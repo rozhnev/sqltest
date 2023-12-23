@@ -1,0 +1,42 @@
+body {
+    font-family: "Lucida Grande",Tahoma,Arial,Verdana,sans-serif;
+    margin: 0;
+    min-height: 100vh;
+    background-color: rgb(51, 102, 153);
+    color: white;
+}
+.container {
+    display: grid;
+    grid-template-areas:
+      'header header header header header header'
+      'menu main main main main right'
+      'menu footer footer footer footer footer';
+    gap: 5px;
+    background-color: #2196F3;
+    padding: 5px;
+}
+
+.container > div {
+    background-color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    padding: 5px 0;
+    font-size: 30px;
+}
+
+.header { 
+    grid-area: header; 
+    min-height: 3vh;
+}
+.menu { grid-area: menu; }
+.main { 
+    grid-area: main; 
+    min-height: 86vh;
+}
+.right { grid-area: right; }
+.footer { 
+    grid-area: footer; 
+    min-height: 5vh;
+}
+
+
+
