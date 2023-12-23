@@ -8,35 +8,108 @@ body {
 .container {
     display: grid;
     grid-template-areas:
-      'header header header header header header'
-      'menu main main main main right'
-      'menu footer footer footer footer footer';
+      'header header header header header header header'
+      'menu main main main main main right'
+      'menu footer footer footer footer footer footer';
     gap: 5px;
     background-color: #2196F3;
     padding: 5px;
 }
 
 .container > div {
-    background-color: rgba(255, 255, 255, 0.8);
-    text-align: center;
     padding: 5px 0;
-    font-size: 30px;
 }
 
 .header { 
     grid-area: header; 
     min-height: 3vh;
 }
-.menu { grid-area: menu; }
+.top_menu {
+    text-align: left;
+    font-size: 30px;
+}
+.menu { grid-area: menu;
+    border-right: 1px solid lightblue;
+    max-width: 250px;
+}
 .main { 
     grid-area: main; 
     min-height: 86vh;
+    color: #ddd;
+    max-width: 75vw;
 }
-.right { grid-area: right; }
+.right { 
+    grid-area: right; 
+    max-width: 20vw;
+    padding: 12px;
+    /* border-left: 1px solid lightblue; */
+}
 .footer { 
     grid-area: footer; 
     min-height: 5vh;
 }
 
+/* Style the buttons that are used to open and close the accordion panel */
+.menu .accordion {
+    background-color: #50aaFF;
+    color: #ddd;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+  }
+  
+  /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+  .active, .accordion:hover {
+    background-color: #2196F3;
+  }
+  
+  /* Style the accordion panel. Note: hidden by default */
+  .menu .panel {
+    padding: 0 32px;
+    background-color: #ddd;
+    color: #50aaFF;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    text-align: left;
+  }
 
+  .menu .panel a{
+    color: #50aaFF;
+    font-size: small;
+    display: block;
+    margin: 7px 0;
+  } 
+.question {
+    margin: 0 0 12px 0;
+}
+  .code-wrapper {
+    resize: vertical;
+    min-height: 390px;
+    max-height: 66vh;
+}
+.code-buttons {
+    text-align: end;
+}
+.button {
+    background-color: #0b4fcc;
+    color: white;
+    cursor: pointer;
+    padding: 12px;
+    text-align: center;
+    border: none;
+    width: 98px;
+    margin: 7px 0;
+  }
+.code-result {
+    border: 1px solid lightblue;
+    min-height: 36vh;
+}
 
+.active-link:before {
+    content: "∊"; 
+ }
