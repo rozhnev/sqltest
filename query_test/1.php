@@ -1202,6 +1202,6 @@ $valid_json_result = '[
     }
 ]';
 
-function test_result($json_result) {
+function test_result(str $json_result) : boolval {
     return json_decode($obj1) == json_decode($valid_json_result);
 }
