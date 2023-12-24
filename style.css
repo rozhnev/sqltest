@@ -28,6 +28,12 @@ body {
     text-align: left;
     font-size: 30px;
 }
+.top_menu .lang-swoth {
+    font-size: small;
+    width: 90%;
+    display: inline-block;
+    text-align: end;
+}
 .menu { grid-area: menu;
     border-right: 1px solid lightblue;
     max-width: 250px;
@@ -89,8 +95,8 @@ body {
 }
   .code-wrapper {
     resize: vertical;
-    min-height: 390px;
-    max-height: 66vh;
+    min-height: 30vh;
+    max-height: 30vh;
 }
 .code-buttons {
     text-align: end;
@@ -107,9 +113,13 @@ body {
   }
 .code-result {
     border: 1px solid lightblue;
-    min-height: 36vh;
+    min-height: 30vh;
+    padding: 7px;
+    color: white;
+    max-height: 39vh;
+    overflow: auto;
 }
 
 .active-link:before {
-    content: "∊"; 
+    /* content: "∊";  */
  }

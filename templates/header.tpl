@@ -24,8 +24,3 @@
         </head>
         <body>
             <div class="container">
-                <div class="header">
-                    <div class="top_menu">
-                        SQLtest
-                    </div>
-                </div>

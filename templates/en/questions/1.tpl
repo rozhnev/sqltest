@@ -1,0 +1,1 @@
+Write query for select all records from customer tables

@@ -1,5 +1,5 @@
 <?php
-$valid_json_result = '[
+$validJsonResult = '[
     {
         "actor_id": 1,
         "first_name": "PENELOPE",
@@ -1202,6 +1202,26 @@ $valid_json_result = '[
     }
 ]';
 
-function test_result(str $json_result) : boolval {
-    return json_decode($obj1) == json_decode($valid_json_result);
+function testQueryResult(string $jsonResult) : array {
+    try {
+        $resultObject = json_decode($jsonResult);
+        if (!$resultObject) {
+            return [
+                'ok' => false
+            ];
+        }
+        $validResultObject = json_decode($validJsonResult);
+        $result = $resultObject == $validResultObject;
+        if (!$result) {
+
+        }
+        return [
+            'ok' => $result,
+            'res' => $jsonResult
+        ];
+    } catch(Exception $e) {
+        return [
+            'ok' => false
+        ];
+    }
 }
