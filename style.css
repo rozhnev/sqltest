@@ -10,7 +10,7 @@ body {
     grid-template-areas:
       'header header header header header header header'
       'menu main main main main main right'
-      'menu footer footer footer footer footer footer';
+      'menu footer footer footer footer footer right';
     gap: 5px;
     background-color: #2196F3;
     padding: 5px;
@@ -27,40 +27,43 @@ body {
 .top-menu {
     text-align: left;
 }
-.top-menu h1,h3 {
+.top-menu h1, .top-menu h3 {
     display: inline;
 }
-.top-menu a,a:visited {
+.top-menu a, .top-menu a:visited {
     text-decoration: none;
     color: white;
 }
-.top-menu .lang-swoth {
+.top-menu .lang-swith {
     font-size: small;
-    width: 90%;
-    display: inline-block;
-    text-align: end;
+    position: absolute;
+    right: 20px;
+    top: 20px;
 }
 .menu { grid-area: menu;
     border-right: 1px solid lightblue;
     max-width: 250px;
+    width: 15vw;
 }
 .main { 
     grid-area: main; 
     min-height: 86vh;
     color: #ddd;
-    max-width: 75vw;
+    width: 60vw;
 }
 .right { 
     grid-area: right; 
-    max-width: 20vw;
+    width: 25vw;
+    max-height: 91vh;
     padding: 12px;
-    /* border-left: 1px solid lightblue; */
+    overflow: auto;
+    /* border: 1px solid red; */
 }
 .footer { 
     grid-area: footer; 
-    min-height: 5vh;
+    min-height: 4.5vh;
 }
-.footer a,a:visited{ 
+.footer a, .footer a:visited{ 
   text-decoration: none;
   color: white;
   margin: 0 20px;
@@ -149,6 +152,11 @@ body {
 .db-description .table-columns {
     font-size: smaller;
     padding-inline: 14px;
+}
+.db-description .table-wrapper {
+    max-width: 24vw;
+    overflow-x: auto;
+    padding: 7px 0;
 }
 
 .loader {
