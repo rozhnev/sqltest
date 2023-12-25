@@ -30,6 +30,10 @@ body {
 .top-menu h1,h3 {
     display: inline;
 }
+.top-menu a,a:visited {
+    text-decoration: none;
+    color: white;
+}
 .top-menu .lang-swoth {
     font-size: small;
     width: 90%;
