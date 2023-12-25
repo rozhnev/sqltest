@@ -1,1 +1,1 @@
-Write query for select all records from customer tables
+Select all records from the <b>`actor`</b> table.

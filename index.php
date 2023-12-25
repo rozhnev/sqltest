@@ -36,6 +36,62 @@ function runQuery(string $query, string $format) : string {
     # Print response.
     return $result;
 }
+
+function testQueryResult(string $validJsonResult, string $jsonResult) : array {
+    try {
+        $resultObject = json_decode($jsonResult);
+        if (!$resultObject) {
+            return [
+                'ok' => false
+            ];
+        }
+        $validResultObject = json_decode($validJsonResult);
+        // $result = $resultObject == $validResultObject;
+        // $hints = [];
+        // if (!$result) {
+        // }
+        //check columns count
+        if (count($resultObject[0]->headers) !== count($validResultObject[0]->headers)) {
+            $hints['columnsCount'] = count($validResultObject[0]->headers);
+            return [
+                'ok' => $result,
+                'hints' => $hints
+            ];
+        }
+
+        //check columns order
+        $diff = array_udiff($resultObject[0]->headers, $validResultObject[0]->headers,
+            function ($obj_a, $obj_b) {
+                return strcmp($obj_a->header, $obj_b->header);
+            }
+        );
+        if (count($diff) > 0) {
+            $hints['columnsList'] = "`" . implode('`, `',array_column($validResultObject[0]->headers, 'header')) . "`";
+            return [
+                'ok' => $result,
+                'hints' => $hints
+            ];
+        }
+
+        // check rows count 
+        if (count($resultObject[0]->data) !== count($validResultObject[0]->data)) {
+            $hints['rowsCount'] = count($validResultObject[0]->data);
+            return [
+                'ok' => $result,
+                'hints' => $hints
+            ];
+        }
+
+        return [
+            'ok' => true
+        ];
+    } catch(Exception $e) {
+        // var_dump($e);
+        return [
+            'ok' => false
+        ];
+    }
+}
 // print_r($_SERVER);
 $path = $_SERVER['PATH_INFO'] ? trim($_SERVER['PATH_INFO'], '/') : 'ru/sakila/1';
 $pathParts = explode('/', $path);
@@ -71,7 +127,7 @@ switch ($action) {
         $query = $_POST["query"] ?? '';
         $jsonResult = runQuery($query, 'json');
         // echo $jsonResult;
-        $smarty->assign('QeryTestResult', testQueryResult($jsonResult));
+        $smarty->assign('QeryTestResult', testQueryResult($validJsonResult, $jsonResult));
         $template = "query_test_result.tpl";
         break;
     default:
