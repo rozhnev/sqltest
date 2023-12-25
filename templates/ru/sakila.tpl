@@ -1,32 +1,17 @@
-<style>
-table {
-  border-collapse: collapse;
-  width: 100%;
-  font-size: smaller;
-}
-
-th, td {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-.db-description {
-    padding: 12px;
-}
-</style>
 <div class="db-description">
 <p>
 Sakila — это пример базы данных, разработанный компанией MySQL, специально созданный для обучения и демонстрации возможностей систем управления базами данных (СУБД) на основе реляционной модели.
 </p><p>
 База данных Sakila содержит 16 основных таблиц, описывающих различные аспекты компании по прокату DVD-дисков.
 </p><p>
-Ниже приведен список этих таблиц:</p>
-<p>Actor Table</p>
+Ниже приведен список этих таблиц:
+</p>
+<p>Таблица `actor`</p>
 <ul class="table-columns">
-    <li> actor_id: Unique identifier for each actor.</li>
-    <li> first_name: First name of the actor.</li>
-    <li> last_name: Last name of the actor.</li>
-    <li> last_update: Timestamp indicating when the record was last updated.</li> 
+    <li> `actor_id` - уникальный идентификатор для каждого актера.</li>
+    <li> `first_name` - имя актера.</li>
+    <li> `last_name` - фамилия актера.</li>
+    <li> `last_update` - временная метка, указывающая, когда запись была обновлена в последний раз.</li> 
 </ul>
   <table>
     <tr>
@@ -35,33 +20,29 @@ Sakila — это пример базы данных, разработанный
       <th>last_name</th>
       <th>last_update</th>
     </tr>
-    <!-- Sample Data Rows -->
     <tr>
       <td>1</td>
       <td>John</td>
       <td>Doe</td>
       <td>2023-01-01 12:00:00</td>
     </tr>
-    <!-- More rows go here -->
   </table>
-  <p>Address Table</p>
+  <p>Table `language`</p>
+  <ul class="table-columns">
+      <li> `language_id` - уникальный идентификатор для каждого языка.</li>
+      <li> `name` - название языка.</li>
+      <li> `last_update` - временная метка, указывающая, когда запись была обновлена в последний раз.</li> 
+  </ul>
   <table>
-    <!-- Similar structure as Actor Table -->
-  </table>
-  <p>Category Table</p>
-  <table>
-    <!-- Similar structure as Actor Table -->
-  </table>
-  <p>City Table</p>
-  <table>
-    <!-- Similar structure as Actor Table -->
-  </table>
-  <p>Country Table</p>
-  <table>
-    <!-- Similar structure as Actor Table -->
-  </table>
-  <p>Customer Table</p>
-  <table>
-    <!-- Similar structure as Actor Table -->
+    <tr>
+      <th>language_id</th>
+      <th>name</th>
+      <th>last_update</th>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>English</td>
+      <td>2023-01-01 12:00:00</td>
+    </tr>
   </table>
 </div>

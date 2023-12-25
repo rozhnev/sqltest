@@ -1,0 +1,1 @@
+Get name column from the <b>`language`</b> table.

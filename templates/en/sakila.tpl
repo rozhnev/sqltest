@@ -1,28 +1,18 @@
-<style>
-table {
-  border-collapse: collapse;
-  width: 100%;
-  font-size: smaller;
-}
-
-th, td {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-.db-description {
-    padding: 12px;
-}
-</style>
 <div class="db-description">
-The Sakila database is a sample database that is often used for testing and learning purposes in the context of relational database management systems (RDBMS). It is commonly associated with MySQL. Below is a description of some key tables in the Sakila database:
-<p>Actor Table</p>
-<ul class="table-columns">
-    <li> actor_id: Unique identifier for each actor.</li>
-    <li> first_name: First name of the actor.</li>
-    <li> last_name: Last name of the actor.</li>
-    <li> last_update: Timestamp indicating when the record was last updated.</li> 
-</ul>
+<p>
+Sakila is a sample database developed by MySQL, specifically designed to teach and demonstrate the capabilities of database management systems (DBMS) based on the relational model.
+</p><p>
+The Sakila database contains 16 main tables describing various aspects of a DVD rental company.
+</p><p>
+Below is a list of these tables:
+</p>
+<p>Table `actor`</p>
+  <ul class="table-columns">
+      <li> `actor_id` - Unique identifier for each actor.</li>
+      <li> `first_name` - First name of the actor.</li>
+      <li> `last_name` - Last name of the actor.</li>
+      <li> `last_update` - Timestamp indicating when the record was last updated.</li> 
+  </ul>
   <table>
     <tr>
       <th>actor_id</th>
@@ -30,33 +20,29 @@ The Sakila database is a sample database that is often used for testing and lear
       <th>last_name</th>
       <th>last_update</th>
     </tr>
-    <!-- Sample Data Rows -->
     <tr>
       <td>1</td>
       <td>John</td>
       <td>Doe</td>
       <td>2023-01-01 12:00:00</td>
     </tr>
-    <!-- More rows go here -->
   </table>
-  <p>Address Table</p>
+<p>Table `language`</p>
+  <ul class="table-columns">
+      <li> `language_id` - Unique identifier for each language.</li>
+      <li> `name` - Language name.</li>
+      <li> `last_update` - Timestamp indicating when the record was last updated.</li> 
+  </ul>
   <table>
-    <!-- Similar structure as Actor Table -->
-  </table>
-  <p>Category Table</p>
-  <table>
-    <!-- Similar structure as Actor Table -->
-  </table>
-  <p>City Table</p>
-  <table>
-    <!-- Similar structure as Actor Table -->
-  </table>
-  <p>Country Table</p>
-  <table>
-    <!-- Similar structure as Actor Table -->
-  </table>
-  <p>Customer Table</p>
-  <table>
-    <!-- Similar structure as Actor Table -->
+    <tr>
+      <th>language_id</th>
+      <th>name</th>
+      <th>last_update</th>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>English</td>
+      <td>2023-01-01 12:00:00</td>
+    </tr>
   </table>
 </div>

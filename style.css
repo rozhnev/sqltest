@@ -120,6 +120,25 @@ body {
     overflow: auto;
 }
 
+.db-description {
+    padding: 12px;
+}
+
+.db-description table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: smaller;
+  }
+  
+.db-description th, td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+.db-description .table-columns {
+    font-size: smaller;
+    padding-inline: 14px;
+}
 
 .loader {
 	color: white;
