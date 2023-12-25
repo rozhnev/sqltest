@@ -1,4 +1,4 @@
-{var_dump($QeryTestResult)}
+{* {var_dump($QeryTestResult)} *}
 {if $QeryTestResult.ok}
     Отлично!
 {else}

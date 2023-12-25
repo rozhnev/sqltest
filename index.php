@@ -28,7 +28,7 @@ function runQuery(string $query, string $format) : string {
     $queryHash = getQueryHash($query);
     $ch = curl_init( "https://sqlize.online/sqleval.php" );
     curl_setopt($ch, CURLOPT_POST, 1);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, "sqlses=$queryHash&sql_version=mysql80_sakila");
+    curl_setopt($ch, CURLOPT_POSTFIELDS, "sqlses=$queryHash&sql_version=mysql80_sakila&format=$format");
     curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
     # Send request.
     $result = curl_exec($ch);

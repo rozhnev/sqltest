@@ -1,1208 +1,1230 @@
 <?php
-$validJsonResult = '[
-    {
-        "actor_id": 1,
-        "first_name": "PENELOPE",
-        "last_name": "GUINESS",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 2,
-        "first_name": "NICK",
-        "last_name": "WAHLBERG",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 3,
-        "first_name": "ED",
-        "last_name": "CHASE",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 4,
-        "first_name": "JENNIFER",
-        "last_name": "DAVIS",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 5,
-        "first_name": "JOHNNY",
-        "last_name": "LOLLOBRIGIDA",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 6,
-        "first_name": "BETTE",
-        "last_name": "NICHOLSON",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 7,
-        "first_name": "GRACE",
-        "last_name": "MOSTEL",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 8,
-        "first_name": "MATTHEW",
-        "last_name": "JOHANSSON",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 9,
-        "first_name": "JOE",
-        "last_name": "SWANK",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 10,
-        "first_name": "CHRISTIAN",
-        "last_name": "GABLE",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 11,
-        "first_name": "ZERO",
-        "last_name": "CAGE",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 12,
-        "first_name": "KARL",
-        "last_name": "BERRY",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 13,
-        "first_name": "UMA",
-        "last_name": "WOOD",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 14,
-        "first_name": "VIVIEN",
-        "last_name": "BERGEN",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 15,
-        "first_name": "CUBA",
-        "last_name": "OLIVIER",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 16,
-        "first_name": "FRED",
-        "last_name": "COSTNER",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 17,
-        "first_name": "HELEN",
-        "last_name": "VOIGHT",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 18,
-        "first_name": "DAN",
-        "last_name": "TORN",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 19,
-        "first_name": "BOB",
-        "last_name": "FAWCETT",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 20,
-        "first_name": "LUCILLE",
-        "last_name": "TRACY",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 21,
-        "first_name": "KIRSTEN",
-        "last_name": "PALTROW",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 22,
-        "first_name": "ELVIS",
-        "last_name": "MARX",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 23,
-        "first_name": "SANDRA",
-        "last_name": "KILMER",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 24,
-        "first_name": "CAMERON",
-        "last_name": "STREEP",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 25,
-        "first_name": "KEVIN",
-        "last_name": "BLOOM",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 26,
-        "first_name": "RIP",
-        "last_name": "CRAWFORD",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 27,
-        "first_name": "JULIA",
-        "last_name": "MCQUEEN",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 28,
-        "first_name": "WOODY",
-        "last_name": "HOFFMAN",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 29,
-        "first_name": "ALEC",
-        "last_name": "WAYNE",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 30,
-        "first_name": "SANDRA",
-        "last_name": "PECK",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 31,
-        "first_name": "SISSY",
-        "last_name": "SOBIESKI",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 32,
-        "first_name": "TIM",
-        "last_name": "HACKMAN",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 33,
-        "first_name": "MILLA",
-        "last_name": "PECK",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 34,
-        "first_name": "AUDREY",
-        "last_name": "OLIVIER",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 35,
-        "first_name": "JUDY",
-        "last_name": "DEAN",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 36,
-        "first_name": "BURT",
-        "last_name": "DUKAKIS",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 37,
-        "first_name": "VAL",
-        "last_name": "BOLGER",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 38,
-        "first_name": "TOM",
-        "last_name": "MCKELLEN",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 39,
-        "first_name": "GOLDIE",
-        "last_name": "BRODY",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 40,
-        "first_name": "JOHNNY",
-        "last_name": "CAGE",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 41,
-        "first_name": "JODIE",
-        "last_name": "DEGENERES",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 42,
-        "first_name": "TOM",
-        "last_name": "MIRANDA",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 43,
-        "first_name": "KIRK",
-        "last_name": "JOVOVICH",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 44,
-        "first_name": "NICK",
-        "last_name": "STALLONE",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 45,
-        "first_name": "REESE",
-        "last_name": "KILMER",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 46,
-        "first_name": "PARKER",
-        "last_name": "GOLDBERG",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 47,
-        "first_name": "JULIA",
-        "last_name": "BARRYMORE",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 48,
-        "first_name": "FRANCES",
-        "last_name": "DAY-LEWIS",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 49,
-        "first_name": "ANNE",
-        "last_name": "CRONYN",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 50,
-        "first_name": "NATALIE",
-        "last_name": "HOPKINS",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 51,
-        "first_name": "GARY",
-        "last_name": "PHOENIX",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 52,
-        "first_name": "CARMEN",
-        "last_name": "HUNT",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 53,
-        "first_name": "MENA",
-        "last_name": "TEMPLE",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 54,
-        "first_name": "PENELOPE",
-        "last_name": "PINKETT",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 55,
-        "first_name": "FAY",
-        "last_name": "KILMER",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 56,
-        "first_name": "DAN",
-        "last_name": "HARRIS",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 57,
-        "first_name": "JUDE",
-        "last_name": "CRUISE",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 58,
-        "first_name": "CHRISTIAN",
-        "last_name": "AKROYD",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 59,
-        "first_name": "DUSTIN",
-        "last_name": "TAUTOU",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 60,
-        "first_name": "HENRY",
-        "last_name": "BERRY",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 61,
-        "first_name": "CHRISTIAN",
-        "last_name": "NEESON",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 62,
-        "first_name": "JAYNE",
-        "last_name": "NEESON",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 63,
-        "first_name": "CAMERON",
-        "last_name": "WRAY",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 64,
-        "first_name": "RAY",
-        "last_name": "JOHANSSON",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 65,
-        "first_name": "ANGELA",
-        "last_name": "HUDSON",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 66,
-        "first_name": "MARY",
-        "last_name": "TANDY",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 67,
-        "first_name": "JESSICA",
-        "last_name": "BAILEY",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 68,
-        "first_name": "RIP",
-        "last_name": "WINSLET",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 69,
-        "first_name": "KENNETH",
-        "last_name": "PALTROW",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 70,
-        "first_name": "MICHELLE",
-        "last_name": "MCCONAUGHEY",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 71,
-        "first_name": "ADAM",
-        "last_name": "GRANT",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 72,
-        "first_name": "SEAN",
-        "last_name": "WILLIAMS",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 73,
-        "first_name": "GARY",
-        "last_name": "PENN",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 74,
-        "first_name": "MILLA",
-        "last_name": "KEITEL",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 75,
-        "first_name": "BURT",
-        "last_name": "POSEY",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 76,
-        "first_name": "ANGELINA",
-        "last_name": "ASTAIRE",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 77,
-        "first_name": "CARY",
-        "last_name": "MCCONAUGHEY",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 78,
-        "first_name": "GROUCHO",
-        "last_name": "SINATRA",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 79,
-        "first_name": "MAE",
-        "last_name": "HOFFMAN",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 80,
-        "first_name": "RALPH",
-        "last_name": "CRUZ",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 81,
-        "first_name": "SCARLETT",
-        "last_name": "DAMON",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 82,
-        "first_name": "WOODY",
-        "last_name": "JOLIE",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 83,
-        "first_name": "BEN",
-        "last_name": "WILLIS",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 84,
-        "first_name": "JAMES",
-        "last_name": "PITT",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 85,
-        "first_name": "MINNIE",
-        "last_name": "ZELLWEGER",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 86,
-        "first_name": "GREG",
-        "last_name": "CHAPLIN",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 87,
-        "first_name": "SPENCER",
-        "last_name": "PECK",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 88,
-        "first_name": "KENNETH",
-        "last_name": "PESCI",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 89,
-        "first_name": "CHARLIZE",
-        "last_name": "DENCH",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 90,
-        "first_name": "SEAN",
-        "last_name": "GUINESS",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 91,
-        "first_name": "CHRISTOPHER",
-        "last_name": "BERRY",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 92,
-        "first_name": "KIRSTEN",
-        "last_name": "AKROYD",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 93,
-        "first_name": "ELLEN",
-        "last_name": "PRESLEY",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 94,
-        "first_name": "KENNETH",
-        "last_name": "TORN",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 95,
-        "first_name": "DARYL",
-        "last_name": "WAHLBERG",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 96,
-        "first_name": "GENE",
-        "last_name": "WILLIS",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 97,
-        "first_name": "MEG",
-        "last_name": "HAWKE",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 98,
-        "first_name": "CHRIS",
-        "last_name": "BRIDGES",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 99,
-        "first_name": "JIM",
-        "last_name": "MOSTEL",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 100,
-        "first_name": "SPENCER",
-        "last_name": "DEPP",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 101,
-        "first_name": "SUSAN",
-        "last_name": "DAVIS",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 102,
-        "first_name": "WALTER",
-        "last_name": "TORN",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 103,
-        "first_name": "MATTHEW",
-        "last_name": "LEIGH",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 104,
-        "first_name": "PENELOPE",
-        "last_name": "CRONYN",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 105,
-        "first_name": "SIDNEY",
-        "last_name": "CROWE",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 106,
-        "first_name": "GROUCHO",
-        "last_name": "DUNST",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 107,
-        "first_name": "GINA",
-        "last_name": "DEGENERES",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 108,
-        "first_name": "WARREN",
-        "last_name": "NOLTE",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 109,
-        "first_name": "SYLVESTER",
-        "last_name": "DERN",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 110,
-        "first_name": "SUSAN",
-        "last_name": "DAVIS",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 111,
-        "first_name": "CAMERON",
-        "last_name": "ZELLWEGER",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 112,
-        "first_name": "RUSSELL",
-        "last_name": "BACALL",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 113,
-        "first_name": "MORGAN",
-        "last_name": "HOPKINS",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 114,
-        "first_name": "MORGAN",
-        "last_name": "MCDORMAND",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 115,
-        "first_name": "HARRISON",
-        "last_name": "BALE",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 116,
-        "first_name": "DAN",
-        "last_name": "STREEP",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 117,
-        "first_name": "RENEE",
-        "last_name": "TRACY",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 118,
-        "first_name": "CUBA",
-        "last_name": "ALLEN",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 119,
-        "first_name": "WARREN",
-        "last_name": "JACKMAN",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 120,
-        "first_name": "PENELOPE",
-        "last_name": "MONROE",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 121,
-        "first_name": "LIZA",
-        "last_name": "BERGMAN",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 122,
-        "first_name": "SALMA",
-        "last_name": "NOLTE",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 123,
-        "first_name": "JULIANNE",
-        "last_name": "DENCH",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 124,
-        "first_name": "SCARLETT",
-        "last_name": "BENING",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 125,
-        "first_name": "ALBERT",
-        "last_name": "NOLTE",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 126,
-        "first_name": "FRANCES",
-        "last_name": "TOMEI",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 127,
-        "first_name": "KEVIN",
-        "last_name": "GARLAND",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 128,
-        "first_name": "CATE",
-        "last_name": "MCQUEEN",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 129,
-        "first_name": "DARYL",
-        "last_name": "CRAWFORD",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 130,
-        "first_name": "GRETA",
-        "last_name": "KEITEL",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 131,
-        "first_name": "JANE",
-        "last_name": "JACKMAN",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 132,
-        "first_name": "ADAM",
-        "last_name": "HOPPER",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 133,
-        "first_name": "RICHARD",
-        "last_name": "PENN",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 134,
-        "first_name": "GENE",
-        "last_name": "HOPKINS",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 135,
-        "first_name": "RITA",
-        "last_name": "REYNOLDS",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 136,
-        "first_name": "ED",
-        "last_name": "MANSFIELD",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 137,
-        "first_name": "MORGAN",
-        "last_name": "WILLIAMS",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 138,
-        "first_name": "LUCILLE",
-        "last_name": "DEE",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 139,
-        "first_name": "EWAN",
-        "last_name": "GOODING",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 140,
-        "first_name": "WHOOPI",
-        "last_name": "HURT",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 141,
-        "first_name": "CATE",
-        "last_name": "HARRIS",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 142,
-        "first_name": "JADA",
-        "last_name": "RYDER",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 143,
-        "first_name": "RIVER",
-        "last_name": "DEAN",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 144,
-        "first_name": "ANGELA",
-        "last_name": "WITHERSPOON",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 145,
-        "first_name": "KIM",
-        "last_name": "ALLEN",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 146,
-        "first_name": "ALBERT",
-        "last_name": "JOHANSSON",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 147,
-        "first_name": "FAY",
-        "last_name": "WINSLET",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 148,
-        "first_name": "EMILY",
-        "last_name": "DEE",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 149,
-        "first_name": "RUSSELL",
-        "last_name": "TEMPLE",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 150,
-        "first_name": "JAYNE",
-        "last_name": "NOLTE",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 151,
-        "first_name": "GEOFFREY",
-        "last_name": "HESTON",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 152,
-        "first_name": "BEN",
-        "last_name": "HARRIS",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 153,
-        "first_name": "MINNIE",
-        "last_name": "KILMER",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 154,
-        "first_name": "MERYL",
-        "last_name": "GIBSON",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 155,
-        "first_name": "IAN",
-        "last_name": "TANDY",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 156,
-        "first_name": "FAY",
-        "last_name": "WOOD",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 157,
-        "first_name": "GRETA",
-        "last_name": "MALDEN",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 158,
-        "first_name": "VIVIEN",
-        "last_name": "BASINGER",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 159,
-        "first_name": "LAURA",
-        "last_name": "BRODY",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 160,
-        "first_name": "CHRIS",
-        "last_name": "DEPP",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 161,
-        "first_name": "HARVEY",
-        "last_name": "HOPE",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 162,
-        "first_name": "OPRAH",
-        "last_name": "KILMER",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 163,
-        "first_name": "CHRISTOPHER",
-        "last_name": "WEST",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 164,
-        "first_name": "HUMPHREY",
-        "last_name": "WILLIS",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 165,
-        "first_name": "AL",
-        "last_name": "GARLAND",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 166,
-        "first_name": "NICK",
-        "last_name": "DEGENERES",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 167,
-        "first_name": "LAURENCE",
-        "last_name": "BULLOCK",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 168,
-        "first_name": "WILL",
-        "last_name": "WILSON",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 169,
-        "first_name": "KENNETH",
-        "last_name": "HOFFMAN",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 170,
-        "first_name": "MENA",
-        "last_name": "HOPPER",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 171,
-        "first_name": "OLYMPIA",
-        "last_name": "PFEIFFER",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 172,
-        "first_name": "GROUCHO",
-        "last_name": "WILLIAMS",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 173,
-        "first_name": "ALAN",
-        "last_name": "DREYFUSS",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 174,
-        "first_name": "MICHAEL",
-        "last_name": "BENING",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 175,
-        "first_name": "WILLIAM",
-        "last_name": "HACKMAN",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 176,
-        "first_name": "JON",
-        "last_name": "CHASE",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 177,
-        "first_name": "GENE",
-        "last_name": "MCKELLEN",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 178,
-        "first_name": "LISA",
-        "last_name": "MONROE",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 179,
-        "first_name": "ED",
-        "last_name": "GUINESS",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 180,
-        "first_name": "JEFF",
-        "last_name": "SILVERSTONE",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 181,
-        "first_name": "MATTHEW",
-        "last_name": "CARREY",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 182,
-        "first_name": "DEBBIE",
-        "last_name": "AKROYD",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 183,
-        "first_name": "RUSSELL",
-        "last_name": "CLOSE",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 184,
-        "first_name": "HUMPHREY",
-        "last_name": "GARLAND",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 185,
-        "first_name": "MICHAEL",
-        "last_name": "BOLGER",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 186,
-        "first_name": "JULIA",
-        "last_name": "ZELLWEGER",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 187,
-        "first_name": "RENEE",
-        "last_name": "BALL",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 188,
-        "first_name": "ROCK",
-        "last_name": "DUKAKIS",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 189,
-        "first_name": "CUBA",
-        "last_name": "BIRCH",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 190,
-        "first_name": "AUDREY",
-        "last_name": "BAILEY",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 191,
-        "first_name": "GREGORY",
-        "last_name": "GOODING",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 192,
-        "first_name": "JOHN",
-        "last_name": "SUVARI",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 193,
-        "first_name": "BURT",
-        "last_name": "TEMPLE",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 194,
-        "first_name": "MERYL",
-        "last_name": "ALLEN",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 195,
-        "first_name": "JAYNE",
-        "last_name": "SILVERSTONE",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 196,
-        "first_name": "BELA",
-        "last_name": "WALKEN",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 197,
-        "first_name": "REESE",
-        "last_name": "WEST",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 198,
-        "first_name": "MARY",
-        "last_name": "KEITEL",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 199,
-        "first_name": "JULIA",
-        "last_name": "FAWCETT",
-        "last_update": "2006-02-15 04:34:33"
-    },
-    {
-        "actor_id": 200,
-        "first_name": "THORA",
-        "last_name": "TEMPLE",
-        "last_update": "2006-02-15 04:34:33"
-    }
-]';
-
 function testQueryResult(string $jsonResult) : array {
+    $validJsonResult = '[
+    {
+        "headers": [
+            {
+                "header": "actor_id",
+                "pdo_type": 1
+            },
+            {
+                "header": "first_name",
+                "pdo_type": 2
+            },
+            {
+                "header": "last_name",
+                "pdo_type": 2
+            },
+            {
+                "header": "last_update",
+                "pdo_type": 2
+            }
+        ],
+        "data": [
+            [
+                1,
+                "PENELOPE",
+                "GUINESS",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                2,
+                "NICK",
+                "WAHLBERG",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                3,
+                "ED",
+                "CHASE",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                4,
+                "JENNIFER",
+                "DAVIS",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                5,
+                "JOHNNY",
+                "LOLLOBRIGIDA",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                6,
+                "BETTE",
+                "NICHOLSON",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                7,
+                "GRACE",
+                "MOSTEL",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                8,
+                "MATTHEW",
+                "JOHANSSON",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                9,
+                "JOE",
+                "SWANK",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                10,
+                "CHRISTIAN",
+                "GABLE",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                11,
+                "ZERO",
+                "CAGE",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                12,
+                "KARL",
+                "BERRY",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                13,
+                "UMA",
+                "WOOD",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                14,
+                "VIVIEN",
+                "BERGEN",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                15,
+                "CUBA",
+                "OLIVIER",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                16,
+                "FRED",
+                "COSTNER",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                17,
+                "HELEN",
+                "VOIGHT",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                18,
+                "DAN",
+                "TORN",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                19,
+                "BOB",
+                "FAWCETT",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                20,
+                "LUCILLE",
+                "TRACY",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                21,
+                "KIRSTEN",
+                "PALTROW",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                22,
+                "ELVIS",
+                "MARX",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                23,
+                "SANDRA",
+                "KILMER",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                24,
+                "CAMERON",
+                "STREEP",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                25,
+                "KEVIN",
+                "BLOOM",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                26,
+                "RIP",
+                "CRAWFORD",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                27,
+                "JULIA",
+                "MCQUEEN",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                28,
+                "WOODY",
+                "HOFFMAN",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                29,
+                "ALEC",
+                "WAYNE",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                30,
+                "SANDRA",
+                "PECK",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                31,
+                "SISSY",
+                "SOBIESKI",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                32,
+                "TIM",
+                "HACKMAN",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                33,
+                "MILLA",
+                "PECK",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                34,
+                "AUDREY",
+                "OLIVIER",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                35,
+                "JUDY",
+                "DEAN",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                36,
+                "BURT",
+                "DUKAKIS",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                37,
+                "VAL",
+                "BOLGER",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                38,
+                "TOM",
+                "MCKELLEN",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                39,
+                "GOLDIE",
+                "BRODY",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                40,
+                "JOHNNY",
+                "CAGE",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                41,
+                "JODIE",
+                "DEGENERES",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                42,
+                "TOM",
+                "MIRANDA",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                43,
+                "KIRK",
+                "JOVOVICH",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                44,
+                "NICK",
+                "STALLONE",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                45,
+                "REESE",
+                "KILMER",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                46,
+                "PARKER",
+                "GOLDBERG",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                47,
+                "JULIA",
+                "BARRYMORE",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                48,
+                "FRANCES",
+                "DAY-LEWIS",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                49,
+                "ANNE",
+                "CRONYN",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                50,
+                "NATALIE",
+                "HOPKINS",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                51,
+                "GARY",
+                "PHOENIX",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                52,
+                "CARMEN",
+                "HUNT",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                53,
+                "MENA",
+                "TEMPLE",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                54,
+                "PENELOPE",
+                "PINKETT",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                55,
+                "FAY",
+                "KILMER",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                56,
+                "DAN",
+                "HARRIS",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                57,
+                "JUDE",
+                "CRUISE",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                58,
+                "CHRISTIAN",
+                "AKROYD",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                59,
+                "DUSTIN",
+                "TAUTOU",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                60,
+                "HENRY",
+                "BERRY",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                61,
+                "CHRISTIAN",
+                "NEESON",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                62,
+                "JAYNE",
+                "NEESON",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                63,
+                "CAMERON",
+                "WRAY",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                64,
+                "RAY",
+                "JOHANSSON",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                65,
+                "ANGELA",
+                "HUDSON",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                66,
+                "MARY",
+                "TANDY",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                67,
+                "JESSICA",
+                "BAILEY",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                68,
+                "RIP",
+                "WINSLET",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                69,
+                "KENNETH",
+                "PALTROW",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                70,
+                "MICHELLE",
+                "MCCONAUGHEY",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                71,
+                "ADAM",
+                "GRANT",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                72,
+                "SEAN",
+                "WILLIAMS",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                73,
+                "GARY",
+                "PENN",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                74,
+                "MILLA",
+                "KEITEL",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                75,
+                "BURT",
+                "POSEY",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                76,
+                "ANGELINA",
+                "ASTAIRE",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                77,
+                "CARY",
+                "MCCONAUGHEY",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                78,
+                "GROUCHO",
+                "SINATRA",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                79,
+                "MAE",
+                "HOFFMAN",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                80,
+                "RALPH",
+                "CRUZ",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                81,
+                "SCARLETT",
+                "DAMON",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                82,
+                "WOODY",
+                "JOLIE",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                83,
+                "BEN",
+                "WILLIS",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                84,
+                "JAMES",
+                "PITT",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                85,
+                "MINNIE",
+                "ZELLWEGER",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                86,
+                "GREG",
+                "CHAPLIN",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                87,
+                "SPENCER",
+                "PECK",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                88,
+                "KENNETH",
+                "PESCI",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                89,
+                "CHARLIZE",
+                "DENCH",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                90,
+                "SEAN",
+                "GUINESS",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                91,
+                "CHRISTOPHER",
+                "BERRY",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                92,
+                "KIRSTEN",
+                "AKROYD",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                93,
+                "ELLEN",
+                "PRESLEY",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                94,
+                "KENNETH",
+                "TORN",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                95,
+                "DARYL",
+                "WAHLBERG",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                96,
+                "GENE",
+                "WILLIS",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                97,
+                "MEG",
+                "HAWKE",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                98,
+                "CHRIS",
+                "BRIDGES",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                99,
+                "JIM",
+                "MOSTEL",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                100,
+                "SPENCER",
+                "DEPP",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                101,
+                "SUSAN",
+                "DAVIS",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                102,
+                "WALTER",
+                "TORN",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                103,
+                "MATTHEW",
+                "LEIGH",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                104,
+                "PENELOPE",
+                "CRONYN",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                105,
+                "SIDNEY",
+                "CROWE",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                106,
+                "GROUCHO",
+                "DUNST",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                107,
+                "GINA",
+                "DEGENERES",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                108,
+                "WARREN",
+                "NOLTE",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                109,
+                "SYLVESTER",
+                "DERN",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                110,
+                "SUSAN",
+                "DAVIS",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                111,
+                "CAMERON",
+                "ZELLWEGER",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                112,
+                "RUSSELL",
+                "BACALL",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                113,
+                "MORGAN",
+                "HOPKINS",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                114,
+                "MORGAN",
+                "MCDORMAND",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                115,
+                "HARRISON",
+                "BALE",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                116,
+                "DAN",
+                "STREEP",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                117,
+                "RENEE",
+                "TRACY",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                118,
+                "CUBA",
+                "ALLEN",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                119,
+                "WARREN",
+                "JACKMAN",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                120,
+                "PENELOPE",
+                "MONROE",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                121,
+                "LIZA",
+                "BERGMAN",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                122,
+                "SALMA",
+                "NOLTE",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                123,
+                "JULIANNE",
+                "DENCH",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                124,
+                "SCARLETT",
+                "BENING",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                125,
+                "ALBERT",
+                "NOLTE",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                126,
+                "FRANCES",
+                "TOMEI",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                127,
+                "KEVIN",
+                "GARLAND",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                128,
+                "CATE",
+                "MCQUEEN",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                129,
+                "DARYL",
+                "CRAWFORD",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                130,
+                "GRETA",
+                "KEITEL",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                131,
+                "JANE",
+                "JACKMAN",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                132,
+                "ADAM",
+                "HOPPER",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                133,
+                "RICHARD",
+                "PENN",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                134,
+                "GENE",
+                "HOPKINS",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                135,
+                "RITA",
+                "REYNOLDS",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                136,
+                "ED",
+                "MANSFIELD",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                137,
+                "MORGAN",
+                "WILLIAMS",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                138,
+                "LUCILLE",
+                "DEE",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                139,
+                "EWAN",
+                "GOODING",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                140,
+                "WHOOPI",
+                "HURT",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                141,
+                "CATE",
+                "HARRIS",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                142,
+                "JADA",
+                "RYDER",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                143,
+                "RIVER",
+                "DEAN",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                144,
+                "ANGELA",
+                "WITHERSPOON",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                145,
+                "KIM",
+                "ALLEN",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                146,
+                "ALBERT",
+                "JOHANSSON",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                147,
+                "FAY",
+                "WINSLET",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                148,
+                "EMILY",
+                "DEE",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                149,
+                "RUSSELL",
+                "TEMPLE",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                150,
+                "JAYNE",
+                "NOLTE",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                151,
+                "GEOFFREY",
+                "HESTON",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                152,
+                "BEN",
+                "HARRIS",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                153,
+                "MINNIE",
+                "KILMER",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                154,
+                "MERYL",
+                "GIBSON",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                155,
+                "IAN",
+                "TANDY",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                156,
+                "FAY",
+                "WOOD",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                157,
+                "GRETA",
+                "MALDEN",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                158,
+                "VIVIEN",
+                "BASINGER",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                159,
+                "LAURA",
+                "BRODY",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                160,
+                "CHRIS",
+                "DEPP",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                161,
+                "HARVEY",
+                "HOPE",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                162,
+                "OPRAH",
+                "KILMER",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                163,
+                "CHRISTOPHER",
+                "WEST",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                164,
+                "HUMPHREY",
+                "WILLIS",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                165,
+                "AL",
+                "GARLAND",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                166,
+                "NICK",
+                "DEGENERES",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                167,
+                "LAURENCE",
+                "BULLOCK",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                168,
+                "WILL",
+                "WILSON",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                169,
+                "KENNETH",
+                "HOFFMAN",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                170,
+                "MENA",
+                "HOPPER",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                171,
+                "OLYMPIA",
+                "PFEIFFER",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                172,
+                "GROUCHO",
+                "WILLIAMS",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                173,
+                "ALAN",
+                "DREYFUSS",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                174,
+                "MICHAEL",
+                "BENING",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                175,
+                "WILLIAM",
+                "HACKMAN",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                176,
+                "JON",
+                "CHASE",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                177,
+                "GENE",
+                "MCKELLEN",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                178,
+                "LISA",
+                "MONROE",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                179,
+                "ED",
+                "GUINESS",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                180,
+                "JEFF",
+                "SILVERSTONE",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                181,
+                "MATTHEW",
+                "CARREY",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                182,
+                "DEBBIE",
+                "AKROYD",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                183,
+                "RUSSELL",
+                "CLOSE",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                184,
+                "HUMPHREY",
+                "GARLAND",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                185,
+                "MICHAEL",
+                "BOLGER",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                186,
+                "JULIA",
+                "ZELLWEGER",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                187,
+                "RENEE",
+                "BALL",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                188,
+                "ROCK",
+                "DUKAKIS",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                189,
+                "CUBA",
+                "BIRCH",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                190,
+                "AUDREY",
+                "BAILEY",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                191,
+                "GREGORY",
+                "GOODING",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                192,
+                "JOHN",
+                "SUVARI",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                193,
+                "BURT",
+                "TEMPLE",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                194,
+                "MERYL",
+                "ALLEN",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                195,
+                "JAYNE",
+                "SILVERSTONE",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                196,
+                "BELA",
+                "WALKEN",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                197,
+                "REESE",
+                "WEST",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                198,
+                "MARY",
+                "KEITEL",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                199,
+                "JULIA",
+                "FAWCETT",
+                "2006-02-15 04:34:33"
+            ],
+            [
+                200,
+                "THORA",
+                "TEMPLE",
+                "2006-02-15 04:34:33"
+            ]
+        ]
+    }]';
+
+
     try {
         $resultObject = json_decode($jsonResult);
         if (!$resultObject) {
@@ -1212,12 +1234,21 @@ function testQueryResult(string $jsonResult) : array {
         }
         $validResultObject = json_decode($validJsonResult);
         $result = $resultObject == $validResultObject;
+        $hints = [];
         if (!$result) {
-
+            if (count($resultObject->headers) !== count($validResultObject->headers)) {
+                $hints['columnsCount'] = count($validResultObject->headers);
+            }
+            if ($resultObject->headers !== $validResultObject->headers) {
+                $hints['columnsList'] = $validResultObject->headers;
+            }
+            if (count($resultObject->data) !== count($validResultObject->data)) {
+                $hints['rowsCount'] = count($validResultObject->data);
+            }
         }
         return [
             'ok' => $result,
-            'res' => $jsonResult
+            'hints' => $hints
         ];
     } catch(Exception $e) {
         return [
