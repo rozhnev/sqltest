@@ -1,5 +1,8 @@
             <div class="footer">
-                SQLtest.online 2023
+                © 2023-2024 SQLtest.online
+                <a target="_blank" href="https://t.me/sqlize">
+                    <img id="telegram_send_button" src="https://sqlize.online/favicons/telegram.svg" style="cursor:pointer; width: 32px; height: 32px; margin-bottom: -12px;"> our telegram chat
+                </a>
             </div>
         </div>
     </body>
