@@ -54,7 +54,7 @@ function testQueryResult(string $validJsonResult, string $jsonResult) : array {
         if (count($resultObject[0]->headers) !== count($validResultObject[0]->headers)) {
             $hints['columnsCount'] = count($validResultObject[0]->headers);
             return [
-                'ok' => $result,
+                'ok' => false,
                 'hints' => $hints
             ];
         }
@@ -68,7 +68,7 @@ function testQueryResult(string $validJsonResult, string $jsonResult) : array {
         if (count($diff) > 0) {
             $hints['columnsList'] = "`" . implode('`, `',array_column($validResultObject[0]->headers, 'header')) . "`";
             return [
-                'ok' => $result,
+                'ok' => false,
                 'hints' => $hints
             ];
         }
@@ -77,11 +77,21 @@ function testQueryResult(string $validJsonResult, string $jsonResult) : array {
         if (count($resultObject[0]->data) !== count($validResultObject[0]->data)) {
             $hints['rowsCount'] = count($validResultObject[0]->data);
             return [
-                'ok' => $result,
+                'ok' => false,
                 'hints' => $hints
             ];
         }
 
+        // check rows order
+        foreach ($validResultObject[0]->data as $i => $row) {
+            if ($row !== $resultObject[0]->data[$i]) {
+                $hints['rowsData'] = ['rowNumber' => $i + 1, 'rowData' => "'" . implode("', '", $row) . "'" ];
+                return [
+                    'ok' => false,
+                    'hints' => $hints
+                ];
+            }
+        }
         return [
             'ok' => true
         ];
@@ -93,7 +103,8 @@ function testQueryResult(string $validJsonResult, string $jsonResult) : array {
     }
 }
 // print_r($_SERVER);
-$path = $_SERVER['PATH_INFO'] ? trim($_SERVER['PATH_INFO'], '/') : 'ru/sakila/1';
+
+$path = isset($_SERVER['PATH_INFO']) ? trim($_SERVER['PATH_INFO'], '/') : trim($_SERVER['PHP_SELF'], '/');
 $pathParts = explode('/', $path);
 
 $lang       = $pathParts[0] ?? 'en';

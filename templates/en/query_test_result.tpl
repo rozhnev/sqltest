@@ -12,6 +12,9 @@
          {if array_key_exists('rowsCount', $QeryTestResult.hints) }
              <p>Hint: the result must contain {$QeryTestResult.hints.rowsCount} rows.</p>
          {/if}
+         {if array_key_exists('rowsData', $QeryTestResult.hints) }
+             <p>Hint: the row number {$QeryTestResult.hints.rowsData.rowNumber} of the results table should contain the following values: {$QeryTestResult.hints.rowsData.rowData}.</p>
+         {/if}
      {/if}
     Try again.
 {/if}
