@@ -24,11 +24,13 @@ body {
     grid-area: header; 
     min-height: 3vh;
 }
-.top_menu {
+.top-menu {
     text-align: left;
-    font-size: 30px;
 }
-.top_menu .lang-swoth {
+.top-menu h1,h3 {
+    display: inline;
+}
+.top-menu .lang-swoth {
     font-size: small;
     width: 90%;
     display: inline-block;
