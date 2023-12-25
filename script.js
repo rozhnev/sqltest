@@ -1,4 +1,10 @@
+
+function setLoader() {
+  return document.getElementById('code-result').innerHTML = '<div class="loader">Loading...</div>';
+}
+
 function getHelp(lang, db, questionId) {
+    setLoader();
     fetch(`/${lang}/${db}/${questionId}/query-help`, {
         method: "GET", // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, *cors, same-origin
@@ -15,6 +21,7 @@ function getHelp(lang, db, questionId) {
 }
 
 function runQuery(lang, db, questionId) {
+  setLoader();
   let formData = new FormData();
   formData.append('query', window.sql_editor.getValue());
   fetch(`/${lang}/${db}/${questionId}/query-run`, {
@@ -34,6 +41,7 @@ function runQuery(lang, db, questionId) {
 }
 
 function testQuery(lang, db, questionId) {
+  setLoader();
   let formData = new FormData();
   formData.append('query', window.sql_editor.getValue());
   fetch(`/${lang}/${db}/${questionId}/query-test`, {
