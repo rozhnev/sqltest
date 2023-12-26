@@ -26,6 +26,8 @@ body {
 }
 .top-menu {
     text-align: left;
+    background-color: #0b4fcc;
+    padding: 7px;
 }
 .top-menu h1, .top-menu h3 {
     display: inline;
@@ -37,8 +39,8 @@ body {
 .top-menu .lang-swith {
     font-size: small;
     position: absolute;
-    right: 20px;
-    top: 20px;
+    right: 28px;
+    top: 28px;
 }
 .menu { grid-area: menu;
     border-right: 1px solid lightblue;
