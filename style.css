@@ -50,7 +50,7 @@ body {
 .main { 
     grid-area: main; 
     min-height: 86vh;
-    color: #ddd;
+    color: white;
     width: 60vw;
 }
 .right { 
@@ -73,8 +73,8 @@ body {
 
 /* Style the buttons that are used to open and close the accordion panel */
 .menu .accordion {
-    background-color: #50aaFF;
-    color: #ddd;
+    background-color: #0b4fcc;
+    color: white;
     cursor: pointer;
     padding: 18px;
     width: 100%;
@@ -82,6 +82,7 @@ body {
     border: none;
     outline: none;
     transition: 0.4s;
+    font-weight: bold;
   }
   
   /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
@@ -92,7 +93,7 @@ body {
   /* Style the accordion panel. Note: hidden by default */
   .menu .panel {
     padding: 0 32px;
-    background-color: #ddd;
+    background-color: white;
     color: #50aaFF;
     max-height: 0;
     overflow: hidden;
@@ -126,6 +127,9 @@ body {
     border: none;
     width: 98px;
     margin: 7px 0;
+  }
+  .button.test {
+    background-color: #187e04 !important;
   }
 .code-result {
     border: 1px solid lightblue;

@@ -13,7 +13,7 @@
     <div class="code-buttons">
         <button class="button" onClick="getHelp('{$Lang}', '{$DB}', {$QuestionID})">Get help</button>
         <button class="button" onClick="runQuery('{$Lang}', '{$DB}', {$QuestionID})">Run query</button>
-        <button class="button" onClick="testQuery('{$Lang}', '{$DB}', {$QuestionID})">Check it!</button>
+        <button class="button test" onClick="testQuery('{$Lang}', '{$DB}', {$QuestionID})">Check it!</button>
     </div>
     <div class="code-result" id="code-result"></div>
 </div>
