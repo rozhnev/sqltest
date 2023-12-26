@@ -15,13 +15,28 @@
             <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.2/ext-beautify.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.2/mode-sql.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.2/mode-mysql.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.2/mode-sqlserver.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.2/mode-pgsql.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.2/mode-plsql.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.2/theme-xcode.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.2/ext-language_tools.js"></script>
+            <!-- Yandex.RTB -->
+            <script>window.yaContextCb=window.yaContextCb||[]</script>
+            <script src="https://yandex.ru/ads/system/context.js" async></script>
             <script type="text/javascript" src="/script.js?1" defer></script>
             {literal}
+            <!-- Yandex.RTB R-A-4716552-1 -->
+            <script>
+            window.yaContextCb.push(()=>{
+                Ya.Context.AdvManager.render({
+                    "blockId": "R-A-4716552-1",
+                    "type": "fullscreen",
+                    "platform": "touch"
+                });
+                Ya.Context.AdvManager.render({
+                    "blockId": "R-A-4716552-2",
+                    "renderTo": "yandex_rtb_R-A-4716552-2"
+                })
+            })
+            <!-- Yandex.RTB R-A-4716552-2 -->
+            </script>
             <!-- Google tag (gtag.js) -->
             <script async src="https://www.googletagmanager.com/gtag/js?id=G-PCGW7ZLSD1"></script>
             <script>

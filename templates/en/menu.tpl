@@ -12,7 +12,7 @@
         <a class="active-link" href="/en/sakila/9">Find addresses using sub-query</a>
         <a class="active-link" href="/en/sakila/10">Find addresses using JOIN</a>
     </div>
-
+    <div id="yandex_rtb_R-A-4716552-2"></div>
     {* <button class="accordion">Join tables</button>
     <div class="panel">
         <a href="/question/2/1">Join all tables</a>
