@@ -106,7 +106,11 @@ body {
     font-size: small;
     display: block;
     margin: 7px 0;
-  } 
+  }
+  .menu .menu-ad {
+    height: 45vh;
+    margin-top: 28px;
+  }
 .question {
     margin: 0 0 12px 0;
 }
