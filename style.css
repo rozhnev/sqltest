@@ -161,7 +161,22 @@ body {
     overflow-x: auto;
     padding: 7px 0;
 }
-
+.donate-btn {
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: 12px;
+  background: gold;
+  color: brown!important;
+  position: absolute;
+  right: 60px;
+  top: 20px;
+}
+.shake {
+  animation: shake .82s cubic-bezier(.36,.07,.19,.97) both;
+  transform: translate3d(0,0,0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
 .loader {
 	color: #50aaFF;
 	font-size: 20px;
