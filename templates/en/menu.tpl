@@ -7,6 +7,7 @@
         <a class="active-link" href="/en/sakila/4">Get the sorted list of films with limit</a>
         <a class="active-link" href="/en/sakila/5">Find stuff members by condition</a>
         <a class="active-link" href="/en/sakila/6">Get the sorted list of films with condition</a>
+        <a class="active-link" href="/en/sakila/7">Find film names by description</a>
     </div>
 
     {* <button class="accordion">Join tables</button>
