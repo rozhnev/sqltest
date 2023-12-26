@@ -6,6 +6,7 @@
         <a class="active-link" href="/ru/sakila/3">Получить упорядоченный список языков</a>
         <a class="active-link" href="/ru/sakila/4">Получить отсортированный список фильмов с лимитом</a>
         <a class="active-link" href="/ru/sakila/5">Найти участников по условию</a>
+        <a class="active-link" href="/ru/sakila/6">Получить отсортированный список фильмов с условием</a>
     </div>
 
     {* <button class="accordion">Join tables</button>

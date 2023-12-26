@@ -1,0 +1,1 @@
+To solve this problem use combination of WHERE and ORDER clauses.
