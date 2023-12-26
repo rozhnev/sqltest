@@ -10,6 +10,7 @@
         <a class="active-link" href="/en/sakila/7">Find film names by description</a>
         <a class="active-link" href="/en/sakila/8">Find active customers full names</a>
         <a class="active-link" href="/en/sakila/9">Find addresses using sub-query</a>
+        <a class="active-link" href="/en/sakila/10">Find addresses using JOIN</a>
     </div>
 
     {* <button class="accordion">Join tables</button>

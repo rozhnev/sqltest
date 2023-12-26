@@ -1,0 +1,1 @@
+Use JOIN table `address` with table `city`

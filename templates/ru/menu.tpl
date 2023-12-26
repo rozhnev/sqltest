@@ -10,6 +10,7 @@
         <a class="active-link" href="/ru/sakila/7">Найти названия фильмов по описанию</a>
         <a class="active-link" href="/ru/sakila/8">Найти полные имена активных клиентов</a>
         <a class="active-link" href="/ru/sakila/9">Найти адреса с помощью подзапроса</a>
+        <a class="active-link" href="/ru/sakila/10">Найти адреса с помощью JOIN</a>
     </div>
 
     {* <button class="accordion">Join tables</button>
