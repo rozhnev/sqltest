@@ -8,6 +8,7 @@
         <a class="active-link" href="/ru/sakila/5">Найти сотрудников по условию</a>
         <a class="active-link" href="/ru/sakila/6">Получить отсортированный список фильмов с условием</a>
         <a class="active-link" href="/ru/sakila/7">Найти названия фильмов по описанию</a>
+        <a class="active-link" href="/en/sakila/8">Найти полные имена активных клиентов</a>
     </div>
 
     {* <button class="accordion">Join tables</button>

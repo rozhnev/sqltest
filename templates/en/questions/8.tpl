@@ -1,0 +1,2 @@
+Find all active customers of store 2. 
+Select them as two column table where first column is `full_name` - customer's first_name and last_name with one space between and second column - customer's email, sorted by last name in alphabetical order.

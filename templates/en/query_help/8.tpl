@@ -1,0 +1,1 @@
+Use CONCAT function for join strings.
