@@ -1,5 +1,5 @@
     <p>
-        Thank you for finding a way to support PHPize.online. Your contribution makes a significant contribution to the continuation of the activity and development of the project.
+        Thank you for finding a way to support SQLtest.online. Your contribution makes a significant contribution to the continuation of the activity and development of the project.
     </p>
     <h2>Why Donate?</h2>
     <p>
