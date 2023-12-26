@@ -70,7 +70,6 @@ for (let i = 0; i < acc.length; i++) {
       panel.style.maxHeight = panel.scrollHeight + "px";
     }
   });
-  console.log(i, acc[i])
   if (i == 0) {
     const panel = acc[i].nextElementSibling;
     if (panel.style.maxHeight) {

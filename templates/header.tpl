@@ -25,11 +25,11 @@
             <!-- Yandex.RTB R-A-4716552-1 -->
             <script>
             window.yaContextCb.push(()=>{
-                Ya.Context.AdvManager.render({
-                    "blockId": "R-A-4716552-1",
-                    "type": "fullscreen",
-                    "platform": "touch"
-                });
+                // Ya.Context.AdvManager.render({
+                //     "blockId": "R-A-4716552-1",
+                //     "type": "fullscreen",
+                //     "platform": "touch"
+                // });
                 Ya.Context.AdvManager.render({
                     "blockId": "R-A-4716552-2",
                     "renderTo": "yandex_rtb_R-A-4716552-2"
