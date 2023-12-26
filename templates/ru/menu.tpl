@@ -4,6 +4,7 @@
         <a class="active-link" href="/ru/sakila/1">Получить список актёров</a>
         <a class="active-link" href="/ru/sakila/2">Получите языки</a>
         <a class="active-link" href="/ru/sakila/3">Получить упорядоченный список языков</a>
+        <a class="active-link" href="/ru/sakila/4">Получить отсортированный список фильмов с лимитом</a>
     </div>
 
     {* <button class="accordion">Join tables</button>
