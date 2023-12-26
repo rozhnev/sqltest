@@ -129,9 +129,10 @@ body {
     border: 1px solid lightblue;
     min-height: 30vh;
     padding: 7px;
-    color: white;
     max-height: 39vh;
     overflow: auto;
+    color: #333333;
+    background-color: white;
 }
 
 .db-description {
@@ -160,7 +161,7 @@ body {
 }
 
 .loader {
-	color: white;
+	color: #50aaFF;
 	font-size: 20px;
 	margin: 120px auto;
 	width: 1em;
