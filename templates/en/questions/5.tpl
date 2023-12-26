@@ -1,0 +1,1 @@
+Find staff members worked in store 1 and get all theirs data. 

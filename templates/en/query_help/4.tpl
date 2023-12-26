@@ -1,1 +1,1 @@
-To solve this troblem use ORDER BY with LIMIT clause.
+To solve this problem use ORDER BY with LIMIT clause.
