@@ -1,0 +1,1 @@
+In the previous task, we found that there were two entries in the table about actors named "Scarlett". Find all names that appear more than once. As a result, you will get a table with two columns, first_name and count.
