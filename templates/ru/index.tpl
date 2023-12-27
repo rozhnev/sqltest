@@ -6,9 +6,11 @@
     var db = '{$DB}';
 </script>
 <div class="main">
-    <div class="question">
+    <div class="question-wrapper">
         <p class="question-title">Задание:</p>
-        {include file="questions/{$QuestionID}.tpl"}
+        <div class="question">
+            {include file="questions/{$QuestionID}.tpl"}
+        </div>
         <p class="question-action">
         Напишите свой запрос в поле ниже и нажмите кнопку "Проверить!" (В случае ошибки вам придется просмотреть рекламный блок)
         </p>

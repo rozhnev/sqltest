@@ -2,9 +2,11 @@
 {include file='top-menu.tpl'}
 {include file='menu.tpl'}
 <div class="main">
-    <div class="question">
+    <div class="question-wrapper">
         <p class="question-title">Task:</p>
-        {include file="questions/{$QuestionID}.tpl"}
+        <div class="question">
+            {include file="questions/{$QuestionID}.tpl"}
+        </div>
         <p class="question-action">
         Write your request in the field below and click the "Check it!" button. (If there is an error, you will have to review the ad unit)
         </p>

@@ -111,17 +111,22 @@ body {
     height: 45vh;
     margin-top: 28px;
   }
-.question {
+.question-wrapper {
     margin: 0 0 12px 0;
     background-color: white;
     color: #333333;
-    padding: 5px 15px;
+}
+.question {
+  padding: 5px 15px;
 }
 .question-title {
   font-weight: bold;
+  background-color: #eee;
+  padding: 6px;
 }
 .question-action {
   font-style: italic;
+  padding: 0 15px 5px;
 }
   .code-wrapper {
     resize: vertical;
