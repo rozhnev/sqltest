@@ -66,3 +66,4 @@
         </head>
         <body>
             <div class="container">
+                <div class="toast" id="toast">php result copied to buffer</div>

@@ -19,6 +19,26 @@ body {
 .container > div {
     padding: 5px 0;
 }
+.toast {
+  /* visibility: hidden; */
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: #2196F3;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 47%;
+  top: 90px;
+}
+.toast.visible {
+  opacity: 100;
+  transition: opacity 0.3s ease-out;
+}
 
 .header { 
     grid-area: header; 
@@ -137,7 +157,11 @@ body {
   font-style: italic;
   padding: 0 15px 5px;
 }
-  .code-wrapper {
+.code-actions {
+    text-align: right;
+    padding-bottom: 3px;
+}
+.code-wrapper {
     resize: vertical;
     min-height: 30vh;
     max-height: 30vh;

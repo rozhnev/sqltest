@@ -3,6 +3,30 @@ function setLoader() {
   return document.getElementById('code-result').innerHTML = '<div class="loader">Loading...</div>';
 }
 
+function showToast(msg) {
+    const toast = document.getElementById("toast");
+    toast.innerText = msg || "...";
+    toast.classList.toggle("visible");
+    setTimeout((function() {
+      toast.classList.toggle("visible");
+    }
+    ), 1999)
+}
+
+function copyCode(msg) {
+    const editor = window.sql_editor;
+    navigator.clipboard && navigator.clipboard.writeText(editor.getValue()),
+    showToast(msg)
+}
+
+function clearEditor() {
+    const editor = window.sql_editor;
+    editor.setValue('');
+    editor.focus();
+    editor.session.selection.clearSelection();
+}
+
+
 function jsonToTable(jsonString) {
   const jsonObject = JSON.parse(jsonString);
   let htmlTable = "<table class='result-table'><tr><th>" + jsonObject[0].headers.map(h=>h.header).join('</th><th>') + "</th></tr>";

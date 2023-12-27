@@ -15,6 +15,9 @@
         Напишите свой запрос в поле ниже и нажмите кнопку "Проверить!" (В случае ошибки вам придется просмотреть рекламный блок)
         </p>
     </div>
+    <div class="code-actions">
+        <button onClick="copyCode(`Код SQL скопирован в буфер`)">Копировать код</button> <button onClick="clearEditor()">Очистить редактор</button>
+    </div>
     <div class="code-wrapper" id="sql-code" name="sql-code"></div>
     <div class="code-buttons">
         <button class="button" onClick="getHelp('{$Lang}', '{$DB}', {$QuestionID})">Помощь</button>
