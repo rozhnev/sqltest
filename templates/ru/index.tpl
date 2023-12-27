@@ -7,7 +7,7 @@
 </script>
 <div class="main">
     <div class="question-wrapper">
-        <p class="question-title">Задание:</p>
+        <div class="question-title">Задание:</div>
         <div class="question">
             {include file="questions/{$QuestionID}.tpl"}
         </div>

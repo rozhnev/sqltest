@@ -46,24 +46,25 @@ body {
     border-right: 1px solid lightblue;
     max-width: 250px;
     width: 15vw;
+    max-height: 90vh;
 }
 .main { 
     grid-area: main; 
-    min-height: 86vh;
+    min-height: 85vh;
     color: white;
     width: 60vw;
 }
 .right { 
     grid-area: right; 
     width: 25vw;
-    max-height: 91vh;
+    max-height: 90vh;
     padding: 12px;
     overflow: auto;
     /* border: 1px solid red; */
 }
 .footer { 
     grid-area: footer; 
-    min-height: 4.5vh;
+    min-height: 4vh;
 }
 .footer a, .footer a:visited{ 
   text-decoration: none;
@@ -173,11 +174,14 @@ body {
 }
 .code-result .result-table th, 
 .code-result .result-table td {
-  border: 1px solid silver;
-  color: #333;
+    border: 1px solid silver;
+    color: #333;
 }
 .db-description {
-    padding: 12px;
+    padding: 0 12px;
+}
+.db-description h3 {
+  margin-top: 0;
 }
 
 .db-description table {

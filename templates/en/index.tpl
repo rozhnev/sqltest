@@ -3,7 +3,7 @@
 {include file='menu.tpl'}
 <div class="main">
     <div class="question-wrapper">
-        <p class="question-title">Task:</p>
+        <div class="question-title">Task:</div>
         <div class="question">
             {include file="questions/{$QuestionID}.tpl"}
         </div>
