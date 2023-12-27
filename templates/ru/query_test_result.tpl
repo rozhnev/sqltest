@@ -13,9 +13,15 @@
         {if array_key_exists('rowsCount', $QeryTestResult.hints) }
             <p>Подсказка: результат должен содержать {$QeryTestResult.hints.rowsCount} строк.</p>
         {/if}
-         {if array_key_exists('rowsData', $QeryTestResult.hints) }
+        {if array_key_exists('rowsData', $QeryTestResult.hints) }
             <p>Подсказка: строка номер {$QeryTestResult.hints.rowsData.rowNumber} таблицы результатов должна содержать следующие значения: {$QeryTestResult.hints.rowsData.rowData}.</p>
-         {/if}        
+        {/if}
+        {if array_key_exists('emptyQuery', $QeryTestResult.hints) }
+            <p>Подсказка: ваш запрос пуст.</p>
+        {/if}
+        {if array_key_exists('wrongQuery', $QeryTestResult.hints) }
+            <p>Подсказка: ваш запрос неверен. Попробуйте переписать его.</p>
+        {/if}
     {/if}
    Попробуйте ещё раз.
 {/if}
