@@ -19,7 +19,7 @@
             <p>Hint: your query is empty.</p>
         {/if}
         {if array_key_exists('wrongQuery', $QeryTestResult.hints) }
-            <p>Hint: your query is wrong. Try to rewrite it.</p>
+            <p>Hint: your request does not meet the requirements described in the task. Try to rewrite it.</p>
         {/if}
      {/if}
     Try again.

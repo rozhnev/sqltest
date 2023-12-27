@@ -1,4 +1,5 @@
 <?php
+$queryRegexValidator = '/join/i'; // contains join 
 $validJsonResult = '[
     {
         "headers": [
