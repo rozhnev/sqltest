@@ -3,9 +3,9 @@
 {include file='menu.tpl'}
 <div class="main">
     <div class="question">
-        <p>Task:</p>
+        <p class="question-title">Task:</p>
         {include file="questions/{$QuestionID}.tpl"}
-        <p>
+        <p class="question-action">
         Write your request in the field below and click the "Check it!" button. (If there is an error, you will have to review the ad unit)
         </p>
     </div>

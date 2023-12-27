@@ -113,6 +113,15 @@ body {
   }
 .question {
     margin: 0 0 12px 0;
+    background-color: #eee;
+    color: #333;
+    padding: 5px 15px;
+}
+.question-title {
+  font-weight: bold;
+}
+.question-action {
+  font-style: italic;
 }
   .code-wrapper {
     resize: vertical;
@@ -138,13 +147,22 @@ body {
 .code-result {
     border: 1px solid lightblue;
     min-height: 30vh;
-    padding: 7px;
+    padding: 15px;
     max-height: 39vh;
     overflow: auto;
     color: #333333;
-    background-color: white;
+    background-color: #eee;
 }
-
+.code-result .result-table {
+    border: 1px solid gray;
+    width: 100%;
+    border-collapse: collapse;
+}
+.code-result .result-table th, 
+.code-result .result-table td {
+  border: 1px solid silver;
+  color: #333;
+}
 .db-description {
     padding: 12px;
 }

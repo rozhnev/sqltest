@@ -3,6 +3,16 @@ function setLoader() {
   return document.getElementById('code-result').innerHTML = '<div class="loader">Loading...</div>';
 }
 
+function jsonToTable(jsonString) {
+  const jsonObject = JSON.parse(jsonString);
+  let htmlTable = "<table class='result-table'><tr><th>" + jsonObject[0].headers.map(h=>h.header).join('</th><th>') + "</th></tr>";
+  for (let r of jsonObject[0].data) {
+    htmlTable += "<tr><td>" + r.join('</td><td>') + "</td></tr>";
+  }
+  htmlTable += "</table>";
+  return htmlTable;
+}
+
 function getHelp(lang, db, questionId) {
     setLoader();
     fetch(`/${lang}/${db}/${questionId}/query-help`, {
@@ -36,7 +46,7 @@ function runQuery(lang, db, questionId) {
     return await response.text();
   }))
   .then((message)=>{
-    document.getElementById('code-result').innerHTML = message;
+    document.getElementById('code-result').innerHTML = jsonToTable(message);
   });
 }
 

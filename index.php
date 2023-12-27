@@ -129,7 +129,7 @@ switch ($action) {
     case 'query-run':
         // var_dump($_POST);
         $query = $_POST["query"] ?? '';
-        $queryResult = runQuery($query, 'text');
+        $queryResult = runQuery($query, 'json');
         $smarty->assign('QeryResult', $queryResult);
         $template = "query_result.tpl";
         break;

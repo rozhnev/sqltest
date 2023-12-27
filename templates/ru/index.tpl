@@ -7,9 +7,9 @@
 </script>
 <div class="main">
     <div class="question">
-        <p>Задание:</p>
+        <p class="question-title">Задание:</p>
         {include file="questions/{$QuestionID}.tpl"}
-        <p>
+        <p class="question-action">
         Напишите свой запрос в поле ниже и нажмите кнопку "Проверить!" (В случае ошибки вам придется просмотреть рекламный блок)
         </p>
     </div>
