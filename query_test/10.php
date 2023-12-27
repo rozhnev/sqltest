@@ -1,5 +1,5 @@
 <?php
-$valid_json_result = '[
+$validJsonResult = '[
     {
         "headers": [
             {
