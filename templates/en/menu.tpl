@@ -4,6 +4,7 @@
         <a class="active-link" href="/en/sakila/1">Get the actors</a>
         <a class="active-link" href="/en/sakila/11">Find the actors by name</a>
         <a class="active-link" href="/en/sakila/12">Find duplicate actor names</a>
+        <a class="active-link" href="/en/sakila/13">Find the most popular the actors name</a>
         <a class="active-link" href="/en/sakila/2">Get the languages</a>
         <a class="active-link" href="/en/sakila/3">Get the ordered list of languages</a>
         <a class="active-link" href="/en/sakila/4">Get the sorted list of films with limit</a>
