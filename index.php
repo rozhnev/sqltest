@@ -37,7 +37,28 @@ function runQuery(string $query, string $format) : string {
     return $result;
 }
 
-function testQueryResult(string $validJsonResult, string $jsonResult) : array {
+function testQuery(string $queryRegexValidator, string $query) : array {
+    if (empty($query)) {
+        $hints['emptyQuery'] = true;
+        return [
+            'ok' => false,
+            'hints' => $hints
+        ];
+    }
+    if (empty($queryRegexValidator) || preg_match($queryRegexValidator, $query)) {
+        return [
+            'ok' => true
+        ];
+    }
+
+    $hints['wrongQuery'] = true;
+    return [
+        'ok' => false,
+        'hints' => $hints
+    ];
+}
+
+function queryTestResult(string $validJsonResult, string $jsonResult) : array {
     try {
         $resultObject = json_decode($jsonResult);
         if (!$resultObject) {
@@ -129,16 +150,27 @@ switch ($action) {
     case 'query-run':
         // var_dump($_POST);
         $query = $_POST["query"] ?? '';
+        if (empty($query)) {
+            $template = "empty_query_result.tpl";
+            break;
+        }
         $queryResult = runQuery($query, 'json');
         $smarty->assign('QeryResult', $queryResult);
         $template = "query_result.tpl";
         break;
     case 'query-test':
+        $queryRegexValidator = '';
         require_once("query_test/$questionID.php");
         $query = $_POST["query"] ?? '';
-        $jsonResult = runQuery($query, 'json');
-        // echo $jsonResult;
-        $smarty->assign('QeryTestResult', testQueryResult($validJsonResult, $jsonResult));
+
+        $queryTestResult = testQuery($queryRegexValidator, $query);
+        $smarty->assign('QeryTestResult', $queryTestResult);
+        if ($queryTestResult['ok']) {
+            $jsonResult = runQuery($query, 'json');
+            // echo $jsonResult;
+            $smarty->assign('QeryTestResult', queryTestResult($validJsonResult, $jsonResult));
+        }
+
         $template = "query_test_result.tpl";
         break;
     default:
