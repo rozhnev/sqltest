@@ -15,16 +15,15 @@
         <a class="active-link" href="/ru/sakila/9">Найти адреса с помощью подзапроса</a>
         <a class="active-link" href="/ru/sakila/10">Найти адреса с помощью JOIN</a>
     </div>
-    <div class="menu-ad">
-        <div id="yandex_rtb_R-A-4716552-2"></div>
-    </div>
     {* <button class="accordion">Join tables</button>
     <div class="panel">
         <a href="/question/2/1">Join all tables</a>
     </div>
-
     <button class="accordion">Data aggregation</button>
     <div class="panel">
         <a href="/question/3/1">Summarize data</a>
     </div> *}
+    <div class="menu-ad">
+        <div id="yandex_rtb_R-A-4716552-2"></div>
+    </div>
 </div>

@@ -83,11 +83,13 @@ body {
     outline: none;
     transition: 0.4s;
     font-weight: bold;
+    border-bottom: 1px solid #0b4fcc;
   }
   
   /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
-  .active, .accordion:hover {
+  .accordion:hover {
     background-color: #2196F3;
+    border-bottom: 1px solid #0b4fcc;
   }
   
   /* Style the accordion panel. Note: hidden by default */
@@ -96,9 +98,10 @@ body {
     background-color: white;
     color: #50aaFF;
     max-height: 0;
-    overflow: hidden;
+    overflow-x: hidden;
     transition: max-height 0.2s ease-out;
     text-align: left;
+    overflow-y: scroll;
   }
 
   .menu .panel a{
@@ -107,6 +110,11 @@ body {
     display: block;
     margin: 7px 0;
   }
+  .panel.active {
+    /* height: 38vh !important; */
+    max-height: 38vh !important;
+  }
+
   .menu .menu-ad {
     height: 45vh;
     margin-top: 28px;

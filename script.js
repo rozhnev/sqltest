@@ -72,21 +72,25 @@ function testQuery(lang, db, questionId) {
 const acc = document.getElementsByClassName("accordion");
 for (let i = 0; i < acc.length; i++) {
   acc[i].addEventListener("click", function () {
+    for (let el of document.getElementsByClassName("panel")) el.classList.remove("active");
     this.classList.toggle("active");
     const panel = this.nextElementSibling;
-    if (panel.style.maxHeight) {
-      panel.style.maxHeight = null;
-    } else {
-      panel.style.maxHeight = panel.scrollHeight + "px";
-    }
+    panel.classList.toggle("active");
+   
+    // if (panel.style.maxHeight) {
+    //   panel.style.maxHeight = null;
+    // } else {
+    //   panel.style.maxHeight = panel.scrollHeight + "px";
+    // }
   });
   if (i == 0) {
     const panel = acc[i].nextElementSibling;
-    if (panel.style.maxHeight) {
-        panel.style.maxHeight = null;
-      } else {
-        panel.style.maxHeight = panel.scrollHeight + "px";
-      }
+    panel.classList.toggle("active");
+  //   if (panel.style.maxHeight) {
+  //       panel.style.maxHeight = null;
+  //     } else {
+  //       panel.style.maxHeight = panel.scrollHeight + "px";
+  //     }
   }
 }
 window.sql_editor = ace.edit("sql-code", {
