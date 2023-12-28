@@ -1,0 +1,1 @@
+Find all the films in which HENRY BERRY starred. Output a resulting table of three columns `title`, `release_year` and `rating` sorted by rating.

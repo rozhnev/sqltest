@@ -16,7 +16,8 @@ $questionnire = [
             ['Find active customers full names', 8],
             ['Find addresses using sub-query', 9],
             ['Find addresses using JOIN', 10],
-            ['Find all the actors in the film', 14]
+            ['Find all the actors in the film', 14],
+            ['Find all films of an actor', 15]
         ]
     ]
 ];
