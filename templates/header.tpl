@@ -3,6 +3,7 @@
     <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
         <head>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1;"/>
             <meta charset="utf-8">
             <meta name="description" content="Free online SQL test.">
             <meta name="keywords" content="free sql test,online testing, sql, fiddle">
