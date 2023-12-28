@@ -28,12 +28,16 @@ function clearEditor() {
 
 
 function jsonToTable(jsonString) {
-  const jsonObject = JSON.parse(jsonString);
-  let htmlTable = "<table class='result-table'><tr><th>" + jsonObject[0].headers.map(h=>h.header).join('</th><th>') + "</th></tr>";
-  for (let r of jsonObject[0].data) {
-    htmlTable += "<tr><td>" + r.join('</td><td>') + "</td></tr>";
-  }
-  htmlTable += "</table>";
+  let htmlTable = '';
+  try {const jsonObject = JSON.parse(jsonString);
+      htmlTable = "<table class='result-table'><tr><th>" + jsonObject[0].headers.map(h=>h.header).join('</th><th>') + "</th></tr>";
+      for (let r of jsonObject[0].data) {
+        htmlTable += "<tr><td>" + r.join('</td><td>') + "</td></tr>";
+      }
+      htmlTable += "</table>";
+    } catch(e) {
+      htmlTable = 'Something went wrong. Please review your query and try again.'
+    }
   return htmlTable;
 }
 
