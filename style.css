@@ -115,7 +115,7 @@ body {
   
   /* Style the accordion panel. Note: hidden by default */
   .menu .panel {
-    padding: 0 32px;
+    padding: 0;
     background-color: white;
     color: #50aaFF;
     max-height: 0;
@@ -124,8 +124,12 @@ body {
     text-align: left;
     overflow-y: scroll;
   }
+  .menu .panel ol {
+    color: #50aaFF;
+    font-size: small;
+  }
 
-  .menu .panel a{
+  .menu .panel a {
     color: #50aaFF;
     font-size: small;
     display: block;
