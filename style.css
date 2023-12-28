@@ -117,7 +117,7 @@ body {
   .menu .panel {
     padding: 0;
     background-color: white;
-    color: #50aaFF;
+    color: #0071DB;
     max-height: 0;
     overflow-x: hidden;
     transition: max-height 0.2s ease-out;
@@ -125,12 +125,12 @@ body {
     overflow-y: scroll;
   }
   .menu .panel ol {
-    color: #50aaFF;
+    color: #0071DB;
     font-size: small;
   }
 
   .menu .panel a {
-    color: #50aaFF;
+    color: #0071DB;
     font-size: small;
     display: block;
     margin: 7px 0;
