@@ -4,7 +4,7 @@
     <div class="panel">
         <ol>
         {foreach $panel.questions as $question}
-            <li><a class="active-link" href="/en/sakila/{$question[1]}">{$question[0]}</a></li>
+            <li><a class="active-link" href="/{$Lang}/sakila/{$question[1]}">{$question[0]}</a></li>
         {/foreach}
         </ol>
     </div>

@@ -151,7 +151,9 @@ $smarty->assign('QuestionID', $questionID);
 
 switch ($action) {
     case 'query-help':
-        $template = "query_help/$questionID.tpl";
+        $template = file_exists("templates/$lang/query_help/$questionID.tpl") 
+            ? "query_help/$questionID.tpl" 
+            : "query_help/default.tpl";
         break;
     case 'query-run':
         // var_dump($_POST);
