@@ -141,6 +141,7 @@ $action     = $pathParts[3] ?? '';
 if ($lang == 'ru') {
     $smarty->setTemplateDir('./templates/ru');
 } else {
+    $lang = 'en';
     $smarty->setTemplateDir('./templates/en');
 }
 
