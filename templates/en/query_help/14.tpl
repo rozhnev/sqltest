@@ -1,0 +1,1 @@
+For this task you should JOIN three tables `actor`, `folm` and `film_actor`
