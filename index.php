@@ -5,6 +5,11 @@ $smarty = new Smarty();
 $lang = 'en';
 $question;
 
+function getQuestionnire(string $lang): array {
+    require_once("questions_$lang.php");
+    return $questionnire;
+}
+
 function getQueryHash(string $query) : string {
     $ch = curl_init( "https://sqlize.online/hash.php" );
     # Setup request to send json via POST.
@@ -174,6 +179,7 @@ switch ($action) {
         $template = "query_test_result.tpl";
         break;
     default:
+        $smarty->assign('Questionnire', getQuestionnire($lang));
         $template = "index.tpl";
 }
 

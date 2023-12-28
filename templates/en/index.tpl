@@ -1,6 +1,6 @@
 {include file='../header.tpl'}
 {include file='top-menu.tpl'}
-{include file='menu.tpl'}
+{include file='../menu.tpl'}
 <div class="main">
     <div class="question-wrapper">
         <div class="question-title">Task:</div>

@@ -1,6 +1,6 @@
 {include file='../header.tpl'}
 {include file='top-menu.tpl'}
-{include file='menu.tpl'}
+{include file='../menu.tpl'}
 <script>
     var lang = '{$Lang}';
     var db = '{$DB}';
