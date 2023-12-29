@@ -1,0 +1,1 @@
+Find the average length of the movie. Display the result in the `avg_film_length` column.
