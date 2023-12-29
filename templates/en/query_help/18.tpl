@@ -1,0 +1,1 @@
+Use the AVG aggregate function with GROUP BY
