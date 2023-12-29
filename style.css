@@ -167,8 +167,8 @@ body {
 }
 .code-wrapper {
     resize: vertical;
-    min-height: 30vh;
-    max-height: 30vh;
+    min-height: 28vh;
+    max-height: 28vh;
 }
 .code-buttons {
     text-align: end;
@@ -188,9 +188,9 @@ body {
   }
 .code-result {
     border: 1px solid lightblue;
-    min-height: 30vh;
+    min-height: 28vh;
     padding: 15px;
-    max-height: 39vh;
+    max-height: 28vh;
     overflow: auto;
     color: #333333;
     background-color: white;
