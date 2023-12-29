@@ -12,7 +12,7 @@ $validJsonResult = '[
                 "pdo_type": 2
             },
             {
-                "header": "avg_folm_length",
+                "header": "avg_film_length",
                 "pdo_type": 2
             }
         ],
