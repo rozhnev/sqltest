@@ -1,1 +1,1 @@
-Find the most popular name among actors.
+Find the most popular surname among actors. The result should contain two columns - the last name ('last_name') and the number of actors with this surname ('count').

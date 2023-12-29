@@ -6,7 +6,7 @@ $questionnire = [
             ['Get the actors', 1],
             ['Find the actors by name', 11],
             ['Find duplicate actor names', 12],
-            ['Find the most popular the actors name', 13],
+            ['Find the most popular surname among actors', 13],
             ['Get the languages', 2],
             ['Get the ordered list of languages', 3],
             ['Get the sorted list of films with limit', 4],
