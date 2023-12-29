@@ -42,7 +42,7 @@ function runQuery(string $query, string $format) : string {
     return $result;
 }
 
-function testQuery(string $queryRegexValidator, string $query) : array {
+function testQuery(array $queryRegexValidator, string $query) : array {
     if (empty($query)) {
         $hints['emptyQuery'] = true;
         return [
@@ -50,16 +50,18 @@ function testQuery(string $queryRegexValidator, string $query) : array {
             'hints' => $hints
         ];
     }
-    if (empty($queryRegexValidator) || preg_match($queryRegexValidator, $query)) {
+    if (
+        (isset($queryRegexValidator['queryMatch']) && !preg_match($queryRegexValidator['queryMatch'], $query)) ||
+        (isset($queryRegexValidator['queryNotMatch']) && preg_match($queryRegexValidator['queryNotMatch'], $query))
+    ) {
+        $hints['wrongQuery'] = true;
         return [
-            'ok' => true
+            'ok' => false,
+            'hints' => $hints
         ];
     }
-
-    $hints['wrongQuery'] = true;
     return [
-        'ok' => false,
-        'hints' => $hints
+        'ok' => true
     ];
 }
 

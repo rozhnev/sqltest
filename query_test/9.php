@@ -1,5 +1,7 @@
 <?php
-$queryRegexValidator = '/^((?!join).)*$/i'; // not contains join 
+$queryRegexValidator = [
+    'queryNotMatch' => '/join/im' // not contains join 
+]; 
 $validJsonResult = '[
     {
         "headers": [

@@ -1,5 +1,8 @@
 <?php
-$queryRegexValidator = '/join/i'; // contains join 
+$queryRegexValidator = [
+    'queryMatch' => '/join/im' // contains join 
+];
+
 $validJsonResult = '[
     {
         "headers": [
