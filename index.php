@@ -169,7 +169,7 @@ switch ($action) {
         $template = "query_result.tpl";
         break;
     case 'query-test':
-        $queryRegexValidator = '';
+        $queryRegexValidator = [];
         require_once("query_test/$questionID.php");
         $query = $_POST["query"] ?? '';
 
