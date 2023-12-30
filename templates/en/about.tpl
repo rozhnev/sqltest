@@ -1,5 +1,3 @@
-<h1>About Project: SQLTest.online</h1>
-
 <p>Welcome to SQLTest.online – your guide to the world of SQL and databases! Our project is designed to provide a unique platform for testing and improving your SQL skills.</p>
 
 <h2>What is SQLTest.online?</h2>
