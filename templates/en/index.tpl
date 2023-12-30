@@ -3,7 +3,12 @@
 {include file='../menu.tpl'}
 <div class="main">
     <div class="question-wrapper">
-        <div class="question-title">Task:</div>
+        <div class="question-title">Task:
+            <span class="question-navigate">
+                <a href="" title="Previous task"><i class="arrow arrow-left"></i></a>    
+                <a href="" title="Next task"><i class="arrow arrow-right"></i></a>
+            </span>
+        </div>
         <div class="question">
             {include file="questions/{$QuestionID}.tpl"}
         </div>

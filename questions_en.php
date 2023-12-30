@@ -2,6 +2,7 @@
 $questionnire = [
     [
         'title'=>'Sakila DB',
+        'db' => 'sakila',
         'questions' => [
             ['Get the actors', 1],
             ['Find the actors by name', 11],

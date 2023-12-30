@@ -7,7 +7,12 @@
 </script>
 <div class="main">
     <div class="question-wrapper">
-        <div class="question-title">Задание:</div>
+        <div class="question-title">Задание:
+            <span class="question-navigate">
+                <a href="" title="Предыдущее задание"><i class="arrow arrow-left"></i></a>    
+                <a href="" title="Следующее задание"><i class="arrow arrow-right"></i></a>
+            </span>
+        </div>
         <div class="question">
             {include file="questions/{$QuestionID}.tpl"}
         </div>

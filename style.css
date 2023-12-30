@@ -132,7 +132,12 @@ body {
     /* height: 38vh !important; */
     max-height: 38vh !important;
 }
+/* .question-link{
 
+} */
+.current-question {
+    font-weight: bold;
+}
 .menu .menu-ad {
     height: 45vh;
     margin-top: 28px;
@@ -150,9 +155,29 @@ body {
     background-color: #eee;
     padding: 6px;
 }
+.question-navigate {
+    float: right;
+    padding: 0 12px;
+}
+.arrow {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+} 
+.arrow-right {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+} 
+.arrow-left {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+}
+  
 .question-action {
     font-style: italic;
     padding: 0 15px 5px;
+    font-size: smaller;
 }
 .code-actions {
     text-align: right;
