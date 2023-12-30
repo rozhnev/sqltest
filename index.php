@@ -136,7 +136,7 @@ $path = isset($_SERVER['PATH_INFO']) ? trim($_SERVER['PATH_INFO'], '/') : trim($
 $pathParts = explode('/', $path);
 
 $lang       = $pathParts[0] ?? 'en';
-$db         = $pathParts[1] ?? 'sakila';
+$db         = $pathParts[1] ?? 'about';
 $questionID = $pathParts[2] ?? '1';
 $action     = $pathParts[3] ?? '';
 
