@@ -1,0 +1,1 @@
+Find the number of films in which HENRY BERRY took part. Name the resulting column `film_count`.

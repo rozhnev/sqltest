@@ -18,6 +18,8 @@ $questionnire = [
             ['Find addresses using JOIN', 10],
             ['Find all the actors in the film', 14],
             ['Find all films of an actor', 15],
+            ['Find the number of films in which the actor took part', 19],
+            ['Find actors more popular than HENRY BERRY', 20],
             ['Find the distribution of films by category', 16],
             ['Find the average length of a movie', 17],
             ['Find the average length of a movie by category', 18]
