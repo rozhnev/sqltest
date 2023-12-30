@@ -15,7 +15,7 @@
 
     <h2>What's New:</h2>
 
-    <p>Currently, we have over 15 tasks based on the Sakila database from MySQL. We regularly add new tasks and aim to expand the number of databases to provide you with a broader learning experience.</p>
+    <p>Currently, we have over 20 tasks based on the Sakila database from MySQL. We regularly add new tasks and aim to expand the number of databases to provide you with a broader learning experience.</p>
 
     <h2>Join Us:</h2>
 
