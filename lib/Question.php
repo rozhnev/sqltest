@@ -3,15 +3,30 @@ class Question
 {
     private $id;
 
-    private $queryRegexValidator;
+    private $queryRegexValidator = [];
 
     private $validJsonResult;
 
     public function __construct(string $id)
     {
+        require_once("query_test/$id.php");
         $this->id = $id;
-    }
+        $this->queryRegexValidator = $queryRegexValidator ?? [];
+        $this->validResultObject = json_decode($validJsonResult);
 
+    }
+    public function getDBTemplate (): string {
+        return 'sakila';
+    }
+    public function getHint (): string {
+        return 'sakila';
+    }
+    public function getPreviousId (): string {
+        return '1';
+    }
+    public function getNextId (): string {
+        return '3';
+    }
     public function checkQuery(string $query)
     {
         if (empty($query)) {
@@ -36,7 +51,7 @@ class Question
         ];
     }
 
-    public function checkQueryResult(string $query)
+    public function checkQueryResult(string $queryResult)
     {
         try {
             $resultObject = json_decode($jsonResult);

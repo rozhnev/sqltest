@@ -10,7 +10,7 @@ class Query
         $this->sql = $sql;
     }
 
-    private function setHash(string $query) : string {
+    private function setHash() {
         $ch = curl_init( "https://sqlize.online/hash.php" );
         # Setup request to send json via POST.
         $payload = json_encode( [
