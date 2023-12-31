@@ -1,46 +1,10 @@
 <?php
 require 'vendor/autoload.php';
 $smarty = new Smarty();
+$db     = new DB();
+$dbh    = $db->getInstance();
 
-$lang = 'en';
 $question;
-
-function getQuestionnire(string $lang): array {
-    require_once("questions_$lang.php");
-    return $questionnire;
-}
-
-function getQueryHash(string $query) : string {
-    $ch = curl_init( "https://sqlize.online/hash.php" );
-    # Setup request to send json via POST.
-    $payload = json_encode( [
-        "language" => "sql", 
-        "code" => $query, 
-        "sql_version" => "mysql80_sakila"
-    ]);
-    curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
-    curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
-    # Return response instead of printing.
-    curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
-    # Send request.
-    $result = curl_exec($ch);
-    curl_close($ch);
-    # Print response.
-    return $result;
-}
-
-function runQuery(string $query, string $format) : string {
-    $queryHash = getQueryHash($query);
-    $ch = curl_init( "https://sqlize.online/sqleval.php" );
-    curl_setopt($ch, CURLOPT_POST, 1);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, "sqlses=$queryHash&sql_version=mysql80_sakila&format=$format");
-    curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
-    # Send request.
-    $result = curl_exec($ch);
-    curl_close($ch);
-    # Print response.
-    return $result;
-}
 
 function testQuery(array $queryRegexValidator, string $query) : array {
     if (empty($query)) {
@@ -130,7 +94,6 @@ function queryTestResult(string $validJsonResult, string $jsonResult) : array {
         ];
     }
 }
-// print_r($_SERVER);
 
 $path = isset($_SERVER['PATH_INFO']) ? trim($_SERVER['PATH_INFO'], '/') : trim($_SERVER['PHP_SELF'], '/');
 $pathParts = explode('/', $path);
@@ -146,6 +109,7 @@ if ($lang == 'ru') {
     $lang = 'en';
     $smarty->setTemplateDir('./templates/en');
 }
+$questionnire = new Questionnire($lang);
 
 $smarty->assign('Lang', $lang);
 $smarty->assign('DB', $db);
@@ -159,13 +123,13 @@ switch ($action) {
         break;
     case 'query-run':
         // var_dump($_POST);
-        $query = $_POST["query"] ?? '';
-        if (empty($query)) {
+        $sql = $_POST["query"] ?? '';
+        if (empty($sql)) {
             $template = "empty_query_result.tpl";
             break;
         }
-        $queryResult = runQuery($query, 'json');
-        $smarty->assign('QeryResult', $queryResult);
+        $query = new Query($sql);
+        $smarty->assign('QeryResult', $query->getResult('mysql80_sakila', 'json'));
         $template = "query_result.tpl";
         break;
     case 'query-test':
@@ -184,7 +148,7 @@ switch ($action) {
         $template = "query_test_result.tpl";
         break;
     default:
-        $smarty->assign('Questionnire', getQuestionnire($lang));
+        $smarty->assign('Questionnire', $questionnire->get());
         $template = "index.tpl";
 }
 

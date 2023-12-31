@@ -1,5 +1,8 @@
 {
     "require": {
         "smarty/smarty": "^4.3"
+    },
+    "autoload": {
+        "classmap": ["lib"]
     }
 }
