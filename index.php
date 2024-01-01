@@ -142,9 +142,11 @@ $action     = $pathParts[3] ?? '';
 
 if ($lang == 'ru') {
     $smarty->setTemplateDir('./templates/ru');
+    $smarty->assign('SiteTitle', 'SQLtest — test your SQL knowlage online');
 } else {
     $lang = 'en';
     $smarty->setTemplateDir('./templates/en');
+    $smarty->assign('SiteTitle', 'SQLtest — проверьте свои знания SQL онлайн');
 }
 
 $smarty->assign('Lang', $lang);
