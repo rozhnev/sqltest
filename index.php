@@ -52,9 +52,11 @@ switch ($action) {
 
 if ($lang == 'ru') {
     $smarty->setTemplateDir('./templates/ru');
+    $smarty->assign('SiteTitle', 'SQLtest — проверьте свои знания SQL онлайн');
 } else {
     $lang = 'en';
     $smarty->setTemplateDir('./templates/en');
+    $smarty->assign('SiteTitle', 'SQLtest — test your SQL knowlage online');
 }
 $smarty->assign('Lang', $lang);
 $smarty->assign('DB', $db);

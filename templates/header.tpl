@@ -7,7 +7,7 @@
             <meta charset="utf-8">
             <meta name="description" content="Free online SQL test.">
             <meta name="keywords" content="free sql test,online testing, sql, fiddle">
-            <title>SQLtest - test your SQL knowlage online</title>
+            <title>{$SiteTitle}</title>
             <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
             <link rel="icon" type="image/png" href="/favicons/favicon-32x32.png" sizes="32x32">
             <link rel="icon" type="image/png" href="/favicons/favicon-16x16.png" sizes="16x16">
