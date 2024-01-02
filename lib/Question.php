@@ -26,6 +26,13 @@ class Question
         return 'sakila';
     }
     
+    public function get(string $lang): string 
+    {
+        $stmt = $this->dbh->prepare("SELECT task_{$lang} FROM questions WHERE id = ?");
+        $stmt->execute([$this->id]);
+        return $stmt->fetchColumn();
+    }
+
     public function getHint(string $lang): string 
     {
         $stmt = $this->dbh->prepare("SELECT hint_{$lang} FROM questions WHERE id = ?");
@@ -48,12 +55,30 @@ class Question
     
     public function getPreviousId (): string 
     {
-        return '1';
+        $stmt = $this->dbh->prepare("
+            SELECT nq.id
+            FROM questions nq
+            JOIN questions cq ON nq.category_id = cq.category_id and nq.sequence_position < cq.sequence_position
+            WHERE cq.id = ?
+            ORDER BY nq.sequence_position DESC
+            LIMIT 1
+        ");
+        $stmt->execute([$this->id]);
+        return $stmt->fetchColumn();
     }
     
     public function getNextId (): string 
     {
-        return '3';
+        $stmt = $this->dbh->prepare("
+            SELECT nq.id
+            FROM questions nq
+            JOIN questions cq ON nq.category_id = cq.category_id and nq.sequence_position > cq.sequence_position
+            WHERE cq.id = ?
+            ORDER BY nq.sequence_position ASC
+            LIMIT 1
+        ");
+        $stmt->execute([$this->id]);
+        return $stmt->fetchColumn();
     }
 
     public function checkQuery(string $query)

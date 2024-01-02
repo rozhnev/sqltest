@@ -9,12 +9,16 @@
     <div class="question-wrapper">
         <div class="question-title">Задание:
             <span class="question-navigate">
-                <a href="" title="Предыдущее задание"><i class="arrow arrow-left"></i></a>    
-                <a href="" title="Следующее задание"><i class="arrow arrow-right"></i></a>
+                {if $PreviousQuestionId}
+                    <a href="/{$Lang}/{$DB}/{$PreviousQuestionId}" title="Предыдущее задание"><i class="arrow arrow-left"></i></a>
+                {/if}
+                {if $NextQuestionId}
+                    <a href="/{$Lang}/{$DB}/{$NextQuestionId}" title="Следующее задание"><i class="arrow arrow-right"></i></a>
+                {/if}
             </span>
         </div>
         <div class="question">
-            {include file="questions/{$QuestionID}.tpl"}
+            {$Question}
         </div>
         <p class="question-action">
             Напишите свой запрос в поле ниже и нажмите кнопку "Проверить!" (В случае ошибки вам придется просмотреть рекламный блок)
@@ -31,7 +35,9 @@
         <button class="button" onClick="getHelp('{$Lang}', '{$DB}', {$QuestionID})">Помощь</button>
         <button class="button" onClick="runQuery('{$Lang}', '{$DB}', {$QuestionID})">Выполнить</button>
         <button class="button test" onClick="testQuery('{$Lang}', '{$DB}', {$QuestionID})">Проверить!</button>
-        <button class="button test hidden" onClick="testQuery('{$Lang}', '{$DB}', {$QuestionID})">Далее</button>
+        {if $NextQuestionId}
+            <a href="/{$Lang}/{$DB}/{$NextQuestionId}" title="Следующее задание" class="button test hidden">Далее</a>
+        {/if}
     </div>
     <div class="code-result" id="code-result"></div>
 </div>

@@ -191,6 +191,10 @@ body {
 .code-buttons {
     text-align: end;
 }
+.code-buttons a {
+    text-decoration: none;
+    font-size: smaller;
+}
 .button {
     background-color: #0b4fcc;
     color: white;

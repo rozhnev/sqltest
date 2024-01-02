@@ -47,6 +47,9 @@ switch ($action) {
         $smarty->assign('PreviousQuestionId', $question->getPreviousId());
         $smarty->assign('NextQuestionId', $question->getNextId());
         $smarty->assign('Questionnire', $questionnire->get());
+        $smarty->assign('Question', $question->get($lang));
+        $smarty->assign('NextQuestionId', $question->getNextId());
+        $smarty->assign('PreviousQuestionId', $question->getPreviousId());
         $template = "index.tpl";
 }
 
