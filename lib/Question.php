@@ -4,15 +4,10 @@ class Question
     private $dbh;
     private $id;
 
-    private $queryRegexValidator = [];
-
     public function __construct(PDO $dbh, string $id)
     {
         $this->dbh  = $dbh;
         $this->id = $id;
-        // $this->queryMatch = $questionData['queryMatch'];
-        // $this->queryRegexValidator = $queryRegexValidator ?? [];
-        // $this->validResultObject = json_decode($validJsonResult);
     }
     public function getDBTemplate(): string {
         return 'sakila';
