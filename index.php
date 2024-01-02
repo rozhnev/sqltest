@@ -14,9 +14,9 @@ $action     = $pathParts[3] ?? '';
 
 switch ($action) {
     case 'query-help':
-        $template = file_exists("templates/$lang/query_help/$questionID.tpl") 
-            ? "query_help/$questionID.tpl" 
-            : "query_help/default.tpl";
+        $question = new Question($questionID);
+        $smarty->assign('Hint', $question->getHint($lang));
+        $template = "../hint.tpl";
         break;
     case 'query-run':
         $sql = $_POST["query"] ?? '';
@@ -44,7 +44,6 @@ switch ($action) {
     default:
         $questionnire = new Questionnire($lang);
         $question = new Question($questionID);
-        $db = $question->getDBTemplate();
         $smarty->assign('PreviousQuestionId', $question->getPreviousId());
         $smarty->assign('NextQuestionId', $question->getNextId());
         $smarty->assign('Questionnire', $questionnire->get());

@@ -18,8 +18,12 @@ class Question
     public function getDBTemplate (): string {
         return 'sakila';
     }
-    public function getHint (): string {
-        return 'sakila';
+    public function getHint (string $lang): string {
+        $dafaultHint = [
+            'en' => 'Try to complete this task without any hints.',
+            'ru' => 'Попробуйте выполнить это задание без подсказок.'
+        ];
+        return $dafaultHint($lang);
     }
     public function getPreviousId (): string {
         return '1';
