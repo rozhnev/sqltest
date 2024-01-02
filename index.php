@@ -37,9 +37,10 @@ switch ($action) {
         if ($queryTestResult['ok']) {
             $query = new Query($sql);
             $jsonResult = $query->getResult($question->getDB(), 'json');
-            $smarty->assign('QeryTestResult', $question->checkQueryResult($jsonResult));
+            $queryTestResult = $question->checkQueryResult($jsonResult);
+            $smarty->assign('QeryTestResult', $queryTestResult);
         }
-
+        if (!$queryTestResult['ok']) header( 'HTTP/1.1 418 BAD REQUEST' );
         $template = "query_test_result.tpl";
         break;
     default:

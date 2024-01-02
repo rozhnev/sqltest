@@ -102,12 +102,14 @@ function testQuery(lang, db, questionId) {
       body: formData,
     })
     .then((async response=>{
-      if (!response.ok) throw Error('Something went wrong.');
+      if (response.ok) {
+          [...document.getElementsByClassName("button test")].map(el=>el.classList.toggle("hidden"));
+      }
+      //throw Error('Something went wrong.');
       return await response.text();
     }))
     .then((message)=>{
       document.getElementById('code-result').innerHTML = message;
-      [...document.getElementsByClassName("button test")].map(el=>el.classList.toggle("hidden"));
     })
     .catch(err=>{
       document.getElementById('code-result').innerHTML = 'Something went wrong. Please review your query and try again.';
