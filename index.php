@@ -25,7 +25,8 @@ switch ($action) {
             break;
         }
         $query = new Query($sql);
-        $smarty->assign('QeryResult', $query->getResult('mysql80_sakila', 'json'));
+        $question = new Question($dbh, $questionID);
+        $smarty->assign('QeryResult', $query->getResult($question->getDB(), 'json'));
         $template = "query_result.tpl";
         break;
     case 'query-test':
