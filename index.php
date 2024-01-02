@@ -14,7 +14,7 @@ $action     = $pathParts[3] ?? '';
 
 switch ($action) {
     case 'query-help':
-        $question = new Question($questionID);
+        $question = new Question($dbh, $questionID);
         $smarty->assign('Hint', $question->getHint($lang));
         $template = "../hint.tpl";
         break;
@@ -30,20 +30,20 @@ switch ($action) {
         break;
     case 'query-test':
         $sql = $_POST["query"] ?? '';
-        $question = new Question($questionID);
+        $question = new Question($dbh, $questionID);
         $queryTestResult = $question->checkQuery($sql);
         $smarty->assign('QeryTestResult', $queryTestResult);
         if ($queryTestResult['ok']) {
             $query = new Query($sql);
-            $jsonResult = $query->getResult('mysql80_sakila', 'json');
+            $jsonResult = $query->getResult($question->getDB(), 'json');
             $smarty->assign('QeryTestResult', $question->checkQueryResult($jsonResult));
         }
 
         $template = "query_test_result.tpl";
         break;
     default:
-        $questionnire = new Questionnire($lang);
-        $question = new Question($questionID);
+        $questionnire = new Questionnire($dbh, $lang);
+        $question = new Question($dbh, $questionID);
         $smarty->assign('PreviousQuestionId', $question->getPreviousId());
         $smarty->assign('NextQuestionId', $question->getNextId());
         $smarty->assign('Questionnire', $questionnire->get());
