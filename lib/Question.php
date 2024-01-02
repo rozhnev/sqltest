@@ -1,18 +1,33 @@
 <?php
 class Question 
 {
+    /**
+     * DB hahdler 
+     *
+     * @var PDO
+     */
     private $dbh;
+
+    /**
+     * Question id
+     *
+     * @var integer
+     */
     private $id;
 
     public function __construct(PDO $dbh, string $id)
     {
         $this->dbh  = $dbh;
-        $this->id = $id;
+        $this->id = (int)$id;
     }
-    public function getDBTemplate(): string {
+
+    public function getDBTemplate(): string 
+    {
         return 'sakila';
     }
-    public function getHint(string $lang): string {
+    
+    public function getHint(string $lang): string 
+    {
         $stmt = $this->dbh->prepare("SELECT hint_{$lang} FROM questions WHERE id = ?");
         $stmt->execute([$this->id]);
         $hint = $stmt->fetchColumn();
@@ -23,17 +38,24 @@ class Question
         ];
         return $hint ?? $dafaultHint[$lang];
     }
-    public function getDB(): string {
+    
+    public function getDB(): string 
+    {
         $stmt = $this->dbh->prepare("SELECT db FROM questions WHERE id = ?");
         $stmt->execute([$this->id]);
         return $stmt->fetchColumn();
     }
-    public function getPreviousId (): string {
+    
+    public function getPreviousId (): string 
+    {
         return '1';
     }
-    public function getNextId (): string {
+    
+    public function getNextId (): string 
+    {
         return '3';
     }
+
     public function checkQuery(string $query)
     {
         if (empty($query)) {

@@ -1,16 +1,43 @@
 <?php
 class Questionnire 
 {
+    /**
+     * DB hahdler 
+     *
+     * @var PDO
+     */
     private $dbh;
+    
+    /**
+     * Questionnire supported language
+     *
+     * @var array<string>
+     */
+    private $supportedlanguages = ['en', 'ru'];
+
+    /**
+     * Questionnire language
+     *
+     * @var string
+     */
     private $lang;
 
     public function __construct(PDO $dbh, string $lang)
     {
+        if(!in_array($lang, $this->supportedlanguages)) {
+            throw new Exception('Language does not supported');
+        }
+
         $this->dbh  = $dbh;
         $this->lang = $lang;
     }
-
-    public function get() {
+    /**
+     * Returns Questionnire data
+     *
+     * @return array
+     */
+    public function get(): array
+    {
         $stmt = $this->dbh->prepare("
             SELECT 
                 question_categories.title_{$this->lang} question_category,
