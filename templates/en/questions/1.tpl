@@ -1,1 +1,0 @@
-Select all records from the <b>`actor`</b> table.

@@ -1,1 +1,0 @@
-Use the AVG aggregate function.

@@ -1,1 +1,0 @@
-Write query that returns address and postal code of all addresses located in London. Don't use JOIN for this task.
