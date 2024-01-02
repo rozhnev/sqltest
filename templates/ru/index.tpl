@@ -31,6 +31,7 @@
         <button class="button" onClick="getHelp('{$Lang}', '{$DB}', {$QuestionID})">Помощь</button>
         <button class="button" onClick="runQuery('{$Lang}', '{$DB}', {$QuestionID})">Выполнить</button>
         <button class="button test" onClick="testQuery('{$Lang}', '{$DB}', {$QuestionID})">Проверить!</button>
+        <button class="button test hidden" onClick="testQuery('{$Lang}', '{$DB}', {$QuestionID})">Далее</button>
     </div>
     <div class="code-result" id="code-result"></div>
 </div>

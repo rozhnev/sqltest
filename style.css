@@ -204,6 +204,9 @@ body {
 .button.test {
     background-color: #187e04 !important;
 }
+.button.hidden {
+    display: none;
+}
 .code-result {
     border: 1px solid lightblue;
     min-height: 28vh;

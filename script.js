@@ -90,11 +90,12 @@ function testQuery(lang, db, questionId) {
     body: formData,
   })
   .then((async response=>{
-    if (!response.ok) throw Error('SOmething went wrong.');
+    if (!response.ok) throw Error('Something went wrong.');
     return await response.text();
   }))
   .then((message)=>{
     document.getElementById('code-result').innerHTML = message;
+    [...document.getElementsByClassName("button test")].map(el=>el.classList.toggle("hidden"));
   });}
 
 const acc = document.getElementsByClassName("accordion");

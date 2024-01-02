@@ -25,7 +25,7 @@ class Questionnire
     public function __construct(PDO $dbh, string $lang)
     {
         if(!in_array($lang, $this->supportedlanguages)) {
-            throw new Exception('Language does not supported');
+            throw new Exception("The {$lang} language does not supported");
         }
 
         $this->dbh  = $dbh;
