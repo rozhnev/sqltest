@@ -27,11 +27,12 @@ function clearEditor() {
 }
 
 
-function jsonToTable(jsonString) {
+function jsonToTable(jsonObject) {
   let htmlTable = '';
-  try {const jsonObject = JSON.parse(jsonString);
-      htmlTable = "<table class='result-table'><tr><th>" + jsonObject[0].headers.map(h=>h.header).join('</th><th>') + "</th></tr>";
-      for (let r of jsonObject[0].data) {
+  try {
+      //const jsonObject = JSON.parse(jsonString);
+      htmlTable = "<table class='result-table'><tr><th>" + jsonObject.headers.map(h=>h.header).join('</th><th>') + "</th></tr>";
+      for (let r of jsonObject.data) {
         htmlTable += "<tr><td>" + r.join('</td><td>') + "</td></tr>";
       }
       htmlTable += "</table>";
@@ -39,6 +40,10 @@ function jsonToTable(jsonString) {
       htmlTable = 'Something went wrong. Please review your query and try again.'
     }
   return htmlTable;
+}
+
+function errorToTable(jsonObject) {
+  return `<span class="sql_error">${jsonObject.error}</span>`;
 }
 
 function getHelp(lang, db, questionId) {
@@ -73,30 +78,41 @@ function runQuery(lang, db, questionId) {
     if (!response.ok) throw Error('SOmething went wrong.');
     return await response.text();
   }))
-  .then((message)=>{
-    document.getElementById('code-result').innerHTML = jsonToTable(message);
+  .then(JSON.parse)
+  .then((JSONmessage)=>{
+    const jsonObject = JSONmessage[0];
+    document.getElementById('code-result').innerHTML = jsonObject.error 
+      ? errorToTable(jsonObject) 
+      : jsonToTable(jsonObject);
+  })
+  .catch(err=>{
+    document.getElementById('code-result').innerHTML = 'Something went wrong. Please review your query and try again.';
   });
 }
 
 function testQuery(lang, db, questionId) {
-  setLoader();
-  let formData = new FormData();
-  formData.append('query', window.sql_editor.getValue());
-  fetch(`/${lang}/${db}/${questionId}/query-test`, {
-    method: "POST", // *GET, POST, PUT, DELETE, etc.
-    mode: "cors", // no-cors, *cors, same-origin
-    cache: "default", // *default, no-cache, reload, force-cache, only-if-cached
-    credentials: "same-origin", // include, *same-origin, omit
-    body: formData,
-  })
-  .then((async response=>{
-    if (!response.ok) throw Error('Something went wrong.');
-    return await response.text();
-  }))
-  .then((message)=>{
-    document.getElementById('code-result').innerHTML = message;
-    [...document.getElementsByClassName("button test")].map(el=>el.classList.toggle("hidden"));
-  });}
+    setLoader();
+    let formData = new FormData();
+    formData.append('query', window.sql_editor.getValue());
+    fetch(`/${lang}/${db}/${questionId}/query-test`, {
+      method: "POST", // *GET, POST, PUT, DELETE, etc.
+      mode: "cors", // no-cors, *cors, same-origin
+      cache: "default", // *default, no-cache, reload, force-cache, only-if-cached
+      credentials: "same-origin", // include, *same-origin, omit
+      body: formData,
+    })
+    .then((async response=>{
+      if (!response.ok) throw Error('Something went wrong.');
+      return await response.text();
+    }))
+    .then((message)=>{
+      document.getElementById('code-result').innerHTML = message;
+      [...document.getElementsByClassName("button test")].map(el=>el.classList.toggle("hidden"));
+    })
+    .catch(err=>{
+      document.getElementById('code-result').innerHTML = 'Something went wrong. Please review your query and try again.';
+    });
+}
 
 const acc = document.getElementsByClassName("accordion");
 for (let i = 0; i < acc.length; i++) {

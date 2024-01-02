@@ -230,6 +230,10 @@ body {
     border: 1px solid silver;
     color: #333;
 }
+.code-result .sql_error {
+    color: darkred;
+    font-weight: bolder;
+}
 .db-description {
     padding: 0 12px;
 }
