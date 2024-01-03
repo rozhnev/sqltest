@@ -30,7 +30,6 @@ function clearEditor() {
 function jsonToTable(jsonObject) {
   let htmlTable = '';
   try {
-      //const jsonObject = JSON.parse(jsonString);
       htmlTable = "<table class='result-table'><tr><th>" + jsonObject.headers.map(h=>h.header).join('</th><th>') + "</th></tr>";
       for (let r of jsonObject.data) {
         htmlTable += "<tr><td>" + r.join('</td><td>') + "</td></tr>";
@@ -123,21 +122,10 @@ for (let i = 0; i < acc.length; i++) {
     this.classList.toggle("active");
     const panel = this.nextElementSibling;
     panel.classList.toggle("active");
-   
-    // if (panel.style.maxHeight) {
-    //   panel.style.maxHeight = null;
-    // } else {
-    //   panel.style.maxHeight = panel.scrollHeight + "px";
-    // }
   });
   if (i == 0) {
     const panel = acc[i].nextElementSibling;
     panel.classList.toggle("active");
-  //   if (panel.style.maxHeight) {
-  //       panel.style.maxHeight = null;
-  //     } else {
-  //       panel.style.maxHeight = panel.scrollHeight + "px";
-  //     }
   }
 }
 window.sql_editor = ace.edit("sql-code", {
@@ -146,6 +134,5 @@ window.sql_editor = ace.edit("sql-code", {
     dragEnabled: false,
     useWorker: false
 });
-// window.sql_editor.setTheme(`ace/theme/${currentTheme}`);
 window.sql_editor.setShowPrintMargin(false);
 window.sql_editor.setOptions({enableBasicAutocompletion: true});
