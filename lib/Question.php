@@ -20,24 +20,40 @@ class Question
         $this->dbh  = $dbh;
         $this->id = (int)$id;
     }
-
+    /**
+     * Returns question DB template name
+     *
+     * @return string
+     */
     public function getDBTemplate(): string 
     {
-        return 'sakila';
+        $stmt = $this->dbh->prepare("SELECT db_template FROM questions WHERE id = ?");
+        $stmt->execute([$this->id]);
+        return (string)$stmt->fetchColumn();
     }
-    
+    /**
+     * Returns question task for provided language
+     *
+     * @param string $lang
+     * @return string
+     */
     public function get(string $lang): string 
     {
         $stmt = $this->dbh->prepare("SELECT task_{$lang} FROM questions WHERE id = ?");
         $stmt->execute([$this->id]);
-        return $stmt->fetchColumn();
+        return (string)$stmt->fetchColumn();
     }
-
+    /**
+     * Returns question hint for provided language
+     *
+     * @param string $lang
+     * @return string
+     */
     public function getHint(string $lang): string 
     {
         $stmt = $this->dbh->prepare("SELECT hint_{$lang} FROM questions WHERE id = ?");
         $stmt->execute([$this->id]);
-        $hint = $stmt->fetchColumn();
+        $hint = (string)$stmt->fetchColumn();
 
         $dafaultHint = [
             'en' => 'Try to complete this task without any hints.',
@@ -45,15 +61,23 @@ class Question
         ];
         return $hint ?? $dafaultHint[$lang];
     }
-    
+    /**
+     * Returns question db name
+     *
+     * @return string
+     */
     public function getDB(): string 
     {
         $stmt = $this->dbh->prepare("SELECT db FROM questions WHERE id = ?");
         $stmt->execute([$this->id]);
-        return $stmt->fetchColumn();
+        return (string)$stmt->fetchColumn();
     }
-    
-    public function getPreviousId (): string 
+    /**
+     * Returns previous questio Id
+     *
+     * @return integer
+     */
+    public function getPreviousId (): int 
     {
         $stmt = $this->dbh->prepare("
             SELECT nq.id
@@ -64,10 +88,14 @@ class Question
             LIMIT 1
         ");
         $stmt->execute([$this->id]);
-        return $stmt->fetchColumn();
+        return (int)$stmt->fetchColumn();
     }
-    
-    public function getNextId (): string 
+    /**
+     * Returns next question Id
+     *
+     * @return integer
+     */
+    public function getNextId (): int 
     {
         $stmt = $this->dbh->prepare("
             SELECT nq.id
@@ -78,7 +106,7 @@ class Question
             LIMIT 1
         ");
         $stmt->execute([$this->id]);
-        return $stmt->fetchColumn();
+        return (int)$stmt->fetchColumn();
     }
 
     public function checkQuery(string $query)

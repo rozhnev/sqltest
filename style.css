@@ -173,11 +173,14 @@ body {
     transform: rotate(135deg);
     -webkit-transform: rotate(135deg);
 }
-  
 .question-action {
     font-style: italic;
     padding: 0 15px 5px;
     font-size: smaller;
+}
+.question .attention {
+    font-weight: bold;
+    font-style: italic;
 }
 .code-actions {
     text-align: right;
