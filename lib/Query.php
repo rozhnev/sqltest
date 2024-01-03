@@ -11,7 +11,7 @@ class Query
     /**
      * Calculated query hash
      *
-     * @var string
+     * @var string|boolean
      */
     private $hash;
 
@@ -49,7 +49,7 @@ class Query
      * @param string $format
      * @return string
      */
-    public function getResult(string $db, string $format) : string 
+    public function getResult(string $db, string $format) : string
     {
         $this->setHash();
         $ch = curl_init( "https://sqlize.online/sqleval.php" );
