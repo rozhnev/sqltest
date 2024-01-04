@@ -136,3 +136,24 @@ window.sql_editor = ace.edit("sql-code", {
 });
 window.sql_editor.setShowPrintMargin(false);
 window.sql_editor.setOptions({enableBasicAutocompletion: true});
+
+window.YaAuthSuggest.init(
+  {
+      client_id: '6a7ad9d0d23a496987255a596b83b9db',
+      response_type: 'token',
+      redirect_uri: 'https://sqltest.online/'
+  },
+  'https://sqltest.online/',
+  {
+    view: "button",
+    parentId: "yandexLogin",
+    buttonSize: 'm',
+    buttonView: 'icon',
+    buttonTheme: 'light',
+    buttonBorderRadius: "0",
+    buttonIcon: 'ya',
+  }
+)
+.then(({handler}) => handler())
+.then(data => console.log('Сообщение с токеном', data))
+.catch(error => console.log('Обработка ошибки', error))

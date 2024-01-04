@@ -3,7 +3,7 @@
     <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
         <head>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1;"/>
+            <meta name="viewport" content="width=device-width, initial-scale=1"/>
             <meta charset="utf-8">
             <meta name="description" content="Free online SQL test.">
             <meta name="keywords" content="free sql test,online testing, sql, fiddle">
@@ -21,6 +21,7 @@
             <!-- Yandex.RTB -->
             <script>window.yaContextCb=window.yaContextCb||[]</script>
             <script src="https://yandex.ru/ads/system/context.js" async></script>
+                <script src="https://yastatic.net/s3/passport-sdk/autofill/v1/sdk-suggest-with-polyfills-latest.js"></script>
             <script type="text/javascript" src="/script.js?2" defer></script>
             {literal}
             <!-- Yandex.RTB R-A-4716552-1 -->
