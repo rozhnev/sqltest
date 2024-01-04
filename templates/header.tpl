@@ -69,3 +69,7 @@
         <body>
             <div class="container">
                 <div class="toast" id="toast">php result copied to buffer</div>
+                <div class="login-window" id="login-window">
+                    <div class="login-window-header"><span  class="login-window-close" onClick="toggleLoginWindow()">X</span></div>
+                    <div style="margin: 12px;" id="yandexLogin"></div>
+                </div>

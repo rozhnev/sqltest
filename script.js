@@ -26,6 +26,13 @@ function clearEditor() {
     editor.session.selection.clearSelection();
 }
 
+function toggleLoginWindow() {
+  const loginWindow = document.getElementById("login-window");
+  setTimeout((function() {
+    loginWindow.classList.toggle("visible");
+  }
+  ), 333)
+}
 
 function jsonToTable(jsonObject) {
   let htmlTable = '';

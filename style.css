@@ -28,18 +28,48 @@ body {
     background-color: #2196F3;
     color: #fff;
     text-align: center;
-    border-radius: 6px;
+    border-radius: 3px;
     padding: 16px;
     position: fixed;
     z-index: 1;
     left: 47%;
     top: 90px;
 }
-.toast.visible {
-    opacity: 100;
+.visible {
+    opacity: 100 !important;
     transition: opacity 0.3s ease-out;
 }
-
+.login-button {
+    position: absolute;
+    right: 160px;
+    top: 24px;
+    cursor: pointer;
+}
+.login-window  {
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
+    min-width: 20%;
+    min-height: 96px;
+    background-color: #2196F3;
+    color: #fff;
+    text-align: center;
+    border-radius: 3px;
+    padding: 0 !important;
+    position: fixed;
+    z-index: 1;
+    left: 40%;
+    top: 36%;
+}
+.login-window-header {
+    text-align: right;
+    padding: 5px 9px;
+    background-color: #0b4fcc;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+}
+.login-window-close {
+    cursor: pointer;
+}
 .header { 
     grid-area: header; 
     min-height: 3vh;
