@@ -27,7 +27,7 @@ function clearEditor() {
 }
 
 function toggleLoginWindow() {
-  const loginWindow = document.getElementById("login-window");
+  const loginWindow = document.getElementById("login-popup");
   setTimeout((function() {
     loginWindow.classList.toggle("visible");
   }
@@ -144,23 +144,42 @@ window.sql_editor = ace.edit("sql-code", {
 window.sql_editor.setShowPrintMargin(false);
 window.sql_editor.setOptions({enableBasicAutocompletion: true});
 
-window.YaAuthSuggest.init(
-  {
-      client_id: '6a7ad9d0d23a496987255a596b83b9db',
-      response_type: 'token',
-      redirect_uri: 'https://sqltest.online/'
-  },
-  'https://sqltest.online/',
-  {
-    view: "button",
-    parentId: "yandexLogin",
-    buttonSize: 'm',
-    buttonView: 'icon',
-    buttonTheme: 'light',
-    buttonBorderRadius: "0",
-    buttonIcon: 'ya',
-  }
-)
-.then(({handler}) => handler())
-.then(data => console.log('Сообщение с токеном', data))
-.catch(error => console.log('Обработка ошибки', error))
+function onSuccessGoogleLogin(googleUser) {
+  console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+}
+function onFailureGoogleLogin(error) {
+  console.log(error);
+}
+
+window.onload = function() {
+    window.YaAuthSuggest.init(
+      {
+          client_id: '6a7ad9d0d23a496987255a596b83b9db',
+          response_type: 'token',
+          redirect_uri: 'https://sqltest.online/'
+      },
+      'https://sqltest.online/',
+      {
+        view: "button",
+        parentId: "yandexLogin",
+        buttonSize: 'm',
+        buttonView: 'icon',
+        buttonTheme: 'light',
+        buttonBorderRadius: "0",
+        buttonIcon: 'ya',
+      }
+    )
+    .then(({handler}) => handler())
+    .then(data => console.log('Сообщение с токеном', data))
+    .catch(error => console.log('Обработка ошибки', error));
+
+    gapi.signin2.render('googleLogin', {
+      'scope': 'profile email',
+      'width': 36,
+      'height': 36,
+      'longtitle': true,
+      'theme': 'dark',
+      'onsuccess': onSuccessGoogleLogin,
+      'onfailure': onFailureGoogleLogin
+    });
+};

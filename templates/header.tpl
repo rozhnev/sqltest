@@ -7,6 +7,7 @@
             <meta charset="utf-8">
             <meta name="description" content="Free online SQL test.">
             <meta name="keywords" content="free sql test,online testing, sql, fiddle">
+            <meta name="google-signin-client_id" content="340274762951-1d5m1pb8p9i2bhjbtuc4p8q9gveuk2ug.apps.googleusercontent.com">
             {include file='site-title.tpl'}
             <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
             <link rel="icon" type="image/png" href="/favicons/favicon-32x32.png" sizes="32x32">
@@ -40,6 +41,7 @@
             <!-- Yandex.RTB R-A-4716552-2 -->
             </script>
             <!-- Google tag (gtag.js) -->
+            <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
             <script async src="https://www.googletagmanager.com/gtag/js?id=G-PCGW7ZLSD1"></script>
             <script>
                 window.dataLayer = window.dataLayer || [];
@@ -69,7 +71,4 @@
         <body>
             <div class="container">
                 <div class="toast" id="toast">php result copied to buffer</div>
-                <div class="login-window" id="login-window">
-                    <div class="login-window-header"><span  class="login-window-close" onClick="toggleLoginWindow()">X</span></div>
-                    <div style="margin: 12px;" id="yandexLogin"></div>
-                </div>
+                {include file='login-popup.tpl'}

@@ -45,10 +45,10 @@ body {
     top: 24px;
     cursor: pointer;
 }
-.login-window  {
+.login-popup  {
     opacity: 0;
     transition: opacity 0.3s ease-out;
-    min-width: 20%;
+    width: 20%;
     min-height: 96px;
     background-color: #2196F3;
     color: #fff;
@@ -60,15 +60,30 @@ body {
     left: 40%;
     top: 36%;
 }
-.login-window-header {
+.login-popup-header {
     text-align: right;
     padding: 5px 9px;
     background-color: #0b4fcc;
     border-top-right-radius: 3px;
     border-top-left-radius: 3px;
 }
-.login-window-close {
+.login-popup-footer {
+    font-size: smaller;
+    padding: 10px;
+}
+.login-popup-title {
+    width: 94%;
+    display: inline-block;
+    text-align: left;
+}
+.login-popup-close {
     cursor: pointer;
+}
+.social-login-button {
+    width: 36px;
+    height: 36px;
+    display: inline-block;
+    margin: 12px;
 }
 .header { 
     grid-area: header; 
