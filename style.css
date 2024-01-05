@@ -66,6 +66,7 @@ body {
     background-color: #0b4fcc;
     border-top-right-radius: 3px;
     border-top-left-radius: 3px;
+    margin-bottom: 12px;
 }
 .login-popup-footer {
     font-size: smaller;
@@ -83,7 +84,7 @@ body {
     width: 36px;
     height: 36px;
     display: inline-block;
-    margin: 12px;
+    margin: 0 12px;
 }
 .header { 
     grid-area: header; 
