@@ -60,16 +60,52 @@ class User
      
             $info = json_decode($info, true);
 
-            $this->login = $info['login'];
-            // print_r($info);
+            $this->email = $info['login'];
+            $this->upsert();
             return true;
         }
 
         return false;
     }
 
-    public function createSession()
+    
+    public function logged() 
     {
+        return isset($this->id);
+    }
 
+    public function setId(string $id) 
+    {
+        $this->id = $id;
+    }
+
+    public function getId() 
+    {
+        return $this->id;
+    }
+
+    public function upsert()
+    {
+        $this->id = vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex(random_bytes(16)), 4));
+
+        $stmt = $this->dbh->prepare("
+            INSERT INTO users (id, email) VALUES (?, ?) 
+            ON CONFLICT (email) DO 
+               UPDATE SET last_login_at = CURRENT_TIMESTAMP 
+            RETURNING id");
+        $stmt->execute([$this->id, $this->email]);
+
+        $this->id = $stmt->fetchColumn();
+    }
+
+    public function setPath(string $path)
+    {
+        $this->path = $path;
+    }
+
+    public function save()
+    {
+        $stmt = $this->dbh->prepare("UPDATE users SET last_path = ? WHERE id = ?");
+        $stmt->execute([$this->path, $this->id]);
     }
 }

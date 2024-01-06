@@ -7,9 +7,9 @@ class DB
     private $connection;
 
     /**
-     * @var string $engine The engine of connection
+     * @var string $dsn The dsn of connection
      */
-    private $engine = 'sqlite:sqltest.db'; // sqlite::memory:
+    private $dsn;
 
     /**
      * @var array $options Default option to PDO connection
@@ -27,13 +27,17 @@ class DB
      * @throws \Throwable
      * @return void
      */
-    public function __construct()
+    public function __construct(array $env)
     {
+        $this->dsn = $env['DB_ENGINE'] 
+            ? "pgsql:host={$env['DB_HOST']};port={$env['DB_PORT']};dbname={$env['DB_NAME']};" 
+            : 'sqlite:sqltest.db';
+
         try {
-            $this->connection = new PDO($this->engine, null, null, $this->options);
+            $this->connection = new PDO($this->dsn, $env['DB_USER'], $env['DB_PASS'], $this->options);
         }
         catch (\Throwable $error) {
-            error_log("{$error->getMessage()}");
+            throw new Exception($error->getMessage());
         }
     }
 

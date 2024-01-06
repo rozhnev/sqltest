@@ -3,16 +3,14 @@ $env    = parse_ini_string(file_get_contents(".env"), 1);
 
 require 'vendor/autoload.php';
 $smarty = new Smarty();
-$db     = new DB();
+$db     = new DB($env);
 $dbh    = $db->getInstance();
+$user = new User($dbh, $env);
 
 $path = isset($_SERVER['PATH_INFO']) ? trim($_SERVER['PATH_INFO'], '/') : trim($_SERVER['PHP_SELF'], '/');
 $pathParts = explode('/', $path);
 
 if ($pathParts[0] === 'login') {
-    // echo '<pre>';
-    // var_dump($_SERVER);
-    // echo '</pre>';
     $action     = 'login';
     $loginProvider = $pathParts[1];
 } else {
@@ -22,12 +20,17 @@ if ($pathParts[0] === 'login') {
     $action     = $pathParts[3] ?? '';
 }
 
+session_start();
+
+if (($_SESSION && $_SESSION['user_id'])) {
+    $user->setId($_SESSION['user_id']);
+}
 
 switch ($action) {
     case 'login':
-        $user = new User($dbh, $env);
         $user->login($loginProvider, $_REQUEST);
-        
+        $_SESSION["user_id"] = $user->getId();
+        //TODO: last path should be restored on login
         $template = "../login_result.tpl";
         break;
     case 'query-help':
@@ -60,7 +63,30 @@ switch ($action) {
         if (!$queryTestResult['ok']) header( 'HTTP/1.1 418 BAD REQUEST' );
         $template = "query_test_result.tpl";
         break;
+    case 'logout':
+        // Unset all of the session variables.
+        $_SESSION = array();
+
+        // If it's desired to kill the session, also delete the session cookie.
+        // Note: This will destroy the session, and not just the session data!
+        if (ini_get("session.use_cookies")) {
+            $params = session_get_cookie_params();
+            setcookie(session_name(), '', time() - 42000,
+                $params["path"], $params["domain"],
+                $params["secure"], $params["httponly"]
+            );
+        }
+
+        // Finally, destroy the session.
+        session_destroy();
+        header("location:/");
+        die();
     default:
+        if ($user->logged()) {
+            $user->setPath($path);
+            $user->save();
+        }
+
         $questionnire = new Questionnire($dbh, $lang);
         $question = new Question($dbh, $questionID);
         $smarty->assign('PreviousQuestionId', $question->getPreviousId());
@@ -69,6 +95,7 @@ switch ($action) {
         $smarty->assign('Question', $question->get($lang));
         $smarty->assign('NextQuestionId', $question->getNextId());
         $smarty->assign('PreviousQuestionId', $question->getPreviousId());
+        $smarty->assign('Logged', $user->logged());
         $template = "index.tpl";
 }
 
