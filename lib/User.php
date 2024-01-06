@@ -108,4 +108,19 @@ class User
         $stmt = $this->dbh->prepare("UPDATE users SET last_path = ? WHERE id = ?");
         $stmt->execute([$this->path, $this->id]);
     }
+
+    public function saveQuestionAttempt(int $questionID, bool $solved)
+    {
+        $stmt = $this->dbh->prepare("
+            INSERT INTO user_questions (
+                user_id, question_id, last_attempt_at, solved_at
+            ) VALUES (
+                ?, ?, CURRENT_TIMESTAMP, CASE WHEN ".($solved ? 'true' : 'false')." THEN CURRENT_TIMESTAMP END
+            ) 
+            ON CONFLICT (user_id, question_id) DO UPDATE SET
+                last_attempt_at = CURRENT_TIMESTAMP, 
+                solved_at = LEAST(user_questions.solved_at, EXCLUDED.solved_at)
+            ");
+        $stmt->execute([$this->id, $questionID]);
+    }
 }

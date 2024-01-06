@@ -60,6 +60,9 @@ switch ($action) {
             $queryTestResult = $question->checkQueryResult($jsonResult);
             $smarty->assign('QeryTestResult', $queryTestResult);
         }
+        if ($user->logged()) {
+            $user->saveQuestionAttempt($questionID, $queryTestResult['ok']);
+        }
         if (!$queryTestResult['ok']) header( 'HTTP/1.1 418 BAD REQUEST' );
         $template = "query_test_result.tpl";
         break;
