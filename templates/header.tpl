@@ -7,6 +7,7 @@
             <meta charset="utf-8">
             <meta name="description" content="Free online SQL test.">
             <meta name="keywords" content="free sql test,online testing, sql, fiddle">
+            <meta Content-Security-Policy-Report-Only: script-src https://accounts.google.com/gsi/client; frame-src https://accounts.google.com/gsi/; connect-src https://accounts.google.com/gsi/; />
             <meta name="google-signin-client_id" content="340274762951-1d5m1pb8p9i2bhjbtuc4p8q9gveuk2ug.apps.googleusercontent.com">
             {include file='site-title.tpl'}
             <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
@@ -63,10 +64,14 @@
                 trackLinks:true,
                 accurateTrackBounce:true
             });
+            {/literal}
+            var lang = '{$Lang}',
+                db   = '{$DB}',
+                questionId = '{$QuestionID}';
             </script>
             <noscript><div><img src="https://mc.yandex.ru/watch/95990842" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
             <!-- /Yandex.Metrika counter -->
-            {/literal}
+
         </head>
         <body>
             <div class="container">

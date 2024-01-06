@@ -1,4 +1,6 @@
 <?php
+$env    = parse_ini_string(file_get_contents(".env"), 1);
+
 require 'vendor/autoload.php';
 $smarty = new Smarty();
 $db     = new DB();
@@ -7,12 +9,27 @@ $dbh    = $db->getInstance();
 $path = isset($_SERVER['PATH_INFO']) ? trim($_SERVER['PATH_INFO'], '/') : trim($_SERVER['PHP_SELF'], '/');
 $pathParts = explode('/', $path);
 
-$lang       = isset($pathParts[0]) && $pathParts[0] === 'ru' ? 'ru' : 'en';
-$db         = $pathParts[1] ?? 'about';
-$questionID = $pathParts[2] ?? '1';
-$action     = $pathParts[3] ?? '';
+if ($pathParts[0] === 'login') {
+    // echo '<pre>';
+    // var_dump($_SERVER);
+    // echo '</pre>';
+    $action     = 'login';
+    $loginProvider = $pathParts[1];
+} else {
+    $lang       = isset($pathParts[0]) && $pathParts[0] === 'ru' ? 'ru' : 'en';
+    $db         = $pathParts[1] ?? 'about';
+    $questionID = $pathParts[2] ?? '1';
+    $action     = $pathParts[3] ?? '';
+}
+
 
 switch ($action) {
+    case 'login':
+        $user = new User($dbh, $env);
+        $user->login($loginProvider, $_REQUEST);
+        
+        $template = "../login_result.tpl";
+        break;
     case 'query-help':
         $question = new Question($dbh, $questionID);
         $smarty->assign('Hint', $question->getHint($lang));

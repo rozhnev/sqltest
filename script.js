@@ -155,10 +155,11 @@ window.onload = function() {
     window.YaAuthSuggest.init(
       {
           client_id: '6a7ad9d0d23a496987255a596b83b9db',
-          response_type: 'token',
-          redirect_uri: 'https://sqltest.online/'
+          response_type: 'code',
+          // redirect_uri: `https://sqltest.online/yandex-login/?lang=${lang}&db=${db}&questionId=${questionId}`
+          redirect_uri: `http://localhost:8000/login/yandex/?lang=${lang}&db=${db}&questionId=${questionId}`
       },
-      'https://sqltest.online/',
+      `http://localhost:8000/login/yandex/?lang=${lang}&db=${db}&questionId=${questionId}`,
       {
         view: "button",
         parentId: "yandexLogin",
@@ -170,8 +171,8 @@ window.onload = function() {
       }
     )
     .then(({handler}) => handler())
-    .then(data => console.log('Сообщение с токеном', data))
-    .catch(error => console.log('Обработка ошибки', error));
+    .then(data => alert('Сообщение с токеном', data))
+    .catch(error => alert('Обработка ошибки', error));
 
     gapi.signin2.render('googleLogin', {
       'scope': 'profile email',
