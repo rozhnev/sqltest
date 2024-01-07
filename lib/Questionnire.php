@@ -50,19 +50,21 @@ class Questionnire
         ");
         $stmt->execute();
         $questionnire = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        return array_reduce(
-            $questionnire,
-            function($acc, $el) {
-                if (!isset($acc[$el['question_category']])) $acc[$el['question_category']] = [
-                    'title'     => $el['question_category'],
-                    'db'        => $el['db_template'],
-                    'questions' => []
-                ];
-                $acc[$el['question_category']]['questions'][] = [$el['question_title'], $el['question_id']];
-                return $acc;
-            },
-            []
-        );
+        if ($questionnire) {
+            return array_reduce(
+                $questionnire,
+                function($acc, $el) {
+                    if (!isset($acc[$el['question_category']])) $acc[$el['question_category']] = [
+                        'title'     => $el['question_category'],
+                        'db'        => $el['db_template'],
+                        'questions' => []
+                    ];
+                    $acc[$el['question_category']]['questions'][] = [$el['question_title'], $el['question_id']];
+                    return $acc;
+                },
+                []
+            );
+        }
+        return [];
     }
 }

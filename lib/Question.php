@@ -109,6 +109,12 @@ class Question
         return (int)$stmt->fetchColumn();
     }
 
+    /**
+     * Check query using regular expressions
+     *
+     * @param string $query
+     * @return array
+     */
     public function checkQuery(string $query)
     {
         if (empty($query)) {
