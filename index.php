@@ -94,8 +94,8 @@ switch ($action) {
         $question = new Question($dbh, $questionID);
         $smarty->assign('PreviousQuestionId', $question->getPreviousId());
         $smarty->assign('NextQuestionId', $question->getNextId());
-        $smarty->assign('Questionnire', $questionnire->get());
-        $smarty->assign('Question', $question->get($lang));
+        $smarty->assign('Questionnire', $questionnire->get($user->getId()));
+        $smarty->assign('Question', $question->get($lang, $user->getId()));
         $smarty->assign('NextQuestionId', $question->getNextId());
         $smarty->assign('PreviousQuestionId', $question->getPreviousId());
         $smarty->assign('Logged', $user->logged());

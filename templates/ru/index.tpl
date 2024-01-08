@@ -7,7 +7,14 @@
 </script>
 <div class="main">
     <div class="question-wrapper">
-        <div class="question-title">Задание:
+        <div class="question-title">Задание {$Question.number}:
+            <span class="question-dates">
+                {if $Question.solved_date}
+                    Решено: {$Question.solved_date}
+                {elseif $Question.last_attempt_date}
+                    Последняя попытка: {$Question.last_attempt_date}
+                {/if}
+            </span>
             <span class="question-navigate">
                 {if $PreviousQuestionId}
                     <a href="/{$Lang}/{$DB}/{$PreviousQuestionId}" title="Предыдущее задание"><i class="arrow arrow-left"></i></a>
@@ -18,7 +25,7 @@
             </span>
         </div>
         <div class="question">
-            {$Question}
+            {$Question.task}
         </div>
         <p class="question-action">
             Напишите свой запрос в поле ниже и нажмите кнопку "Проверить!" (В случае ошибки вам придется просмотреть рекламный блок)
@@ -30,7 +37,7 @@
     <div class="code-actions">
         <button onClick="copyCode(`Код SQL скопирован в буфер`)">Копировать код</button> <button onClick="clearEditor()">Очистить редактор</button>
     </div>
-    <div class="code-wrapper" id="sql-code" name="sql-code"></div>
+    <div class="code-wrapper" id="sql-code" name="sql-code">{$Question.last_query}</div>
     <div class="code-buttons">
         <button class="button" onClick="getHelp('{$Lang}', '{$DB}', {$QuestionID})">Помощь</button>
         <button class="button" onClick="runQuery('{$Lang}', '{$DB}', {$QuestionID})">Выполнить</button>

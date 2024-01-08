@@ -35,13 +35,20 @@ class Question
      * Returns question task for provided language
      *
      * @param string $lang
-     * @return string
+     * @return array
      */
-    public function get(string $lang): string 
+    public function get(string $lang, ?string $userId): array 
     {
-        $stmt = $this->dbh->prepare("SELECT task_{$lang} FROM questions WHERE id = ?");
-        $stmt->execute([$this->id]);
-        return (string)$stmt->fetchColumn();
+        $stmt = $this->dbh->prepare("
+            SELECT 
+                number, task_{$lang} task, 
+                last_attempt_at::date last_attempt_date, 
+                solved_at::date solved_date, last_query
+            FROM questions 
+            LEFT JOIN user_questions ON user_questions.question_id = questions.id and user_questions.user_id = ?
+            WHERE id = ?");
+        $stmt->execute([$userId, $this->id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
     /**
      * Returns question hint for provided language
@@ -82,9 +89,9 @@ class Question
         $stmt = $this->dbh->prepare("
             SELECT nq.id
             FROM questions nq
-            JOIN questions cq ON nq.category_id = cq.category_id and nq.sequence_position < cq.sequence_position
+            JOIN questions cq ON nq.category_id = cq.category_id and nq.number < cq.number
             WHERE cq.id = ?
-            ORDER BY nq.sequence_position DESC
+            ORDER BY nq.number DESC
             LIMIT 1
         ");
         $stmt->execute([$this->id]);
@@ -100,9 +107,9 @@ class Question
         $stmt = $this->dbh->prepare("
             SELECT nq.id
             FROM questions nq
-            JOIN questions cq ON nq.category_id = cq.category_id and nq.sequence_position > cq.sequence_position
+            JOIN questions cq ON nq.category_id = cq.category_id and nq.number > cq.number
             WHERE cq.id = ?
-            ORDER BY nq.sequence_position ASC
+            ORDER BY nq.number ASC
             LIMIT 1
         ");
         $stmt->execute([$this->id]);

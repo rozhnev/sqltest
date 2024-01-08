@@ -184,6 +184,9 @@ body {
 .current-question {
     font-weight: bold;
 }
+.question-link.solved {
+    color: gray !important;
+}
 .menu .menu-ad {
     height: 45vh;
     margin-top: 28px;
@@ -200,6 +203,11 @@ body {
     font-weight: bold;
     background-color: #eee;
     padding: 6px;
+}
+.question-title .question-dates {
+    color: gray;
+    font-size: small;
+    padding-left: 30%;
 }
 .question-navigate {
     float: right;
