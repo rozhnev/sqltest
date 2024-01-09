@@ -124,7 +124,7 @@ function testQuery(lang, db, questionId) {
 
 function openGitHubLoginPopUp() {
     window.open(
-        'https://github.com/login/oauth/authorize?client_id=9a1910d2a6c658fdffc3&redirect_uri=https://sqltest.online&scope=user', 'GitHub Login', 
+        'https://github.com/login/oauth/authorize?client_id=9a1910d2a6c658fdffc3&redirect_uri=https://sqltest.online/login/github/&scope=user', 'GitHub Login', 
         `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=530,height=950,left=${(window.outerWidth - 530) / 2},top=${(window.outerHeight - 950) / 2}`
     );
 }
