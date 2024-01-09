@@ -3,8 +3,7 @@
         <span class="login-popup-title">Выберите способ авторизации</span>
         <span class="login-popup-close" onClick="toggleLoginWindow()">X</span>
     </div>
-    <div class="social-login-button" id="yandexLogin"></div>
-    <div class="social-login-button" id="googleLogin"></div>
+        {include file='../login_buttons.tpl'}
     <div class="login-popup-footer">
         Авторизация на сайте необходима только для сохранения вашего прогресса. Вы можете можете продолжать тестирование и без выполнения входа на сайт. 
     </div>
