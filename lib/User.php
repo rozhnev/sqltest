@@ -15,11 +15,11 @@ class User
      */
     private $env;
     /**
-     * User email
+     * User login
      *
      * @var string
      */
-    private $email;
+    private $login;
 
     /**
      * User id
@@ -80,7 +80,8 @@ class User
             curl_setopt($ch, CURLOPT_POSTFIELDS, $params); 
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-            curl_setopt($ch, CURLOPT_HEADER, ['Accept: application/json']);
+            curl_setopt($ch, CURLOPT_HTTPHEADER,  ['Accept: application/json']);
+            curl_setopt($ch, CURLOPT_HEADER, false);
             
             $data = curl_exec($ch);
             curl_close($ch);
@@ -91,18 +92,21 @@ class User
                 // Токен получили, получаем данные пользователя.
                 $ch = curl_init('https://api.github.com/user');
                 if ($ch) {
-                    curl_setopt($ch, CURLOPT_POST, 1);
-                    curl_setopt($ch, CURLOPT_POSTFIELDS, array('format' => 'json')); 
-                    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Authorization: Bearer ' . $data['access_token']));
                     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-                    curl_setopt($ch, CURLOPT_HEADER, ['Accept: application/json']);
+                    curl_setopt($ch, CURLOPT_HTTPHEADER,  [
+                        'Authorization: Bearer ' . $data['access_token'],
+                        'Accept: application/vnd.github+json',
+                        'X-GitHub-Api-Version: 2022-11-28',
+                        'User-Agent: SQLtest.online'
+                    ]);
+                    curl_setopt($ch, CURLOPT_HEADER, false);
                     $info = curl_exec($ch);
                     curl_close($ch);
             
                     $info = json_decode($info, true);
         
-                    $this->email = $info['login'];
+                    $this->login = $info['login'] . '@github';
                     $this->upsert();
                     return true;
                 }
@@ -155,7 +159,7 @@ class User
             
                     $info = json_decode($info, true);
         
-                    $this->email = $info['login'];
+                    $this->login = $info['login'] . '@yandex';
                     $this->upsert();
                     return true;
                 }
@@ -207,11 +211,11 @@ class User
         $this->id = vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex(random_bytes(16)), 4));
 
         $stmt = $this->dbh->prepare("
-            INSERT INTO users (id, email) VALUES (?, ?) 
-            ON CONFLICT (email) DO 
+            INSERT INTO users (id, login) VALUES (?, ?) 
+            ON CONFLICT (login) DO 
                UPDATE SET last_login_at = CURRENT_TIMESTAMP 
             RETURNING id");
-        if ($stmt->execute([$this->id, $this->email])) {
+        if ($stmt->execute([$this->id, $this->login])) {
             $this->id = (string)$stmt->fetchColumn();
         }
     }

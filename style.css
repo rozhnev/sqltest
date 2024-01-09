@@ -85,6 +85,7 @@ body {
     height: 36px;
     display: inline-block;
     margin: 0 12px;
+    cursor: pointer;
 }
 .header { 
     grid-area: header; 
