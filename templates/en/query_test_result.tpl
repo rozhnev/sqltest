@@ -1,10 +1,13 @@
 {if $QeryTestResult.ok}
      Great! You can proceed to the next test.
+     {if !$Logged}
+        To save your progress, please <a href="" onClick="toggleLoginWindow()">login</a>
+    {/if}
 {else}
      Unfortunately incorrect.
      {if array_key_exists('hints', $QeryTestResult) }
         {if array_key_exists('queryError', $QeryTestResult.hints) }
-            <p>Hint: the query returns the error: {$QeryTestResult.hints.queryError}</p>
+            <p>Hint: the query returns the error: <span class="sql_error">{$QeryTestResult.hints.queryError}</span></p>
         {/if}
         {if array_key_exists('columnsCount', $QeryTestResult.hints) }
             <p>Hint: the result table must consist of {$QeryTestResult.hints.columnsCount} columns.</p>

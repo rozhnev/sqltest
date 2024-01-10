@@ -1,11 +1,14 @@
 {* {var_dump($QeryTestResult)} *}
 {if $QeryTestResult.ok}
-    Отлично! Можно приступать к следующему тесту.
+    Отлично! Можно приступать к следующему тесту. 
+    {if !$Logged}
+        Для сохранения вашего прогресса выполните <a href="" onClick="toggleLoginWindow()">вход на сайт</a>
+    {/if}
 {else}
     К сожалению неверно. 
     {if array_key_exists('hints', $QeryTestResult) }
         {if array_key_exists('queryError', $QeryTestResult.hints) }
-            <p>Подсказка: запрос вернул ошибку: {$QeryTestResult.hints.queryError}</p>
+            <p>Подсказка: запрос вернул ошибку: <span class="sql_error">{$QeryTestResult.hints.queryError}</span></p>
         {/if}
         {if array_key_exists('columnsCount', $QeryTestResult.hints) }
             <p>Подсказка: результирующая таблица должна состоять из {$QeryTestResult.hints.columnsCount} колонок.</p>
