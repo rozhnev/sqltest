@@ -2,7 +2,9 @@
 {if $QeryTestResult.ok}
     Отлично! Можно приступать к следующему тесту. 
     {if !$Logged}
-        Для сохранения вашего прогресса выполните <a href="" onClick="toggleLoginWindow(); return false;">вход на сайт</a>
+        <p class="question-action">
+            Для сохранения вашего прогресса выполните <a href="" onClick="toggleLoginWindow(); return false;">вход на сайт</a>
+        </p>
     {/if}
 {else}
     К сожалению неверно. 
