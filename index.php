@@ -64,6 +64,7 @@ switch ($action) {
             $user->saveQuestionAttempt($questionID, $queryTestResult['ok'], $sql);
         }
         if (!$queryTestResult['ok']) header( 'HTTP/1.1 418 BAD REQUEST' );
+        $smarty->assign('Logged', $user->logged());
         $template = "query_test_result.tpl";
         break;
     case 'logout':

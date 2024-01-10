@@ -1,7 +1,7 @@
 {if $QeryTestResult.ok}
      Great! You can proceed to the next test.
      {if !$Logged}
-        To save your progress, please <a href="" onClick="toggleLoginWindow()">login</a>
+        To save your progress, please <a href="" onClick="toggleLoginWindow(); return false;">login</a>
     {/if}
 {else}
      Unfortunately incorrect.
