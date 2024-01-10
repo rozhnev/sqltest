@@ -163,10 +163,9 @@ window.onload = function() {
       {
           client_id: '6a7ad9d0d23a496987255a596b83b9db',
           response_type: 'code',
-          // redirect_uri: `https://sqltest.online/yandex-login/?lang=${lang}&db=${db}&questionId=${questionId}`
-          redirect_uri: `http://localhost:8000/login/yandex/?lang=${lang}&db=${db}&questionId=${questionId}`
+          redirect_uri: `https://sqltest.online/login/yandex/?lang=${lang}&db=${db}&questionId=${questionId}`
       },
-      `http://localhost:8000/login/yandex/?lang=${lang}&db=${db}&questionId=${questionId}`,
+      `https://sqltest.online/login/yandex/?lang=${lang}&db=${db}&questionId=${questionId}`,
       {
         view: "button",
         parentId: "yandexLogin",
