@@ -164,6 +164,13 @@ class Question
                     'ok' => false
                 ];
             }
+            if (isset($resultObject[0]->error)) {
+                $hints['queryError'] = $resultObject[0]->error;
+                return [
+                    'ok' => false,
+                    'hints' => $hints
+                ];
+            }
             //check columns count
             if (count($resultObject[0]->headers) !== count($queryValidResult->headers)) {
                 $hints['columnsCount'] = count($queryValidResult->headers);

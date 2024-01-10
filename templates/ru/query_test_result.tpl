@@ -4,6 +4,9 @@
 {else}
     К сожалению неверно. 
     {if array_key_exists('hints', $QeryTestResult) }
+        {if array_key_exists('queryError', $QeryTestResult.hints) }
+            <p>Подсказка: запрос вернул ошибку: {$QeryTestResult.hints.queryError}</p>
+        {/if}
         {if array_key_exists('columnsCount', $QeryTestResult.hints) }
             <p>Подсказка: результирующая таблица должна состоять из {$QeryTestResult.hints.columnsCount} колонок.</p>
         {/if}
