@@ -1,1 +1,0 @@
-Use LIKE condition for find rows by template.

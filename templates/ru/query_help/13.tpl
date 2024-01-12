@@ -1,1 +1,0 @@
-Для этой задачи вам следует использовать GROUP BY, COUNT, ORDER BY и LIMIT.

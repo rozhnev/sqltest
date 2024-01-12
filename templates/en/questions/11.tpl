@@ -1,1 +1,0 @@
-Get actors who have the first name "Scarlett".

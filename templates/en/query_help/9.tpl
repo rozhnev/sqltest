@@ -1,1 +1,0 @@
-Use SUB-QUERY in condition.

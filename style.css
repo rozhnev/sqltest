@@ -173,11 +173,14 @@ body {
     transform: rotate(135deg);
     -webkit-transform: rotate(135deg);
 }
-  
 .question-action {
     font-style: italic;
     padding: 0 15px 5px;
     font-size: smaller;
+}
+.question .attention {
+    font-weight: bold;
+    font-style: italic;
 }
 .code-actions {
     text-align: right;
@@ -191,6 +194,10 @@ body {
 .code-buttons {
     text-align: end;
 }
+.code-buttons a {
+    text-decoration: none;
+    font-size: smaller;
+}
 .button {
     background-color: #0b4fcc;
     color: white;
@@ -203,6 +210,9 @@ body {
 }
 .button.test {
     background-color: #187e04 !important;
+}
+.button.hidden {
+    display: none;
 }
 .code-result {
     border: 1px solid lightblue;
@@ -222,6 +232,10 @@ body {
 .code-result .result-table td {
     border: 1px solid silver;
     color: #333;
+}
+.code-result .sql_error {
+    color: darkred;
+    font-weight: bolder;
 }
 .db-description {
     padding: 0 12px;

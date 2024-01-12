@@ -1,1 +1,0 @@
-Find the average length of a movie for each category. Display the result in two columns `catrgory` and `avg_film_length`.
