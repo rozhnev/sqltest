@@ -339,4 +339,37 @@ body {
       box-shadow: 0em -3em 0 0, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0, -2em -2em 0 0.2em;
     }
 }
+
+@media screen and (max-width: 767px) {
+    .container {
+        padding: 2.5vw;
+        grid-template-areas:
+        'header header header'
+        'right right right'
+        'main main main'
+        'menu menu menu'
+        'footer footer footer'; 
+    }
+    .right {
+        width: auto;
+        max-height: none;
+    }
+    .main {
+        width: auto;
+    }
+    .menu {
+        max-width: none;
+        width: auto;
+        max-height: none;
+    }
+    .panel.active {
+        max-height: none !important;
+    }
+    .menu .menu-ad {
+        height: auto;
+    }
+    .top-menu h3 {
+        display: inline-block;
+    }
+}
   
