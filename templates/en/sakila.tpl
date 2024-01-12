@@ -450,7 +450,30 @@ Below is a list of these tables:
     <!-- Additional rows go here if applicable -->
   </table>
 </div>
-
+<p>Table `inventory`</p>
+<ul class="table-columns">
+    <li>`inventory_id` - Unique identifier for each inventory item.</li>
+    <li>`film_id` - Unique identifier for each film in the inventory.</li>
+    <li>`store_id` - Unique identifier for the store where the inventory item is located.</li>
+    <li>`last_update` - Last modified timestamp of the record.</li>
+</ul>
+<div class="table-wrapper">
+    <table>
+        <tr>
+            <th>inventory_id</th>
+            <th>film_id</th>
+            <th>store_id</th>
+            <th>last_update</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>23</td>
+            <td>2</td>
+            <td>2023-01-01 12:00:00</td>
+        </tr>
+        <!-- Add more rows as needed -->
+    </table>
+</div>
 <!-- For Rental Table -->
 <p>Table `rental`</p>
 <ul class="table-columns">

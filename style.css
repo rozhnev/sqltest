@@ -28,18 +28,65 @@ body {
     background-color: #2196F3;
     color: #fff;
     text-align: center;
-    border-radius: 6px;
+    border-radius: 3px;
     padding: 16px;
     position: fixed;
     z-index: 1;
     left: 47%;
     top: 90px;
 }
-.toast.visible {
-    opacity: 100;
+.visible {
+    opacity: 100 !important;
     transition: opacity 0.3s ease-out;
 }
-
+.login-button {
+    position: absolute;
+    right: 160px;
+    top: 24px;
+    cursor: pointer;
+}
+.login-popup  {
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
+    width: 20%;
+    min-height: 96px;
+    background-color: #2196F3;
+    color: #fff;
+    text-align: center;
+    border-radius: 3px;
+    padding: 0 !important;
+    position: fixed;
+    z-index: 1;
+    left: 40%;
+    top: 36%;
+}
+.login-popup-header {
+    text-align: right;
+    padding: 5px 9px;
+    background-color: #0b4fcc;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+    margin-bottom: 12px;
+}
+.login-popup-footer {
+    font-size: smaller;
+    padding: 10px;
+}
+.login-popup-title {
+    width: 94%;
+    display: inline-block;
+    text-align: left;
+}
+.login-popup-close {
+    cursor: pointer;
+}
+.social-login-button {
+    width: 36px;
+    height: 36px;
+    display: inline-block;
+    margin: 0 12px;
+    cursor: pointer;
+}
 .header { 
     grid-area: header; 
     min-height: 3vh;
@@ -138,6 +185,9 @@ body {
 .current-question {
     font-weight: bold;
 }
+.question-link.solved {
+    color: gray !important;
+}
 .menu .menu-ad {
     height: 45vh;
     margin-top: 28px;
@@ -154,6 +204,11 @@ body {
     font-weight: bold;
     background-color: #eee;
     padding: 6px;
+}
+.question-title .question-dates {
+    color: gray;
+    font-size: small;
+    padding-left: 30%;
 }
 .question-navigate {
     float: right;

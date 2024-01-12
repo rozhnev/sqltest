@@ -26,6 +26,13 @@ function clearEditor() {
     editor.session.selection.clearSelection();
 }
 
+function toggleLoginWindow() {
+  const loginWindow = document.getElementById("login-popup");
+  setTimeout((function() {
+    loginWindow.classList.toggle("visible");
+  }
+  ), 333)
+}
 
 function jsonToTable(jsonObject) {
   let htmlTable = '';
@@ -115,6 +122,13 @@ function testQuery(lang, db, questionId) {
     });
 }
 
+function openGitHubLoginPopUp() {
+    window.open(
+        'https://github.com/login/oauth/authorize?client_id=9a1910d2a6c658fdffc3&redirect_uri=https://sqltest.online/login/github/&scope=user', 'GitHub Login', 
+        `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=530,height=950,left=${(window.outerWidth - 530) / 2},top=${(window.outerHeight - 950) / 2}`
+    );
+}
+
 const acc = document.getElementsByClassName("accordion");
 for (let i = 0; i < acc.length; i++) {
   acc[i].addEventListener("click", function () {
@@ -136,3 +150,43 @@ window.sql_editor = ace.edit("sql-code", {
 });
 window.sql_editor.setShowPrintMargin(false);
 window.sql_editor.setOptions({enableBasicAutocompletion: true});
+
+function onSuccessGoogleLogin(googleUser) {
+  console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+}
+function onFailureGoogleLogin(error) {
+  console.log(error);
+}
+
+window.onload = function() {
+    window.YaAuthSuggest.init(
+      {
+          client_id: '6a7ad9d0d23a496987255a596b83b9db',
+          response_type: 'code',
+          redirect_uri: `https://sqltest.online/login/yandex/?lang=${lang}&db=${db}&questionId=${questionId}`
+      },
+      `https://sqltest.online/login/yandex/?lang=${lang}&db=${db}&questionId=${questionId}`,
+      {
+        view: "button",
+        parentId: "yandexLogin",
+        buttonSize: 'm',
+        buttonView: 'icon',
+        buttonTheme: 'light',
+        buttonBorderRadius: "0",
+        buttonIcon: 'ya',
+      }
+    )
+    .then(({handler}) => handler())
+    .then(data => alert('Сообщение с токеном', data))
+    .catch(error => alert('Обработка ошибки', error));
+
+    gapi.signin2.render('googleLogin', {
+      'scope': 'profile email',
+      'width': 36,
+      'height': 36,
+      'longtitle': true,
+      'theme': 'dark',
+      'onsuccess': onSuccessGoogleLogin,
+      'onfailure': onFailureGoogleLogin
+    });
+};

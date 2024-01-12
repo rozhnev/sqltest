@@ -3,10 +3,12 @@
     <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
         <head>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1;"/>
+            <meta name="viewport" content="width=device-width, initial-scale=1"/>
             <meta charset="utf-8">
             <meta name="description" content="Free online SQL test.">
             <meta name="keywords" content="free sql test,online testing, sql, fiddle">
+            <meta Content-Security-Policy-Report-Only: script-src https://accounts.google.com/gsi/client; frame-src https://accounts.google.com/gsi/; connect-src https://accounts.google.com/gsi/; />
+            <meta name="google-signin-client_id" content="340274762951-1d5m1pb8p9i2bhjbtuc4p8q9gveuk2ug.apps.googleusercontent.com">
             {include file='site-title.tpl'}
             <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
             <link rel="icon" type="image/png" href="/favicons/favicon-32x32.png" sizes="32x32">
@@ -21,6 +23,7 @@
             <!-- Yandex.RTB -->
             <script>window.yaContextCb=window.yaContextCb||[]</script>
             <script src="https://yandex.ru/ads/system/context.js" async></script>
+                <script src="https://yastatic.net/s3/passport-sdk/autofill/v1/sdk-suggest-with-polyfills-latest.js"></script>
             <script type="text/javascript" src="/script.js?2" defer></script>
             {literal}
             <!-- Yandex.RTB R-A-4716552-1 -->
@@ -39,6 +42,7 @@
             <!-- Yandex.RTB R-A-4716552-2 -->
             </script>
             <!-- Google tag (gtag.js) -->
+            <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
             <script async src="https://www.googletagmanager.com/gtag/js?id=G-PCGW7ZLSD1"></script>
             <script>
                 window.dataLayer = window.dataLayer || [];
@@ -60,11 +64,16 @@
                 trackLinks:true,
                 accurateTrackBounce:true
             });
+            {/literal}
+            var lang = '{$Lang}',
+                db   = '{$DB}',
+                questionId = '{$QuestionID}';
             </script>
             <noscript><div><img src="https://mc.yandex.ru/watch/95990842" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
             <!-- /Yandex.Metrika counter -->
-            {/literal}
+
         </head>
         <body>
             <div class="container">
                 <div class="toast" id="toast">php result copied to buffer</div>
+                {include file='login-popup.tpl'}

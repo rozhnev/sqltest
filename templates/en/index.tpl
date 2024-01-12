@@ -3,7 +3,14 @@
 {include file='../menu.tpl'}
 <div class="main">
     <div class="question-wrapper">
-        <div class="question-title">Task:
+        <div class="question-title">Task {$Question.number}:
+            <span class="question-dates">
+                {if $Question.solved_date}
+                    Solved at: {$Question.solved_date}
+                {elseif $Question.last_attempt_date}
+                    Last Attempt Date: {$Question.last_attempt_date}
+                {/if}
+            </span>
             <span class="question-navigate">
                 {if $PreviousQuestionId}
                     <a href="/{$Lang}/{$DB}/{$PreviousQuestionId}" title="Previous task"><i class="arrow arrow-left"></i></a>
@@ -14,7 +21,7 @@
             </span>
         </div>
         <div class="question">
-            {$Question}
+            {$Question.task}
         </div>
         <p class="question-action">
         Write your request in the field below and click the "Check it!" button. (If there is an error, you will have to review the ad unit)
@@ -26,7 +33,7 @@
     <div class="code-actions">
         <button onClick="copyCode(`SQL code copied to buffer`)">Copy code</button> <button onClick="clearEditor()">Clear editor</button>
     </div>
-    <div class="code-wrapper" id="sql-code" name="sql-code"></div>
+    <div class="code-wrapper" id="sql-code" name="sql-code">{$Question.last_query}</div>
     <div class="code-buttons">
         <button class="button" onClick="getHelp('{$Lang}', '{$DB}', {$QuestionID})">Get help</button>
         <button class="button" onClick="runQuery('{$Lang}', '{$DB}', {$QuestionID})">Run query</button>
