@@ -15,9 +15,21 @@ body {
     background-color: #2196F3;
     padding: 5px;
 }
-
 .container > div {
     padding: 5px 0;
+}
+
+.container2 {
+    background-color: #2196F3;
+    padding: 5px;
+    height: 98.9vh;
+}
+.container2 > div {
+    padding: 5px 0;
+}
+.container3 {
+    padding: 0 20px !important;
+    height: 85vh;
 }
 .toast {
     /* visibility: hidden; */
