@@ -5,6 +5,14 @@
     var lang = '{$Lang}';
     var db = '{$DB}';
 </script>
+<div class="splitter">
+    <a href="" onClick="return toggleInfoPanel();" title="Toggle panel">
+        ⯈
+    </a>
+    <a href="" class="hidden" onClick="return toggleInfoPanel();" title="Toggle panel">
+        ⯇
+    </a>
+</div>
 <div class="main">
     <div class="question-wrapper">
         <div class="question-title">Задание {$Question.number}:

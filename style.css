@@ -8,9 +8,9 @@ body {
 .container {
     display: grid;
     grid-template-areas:
-      'header header header header header header header'
-      'menu main main main main main right'
-      'menu footer footer footer footer footer right';
+      'header header header header header header header header'
+      'menu main   main   main   main   main   splitter right'
+      'menu footer footer footer footer footer splitter right';
     gap: 5px;
     background-color: #2196F3;
     padding: 5px;
@@ -132,6 +132,22 @@ body {
     min-height: 85vh;
     color: white;
     width: 60vw;
+    transition: linear 0.5s;
+}
+.main.wide { 
+    width: 82vw;
+    transition: linear 0.5s;
+}
+.splitter {
+    width: 15px;
+    padding-top: 5px;
+}
+.splitter a, .splitter a:visited {
+    text-decoration: none;
+    color: white;
+} 
+.splitter .hidden {
+    display: none;
 }
 .right { 
     grid-area: right; 
@@ -139,7 +155,12 @@ body {
     max-height: 90vh;
     padding: 12px;
     overflow: auto;
+    transition: easy 0.5s;
     /* border: 1px solid red; */
+}
+.right.hidden {
+    display: none;
+    transition: easy 0.5s;
 }
 .footer { 
     grid-area: footer; 
@@ -227,10 +248,10 @@ body {
     padding: 0 12px;
 }
 .arrow {
-    border: solid black;
-    border-width: 0 3px 3px 0;
     display: inline-block;
     padding: 3px;
+    border: solid black;
+    border-width: 0 3px 3px 0;
 } 
 .arrow-right {
     transform: rotate(-45deg);
@@ -306,7 +327,7 @@ body {
     font-weight: bolder;
 }
 .db-description {
-    padding: 0 12px;
+    /* padding: 0 12px; */
 }
 .db-description h3 {
     margin-top: 0;

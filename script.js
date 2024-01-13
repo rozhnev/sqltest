@@ -121,7 +121,12 @@ function testQuery(lang, db, questionId) {
       document.getElementById('code-result').innerHTML = 'Something went wrong. Please review your query and try again.';
     });
 }
-
+function toggleInfoPanel() {
+  document.getElementsByClassName("right")[0].classList.toggle("hidden");
+  document.getElementsByClassName("main")[0].classList.toggle("wide");
+  [...document.getElementsByClassName("splitter")[0].children].map(el=>el.classList.toggle("hidden"));
+  return false;
+}
 function openGitHubLoginPopUp() {
     window.open(
         'https://github.com/login/oauth/authorize?client_id=9a1910d2a6c658fdffc3&redirect_uri=https://sqltest.online/login/github/&scope=user', 'GitHub Login', 
