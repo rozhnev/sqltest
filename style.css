@@ -295,7 +295,7 @@ body {
     padding: 12px;
     text-align: center;
     border: none;
-    width: 98px;
+    min-width: 98px;
     margin: 7px 0;
 }
 .button.test {

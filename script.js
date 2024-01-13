@@ -164,6 +164,12 @@ function onFailureGoogleLogin(error) {
 }
 
 window.onload = function() {
+    document.addEventListener('keydown', function(event) {
+        if (event.ctrlKey && event.key === 'Enter') {
+            runQuery(lang, db, questionId);
+        }
+    });
+
     window.YaAuthSuggest.init(
       {
           client_id: '6a7ad9d0d23a496987255a596b83b9db',
