@@ -29,6 +29,10 @@ if (($_SESSION && $_SESSION['user_id'])) {
     $user->setId($_SESSION['user_id']);
 }
 
+if ($questionID === 0) {
+    $action     = 'welcome';
+}
+
 switch ($action) {
     case 'login':
         $user->login($loginProvider, $_REQUEST);
@@ -49,7 +53,7 @@ switch ($action) {
         break;
     case 'query-run':
         $sql = $_POST["query"] ?? '';
-        if (empty($sql)) {
+        if (empty($sql) || !$questionID) {
             $template = "empty_query_result.tpl";
             break;
         }
@@ -94,6 +98,11 @@ switch ($action) {
         session_destroy();
         header("location:/");
         die();
+    case 'welcome':
+        $questionnire = new Questionnire($dbh, $lang);
+        $smarty->assign('Questionnire', $questionnire->get());
+        $template = "welcome.tpl";
+        break;
     default:
         if ($user->logged()) {
             $user->setPath($path);
