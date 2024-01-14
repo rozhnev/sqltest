@@ -29,9 +29,10 @@ if (($_SESSION && $_SESSION['user_id'])) {
     $user->setId($_SESSION['user_id']);
 }
 
-if ($questionID === 0) {
-    $action     = 'welcome';
-}
+// Temporary disabled
+// if ($questionID === 0) {
+//     $action     = 'welcome';
+// }
 
 switch ($action) {
     case 'login':
@@ -53,7 +54,7 @@ switch ($action) {
         break;
     case 'query-run':
         $sql = $_POST["query"] ?? '';
-        if (empty($sql) || !$questionID) {
+        if (empty($sql)) {
             $template = "empty_query_result.tpl";
             break;
         }
