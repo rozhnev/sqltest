@@ -1,7 +1,11 @@
 <div class="db-description">
     <h3>Employee Database (Firebird) description</h3>
     <p>
-    Below is a list of these tables:
+     Employee is a sample database that comes with the Firebird cross-platform database management system.
+     You can use this database to explore Firebird SQL and other DBMS features.
+    </p>
+    <p>
+    Below is a list of this DB tables:
     </p>
     <p>Table: COUNTRIES</p>
     <ul class="table-columns">
