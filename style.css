@@ -123,15 +123,14 @@ body {
 }
 .menu { grid-area: menu;
     border-right: 1px solid lightblue;
-    max-width: 250px;
-    width: 15vw;
+    width: 17vw;
     max-height: 90vh;
 }
 .main { 
     grid-area: main; 
     min-height: 85vh;
     color: white;
-    width: 60vw;
+    width: 58vw;
     transition: linear 0.5s;
 }
 .main.wide { 
@@ -224,8 +223,8 @@ body {
     color: gray !important;
 }
 .menu .menu-ad {
-    height: 45vh;
-    margin-top: 28px;
+    height: 42vh;
+    margin-top: 1vh;
 }
 .question-wrapper {
     margin: 0 0 12px 0;
