@@ -142,10 +142,6 @@ for (let i = 0; i < acc.length; i++) {
     const panel = this.nextElementSibling;
     panel.classList.toggle("active");
   });
-  if (i == 0) {
-    const panel = acc[i].nextElementSibling;
-    panel.classList.toggle("active");
-  }
 }
 window.sql_editor = ace.edit("sql-code", {
     mode: "ace/mode/mysql",
