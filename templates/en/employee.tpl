@@ -285,7 +285,7 @@
             <!-- Add more rows as needed -->
         </table>
     </div>
-    <p>Table: SALES_ORDER</p>
+    <p>Table: SALES</p>
     <ul class="table-columns">
         <li>PO_NUMBER - Purchase order number.</li>
         <li>CUST_NO - Customer number associated with the order.</li>
