@@ -41,6 +41,7 @@ class Questionnire
     {
         $stmt = $this->dbh->prepare("
             SELECT 
+                question_categories.id, 
                 question_categories.title_{$this->lang} question_category,
                 questions.id question_id,
                 questions.db_template,
@@ -57,12 +58,12 @@ class Questionnire
             return array_reduce(
                 $questionnire,
                 function($acc, $el) {
-                    if (!isset($acc[$el['question_category']])) $acc[$el['question_category']] = [
+                    if (!isset($acc[$el['id']])) $acc[$el['id']] = [
                         'title'     => $el['question_category'],
                         'db'        => $el['db_template'],
                         'questions' => []
                     ];
-                    $acc[$el['question_category']]['questions'][] = [$el['question_title'], $el['question_id'], $el['solved']];
+                    $acc[$el['id']]['questions'][] = [$el['question_title'], $el['question_id'], $el['solved']];
                     return $acc;
                 },
                 []

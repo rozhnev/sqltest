@@ -41,6 +41,7 @@ class Question
     {
         $stmt = $this->dbh->prepare("
             SELECT 
+                category_id,
                 number, task_{$lang} task, 
                 last_attempt_at::date last_attempt_date, 
                 solved_at::date solved_date, last_query

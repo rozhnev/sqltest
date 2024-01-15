@@ -1,7 +1,7 @@
 <div class="menu">
-    {foreach $Questionnire as $panel}
+    {foreach $Questionnire as $categoryId => $panel}
     <button class="accordion">{$panel.title}</button>
-    <div class="panel">
+    <div class="panel {if $categoryId eq $Question.category_id}active{/if}">
         <ol>
         {foreach $panel.questions as $question}
         <li>
