@@ -137,7 +137,7 @@ body {
     transition: linear 0.5s;
 }
 .main.wide { 
-    width: 82vw;
+    width: 80vw;
     transition: linear 0.5s;
 }
 .splitter {
