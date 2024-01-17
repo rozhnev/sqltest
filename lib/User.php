@@ -54,10 +54,62 @@ class User
             case 'yandex':
                 return $this->loginYandex($_GET['code']);
             case 'github':
-                return $this->loginGithub($_GET['code']);                
+                return $this->loginGithub($_GET['code']);
+            case 'google':
+                return $this->loginGoogle($_GET['code']);            
             default:
                 throw new Exception('Not supported login provider'); 
         }
+    }
+    /**
+     * Proceed GitHub login with code
+     *
+     * @param string $code
+     * @return bool
+     */
+    public function loginGoogle(string $code): bool
+    {
+        // Exchange the authorization code for an access token
+        $ch = curl_init($tokenURL);
+        $baseURL = 'https://' . $_SERVER['SERVER_NAME'] . $_SERVER['PHP_SELF'];
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([
+            'grant_type'    => 'authorization_code',
+            'client_id'     => $this->env['GOOGLE_CLIENT_ID'],
+            'client_secret' => $this->env['GOOGLE_SECRET'],
+            'redirect_uri'  => $baseURL,
+            'code' => $code
+        ]));
+        $data = json_decode(curl_exec($ch), true);
+        echo "<pre>";
+        var_dump($data);
+        if (!empty($data['access_token'])) {
+            // Токен получили, получаем данные пользователя.
+            $ch = curl_init('https://www.googleapis.com/oauth2/v3/userinfo');
+            if ($ch) {
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                curl_setopt($ch, CURLOPT_HTTPHEADER,  [
+                    'Authorization: Bearer ' . $data['access_token'],
+                    // 'Accept: application/vnd.github+json',
+                    // 'X-GitHub-Api-Version: 2022-11-28',
+                    // 'User-Agent: SQLtest.online'
+                ]);
+                curl_setopt($ch, CURLOPT_HEADER, false);
+                $info = curl_exec($ch);
+                curl_close($ch);
+        
+                $info = json_decode($info, true);
+    
+                $this->login = $info['email'] . '@google';
+                $this->upsert();
+                return true;
+            }
+            return false;
+        }
+        var_dump($info);
+        die();
+        return false;
     }
     /**
      * Proceed GitHub login with code
