@@ -1,3 +1,6 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
 body {
     font-family: "Lucida Grande",Tahoma,Arial,Verdana,sans-serif;
     margin: 0;
@@ -12,7 +15,7 @@ body {
       'menu main   main   main   main   main   splitter right'
       'menu footer footer footer footer footer splitter right';
     gap: 5px;
-    background-color: #2196F3;
+    background-color: rgb(51, 102, 153);
     padding: 5px;
 }
 .container > div {
@@ -20,7 +23,7 @@ body {
 }
 
 .container2 {
-    background-color: #2196F3;
+    background-color: rgb(51, 102, 153);
     padding: 5px;
     height: 98.9vh;
 }
@@ -37,7 +40,7 @@ body {
     transition: opacity 0.3s ease-out;
     min-width: 250px;
     margin-left: -125px;
-    background-color: #2196F3;
+    background-color: rgb(51, 102, 153);
     color: #fff;
     text-align: center;
     border-radius: 3px;
@@ -62,7 +65,7 @@ body {
     transition: opacity 0.3s ease-out;
     width: 20%;
     min-height: 96px;
-    background-color: #2196F3;
+    background-color: rgb(51, 102, 153);
     color: #fff;
     text-align: center;
     border-radius: 3px;
@@ -71,11 +74,12 @@ body {
     z-index: 1;
     left: 40%;
     top: 36%;
+    border: 1px solid gray;
 }
 .login-popup-header {
     text-align: right;
     padding: 5px 9px;
-    background-color: #0b4fcc;
+    background-color: #126cc6;
     border-top-right-radius: 3px;
     border-top-left-radius: 3px;
     margin-bottom: 12px;
@@ -109,7 +113,7 @@ body {
 }
 .top-menu {
     text-align: left;
-    background-color: #0b4fcc;
+    background-color: #126cc6;
     padding: 7px;
 }
 .top-menu h1, .top-menu h3 {
@@ -138,7 +142,7 @@ body {
     transition: linear 0.5s;
 }
 .main.wide { 
-    width: 82vw;
+    width: 80vw;
     transition: linear 0.5s;
 }
 .splitter {
@@ -177,7 +181,7 @@ body {
     margin: 0 20px;
 }
 .menu .accordion {
-    background-color: #0b4fcc;
+    background-color: #126cc6;
     color: white;
     cursor: pointer;
     padding: 12px;
@@ -292,7 +296,7 @@ body {
     font-size: smaller;
 }
 .button {
-    background-color: #0b4fcc;
+    background-color: #126cc6;
     color: white;
     cursor: pointer;
     padding: 12px;
@@ -300,6 +304,8 @@ body {
     border: none;
     min-width: 98px;
     margin: 7px 0;
+    border: 1px solid slategrey;
+    border-radius: 2px;
 }
 .button.test {
     background-color: #187e04 !important;

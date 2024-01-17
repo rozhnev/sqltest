@@ -1,18 +1,7 @@
 {include file='../header.tpl'}
 {include file='top-menu.tpl'}
 {include file='../menu.tpl'}
-<script>
-    var lang = '{$Lang}';
-    var db = '{$DB}';
-</script>
-<div class="splitter">
-    <a href="" onClick="return toggleInfoPanel();" title="Toggle panel">
-        ⯈
-    </a>
-    <a href="" class="hidden" onClick="return toggleInfoPanel();" title="Toggle panel">
-        ⯇
-    </a>
-</div>
+{include file='../splitter.tpl'}
 <div class="main">
     <div class="question-wrapper">
         <div class="question-title">Задание {$Question.number}:
