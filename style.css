@@ -99,6 +99,10 @@ body {
     margin: 0 12px;
     cursor: pointer;
 }
+.yaPersonalButtonLogo {
+    width: 40px in !important;
+    height: 40px !important;
+}
 .header { 
     grid-area: header; 
     min-height: 3vh;
@@ -443,4 +447,3 @@ body {
       box-shadow: 0em -3em 0 0, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0, -2em -2em 0 0.2em;
     }
 }
-  
