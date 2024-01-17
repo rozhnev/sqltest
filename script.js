@@ -133,7 +133,20 @@ function openGitHubLoginPopUp() {
         `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=530,height=950,left=${(window.outerWidth - 530) / 2},top=${(window.outerHeight - 950) / 2}`
     );
 }
-
+function openGoogleLoginPopUp() {
+  const params = {
+      response_type: 'code',
+      client_id: '340274762951-1d5m1pb8p9i2bhjbtuc4p8q9gveuk2ug.apps.googleusercontent.com',
+      redirect_uri: `${window.location.protocol}//${window.location.host}/login/google/`,
+      scope:'openid email',
+      state: ''
+  };
+  window.open(
+      'https://accounts.google.com/o/oauth2/v2/auth?' + new URLSearchParams(params).toString(), 
+      'Google Login', 
+      `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=530,height=600,left=${(window.outerWidth - 530) / 2},top=${(window.outerHeight - 950) / 2}`
+  );
+}
 const acc = document.getElementsByClassName("accordion");
 for (let i = 0; i < acc.length; i++) {
   acc[i].addEventListener("click", function () {
@@ -170,9 +183,9 @@ window.onload = function() {
       {
           client_id: '6a7ad9d0d23a496987255a596b83b9db',
           response_type: 'code',
-          redirect_uri: `https://sqltest.online/login/yandex/?lang=${lang}&db=${db}&questionId=${questionId}`
+          redirect_uri: `${window.location.protocol}//${window.location.host}/login/yandex/?lang=${lang}&db=${db}&questionId=${questionId}`
       },
-      `https://sqltest.online/login/yandex/?lang=${lang}&db=${db}&questionId=${questionId}`,
+      `${window.location.protocol}//${window.location.host}/login/yandex/?lang=${lang}&db=${db}&questionId=${questionId}`,
       {
         view: "button",
         parentId: "yandexLogin",
@@ -186,14 +199,4 @@ window.onload = function() {
     .then(({handler}) => handler())
     .then(data => alert('Сообщение с токеном', data))
     .catch(error => alert('Обработка ошибки', error));
-
-    gapi.signin2.render('googleLogin', {
-      'scope': 'profile email',
-      'width': 36,
-      'height': 36,
-      'longtitle': true,
-      'theme': 'dark',
-      'onsuccess': onSuccessGoogleLogin,
-      'onfailure': onFailureGoogleLogin
-    });
 };

@@ -23,7 +23,6 @@
         <!-- Yandex.RTB R-A-4716552-2 -->
         </script>
         <!-- Google tag (gtag.js) -->
-        <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-PCGW7ZLSD1"></script>
         <script>
             window.dataLayer = window.dataLayer || [];
