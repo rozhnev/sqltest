@@ -6,7 +6,7 @@
         <script>
             try {
                 window.opener.location.reload();
-            } catch() {
+            } catch(error) {
                 window.opener.parent.location.reload();
             }
             window.close();
