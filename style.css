@@ -348,6 +348,7 @@ body {
 }
 .code-result .hint-code {
     background-color: #eee;
+    padding: 7px;
 }
 .db-description {
     /* padding: 0 12px; */
