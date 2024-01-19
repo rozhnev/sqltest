@@ -259,7 +259,7 @@ body {
     float: right;
     padding: 0 12px;
 }
-.question.sql {
+.question .sql {
     background-color: #eee;
     color: #cb0000;
     padding: 3px;
