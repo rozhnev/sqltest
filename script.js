@@ -162,6 +162,7 @@ window.sql_editor = ace.edit("sql-code", {
     dragEnabled: false,
     useWorker: false
 });
+window.sql_editor.setTheme(`ace/theme/xcode`);
 window.sql_editor.setShowPrintMargin(false);
 window.sql_editor.setOptions({enableBasicAutocompletion: true});
 
