@@ -97,8 +97,8 @@ body {
     cursor: pointer;
 }
 .social-login-button {
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 40px;
     display: inline-block;
     margin: 0 12px;
     cursor: pointer;
@@ -247,6 +247,9 @@ body {
     background-color: #eee;
     padding: 6px;
 }
+.question pre {
+    font-family: Arial, Helvetica, sans-serif;
+}
 .question-title .question-dates {
     color: gray;
     font-size: small;
@@ -255,6 +258,11 @@ body {
 .question-navigate {
     float: right;
     padding: 0 12px;
+}
+.question.sql {
+    background-color: #eee;
+    color: #cb0000;
+    padding: 3px;
 }
 .arrow {
     display: inline-block;
