@@ -43,7 +43,7 @@
             <a href="/{$Lang}/{$DB}/{$NextQuestionId}" title="Следующее задание" class="button test hidden">Next</a>
         {/if}
     </div>
-    <div class="code-result" id="code-result"></div>
+    <div class="code-result ace-xcode" id="code-result"></div>
 </div>
 
 <div class="right">
