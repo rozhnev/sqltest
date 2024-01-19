@@ -346,6 +346,9 @@ body {
     color: darkred;
     font-weight: bolder;
 }
+.code-result .hint-code {
+    background-color: #eee;
+}
 .db-description {
     /* padding: 0 12px; */
 }
