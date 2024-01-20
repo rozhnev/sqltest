@@ -92,7 +92,7 @@ function runQuery(lang, db, questionId) {
       : jsonToTable(jsonObject);
   })
   .catch(err=>{
-    document.getElementById('code-result').innerHTML = 'Something went wrong. Please review your query and try again.';
+      document.getElementById('code-result').innerHTML = 'Something went wrong. Please review your query and try again.';
   });
 }
 
@@ -101,11 +101,11 @@ function testQuery(lang, db, questionId) {
     let formData = new FormData();
     formData.append('query', window.sql_editor.getValue());
     fetch(`/${lang}/${db}/${questionId}/query-test`, {
-      method: "POST", // *GET, POST, PUT, DELETE, etc.
-      mode: "cors", // no-cors, *cors, same-origin
-      cache: "default", // *default, no-cache, reload, force-cache, only-if-cached
-      credentials: "same-origin", // include, *same-origin, omit
-      body: formData,
+        method: "POST", // *GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors, *cors, same-origin
+        cache: "default", // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: "same-origin", // include, *same-origin, omit
+        body: formData,
     })
     .then((async response=>{
       if (response.ok) {
@@ -115,17 +115,24 @@ function testQuery(lang, db, questionId) {
       return await response.text();
     }))
     .then((message)=>{
-      document.getElementById('code-result').innerHTML = message;
+        document.getElementById('code-result').innerHTML = message;
     })
     .catch(err=>{
-      document.getElementById('code-result').innerHTML = 'Something went wrong. Please review your query and try again.';
+        document.getElementById('code-result').innerHTML = 'Something went wrong. Please review your query and try again.';
     });
 }
 function toggleInfoPanel() {
-  document.getElementsByClassName("right")[0].classList.toggle("hidden");
-  document.getElementsByClassName("main")[0].classList.toggle("wide");
-  [...document.getElementsByClassName("splitter")[0].children].map(el=>el.classList.toggle("hidden"));
-  return false;
+    document.getElementsByClassName("right")[0].classList.toggle("hidden");
+    document.getElementsByClassName("main")[0].classList.toggle("wide");
+    [...document.getElementsByClassName("splitter")[0].children].map(el=>el.classList.toggle("hidden"));
+    return false;
+}
+function scrollQuestionPanel() {
+    const activePanel = document.getElementsByClassName("panel active")[0];
+    const qurrentQuestion = document.getElementsByClassName("current-question")[0];
+    if (activePanel && qurrentQuestion) {
+        activePanel.scrollTop = qurrentQuestion.offsetTop - activePanel.offsetTop;
+    }
 }
 function openGitHubLoginPopUp() {
     window.open(
@@ -166,14 +173,8 @@ window.sql_editor.setTheme(`ace/theme/xcode`);
 window.sql_editor.setShowPrintMargin(false);
 window.sql_editor.setOptions({enableBasicAutocompletion: true});
 
-function onSuccessGoogleLogin(googleUser) {
-  console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
-}
-function onFailureGoogleLogin(error) {
-  console.log(error);
-}
-
 window.onload = function() {
+    scrollQuestionPanel();
     document.addEventListener('keydown', function(event) {
         if (event.ctrlKey && event.key === 'Enter') {
             runQuery(lang, db, questionId);
