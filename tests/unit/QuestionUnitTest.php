@@ -1,6 +1,6 @@
 <?php
 
-class QuestionTest extends \Codeception\Test\Unit
+class QuestionUnitTest extends \Codeception\Test\Unit
 {
     /**
      * @var \UnitTester
@@ -20,7 +20,7 @@ class QuestionTest extends \Codeception\Test\Unit
     {
     }
 
-    // tests
+    tests
     public function testSomeFeature()
     {
         $user = new Question($this->dbh, '1');

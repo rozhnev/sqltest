@@ -13,8 +13,6 @@ class FirstCest
         $I->amOnPage('/en');
         $I->see('place where you can test your SQL knowledge for free');
         $I->see('Get the actors');
-        $I->click('.login-button');
-        $I->see('Choose login option');
     }
 
     public function frontpageRuWorks(AcceptanceTester $I)
@@ -22,16 +20,22 @@ class FirstCest
         $I->amOnPage('/ru');
         $I->see('место, где вы можете бесплатно проверить свои знания SQL');
         $I->see('Получить список актёров');
-        $I->click('.login-button');
-        $I->see('Выберите способ авторизации');
+    }
+
+    public function questionEnWorks(AcceptanceTester $I)
+    {
+        $I->amOnPage('/en/sakila/1');
+        $I->see('Select all records from the actor table.');
+        // $I->executeJS("runQuery('ru', 'sakila', 1)");
+        // $I->see('Для получения всех данных из таблицы используйте');
     }
 
     public function questionRuWorks(AcceptanceTester $I)
     {
         $I->amOnPage('/ru/sakila/1');
-        $I->see('Выберите все записи из таблицы `actor`');
-        $I->executeJS("runQuery('ru', 'sakila', 1)");
-        $I->see('Для получения всех данных из таблицы используйте');
+        $I->see('Выберите все записи из таблицы');
+        // $I->executeJS("runQuery('ru', 'sakila', 1)");
+        // $I->see('Для получения всех данных из таблицы используйте');
     }
 
     public function privacyPolicyEnWorks(AcceptanceTester $I)

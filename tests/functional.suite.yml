@@ -8,6 +8,11 @@
 actor: FunctionalTester
 modules:
     enabled:
+        - WebDriver:
+            url: https://sqltest.online
+            browser: chrome # 'chrome' or 'firefox'
+        - PhpBrowser:
+            url: https://sqltest.online
         # add a framework module here
         - \Helper\Functional
-    step_decorators: ~        
+    step_decorators: ~
