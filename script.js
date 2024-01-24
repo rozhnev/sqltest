@@ -121,10 +121,21 @@ function testQuery(lang, db, questionId) {
         document.getElementById('code-result').innerHTML = 'Something went wrong. Please review your query and try again.';
     });
 }
+function toggleSolvedTasks(e) {
+    [...document.getElementsByClassName("eye-btn")].map(el=>el.classList.toggle("hidden"));
+    [...document.getElementsByClassName("question-link solved")].map(el=>{
+      el.parentNode.classList.toggle("invisible")
+    });
+    window.UIConfig.hideSolvedTasks = !window.UIConfig.hideSolvedTasks;
+    saveUIConfig();
+    return false;
+}
 function toggleInfoPanel() {
     document.getElementsByClassName("right")[0].classList.toggle("hidden");
     document.getElementsByClassName("main")[0].classList.toggle("wide");
     [...document.getElementsByClassName("splitter")[0].children].map(el=>el.classList.toggle("hidden"));
+    window.UIConfig.hideInfoPanel = !window.UIConfig.hideInfoPanel;
+    saveUIConfig();
     return false;
 }
 function scrollQuestionPanel() {
@@ -154,15 +165,56 @@ function openGoogleLoginPopUp() {
       `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=530,height=600,left=${(window.outerWidth - 530) / 2},top=${(window.outerHeight - 950) / 2}`
   );
 }
-const acc = document.getElementsByClassName("accordion");
-for (let i = 0; i < acc.length; i++) {
-  acc[i].addEventListener("click", function () {
-    for (let el of document.getElementsByClassName("panel")) el.classList.remove("active");
-    this.classList.toggle("active");
-    const panel = this.nextElementSibling;
-    panel.classList.toggle("active");
-  });
+
+function loadUIConfig() {
+  try {
+      const UIConfig = localStorage.getItem("UIConfig");
+      console.log(UIConfig);
+      if (UIConfig) return JSON.parse(UIConfig);
+  } catch (err) {
+      console.log(err);
+      return {
+          hideSolvedTasks: false,
+          hideInfoPanel: false
+      }
+  }
 }
+function saveUIConfig() {
+  localStorage.setItem("UIConfig", JSON.stringify(window.UIConfig));
+}
+function applyUIConfig() {
+    if (window.UIConfig.hideSolvedTasks) {
+        window.UIConfig.hideSolvedTasks = !window.UIConfig.hideSolvedTasks;
+        toggleSolvedTasks();
+    }
+
+    if (window.UIConfig.hideInfoPanel) {
+        window.UIConfig.hideInfoPanel = !window.UIConfig.hideInfoPanel;
+        toggleInfoPanel();
+    }
+}
+
+// set menu event listeners
+[...document.getElementsByClassName("accordion")].map(el=>{
+    el.addEventListener ('click', function() {
+        for (let el of document.getElementsByClassName("panel")) el.classList.remove("active");
+        this.classList.toggle("active");
+        const panel = this.nextElementSibling;
+        panel.classList.toggle("active");
+    });
+});
+
+[...document.getElementsByClassName("eye-btn")].map(el=>{
+    el.addEventListener ('click', e=>{
+      e.preventDefault();
+      toggleSolvedTasks()
+  });
+})
+// set menu event listeners
+
+window.UIConfig = loadUIConfig();
+applyUIConfig();
+
 window.sql_editor = ace.edit("sql-code", {
     mode: "ace/mode/mysql",
     selectionStyle: "text",

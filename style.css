@@ -8,6 +8,11 @@ body {
     background-color: rgb(51, 102, 153);
     color: white;
 }
+.invisible {
+    /* visibility: hidden; */
+    overflow: hidden;
+    height: 0;
+}
 .container {
     display: grid;
     grid-template-areas:
@@ -155,7 +160,8 @@ body {
     font-size: 18px;
     font-weight: bold;
 } 
-.splitter .hidden {
+.splitter .hidden, 
+.accordion .hidden {
     display: none;
 }
 .right { 
@@ -196,6 +202,9 @@ body {
 .accordion:hover {
     background-color: #2196F3;
     border-bottom: 1px solid #0b4fcc;
+}
+.accordion .eye-btn {
+    float: right;
 }
 .menu .panel {
     padding: 0;
