@@ -54,7 +54,7 @@
             <div class="container2">
                 <div class="header">
                     <div class="top-menu">
-                        <a href="/ru/sakila/1"><h1 class="site-name">SQLtest</h1><h3 class="site-promo"> - место, где вы можете бесплатно проверить свои знания SQL</h3></a>
+                        <a href="/ru/" target="_self"><h1 class="site-name">SQLtest</h1><h3 class="site-promo"> - место, где вы можете бесплатно проверить свои знания SQL</h3></a>
                         <span class="lang-swith"><a href="/en/privacy-policy" target="_self">EN</a></span>
                     </div>
                 </div>
