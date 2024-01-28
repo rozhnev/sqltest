@@ -9,11 +9,13 @@ $user   = new User($dbh, $env);
 
 $path = isset($_SERVER['PATH_INFO']) ? trim($_SERVER['PATH_INFO'], '/') : trim($_SERVER['PHP_SELF'], '/');
 $pathParts = explode('/', $path);
+$db         = '';
+$questionID = '';
 
-if ($pathParts[0] === 'login') {
+if (isset($pathParts[0]) && $pathParts[0] === 'login') {
     $action     = 'login';
     $loginProvider = $pathParts[1];
-} elseif ($pathParts[1] === 'privacy-policy') {
+} elseif (isset($pathParts[1]) && $pathParts[1] === 'privacy-policy') {
     $lang       = isset($pathParts[0]) && $pathParts[0] === 'ru' ? 'ru' : 'en';
     $action     = 'privacy-policy';
 } else {
@@ -78,7 +80,6 @@ switch ($action) {
             $user->saveQuestionAttempt($questionID, $queryTestResult['ok'], $sql);
         }
         if (!$queryTestResult['ok']) header( 'HTTP/1.1 418 BAD REQUEST' );
-        $smarty->assign('Logged', $user->logged());
         $template = "query_test_result.tpl";
         break;
     case 'logout':
@@ -116,7 +117,6 @@ switch ($action) {
         $smarty->assign('Question', $question->get($lang, $user->getId()));
         $smarty->assign('NextQuestionId', $question->getNextId());
         $smarty->assign('PreviousQuestionId', $question->getPreviousId());
-        $smarty->assign('Logged', $user->logged());
         $template = "index.tpl";
 }
 
@@ -126,6 +126,7 @@ if ($lang == 'ru') {
     $lang = 'en';
     $smarty->setTemplateDir('./templates/en');
 }
+$smarty->assign('Logged', $user->logged());
 $smarty->assign('Lang', $lang);
 $smarty->assign('DB', $db);
 $smarty->assign('QuestionID', $questionID);
