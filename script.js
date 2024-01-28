@@ -167,16 +167,17 @@ function openGoogleLoginPopUp() {
 }
 
 function loadUIConfig() {
+  const defaultConfig = {
+      hideSolvedTasks: false,
+      hideInfoPanel: false
+  };
   try {
       const UIConfig = localStorage.getItem("UIConfig");
-      console.log(UIConfig);
-      if (UIConfig) return JSON.parse(UIConfig);
+      // console.log(UIConfig);
+      return UIConfig ? JSON.parse(UIConfig) : defaultConfig;
   } catch (err) {
-      console.log(err);
-      return {
-          hideSolvedTasks: false,
-          hideInfoPanel: false
-      }
+      // console.log(err);
+      return defaultConfig
   }
 }
 function saveUIConfig() {
