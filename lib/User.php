@@ -226,6 +226,25 @@ class User
     }
 
     /**
+     * Return User admin status
+     *
+     * @return bool
+     */
+    public function isAdmin(): bool
+    {
+        if (!$this->logged()) return false;
+
+        $stmt = $this->dbh->prepare("SELECT admin FROM users WHERE id = ?;");
+
+        if ($stmt->execute([$this->id])) {
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $row['admin'];
+        }
+
+        return false;
+    }
+
+    /**
      * Set User's id
      *
      * @param string $id
