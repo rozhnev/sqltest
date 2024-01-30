@@ -12,6 +12,6 @@
         "codeception/codeception": "^4.2",
         "codeception/module-phpbrowser": "^1.0.0",
         "codeception/module-asserts": "^1.3",
-        "codeception/module-webdriver": "^4"
+        "codeception/module-webdriver": "^2.0"
     }
 }
