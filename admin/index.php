@@ -12,6 +12,12 @@ session_start();
 if (($_SESSION && $_SESSION['user_id'])) {
     $user->setId($_SESSION['user_id']);
 }
+$smarty->assign('QuestionTitleEn', 'Title');
+$smarty->assign('QuestionTitleRu', 'Title');
+$smarty->assign('QuestionEn', 'Question');
+$smarty->assign('QuestionRu', 'Question');
+$smarty->assign('QuestionHintEn', 'Hint');
+$smarty->assign('QuestionHintRu', 'Hint');
 
 // var_dump($user);
 $smarty->assign('Logged', $user->logged());

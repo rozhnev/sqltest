@@ -1,0 +1,24 @@
+.admin-container {
+    display: grid;
+    grid-template-areas:
+      'header header'
+      'menu main'
+      'menu footer';
+    gap: 5px;
+    background-color: rgb(51, 102, 153);
+    padding: 5px;
+}
+.admin-container > div {
+    padding: 5px 0;
+}
+
+.question-form {
+    display: grid;
+    grid-template-areas:
+        'top top'
+        'left right'
+        'bottom bottom';
+    gap: 5px;
+    background-color: rgb(51, 102, 153);
+    padding: 5px;
+}
