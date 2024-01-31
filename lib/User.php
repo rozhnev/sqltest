@@ -245,6 +245,19 @@ class User
     }
 
     /**
+     * Set User's id and admin status
+     *
+     * @param string $id
+     * @param bool $admin
+     * @return void
+     */
+    public function set(string $id, bool $admin): void
+    {
+        $this->id = $id;
+        $this->admin = $admin;
+    }
+
+    /**
      * Set User's id
      *
      * @param string $id

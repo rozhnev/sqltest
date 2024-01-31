@@ -28,18 +28,14 @@ if (isset($pathParts[0]) && $pathParts[0] === 'login') {
 session_start();
 
 if (($_SESSION && $_SESSION['user_id'])) {
-    $user->setId($_SESSION['user_id']);
+    $user->set($_SESSION['user_id'], $_SESSION["admin"]);
 }
-
-// Temporary disabled
-// if ($questionID === 0) {
-//     $action     = 'welcome';
-// }
 
 switch ($action) {
     case 'login':
         $user->login($loginProvider, $_REQUEST);
         $_SESSION["user_id"] = $user->getId();
+        $_SESSION["admin"] = $user->isAdmin();
         //TODO: last path should be restored on login
         $template = "../login_result.tpl";
         break;
@@ -126,7 +122,9 @@ if ($lang == 'ru') {
     $lang = 'en';
     $smarty->setTemplateDir('./templates/en');
 }
+
 $smarty->assign('Logged', $user->logged());
+$smarty->assign('LoggedAsAdmin', $user->isAdmin());
 $smarty->assign('Lang', $lang);
 $smarty->assign('DB', $db);
 $smarty->assign('QuestionID', $questionID);
