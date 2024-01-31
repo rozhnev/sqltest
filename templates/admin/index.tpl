@@ -52,25 +52,39 @@
                 <div class="question-form-left">
                     <div>
                         <label for="question-title-en">Question Title:</label>
-                        <input type="text" name="question-title-en" value="{$QuestionTitleEn}" />
+                        <input type="text" name="question-title-en" style="width:300px" value="{$QuestionTitleEn}" />
+                        <button>Translate to Russian =></button>
                     </div>
                     <div>
                         <label for="question-title-en">Question:</label>
                         <input type="textarea" name="question-en" value="{$QuestionEn}" />
+                        <button>Translate to Russian =></button>
                     </div>
                     <div>
                         <label for="question-title-en">Hint:</label>
                         <input type="textarea" name="question-hint-en" value="{$QuestionHintEn}" />
+                        <button>Translate to Russian =></button>
                     </div>
                 </div>
                 <div class="question-form-right">
-                    <input type="text" name="question-title-ru" value="{$QuestionTitleRu}" />
+                    <button><= Translate to English</button>
+                    <input type="text" name="question-title-ru" style="width:300px" value="{$QuestionTitleRu}" />
                 </div>
                 <div class="question-form-bottom">
-                    <label for="question-title-en">Solution Match:</label>
-                    <input type="text" name="question-match" value="{$QuestionHintEn}" />
-                    <label for="question-title-en">Solution Not Match:</label>
-                    <input type="text" name="question-match" value="{$QuestionHintEn}" />
+                    <div>
+                        <label for="question-title-en">Solution Match:</label>
+                        <input type="text" name="question-match" value="{$SolutionMatch}" />
+                        <button>Check</button>
+                    </div>
+                    <div>
+                        <label for="question-title-en">Solution Not Match:</label>
+                        <input type="text" name="question-match" value="{$SolutionNotMatch}" />
+                        <button>Check</button>
+                    </div>
+                    <div>
+                        <label for="question-title-en">Result:</label>
+                        <input type="text" name="question-match" value="{$QuestionResult}" />
+                    </div>
                     <div>
                         <button class="button test" id="saveQuestionBtn" onClick="saveQuestion({$QuestionID})">Save</button>
                     </div>
