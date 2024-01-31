@@ -18,6 +18,9 @@ $smarty->assign('QuestionEn', 'Question');
 $smarty->assign('QuestionRu', 'Question');
 $smarty->assign('QuestionHintEn', 'Hint');
 $smarty->assign('QuestionHintRu', 'Hint');
+$smarty->assign('SolutionMatch', 'SolutionMatch');
+$smarty->assign('SolutionNotMatch', 'SolutionNotMatch');
+$smarty->assign('QuestionResult', 'QuestionResult');
 
 // var_dump($user);
 $smarty->assign('Logged', $user->logged());
