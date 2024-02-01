@@ -32,6 +32,17 @@ class Question
         return (string)$stmt->fetchColumn();
     }
     /**
+     * Returns all question fields from DB
+     *
+     * @return array
+     */
+    public function getData(): array 
+    {
+        $stmt = $this->dbh->prepare("SELECT * FROM questions WHERE id = ?");
+        $stmt->execute([$this->id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    /**
      * Returns question task for provided language
      *
      * @param string $lang

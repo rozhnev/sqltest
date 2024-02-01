@@ -5,7 +5,7 @@
         <head>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
             <meta http-equiv="Permissions-Policy" content="browsing-topics=('mc.yandex.com')">
-            <meta name="viewport" content="width=device-width, initial-scale=1;"/>
+            <meta name="viewport" content="width=device-width, initial-scale=1"/>
             <meta charset="utf-8">
             <meta name="description" content="Free online SQL test.">
             <meta name="keywords" content="free sql test,online testing, sql, fiddle">
@@ -21,7 +21,8 @@
             <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.2/mode-mysql.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.2/theme-xcode.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.2/ext-language_tools.js"></script>
-            <script type="text/javascript" src="script.js?8" defer></script>
+            {* <script type="text/javascript" src="/script.js?8" defer></script> *}
+            <script type="text/javascript" src="/admin/script.js?10"></script>
             <script>
                 var lang = '{$Lang}',
                     db   = '{$DB}',
@@ -52,23 +53,29 @@
                 <div class="question-form-left">
                     <div>
                         <label for="question-title-en">Question Title:</label>
-                        <input type="text" name="question-title-en" style="width:300px" value="{$QuestionTitleEn}" />
-                        <button>Translate to Russian =></button>
+                        <input type="text" id="question-title-en" name="question-title-en" style="width:300px" value="{$QuestionTitleEn}" />
+                        <button onClick="translate('English', 'Russian', 'question-title-en', 'question-title-ru');">To Russian =></button>
                     </div>
                     <div>
                         <label for="question-title-en">Question:</label>
-                        <input type="textarea" name="question-en" value="{$QuestionEn}" />
-                        <button>Translate to Russian =></button>
+                        <textarea name="question-en" rows="4" cols="50">{$QuestionTaskEn}</textarea>
+                        <button>To Russian =></button>
                     </div>
                     <div>
                         <label for="question-title-en">Hint:</label>
                         <input type="textarea" name="question-hint-en" value="{$QuestionHintEn}" />
-                        <button>Translate to Russian =></button>
+                        <button>To Russian =></button>
                     </div>
                 </div>
                 <div class="question-form-right">
-                    <button><= Translate to English</button>
-                    <input type="text" name="question-title-ru" style="width:300px" value="{$QuestionTitleRu}" />
+                    <div>
+                        <button><= To English</button>
+                        <input type="text" id="question-title-ru" name="question-title-ru" style="width:300px" value="{$QuestionTitleRu}" />
+                    </div>
+                    <div>
+                        <button><= To English</button>
+                        <textarea name="question-ru" rows="4" cols="50">{$QuestionTaskRu}</textarea>
+                    </div>
                 </div>
                 <div class="question-form-bottom">
                     <div>

@@ -13,6 +13,13 @@ body {
     overflow: hidden;
     height: 0;
 }
+.code-buttons a, .code-buttons a:visited, 
+.footer a, .footer a:visited, 
+.top-menu a, .top-menu a:visited,
+.question-title a, .question-title a:visited,
+.splitter a, .splitter a:visited {
+    text-decoration: none;
+}
 .container {
     display: grid;
     grid-template-areas:
@@ -125,7 +132,6 @@ body {
     display: inline;
 }
 .top-menu a, .top-menu a:visited {
-    text-decoration: none;
     color: white;
 }
 .top-menu .lang-swith {
@@ -155,7 +161,6 @@ body {
     padding-top: 5px;
 }
 .splitter a, .splitter a:visited {
-    text-decoration: none;
     color: white;
     font-size: 18px;
     font-weight: bold;
@@ -182,7 +187,6 @@ body {
     min-height: 4vh;
 }
 .footer a, .footer a:visited{ 
-    text-decoration: none;
     color: white;
     margin: 0 20px;
 }
@@ -311,7 +315,6 @@ body {
     text-align: end;
 }
 .code-buttons a {
-    text-decoration: none;
     font-size: smaller;
 }
 .button {
