@@ -359,6 +359,10 @@ body {
 .code-result .result-table td:nth-child(1) {  
     background-color: #ddd;
 }
+.code-result .result-table td:nth-child(1) {
+    width: 16px;
+    text-align: right;
+}
 .code-result .sql_error {
     color: darkred;
     font-weight: bolder;
