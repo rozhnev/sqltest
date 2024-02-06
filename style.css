@@ -355,6 +355,10 @@ body {
     color: #333;
     font-size: smaller;
 }
+.code-result .result-table th, 
+.code-result .result-table td:nth-child(1) {  
+    background-color: #ddd;
+}
 .code-result .sql_error {
     color: darkred;
     font-weight: bolder;
@@ -409,6 +413,16 @@ body {
     transform: translate3d(0,0,0);
     backface-visibility: hidden;
     perspective: 1000px;
+}
+.help {
+    color: darkred;
+    background-color: white;
+    padding: 1px 5px;
+    font-size: x-small;
+    border-radius: 50%;
+    margin-bottom: 3px;
+    vertical-align: top;
+    cursor: pointer;
 }
 .loader {
     color: #50aaFF;
