@@ -357,7 +357,7 @@ body {
 }
 .code-result .result-table th, 
 .code-result .result-table td:nth-child(1) {  
-    background-color: #ddd;
+    background-color: #e8e8e8;
 }
 .code-result .result-table td:nth-child(1) {
     width: 16px;
