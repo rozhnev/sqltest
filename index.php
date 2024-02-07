@@ -48,7 +48,7 @@ switch ($action) {
     case 'query-help':
         $question = new Question($dbh, $questionID);
         $smarty->assign('Hint', $question->getHint($lang));
-        $template = "../hint.tpl";
+        $template = "hint.tpl";
         break;
     case 'query-run':
         $sql = $_POST["query"] ?? '';
