@@ -4,7 +4,11 @@
 {include file='../splitter.tpl'}
 <div class="main">
     <div class="question-wrapper">
-        <div class="question-title">Задание {$Question.number}:
+        <div class="question-title">
+            Задание {$Question.number}:
+            {if $LoggedAsAdmin}
+                <a href="/admin/question/{$NextQuestionId}" title="Edit" style="color:#333">&#9998;</a>
+            {/if}
             <span class="question-dates">
                 {if $Question.solved_date}
                     Решено: {$Question.solved_date}
