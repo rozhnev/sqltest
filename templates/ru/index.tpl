@@ -18,10 +18,10 @@
             </span>
             <span class="question-navigate">
                 {if $PreviousQuestionId}
-                    <a href="/{$Lang}/{$DB}/{$PreviousQuestionId}" title="Предыдущее задание"><i class="arrow arrow-left"></i></a>
+                    <a href="/{$Lang}/{$Question.db_template}/{$PreviousQuestionId}" title="Предыдущее задание"><i class="arrow arrow-left"></i></a>
                 {/if}
                 {if $NextQuestionId}
-                    <a href="/{$Lang}/{$DB}/{$NextQuestionId}" title="Следующее задание"><i class="arrow arrow-right"></i></a>
+                    <a href="/{$Lang}/{$Question.db_template}/{$NextQuestionId}" title="Следующее задание"><i class="arrow arrow-right"></i></a>
                 {/if}
             </span>
         </div>
