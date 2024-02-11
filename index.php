@@ -3,16 +3,21 @@ $env    = parse_ini_string(file_get_contents(".env"), 1);
 
 require 'vendor/autoload.php';
 $smarty = new Smarty();
-$db     = new DB($env);
-$dbh    = $db->getInstance();
-$user = new User($dbh, $env);
+$dbc    = new DB($env);
+$dbh    = $dbc->getInstance();
+$user   = new User($dbh, $env);
 
 $path = isset($_SERVER['PATH_INFO']) ? trim($_SERVER['PATH_INFO'], '/') : trim($_SERVER['PHP_SELF'], '/');
 $pathParts = explode('/', $path);
+$db         = '';
+$questionID = '';
 
-if ($pathParts[0] === 'login') {
+if (isset($pathParts[0]) && $pathParts[0] === 'login') {
     $action     = 'login';
     $loginProvider = $pathParts[1];
+} elseif (isset($pathParts[1]) && $pathParts[1] === 'privacy-policy') {
+    $lang       = isset($pathParts[0]) && $pathParts[0] === 'ru' ? 'ru' : 'en';
+    $action     = 'privacy-policy';
 } else {
     $lang       = isset($pathParts[0]) && $pathParts[0] === 'ru' ? 'ru' : 'en';
     $db         = $pathParts[1] ?? 'about';
@@ -23,20 +28,27 @@ if ($pathParts[0] === 'login') {
 session_start();
 
 if (($_SESSION && $_SESSION['user_id'])) {
-    $user->setId($_SESSION['user_id']);
+    $user->set($_SESSION['user_id'], $_SESSION["admin"]);
 }
 
 switch ($action) {
     case 'login':
         $user->login($loginProvider, $_REQUEST);
         $_SESSION["user_id"] = $user->getId();
+        $_SESSION["admin"] = $user->isAdmin();
         //TODO: last path should be restored on login
         $template = "../login_result.tpl";
+        break;
+    case 'privacy-policy':
+        $smarty->assign('Lang', $lang);
+        $smarty->assign('DB', 'sakila');
+        $smarty->assign('QuestionID', '1');
+        $template = "privacy_policy.tpl";
         break;
     case 'query-help':
         $question = new Question($dbh, $questionID);
         $smarty->assign('Hint', $question->getHint($lang));
-        $template = "../hint.tpl";
+        $template = "hint.tpl";
         break;
     case 'query-run':
         $sql = $_POST["query"] ?? '';
@@ -64,7 +76,6 @@ switch ($action) {
             $user->saveQuestionAttempt($questionID, $queryTestResult['ok'], $sql);
         }
         if (!$queryTestResult['ok']) header( 'HTTP/1.1 418 BAD REQUEST' );
-        $smarty->assign('Logged', $user->logged());
         $template = "query_test_result.tpl";
         break;
     case 'logout':
@@ -85,6 +96,11 @@ switch ($action) {
         session_destroy();
         header("location:/");
         die();
+    case 'welcome':
+        $questionnire = new Questionnire($dbh, $lang);
+        $smarty->assign('Questionnire', $questionnire->get());
+        $template = "welcome.tpl";
+        break;
     default:
         if ($user->logged()) {
             $user->setPath($path);
@@ -93,13 +109,10 @@ switch ($action) {
 
         $questionnire = new Questionnire($dbh, $lang);
         $question = new Question($dbh, $questionID);
-        $smarty->assign('PreviousQuestionId', $question->getPreviousId());
-        $smarty->assign('NextQuestionId', $question->getNextId());
         $smarty->assign('Questionnire', $questionnire->get($user->getId()));
         $smarty->assign('Question', $question->get($lang, $user->getId()));
         $smarty->assign('NextQuestionId', $question->getNextId());
         $smarty->assign('PreviousQuestionId', $question->getPreviousId());
-        $smarty->assign('Logged', $user->logged());
         $template = "index.tpl";
 }
 
@@ -109,6 +122,9 @@ if ($lang == 'ru') {
     $lang = 'en';
     $smarty->setTemplateDir('./templates/en');
 }
+
+$smarty->assign('Logged', $user->logged());
+$smarty->assign('LoggedAsAdmin', $user->isAdmin());
 $smarty->assign('Lang', $lang);
 $smarty->assign('DB', $db);
 $smarty->assign('QuestionID', $questionID);

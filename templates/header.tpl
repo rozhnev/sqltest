@@ -3,17 +3,18 @@
     <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
         <head>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+            <meta http-equiv="Permissions-Policy" content="browsing-topics=('mc.yandex.com')">
             <meta name="viewport" content="width=device-width, initial-scale=1"/>
             <meta charset="utf-8">
             <meta name="description" content="Free online SQL test.">
-            <meta name="keywords" content="free sql test,online testing, sql, fiddle">
+            <meta name="keywords" content="free sql test, online testing, sql, тест на знание SQL">
             <meta Content-Security-Policy-Report-Only: script-src https://accounts.google.com/gsi/client; frame-src https://accounts.google.com/gsi/; connect-src https://accounts.google.com/gsi/; />
             <meta name="google-signin-client_id" content="340274762951-1d5m1pb8p9i2bhjbtuc4p8q9gveuk2ug.apps.googleusercontent.com">
             {include file='site-title.tpl'}
             <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
             <link rel="icon" type="image/png" href="/favicons/favicon-32x32.png" sizes="32x32">
             <link rel="icon" type="image/png" href="/favicons/favicon-16x16.png" sizes="16x16">
-            <link rel="stylesheet" type="text/css" href="/style.css?2" media="all">
+            <link rel="stylesheet" type="text/css" href="/style.css?9" media="all">
             <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.2/ace.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.2/ext-beautify.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.2/mode-sql.min.js"></script>
@@ -24,7 +25,7 @@
             <script>window.yaContextCb=window.yaContextCb||[]</script>
             <script src="https://yandex.ru/ads/system/context.js" async></script>
                 <script src="https://yastatic.net/s3/passport-sdk/autofill/v1/sdk-suggest-with-polyfills-latest.js"></script>
-            <script type="text/javascript" src="/script.js?2" defer></script>
+            <script type="text/javascript" src="/script.js?8" defer></script>
             {literal}
             <!-- Yandex.RTB R-A-4716552-1 -->
             <script>
@@ -42,7 +43,6 @@
             <!-- Yandex.RTB R-A-4716552-2 -->
             </script>
             <!-- Google tag (gtag.js) -->
-            <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
             <script async src="https://www.googletagmanager.com/gtag/js?id=G-PCGW7ZLSD1"></script>
             <script>
                 window.dataLayer = window.dataLayer || [];

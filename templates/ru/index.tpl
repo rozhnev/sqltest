@@ -1,13 +1,14 @@
 {include file='../header.tpl'}
 {include file='top-menu.tpl'}
 {include file='../menu.tpl'}
-<script>
-    var lang = '{$Lang}';
-    var db = '{$DB}';
-</script>
+{include file='../splitter.tpl'}
 <div class="main">
     <div class="question-wrapper">
-        <div class="question-title">Задание {$Question.number}:
+        <div class="question-title">
+            Задание {$Question.number}:
+            {if $LoggedAsAdmin}
+                <a href="/admin/question/{$NextQuestionId}" title="Edit" style="color:#333">&#9998;</a>
+            {/if}
             <span class="question-dates">
                 {if $Question.solved_date}
                     Решено: {$Question.solved_date}
@@ -17,10 +18,10 @@
             </span>
             <span class="question-navigate">
                 {if $PreviousQuestionId}
-                    <a href="/{$Lang}/{$DB}/{$PreviousQuestionId}" title="Предыдущее задание"><i class="arrow arrow-left"></i></a>
+                    <a href="/{$Lang}/{$Question.db_template}/{$PreviousQuestionId}" title="Предыдущее задание"><i class="arrow arrow-left"></i></a>
                 {/if}
                 {if $NextQuestionId}
-                    <a href="/{$Lang}/{$DB}/{$NextQuestionId}" title="Следующее задание"><i class="arrow arrow-right"></i></a>
+                    <a href="/{$Lang}/{$Question.db_template}/{$NextQuestionId}" title="Следующее задание"><i class="arrow arrow-right"></i></a>
                 {/if}
             </span>
         </div>
@@ -39,14 +40,14 @@
     </div>
     <div class="code-wrapper" id="sql-code" name="sql-code">{$Question.last_query}</div>
     <div class="code-buttons">
-        <button class="button" onClick="getHelp('{$Lang}', '{$DB}', {$QuestionID})">Помощь</button>
-        <button class="button" onClick="runQuery('{$Lang}', '{$DB}', {$QuestionID})">Выполнить</button>
-        <button class="button test" onClick="testQuery('{$Lang}', '{$DB}', {$QuestionID})">Проверить!</button>
+        <button class="button" id="getHelpBtn" onClick="getHelp('{$Lang}', '{$DB}', {$QuestionID})">Помощь</button>
+        <button class="button" id="runQueryBtn" onClick="runQuery('{$Lang}', '{$DB}', {$QuestionID})" title="CTRL+Enter">Выполнить запрос</button>
+        <button class="button test" id="testQueryBtn" onClick="testQuery('{$Lang}', '{$DB}', {$QuestionID})">Проверить!</button>
         {if $NextQuestionId}
             <a href="/{$Lang}/{$DB}/{$NextQuestionId}" title="Следующее задание" class="button test hidden">Далее</a>
         {/if}
     </div>
-    <div class="code-result" id="code-result"></div>
+    <div class="code-result ace-xcode" id="code-result"></div>
 </div>
 
 <div class="right">

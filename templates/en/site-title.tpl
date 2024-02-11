@@ -1,1 +1,1 @@
-<title>SQLtest — test your SQL knowlage online</title>
+<title>SQLtest — test your SQL knowledge online</title>
