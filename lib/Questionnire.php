@@ -34,7 +34,7 @@ class Questionnire
     /**
      * Returns Questionnire data
      *
-     * @param string|null $lang
+     * @param string|null $userId
      * @return array
      */
     public function get(?string $userId): array

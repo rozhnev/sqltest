@@ -4,7 +4,11 @@
 {include file='../splitter.tpl'}
 <div class="main">
     <div class="question-wrapper">
-        <div class="question-title">Task {$Question.number}:
+        <div class="question-title">
+            Task {$Question.number}:
+            {if $LoggedAsAdmin}
+                <a href="/admin/question/{$NextQuestionId}" title="Edit" style="color:#333">&#9998;</a>
+            {/if}
             <span class="question-dates">
                 {if $Question.solved_date}
                     Solved at: {$Question.solved_date}
@@ -14,10 +18,10 @@
             </span>
             <span class="question-navigate">
                 {if $PreviousQuestionId}
-                    <a href="/{$Lang}/{$DB}/{$PreviousQuestionId}" title="Previous task"><i class="arrow arrow-left"></i></a>
+                    <a href="/{$Lang}/{$Question.db_template}/{$PreviousQuestionId}" title="Previous task"><i class="arrow arrow-left"></i></a>
                 {/if}
                 {if $NextQuestionId}
-                    <a href="/{$Lang}/{$DB}/{$NextQuestionId}" title="Next task"><i class="arrow arrow-right"></i></a>
+                    <a href="/{$Lang}/{$Question.db_template}/{$NextQuestionId}" title="Next task"><i class="arrow arrow-right"></i></a>
                 {/if}
             </span>
         </div>

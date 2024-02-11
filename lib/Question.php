@@ -32,6 +32,17 @@ class Question
         return (string)$stmt->fetchColumn();
     }
     /**
+     * Returns all question fields from DB
+     *
+     * @return array
+     */
+    public function getData(): array 
+    {
+        $stmt = $this->dbh->prepare("SELECT * FROM questions WHERE id = ?");
+        $stmt->execute([$this->id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    /**
      * Returns question task for provided language
      *
      * @param string $lang
@@ -42,7 +53,9 @@ class Question
         $stmt = $this->dbh->prepare("
             SELECT 
                 category_id,
-                number, task_{$lang} task, 
+                number, 
+                task_{$lang} task,
+                db_template,
                 last_attempt_at::date last_attempt_date, 
                 solved_at::date solved_date, last_query
             FROM questions 
@@ -61,13 +74,7 @@ class Question
     {
         $stmt = $this->dbh->prepare("SELECT hint_{$lang} FROM questions WHERE id = ?");
         $stmt->execute([$this->id]);
-        $hint = (string)$stmt->fetchColumn();
-
-        $dafaultHint = [
-            'en' => 'Try to complete this task without any hints.',
-            'ru' => 'Попробуйте выполнить это задание без подсказок.'
-        ];
-        return $hint ?? $dafaultHint[$lang];
+        return (string)$stmt->fetchColumn();
     }
     /**
      * Returns question db name
@@ -223,5 +230,8 @@ class Question
                 'ok' => false
             ];
         }
+    }
+    public function save() {
+
     }
 }

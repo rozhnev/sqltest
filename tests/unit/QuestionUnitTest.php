@@ -20,7 +20,7 @@ class QuestionUnitTest extends \Codeception\Test\Unit
     {
     }
 
-    tests
+    // tests
     public function testSomeFeature()
     {
         $user = new Question($this->dbh, '1');

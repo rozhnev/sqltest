@@ -28,6 +28,7 @@ class User
      */
     private $id;
 
+    private $admin = false;
     /**
      * User current path
      *
@@ -223,6 +224,49 @@ class User
     public function logged(): bool
     {
         return isset($this->id);
+    }
+
+    /**
+     * Set and return User admin status
+     *
+     * @return bool
+     */
+    public function autorize(): bool
+    {
+        $this->admin = false;
+        if ($this->logged()) {
+            $stmt = $this->dbh->prepare("SELECT admin FROM users WHERE id = ?;");
+
+            if ($stmt->execute([$this->id])) {
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                $this->admin = $row['admin'];
+            }
+        }
+
+        return $this->admin;
+    }
+
+    /**
+     * Return User admin status
+     *
+     * @return bool
+     */
+    public function isAdmin(): bool
+    {
+        return $this->admin;
+    }
+
+    /**
+     * Set User's id and admin status
+     *
+     * @param string $id
+     * @param bool $admin
+     * @return void
+     */
+    public function set(string $id, bool $admin): void
+    {
+        $this->id = $id;
+        $this->admin = $admin;
     }
 
     /**

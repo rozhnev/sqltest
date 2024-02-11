@@ -1,0 +1,47 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+  }
+  body {
+      font-family: "Lucida Grande",Tahoma,Arial,Verdana,sans-serif;
+      margin: 0;
+      min-height: 100vh;
+      background-color: rgb(51, 102, 153);
+      color: white;
+  }
+  .invisible {
+      /* visibility: hidden; */
+      overflow: hidden;
+      height: 0;
+  }
+.admin-container {
+    display: grid;
+    grid-template-columns: 250px auto auto;
+    grid-template-rows: 60px auto auto auto 50px;
+    height: 100vh;
+}
+.admin-header {
+    grid-area: 1 / 1 / 1 /-1;
+}
+.admin-menu {
+    grid-area: 2 / 1 / -1;
+}
+.admin-footer {
+    grid-area: 5 / 2 / -1;
+}
+.question-form-top {
+    grid-area: 2 / 2 / 2 / -1;
+}
+.question-form-left {
+    grid-area: 3 / 2 ;
+}
+.question-form-right {
+    grid-area: 3 / 3 ;
+}
+.question-form-bottom {
+    grid-area: 4 / 2 / 4 / 3;
+}
+
+.admin-container label {
+    min-width: 160px;
+    display: inline-block;
+}

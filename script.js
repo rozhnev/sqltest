@@ -36,10 +36,11 @@ function toggleLoginWindow() {
 
 function jsonToTable(jsonObject) {
   let htmlTable = '';
+  let rn = 0;
   try {
-      htmlTable = "<table class='result-table'><tr><th>" + jsonObject.headers.map(h=>h.header).join('</th><th>') + "</th></tr>";
+      htmlTable = "<table class='result-table'><tr><th></th><th>" + jsonObject.headers.map(h=>h.header).join('</th><th>') + "</th></tr>";
       for (let r of jsonObject.data) {
-        htmlTable += "<tr><td>" + r.join('</td><td>') + "</td></tr>";
+        htmlTable += "<tr><td>" + (++rn) +"</td><td>" + r.join('</td><td>') + "</td></tr>";
       }
       htmlTable += "</table>";
     } catch(e) {

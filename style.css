@@ -13,6 +13,13 @@ body {
     overflow: hidden;
     height: 0;
 }
+.code-buttons a, .code-buttons a:visited, 
+.footer a, .footer a:visited, 
+.top-menu a, .top-menu a:visited,
+.question-title a, .question-title a:visited,
+.splitter a, .splitter a:visited {
+    text-decoration: none;
+}
 .container {
     display: grid;
     grid-template-areas:
@@ -125,7 +132,6 @@ body {
     display: inline;
 }
 .top-menu a, .top-menu a:visited {
-    text-decoration: none;
     color: white;
 }
 .top-menu .lang-swith {
@@ -155,7 +161,6 @@ body {
     padding-top: 5px;
 }
 .splitter a, .splitter a:visited {
-    text-decoration: none;
     color: white;
     font-size: 18px;
     font-weight: bold;
@@ -182,7 +187,6 @@ body {
     min-height: 4vh;
 }
 .footer a, .footer a:visited{ 
-    text-decoration: none;
     color: white;
     margin: 0 20px;
 }
@@ -311,7 +315,6 @@ body {
     text-align: end;
 }
 .code-buttons a {
-    text-decoration: none;
     font-size: smaller;
 }
 .button {
@@ -351,6 +354,14 @@ body {
     border: 1px solid silver;
     color: #333;
     font-size: smaller;
+}
+.code-result .result-table th, 
+.code-result .result-table td:nth-child(1) {  
+    background-color: #e8e8e8;
+}
+.code-result .result-table td:nth-child(1) {
+    width: 16px;
+    text-align: right;
 }
 .code-result .sql_error {
     color: darkred;
@@ -406,6 +417,16 @@ body {
     transform: translate3d(0,0,0);
     backface-visibility: hidden;
     perspective: 1000px;
+}
+.help {
+    color: darkred;
+    background-color: white;
+    padding: 1px 5px;
+    font-size: x-small;
+    border-radius: 50%;
+    margin-bottom: 3px;
+    vertical-align: top;
+    cursor: pointer;
 }
 .loader {
     color: #50aaFF;
