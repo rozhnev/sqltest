@@ -7,7 +7,7 @@
             <meta name="viewport" content="width=device-width, initial-scale=1"/>
             <meta charset="utf-8">
             <meta name="description" content="Free online SQL test.">
-            <meta name="keywords" content="free sql test,online testing, sql, fiddle">
+            <meta name="keywords" content="free sql test, online testing, sql, тест на знание SQL">
             <meta Content-Security-Policy-Report-Only: script-src https://accounts.google.com/gsi/client; frame-src https://accounts.google.com/gsi/; connect-src https://accounts.google.com/gsi/; />
             <meta name="google-signin-client_id" content="340274762951-1d5m1pb8p9i2bhjbtuc4p8q9gveuk2ug.apps.googleusercontent.com">
             {include file='site-title.tpl'}
