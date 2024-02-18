@@ -215,9 +215,10 @@ body {
 
 .mobile-container .menu {
     grid-area: menu;
-    height: 30vh;
+    /* height: 30vh; */
     width: 100vw;
     padding: 0 3px;
+    margin-bottom: 10px;
 }
 
 .container .main {

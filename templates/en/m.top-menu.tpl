@@ -1,7 +1,7 @@
 <div class="header">
     <div class="top-menu">
         <a href="/en/" target="_self"><h1 class="site-name">SQLtest</h1></a><br>
-        <h3 class="site-promo">place where you can test your SQL knowledge for free</h3></a>
+        <h3 class="site-promo">practical tests for knowledge of SQL</h3></a>
         <a href="/en/donate/{$QuestionID}" target="_self" class="donate-btn shake" id="donate-btn">Donate</a>
         <div class="lang-swith"><a href="/ru/{$DB}/{$QuestionID}" target="_self">RU</a></div>
         {if $Logged}
