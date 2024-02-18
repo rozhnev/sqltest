@@ -54,8 +54,7 @@
             <div class="mobile-container">
                 <div class="header">
                     <div class="top-menu">
-                        <a href="/ru/" target="_self"><h1 class="site-name">SQLtest</h1><br>
-                        <h3 class="site-promo">здесь вы можете бесплатно проверить свои знания SQL</h3></a>
+                        <a href="/ru/" target="_self"><h1 class="site-name">SQLtest</h1></a>
                         <span class="lang-swith"><a href="/en/privacy-policy" target="_self">EN</a></span>
                     </div>
                 </div>
