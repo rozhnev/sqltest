@@ -73,7 +73,4 @@
             <!-- /Yandex.Metrika counter -->
 
         </head>
-        <body>
-            <div class="container">
-                <div class="toast" id="toast">php result copied to buffer</div>
-                {include file='login-popup.tpl'}
+
