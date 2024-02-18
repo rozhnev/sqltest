@@ -8,7 +8,8 @@ $dbh    = $dbc->getInstance();
 $user   = new User($dbh, $env);
 
 $host = parse_url($_SERVER['HTTP_HOST'])['host'];
-$modileView =  ($host === 'm.sqltest.local' || $host === 'm.sqltest.online');
+$modileView =  ($host === 'm.sqltest.local' || $_SERVER['SERVER_NAME'] === 'm.sqltest.online');
+
 
 $path = isset($_SERVER['PATH_INFO']) ? trim($_SERVER['PATH_INFO'], '/') : trim($_SERVER['PHP_SELF'], '/');
 $pathParts = explode('/', $path);

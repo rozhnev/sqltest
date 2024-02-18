@@ -3,7 +3,7 @@
 <div class="mobile-container">
     {include file='popups.tpl'}
     {include file='m.top-menu.tpl'}
-    {include file='../menu.tpl'}
+    {include file='../m.menu.tpl'}
     <div class="main">
         <div class="question-wrapper">
             <div class="question-title">
