@@ -59,7 +59,7 @@
                 </div>
             </div>
             <div class="container3">
-                <h2>Privacy Policy for SQLtest</h2>
+                <h2>Privacy Policy</h2>
 
                 <p>This Privacy Policy describes how SQLtest ("we", "us", or "our") collects, uses, and shares personal information
                     when you use our SQLtest service.</p>
