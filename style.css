@@ -354,9 +354,14 @@ body {
     color: gray !important;
 }
 
-.menu .menu-ad {
+.container .menu .menu-ad {
     height: 42vh;
     margin-top: 1vh;
+}
+.mobile-container .menu .menu-ad {
+    height: 120px;
+    margin: 10px auto;
+    display: block;
 }
 
 .question-wrapper {

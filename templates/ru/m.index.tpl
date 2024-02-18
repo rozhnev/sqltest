@@ -51,7 +51,11 @@
         </div>
         <div class="code-result ace-xcode" id="code-result"></div>
     </div>
-
+    <div class="menu-ad">
+        <div id="yandex_rtb_R-A-4716552-2">
+            <p>Пожалуйста не отключайте рекламу на сайте. Это единственный источник нашего финансирования позволяющий поддерживать работу проекта.</p>
+        </div>
+    </div>
     <div class="right">
         {include file="{$DB}.tpl"}
     </div>
