@@ -333,11 +333,15 @@ body {
 
 .menu .panel a {
     color: #0071DB;
-    font-size: small;
     display: block;
     margin: 7px 0;
 }
-
+.container .question-link {
+    font-size: small;
+}
+.mobile-container .question-link {
+    font-size: larger;
+}
 .container .menu .panel.active {
     max-height: 38vh !important;
 }
@@ -353,9 +357,6 @@ body {
 .question-link.solved {
     color: gray !important;
 }
-
-.mobile-container .question-link {
-    font-size: x-large;
 
 .container .menu .menu-ad {
     height: 42vh;
