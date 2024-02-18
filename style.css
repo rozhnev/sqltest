@@ -354,6 +354,9 @@ body {
     color: gray !important;
 }
 
+.mobile-container .question-link {
+    font-size: large;
+
 .container .menu .menu-ad {
     height: 42vh;
     margin-top: 1vh;

@@ -52,11 +52,11 @@
         </div>
         <div class="code-result ace-xcode" id="code-result"></div>
     </div>
-    <div class="menu-ad">
-    <div id="yandex_rtb_R-A-4716552-2">
-        <p>Please do not disable advertising on the site. This is our only source of funding to support the project.</p>
-    </div>
-</div>
+    {* <div class="menu-ad">
+        <div id="yandex_rtb_R-A-4716552-2">
+            <p>Please do not disable advertising on the site. This is our only source of funding to support the project.</p>
+        </div>
+    </div> *}
     <div class="right">
         {include file="{$DB}.tpl"}
     </div>
