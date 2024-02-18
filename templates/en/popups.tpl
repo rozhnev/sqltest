@@ -1,3 +1,4 @@
+<div class="toast" id="toast">SQL code copied to buffer</div>
 <div class="login-popup" id="login-popup">
     <div class="login-popup-header">
         <span class="login-popup-title">Choose login method</span>

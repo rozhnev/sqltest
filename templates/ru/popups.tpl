@@ -1,3 +1,4 @@
+<div class="toast" id="toast">SQL код скопирован в буфер обмена</div>
 <div class="login-popup" id="login-popup">
     <div class="login-popup-header">
         <span class="login-popup-title">Выберите способ авторизации</span>
