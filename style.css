@@ -94,6 +94,9 @@ body {
     opacity: 100 !important;
     transition: opacity 0.3s ease-out;
 }
+.login-popup.visible {
+    top: 36% !important;
+}
 .login-button {
     position: absolute;
     cursor: pointer;
@@ -118,18 +121,19 @@ body {
     position: fixed;
     z-index: 1;
     border: 1px solid gray;
+    top: -1000px;
+    min-width: 275px;
 }
 
 .container .login-popup {
     width: 20%;
     left: 40%;
-    top: 36%;
+
 }
 
 .mobile-container .login-popup {
     width: 80%;
     left: 10%;
-    top: 36%;
 }
 .login-popup-header {
     text-align: right;
@@ -216,7 +220,7 @@ body {
 .mobile-container .menu {
     grid-area: menu;
     /* height: 30vh; */
-    width: 100vw;
+    width: 99vw;
     padding: 0 3px;
     margin: 10px 0;
 }
@@ -237,7 +241,7 @@ body {
 .mobile-container .main {
     grid-area: main;
     color: white;
-    width: 100vw;
+    width: 99vw;
     padding: 0 3px;
 }
 
@@ -305,7 +309,10 @@ body {
     font-weight: bold;
     border-bottom: 1px solid #0b4fcc;
 }
-
+.mobile-container .menu .accordion {
+    font-size: medium;
+    padding-top: 16px;
+}
 .accordion:hover {
     background-color: #2196F3;
     border-bottom: 1px solid #0b4fcc;
