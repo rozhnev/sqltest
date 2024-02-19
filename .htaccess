@@ -1,8 +1,10 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
     RewriteCond %{HTTP_USER_AGENT} "android|blackberry|googlebot-mobile|iemobile|ipad|iphone|ipod|opera mobile|palmos|webos" [NC]
+    RewriteCond %{HTTP_HOST}   !^m.sqltest.online
     RewriteRule ^$ https://m.sqltest.online/ [L,R=302]
 
     RewriteCond %{HTTP_USER_AGENT} "!(android|blackberry|googlebot-mobile|iemobile|ipad|iphone|ipod|opera mobile|palmos|webos)" [NC]
+    RewriteCond %{HTTP_HOST}   !^sqltest.online
     RewriteRule ^$ https://sqltest.online/ [L,R=302]
 </IfModule>
