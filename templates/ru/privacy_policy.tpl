@@ -51,7 +51,7 @@
 
         </head>
         <body>
-            <div class="container2">
+            <div class="mobile-container">
                 <div class="header">
                     <div class="top-menu">
                         <a href="/ru/" target="_self"><h1 class="site-name">SQLtest</h1><h3 class="site-promo"> - место, где вы можете бесплатно проверить свои знания SQL</h3></a>

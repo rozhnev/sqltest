@@ -22,9 +22,10 @@ $questionID = '';
 if (isset($pathParts[0]) && $pathParts[0] === 'login') {
     $action     = 'login';
     $loginProvider = $pathParts[1];
-} elseif (isset($pathParts[1]) && $pathParts[1] === 'privacy-policy') {
-    $lang       = isset($pathParts[0]) && $pathParts[0] === 'ru' ? 'ru' : 'en';
-    $action     = 'privacy-policy';
+// privacy-policy, logout actions
+} elseif (preg_match('@(?<lang>ru|en)/(?<action>privacy-policy|logout)/?@i', $path, $params)) {
+    $lang       = $params['lang'];
+    $action     = $params['action'];
 } elseif (preg_match('@(?<lang>ru|en)/question/(?<questionCategoryID>\d+)/(?<questionID>\d+)@i', $path, $params)) {
     //$path = "https://sqltest.online/ru/question/1/2";
     //print_r($params);
