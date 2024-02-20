@@ -55,6 +55,7 @@ class Question
                 category_id,
                 number, 
                 task_{$lang} task,
+                dbms,
                 db_template,
                 last_attempt_at::date last_attempt_date, 
                 solved_at::date solved_date, last_query

@@ -32,10 +32,9 @@
                 {$Question.task}
             </div>
             <p class="question-action">
-            Write your request in the field below and click the "Check it!" button. (If there is an error, you will have to review the ad unit)
-            </p>
+            Write your request in the field below and click the "Check it!" button.{* (If there is an error, you will have to review the ad unit) *}
             <p class="question-action">
-                To write the answer, use MySQL syntax. Descriptions of the tables are given in the right panel.
+                To write the answer, use {$Question.dbms} syntax. Descriptions of the tables are given in the right panel.
             </p>
         </div>
         <div class="code-actions">
