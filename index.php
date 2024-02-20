@@ -7,8 +7,11 @@ $dbc    = new DB($env);
 $dbh    = $dbc->getInstance();
 $user   = new User($dbh, $env);
 
-$host = parse_url($_SERVER['HTTP_HOST'])['host'];
-$modileView =  ($host === 'm.sqltest.local' || $_SERVER['SERVER_NAME'] === 'm.sqltest.online');
+$mobileView =  (
+    (isset($_SERVER['SERVER_NAME']) && $_SERVER['SERVER_NAME'] === 'm.sqltest.online') 
+    // for local use
+    //|| parse_url($_SERVER['HTTP_HOST'])['host'] === 'm.sqltest.local' 
+);
 
 
 $path = isset($_SERVER['PATH_INFO']) ? trim($_SERVER['PATH_INFO'], '/') : trim($_SERVER['PHP_SELF'], '/');
@@ -54,7 +57,7 @@ switch ($action) {
         $smarty->assign('Lang', $lang);
         $smarty->assign('DB', 'sakila');
         $smarty->assign('QuestionID', '1');
-        $template = $modileView ? "m.privacy_policy.tpl" : "privacy_policy.tpl";
+        $template = $mobileView ? "m.privacy_policy.tpl" : "privacy_policy.tpl";
         break;
     case 'query-help':
         $question = new Question($dbh, $questionID);
@@ -126,7 +129,7 @@ switch ($action) {
         $smarty->assign('Question', $questionData);
         $smarty->assign('NextQuestionId', $question->getNextId());
         $smarty->assign('PreviousQuestionId', $question->getPreviousId());
-        $template = $modileView ? "m.index.tpl" : "index.tpl";
+        $template = $mobileView ? "m.index.tpl" : "index.tpl";
         $db = $questionData['db_template'];
         break;
     default:
@@ -144,7 +147,7 @@ switch ($action) {
         $smarty->assign('Question', $questionData);
         $smarty->assign('NextQuestionId', $question->getNextId());
         $smarty->assign('PreviousQuestionId', $question->getPreviousId());
-        $template = $modileView ? "m.index.tpl" : "index.tpl";
+        $template = $mobileView ? "m.index.tpl" : "index.tpl";
 }
 
 if ($lang == 'ru') {
