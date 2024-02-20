@@ -109,7 +109,7 @@ switch ($action) {
 
         // Finally, destroy the session.
         session_destroy();
-        header("location:/");
+        header("location:/$lang/");
         die();
     case 'welcome':
         $questionnire = new Questionnire($dbh, $lang);
