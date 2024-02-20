@@ -41,16 +41,16 @@ class Questionnire
     {
         $stmt = $this->dbh->prepare("
             SELECT 
-                question_categories.id, 
-                question_categories.title_{$this->lang} question_category,
+                categories.id,
+                categories.title_{$this->lang} questions_category,
                 questions.id question_id,
                 questions.db_template,
                 questions.title_{$this->lang} question_title,
                 (solved_at IS NOT NULL) solved
-            FROM question_categories 
-            LEFT JOIN questions ON question_categories.id = questions.category_id
+            FROM categories
+            LEFT JOIN questions ON categories.id = questions.category_id
             LEFT JOIN user_questions ON user_questions.question_id = questions.id and user_questions.user_id = ?
-            ORDER BY question_categories.sequence_position, questions.number
+            ORDER BY categories.sequence_position, questions.number
         ");
         $stmt->execute([$userId]);
         $questionnire = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -59,7 +59,7 @@ class Questionnire
                 $questionnire,
                 function($acc, $el) {
                     if (!isset($acc[$el['id']])) $acc[$el['id']] = [
-                        'title'     => $el['question_category'],
+                        'title'     => $el['questions_category'],
                         'db'        => $el['db_template'],
                         'questions' => []
                     ];
