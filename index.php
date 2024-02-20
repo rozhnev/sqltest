@@ -22,6 +22,13 @@ if (isset($pathParts[0]) && $pathParts[0] === 'login') {
 } elseif (isset($pathParts[1]) && $pathParts[1] === 'privacy-policy') {
     $lang       = isset($pathParts[0]) && $pathParts[0] === 'ru' ? 'ru' : 'en';
     $action     = 'privacy-policy';
+} elseif (preg_match('@(?<lang>ru|en)/question/(?<questionCategoryID>\d+)/(?<questionID>\d+)@i', $path, $params)) {
+    //$path = "https://sqltest.online/ru/question/1/2";
+    //print_r($params);
+    $lang       = $params['lang'];
+    $action     = 'question';
+    $questionCategoryID = $params['questionCategoryID'];
+    $questionID = $params['questionID'];
 } else {
     $lang       = isset($pathParts[0]) && $pathParts[0] === 'ru' ? 'ru' : 'en';
     $db         = $pathParts[1] ?? 'about';
@@ -105,7 +112,7 @@ switch ($action) {
         $smarty->assign('Questionnire', $questionnire->get());
         $template = "welcome.tpl";
         break;
-    default:
+    case 'question':
         if ($user->logged()) {
             $user->setPath($path);
             $user->save();
@@ -114,7 +121,27 @@ switch ($action) {
         $questionnire = new Questionnire($dbh, $lang);
         $question = new Question($dbh, $questionID);
         $smarty->assign('Questionnire', $questionnire->get($user->getId()));
-        $smarty->assign('Question', $question->get($lang, $user->getId()));
+        $questionData = $question->get($lang, $user->getId());
+        $smarty->assign('QuestionCategoryID', $questionCategoryID);
+        $smarty->assign('Question', $questionData);
+        $smarty->assign('NextQuestionId', $question->getNextId());
+        $smarty->assign('PreviousQuestionId', $question->getPreviousId());
+        $template = $modileView ? "m.index.tpl" : "index.tpl";
+        $db = $questionData['db_template'];
+        break;
+    default:
+        // stored for back compatibility
+        if ($user->logged()) {
+            $user->setPath($path);
+            $user->save();
+        }
+
+        $questionnire = new Questionnire($dbh, $lang);
+        $question = new Question($dbh, $questionID);
+        $smarty->assign('Questionnire', $questionnire->get($user->getId()));
+        $questionData = $question->get($lang, $user->getId());
+        $smarty->assign('QuestionCategoryID', $questionData['category_id']);
+        $smarty->assign('Question', $questionData);
         $smarty->assign('NextQuestionId', $question->getNextId());
         $smarty->assign('PreviousQuestionId', $question->getPreviousId());
         $template = $modileView ? "m.index.tpl" : "index.tpl";

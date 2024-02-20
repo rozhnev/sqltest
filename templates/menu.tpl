@@ -15,11 +15,11 @@
             </svg>
         </span>
     </button>
-    <div class="panel {if $categoryId eq $Question.category_id}active{/if}">
+    <div class="panel {if $categoryId eq $QuestionCategoryID}active{/if}">
         <ol>
         {foreach $panel.questions as $question}
         <li>
-            <a class="question-link {if $QuestionID == $question[1]} current-question{/if}{if $question[2]} solved{/if}" href="/{$Lang}/{$panel.db}/{$question[1]}">
+            <a class="question-link {if $QuestionID == $question[1]} current-question{/if}{if $question[2]} solved{/if}" href="/{$Lang}/question/{$categoryId}/{$question[1]}">
                 {$question[0]}
             </a>
         </li>
