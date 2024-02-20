@@ -48,9 +48,10 @@ class Questionnire
                 questions.title_{$this->lang} question_title,
                 (solved_at IS NOT NULL) solved
             FROM categories
-            LEFT JOIN questions ON categories.id = questions.category_id
+            JOIN question_categories ON question_categories.category_id = categories.id
+            JOIN questions ON question_categories.question_id = questions.id
             LEFT JOIN user_questions ON user_questions.question_id = questions.id and user_questions.user_id = ?
-            ORDER BY categories.sequence_position, questions.number
+            ORDER BY categories.sequence_position, question_categories.sequence_position
         ");
         $stmt->execute([$userId]);
         $questionnire = $stmt->fetchAll(PDO::FETCH_ASSOC);
