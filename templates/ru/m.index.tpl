@@ -20,10 +20,10 @@
                 </span>
                 <span class="question-navigate">
                     {if $PreviousQuestionId}
-                        <a href="/{$Lang}/{$Question.db_template}/{$PreviousQuestionId}" title="Предыдущее задание"><i class="arrow arrow-left"></i></a>
+                        <a href="/{$Lang}/question/{$QuestionCategoryID}/{$PreviousQuestionId}" title="Предыдущее задание"><i class="arrow arrow-left"></i></a>
                     {/if}
                     {if $NextQuestionId}
-                        <a href="/{$Lang}/{$Question.db_template}/{$NextQuestionId}" title="Следующее задание"><i class="arrow arrow-right"></i></a>
+                        <a href="/{$Lang}/question/{$QuestionCategoryID}/{$NextQuestionId}" title="Следующее задание"><i class="arrow arrow-right"></i></a>
                     {/if}
                 </span>
             </div>
@@ -47,7 +47,7 @@
             <button class="button" id="runQueryBtn" onClick="runQuery('{$Lang}', '{$DB}', {$QuestionID})" title="CTRL+Enter">Выполнить запрос</button>
             <button class="button test" id="testQueryBtn" onClick="testQuery('{$Lang}', '{$DB}', {$QuestionID})">Проверить!</button>
             {if $NextQuestionId}
-                <a href="/{$Lang}/{$DB}/{$NextQuestionId}" title="Следующее задание" class="button test hidden">Далее</a>
+                <a href="/{$Lang}/question/{$QuestionCategoryID}/{$NextQuestionId}" title="Следующее задание" class="button test hidden">Далее</a>
             {/if}
         </div>
         <div class="code-result ace-xcode" id="code-result"></div>
