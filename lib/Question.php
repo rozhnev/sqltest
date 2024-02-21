@@ -89,39 +89,45 @@ class Question
         return (string)$stmt->fetchColumn();
     }
     /**
-     * Returns previous questio Id
+     * Returns id of previous question in category
      *
+     * @param int $questionCategoryID
      * @return integer
      */
-    public function getPreviousId (): int 
+    public function getPreviousId (int $questionCategoryID): int 
     {
         $stmt = $this->dbh->prepare("
-            SELECT nq.id
-            FROM questions nq
-            JOIN questions cq ON nq.category_id = cq.category_id and nq.number < cq.number
-            WHERE cq.id = ?
-            ORDER BY nq.number DESC
-            LIMIT 1
+            select 
+                sequence_position
+            from question_categories 
+            where category_id = :category_id and sequence_position < (
+                select sequence_position from question_categories where category_id = :category_id and question_id = :question_id
+            )
+            order by sequence_position desc 
+            limit 1;
         ");
-        $stmt->execute([$this->id]);
+        $stmt->execute(['category_id' => $questionCategoryID, ':question_id' => $this->id]);
         return (int)$stmt->fetchColumn();
     }
     /**
-     * Returns next question Id
+     * Returns id of next question in category
      *
+     * @param int $questionCategoryID
      * @return integer
      */
-    public function getNextId (): int 
+    public function getNextId (int $questionCategoryID): int 
     {
         $stmt = $this->dbh->prepare("
-            SELECT nq.id
-            FROM questions nq
-            JOIN questions cq ON nq.category_id = cq.category_id and nq.number > cq.number
-            WHERE cq.id = ?
-            ORDER BY nq.number ASC
-            LIMIT 1
+            select 
+                sequence_position
+            from question_categories 
+            where category_id = :category_id and sequence_position > (
+                select sequence_position from question_categories where category_id = :category_id and question_id = :question_id
+            )
+            order by sequence_position asc 
+            limit 1;
         ");
-        $stmt->execute([$this->id]);
+        $stmt->execute(['category_id' => $questionCategoryID, ':question_id' => $this->id]);
         return (int)$stmt->fetchColumn();
     }
 
