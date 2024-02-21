@@ -5,7 +5,7 @@
     {include file='m.top-menu.tpl'}
     {include file='../m.menu.tpl'}
     <div class="main">
-        <div class="question-wrapper">
+        <div class="question-wrapper" id="question-wrapper">
             <div class="question-title">
                 Задание {$Question.number}:
                 {if $LoggedAsAdmin}
