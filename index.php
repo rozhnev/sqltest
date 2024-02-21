@@ -126,7 +126,7 @@ switch ($action) {
         $questionnire = new Questionnire($dbh, $lang);
         $question = new Question($dbh, $questionID);
         $smarty->assign('Questionnire', $questionnire->get($user->getId()));
-        $questionData = $question->get($lang, $user->getId());
+        $questionData = $question->get($questionCategoryID, $lang, $user->getId());
         $smarty->assign('QuestionCategoryID', $questionCategoryID);
         $smarty->assign('Question', $questionData);
         $smarty->assign('NextQuestionId', $question->getNextId($questionCategoryID));
@@ -144,7 +144,7 @@ switch ($action) {
         $questionnire = new Questionnire($dbh, $lang);
         $question = new Question($dbh, $questionID);
         $smarty->assign('Questionnire', $questionnire->get($user->getId()));
-        $questionData = $question->get($lang, $user->getId());
+        $questionData = $question->get($questionCategoryID, $lang, $user->getId());
         $smarty->assign('QuestionCategoryID', $questionData['category_id']);
         $smarty->assign('Question', $questionData);
         $smarty->assign('NextQuestionId', $question->getNextId($questionCategoryID));

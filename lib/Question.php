@@ -45,24 +45,26 @@ class Question
     /**
      * Returns question task for provided language
      *
+     * @param int $questionCategoryID
      * @param string $lang
      * @return array
      */
-    public function get(string $lang, ?string $userId): array 
+    public function get(int $questionCategoryID, string $lang, ?string $userId): array 
     {
         $stmt = $this->dbh->prepare("
             SELECT 
-                category_id,
-                number, 
+                question_categories.category_id,
+                question_categories.sequence_position number, 
                 task_{$lang} task,
                 dbms,
                 db_template,
                 last_attempt_at::date last_attempt_date, 
                 solved_at::date solved_date, last_query
             FROM questions 
-            LEFT JOIN user_questions ON user_questions.question_id = questions.id and user_questions.user_id = ?
-            WHERE id = ?");
-        $stmt->execute([$userId, $this->id]);
+            JOIN question_categories ON question_categories.question_id = questions.id and question_categories.category_id = :category_id
+            LEFT JOIN user_questions ON user_questions.question_id = questions.id and user_questions.user_id = :user_id
+            WHERE id = :id");
+        $stmt->execute([':category_id' => $questionCategoryID, ':user_id' => $userId, ':id' => $this->id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
     /**
@@ -98,7 +100,7 @@ class Question
     {
         $stmt = $this->dbh->prepare("
             select 
-                sequence_position
+                question_id
             from question_categories 
             where category_id = :category_id and sequence_position < (
                 select sequence_position from question_categories where category_id = :category_id and question_id = :question_id
@@ -119,7 +121,7 @@ class Question
     {
         $stmt = $this->dbh->prepare("
             select 
-                sequence_position
+                question_id
             from question_categories 
             where category_id = :category_id and sequence_position > (
                 select sequence_position from question_categories where category_id = :category_id and question_id = :question_id
