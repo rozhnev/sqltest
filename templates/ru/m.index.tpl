@@ -60,4 +60,4 @@
     <div class="right">
         {include file="{$DB}.tpl"}
     </div>
-    {include file='../m.footer.tpl'}
+    {include file='footer.tpl'}
