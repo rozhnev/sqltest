@@ -38,6 +38,7 @@ if (isset($pathParts[0]) && $pathParts[0] === 'login') {
     $db         = $pathParts[1] ?? 'about';
     $questionID = $pathParts[2] ?? '1';
     $action     = $pathParts[3] ?? '';
+    $questionCategoryID = 1;
 }
 
 session_start();
@@ -125,11 +126,11 @@ switch ($action) {
         $questionnire = new Questionnire($dbh, $lang);
         $question = new Question($dbh, $questionID);
         $smarty->assign('Questionnire', $questionnire->get($user->getId()));
-        $questionData = $question->get($lang, $user->getId());
+        $questionData = $question->get($questionCategoryID, $lang, $user->getId());
         $smarty->assign('QuestionCategoryID', $questionCategoryID);
         $smarty->assign('Question', $questionData);
-        $smarty->assign('NextQuestionId', $question->getNextId());
-        $smarty->assign('PreviousQuestionId', $question->getPreviousId());
+        $smarty->assign('NextQuestionId', $question->getNextId($questionCategoryID));
+        $smarty->assign('PreviousQuestionId', $question->getPreviousId($questionCategoryID));
         $template = $mobileView ? "m.index.tpl" : "index.tpl";
         $db = $questionData['db_template'];
         break;
@@ -143,11 +144,11 @@ switch ($action) {
         $questionnire = new Questionnire($dbh, $lang);
         $question = new Question($dbh, $questionID);
         $smarty->assign('Questionnire', $questionnire->get($user->getId()));
-        $questionData = $question->get($lang, $user->getId());
+        $questionData = $question->get($questionCategoryID, $lang, $user->getId());
         $smarty->assign('QuestionCategoryID', $questionData['category_id']);
         $smarty->assign('Question', $questionData);
-        $smarty->assign('NextQuestionId', $question->getNextId());
-        $smarty->assign('PreviousQuestionId', $question->getPreviousId());
+        $smarty->assign('NextQuestionId', $question->getNextId($questionCategoryID));
+        $smarty->assign('PreviousQuestionId', $question->getPreviousId($questionCategoryID));
         $template = $mobileView ? "m.index.tpl" : "index.tpl";
 }
 

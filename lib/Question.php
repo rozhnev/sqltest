@@ -45,24 +45,26 @@ class Question
     /**
      * Returns question task for provided language
      *
+     * @param int $questionCategoryID
      * @param string $lang
      * @return array
      */
-    public function get(string $lang, ?string $userId): array 
+    public function get(int $questionCategoryID, string $lang, ?string $userId): array 
     {
         $stmt = $this->dbh->prepare("
             SELECT 
-                category_id,
-                number, 
+                question_categories.category_id,
+                question_categories.sequence_position number, 
                 task_{$lang} task,
                 dbms,
                 db_template,
                 last_attempt_at::date last_attempt_date, 
                 solved_at::date solved_date, last_query
             FROM questions 
-            LEFT JOIN user_questions ON user_questions.question_id = questions.id and user_questions.user_id = ?
-            WHERE id = ?");
-        $stmt->execute([$userId, $this->id]);
+            JOIN question_categories ON question_categories.question_id = questions.id and question_categories.category_id = :category_id
+            LEFT JOIN user_questions ON user_questions.question_id = questions.id and user_questions.user_id = :user_id
+            WHERE id = :id");
+        $stmt->execute([':category_id' => $questionCategoryID, ':user_id' => $userId, ':id' => $this->id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
     /**
@@ -89,39 +91,45 @@ class Question
         return (string)$stmt->fetchColumn();
     }
     /**
-     * Returns previous questio Id
+     * Returns id of previous question in category
      *
+     * @param int $questionCategoryID
      * @return integer
      */
-    public function getPreviousId (): int 
+    public function getPreviousId (int $questionCategoryID): int 
     {
         $stmt = $this->dbh->prepare("
-            SELECT nq.id
-            FROM questions nq
-            JOIN questions cq ON nq.category_id = cq.category_id and nq.number < cq.number
-            WHERE cq.id = ?
-            ORDER BY nq.number DESC
-            LIMIT 1
+            select 
+                question_id
+            from question_categories 
+            where category_id = :category_id and sequence_position < (
+                select sequence_position from question_categories where category_id = :category_id and question_id = :question_id
+            )
+            order by sequence_position desc 
+            limit 1;
         ");
-        $stmt->execute([$this->id]);
+        $stmt->execute(['category_id' => $questionCategoryID, ':question_id' => $this->id]);
         return (int)$stmt->fetchColumn();
     }
     /**
-     * Returns next question Id
+     * Returns id of next question in category
      *
+     * @param int $questionCategoryID
      * @return integer
      */
-    public function getNextId (): int 
+    public function getNextId (int $questionCategoryID): int 
     {
         $stmt = $this->dbh->prepare("
-            SELECT nq.id
-            FROM questions nq
-            JOIN questions cq ON nq.category_id = cq.category_id and nq.number > cq.number
-            WHERE cq.id = ?
-            ORDER BY nq.number ASC
-            LIMIT 1
+            select 
+                question_id
+            from question_categories 
+            where category_id = :category_id and sequence_position > (
+                select sequence_position from question_categories where category_id = :category_id and question_id = :question_id
+            )
+            order by sequence_position asc 
+            limit 1;
         ");
-        $stmt->execute([$this->id]);
+        $stmt->execute(['category_id' => $questionCategoryID, ':question_id' => $this->id]);
         return (int)$stmt->fetchColumn();
     }
 
@@ -196,7 +204,7 @@ class Question
                 }
             );
             if (count($diff) > 0) {
-                $hints['columnsList'] = "`" . implode('`, `',array_column($queryValidResult->headers, 'header')) . "`";
+                $hints['columnsList'] = '<span class="ace_keyword">' . implode('</span>, <span class="ace_keyword">',array_column($queryValidResult->headers, 'header')) . "</span>";
                 return [
                     'ok' => false,
                     'hints' => $hints
