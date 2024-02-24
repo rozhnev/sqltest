@@ -1,1 +1,1 @@
-<title>SQLtest — тесты на знание SQL онлайн</title>
+<title>SQLtest - задачи по SQL</title>

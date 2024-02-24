@@ -290,6 +290,11 @@ body {
 .mobile-container .site-promo {
     font-size: small;
 }
+.site-description {
+    max-width: 60vw; 
+    display: inline-block; 
+    padding: 0 12px;
+}
 .footer a,
 .footer a:visited {
     color: white;
