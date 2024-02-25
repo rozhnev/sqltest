@@ -11,7 +11,7 @@ Below is a list of these tables:
       <li> `actor_id` - Unique identifier for each actor.</li>
       <li> `first_name` - First name of the actor.</li>
       <li> `last_name` - Last name of the actor.</li>
-      <li> `last_update` - Last modified timestamp of the record.</li> 
+      <li> `last_update` - When the row was created or most recently updated.</li> 
   </ul>
   <div class="table-wrapper">
     <table>
@@ -32,18 +32,18 @@ Below is a list of these tables:
   <p>Table `film`</p>
   <ul class="table-columns">
     <li> `film_id` - Unique identifier for each film.</li>
-    <li> `title` - Title of the film.</li>
-    <li> `description` - Description of the film.</li>
-    <li> `release_year` - Year the film was released.</li>
-    <li> `language_id` - Foreign key referencing the language table.</li>
-    <li> `original_language_id` - Foreign key referencing the language table.</li>
-    <li> `rental_duration` - Rental duration in days.</li>
-    <li> `rental_rate` - Rental rate.</li>
-    <li> `length` - Duration of the film in minutes.</li>
-    <li> `replacement_cost` - Replacement cost.</li>
-    <li> `rating` - Film rating.</li>
-    <li> `special_features` - Special features of the film.</li>
-    <li> `last_update` - Last modified timestamp of the record.</li>
+    <li> `title` - The title of the film.</li>
+    <li> `description` - A short description or plot summary of the film.</li>
+    <li> `release_year` - The year in which the movie was released.</li>
+    <li> `language_id` - Foreign key referencing the language table; identifies the language of the film.</li>
+    <li> `original_language_id` - A foreign key pointing at the language table; identifies the original language of the film. Used when a film has been dubbed into a new language.</li>
+    <li> `rental_duration` - The length of the rental period, in days.</li>
+    <li> `rental_rate` - The cost to rent the film for the period specified in the rental_duration column.</li>
+    <li> `length` - Duration of the film, in minutes.</li>
+    <li> `replacement_cost` - The amount charged to the customer if the film is not returned or is returned in a damaged state.</li>
+    <li> `rating` - The rating assigned to the film. Can be one of: G, PG, PG-13, R, or NC-17.</li>
+    <li> `special_features` - Lists which common special features are included on the DVD. Can be zero or more of: Trailers, Commentaries, Deleted Scenes, Behind the Scenes.</li>
+    <li> `last_update` - When the row was created or most recently updated.</li>
   </ul>
   <div class="table-wrapper">
     <table>
@@ -105,7 +105,7 @@ Below is a list of these tables:
   <ul class="table-columns">
     <li> `actor_id` - Unique identifier for actor.</li>
     <li> `film_id` - Unique identifier for film.</li>
-    <li> `last_update` - Last modified timestamp of the record.</li>
+    <li> `last_update` - When the row was created or most recently updated.</li>
   </ul>
   <div class="table-wrapper">
     <table>
@@ -132,7 +132,7 @@ Below is a list of these tables:
     <li> `address_id` - Foreign key referencing the address table.</li>
     <li> `active` - Indicates whether the customer is active.</li>
     <li> `create_date` - Timestamp indicating when the customer was added to the database.</li>
-    <li> `last_update` - Last modified timestamp of the record.</li>
+    <li> `last_update` - When the row was created or most recently updated.</li>
   </ul>
   <div class="table-wrapper">
     <table>
@@ -169,7 +169,7 @@ Below is a list of these tables:
     <li> `city_id` - Foreign key referencing the city table.</li>
     <li> `postal_code` - Postal code.</li>
     <li> `phone` - Phone number.</li>
-    <li> `last_update` - Last modified timestamp of the record.</li>
+    <li> `last_update` - When the row was created or most recently updated.</li>
   </ul>
   <div class="table-wrapper">
     <table>
@@ -202,7 +202,7 @@ Below is a list of these tables:
   <li> `city_id` - Unique identifier for each city.</li>
   <li> `city` - City name.</li>
   <li> `country_id` - Foreign key referencing the country table.</li>
-  <li> `last_update` - Last modified timestamp of the record.</li>
+  <li> `last_update` - When the row was created or most recently updated.</li>
 </ul>
 <div class="table-wrapper">
   <table>
@@ -227,7 +227,7 @@ Below is a list of these tables:
 <ul class="table-columns">
   <li> `country_id` - Unique identifier for each country.</li>
   <li> `country` - Country name.</li>
-  <li> `last_update` - Last modified timestamp of the record.</li>
+  <li> `last_update` - When the row was created or most recently updated.</li>
 </ul>
 <div class="table-wrapper">
   <table>
@@ -249,7 +249,7 @@ Below is a list of these tables:
 <ul class="table-columns">
   <li> `category_id` - Unique identifier for each category.</li>
   <li> `name` - Name of the category.</li>
-  <li> `last_update` - Last modified timestamp of the record.</li>
+  <li> `last_update` - When the row was created or most recently updated.</li>
 </ul>
 <div class="table-wrapper">
   <table>
@@ -270,7 +270,7 @@ Below is a list of these tables:
   <ul class="table-columns">
     <li> `film_id` - Unique identifier for each film.</li>
     <li> `category_id` - Unique identifier for each category.</li>
-    <li> `last_update` - Last modified timestamp of the record.</li>
+    <li> `last_update` - When the row was created or most recently updated.</li>
   </ul>
   <div class="table-wrapper">
     <table>
@@ -291,7 +291,7 @@ Below is a list of these tables:
   <ul class="table-columns">
       <li> `language_id` - Unique identifier for each language.</li>
       <li> `name` - Language name.</li>
-      <li> `last_update` - Last modified timestamp of the record.</li> 
+      <li> `last_update` - When the row was created or most recently updated.</li> 
   </ul>
   <div class="table-wrapper">
     <table>
@@ -320,7 +320,7 @@ Below is a list of these tables:
   <li> `active` - Indicates whether the staff member is active.</li>
   <li> `username` - Username for login.</li>
   <li> `password` - Password for login.</li>
-  <li> `last_update` - Last modified timestamp of the record.</li>
+  <li> `last_update` - When the row was created or most recently updated.</li>
 </ul>
 <div class="table-wrapper">
   <table>
@@ -397,7 +397,7 @@ Below is a list of these tables:
   <li> `store_id` - Unique identifier for each store.</li>
   <li> `manager_staff_id` - Foreign key referencing the staff table for the store manager.</li>
   <li> `address_id` - Foreign key referencing the address table.</li>
-  <li> `last_update` - Last modified timestamp of the record.</li>
+  <li> `last_update` - When the row was created or most recently updated.</li>
 </ul>
 <div class="table-wrapper">
   <table>
@@ -425,7 +425,7 @@ Below is a list of these tables:
   <li> `rental_id` - Foreign key referencing the rental table.</li>
   <li> `amount` - Payment amount.</li>
   <li> `payment_date` - Date of the payment.</li>
-  <li> `last_update` - Last modified timestamp of the record.</li>
+  <li> `last_update` - When the row was created or most recently updated.</li>
 </ul>
 <div class="table-wrapper">
   <table>
@@ -455,7 +455,7 @@ Below is a list of these tables:
     <li>`inventory_id` - Unique identifier for each inventory item.</li>
     <li>`film_id` - Unique identifier for each film in the inventory.</li>
     <li>`store_id` - Unique identifier for the store where the inventory item is located.</li>
-    <li>`last_update` - Last modified timestamp of the record.</li>
+    <li>`last_update` - When the row was created or most recently updated.</li>
 </ul>
 <div class="table-wrapper">
     <table>
@@ -483,7 +483,7 @@ Below is a list of these tables:
   <li> `customer_id` - Foreign key referencing the customer table.</li>
   <li> `return_date` - Date when the rental was returned.</li>
   <li> `staff_id` - Foreign key referencing the staff table.</li>
-  <li> `last_update` - Last modified timestamp of the record.</li>
+  <li> `last_update` - When the row was created or most recently updated.</li>
 </ul>
 <div class="table-wrapper">
   <table>
