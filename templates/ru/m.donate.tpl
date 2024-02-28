@@ -1,12 +1,12 @@
 {include file='../short-header.tpl'}
     <body>
-    <div class="full-container">
-        <div class="header">
-            <div class="top-menu">
-                {include file='site-name.tpl'}
-                <span class="lang-swith"><a href="/en/donate" target="_self">EN</a></span>
+        <div class="mobile-container">
+            <div class="header">
+                <div class="top-menu">
+                    <a href="/ru/" target="_self"><h1 class="site-name">SQLtest</h1></a>
+                    <span class="lang-swith"><a href="/en/donate" target="_self">EN</a></span>
+                </div>
             </div>
-        </div>
             <div class="container3">
                 <p>
                     Благодарим вас за то, что нашли способ поддержать SQLtest.online. Ваш вклад вносит существенный вклад в продолжение деятельности и развитие проекта.
@@ -35,4 +35,4 @@
                 </div>
                 <p>Спасибо за то, что вы являетесь ценной частью сообщества SQLtest.online!</p>
             </div>
-            {include file='../m.footer.tpl'}
+        {include file='../m.footer.tpl'}
