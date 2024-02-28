@@ -35,4 +35,4 @@
                 </div>
                 <p>Спасибо за то, что вы являетесь ценной частью сообщества SQLtest.online!</p>
             </div>
-        {include file='footer.tpl'}
+            {include file='../m.footer.tpl'}

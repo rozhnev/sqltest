@@ -75,7 +75,7 @@ switch ($action) {
         $smarty->assign('Lang', $lang);
         $smarty->assign('DB', 'sakila');
         $smarty->assign('QuestionID', '1');
-        $template = "donate.tpl";
+        $template = $mobileView ? "m.donate.tpl" : "donate.tpl";
         break;
     case 'query-help':
         $question = new Question($dbh, $questionID);

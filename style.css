@@ -64,14 +64,14 @@ body {
 .full-container {
     background-color: rgb(51, 102, 153);
     padding: 5px;
-    height: 98.9vh;
+    min-height: 98.9vh;
 }
 .full-container>div {
     padding: 5px 0;
 }
 .full-container .container3 {
     padding: 0 20px !important;
-    height: 85vh;
+    min-height: 85vh;
 }
 .mobile-container .container3 {
     padding: 0 10px !important;
