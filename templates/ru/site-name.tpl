@@ -1,0 +1,2 @@
+        <a href="/ru/" target="_self"><h1 class="site-name">SQLtest</h1><h3 class="site-promo"> - задачи по SQL</h3></a>
+        <span  class="site-description">Тест на знание SQL, практика написания запросов, подготовка к собеседованиям, практические задания по SQL для начинающих и продвинутых</span>
