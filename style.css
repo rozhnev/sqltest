@@ -358,7 +358,7 @@ body {
     font-size: larger;
 }
 .container .menu .panel.active {
-    max-height: 38vh !important;
+    max-height: 28vh !important;
 }
 
 .mobile-container .active {
