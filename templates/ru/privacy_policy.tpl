@@ -54,7 +54,7 @@
             <div class="mobile-container">
                 <div class="header">
                     <div class="top-menu">
-                        <a href="/ru/" target="_self"><h1 class="site-name">SQLtest</h1><h3 class="site-promo"> - место, где вы можете бесплатно проверить свои знания SQL</h3></a>
+                        {include file='site-name.tpl'}
                         <span class="lang-swith"><a href="/en/privacy-policy" target="_self">EN</a></span>
                     </div>
                 </div>
@@ -115,4 +115,4 @@
                             <p>Настоящая Политика конфиденциальности последний раз обновлялась 1 января 2024 г.</p>
                         </footer>
                 </div>
-     {include file='../footer.tpl'}
+    {include file='../footer.tpl'}
