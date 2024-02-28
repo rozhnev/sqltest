@@ -1,4 +1,4 @@
-<title>SQLtest — practical SQL quizzes</title>
+<title>SQLtest — practical SQL quiz</title>
 <meta name="keywords" content="practical SQL quiz, test SQL knowledge, sakila mysql">
 <meta property="og:site_name" content="SQLtest.online">
 <meta property="og:type" content="website">
