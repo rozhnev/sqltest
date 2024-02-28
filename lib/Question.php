@@ -65,7 +65,12 @@ class Question
             LEFT JOIN user_questions ON user_questions.question_id = questions.id and user_questions.user_id = :user_id
             WHERE id = :id");
         $stmt->execute([':category_id' => $questionCategoryID, ':user_id' => $userId, ':id' => $this->id]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        $question = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($question) {
+            return $question;
+        } else {
+            throw new Exception('Question not found');
+        }
     }
     /**
      * Returns question hint for provided language

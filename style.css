@@ -59,15 +59,15 @@ body {
     padding: 5px 0;
 }
 
-.container2 {
+.full-container {
     background-color: rgb(51, 102, 153);
     padding: 5px;
     height: 98.9vh;
 }
-.container2>div {
+.full-container>div {
     padding: 5px 0;
 }
-.container2 .container3 {
+.full-container .container3 {
     padding: 0 20px !important;
     height: 85vh;
 }
@@ -198,7 +198,8 @@ body {
     position: absolute;
 }
 
-.container .lang-swith {
+.container .lang-swith,
+.full-container .lang-swith {
     right: 28px;
     top: 28px;
 }

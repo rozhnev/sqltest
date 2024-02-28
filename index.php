@@ -27,11 +27,14 @@ if (isset($pathParts[0]) && $pathParts[0] === 'login') {
     $lang       = $params['lang'];
     $action     = $params['action'];
 } elseif (preg_match('@(?<lang>ru|en)/question/(?<questionCategoryID>\d+)/(?<questionID>\d+)@i', $path, $params)) {
-    //$path = "https://sqltest.online/ru/question/1/2";
-    //print_r($params);
     $lang       = $params['lang'];
     $action     = 'question';
     $questionCategoryID = $params['questionCategoryID'];
+    $questionID = $params['questionID'];
+} elseif (preg_match('@(?<lang>ru|en)/(?<questionCategory>sakila|employee)/(?<questionID>\d+)@i', $path, $params)) {
+    $lang       = $params['lang'];
+    $action     = 'question';
+    $questionCategoryID = $params['questionCategory'] == 'employee' ? 2 : 1;
     $questionID = $params['questionID'];
 } else {
     $lang       = isset($pathParts[0]) && $pathParts[0] === 'ru' ? 'ru' : 'en';
@@ -122,17 +125,21 @@ switch ($action) {
             $user->setPath($path);
             $user->save();
         }
+        try {
+            $questionnire = new Questionnire($dbh, $lang);
+            $question = new Question($dbh, $questionID);
+            $smarty->assign('Questionnire', $questionnire->get($user->getId()));
+            $questionData = $question->get($questionCategoryID, $lang, $user->getId());
+            $smarty->assign('QuestionCategoryID', $questionCategoryID);
+            $smarty->assign('Question', $questionData);
+            $smarty->assign('NextQuestionId', $question->getNextId($questionCategoryID));
+            $smarty->assign('PreviousQuestionId', $question->getPreviousId($questionCategoryID));
+            $template = $mobileView ? "m.index.tpl" : "index.tpl";
+            $db = $questionData['db_template'];
+        } catch(Exception $e) {
+            $template = $mobileView ? "m.error.tpl" : "error.tpl";
+        }
 
-        $questionnire = new Questionnire($dbh, $lang);
-        $question = new Question($dbh, $questionID);
-        $smarty->assign('Questionnire', $questionnire->get($user->getId()));
-        $questionData = $question->get($questionCategoryID, $lang, $user->getId());
-        $smarty->assign('QuestionCategoryID', $questionCategoryID);
-        $smarty->assign('Question', $questionData);
-        $smarty->assign('NextQuestionId', $question->getNextId($questionCategoryID));
-        $smarty->assign('PreviousQuestionId', $question->getPreviousId($questionCategoryID));
-        $template = $mobileView ? "m.index.tpl" : "index.tpl";
-        $db = $questionData['db_template'];
         break;
     default:
         // stored for back compatibility
