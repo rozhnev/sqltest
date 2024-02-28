@@ -31,6 +31,10 @@ if (isset($pathParts[0]) && $pathParts[0] === 'login') {
     $action     = 'question';
     $questionCategoryID = $params['questionCategoryID'];
     $questionID = $params['questionID'];
+} elseif (preg_match('@(?<lang>ru|en)/(?<questionCategory>sakila|employee)/(?<questionID>\d+)/(?<action>query-help|query-run)@i', $path, $params)) {
+    $lang       = $params['lang'];
+    $action     = $params['action'];
+    $questionID = $params['questionID'];
 } elseif (preg_match('@(?<lang>ru|en)/(?<questionCategory>sakila|employee)/(?<questionID>\d+)@i', $path, $params)) {
     $lang       = $params['lang'];
     $action     = 'question';
