@@ -366,15 +366,15 @@ class User
      * @param boolean $solved
      * @return void
      */
-    public function saveQuestionScore(int $questionID, int $score): void
+    public function saveQuestionRate(int $questionID, int $rate): void
     {
         try {
             $stmt = $this->dbh->prepare("
                 UPDATE user_questions 
-                SET score = :score
+                SET rate = :rate
                 WHERE user_id = :user_id AND question_id = :question_id
             ");
-            $stmt->execute([':user_id' => $this->id, ':question_id' => $questionID, ':score' => $score]);
+            $stmt->execute([':user_id' => $this->id, ':question_id' => $questionID, ':rate' => $rate]);
         }
         catch (\Throwable $error) {
             throw new Exception($error->getMessage());

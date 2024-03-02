@@ -112,7 +112,7 @@ switch ($action) {
         break;
     case 'rate':
         if ($user->logged()) {
-            $user->saveQuestionScore($questionID, $rate);
+            $user->saveQuestionRate($questionID, $rate);
         }
         $template = "rate_saved.tpl";
         break;
