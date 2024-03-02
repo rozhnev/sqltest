@@ -112,6 +112,7 @@ switch ($action) {
         break;
     case 'rate':
         if ($user->logged()) {
+            $rate = intval($_REQUEST['rate']);
             $user->saveQuestionRate($questionID, $rate);
         }
         $template = "rate_saved.tpl";
