@@ -53,9 +53,9 @@ function errorToTable(jsonObject) {
   return `<span class="sql_error">${jsonObject.error}</span>`;
 }
 
-function getHelp(lang, db, questionId) {
+function getHelp(lang, questionId) {
     setLoader();
-    fetch(`/${lang}/${db}/${questionId}/query-help`, {
+    fetch(`/${lang}/question/${questionId}/query-help`, {
         method: "GET", // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, *cors, same-origin
         cache: "default", // *default, no-cache, reload, force-cache, only-if-cached
@@ -70,11 +70,11 @@ function getHelp(lang, db, questionId) {
       });
 }
 
-function runQuery(lang, db, questionId) {
+function runQuery(lang, questionId) {
   setLoader();
   let formData = new FormData();
   formData.append('query', window.sql_editor.getValue());
-  fetch(`/${lang}/${db}/${questionId}/query-run`, {
+  fetch(`/${lang}/question/${questionId}/query-run`, {
     method: "POST", // *GET, POST, PUT, DELETE, etc.
     mode: "cors", // no-cors, *cors, same-origin
     cache: "default", // *default, no-cache, reload, force-cache, only-if-cached
@@ -97,11 +97,11 @@ function runQuery(lang, db, questionId) {
   });
 }
 
-function testQuery(lang, db, questionId) {
+function testQuery(lang, questionId) {
     setLoader();
     let formData = new FormData();
     formData.append('query', window.sql_editor.getValue());
-    fetch(`/${lang}/${db}/${questionId}/query-test`, {
+    fetch(`/${lang}/question/${questionId}/query-test`, {
         method: "POST", // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, *cors, same-origin
         cache: "default", // *default, no-cache, reload, force-cache, only-if-cached
@@ -120,6 +120,25 @@ function testQuery(lang, db, questionId) {
     })
     .catch(err=>{
         document.getElementById('code-result').innerHTML = 'Something went wrong. Please review your query and try again.';
+    });
+}
+function rateQuestion(questionId, rate) {
+    let formData = new FormData();
+    formData.append('rate', rate);
+    fetch(`/${lang}/question/${questionId}/rate`, {
+        method: "POST", // *GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors, *cors, same-origin
+        cache: "default", // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: "same-origin", // include, *same-origin, omit
+        body: formData,
+    })
+    .then((async response=>{
+      if (response.ok) {
+        const message =  await response.text();
+        showToast(message);
+      }
+    }))
+    .catch(err=>{
     });
 }
 function toggleSolvedTasks(e) {
