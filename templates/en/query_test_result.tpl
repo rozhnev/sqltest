@@ -1,5 +1,5 @@
 {if $QeryTestResult.ok}
-     <b>Great! You can proceed to the next test.</b>
+     <b>Great! You have completed the task!</b>
      {if !$Logged}
         <p class="question-action">
             To save your progress, please <a href="" onClick="toggleLoginWindow(); return false;">login</a>
