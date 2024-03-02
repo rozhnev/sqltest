@@ -43,9 +43,9 @@
         </div>
         <div class="code-wrapper" id="sql-code" name="sql-code">{$Question.last_query}</div>
         <div class="code-buttons">
-            <button class="button" id="getHelpBtn" onClick="getHelp('{$Lang}', '{$DB}', {$QuestionID})">Get help</button>
-            <button class="button" id="runQueryBtn" onClick="runQuery('{$Lang}', '{$DB}', {$QuestionID})" title="CTRL+Enter">Run query</button>
-            <button class="button test" id="testQueryBtn" onClick="testQuery('{$Lang}', '{$DB}', {$QuestionID})">Check it!</button>
+            <button class="button" id="getHelpBtn" onClick="getHelp('{$Lang}', {$QuestionID})">Get help</button>
+            <button class="button" id="runQueryBtn" onClick="runQuery('{$Lang}', {$QuestionID})" title="CTRL+Enter">Run query</button>
+            <button class="button test" id="testQueryBtn" onClick="testQuery('{$Lang}', {$QuestionID})">Check it!</button>
             {if $NextQuestionId}
                 <a href="/{$Lang}/question/{$QuestionCategoryID}/{$NextQuestionId}" title="Следующее задание" class="button test hidden">Next</a>
             {/if}

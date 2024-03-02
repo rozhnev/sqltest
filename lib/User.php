@@ -358,4 +358,26 @@ class User
             throw new Exception($error->getMessage());
         }
     }
+
+    /**
+     * Save Questoin attepmt in DB
+     *
+     * @param integer $questionID
+     * @param boolean $solved
+     * @return void
+     */
+    public function saveQuestionScore(int $questionID, int $score): void
+    {
+        try {
+            $stmt = $this->dbh->prepare("
+                UPDATE user_questions 
+                SET score = :score
+                WHERE user_id = :user_id AND question_id = :question_id
+            ");
+            $stmt->execute([':user_id' => $this->id, ':question_id' => $questionID, ':score' => $score]);
+        }
+        catch (\Throwable $error) {
+            throw new Exception($error->getMessage());
+        }
+    }
 }

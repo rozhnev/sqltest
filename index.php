@@ -31,7 +31,7 @@ if (isset($pathParts[0]) && $pathParts[0] === 'login') {
     $action     = 'question';
     $questionCategoryID = $params['questionCategoryID'];
     $questionID = $params['questionID'];
-} elseif (preg_match('@(?<lang>ru|en)/(?<questionCategory>sakila|employee)/(?<questionID>\d+)/(?<action>query-help|query-run|query-test)@i', $path, $params)) {
+} elseif (preg_match('@(?<lang>ru|en)/question/(?<questionID>\d+)/(?<action>query-help|query-run|query-test|rate)@i', $path, $params)) {
     $lang       = $params['lang'];
     $action     = $params['action'];
     $questionID = $params['questionID'];
@@ -109,6 +109,12 @@ switch ($action) {
         }
         if (!$queryTestResult['ok']) header( 'HTTP/1.1 418 BAD REQUEST' );
         $template = "query_test_result.tpl";
+        break;
+    case 'rate':
+        if ($user->logged()) {
+            $user->saveQuestionScore($questionID, $rate);
+        }
+        $template = "rate_saved.tpl";
         break;
     case 'logout':
         // Unset all of the session variables.

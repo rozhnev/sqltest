@@ -4,6 +4,18 @@
         <p class="question-action">
             To save your progress, please <a href="" onClick="toggleLoginWindow(); return false;">login</a>
         </p>
+    {else}
+        <p class="question-action">
+         Before starting the next test, please rate the difficulty of this task:
+         <select onchange="rateQuestion({$QuestionID}, this.value)">
+             <option value="0" disabled selected>---</option>
+             <option value="1">Too easy</option>
+             <option value="2">Simple</option>
+             <option value="3">Normal</option>
+             <option value="4">Difficult</option>
+             <option value="5">Very hard</option>
+         </select>
+         </p>
     {/if}
 {else}
      Unfortunately incorrect.
