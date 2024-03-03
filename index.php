@@ -45,9 +45,8 @@ if (isset($pathParts[0]) && $pathParts[0] === 'login') {
     $questionID = $params['questionID'];
 } else {
     $lang       = isset($pathParts[0]) && $pathParts[0] === 'ru' ? 'ru' : 'en';
-    $db         = $pathParts[1] ?? 'about';
-    $questionID = $pathParts[2] ?? '1';
-    $action     = $pathParts[3] ?? '';
+    $questionID = $pathParts[2] ?? 1;
+    $action     = $pathParts[3] ?? 'question';
     $questionCategoryID = 1;
 }
 
