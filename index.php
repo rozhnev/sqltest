@@ -23,7 +23,7 @@ if (isset($pathParts[0]) && $pathParts[0] === 'login') {
     $action     = 'login';
     $loginProvider = $pathParts[1];
 // privacy-policy, logout actions
-} elseif (preg_match('@(?<lang>ru|en)/(?<action>privacy-policy|logout)/?@i', $path, $params)) {
+} elseif (preg_match('@(?<lang>ru|en)/(?<action>privacy-policy|logout|about)/?@i', $path, $params)) {
     $lang       = $params['lang'];
     $action     = $params['action'];
 } elseif (preg_match('@(?<lang>ru|en)/question/(?<questionCategoryID>\d+)/(?<questionID>\d+)@i', $path, $params)) {
@@ -65,11 +65,15 @@ switch ($action) {
         //TODO: last path should be restored on login
         $template = "../login_result.tpl";
         break;
+    case 'about':
+        $smarty->assign('Lang', $lang);
+        $smarty->assign('MobileView', $mobileView);
+        $template = "about.tpl";
+        break;        
     case 'privacy-policy':
         $smarty->assign('Lang', $lang);
-        $smarty->assign('DB', 'sakila');
-        $smarty->assign('QuestionID', '1');
-        $template = $mobileView ? "m.privacy_policy.tpl" : "privacy_policy.tpl";
+        $smarty->assign('MobileView', $mobileView);
+        $template = "privacy_policy.tpl";
         break;
     case 'donate':
         $smarty->assign('Lang', $lang);

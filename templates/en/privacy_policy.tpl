@@ -1,9 +1,13 @@
 {include file='../short-header.tpl'}
     <body>
-        <div class="full-container">
+        <div class="{if $MobileView}mobile-container{else}full-container{/if}">
             <div class="header">
                 <div class="top-menu">
-                    {include file='site-name.tpl'}
+                    {if $MobileView}
+                        {include file='m.site-name.tpl'}
+                    {else}
+                        {include file='site-name.tpl'}
+                    {/if}
                     <span class="lang-swith"><a href="/ru/privacy-policy" target="_self">RU</a></span>
                 </div>
             </div>
@@ -65,4 +69,8 @@
                     <p>This Privacy Policy was last updated on 2024-01-01.</p>
                 </footer>
             </div>
+{if $MobileView}
+    {include file='../m.footer.tpl'}
+{else}
     {include file='../footer.tpl'}
+{/if}
