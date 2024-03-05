@@ -164,7 +164,7 @@ Below is a list of these tables:
   <ul class="table-columns">
     <li> `address_id` - Unique identifier for each address.</li>
     <li> `address` - Street address.</li>
-    <li> `address` - Additional address.</li>
+    <li> `address2` - Additional address.</li>
     <li> `district` - District or region.</li>
     <li> `city_id` - Foreign key referencing the city table.</li>
     <li> `postal_code` - Postal code.</li>
