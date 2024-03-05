@@ -59,11 +59,15 @@ class Question
                 dbms,
                 db_template,
                 last_attempt_at::date last_attempt_date, 
-                solved_at::date solved_date, last_query
+                solved_at::date solved_date, 
+                last_query,
+                questions.rate,
+                rate_{$lang} question_rate
             FROM questions 
             JOIN question_categories ON question_categories.question_id = questions.id and question_categories.category_id = :category_id
             LEFT JOIN user_questions ON user_questions.question_id = questions.id and user_questions.user_id = :user_id
-            WHERE id = :id");
+            LEFT JOIN question_rates ON questions.rate = question_rates.id
+            WHERE questions.id = :id");
         $stmt->execute([':category_id' => $questionCategoryID, ':user_id' => $userId, ':id' => $this->id]);
         $question = $stmt->fetch(PDO::FETCH_ASSOC);
         if ($question) {

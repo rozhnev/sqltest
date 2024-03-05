@@ -7,6 +7,7 @@
     <div class="main">
         <div class="question-wrapper" id="question-wrapper">
             <div class="question-title">
+                <div class="question-level rate{$Question.rate}" title="{$Question.question_rate|default:'Еще не оценено'}"></div>
                 Задание {$Question.number}:
                 {if $LoggedAsAdmin}
                     <a href="/admin/question/{$NextQuestionId}" title="Edit" style="color:#333">&#9998;</a>
