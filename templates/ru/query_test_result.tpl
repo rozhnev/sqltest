@@ -7,7 +7,7 @@
         </p>
     {else}
         <p class="question-action">
-        Прежде чем приступить к следующему тесту пожалуйста оцение сложность этого задания:
+        Прежде чем приступить к следующему тесту, пожалуйста оцените сложность этого задания:
         <select onchange="rateQuestion({$QuestionID}, this.value)">
             <option value="0" disabled selected>---</option>
             <option value="1">Слишком просто</option>
