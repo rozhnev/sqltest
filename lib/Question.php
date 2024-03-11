@@ -157,13 +157,13 @@ class Question
                 'hints' => $hints
             ];
         }
-        $stmt = $this->dbh->prepare("SELECT query_match queryMatch, query_not_match queryNotMatch FROM questions WHERE id = ?");
+        $stmt = $this->dbh->prepare("SELECT query_match, query_not_match FROM questions WHERE id = ?");
         $stmt->execute([$this->id]);
         $questionData = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if (
-            (isset($questionData['queryMatch']) && !preg_match($questionData['queryMatch'], $query)) ||
-            (isset($questionData['queryNotMatch']) && preg_match($questionData['queryNotMatch'], $query))
+            (isset($questionData['query_match']) && !preg_match($questionData['query_match'], $query)) ||
+            (isset($questionData['query_not_match']) && preg_match($questionData['query_not_match'], $query))
         ) {
             $hints['wrongQuery'] = true;
             return [
