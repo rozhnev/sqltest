@@ -39,7 +39,7 @@
             <p>Hint: your query is empty.</p>
         {/if}
         {if array_key_exists('wrongQuery', $QeryTestResult.hints) }
-            <p>Hint: your request does not meet the requirements described in the task. Try to rewrite it.</p>
+            <p>Hint: your request does not meet the requirements described in the task. <a href="#" onclick="getHelp('ru', {$QuestionID}); return false;">Use the hint</a> and try to rewrite it..</p>
         {/if}
      {/if}
     Try again.
