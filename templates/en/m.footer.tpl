@@ -4,10 +4,10 @@
                         Have a questions?
                         <a target="_blank" href="https://t.me/sqlize" class="">
                             <span class="" style="background-color: #64a9dc;
-                                    height: 24px;
+                                    height: 32px;
                                     display: inline-block;
-                                    width: 24px;
-                                    border-radius: 3px;
+                                    width: 32px;
+                                    border-radius: 50%;
                                 }">
                                 <span class="tg-icon" > </span>
                             </span>
