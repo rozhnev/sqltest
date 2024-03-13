@@ -76,6 +76,10 @@ body {
 .mobile-container .container3 {
     padding: 0 10px !important;
 }
+.mobile-container .footer-links {
+    align-items: center;
+    justify-content: center;
+}
 .toast {
     /* visibility: hidden; */
     opacity: 0;
