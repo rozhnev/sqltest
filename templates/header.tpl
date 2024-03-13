@@ -25,20 +25,32 @@
             <script src="https://yandex.ru/ads/system/context.js" async></script>
                 <script src="https://yastatic.net/s3/passport-sdk/autofill/v1/sdk-suggest-with-polyfills-latest.js"></script>
             <script type="text/javascript" src="/script.js?9" defer></script>
-            {literal}
-            <!-- Yandex.RTB R-A-4716552-1 -->
-            <script>
-            window.yaContextCb.push(()=>{
-                // Ya.Context.AdvManager.render({
-                //     "blockId": "R-A-4716552-1",
-                //     "type": "fullscreen",
-                //     "platform": "touch"
-                // });
-                Ya.Context.AdvManager.render({
-                    "blockId": "R-A-4716552-2",
-                    "renderTo": "yandex_rtb_R-A-4716552-2"
+            {if $MobileView}
+                {literal}
+                <!-- Yandex.RTB R-A-4716552-3 -->
+                <script>
+                window.yaContextCb.push(()=>{
+                    Ya.Context.AdvManager.render({
+                        "blockId": "R-A-4716552-3",
+                        "type": "floorAd",
+                        "platform": "touch"
+                    })
                 })
-            })
+                </script>
+                {/literal}
+            {else}
+                {literal}
+                <!-- Yandex.RTB R-A-4716552-1 -->
+                <script>
+                window.yaContextCb.push(()=>{
+                    Ya.Context.AdvManager.render({
+                        "blockId": "R-A-4716552-2",
+                        "renderTo": "yandex_rtb_R-A-4716552-2"
+                    })
+                })
+                {/literal}
+            {/if}
+            {literal}
             <!-- Yandex.RTB R-A-4716552-2 -->
             </script>
             <!-- Google tag (gtag.js) -->

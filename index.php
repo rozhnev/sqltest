@@ -66,17 +66,14 @@ switch ($action) {
         break;
     case 'about':
         $smarty->assign('Lang', $lang);
-        $smarty->assign('MobileView', $mobileView);
         $template = "about.tpl";
         break;        
     case 'privacy-policy':
         $smarty->assign('Lang', $lang);
-        $smarty->assign('MobileView', $mobileView);
         $template = "privacy_policy.tpl";
         break;
     case 'donate':
         $smarty->assign('Lang', $lang);
-        $smarty->assign('MobileView', $mobileView);
         $template = "donate.tpl";
         break;
     case 'query-help':
@@ -159,6 +156,8 @@ switch ($action) {
             $template = $mobileView ? "m.index.tpl" : "index.tpl";
             $db = $questionData['db_template'];
         } catch(Exception $e) {
+            // echo '<pre>';
+            // var_dump($e);
             $template = $mobileView ? "m.error.tpl" : "error.tpl";
         }
 
@@ -188,6 +187,7 @@ if ($lang == 'ru') {
     $smarty->setTemplateDir('./templates/en');
 }
 
+$smarty->assign('MobileView', $mobileView);
 $smarty->assign('Logged', $user->logged());
 $smarty->assign('LoggedAsAdmin', $user->isAdmin());
 $smarty->assign('Lang', $lang);
