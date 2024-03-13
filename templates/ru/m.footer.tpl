@@ -4,9 +4,9 @@
                         Вопросы?
                         <a target="_blank" href="https://t.me/sqlize" class="">
                             <span class="" style="background-color: #64a9dc;
-                                    height: 36px;
+                                    height: 32px;
                                     display: inline-block;
-                                    width: 36px;
+                                    width: 32px;
                                     border-radius: 50%;
                                 }">
                                 <span class="tg-icon" > </span>
