@@ -18,8 +18,8 @@
                 <div class="footer-links">
                     <div>
                         <script src="https://yastatic.net/share2/share.js"></script>
-                        Понравилось? Поделитесь!
-                        <div class="ya-share2" data-curtain data-services="vkontakte,telegram,whatsapp,reddit"></div>                        
+                        Поделитесь!
+                        <div class="ya-share2" data-curtain data-services="vkontakte,telegram,odnoklassniki,whatsapp,reddit"></div>                        
                     </div>
                 </div>
                 <div class="footer-links">
