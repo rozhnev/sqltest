@@ -17,13 +17,15 @@
                     <div>
                         <script src="https://yastatic.net/share2/share.js"></script>
                         Понравился сайт? Поделитесь!
-                        <div class="ya-share2" data-curtain data-services="vkontakte,odnoklassniki,telegram,whatsapp,moimir,lj"></div>
+                        <div class="ya-share2" data-curtain data-services="vkontakte,odnoklassniki,telegram,whatsapp,moimir"></div>
                     </div>
                 </div>
                 <div class="footer-links">
-                    © 2023-2024 SQLtest.online
-                    <a href="/ru/about" target="_self">О проекте</a>
-                    <a href="/ru/privacy-policy" target="_self">Политика конфиденциальности</a>
+                    <div>
+                        © 2023-2024 SQLtest.online
+                        <a href="/ru/about" target="_self">О проекте</a>
+                        <a href="/ru/privacy-policy" target="_self">Политика конфиденциальности</a>
+                    </div>
                 </div>
             </div>
         </div>

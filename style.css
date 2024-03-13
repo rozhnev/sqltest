@@ -217,7 +217,7 @@ body {
     grid-area: menu;
     border-right: 1px solid lightblue;
     width: 17vw;
-    max-height: 90vh;
+    max-height: 100vh;
 }
 
 .mobile-container .menu {
@@ -268,7 +268,7 @@ body {
 .right {
     grid-area: right;
     /* width: 25vw; */
-    max-height: 90vh;
+    max-height: 100vh;
     padding: 12px;
     overflow: auto;
     transition: easy 0.5s;
@@ -299,23 +299,18 @@ body {
     padding: 0 12px;
 }
 .footer-links {
-    margin: 0 0 20px 0;
-    text-align: center;
     display: flex;
-    justify-content: center;
-}
-.footer-links > div {
-    margin: 10px;
+    align-items: center;
+    column-gap: 4px;
     height: 3rem;
-    line-height: 3rem;
-    justify-content: center;
-  }
-.ya-share2 {
-    display: inline-block;
 }
-/*.ya-share2__item {
-    width: 24px;
-} */
+.footer-links > div,
+.footer-links > div > a {
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    column-gap: 4px;
+  }
 .tg-icon {
     display:inline-block;
     width: 24px;
