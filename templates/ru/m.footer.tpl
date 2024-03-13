@@ -19,12 +19,16 @@
                     <div>
                         <script src="https://yastatic.net/share2/share.js"></script>
                         Понравилось? Поделитесь!
-                        <div class="ya-share2" data-curtain data-services="vkontakte,odnoklassniki,telegram,whatsapp,reddit"></div>                        
+                        <div class="ya-share2" data-curtain data-services="vkontakte,telegram,whatsapp,reddit"></div>                        
                     </div>
                 </div>
                 <div class="footer-links">
                     <div>
                         <a href="/ru/about" target="_self">О проекте</a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <div>
                         <a href="/ru/privacy-policy" target="_self">Политика конфиденциальности</a>
                     </div>
                 </div>

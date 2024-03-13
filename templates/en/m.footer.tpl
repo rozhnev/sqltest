@@ -1,7 +1,7 @@
             <div class="footer">
                 <div class="footer-links">
                     <div>
-                        Have a questions?
+                        Questions?
                         <a target="_blank" href="https://t.me/sqlize" class="">
                             <span class="" style="background-color: #64a9dc;
                                     height: 32px;
@@ -11,7 +11,7 @@
                                 }">
                                 <span class="tg-icon" > </span>
                             </span>
-                            Ask in our telegram chat!
+                            Ask in our chat!
                         </a>
                     </div>
                 </div>
