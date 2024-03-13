@@ -13,7 +13,9 @@
                             </span>
                             Ask in our telegram chat!
                         </a>
-                        </div>
+                    </div>
+                </div>
+                <div class="footer-links">
                     <div>
                         <script src="https://yastatic.net/share2/share.js"></script>
                         Like the site? Share it!
@@ -22,11 +24,11 @@
                 </div>
                 <div class="footer-links">
                     <div>
-                        © 2023-2024 SQLtest.online
                         <a href="/en/about" target="_self">About</a>
                         <a href="/en/privacy-policy" target="_self">Privacy policy</a>
                     </div>
                 </div>
+                © 2023-2024 SQLtest.online
             </div>
         </div>
     </body>

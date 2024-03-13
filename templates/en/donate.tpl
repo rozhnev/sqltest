@@ -41,7 +41,7 @@
                 <p>Thank you for being a valuable part of SQLtest.online comunity!</p>
             </div>
 {if $MobileView}
-    {include file='../m.footer.tpl'}
+    {include file='m.footer.tpl'}
 {else}
     {include file='footer.tpl'}
 {/if}

@@ -1,7 +1,7 @@
             <div class="footer">
                 <div class="footer-links">
                     <div>
-                        Have a questions?
+                        Есть вопросы?
                         <a target="_blank" href="https://t.me/sqlize" class="">
                             <span class="" style="background-color: #64a9dc;
                                     height: 24px;
@@ -11,21 +11,21 @@
                                 }">
                                 <span class="tg-icon" > </span>
                             </span>
-                            Ask in our telegram chat!
+                            Обращайтесь в наш телеграм чат!
                         </a>
                     </div>
                 </div>
                 <div class="footer-links">
                     <div>
                         <script src="https://yastatic.net/share2/share.js"></script>
-                        Like the site? Share it!
-                        <div class="ya-share2" data-curtain data-services="telegram,twitter,whatsapp,linkedin,reddit"></div>
+                        Понравился сайт? Поделитесь!
+                        <div class="ya-share2" data-curtain data-services="vkontakte,odnoklassniki,telegram,whatsapp,reddit"></div>                        
                     </div>
                 </div>
                 <div class="footer-links">
                     <div>
-                        <a href="/{$Lang}/about" target="_self">About</a>
-                        <a href="/{$Lang}/privacy-policy" target="_self">Privacy policy</a>
+                        <a href="/ru/about" target="_self">О проекте</a>
+                        <a href="/ru/privacy-policy" target="_self">Политика конфиденциальности</a>
                     </div>
                 </div>
                 © 2023-2024 SQLtest.online

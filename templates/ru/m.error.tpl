@@ -10,4 +10,4 @@
     <div class="container3">
         <h3 style="margin: 50vh auto; text-align: center;">Упс! Что-то пошло не так, но не  расстраивайтесь у нас есть много других интересных задач <a href="/ru/" target="_self">здесь</a></h3>
     </div>
-{include file='../footer.tpl'}
+{include file='m.footer.tpl'}
