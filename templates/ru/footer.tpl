@@ -17,7 +17,7 @@
                     <div>
                         <script src="https://yastatic.net/share2/share.js"></script>
                         Понравился сайт? Поделитесь!
-                        <div class="ya-share2" data-curtain data-services="vkontakte,odnoklassniki,telegram,whatsapp,moimir"></div>
+                        <div class="ya-share2" data-curtain data-services="vkontakte,odnoklassniki,telegram,whatsapp,reddit"></div>
                     </div>
                 </div>
                 <div class="footer-links">
