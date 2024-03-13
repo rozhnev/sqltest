@@ -1,24 +1,24 @@
             <div class="footer">
                 <div class="footer-links">
                     <div>
-                        Есть вопросы?
+                        Вопросы?
                         <a target="_blank" href="https://t.me/sqlize" class="">
                             <span class="" style="background-color: #64a9dc;
-                                    height: 24px;
+                                    height: 36px;
                                     display: inline-block;
-                                    width: 24px;
-                                    border-radius: 3px;
+                                    width: 36px;
+                                    border-radius: 50%;
                                 }">
                                 <span class="tg-icon" > </span>
                             </span>
-                            Обращайтесь в наш телеграм чат!
+                            Обращайтесь в наш чат!
                         </a>
                     </div>
                 </div>
                 <div class="footer-links">
                     <div>
                         <script src="https://yastatic.net/share2/share.js"></script>
-                        Понравился сайт? Поделитесь!
+                        Понравилось? Поделитесь!
                         <div class="ya-share2" data-curtain data-services="vkontakte,odnoklassniki,telegram,whatsapp,reddit"></div>                        
                     </div>
                 </div>
