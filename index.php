@@ -65,7 +65,10 @@ switch ($action) {
         $template = "../login_result.tpl";
         break;
     case 'about':
+        $questionnire = new Questionnire($dbh, $lang);
         $smarty->assign('Lang', $lang);
+        $smarty->assign('CategoriesCount', $questionnire->getCategoriesCount());
+        $smarty->assign('QuestionsCount',  $questionnire->getQuestionsCount());
         $template = "about.tpl";
         break;        
     case 'privacy-policy':

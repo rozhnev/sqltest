@@ -51,6 +51,7 @@ class Questionnire
             JOIN question_categories ON question_categories.category_id = categories.id
             JOIN questions ON question_categories.question_id = questions.id
             LEFT JOIN user_questions ON user_questions.question_id = questions.id and user_questions.user_id = ?
+            WHERE not categories.deleted AND not questions.deleted
             ORDER BY categories.sequence_position, question_categories.sequence_position
         ");
         $stmt->execute([$userId]);
@@ -71,5 +72,19 @@ class Questionnire
             );
         }
         return [];
+    }
+
+    public function getCategoriesCount(): int
+    {
+        $stmt = $this->dbh->prepare("SELECT COUNT(id) FROM categories WHERE not deleted;");
+        $stmt->execute();
+        return $stmt->fetchColumn(0);
+    }
+
+    public function getQuestionsCount(): int
+    {
+        $stmt = $this->dbh->prepare("SELECT COUNT(id) FROM questions WHERE not deleted;");
+        $stmt->execute();
+        return $stmt->fetchColumn(0);
     }
 }
