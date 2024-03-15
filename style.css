@@ -466,7 +466,8 @@ body {
     padding: 0 12px;
 }
 
-.question .sql {
+.question .sql,
+.code-result .sql {
     background-color: #eee;
     color: #C800A4;
     padding: 3px;
