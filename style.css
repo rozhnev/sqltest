@@ -32,7 +32,12 @@ body {
 .splitter a:visited {
     text-decoration: none;
 }
-
+.container3 a,
+.container3 a:visited
+{
+    font-weight: bold;
+    color: wheat;
+}
 .container {
     display: grid;
     grid-template-areas:
