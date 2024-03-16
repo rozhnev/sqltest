@@ -27,6 +27,9 @@
                 <h2>Join Us:</h2>
                 <p>No registration required – just visit <a href="https://sqltest.online">SQLTest.online</a> and start your SQL adventure. We also invite you to join our <a href="https://t.me/sqlize">Telegram chat</a>, where you can share your experiences and influence the future development of the project.</p></details>
                 <p><strong>Let's develop SQL skills together on SQLTest.online!</strong> 🚀</p>
+                <p>
+                    Many thanks to <a href ="https://t.me/artlatyshev" target="_blank">Artem Latyshev</a> for his contribution to the development of the project.
+                </p>
             </div>
 {if $MobileView}
     {include file='m.footer.tpl'}
