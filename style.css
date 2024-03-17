@@ -225,7 +225,7 @@ body {
 .container .menu {
     grid-area: menu;
     border-right: 1px solid lightblue;
-    width: 17vw;
+    width: 20vw;
     max-height: 100vh;
 }
 
@@ -241,7 +241,7 @@ body {
     grid-area: main;
     min-height: 85vh;
     color: white;
-    width: 58vw;
+    width: 55vw;
     transition: linear 0.5s;
 }
 
