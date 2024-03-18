@@ -240,7 +240,8 @@ class Question
                 }
             }
             return [
-                'ok' => true
+                'ok' => true,
+                'cost' => array_pop($resultObject)->data[0][1]
             ];
         } catch(Exception $e) {
             // var_dump($e);

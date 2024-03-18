@@ -1,5 +1,6 @@
 {if $QeryTestResult.ok}
      <b>Great! You have completed the task!</b>
+     <p>The cost of executing your query is {$QeryTestResult.cost} (the lower the cost, the more effective the query)</p>
      {if !$Logged}
         <p class="question-action">
             To save your progress, please <a href="" onClick="toggleLoginWindow(); return false;">login</a>
