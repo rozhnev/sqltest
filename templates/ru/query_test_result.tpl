@@ -1,7 +1,9 @@
 {* {var_dump($QeryTestResult)} *}
 {if $QeryTestResult.ok}
     <b>Отлично! Вы справились с задачей!</b>
-    <p>Стоимость выполнения вашего запроса — {$QeryTestResult.cost} (чем меньше стоимость тем эффективней запрос)</p>
+    {if $QeryTestResult.cost > 0}
+        <p>Стоимость выполнения вашего запроса — {$QeryTestResult.cost} (чем меньше стоимость тем эффективней запрос)</p>
+    {/if}
     {if !$Logged}
         <p class="question-action">
             Для сохранения вашего прогресса выполните <a href="" onClick="toggleLoginWindow(); return false;">вход на сайт</a>
