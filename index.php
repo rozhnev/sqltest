@@ -23,7 +23,7 @@ if (isset($pathParts[0]) && $pathParts[0] === 'login') {
     $action     = 'login';
     $loginProvider = $pathParts[1];
 // privacy-policy, logout actions
-} elseif (preg_match('@(?<lang>ru|en)/(?<action>privacy-policy|logout|about)/?@i', $path, $params)) {
+} elseif (preg_match('@(?<lang>ru|en)/(?<action>privacy-policy|logout|about|menu)/?@i', $path, $params)) {
     $lang       = $params['lang'];
     $action     = $params['action'];
 } elseif (preg_match('@(?<lang>ru|en)/question/(?<questionCategoryID>\d+)/(?<questionID>\d+)@i', $path, $params)) {
@@ -64,6 +64,14 @@ switch ($action) {
         //TODO: last path should be restored on login
         $template = "../login_result.tpl";
         break;
+    case 'menu':
+        $groupBy = $_GET['group_by'] ?? 'category';
+        $questionnire = new Questionnire($dbh, $lang);
+        $smarty->assign('Questionnire', $questionnire->get($user->getId()));
+        $smarty->assign('Lang', $lang);
+        $smarty->assign('GroupBy', $groupBy);
+        $template = "menu.tpl";
+        break;      
     case 'about':
         $questionnire = new Questionnire($dbh, $lang);
         $smarty->assign('Lang', $lang);
@@ -107,7 +115,7 @@ switch ($action) {
             $smarty->assign('QeryTestResult', $queryTestResult);
         }
         if ($user->logged()) {
-            $user->saveQuestionAttempt($questionID, $queryTestResult['ok'], $sql);
+            $user->saveQuestionAttempt($questionID, $queryTestResult, $sql);
         }
         if (!$queryTestResult['ok']) header( 'HTTP/1.1 418 BAD REQUEST' );
         $template = "query_test_result.tpl";

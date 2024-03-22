@@ -338,21 +338,22 @@ class User
      * @param boolean $solved
      * @return void
      */
-    public function saveQuestionAttempt(int $questionID, bool $solved, string $query): void
+    public function saveQuestionAttempt(int $questionID, array $result, string $query): void
     {
         try {
             $stmt = $this->dbh->prepare("
                 INSERT INTO user_questions (
-                    user_id, question_id, last_attempt_at, solved_at, last_query
+                    user_id, question_id, last_attempt_at, solved_at, last_query, query_cost
                 ) VALUES (
-                    ?, ?, CURRENT_TIMESTAMP, CASE WHEN ".($solved ? 'true' : 'false')." THEN CURRENT_TIMESTAMP END, ?
+                    ?, ?, CURRENT_TIMESTAMP, CASE WHEN ".($result['ok'] ? 'true' : 'false')." THEN CURRENT_TIMESTAMP END, ?, ?
                 ) 
                 ON CONFLICT (user_id, question_id) DO UPDATE SET
                     last_attempt_at = CURRENT_TIMESTAMP, 
                     solved_at = LEAST(user_questions.solved_at, EXCLUDED.solved_at),
-                    last_query = EXCLUDED.last_query
+                    last_query = EXCLUDED.last_query,
+                    query_cost = EXCLUDED.query_cost
                 ");
-            $stmt->execute([$this->id, $questionID, $query]);
+            $stmt->execute([$this->id, $questionID, $query, floatval($result['cost'])]);
         }
         catch (\Throwable $error) {
             throw new Exception($error->getMessage());
