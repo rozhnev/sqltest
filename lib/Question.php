@@ -241,7 +241,7 @@ class Question
             }
             return [
                 'ok' => true,
-                'cost' => array_pop($resultObject)->data[0][1]
+                'cost' => round(floatval(array_pop($resultObject)->data[0][1]),3)
             ];
         } catch(Exception $e) {
             // var_dump($e);
