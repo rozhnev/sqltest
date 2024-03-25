@@ -89,6 +89,17 @@ class Question
         return (string)$stmt->fetchColumn();
     }
     /**
+     * Returns question best cost
+     *
+     * @return float
+     */
+    public function getBestCost(): float
+    {
+        $stmt = $this->dbh->prepare("SELECT best_query_cost FROM questions WHERE id = ?");
+        $stmt->execute([$this->id]);
+        return (float)$stmt->fetchColumn();
+    }
+    /**
      * Returns question db name
      *
      * @return string

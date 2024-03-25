@@ -3,6 +3,12 @@
     <b>Отлично! Вы справились с задачей!</b>
     {if $QeryTestResult.cost > 0}
         <p>Стоимость выполнения вашего запроса — {$QeryTestResult.cost} (чем меньше стоимость тем эффективней запрос)</p>
+        {if $QeryBestCost}
+            Лучший запрос имеет стоимость:  {$QeryBestCost}
+            {if $QeryBestCost == $QeryTestResult.cost} Поздравляем! Ваш вариант запроса в числе лучших на нашем сайте!
+            {elseif $QeryBestCost > $QeryTestResult.cost} Поздравляем вам удалось улучшить наш рекорд!
+            {else} К сожалению ваш результат немного недотягивает до рекорда. Вам есть над чем поработать! {/if}
+        {/if}
     {/if}
     {if !$Logged}
         <p class="question-action">

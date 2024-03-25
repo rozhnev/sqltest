@@ -2,6 +2,12 @@
      <b>Great! You have completed the task!</b>
      {if $QeryTestResult.cost > 0}
         <p>The cost of executing your query is {$QeryTestResult.cost} (the lower the cost, the more effective the query)</p>
+        {if $QeryBestCost}
+            The best query has a cost: {$QeryBestCost}
+            {if $QeryBestCost == $QeryTestResult.cost} Congratulations! Your request is among the best on our website!
+            {elseif $QeryBestCost > $QeryTestResult.cost} Congratulations on improving our record!
+            {else} Unfortunately, your result is a little low of the record. You have something to work on! {/if}
+        {/if}
      {/if}
      {if !$Logged}
         <p class="question-action">

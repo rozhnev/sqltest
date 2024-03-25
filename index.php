@@ -113,6 +113,7 @@ switch ($action) {
             $jsonResult = $query->getResult($question->getDB(), 'json');
             $queryTestResult = $question->checkQueryResult($jsonResult);
             $smarty->assign('QeryTestResult', $queryTestResult);
+            $smarty->assign('QeryBestCost', $question->getBestCost());
         }
         if ($user->logged()) {
             $user->saveQuestionAttempt($questionID, $queryTestResult, $sql);
@@ -167,8 +168,6 @@ switch ($action) {
             $template = $mobileView ? "m.index.tpl" : "index.tpl";
             $db = $questionData['db_template'];
         } catch(Exception $e) {
-            // echo '<pre>';
-            // var_dump($e);
             $template = $mobileView ? "m.error.tpl" : "error.tpl";
         }
 
