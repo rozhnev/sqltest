@@ -1,4 +1,4 @@
-<title>SQLtest — practical SQL quiz</title>
+<title>SQLtest — practical SQL quiz{if $Question.title} ({$Question.title}){/if}</title>
 <meta name="keywords" content="practical SQL quiz, test SQL knowledge, sakila mysql">
 <meta property="og:site_name" content="SQLtest.online">
 <meta property="og:type" content="website">

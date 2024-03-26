@@ -55,6 +55,7 @@ class Question
             SELECT 
                 question_categories.category_id,
                 question_categories.sequence_position number, 
+                title_{$lang} title,
                 task_{$lang} task,
                 dbms,
                 db_template,
