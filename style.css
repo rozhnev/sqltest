@@ -556,14 +556,17 @@ body {
     background-color: white;
 }
 
-.code-result .result-table {
+.code-result .result-table,
+.code-result .hint-table {
     border: 1px solid gray;
     width: 100%;
     border-collapse: collapse;
 }
 
 .code-result .result-table th,
-.code-result .result-table td {
+.code-result .result-table td,
+.code-result .hint-table th,
+.code-result .hint-table td {
     border: 1px solid silver;
     color: #333;
     font-size: smaller;
