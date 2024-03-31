@@ -1,5 +1,5 @@
 <div class="menu">
-    {foreach $Questionnire as $categoryId => $panel}
+    {foreach $Questionnire.menu as $categoryId => $panel}
     <button class="accordion">
         {$panel.title}
         <span class="eye-btn" title="Hide solved tasks">
