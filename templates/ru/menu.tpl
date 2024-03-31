@@ -1,5 +1,12 @@
-<div class="menu">
-    {foreach $Questionnire as $categoryId => $panel}
+<div class="menu" id="menu">
+    <div style = "display: flex; align-items: center;column-gap: 4px; margin-bottom: 6px; padding: 5px;">
+        Группировка по:&nbsp;
+        <input type="radio" id="complexity_menu_groups" name="menu_groups" value="complexity" onClick="loadMenu(this.value)" {if $Questionnire.name == 'complexity'}checked{/if}>
+        <label for="complexity_menu_groups">сложности</label>
+<input type="radio" id="category_menu_groups" name="menu_groups" value="category" onClick="loadMenu(this.value)" {if $Questionnire.name == 'category'}checked{/if}>
+        <label for="category_menu_groups">категории</label>
+    </div>
+    {foreach $Questionnire.menu as $categoryId => $panel}
     <button class="accordion">
         {$panel.title}
         <span class="eye-btn" title="Hide solved tasks">
@@ -30,7 +37,6 @@
     <div class="menu-ad">
         <div id="yandex_rtb_R-A-4716552-2">
             <p>Пожалуйста не отключайте рекламу на сайте. Это единственный источник нашего финансирования позволяющий поддерживать работу проекта.</p>
-            <p>Please do not disable advertising on the site. This is our only source of funding to support the project.</p>
         </div>
     </div>
 </div>

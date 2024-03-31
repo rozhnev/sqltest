@@ -3,7 +3,7 @@
 <div class="container">
     {include file='popups.tpl'}
     {include file='top-menu.tpl'}
-    {include file='../menu.tpl'}
+    {include file='menu.tpl'}
     {include file='../splitter.tpl'}
     <div class="main">
         <div class="question-wrapper">

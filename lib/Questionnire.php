@@ -37,7 +37,7 @@ class Questionnire
      * @param string|null $userId
      * @return array
      */
-    public function get(?string $userId): array
+    public function get(string $name, ?string $userId): array
     {
         $stmt = $this->dbh->prepare("
             SELECT 
@@ -48,16 +48,22 @@ class Questionnire
                 questions.title_{$this->lang} question_title,
                 (solved_at IS NOT NULL) solved
             FROM categories
+            JOIN questionnires ON questionnires.id = categories.questionnire_id
             JOIN question_categories ON question_categories.category_id = categories.id
             JOIN questions ON question_categories.question_id = questions.id
-            LEFT JOIN user_questions ON user_questions.question_id = questions.id and user_questions.user_id = ?
-            WHERE not categories.deleted AND not questions.deleted
+            LEFT JOIN user_questions ON user_questions.question_id = questions.id and user_questions.user_id = :userId
+            WHERE not categories.deleted AND not questions.deleted AND
+                questionnires.name = :questionnire
             ORDER BY categories.sequence_position, question_categories.sequence_position
         ");
-        $stmt->execute([$userId]);
+        try {
+            $stmt->execute([':userId' => $userId, ':questionnire' => $name]);
+        } catch (Exception $e) {
+            var_dump($e);
+        }
         $questionnire = $stmt->fetchAll(PDO::FETCH_ASSOC);
         if ($questionnire) {
-            return array_reduce(
+            $menu = array_reduce(
                 $questionnire,
                 function($acc, $el) {
                     if (!isset($acc[$el['id']])) $acc[$el['id']] = [
@@ -70,8 +76,13 @@ class Questionnire
                 },
                 []
             );
+        } else {
+            $menu = [];
         }
-        return [];
+        return [
+            'name' => $name,
+            'menu' => $menu
+        ];
     }
 
     public function getCategoriesCount(): int

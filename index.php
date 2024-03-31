@@ -18,6 +18,7 @@ $path = isset($_SERVER['PATH_INFO']) ? trim($_SERVER['PATH_INFO'], '/') : trim($
 $pathParts = explode('/', $path);
 $db         = '';
 $questionID = '';
+$QuestionnireName = $_COOKIE['Questionnire'] ?? 'category';
 
 if (isset($pathParts[0]) && $pathParts[0] === 'login') {
     $action     = 'login';
@@ -65,11 +66,12 @@ switch ($action) {
         $template = "../login_result.tpl";
         break;
     case 'menu':
-        $groupBy = $_GET['group_by'] ?? 'category';
+        $QuestionnireName = $_GET['questionnire'] ?? 'category';
+        setcookie("Questionnire", $QuestionnireName, time() + 86400 * 365, "/" );
         $questionnire = new Questionnire($dbh, $lang);
-        $smarty->assign('Questionnire', $questionnire->get($user->getId()));
+        $smarty->assign('Questionnire', $questionnire->get($QuestionnireName, $user->getId()));
         $smarty->assign('Lang', $lang);
-        $smarty->assign('GroupBy', $groupBy);
+        // var_dump($questionnire->get($QuestionnireName, $user->getId()));
         $template = "menu.tpl";
         break;      
     case 'about':
@@ -159,7 +161,7 @@ switch ($action) {
         try {
             $questionnire = new Questionnire($dbh, $lang);
             $question = new Question($dbh, $questionID);
-            $smarty->assign('Questionnire', $questionnire->get($user->getId()));
+            $smarty->assign('Questionnire', $questionnire->get($QuestionnireName, $user->getId()));
             $questionData = $question->get($questionCategoryID, $lang, $user->getId());
             $smarty->assign('QuestionCategoryID', $questionCategoryID);
             $smarty->assign('Question', $questionData);
@@ -181,7 +183,7 @@ switch ($action) {
 
         $questionnire = new Questionnire($dbh, $lang);
         $question = new Question($dbh, $questionID);
-        $smarty->assign('Questionnire', $questionnire->get($user->getId()));
+        $smarty->assign('Questionnire', $questionnire->get($QuestionnireName, $user->getId()));
         $questionData = $question->get($questionCategoryID, $lang, $user->getId());
         $smarty->assign('QuestionCategoryID', $questionData['category_id']);
         $smarty->assign('Question', $questionData);

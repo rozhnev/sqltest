@@ -12,7 +12,27 @@ function showToast(msg) {
     }
     ), 1999)
 }
-
+function loadMenu(questionnire) {
+    fetch(`/${lang}/menu?questionnire=${questionnire}`, {
+        method: "GET", // *GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors, *cors, same-origin
+        cache: "default", // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: "same-origin", // include, *same-origin, omit
+    })
+    .then((async response=>{
+        if (!response.ok) throw Error('Something went wrong.');
+        return await response.text();
+    }))
+    .then((message)=>{
+        document.getElementById('menu').innerHTML = message;
+        window.UIConfig.questionnire = questionnire;
+        saveUIConfig();
+        setMenuEventListeners();
+    })
+    .catch(err=>{
+        console.log(err)
+    });;
+}
 function copyCode(msg) {
     const editor = window.sql_editor;
     navigator.clipboard && navigator.clipboard.writeText(editor.getValue()),
@@ -215,24 +235,27 @@ function applyUIConfig() {
     }
 }
 
-// set menu event listeners
-[...document.getElementsByClassName("accordion")].map(el=>{
-    el.addEventListener ('click', function() {
-        for (let el of document.getElementsByClassName("panel")) el.classList.remove("active");
-        this.classList.toggle("active");
-        const panel = this.nextElementSibling;
-        panel.classList.toggle("active");
+function setMenuEventListeners() {
+    // set menu event listeners
+    [...document.getElementsByClassName("accordion")].map(el=>{
+      el.addEventListener ('click', function() {
+          for (let el of document.getElementsByClassName("panel")) el.classList.remove("active");
+          this.classList.toggle("active");
+          const panel = this.nextElementSibling;
+          panel.classList.toggle("active");
+      });
     });
-});
 
-[...document.getElementsByClassName("eye-btn")].map(el=>{
-    el.addEventListener ('click', e=>{
-      e.preventDefault();
-      toggleSolvedTasks()
-  });
-})
-// set menu event listeners
+    [...document.getElementsByClassName("eye-btn")].map(el=>{
+      el.addEventListener ('click', e=>{
+        e.preventDefault();
+        toggleSolvedTasks()
+    });
+    })
+    // set menu event listeners
+}
 
+setMenuEventListeners();
 window.UIConfig = loadUIConfig();
 applyUIConfig();
 
