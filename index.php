@@ -116,7 +116,7 @@ switch ($action) {
             $queryCheck = $question->getQueryCheck();
             $queryPreCheck = $question->getQueryPreCheck();
             
-            $query = new Query($queryPreCheck . $sql . $queryCheck);
+            $query = new Query($queryPreCheck . ';' . $sql . ';' . $queryCheck);
             $jsonResult = $query->getResult($question->getDB(), 'json');
             $queryTestResult = $question->checkQueryResult($jsonResult);
             $smarty->assign('QeryTestResult', $queryTestResult);
