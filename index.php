@@ -100,8 +100,10 @@ switch ($action) {
             $template = "empty_query_result.tpl";
             break;
         }
-        $query = new Query($sql);
         $question = new Question($dbh, $questionID);
+        $queryPreCheck = $question->getQueryPreCheck();
+        $query = new Query($queryPreCheck . '; ' .$sql);
+
         $smarty->assign('QeryResult', $query->getResult($question->getDB(), 'json'));
         $template = "query_result.tpl";
         break;
@@ -111,7 +113,10 @@ switch ($action) {
         $queryTestResult = $question->checkQuery($sql);
         $smarty->assign('QeryTestResult', $queryTestResult);
         if ($queryTestResult['ok']) {
-            $query = new Query($sql);
+            $queryCheck = $question->getQueryCheck();
+            $queryPreCheck = $question->getQueryPreCheck();
+            
+            $query = new Query($queryPreCheck . $sql . $queryCheck);
             $jsonResult = $query->getResult($question->getDB(), 'json');
             $queryTestResult = $question->checkQueryResult($jsonResult);
             $smarty->assign('QeryTestResult', $queryTestResult);

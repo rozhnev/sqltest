@@ -28,7 +28,7 @@ class Query
             # Setup request to send json via POST.
             $payload = json_encode( [
                 "language" => "sql", 
-                "code" => $this->sql . "; SHOW STATUS LIKE 'Last_query_cost';", 
+                "code" => $this->sql, 
                 "sql_version" => "mysql80_sakila"
             ]);
             curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );

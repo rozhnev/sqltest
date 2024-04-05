@@ -107,10 +107,14 @@ function runQuery(lang, questionId) {
   }))
   .then(JSON.parse)
   .then((JSONmessage)=>{
-    const jsonObject = JSONmessage[0];
-    document.getElementById('code-result').innerHTML = jsonObject.error 
-      ? errorToTable(jsonObject) 
-      : jsonToTable(jsonObject);
+      let html = '✓ (Done)';
+      if (JSONmessage && JSONmessage[0]) {
+          const jsonObject = JSONmessage[0];
+          html = jsonObject.error 
+            ? errorToTable(jsonObject) 
+            : jsonToTable(jsonObject);
+      }
+      document.getElementById('code-result').innerHTML = html;
   })
   .catch(err=>{
       document.getElementById('code-result').innerHTML = 'Something went wrong. Please review your query and try again.';
