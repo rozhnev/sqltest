@@ -1,10 +1,16 @@
 <div class="menu" id="menu">
-    <div style = "display: flex; align-items: center;column-gap: 4px; margin-bottom: 6px; padding: 5px;">
-        Group by:&nbsp;
-        <input type="radio" id="complexity_menu_groups" name="menu_groups" value="complexity" onClick="loadMenu(this.value)" {if $Questionnire.name == 'complexity'}checked{/if}>
-        <label for="complexity_menu_groups">complexity</label>
-        <input type="radio" id="category_menu_groups" name="menu_groups" value="category" onClick="loadMenu(this.value)" {if $Questionnire.name == 'category'}checked{/if}>
-        <label for="category_menu_groups">category</label>
+    <div class="selector">
+        <div style="min-width: 75px;">Group by:</div>
+        <div class="selector-options">
+            <div>
+                <input type="radio" id="complexity_menu_groups" name="menu_groups" value="complexity" onClick="loadMenu(this.value)" {if $Questionnire.name == 'complexity'}checked{/if}>
+                <label for="complexity_menu_groups">complexity</label>
+            </div>
+            <div>
+                <input type="radio" id="category_menu_groups" name="menu_groups" value="category" onClick="loadMenu(this.value)" {if $Questionnire.name == 'category'}checked{/if}>
+                <label for="category_menu_groups">category</label>
+            </div>
+        </div>
     </div>
     {foreach $Questionnire.menu as $categoryId => $panel}
     <button class="accordion">

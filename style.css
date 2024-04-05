@@ -366,7 +366,20 @@ body {
 .accordion .eye-btn {
     float: right;
 }
-
+.menu .selector {
+    display: flex; 
+    align-items: center;
+    column-gap: 4px; 
+    margin-bottom: 6px; 
+    padding: 5px;
+}
+.menu .selector .selector-options {
+    display: flex; 
+    align-items: left;
+    column-gap: 4px; 
+    padding: 5px; 
+    flex-flow: row wrap;
+}
 .menu .panel {
     padding: 0;
     background-color: white;
