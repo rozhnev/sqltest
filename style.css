@@ -312,6 +312,9 @@ body {
     align-items: center;
     column-gap: 4px;
     height: 3rem;
+    flex-flow: row wrap;
+    width: 55vw;
+    margin-top: 10px;
 }
 .footer-links > div,
 .footer-links > div > a {
@@ -319,6 +322,7 @@ body {
     display: flex;
     align-items: center;
     column-gap: 4px;
+    margin-bottom: 5px;
   }
 .tg-icon {
     display:inline-block;
