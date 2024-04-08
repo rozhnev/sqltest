@@ -630,6 +630,11 @@ td {
     padding: 8px;
 }
 
+.db-description .sql {
+    color: wheat;
+    font-weight: bold;
+}
+
 .db-description .table-columns {
     font-size: smaller;
     padding-inline: 14px;
