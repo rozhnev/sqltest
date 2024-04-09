@@ -255,11 +255,22 @@ function setMenuEventListeners() {
         e.preventDefault();
         toggleSolvedTasks()
     });
+    });
+}
+
+function setEventListeners() {
+    [...document.querySelectorAll(".db-description .sql")].map(el=>{
+        el.addEventListener ('dblclick', e=>{
+            e.preventDefault();
+            window.sql_editor.session.insert(window.sql_editor.getCursorPosition(), ` ${el.innerText} `);
+            window.sql_editor.focus();
+        });
     })
     // set menu event listeners
 }
 
 setMenuEventListeners();
+setEventListeners();
 window.UIConfig = loadUIConfig();
 applyUIConfig();
 

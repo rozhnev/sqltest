@@ -22,7 +22,7 @@
             <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.2/theme-xcode.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.2/ext-language_tools.js"></script>
             {* <script type="text/javascript" src="/script.js?8" defer></script> *}
-            <script type="text/javascript" src="/admin/script.js?11"></script>
+            <script type="text/javascript" src="/admin/script.js?12"></script>
             <script>
                 var lang = '{$Lang}',
                     db   = '{$DB}',
