@@ -1,3 +1,10 @@
+function switchTheme(e) {
+    const currentTheme = e.target.checked ?  'dark' : 'light';
+    window.sql_editor.setTheme(currentTheme === 'dark' ? 'ace/theme/github_dark' : 'ace/theme/xcode');
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    window.UIConfig.theme = currentTheme;
+    saveUIConfig();
+}
 
 function setLoader() {
   return document.getElementById('code-result').innerHTML = '<div class="loader">Loading...</div>';
@@ -210,21 +217,8 @@ function openGoogleLoginPopUp() {
   );
 }
 
-function loadUIConfig() {
-  const defaultConfig = {
-      hideSolvedTasks: false,
-      hideInfoPanel: false
-  };
-  try {
-      const UIConfig = localStorage.getItem("UIConfig");
-      // console.log(UIConfig);
-      return UIConfig ? JSON.parse(UIConfig) : defaultConfig;
-  } catch (err) {
-      // console.log(err);
-      return defaultConfig
-  }
-}
 function saveUIConfig() {
+  console.log(window.UIConfig);
   localStorage.setItem("UIConfig", JSON.stringify(window.UIConfig));
 }
 function applyUIConfig() {
@@ -237,13 +231,14 @@ function applyUIConfig() {
         window.UIConfig.hideInfoPanel = !window.UIConfig.hideInfoPanel;
         toggleInfoPanel();
     }
+    document.querySelector('#theme-switch-checkbox').checked = (window.UIConfig.theme === 'dark' ? 1 : 0);
 }
 
 function setMenuEventListeners() {
-    // set menu event listeners
     [...document.getElementsByClassName("accordion")].map(el=>{
       el.addEventListener ('click', function() {
           for (let el of document.getElementsByClassName("panel")) el.classList.remove("active");
+          for (let el of document.getElementsByClassName("accordion")) el.classList.remove("active");
           this.classList.toggle("active");
           const panel = this.nextElementSibling;
           panel.classList.toggle("active");
@@ -266,21 +261,21 @@ function setEventListeners() {
             window.sql_editor.focus();
         });
     })
-    // set menu event listeners
+    const toggleSwitch = document.querySelector('#theme-switch-checkbox');
+    toggleSwitch.addEventListener('change', switchTheme, false);
 }
 
 setMenuEventListeners();
 setEventListeners();
-window.UIConfig = loadUIConfig();
 applyUIConfig();
-
 window.sql_editor = ace.edit("sql-code", {
     mode: "ace/mode/mysql",
     selectionStyle: "text",
     dragEnabled: false,
     useWorker: false
 });
-window.sql_editor.setTheme(`ace/theme/xcode`);
+
+window.sql_editor.setTheme(window.UIConfig.theme === 'dark' ? 'ace/theme/github_dark' : 'ace/theme/xcode');
 window.sql_editor.setShowPrintMargin(false);
 window.sql_editor.setOptions({enableBasicAutocompletion: true});
 
