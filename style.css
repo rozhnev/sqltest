@@ -147,7 +147,7 @@ body {
 }
 .mobile-container .login-button {
     right: 140px;
-    top: 18px;
+    top: 12px;
 }
 .container .theme-switch-wrapper {
     right: 220px;
@@ -155,7 +155,10 @@ body {
 }
 .mobile-container .theme-switch-wrapper {
     right: 190px;
-    top: 14px;
+    top: 8px;
+}
+.mobile-container .site-name {
+    font-size: 1.5em;
 }
 .login-popup  {
     opacity: 0;
@@ -255,11 +258,7 @@ body {
 }
 .mobile-container .lang-swith {
     right: 18px;
-    top: 20px;
-}
-.mobile-container .lang-swith {
-    right: 18px;
-    top: 20px;
+    top: 14px;
 }
 .container .menu {
     grid-area: menu;
@@ -718,7 +717,7 @@ td {
 }
 .mobile-container .donate-btn {
     right: 50px;
-    top: 14px;
+    top: 8px;
 }
 .shake {
     animation: shake .82s cubic-bezier(.36, .07, .19, .97) both;
