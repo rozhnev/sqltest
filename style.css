@@ -149,6 +149,14 @@ body {
     right: 140px;
     top: 18px;
 }
+.container .theme-switch-wrapper {
+    right: 220px;
+    top: 22px;
+}
+.mobile-container .theme-switch-wrapper {
+    right: 190px;
+    top: 14px;
+}
 .login-popup  {
     opacity: 0;
     transition: opacity 0.3s ease-out;
@@ -735,8 +743,6 @@ td {
 	display: flex;
 	align-items: center;
 	position: absolute;
-    right: 220px;
-    top: 22px;
 }
 .theme-switch {
 	display: inline-block;
