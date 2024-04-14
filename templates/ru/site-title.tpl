@@ -1,4 +1,4 @@
-<title>SQLtest — SQL задачи {if $Question.title} ({$Question.title}){/if}</title>
+<title>SQL задачи на SQLtest — {if $Question.title} ({$Question.title}){/if}</title>
 <meta name="keywords" content="практические задачи по SQL, тест на знание SQL, sakila mysql">
 <meta property="og:site_name" content="SQLtest.online">
 <meta property="og:type" content="website">
