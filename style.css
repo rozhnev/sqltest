@@ -352,8 +352,13 @@ body {
     column-gap: 4px;
     height: 3rem;
     flex-flow: row wrap;
-    width: 55vw;
     margin-top: 10px;
+}
+.container .footer-links {
+    width: 55vw;
+}
+.mobile-container .footer-links {
+    width: 100vw;
 }
 .footer-links > div,
 .footer-links > div > a {
@@ -361,8 +366,10 @@ body {
     display: flex;
     align-items: center;
     column-gap: 4px;
+}
+.footer-links > div {
     margin-bottom: 5px;
-  }
+}
 .tg-icon {
     display:inline-block;
     width: 24px;
