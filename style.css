@@ -646,7 +646,8 @@ body {
 }
 
 .code-result .sql_error {
-    color: darkred;
+    background-color: var(--sql-background-color); 
+    color: var(--sql-color);
     font-weight: bolder;
 }
 
