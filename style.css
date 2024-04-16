@@ -543,7 +543,7 @@ body {
 .code-result .sql {
     background-color: var(--sql-background-color); 
     color: var(--sql-color);
-    padding: 3px;
+    padding: 0 3px;
 }
 
 .arrow {
