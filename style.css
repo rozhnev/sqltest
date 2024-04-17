@@ -21,6 +21,8 @@
     --accordion-hover-border: #0B4FCC;
     --sql-background-color: #eee;
     --sql-color:  #C800A4;
+    --question-date-color: gray;
+    --arrow-borer-color: black;
 }
 [data-theme="dark"] {
     --body-background-color: #0D1017;
@@ -39,8 +41,9 @@
     --accordion-hover: #484F58;
     --accordion-hover-border: #F0F6FC;
     --sql-background-color: #484F58;
-    --sql-color:  #F85149
-    ;
+    --sql-color:  #F85149;
+    --question-date-color: #F0F6FC;
+    --arrow-borer-color: #F0F6FC;
 }
 .ace-github-dark .ace_gutter {
     background: #24292e !important;
@@ -529,7 +532,7 @@ body {
 }
 
 .question-title .question-dates {
-    color: gray;
+    color: var(--question-date-color);
     font-size: small;
     padding-left: 30%;
 }
@@ -549,7 +552,7 @@ body {
 .arrow {
     display: inline-block;
     padding: 3px;
-    border: solid black;
+    border: solid var(--arrow-borer-color);
     border-width: 0 3px 3px 0;
 }
 
