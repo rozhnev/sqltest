@@ -181,8 +181,8 @@ switch ($action) {
             $questionData = $question->get($questionCategoryID, $lang, $user->getId());
             $smarty->assign('QuestionCategoryID', $questionCategoryID);
             $smarty->assign('Question', $questionData);
-            $smarty->assign('NextQuestionId', $question->getNextId($questionCategoryID));
-            $smarty->assign('PreviousQuestionId', $question->getPreviousId($questionCategoryID));
+            $smarty->assign('NextQuestionId', $question->getNextSefId($questionCategoryID));
+            $smarty->assign('PreviousQuestionId', $question->getPreviousSefId($questionCategoryID));
             $template = $mobileView ? "m.index.tpl" : "index.tpl";
             $db = $questionData['db_template'];
         } catch(Exception $e) {
@@ -203,8 +203,8 @@ switch ($action) {
         $questionData = $question->get($questionCategoryID, $lang, $user->getId());
         $smarty->assign('QuestionCategoryID', $questionData['category_id']);
         $smarty->assign('Question', $questionData);
-        $smarty->assign('NextQuestionId', $question->getNextId($questionCategoryID));
-        $smarty->assign('PreviousQuestionId', $question->getPreviousId($questionCategoryID));
+        $smarty->assign('NextQuestionId', $question->getNextSefId($questionCategoryID));
+        $smarty->assign('PreviousQuestionId', $question->getPreviousSefId($questionCategoryID));
         $template = $mobileView ? "m.index.tpl" : "index.tpl";
 }
 

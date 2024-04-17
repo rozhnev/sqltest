@@ -54,9 +54,11 @@ class Question
         $stmt = $this->dbh->prepare("
             SELECT 
                 question_categories.category_id,
+                categories.title_sef category_sef,
+                questions.title_sef question_sef,
                 question_categories.sequence_position number, 
-                title_{$lang} title,
-                task_{$lang} task,
+                questions.title_{$lang} title,
+                questions.task_{$lang} task,
                 dbms,
                 db_template,
                 last_attempt_at::date last_attempt_date, 
@@ -66,6 +68,7 @@ class Question
                 rate_{$lang} question_rate
             FROM questions 
             JOIN question_categories ON question_categories.question_id = questions.id and question_categories.category_id = :category_id
+            JOIN categories on categories.id = question_categories.category_id
             LEFT JOIN user_questions ON user_questions.question_id = questions.id and user_questions.user_id = :user_id
             LEFT JOIN question_rates ON questions.rate = question_rates.id
             WHERE questions.id = :id");
@@ -115,14 +118,15 @@ class Question
      * Returns id of previous question in category
      *
      * @param int $questionCategoryID
-     * @return integer
+     * @return string
      */
-    public function getPreviousId (int $questionCategoryID): int 
+    public function getPreviousSefId (int $questionCategoryID): string 
     {
         $stmt = $this->dbh->prepare("
             select 
-                question_id
+                title_sef
             from question_categories 
+            join questions on questions.id = question_categories.question_id
             where category_id = :category_id and sequence_position < (
                 select sequence_position from question_categories where category_id = :category_id and question_id = :question_id
             )
@@ -130,20 +134,21 @@ class Question
             limit 1;
         ");
         $stmt->execute(['category_id' => $questionCategoryID, ':question_id' => $this->id]);
-        return (int)$stmt->fetchColumn();
+        return (string)$stmt->fetchColumn();
     }
     /**
      * Returns id of next question in category
      *
      * @param int $questionCategoryID
-     * @return integer
+     * @return string
      */
-    public function getNextId (int $questionCategoryID): int 
+    public function getNextSefId (int $questionCategoryID): string 
     {
         $stmt = $this->dbh->prepare("
             select 
-                question_id
+                title_sef
             from question_categories 
+            join questions on questions.id = question_categories.question_id
             where category_id = :category_id and sequence_position > (
                 select sequence_position from question_categories where category_id = :category_id and question_id = :question_id
             )
@@ -151,7 +156,7 @@ class Question
             limit 1;
         ");
         $stmt->execute(['category_id' => $questionCategoryID, ':question_id' => $this->id]);
-        return (int)$stmt->fetchColumn();
+        return (string)$stmt->fetchColumn();
     }
     public function getQueryPreCheck(): string {
         $stmt = $this->dbh->prepare("SELECT query_pre_check FROM questions WHERE id = ?");
