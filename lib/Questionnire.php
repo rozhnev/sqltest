@@ -101,15 +101,15 @@ class Questionnire
 
     public function getCategoryId(string $sef): int
     {
-        $stmt = $this->dbh->prepare("SELECT id FROM categories WHERE title_sef = sef: ;");
-        $stmt->execute(['sef:' => $sef]);
+        $stmt = $this->dbh->prepare("SELECT id FROM categories WHERE title_sef = :sef ;");
+        $stmt->execute([':sef' => $sef]);
         return $stmt->fetchColumn(0);
     }
     
     public function getQuestionId(string $sef): int
     {
-        $stmt = $this->dbh->prepare("SELECT id FROM questions WHERE title_sef = sef: ;");
-        $stmt->execute(['sef:' => $sef]);
+        $stmt = $this->dbh->prepare("SELECT id FROM questions WHERE title_sef = :sef ;");
+        $stmt->execute([':sef' => $sef]);
         return $stmt->fetchColumn(0);
     }
 }
