@@ -41,9 +41,11 @@ class Questionnire
     {
         $stmt = $this->dbh->prepare("
             SELECT 
-                categories.title_sef id,
+                categories.id,
+                categories.title_sef sef,
                 categories.title_{$this->lang} questions_category,
-                questions.title_sef question_id,
+                questions.id question_id,
+                questions.title_sef question_sef,
                 questions.db_template,
                 questions.title_{$this->lang} question_title,
                 (solved_at IS NOT NULL) solved
@@ -69,9 +71,10 @@ class Questionnire
                     if (!isset($acc[$el['id']])) $acc[$el['id']] = [
                         'title'     => $el['questions_category'],
                         'db'        => $el['db_template'],
+                        'sef'       => $el['sef'],
                         'questions' => []
                     ];
-                    $acc[$el['id']]['questions'][] = [$el['question_title'], $el['question_id'], $el['solved']];
+                    $acc[$el['id']]['questions'][] = [$el['question_title'], $el['question_id'], $el['solved'], $el['question_sef']];
                     return $acc;
                 },
                 []
@@ -110,6 +113,8 @@ class Questionnire
     {
         $stmt = $this->dbh->prepare("SELECT id FROM questions WHERE title_sef = :sef ;");
         $stmt->execute([':sef' => $sef]);
+        var_dump($sef);
+        var_dump($stmt->fetchColumn(0));
         return $stmt->fetchColumn(0);
     }
 }
