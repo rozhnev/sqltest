@@ -113,8 +113,6 @@ class Questionnire
     {
         $stmt = $this->dbh->prepare("SELECT id FROM questions WHERE title_sef = :sef ;");
         $stmt->execute([':sef' => $sef]);
-        var_dump($sef);
-        var_dump($stmt->fetchColumn(0));
         return $stmt->fetchColumn(0);
     }
 }
