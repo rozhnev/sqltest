@@ -41,9 +41,9 @@ class Questionnire
     {
         $stmt = $this->dbh->prepare("
             SELECT 
-                categories.id,
+                categories.title_sef id,
                 categories.title_{$this->lang} questions_category,
-                questions.id question_id,
+                questions.title_sef question_id,
                 questions.db_template,
                 questions.title_{$this->lang} question_title,
                 (solved_at IS NOT NULL) solved
