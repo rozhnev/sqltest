@@ -32,6 +32,12 @@ if (isset($pathParts[0]) && $pathParts[0] === 'login') {
     $action     = 'question';
     $questionCategoryID = $params['questionCategoryID'];
     $questionID = $params['questionID'];
+} elseif (preg_match('@(?<lang>ru|en)/question/(?<questionCategory>[a-z-]+)/(?<question>[a-z-]+)@i', $path, $params)) {
+    $lang       = $params['lang'];
+    $questionnire = new Questionnire($dbh, $lang);
+    $action     = 'question';
+    $questionCategoryID = $questionnire->getCategoryId($params['questionCategory']);
+    $questionID = $questionnire->getQuestionId($params['question']);
 } elseif (preg_match('@(?<lang>ru|en)/question/(?<questionID>\d+)/(?<action>query-help|query-run|query-test|rate)@i', $path, $params)) {
     $lang       = $params['lang'];
     $action     = $params['action'];
