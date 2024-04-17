@@ -62,7 +62,7 @@
                 window.yaContextCb.push(()=>{
                     Ya.Context.AdvManager.render({
                         "blockId": "R-A-4716552-2",
-                        "renderTo": "yandex_rtb_R-A-4716552-2"
+                        "renderTo": "yandex_rtb_R-A-4716552-2",
                         darkTheme: window.UIConfig.theme === 'dark'
                     })
                 })
