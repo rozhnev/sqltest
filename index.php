@@ -20,6 +20,10 @@ $db         = '';
 $questionID = '';
 $QuestionnireName = $_COOKIE['Questionnire'] ?? 'category';
 
+if ($mobileView) {
+    $smarty->assign('CanonicalLink', "https://sqltest.online/{$path}");
+}
+
 if (isset($pathParts[0]) && $pathParts[0] === 'login') {
     $action     = 'login';
     $loginProvider = $pathParts[1];
@@ -38,6 +42,7 @@ if (isset($pathParts[0]) && $pathParts[0] === 'login') {
     $action     = 'question';
     $questionCategoryID = $questionnire->getCategoryId($params['questionCategory']);
     $questionID = $questionnire->getQuestionId($params['question']);
+    $smarty->assign('CanonicalLink', "https://sqltest.online/{$lang}/question/{$questionCategoryID}/{$questionID}");
 } elseif (preg_match('@(?<lang>ru|en)/question/(?<questionID>\d+)/(?<action>query-help|query-run|query-test|rate)@i', $path, $params)) {
     $lang       = $params['lang'];
     $action     = $params['action'];
