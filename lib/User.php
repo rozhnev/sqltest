@@ -335,7 +335,8 @@ class User
      * Save Questoin attepmt in DB
      *
      * @param integer $questionID
-     * @param boolean $solved
+     * @param array $result
+     * @param string $query
      * @return void
      */
     public function saveQuestionAttempt(int $questionID, array $result, string $query): void
@@ -364,7 +365,7 @@ class User
      * Save Questoin attepmt in DB
      *
      * @param integer $questionID
-     * @param boolean $solved
+     * @param integer $rate
      * @return void
      */
     public function saveQuestionRate(int $questionID, int $rate): void

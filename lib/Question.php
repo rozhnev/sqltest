@@ -161,12 +161,12 @@ class Question
     public function getQueryPreCheck(): string {
         $stmt = $this->dbh->prepare("SELECT query_pre_check FROM questions WHERE id = ?");
         $stmt->execute([$this->id]);
-        return (string)$stmt->fetchColumn() ?? '';
+        return (string)$stmt->fetchColumn();
     }
     public function getQueryCheck(): string {
         $stmt = $this->dbh->prepare("SELECT query_check FROM questions WHERE id = ?");
         $stmt->execute([$this->id]);
-        return (string)$stmt->fetchColumn() ?? '';
+        return (string)$stmt->fetchColumn();
     }
     /**
      * Check query using regular expressions

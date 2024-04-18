@@ -62,7 +62,7 @@ class Query
             $result = curl_exec($ch);
             curl_close($ch);
 
-            return preg_replace("/{$this->hash}\.?/", '', $result??'');
+            return preg_replace("/{$this->hash}\.?/", '', (string)$result);
         } else {
             throw new Exception('Can\'t qet query result');
         }
