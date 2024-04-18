@@ -122,7 +122,7 @@ switch ($action) {
         $sql = $_POST["query"] ?? '';
         $question = new Question($dbh, $questionID);
         $queryTestResult = $question->checkQuery($sql);
-        $smarty->assign('QeryTestResult', $queryTestResult);
+        $smarty->assign('QueryTestResult', $queryTestResult);
         if ($queryTestResult['ok']) {
             $queryCheck = $question->getQueryCheck();
             $queryPreCheck = $question->getQueryPreCheck();
@@ -130,8 +130,8 @@ switch ($action) {
             $query = new Query($queryPreCheck . ';' . $sql . ';' . $queryCheck);
             $jsonResult = $query->getResult($question->getDB(), 'json');
             $queryTestResult = $question->checkQueryResult($jsonResult);
-            $smarty->assign('QeryTestResult', $queryTestResult);
-            $smarty->assign('QeryBestCost', $question->getBestCost());
+            $smarty->assign('QueryTestResult', $queryTestResult);
+            $smarty->assign('QueryBestCost', $question->getBestCost());
         }
         if ($user->logged()) {
             $user->saveQuestionAttempt($questionID, $queryTestResult, $sql);

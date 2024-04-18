@@ -1,12 +1,11 @@
-{* {var_dump($QeryTestResult)} *}
-{if $QeryTestResult.ok}
+{if $QueryTestResult.ok}
     <b>Отлично! Вы справились с задачей!</b>
-    {if $QeryTestResult.cost > 0}
-        <p>Стоимость выполнения вашего запроса — {$QeryTestResult.cost} (чем меньше стоимость тем эффективней запрос)</p>
-        {if $QeryBestCost}
-            Лучший запрос имеет стоимость:  {$QeryBestCost}
-            {if $QeryBestCost == $QeryTestResult.cost} Поздравляем! Ваш вариант запроса в числе лучших на нашем сайте!
-            {elseif $QeryBestCost > $QeryTestResult.cost} Поздравляем вам удалось улучшить наш рекорд!
+    {if $QueryTestResult.cost > 0}
+        <p>Стоимость выполнения вашего запроса — {$QueryTestResult.cost} (чем меньше стоимость тем эффективней запрос)</p>
+        {if $QueryBestCost}
+            Лучший запрос имеет стоимость:  {$QueryBestCost}
+            {if $QueryBestCost == $QueryTestResult.cost} Поздравляем! Ваш вариант запроса в числе лучших на нашем сайте!
+            {elseif $QueryBestCost > $QueryTestResult.cost} Поздравляем вам удалось улучшить наш рекорд!
             {else} К сожалению, ваш результат немного недотягивает до рекорда. Вам есть над чем поработать! {/if}
         {/if}
     {/if}
@@ -29,26 +28,26 @@
     {/if}
 {else}
     К сожалению неверно. 
-    {if array_key_exists('hints', $QeryTestResult) }
-        {if array_key_exists('queryError', $QeryTestResult.hints) }
-            <p>Подсказка: запрос вернул ошибку: <span class="sql_error">{$QeryTestResult.hints.queryError}</span></p>
+    {if array_key_exists('hints', $QueryTestResult) }
+        {if array_key_exists('queryError', $QueryTestResult.hints) }
+            <p>Подсказка: запрос вернул ошибку: <span class="sql_error">{$QueryTestResult.hints.queryError}</span></p>
         {/if}
-        {if array_key_exists('columnsCount', $QeryTestResult.hints) }
-            <p>Подсказка: результирующая таблица должна состоять из {$QeryTestResult.hints.columnsCount} колонок.</p>
+        {if array_key_exists('columnsCount', $QueryTestResult.hints) }
+            <p>Подсказка: результирующая таблица должна состоять из {$QueryTestResult.hints.columnsCount} колонок.</p>
         {/if}
-        {if array_key_exists('columnsList', $QeryTestResult.hints) }
-            <p>Подсказка: результирующая таблица должна состоять из следующих колонок: {$QeryTestResult.hints.columnsList}.</p>
+        {if array_key_exists('columnsList', $QueryTestResult.hints) }
+            <p>Подсказка: результирующая таблица должна состоять из следующих колонок: {$QueryTestResult.hints.columnsList}.</p>
         {/if}
-        {if array_key_exists('rowsCount', $QeryTestResult.hints) }
-            <p>Подсказка: результат должен содержать {$QeryTestResult.hints.rowsCount} строк.</p>
+        {if array_key_exists('rowsCount', $QueryTestResult.hints) }
+            <p>Подсказка: результат должен содержать {$QueryTestResult.hints.rowsCount} строк.</p>
         {/if}
-        {if array_key_exists('rowsData', $QeryTestResult.hints) }
-            <p>Подсказка: строка номер {$QeryTestResult.hints.rowsData.rowNumber} таблицы результатов должна содержать следующие значения: {$QeryTestResult.hints.rowsData.rowData}.</p>
+        {if array_key_exists('rowsData', $QueryTestResult.hints) }
+            <p>Подсказка: строка номер {$QueryTestResult.hints.rowsData.rowNumber} таблицы результатов должна содержать следующие значения: {$QueryTestResult.hints.rowsData.rowData}.</p>
         {/if}
-        {if array_key_exists('emptyQuery', $QeryTestResult.hints) }
+        {if array_key_exists('emptyQuery', $QueryTestResult.hints) }
             <p>Подсказка: ваш запрос пуст.</p>
         {/if}
-        {if array_key_exists('wrongQuery', $QeryTestResult.hints) }
+        {if array_key_exists('wrongQuery', $QueryTestResult.hints) }
             <p>Подсказка: ваш запрос не соответствует требованиям описанным в задаче. <a href="#" onclick="getHelp('ru', {$QuestionID}); return false;">Воспользуйтесь подсказкой</a> и попробуйте переписать его..</p>
         {/if}
     {/if}
