@@ -1,3 +1,15 @@
+
+let windowObjectReference = null; // global variable
+function openRequestedTab() {
+  if (windowObjectReference === null || windowObjectReference.closed) {
+    const url = `/images/sakila_${window.UIConfig.theme === 'dark' ?  'dark' : 'light'}.png`;
+    const popUpParams = `scrollbars=no,resizable=yes,status=no,location=no,toolbar=no,menubar=no,width=0,height=0,left=-1000,top=-1000`;
+    windowObjectReference = window.open(url, 'Sakila DB ER Diagram', popUpParams);
+  } else {
+    windowObjectReference.focus();
+  }
+}
+
 function switchTheme(e) {
     const currentTheme = e.target.checked ?  'dark' : 'light';
     window.sql_editor.setTheme(currentTheme === 'dark' ? 'ace/theme/github_dark' : 'ace/theme/xcode');
@@ -270,6 +282,16 @@ function setEventListeners() {
     })
     const toggleSwitch = document.querySelector('#theme-switch-checkbox');
     toggleSwitch.addEventListener('change', switchTheme, false);
+
+    const link = document.querySelector("a[target='ERDWindow']");
+    link.addEventListener(
+      "click",
+      (event) => {
+        openRequestedTab();
+        event.preventDefault();
+      },
+      false,
+    );
 }
 
 setMenuEventListeners();
