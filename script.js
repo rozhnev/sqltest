@@ -284,14 +284,16 @@ function setEventListeners() {
     toggleSwitch.addEventListener('change', switchTheme, false);
 
     const link = document.querySelector("a[target='ERDWindow']");
-    link.addEventListener(
-      "click",
-      (event) => {
-        openRequestedTab();
-        event.preventDefault();
-      },
-      false,
-    );
+    if (link) {
+        link.addEventListener(
+          "click",
+          (event) => {
+            openRequestedTab();
+            event.preventDefault();
+          },
+          false,
+        );
+    }
 }
 
 setMenuEventListeners();
