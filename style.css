@@ -666,6 +666,11 @@ body {
     padding: 7px;
 }
 
+.code-result a,
+.code-result a:visited {
+    color: var(--sql-color);
+}
+
 .db-description h3 {
     margin-top: 0;
 }
