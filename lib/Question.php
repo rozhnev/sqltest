@@ -258,11 +258,25 @@ class Question
             // check rows order
             foreach ($queryValidResult->data as $i => $row) {
                 if ($row !== $resultObject[0]->data[$i]) {
-                    $hints['rowsData'] = ['rowNumber' => $i + 1, 'rowData' => "'" . implode("', '", $row) . "'" ];
-                    return [
-                        'ok' => false,
-                        'hints' => $hints
-                    ];
+                    foreach($row as $col=>$val) {
+                        if (
+                            is_numeric($resultObject[0]->data[$i][$col]) && is_numeric($val)
+                        ) {
+                            $row[$col] = floatval($val);
+                            $resultObject[0]->data[$i][$col] = floatval($resultObject[0]->data[$i][$col]);
+                        }
+                    }
+                    if ($row !== $resultObject[0]->data[$i]) {
+                        $hints['rowsData'] = [
+                            'rowNumber' => $i + 1,
+                            'rowTable' => '<table class="result-table"><tr><td>' . ($i + 1) . '</td><td>' . implode("</td><td>", $row) .'</td></tr></table>',
+                            'resultTable' => '<table class="result-table"><tr><td>' . ($i + 1) . '</td><td>' . implode("</td><td>", $resultObject[0]->data[$i]) .'</td></tr></table>'
+                        ];
+                        return [
+                            'ok' => false,
+                            'hints' => $hints
+                        ];
+                    }
                 }
             }
             return [

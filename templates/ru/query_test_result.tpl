@@ -42,13 +42,18 @@
             <p>Подсказка: результат должен содержать {$QueryTestResult.hints.rowsCount} строк.</p>
         {/if}
         {if array_key_exists('rowsData', $QueryTestResult.hints) }
-            <p>Подсказка: строка номер {$QueryTestResult.hints.rowsData.rowNumber} таблицы результатов должна содержать следующие значения: {$QueryTestResult.hints.rowsData.rowData}.</p>
+            <p>Подсказка: строка номер {$QueryTestResult.hints.rowsData.rowNumber} таблицы результатов должна содержать следующие значения: 
+                {$QueryTestResult.hints.rowsData.rowTable}
+            </p>
+            <p>ваш результат:
+                {$QueryTestResult.hints.rowsData.resultTable}
+            </p>
         {/if}
         {if array_key_exists('emptyQuery', $QueryTestResult.hints) }
             <p>Подсказка: ваш запрос пуст.</p>
         {/if}
         {if array_key_exists('wrongQuery', $QueryTestResult.hints) }
-            <p>Подсказка: ваш запрос не соответствует требованиям описанным в задаче. <a href="#" onclick="getHelp('ru', {$QuestionID}); return false;">Воспользуйтесь подсказкой</a> и попробуйте переписать его..</p>
+            <p>Подсказка: ваш запрос не соответствует требованиям описанным в задаче. <a href="#" onclick="getHelp('ru', {$QuestionID}); return false;">Воспользуйтесь подсказкой</a> и попробуйте переписать его.</p>
         {/if}
     {/if}
    Попробуйте ещё раз. Нашли ошибку в задании - <a target="_blank" href="https://t.me/sqlize">сообщите!</a>

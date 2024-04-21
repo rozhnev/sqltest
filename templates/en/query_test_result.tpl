@@ -42,13 +42,18 @@
             <p>Hint: the result must contain {$QueryTestResult.hints.rowsCount} rows.</p>
         {/if}
         {if array_key_exists('rowsData', $QueryTestResult.hints) }
-            <p>Hint: the row number {$QueryTestResult.hints.rowsData.rowNumber} of the results table should contain the following values: {$QueryTestResult.hints.rowsData.rowData}.</p>
+            <p>Hint: the row number {$QueryTestResult.hints.rowsData.rowNumber} of the results table should contain the following values: 
+                {$QueryTestResult.hints.rowsData.rowTable}
+            </p>
+            <p>your result:
+                {$QueryTestResult.hints.rowsData.resultTable}
+            </p>
         {/if}
         {if array_key_exists('emptyQuery', $QueryTestResult.hints) }
             <p>Hint: your query is empty.</p>
         {/if}
         {if array_key_exists('wrongQuery', $QueryTestResult.hints) }
-            <p>Hint: your request does not meet the requirements described in the task. <a href="#" onclick="getHelp('ru', {$QuestionID}); return false;">Use the hint</a> and try to rewrite it..</p>
+            <p>Hint: your request does not meet the requirements described in the task. <a href="#" onclick="getHelp('ru', {$QuestionID}); return false;">Use the hint</a> and try to rewrite it.</p>
         {/if}
      {/if}
     Try again.
