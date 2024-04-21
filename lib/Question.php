@@ -239,7 +239,7 @@ class Question
                 }
             );
             if (count($diff) > 0) {
-                $hints['columnsList'] = '<span class="ace_keyword">' . implode('</span>, <span class="ace_keyword">',array_column($queryValidResult->headers, 'header')) . "</span>";
+                $hints['columnsList'] = '<span class="sql">' . implode('</span>, <span class="sql">',array_column($queryValidResult->headers, 'header')) . "</span>";
                 return [
                     'ok' => false,
                     'hints' => $hints
