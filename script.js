@@ -1,8 +1,8 @@
 
 let windowObjectReference = null; // global variable
-function openRequestedTab() {
+function openRequestedTab(href) {
   if (windowObjectReference === null || windowObjectReference.closed) {
-    const url = `/images/sakila_${window.UIConfig.theme === 'dark' ?  'dark' : 'light'}.png`;
+    const url = `${href}_${window.UIConfig.theme === 'dark' ?  'dark' : 'light'}.png`;
     const popUpParams = `scrollbars=no,resizable=yes,status=no,location=no,toolbar=no,menubar=no,width=0,height=0,left=-1000,top=-1000`;
     windowObjectReference = window.open(url, 'Sakila DB ER Diagram', popUpParams);
   } else {
@@ -288,7 +288,8 @@ function setEventListeners() {
         link.addEventListener(
           "click",
           (event) => {
-            openRequestedTab();
+            console.log(event.target.href);
+            openRequestedTab(event.target.href);
             event.preventDefault();
           },
           false,
