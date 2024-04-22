@@ -46,7 +46,9 @@
     {/foreach}
     <div class="menu-ad">
         <div id="yandex_rtb_R-A-4716552-2">
-            <p>Please do not disable advertising on the site. This is our only source of funding to support the project.</p>
+            <p style="padding: 5px;">
+                Advertising income and donations are our only sources of funding to support the project. Please do not disable advertising on the site or make a reasonable donation.
+            </p>
         </div>
     </div>
 </div>
