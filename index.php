@@ -124,7 +124,7 @@ switch ($action) {
         $queryTestResult = $question->checkQuery($sql);
         $smarty->assign('QueryTestResult', $queryTestResult);
         if ($queryTestResult['ok']) {
-            $queryCheck = $question->getQueryCheck();
+            $queryCheck = $question->getQueryCheck($sql);
             $queryPreCheck = $question->getQueryPreCheck();
             
             $query = new Query($queryPreCheck . ';' . $sql . ';' . $queryCheck);

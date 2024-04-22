@@ -163,10 +163,11 @@ class Question
         $stmt->execute([$this->id]);
         return (string)$stmt->fetchColumn();
     }
-    public function getQueryCheck(): string {
+    public function getQueryCheck(string $query): string {
         $stmt = $this->dbh->prepare("SELECT query_check FROM questions WHERE id = ?");
         $stmt->execute([$this->id]);
-        return (string)$stmt->fetchColumn();
+        $queryCheck = (string)$stmt->fetchColumn();
+        return str_replace("{{query}}", str_replace("'","''",$query) , $queryCheck);
     }
     /**
      * Check query using regular expressions
