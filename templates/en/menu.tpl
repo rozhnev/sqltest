@@ -10,6 +10,10 @@
                 <input type="radio" id="category_menu_groups" name="menu_groups" value="category" onClick="loadMenu(this.value)" {if $Questionnire.name == 'category'}checked{/if}>
                 <label for="category_menu_groups">category</label>
             </div>
+            <div>
+                <input type="radio" id="database_menu_groups" name="menu_groups" value="database" onClick="loadMenu(this.value)" {if $Questionnire.name == 'database'}checked{/if}>
+                <label for="database_menu_groups">database</label>
+            </div>
         </div>
     </div>
     {foreach $Questionnire.menu as $categoryId => $panel}
