@@ -1,6 +1,6 @@
 <div class="menu" id="menu">
     <div class="selector">
-        <div style="min-width: 75px;">Group by:</div>
+        <div style="min-width: 9em;">Group by:</div>
         <div class="selector-options">
             <div>
                 <input type="radio" id="complexity_menu_groups" name="menu_groups" value="complexity" onClick="loadMenu(this.value)" {if $Questionnire.name == 'complexity'}checked{/if}>
