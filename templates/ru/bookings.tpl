@@ -6,6 +6,11 @@
         <a style="font-size: small; color: var(--special-text-color);" href="/images/bookings" target="ERDWindow">ER диаграмма базы данных Bookings</a>
     </p>
     <p>Таблица <span class='sql'>aircrafts_data</span></p>
+    <ul class="table-columns">
+        <li> <span class='sql'>aircraft_code</span> – Уникальный код для каждого самолета.</li>
+        <li> <span class='sql'>model</span> — Название модели самолета на английском и русском языках в формате JSON.</li>
+        <li> <span class='sql'>range</span> – Дальность полета самолета в километрах.</li>
+    </ul>
     <div class="table-wrapper">
         <table class=""><tbody><tr><th></th><th>aircraft_code</th><th>model</th><th>range</th></tr><tr><td>1</td><td>773</td><td>{"en": "Boeing 777-300", "ru": "Боинг 777-300"}</td><td>11100</td></tr></tbody></table>
     </div>

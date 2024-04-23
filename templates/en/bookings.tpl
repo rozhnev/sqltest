@@ -6,8 +6,18 @@
         <a style="font-size: small; color: var(--special-text-color);" href="/images/bookings" target="ERDWindow">ER diagram of the Bookings database</a>
     </p>
     <p>Table <span class='sql'>aircrafts_data</span></p>
+    <ul class="table-columns">
+        <li> <span class='sql'>aircraft_code</span> - Unique code for each aircraft.</li>
+        <li> <span class='sql'>model</span> - Aircraft model name in English and Russian in JSON format.</li>
+        <li> <span class='sql'>range</span> - Aircraft fly range in kilometers.</li>
+    </ul>
     <div class="table-wrapper">
-        <table class=""><tbody><tr><th></th><th>aircraft_code</th><th>model</th><th>range</th></tr><tr><td>1</td><td>773</td><td>{"en": "Boeing 777-300", "ru": "Боинг 777-300"}</td><td>11100</td></tr></tbody></table>
+        <table class="">
+            <tbody>
+                <tr><th></th><th>aircraft_code</th><th>model</th><th>range</th></tr>
+                <tr><td>1</td><td>773</td><td>{"en": "Boeing 777-300", "ru": "Боинг 777-300"}</td><td>11100</td></tr>
+            </tbody>
+        </table>
     </div>
     <p>Table <span class='sql'>airports_data</span></p>
     <div class="table-wrapper">
