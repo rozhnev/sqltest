@@ -20,8 +20,18 @@
         </table>
     </div>
     <p>Table <span class='sql'>airports_data</span></p>
+    <ul class="table-columns">
+        <li> <span class='sql'>airport_code</span> - Unique code for each airport.</li>
+        <li> <span class='sql'>airport_name</span> - Airport name in English and Russian in JSON format.</li>
+        <li> <span class='sql'>city</span> - Airport city in English and Russian in JSON format.</li>
+        <li> <span class='sql'>coordinates</span> - Airport coordinates as POINT(latitude, longitude).</li>
+        <li> <span class='sql'>timezone</span> - Airport timezone name.</li>
+    </ul>
     <div class="table-wrapper">
-        <table class=""><tbody><tr><th></th><th>airport_code</th><th>airport_name</th><th>city</th><th>coordinates</th><th>timezone</th></tr><tr><td>1</td><td>YKS</td><td>{"en": "Yakutsk Airport", "ru": "Якутск"}</td><td>{"en": "Yakutsk", "ru": "Якутск"}</td><td>(129.77099609375,62.0932998657227)</td><td>Asia/Yakutsk</td></tr></tbody></table>
+        <table class="">
+            <tbody>
+                <tr><th></th><th>airport_code</th><th>airport_name</th><th>city</th><th>coordinates</th><th>timezone</th></tr>
+                <tr><td>1</td><td>YKS</td><td>{"en": "Yakutsk Airport", "ru": "Якутск"}</td><td>{"en": "Yakutsk", "ru": "Якутск"}</td><td>(129.77099609375,62.0932998657227)</td><td>Asia/Yakutsk</td></tr></tbody></table>
     </div>
     <p>Table <span class='sql'>boarding_passes</span></p>
     <div class="table-wrapper">

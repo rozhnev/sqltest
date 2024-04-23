@@ -15,6 +15,13 @@
         <table class=""><tbody><tr><th></th><th>aircraft_code</th><th>model</th><th>range</th></tr><tr><td>1</td><td>773</td><td>{"en": "Boeing 777-300", "ru": "Боинг 777-300"}</td><td>11100</td></tr></tbody></table>
     </div>
     <p>Таблица <span class='sql'>airports_data</span></p>
+    <ul class="table-columns">
+         <li> <span class='sql'>airport_code</span> – Уникальный код для каждого аэропорта.</li>
+         <li> <span class='sql'>airport_name</span> — Название аэропорта на английском и русском языках в формате JSON.</li>
+         <li> <span class='sql'>city</span> — Город аэропорта на английском и русском языках в формате JSON.</li>
+         <li> <span class='sql'>coordinates</span> – Координаты аэропорта в виде POINT(широта, долгота).</li>
+         <li> <span class='sql'>timezone</span> – Название часового пояса аэропорта.</li>
+     </ul>
     <div class="table-wrapper">
         <table class=""><tbody><tr><th></th><th>airport_code</th><th>airport_name</th><th>city</th><th>coordinates</th><th>timezone</th></tr><tr><td>1</td><td>YKS</td><td>{"en": "Yakutsk Airport", "ru": "Якутск"}</td><td>{"en": "Yakutsk", "ru": "Якутск"}</td><td>(129.77099609375,62.0932998657227)</td><td>Asia/Yakutsk</td></tr></tbody></table>
     </div>
