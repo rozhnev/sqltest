@@ -13,6 +13,36 @@ $mobileView =  (
     //|| parse_url($_SERVER['HTTP_HOST'])['host'] === 'm.sqltest.local' 
 );
 
+function getUserOSLanguage() {
+    $lang = 'en';
+    $langs = array();
+    if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
+        // Break up string into pieces (languages and q factors)
+        preg_match_all(
+            '/([a-z]{1,8}(-[a-z]{1,8})?)\s*(;\s*q\s*=\s*(1|0\.[0-9]+))?/i',
+            $_SERVER['HTTP_ACCEPT_LANGUAGE'],
+            $lang_parse
+        );
+        if (count($lang_parse[1])) {
+            // Create a list like 'en' => 0.8
+            $langs = array_combine($lang_parse[1], $lang_parse[4]);
+            // Set default to 1 for any without q factor
+            foreach ($langs as $lang => $val) {
+                if ($val === '') $langs[$lang] = 1;
+            }
+            // Sort list based on value
+            arsort($langs, SORT_NUMERIC);
+        }
+    }
+    // Extract most important (first)
+    foreach ($langs as $lang => $val) { break; }
+    // If complex language, simplify it
+    if (stristr($lang, "-")) {
+        $tmp = explode("-", $lang);
+        $lang = $tmp[0];
+    }
+    return $lang;
+}
 
 $path = isset($_SERVER['PATH_INFO']) ? trim($_SERVER['PATH_INFO'], '/') : trim($_SERVER['PHP_SELF'], '/');
 $pathParts = explode('/', $path);
@@ -56,7 +86,7 @@ if (isset($pathParts[0]) && $pathParts[0] === 'login') {
     $questionCategoryID = $params['questionCategory'] == 'employee' ? 2 : 1;
     $questionID = $params['questionID'];
 } else {
-    $lang       = isset($pathParts[0]) && $pathParts[0] === 'ru' ? 'ru' : 'en';
+    $lang       = isset($pathParts[0]) && $pathParts[0] === 'ru' ? 'ru' : getUserOSLanguage();
     $questionID = $pathParts[2] ?? 1;
     $action     = $pathParts[3] ?? 'question';
     $questionCategoryID = 1;
