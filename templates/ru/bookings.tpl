@@ -19,7 +19,7 @@
          <li> <span class='sql'>airport_code</span> – Уникальный код для каждого аэропорта.</li>
          <li> <span class='sql'>airport_name</span> — Название аэропорта на английском и русском языках в формате JSON.</li>
          <li> <span class='sql'>city</span> — Город аэропорта на английском и русском языках в формате JSON.</li>
-         <li> <span class='sql'>coordinates</span> – Координаты аэропорта в виде POINT(широта, долгота).</li>
+         <li> <span class='sql'>coordinates</span> – Координаты аэропорта в виде POINT(долгота, широта).</li>
          <li> <span class='sql'>timezone</span> – Название часового пояса аэропорта.</li>
      </ul>
     <div class="table-wrapper">
