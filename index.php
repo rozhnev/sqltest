@@ -86,7 +86,7 @@ if (isset($pathParts[0]) && $pathParts[0] === 'login') {
     $questionCategoryID = $params['questionCategory'] == 'employee' ? 2 : 1;
     $questionID = $params['questionID'];
 } else {
-    $lang       = isset($pathParts[0]) && $pathParts[0] === 'ru' ? 'ru' : getUserOSLanguage();
+    $lang       = (isset($pathParts[0]) && $pathParts[0] === 'ru') ||  getUserOSLanguage() =='ru' ? 'ru' : 'en';
     $questionID = $pathParts[2] ?? 1;
     $action     = $pathParts[3] ?? 'question';
     $questionCategoryID = 1;
