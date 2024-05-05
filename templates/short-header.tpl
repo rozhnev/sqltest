@@ -5,6 +5,23 @@
             <meta name="viewport" content="width=device-width, initial-scale=1"/>
             <meta charset="utf-8">
             <meta name="description" content="Free online SQL test.">
+            <script>
+            function loadUIConfig() {
+                const defaultConfig = {
+                    hideSolvedTasks: false,
+                    hideInfoPanel: false,
+                    theme: 'light'
+                };
+                try {
+                    const UIConfig = localStorage.getItem("UIConfig");
+                    return UIConfig ? JSON.parse(UIConfig) : defaultConfig;
+                } catch (err) {
+                    return defaultConfig
+                }
+            }
+            window.UIConfig = loadUIConfig();
+            document.documentElement.setAttribute('data-theme', window.UIConfig.theme);
+        </script>
             <meta name="keywords" content="free sql test,online testing, sql, fiddle">
             {include file='site-title.tpl'}
             <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
