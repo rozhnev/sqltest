@@ -1,5 +1,5 @@
 <div class="db-description">
-    <h3>Employee Database (Firebird) description</h3>
+    <h2>Employee Database (Firebird) description</h2>
     <p>
      Employee is a sample database that comes with the Firebird cross-platform database management system.
      You can use this database to explore Firebird SQL and other DBMS features.
@@ -7,8 +7,8 @@
     <p>
     Below is a list of this DB tables:
     </p>
-    <p>Table: <span class='sql'>COUNTRIES</span></p>
-    <ul class="table-columns">
+    <h3>Table: <span class='sql'>COUNTRIES</span></h3>
+    Table columns: <ul class="table-columns">
         <li><span class='sql'>COUNTRY</span> - Name of the country.</li>
         <li><span class='sql'>CURRENCY</span> - Currency used in the country.</li>
     </ul>
@@ -25,8 +25,8 @@
             <!-- Add more rows as needed -->
         </table>
     </div>
-    <p>Table: <span class='sql'>JOB</span></p>
-    <ul class="table-columns">
+    <h3>Table: <span class='sql'>JOB</span></h3>
+    Table columns: <ul class="table-columns">
         <li><span class='sql'>JOB_CODE</span> - Job code.</li>
         <li><span class='sql'>JOB_GRADE</span> - Job grade.</li>
         <li><span class='sql'>JOB_COUNTRY</span> - Country associated with the job.</li>
@@ -61,8 +61,8 @@
             <!-- Add more rows as needed -->
         </table>
     </div>
-    <p>Table: <span class='sql'>DEPARTMENT</span></p>
-    <ul class="table-columns">
+    <h3>Table: <span class='sql'>DEPARTMENT</span></h3>
+    Table columns: <ul class="table-columns">
         <li><span class='sql'>DEPT_NO</span> - Department number.</li>
         <li><span class='sql'>DEPARTMENT</span> - Department name.</li>
         <li><span class='sql'>HEAD_DEPT</span> - Head department (can be null).</li>
@@ -94,8 +94,8 @@
             <!-- Add more rows as needed -->
         </table>
     </div>
-    <p>Table: <span class='sql'>EMPLOYEE</span></p>
-    <ul class="table-columns">
+    <h3>Table: <span class='sql'>EMPLOYEE</span></h3>
+    Table columns: <ul class="table-columns">
         <li><span class='sql'>EMP_NO</span> - Employee number.</li>
         <li><span class='sql'>FIRST_NAME</span> - First name of the employee.</li>
         <li><span class='sql'>LAST_NAME</span> - Last name of the employee.</li>
@@ -139,8 +139,8 @@
             <!-- Add more rows as needed -->
         </table>
     </div>
-    <p>Table: <span class='sql'>PROJECT</span></p>
-    <ul class="table-columns">
+    <h3>Table: <span class='sql'>PROJECT</span></h3>
+    Table columns: <ul class="table-columns">
         <li><span class='sql'>PROJ_ID</span> - Project ID.</li>
         <li><span class='sql'>PROJ_NAME</span> - Project name.</li>
         <li><span class='sql'>PROJ_DESC</span> - Project description.</li>
@@ -166,8 +166,8 @@
             <!-- Add more rows as needed -->
         </table>
     </div>
-    <p>Table: <span class='sql'>EMPLOYEE_PROJECT</span></p>
-    <ul class="table-columns">
+    <h3>Table: <span class='sql'>EMPLOYEE_PROJECT</span></h3>
+    Table columns: <ul class="table-columns">
         <li><span class='sql'>EMP_NO</span> - Employee number.</li>
         <li><span class='sql'>PROJ_ID</span> - Project ID.</li>
     </ul>
@@ -184,8 +184,8 @@
             <!-- Add more rows as needed -->
         </table>
     </div>
-    <p>Table: <span class='sql'>PROJ_DEPT_BUDGET</span></p>
-    <ul class="table-columns">
+    <h3>Table: <span class='sql'>PROJ_DEPT_BUDGET</span></h3>
+    Table columns: <ul class="table-columns">
         <li><span class='sql'>FISCAL_YEAR</span> - Fiscal year.</li>
         <li><span class='sql'>PROJ_ID</span> - Project ID.</li>
         <li><span class='sql'>DEPT_NO</span> - Department number.</li>
@@ -211,8 +211,8 @@
             <!-- Add more rows as needed -->
         </table>
     </div>
-    <p>Table: <span class='sql'>SALARY_HISTORY</span></p>
-    <ul class="table-columns">
+    <h3>Table: <span class='sql'>SALARY_HISTORY</span></h3>
+    Table columns: <ul class="table-columns">
         <li><span class='sql'>EMP_NO</span> - Employee number.</li>
         <li><span class='sql'>CHANGE_DATE</span> - Date of salary change.</li>
         <li><span class='sql'>UPDATER_ID</span> - Updater ID.</li>
@@ -241,8 +241,8 @@
             <!-- Add more rows as needed -->
         </table>
     </div>
-    <p>Table: <span class='sql'>CUSTOMER</span></p>
-    <ul class="table-columns">
+    <h3>Table: <span class='sql'>CUSTOMER</span></h3>
+    Table columns: <ul class="table-columns">
         <li><span class='sql'>CUST_NO</span> - Customer number.</li>
         <li><span class='sql'>CUSTOMER</span> - Customer name.</li>
         <li><span class='sql'>CONTACT_FIRST</span> - First name of the contact person.</li>
@@ -289,8 +289,8 @@
             <!-- Add more rows as needed -->
         </table>
     </div>
-    <p>Table: <span class='sql'>SALES</span></p>
-    <ul class="table-columns">
+    <h3>Table: <span class='sql'>SALES</span></h3>
+    Table columns: <ul class="table-columns">
         <li><span class='sql'>PO_NUMBER</span> - Purchase order number.</li>
         <li><span class='sql'>CUST_NO</span> - Customer number associated with the order.</li>
         <li><span class='sql'>SALES_REP</span> - Sales representative number.</li>
