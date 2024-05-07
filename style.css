@@ -671,10 +671,6 @@ body {
     color: var(--sql-color);
 }
 
-.db-description h3 {
-    margin-top: 0;
-}
-
 .db-description table {
     border-collapse: collapse;
     width: 100%;
