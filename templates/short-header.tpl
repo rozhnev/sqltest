@@ -4,35 +4,33 @@
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1"/>
             <meta charset="utf-8">
-            <meta name="description" content="Free online SQL test.">
             <script>
-            function loadUIConfig() {
-                const defaultConfig = {
-                    hideSolvedTasks: false,
-                    hideInfoPanel: false,
-                    theme: 'light'
-                };
-                try {
-                    const UIConfig = localStorage.getItem("UIConfig");
-                    return UIConfig ? JSON.parse(UIConfig) : defaultConfig;
-                } catch (err) {
-                    return defaultConfig
+                function loadUIConfig() {
+                    const defaultConfig = {
+                        hideSolvedTasks: false,
+                        hideInfoPanel: false,
+                        theme: 'light'
+                    };
+                    try {
+                        const UIConfig = localStorage.getItem("UIConfig");
+                        return UIConfig ? JSON.parse(UIConfig) : defaultConfig;
+                    } catch (err) {
+                        return defaultConfig
+                    }
                 }
-            }
-            window.UIConfig = loadUIConfig();
-            document.documentElement.setAttribute('data-theme', window.UIConfig.theme);
-        </script>
-            <meta name="keywords" content="free sql test,online testing, sql, fiddle">
+                window.UIConfig = loadUIConfig();
+                document.documentElement.setAttribute('data-theme', window.UIConfig.theme);
+            </script>
             {include file='site-title.tpl'}
             <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
             <link rel="icon" type="image/png" href="/favicons/favicon-32x32.png" sizes="32x32">
             <link rel="icon" type="image/png" href="/favicons/favicon-16x16.png" sizes="16x16">
-            <link rel="stylesheet" type="text/css" href="/style.css?18" media="all">
+            <link rel="stylesheet" type="text/css" href="/style.css?20" media="all">
             <!-- Yandex.RTB -->
             <script>window.yaContextCb=window.yaContextCb||[]</script>
             <script src="https://yandex.ru/ads/system/context.js" async></script>
                 <script src="https://yastatic.net/s3/passport-sdk/autofill/v1/sdk-suggest-with-polyfills-latest.js"></script>
-            <script type="text/javascript" src="/script.js?18" defer></script>
+            <script type="text/javascript" src="/script.js?20" defer></script>
             {literal}
             <!-- Yandex.RTB R-A-4716552-1 -->
             <script>

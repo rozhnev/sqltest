@@ -11,7 +11,7 @@
     {/if}
     {if !$Logged}
         <p class="question-action">
-            Для сохранения вашего прогресса выполните <a href="" onClick="toggleLoginWindow(); return false;">вход на сайт</a>
+            Для сохранения вашего прогресса и возможности увидеть другие варианты решения выполните <a href="" onClick="toggleLoginWindow(); return false;">вход на сайт</a>
         </p>
     {else}
         <p class="question-action">
@@ -24,6 +24,9 @@
             <option value="4">Сложно</option>
             <option value="5">Очень сложно</option>
         </select>
+        </p>
+        <p class="question-action">
+             <button onClick="showSolutions({$QuestionID})">Покажите мне другие решения!</button>
         </p>
     {/if}
 {else}

@@ -53,7 +53,7 @@
         <div class="code-result ace-xcode" id="code-result"></div>
     </div>
 
-    <div class="right">
+    <div class="right" id="right-panel">
         {include file="{$DB}.tpl"}
     </div>
     {include file='footer.tpl'}

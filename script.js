@@ -25,8 +25,8 @@ function switchTheme(e) {
     }
 }
 
-function setLoader() {
-  return document.getElementById('code-result').innerHTML = '<div class="loader">Loading...</div>';
+function setLoader(id) {
+  return document.getElementById(id).innerHTML = '<div class="loader">Loading...</div>';
 }
 
 function showToast(msg) {
@@ -40,10 +40,10 @@ function showToast(msg) {
 }
 function loadMenu(questionnire) {
     fetch(`/${lang}/menu?questionnire=${questionnire}`, {
-        method: "GET", // *GET, POST, PUT, DELETE, etc.
-        mode: "cors", // no-cors, *cors, same-origin
-        cache: "default", // *default, no-cache, reload, force-cache, only-if-cached
-        credentials: "same-origin", // include, *same-origin, omit
+        method: "GET",
+        mode: "cors",
+        cache: "default",
+        credentials: "same-origin",
     })
     .then((async response=>{
         if (!response.ok) throw Error('Something went wrong.');
@@ -100,12 +100,12 @@ function errorToTable(jsonObject) {
 }
 
 function getHelp(lang, questionId) {
-    setLoader();
+    setLoader('code-result');
     fetch(`/${lang}/question/${questionId}/query-help`, {
-        method: "GET", // *GET, POST, PUT, DELETE, etc.
-        mode: "cors", // no-cors, *cors, same-origin
-        cache: "default", // *default, no-cache, reload, force-cache, only-if-cached
-        credentials: "same-origin", // include, *same-origin, omit
+        method: "GET",
+        mode: "cors",
+        cache: "default",
+        credentials: "same-origin",
       })
       .then((async response=>{
         if (!response.ok) throw Error('SOmething went wrong.');
@@ -117,14 +117,14 @@ function getHelp(lang, questionId) {
 }
 
 function runQuery(lang, questionId) {
-  setLoader();
+  setLoader('code-result');
   let formData = new FormData();
   formData.append('query', window.sql_editor.getValue());
   fetch(`/${lang}/question/${questionId}/query-run`, {
-    method: "POST", // *GET, POST, PUT, DELETE, etc.
-    mode: "cors", // no-cors, *cors, same-origin
-    cache: "default", // *default, no-cache, reload, force-cache, only-if-cached
-    credentials: "same-origin", // include, *same-origin, omit
+    method: "POST",
+    mode: "cors",
+    cache: "default",
+    credentials: "same-origin",
     body: formData,
   })
   .then((async response=>{
@@ -148,21 +148,20 @@ function runQuery(lang, questionId) {
 }
 
 function testQuery(lang, questionId) {
-    setLoader();
+    setLoader('code-result');
     let formData = new FormData();
     formData.append('query', window.sql_editor.getValue());
     fetch(`/${lang}/question/${questionId}/query-test`, {
-        method: "POST", // *GET, POST, PUT, DELETE, etc.
-        mode: "cors", // no-cors, *cors, same-origin
-        cache: "default", // *default, no-cache, reload, force-cache, only-if-cached
-        credentials: "same-origin", // include, *same-origin, omit
+        method: "POST",
+        mode: "cors",
+        cache: "default",
+        credentials: "same-origin",
         body: formData,
     })
     .then((async response=>{
       if (response.ok) {
           [...document.getElementsByClassName("button test")].map(el=>el.classList.toggle("hidden"));
       }
-      //throw Error('Something went wrong.');
       return await response.text();
     }))
     .then((message)=>{
@@ -172,14 +171,39 @@ function testQuery(lang, questionId) {
         document.getElementById('code-result').innerHTML = 'Something went wrong. Please review your query and try again.';
     });
 }
+function showSolutions(questionId) {
+    fetch(`/${lang}/question/${questionId}/solutions`, {
+        method: "GET",
+        mode: "cors",
+        cache: "default",
+        credentials: "same-origin",
+    })
+    .then((async response=>{
+        if (!response.ok) throw Error('Something went wrong.');
+        return await response.text();
+    }))
+    .then((message)=>{
+        document.getElementById('right-panel').innerHTML = message;
+    })
+    .then(()=>{
+      [...document.getElementsByClassName("solutuon-block")].map(el=>{
+        ace
+          .edit(el.id, {mode: "ace/mode/mysql", dragEnabled: false,  useWorker: false, setReadOnly: true })
+          .setTheme(window.UIConfig.theme === 'dark' ? 'ace/theme/github_dark' : 'ace/theme/xcode');
+      });
+    })
+    .catch(err=>{
+      document.getElementById('right-panel').innerHTML = 'Something went wrong.';
+    });
+}
 function rateQuestion(questionId, rate) {
     let formData = new FormData();
     formData.append('rate', rate);
     fetch(`/${lang}/question/${questionId}/rate`, {
-        method: "POST", // *GET, POST, PUT, DELETE, etc.
-        mode: "cors", // no-cors, *cors, same-origin
-        cache: "default", // *default, no-cache, reload, force-cache, only-if-cached
-        credentials: "same-origin", // include, *same-origin, omit
+        method: "POST",
+        mode: "cors",
+        cache: "default",
+        credentials: "same-origin",
         body: formData,
     })
     .then((async response=>{

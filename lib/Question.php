@@ -291,6 +291,12 @@ class Question
             ];
         }
     }
+    public function getSolutions() {
+        $stmt = $this->dbh->prepare("SELECT DISTINCT query, query_cost, created_at::date created_at FROM user_solutions WHERE question_id = ? order by query_cost limit 3");
+        $stmt->execute([$this->id]);
+        $solutions = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $solutions;
+    }
     public function save() {
 
     }

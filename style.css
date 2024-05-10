@@ -713,7 +713,20 @@ td {
     /* text-decoration: none; */
     font-weight: bold;
 }
-
+.solutuon-block{
+    height: 20vh;
+    width: 25vw;
+}
+.question-footer {
+    font-weight: bold;
+    background-color: var(--question-title-bg-color);
+    padding: 6px;
+}
+.question-footer .question-dates {
+    color: var(--question-date-color);
+    font-size: small;
+    text-align: right;
+}
 .donate-btn {
     display: inline-block;
     padding: 5px 12px;

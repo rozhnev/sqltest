@@ -49,6 +49,7 @@ $pathParts = explode('/', $path);
 $db         = '';
 $questionID = '';
 $QuestionnireName = $_COOKIE['Questionnire'] ?? 'category';
+$smarty->assign('CanonicalLink', null);
 
 if ($mobileView) {
     $smarty->assign('CanonicalLink', "https://sqltest.online/{$path}");
@@ -73,7 +74,7 @@ if (isset($pathParts[0]) && $pathParts[0] === 'login') {
     $questionCategoryID = $questionnire->getCategoryId($params['questionCategory']);
     $questionID = $questionnire->getQuestionId($params['question']);
     $smarty->assign('CanonicalLink', "https://sqltest.online/{$lang}/question/{$questionCategoryID}/{$questionID}");
-} elseif (preg_match('@(?<lang>ru|en)/question/(?<questionID>\d+)/(?<action>query-help|query-run|query-test|rate)@i', $path, $params)) {
+} elseif (preg_match('@(?<lang>ru|en)/question/(?<questionID>\d+)/(?<action>query-help|query-run|query-test|rate|solutions)@i', $path, $params)) {
     $lang       = $params['lang'];
     $action     = $params['action'];
     $questionID = $params['questionID'];
@@ -175,6 +176,11 @@ switch ($action) {
             $user->saveQuestionRate($questionID, $rate);
         }
         $template = "rate_saved.tpl";
+        break;
+    case 'solutions':
+        $question = new Question($dbh, $questionID);
+        $smarty->assign('QuestionSolutions', $question->getSolutions());
+        $template = "solutions.tpl";
         break;
     case 'logout':
         // Unset all of the session variables.

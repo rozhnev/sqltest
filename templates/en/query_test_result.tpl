@@ -11,20 +11,23 @@
      {/if}
      {if !$Logged}
         <p class="question-action">
-            To save your progress, please <a href="" onClick="toggleLoginWindow(); return false;">login</a>
+            To save your progress and be able to see other solutions, please <a href="" onClick="toggleLoginWindow(); return false;">login</a>
         </p>
     {else}
         <p class="question-action">
-         Before starting the next test, please rate the difficulty of this task:
-         <select onchange="rateQuestion({$QuestionID}, this.value)">
+        Before starting the next test, please rate the difficulty of this task:
+        <select onchange="rateQuestion({$QuestionID}, this.value)">
              <option value="0" disabled selected>---</option>
              <option value="1">Too easy</option>
              <option value="2">Simple</option>
              <option value="3">Normal</option>
              <option value="4">Difficult</option>
              <option value="5">Very hard</option>
-         </select>
-         </p>
+        </select>
+        </p>
+        <p class="question-action">
+            <button onClick="showSolutions({$QuestionID})">Show me other solutions!</button>
+        </p>
     {/if}
 {else}
      Unfortunately incorrect.
