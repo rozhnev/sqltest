@@ -1,13 +1,13 @@
 
 let windowObjectReference = null; // global variable
 function openRequestedTab(href) {
-  if (windowObjectReference === null || windowObjectReference.closed) {
-    const url = `${href}_${window.UIConfig.theme === 'dark' ?  'dark' : 'light'}.png`;
-    const popUpParams = `scrollbars=no,resizable=yes,status=no,location=no,toolbar=no,menubar=no,width=0,height=0,left=-1000,top=-1000`;
-    windowObjectReference = window.open(url, 'Sakila DB ER Diagram', popUpParams);
-  } else {
-    windowObjectReference.focus();
-  }
+    if (windowObjectReference === null || windowObjectReference.closed) {
+        const url = `${href}_${window.UIConfig.theme === 'dark' ?  'dark' : 'light'}.png`;
+        const popUpParams = `scrollbars=no,resizable=yes,status=no,location=no,toolbar=no,menubar=no,width=0,height=0,left=-1000,top=-1000`;
+        windowObjectReference = window.open(url, 'Sakila DB ER Diagram', popUpParams);
+    } else {
+        windowObjectReference.focus();
+    }
 }
 
 function switchTheme(e) {
@@ -17,16 +17,16 @@ function switchTheme(e) {
     window.UIConfig.theme = currentTheme;
     saveUIConfig();
     if (document.getElementById('yandex_rtb_R-A-4716552-2')) {
-      Ya.Context.AdvManager.render({
-        "blockId": "R-A-4716552-2",
-        "renderTo": "yandex_rtb_R-A-4716552-2",
-        darkTheme: window.UIConfig.theme === 'dark'
-      })
+        Ya.Context.AdvManager.render({
+            "blockId": "R-A-4716552-2",
+            "renderTo": "yandex_rtb_R-A-4716552-2",
+            darkTheme: window.UIConfig.theme === 'dark'
+        })
     }
 }
 
 function setLoader(id) {
-  return document.getElementById(id).innerHTML = '<div class="loader">Loading...</div>';
+    return document.getElementById(id).innerHTML = '<div class="loader">Loading...</div>';
 }
 
 function showToast(msg) {
@@ -34,7 +34,7 @@ function showToast(msg) {
     toast.innerText = msg || "...";
     toast.classList.toggle("visible");
     setTimeout((function() {
-      toast.classList.toggle("visible");
+        toast.classList.toggle("visible");
     }
     ), 1999)
 }
@@ -73,46 +73,46 @@ function clearEditor() {
 }
 
 function toggleLoginWindow() {
-  const loginWindow = document.getElementById("login-popup");
-  setTimeout((function() {
-    loginWindow.classList.toggle("visible");
-  }
-  ), 333)
+    const loginWindow = document.getElementById("login-popup");
+    setTimeout((function() {
+        loginWindow.classList.toggle("visible");
+    }
+    ), 333)
 }
 
 function jsonToTable(jsonObject) {
-  let htmlTable = '';
-  let rn = 0;
-  try {
-      htmlTable = "<table class='result-table'><tr><th></th><th>" + jsonObject.headers.map(h=>h.header).join('</th><th>') + "</th></tr>";
-      for (let r of jsonObject.data) {
-        htmlTable += "<tr><td>" + (++rn) +"</td><td>" + r.join('</td><td>') + "</td></tr>";
-      }
-      htmlTable += "</table>";
+    let htmlTable = '';
+    let rn = 0;
+    try {
+        htmlTable = "<table class='result-table'><tr><th></th><th>" + jsonObject.headers.map(h=>h.header).join('</th><th>') + "</th></tr>";
+        for (let r of jsonObject.data) {
+            htmlTable += "<tr><td>" + (++rn) +"</td><td>" + r.join('</td><td>') + "</td></tr>";
+        }
+        htmlTable += "</table>";
     } catch(e) {
-      htmlTable = 'Something went wrong. Please review your query and try again.'
+        htmlTable = 'Something went wrong. Please review your query and try again.'
     }
-  return htmlTable;
+    return htmlTable;
 }
 
 function errorToTable(jsonObject) {
-  return `<span class="sql_error">${jsonObject.error}</span>`;
+    return `<span class="sql_error">${jsonObject.error}</span>`;
 }
 
 function getHelp(lang, questionId) {
     setLoader('code-result');
     fetch(`/${lang}/question/${questionId}/query-help`, {
-        method: "GET",
-        mode: "cors",
-        cache: "default",
-        credentials: "same-origin",
+          method: "GET",
+          mode: "cors",
+          cache: "default",
+          credentials: "same-origin",
       })
       .then((async response=>{
-        if (!response.ok) throw Error('SOmething went wrong.');
-        return await response.text();
+          if (!response.ok) throw Error('SOmething went wrong.');
+          return await response.text();
       }))
       .then((message)=>{
-        document.getElementById('code-result').innerHTML = message;
+          document.getElementById('code-result').innerHTML = message;
       });
 }
 
@@ -121,15 +121,15 @@ function runQuery(lang, questionId) {
   let formData = new FormData();
   formData.append('query', window.sql_editor.getValue());
   fetch(`/${lang}/question/${questionId}/query-run`, {
-    method: "POST",
-    mode: "cors",
-    cache: "default",
-    credentials: "same-origin",
-    body: formData,
+      method: "POST",
+      mode: "cors",
+      cache: "default",
+      credentials: "same-origin",
+      body: formData,
   })
   .then((async response=>{
-    if (!response.ok) throw Error('SOmething went wrong.');
-    return await response.text();
+      if (!response.ok) throw Error('SOmething went wrong.');
+      return await response.text();
   }))
   .then(JSON.parse)
   .then((JSONmessage)=>{
@@ -159,10 +159,10 @@ function testQuery(lang, questionId) {
         body: formData,
     })
     .then((async response=>{
-      if (response.ok) {
-          [...document.getElementsByClassName("button green")].map(el=>el.classList.toggle("hidden"));
-      }
-      return await response.text();
+        if (response.ok) {
+            [...document.getElementsByClassName("button green")].map(el=>el.classList.toggle("hidden"));
+        }
+        return await response.text();
     }))
     .then((message)=>{
         document.getElementById('code-result').innerHTML = message;
@@ -193,9 +193,35 @@ function showSolutions(questionId) {
       });
     })
     .catch(err=>{
-      document.getElementById('right-panel').innerHTML = 'Something went wrong.';
+        document.getElementById('right-panel').innerHTML = 'Something went wrong.';
     });
 }
+function solutionUpdate(solutionId, action) {
+    return fetch(`/${lang}/solution/${solutionId}/${action}`, {
+        method: "POST",
+        mode: "cors",
+        cache: "default",
+        credentials: "same-origin",
+    })
+    .then((async response=>{
+      if (response.ok) {
+        const message =  await response.text();
+        showToast(message);
+      }
+    }))
+    .catch(err=>{
+    });
+}
+function solutionLike(solutionId) {
+    return solutionUpdate(solutionId, 'like');
+}
+function solutionUnlike(solutionId) {
+    return solutionUpdate(solutionId, 'unlike');
+}
+function solutionReport(solutionId) {
+    return solutionUpdate(solutionId, 'report');
+}
+
 function rateQuestion(questionId, rate) {
     let formData = new FormData();
     formData.append('rate', rate);
@@ -207,10 +233,10 @@ function rateQuestion(questionId, rate) {
         body: formData,
     })
     .then((async response=>{
-      if (response.ok) {
-        const message =  await response.text();
-        showToast(message);
-      }
+        if (response.ok) {
+            const message =  await response.text();
+            showToast(message);
+        }
     }))
     .catch(err=>{
     });
@@ -218,7 +244,7 @@ function rateQuestion(questionId, rate) {
 function toggleSolvedTasks(e) {
     [...document.getElementsByClassName("eye-btn")].map(el=>el.classList.toggle("hidden"));
     [...document.getElementsByClassName("question-link solved")].map(el=>{
-      el.parentNode.classList.toggle("invisible")
+        el.parentNode.classList.toggle("invisible")
     });
     window.UIConfig.hideSolvedTasks = !window.UIConfig.hideSolvedTasks;
     saveUIConfig();
@@ -246,23 +272,23 @@ function openGitHubLoginPopUp() {
     );
 }
 function openGoogleLoginPopUp() {
-  const params = {
-      response_type: 'code',
-      client_id: '340274762951-1d5m1pb8p9i2bhjbtuc4p8q9gveuk2ug.apps.googleusercontent.com',
-      redirect_uri: `${window.location.protocol}//${window.location.host}/login/google/`,
-      scope:'openid email',
-      state: ''
-  };
-  window.open(
-      'https://accounts.google.com/o/oauth2/v2/auth?' + new URLSearchParams(params).toString(), 
-      'Google Login', 
-      `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=530,height=600,left=${(window.outerWidth - 530) / 2},top=${(window.outerHeight - 950) / 2}`
-  );
+    const params = {
+        response_type: 'code',
+        client_id: '340274762951-1d5m1pb8p9i2bhjbtuc4p8q9gveuk2ug.apps.googleusercontent.com',
+        redirect_uri: `${window.location.protocol}//${window.location.host}/login/google/`,
+        scope:'openid email',
+        state: ''
+    };
+    window.open(
+        'https://accounts.google.com/o/oauth2/v2/auth?' + new URLSearchParams(params).toString(), 
+        'Google Login', 
+        `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=530,height=600,left=${(window.outerWidth - 530) / 2},top=${(window.outerHeight - 950) / 2}`
+    );
 }
 
 function saveUIConfig() {
-  console.log(window.UIConfig);
-  localStorage.setItem("UIConfig", JSON.stringify(window.UIConfig));
+    console.log(window.UIConfig);
+    localStorage.setItem("UIConfig", JSON.stringify(window.UIConfig));
 }
 function applyUIConfig() {
     if (window.UIConfig.hideSolvedTasks) {
@@ -290,9 +316,9 @@ function setMenuEventListeners() {
 
     [...document.getElementsByClassName("eye-btn")].map(el=>{
       el.addEventListener ('click', e=>{
-        e.preventDefault();
-        toggleSolvedTasks()
-    });
+          e.preventDefault();
+          toggleSolvedTasks()
+      });
     });
 }
 
@@ -310,13 +336,13 @@ function setEventListeners() {
     const link = document.querySelector("a[target='ERDWindow']");
     if (link) {
         link.addEventListener(
-          "click",
-          (event) => {
-            console.log(event.target.href);
-            openRequestedTab(event.target.href);
-            event.preventDefault();
-          },
-          false,
+            "click",
+            (event) => {
+                console.log(event.target.href);
+                openRequestedTab(event.target.href);
+                event.preventDefault();
+            },
+            false,
         );
     }
 }
@@ -351,13 +377,13 @@ window.onload = function() {
       },
       `${window.location.protocol}//${window.location.host}/login/yandex/?lang=${lang}&db=${db}&questionId=${questionId}`,
       {
-        view: "button",
-        parentId: "yandexLogin",
-        buttonSize: 'm',
-        buttonView: 'icon',
-        buttonTheme: 'light',
-        buttonBorderRadius: "0",
-        buttonIcon: 'ya',
+          view: "button",
+          parentId: "yandexLogin",
+          buttonSize: 'm',
+          buttonView: 'icon',
+          buttonTheme: 'light',
+          buttonBorderRadius: "0",
+          buttonIcon: 'ya',
       }
     )
     .then(({handler}) => handler())

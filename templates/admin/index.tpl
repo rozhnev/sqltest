@@ -94,7 +94,7 @@
                         <input type="text" name="question-match" value="{$QuestionResult}" />
                     </div>
                     <div>
-                        <button class="button test" id="saveQuestionBtn" onClick="saveQuestion({$QuestionID})">Save</button>
+                        <button class="button green" id="saveQuestionBtn" onClick="saveQuestion({$QuestionID})">Save</button>
                     </div>
                 </div>
             <div class="admin-footer">
