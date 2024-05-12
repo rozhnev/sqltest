@@ -78,6 +78,10 @@ if (isset($pathParts[0]) && $pathParts[0] === 'login') {
     $lang       = $params['lang'];
     $action     = $params['action'];
     $questionID = $params['questionID'];
+} elseif (preg_match('@(?<lang>ru|en)/solution/(?<solutionID>\d+)/(?<action>like|dislike|report)@i', $path, $params)) {
+    $lang       = $params['lang'];
+    $action     = 'solution' . $params['action'];
+    $solutionID = $params['solutionID'];
 } elseif (preg_match('@(?<lang>ru|en)/(?<action>donate)@i', $path, $params)) {
     $lang       = $params['lang'];
     $action     = $params['action'];
@@ -182,6 +186,27 @@ switch ($action) {
         $smarty->assign('QuestionSolutions', $question->getSolutions());
         $template = "solutions.tpl";
         break;
+    case 'solution-like':
+        if ($user->logged()) {
+            $solution = new Solution($dbh, $solutionID);
+            $solution->like();
+        }
+        $template = "rate_saved.tpl";
+        break;
+    case 'solution-dislike':
+        if ($user->logged()) {
+            $solution = new Solution($dbh, $solutionID);
+            $solution->dislike();
+        }
+        $template = "rate_saved.tpl";
+        break;
+    case 'solution-report':
+        if ($user->logged()) {
+            $solution = new Solution($dbh, $solutionID);
+            $solution->report();
+        }
+        $template = "rate_saved.tpl";
+        break;        
     case 'logout':
         // Unset all of the session variables.
         $_SESSION = array();
