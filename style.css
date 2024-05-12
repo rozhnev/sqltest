@@ -604,7 +604,6 @@ body {
     cursor: pointer;
     padding: 12px;
     text-align: center;
-    border: none;
     min-width: 98px;
     margin: 7px 0;
     border: 1px solid var(--btn-border-color);
@@ -730,10 +729,26 @@ td {
     background-color: var(--question-title-bg-color);
     padding: 6px;
 }
+.solution-footer {
+    text-align: right;
+    background-color: var(--body-background-color);
+}
 .question-footer .question-dates {
     color: var(--question-date-color);
     font-size: small;
     text-align: right;
+}
+.button-small {
+    background-color: var(--block-background-color);
+    color: white;
+    cursor: pointer;
+    padding: 6px;
+    text-align: center;
+    min-width: 98px;
+    margin: 7px 0;
+    border: 1px solid var(--btn-border-color);
+    border-radius: 2px;
+    font-size: small;
 }
 .donate-btn {
     display: inline-block;
