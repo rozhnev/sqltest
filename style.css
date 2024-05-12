@@ -14,7 +14,7 @@
     --border-color:  #0B4FCC;
     --btn-border-color:  slategrey;
     --donate-btn-background: gold;
-    --check-btn-background: #187e04 !important;
+    --green-btn-background: #187e04 !important;
     --question-text: #333333;
     --question-title-bg-color: #EEEEEE;
     --accordion-hover: #2196F3;
@@ -36,7 +36,7 @@
     --border-color: #484F58;
     --btn-border-color: #C9D1D9;
     --donate-btn-background: #E3B341;
-    --check-btn-background:#2EA043 !important;
+    --green-btn-background:#2EA043 !important;
     --question-title-bg-color: #484F58;
     --accordion-hover: #484F58;
     --accordion-hover-border: #F0F6FC;
@@ -611,8 +611,8 @@ body {
     border-radius: 2px;
 }
 
-.button.test {
-    background-color: var(--check-btn-background);
+.button.green {
+    background-color: var(--green-btn-background);
 }
 
 .button.hidden {

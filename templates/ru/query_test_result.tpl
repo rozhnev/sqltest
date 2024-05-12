@@ -3,7 +3,7 @@
     {if $QueryTestResult.cost > 0}
         <p>Стоимость выполнения вашего запроса — {$QueryTestResult.cost} (чем меньше стоимость тем эффективней запрос)</p>
         {if $QueryBestCost}
-            Лучший запрос имеет стоимость:  {$QueryBestCost}
+            Стоимость лучшего решения: {$QueryBestCost}
             {if $QueryBestCost == $QueryTestResult.cost} Поздравляем! Ваш вариант запроса в числе лучших на нашем сайте!
             {elseif $QueryBestCost > $QueryTestResult.cost} Поздравляем вам удалось улучшить наш рекорд!
             {else} К сожалению, ваш результат немного недотягивает до рекорда. Вам есть над чем поработать! {/if}
@@ -26,7 +26,7 @@
         </select>
         </p>
         <p class="question-action">
-             <button onClick="showSolutions({$QuestionID})">Покажите мне другие решения!</button>
+             <button class="button green" onClick="showSolutions({$QuestionID})">Покажите мне другие решения!</button>
         </p>
     {/if}
 {else}

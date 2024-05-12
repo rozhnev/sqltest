@@ -3,7 +3,7 @@
      {if $QueryTestResult.cost > 0}
         <p>The cost of executing your query is {$QueryTestResult.cost} (the lower the cost, the more effective the query)</p>
         {if $QueryBestCost}
-            The best query has a cost: {$QueryBestCost}
+            Cost of the best solution: {$QueryBestCost}
             {if $QueryBestCost == $QueryTestResult.cost} Congratulations! Your request is among the best on our website!
             {elseif $QueryBestCost > $QueryTestResult.cost} Congratulations on improving our record!
             {else} Unfortunately, your result is a little low of the record. You have something to work on! {/if}
@@ -26,7 +26,7 @@
         </select>
         </p>
         <p class="question-action">
-            <button onClick="showSolutions({$QuestionID})">Show me other solutions!</button>
+            <button class="button green" onClick="showSolutions({$QuestionID})">Show me other solutions!</button>
         </p>
     {/if}
 {else}

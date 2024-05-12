@@ -160,7 +160,7 @@ function testQuery(lang, questionId) {
     })
     .then((async response=>{
       if (response.ok) {
-          [...document.getElementsByClassName("button test")].map(el=>el.classList.toggle("hidden"));
+          [...document.getElementsByClassName("button green")].map(el=>el.classList.toggle("hidden"));
       }
       return await response.text();
     }))

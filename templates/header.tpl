@@ -32,7 +32,7 @@
         {if $CanonicalLink}
             <link rel="canonical" href="{$CanonicalLink}">
         {/if}
-            <link rel="stylesheet" type="text/css" href="/style.css?21" media="all">
+            <link rel="stylesheet" type="text/css" href="/style.css?22" media="all">
             <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/ace.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/ext-beautify.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/mode-sql.min.js"></script>
@@ -43,7 +43,7 @@
             <script>window.yaContextCb=window.yaContextCb||[]</script>
             <script src="https://yandex.ru/ads/system/context.js" async></script>
             <script src="https://yastatic.net/s3/passport-sdk/autofill/v1/sdk-suggest-with-polyfills-latest.js"></script>
-            <script type="text/javascript" src="/script.js?21" defer></script>
+            <script type="text/javascript" src="/script.js?22" defer></script>
             {if $MobileView}
                 {literal}
                 <!-- Yandex.RTB R-A-4716552-3 -->
