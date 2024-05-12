@@ -215,8 +215,8 @@ function solutionUpdate(solutionId, action) {
 function solutionLike(solutionId) {
     return solutionUpdate(solutionId, 'like');
 }
-function solutionUnlike(solutionId) {
-    return solutionUpdate(solutionId, 'unlike');
+function solutionDislike(solutionId) {
+    return solutionUpdate(solutionId, 'dislike');
 }
 function solutionReport(solutionId) {
     return solutionUpdate(solutionId, 'report');
