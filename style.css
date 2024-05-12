@@ -713,11 +713,18 @@ td {
     /* text-decoration: none; */
     font-weight: bold;
 }
-.solutuon-block{
+.solution-wrapper {
+    margin: 0 0 12px 0;
+    background-color: var(--text-block-background-color);
+    border: 1px solid var(--text-block-border-color);
+    color: var(--question-text);
+}
+.solution-block {
     height: 20vh;
     width: 21vw;
 }
-.question-footer {
+.solution-title,
+.solution-footer {
     font-weight: bold;
     background-color: var(--question-title-bg-color);
     padding: 6px;
