@@ -726,6 +726,7 @@ td {
 .solution-title,
 .solution-footer {
     font-weight: bold;
+    font-size: small;
     background-color: var(--question-title-bg-color);
     padding: 6px;
 }
