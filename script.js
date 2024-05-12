@@ -186,7 +186,7 @@ function showSolutions(questionId) {
         document.getElementById('right-panel').innerHTML = message;
     })
     .then(()=>{
-      [...document.getElementsByClassName("solutuon-block")].map(el=>{
+      [...document.getElementsByClassName("solution-block")].map(el=>{
         ace
           .edit(el.id, {mode: "ace/mode/mysql", dragEnabled: false,  useWorker: false, setReadOnly: true })
           .setTheme(window.UIConfig.theme === 'dark' ? 'ace/theme/github_dark' : 'ace/theme/xcode');
