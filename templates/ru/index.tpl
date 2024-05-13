@@ -55,6 +55,15 @@
     </div>
 
     <div class="right" id="right-panel">
+        <div class="text-block user-solutions-count">
+            <p>На нашем сайте представлено более <span style="font-weight:bold;">{floor(($QuestionsCount - 1)/10) * 10}</span> задач.</p>
+        {if $Logged}
+            <p>Вы {if $SolvedQuestionsCount < ($QuestionsCount/2)}пока{else}уже{/if} решили <span style="font-weight:bold;">{$SolvedQuestionsCount}</span> из них.</p>
+        {else}
+            <p>Выполните вход для сохранения вашего прогресса.</p>
+            <button class="button blue" onClick="toggleLoginWindow()">Вход</button>
+        {/if}
+        </div>
         {include file="{$DB}.tpl"}
     </div>
     {include file='footer.tpl'}

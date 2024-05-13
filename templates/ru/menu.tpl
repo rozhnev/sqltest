@@ -15,9 +15,6 @@
                 <label for="database_menu_groups">базе данных</label>
             </div>
         </div>
-        <div class="user-solutions-count">
-            Решено {$SolvedQuestionsCount} из {$QuestionsCount} заданий
-        </div>
     </div>
     {foreach $Questionnire.menu as $categoryId => $panel}
     <button class="accordion {if $categoryId eq $QuestionCategoryID}active{/if}">
