@@ -235,7 +235,7 @@ switch ($action) {
             $questionnire = new Questionnire($dbh, $lang);
             $question = new Question($dbh, $questionID);
             $smarty->assign('QuestionsCount',  $questionnire->getQuestionsCount());
-            $smarty->assign('SolvedQuestionsCount',  $user->logged() ? $user->getSolvedQuestionsCount()): 0;
+            $smarty->assign('SolvedQuestionsCount',  $user->logged() ? $user->getSolvedQuestionsCount() : 0);
             if ($user->logged()) {
                 $user->setPath($path);
                 $user->save();
