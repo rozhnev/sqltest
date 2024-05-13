@@ -231,13 +231,15 @@ switch ($action) {
         $template = "welcome.tpl";
         break;
     case 'question':
-        if ($user->logged()) {
-            $user->setPath($path);
-            $user->save();
-        }
         try {
             $questionnire = new Questionnire($dbh, $lang);
             $question = new Question($dbh, $questionID);
+            $smarty->assign('QuestionsCount',  $questionnire->getQuestionsCount());
+            $smarty->assign('SolvedQuestionsCount',  $user->logged() ? $user->getSolvedQuestionsCount()): 0;
+            if ($user->logged()) {
+                $user->setPath($path);
+                $user->save();
+            }
             $smarty->assign('Questionnire', $questionnire->get($QuestionnireName, $user->getId()));
             $questionData = $question->get($questionCategoryID, $lang, $user->getId());
             $smarty->assign('QuestionCategoryID', $questionCategoryID);

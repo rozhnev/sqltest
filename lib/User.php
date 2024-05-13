@@ -382,4 +382,11 @@ class User
             throw new Exception($error->getMessage());
         }
     }
+
+    public function getSolvedQuestionsCount(): int 
+    {
+        $stmt = $this->dbh->prepare("SELECT COUNT(question_id) FROM user_questions WHERE user_id = :user_id and solved_at is not null;");
+        $stmt->execute([':user_id' => $this->id]);
+        return $stmt->fetchColumn(0);
+    }
 }
