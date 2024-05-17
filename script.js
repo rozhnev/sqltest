@@ -86,7 +86,7 @@ function jsonToTable(jsonObject) {
     try {
         htmlTable = "<table class='result-table'><tr><th></th><th>" + jsonObject.headers.map(h=>h.header).join('</th><th>') + "</th></tr>";
         for (let r of jsonObject.data) {
-            htmlTable += "<tr><td>" + (++rn) +"</td><td>" + r.join('</td><td>') + "</td></tr>";
+            htmlTable += "<tr><td>" + (++rn) +"</td><td>" + r.map(el=>el === null ? '[null]' : el).join('</td><td>') + "</td></tr>";
         }
         htmlTable += "</table>";
     } catch(e) {
