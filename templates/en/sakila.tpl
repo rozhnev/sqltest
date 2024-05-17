@@ -1,5 +1,5 @@
 <div class="db-description">
-<h3>Sakila DB description</h3
+<h2>Sakila DB description</h2>
 Sakila is a sample database developed by MySQL, specifically designed to teach and demonstrate the capabilities of database management systems (DBMS) based on the relational model.
 <p>
 <a style="font-size: small; color: var(--special-text-color);" href="/images/sakila" target="ERDWindow">Sakila DB ER diagram</a>
@@ -9,8 +9,8 @@ The Sakila database contains 16 main tables describing various aspects of a DVD 
 <p>
 Below is a list of these tables:
 </p>
-<p>Table <span class='sql'>actor</span></p>
-  <ul class="table-columns">
+<h3>Table <span class='sql'>actor</span></h3>
+  Table columns: <ul class="table-columns">
       <li> <span class='sql'>actor_id</span> - Unique identifier for each actor.</li>
       <li> <span class='sql'>first_name</span> - First name of the actor.</li>
       <li> <span class='sql'>last_name</span> - Last name of the actor.</li>
@@ -32,8 +32,8 @@ Below is a list of these tables:
       </tr>
     </table>
   </div>
-  <p>Table <span class='sql'>film</span></p>
-  <ul class="table-columns">
+  <h3>Table <span class='sql'>film</span></h3>
+  Table columns: <ul class="table-columns">
     <li> <span class='sql'>film_id</span> - Unique identifier for each film.</li>
     <li> <span class='sql'>title</span> - The title of the film.</li>
     <li> <span class='sql'>description</span> - A short description or plot summary of the film.</li>
@@ -83,8 +83,8 @@ Below is a list of these tables:
       <!-- Additional rows go here if applicable -->
     </table>
   </div>
-  <p>Table <span class='sql'>film_text</span></p>
-<ul class="table-columns">
+  <h3>Table <span class='sql'>film_text</span></h3>
+Table columns: <ul class="table-columns">
   <li> <span class='sql'>film_id</span> - Unique identifier for each film.</li>
   <li> <span class='sql'>title</span> - Title of the film.</li>
   <li> <span class='sql'>description</span> - Description of the film.</li>
@@ -104,8 +104,8 @@ Below is a list of these tables:
     <!-- Additional rows go here if applicable -->
   </table>
 </div>
-  <p>Table <span class='sql'>film_actor</span></p>
-  <ul class="table-columns">
+  <h3>Table <span class='sql'>film_actor</span></h3>
+  Table columns: <ul class="table-columns">
     <li> <span class='sql'>actor_id</span> - Unique identifier for actor.</li>
     <li> <span class='sql'>film_id</span> - Unique identifier for film.</li>
     <li> <span class='sql'>last_update</span> - When the row was created or most recently updated.</li>
@@ -125,8 +125,8 @@ Below is a list of these tables:
       <!-- Additional rows go here if applicable -->
     </table>
   </div>
-  <p>Table <span class='sql'>customer</span></p>
-  <ul class="table-columns">
+  <h3>Table <span class='sql'>customer</span></h3>
+  Table columns: <ul class="table-columns">
     <li> <span class='sql'>customer_id</span> - Unique identifier for each customer.</li>
     <li> <span class='sql'>store_id</span> - Foreign key referencing the store table.</li>
     <li> <span class='sql'>first_name</span> - First name of the customer.</li>
@@ -163,8 +163,8 @@ Below is a list of these tables:
       </tr>
     </table>
   </div>
-  <p>Table <span class='sql'>address</span></p>
-  <ul class="table-columns">
+  <h3>Table <span class='sql'>address</span></h3>
+  Table columns: <ul class="table-columns">
     <li> <span class='sql'>address_id</span> - Unique identifier for each address.</li>
     <li> <span class='sql'>address</span> - Street address.</li>
     <li> <span class='sql'>address2</span> - Additional address.</li>
@@ -200,8 +200,8 @@ Below is a list of these tables:
     </table>
   </div>
   <!-- For City Table -->
-<p>Table <span class='sql'>city</span></p>
-<ul class="table-columns">
+<h3>Table <span class='sql'>city</span></h3>
+Table columns: <ul class="table-columns">
   <li> <span class='sql'>city_id</span> - Unique identifier for each city.</li>
   <li> <span class='sql'>city</span> - City name.</li>
   <li> <span class='sql'>country_id</span> - Foreign key referencing the country table.</li>
@@ -226,8 +226,8 @@ Below is a list of these tables:
 </div>
 
 <!-- For Country Table -->
-<p>Table <span class='sql'>country</span></p>
-<ul class="table-columns">
+<h3>Table <span class='sql'>country</span></h3>
+Table columns: <ul class="table-columns">
   <li> <span class='sql'>country_id</span> - Unique identifier for each country.</li>
   <li> <span class='sql'>country</span> - Country name.</li>
   <li> <span class='sql'>last_update</span> - When the row was created or most recently updated.</li>
@@ -248,8 +248,8 @@ Below is a list of these tables:
   </table>
 </div>
 
-  <p>Table <span class='sql'>category</span></p>
-<ul class="table-columns">
+  <h3>Table <span class='sql'>category</span></h3>
+Table columns: <ul class="table-columns">
   <li> <span class='sql'>category_id</span> - Unique identifier for each category.</li>
   <li> <span class='sql'>name</span> - Name of the category.</li>
   <li> <span class='sql'>last_update</span> - When the row was created or most recently updated.</li>
@@ -269,8 +269,8 @@ Below is a list of these tables:
     <!-- Additional rows go here if applicable -->
   </table>
 </div>
-<p>Table <span class='sql'>film_category</span></p>
-  <ul class="table-columns">
+<h3>Table <span class='sql'>film_category</span></h3>
+  Table columns: <ul class="table-columns">
     <li> <span class='sql'>film_id</span> - Unique identifier for each film.</li>
     <li> <span class='sql'>category_id</span> - Unique identifier for each category.</li>
     <li> <span class='sql'>last_update</span> - When the row was created or most recently updated.</li>
@@ -290,8 +290,8 @@ Below is a list of these tables:
       <!-- Additional rows go here if applicable -->
     </table>
   </div>
-<p>Table <span class='sql'>language</span></p>
-  <ul class="table-columns">
+<h3>Table <span class='sql'>language</span></h3>
+  Table columns: <ul class="table-columns">
       <li> <span class='sql'>language_id</span> - Unique identifier for each language.</li>
       <li> <span class='sql'>name</span> - Language name.</li>
       <li> <span class='sql'>last_update</span> - When the row was created or most recently updated.</li> 
@@ -311,8 +311,8 @@ Below is a list of these tables:
     </table>
   </div>
     <!-- For Staff Table -->
-<p>Table <span class='sql'>staff</span></p>
-<ul class="table-columns">
+<h3>Table <span class='sql'>staff</span></h3>
+Table columns: <ul class="table-columns">
   <li> <span class='sql'>staff_id</span> - Unique identifier for each staff member.</li>
   <li> <span class='sql'>first_name</span> - First name of the staff member.</li>
   <li> <span class='sql'>last_name</span> - Last name of the staff member.</li>
@@ -357,8 +357,8 @@ Below is a list of these tables:
   </table>
 </div>
 <!-- For Staff_List Table -->
-<p>Table <span class='sql'>staff_list</span></p>
-<ul class="table-columns">
+<h3>Table <span class='sql'>staff_list</span></h3>
+Table columns: <ul class="table-columns">
   <li> <span class='sql'>ID</span> - Unique identifier for each staff list entry.</li>
   <li> <span class='sql'>name</span> - Staff member's name.</li>
   <li> <span class='sql'>address</span> - Staff member's address.</li>
@@ -395,8 +395,8 @@ Below is a list of these tables:
 </div>
 
 <!-- For Store Table -->
-<p>Table <span class='sql'>store</span></p>
-<ul class="table-columns">
+<h3>Table <span class='sql'>store</span></h3>
+Table columns: <ul class="table-columns">
   <li> <span class='sql'>store_id</span> - Unique identifier for each store.</li>
   <li> <span class='sql'>manager_staff_id</span> - Foreign key referencing the staff table for the store manager.</li>
   <li> <span class='sql'>address_id</span> - Foreign key referencing the address table.</li>
@@ -420,8 +420,8 @@ Below is a list of these tables:
   </table>
 </div>
 <!-- For Payment Table -->
-<p>Table <span class='sql'>payment</span></p>
-<ul class="table-columns">
+<h3>Table <span class='sql'>payment</span></h3>
+Table columns: <ul class="table-columns">
   <li> <span class='sql'>payment_id</span> - Unique identifier for each payment.</li>
   <li> <span class='sql'>customer_id</span> - Foreign key referencing the customer table.</li>
   <li> <span class='sql'>staff_id</span> - Foreign key referencing the staff table.</li>
@@ -453,8 +453,8 @@ Below is a list of these tables:
     <!-- Additional rows go here if applicable -->
   </table>
 </div>
-<p>Table <span class='sql'>inventory</span></p>
-<ul class="table-columns">
+<h3>Table <span class='sql'>inventory</span></h3>
+Table columns: <ul class="table-columns">
     <li><span class='sql'>inventory_id</span> - Unique identifier for each inventory item.</li>
     <li><span class='sql'>film_id</span> - Unique identifier for each film in the inventory.</li>
     <li><span class='sql'>store_id</span> - Unique identifier for the store where the inventory item is located.</li>
@@ -478,8 +478,8 @@ Below is a list of these tables:
     </table>
 </div>
 <!-- For Rental Table -->
-<p>Table <span class='sql'>rental</span></p>
-<ul class="table-columns">
+<h3>Table <span class='sql'>rental</span></h3>
+Table columns: <ul class="table-columns">
   <li> <span class='sql'>rental_id</span> - Unique identifier for each rental.</li>
   <li> <span class='sql'>rental_date</span> - Date when the rental occurred.</li>
   <li> <span class='sql'>inventory_id</span> - Foreign key referencing the inventory table.</li>

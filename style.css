@@ -14,7 +14,8 @@
     --border-color:  #0B4FCC;
     --btn-border-color:  slategrey;
     --donate-btn-background: gold;
-    --check-btn-background: #187e04 !important;
+    --green-btn-background: #187e04 !important;
+    --blue-btn-background: #126cc6 !important;
     --question-text: #333333;
     --question-title-bg-color: #EEEEEE;
     --accordion-hover: #2196F3;
@@ -36,7 +37,8 @@
     --border-color: #484F58;
     --btn-border-color: #C9D1D9;
     --donate-btn-background: #E3B341;
-    --check-btn-background:#2EA043 !important;
+    --green-btn-background:#2EA043 !important;
+    --blue-btn-background: #79C0FF !important;
     --question-title-bg-color: #484F58;
     --accordion-hover: #484F58;
     --accordion-hover-border: #F0F6FC;
@@ -56,7 +58,10 @@ body {
     background-color: var(--body-background-color);
     color: var(--regualr-text-color);
 }
-
+.text-block {
+    background-color: var(--text-block-background-color);
+    border: 1px solid var(--text-block-border-color);
+}
 .invisible {
     /* visibility: hidden; */
     overflow: hidden;
@@ -314,15 +319,17 @@ body {
 .accordion .hidden {
     display: none;
 }
-
+.user-solutions-count {
+    color: var(--question-text);
+    padding: 0 5px;
+    text-align: center;
+}
 .right {
     grid-area: right;
-    /* width: 25vw; */
-    max-height: 100vh;
+    /* max-height: 100vh; */
     padding: 12px;
     overflow: auto;
     transition: easy 0.5s;
-    /* border: 1px solid red; */
 }
 
 .right.hidden {
@@ -607,15 +614,17 @@ body {
     cursor: pointer;
     padding: 12px;
     text-align: center;
-    border: none;
     min-width: 98px;
     margin: 7px 0;
     border: 1px solid var(--btn-border-color);
     border-radius: 2px;
 }
 
-.button.test {
-    background-color: var(--check-btn-background);
+.button.green {
+    background-color: var(--green-btn-background);
+}
+.button.blue {
+    background-color: var(--blue-btn-background);
 }
 
 .button.hidden {
@@ -673,11 +682,11 @@ body {
 .code-result a:visited {
     color: var(--sql-color);
 }
-
-.db-description h3 {
-    margin-top: 0;
+.db-description {
+    height: 85vh;
+    overflow: auto;
+    margin-top: 10px;
 }
-
 .db-description table {
     border-collapse: collapse;
     width: 100%;
@@ -720,7 +729,44 @@ td {
     /* text-decoration: none; */
     font-weight: bold;
 }
-
+.solution-wrapper {
+    margin: 0 0 12px 0;
+    background-color: var(--text-block-background-color);
+    border: 1px solid var(--text-block-border-color);
+    color: var(--question-text);
+}
+.solution-block {
+    height: 20vh;
+    width: 21vw;
+}
+.solution-title,
+.solution-footer {
+    font-weight: bold;
+    font-size: small;
+    background-color: var(--question-title-bg-color);
+    padding: 6px;
+}
+.solution-footer {
+    text-align: right;
+    background-color: var(--body-background-color);
+}
+.question-footer .question-dates {
+    color: var(--question-date-color);
+    font-size: small;
+    text-align: right;
+}
+.button-small {
+    background-color: var(--block-background-color);
+    color: white;
+    cursor: pointer;
+    padding: 6px;
+    text-align: center;
+    min-width: 98px;
+    margin: 7px 0;
+    border: 1px solid var(--btn-border-color);
+    border-radius: 2px;
+    font-size: small;
+}
 .donate-btn {
     display: inline-block;
     padding: 5px 12px;

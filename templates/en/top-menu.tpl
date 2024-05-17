@@ -7,7 +7,7 @@
         {if $Logged}
             <span class="login-button"><a href="/en/logout" target="_self">Logout</a></span>
         {else}
-            <span class="login-button" onClick="toggleLoginWindow()">Login</span>
+            {* <span class="login-button" onClick="toggleLoginWindow()">Login</span> *}
         {/if}
     </div>
 </div>

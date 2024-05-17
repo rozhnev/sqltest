@@ -46,9 +46,9 @@
         <div class="code-buttons">
             <button class="button" id="getHelpBtn" onClick="getHelp('{$Lang}', {$QuestionID})">Get help</button>
             <button class="button" id="runQueryBtn" onClick="runQuery('{$Lang}', {$QuestionID})" title="CTRL+Enter">Run query</button>
-            <button class="button test" id="testQueryBtn" onClick="testQuery('{$Lang}', {$QuestionID})">Check it!</button>
+            <button class="button green" id="testQueryBtn" onClick="testQuery('{$Lang}', {$QuestionID})">Check it!</button>
             {if $NextQuestionId}
-                <a href="/{$Lang}/question/{$Question.category_sef}/{$NextQuestionId}" title="Следующее задание" class="button test hidden">Next</a>
+                <a href="/{$Lang}/question/{$Question.category_sef}/{$NextQuestionId}" title="Следующее задание" class="button green hidden">Next</a>
             {/if}
         </div>
         <div class="code-result ace-xcode" id="code-result"></div>

@@ -158,16 +158,52 @@ class Question
         $stmt->execute(['category_id' => $questionCategoryID, ':question_id' => $this->id]);
         return (string)$stmt->fetchColumn();
     }
+    /**
+     * Returns question query pre-check condition 
+     *
+     * @return string
+     */
     public function getQueryPreCheck(): string {
         $stmt = $this->dbh->prepare("SELECT query_pre_check FROM questions WHERE id = ?");
         $stmt->execute([$this->id]);
-        return (string)$stmt->fetchColumn();
+        $queryPreCheck = (string)$stmt->fetchColumn();
+        if (!empty($queryPreCheck)) {
+            $queryPreCheck = trim($queryPreCheck, "\r\n\t ;") . ';' . PHP_EOL ;
+        }
+        return $queryPreCheck;
     }
+    /**
+     * Returns question query check condition 
+     *
+     * @param string $query
+     * @return string
+     */
     public function getQueryCheck(string $query): string {
         $stmt = $this->dbh->prepare("SELECT query_check FROM questions WHERE id = ?");
         $stmt->execute([$this->id]);
         $queryCheck = (string)$stmt->fetchColumn();
         return str_replace("{{query}}", str_replace("'","''",$query) , $queryCheck);
+    }
+    /**
+     * Returns question prepared query
+     * 
+     * @param string $query
+     * @return string
+     */
+    public function prepareQuery(string $query): string {
+        $preparedQuery = $query;
+        $stmt = $this->dbh->prepare("SELECT query_pre_check, query_check FROM questions WHERE id = ?");
+        $stmt->execute([$this->id]);
+        $conditions = $stmt->fetch(PDO::FETCH_ASSOC);
+        // concat query_pre_check if exists
+        if (isset($conditions['query_pre_check']) && !empty($conditions['query_pre_check'])) {
+            $preparedQuery = $conditions['query_pre_check'] . ';' . PHP_EOL .$preparedQuery;
+        }
+        // concat query_check if exists
+        if (isset($conditions['query_check']) && !empty($conditions['query_check'])) {
+            $preparedQuery = $preparedQuery . ';' . PHP_EOL . str_replace("{{query}}", str_replace("'","''", $query) , $conditions['query_check']);
+        }
+        return $preparedQuery;
     }
     /**
      * Check query using regular expressions
@@ -259,6 +295,10 @@ class Question
             // check rows order
             foreach ($queryValidResult->data as $i => $row) {
                 if ($row !== $resultObject[0]->data[$i]) {
+                    // map NULLs to '[null]'
+                    $resultRow = array_map(fn($el)=>(is_null($el) ? '[null]' : $el), $resultObject[0]->data[$i]);
+                    $row = array_map(fn($el)=>(is_null($el) ? '[null]' : $el), $row);
+
                     foreach($row as $col=>$val) {
                         if (
                             is_numeric($resultObject[0]->data[$i][$col]) && is_numeric($val)
@@ -271,7 +311,7 @@ class Question
                         $hints['rowsData'] = [
                             'rowNumber' => $i + 1,
                             'rowTable' => '<table class="result-table"><tr><td>' . ($i + 1) . '</td><td>' . implode("</td><td>", $row) .'</td></tr></table>',
-                            'resultTable' => '<table class="result-table"><tr><td>' . ($i + 1) . '</td><td>' . implode("</td><td>", $resultObject[0]->data[$i]) .'</td></tr></table>'
+                            'resultTable' => '<table class="result-table"><tr><td>' . ($i + 1) . '</td><td>' . implode("</td><td>", $resultRow) .'</td></tr></table>'
                         ];
                         return [
                             'ok' => false,
@@ -291,7 +331,22 @@ class Question
             ];
         }
     }
-    public function save() {
-
+    /**
+     * Returns array of Question users solutions
+     *
+     * @param int $limit
+     * @return array
+     */
+    public function getSolutions($limit = 3): array 
+    {
+        $stmt = $this->dbh->prepare("
+            SELECT id, query, query_cost, created_at::date created_at, likes, dislikes
+            FROM user_solutions 
+            WHERE question_id = ? AND NOT reported
+            ORDER BY query_cost ASC, (likes - dislikes) ASC
+            LIMIT " . $limit);
+        $stmt->execute([$this->id]);
+        $solutions = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $solutions;
     }
 }

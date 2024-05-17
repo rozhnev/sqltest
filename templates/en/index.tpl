@@ -45,15 +45,24 @@
         <div class="code-buttons">
             <button class="button" id="getHelpBtn" onClick="getHelp('{$Lang}', {$QuestionID})">Get help</button>
             <button class="button" id="runQueryBtn" onClick="runQuery('{$Lang}', {$QuestionID})" title="CTRL+Enter">Run query</button>
-            <button class="button test" id="testQueryBtn" onClick="testQuery('{$Lang}', {$QuestionID})">Check it!</button>
+            <button class="button green" id="testQueryBtn" onClick="testQuery('{$Lang}', {$QuestionID})">Check it!</button>
             {if $NextQuestionId}
-                <a href="/{$Lang}/question/{$Question.category_sef}/{$NextQuestionId}" title="Следующее задание" class="button test hidden">Next</a>
+                <a href="/{$Lang}/question/{$Question.category_sef}/{$NextQuestionId}" title="Следующее задание" class="button green hidden">Next</a>
             {/if}
         </div>
         <div class="code-result ace-xcode" id="code-result"></div>
     </div>
 
-    <div class="right">
+    <div class="right" id="right-panel">
+        <div class="text-block user-solutions-count">
+             <p>Our website contains more than <span style="font-weight:bold;">{floor(($QuestionsCount - 1)/10) * 10}</span> tasks.</p>
+         {if $Logged}
+             <p>You {if $SolvedQuestionsCount < ($QuestionsCount/2)}have{else}already{/if} solved <span style="font-weight:bold;">{$SolvedQuestionsCount}</span> of them. </p>
+         {else}
+             <p>Log in to save your progress.</p>
+             <button class="button blue" onClick="toggleLoginWindow()">Login</button>
+         {/if}
+         </div>
         {include file="{$DB}.tpl"}
     </div>
     {include file='footer.tpl'}

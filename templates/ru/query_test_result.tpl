@@ -3,7 +3,7 @@
     {if $QueryTestResult.cost > 0}
         <p>Стоимость выполнения вашего запроса — {$QueryTestResult.cost} (чем меньше стоимость тем эффективней запрос)</p>
         {if $QueryBestCost}
-            Лучший запрос имеет стоимость:  {$QueryBestCost}
+            Стоимость лучшего решения: {$QueryBestCost}
             {if $QueryBestCost == $QueryTestResult.cost} Поздравляем! Ваш вариант запроса в числе лучших на нашем сайте!
             {elseif $QueryBestCost > $QueryTestResult.cost} Поздравляем вам удалось улучшить наш рекорд!
             {else} К сожалению, ваш результат немного недотягивает до рекорда. Вам есть над чем поработать! {/if}
@@ -11,7 +11,7 @@
     {/if}
     {if !$Logged}
         <p class="question-action">
-            Для сохранения вашего прогресса выполните <a href="" onClick="toggleLoginWindow(); return false;">вход на сайт</a>
+            Для сохранения вашего прогресса и возможности увидеть другие варианты решения выполните <a href="" onClick="toggleLoginWindow(); return false;">вход на сайт</a>
         </p>
     {else}
         <p class="question-action">
@@ -24,6 +24,9 @@
             <option value="4">Сложно</option>
             <option value="5">Очень сложно</option>
         </select>
+        </p>
+        <p class="question-action">
+             <button class="button green" onClick="showSolutions({$QuestionID})">Покажите мне другие решения!</button>
         </p>
     {/if}
 {else}

@@ -22,7 +22,7 @@
                     <li><strong>Supportive Community:</strong> Join our community where you can share your experiences, discuss interesting points, and get assistance from fellow enthusiasts.</li>
                 </ol>
                 <h2>What's New:</h2>
-                <p>At the moment, our website presents more then {floor(($QuestionsCount - 1)/10) * 10} tasks of varying complexity in {$CategoriesCount} categories, based on the Sakila (MySQL) and EMPLOYEE (Firebird). We regularly add new tasks and aim to expand the number of databases to provide you with a broader learning experience.</p></details>
+                <p>At the moment, our website presents more then {floor(($QuestionsCount - 1)/10) * 10} tasks of varying complexity in {$CategoriesCount} categories, based on the Sakila (MySQL), Bookings (PostgreSQL) and EMPLOYEE (Firebird). We regularly add new tasks and aim to expand the number of databases to provide you with a broader learning experience.</p></details>
 
                 <h2>Join Us:</h2>
                 <p>No registration required – just visit <a href="https://sqltest.online">SQLTest.online</a> and start your SQL adventure. We also invite you to join our <a href="https://t.me/sqlize">Telegram chat</a>, where you can share your experiences and influence the future development of the project.</p></details>

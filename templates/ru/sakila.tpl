@@ -1,5 +1,5 @@
 <div class="db-description">
-<h3>Описание базы данных Sakila</h3>
+<h2>Описание базы данных Sakila</h2>
 <p>
 <a style="font-size: small; color: var(--special-text-color);" href="/images/sakila" target="ERDWindow">ER диаграмма базы данных Sakila</a>
 </p>
@@ -9,8 +9,8 @@ Sakila - это пример базы данных, разработанный �
 </p><p>
 Ниже приведен список этих таблиц:
 </p>
-<p>Таблица <span class='sql'>actor</span></p>
-<ul class="table-columns">
+<h3>Таблица <span class='sql'>actor</span></h3>
+Колонки: <ul class="table-columns">
     <li> <span class='sql'>actor_id</span> - уникальный идентификатор для каждого актера.</li>
     <li> <span class='sql'>first_name</span> - имя актера.</li>
     <li> <span class='sql'>last_name</span> - фамилия актера.</li>
@@ -32,8 +32,8 @@ Sakila - это пример базы данных, разработанный �
   </tr>
 </table>
 </div>
-<p>Таблица <span class='sql'>film</span></p>
-  <ul class="table-columns">
+<h3>Таблица <span class='sql'>film</span></h3>
+  Колонки: <ul class="table-columns">
      <li> <span class='sql'>film_id</span> – уникальный идентификатор каждого фильма.</li>
      <li> <span class='sql'>title</span> — название фильма.</li>
      <li> <span class='sql'>description</span> – краткое описание или сюжет фильма.</li>
@@ -83,8 +83,8 @@ Sakila - это пример базы данных, разработанный �
     </table>
   </div>
   <!-- For Film_Text Table -->
-<p>Таблица <span class='sql'>film_text</span></p>
-<ul class="table-columns">
+<h3>Таблица <span class='sql'>film_text</span></h3>
+Колонки: <ul class="table-columns">
 <li> <span class='sql'>film_id</span> – уникальный идентификатор каждого фильма.</li>
    <li> <span class='sql'>title</span> - название фильма.</li>
    <li> <span class='sql'>description</span> - описание фильма.</li>
@@ -104,8 +104,8 @@ Sakila - это пример базы данных, разработанный �
     <!-- Additional rows go here if applicable -->
   </table>
 </div>
-  <p>Таблица <span class='sql'>film_actor</span></p>
-<ul class="table-columns">
+  <h3>Таблица <span class='sql'>film_actor</span></h3>
+Колонки: <ul class="table-columns">
   <li> <span class='sql'>actor_id</span> – уникальный идентификатор актера.</li>
   <li> <span class='sql'>film_id</span> – уникальный идентификатор фильма.</li>
   <li> <span class='sql'>last_update</span> - временная метка создания или последнего обновления строки.</li> 
@@ -124,8 +124,8 @@ Sakila - это пример базы данных, разработанный �
     </tr>
   </table>
 </div>
-<p>Таблица <span class='sql'>customer</span></p>
-  <ul class="table-columns">
+<h3>Таблица <span class='sql'>customer</span></h3>
+  Колонки: <ul class="table-columns">
     <li> <span class='sql'>customer_id</span> – уникальный идентификатор для каждого клиента.</li>
     <li> <span class='sql'>store_id</span> - внешний ключ, ссылающийся на таблицу магазина.</li>
     <li> <span class='sql'>first_name</span> – имя клиента.</li>
@@ -162,8 +162,8 @@ Sakila - это пример базы данных, разработанный �
       </tr>
     </table>
   </div>
-  <p>Таблица <span class='sql'>address</span></p>
-  <ul class="table-columns">
+  <h3>Таблица <span class='sql'>address</span></h3>
+  Колонки: <ul class="table-columns">
     <li> <span class='sql'>address_id</span> - уникальный идентификатор для каждого адреса.</li>
     <li> <span class='sql'>address</span> – почтовый адрес.</li>
     <li> <span class='sql'>address2</span> – дополнительный адрес.</li>
@@ -199,8 +199,8 @@ Sakila - это пример базы данных, разработанный �
     </table>
   </div>
   <!-- For City Table -->
-<p>Таблица <span class='sql'>city</span></p>
-<ul class="table-columns">
+<h3>Таблица <span class='sql'>city</span></h3>
+Колонки: <ul class="table-columns">
 <li> <span class='sql'>city_id</span> – уникальный идентификатор для каждого города.</li>
    <li> <span class='sql'>city</span> - название города.</li>
    <li> <span class='sql'>country_id</span> - внешний ключ, ссылающийся на таблицу стран.</li>
@@ -225,8 +225,8 @@ Sakila - это пример базы данных, разработанный �
 </div>
 
 <!-- For Country Table -->
-<p>Таблица <span class='sql'>country</span></p>
-<ul class="table-columns">
+<h3>Таблица <span class='sql'>country</span></h3>
+Колонки: <ul class="table-columns">
 <li> <span class='sql'>country_id</span> – уникальный идентификатор для каждой страны.</li>
    <li> <span class='sql'>country</span> – название страны.</li>
   <li> <span class='sql'>last_update</span> - временная метка создания или последнего обновления строки.</li> 
@@ -246,8 +246,8 @@ Sakila - это пример базы данных, разработанный �
     <!-- Additional rows go here if applicable -->
   </table>
 </div>
-  <p>Таблица <span class='sql'>category</span></p>
-  <ul class="table-columns">
+  <h3>Таблица <span class='sql'>category</span></h3>
+  Колонки: <ul class="table-columns">
   <li> <span class='sql'>category_id</span> – уникальный идентификатор для каждой категории.</li>
   <li> <span class='sql'>name</span> - название категории.</li>
     <li> <span class='sql'>last_update</span> - временная метка создания или последнего обновления строки.</li> 
@@ -267,8 +267,8 @@ Sakila - это пример базы данных, разработанный �
       <!-- Additional rows go here if applicable -->
     </table>
   </div>
-  <p>Таблица <span class='sql'>film_category</span></p>
-    <ul class="table-columns">
+  <h3>Таблица <span class='sql'>film_category</span></h3>
+    Колонки: <ul class="table-columns">
     <li> <span class='sql'>film_id</span> – уникальный идентификатор каждого фильма.</li>
     <li> <span class='sql'>category_id</span> – уникальный идентификатор для каждой категории.</li>
       <li> <span class='sql'>last_update</span> - временная метка создания или последнего обновления строки.</li> 
@@ -288,8 +288,8 @@ Sakila - это пример базы данных, разработанный �
         <!-- Additional rows go here if applicable -->
       </table>
     </div>
-  <p>Таблица <span class='sql'>language</span></p>
-  <ul class="table-columns">
+  <h3>Таблица <span class='sql'>language</span></h3>
+  Колонки: <ul class="table-columns">
       <li> <span class='sql'>language_id</span> - уникальный идентификатор для каждого языка.</li>
       <li> <span class='sql'>name</span> - название языка.</li>
       <li> <span class='sql'>last_update</span> - временная метка создания или последнего обновления строки.</li> 
@@ -309,8 +309,8 @@ Sakila - это пример базы данных, разработанный �
     </table>
   </div>
   <!-- For Staff Table -->
-<p>Таблица <span class='sql'>staff</span></p>
-<ul class="table-columns">
+<h3>Таблица <span class='sql'>staff</span></h3>
+Колонки: <ul class="table-columns">
 <li> <span class='sql'>staff_id</span> – уникальный идентификатор каждого сотрудника.</li>
    <li> <span class='sql'>first_name</span> – имя сотрудника.</li>
    <li> <span class='sql'>last_name</span> - фамилия сотрудника.</li>
@@ -355,8 +355,8 @@ Sakila - это пример базы данных, разработанный �
   </table>
 </div>
 <!-- For Staff_List Table -->
-<p>Таблица <span class='sql'>staff_list</span></p>
-<ul class="table-columns">
+<h3>Таблица <span class='sql'>staff_list</span></h3>
+Колонки: <ul class="table-columns">
 <li> <span class='sql'>ID</span> – уникальный идентификатор для каждой записи в списке сотрудников.</li>
    <li> <span class='sql'>name</span> – имя сотрудника.</li>
    <li> <span class='sql'>address</span> – адрес сотрудника.</li>
@@ -393,8 +393,8 @@ Sakila - это пример базы данных, разработанный �
 </div>
 
 <!-- For Store Table -->
-<p>Таблица <span class='sql'>store</span></p>
-<ul class="table-columns">
+<h3>Таблица <span class='sql'>store</span></h3>
+Колонки: <ul class="table-columns">
     <li> <span class='sql'>store_id</span> – уникальный идентификатор каждого магазина.</li>
     <li> <span class='sql'>manager_staff_id</span> - внешний ключ, ссылающийся на таблицу персонала менеджера магазина.</li>
     <li> <span class='sql'>address_id</span> - внешний ключ, ссылающийся на таблицу адресов.</li>
@@ -418,8 +418,8 @@ Sakila - это пример базы данных, разработанный �
   </table>
 </div>
 <!-- For Payment Table -->
-<p>Таблица <span class='sql'>payment</span></p>
-<ul class="table-columns">
+<h3>Таблица <span class='sql'>payment</span></h3>
+Колонки: <ul class="table-columns">
   <li> <span class='sql'>payment_id</span> – уникальный идентификатор для каждого платежа.</li>
   <li> <span class='sql'>customer_id</span> - внешний ключ, ссылающийся на таблицу клиентов.</li>
   <li> <span class='sql'>staff_id</span> - внешний ключ, ссылающийся на таблицу персонала.</li>
@@ -451,8 +451,8 @@ Sakila - это пример базы данных, разработанный �
     <!-- Additional rows go here if applicable -->
   </table>
 </div>
-<p>Таблица <span class='sql'>inventory</span></p>
-<ul class="table-columns">
+<h3>Таблица <span class='sql'>inventory</span></h3>
+Колонки: <ul class="table-columns">
      <li><span class='sql'>inventory_id</span> – уникальный идентификатор для каждого элемента.</li>
      <li><span class='sql'>film_id</span> – уникальный идентификатор каждого фильма в таблице.</li>
      <li><span class='sql'>store_id</span> – уникальный идентификатор магазина, в котором находится товар.</li>
@@ -476,8 +476,8 @@ Sakila - это пример базы данных, разработанный �
     </table>
 </div>
 <!-- For Rental Table -->
-<p>Таблица <span class='sql'>rental</span></p>
-<ul class="table-columns">
+<h3>Таблица <span class='sql'>rental</span></h3>
+Колонки: <ul class="table-columns">
 <li> <span class='sql'>rental_id</span> – уникальный идентификатор для каждой аренды.</li>
    <li> <span class='sql'>rental_date</span> – дата, когда произошла аренда.</li>
    <li> <span class='sql'>inventory_id</span> - внешний ключ, ссылающийся на таблицу инвентаризации.</li>

@@ -13,12 +13,43 @@ $mobileView =  (
     //|| parse_url($_SERVER['HTTP_HOST'])['host'] === 'm.sqltest.local' 
 );
 
+function getUserOSLanguage() {
+    $lang = 'en';
+    $langs = array();
+    if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
+        // Break up string into pieces (languages and q factors)
+        preg_match_all(
+            '/([a-z]{1,8}(-[a-z]{1,8})?)\s*(;\s*q\s*=\s*(1|0\.[0-9]+))?/i',
+            $_SERVER['HTTP_ACCEPT_LANGUAGE'],
+            $lang_parse
+        );
+        if (count($lang_parse[1])) {
+            // Create a list like 'en' => 0.8
+            $langs = array_combine($lang_parse[1], $lang_parse[4]);
+            // Set default to 1 for any without q factor
+            foreach ($langs as $lang => $val) {
+                if ($val === '') $langs[$lang] = 1;
+            }
+            // Sort list based on value
+            arsort($langs, SORT_NUMERIC);
+        }
+    }
+    // Extract most important (first)
+    foreach ($langs as $lang => $val) { break; }
+    // If complex language, simplify it
+    if (stristr($lang, "-")) {
+        $tmp = explode("-", $lang);
+        $lang = $tmp[0];
+    }
+    return $lang;
+}
 
 $path = isset($_SERVER['PATH_INFO']) ? trim($_SERVER['PATH_INFO'], '/') : trim($_SERVER['PHP_SELF'], '/');
 $pathParts = explode('/', $path);
 $db         = '';
 $questionID = '';
 $QuestionnireName = $_COOKIE['Questionnire'] ?? 'category';
+$smarty->assign('CanonicalLink', null);
 
 if ($mobileView) {
     $smarty->assign('CanonicalLink', "https://sqltest.online/{$path}");
@@ -43,10 +74,14 @@ if (isset($pathParts[0]) && $pathParts[0] === 'login') {
     $questionCategoryID = $questionnire->getCategoryId($params['questionCategory']);
     $questionID = $questionnire->getQuestionId($params['question']);
     $smarty->assign('CanonicalLink', "https://sqltest.online/{$lang}/question/{$questionCategoryID}/{$questionID}");
-} elseif (preg_match('@(?<lang>ru|en)/question/(?<questionID>\d+)/(?<action>query-help|query-run|query-test|rate)@i', $path, $params)) {
+} elseif (preg_match('@(?<lang>ru|en)/question/(?<questionID>\d+)/(?<action>query-help|query-run|query-test|rate|solutions)@i', $path, $params)) {
     $lang       = $params['lang'];
     $action     = $params['action'];
     $questionID = $params['questionID'];
+} elseif (preg_match('@(?<lang>ru|en)/solution/(?<solutionID>\d+)/(?<action>like|dislike|report)@i', $path, $params)) {
+    $lang       = $params['lang'];
+    $action     = 'solution-' . $params['action'];
+    $solutionID = $params['solutionID'];
 } elseif (preg_match('@(?<lang>ru|en)/(?<action>donate)@i', $path, $params)) {
     $lang       = $params['lang'];
     $action     = $params['action'];
@@ -56,7 +91,7 @@ if (isset($pathParts[0]) && $pathParts[0] === 'login') {
     $questionCategoryID = $params['questionCategory'] == 'employee' ? 2 : 1;
     $questionID = $params['questionID'];
 } else {
-    $lang       = isset($pathParts[0]) && $pathParts[0] === 'ru' ? 'ru' : 'en';
+    $lang       = (isset($pathParts[0]) && $pathParts[0] === 'ru') ||  getUserOSLanguage() =='ru' ? 'ru' : 'en';
     $questionID = $pathParts[2] ?? 1;
     $action     = $pathParts[3] ?? 'question';
     $questionCategoryID = 1;
@@ -113,7 +148,7 @@ switch ($action) {
         }
         $question = new Question($dbh, $questionID);
         $queryPreCheck = $question->getQueryPreCheck();
-        $query = new Query($queryPreCheck . '; ' .$sql);
+        $query = new Query($queryPreCheck . $sql);
 
         $smarty->assign('QeryResult', $query->getResult($question->getDB(), 'json'));
         $template = "query_result.tpl";
@@ -124,10 +159,8 @@ switch ($action) {
         $queryTestResult = $question->checkQuery($sql);
         $smarty->assign('QueryTestResult', $queryTestResult);
         if ($queryTestResult['ok']) {
-            $queryCheck = $question->getQueryCheck($sql);
-            $queryPreCheck = $question->getQueryPreCheck();
-            
-            $query = new Query($queryPreCheck . ';' . $sql . ';' . $queryCheck);
+            $preparedQuery = $question->prepareQuery($sql);
+            $query = new Query($preparedQuery);
             $jsonResult = $query->getResult($question->getDB(), 'json');
             $queryTestResult = $question->checkQueryResult($jsonResult);
             $smarty->assign('QueryTestResult', $queryTestResult);
@@ -146,6 +179,32 @@ switch ($action) {
         }
         $template = "rate_saved.tpl";
         break;
+    case 'solutions':
+        $question = new Question($dbh, $questionID);
+        $smarty->assign('QuestionSolutions', $question->getSolutions());
+        $template = "solutions.tpl";
+        break;
+    case 'solution-like':
+        if ($user->logged()) {
+            $solution = new Solution($dbh, $solutionID);
+            $solution->like();
+        }
+        $template = "rate_saved.tpl";
+        break;
+    case 'solution-dislike':
+        if ($user->logged()) {
+            $solution = new Solution($dbh, $solutionID);
+            $solution->dislike();
+        }
+        $template = "rate_saved.tpl";
+        break;
+    case 'solution-report':
+        if ($user->logged()) {
+            $solution = new Solution($dbh, $solutionID);
+            $solution->report();
+        }
+        $template = "rate_saved.tpl";
+        break;        
     case 'logout':
         // Unset all of the session variables.
         $_SESSION = array();
@@ -170,13 +229,15 @@ switch ($action) {
         $template = "welcome.tpl";
         break;
     case 'question':
-        if ($user->logged()) {
-            $user->setPath($path);
-            $user->save();
-        }
         try {
             $questionnire = new Questionnire($dbh, $lang);
             $question = new Question($dbh, $questionID);
+            $smarty->assign('QuestionsCount',  $questionnire->getQuestionsCount());
+            $smarty->assign('SolvedQuestionsCount',  $user->logged() ? $user->getSolvedQuestionsCount() : 0);
+            if ($user->logged()) {
+                $user->setPath($path);
+                $user->save();
+            }
             $smarty->assign('Questionnire', $questionnire->get($QuestionnireName, $user->getId()));
             $questionData = $question->get($questionCategoryID, $lang, $user->getId());
             $smarty->assign('QuestionCategoryID', $questionCategoryID);
