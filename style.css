@@ -502,7 +502,10 @@ body {
 .question {
     padding: 5px 15px;
 }
-
+.question a,
+.question a:visited {
+    color: var(--menu-link-color);
+}
 .question-title {
     font-weight: bold;
     background-color: var(--question-title-bg-color);
