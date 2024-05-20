@@ -12,5 +12,9 @@
         </div>
     {/foreach}
 {else}
-    <p>Sorry, but no solution to this problem has been published yet.</p>
+    <div class="solution-wrapper">
+        <div style="padding: 2em;">
+            <p>Sorry, but no solution to this problem has been published yet.</p>
+        </div>
+    </div>
 {/if}
