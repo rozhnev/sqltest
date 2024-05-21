@@ -55,9 +55,9 @@
 
     <div class="right" id="right-panel">
         <div class="text-block user-solutions-count">
-             <p>Our website contains more than <span style="font-weight:bold;">{floor(($QuestionsCount - 1)/10) * 10}</span> tasks.</p>
+             <p>Our website contains more than <span style="font-weight:bold; color: #2EA043 !important;">{floor(($QuestionsCount - 1)/10) * 10}</span> tasks.</p>
          {if $Logged}
-             <p>You {if $SolvedQuestionsCount < ($QuestionsCount/2)}have{else}already{/if} solved <span style="font-weight:bold;">{$SolvedQuestionsCount}</span> of them. </p>
+             <p>You {if $SolvedQuestionsCount < ($QuestionsCount/2)}have{else}already{/if} solved <span style="font-weight:bold;  color: #2EA043 !important;">{$SolvedQuestionsCount}</span> of them. </p>
          {else}
              <p>Log in to save your progress.</p>
              <button class="button blue" onClick="toggleLoginWindow()">Login</button>
