@@ -503,7 +503,9 @@ body {
     padding: 5px 15px;
 }
 .question a,
-.question a:visited {
+.question a:visited,
+.code-result a,
+.code-result a:visited {
     color: var(--menu-link-color);
 }
 .question-title {
@@ -678,10 +680,6 @@ body {
     padding: 7px;
 }
 
-.code-result a,
-.code-result a:visited {
-    color: var(--sql-color);
-}
 .db-description {
     height: 85vh;
     overflow: auto;
