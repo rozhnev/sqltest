@@ -1,4 +1,9 @@
     <div class="social-login-button" id="yandexLogin"></div>
+    <div class="social-login-button" style="background-color: #0077ff; border-radius: 4px;" id="vkLogin" onClick="openVKLoginPopUp()">
+        <svg height="40" aria-hidden="true" viewBox="0 0 24 24" version="1.1" width="40" data-view-component="true">
+            <path fill="white" d="M12.878 17.304c-5.411 0-8.695-3.755-8.823-9.994h2.74c.086 4.583 2.171 6.528 3.77 6.925V7.31h2.627v3.954c1.542-.17 3.155-1.97 3.698-3.954h2.584c-.414 2.441-2.17 4.24-3.412 4.983 1.242.6 3.24 2.17 4.011 5.01h-2.84c-.6-1.898-2.07-3.369-4.04-3.569v3.57h-.315Z"></path>
+        </svg>
+     </div>
     <div class="social-login-button" id="googleLogin" onClick="openGoogleLoginPopUp()">
         <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect width="40" height="40" rx="4" fill="#F2F2F2"/>
