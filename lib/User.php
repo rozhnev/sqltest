@@ -59,7 +59,7 @@ class User
             case 'google':
                 return $this->loginGoogle($_GET['code']);
             case 'vk':
-                return $this->loginVK($_GET['code']);            
+                return $this->loginVK($_GET['payload']);            
             default:
                 throw new Exception('Not supported login provider'); 
         }
@@ -70,40 +70,30 @@ class User
      * @param string $code
      * @return bool
      */
-    public function loginVK(string $code): bool
+    public function loginVK(string $payload): bool
     {
-    //   -d "v=5.131&token=silent_token&access_token=service_token&uuid=uuid"
-    //   https://sqltest.online/login/vk/?payload=%7B%22type%22%3A%22silent_token%22%2C%22auth%22%3A1%2C%22user%22%3A%7B%22id%22%3A776757%2C%22first_name%22%3A%22%D0%A1%D0%BB%D0%B0%D0%B2%D0%B0%22%2C%22last_name%22%3A%22%D0%A0.%22%2C%22avatar%22%3A%22https%3A%2F%2Fsun9-74.userapi.com%2Fc16%2Fu776757%2Fd_5fe989cc.jpg%22%2C%22avatar_base%22%3Anull%2C%22phone%22%3A%22%2B972%20**%20***%20**%2002%22%7D%2C%22token%22%3A%22O6o633AmSh_1SUiRlMDGBZCRPBfQkiy1mzbh9yxFWTQ3RnDGvicJU7boVuPDZAtsaYQFnNxUg5lBN4oqPTdeq5POYu8-73ttmUSY78srW9zskzdM94IXOzyJuIdpTOytL3pQ4gEGqwTtcgITTAV--AzSJBU_2goe_WIYQO0CwGksKBDsuuyU-Ikd5ulWWIHpQwwOZ6kZdGvXQLWTGibxtSv3_kekx7_MwWksXYfV8fyLzZR87BkOnQhqT0cxCrfHkMeYAF5qYImuGCrTDiZxF1Iwj-jXRvD3PbOo0X4_IiYJiVOsZxSo9NNaWK6Shdpes8an5l1Kb_qoY-EaZzs4wkJKEAPJyJY63MWVsnyzyBdx7kXZhIbuA5TDvmU2fQpydlq9RpoKVFiNf7Z1PWjdkJbQoAbAnEiIumYrT_3tRSOs6n8Rz3ZJRu-2Tdef6cAM%22%2C%22ttl%22%3A600%2C%22uuid%22%3A%2229890eb2-6a16-0613-190f-250e54537e18%22%2C%22hash%22%3A%22SIuh2e5gZZmReAq8fnnXaxErfSJDUqTht5HvZpXDyeP%22%2C%22loadExternalUsers%22%3Afalse%7D&state=login
-        // Exchange the authorization code for an access token
-        $payload = $_GET['payload'];
-        die($payload);
-        $ch = curl_init('https://api.vk.com/method/auth.exchangeSilentAuthToken');
-        $baseURL = 'https://' . $_SERVER['SERVER_NAME'] . $_SERVER['PHP_SELF'];
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([
-            'grant_type'    => 'authorization_code',
-            'client_id'     => $this->env['GOOGLE_CLIENT_ID'],
-            'client_secret' => $this->env['GOOGLE_SECRET'],
-            'redirect_uri'  => $baseURL,
-            'code' => $code
-        ]));
-        $data = json_decode(curl_exec($ch), true);
-        if (!empty($data['access_token'])) {
-            // Токен получили, получаем данные пользователя.
-            $ch = curl_init('https://www.googleapis.com/oauth2/v3/userinfo');
+        $data = json_decode($payload, true);
+
+        if (isset($data['auth']) && $data['auth'] == 1) {
+            // echo "<pre>";
+            // var_dump($data);
+
+            $ch = curl_init('https://api.vk.com/method/auth.exchangeSilentAuthToken');
             if ($ch) {
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-                curl_setopt($ch, CURLOPT_HTTPHEADER,  [
-                    'Authorization: Bearer ' . $data['access_token'],
-                ]);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([
+                    'v'             => '5.131',
+                    'token'         => $data['token'],
+                    'uuid'          => $data['uuid'],
+                ]));
                 curl_setopt($ch, CURLOPT_HEADER, false);
                 $info = curl_exec($ch);
                 curl_close($ch);
         
                 $info = json_decode($info, true);
     
-                $this->login = $info['email'] . '@google';
+                $this->login = $info['user_id'] . '@vk';
                 $this->upsert();
                 return true;
             }

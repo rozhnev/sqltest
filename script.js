@@ -24,7 +24,11 @@ function switchTheme(e) {
         })
     }
 }
-
+function formatCode() {
+    const beautify = ace.require("ace/ext/beautify");
+    const editor_session = window.sql_editor.session;
+    beautify.beautify(editor_session);
+}
 function setLoader(id) {
     return document.getElementById(id).innerHTML = '<div class="loader">Loading...</div>';
 }
@@ -268,6 +272,21 @@ function scrollQuestionPanel() {
 function openGitHubLoginPopUp() {
     window.open(
         `https://github.com/login/oauth/authorize?client_id=9a1910d2a6c658fdffc3&redirect_uri=${window.location.protocol}//${window.location.host}/login/github/&scope=user`, 'GitHub Login', 
+        `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=530,height=950,left=${(window.outerWidth - 530) / 2},top=${(window.outerHeight - 950) / 2}`
+    );
+}
+function openVKLoginPopUp() {
+    const uuid = '29890eb2-6a16-0613-190f-250e54537e18'; // Generate a random string. We recommend using at least 36 characters. This string will be used to verify that the request is coming from your app.
+    const appId = 51931966; // Your app identifier.
+    // const redirect_uri = `${window.location.protocol}//${window.location.host}/login/vk/`;
+    const redirect_uri = `https://sqltest.online/login/vk/`;
+    const redirect_state = 'login'; // Your app's state or any arbitrary string that will be added to the URL after authentication.
+
+    const query = `uuid=${uuid}&app_id=${appId}&response_type=silent_token&redirect_uri=${redirect_uri}&redirect_state=${redirect_state}`;
+
+    window.open(
+        `https://id.vk.com/auth?${query}`,
+        'VK Login',
         `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=530,height=950,left=${(window.outerWidth - 530) / 2},top=${(window.outerHeight - 950) / 2}`
     );
 }
