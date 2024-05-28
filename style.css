@@ -738,7 +738,7 @@ td {
 }
 .solution-block {
     height: 20vh;
-    width: 21vw;
+    /* width: 21vw; */
 }
 .solution-title,
 .solution-footer {
