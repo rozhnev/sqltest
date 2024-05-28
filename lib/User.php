@@ -91,7 +91,9 @@ class User
                 curl_close($ch);
         
                 $info = json_decode($info, true);
-    
+                
+                if (!$info['response']['user_id'])  return false;
+
                 $this->login = $info['response']['user_id'] . '@vk';
                 $this->upsert();
                 return true;
