@@ -112,7 +112,7 @@ function getHelp(lang, questionId) {
           credentials: "same-origin",
       })
       .then((async response=>{
-          if (!response.ok) throw Error('SOmething went wrong.');
+          if (!response.ok) throw Error('Something went wrong.');
           return await response.text();
       }))
       .then((message)=>{
@@ -132,7 +132,7 @@ function runQuery(lang, questionId) {
       body: formData,
   })
   .then((async response=>{
-      if (!response.ok) throw Error('SOmething went wrong.');
+      if (!response.ok) throw Error('Something went wrong.');
       return await response.text();
   }))
   .then(JSON.parse)
@@ -224,6 +224,11 @@ function solutionDislike(solutionId) {
 }
 function solutionReport(solutionId) {
     return solutionUpdate(solutionId, 'report');
+}
+function solutionRun(lang, questionId, solutionId) {
+    const solution = ace.edit(`solution-${solutionId}`).getValue();
+    window.sql_editor.setValue(solution);
+    return runQuery(lang, questionId);
 }
 
 function rateQuestion(questionId, rate) {
