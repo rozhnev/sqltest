@@ -222,8 +222,9 @@ function solutionLike(solutionId) {
 function solutionDislike(solutionId) {
     return solutionUpdate(solutionId, 'dislike');
 }
-function solutionReport(solutionId) {
-    return solutionUpdate(solutionId, 'report');
+function solutionReport(lang, questionId, solutionId) {
+    solutionUpdate(solutionId, 'report')
+    .then(()=>showSolutions(questionId));
 }
 function solutionRun(lang, questionId, solutionId) {
     const solution = ace.edit(`solution-${solutionId}`).getValue();
