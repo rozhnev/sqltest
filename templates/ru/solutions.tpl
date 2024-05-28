@@ -7,8 +7,8 @@
             <div class="solution-footer">
                 <button class="button-small green" onClick="solutionRun('ru', {$QuestionID}, {$id})">Выполнить</button>
                 {* <button class="button-small green" onClick="solutionLike({$solution.id})">Нравится! ({$solution.likes})</button> 
-                <button class="button-small yellow" onClick="solutionDislike({$solution.id})">Не нравится ({$solution.dislikes})</button>
-                <button class="button-small red" onClick="solutionReport({$solution.id})">Не верно!</button> *}
+                <button class="button-small yellow" onClick="solutionDislike({$solution.id})">Не нравится ({$solution.dislikes})</button> *}
+                <button class="button-small red" onClick="solutionReport({$solution.id})">Не верно!</button>
             </div>
         </div>
     {/foreach}
