@@ -93,7 +93,7 @@ class User
         
                 $info = json_decode($info, true);
     
-                $this->login = $info['user_id'] . '@vk';
+                $this->login = $info['response']['user_id'] . '@vk';
                 $this->upsert();
                 return true;
             }
