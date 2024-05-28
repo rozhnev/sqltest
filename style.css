@@ -628,6 +628,9 @@ body {
 .button.blue {
     background-color: var(--blue-btn-background);
 }
+.button-small.red {
+    background-color: darkred;
+}
 
 .button.hidden {
     display: none;
