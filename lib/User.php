@@ -75,8 +75,6 @@ class User
         $data = json_decode($payload, true);
 
         if (isset($data['auth']) && $data['auth'] == 1) {
-            // echo "<pre>";
-            // var_dump($data);
 
             $ch = curl_init('https://api.vk.com/method/auth.exchangeSilentAuthToken');
             if ($ch) {
@@ -85,6 +83,7 @@ class User
                 curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([
                     'v'             => '5.131',
                     'token'         => $data['token'],
+                    'access_token'  => $this->env['VK_ACCESS_TOKEN'],
                     'uuid'          => $data['uuid'],
                 ]));
                 curl_setopt($ch, CURLOPT_HEADER, false);
