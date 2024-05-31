@@ -16,9 +16,9 @@
             </div>
         </div>
     </div>
-    <div style="height: 12vh;">
+    <div style="height: 5em;">
         <div id="yandex_rtb_R-A-4716552-4">
-            <p style="padding: 5px; font-size:small;">
+            <p style="padding: 5px; font-size:12px;">
                 Advertising income and donations are our sole funding sources. Please don’t disable ads or consider donating.<br>
                 Thank you for your support! 🙏🌟
             </p>
