@@ -40,6 +40,7 @@
         </div>
         <div class="code-actions">
             <button onClick="copyCode(`SQL code copied to buffer`)">Copy code</button> <button onClick="clearEditor()">Clear editor</button>
+            {* <a class="clear-code" id="format_sql_btn" title="Format SQL code" href="javascript:formatCode('sql');">Format</a> *}
         </div>
         <div class="code-wrapper" id="sql-code" name="sql-code">{$Question.last_query}</div>
         <div class="code-buttons">

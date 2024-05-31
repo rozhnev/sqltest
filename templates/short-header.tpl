@@ -32,10 +32,6 @@
                 <script src="https://yastatic.net/s3/passport-sdk/autofill/v1/sdk-suggest-with-polyfills-latest.js"></script>
             <script type="text/javascript" src="/script.js?23" defer></script>
             {literal}
-            <!-- Yandex.RTB R-A-4716552-1 -->
-            <script>
-            <!-- Yandex.RTB R-A-4716552-2 -->
-            </script>
             <!-- Google tag (gtag.js) -->
             <script async src="https://www.googletagmanager.com/gtag/js?id=G-PCGW7ZLSD1"></script>
             <script>

@@ -16,6 +16,13 @@
             </div>
         </div>
     </div>
+    <div style="height: 10vh;">
+        <div id="yandex_rtb_R-A-4716552-4">
+            <p style="padding: 5px;">
+                Доходы от рекламы и пожертвования это единственные источники нашего финансирования позволяющий поддерживать работу проекта. Пожалуйста не отключайте рекламу на сайте или внесите посильное пожертвование.
+            </p>
+        </div>
+    </div>
     {foreach $Questionnire.menu as $categoryId => $panel}
     <button class="accordion {if $categoryId eq $QuestionCategoryID}active{/if}">
         {$panel.title}

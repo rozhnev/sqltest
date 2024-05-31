@@ -23,6 +23,13 @@ function switchTheme(e) {
             darkTheme: window.UIConfig.theme === 'dark'
         })
     }
+    if (document.getElementById('yandex_rtb_R-A-4716552-4')) {
+        Ya.Context.AdvManager.render({
+            "blockId": "R-A-4716552-4",
+            "renderTo": "yandex_rtb_R-A-4716552-4",
+            darkTheme: window.UIConfig.theme === 'dark'
+        })
+    }
 }
 function formatCode() {
     const beautify = ace.require("ace/ext/beautify");

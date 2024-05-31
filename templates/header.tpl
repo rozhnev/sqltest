@@ -32,7 +32,7 @@
         {if $CanonicalLink}
             <link rel="canonical" href="{$CanonicalLink}">
         {/if}
-            <link rel="stylesheet" type="text/css" href="/style.css?23" media="all">
+            <link rel="stylesheet" type="text/css" href="/style.css?24" media="all">
             <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/ace.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/ext-beautify.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/mode-sql.min.js"></script>
@@ -43,10 +43,9 @@
             <script>window.yaContextCb=window.yaContextCb||[]</script>
             <script src="https://yandex.ru/ads/system/context.js" async></script>
             <script src="https://yastatic.net/s3/passport-sdk/autofill/v1/sdk-suggest-with-polyfills-latest.js"></script>
-            <script type="text/javascript" src="/script.js?23" defer></script>
+            <script type="text/javascript" src="/script.js?24" defer></script>
             {if $MobileView}
                 {literal}
-                <!-- Yandex.RTB R-A-4716552-3 -->
                 <script>
                 window.yaContextCb.push(()=>{
                     Ya.Context.AdvManager.render({
@@ -59,7 +58,6 @@
                 {/literal}
             {else}
                 {literal}
-                <!-- Yandex.RTB R-A-4716552-1 -->
                 <script>
                 window.yaContextCb.push(()=>{
                     Ya.Context.AdvManager.render({
@@ -68,10 +66,16 @@
                         darkTheme: window.UIConfig.theme === 'dark'
                     })
                 })
+                window.yaContextCb.push(()=>{
+                    Ya.Context.AdvManager.render({
+                        "blockId": "R-A-4716552-4",
+                        "renderTo": "yandex_rtb_R-A-4716552-4",
+                        darkTheme: window.UIConfig.theme === 'dark'
+                    })
+                })
                 {/literal}
             {/if}
             {literal}
-            <!-- Yandex.RTB R-A-4716552-2 -->
             </script>
             <!-- Google tag (gtag.js) -->
             <script async src="https://www.googletagmanager.com/gtag/js?id=G-PCGW7ZLSD1"></script>
