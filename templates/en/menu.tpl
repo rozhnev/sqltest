@@ -16,10 +16,11 @@
             </div>
         </div>
     </div>
-    <div style="height: 10vh;">
+    <div style="height: 12vh;">
         <div id="yandex_rtb_R-A-4716552-4">
-            <p style="padding: 5px;">
-                Advertising income and donations are our only sources of funding to support the project. Please do not disable advertising on the site or make a reasonable donation.
+            <p style="padding: 5px; font-size:small;">
+                Advertising income and donations are our sole funding sources. Please don’t disable ads or consider donating.<br>
+                Thank you for your support! 🙏🌟
             </p>
         </div>
     </div>
@@ -53,9 +54,6 @@
     {/foreach}
     <div class="menu-ad">
         <div id="yandex_rtb_R-A-4716552-2">
-            <p style="padding: 5px;">
-                Advertising income and donations are our only sources of funding to support the project. Please do not disable advertising on the site or make a reasonable donation.
-            </p>
         </div>
     </div>
 </div>
