@@ -409,6 +409,7 @@ body {
     transition: 0.4s;
     font-weight: bold;
     border-bottom: 1px solid var(--border-color);
+    font-size: 0.9em;
 }
 .accordion.active {
     background-color: var(--accordion-hover);
@@ -460,6 +461,8 @@ body {
     color: var(--menu-link-color); 
     display: block;
     margin: 7px 0;
+    font-size: 1.1em;
+    text-decoration: none;
 }
 .container .question-link {
     font-size: small;
@@ -484,7 +487,7 @@ body {
 }
 
 .container .menu .menu-ad {
-    height: 42vh;
+    height: 32vh;
     margin-top: 1vh;
 }
 .mobile-container .menu .menu-ad {
