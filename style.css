@@ -591,7 +591,9 @@ body {
     font-weight: bold;
     font-style: italic;
 }
-
+.answer {
+    padding:10px;
+}
 .code-actions {
     text-align: right;
     padding-bottom: 3px;
