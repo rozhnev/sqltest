@@ -65,7 +65,8 @@ class Question
                 solved_at::date solved_date, 
                 last_query,
                 questions.rate,
-                rate_{$lang} question_rate
+                rate_{$lang} question_rate,
+                (exists (select true from answers where question_id = questions.id)) have_answers
             FROM questions 
             JOIN question_categories ON question_categories.question_id = questions.id and question_categories.category_id = :category_id
             JOIN categories on categories.id = question_categories.category_id
@@ -91,6 +92,46 @@ class Question
         $stmt = $this->dbh->prepare("SELECT hint_{$lang} FROM questions WHERE id = ?");
         $stmt->execute([$this->id]);
         return (string)$stmt->fetchColumn();
+    }
+    /**
+     * Returns question answers for provided language
+     *
+     * @param string $lang
+     * @return string
+     */
+    public function getAnswers(int $questionCategoryID, string $lang, ?string $userId): array 
+    {
+        $stmt = $this->dbh->prepare("SELECT id, {$lang} answer FROM answers WHERE question_id = ? ");
+        $stmt->execute([$this->id]);
+        $answers = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        if ($answers) {
+            shuffle($answers);
+            return $answers;
+        } else {
+            throw new Exception('Answers not found');
+        }
+    }
+        /**
+     * Returns question answers for provided language
+     *
+     * @param string $lang
+     * @return string
+     */
+    public function checkAnswers($answers): array 
+    {
+        $stmt = $this->dbh->prepare("SELECT json_agg(id ORDER BY id) answers FROM answers WHERE question_id = ? and is_valid");
+        $stmt->execute([$this->id]);
+        $validAnswers = $stmt->fetchColumn();
+
+        if (json_decode($answers) !== json_decode($validAnswers)) {
+            return [
+                'ok' => false
+            ];
+        }
+        return [
+            'ok' => true
+        ];
     }
     /**
      * Returns question best cost
