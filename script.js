@@ -12,7 +12,9 @@ function openRequestedTab(href) {
 
 function switchTheme(e) {
     const currentTheme = e.target.checked ?  'dark' : 'light';
-    window.sql_editor.setTheme(currentTheme === 'dark' ? 'ace/theme/github_dark' : 'ace/theme/xcode');
+    if (window.sql_editor) {
+        window.sql_editor.setTheme(currentTheme === 'dark' ? 'ace/theme/github_dark' : 'ace/theme/xcode');
+    }
     document.documentElement.setAttribute('data-theme', currentTheme);
     window.UIConfig.theme = currentTheme;
     saveUIConfig();
@@ -157,7 +159,37 @@ function runQuery(lang, questionId) {
       document.getElementById('code-result').innerHTML = 'Something went wrong. Please review your query and try again.';
   });
 }
+function checkAnswers(lang, questionId) {
+    setLoader('code-result');
+    const answers = [...document.querySelectorAll('input[name=answers]:checked')]
+        .reduce(
+            (res, el)=>{res.push(parseInt(el.value)); return res;}, 
+            []
+        )
+        .toSorted();
 
+    let formData = new FormData();
+    formData.append('answers', JSON.stringify(answers));
+    fetch(`/${lang}/question/${questionId}/check-answers`, {
+        method: "POST",
+        mode: "cors",
+        cache: "default",
+        credentials: "same-origin",
+        body: formData,
+    })
+    .then((async response=>{
+        if (response.ok) {
+            [...document.getElementsByClassName("button green")].map(el=>el.classList.toggle("hidden"));
+        }
+        return await response.text();
+    }))
+    .then((message)=>{
+        document.getElementById('code-result').innerHTML = message;
+    })
+    .catch(err=>{
+        document.getElementById('code-result').innerHTML = 'Something went wrong. Please review your query and try again.';
+    });
+}
 function testQuery(lang, questionId) {
     setLoader('code-result');
     let formData = new FormData();
@@ -319,7 +351,6 @@ function openGoogleLoginPopUp() {
 }
 
 function saveUIConfig() {
-    console.log(window.UIConfig);
     localStorage.setItem("UIConfig", JSON.stringify(window.UIConfig));
 }
 function applyUIConfig() {
@@ -382,16 +413,19 @@ function setEventListeners() {
 setMenuEventListeners();
 setEventListeners();
 applyUIConfig();
-window.sql_editor = ace.edit("sql-code", {
-    mode: "ace/mode/mysql",
-    selectionStyle: "text",
-    dragEnabled: false,
-    useWorker: false
-});
+if (document.getElementById("sql-code")) {
 
-window.sql_editor.setTheme(window.UIConfig.theme === 'dark' ? 'ace/theme/github_dark' : 'ace/theme/xcode');
-window.sql_editor.setShowPrintMargin(false);
-window.sql_editor.setOptions({enableBasicAutocompletion: true});
+    window.sql_editor = ace.edit("sql-code", {
+        mode: "ace/mode/mysql",
+        selectionStyle: "text",
+        dragEnabled: false,
+        useWorker: false
+    });
+
+    window.sql_editor.setTheme(window.UIConfig.theme === 'dark' ? 'ace/theme/github_dark' : 'ace/theme/xcode');
+    window.sql_editor.setShowPrintMargin(false);
+    window.sql_editor.setOptions({enableBasicAutocompletion: true});
+}
 
 window.onload = function() {
     scrollQuestionPanel();

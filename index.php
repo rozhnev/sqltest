@@ -74,7 +74,7 @@ if (isset($pathParts[0]) && $pathParts[0] === 'login') {
     $questionCategoryID = $questionnire->getCategoryId($params['questionCategory']);
     $questionID = $questionnire->getQuestionId($params['question']);
     $smarty->assign('CanonicalLink', "https://sqltest.online/{$lang}/question/{$questionCategoryID}/{$questionID}");
-} elseif (preg_match('@(?<lang>ru|en)/question/(?<questionID>\d+)/(?<action>query-help|query-run|query-test|rate|solutions)@i', $path, $params)) {
+} elseif (preg_match('@(?<lang>ru|en)/question/(?<questionID>\d+)/(?<action>query-help|query-run|query-test|rate|solutions|check-answers)@i', $path, $params)) {
     $lang       = $params['lang'];
     $action     = $params['action'];
     $questionID = $params['questionID'];
@@ -172,6 +172,17 @@ switch ($action) {
         if (!$queryTestResult['ok']) header( 'HTTP/1.1 418 BAD REQUEST' );
         $template = "query_test_result.tpl";
         break;
+    case 'check-answers':
+        $answers = $_POST["answers"] ?? '[]';
+        $question = new Question($dbh, $questionID);
+        $answerResult = $question->checkAnswers($answers);
+        $smarty->assign('AnswerResult', $answerResult);
+        if ($user->logged()) {
+            $user->saveQuestionAttempt($questionID, $answerResult, $answers);
+        }
+        if (!$answerResult['ok']) header( 'HTTP/1.1 418 BAD REQUEST' );
+        $template = "check_answer_result.tpl";
+        break;
     case 'rate':
         if ($user->logged()) {
             $rate = intval($_REQUEST['rate']);
@@ -240,6 +251,9 @@ switch ($action) {
             }
             $smarty->assign('Questionnire', $questionnire->get($QuestionnireName, $user->getId()));
             $questionData = $question->get($questionCategoryID, $lang, $user->getId());
+            if ($questionData['have_answers']) {
+                $questionData['answers'] = $question->getAnswers($questionCategoryID, $lang, $user->getId());
+            }
             $smarty->assign('QuestionCategoryID', $questionCategoryID);
             $smarty->assign('Question', $questionData);
             $smarty->assign('NextQuestionId', $question->getNextSefId($questionCategoryID));
