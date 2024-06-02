@@ -97,7 +97,9 @@ if (isset($pathParts[0]) && $pathParts[0] === 'login') {
     $questionCategoryID = 1;
 }
 
-session_start();
+session_start([
+    'cookie_lifetime' => 86400,
+]);
 
 if (($_SESSION && $_SESSION['user_id'])) {
     $user->set($_SESSION['user_id'], $_SESSION["admin"]);
