@@ -32,7 +32,7 @@
         ['Not quite, but don\'t give up! Try again.'],
         ['Let\'s try a different approach.'],
         ['Almost, but not quite. Try again!'],
-        ['Let\'s give that another go. You're almost there!']
+        ['Let\'s give that another go. You\'re almost there!']
     ]}
     {$phrases[$phrase_id][0]}
     <p>Error in task? <a target="_blank" href="https://t.me/sqlize">Report! We'll fix it :)</a></p>
