@@ -31,22 +31,42 @@
             <div class="question">
                 {$Question.task}
             </div>
-            <p class="question-action">
-                Напишите свой запрос в поле ниже и нажмите кнопку "Проверить!"{* (В случае ошибки вам придется просмотреть рекламный блок) *}
-            </p>
-            <p class="question-action">
-                Для написания используйте синтаксис {$Question.dbms}.<br>
-                Описания таблиц приведены внизу экрана. 
-            </p>
+            {if isset($Question.answers)}
+                <div class="question">
+                {foreach $Question.answers as $answer}
+                    <div class="answer">
+                        <input type="checkbox" id="answer-{$answer.id}" name="answers" value="{$answer.id}">
+                        <label for="answer-{$answer.id}"> {$answer.answer}</label>
+                    </div>
+                {/foreach}
+                </div>
+                <p class="question-action">
+                    Отметьте ВСЕ правильные ответы и нажмите кнопку «Проверить!»
+                </p>
+            {else}
+                <p class="question-action">
+                    Напишите свой запрос в поле ниже и нажмите кнопку «Проверить!»{* (В случае ошибки вам придется просмотреть рекламный блок) *}
+                </p>
+                <p class="question-action">
+                    Для написания используйте синтаксис {$Question.dbms}.<br>
+                    Описания таблиц приведены внизу экрана. 
+                </p>
+            {/if}
         </div>
-        <div class="code-actions">
-            <button onClick="copyCode(`Код SQL скопирован в буфер`)">Копировать код</button> <button onClick="clearEditor()">Очистить редактор</button>
-        </div>
-        <div class="code-wrapper" id="sql-code" name="sql-code">{$Question.last_query}</div>
+        {if !isset($Question.answers)}
+            <div class="code-actions">
+                <button onClick="copyCode(`Код SQL скопирован в буфер`)">Копировать код</button> <button onClick="clearEditor()">Очистить редактор</button>
+            </div>
+            <div class="code-wrapper" id="sql-code" name="sql-code">{$Question.last_query}</div>
+        {/if}
         <div class="code-buttons">
             <button class="button" id="getHelpBtn" onClick="getHelp('{$Lang}', {$QuestionID})">Помощь</button>
-            <button class="button" id="runQueryBtn" onClick="runQuery('{$Lang}', {$QuestionID})" title="CTRL+Enter">Выполнить запрос</button>
-            <button class="button green" id="testQueryBtn" onClick="testQuery('{$Lang}', {$QuestionID})">Проверить!</button>
+            {if !isset($Question.answers)}
+                <button class="button" id="runQueryBtn" onClick="runQuery('{$Lang}', {$QuestionID})" title="CTRL+Enter">Выполнить запрос</button>
+                <button class="button green" id="testQueryBtn" onClick="testQuery('{$Lang}', {$QuestionID})">Проверить!</button>
+            {else}
+                <button class="button green" id="checkAnswersBtn" onClick="checkAnswers('{$Lang}', {$QuestionID})">Проверить!</button>
+            {/if}
             {if $NextQuestionId}
                 <a href="/{$Lang}/question/{$Question.category_sef}/{$NextQuestionId}" title="Следующее задание" class="button green hidden">Далее</a>
             {/if}
