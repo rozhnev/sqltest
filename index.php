@@ -255,7 +255,7 @@ switch ($action) {
             $questionData = $question->get($questionCategoryID, $lang, $user->getId());
             if ($questionData['have_answers']) {
                 $questionData['answers'] = $question->getAnswers($questionCategoryID, $lang, $user->getId());
-                $questionData['last_query'] = json_decode($questionData['last_query'], true);
+                $questionData['last_query'] = json_decode($questionData['last_query']??'[]', true);
             }
             $smarty->assign('QuestionCategoryID', $questionCategoryID);
             $smarty->assign('Question', $questionData);
