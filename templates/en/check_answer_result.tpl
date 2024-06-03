@@ -1,25 +1,18 @@
+{assign var=phrase_id value=0|mt_rand:4}
+
 {if $AnswerResult.ok}
-     {* <b>Great! You have completed the task!</b> *}
-     <b>Awesome! You finished the task!</b>
-     {* <b>You did it! Way to go!</b>
-     <b>Congrats on finishing the task!</b>
-     <b>You rock! You're all done!</b> *}
-     {if !$Logged}
-        {* <p class="question-action">
-            To save your progress, please <a href="" onClick="toggleLoginWindow(); return false;">login</a>
-        </p> *}
+    {assign var="phrases" value=[
+        ['Great! You have completed the task!', 'To save your progress, please <a href="" onClick="toggleLoginWindow(); return false;">login</a>.'],
+        ['Awesome! You finished the task!', 'To keep your progress safe, <a href="" onClick="toggleLoginWindow(); return false;">just log in now</a>.'],
+        ['You did it! Way to go!', 'To make sure your awesome work is saved, <a href="" onClick="toggleLoginWindow(); return false;">just log in</a>.'],
+        ['Congrats on finishing the task!', '<a href="" onClick="toggleLoginWindow(); return false;">Log in</a> now to save your progress.'],
+        ['You rock! You\'re all done!', 'Don\'t forget to <a href="" onClick="toggleLoginWindow(); return false;">log in</a> to keep all your progress safe and sound. 😎']
+    ] }
+    {$phrases[$phrase_id][0]}
+    {if !$Logged}
         <p class="question-action">
-            To keep your progress safe, <a href="" onClick="toggleLoginWindow(); return false;">just log in now</a>.
+            {$phrases[$phrase_id][1]}
         </p>
-        {* <p class="question-action">
-            To make sure your awesome work is saved, <a href="" onClick="toggleLoginWindow(); return false;">just log in</a>.
-        </p>
-        <p class="question-action">
-            <a href="" onClick="toggleLoginWindow(); return false;">Log in</a> now to save your progress.
-        </p>
-        <p class="question-action">
-            Don't forget to <a href="" onClick="toggleLoginWindow(); return false;">log in</a> to keep all your progress safe and sound. 😎
-        </p> *}
     {else}
         <p class="question-action">
         Before starting the next test, please rate the difficulty of this task:
@@ -34,5 +27,13 @@
         </p>
     {/if}
 {else}
-    That's not quite right. Let's try again.
+    {assign var="phrases" value=[
+        ['That\'s not it, but keep thinking! Try again.'],
+        ['Not quite, but don\'t give up! Try again.'],
+        ['Let\'s try a different approach.'],
+        ['Almost, but not quite. Try again!'],
+        ['Let\'s give that another go. You're almost there!']
+    ]}
+    {$phrases[$phrase_id][0]}
+    <p>Error in task? <a target="_blank" href="https://t.me/sqlize">Report! We'll fix it :)</a></p>
 {/if}
