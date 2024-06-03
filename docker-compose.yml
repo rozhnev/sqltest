@@ -1,0 +1,9 @@
+version: "3.3"
+
+services:
+  web:
+    image: sqltest:latest
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www/html
