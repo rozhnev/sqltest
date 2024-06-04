@@ -336,10 +336,6 @@ class Question
             // check rows order
             foreach ($queryValidResult->data as $i => $row) {
                 if ($row !== $resultObject[0]->data[$i]) {
-                    // map NULLs to '[null]'
-                    $resultRow = array_map(fn($el)=>(is_null($el) ? '[null]' : $el), $resultObject[0]->data[$i]);
-                    $row = array_map(fn($el)=>(is_null($el) ? '[null]' : $el), $row);
-
                     foreach($row as $col=>$val) {
                         if (
                             is_numeric($resultObject[0]->data[$i][$col]) && is_numeric($val)
@@ -349,6 +345,9 @@ class Question
                         }
                     }
                     if ($row !== $resultObject[0]->data[$i]) {
+                        // map NULLs to '[null]' before show
+                        $resultRow = array_map(fn($el)=>(is_null($el) ? '[null]' : $el), $resultObject[0]->data[$i]);
+                        $row = array_map(fn($el)=>(is_null($el) ? '[null]' : $el), $row);
                         $hints['rowsData'] = [
                             'rowNumber' => $i + 1,
                             'rowTable' => '<table class="result-table"><tr><td>' . ($i + 1) . '</td><td>' . implode("</td><td>", $row) .'</td></tr></table>',
