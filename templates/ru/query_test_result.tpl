@@ -61,3 +61,6 @@
     {/if}
    Попробуйте ещё раз. Нашли ошибку в задании - <a target="_blank" href="https://t.me/sqlize">сообщите!</a>
 {/if}
+<p style="font-size:large;">
+    Хочешь освоить SQL и стать востребованным специалистом? <a href="https://go.redav.online/43dad3e496009351">Запишись на курс SkillFactory!</a>
+</p>
