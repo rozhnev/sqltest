@@ -501,9 +501,9 @@ body {
     border: 1px solid var(--text-block-border-color);
     color: var(--question-text);
 }
-
 .question {
     padding: 5px 15px;
+    font-size: larger;
 }
 .question a,
 .question a:visited,
@@ -590,6 +590,9 @@ body {
 .question .attention {
     font-weight: bold;
     font-style: italic;
+}
+.answers {
+    padding: 5px 15px;
 }
 .answer {
     padding:10px;
