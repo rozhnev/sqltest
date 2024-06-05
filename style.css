@@ -593,6 +593,15 @@ body {
 }
 .answer {
     padding:10px;
+    display: flex;
+    gap: 0.5em;
+}
+.answer input {
+    width: 16px;
+    height: 16px;
+}
+.answer label {
+    line-height: 20px;
 }
 .code-actions {
     text-align: right;
