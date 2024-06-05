@@ -351,9 +351,9 @@ body {
     font-size: small;
 }
 .site-description {
-    max-width: 60vw; 
+    max-width: 55vw; 
     display: flex; 
-    padding: 0 12px;
+    padding: 0 0.5em;
     align-items: center;
 }
 .footer-links {
