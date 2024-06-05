@@ -62,12 +62,12 @@
    Попробуйте ещё раз. Нашли ошибку в задании - <a target="_blank" href="https://t.me/sqlize">сообщите!</a>
 {/if}
 {assign var=phrase_id value=0|mt_rand:4}
-{assign var="adverts" value=[
+{assign var="referal_links" value=[
     ['Хочешь освоить SQL и стать востребованным специалистом? <a target="_blank" href="https://go.redav.online/43dad3e496009351">Запишись на курс SkillFactory!</a>'],
     ['Хочешь освоить SQL и стать востребованным специалистом? <a target="_blank" href="https://go.redav.online/291bd04d7a9ef1a1">Запишись на курс Eduson ACADEMY!</a>'],
-    ['Хочешь освоить SQL и стать востребованным специалистом? <a target="_blank" href="https://go.redav.online/43dad3e496009351">Запишись на курс SkillFactory!</a>'],
-    ['Хочешь освоить SQL и стать востребованным специалистом? <a target="_blank" href="https://go.redav.online/291bd04d7a9ef1a1">Запишись на курс Eduson ACADEMY!</a>'],
-    ['Хочешь освоить SQL и стать востребованным специалистом? <a target="_blank" href="https://go.redav.online/43dad3e496009351">Запишись на курс SkillFactory!</a>'],
-    ['Хочешь освоить SQL и стать востребованным специалистом? <a target="_blank" href="https://go.redav.online/291bd04d7a9ef1a1">Запишись на курс Eduson ACADEMY!</a>']
+    ['Хочешь освоить SQL и стать востребованным специалистом? <a target="_blank" href="https://go.redav.online/43dad3e496009351">Пройди курс от SkillFactory!</a>'],
+    ['Хочешь освоить SQL и стать востребованным специалистом? <a target="_blank" href="https://go.redav.online/291bd04d7a9ef1a1">Пройди курс от Eduson ACADEMY!</a>'],
+    ['Хочешь освоить SQL и стать востребованным специалистом? <a target="_blank" href="https://go.redav.online/43dad3e496009351">Получи диплом от SkillFactory!</a>'],
+    ['Хочешь освоить SQL и стать востребованным специалистом? <a target="_blank" href="https://go.redav.online/291bd04d7a9ef1a1">Получи диплом от Eduson ACADEMY!</a>']
 ]}
-<p style="font-size:large; margin-top: 5em;">{$adverts[$phrase_id][0]}</p>
+<p style="font-size:large; margin-top: 5em;">{$referal_links[$phrase_id][0]}</p>
