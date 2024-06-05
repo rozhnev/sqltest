@@ -37,6 +37,6 @@
     {$phrases[$phrase_id][0]}
     <p>Ошибка в задании? <a target="_blank" href="https://t.me/sqlize">Сообщите! Мы всё исправим :)</a></p>
 {/if}
-<p style="font-size:large;">
+<p style="font-size:large; margin-top: 5em;">
     Хочешь освоить SQL и стать востребованным специалистом? <a href="https://go.redav.online/43dad3e496009351">Запишись на курс SkillFactory!</a>
 </p>
