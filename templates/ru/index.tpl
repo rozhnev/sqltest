@@ -76,7 +76,7 @@
 
     <div class="right" id="right-panel">
         <div class="text-block user-solutions-count">
-            <p>Откройте для себя более <span style="font-weight:bold; color: #2EA043 !important;">{floor(($QuestionsCount - 1)/10) * 10}</span> уникальных заданий на нашем сайте.</p>
+            <p>Откройте для себя более <span style="font-weight:bold; color: #2EA043 !important;">{floor(($QuestionsCount - 1)/10) * 10}</span> уникальных заданий.</p>
         {if $Logged}
             <p>
                 Вы {if $SolvedQuestionsCount < ($QuestionsCount/2)}пока{else}уже{/if} решили <span style="font-weight:bold; color: #2EA043 !important;">{$SolvedQuestionsCount}</span> из них.
