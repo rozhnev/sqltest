@@ -679,6 +679,10 @@ body {
     font-size: smaller;
 }
 
+.code-result a {
+    text-decoration: none;
+}
+
 .code-result .result-table th,
 .code-result .result-table td:nth-child(1) {
     background-color: var(--question-title-bg-color);
