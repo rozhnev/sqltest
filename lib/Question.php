@@ -260,6 +260,7 @@ class Question
             $hints['emptyQuery'] = true;
             return [
                 'ok' => false,
+                'cost' => 0,
                 'hints' => $hints
             ];
         }
@@ -274,11 +275,13 @@ class Question
             $hints['wrongQuery'] = true;
             return [
                 'ok' => false,
+                'cost' => 0,
                 'hints' => $hints
             ];
         }
         return [
-            'ok' => true
+            'ok' => true,
+            'cost' => 0
         ];
     }
 
@@ -293,13 +296,15 @@ class Question
             $resultObject = json_decode($queryResult);
             if (!$resultObject) {
                 return [
-                    'ok' => false
+                    'ok' => false,
+                    'cost' => 0
                 ];
             }
             if (isset($resultObject[0]->error)) {
                 $hints['queryError'] = $resultObject[0]->error;
                 return [
                     'ok' => false,
+                    'cost' => 0,
                     'hints' => $hints
                 ];
             }
@@ -308,6 +313,7 @@ class Question
                 $hints['columnsCount'] = count($queryValidResult->headers);
                 return [
                     'ok' => false,
+                    'cost' => 0,
                     'hints' => $hints
                 ];
             }
@@ -322,6 +328,7 @@ class Question
                 $hints['columnsList'] = '<span class="sql">' . implode('</span>, <span class="sql">',array_column($queryValidResult->headers, 'header')) . "</span>";
                 return [
                     'ok' => false,
+                    'cost' => 0,
                     'hints' => $hints
                 ];
             }
@@ -331,6 +338,7 @@ class Question
                 $hints['rowsCount'] = count($queryValidResult->data);
                 return [
                     'ok' => false,
+                    'cost' => 0,
                     'hints' => $hints
                 ];
             }
@@ -357,6 +365,7 @@ class Question
                         ];
                         return [
                             'ok' => false,
+                            'cost' => 0,
                             'hints' => $hints
                         ];
                     }
@@ -369,7 +378,8 @@ class Question
         } catch(Exception $e) {
             // var_dump($e);
             return [
-                'ok' => false
+                'ok' => false,
+                'cost' => 0
             ];
         }
     }
