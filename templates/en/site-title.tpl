@@ -1,4 +1,4 @@
-<title>SQL practice on SQLtest {if $Question.title} ({$Question.title}){/if}</title>
+<title>SQL practice on SQLtest {if $Question && $Question.title} ({$Question.title}){/if}</title>
 <meta name="description" content="Free online SQL practical test.">
 <meta name="keywords" content="practical SQL quiz, test SQL knowledge, sakila mysql postgresql">
 <meta property="og:site_name" content="SQLtest.online">
