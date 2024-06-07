@@ -37,7 +37,7 @@
     {$phrases[$phrase_id][0]}
     <p>Ошибка в задании? <a target="_blank" href="https://t.me/sqlize">Сообщите! Мы всё исправим :)</a></p>
 {/if}
-{assign var=referral_link_id value=0|mt_rand:9}
+{assign var=referral_link_id value=0|mt_rand:8}
 {assign var="referral_links" value=[
     ['Хочешь освоить SQL и стать востребованным специалистом? <a target="_blank" href="https://go.redav.online/43dad3e496009351">Запишись на курс SkillFactory!</a>'],
     ['Хочешь освоить SQL и стать востребованным специалистом? <a target="_blank" href="https://go.redav.online/291bd04d7a9ef1a1">Запишись на курс Eduson ACADEMY!</a>'],
