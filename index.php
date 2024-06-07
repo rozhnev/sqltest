@@ -2,6 +2,7 @@
 $env    = parse_ini_string(file_get_contents(".env"), 1);
 
 require 'vendor/autoload.php';
+$lang   = 'en';
 $smarty = new Smarty();
 $dbc    = new DB($env);
 $dbh    = $dbc->getInstance();
@@ -172,6 +173,7 @@ switch ($action) {
             $user->saveQuestionAttempt($questionID, $queryTestResult, $sql);
         }
         if (!$queryTestResult['ok']) header( 'HTTP/1.1 418 BAD REQUEST' );
+        $smarty->registerPlugin("modifier", "mt_rand", "mt_rand");
         $template = "query_test_result.tpl";
         break;
     case 'check-answers':
@@ -183,6 +185,7 @@ switch ($action) {
             $user->saveQuestionAttempt($questionID, $answerResult, $answers);
         }
         if (!$answerResult['ok']) header( 'HTTP/1.1 418 BAD REQUEST' );
+        $smarty->registerPlugin("modifier", "mt_rand", "mt_rand");
         $template = "check_answer_result.tpl";
         break;
     case 'rate':
