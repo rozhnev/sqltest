@@ -1,11 +1,14 @@
-{assign var=phrase_id value=0|mt_rand:4}
-{assign var="referal_links" value=[
+{assign var=referral_link_id value=0|mt_rand:9}
+{assign var="referral_links" value=[
     ['Хочешь освоить SQL и стать востребованным специалистом? <a target="_blank" href="https://go.redav.online/43dad3e496009351">Запишись на курс SkillFactory!</a>'],
     ['Хочешь освоить SQL и стать востребованным специалистом? <a target="_blank" href="https://go.redav.online/291bd04d7a9ef1a1">Запишись на курс Eduson ACADEMY!</a>'],
+    ['Хочешь освоить SQL и стать востребованным специалистом? <a target="_blank" href="https://go.redav.online/25a34bf9dae29e31">Запишись на курс Geek Brains!</a>'].
     ['Хочешь освоить SQL и стать востребованным специалистом? <a target="_blank" href="https://go.redav.online/43dad3e496009351">Пройди курс от SkillFactory!</a>'],
     ['Хочешь освоить SQL и стать востребованным специалистом? <a target="_blank" href="https://go.redav.online/291bd04d7a9ef1a1">Пройди курс от Eduson ACADEMY!</a>'],
+    ['Хочешь освоить SQL и стать востребованным специалистом? <a target="_blank" href="https://go.redav.online/25a34bf9dae29e31">Пройди курс от Geek Brains!</a>']
     ['Хочешь освоить SQL и стать востребованным специалистом? <a target="_blank" href="https://go.redav.online/43dad3e496009351">Получи диплом от SkillFactory!</a>'],
-    ['Хочешь освоить SQL и стать востребованным специалистом? <a target="_blank" href="https://go.redav.online/291bd04d7a9ef1a1">Получи диплом от Eduson ACADEMY!</a>']
+    ['Хочешь освоить SQL и стать востребованным специалистом? <a target="_blank" href="https://go.redav.online/291bd04d7a9ef1a1">Получи диплом от Eduson ACADEMY!</a>'],
+    ['Хочешь освоить SQL и стать востребованным специалистом? <a target="_blank" href="https://go.redav.online/25a34bf9dae29e31">Получи диплом от Geek Brains!</a>']
 ]}
 {if $QueryTestResult.ok}
     <b>Отлично! Вы справились с задачей!</b>
@@ -37,7 +40,7 @@
         <p class="question-action">
              <button class="button green" onClick="showSolutions({$QuestionID})">Покажите мне другие решения!</button>
         </p>
-        <p style="font-size:large; margin-top: 0;">{$referal_links[$phrase_id][0]}</p>
+        <p style="font-size:large; margin-top: 0;">{$referral_links[$referral_link_id][0]}</p>
     {/if}
 {else}
     К сожалению неверно. 
@@ -70,5 +73,5 @@
         {/if}
     {/if}
    Попробуйте ещё раз. Нашли ошибку в задании - <a target="_blank" href="https://t.me/sqlize">сообщите!</a>
-   <p style="font-size:large; margin-top: 5em;">{$referal_links[$phrase_id][0]}</p>
+   <p style="font-size:large; margin-top: 5em;">{$referral_links[$referral_link_id][0]}</p>
 {/if}
