@@ -40,7 +40,6 @@
         <p class="question-action">
              <button class="button green" onClick="showSolutions({$QuestionID})">Покажите мне другие решения!</button>
         </p>
-        <p style="font-size:large; margin-top: 0;">{$referral_links[$referral_link_id][0]}</p>
     {/if}
 {else}
     К сожалению неверно. 
@@ -73,5 +72,5 @@
         {/if}
     {/if}
    Попробуйте ещё раз. Нашли ошибку в задании - <a target="_blank" href="https://t.me/sqlize">сообщите!</a>
-   <p style="font-size:large; margin-top: 5em;">{$referral_links[$referral_link_id][0]}</p>
 {/if}
+<p style="font-size:large; margin-top: 5em;">{$referral_links[$referral_link_id][0]}</p>

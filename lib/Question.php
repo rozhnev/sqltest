@@ -285,13 +285,20 @@ class Question
         ];
     }
 
+    private function evaluateValidResult(string $input): string
+    {
+        $regex = '@<\?php([^?]+)\?>@';
+        return preg_replace_callback($regex, function($code) { eval("\$evaluated = $code[1];"); return $evaluated; }, $input);    
+    }
+
     public function checkQueryResult(string $queryResult)
     {
         
         $stmt = $this->dbh->prepare("SELECT query_valid_result FROM questions WHERE id = ?");
         $stmt->execute([$this->id]);
         $questionData = $stmt->fetch(PDO::FETCH_ASSOC);
-        $queryValidResult = json_decode($questionData['query_valid_result'])[0];
+        $evaluatedResult = $this->evaluateValidResult($questionData['query_valid_result']);
+        $queryValidResult = json_decode($evaluatedResult)[0];
         try {
             $resultObject = json_decode($queryResult);
             if (!$resultObject) {
