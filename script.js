@@ -455,4 +455,6 @@ window.onload = function() {
     .then(({handler}) => handler())
     .then(data => alert('Сообщение с токеном', data))
     .catch(error => alert('Обработка ошибки', error));
+
+    ym(95990842,'reachGoal','referral-link');
 };
