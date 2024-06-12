@@ -88,6 +88,18 @@ class Questionnire
         ];
     }
 
+    public function getMap(): array
+    {
+        $stmt = $this->dbh->prepare("SELECT min(c.title_sef) category, q.title_sef question
+            FROM questions q 
+            JOIN question_categories qc ON qc.question_id = q.id 
+            JOIN categories c ON c.id = qc.category_id 
+            WHERE not c.deleted AND not q.deleted
+            GROUP BY q.title_sef;");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function getCategoriesCount(): int
     {
         $stmt = $this->dbh->prepare("SELECT COUNT(id) FROM categories WHERE not deleted;");

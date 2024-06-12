@@ -91,6 +91,8 @@ if (isset($pathParts[0]) && $pathParts[0] === 'login') {
     $action     = 'question';
     $questionCategoryID = $params['questionCategory'] == 'employee' ? 2 : 1;
     $questionID = $params['questionID'];
+} elseif (preg_match('@sitemap@i', $path, $params)) {
+    $action     = 'sitemap';
 } else {
     $lang       = (isset($pathParts[0]) && $pathParts[0] === 'ru') ||  getUserOSLanguage() =='ru' ? 'ru' : 'en';
     $questionID = $pathParts[2] ?? 1;
@@ -122,7 +124,15 @@ switch ($action) {
         $smarty->assign('Lang', $lang);
         // var_dump($questionnire->get($QuestionnireName, $user->getId()));
         $template = "menu.tpl";
-        break;      
+        break;
+    case 'sitemap':
+        header('Content-Type: application/xml');
+
+        $questionnire = new Questionnire($dbh, $lang);
+        $smarty->assign("Today", date('Y-m-d'));
+        $smarty->assign("Questionnire", $questionnire->getMap());
+        $template = "../sitemap.tpl";
+        break;  
     case 'about':
         $questionnire = new Questionnire($dbh, $lang);
         $smarty->assign('Lang', $lang);
@@ -264,6 +274,7 @@ switch ($action) {
             $smarty->assign('Question', $questionData);
             $smarty->assign('NextQuestionId', $question->getNextSefId($questionCategoryID));
             $smarty->assign('PreviousQuestionId', $question->getPreviousSefId($questionCategoryID));
+            $smarty->registerPlugin("modifier", "floor", "floor");
             $template = $mobileView ? "m.index.tpl" : "index.tpl";
             $db = $questionData['db_template'];
         } catch(Exception $e) {
@@ -286,6 +297,7 @@ switch ($action) {
         $smarty->assign('Question', $questionData);
         $smarty->assign('NextQuestionId', $question->getNextSefId($questionCategoryID));
         $smarty->assign('PreviousQuestionId', $question->getPreviousSefId($questionCategoryID));
+        $smarty->registerPlugin("modifier", "floor", "floor");
         $template = $mobileView ? "m.index.tpl" : "index.tpl";
 }
 
