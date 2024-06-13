@@ -275,6 +275,7 @@ switch ($action) {
             $smarty->assign('NextQuestionId', $question->getNextSefId($questionCategoryID));
             $smarty->assign('PreviousQuestionId', $question->getPreviousSefId($questionCategoryID));
             $smarty->registerPlugin("modifier", "floor", "floor");
+            $smarty->registerPlugin("modifier", "in_array", "in_array");
             $template = $mobileView ? "m.index.tpl" : "index.tpl";
             $db = $questionData['db_template'];
         } catch(Exception $e) {
@@ -298,6 +299,7 @@ switch ($action) {
         $smarty->assign('NextQuestionId', $question->getNextSefId($questionCategoryID));
         $smarty->assign('PreviousQuestionId', $question->getPreviousSefId($questionCategoryID));
         $smarty->registerPlugin("modifier", "floor", "floor");
+        $smarty->registerPlugin("modifier", "in_array", "in_array");
         $template = $mobileView ? "m.index.tpl" : "index.tpl";
 }
 
