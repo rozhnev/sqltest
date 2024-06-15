@@ -43,7 +43,7 @@
             <script>window.yaContextCb=window.yaContextCb||[]</script>
             <script src="https://yandex.ru/ads/system/context.js" async></script>
             <script src="https://yastatic.net/s3/passport-sdk/autofill/v1/sdk-suggest-with-polyfills-latest.js"></script>
-            <script type="text/javascript" src="/script.js?27" defer></script>
+            <script type="text/javascript" src="/script.js?28" defer></script>
             {if $MobileView}
                 {literal}
                 <script>
