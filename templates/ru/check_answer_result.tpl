@@ -39,17 +39,17 @@
 {/if}
 {assign var=referral_link_id value=0|mt_rand:11}
 {assign var="referral_links" value=[
-    ['Хочешь освоить SQL и стать востребованным специалистом? <a id="referral-link" target="_blank" href="https://go.redav.online/43dad3e496009351">Запишись на курс SkillFactory!</a>'],
-    ['Хочешь освоить SQL и стать востребованным специалистом? <a id="referral-link" target="_blank" href="https://go.redav.online/b412b1200cd44461">Запишись на курс SkillBox!</a>'],
-    ['Хочешь освоить SQL и стать востребованным специалистом? <a id="referral-link" target="_blank" href="https://go.redav.online/291bd04d7a9ef1a1">Запишись на курс Eduson ACADEMY!</a>'],
-    ['Хочешь освоить SQL и стать востребованным специалистом? <a id="referral-link" target="_blank" href="https://go.redav.online/25a34bf9dae29e31">Запишись на курс Geek Brains!</a>'],
-    ['Хочешь освоить SQL и стать востребованным специалистом? <a id="referral-link" target="_blank" href="https://go.redav.online/43dad3e496009351">Пройди курс от SkillFactory!</a>'],
-    ['Хочешь освоить SQL и стать востребованным специалистом? <a id="referral-link" target="_blank" href="https://go.redav.online/b412b1200cd44461">Пройди курс от SkillBox!</a>'],
-    ['Хочешь освоить SQL и стать востребованным специалистом? <a id="referral-link" target="_blank" href="https://go.redav.online/291bd04d7a9ef1a1">Пройди курс от Eduson ACADEMY!</a>'],
-    ['Хочешь освоить SQL и стать востребованным специалистом? <a id="referral-link" target="_blank" href="https://go.redav.online/25a34bf9dae29e31">Пройди курс от Geek Brains!</a>'],
-    ['Хочешь освоить SQL и стать востребованным специалистом? <a id="referral-link" target="_blank" href="https://go.redav.online/43dad3e496009351">Получи диплом от SkillFactory!</a>'],
-    ['Хочешь освоить SQL и стать востребованным специалистом? <a id="referral-link" target="_blank" href="https://go.redav.online/b412b1200cd44461">Получи диплом от SkillBox!</a>'],
-    ['Хочешь освоить SQL и стать востребованным специалистом? <a id="referral-link" target="_blank" href="https://go.redav.online/291bd04d7a9ef1a1">Получи диплом от Eduson ACADEMY!</a>'],
-    ['Хочешь освоить SQL и стать востребованным специалистом? <a id="referral-link" target="_blank" href="https://go.redav.online/25a34bf9dae29e31">Получи диплом от Geek Brains!</a>']
+    ['Хочешь освоить SQL и стать востребованным специалистом? <a id="referral-link" onclick="ym(95990842,\'reachGoal\',\'referral-link\'); return true;" target="_blank" href="https://go.redav.online/43dad3e496009351">Запишись на курс SkillFactory!</a>'],
+    ['Хочешь освоить SQL и стать востребованным специалистом? <a id="referral-link" onclick="ym(95990842,\'reachGoal\',\'referral-link\'); return true;" target="_blank" href="https://go.redav.online/b412b1200cd44461">Запишись на курс SkillBox!</a>'],
+    ['Хочешь освоить SQL и стать востребованным специалистом? <a id="referral-link" onclick="ym(95990842,\'reachGoal\',\'referral-link\'); return true;" target="_blank" href="https://go.redav.online/291bd04d7a9ef1a1">Запишись на курс Eduson ACADEMY!</a>'],
+    ['Хочешь освоить SQL и стать востребованным специалистом? <a id="referral-link" onclick="ym(95990842,\'reachGoal\',\'referral-link\'); return true;" target="_blank" href="https://go.redav.online/25a34bf9dae29e31">Запишись на курс Geek Brains!</a>'],
+    ['Хочешь освоить SQL и стать востребованным специалистом? <a id="referral-link" onclick="ym(95990842,\'reachGoal\',\'referral-link\'); return true;" target="_blank" href="https://go.redav.online/43dad3e496009351">Пройди курс от SkillFactory!</a>'],
+    ['Хочешь освоить SQL и стать востребованным специалистом? <a id="referral-link" onclick="ym(95990842,\'reachGoal\',\'referral-link\'); return true;" target="_blank" href="https://go.redav.online/b412b1200cd44461">Пройди курс от SkillBox!</a>'],
+    ['Хочешь освоить SQL и стать востребованным специалистом? <a id="referral-link" onclick="ym(95990842,\'reachGoal\',\'referral-link\'); return true;" target="_blank" href="https://go.redav.online/291bd04d7a9ef1a1">Пройди курс от Eduson ACADEMY!</a>'],
+    ['Хочешь освоить SQL и стать востребованным специалистом? <a id="referral-link" onclick="ym(95990842,\'reachGoal\',\'referral-link\'); return true;" target="_blank" href="https://go.redav.online/25a34bf9dae29e31">Пройди курс от Geek Brains!</a>'],
+    ['Хочешь освоить SQL и стать востребованным специалистом? <a id="referral-link" onclick="ym(95990842,\'reachGoal\',\'referral-link\'); return true;" target="_blank" href="https://go.redav.online/43dad3e496009351">Получи диплом от SkillFactory!</a>'],
+    ['Хочешь освоить SQL и стать востребованным специалистом? <a id="referral-link" onclick="ym(95990842,\'reachGoal\',\'referral-link\'); return true;" target="_blank" href="https://go.redav.online/b412b1200cd44461">Получи диплом от SkillBox!</a>'],
+    ['Хочешь освоить SQL и стать востребованным специалистом? <a id="referral-link" onclick="ym(95990842,\'reachGoal\',\'referral-link\'); return true;" target="_blank" href="https://go.redav.online/291bd04d7a9ef1a1">Получи диплом от Eduson ACADEMY!</a>'],
+    ['Хочешь освоить SQL и стать востребованным специалистом? <a id="referral-link" onclick="ym(95990842,\'reachGoal\',\'referral-link\'); return true;" target="_blank" href="https://go.redav.online/25a34bf9dae29e31">Получи диплом от Geek Brains!</a>']
 ]}
 <p style="font-size:large; margin-top: 5em;">{$referral_links[$referral_link_id][0]}</p>
