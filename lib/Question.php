@@ -419,7 +419,7 @@ class Question
             SELECT id, query, query_cost, created_at::date created_at, likes, dislikes
             FROM user_solutions 
             WHERE question_id = ? AND NOT reported
-            ORDER BY query_cost ASC, (likes - dislikes) ASC
+            ORDER BY query_cost ASC, (likes - dislikes) ASC, RANDOM()
             LIMIT " . $limit);
         $stmt->execute([$this->id]);
         $solutions = $stmt->fetchAll(PDO::FETCH_ASSOC);
