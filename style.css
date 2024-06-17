@@ -123,7 +123,7 @@ body {
     justify-content: center;
 }
 .toast {
-    /* visibility: hidden; */
+    border: 1px solid var(--text-block-border-color);
     opacity: 0;
     transition: opacity 0.3s ease-out;
     min-width: 250px;
@@ -136,11 +136,12 @@ body {
     position: fixed;
     z-index: 1;
     left: 47%;
-    top: 90px;
+    top: -90px;
 }
 .visible {
     opacity: 100 !important;
-    transition: opacity 0.3s ease-out;
+    top: 190px;
+    transition: opacity 0.3s ease-out, top 1s;
 }
 .login-popup.visible {
     top: 36% !important;
