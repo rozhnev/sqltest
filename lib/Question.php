@@ -353,12 +353,17 @@ class Question
             // check rows order
             foreach ($queryValidResult->data as $i => $row) {
                 if ($row !== $resultObject[0]->data[$i]) {
+                    // convert numeric strings to floating numbers
                     foreach($row as $col=>$val) {
                         if (
                             is_numeric($resultObject[0]->data[$i][$col]) && is_numeric($val)
                         ) {
                             $row[$col] = floatval($val);
                             $resultObject[0]->data[$i][$col] = floatval($resultObject[0]->data[$i][$col]);
+                            // patch for compare float values with limited precision
+                            if(abs($row[$col]-$resultObject[0]->data[$i][$col]) < 0.0000001) {
+                                $resultObject[0]->data[$i][$col] = $row[$col];
+                            }
                         }
                     }
                     if ($row !== $resultObject[0]->data[$i]) {
