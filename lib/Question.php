@@ -244,7 +244,7 @@ class Question
         }
         // concat query_check if exists
         if (isset($conditions['query_check']) && !empty($conditions['query_check'])) {
-            $preparedQuery = $preparedQuery . ';' . PHP_EOL . str_replace("{{query}}", str_replace("'","''", $query) , $conditions['query_check']);
+            $preparedQuery = $preparedQuery . PHP_EOL . ';' . PHP_EOL . str_replace("{{query}}", str_replace("'","''", $query) , $conditions['query_check']);
         }
         return $preparedQuery;
     }
@@ -349,7 +349,7 @@ class Question
                     'hints' => $hints
                 ];
             }
-            
+
             // check rows order
             foreach ($queryValidResult->data as $i => $row) {
                 if ($row !== $resultObject[0]->data[$i]) {
