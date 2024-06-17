@@ -349,7 +349,7 @@ class Question
                     'hints' => $hints
                 ];
             }
-    
+            
             // check rows order
             foreach ($queryValidResult->data as $i => $row) {
                 if ($row !== $resultObject[0]->data[$i]) {
@@ -361,7 +361,19 @@ class Question
                             $row[$col] = floatval($val);
                             $resultObject[0]->data[$i][$col] = floatval($resultObject[0]->data[$i][$col]);
                             // patch for compare float values with limited precision
-                            if(abs($row[$col]-$resultObject[0]->data[$i][$col]) < 0.0000001) {
+                            if(abs($row[$col]-$resultObject[0]->data[$i][$col]) < 0.0000000001) {
+                                $resultObject[0]->data[$i][$col] = $row[$col];
+                            }
+                        } elseif (
+                            // compare Postgres two numbers arrays of float with limited precision
+                            preg_match('/\(([0-9.]+),([0-9.]+)\)/ims', $val, $m1) &&
+                            preg_match('/\(([0-9.]+),([0-9.]+)\)/ims', $resultObject[0]->data[$i][$col], $m2)
+                        ) 
+                        {
+                            if (
+                                abs($m1[1]-$m2[1]) < 0.0000000001 && 
+                                abs($m1[2]-$m2[2]) < 0.0000000001
+                            ) {
                                 $resultObject[0]->data[$i][$col] = $row[$col];
                             }
                         }
