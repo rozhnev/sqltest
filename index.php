@@ -93,6 +93,10 @@ if (isset($pathParts[0]) && $pathParts[0] === 'login') {
     $questionID = $params['questionID'];
 } elseif (preg_match('@sitemap@i', $path, $params)) {
     $action     = 'sitemap';
+} elseif (preg_match('@robots@i', $path, $params)) {
+    echo 'User-agent: *
+    Disallow:';
+    die();
 } else {
     $lang       = (isset($pathParts[0]) && $pathParts[0] === 'ru') ||  getUserOSLanguage() =='ru' ? 'ru' : 'en';
     $questionID = $pathParts[2] ?? 1;
