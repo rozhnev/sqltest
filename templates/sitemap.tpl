@@ -39,13 +39,13 @@
     </url>
     {foreach from=$Questionnire item=question}
       <url>
-        <loc>https://sqltest.online/ru/{$question['category']}/{$question['question']}</loc>
+        <loc>https://sqltest.online/ru/question/{$question['category']}/{$question['question']}</loc>
         <lastmod>{$Today}</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.3</priority>
       </url>
       <url>
-        <loc>https://sqltest.online/en/{$question['category']}/{$question['question']}</loc>
+        <loc>https://sqltest.online/en/question/{$question['category']}/{$question['question']}</loc>
         <lastmod>{$Today}</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.3</priority>
