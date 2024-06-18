@@ -19,7 +19,7 @@
     <div style="height: 5em;">
         <div id="yandex_rtb_R-A-4716552-4">
             <p style="padding: 5px; font-size:12px;">
-                Advertising income and donations are our sole funding sources. Please don’t disable ads or <a href='/en/donate'>consider donating</a>.<br>
+                Advertising income and donations are our sole funding sources. Please don’t disable ads or <a href="/en/donate" style="color: var(--special-text-color);">consider donating</a>.<br>
                 Thank you for your support! 🙏🌟
             </p>
         </div>
