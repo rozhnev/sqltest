@@ -57,7 +57,7 @@
         <div class="question-wrapper">
             <div class="question-title">Помогите сделать SQLtest.online еще лучше!</div>
             <div style="font-size:small; padding: 0.5em;">
-                <p>Приветствую, любители SQL!</p>
+                <p>Приветствую вас, любители SQL!</p>
 
                 <p>Я пишу вам сегодня, потому что мне нужна ваша помощь.</p>
 
