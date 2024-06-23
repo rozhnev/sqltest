@@ -1,5 +1,5 @@
 <div class="db-description">
-    <h2>Employee Database</h2>
+    <h2>Employee Database (Firebird)</h2>
     <p>
      Employee is a sample database that comes with the Firebird cross-platform database management system.
      You can use this database to explore Firebird SQL and other DBMS features.
