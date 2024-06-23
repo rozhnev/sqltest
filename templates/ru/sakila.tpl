@@ -1,52 +1,51 @@
 <div class="db-description">
-<h2>База данных Sakila (MySQL)</h2>
-<p>
-<a style="font-size: small; color: var(--special-text-color);" href="/images/sakila" target="ERDWindow">ER диаграмма базы данных Sakila</a>
-</p>
-Sakila - это пример базы данных, разработанный компанией MySQL, специально созданный для обучения и демонстрации возможностей систем управления базами данных (СУБД) на основе реляционной модели.
-<p>
-База данных Sakila содержит 16 основных таблиц, описывающих различные аспекты компании по прокату DVD-дисков.
-</p><p>
-Ниже приведен список этих таблиц:
-</p>
-<h3>Таблица <span class='sql'>actor</span></h3>
-Колонки: <ul class="table-columns">
+  <h2>База данных Sakila (MySQL)</h2>
+  <p><a style="font-size: small; color: var(--special-text-color);" href="/images/sakila" target="ERDWindow">ER диаграмма базы данных Sakila</a></p>
+  Sakila - это пример базы данных, разработанный компанией MySQL, специально созданный для обучения и демонстрации возможностей систем управления базами данных (СУБД) на основе реляционной модели.
+  <p>База данных Sakila содержит 16 основных таблиц, описывающих различные аспекты компании по прокату DVD-дисков.</p>
+  <p>Ниже приведен список этих таблиц:</p>
+  <h3>Таблица <span class='sql'>actor</span></h3>
+  Колонки: <ul class="table-columns">
     <li> <span class='sql'>actor_id</span> - уникальный идентификатор для каждого актера.</li>
     <li> <span class='sql'>first_name</span> - имя актера.</li>
     <li> <span class='sql'>last_name</span> - фамилия актера.</li>
     <li> <span class='sql'>last_update</span> - временная метка создания или последнего обновления строки.</li> 
-</ul>
-<div class="table-wrapper">
-<table>
-  <tr>
-    <th>actor_id</th>
-    <th>first_name</th>
-    <th>last_name</th>
-    <th>last_update</th>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td>John</td>
-    <td>Doe</td>
-    <td>2023-01-01 12:00:00</td>
-  </tr>
-</table>
-</div>
-<h3>Таблица <span class='sql'>film</span></h3>
+  </ul>
+  <div class="table-wrapper">
+    <table>
+      <tr>
+        <th>actor_id</th>
+        <th>first_name</th>
+        <th>last_name</th>
+        <th>last_update</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>John</td>
+        <td>Doe</td>
+        <td>2023-01-01 12:00:00</td>
+      </tr>
+    </table>
+  </div>
+  Индексы:
+  <ul class="table-columns">
+    <li>PRIMARY KEY, btree (actor_id)</li>
+  </ul>
+  <h3>Таблица <span class='sql'>film</span></h3>
   Колонки: <ul class="table-columns">
-     <li> <span class='sql'>film_id</span> – уникальный идентификатор каждого фильма.</li>
-     <li> <span class='sql'>title</span> — название фильма.</li>
-     <li> <span class='sql'>description</span> – краткое описание или сюжет фильма.</li>
-     <li> <span class='sql'>release_year</span> — год выхода фильма.</li>
-     <li> <span class='sql'>language_id</span> — внешний ключ, ссылающийся на таблицу <span class='sql'>language</span> - определяет язык фильма.</li>
-     <li> <span class='sql'>original_language_id</span> — внешний ключ, указывающий на таблицу <span class='sql'>language</span> - определяет язык оригинала фильма. Используется, когда фильм дублирован на новый язык.</li>
-     <li> <span class='sql'>rental_duration</span> — продолжительность периода аренды в днях.</li>
-     <li> <span class='sql'>rental_rate</span> — стоимость проката фильма на период, указанный в столбце rental_duration.</li>
-     <li> <span class='sql'>length</span> — продолжительность фильма в минутах.</li>
-     <li> <span class='sql'>replacement_cost</span> — сумма, взимаемая с покупателя, если пленка не возвращена или возвращена в поврежденном состоянии.</li>
-     <li> <span class='sql'>rating</span> — рейтинг, присвоенный фильму. Может быть одним из: G, PG, PG-13, R или NC-17.</li>
-     <li> <span class='sql'>special_features</span> — список общих специальных функций, включенных в DVD. Может быть ноль или более: трейлеры, комментарии, удаленные сцены, за кадром.</li>
-     <li> <span class='sql'>last_update</span> — временная метка создания или последнего обновления строки.</li>
+    <li> <span class='sql'>film_id</span> – уникальный идентификатор каждого фильма.</li>
+    <li> <span class='sql'>title</span> — название фильма.</li>
+    <li> <span class='sql'>description</span> – краткое описание или сюжет фильма.</li>
+    <li> <span class='sql'>release_year</span> — год выхода фильма.</li>
+    <li> <span class='sql'>language_id</span> — внешний ключ, ссылающийся на таблицу <span class='sql'>language</span> - определяет язык фильма.</li>
+    <li> <span class='sql'>original_language_id</span> — внешний ключ, указывающий на таблицу <span class='sql'>language</span> - определяет язык оригинала фильма. Используется, когда фильм дублирован на новый язык.</li>
+    <li> <span class='sql'>rental_duration</span> — продолжительность периода аренды в днях.</li>
+    <li> <span class='sql'>rental_rate</span> — стоимость проката фильма на период, указанный в столбце rental_duration.</li>
+    <li> <span class='sql'>length</span> — продолжительность фильма в минутах.</li>
+    <li> <span class='sql'>replacement_cost</span> — сумма, взимаемая с покупателя, если пленка не возвращена или возвращена в поврежденном состоянии.</li>
+    <li> <span class='sql'>rating</span> — рейтинг, присвоенный фильму. Может быть одним из: G, PG, PG-13, R или NC-17.</li>
+    <li> <span class='sql'>special_features</span> — список общих специальных функций, включенных в DVD. Может быть ноль или более: трейлеры, комментарии, удаленные сцены, за кадром.</li>
+    <li> <span class='sql'>last_update</span> — временная метка создания или последнего обновления строки.</li>
   </ul>
   <div class="table-wrapper">
     <table>
@@ -82,49 +81,59 @@ Sakila - это пример базы данных, разработанный �
       </tr>
     </table>
   </div>
-  <!-- For Film_Text Table -->
-<h3>Таблица <span class='sql'>film_text</span></h3>
-Колонки: <ul class="table-columns">
-<li> <span class='sql'>film_id</span> – уникальный идентификатор каждого фильма.</li>
-   <li> <span class='sql'>title</span> - название фильма.</li>
-   <li> <span class='sql'>description</span> - описание фильма.</li>
-</ul>
-<div class="table-wrapper">
-  <table>
-    <tr>
-      <th>film_id</th>
-      <th>title</th>
-      <th>description</th>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td>Film Title</td>
-      <td>A brief description of the film.</td>
-    </tr>
-    <!-- Additional rows go here if applicable -->
-  </table>
-</div>
-  <h3>Таблица <span class='sql'>film_actor</span></h3>
-Колонки: <ul class="table-columns">
-  <li> <span class='sql'>actor_id</span> – уникальный идентификатор актера.</li>
-  <li> <span class='sql'>film_id</span> – уникальный идентификатор фильма.</li>
-  <li> <span class='sql'>last_update</span> - временная метка создания или последнего обновления строки.</li> 
+  Индексы:
+  <ul class="table-columns">
+      <li>PRIMARY KEY, btree (film_id)</li>
   </ul>
-<div class="table-wrapper">
-  <table>
-    <tr>
-      <th>actor_id</th>
-      <th>film_id</th>
-      <th>last_update</th>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td>1</td>
-      <td>2023-01-01 12:00:00</td>
-    </tr>
-  </table>
-</div>
-<h3>Таблица <span class='sql'>customer</span></h3>
+  <h3>Таблица <span class='sql'>film_text</span></h3>
+  Колонки: <ul class="table-columns">
+    <li> <span class='sql'>film_id</span> – уникальный идентификатор каждого фильма.</li>
+    <li> <span class='sql'>title</span> - название фильма.</li>
+    <li> <span class='sql'>description</span> - описание фильма.</li>
+  </ul>
+  <div class="table-wrapper">
+    <table>
+      <tr>
+        <th>film_id</th>
+        <th>title</th>
+        <th>description</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>Film Title</td>
+        <td>A brief description of the film.</td>
+      </tr>
+    </table>
+  </div>
+  Индексы:
+  <ul class="table-columns">
+    <li>PRIMARY KEY, btree (film_id)</li>
+  </ul>
+  <h3>Таблица <span class='sql'>film_actor</span></h3>
+  Колонки: <ul class="table-columns">
+    <li> <span class='sql'>actor_id</span> – уникальный идентификатор актера.</li>
+    <li> <span class='sql'>film_id</span> – уникальный идентификатор фильма.</li>
+    <li> <span class='sql'>last_update</span> - временная метка создания или последнего обновления строки.</li> 
+  </ul>
+  <div class="table-wrapper">
+    <table>
+      <tr>
+        <th>actor_id</th>
+        <th>film_id</th>
+        <th>last_update</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>1</td>
+        <td>2023-01-01 12:00:00</td>
+      </tr>
+    </table>
+  </div>
+  Индексы:
+  <ul class="table-columns">
+    <li>PRIMARY KEY, btree (actor_id, film_id)</li>
+  </ul>
+  <h3>Таблица <span class='sql'>customer</span></h3>
   Колонки: <ul class="table-columns">
     <li> <span class='sql'>customer_id</span> – уникальный идентификатор для каждого клиента.</li>
     <li> <span class='sql'>store_id</span> - внешний ключ, ссылающийся на таблицу магазина.</li>
@@ -162,6 +171,10 @@ Sakila - это пример базы данных, разработанный �
       </tr>
     </table>
   </div>
+  Индексы:
+  <ul class="table-columns">
+    <li>PRIMARY KEY, btree (customer_id)</li>
+  </ul>
   <h3>Таблица <span class='sql'>address</span></h3>
   Колонки: <ul class="table-columns">
     <li> <span class='sql'>address_id</span> - уникальный идентификатор для каждого адреса.</li>
@@ -195,63 +208,69 @@ Sakila - это пример базы данных, разработанный �
         <td>+1234567890</td>
         <td>2023-01-01 12:00:00</td>
       </tr>
-      <!-- Additional rows go here if applicable -->
     </table>
   </div>
-  <!-- For City Table -->
-<h3>Таблица <span class='sql'>city</span></h3>
-Колонки: <ul class="table-columns">
-<li> <span class='sql'>city_id</span> – уникальный идентификатор для каждого города.</li>
-   <li> <span class='sql'>city</span> - название города.</li>
-   <li> <span class='sql'>country_id</span> - внешний ключ, ссылающийся на таблицу стран.</li>
-  <li> <span class='sql'>last_update</span> - временная метка создания или последнего обновления строки.</li> 
+  Индексы:
+  <ul class="table-columns">
+    <li>PRIMARY KEY, btree (address_id)</li>
   </ul>
-<div class="table-wrapper">
-  <table>
-    <tr>
-      <th>city_id</th>
-      <th>city</th>
-      <th>country_id</th>
-      <th>last_update</th>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td>Metropolis</td>
-      <td>1</td>
-      <td>2023-01-01 12:00:00</td>
-    </tr>
-    <!-- Additional rows go here if applicable -->
-  </table>
-</div>
-
-<!-- For Country Table -->
-<h3>Таблица <span class='sql'>country</span></h3>
-Колонки: <ul class="table-columns">
-<li> <span class='sql'>country_id</span> – уникальный идентификатор для каждой страны.</li>
-   <li> <span class='sql'>country</span> – название страны.</li>
-  <li> <span class='sql'>last_update</span> - временная метка создания или последнего обновления строки.</li> 
-  </ul>
-<div class="table-wrapper">
-  <table>
-    <tr>
-      <th>country_id</th>
-      <th>country</th>
-      <th>last_update</th>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td>United States</td>
-      <td>2023-01-01 12:00:00</td>
-    </tr>
-    <!-- Additional rows go here if applicable -->
-  </table>
-</div>
-  <h3>Таблица <span class='sql'>category</span></h3>
+  <h3>Таблица <span class='sql'>city</span></h3>
   Колонки: <ul class="table-columns">
-  <li> <span class='sql'>category_id</span> – уникальный идентификатор для каждой категории.</li>
-  <li> <span class='sql'>name</span> - название категории.</li>
+    <li> <span class='sql'>city_id</span> – уникальный идентификатор для каждого города.</li>
+    <li> <span class='sql'>city</span> - название города.</li>
+    <li> <span class='sql'>country_id</span> - внешний ключ, ссылающийся на таблицу стран.</li>
     <li> <span class='sql'>last_update</span> - временная метка создания или последнего обновления строки.</li> 
     </ul>
+  <div class="table-wrapper">
+    <table>
+      <tr>
+        <th>city_id</th>
+        <th>city</th>
+        <th>country_id</th>
+        <th>last_update</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>Metropolis</td>
+        <td>1</td>
+        <td>2023-01-01 12:00:00</td>
+      </tr>
+    </table>
+  </div>
+  Индексы:
+  <ul class="table-columns">
+    <li>PRIMARY KEY, btree (city_id)</li>
+  </ul>
+  <h3>Таблица <span class='sql'>country</span></h3>
+  Колонки: <ul class="table-columns">
+    <li> <span class='sql'>country_id</span> – уникальный идентификатор для каждой страны.</li>
+    <li> <span class='sql'>country</span> – название страны.</li>
+    <li> <span class='sql'>last_update</span> - временная метка создания или последнего обновления строки.</li> 
+  </ul>
+  <div class="table-wrapper">
+    <table>
+      <tr>
+        <th>country_id</th>
+        <th>country</th>
+        <th>last_update</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>United States</td>
+        <td>2023-01-01 12:00:00</td>
+      </tr>
+    </table>
+  </div>
+  Индексы:
+  <ul class="table-columns">
+    <li>PRIMARY KEY, btree (country_id)</li>
+  </ul>
+  <h3>Таблица <span class='sql'>category</span></h3>
+  Колонки: <ul class="table-columns">
+    <li> <span class='sql'>category_id</span> – уникальный идентификатор для каждой категории.</li>
+    <li> <span class='sql'>name</span> - название категории.</li>
+    <li> <span class='sql'>last_update</span> - временная метка создания или последнего обновления строки.</li> 
+  </ul>
   <div class="table-wrapper">
     <table>
       <tr>
@@ -264,30 +283,36 @@ Sakila - это пример базы данных, разработанный �
         <td>Action</td>
         <td>2023-01-01 12:00:00</td>
       </tr>
-      <!-- Additional rows go here if applicable -->
     </table>
   </div>
+  Индексы:
+  <ul class="table-columns">
+    <li>PRIMARY KEY, btree (category_id)</li>
+  </ul>
   <h3>Таблица <span class='sql'>film_category</span></h3>
-    Колонки: <ul class="table-columns">
+  Колонки: <ul class="table-columns">
     <li> <span class='sql'>film_id</span> – уникальный идентификатор каждого фильма.</li>
     <li> <span class='sql'>category_id</span> – уникальный идентификатор для каждой категории.</li>
-      <li> <span class='sql'>last_update</span> - временная метка создания или последнего обновления строки.</li> 
-    </ul>
-    <div class="table-wrapper">
-      <table>
-        <tr>
-          <th>film_id</th>
-          <th>category_id</th>
-          <th>last_update</th>
-        </tr>
-        <tr>
-          <td>1</td>
-          <td>1</td>
-          <td>2023-01-01 12:00:00</td>
-        </tr>
-        <!-- Additional rows go here if applicable -->
-      </table>
-    </div>
+    <li> <span class='sql'>last_update</span> - временная метка создания или последнего обновления строки.</li> 
+  </ul>
+  <div class="table-wrapper">
+    <table>
+      <tr>
+        <th>film_id</th>
+        <th>category_id</th>
+        <th>last_update</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>1</td>
+        <td>2023-01-01 12:00:00</td>
+      </tr>
+    </table>
+  </div>
+  Индексы:
+  <ul class="table-columns">
+    <li>PRIMARY KEY, btree (film_id, category_id)</li>
+  </ul>
   <h3>Таблица <span class='sql'>language</span></h3>
   Колонки: <ul class="table-columns">
       <li> <span class='sql'>language_id</span> - уникальный идентификатор для каждого языка.</li>
@@ -308,206 +333,182 @@ Sakila - это пример базы данных, разработанный �
       </tr>
     </table>
   </div>
-  <!-- For Staff Table -->
-<h3>Таблица <span class='sql'>staff</span></h3>
-Колонки: <ul class="table-columns">
-<li> <span class='sql'>staff_id</span> – уникальный идентификатор каждого сотрудника.</li>
-   <li> <span class='sql'>first_name</span> – имя сотрудника.</li>
-   <li> <span class='sql'>last_name</span> - фамилия сотрудника.</li>
-   <li> <span class='sql'>address_id</span> - внешний ключ, ссылающийся на таблицу адресов.</li>
-   <li> <span class='sql'>picture</span> – изображение сотрудника.</li>
-   <li> <span class='sql'>email</span> - адрес электронной почты сотрудника.</li>
-   <li> <span class='sql'>store_id</span> - внешний ключ, ссылающийся на таблицу магазина.</li>
-   <li> <span class='sql'>active</span> – указывает, активен ли сотрудник.</li>
-   <li> <span class='sql'>username</span> - имя пользователя для входа в систему.</li>
-   <li> <span class='sql'>password</span> - пароль для входа.</li>
-  <li> <span class='sql'>last_update</span> - временная метка создания или последнего обновления строки.</li> 
+  Индексы:
+  <ul class="table-columns">
+    <li>PRIMARY KEY, btree (language_id)</li>
   </ul>
-<div class="table-wrapper">
-  <table>
-    <tr>
-      <th>staff_id</th>
-      <th>first_name</th>
-      <th>last_name</th>
-      <th>address_id</th>
-      <th>picture</th>
-      <th>email</th>
-      <th>store_id</th>
-      <th>active</th>
-      <th>username</th>
-      <th>password</th>
-      <th>last_update</th>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td>John</td>
-      <td>Doe</td>
-      <td>1</td>
-      <td>[null]</td>
-      <td>john.doe@example.com</td>
-      <td>1</td>
-      <td>true</td>
-      <td>johndoe</td>
-      <td>********</td>
-      <td>2023-01-01 12:00:00</td>
-    </tr>
-    <!-- Additional rows go here if applicable -->
-  </table>
-</div>
-<!-- For Staff_List Table -->
-<h3>Таблица <span class='sql'>staff_list</span></h3>
-Колонки: <ul class="table-columns">
-<li> <span class='sql'>ID</span> – уникальный идентификатор для каждой записи в списке сотрудников.</li>
-   <li> <span class='sql'>name</span> – имя сотрудника.</li>
-   <li> <span class='sql'>address</span> – адрес сотрудника.</li>
-   <li> <span class='sql'>zip code</span> – почтовый индекс сотрудника.</li>
-   <li> <span class='sql'>phone</span> – номер телефона сотрудника.</li>
-   <li> <span class='sql'>city</span> - город сотрудника.</li>
-   <li> <span class='sql'>country</span> – страна сотрудника.</li>
-   <li> <span class='sql'>SID</span> – внешний ключ, ссылающийся на таблицу персонала.</li>
-</ul>
-<div class="table-wrapper">
-  <table>
-    <tr>
-      <th>ID</th>
-      <th>name</th>
-      <th>address</th>
-      <th>zip code</th>
-      <th>phone</th>
-      <th>city</th>
-      <th>country</th>
-      <th>SID</th>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td>John Doe</td>
-      <td>123 Main St</td>
-      <td>12345</td>
-      <td>+1234567890</td>
-      <td>Metropolis</td>
-      <td>United States</td>
-      <td>1</td>
-    </tr>
-    <!-- Additional rows go here if applicable -->
-  </table>
-</div>
-
-<!-- For Store Table -->
-<h3>Таблица <span class='sql'>store</span></h3>
-Колонки: <ul class="table-columns">
+  <h3>Таблица <span class='sql'>staff</span></h3>
+  Колонки: <ul class="table-columns">
+  <li> <span class='sql'>staff_id</span> – уникальный идентификатор каждого сотрудника.</li>
+    <li> <span class='sql'>first_name</span> – имя сотрудника.</li>
+    <li> <span class='sql'>last_name</span> - фамилия сотрудника.</li>
+    <li> <span class='sql'>address_id</span> - внешний ключ, ссылающийся на таблицу адресов.</li>
+    <li> <span class='sql'>picture</span> – изображение сотрудника.</li>
+    <li> <span class='sql'>email</span> - адрес электронной почты сотрудника.</li>
+    <li> <span class='sql'>store_id</span> - внешний ключ, ссылающийся на таблицу магазина.</li>
+    <li> <span class='sql'>active</span> – указывает, активен ли сотрудник.</li>
+    <li> <span class='sql'>username</span> - имя пользователя для входа в систему.</li>
+    <li> <span class='sql'>password</span> - пароль для входа.</li>
+    <li> <span class='sql'>last_update</span> - временная метка создания или последнего обновления строки.</li> 
+  </ul>
+  <div class="table-wrapper">
+    <table>
+      <tr>
+        <th>staff_id</th>
+        <th>first_name</th>
+        <th>last_name</th>
+        <th>address_id</th>
+        <th>picture</th>
+        <th>email</th>
+        <th>store_id</th>
+        <th>active</th>
+        <th>username</th>
+        <th>password</th>
+        <th>last_update</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>John</td>
+        <td>Doe</td>
+        <td>1</td>
+        <td>[null]</td>
+        <td>john.doe@example.com</td>
+        <td>1</td>
+        <td>true</td>
+        <td>johndoe</td>
+        <td>********</td>
+        <td>2023-01-01 12:00:00</td>
+      </tr>
+    </table>
+  </div>
+  Индексы:
+  <ul class="table-columns">
+    <li>PRIMARY KEY, btree (staff_id)</li>
+  </ul>
+  <h3>Таблица <span class='sql'>store</span></h3>
+  Колонки: <ul class="table-columns">
     <li> <span class='sql'>store_id</span> – уникальный идентификатор каждого магазина.</li>
     <li> <span class='sql'>manager_staff_id</span> - внешний ключ, ссылающийся на таблицу персонала менеджера магазина.</li>
     <li> <span class='sql'>address_id</span> - внешний ключ, ссылающийся на таблицу адресов.</li>
     <li> <span class='sql'>last_update</span> - временная метка создания или последнего обновления строки.</li> 
-</ul>
-<div class="table-wrapper">
-  <table>
-    <tr>
-      <th>store_id</th>
-      <th>manager_staff_id</th>
-      <th>address_id</th>
-      <th>last_update</th>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>2023-01-01 12:00:00</td>
-    </tr>
-    <!-- Additional rows go here if applicable -->
-  </table>
-</div>
-<!-- For Payment Table -->
-<h3>Таблица <span class='sql'>payment</span></h3>
-Колонки: <ul class="table-columns">
-  <li> <span class='sql'>payment_id</span> – уникальный идентификатор для каждого платежа.</li>
-  <li> <span class='sql'>customer_id</span> - внешний ключ, ссылающийся на таблицу клиентов.</li>
-  <li> <span class='sql'>staff_id</span> - внешний ключ, ссылающийся на таблицу персонала.</li>
-  <li> <span class='sql'>rental_id</span> - внешний ключ, ссылающийся на таблицу аренды.</li>
-  <li> <span class='sql'>amount</span> – сумма платежа.</li>
-  <li> <span class='sql'>payment_date</span> – дата платежа.</li>
-  <li> <span class='sql'>last_update</span> - временная метка создания или последнего обновления строки.</li> 
-</ul>
-<div class="table-wrapper">
-  <table>
-    <tr>
-      <th>payment_id</th>
-      <th>customer_id</th>
-      <th>staff_id</th>
-      <th>rental_id</th>
-      <th>amount</th>
-      <th>payment_date</th>
-      <th>last_update</th>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>4.99</td>
-      <td>2023-01-01 12:13:14</td>
-      <td>2023-01-01 12:14:15</td>
-    </tr>
-    <!-- Additional rows go here if applicable -->
-  </table>
-</div>
-<h3>Таблица <span class='sql'>inventory</span></h3>
-Колонки: <ul class="table-columns">
-     <li><span class='sql'>inventory_id</span> – уникальный идентификатор для каждого элемента.</li>
-     <li><span class='sql'>film_id</span> – уникальный идентификатор каждого фильма в таблице.</li>
-     <li><span class='sql'>store_id</span> – уникальный идентификатор магазина, в котором находится товар.</li>
-     <li><span class='sql'>last_update</span> — временная метка последнего изменения записи.</li>
-</ul>
-<div class="table-wrapper">
+  </ul>
+  <div class="table-wrapper">
     <table>
-    <tr>
+      <tr>
+        <th>store_id</th>
+        <th>manager_staff_id</th>
+        <th>address_id</th>
+        <th>last_update</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+        <td>2023-01-01 12:00:00</td>
+      </tr>
+    </table>
+  </div>
+  Индексы:
+  <ul class="table-columns">
+    <li>PRIMARY KEY, btree (store_id)</li>
+  </ul>
+  <h3>Таблица <span class='sql'>payment</span></h3>
+  Колонки: <ul class="table-columns">
+    <li> <span class='sql'>payment_id</span> – уникальный идентификатор для каждого платежа.</li>
+    <li> <span class='sql'>customer_id</span> - внешний ключ, ссылающийся на таблицу клиентов.</li>
+    <li> <span class='sql'>staff_id</span> - внешний ключ, ссылающийся на таблицу персонала.</li>
+    <li> <span class='sql'>rental_id</span> - внешний ключ, ссылающийся на таблицу аренды.</li>
+    <li> <span class='sql'>amount</span> – сумма платежа.</li>
+    <li> <span class='sql'>payment_date</span> – дата платежа.</li>
+    <li> <span class='sql'>last_update</span> - временная метка создания или последнего обновления строки.</li> 
+  </ul>
+  <div class="table-wrapper">
+    <table>
+      <tr>
+        <th>payment_id</th>
+        <th>customer_id</th>
+        <th>staff_id</th>
+        <th>rental_id</th>
+        <th>amount</th>
+        <th>payment_date</th>
+        <th>last_update</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+        <td>4.99</td>
+        <td>2023-01-01 12:13:14</td>
+        <td>2023-01-01 12:14:15</td>
+      </tr>
+    </table>
+  </div>
+  Индексы:
+  <ul class="table-columns">
+    <li>PRIMARY KEY, btree (payment_id)</li>
+  </ul>
+  <h3>Таблица <span class='sql'>inventory</span></h3>
+  Колонки: <ul class="table-columns">
+      <li><span class='sql'>inventory_id</span> – уникальный идентификатор для каждого элемента.</li>
+      <li><span class='sql'>film_id</span> – уникальный идентификатор каждого фильма в таблице.</li>
+      <li><span class='sql'>store_id</span> – уникальный идентификатор магазина, в котором находится товар.</li>
+      <li><span class='sql'>last_update</span> — временная метка последнего изменения записи.</li>
+  </ul>
+  <div class="table-wrapper">
+    <table>
+      <tr>
         <th>inventory_id</th>
         <th>film_id</th>
         <th>store_id</th>
         <th>last_update</th>
-    </tr>
-    <tr>
+      </tr>
+      <tr>
         <td>1</td>
         <td>23</td>
         <td>2</td>
         <td>2023-01-01 12:00:00</td>
-    </tr>
-    <!-- Add more rows as needed -->
+      </tr>
     </table>
-</div>
-<!-- For Rental Table -->
-<h3>Таблица <span class='sql'>rental</span></h3>
-Колонки: <ul class="table-columns">
-<li> <span class='sql'>rental_id</span> – уникальный идентификатор для каждой аренды.</li>
-   <li> <span class='sql'>rental_date</span> – дата, когда произошла аренда.</li>
-   <li> <span class='sql'>inventory_id</span> - внешний ключ, ссылающийся на таблицу инвентаризации.</li>
-   <li> <span class='sql'>customer_id</span> - внешний ключ, ссылающийся на таблицу клиентов.</li>
-   <li> <span class='sql'>return_date</span> – дата возврата взятого напрокат имущества.</li>
-   <li> <span class='sql'>staff_id</span> - внешний ключ, ссылающийся на таблицу персонала.</li>
-  <li> <span class='sql'>last_update</span> - временная метка создания или последнего обновления строки.</li> 
-</ul>
-<div class="table-wrapper">
-  <table>
-    <tr>
-      <th>rental_id</th>
-      <th>rental_date</th>
-      <th>inventory_id</th>
-      <th>customer_id</th>
-      <th>return_date</th>
-      <th>staff_id</th>
-      <th>last_update</th>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td>2023-01-01 16:15:21</td>
-      <td>1</td>
-      <td>1</td>
-      <td>2023-01-10 09:12:36</td>
-      <td>1</td>
-      <td>2023-01-01 12:00:00</td>
-    </tr>
-    <!-- Additional rows go here if applicable -->
-  </table>
-</div>
-
+  </div>
+  Индексы:
+  <ul class="table-columns">
+    <li>PRIMARY KEY, btree (inventory_id)</li>
+  </ul>
+  <h3>Таблица <span class='sql'>rental</span></h3>
+  Колонки: <ul class="table-columns">
+    <li> <span class='sql'>rental_id</span> – уникальный идентификатор для каждой аренды.</li>
+    <li> <span class='sql'>rental_date</span> – дата, когда произошла аренда.</li>
+    <li> <span class='sql'>inventory_id</span> - внешний ключ, ссылающийся на таблицу инвентаризации.</li>
+    <li> <span class='sql'>customer_id</span> - внешний ключ, ссылающийся на таблицу клиентов.</li>
+    <li> <span class='sql'>return_date</span> – дата возврата взятого напрокат имущества.</li>
+    <li> <span class='sql'>staff_id</span> - внешний ключ, ссылающийся на таблицу персонала.</li>
+    <li> <span class='sql'>last_update</span> - временная метка создания или последнего обновления строки.</li> 
+  </ul>
+  <div class="table-wrapper">
+    <table>
+      <tr>
+        <th>rental_id</th>
+        <th>rental_date</th>
+        <th>inventory_id</th>
+        <th>customer_id</th>
+        <th>return_date</th>
+        <th>staff_id</th>
+        <th>last_update</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>2023-01-01 16:15:21</td>
+        <td>1</td>
+        <td>1</td>
+        <td>2023-01-10 09:12:36</td>
+        <td>1</td>
+        <td>2023-01-01 12:00:00</td>
+      </tr>
+    </table>
+  </div>
+  Индексы:
+  <ul class="table-columns">
+    <li>PRIMARY KEY, btree (rental_id)</li>
+  </ul>
 </div>
