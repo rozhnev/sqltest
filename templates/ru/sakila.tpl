@@ -1,5 +1,5 @@
 <div class="db-description">
-<h2>Описание базы данных Sakila</h2>
+<h2>База данных Sakila</h2>
 <p>
 <a style="font-size: small; color: var(--special-text-color);" href="/images/sakila" target="ERDWindow">ER диаграмма базы данных Sakila</a>
 </p>

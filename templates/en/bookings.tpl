@@ -1,6 +1,6 @@
 <div class="db-description">
     {literal}
-    <h2>Bookings database</h2>
+    <h2>Bookings Database</h2>
     The subject area of this database is airline flights through various airports.
     <p>
         <a style="font-size: small; color: var(--special-text-color);" href="/images/bookings" target="ERDWindow">ER diagram of the Bookings database</a>

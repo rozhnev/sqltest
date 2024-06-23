@@ -1,6 +1,6 @@
 <div class="db-description">
     {literal}
-    <h2>Описание базы данных Bookings</h2>
+    <h2>База данных Bookings</h2>
     Предметной областью этой базы данных являются рейсы авиакомпаний через различные аэропорты.
     <p>
         <a style="font-size: small; color: var(--special-text-color);" href="/images/bookings" target="ERDWindow">ER диаграмма базы данных Bookings</a>
