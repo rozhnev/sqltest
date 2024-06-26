@@ -40,7 +40,7 @@
              <button class="button green" onClick="showSolutions({$QuestionID})">Покажите мне другие решения!</button>
         </p>
     {/if}
-    <p style="font-size:large; margin-top: 2em;">{$referral_links[$referral_link_id][0]}</p>
+    <p style="font-size:large; margin-top: 1em;">{$referral_links[$referral_link_id][0]}</p>
 {else}
     К сожалению неверно. 
     {if array_key_exists('hints', $QueryTestResult) }
