@@ -10,13 +10,15 @@
 {if $QueryTestResult.ok}
     <b>Отлично! Вы справились с задачей!</b>
     {if $QueryTestResult.cost > 0}
-        <p>Стоимость выполнения вашего запроса — {$QueryTestResult.cost} (чем меньше стоимость тем эффективней запрос)</p>
+        <p>
+        Стоимость выполнения вашего запроса — {$QueryTestResult.cost} (чем ниже тем эффективней запрос).
         {if $QueryBestCost}
-            Стоимость лучшего решения: {$QueryBestCost}
+            Стоимость лучшего решения — {$QueryBestCost}<br>
             {if $QueryBestCost == $QueryTestResult.cost} Поздравляем! Ваш вариант запроса в числе лучших на нашем сайте!
             {elseif $QueryBestCost > $QueryTestResult.cost} Поздравляем вам удалось улучшить наш рекорд!
             {else} К сожалению, ваш результат немного недотягивает до рекорда. Вам есть над чем поработать! {/if}
         {/if}
+        </p>
     {/if}
     {if !$Logged}
         <p class="question-action">
@@ -38,7 +40,7 @@
              <button class="button green" onClick="showSolutions({$QuestionID})">Покажите мне другие решения!</button>
         </p>
     {/if}
-    <p style="font-size:large; margin-top: 1em;">{$referral_links[$referral_link_id][0]}</p>
+    <p style="font-size:large; margin-top: 2em;">{$referral_links[$referral_link_id][0]}</p>
 {else}
     К сожалению неверно. 
     {if array_key_exists('hints', $QueryTestResult) }
