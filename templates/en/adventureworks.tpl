@@ -55,8 +55,9 @@
     <h3>Table <span class="sql">Customer</span></h3>
     Columns:
     <ul class="table-columns">
-      <li> <span class="sql">CustomerID</span> - a unique identifier for each address.</li>
-      <li> <span class="sql">NameStyle</span> - a unique identifier for each address.</li>
+      <li> <span class="sql">CustomerID</span> - a unique identifier for each customer.</li>
+      <li> <span class="sql">NameStyle</span> - 0 = The data in FirstName and LastName are stored in western style (first name, last name) order. 1 = Eastern style (last name, first name) order.
+Default: 0.</li>
       <li> <span class="sql">Title</span> - title.</li>
       <li> <span class="sql">FirstName</span> - name.</li>
       <li> <span class="sql">MiddleName</span> - middle name.</li>
@@ -119,10 +120,8 @@
     <h3>Table <span class="sql">CustomerAddress</span></h3>
     Columns:
     <ul class="table-columns">
-      <li> <span class="sql">CustomerID</span> - unique identifier of each client in the table <span
-          class="sql">Customer</span>.</li>
-      <li> <span class="sql">AddressID</span> - unique identifier of each address in the table <span
-          class="sql">Address</span>.</li>
+      <li> <span class="sql">CustomerID</span> - unique identifier of client in the table <span class="sql">Customer</span>.</li>
+      <li> <span class="sql">AddressID</span> - unique identifier of address in the table <span class="sql">Address</span>.</li>
       <li> <span class="sql">AddressType</span> - address type.</li>
       <li> <span class="sql">rowguid</span> - guid.</li>
       <li> <span class="sql">ModifiedDate</span> - timestamp of row creation or last update.</li>
@@ -329,10 +328,8 @@
     <h3>Table <span class="sql">ProductModelProductDescription</span></h3>
     Columns:
     <ul class="table-columns">
-      <li> <span class="sql">ProductModelID</span> - unique identifier of each client in the table <span
-          class="sql">ProductModel</span>.</li>
-      <li> <span class="sql">ProductDescriptionID</span> - unique identifier of each address in the table <span
-          class="sql">ProductDescription</span>.</li>
+      <li> <span class="sql">ProductModelID</span> - unique identifier of client in the table <span class="sql">ProductModel</span>.</li>
+      <li> <span class="sql">ProductDescriptionID</span> - unique identifier of address in the table <span class="sql">ProductDescription</span>.</li>
       <li> <span class="sql">Culture</span> - language code in ISO format.</li>
       <li> <span class="sql">rowguid</span> - guid.</li>
       <li> <span class="sql">ModifiedDate</span> - timestamp of row creation or last update.</li>

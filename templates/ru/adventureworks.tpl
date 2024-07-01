@@ -54,8 +54,9 @@
     <h3>Таблица <span class="sql">Customer</span></h3>
     Колонки:
     <ul class="table-columns">
-      <li> <span class="sql">CustomerID</span> - уникальный идентификатор для каждого адреса.</li>
-      <li> <span class="sql">NameStyle</span> - уникальный идентификатор для каждого адреса.</li>
+      <li> <span class="sql">CustomerID</span> - уникальный идентификатор для каждого клиента.</li>
+      <li> <span class="sql">NameStyle</span> - 0 = Данные в FirstName и LastName хранятся в западном стиле (имя, фамилия). 1 = Восточный стиль (фамилия, имя) порядок.
+      По умолчанию: 0.</li>
       <li> <span class="sql">Title</span> - обращение.</li>
       <li> <span class="sql">FirstName</span> - имя.</li>
       <li> <span class="sql">MiddleName</span> - второе имя.</li>
@@ -119,10 +120,8 @@
     <h3>Таблица <span class="sql">CustomerAddress</span></h3>
     Колонки:
     <ul class="table-columns">
-      <li> <span class="sql">CustomerID</span> - уникальный идентификатор каждого клиента в таблице <span
-          class="sql">Customer</span>.</li>
-      <li> <span class="sql">AddressID</span> - уникальный идентификатор каждого адреса в таблице <span
-          class="sql">Address</span>.</li>
+      <li> <span class="sql">CustomerID</span> - уникальный идентификатор клиента в таблице <span class="sql">Customer</span>.</li>
+      <li> <span class="sql">AddressID</span> - уникальный идентификатор адреса в таблице <span class="sql">Address</span>.</li>
       <li> <span class="sql">AddressType</span> - тип адреса.</li>
       <li> <span class="sql">rowguid</span> - guid.</li>
       <li> <span class="sql">ModifiedDate</span> - временная метка создания или последнего обновления строки.</li>
@@ -331,10 +330,8 @@
     <h3>Таблица <span class="sql">ProductModelProductDescription</span></h3>
     Колонки:
     <ul class="table-columns">
-      <li> <span class="sql">ProductModelID</span> - уникальный идентификатор каждого клиента в таблице <span
-          class="sql">ProductModel</span>.</li>
-      <li> <span class="sql">ProductDescriptionID</span> - уникальный идентификатор каждого адреса в таблице <span
-          class="sql">ProductDescription</span>.</li>
+      <li> <span class="sql">ProductModelID</span> - уникальный идентификатор клиента в таблице <span class="sql">ProductModel</span>.</li>
+      <li> <span class="sql">ProductDescriptionID</span> - уникальный идентификатор адреса в таблице <span class="sql">ProductDescription</span>.</li>
       <li> <span class="sql">Culture</span> - языковой код в формате ISO.</li>
       <li> <span class="sql">rowguid</span> - guid.</li>
       <li> <span class="sql">ModifiedDate</span> - временная метка создания или последнего обновления строки.</li>
