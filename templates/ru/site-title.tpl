@@ -1,5 +1,6 @@
 <title>SQL задачи на SQLtest{if $Question && $Question.title} — ({$Question.title}){/if}</title>
-<meta name="description" content="{if $Question && $Question.title} ({$Question.title}){/if}">
+<meta http-equiv = "content-language" content = "ru">
+<meta name="description" content="Проверьте свои навыки SQL онлайн. Решайте SQL задачи, пишите эффективные SQL запросы, изучайте концепции и повышайте уровень знаний по базам данных. Станьте экспертом в SQL с sqltest.online"/>
 <meta name="keywords" content="практические задачи по SQL, тест на знание SQL, sakila mysql">
 <meta property="og:site_name" content="SQLtest.online">
 <meta property="og:type" content="website">
