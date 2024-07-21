@@ -1,6 +1,6 @@
         <a href="/ru/" target="_self" style="width: 20vw;">
                 <h1 class="site-name">SQLtest
-                        <span class="site-promo" style="font-size: 1.2em"> - SQL practice online</span>
+                        <span class="site-promo"> - SQL practice online</span>
                 </h1>
         </a>
         <span  class="site-description">

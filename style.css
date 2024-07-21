@@ -348,6 +348,9 @@ body {
     height: 100px;
     line-height: 32px;
 }
+.site-promo {
+    font-size: 0.6em;
+}
 .mobile-container .site-promo {
     font-size: small;
 }
