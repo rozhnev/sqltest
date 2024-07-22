@@ -47,4 +47,6 @@
     ['Аналитик?! Хочешь освоить SQL и повысить свою ценность? <a id="referral-link" target="_blank" href="https://go.redav.online/e1ad0b14a1ac8c50?erid=LdtCKEwqn&m=1">Запишись на курс «SQL для анализа данных» от SkillBox с максимальной скидкой!</a><p style="font-size:xx-small;">Реклама. ЧОУ ЧАСТНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ДОПОЛНИТЕЛЬНОГО ПРОФЕССИОНАЛЬНОГО ОБРАЗОВАНИЯ ОБРАЗОВАТЕЛЬНЫЕ ТЕХНОЛОГИИ СКИЛБОКС (КОРОБКА НАВЫКОВ), ИНН 9704088880, erid: LdtCKEwqn</p>'],
     ['Разработчик?! Хочешь уметь использовать, проектировать и оптимизировать базы данных? <a id="referral-link" target="_blank" href="https://go.redav.online/9c71a99b3ea3b9f0?erid=LdtCKEwqn&m=1">Запишись на курс «Базы данных для разработчиков» от SkillBox с максимальной скидкой!</a><p style="font-size:xx-small;">Реклама. ЧОУ ЧАСТНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ДОПОЛНИТЕЛЬНОГО ПРОФЕССИОНАЛЬНОГО ОБРАЗОВАНИЯ ОБРАЗОВАТЕЛЬНЫЕ ТЕХНОЛОГИИ СКИЛБОКС (КОРОБКА НАВЫКОВ), ИНН 9704088880, erid: LdtCKEwqn</p>']
 ]}
-<p style="font-size:large; margin-top: 3em;">{$referral_links[$referral_link_id][0]}</p>
+<div class="referral_link" style="font-size:large; margin-top: 3em; padding: 1em; border: solid 1px; border-radius: 3px;">
+    {$referral_links[$referral_link_id][0]}
+</div>

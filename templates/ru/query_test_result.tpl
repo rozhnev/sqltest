@@ -10,28 +10,35 @@
 ]}
 
 {if $QueryTestResult.ok}
-    <b>Отлично! Вы справились с задачей!</b>
-    {if $QueryTestResult.cost > 0}
-        <p>
-        Стоимость выполнения вашего запроса — {$QueryTestResult.cost} (чем ниже тем эффективней запрос).
-        {if $QueryBestCost}
-            Стоимость лучшего решения — {$QueryBestCost}<br>
-            {if $QueryBestCost == $QueryTestResult.cost} Поздравляем! Ваш вариант запроса в числе лучших на нашем сайте!
-            {elseif $QueryBestCost > $QueryTestResult.cost} Поздравляем вам удалось улучшить наш рекорд!
-            {else} К сожалению, ваш результат немного недотягивает до рекорда. Вам есть над чем поработать! {/if}
+    <div style="font-size: larger; margin-bottom: 10px;">Отлично! Вы справились с задачей!</div>
+    <div style="display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    line-height: 1.5em;">
+        {if $QueryTestResult.cost > 0}
+            <div style="flex: 2 1;">
+            Стоимость выполнения вашего запроса — {$QueryTestResult.cost} <span style="font-size: small;">(чем ниже тем эффективней запрос)</span>.
+            {if $QueryBestCost}
+                <br>Стоимость лучшего решения — {$QueryBestCost}<br>
+                {if $QueryBestCost == $QueryTestResult.cost} Поздравляем! Ваш вариант запроса в числе лучших на нашем сайте!
+                {elseif $QueryBestCost > $QueryTestResult.cost} Поздравляем вам удалось улучшить наш рекорд!
+                {else} К сожалению, ваш результат немного недотягивает до рекорда. Вам есть над чем поработать! {/if}
+            {/if}
+            </div>
         {/if}
-        </p>
-    {/if}
+        {if $Logged}
+            <div>
+                <button class="button green" onClick="showSolutions({$QuestionID})">Покажите мне другие решения!</button>
+            </div>
+        {/if}
+    </div>
     {if !$Logged}
         <p class="question-action">
             Для сохранения вашего прогресса и возможности увидеть другие варианты решения выполните <a href="" onClick="toggleLoginWindow(); return false;">вход на сайт</a>
         </p>
     {else}
-        <p class="question-action">
-             <button class="button green" onClick="showSolutions({$QuestionID})">Покажите мне другие решения!</button>
-        </p>
         <div class="question-rate-panel">
-            <div style="min-width:280px;">Прежде чем двигаться дальше, пожалуйста оцените сложность этого задания:</div>
+            <div style="min-width:280px; flex: 2 1;">Прежде чем двигаться дальше, пожалуйста оцените сложность этого задания:</div>
             <div class="buttons">
                 <button class="button-small" onclick="rateQuestion({$QuestionID}, 1)"><span class="question-level rate1"></span>&nbsp;Легко</button>
                 <button class="button-small" onclick="rateQuestion({$QuestionID}, 2)"><span class="question-level rate2"></span>&nbsp;Просто</button>
@@ -41,7 +48,9 @@
             </div>
         </div>
     {/if}
-    <p style="font-size:large; margin-top: 1em;">{$referral_links[$referral_link_id][0]}</p>
+    <div class="referral_link" style="font-size:large; margin-top: 1em; padding: 1em; border: solid 1px; border-radius: 3px;">
+        {$referral_links[$referral_link_id][0]}
+    </div>
 {else}
     К сожалению неверно. 
     {if array_key_exists('hints', $QueryTestResult) }
@@ -72,6 +81,8 @@
             <p>Подсказка: ваш запрос не соответствует требованиям описанным в задаче. <a href="#" onclick="getHelp('ru', {$QuestionID}); return false;">Воспользуйтесь подсказкой</a> и попробуйте переписать его.</p>
         {/if}
     {/if}
-   Попробуйте ещё раз. Нашли ошибку в задании - <a target="_blank" href="https://t.me/sqlize">сообщите!</a>
-   <p style="font-size:large; margin-top: 5em;">{$referral_links[$referral_link_id][0]}</p>
+    Попробуйте ещё раз. Нашли ошибку в задании - <a target="_blank" href="https://t.me/sqlize">сообщите!</a>
+    <div class="referral_link" style="font-size:large; margin-top: 5em; padding: 1em; border: solid 1px; border-radius: 3px;">
+        {$referral_links[$referral_link_id][0]}
+    </div>
 {/if}
