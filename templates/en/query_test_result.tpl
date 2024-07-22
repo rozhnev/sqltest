@@ -15,19 +15,18 @@
         </p>
     {else}
         <p class="question-action">
-        Before starting the next test, please rate the difficulty of this task:
-        <select onchange="rateQuestion({$QuestionID}, this.value)">
-             <option value="0" disabled selected>---</option>
-             <option value="1">Too easy</option>
-             <option value="2">Simple</option>
-             <option value="3">Normal</option>
-             <option value="4">Difficult</option>
-             <option value="5">Very hard</option>
-        </select>
-        </p>
-        <p class="question-action">
             <button class="button green" onClick="showSolutions({$QuestionID})">Show me other solutions!</button>
         </p>
+        <div class="question-rate-panel">
+            <div style="min-width:280px;">Before starting the next test, please rate the difficulty of this task:</div>
+            <div class="buttons">
+                <button class="button-small" onclick="rateQuestion({$QuestionID}, 1)"><span class="question-level rate1"></span>&nbsp;Too easy</button>
+                <button class="button-small" onclick="rateQuestion({$QuestionID}, 2)"><span class="question-level rate2"></span>&nbsp;Simple</button>
+                <button class="button-small" onclick="rateQuestion({$QuestionID}, 3)"><span class="question-level rate3"></span>&nbsp;Normal</button>
+                <button class="button-small" onclick="rateQuestion({$QuestionID}, 4)"><span class="question-level rate4"></span>&nbsp;Difficult</button>
+                <button class="button-small" onclick="rateQuestion({$QuestionID}, 5)"><span class="question-level rate5"></span>&nbsp;Very hard</button>
+            </div>
+        </div>
     {/if}
 {else}
      Unfortunately incorrect.

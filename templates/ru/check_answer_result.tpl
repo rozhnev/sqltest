@@ -14,16 +14,16 @@
             {$phrases[$phrase_id][1]}
         </p>
     {else}
-        <p class="question-action">
-        Прежде чем приступить к следующему тесту, пожалуйста оцените сложность этого задания:
-        <select onchange="rateQuestion({$QuestionID}, this.value)">
-            <option value="0" disabled selected>---</option>
-            <option value="1">Слишком просто</option>
-            <option value="2">Просто</option>
-            <option value="3">Нормально</option>
-            <option value="4">Сложно</option>
-            <option value="5">Очень сложно</option>
-        </select>
+        <div class="question-rate-panel">
+            <div style="min-width:280px;">Прежде чем двигаться дальше, пожалуйста оцените сложность этого задания:</div>
+            <div class="buttons">
+                <button class="button-small" onclick="rateQuestion({$QuestionID}, 1)"><span class="question-level rate1"></span>&nbsp;Легко</button>
+                <button class="button-small" onclick="rateQuestion({$QuestionID}, 2)"><span class="question-level rate2"></span>&nbsp;Просто</button>
+                <button class="button-small" onclick="rateQuestion({$QuestionID}, 3)"><span class="question-level rate3"></span>&nbsp;Нормально</button>
+                <button class="button-small" onclick="rateQuestion({$QuestionID}, 4)"><span class="question-level rate4"></span>&nbsp;Сложно</button>
+                <button class="button-small" onclick="rateQuestion({$QuestionID}, 5)"><span class="question-level rate5"></span>&nbsp;Очень сложно</button>
+            </div>
+        </div>
         </p>
     {/if}
 {else}
@@ -47,4 +47,4 @@
     ['Аналитик?! Хочешь освоить SQL и повысить свою ценность? <a id="referral-link" target="_blank" href="https://go.redav.online/e1ad0b14a1ac8c50?erid=LdtCKEwqn&m=1">Запишись на курс «SQL для анализа данных» от SkillBox с максимальной скидкой!</a><p style="font-size:xx-small;">Реклама. ЧОУ ЧАСТНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ДОПОЛНИТЕЛЬНОГО ПРОФЕССИОНАЛЬНОГО ОБРАЗОВАНИЯ ОБРАЗОВАТЕЛЬНЫЕ ТЕХНОЛОГИИ СКИЛБОКС (КОРОБКА НАВЫКОВ), ИНН 9704088880, erid: LdtCKEwqn</p>'],
     ['Разработчик?! Хочешь уметь использовать, проектировать и оптимизировать базы данных? <a id="referral-link" target="_blank" href="https://go.redav.online/9c71a99b3ea3b9f0?erid=LdtCKEwqn&m=1">Запишись на курс «Базы данных для разработчиков» от SkillBox с максимальной скидкой!</a><p style="font-size:xx-small;">Реклама. ЧОУ ЧАСТНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ДОПОЛНИТЕЛЬНОГО ПРОФЕССИОНАЛЬНОГО ОБРАЗОВАНИЯ ОБРАЗОВАТЕЛЬНЫЕ ТЕХНОЛОГИИ СКИЛБОКС (КОРОБКА НАВЫКОВ), ИНН 9704088880, erid: LdtCKEwqn</p>']
 ]}
-<p style="font-size:large; margin-top: 5em;">{$referral_links[$referral_link_id][0]}</p>
+<p style="font-size:large; margin-top: 3em;">{$referral_links[$referral_link_id][0]}</p>

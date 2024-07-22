@@ -28,19 +28,18 @@
         </p>
     {else}
         <p class="question-action">
-        Прежде чем приступить к следующему тесту, пожалуйста оцените сложность этого задания:
-        <select onchange="rateQuestion({$QuestionID}, this.value)">
-            <option value="0" disabled selected>---</option>
-            <option value="1">Слишком просто</option>
-            <option value="2">Просто</option>
-            <option value="3">Нормально</option>
-            <option value="4">Сложно</option>
-            <option value="5">Очень сложно</option>
-        </select>
-        </p>
-        <p class="question-action">
              <button class="button green" onClick="showSolutions({$QuestionID})">Покажите мне другие решения!</button>
         </p>
+        <div class="question-rate-panel">
+            <div style="min-width:280px;">Прежде чем двигаться дальше, пожалуйста оцените сложность этого задания:</div>
+            <div class="buttons">
+                <button class="button-small" onclick="rateQuestion({$QuestionID}, 1)"><span class="question-level rate1"></span>&nbsp;Легко</button>
+                <button class="button-small" onclick="rateQuestion({$QuestionID}, 2)"><span class="question-level rate2"></span>&nbsp;Просто</button>
+                <button class="button-small" onclick="rateQuestion({$QuestionID}, 3)"><span class="question-level rate3"></span>&nbsp;Нормально</button>
+                <button class="button-small" onclick="rateQuestion({$QuestionID}, 4)"><span class="question-level rate4"></span>&nbsp;Сложно</button>
+                <button class="button-small" onclick="rateQuestion({$QuestionID}, 5)"><span class="question-level rate5"></span>&nbsp;Очень сложно</button>
+            </div>
+        </div>
     {/if}
     <p style="font-size:large; margin-top: 1em;">{$referral_links[$referral_link_id][0]}</p>
 {else}
