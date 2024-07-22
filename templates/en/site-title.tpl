@@ -1,6 +1,6 @@
 <title>SQL practice{if $Question && $Question.title}: {$Question.title}{/if}</title>
 <meta http-equiv = "content-language" content = "en">
-<meta name="description" content="Test your SQL skills online with sqltest.online. Practice queries, explore concepts, and improve your database expertise."/>
+<meta name="description" content="Take the SQL test. Solve SQL tasks, write effective SQL queries, learn concepts, and improve your knowledge. Become an SQL expert!"/>
 <meta name="keywords" content="practical SQL quiz, test SQL knowledge, sakila mysql postgresql">
 <meta property="og:site_name" content="SQLtest.online">
 <meta property="og:type" content="website">
