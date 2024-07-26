@@ -1,2 +1,10 @@
 User-agent: *
-Disallow:
+
+Disallow: /en/privacy-policy
+Disallow: /ru/privacy-policy
+Disallow: /en/donate
+Disallow: /ru/donate
+
+Allow: /
+
+Sitemap: https://sqltest.online/sitemap.xml
