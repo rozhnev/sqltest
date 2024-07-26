@@ -95,8 +95,7 @@ if (isset($pathParts[0]) && $pathParts[0] === 'login') {
 } elseif (preg_match('@sitemap@i', $path, $params)) {
     $action     = 'sitemap';
 } elseif (preg_match('@robots@i', $path, $params)) {
-    echo 'User-agent: *
-    Disallow:';
+    include 'robots.txt';
     die();
 } else {
     $lang       = (isset($pathParts[0]) && $pathParts[0] === 'ru') ||  getUserOSLanguage() =='ru' ? 'ru' : 'en';
@@ -143,6 +142,7 @@ switch ($action) {
         $smarty->assign('Lang', $lang);
         $smarty->assign('CategoriesCount', $questionnire->getCategoriesCount());
         $smarty->assign('QuestionsCount',  $questionnire->getQuestionsCount());
+        //$smarty->assign('QuestionnaireCategoriesLinks',  $questionnire->getQuestionnaireCategoriesLinks(3));
         $template = "about.tpl";
         break;        
     case 'privacy-policy':
