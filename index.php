@@ -143,10 +143,22 @@ switch ($action) {
         $smarty->assign('CategoriesCount', $questionnire->getCategoriesCount());
         $smarty->assign('QuestionsCount',  $questionnire->getQuestionsCount());
         //$smarty->assign('QuestionnaireCategoriesLinks',  $questionnire->getQuestionnaireCategoriesLinks(3));
+        $smarty->assign('PageTitle', $lang === 'ru' 
+            ? 'SQLTest.online: твой персональный тренер по SQL'
+            : 'SQLTest.online: your personal SQL trainer'
+        );
+        $smarty->assign('PageDescription', $lang === 'ru' 
+            ? 'Хочешь научиться писать эффективные SQL-запросы? С SQLTest.online это просто! Решай разнообразные практические задачи, отслеживай свой прогресс и становись настоящим экспертом в области SQL.'
+            : 'Want to learn how to write effective SQL queries? With SQLTest.online it\'s easy! Solve various practical problems, track your progress and become a real expert in SQL.'
+        );
         $template = "about.tpl";
         break;        
     case 'privacy-policy':
         $smarty->assign('Lang', $lang);
+        $smarty->assign('PageTitle', $lang === 'ru' 
+            ? 'SQLTest.online: Политика конфиденциальности'
+            : 'SQLTest.online: Privacy Policy'
+        );
         $template = "privacy_policy.tpl";
         break;
     case 'donate':
