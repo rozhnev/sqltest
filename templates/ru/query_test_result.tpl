@@ -48,9 +48,11 @@
             </div>
         </div>
     {/if}
-    <div class="referral_link" style="font-size:large; margin-top: 1em; padding: 1em; border: solid 1px; border-radius: 3px;">
-        {$referral_links[$referral_link_id][0]}
-    </div>
+    {if isset($ReferralLink)}
+        <div class="referral_link" style="font-size:large; margin-top: 1em; padding: 1em; border: solid 1px; border-radius: 3px;">
+            {$ReferralLink}
+        </div>
+    {/if}
 {else}
     К сожалению неверно. 
     {if array_key_exists('hints', $QueryTestResult) }
@@ -82,7 +84,9 @@
         {/if}
     {/if}
     Попробуйте ещё раз. Нашли ошибку в задании - <a target="_blank" href="https://t.me/sqlize">сообщите!</a>
-    <div class="referral_link" style="font-size:large; margin-top: 5em; padding: 1em; border: solid 1px; border-radius: 3px;">
-        {$referral_links[$referral_link_id][0]}
-    </div>
+    {if isset($ReferralLink)}
+        <div class="referral_link" style="font-size:large; margin-top: 5em; padding: 1em; border: solid 1px; border-radius: 3px;">
+            {$ReferralLink}
+        </div>
+    {/if}
 {/if}

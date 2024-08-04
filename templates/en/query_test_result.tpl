@@ -28,6 +28,11 @@
             </div>
         </div>
     {/if}
+    {if isset($ReferralLink)}
+        <div class="referral_link" style="font-size:large; margin-top: 1em; padding: 1em; border: solid 1px; border-radius: 3px;">
+            {$ReferralLink}
+        </div>
+    {/if}
 {else}
      Unfortunately incorrect.
      {if array_key_exists('hints', $QueryTestResult) }
@@ -59,4 +64,9 @@
         {/if}
      {/if}
     Try again.
+    {if isset($ReferralLink)}
+        <div class="referral_link" style="font-size:large; margin-top: 5em; padding: 1em; border: solid 1px; border-radius: 3px;">
+            {$ReferralLink}
+        </div>
+    {/if}
 {/if}
