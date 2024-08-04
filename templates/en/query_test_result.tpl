@@ -1,22 +1,31 @@
 {if $QueryTestResult.ok}
-     <b>Great! You have completed the task!</b>
-     {if $QueryTestResult.cost > 0}
-        <p>The cost of executing your query is {$QueryTestResult.cost} (the lower the cost, the more effective the query)</p>
-        {if $QueryBestCost}
-            Cost of the best solution: {$QueryBestCost}
-            {if $QueryBestCost == $QueryTestResult.cost} Congratulations! Your request is among the best on our website!
-            {elseif $QueryBestCost > $QueryTestResult.cost} Congratulations on improving our record!
-            {else} Unfortunately, your result is a little low of the record. You have something to work on! {/if}
+    <div style="font-size: larger; margin-bottom: 10px;">Great! You have completed the task!</div>
+    <div style="display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    line-height: 1.5em;">
+        {if $QueryTestResult.cost > 0}
+            <div style="flex: 2 1;">
+            The cost of executing your query is {$QueryTestResult.cost} <span style="font-size: small;">(the lower the cost, the more effective the query)</span>
+            {if $QueryBestCost}
+                <br>Cost of the best solution: {$QueryBestCost}<br>
+                {if $QueryBestCost == $QueryTestResult.cost} Congratulations! Your request is among the best on our website!
+                {elseif $QueryBestCost > $QueryTestResult.cost} Congratulations on improving our record!
+                {else} Unfortunately, your result is a little low of the record. You have something to work on! {/if}
+            {/if}
+            </div>
+        {if $Logged}
+            <div>
+                <button class="button green" onClick="showSolutions({$QuestionID})">Show me other solutions!</button>
+            </div>
         {/if}
      {/if}
+     </div>
      {if !$Logged}
         <p class="question-action">
             To save your progress and be able to see other solutions, please <a href="" onClick="toggleLoginWindow(); return false;">login</a>
         </p>
     {else}
-        <p class="question-action">
-            <button class="button green" onClick="showSolutions({$QuestionID})">Show me other solutions!</button>
-        </p>
         <div class="question-rate-panel">
             <div style="min-width:280px;">Before starting the next test, please rate the difficulty of this task:</div>
             <div class="buttons">
