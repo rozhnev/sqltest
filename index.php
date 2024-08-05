@@ -69,6 +69,12 @@ if (isset($pathParts[0]) && $pathParts[0] === 'login') {
     $action     = 'question';
     $questionCategoryID = $params['questionCategoryID'];
     $questionID = $params['questionID'];
+    // old URL format - redirect
+    $questionnire = new Questionnire($dbh, $lang);
+    $redirectLink = $questionnire->getQuestionLink($questionCategoryID, $questionID);
+    header("HTTP/1.1 301 Moved Permanently");
+    header("Location: $redirectLink");
+    exit();
 } elseif (preg_match('@(?<lang>ru|en)/question/(?<questionCategory>[a-z-]+)/(?<question>[a-z-]+)@i', $path, $params)) {
     $lang       = $params['lang'];
     $questionnire = new Questionnire($dbh, $lang);
@@ -92,6 +98,12 @@ if (isset($pathParts[0]) && $pathParts[0] === 'login') {
     $action     = 'question';
     $questionCategoryID = $params['questionCategory'] == 'employee' ? 2 : 1;
     $questionID = $params['questionID'];
+    // old URL format - redirect
+    $questionnire = new Questionnire($dbh, $lang);
+    $redirectLink = $questionnire->getQuestionLink($questionCategoryID, $questionID);
+    header("HTTP/1.1 301 Moved Permanently");
+    header("Location: $redirectLink");
+    exit();
 } elseif (preg_match('@sitemap@i', $path, $params)) {
     $action     = 'sitemap';
 } elseif (preg_match('@robots@i', $path, $params)) {

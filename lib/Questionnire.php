@@ -127,4 +127,16 @@ class Questionnire
         $stmt->execute([':sef' => $sef]);
         return $stmt->fetchColumn(0);
     }
+     
+    public function getQuestionLink(int $categoryId, int $questionId): string
+    {
+        $stmt = $this->dbh->prepare("SELECT CONCAT(
+                '/{$this->lang}/question', 
+                (SELECT CONCAT('/', title_sef) FROM categories WHERE id = :categoryId), 
+                (SELECT CONCAT('/', title_sef) FROM questions WHERE id = :questionId)
+            );"
+        );
+        $stmt->execute([':categoryId' => $categoryId, ':questionId' => $questionId]);
+        return $stmt->fetchColumn(0);
+    }
 }
