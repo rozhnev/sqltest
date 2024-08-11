@@ -61,6 +61,12 @@ if (isset($pathParts[0]) && $pathParts[0] === 'login') {
     $action     = 'login';
     $loginProvider = $pathParts[1];
 // privacy-policy, logout actions
+} elseif (preg_match('@(?<lang>ru|en)/(?<action>privacy-policy|logout|about|menu)/\d+@i', $path, $params)) {
+    $lang       = $params['lang'];
+    $action     = $params['action'];
+    header("HTTP/1.1 301 Moved Permanently");
+    header("Location: /{$lang}/{$action}");
+    exit();
 } elseif (preg_match('@(?<lang>ru|en)/(?<action>privacy-policy|logout|about|menu)/?@i', $path, $params)) {
     $lang       = $params['lang'];
     $action     = $params['action'];
