@@ -13,8 +13,8 @@
 <meta property="og:title" content="SQLtest - задачи по SQL"/>
 <meta property="og:description" content="Практические задачи по SQL{if isset($Question) && $Question.title}: {$Question.title}{/if}" />
 <meta property="og:url" content="https://sqltest.online/favicons/android-chrome-192x192.png" />
-<meta property="og:image:secure_url" itemprop="image" content="https://sqltest.online/favicons/android-chrome-192x192.png" />
-<meta property="og:image" itemprop="image" content="https://sqltest.online/favicons/android-chrome-192x192.png" />
+{* <meta property="og:image:secure_url" itemprop="image" content="https://sqltest.online/favicons/android-chrome-192x192.png" /> *}
+<meta property="og:image" {*itemprop="image" *}content="https://sqltest.online/favicons/android-chrome-192x192.png" />
 <meta property="og:image:width" content="192" />
 <meta property="og:image:height" content="192" />
 <meta property="og:image:type" content="image/png" />
