@@ -4,6 +4,7 @@
     <p>The AdventureWorks Database is a sample database that demonstrates the capabilities of SQL Server. It includes data
       about
       fictional manufacturing company.</p>
+    <p><a style="font-size: small; color: var(--special-text-color);" href="/images/adwentureworks" target="ERDWindow">AdventureWorks DB ER diagram</a></p>
     <p>The following is a list of these tables:</p>
 
     <h3>Table <span class="sql">Address</span></h3>

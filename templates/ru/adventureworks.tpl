@@ -3,6 +3,7 @@
     <h2>База данных AdventureWorks (SQL Server)</h2>
     <p>База данных AdventureWorks — это образец базы данных, демонстрирующий возможности SQL Server. Он включает данные о
       вымышленной производственной компании.</p>
+    <p><a style="font-size: small; color: var(--special-text-color);" href="/images/adwentureworks" target="ERDWindow">ER диаграмма базы данных AdventureWorks</a></p>
     <p>Ниже приведен список этих таблиц:</p>
 
     <h3>Таблица <span class="sql">Address</span></h3>
