@@ -508,6 +508,7 @@ body {
 .question {
     padding: 5px 15px;
     font-size: larger;
+    line-height: 1.3em;
 }
 .question a,
 .question a:visited,
@@ -563,7 +564,7 @@ body {
 
 .question .sql,
 .code-result .sql {
-    background-color: var(--sql-background-color); 
+    /* background-color: var(--sql-background-color);  */
     color: var(--sql-color);
     padding: 0 3px;
 }
