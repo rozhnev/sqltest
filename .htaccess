@@ -5,12 +5,10 @@
     RewriteRule ^sitemap\.xml$ sitemap.php [L]
 
     RewriteCond %{HTTP_USER_AGENT} "android|blackberry|googlebot-mobile|iemobile|ipad|iphone|ipod|opera mobile|mobile safari|palmos|webos" [NC]
-    RewriteCond %{HTTP_HOST}   !^m.sqltest.online
-    RewriteCond %{HTTP_HOST}   !^localhost
-    RewriteRule ^(.+)$ https://m.sqltest.online%{REQUEST_URI} [L,R=302]
+    RewriteCond %{HTTP_HOST} ^sqltest.online$
+    RewriteRule (.*) https://m.sqltest.online%{REQUEST_URI} [R=302,L]
 
     RewriteCond %{HTTP_USER_AGENT} "!(android|blackberry|googlebot-mobile|iemobile|ipad|iphone|ipod|opera mobile|mobile safari|palmos|webos)" [NC]
-    RewriteCond %{HTTP_HOST}   !^sqltest.online
-    RewriteCond %{HTTP_HOST}   !^localhost
-    RewriteRule ^(.+)$ https://sqltest.online%{REQUEST_URI} [L,R=302]
+    RewriteCond %{HTTP_HOST} ^m.sqltest.online$
+    RewriteRule (.*) https://sqltest.online%{REQUEST_URI} [R=302,L]
 </IfModule>
