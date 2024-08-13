@@ -99,6 +99,15 @@ class Questionnire
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    
+    public function getNameByCategory(string $category): string
+    {
+        $stmt = $this->dbh->prepare("SELECT questionnires.name 
+            FROM categories JOIN questionnires ON questionnires.id = categories.questionnire_id 
+            WHERE categories.title_sef = :category_sef;");
+        $stmt->execute([':category_sef' => $category]);
+        return $stmt->fetchColumn(0);
+    }
 
     public function getCategoriesCount(): int
     {

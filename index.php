@@ -86,6 +86,7 @@ if (isset($pathParts[0]) && $pathParts[0] === 'login') {
     $questionnire = new Questionnire($dbh, $lang);
     $action     = 'question';
     $questionCategoryID = $questionnire->getCategoryId($params['questionCategory']);
+    $QuestionnireName = $questionnire->getNameByCategory($params['questionCategory']) ?? 'category';
     $questionID = $questionnire->getQuestionId($params['question']);
     // $smarty->assign('CanonicalLink', "https://sqltest.online/{$lang}/question/{$questionCategoryID}/{$questionID}");
 } elseif (preg_match('@(?<lang>ru|en)/question/(?<questionID>\d+)/(?<action>query-help|query-run|query-test|rate|solutions|check-answers)@i', $path, $params)) {
