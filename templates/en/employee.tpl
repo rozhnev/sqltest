@@ -7,7 +7,7 @@
     <p>
     Below is a list of this DB tables:
     </p>
-    <h3>Table: <span class='sql'>COUNTRIES</span></h3>
+    <h3>Table: <span class='sql'>COUNTRY</span></h3>
     Table columns: <ul class="table-columns">
         <li><span class='sql'>COUNTRY</span> - Name of the country.</li>
         <li><span class='sql'>CURRENCY</span> - Currency used in the country.</li>

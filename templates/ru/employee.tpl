@@ -7,7 +7,7 @@
     <p>
         Ниже приведен список таблиц этой базы данных:
     </p>
-    <h3>Таблица: <span class='sql'>COUNTRIES</span></h3>
+    <h3>Таблица: <span class='sql'>COUNTRY</span></h3>
     Колонки: <ul class="table-columns">
         <li><span class='sql'>COUNTRY</span> - Название страны.</li>
         <li><span class='sql'>CURRENCY</span> - Валюта, используемая в стране.</li>
