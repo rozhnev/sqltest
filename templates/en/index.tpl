@@ -7,27 +7,31 @@
     {include file='../splitter.tpl'}
     <div class="main">
         <div class="question-wrapper">
-            <div class="question-title">
-                <div class="question-level rate{$Question.rate}" title="{$Question.question_rate|default:'Not rated yet'}"></div>
-                Task {$Question.number}:
-                {if $LoggedAsAdmin}
-                    <a href="/admin/question/{$NextQuestionId}" title="Edit" style="color:#333">&#9998;</a>
-                {/if}
-                <span class="question-dates">
-                    {if $Question.solved_date}
-                        Solved at: {$Question.solved_date}
-                    {elseif $Question.last_attempt_date}
-                        Last Attempt Date: {$Question.last_attempt_date}
+            <div class="question-title-bar" style="display: flex;">
+                <div class="question-title">
+                    <div class="question-level rate{$Question.rate}" title="{$Question.question_rate|default:'Not rated yet'}"></div>
+                    Task {$Question.number}:
+                    {if $LoggedAsAdmin}
+                        <a href="/admin/question/{$NextQuestionId}" title="Edit" style="color:#333">&#9998;</a>
                     {/if}
-                </span>
-                <span class="question-navigate">
-                    {if $PreviousQuestionId}
+                    <span class="question-dates">
+                        {if $Question.solved_date}
+                            Solved at: {$Question.solved_date}
+                        {elseif $Question.last_attempt_date}
+                            Last Attempt Date: {$Question.last_attempt_date}
+                        {/if}
+                    </span>
+                </div>
+                {if $PreviousQuestionId}
+                    <div class="question-navigate" style="border-right: 1px solid var(--text-block-border-color);">
                         <a href="/{$Lang}/question/{$Question.category_sef}/{$PreviousQuestionId}" title="Previous task"><i class="arrow arrow-left"></i></a>
-                    {/if}
-                    {if $NextQuestionId}
+                    </div>
+                {/if}
+                {if $NextQuestionId}
+                    <div class="question-navigate">
                         <a href="/{$Lang}/question/{$Question.category_sef}/{$NextQuestionId}" title="Next task"><i class="arrow arrow-right"></i></a>
-                    {/if}
-                </span>
+                    </div>
+                {/if}
             </div>
             <div class="question">
                 {$Question.task}
@@ -46,7 +50,7 @@
                 </p>
             {else}
                 <p class="question-action">
-                    Write your request in the field below and click the "Check it!" button.{* (If there is an error, you will have to review the ad unit) *}
+                    Write your request in the field below and click the "Check it!" button.
                 </p>
                 <p class="question-action">
                     To write the answer, use {$Question.dbms} syntax. Descriptions of the tables are given in the right panel.
@@ -56,7 +60,6 @@
         {if !isset($Question.answers)}
         <div class="code-actions">
             <button onClick="copyCode(`SQL code copied to buffer`)">Copy code</button> <button onClick="clearEditor()">Clear editor</button>
-            {* <a class="clear-code" id="format_sql_btn" title="Format SQL code" href="javascript:formatCode('sql');">Format</a> *}
         </div>
         <div class="code-wrapper" id="sql-code" name="sql-code">{$Question.last_query}</div>
         {/if}
@@ -77,17 +80,17 @@
 
     <div class="right" id="right-panel">
         <div class="text-block user-solutions-count">
-             <p>Explore over <span style="font-weight:bold; color: #2EA043 !important;">{floor(($QuestionsCount - 1)/10) * 10}</span> diverse tasks on our platform.</p>
-         {if $Logged}
+            <p>Explore over <span style="font-weight:bold; color: #2EA043 !important;">{floor(($QuestionsCount - 1)/10) * 10}</span> diverse tasks on our platform.</p>
+        {if $Logged}
             <p>
                 You {if $SolvedQuestionsCount < ($QuestionsCount/2)}have{else}already{/if} solved <span style="font-weight:bold;  color: #2EA043 !important;">{$SolvedQuestionsCount}</span> of them.
                 {if $SolvedQuestionsCount < $QuestionsCount} Keep going!{/if}
             </p>
-         {else}
-             <p>Log in to save your progress.</p>
-             <button class="button blue" onClick="toggleLoginWindow()">Login</button>
-         {/if}
-         </div>
+        {else}
+            <p>Log in to save your progress.</p>
+            <button class="button blue" onClick="toggleLoginWindow()">Login</button>
+        {/if}
+        </div>
         {include file="{$DB}.tpl"}
     </div>
     {include file='footer.tpl'}

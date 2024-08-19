@@ -7,7 +7,7 @@
     --body-background-color: rgb(51, 102, 153);
     --regualr-text-color: #FFFFFF;
     --block-background-color: #126cc6;
-    --text-block-border-color: lightblue;
+    --text-block-border-color: lightgrey;
     --text-block-background-color: #FFFFFF;
     --special-text-color: #FFFFFF;
     --menu-link-color:  #0071DB;
@@ -23,7 +23,7 @@
     --sql-background-color: #eee;
     --sql-color:  #C800A4;
     --question-date-color: gray;
-    --arrow-borer-color: black;
+    --arrow-border-color: white;
 }
 [data-theme="dark"] {
     --body-background-color: #0D1017;
@@ -45,7 +45,7 @@
     --sql-background-color: #484F58;
     --sql-color:  #F85149;
     --question-date-color: #F0F6FC;
-    --arrow-borer-color: #F0F6FC;
+    --arrow-border-color: white;
 }
 .ace-github-dark .ace_gutter {
     background: #24292e !important;
@@ -517,6 +517,8 @@ body {
     color: var(--menu-link-color);
 }
 .question-title {
+    display: flex; 
+    width:100%;
     font-weight: bold;
     background-color: var(--question-title-bg-color);
     padding: 6px;
@@ -529,6 +531,7 @@ body {
     vertical-align: bottom;
     border-radius: 50%;
     background-color: gray;
+    margin-right: 5px;
 }
 .question-level.rate1 {
     background-color: #6dd320;
@@ -558,8 +561,11 @@ body {
 }
 
 .question-navigate {
-    float: right;
-    padding: 0 12px;
+    padding: 4px 12px;
+    display: flex; 
+    background-color: var(--block-background-color);  
+    border-bottom: 1px solid var(--text-block-border-color); 
+    color: white;
 }
 
 .question .sql,
@@ -572,7 +578,7 @@ body {
 .arrow {
     display: inline-block;
     padding: 3px;
-    border: solid var(--arrow-borer-color);
+    border: solid var(--arrow-border-color);
     border-width: 0 3px 3px 0;
 }
 
