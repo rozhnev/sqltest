@@ -1,10 +1,20 @@
-<div class="db-description">
+<div id="db-description" class="db-description">
   <h2>Sakila Database (MySQL)</h2>
   Sakila is a sample database developed by MySQL, specifically designed to teach and demonstrate the capabilities of database management systems (DBMS) based on the relational model.
   <p><a style="font-size: small; color: var(--special-text-color);" href="/images/sakila" target="ERDWindow">Sakila DB ER diagram</a></p>
   The Sakila database contains 16 main tables describing various aspects of a DVD rental company.
   <p>Below is a list of these tables:</p>
-  <h3>Table <span class='sql'>actor</span></h3>
+  <ul>
+    <li><span class='sql' onclick="scrollInfoPanel('actor_table_description')">actor</span></li>
+    <li><span class='sql' onclick="scrollInfoPanel('address_table_description')">address</span> - customer and staff addresses</li>
+    <li><span class='sql' onclick="scrollInfoPanel('film_table_description')">film</span> - films in Sakila database</li>
+    <li><span class='sql' onclick="scrollInfoPanel('inventory_table_description')">inventory</span></li>
+    <li><span class='sql' onclick="scrollInfoPanel('payment_table_description')">payment</span></li>
+    <li><span class='sql' onclick="scrollInfoPanel('rental_table_description')">rental</span></li>
+    <li><span class='sql' onclick="scrollInfoPanel('staff_table_description')">staff</span></li>
+    <li><span class='sql' onclick="scrollInfoPanel('store_table_description')">store</span></li>
+  </ul>
+  <h3 id="actor_table_description">Table <span class='sql'>actor</span></h3>
   Table columns: <ul class="table-columns">
     <li> <span class='sql'>actor_id</span> - Unique identifier for each actor.</li>
     <li> <span class='sql'>first_name</span> - First name of the actor.</li>
@@ -31,7 +41,7 @@
   <ul class="table-columns">
     <li>PRIMARY KEY, btree (actor_id)</li>
   </ul>
-  <h3>Table <span class='sql'>film</span></h3>
+  <h3 id="film_table_description">Table <span class='sql'>film</span></h3>
   Table columns: <ul class="table-columns">
     <li> <span class='sql'>film_id</span> - Unique identifier for each film.</li>
     <li> <span class='sql'>title</span> - The title of the film.</li>
@@ -175,7 +185,7 @@
   <ul class="table-columns">
     <li>PRIMARY KEY, btree (customer_id)</li>
   </ul>
-  <h3>Table <span class='sql'>address</span></h3>
+  <h3 id="address_table_description">Table <span class='sql'>address</span></h3>
   Table columns: <ul class="table-columns">
     <li> <span class='sql'>address_id</span> - Unique identifier for each address.</li>
     <li> <span class='sql'>address</span> - Street address.</li>
@@ -337,7 +347,7 @@
   <ul class="table-columns">
     <li>PRIMARY KEY, btree (language_id)</li>
   </ul>
-  <h3>Table <span class='sql'>staff</span></h3>
+  <h3 id="staff_table_description">Table <span class='sql'>staff</span></h3>
   Table columns: <ul class="table-columns">
     <li> <span class='sql'>staff_id</span> - Unique identifier for each staff member.</li>
     <li> <span class='sql'>first_name</span> - First name of the staff member.</li>
@@ -412,7 +422,7 @@
   <ul class="table-columns">
     <li>PRIMARY KEY, btree (store_id)</li>
   </ul>
-  <h3>Table <span class='sql'>payment</span></h3>
+  <h3 id="payment_table_description">Table <span class='sql'>payment</span></h3>
   Table columns: <ul class="table-columns">
     <li> <span class='sql'>payment_id</span> - Unique identifier for each payment.</li>
     <li> <span class='sql'>customer_id</span> - Foreign key referencing the customer table.</li>
@@ -448,7 +458,7 @@
   <ul class="table-columns">
     <li>PRIMARY KEY, btree (payment_id)</li>
   </ul>
-  <h3>Table <span class='sql'>inventory</span></h3>
+  <h3 id="inventory_table_description">Table <span class='sql'>inventory</span></h3>
   Table columns: <ul class="table-columns">
       <li><span class='sql'>inventory_id</span> - Unique identifier for each inventory item.</li>
       <li><span class='sql'>film_id</span> - Unique identifier for each film in the inventory.</li>
@@ -475,7 +485,7 @@
   <ul class="table-columns">
     <li>PRIMARY KEY, btree (inventory_id)</li>
   </ul>
-  <h3>Table <span class='sql'>rental</span></h3>
+  <h3 id="rental_table_description">Table <span class='sql'>rental</span></h3>
   Table columns: <ul class="table-columns">
     <li> <span class='sql'>rental_id</span> - Unique identifier for each rental.</li>
     <li> <span class='sql'>rental_date</span> - Date when the rental occurred.</li>

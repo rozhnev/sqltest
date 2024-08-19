@@ -307,6 +307,14 @@ function toggleInfoPanel() {
     saveUIConfig();
     return false;
 }
+function scrollInfoPanel(ancor) {
+    document.getElementById("db-description").scrollTo(
+        { 
+            top: (document.getElementById(ancor).offsetTop - document.getElementById("db-description").offsetTop), 
+            behavior: "smooth" 
+        }
+   )
+}
 function scrollQuestionPanel() {
     const activePanel = document.getElementsByClassName("panel active")[0];
     const qurrentQuestion = document.getElementsByClassName("current-question")[0];

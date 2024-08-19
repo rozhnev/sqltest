@@ -754,6 +754,7 @@ td {
 .db-description .sql {
     color: var(--special-text-color); /* wheat;*/
     font-weight: bold;
+    cursor: pointer;
 }
 
 .db-description .table-columns {
