@@ -2,7 +2,7 @@
   <h2>Sakila Database (MySQL)</h2>
   Sakila is a sample database developed by MySQL, specifically designed to teach and demonstrate the capabilities of database management systems (DBMS) based on the relational model.
   <p><a style="font-size: small; color: var(--special-text-color);" href="/images/sakila" target="ERDWindow">Sakila DB ER diagram</a></p>
-  The Sakila database contains 16 main tables describing various aspects of a DVD rental company.
+  The Sakila database contains 15 main tables describing various aspects of a DVD rental company.
   <p>Below is a list of these tables:</p>
   <ul style="list-style-type: ' ▤ ';">
     <li><span class='sql' onclick="scrollInfoPanel('actor_table_description')">actor</span> - table of actors.</li>
@@ -14,14 +14,21 @@
     <li><span class='sql' onclick="scrollInfoPanel('film_table_description')">film</span> - films in Sakila database</li>
     <li><span class='sql' onclick="scrollInfoPanel('film_actor_table_description')">film_actor</span> - actors to films relation table</li>
     <li><span class='sql' onclick="scrollInfoPanel('film_category_table_description')">film_category</span> - films to categories relation table</li>
-    <li><span class='sql' onclick="scrollInfoPanel('inventory_table_description')">inventory</span></li>
+    <li><span class='sql' onclick="scrollInfoPanel('inventory_table_description')">inventory</span> - table of items in Sakila database.</li>
     <li><span class='sql' onclick="scrollInfoPanel('language_table_description')">language</span> - table of films languages.</li>
-    <li><span class='sql' onclick="scrollInfoPanel('payment_table_description')">payment</span></li>
-    <li><span class='sql' onclick="scrollInfoPanel('rental_table_description')">rental</span></li>
+    <li><span class='sql' onclick="scrollInfoPanel('payment_table_description')">payment</span> - table of customers payments.</li>
+    <li><span class='sql' onclick="scrollInfoPanel('rental_table_description')">rental</span> - table of customers rentals.</li>
     <li><span class='sql' onclick="scrollInfoPanel('staff_table_description')">staff</span> - table of company staff.</li>
     <li><span class='sql' onclick="scrollInfoPanel('store_table_description')">store</span> - table of company stories.</li>
   </ul>
-  <h3 id="actor_table_description">Table <span class='sql'>actor</span></h3>
+  <h3 id="actor_table_description">
+    <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+      <svg height="15" width="15" style="">
+        <polygon points="8,1 15,14 1,14" fill="white"/>
+      </svg>
+    </span>
+    Table <span class='sql'>actor</span>
+  </h3>
   Table columns: <ul class="table-columns">
     <li> <span class='sql'>actor_id</span> - Unique identifier for each actor.</li>
     <li> <span class='sql'>first_name</span> - First name of the actor.</li>
@@ -48,7 +55,14 @@
   <ul class="table-columns">
     <li>PRIMARY KEY, btree (actor_id)</li>
   </ul>
-  <h3 id="film_table_description">Table <span class='sql'>film</span></h3>
+  <h3 id="film_table_description">
+    <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+      <svg height="15" width="15" style="">
+        <polygon points="8,1 15,14 1,14" fill="white"/>
+      </svg>
+    </span>
+    Table <span class='sql'>film</span>
+  </h3>
   Table columns: <ul class="table-columns">
     <li> <span class='sql'>film_id</span> - Unique identifier for each film.</li>
     <li> <span class='sql'>title</span> - The title of the film.</li>
@@ -102,31 +116,14 @@
   <ul class="table-columns">
     <li>PRIMARY KEY, btree (film_id)</li>
   </ul>
-  <h3 id="film_text_table_description">Table <span class='sql'>film_text</span></h3>
-  Table columns: <ul class="table-columns">
-    <li> <span class='sql'>film_id</span> - Unique identifier for each film.</li>
-    <li> <span class='sql'>title</span> - Title of the film.</li>
-    <li> <span class='sql'>description</span> - Description of the film.</li>
-  </ul>
-  <div class="table-wrapper">
-    <table>
-      <tr>
-        <th>film_id</th>
-        <th>title</th>
-        <th>description</th>
-      </tr>
-      <tr>
-        <td>1</td>
-        <td>Film Title</td>
-        <td>A brief description of the film.</td>
-      </tr>
-    </table>
-  </div>
-  Indexes:
-  <ul class="table-columns">
-    <li>PRIMARY KEY, btree (film_id)</li>
-  </ul>
-  <h3 id="film_actor_table_description">Table <span class='sql'>film_actor</span></h3>
+  <h3 id="film_actor_table_description">
+    <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+      <svg height="15" width="15" style="">
+        <polygon points="8,1 15,14 1,14" fill="white"/>
+      </svg>
+    </span>
+    Table <span class='sql'>film_actor</span>
+  </h3>
   Table columns: <ul class="table-columns">
     <li> <span class='sql'>actor_id</span> - Unique identifier for actor.</li>
     <li> <span class='sql'>film_id</span> - Unique identifier for film.</li>
@@ -150,7 +147,14 @@
   <ul class="table-columns">
     <li>PRIMARY KEY, btree (actor_id, film_id)</li>
   </ul>
-  <h3 id="customer_table_description">Table <span class='sql'>customer</span></h3>
+  <h3 id="customer_table_description">
+    <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+      <svg height="15" width="15" style="">
+        <polygon points="8,1 15,14 1,14" fill="white"/>
+      </svg>
+    </span>
+    Table <span class='sql'>customer</span>
+  </h3>
   Table columns: <ul class="table-columns">
     <li> <span class='sql'>customer_id</span> - Unique identifier for each customer.</li>
     <li> <span class='sql'>store_id</span> - Foreign key referencing the store table.</li>
@@ -192,7 +196,14 @@
   <ul class="table-columns">
     <li>PRIMARY KEY, btree (customer_id)</li>
   </ul>
-  <h3 id="address_table_description">Table <span class='sql'>address</span></h3>
+  <h3 id="address_table_description">
+    <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+      <svg height="15" width="15" style="">
+        <polygon points="8,1 15,14 1,14" fill="white"/>
+      </svg>
+    </span>
+    Table <span class='sql'>address</span>
+  </h3>
   Table columns: <ul class="table-columns">
     <li> <span class='sql'>address_id</span> - Unique identifier for each address.</li>
     <li> <span class='sql'>address</span> - Street address.</li>
@@ -231,7 +242,14 @@
   <ul class="table-columns">
     <li>PRIMARY KEY, btree (address_id)</li>
   </ul>
-  <h3 id="city_table_description">Table <span class='sql'>city</span></h3>
+  <h3 id="city_table_description">
+    <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+      <svg height="15" width="15" style="">
+        <polygon points="8,1 15,14 1,14" fill="white"/>
+      </svg>
+    </span>
+    Table <span class='sql'>city</span>
+  </h3>
   Table columns: <ul class="table-columns">
     <li> <span class='sql'>city_id</span> - Unique identifier for each city.</li>
     <li> <span class='sql'>city</span> - City name.</li>
@@ -258,7 +276,14 @@
   <ul class="table-columns">
     <li>PRIMARY KEY, btree (city_id)</li>
   </ul>
-  <h3 id="country_table_description">Table <span class='sql'>country</span></h3>
+  <h3 id="country_table_description">
+    <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+      <svg height="15" width="15" style="">
+        <polygon points="8,1 15,14 1,14" fill="white"/>
+      </svg>
+    </span>
+    Table <span class='sql'>country</span>
+  </h3>
   Table columns: <ul class="table-columns">
     <li> <span class='sql'>country_id</span> - Unique identifier for each country.</li>
     <li> <span class='sql'>country</span> - Country name.</li>
@@ -282,7 +307,14 @@
   <ul class="table-columns">
     <li>PRIMARY KEY, btree (country_id)</li>
   </ul>
-  <h3 id="category_table_description">Table <span class='sql'>category</span></h3>
+  <h3 id="category_table_description">
+    <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+      <svg height="15" width="15" style="">
+        <polygon points="8,1 15,14 1,14" fill="white"/>
+      </svg>
+    </span>
+    Table <span class='sql'>category</span>
+  </h3>
   Table columns: <ul class="table-columns">
     <li> <span class='sql'>category_id</span> - Unique identifier for each category.</li>
     <li> <span class='sql'>name</span> - Name of the category.</li>
@@ -306,7 +338,14 @@
   <ul class="table-columns">
     <li>PRIMARY KEY, btree (category_id)</li>
   </ul>
-  <h3 id="film_category_table_description">Table <span class='sql'>film_category</span></h3>
+  <h3 id="film_category_table_description">
+    <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+      <svg height="15" width="15" style="">
+        <polygon points="8,1 15,14 1,14" fill="white"/>
+      </svg>
+    </span>
+    Table <span class='sql'>film_category</span>
+  </h3>
   Table columns: <ul class="table-columns">
     <li> <span class='sql'>film_id</span> - Unique identifier for each film.</li>
     <li> <span class='sql'>category_id</span> - Unique identifier for each category.</li>
@@ -330,7 +369,14 @@
   <ul class="table-columns">
       <li>PRIMARY KEY, btree (film_id, category_id)</li>
   </ul>
-  <h3 id="language_table_description">Table <span class='sql'>language</span></h3>
+  <h3 id="language_table_description">
+    <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+      <svg height="15" width="15" style="">
+        <polygon points="8,1 15,14 1,14" fill="white"/>
+      </svg>
+    </span>
+    Table <span class='sql'>language</span>
+  </h3>
   Table columns: <ul class="table-columns">
       <li> <span class='sql'>language_id</span> - Unique identifier for each language.</li>
       <li> <span class='sql'>name</span> - Language name.</li>
@@ -354,7 +400,14 @@
   <ul class="table-columns">
     <li>PRIMARY KEY, btree (language_id)</li>
   </ul>
-  <h3 id="staff_table_description">Table <span class='sql'>staff</span></h3>
+  <h3 id="staff_table_description">
+    <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+      <svg height="15" width="15" style="">
+        <polygon points="8,1 15,14 1,14" fill="white"/>
+      </svg>
+    </span>
+    Table <span class='sql'>staff</span>
+  </h3>
   Table columns: <ul class="table-columns">
     <li> <span class='sql'>staff_id</span> - Unique identifier for each staff member.</li>
     <li> <span class='sql'>first_name</span> - First name of the staff member.</li>
@@ -402,7 +455,14 @@
   <ul class="table-columns">
     <li>PRIMARY KEY, btree (staff_id)</li>
   </ul>
-  <h3 id="store_table_description">Table <span class='sql'>store</span></h3>
+  <h3 id="store_table_description">
+    <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+      <svg height="15" width="15" style="">
+        <polygon points="8,1 15,14 1,14" fill="white"/>
+      </svg>
+    </span>
+    Table <span class='sql'>store</span>
+  </h3>
   Table columns: <ul class="table-columns">
     <li> <span class='sql'>store_id</span> - Unique identifier for each store.</li>
     <li> <span class='sql'>manager_staff_id</span> - Foreign key referencing the staff table for the store manager.</li>
@@ -429,7 +489,14 @@
   <ul class="table-columns">
     <li>PRIMARY KEY, btree (store_id)</li>
   </ul>
-  <h3 id="payment_table_description">Table <span class='sql'>payment</span></h3>
+  <h3 id="payment_table_description">
+    <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+      <svg height="15" width="15" style="">
+        <polygon points="8,1 15,14 1,14" fill="white"/>
+      </svg>
+    </span>
+    Table <span class='sql'>payment</span>
+  </h3>
   Table columns: <ul class="table-columns">
     <li> <span class='sql'>payment_id</span> - Unique identifier for each payment.</li>
     <li> <span class='sql'>customer_id</span> - Foreign key referencing the customer table.</li>
@@ -465,7 +532,14 @@
   <ul class="table-columns">
     <li>PRIMARY KEY, btree (payment_id)</li>
   </ul>
-  <h3 id="inventory_table_description">Table <span class='sql'>inventory</span></h3>
+  <h3 id="inventory_table_description">
+    <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+      <svg height="15" width="15" style="">
+        <polygon points="8,1 15,14 1,14" fill="white"/>
+      </svg>
+    </span>
+    Table <span class='sql'>inventory</span>
+  </h3>
   Table columns: <ul class="table-columns">
       <li><span class='sql'>inventory_id</span> - Unique identifier for each inventory item.</li>
       <li><span class='sql'>film_id</span> - Unique identifier for each film in the inventory.</li>
@@ -492,7 +566,14 @@
   <ul class="table-columns">
     <li>PRIMARY KEY, btree (inventory_id)</li>
   </ul>
-  <h3 id="rental_table_description">Table <span class='sql'>rental</span></h3>
+  <h3 id="rental_table_description">
+    <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+      <svg height="15" width="15" style="">
+        <polygon points="8,1 15,14 1,14" fill="white"/>
+      </svg>
+    </span>
+    Table <span class='sql'>rental</span>
+  </h3>
   Table columns: <ul class="table-columns">
     <li> <span class='sql'>rental_id</span> - Unique identifier for each rental.</li>
     <li> <span class='sql'>rental_date</span> - Date when the rental occurred.</li>

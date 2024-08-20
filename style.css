@@ -738,6 +738,10 @@ body {
     overflow: auto;
     margin-top: 10px;
 }
+.db-description h3{
+    border-bottom: 1px solid white;
+    padding-bottom: 5px;
+}
 .db-description table {
     border-collapse: collapse;
     width: 100%;
@@ -765,6 +769,7 @@ td {
 .db-description .table-wrapper {
     overflow-x: auto;
     padding: 7px 0;
+    margin-bottom: 1em;
 }
 
 .container .right .db-description .table-wrapper {
