@@ -4,7 +4,7 @@
   <p><a style="font-size: small; color: var(--special-text-color);" href="/images/sakila" target="ERDWindow">Sakila DB ER diagram</a></p>
   The Sakila database contains 15 main tables describing various aspects of a DVD rental company.
   <p>Below is a list of these tables:</p>
-  <ul style="list-style-type: ' ▤ ';">
+  <ul style="list-style-type: '▤ '; padding-inline-start: 20px;">
     <li><span class='sql' onclick="scrollInfoPanel('actor_table_description')">actor</span> - table of actors.</li>
     <li><span class='sql' onclick="scrollInfoPanel('address_table_description')">address</span> - customer and staff addresses</li>
     <li><span class='sql' onclick="scrollInfoPanel('category_table_description')">category</span> - table of films categories.</li>
@@ -54,6 +54,197 @@
   Indexes:
   <ul class="table-columns">
     <li>PRIMARY KEY, btree (actor_id)</li>
+  </ul>
+  <h3 id="address_table_description">
+    <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+      <svg height="15" width="15" style="">
+        <polygon points="8,1 15,14 1,14" fill="white"/>
+      </svg>
+    </span>
+    Table <span class='sql'>address</span>
+  </h3>
+  Table columns: <ul class="table-columns">
+    <li> <span class='sql'>address_id</span> - Unique identifier for each address.</li>
+    <li> <span class='sql'>address</span> - Street address.</li>
+    <li> <span class='sql'>address2</span> - Additional address.</li>
+    <li> <span class='sql'>district</span> - District or region.</li>
+    <li> <span class='sql'>city_id</span> - Foreign key referencing the city table.</li>
+    <li> <span class='sql'>postal_code</span> - Postal code.</li>
+    <li> <span class='sql'>phone</span> - Phone number.</li>
+    <li> <span class='sql'>last_update</span> - When the row was created or most recently updated.</li>
+  </ul>
+  <div class="table-wrapper">
+    <table>
+      <tr>
+        <th>address_id</th>
+        <th>address</th>
+        <th>address2</th>
+        <th>district</th>
+        <th>city_id</th>
+        <th>postal_code</th>
+        <th>phone</th>
+        <th>last_update</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>123 Main St</td>
+        <td>[null]</td>
+        <td>Downtown</td>
+        <td>1</td>
+        <td>12345</td>
+        <td>+1234567890</td>
+        <td>2023-01-01 12:00:00</td>
+      </tr>
+    </table>
+  </div>
+  Indexes:
+  <ul class="table-columns">
+    <li>PRIMARY KEY, btree (address_id)</li>
+  </ul>
+  <h3 id="category_table_description">
+    <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+      <svg height="15" width="15" style="">
+        <polygon points="8,1 15,14 1,14" fill="white"/>
+      </svg>
+    </span>
+    Table <span class='sql'>category</span>
+  </h3>
+  Table columns: <ul class="table-columns">
+    <li> <span class='sql'>category_id</span> - Unique identifier for each category.</li>
+    <li> <span class='sql'>name</span> - Name of the category.</li>
+    <li> <span class='sql'>last_update</span> - When the row was created or most recently updated.</li>
+  </ul>
+  <div class="table-wrapper">
+    <table>
+      <tr>
+        <th>category_id</th>
+        <th>name</th>
+        <th>last_update</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>Action</td>
+        <td>2023-01-01 12:00:00</td>
+      </tr>
+    </table>
+  </div>
+  Indexes:
+  <ul class="table-columns">
+    <li>PRIMARY KEY, btree (category_id)</li>
+  </ul>
+  <h3 id="city_table_description">
+    <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+      <svg height="15" width="15" style="">
+        <polygon points="8,1 15,14 1,14" fill="white"/>
+      </svg>
+    </span>
+    Table <span class='sql'>city</span>
+  </h3>
+  Table columns: <ul class="table-columns">
+    <li> <span class='sql'>city_id</span> - Unique identifier for each city.</li>
+    <li> <span class='sql'>city</span> - City name.</li>
+    <li> <span class='sql'>country_id</span> - Foreign key referencing the country table.</li>
+    <li> <span class='sql'>last_update</span> - When the row was created or most recently updated.</li>
+  </ul>
+  <div class="table-wrapper">
+    <table>
+      <tr>
+        <th>city_id</th>
+        <th>city</th>
+        <th>country_id</th>
+        <th>last_update</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>Metropolis</td>
+        <td>1</td>
+        <td>2023-01-01 12:00:00</td>
+      </tr>
+    </table>
+  </div>
+  Indexes:
+  <ul class="table-columns">
+    <li>PRIMARY KEY, btree (city_id)</li>
+  </ul>
+  <h3 id="country_table_description">
+    <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+      <svg height="15" width="15" style="">
+        <polygon points="8,1 15,14 1,14" fill="white"/>
+      </svg>
+    </span>
+    Table <span class='sql'>country</span>
+  </h3>
+  Table columns: <ul class="table-columns">
+    <li> <span class='sql'>country_id</span> - Unique identifier for each country.</li>
+    <li> <span class='sql'>country</span> - Country name.</li>
+    <li> <span class='sql'>last_update</span> - When the row was created or most recently updated.</li>
+  </ul>
+  <div class="table-wrapper">
+    <table>
+      <tr>
+        <th>country_id</th>
+        <th>country</th>
+        <th>last_update</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>United States</td>
+        <td>2023-01-01 12:00:00</td>
+      </tr>
+    </table>
+  </div>
+  Indexes:
+  <ul class="table-columns">
+    <li>PRIMARY KEY, btree (country_id)</li>
+  </ul>
+  <h3 id="customer_table_description">
+    <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+      <svg height="15" width="15" style="">
+        <polygon points="8,1 15,14 1,14" fill="white"/>
+      </svg>
+    </span>
+    Table <span class='sql'>customer</span>
+  </h3>
+  Table columns: <ul class="table-columns">
+    <li> <span class='sql'>customer_id</span> - Unique identifier for each customer.</li>
+    <li> <span class='sql'>store_id</span> - Foreign key referencing the store table.</li>
+    <li> <span class='sql'>first_name</span> - First name of the customer.</li>
+    <li> <span class='sql'>last_name</span> - Last name of the customer.</li>
+    <li> <span class='sql'>email</span> - Email address of the customer.</li>
+    <li> <span class='sql'>address_id</span> - Foreign key referencing the address table.</li>
+    <li> <span class='sql'>active</span> - Indicates whether the customer is active.</li>
+    <li> <span class='sql'>create_date</span> - Timestamp indicating when the customer was added to the database.</li>
+    <li> <span class='sql'>last_update</span> - When the row was created or most recently updated.</li>
+  </ul>
+  <div class="table-wrapper">
+    <table>
+      <tr>
+        <th>customer_id</th>
+        <th>store_id</th>
+        <th>first_name</th>
+        <th>last_name</th>
+        <th>email</th>
+        <th>address_id</th>
+        <th>active</th>
+        <th>create_date</th>
+        <th>last_update</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>1</td>
+        <td>John</td>
+        <td>Doe</td>
+        <td>john.doe@example.com</td>
+        <td>1</td>
+        <td>true</td>
+        <td>2023-01-01 12:00:00</td>
+        <td>2023-01-01 12:00:00</td>
+      </tr>
+    </table>
+  </div>
+  Indexes:
+  <ul class="table-columns">
+    <li>PRIMARY KEY, btree (customer_id)</li>
   </ul>
   <h3 id="film_table_description">
     <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
@@ -147,197 +338,6 @@
   <ul class="table-columns">
     <li>PRIMARY KEY, btree (actor_id, film_id)</li>
   </ul>
-  <h3 id="customer_table_description">
-    <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
-      <svg height="15" width="15" style="">
-        <polygon points="8,1 15,14 1,14" fill="white"/>
-      </svg>
-    </span>
-    Table <span class='sql'>customer</span>
-  </h3>
-  Table columns: <ul class="table-columns">
-    <li> <span class='sql'>customer_id</span> - Unique identifier for each customer.</li>
-    <li> <span class='sql'>store_id</span> - Foreign key referencing the store table.</li>
-    <li> <span class='sql'>first_name</span> - First name of the customer.</li>
-    <li> <span class='sql'>last_name</span> - Last name of the customer.</li>
-    <li> <span class='sql'>email</span> - Email address of the customer.</li>
-    <li> <span class='sql'>address_id</span> - Foreign key referencing the address table.</li>
-    <li> <span class='sql'>active</span> - Indicates whether the customer is active.</li>
-    <li> <span class='sql'>create_date</span> - Timestamp indicating when the customer was added to the database.</li>
-    <li> <span class='sql'>last_update</span> - When the row was created or most recently updated.</li>
-  </ul>
-  <div class="table-wrapper">
-    <table>
-      <tr>
-        <th>customer_id</th>
-        <th>store_id</th>
-        <th>first_name</th>
-        <th>last_name</th>
-        <th>email</th>
-        <th>address_id</th>
-        <th>active</th>
-        <th>create_date</th>
-        <th>last_update</th>
-      </tr>
-      <tr>
-        <td>1</td>
-        <td>1</td>
-        <td>John</td>
-        <td>Doe</td>
-        <td>john.doe@example.com</td>
-        <td>1</td>
-        <td>true</td>
-        <td>2023-01-01 12:00:00</td>
-        <td>2023-01-01 12:00:00</td>
-      </tr>
-    </table>
-  </div>
-  Indexes:
-  <ul class="table-columns">
-    <li>PRIMARY KEY, btree (customer_id)</li>
-  </ul>
-  <h3 id="address_table_description">
-    <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
-      <svg height="15" width="15" style="">
-        <polygon points="8,1 15,14 1,14" fill="white"/>
-      </svg>
-    </span>
-    Table <span class='sql'>address</span>
-  </h3>
-  Table columns: <ul class="table-columns">
-    <li> <span class='sql'>address_id</span> - Unique identifier for each address.</li>
-    <li> <span class='sql'>address</span> - Street address.</li>
-    <li> <span class='sql'>address2</span> - Additional address.</li>
-    <li> <span class='sql'>district</span> - District or region.</li>
-    <li> <span class='sql'>city_id</span> - Foreign key referencing the city table.</li>
-    <li> <span class='sql'>postal_code</span> - Postal code.</li>
-    <li> <span class='sql'>phone</span> - Phone number.</li>
-    <li> <span class='sql'>last_update</span> - When the row was created or most recently updated.</li>
-  </ul>
-  <div class="table-wrapper">
-    <table>
-      <tr>
-        <th>address_id</th>
-        <th>address</th>
-        <th>address2</th>
-        <th>district</th>
-        <th>city_id</th>
-        <th>postal_code</th>
-        <th>phone</th>
-        <th>last_update</th>
-      </tr>
-      <tr>
-        <td>1</td>
-        <td>123 Main St</td>
-        <td>[null]</td>
-        <td>Downtown</td>
-        <td>1</td>
-        <td>12345</td>
-        <td>+1234567890</td>
-        <td>2023-01-01 12:00:00</td>
-      </tr>
-    </table>
-  </div>
-  Indexes:
-  <ul class="table-columns">
-    <li>PRIMARY KEY, btree (address_id)</li>
-  </ul>
-  <h3 id="city_table_description">
-    <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
-      <svg height="15" width="15" style="">
-        <polygon points="8,1 15,14 1,14" fill="white"/>
-      </svg>
-    </span>
-    Table <span class='sql'>city</span>
-  </h3>
-  Table columns: <ul class="table-columns">
-    <li> <span class='sql'>city_id</span> - Unique identifier for each city.</li>
-    <li> <span class='sql'>city</span> - City name.</li>
-    <li> <span class='sql'>country_id</span> - Foreign key referencing the country table.</li>
-    <li> <span class='sql'>last_update</span> - When the row was created or most recently updated.</li>
-  </ul>
-  <div class="table-wrapper">
-    <table>
-      <tr>
-        <th>city_id</th>
-        <th>city</th>
-        <th>country_id</th>
-        <th>last_update</th>
-      </tr>
-      <tr>
-        <td>1</td>
-        <td>Metropolis</td>
-        <td>1</td>
-        <td>2023-01-01 12:00:00</td>
-      </tr>
-    </table>
-  </div>
-  Indexes:
-  <ul class="table-columns">
-    <li>PRIMARY KEY, btree (city_id)</li>
-  </ul>
-  <h3 id="country_table_description">
-    <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
-      <svg height="15" width="15" style="">
-        <polygon points="8,1 15,14 1,14" fill="white"/>
-      </svg>
-    </span>
-    Table <span class='sql'>country</span>
-  </h3>
-  Table columns: <ul class="table-columns">
-    <li> <span class='sql'>country_id</span> - Unique identifier for each country.</li>
-    <li> <span class='sql'>country</span> - Country name.</li>
-    <li> <span class='sql'>last_update</span> - When the row was created or most recently updated.</li>
-  </ul>
-  <div class="table-wrapper">
-    <table>
-      <tr>
-        <th>country_id</th>
-        <th>country</th>
-        <th>last_update</th>
-      </tr>
-      <tr>
-        <td>1</td>
-        <td>United States</td>
-        <td>2023-01-01 12:00:00</td>
-      </tr>
-    </table>
-  </div>
-  Indexes:
-  <ul class="table-columns">
-    <li>PRIMARY KEY, btree (country_id)</li>
-  </ul>
-  <h3 id="category_table_description">
-    <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
-      <svg height="15" width="15" style="">
-        <polygon points="8,1 15,14 1,14" fill="white"/>
-      </svg>
-    </span>
-    Table <span class='sql'>category</span>
-  </h3>
-  Table columns: <ul class="table-columns">
-    <li> <span class='sql'>category_id</span> - Unique identifier for each category.</li>
-    <li> <span class='sql'>name</span> - Name of the category.</li>
-    <li> <span class='sql'>last_update</span> - When the row was created or most recently updated.</li>
-  </ul>
-  <div class="table-wrapper">
-    <table>
-      <tr>
-        <th>category_id</th>
-        <th>name</th>
-        <th>last_update</th>
-      </tr>
-      <tr>
-        <td>1</td>
-        <td>Action</td>
-        <td>2023-01-01 12:00:00</td>
-      </tr>
-    </table>
-  </div>
-  Indexes:
-  <ul class="table-columns">
-    <li>PRIMARY KEY, btree (category_id)</li>
-  </ul>
   <h3 id="film_category_table_description">
     <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
       <svg height="15" width="15" style="">
@@ -369,6 +369,40 @@
   <ul class="table-columns">
       <li>PRIMARY KEY, btree (film_id, category_id)</li>
   </ul>
+  <h3 id="inventory_table_description">
+    <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+      <svg height="15" width="15" style="">
+        <polygon points="8,1 15,14 1,14" fill="white"/>
+      </svg>
+    </span>
+    Table <span class='sql'>inventory</span>
+  </h3>
+  Table columns: <ul class="table-columns">
+      <li><span class='sql'>inventory_id</span> - Unique identifier for each inventory item.</li>
+      <li><span class='sql'>film_id</span> - Unique identifier for each film in the inventory.</li>
+      <li><span class='sql'>store_id</span> - Unique identifier for the store where the inventory item is located.</li>
+      <li><span class='sql'>last_update</span> - When the row was created or most recently updated.</li>
+  </ul>
+  <div class="table-wrapper">
+    <table>
+      <tr>
+        <th>inventory_id</th>
+        <th>film_id</th>
+        <th>store_id</th>
+        <th>last_update</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>23</td>
+        <td>2</td>
+        <td>2023-01-01 12:00:00</td>
+      </tr>
+    </table>
+  </div>
+  Indexes:
+  <ul class="table-columns">
+    <li>PRIMARY KEY, btree (inventory_id)</li>
+  </ul>
   <h3 id="language_table_description">
     <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
       <svg height="15" width="15" style="">
@@ -399,6 +433,92 @@
   Indexes:
   <ul class="table-columns">
     <li>PRIMARY KEY, btree (language_id)</li>
+  </ul>
+  <h3 id="payment_table_description">
+    <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+      <svg height="15" width="15" style="">
+        <polygon points="8,1 15,14 1,14" fill="white"/>
+      </svg>
+    </span>
+    Table <span class='sql'>payment</span>
+  </h3>
+  Table columns: <ul class="table-columns">
+    <li> <span class='sql'>payment_id</span> - Unique identifier for each payment.</li>
+    <li> <span class='sql'>customer_id</span> - Foreign key referencing the customer table.</li>
+    <li> <span class='sql'>staff_id</span> - Foreign key referencing the staff table.</li>
+    <li> <span class='sql'>rental_id</span> - Foreign key referencing the rental table.</li>
+    <li> <span class='sql'>amount</span> - Payment amount.</li>
+    <li> <span class='sql'>payment_date</span> - Date of the payment.</li>
+    <li> <span class='sql'>last_update</span> - When the row was created or most recently updated.</li>
+  </ul>
+  <div class="table-wrapper">
+    <table>
+      <tr>
+        <th>payment_id</th>
+        <th>customer_id</th>
+        <th>staff_id</th>
+        <th>rental_id</th>
+        <th>amount</th>
+        <th>payment_date</th>
+        <th>last_update</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+        <td>4.99</td>
+        <td>2023-01-01 12:13:14</td>
+        <td>2023-01-01 12:14:15</td>
+      </tr>
+    </table>
+  </div>
+  Indexes:
+  <ul class="table-columns">
+    <li>PRIMARY KEY, btree (payment_id)</li>
+  </ul>
+  <h3 id="rental_table_description">
+    <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+      <svg height="15" width="15" style="">
+        <polygon points="8,1 15,14 1,14" fill="white"/>
+      </svg>
+    </span>
+    Table <span class='sql'>rental</span>
+  </h3>
+  Table columns: <ul class="table-columns">
+    <li> <span class='sql'>rental_id</span> - Unique identifier for each rental.</li>
+    <li> <span class='sql'>rental_date</span> - Date when the rental occurred.</li>
+    <li> <span class='sql'>inventory_id</span> - Foreign key referencing the inventory table.</li>
+    <li> <span class='sql'>customer_id</span> - Foreign key referencing the customer table.</li>
+    <li> <span class='sql'>return_date</span> - Date when the rental was returned.</li>
+    <li> <span class='sql'>staff_id</span> - Foreign key referencing the staff table.</li>
+    <li> <span class='sql'>last_update</span> - When the row was created or most recently updated.</li>
+  </ul>
+  <div class="table-wrapper">
+    <table>
+      <tr>
+        <th>rental_id</th>
+        <th>rental_date</th>
+        <th>inventory_id</th>
+        <th>customer_id</th>
+        <th>return_date</th>
+        <th>staff_id</th>
+        <th>last_update</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>2023-01-01 16:15:21</td>
+        <td>1</td>
+        <td>1</td>
+        <td>2023-01-10 09:12:36</td>
+        <td>1</td>
+        <td>2023-01-01 12:00:00</td>
+      </tr>
+    </table>
+  </div>
+  Indexes:
+  <ul class="table-columns">
+    <li>PRIMARY KEY, btree (rental_id)</li>
   </ul>
   <h3 id="staff_table_description">
     <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
@@ -488,125 +608,5 @@
   Indexes:
   <ul class="table-columns">
     <li>PRIMARY KEY, btree (store_id)</li>
-  </ul>
-  <h3 id="payment_table_description">
-    <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
-      <svg height="15" width="15" style="">
-        <polygon points="8,1 15,14 1,14" fill="white"/>
-      </svg>
-    </span>
-    Table <span class='sql'>payment</span>
-  </h3>
-  Table columns: <ul class="table-columns">
-    <li> <span class='sql'>payment_id</span> - Unique identifier for each payment.</li>
-    <li> <span class='sql'>customer_id</span> - Foreign key referencing the customer table.</li>
-    <li> <span class='sql'>staff_id</span> - Foreign key referencing the staff table.</li>
-    <li> <span class='sql'>rental_id</span> - Foreign key referencing the rental table.</li>
-    <li> <span class='sql'>amount</span> - Payment amount.</li>
-    <li> <span class='sql'>payment_date</span> - Date of the payment.</li>
-    <li> <span class='sql'>last_update</span> - When the row was created or most recently updated.</li>
-  </ul>
-  <div class="table-wrapper">
-    <table>
-      <tr>
-        <th>payment_id</th>
-        <th>customer_id</th>
-        <th>staff_id</th>
-        <th>rental_id</th>
-        <th>amount</th>
-        <th>payment_date</th>
-        <th>last_update</th>
-      </tr>
-      <tr>
-        <td>1</td>
-        <td>1</td>
-        <td>1</td>
-        <td>1</td>
-        <td>4.99</td>
-        <td>2023-01-01 12:13:14</td>
-        <td>2023-01-01 12:14:15</td>
-      </tr>
-    </table>
-  </div>
-  Indexes:
-  <ul class="table-columns">
-    <li>PRIMARY KEY, btree (payment_id)</li>
-  </ul>
-  <h3 id="inventory_table_description">
-    <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
-      <svg height="15" width="15" style="">
-        <polygon points="8,1 15,14 1,14" fill="white"/>
-      </svg>
-    </span>
-    Table <span class='sql'>inventory</span>
-  </h3>
-  Table columns: <ul class="table-columns">
-      <li><span class='sql'>inventory_id</span> - Unique identifier for each inventory item.</li>
-      <li><span class='sql'>film_id</span> - Unique identifier for each film in the inventory.</li>
-      <li><span class='sql'>store_id</span> - Unique identifier for the store where the inventory item is located.</li>
-      <li><span class='sql'>last_update</span> - When the row was created or most recently updated.</li>
-  </ul>
-  <div class="table-wrapper">
-    <table>
-      <tr>
-        <th>inventory_id</th>
-        <th>film_id</th>
-        <th>store_id</th>
-        <th>last_update</th>
-      </tr>
-      <tr>
-        <td>1</td>
-        <td>23</td>
-        <td>2</td>
-        <td>2023-01-01 12:00:00</td>
-      </tr>
-    </table>
-  </div>
-  Indexes:
-  <ul class="table-columns">
-    <li>PRIMARY KEY, btree (inventory_id)</li>
-  </ul>
-  <h3 id="rental_table_description">
-    <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
-      <svg height="15" width="15" style="">
-        <polygon points="8,1 15,14 1,14" fill="white"/>
-      </svg>
-    </span>
-    Table <span class='sql'>rental</span>
-  </h3>
-  Table columns: <ul class="table-columns">
-    <li> <span class='sql'>rental_id</span> - Unique identifier for each rental.</li>
-    <li> <span class='sql'>rental_date</span> - Date when the rental occurred.</li>
-    <li> <span class='sql'>inventory_id</span> - Foreign key referencing the inventory table.</li>
-    <li> <span class='sql'>customer_id</span> - Foreign key referencing the customer table.</li>
-    <li> <span class='sql'>return_date</span> - Date when the rental was returned.</li>
-    <li> <span class='sql'>staff_id</span> - Foreign key referencing the staff table.</li>
-    <li> <span class='sql'>last_update</span> - When the row was created or most recently updated.</li>
-  </ul>
-  <div class="table-wrapper">
-    <table>
-      <tr>
-        <th>rental_id</th>
-        <th>rental_date</th>
-        <th>inventory_id</th>
-        <th>customer_id</th>
-        <th>return_date</th>
-        <th>staff_id</th>
-        <th>last_update</th>
-      </tr>
-      <tr>
-        <td>1</td>
-        <td>2023-01-01 16:15:21</td>
-        <td>1</td>
-        <td>1</td>
-        <td>2023-01-10 09:12:36</td>
-        <td>1</td>
-        <td>2023-01-01 12:00:00</td>
-      </tr>
-    </table>
-  </div>
-  Indexes:
-  <ul class="table-columns">
-    <li>PRIMARY KEY, btree (rental_id)</li>
   </ul>
 </div>
