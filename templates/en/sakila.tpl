@@ -4,15 +4,22 @@
   <p><a style="font-size: small; color: var(--special-text-color);" href="/images/sakila" target="ERDWindow">Sakila DB ER diagram</a></p>
   The Sakila database contains 16 main tables describing various aspects of a DVD rental company.
   <p>Below is a list of these tables:</p>
-  <ul>
-    <li><span class='sql' onclick="scrollInfoPanel('actor_table_description')">actor</span></li>
+  <ul style="list-style-type: ' ▤ ';">
+    <li><span class='sql' onclick="scrollInfoPanel('actor_table_description')">actor</span> - table of actors.</li>
     <li><span class='sql' onclick="scrollInfoPanel('address_table_description')">address</span> - customer and staff addresses</li>
+    <li><span class='sql' onclick="scrollInfoPanel('category_table_description')">category</span> - table of films categories.</li>
+    <li><span class='sql' onclick="scrollInfoPanel('city_table_description')">city</span> - table of cities.</li>
+    <li><span class='sql' onclick="scrollInfoPanel('country_table_description')">country</span> - table of countries.</li>
+    <li><span class='sql' onclick="scrollInfoPanel('customer_table_description')">customer</span> - customers in Sakila database</li>
     <li><span class='sql' onclick="scrollInfoPanel('film_table_description')">film</span> - films in Sakila database</li>
+    <li><span class='sql' onclick="scrollInfoPanel('film_actor_table_description')">film_actor</span> - actors to films relation table</li>
+    <li><span class='sql' onclick="scrollInfoPanel('film_category_table_description')">film_category</span> - films to categories relation table</li>
     <li><span class='sql' onclick="scrollInfoPanel('inventory_table_description')">inventory</span></li>
+    <li><span class='sql' onclick="scrollInfoPanel('language_table_description')">language</span> - table of films languages.</li>
     <li><span class='sql' onclick="scrollInfoPanel('payment_table_description')">payment</span></li>
     <li><span class='sql' onclick="scrollInfoPanel('rental_table_description')">rental</span></li>
-    <li><span class='sql' onclick="scrollInfoPanel('staff_table_description')">staff</span></li>
-    <li><span class='sql' onclick="scrollInfoPanel('store_table_description')">store</span></li>
+    <li><span class='sql' onclick="scrollInfoPanel('staff_table_description')">staff</span> - table of company staff.</li>
+    <li><span class='sql' onclick="scrollInfoPanel('store_table_description')">store</span> - table of company stories.</li>
   </ul>
   <h3 id="actor_table_description">Table <span class='sql'>actor</span></h3>
   Table columns: <ul class="table-columns">
@@ -95,7 +102,7 @@
   <ul class="table-columns">
     <li>PRIMARY KEY, btree (film_id)</li>
   </ul>
-  <h3>Table <span class='sql'>film_text</span></h3>
+  <h3 id="film_text_table_description">Table <span class='sql'>film_text</span></h3>
   Table columns: <ul class="table-columns">
     <li> <span class='sql'>film_id</span> - Unique identifier for each film.</li>
     <li> <span class='sql'>title</span> - Title of the film.</li>
@@ -119,7 +126,7 @@
   <ul class="table-columns">
     <li>PRIMARY KEY, btree (film_id)</li>
   </ul>
-  <h3>Table <span class='sql'>film_actor</span></h3>
+  <h3 id="film_actor_table_description">Table <span class='sql'>film_actor</span></h3>
   Table columns: <ul class="table-columns">
     <li> <span class='sql'>actor_id</span> - Unique identifier for actor.</li>
     <li> <span class='sql'>film_id</span> - Unique identifier for film.</li>
@@ -143,7 +150,7 @@
   <ul class="table-columns">
     <li>PRIMARY KEY, btree (actor_id, film_id)</li>
   </ul>
-  <h3>Table <span class='sql'>customer</span></h3>
+  <h3 id="customer_table_description">Table <span class='sql'>customer</span></h3>
   Table columns: <ul class="table-columns">
     <li> <span class='sql'>customer_id</span> - Unique identifier for each customer.</li>
     <li> <span class='sql'>store_id</span> - Foreign key referencing the store table.</li>
@@ -224,7 +231,7 @@
   <ul class="table-columns">
     <li>PRIMARY KEY, btree (address_id)</li>
   </ul>
-  <h3>Table <span class='sql'>city</span></h3>
+  <h3 id="city_table_description">Table <span class='sql'>city</span></h3>
   Table columns: <ul class="table-columns">
     <li> <span class='sql'>city_id</span> - Unique identifier for each city.</li>
     <li> <span class='sql'>city</span> - City name.</li>
@@ -251,7 +258,7 @@
   <ul class="table-columns">
     <li>PRIMARY KEY, btree (city_id)</li>
   </ul>
-  <h3>Table <span class='sql'>country</span></h3>
+  <h3 id="country_table_description">Table <span class='sql'>country</span></h3>
   Table columns: <ul class="table-columns">
     <li> <span class='sql'>country_id</span> - Unique identifier for each country.</li>
     <li> <span class='sql'>country</span> - Country name.</li>
@@ -275,7 +282,7 @@
   <ul class="table-columns">
     <li>PRIMARY KEY, btree (country_id)</li>
   </ul>
-    <h3>Table <span class='sql'>category</span></h3>
+  <h3 id="category_table_description">Table <span class='sql'>category</span></h3>
   Table columns: <ul class="table-columns">
     <li> <span class='sql'>category_id</span> - Unique identifier for each category.</li>
     <li> <span class='sql'>name</span> - Name of the category.</li>
@@ -299,7 +306,7 @@
   <ul class="table-columns">
     <li>PRIMARY KEY, btree (category_id)</li>
   </ul>
-  <h3>Table <span class='sql'>film_category</span></h3>
+  <h3 id="film_category_table_description">Table <span class='sql'>film_category</span></h3>
   Table columns: <ul class="table-columns">
     <li> <span class='sql'>film_id</span> - Unique identifier for each film.</li>
     <li> <span class='sql'>category_id</span> - Unique identifier for each category.</li>
@@ -323,7 +330,7 @@
   <ul class="table-columns">
       <li>PRIMARY KEY, btree (film_id, category_id)</li>
   </ul>
-  <h3>Table <span class='sql'>language</span></h3>
+  <h3 id="language_table_description">Table <span class='sql'>language</span></h3>
   Table columns: <ul class="table-columns">
       <li> <span class='sql'>language_id</span> - Unique identifier for each language.</li>
       <li> <span class='sql'>name</span> - Language name.</li>
@@ -395,7 +402,7 @@
   <ul class="table-columns">
     <li>PRIMARY KEY, btree (staff_id)</li>
   </ul>
-  <h3>Table <span class='sql'>store</span></h3>
+  <h3 id="store_table_description">Table <span class='sql'>store</span></h3>
   Table columns: <ul class="table-columns">
     <li> <span class='sql'>store_id</span> - Unique identifier for each store.</li>
     <li> <span class='sql'>manager_staff_id</span> - Foreign key referencing the staff table for the store manager.</li>
