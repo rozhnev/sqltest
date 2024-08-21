@@ -6,14 +6,14 @@
   <p>Below is a list of these tables:</p>
   <ul style="list-style-type: '▤ '; padding-inline-start: 20px;">
     <li><span class='sql' onclick="scrollInfoPanel('actor_table_description')">actor</span> - table of actors.</li>
-    <li><span class='sql' onclick="scrollInfoPanel('address_table_description')">address</span> - customer and staff addresses</li>
+    <li><span class='sql' onclick="scrollInfoPanel('address_table_description')">address</span> - table of customer and staff addresses</li>
     <li><span class='sql' onclick="scrollInfoPanel('category_table_description')">category</span> - table of films categories.</li>
     <li><span class='sql' onclick="scrollInfoPanel('city_table_description')">city</span> - table of cities.</li>
     <li><span class='sql' onclick="scrollInfoPanel('country_table_description')">country</span> - table of countries.</li>
-    <li><span class='sql' onclick="scrollInfoPanel('customer_table_description')">customer</span> - customers in Sakila database</li>
-    <li><span class='sql' onclick="scrollInfoPanel('film_table_description')">film</span> - films in Sakila database</li>
-    <li><span class='sql' onclick="scrollInfoPanel('film_actor_table_description')">film_actor</span> - actors to films relation table</li>
-    <li><span class='sql' onclick="scrollInfoPanel('film_category_table_description')">film_category</span> - films to categories relation table</li>
+    <li><span class='sql' onclick="scrollInfoPanel('customer_table_description')">customer</span> - table of customers in Sakila database.</li>
+    <li><span class='sql' onclick="scrollInfoPanel('film_table_description')">film</span> - table of films in Sakila database.</li>
+    <li><span class='sql' onclick="scrollInfoPanel('film_actor_table_description')">film_actor</span> - actors to films relation table.</li>
+    <li><span class='sql' onclick="scrollInfoPanel('film_category_table_description')">film_category</span> - films to categories relation table.</li>
     <li><span class='sql' onclick="scrollInfoPanel('inventory_table_description')">inventory</span> - table of items in Sakila database.</li>
     <li><span class='sql' onclick="scrollInfoPanel('language_table_description')">language</span> - table of films languages.</li>
     <li><span class='sql' onclick="scrollInfoPanel('payment_table_description')">payment</span> - table of customers payments.</li>
