@@ -1,11 +1,18 @@
-<div class="db-description">
+<div id="db-description" class="db-description">
     {literal}
     <h2>Bookings Database (PostgreSQL)</h2>
     The subject area of this database is airline flights through various airports.
     <p>
         <a style="font-size: small; color: var(--special-text-color);" href="/images/bookings" target="ERDWindow">ER diagram of the Bookings database</a>
     </p>
-    <h3>Table <span class='sql'>aircrafts_data</span></h3>
+    <h3 id="aircrafts_data_table_description">
+      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+        <svg height="15" width="15" style="">
+          <polygon points="8,1 15,14 1,14" fill="white"/>
+        </svg>
+      </span>
+      Table <span class='sql'>aircrafts_data</span>
+    </h3>
     Table columns:
     <ul class="table-columns">
         <li> <span class='sql'>aircraft_code</span> - Unique code for each aircraft.</li>
@@ -24,7 +31,14 @@
             </tbody>
         </table>
     </div>
-    <h3>Table <span class='sql'>airports_data</span></h3>
+    <h3 id="airports_data_table_description">
+      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+        <svg height="15" width="15" style="">
+          <polygon points="8,1 15,14 1,14" fill="white"/>
+        </svg>
+      </span>
+      Table <span class='sql'>airports_data</span>
+    </h3>
     Table columns:
     <ul class="table-columns">
         <li> <span class='sql'>airport_code</span> - Unique code for each airport.</li>
@@ -45,7 +59,14 @@
     <ul class="table-columns">
         <li>PRIMARY KEY, btree (airport_code)</li>
     </ul>
-    <h3>Table <span class='sql'>boarding_passes</span></h3>
+    <h3 id="boarding_passes_table_description">
+      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+        <svg height="15" width="15" style="">
+          <polygon points="8,1 15,14 1,14" fill="white"/>
+        </svg>
+      </span>
+      Table <span class='sql'>boarding_passes</span>
+    </h3>    
     Table columns:
     <ul class="table-columns">
         <li> <span class='sql'>ticket_no</span> - Ticket number.</li>
@@ -71,7 +92,14 @@
     <ul class="table-columns">
         <li>FOREIGN KEY (ticket_no, flight_id) REFERENCES ticket_flights(ticket_no, flight_id)</li>
     </ul>
-    <h3>Table <span class='sql'>bookings</span></h3>
+    <h3 id="bookings_table_description">
+      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+        <svg height="15" width="15" style="">
+          <polygon points="8,1 15,14 1,14" fill="white"/>
+        </svg>
+      </span>
+      Table <span class='sql'>bookings</span>
+    </h3>      
     Table columns:
     <ul class="table-columns">
         <li> <span class='sql'>book_ref</span> - Booking number.</li>
@@ -85,7 +113,14 @@
     <ul class="table-columns">
         <li>PRIMARY KEY, btree (book_ref)</li>
     </ul>
-    <h3>Table <span class='sql'>flights</span></h3>
+    <h3 id="flights_table_description">
+      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+        <svg height="15" width="15" style="">
+          <polygon points="8,1 15,14 1,14" fill="white"/>
+        </svg>
+      </span>
+      Table <span class='sql'>flights</span>
+    </h3>
     Table columns:
     <ul class="table-columns">
         <li> <span class='sql'>flight_id</span> - Flight ID.</li>
@@ -119,7 +154,14 @@
         <li>PRIMARY KEY, btree (flight_id)</li>
         <li>UNIQUE CONSTRAINT, btree (flight_no, scheduled_departure)</li>
     </ul>
-    <h3>Table <span class='sql'>seats</span></h3>
+    <h3 id="seats_table_description">
+      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+        <svg height="15" width="15" style="">
+          <polygon points="8,1 15,14 1,14" fill="white"/>
+        </svg>
+      </span>
+      Table <span class='sql'>seats</span>
+    </h3>    
     Table columns:
     <ul class="table-columns">
         <li> <span class='sql'>aircraft_code</span> - Aircraft code, IATA.</li>
@@ -141,7 +183,14 @@
     <ul class="table-columns">
         <li>FOREIGN KEY (aircraft_code) REFERENCES aircrafts(aircraft_code) ON DELETE CASCADE</li>
     </ul>
-    <h3>Table <span class='sql'>ticket_flights</span></h3>
+    <h3 id="ticket_flights_table_description">
+      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+        <svg height="15" width="15" style="">
+          <polygon points="8,1 15,14 1,14" fill="white"/>
+        </svg>
+      </span>
+      Table <span class='sql'>ticket_flights</span>
+    </h3>    
     Table columns:
     <ul class="table-columns">
         <li> <span class='sql'>ticket_no</span> - Ticket number.</li>
@@ -167,7 +216,14 @@
         <li>FOREIGN KEY (flight_id) REFERENCES flights(flight_id)</li>
         <li>FOREIGN KEY (ticket_no) REFERENCES tickets(ticket_no)</li>
     </ul>
-    <h3>Table <span class='sql'>tickets</span></h3>
+    <h3 id="tickets_table_description">
+      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+        <svg height="15" width="15" style="">
+          <polygon points="8,1 15,14 1,14" fill="white"/>
+        </svg>
+      </span>
+      Table <span class='sql'>tickets</span>
+    </h3>
     Table columns:
     <ul class="table-columns">
         <li> <span class='sql'>ticket_no</span> - Ticket number.</li>
