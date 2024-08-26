@@ -161,7 +161,7 @@
         </svg>
       </span>
       Table <span class='sql'>seats</span>
-    </h3>    
+    </h3>
     Table columns:
     <ul class="table-columns">
         <li> <span class='sql'>aircraft_code</span> - Aircraft code, IATA.</li>
@@ -190,7 +190,7 @@
         </svg>
       </span>
       Table <span class='sql'>ticket_flights</span>
-    </h3>    
+    </h3>
     Table columns:
     <ul class="table-columns">
         <li> <span class='sql'>ticket_no</span> - Ticket number.</li>
