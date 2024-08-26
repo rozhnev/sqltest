@@ -21,6 +21,19 @@
     <li><span class='sql' onclick="scrollInfoPanel('staff_table_description')">staff</span> - таблица сотрудников компании.</li>
     <li><span class='sql' onclick="scrollInfoPanel('store_table_description')">store</span> - таблица магазинов компании.</li>
   </ul>
+  <a href="https://book24.ru/r/MdRZN?erid=LjN8JzJBX" target="_blank" style="text-decoration: none;">
+    <div style="display: flex; flex-direction: row; border: 1px solid white; padding: 0.3em; width: 98%;">
+      <div  style = "width: 30%;">
+          <img style="width: 100%;" src="//ndc.book24.ru/resize/820x1180/pim/products/images/97/d1/01907881-ff4d-78d9-ac6a-7021d02597d1.jpg" alt="SQL: быстрое погружение.">
+      </div>
+      <div style="font-size: 1em;  width: 70%;  padding: 0 0.7em; font-weight: 100;">
+          <div>Шилдс Уолтер: SQL: быстрое погружение.</div>
+          <div style="font-size: small; padding-top: 0.5em;">
+            Книга «SQL: быстрое погружение» идеальна для всех, кто ищет новые перспективы карьерного роста; для разработчиков, которые хотят расширить свои навыки и знания в программировании; для любого человека, даже без опыта, кто хочет воспользоваться возможностями будущего, в котором будут править данные.
+          </div>
+      </div>
+    </div>
+  </a>
   <h3 id="actor_table_description">
     <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
       <svg height="15" width="15" style="">

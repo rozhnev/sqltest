@@ -5,6 +5,20 @@
     <p>
         <a style="font-size: small; color: var(--special-text-color);" href="/images/bookings" target="ERDWindow">ER диаграмма базы данных Bookings</a>
     </p>
+    <a href="https://book24.ru/r/iuZxo?erid=LjN8KKn37" target="_blank" style="text-decoration: none;">
+      <div style="display: flex; flex-direction: row; border: 1px solid white; padding: 0.3em; width: 98%;">
+        <div  style = "width: 30%;">
+            <img style="width: 100%;" src="//ndc.book24.ru/resize/410x590/pim/products/images/6f/0f/018ee0c1-cb86-72ca-be63-928004a76f0f.jpg" alt="PostgreSQL Основы языка SQL : учебное пособие">
+        </div>
+        <div style="font-size: 1em;  width: 70%;  padding: 0 0.7em; font-weight: 100;">
+            <div>Моргунов Евгений Павлович: PostgreSQL Основы языка SQL.</div>
+            <div style="font-size: small; padding-top: 0.5em;">
+                Учебно-практическое пособие охватывает первую, базовую, часть учебного курса по языку SQL, созданного при участии российской компании Postgres Professional. 
+                Учебный материал излагается в расчете на использование системы управления базами данных PostgreSQL. 
+            </div>
+        </div>
+      </div>
+    </a>
     <h3 id="aircrafts_data_table_description">
       <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
         <svg height="15" width="15" style="">
