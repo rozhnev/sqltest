@@ -1,4 +1,4 @@
-<div class="db-description">
+<div id="db-description" class="db-description">
   {literal}
     <h2>AdventureWorks Database (SQL Server)</h2>
     <p>The AdventureWorks Database is a sample database that demonstrates the capabilities of SQL Server. It includes data
@@ -6,8 +6,26 @@
       fictional manufacturing company.</p>
     <p><a style="font-size: small; color: var(--special-text-color);" href="/images/adventureworks" target="ERDWindow">AdventureWorks DB ER diagram</a></p>
     <p>The following is a list of these tables:</p>
-
-    <h3>Table <span class="sql">Address</span></h3>
+    <ul style="list-style-type: '▤ '; padding-inline-start: 20px;">
+      <li><span class='sql' onclick="scrollInfoPanel('Address_table_description')">Address</span> - table of addresses.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('Customer_table_description')">Customer</span> - table of customers</li>
+      <li><span class='sql' onclick="scrollInfoPanel('CustomerAddress_table_description')">CustomerAddress</span> - table of customer tot address relations.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('Product_table_description')">Product</span> - table of products.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('ProductCategory_table_description')">ProductCategory</span> - table of product categories.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('ProductDescription_table_description')">ProductDescription</span> - table of product descriptions.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('ProductModel_table_description')">ProductModel</span> - table of product models.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('ProductModelProductDescription_table_description')">ProductModelProductDescription</span> - table of product models descriptions.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('SalesOrderDetail_table_description')">SalesOrderDetail</span> - table of product sales orders.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('SalesOrderHeader_table_description')">SalesOrderHeader</span> - table of product sales orders details.</li>
+    </ul>
+    <h3 id="Address_table_description">
+      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+        <svg height="15" width="15" style="">
+          <polygon points="8,1 15,14 1,14" fill="white"/>
+        </svg>
+      </span>
+      Table <span class='sql'>Address</span>
+    </h3>
     Columns:
     <ul class="table-columns">
       <li> <span class="sql">AddressID</span> - a unique identifier for each address.</li>
@@ -52,8 +70,14 @@
     <ul class="table-columns">
       <li>PRIMARY KEY, btree (AddressID)</li>
     </ul>
-
-    <h3>Table <span class="sql">Customer</span></h3>
+    <h3 id="Customer_table_description">
+      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+        <svg height="15" width="15" style="">
+          <polygon points="8,1 15,14 1,14" fill="white"/>
+        </svg>
+      </span>
+      Table <span class='sql'>Customer</span>
+    </h3>
     Columns:
     <ul class="table-columns">
       <li> <span class="sql">CustomerID</span> - a unique identifier for each customer.</li>
@@ -118,7 +142,14 @@ Default: 0.</li>
     <ul class="table-columns">
       <li>PRIMARY KEY, btree (CustomerID)</li>
     </ul>
-    <h3>Table <span class="sql">CustomerAddress</span></h3>
+    <h3 id="CustomerAddress_table_description">
+      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+        <svg height="15" width="15" style="">
+          <polygon points="8,1 15,14 1,14" fill="white"/>
+        </svg>
+      </span>
+      Table <span class='sql'>CustomerAddress</span>
+    </h3>
     Columns:
     <ul class="table-columns">
       <li> <span class="sql">CustomerID</span> - unique identifier of client in the table <span class="sql">Customer</span>.</li>
@@ -152,8 +183,14 @@ Default: 0.</li>
     <ul class="table-columns">
       <li>PRIMARY KEY, btree (CustomerID, AddressID)</li>
     </ul>
-
-    <h3>Table <span class="sql">Product</span></h3>
+    <h3 id="Product_table_description">
+      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+        <svg height="15" width="15" style="">
+          <polygon points="8,1 15,14 1,14" fill="white"/>
+        </svg>
+      </span>
+      Table <span class='sql'>Product</span>
+    </h3>
     Columns:
     <ul class="table-columns">
       <li> <span class="sql">ProductID</span> - a unique identifier for each product.</li>
@@ -225,7 +262,14 @@ Default: 0.</li>
     <ul class="table-columns">
       <li>PRIMARY KEY, btree (ProductID, ProductCategoryID, ProductModelID)</li>
     </ul>
-    <h3>Table <span class="sql">ProductCategory</span></h3>
+    <h3 id="ProductCategory_table_description">
+      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+        <svg height="15" width="15" style="">
+          <polygon points="8,1 15,14 1,14" fill="white"/>
+        </svg>
+      </span>
+      Table <span class='sql'>ProductCategory</span>
+    </h3>
     Columns:
     <ul class="table-columns">
       <li> <span class="sql">ProductCategoryID</span> - a unique identifier for each product category.</li>
@@ -259,8 +303,14 @@ Default: 0.</li>
     <ul class="table-columns">
       <li>PRIMARY KEY, btree (ProductCategoryID)</li>
     </ul>
-
-    <h3>Table <span class="sql">ProductDescription</span></h3>
+    <h3 id="ProductDescription_table_description">
+      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+        <svg height="15" width="15" style="">
+          <polygon points="8,1 15,14 1,14" fill="white"/>
+        </svg>
+      </span>
+      Table <span class='sql'>ProductDescription</span>
+    </h3>
     Columns:
     <ul class="table-columns">
       <li> <span class="sql">ProductDescriptionID</span> - a unique identifier for each product description.</li>
@@ -268,7 +318,6 @@ Default: 0.</li>
       <li> <span class="sql">rowguid</span> - guid.</li>
       <li> <span class="sql">ModifiedDate</span> - timestamp of row creation or last update.</li>
     </ul>
-
     <div class="table-wrapper">
       <table>
         <tbody>
@@ -291,8 +340,14 @@ Default: 0.</li>
     <ul class="table-columns">
       <li>PRIMARY KEY, btree (ProductDescriptionID)</li>
     </ul>
-
-    <h3>Table <span class="sql">ProductModel</span></h3>
+    <h3 id="ProductModel_table_description">
+      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+        <svg height="15" width="15" style="">
+          <polygon points="8,1 15,14 1,14" fill="white"/>
+        </svg>
+      </span>
+      Table <span class='sql'>ProductModel</span>
+    </h3>
     Columns:
     <ul class="table-columns">
       <li> <span class="sql">ProductModelID</span> - a unique identifier for each product model.</li>
@@ -326,7 +381,14 @@ Default: 0.</li>
     <ul class="table-columns">
       <li>PRIMARY KEY, btree (ProductModelID)</li>
     </ul>
-    <h3>Table <span class="sql">ProductModelProductDescription</span></h3>
+    <h3 id="ProductModelProductDescription_table_description">
+      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+        <svg height="15" width="15" style="">
+          <polygon points="8,1 15,14 1,14" fill="white"/>
+        </svg>
+      </span>
+      Table <span class='sql'>ProductModelProductDescription</span>
+    </h3>
     Columns:
     <ul class="table-columns">
       <li> <span class="sql">ProductModelID</span> - unique identifier of client in the table <span class="sql">ProductModel</span>.</li>
@@ -360,7 +422,14 @@ Default: 0.</li>
     <ul class="table-columns">
       <li>PRIMARY KEY, btree (ProductModelID, ProductDescriptionID)</li>
     </ul>
-    <h3>Table <span class="sql">SalesOrderDetail</span></h3>
+    <h3 id="SalesOrderDetail_table_description">
+      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+        <svg height="15" width="15" style="">
+          <polygon points="8,1 15,14 1,14" fill="white"/>
+        </svg>
+      </span>
+      Table <span class='sql'>SalesOrderDetail</span>
+    </h3>    
     Columns:
     <ul class="table-columns">
       <li> <span class="sql">SalesOrderID</span> - foreign key referencing table <span class="sql">SalesOrder</span>.</li>
@@ -406,7 +475,14 @@ Default: 0.</li>
     <ul class="table-columns">
       <li>PRIMARY KEY, btree (SalesOrderID, SalesOrderDetailID, ProductID)</li>
     </ul>
-    <h3>Table <span class="sql">SalesOrderHeader</span></h3>
+    <h3 id="SalesOrderHeader_table_description">
+      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+        <svg height="15" width="15" style="">
+          <polygon points="8,1 15,14 1,14" fill="white"/>
+        </svg>
+      </span>
+      Table <span class='sql'>SalesOrderHeader</span>
+    </h3>        
     Columns:
     <ul class="table-columns">
       <li> <span class="sql">SalesOrderID</span> - foreign key referencing table <span class="sql">SalesOrder</span>.</li>
