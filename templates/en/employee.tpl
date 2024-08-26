@@ -1,4 +1,4 @@
-<div class="db-description">
+<div id="db-description" class="db-description">
     <h2>Employee Database (Firebird)</h2>
     <p>
      Employee is a sample database that comes with the Firebird cross-platform database management system.
@@ -7,8 +7,16 @@
     <p>
     Below is a list of this DB tables:
     </p>
-    <h3>Table: <span class='sql'>COUNTRY</span></h3>
-    Table columns: <ul class="table-columns">
+    <h3 id="COUNTRY_table_description">
+      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+        <svg height="15" width="15" style="">
+          <polygon points="8,1 15,14 1,14" fill="white"/>
+        </svg>
+      </span>
+      Table <span class='sql'>COUNTRY</span>
+    </h3>
+    Table columns: 
+    <ul class="table-columns">
         <li><span class='sql'>COUNTRY</span> - Name of the country.</li>
         <li><span class='sql'>CURRENCY</span> - Currency used in the country.</li>
     </ul>
@@ -25,8 +33,16 @@
             <!-- Add more rows as needed -->
         </table>
     </div>
-    <h3>Table: <span class='sql'>JOB</span></h3>
-    Table columns: <ul class="table-columns">
+    <h3 id="JOB_table_description">
+        <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+        <svg height="15" width="15" style="">
+            <polygon points="8,1 15,14 1,14" fill="white"/>
+        </svg>
+        </span>
+        Table <span class='sql'>JOB</span>
+    </h3>
+    Table columns: 
+    <ul class="table-columns">
         <li><span class='sql'>JOB_CODE</span> - Job code.</li>
         <li><span class='sql'>JOB_GRADE</span> - Job grade.</li>
         <li><span class='sql'>JOB_COUNTRY</span> - Country associated with the job.</li>
@@ -61,8 +77,16 @@
             <!-- Add more rows as needed -->
         </table>
     </div>
-    <h3>Table: <span class='sql'>DEPARTMENT</span></h3>
-    Table columns: <ul class="table-columns">
+    <h3 id="DEPARTMENT_table_description">
+        <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+        <svg height="15" width="15" style="">
+            <polygon points="8,1 15,14 1,14" fill="white"/>
+        </svg>
+        </span>
+        Table <span class='sql'>DEPARTMENT</span>
+    </h3>
+    Table columns: 
+    <ul class="table-columns">
         <li><span class='sql'>DEPT_NO</span> - Department number.</li>
         <li><span class='sql'>DEPARTMENT</span> - Department name.</li>
         <li><span class='sql'>HEAD_DEPT</span> - Head department (can be null).</li>
@@ -94,8 +118,16 @@
             <!-- Add more rows as needed -->
         </table>
     </div>
-    <h3>Table: <span class='sql'>EMPLOYEE</span></h3>
-    Table columns: <ul class="table-columns">
+    <h3 id="EMPLOYEE_table_description">
+        <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+        <svg height="15" width="15" style="">
+            <polygon points="8,1 15,14 1,14" fill="white"/>
+        </svg>
+        </span>
+        Table <span class='sql'>EMPLOYEE</span>
+    </h3>
+    Table columns: 
+    <ul class="table-columns">
         <li><span class='sql'>EMP_NO</span> - Employee number.</li>
         <li><span class='sql'>FIRST_NAME</span> - First name of the employee.</li>
         <li><span class='sql'>LAST_NAME</span> - Last name of the employee.</li>
@@ -139,8 +171,16 @@
             <!-- Add more rows as needed -->
         </table>
     </div>
-    <h3>Table: <span class='sql'>PROJECT</span></h3>
-    Table columns: <ul class="table-columns">
+    <h3 id="PROJECT_table_description">
+        <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+        <svg height="15" width="15" style="">
+            <polygon points="8,1 15,14 1,14" fill="white"/>
+        </svg>
+        </span>
+        Table <span class='sql'>PROJECT</span>
+    </h3>
+    Table columns: 
+    <ul class="table-columns">
         <li><span class='sql'>PROJ_ID</span> - Project ID.</li>
         <li><span class='sql'>PROJ_NAME</span> - Project name.</li>
         <li><span class='sql'>PROJ_DESC</span> - Project description.</li>
@@ -166,8 +206,16 @@
             <!-- Add more rows as needed -->
         </table>
     </div>
-    <h3>Table: <span class='sql'>EMPLOYEE_PROJECT</span></h3>
-    Table columns: <ul class="table-columns">
+    <h3 id="EMPLOYEE_PROJECT_table_description">
+        <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+        <svg height="15" width="15" style="">
+            <polygon points="8,1 15,14 1,14" fill="white"/>
+        </svg>
+        </span>
+        Table <span class='sql'>EMPLOYEE_PROJECT</span>
+    </h3>
+    Table columns: 
+    <ul class="table-columns">
         <li><span class='sql'>EMP_NO</span> - Employee number.</li>
         <li><span class='sql'>PROJ_ID</span> - Project ID.</li>
     </ul>
@@ -184,7 +232,14 @@
             <!-- Add more rows as needed -->
         </table>
     </div>
-    <h3>Table: <span class='sql'>PROJ_DEPT_BUDGET</span></h3>
+    <h3 id="PROJ_DEPT_BUDGET_table_description">
+        <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+        <svg height="15" width="15" style="">
+            <polygon points="8,1 15,14 1,14" fill="white"/>
+        </svg>
+        </span>
+        Table <span class='sql'>PROJ_DEPT_BUDGET</span>
+    </h3>
     Table columns: <ul class="table-columns">
         <li><span class='sql'>FISCAL_YEAR</span> - Fiscal year.</li>
         <li><span class='sql'>PROJ_ID</span> - Project ID.</li>
@@ -211,7 +266,14 @@
             <!-- Add more rows as needed -->
         </table>
     </div>
-    <h3>Table: <span class='sql'>SALARY_HISTORY</span></h3>
+    <h3 id="SALARY_HISTORY_table_description">
+        <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+        <svg height="15" width="15" style="">
+            <polygon points="8,1 15,14 1,14" fill="white"/>
+        </svg>
+        </span>
+        Table <span class='sql'>SALARY_HISTORY</span>
+    </h3>
     Table columns: <ul class="table-columns">
         <li><span class='sql'>EMP_NO</span> - Employee number.</li>
         <li><span class='sql'>CHANGE_DATE</span> - Date of salary change.</li>
@@ -241,7 +303,14 @@
             <!-- Add more rows as needed -->
         </table>
     </div>
-    <h3>Table: <span class='sql'>CUSTOMER</span></h3>
+    <h3 id="CUSTOMER_table_description">
+        <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+        <svg height="15" width="15" style="">
+            <polygon points="8,1 15,14 1,14" fill="white"/>
+        </svg>
+        </span>
+        Table <span class='sql'>CUSTOMER</span>
+    </h3>     
     Table columns: <ul class="table-columns">
         <li><span class='sql'>CUST_NO</span> - Customer number.</li>
         <li><span class='sql'>CUSTOMER</span> - Customer name.</li>
@@ -289,7 +358,14 @@
             <!-- Add more rows as needed -->
         </table>
     </div>
-    <h3>Table: <span class='sql'>SALES</span></h3>
+    <h3 id="SALES_table_description">
+        <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+        <svg height="15" width="15" style="">
+            <polygon points="8,1 15,14 1,14" fill="white"/>
+        </svg>
+        </span>
+        Table <span class='sql'>SALES</span>
+    </h3>
     Table columns: <ul class="table-columns">
         <li><span class='sql'>PO_NUMBER</span> - Purchase order number.</li>
         <li><span class='sql'>CUST_NO</span> - Customer number associated with the order.</li>

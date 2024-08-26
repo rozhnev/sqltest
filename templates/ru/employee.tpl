@@ -1,4 +1,4 @@
-<div class="db-description">
+<div id="db-description" class="db-description">
     <h2>База данных Employee (Firebird)</h2>
     <p>
     Employee - это образец базы данных, которая поставляется с кроссплатформенной системой управления базами данных Firebird. 
@@ -7,8 +7,16 @@
     <p>
         Ниже приведен список таблиц этой базы данных:
     </p>
-    <h3>Таблица: <span class='sql'>COUNTRY</span></h3>
-    Колонки: <ul class="table-columns">
+    <h3 id="COUNTRY_table_description">
+      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+        <svg height="15" width="15" style="">
+          <polygon points="8,1 15,14 1,14" fill="white"/>
+        </svg>
+      </span>
+      Таблица <span class='sql'>COUNTRY</span>
+    </h3>
+    Колонки: 
+    <ul class="table-columns">
         <li><span class='sql'>COUNTRY</span> - Название страны.</li>
         <li><span class='sql'>CURRENCY</span> - Валюта, используемая в стране.</li>
     </ul>
@@ -25,8 +33,16 @@
             <!-- Добавьте больше строк по мере необходимости -->
         </table>
     </div>
-    <h3>Таблица: <span class='sql'>JOB</span></h3>
-    Колонки: <ul class="table-columns">
+    <h3 id="JOB_table_description">
+        <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+        <svg height="15" width="15" style="">
+            <polygon points="8,1 15,14 1,14" fill="white"/>
+        </svg>
+        </span>
+        Таблица <span class='sql'>JOB</span>
+    </h3>
+    Колонки: 
+    <ul class="table-columns">
         <li><span class='sql'>JOB_CODE</span> - Код работы.</li>
         <li><span class='sql'>JOB_GRADE</span> - Категория работы.</li>
         <li><span class='sql'>JOB_COUNTRY</span> - Страна, связанная с работой.</li>
@@ -61,8 +77,16 @@
             <!-- Добавьте больше строк по мере необходимости -->
         </table>
     </div>
-    <h3>Таблица: <span class='sql'>DEPARTMENT</span></h3>
-    Колонки: <ul class="table-columns">
+    <h3 id="DEPARTMENT_table_description">
+        <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+        <svg height="15" width="15" style="">
+            <polygon points="8,1 15,14 1,14" fill="white"/>
+        </svg>
+        </span>
+        Таблица <span class='sql'>DEPARTMENT</span>
+    </h3>
+    Колонки: 
+    <ul class="table-columns">
         <li><span class='sql'>DEPT_NO</span> - Номер отдела.</li>
         <li><span class='sql'>DEPARTMENT</span> - Название отдела.</li>
         <li><span class='sql'>HEAD_DEPT</span> - Главный отдел (может быть null).</li>
@@ -94,8 +118,16 @@
             <!-- Добавьте больше строк по мере необходимости -->
         </table>
     </div>
-    <h3>Таблица: <span class='sql'>EMPLOYEE</span></h3>
-    Колонки: <ul class="table-columns">
+    <h3 id="EMPLOYEE_table_description">
+        <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+        <svg height="15" width="15" style="">
+            <polygon points="8,1 15,14 1,14" fill="white"/>
+        </svg>
+        </span>
+        Таблица <span class='sql'>EMPLOYEE</span>
+    </h3>
+    Колонки: 
+    <ul class="table-columns">
         <li><span class='sql'>EMP_NO</span> - Номер сотрудника.</li>
         <li><span class='sql'>FIRST_NAME</span> - Имя сотрудника.</li>
         <li><span class='sql'>LAST_NAME</span> - Фамилия сотрудника.</li>
@@ -139,8 +171,16 @@
             <!-- Добавьте больше строк по мере необходимости -->
         </table>
     </div>
-    <h3>Таблица: <span class='sql'>PROJECT</span></h3>
-    Колонки: <ul class="table-columns">
+    <h3 id="PROJECT_table_description">
+        <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+        <svg height="15" width="15" style="">
+            <polygon points="8,1 15,14 1,14" fill="white"/>
+        </svg>
+        </span>
+        Таблица <span class='sql'>PROJECT</span>
+    </h3>
+    Колонки: 
+    <ul class="table-columns">
         <li><span class='sql'>PROJ_ID</span> - Идентификатор проекта.</li>
         <li><span class='sql'>PROJ_NAME</span> - Название проекта.</li>
         <li><span class='sql'>PROJ_DESC</span> - Описание проекта.</li>
@@ -166,8 +206,16 @@
             <!-- Добавьте больше строк по мере необходимости -->
         </table>
     </div>
-    <h3>Таблица: <span class='sql'>EMPLOYEE_PROJECT</span></h3>
-    Колонки: <ul class="table-columns">
+    <h3 id="EMPLOYEE_PROJECT_table_description">
+        <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+        <svg height="15" width="15" style="">
+            <polygon points="8,1 15,14 1,14" fill="white"/>
+        </svg>
+        </span>
+        Таблица <span class='sql'>EMPLOYEE_PROJECT</span>
+    </h3>
+    Колонки: 
+    <ul class="table-columns">
         <li><span class='sql'>EMP_NO</span> - Номер сотрудника.</li>
         <li><span class='sql'>PROJ_ID</span> - Идентификатор проекта.</li>
     </ul>
@@ -184,7 +232,14 @@
             <!-- Добавьте больше строк по мере необходимости -->
         </table>
     </div>
-    <h3>Таблица: <span class='sql'>PROJ_DEPT_BUDGET</span></h3>
+    <h3 id="PROJ_DEPT_BUDGET_table_description">
+        <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+        <svg height="15" width="15" style="">
+            <polygon points="8,1 15,14 1,14" fill="white"/>
+        </svg>
+        </span>
+        Таблица <span class='sql'>PROJ_DEPT_BUDGET</span>
+    </h3>
     Колонки: <ul class="table-columns">
         <li><span class='sql'>FISCAL_YEAR</span> - Фискальный год.</li>
         <li><span class='sql'>PROJ_ID</span> - Идентификатор проекта.</li>
@@ -211,8 +266,16 @@
             <!-- Добавьте больше строк по мере необходимости -->
         </table>
     </div>
-    <h3>Таблица: <span class='sql'>SALARY_HISTORY</span></h3>
-    Колонки: <ul class="table-columns">
+    <h3 id="SALARY_HISTORY_table_description">
+        <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+        <svg height="15" width="15" style="">
+            <polygon points="8,1 15,14 1,14" fill="white"/>
+        </svg>
+        </span>
+        Таблица <span class='sql'>SALARY_HISTORY</span>
+    </h3>
+    Колонки: 
+    <ul class="table-columns">
         <li><span class='sql'>EMP_NO</span> - Номер сотрудника.</li>
         <li><span class='sql'>CHANGE_DATE</span> - Дата изменения заработной платы.</li>
         <li><span class='sql'>UPDATER_ID</span> - Идентификатор обновляющего.</li>
@@ -241,8 +304,16 @@
             <!-- Добавьте больше строк по мере необходимости -->
         </table>
     </div>
-    <h3>Таблица: <span class='sql'>CUSTOMER</span></h3>
-    Колонки: <ul class="table-columns">
+    <h3 id="CUSTOMER_table_description">
+        <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+        <svg height="15" width="15" style="">
+            <polygon points="8,1 15,14 1,14" fill="white"/>
+        </svg>
+        </span>
+        Таблица <span class='sql'>CUSTOMER</span>
+    </h3>     
+    Колонки: 
+    <ul class="table-columns">
         <li><span class='sql'>CUST_NO</span> - Номер клиента.</li>
         <li><span class='sql'>CUSTOMER</span> - Название клиента.</li>
         <li><span class='sql'>CONTACT_FIRST</span> - Имя контактного лица.</li>
@@ -289,8 +360,16 @@
             <!-- Добавьте больше строк по мере необходимости -->
         </table>
     </div>
-    <h3>Таблица: <span class='sql'>SALES</span></h3>
-    Колонки: <ul class="table-columns">
+    <h3 id="SALES_table_description">
+        <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+        <svg height="15" width="15" style="">
+            <polygon points="8,1 15,14 1,14" fill="white"/>
+        </svg>
+        </span>
+        Таблица <span class='sql'>SALES</span>
+    </h3>    
+    Колонки: 
+    <ul class="table-columns">
         <li><span class='sql'>PO_NUMBER</span> - Номер заказа.</li>
         <li><span class='sql'>CUST_NO</span> - Номер клиента, связанный с заказом.</li>
         <li><span class='sql'>SALES_REP</span> - Номер представителя по продажам.</li>
