@@ -67,7 +67,7 @@ if (isset($pathParts[0]) && $pathParts[0] === 'login') {
     header("HTTP/1.1 301 Moved Permanently");
     header("Location: /{$lang}/{$action}");
     exit();
-} elseif (preg_match('@(?<lang>ru|en)/(?<action>privacy-policy|logout|about|menu)/?@i', $path, $params)) {
+} elseif (preg_match('@(?<lang>ru|en)/(?<action>privacy-policy|logout|about|menu|books|courses)/?@i', $path, $params)) {
     $lang       = $params['lang'];
     $action     = $params['action'];
 } elseif (preg_match('@(?<lang>ru|en)/question/(?<questionCategoryID>\d+)/(?<questionID>\d+)@i', $path, $params)) {
@@ -319,6 +319,10 @@ switch ($action) {
             $template = $mobileView ? "m.error.tpl" : "error.tpl";
         }
 
+        break;
+    case 'books':
+        $smarty->assign('Books', Helper::getBooks($dbh, $lang));
+        $template = "books.tpl";
         break;
     default:
         // stored for back compatibility
