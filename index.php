@@ -323,6 +323,14 @@ switch ($action) {
     case 'books':
         $smarty->assign('Books', Helper::getBooks($dbh, $lang));
         $template = "books.tpl";
+        $smarty->assign('PageTitle', $lang === 'ru' 
+            ? 'Изучаем SQL с нуля: лучшие книги для начинающих'
+            : 'Learning SQL from Scratch: The Best Books for Beginners'
+        );
+        $smarty->assign('PageDescription', $lang === 'ru' 
+            ? 'Хотите освоить язык SQL и стать востребованным специалистом в области баз данных? Мы собрали для вас подборку самых полезных книг, которые помогут вам сделать первые шаги в мире SQL.'
+            : 'Want to master the SQL language and become a sought-after database specialist? We have compiled a selection of the most useful books for you that will help you take your first steps in the world of SQL.'
+        );
         break;
     default:
         // stored for back compatibility
