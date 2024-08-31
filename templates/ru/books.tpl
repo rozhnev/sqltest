@@ -20,7 +20,7 @@
                 </h3>
                 <div class="books-container" style="display: flex; flex-flow: wrap; gap: 1em;">
                     {foreach $Books as $book}
-                        <div style="display: flex; max-width: 30%; min-width:380px;">
+                        <div style="display: flex; max-width: 30%; min-width:340px;">
                             <a href="{{$book.referral_link}}" target="_blank" style="text-decoration: none; color: white;">
                                 <div style="display: flex; flex-direction: row; border: 1px solid white; padding: 0.3em; width: 98%;">
                                 <div  style = "width: 25%;">
