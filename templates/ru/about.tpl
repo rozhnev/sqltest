@@ -59,7 +59,7 @@
                     <a style="display:inline-block;width:180px;" href="/ru/question/db-theory/what-is-sql" title="Начать" class="button green">Начать</a>
                 </div>
                 <p>
-                    Большое спасибо <a href ="https://t.me/artlatyshev" target="_blank">Артему Латышеву</a> за его вклад в развитие проекта.
+                    Большое спасибо <a href ="https://t.me/artembuenas" target="_blank">Артему Латышеву</a> за его вклад в развитие проекта.
                 </p>
             </div>
 {if $MobileView}
