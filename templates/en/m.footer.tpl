@@ -28,6 +28,11 @@
                         <a href="/en/privacy-policy" target="_self">Privacy policy</a>
                     </div>
                 </div>
+                <div class="footer-links">
+                    <div>
+                        <a href="/en/books" target="_self">Books</a>
+                    </div>
+                </div>
                 © 2023-2024 SQLtest.online
             </div>
         </div>
