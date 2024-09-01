@@ -14,6 +14,18 @@
       <priority>0.8</priority>
     </url>
     <url>
+      <loc>https://sqltest.online/ru/books</loc>
+      <lastmod>{$Today}</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.8</priority>
+    </url>
+    <url>
+      <loc>https://sqltest.online/en/books</loc>
+      <lastmod>{$Today}</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.8</priority>
+    </url>
+    <url>
       <loc>https://sqltest.online/en/about</loc>
       <lastmod>{$Today}</lastmod>
       <changefreq>monthly</changefreq>
