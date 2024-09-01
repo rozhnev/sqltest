@@ -24,11 +24,11 @@
                             <a href="{{$book.referral_link}}" target="_blank" style="text-decoration: none; color: white;">
                                 <div style="display: flex; flex-direction: row; border: 1px solid white; padding: 0.3em; width: 98%;">
                                 <div  style = "width: 25%;">
-                                    <img style="width: 100%;" src="{{$book.picture_link}}" alt="{{$book.title}}">
+                                    <img style="width: 100%;" src="{{$book.picture_link}}" alt="{{$book.title|escape:"html"}}">
                                 </div>
                                 <div style="font-size: 1em;  width: 75%;  padding: 0 0.7em; font-weight: 100; height: 250px; overflow: auto;">
-                                    <div>{{$book.title}}</div>
-                                    <div style="font-size: small; padding-top: 0.5em;">{{$book.description}}</div>
+                                    <div>{{$book.title|escape:"html"}}</div>
+                                    <div style="font-size: small; padding-top: 0.5em;">{{$book.description|escape:"html"}}</div>
                                 </div>
                                 </div>
                             </a>
