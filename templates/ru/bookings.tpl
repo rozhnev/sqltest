@@ -5,6 +5,17 @@
     <p>
         <a style="font-size: small; color: var(--special-text-color);" href="/images/bookings" target="ERDWindow">ER диаграмма базы данных Bookings</a>
     </p>
+    <p>База данных Bookings содержит 8 таблиц:</p>
+    <ul style="list-style-type: '▤ '; padding-inline-start: 20px;">
+      <li><span class='sql' onclick="scrollInfoPanel('aircrafts_data_table_description')">aircrafts_data</span> - таблица самолетов.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('airports_data_table_description')">airports_data</span> - таблица аэропортов.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('boarding_passes_table_description')">boarding_passes</span> - таблица посадочных талонов.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('bookings_table_description')">bookings</span> - таблица бронирований.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('flights_table_description')">flights</span> - таблица рейсов.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('seats_table_description')">seats</span> - таблица мест в самолетах.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('ticket_flights_table_description')">ticket_flights</span> - таблица связей билетов с рейсами.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('tickets_table_description')">tickets</span> - таблица билетов.</li>
+    </ul>
     <a href="https://book24.ru/r/iuZxo?erid=LjN8KKn37" target="_blank" style="text-decoration: none;">
       <div style="display: flex; flex-direction: row; border: 1px solid white; padding: 0.3em; width: 98%;">
         <div  style = "width: 30%;">
