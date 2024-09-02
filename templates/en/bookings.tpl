@@ -5,7 +5,7 @@
     <p>
         <a style="font-size: small; color: var(--special-text-color);" href="/images/bookings" target="ERDWindow">ER diagram of the Bookings database</a>
     </p>
-    <p>The Bookings database contains 8 tables:</p>
+    <p>The Bookings Database contains 8 tables:</p>
     <ul style="list-style-type: '▤ '; padding-inline-start: 20px;">
       <li><span class='sql' onclick="scrollInfoPanel('aircrafts_data_table_description')">aircrafts_data</span> - table of aircrafts.</li>
       <li><span class='sql' onclick="scrollInfoPanel('airports_data_table_description')">airports_data</span> - table of airports.</li>
