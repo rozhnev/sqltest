@@ -4,9 +4,19 @@
      Employee is a sample database that comes with the Firebird cross-platform database management system.
      You can use this database to explore Firebird SQL and other DBMS features.
     </p>
-    <p>
-    Below is a list of this DB tables:
-    </p>
+    <p>Below is a list of this DB tables:</p>
+    <ul style="list-style-type: '▤ '; padding-inline-start: 20px;">
+      <li><span class='sql' onclick="scrollInfoPanel('COUNTRY_table_description')">COUNTRY</span> - table of countries.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('JOB_table_description')">JOB</span> - table of jobs.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('DEPARTMENT_table_description')">DEPARTMENT</span> - table of departments.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('EMPLOYEE_table_description')">EMPLOYEE</span> - table of employees.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('PROJECT_table_description')">PROJECT</span> - table of projects.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('EMPLOYEE_PROJECT_table_description')">EMPLOYEE_PROJECT</span> - table of employee to project relations.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('PROJ_DEPT_BUDGET_table_description')">PROJ_DEPT_BUDGET</span> - table of project budgets.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('SALARY_HISTORY_table_description')">SALARY_HISTORY</span> - table of employees salary changes history.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('CUSTOMER_table_description')">CUSTOMER</span> - table of customers.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('SALES_table_description')">SALES</span> - table of sales.</li>
+    </ul>
     <h3 id="COUNTRY_table_description">
       <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
         <svg height="15" width="15" style="">
@@ -30,7 +40,6 @@
                 <td>USA</td>
                 <td>Dollar</td>
             </tr>
-            <!-- Add more rows as needed -->
         </table>
     </div>
     <h3 id="JOB_table_description">
@@ -74,7 +83,6 @@
                 <td>No specific requirements.</td>
                 <td>[null]</td>
             </tr>
-            <!-- Add more rows as needed -->
         </table>
     </div>
     <h3 id="DEPARTMENT_table_description">
@@ -115,7 +123,6 @@
                 <td>Monterey</td>
                 <td>(408) 555-1234</td>
             </tr>
-            <!-- Add more rows as needed -->
         </table>
     </div>
     <h3 id="EMPLOYEE_table_description">
@@ -168,7 +175,6 @@
                 <td>105900.00</td>
                 <td>Nelson, Robert</td>
             </tr>
-            <!-- Add more rows as needed -->
         </table>
     </div>
     <h3 id="PROJECT_table_description">
@@ -203,7 +209,6 @@
                 <td>45</td>
                 <td>software</td>
             </tr>
-            <!-- Add more rows as needed -->
         </table>
     </div>
     <h3 id="EMPLOYEE_PROJECT_table_description">
@@ -229,7 +234,6 @@
                 <td>144</td>
                 <td>DGPII</td>
             </tr>
-            <!-- Add more rows as needed -->
         </table>
     </div>
     <h3 id="PROJ_DEPT_BUDGET_table_description">
@@ -263,7 +267,6 @@
                 <td>[null]</td>
                 <td>200000.00</td>
             </tr>
-            <!-- Add more rows as needed -->
         </table>
     </div>
     <h3 id="SALARY_HISTORY_table_description">
@@ -300,7 +303,6 @@
                 <td>10.000000</td>
                 <td>22000.000000</td>
             </tr>
-            <!-- Add more rows as needed -->
         </table>
     </div>
     <h3 id="CUSTOMER_table_description">
@@ -355,7 +357,6 @@
                 <td>92121</td>
                 <td>[null]</td>
             </tr>
-            <!-- Add more rows as needed -->
         </table>
     </div>
     <h3 id="SALES_table_description">
@@ -413,7 +414,6 @@
                 <td>hardware</td>
                 <td>1.000000000</td>
             </tr>
-            <!-- Add more rows as needed -->
         </table>
     </div>
 </div>

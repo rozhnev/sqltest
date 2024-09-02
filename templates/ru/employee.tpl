@@ -4,9 +4,19 @@
     Employee - это образец базы данных, которая поставляется с кроссплатформенной системой управления базами данных Firebird. 
     Вы можете использовать эту базу данных для изучения возможностей Firebird SQL и других функций СУБД. 
     </p>
-    <p>
-        Ниже приведен список таблиц этой базы данных:
-    </p>
+    <p>Ниже приведен список таблиц этой базы данных:</p>
+    <ul style="list-style-type: '▤ '; padding-inline-start: 20px;">
+        <li><span class='sql' onclick="scrollInfoPanel('COUNTRY_table_description')">COUNTRY</span> - таблица стран.</li>
+        <li><span class='sql' onclick="scrollInfoPanel('JOB_table_description')">JOB</span> - таблица должностей.</li>
+        <li><span class='sql' onclick="scrollInfoPanel('DEPARTMENT_table_description')">DEPARTMENT</span> - таблица отделов.</li>
+        <li><span class='sql' onclick="scrollInfoPanel('EMPLOYEE_table_description')">EMPLOYEE</span> - таблица сотрудников.</li>
+        <li><span class='sql' onclick="scrollInfoPanel('PROJECT_table_description')">PROJECT</span> - таблица проектов.</li>
+        <li><span class='sql' onclick="scrollInfoPanel('EMPLOYEE_PROJECT_table_description')">EMPLOYEE_PROJECT</span> - таблица связей сотрудников с проектами.</li>
+        <li><span class='sql' onclick="scrollInfoPanel('PROJ_DEPT_BUDGET_table_description')">PROJ_DEPT_BUDGET</span> - таблица бюджетов проектов.</li>
+        <li><span class='sql' onclick="scrollInfoPanel('SALARY_HISTORY_table_description')">SALARY_HISTORY</span> - таблица истории изменений зарплат сотрудников.</li>
+        <li><span class='sql' onclick="scrollInfoPanel('CUSTOMER_table_description')">CUSTOMER</span> - таблица клиентов.</li>
+        <li><span class='sql' onclick="scrollInfoPanel('SALES_table_description')">SALES</span> - таблица продаж.</li>
+    </ul>
     <h3 id="COUNTRY_table_description">
       <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
         <svg height="15" width="15" style="">
@@ -30,7 +40,6 @@
                 <td>USA</td>
                 <td>Dollar</td>
             </tr>
-            <!-- Добавьте больше строк по мере необходимости -->
         </table>
     </div>
     <h3 id="JOB_table_description">
@@ -74,7 +83,6 @@
                 <td>Нет специфических требований.</td>
                 <td>[null]</td>
             </tr>
-            <!-- Добавьте больше строк по мере необходимости -->
         </table>
     </div>
     <h3 id="DEPARTMENT_table_description">
@@ -115,7 +123,6 @@
                 <td>Монтерей</td>
                 <td>(408) 555-1234</td>
             </tr>
-            <!-- Добавьте больше строк по мере необходимости -->
         </table>
     </div>
     <h3 id="EMPLOYEE_table_description">
@@ -168,7 +175,6 @@
                 <td>105900.00</td>
                 <td>Nelson, Robert</td>
             </tr>
-            <!-- Добавьте больше строк по мере необходимости -->
         </table>
     </div>
     <h3 id="PROJECT_table_description">
@@ -203,7 +209,6 @@
                 <td>45</td>
                 <td>software</td>
             </tr>
-            <!-- Добавьте больше строк по мере необходимости -->
         </table>
     </div>
     <h3 id="EMPLOYEE_PROJECT_table_description">
@@ -229,7 +234,6 @@
                 <td>144</td>
                 <td>DGPII</td>
             </tr>
-            <!-- Добавьте больше строк по мере необходимости -->
         </table>
     </div>
     <h3 id="PROJ_DEPT_BUDGET_table_description">
@@ -263,7 +267,6 @@
                 <td>[null]</td>
                 <td>200000.00</td>
             </tr>
-            <!-- Добавьте больше строк по мере необходимости -->
         </table>
     </div>
     <h3 id="SALARY_HISTORY_table_description">
@@ -301,7 +304,6 @@
                 <td>10.000000</td>
                 <td>22000.000000</td>
             </tr>
-            <!-- Добавьте больше строк по мере необходимости -->
         </table>
     </div>
     <h3 id="CUSTOMER_table_description">
@@ -357,7 +359,6 @@
                 <td>92121</td>
                 <td>[null]</td>
             </tr>
-            <!-- Добавьте больше строк по мере необходимости -->
         </table>
     </div>
     <h3 id="SALES_table_description">
@@ -416,7 +417,6 @@
                 <td>hardware</td>
                 <td>1.000000000</td>
             </tr>
-            <!-- Добавьте больше строк по мере необходимости -->
         </table>
     </div>
 </div>
