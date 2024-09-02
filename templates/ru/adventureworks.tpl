@@ -366,7 +366,7 @@
     <ul class="table-columns">
       <li> <span class="sql">ProductModelID</span> - уникальный идентификатор для каждой модели продукта.</li>
       <li> <span class="sql">Name</span> - название модели продукта.</li>
-      <li> <span class="sql">CatalogDescription</span> - описание в формате <span class="sql">xml</span>.</li>
+      <li> <span class="sql">CatalogDescription</span> - описание в формате XML.</li>
       <li> <span class="sql">rowguid</span> - guid.</li>
       <li> <span class="sql">ModifiedDate</span> - временная метка создания или последнего обновления строки.</li>
     </ul>
@@ -446,12 +446,10 @@
     </h3>   
     Колонки:
     <ul class="table-columns">
-      <li> <span class="sql">SalesOrderID</span> - внешний ключ, ссылающийся на таблицу <span
-          class="sql">SalesOrder</span>.</li>
-      <li> <span class="sql">SalesOrderDetailID</span> - уникальный идентификатор каждого заказа.</li>
+      <li> <span class="sql">SalesOrderID</span> - внешний ключ, ссылающийся на таблицу <span class="sql">SalesOrderHeader</span>.</li>
+      <li> <span class="sql">SalesOrderDetailID</span> - уникальный идентификатор строки.</li>
       <li> <span class="sql">OrderQty</span> - количество.</li>
-      <li> <span class="sql">ProductID</span> - внешний ключ, ссылающийся на таблицу <span class="sql">Product</span>.
-      </li>
+      <li> <span class="sql">ProductID</span> - внешний ключ, ссылающийся на таблицу <span class="sql">Product</span>.</li>
       <li> <span class="sql">UnitPrice</span> - цена за единицу товара.</li>
       <li> <span class="sql">UnitPriceDiscount</span> - цена за единицу товара со скидкой.</li>
       <li> <span class="sql">LineTotal</span> - Итого.</li>
@@ -500,8 +498,7 @@
     </h3> 
     Колонки:
     <ul class="table-columns">
-      <li> <span class="sql">SalesOrderID</span> - внешний ключ, ссылающийся на таблицу <span
-          class="sql">SalesOrder</span>.</li>
+      <li> <span class="sql">SalesOrderID</span> - уникальный идентификатор заказа в таблице.</li>
       <li> <span class="sql">RevisionNumber</span> - номер ревизии.</li>
       <li> <span class="sql">OrderDate</span> - временная метка создания даты заказа.</li>
       <li> <span class="sql">DueDate</span> - временная метка даты оплаты заказа.</li>

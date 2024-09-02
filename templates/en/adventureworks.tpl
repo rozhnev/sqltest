@@ -365,7 +365,7 @@ Default: 0.</li>
     <ul class="table-columns">
       <li> <span class="sql">ProductModelID</span> - a unique identifier for each product model.</li>
       <li> <span class="sql">Name</span> - name of the product model.</li>
-      <li> <span class="sql">CatalogDescription</span> - description in <span class="sql">xml</span> format.</li>
+      <li> <span class="sql">CatalogDescription</span> - description in XML format.</li>
       <li> <span class="sql">rowguid</span> - guid.</li>
       <li> <span class="sql">ModifiedDate</span> - timestamp of row creation or last update.</li>
     </ul>
@@ -445,8 +445,8 @@ Default: 0.</li>
     </h3>    
     Columns:
     <ul class="table-columns">
-      <li> <span class="sql">SalesOrderID</span> - foreign key referencing table <span class="sql">SalesOrder</span>.</li>
-      <li> <span class="sql">SalesOrderDetailID</span> - a unique identifier for each order.</li>
+      <li> <span class="sql">SalesOrderID</span> - foreign key referencing table <span class="sql">SalesOrderHeader</span>.</li>
+      <li> <span class="sql">SalesOrderDetailID</span> - a unique identifier of record in the table.</li>
       <li> <span class="sql">OrderQty</span> - quantity.</li>
       <li> <span class="sql">ProductID</span> - a foreign key referencing the table <span class="sql">Product</span>.
       </li>
@@ -498,7 +498,7 @@ Default: 0.</li>
     </h3>        
     Columns:
     <ul class="table-columns">
-      <li> <span class="sql">SalesOrderID</span> - foreign key referencing table <span class="sql">SalesOrder</span>.</li>
+      <li> <span class="sql">SalesOrderID</span> - a unique identifier of record in the table.</li>
       <li> <span class="sql">RevisionNumber</span> - revision number.</li>
       <li> <span class="sql">OrderDate</span> - timestamp for creating the order date.</li>
       <li> <span class="sql">DueDate</span> - timestamp of the order payment date.</li>
