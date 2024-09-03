@@ -17,6 +17,22 @@
         <li><span class='sql' onclick="scrollInfoPanel('CUSTOMER_table_description')">CUSTOMER</span> - таблица клиентов.</li>
         <li><span class='sql' onclick="scrollInfoPanel('SALES_table_description')">SALES</span> - таблица продаж.</li>
     </ul>
+    <a href="https://book24.ru/r/RaSLq?erid=LjN8KWDe6" target="_blank" style="text-decoration: none;">
+        <div style="display: flex; flex-direction: row; border: 1px solid white; padding: 0.3em; width: 98%;">
+        <div  style = "width: 30%;">
+            <img style="width: 100%;" src="//ndc.book24.ru/resize/410x590/pim/products/images/fa/ba/018ee5fc-fe2e-7df9-b671-01280c60faba.jpg" alt="PostgreSQL Основы языка SQL : учебное пособие">
+        </div>
+        <div style="font-size: 1em;  width: 70%;  padding: 0 0.7em; font-weight: 100;">
+            <div>Танимура Кэти: SQL для анализа данных.</div>
+            <div style="font-size: small; padding-top: 0.5em;">
+                В книге рассказывается о возможностях SQL применительно к анализу данных, сравниваются различные типы баз данных, описаны методы подготовки данных для анализа. 
+                Рассказано о типах данных, структуре SQL-запросов, профилировнии, структурировании и очистке данных. Описаны методы анализа временных рядов, трендов, приведены примеры анализа данных с учетом сезонности. 
+                Отдельные главы посвящены когортному анализу, текстовому анализу, выявлению и обработке аномалий, анализу результатов экспериментов и А/В-тестирования. Описано создание сложных наборов данных, комбинирование методов анализа. 
+                Приведены практические примеры анализа воронки продаж и потребительской корзины.
+            </div>
+        </div>
+        </div>
+    </a>
     <h3 id="COUNTRY_table_description">
       <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
         <svg height="15" width="15" style="">
