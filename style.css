@@ -167,9 +167,22 @@ body {
     top: 8px;
 }
 
-.site-name {
+.site-name-wrapper {
     display: flex;
     justify-content: space-evenly;
+}
+.site-name  {
+    font-size: 1.5rem;
+}
+.mobile-container .site-name  {
+    font-size: 1.5em !important;
+}
+.site-promo {
+    font-size: 0.6em;
+    padding-top: 9px;
+}
+.mobile-container .site-promo {
+    font-size: small;
 }
 .login-popup  {
     opacity: 0;
@@ -254,7 +267,7 @@ body {
 
 .top-menu h1,
 .top-menu h3 {
-    display: inline-block;
+    display: inline;
     margin: 0;
 }
 
@@ -355,13 +368,6 @@ body {
     text-align: center;
     height: 100px;
     line-height: 32px;
-}
-.site-promo {
-    font-size: 0.5em;
-    padding-top: 9px;
-}
-.mobile-container .site-promo {
-    font-size: small;
 }
 .site-description {
     max-width: 55vw; 
