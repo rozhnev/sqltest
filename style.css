@@ -166,8 +166,10 @@ body {
     right: 190px;
     top: 8px;
 }
-.mobile-container .site-name {
-    font-size: 1.5em;
+
+.site-name {
+    display: flex;
+    justify-content: space-evenly;
 }
 .login-popup  {
     opacity: 0;
@@ -218,12 +220,17 @@ body {
 .pointer-hand {
     cursor: pointer;
 }
-
+.login-buttons-wrapper {
+    display: flex;
+    flex-flow: wrap;
+    gap: 12px;
+    justify-content: center;
+}
 .social-login-button {
     width: 40px;
     height: 40px;
     display: inline-block;
-    margin: 0 12px;
+    margin: 0 5px;
     cursor: pointer;
 }
 
@@ -247,7 +254,8 @@ body {
 
 .top-menu h1,
 .top-menu h3 {
-    display: inline;
+    display: inline-block;
+    margin: 0;
 }
 
 .top-menu a,
@@ -349,7 +357,8 @@ body {
     line-height: 32px;
 }
 .site-promo {
-    font-size: 0.6em;
+    font-size: 0.5em;
+    padding-top: 9px;
 }
 .mobile-container .site-promo {
     font-size: small;
