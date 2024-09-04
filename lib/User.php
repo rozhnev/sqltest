@@ -101,9 +101,10 @@ class User
             curl_setopt($crl, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($crl, CURLOPT_HTTPHEADER, array("Authorization: Bearer ".$accessToken));
 
-            $userDataJson = curl_exec($crl);
+            $userData = curl_exec($crl);
             curl_close($ch);
-            $json = json_decode($userDataJson);
+            $info = json_decode($userData, true);
+            if (!$info['email'])  return false;
 
             $this->login = $info['email'] . '@linkedin';
             $this->upsert();
