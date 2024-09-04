@@ -10,7 +10,7 @@
             <div class="question-title-bar" style="display: flex;">
                 <div class="question-title">
                     <div class="question-level rate{$Question.rate}" title="{$Question.question_rate|default:'Not rated yet'}"></div>
-                    Task {$Question.number}:
+                    Task&nbsp;{$Question.number}:
                     {if $LoggedAsAdmin}
                         <a href="/admin/question/{$NextQuestionId}" title="Edit" style="color:#333">&#9998;</a>
                     {/if}

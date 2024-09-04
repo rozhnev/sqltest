@@ -572,7 +572,7 @@ body {
 .question-title .question-dates {
     color: var(--question-date-color);
     font-size: small;
-    padding-left: 30%;
+    padding-left: 20%;
 }
 
 .question-navigate {
