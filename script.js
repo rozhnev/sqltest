@@ -324,7 +324,7 @@ function scrollQuestionPanel() {
 }
 function openLinkedinLoginPopUp() {
     window.open(
-        `https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=77udx3wni7oovy&redirect_uri=${window.location.protocol}//${window.location.host}/login/linkedin/&state=SignupAuth&scope=r_liteprofile%20r_emailaddress%20w_member_social`, 
+        `https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=77scnm5m8z804e&redirect_uri=${window.location.protocol}//${window.location.host}/login/linkedin/&state=SignupAuth&scope=r_liteprofile%20r_emailaddress%20w_member_social`, 
         'LinkedIn Login', 
         `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=530,height=950,left=${(window.outerWidth - 530) / 2},top=${(window.outerHeight - 950) / 2}`
     );
