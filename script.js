@@ -322,6 +322,13 @@ function scrollQuestionPanel() {
         activePanel.scrollTop = qurrentQuestion.offsetTop - activePanel.offsetTop;
     }
 }
+function openLinkedinLoginPopUp() {
+    window.open(
+        `https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=77udx3wni7oovy&redirect_uri=${window.location.protocol}//${window.location.host}/login/linkedin/&state=SignupAuth&scope=r_liteprofile%20r_emailaddress%20w_member_social`, 
+        'LinkedIn Login', 
+        `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=530,height=950,left=${(window.outerWidth - 530) / 2},top=${(window.outerHeight - 950) / 2}`
+    );
+}
 function openGitHubLoginPopUp() {
     window.open(
         `https://github.com/login/oauth/authorize?client_id=9a1910d2a6c658fdffc3&redirect_uri=${window.location.protocol}//${window.location.host}/login/github/&scope=user`, 'GitHub Login', 

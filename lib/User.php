@@ -59,11 +59,53 @@ class User
             case 'google':
                 return $this->loginGoogle($_GET['code']);
             case 'vk':
-                return $this->loginVK($_GET['payload']);            
+                return $this->loginVK($_GET['payload']);
+            case 'linkedin':
+                return $this->loginLinkedin($_GET['payload']);
             default:
                 throw new Exception('Not supported login provider'); 
         }
     }
+
+    /**
+     * Proceed Linkedin login with code
+     *
+     * @param string $code
+     * @return bool
+     */
+    public function loginLinkedin(string $payload): bool
+    {
+        $data = json_decode($payload, true);
+
+        if (isset($data['auth']) && $data['auth'] == 1) {
+
+            $ch = curl_init('https://api.vk.com/method/auth.exchangeSilentAuthToken');
+            if ($ch) {
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([
+                    'v'             => '5.131',
+                    'token'         => $data['token'],
+                    'access_token'  => $this->env['VK_ACCESS_TOKEN'],
+                    'uuid'          => $data['uuid'],
+                ]));
+                curl_setopt($ch, CURLOPT_HEADER, false);
+                $info = curl_exec($ch);
+                curl_close($ch);
+        
+                $info = json_decode($info, true);
+                
+                if (!$info['response']['user_id'])  return false;
+
+                $this->login = $info['response']['user_id'] . '@vk';
+                $this->upsert();
+                return true;
+            }
+            return false;
+        }
+        return false;
+    }
+
     /**
      * Proceed VK login with code
      *
