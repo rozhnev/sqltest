@@ -61,7 +61,7 @@ class User
             case 'vk':
                 return $this->loginVK($_GET['payload']);
             case 'linkedin':
-                return $this->loginLinkedin($_GET['payload']);
+                return $this->loginLinkedin($_GET['code']);
             default:
                 throw new Exception('Not supported login provider'); 
         }
@@ -73,36 +73,48 @@ class User
      * @param string $code
      * @return bool
      */
-    public function loginLinkedin(string $payload): bool
+    public function loginLinkedin(string $code): bool
     {
-        $data = json_decode($payload, true);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
 
-        if (isset($data['auth']) && $data['auth'] == 1) {
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([
+            'grant_type'    => 'authorization_code',
+            'code'          => $code,
+            'redirect_uri'  => urlencode('https://sqltest.online/login/linkedin')
+            'client_id'     => $this->env['LINKEDIN_CLIENT_ID'],
+            'client_secret' => $this->env['LINKEDIN_SECRET']
+        ]));
+        // execute!
+        $response = curl_exec($ch);
+        // close the connection, release resources used
+        curl_close($ch);
+        // $response contains
+        $json = json_decode($response);
 
-            $ch = curl_init('https://api.vk.com/method/auth.exchangeSilentAuthToken');
-            if ($ch) {
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-                curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([
-                    'v'             => '5.131',
-                    'token'         => $data['token'],
-                    'access_token'  => $this->env['VK_ACCESS_TOKEN'],
-                    'uuid'          => $data['uuid'],
-                ]));
-                curl_setopt($ch, CURLOPT_HEADER, false);
-                $info = curl_exec($ch);
-                curl_close($ch);
-        
-                $info = json_decode($info, true);
-                
-                if (!$info['response']['user_id'])  return false;
+        $accessToken = $json->access_token;
 
-                $this->login = $info['response']['user_id'] . '@vk';
-                $this->upsert();
-                return true;
-            }
-            return false;
+        if ($accessToken) {
+            $url = 'https://api.linkedin.com/v2/me?projection=(id,localizedLastName,localizedFirstName,profilePicture(displayImage~:playableStreams))';
+            $crl = curl_init();
+            
+            curl_setopt($crl, CURLOPT_URL, $url);
+            curl_setopt($crl, CURLOPT_FRESH_CONNECT, true);
+            curl_setopt($crl, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($crl, CURLOPT_HTTPHEADER, array("Authorization: Bearer ".$accessToken));
+            
+            $userDataJson = curl_exec($crl);
+            
+            $userData = json_decode($userDataJson,true);
+            $userName = $userData['localizedFirstName'].' '.$userData['localizedLastName'];
+            $userProfilePic = $userData['profilePicture']['displayImage~']['elements'][0]['identifiers'][0]['identifier'];
+            
+            curl_close($crl);
+
+            return true;
         }
+
         return false;
     }
 
