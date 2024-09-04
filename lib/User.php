@@ -75,6 +75,7 @@ class User
      */
     public function loginLinkedin(string $code): bool
     {
+        $ch = curl_init('https://www.linkedin.com/oauth/v2/accessToken');
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
@@ -82,36 +83,30 @@ class User
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([
             'grant_type'    => 'authorization_code',
             'code'          => $code,
-            'redirect_uri'  => urlencode('https://sqltest.online/login/linkedin'),
+            'redirect_uri'  => 'https://sqltest.online/login/linkedin/',
             'client_id'     => $this->env['LINKEDIN_CLIENT_ID'],
             'client_secret' => $this->env['LINKEDIN_SECRET']
         ]));
-        // execute!
+
         $response = curl_exec($ch);
-        // close the connection, release resources used
         curl_close($ch);
-        // $response contains
         $json = json_decode($response);
 
         $accessToken = $json->access_token;
 
         if ($accessToken) {
-            $url = 'https://api.linkedin.com/v2/me?projection=(id,localizedLastName,localizedFirstName,profilePicture(displayImage~:playableStreams))';
-            $crl = curl_init();
-            
-            curl_setopt($crl, CURLOPT_URL, $url);
+            $crl = curl_init('https://api.linkedin.com/v2/userinfo');
+
             curl_setopt($crl, CURLOPT_FRESH_CONNECT, true);
             curl_setopt($crl, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($crl, CURLOPT_HTTPHEADER, array("Authorization: Bearer ".$accessToken));
-            
-            $userDataJson = curl_exec($crl);
-            
-            $userData = json_decode($userDataJson,true);
-            $userName = $userData['localizedFirstName'].' '.$userData['localizedLastName'];
-            $userProfilePic = $userData['profilePicture']['displayImage~']['elements'][0]['identifiers'][0]['identifier'];
-            
-            curl_close($crl);
 
+            $userDataJson = curl_exec($crl);
+            curl_close($ch);
+            $json = json_decode($userDataJson);
+
+            $this->login = $info['email'] . '@linkedin';
+            $this->upsert();
             return true;
         }
 
