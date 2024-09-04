@@ -82,7 +82,7 @@ class User
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([
             'grant_type'    => 'authorization_code',
             'code'          => $code,
-            'redirect_uri'  => urlencode('https://sqltest.online/login/linkedin')
+            'redirect_uri'  => urlencode('https://sqltest.online/login/linkedin'),
             'client_id'     => $this->env['LINKEDIN_CLIENT_ID'],
             'client_secret' => $this->env['LINKEDIN_SECRET']
         ]));
