@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-    <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+    <html xmlns="http://www.w3.org/1999/xhtml" lang="{$Lang}">
         <head>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
             <meta http-equiv="Permissions-Policy" content="browsing-topics=('mc.yandex.com')">
@@ -32,7 +32,7 @@
         {if $CanonicalLink}
             <link rel="canonical" href="{$CanonicalLink}">
         {/if}
-            <link rel="stylesheet" type="text/css" href="/style.css?27" media="all">
+            <link rel="stylesheet" type="text/css" href="/style.css?30" media="all">
             <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/ace.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/ext-beautify.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/mode-sql.min.js"></script>

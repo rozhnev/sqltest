@@ -1,11 +1,44 @@
-<div class="db-description">
+<div id="db-description" class="db-description">
   {literal}
     <h2>База данных AdventureWorks (SQL Server)</h2>
     <p>База данных AdventureWorks — это образец базы данных, демонстрирующий возможности SQL Server. Он включает данные о
       вымышленной производственной компании.</p>
+    <p><a style="font-size: small; color: var(--special-text-color);" href="/images/adventureworks" target="ERDWindow">ER диаграмма базы данных AdventureWorks</a></p>
     <p>Ниже приведен список этих таблиц:</p>
-
-    <h3>Таблица <span class="sql">Address</span></h3>
+    <ul style="list-style-type: '▤ '; padding-inline-start: 20px;">
+      <li><span class='sql' onclick="scrollInfoPanel('Address_table_description')">Address</span> - таблица адресов.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('Customer_table_description')">Customer</span> - таблица клиентов</li>
+      <li><span class='sql' onclick="scrollInfoPanel('CustomerAddress_table_description')">CustomerAddress</span> - таблица отношений клиентов и адресов.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('Product_table_description')">Product</span> - таблица продуктов.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('ProductCategory_table_description')">ProductCategory</span> - таблица категорий продуктов.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('ProductDescription_table_description')">ProductDescription</span> - таблица описаний продуктов.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('ProductModel_table_description')">ProductModel</span> - таблица моделей продуктов.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('ProductModelProductDescription_table_description')">ProductModelProductDescription</span> - таблица описаний моделей продуктов.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('SalesOrderDetail_table_description')">SalesOrderDetail</span> - таблица заказов.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('SalesOrderHeader_table_description')">SalesOrderHeader</span> - таблица деталей заказов.</li>
+    </ul>
+    <a href="https://book24.ru/r/vPcru?erid=LjN8K1JdK" target="_blank" style="text-decoration: none;">
+      <div style="display: flex; flex-direction: row; border: 1px solid white; padding: 0.3em; width: 98%;">
+        <div  style = "width: 30%;">
+            <img style="width: 100%;" src="//ndc.book24.ru/resize/410x590/pim/products/images/2a/23/018edf56-f466-7e54-b41e-7cd2a6b02a23.jpg" alt="Грабер Мартин: SQL.">
+        </div>
+        <div style="font-size: 1em;  width: 70%;  padding: 0 0.7em; font-weight: 100;">
+            <div>Грабер Мартин: SQL</div>
+            <div style="font-size: small; padding-top: 0.5em;">
+            Классическая работа по SQL. Эта книга - отличный источник знаний для всех, кто программирует на SQL. 
+            В книге дано подробное описание языка, поэтому от читателя не требуется никакой предварительной подготовки. Сопровождаемая практическими учебными материалами, книга представляет собой полное справочное руководство по SQL.
+          </div>
+        </div>
+      </div>
+    </a>
+    <h3 id="Address_table_description">
+      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+        <svg height="15" width="15" style="">
+          <polygon points="8,1 15,14 1,14" fill="white"/>
+        </svg>
+      </span>
+      Таблица <span class='sql'>Address</span>
+    </h3>
     Колонки:
     <ul class="table-columns">
       <li> <span class="sql">AddressID</span> - уникальный идентификатор для каждого адреса.</li>
@@ -50,8 +83,14 @@
     <ul class="table-columns">
       <li>PRIMARY KEY, btree (AddressID)</li>
     </ul>
-
-    <h3>Таблица <span class="sql">Customer</span></h3>
+    <h3 id="Customer_table_description">
+      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+        <svg height="15" width="15" style="">
+          <polygon points="8,1 15,14 1,14" fill="white"/>
+        </svg>
+      </span>
+      Таблица <span class='sql'>Customer</span>
+    </h3>
     Колонки:
     <ul class="table-columns">
       <li> <span class="sql">CustomerID</span> - уникальный идентификатор для каждого клиента.</li>
@@ -116,8 +155,14 @@
     <ul class="table-columns">
       <li>PRIMARY KEY, btree (CustomerID)</li>
     </ul>
-
-    <h3>Таблица <span class="sql">CustomerAddress</span></h3>
+    <h3 id="CustomerAddress_table_description">
+      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+        <svg height="15" width="15" style="">
+          <polygon points="8,1 15,14 1,14" fill="white"/>
+        </svg>
+      </span>
+      Таблица <span class='sql'>CustomerAddress</span>
+    </h3>
     Колонки:
     <ul class="table-columns">
       <li> <span class="sql">CustomerID</span> - уникальный идентификатор клиента в таблице <span class="sql">Customer</span>.</li>
@@ -151,8 +196,14 @@
     <ul class="table-columns">
       <li>PRIMARY KEY, btree (CustomerID, AddressID)</li>
     </ul>
-
-    <h3>Таблица <span class="sql">Product</span></h3>
+    <h3 id="Product_table_description">
+      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+        <svg height="15" width="15" style="">
+          <polygon points="8,1 15,14 1,14" fill="white"/>
+        </svg>
+      </span>
+      Таблица <span class='sql'>Product</span>
+    </h3>
     Колонки:
     <ul class="table-columns">
       <li> <span class="sql">ProductID</span> - уникальный идентификатор для каждого продукта.</li>
@@ -224,8 +275,14 @@
     <ul class="table-columns">
       <li>PRIMARY KEY, btree (ProductID, ProductCategoryID, ProductModelID)</li>
     </ul>
-
-    <h3>Таблица <span class="sql">ProductCategory</span></h3>
+    <h3 id="ProductCategory_table_description">
+      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+        <svg height="15" width="15" style="">
+          <polygon points="8,1 15,14 1,14" fill="white"/>
+        </svg>
+      </span>
+      Таблица <span class='sql'>ProductCategory</span>
+    </h3>
     Колонки:
     <ul class="table-columns">
       <li> <span class="sql">ProductCategoryID</span> - уникальный идентификатор для каждой категории продукта.</li>
@@ -259,8 +316,14 @@
     <ul class="table-columns">
       <li>PRIMARY KEY, btree (ProductCategoryID)</li>
     </ul>
-
-    <h3>Таблица <span class="sql">ProductDescription</span></h3>
+    <h3 id="ProductDescription_table_description">
+      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+        <svg height="15" width="15" style="">
+          <polygon points="8,1 15,14 1,14" fill="white"/>
+        </svg>
+      </span>
+      Таблица <span class='sql'>ProductDescription</span>
+    </h3>
     Колонки:
     <ul class="table-columns">
       <li> <span class="sql">ProductDescriptionID</span> - уникальный идентификатор для каждого описания продукта.</li>
@@ -291,13 +354,19 @@
     <ul class="table-columns">
       <li>PRIMARY KEY, btree (ProductDescriptionID)</li>
     </ul>
-
-    <h3>Таблица <span class="sql">ProductModel</span></h3>
+    <h3 id="ProductModel_table_description">
+      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+        <svg height="15" width="15" style="">
+          <polygon points="8,1 15,14 1,14" fill="white"/>
+        </svg>
+      </span>
+      Таблица <span class='sql'>ProductModel</span>
+    </h3>
     Колонки:
     <ul class="table-columns">
       <li> <span class="sql">ProductModelID</span> - уникальный идентификатор для каждой модели продукта.</li>
       <li> <span class="sql">Name</span> - название модели продукта.</li>
-      <li> <span class="sql">CatalogDescription</span> - описание в формате <span class="sql">xml</span>.</li>
+      <li> <span class="sql">CatalogDescription</span> - описание в формате XML.</li>
       <li> <span class="sql">rowguid</span> - guid.</li>
       <li> <span class="sql">ModifiedDate</span> - временная метка создания или последнего обновления строки.</li>
     </ul>
@@ -326,8 +395,14 @@
     <ul class="table-columns">
       <li>PRIMARY KEY, btree (ProductModelID)</li>
     </ul>
-
-    <h3>Таблица <span class="sql">ProductModelProductDescription</span></h3>
+    <h3 id="ProductModelProductDescription_table_description">
+      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+        <svg height="15" width="15" style="">
+          <polygon points="8,1 15,14 1,14" fill="white"/>
+        </svg>
+      </span>
+      Таблица <span class='sql'>ProductModelProductDescription</span>
+    </h3>
     Колонки:
     <ul class="table-columns">
       <li> <span class="sql">ProductModelID</span> - уникальный идентификатор клиента в таблице <span class="sql">ProductModel</span>.</li>
@@ -361,15 +436,20 @@
     <ul class="table-columns">
       <li>PRIMARY KEY, btree (ProductModelID, ProductDescriptionID)</li>
     </ul>
-    <h3>Таблица <span class="sql">SalesOrderDetail</span></h3>
+    <h3 id="SalesOrderDetail_table_description">
+      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+        <svg height="15" width="15" style="">
+          <polygon points="8,1 15,14 1,14" fill="white"/>
+        </svg>
+      </span>
+      Таблица <span class='sql'>SalesOrderDetail</span>
+    </h3>   
     Колонки:
     <ul class="table-columns">
-      <li> <span class="sql">SalesOrderID</span> - внешний ключ, ссылающийся на таблицу <span
-          class="sql">SalesOrder</span>.</li>
-      <li> <span class="sql">SalesOrderDetailID</span> - уникальный идентификатор каждого заказа.</li>
+      <li> <span class="sql">SalesOrderID</span> - внешний ключ, ссылающийся на таблицу <span class="sql">SalesOrderHeader</span>.</li>
+      <li> <span class="sql">SalesOrderDetailID</span> - уникальный идентификатор строки.</li>
       <li> <span class="sql">OrderQty</span> - количество.</li>
-      <li> <span class="sql">ProductID</span> - внешний ключ, ссылающийся на таблицу <span class="sql">Product</span>.
-      </li>
+      <li> <span class="sql">ProductID</span> - внешний ключ, ссылающийся на таблицу <span class="sql">Product</span>.</li>
       <li> <span class="sql">UnitPrice</span> - цена за единицу товара.</li>
       <li> <span class="sql">UnitPriceDiscount</span> - цена за единицу товара со скидкой.</li>
       <li> <span class="sql">LineTotal</span> - Итого.</li>
@@ -408,11 +488,17 @@
     <ul class="table-columns">
       <li>PRIMARY KEY, btree (SalesOrderID, SalesOrderDetailID, ProductID)</li>
     </ul>
-    <h3>Таблица <span class="sql">SalesOrderHeader</span></h3>
+    <h3 id="SalesOrderHeader_table_description">
+      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+        <svg height="15" width="15" style="">
+          <polygon points="8,1 15,14 1,14" fill="white"/>
+        </svg>
+      </span>
+      Таблица <span class='sql'>SalesOrderHeader</span>
+    </h3> 
     Колонки:
     <ul class="table-columns">
-      <li> <span class="sql">SalesOrderID</span> - внешний ключ, ссылающийся на таблицу <span
-          class="sql">SalesOrder</span>.</li>
+      <li> <span class="sql">SalesOrderID</span> - уникальный идентификатор заказа в таблице.</li>
       <li> <span class="sql">RevisionNumber</span> - номер ревизии.</li>
       <li> <span class="sql">OrderDate</span> - временная метка создания даты заказа.</li>
       <li> <span class="sql">DueDate</span> - временная метка даты оплаты заказа.</li>

@@ -99,6 +99,15 @@ class Questionnire
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    
+    public function getNameByCategory(string $category): string
+    {
+        $stmt = $this->dbh->prepare("SELECT questionnires.name 
+            FROM categories JOIN questionnires ON questionnires.id = categories.questionnire_id 
+            WHERE categories.title_sef = :category_sef;");
+        $stmt->execute([':category_sef' => $category]);
+        return $stmt->fetchColumn(0);
+    }
 
     public function getCategoriesCount(): int
     {
@@ -125,6 +134,18 @@ class Questionnire
     {
         $stmt = $this->dbh->prepare("SELECT id FROM questions WHERE title_sef = :sef ;");
         $stmt->execute([':sef' => $sef]);
+        return $stmt->fetchColumn(0);
+    }
+     
+    public function getQuestionLink(int $categoryId, int $questionId): string
+    {
+        $stmt = $this->dbh->prepare("SELECT CONCAT(
+                '/{$this->lang}/question', 
+                (SELECT CONCAT('/', title_sef) FROM categories WHERE id = :categoryId), 
+                (SELECT CONCAT('/', title_sef) FROM questions WHERE id = :questionId)
+            );"
+        );
+        $stmt->execute([':categoryId' => $categoryId, ':questionId' => $questionId]);
         return $stmt->fetchColumn(0);
     }
 }

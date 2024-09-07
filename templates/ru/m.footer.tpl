@@ -32,6 +32,11 @@
                         <a href="/ru/privacy-policy" target="_self">Политика конфиденциальности</a>
                     </div>
                 </div>
+                <div class="footer-links">
+                    <div>
+                        <a href="/ru/books" target="_self">Книги</a>
+                    </div>
+                </div>
                 © 2023-2024 SQLtest.online
             </div>
         </div>

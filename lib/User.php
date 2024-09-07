@@ -59,11 +59,61 @@ class User
             case 'google':
                 return $this->loginGoogle($_GET['code']);
             case 'vk':
-                return $this->loginVK($_GET['payload']);            
+                return $this->loginVK($_GET['payload']);
+            case 'linkedin':
+                return $this->loginLinkedin($_GET['code']);
             default:
                 throw new Exception('Not supported login provider'); 
         }
     }
+
+    /**
+     * Proceed Linkedin login with code
+     *
+     * @param string $code
+     * @return bool
+     */
+    public function loginLinkedin(string $code): bool
+    {
+        $ch = curl_init('https://www.linkedin.com/oauth/v2/accessToken');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
+
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([
+            'grant_type'    => 'authorization_code',
+            'code'          => $code,
+            'redirect_uri'  => 'https://sqltest.online/login/linkedin/',
+            'client_id'     => $this->env['LINKEDIN_CLIENT_ID'],
+            'client_secret' => $this->env['LINKEDIN_SECRET']
+        ]));
+
+        $response = curl_exec($ch);
+        curl_close($ch);
+        $json = json_decode($response);
+
+        $accessToken = $json->access_token;
+
+        if ($accessToken) {
+            $crl = curl_init('https://api.linkedin.com/v2/userinfo');
+
+            curl_setopt($crl, CURLOPT_FRESH_CONNECT, true);
+            curl_setopt($crl, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($crl, CURLOPT_HTTPHEADER, array("Authorization: Bearer ".$accessToken));
+
+            $userData = curl_exec($crl);
+            curl_close($ch);
+            $info = json_decode($userData, true);
+            if (!$info['email'])  return false;
+
+            $this->login = $info['email'] . '@linkedin';
+            $this->upsert();
+            return true;
+        }
+
+        return false;
+    }
+
     /**
      * Proceed VK login with code
      *

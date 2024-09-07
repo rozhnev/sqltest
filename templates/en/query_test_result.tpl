@@ -1,33 +1,46 @@
 {if $QueryTestResult.ok}
-     <b>Great! You have completed the task!</b>
-     {if $QueryTestResult.cost > 0}
-        <p>The cost of executing your query is {$QueryTestResult.cost} (the lower the cost, the more effective the query)</p>
-        {if $QueryBestCost}
-            Cost of the best solution: {$QueryBestCost}
-            {if $QueryBestCost == $QueryTestResult.cost} Congratulations! Your request is among the best on our website!
-            {elseif $QueryBestCost > $QueryTestResult.cost} Congratulations on improving our record!
-            {else} Unfortunately, your result is a little low of the record. You have something to work on! {/if}
+    <div style="font-size: larger; margin-bottom: 10px;">Great! You have completed the task!</div>
+    <div style="display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    line-height: 1.5em;">
+        {if $QueryTestResult.cost > 0}
+            <div style="flex: 2 1;">
+            The cost of executing your query is {$QueryTestResult.cost} <span style="font-size: small;">(the lower the cost, the more effective the query)</span>
+            {if $QueryBestCost}
+                <br>Cost of the best solution: {$QueryBestCost}<br>
+                {if $QueryBestCost == $QueryTestResult.cost} Congratulations! Your request is among the best on our website!
+                {elseif $QueryBestCost > $QueryTestResult.cost} Congratulations on improving our record!
+                {else} Unfortunately, your result is a little low of the record. You have something to work on! {/if}
+            {/if}
+            </div>
+        {if $Logged}
+            <div>
+                <button class="button green" onClick="showSolutions({$QuestionID})">Show me other solutions!</button>
+            </div>
         {/if}
      {/if}
+     </div>
      {if !$Logged}
         <p class="question-action">
             To save your progress and be able to see other solutions, please <a href="" onClick="toggleLoginWindow(); return false;">login</a>
         </p>
     {else}
-        <p class="question-action">
-        Before starting the next test, please rate the difficulty of this task:
-        <select onchange="rateQuestion({$QuestionID}, this.value)">
-             <option value="0" disabled selected>---</option>
-             <option value="1">Too easy</option>
-             <option value="2">Simple</option>
-             <option value="3">Normal</option>
-             <option value="4">Difficult</option>
-             <option value="5">Very hard</option>
-        </select>
-        </p>
-        <p class="question-action">
-            <button class="button green" onClick="showSolutions({$QuestionID})">Show me other solutions!</button>
-        </p>
+        <div class="question-rate-panel">
+            <div style="min-width:280px;">Before starting the next test, please rate the difficulty of this task:</div>
+            <div class="buttons">
+                <button class="button-small" onclick="rateQuestion({$QuestionID}, 1)"><span class="question-level rate1"></span>&nbsp;Too easy</button>
+                <button class="button-small" onclick="rateQuestion({$QuestionID}, 2)"><span class="question-level rate2"></span>&nbsp;Simple</button>
+                <button class="button-small" onclick="rateQuestion({$QuestionID}, 3)"><span class="question-level rate3"></span>&nbsp;Normal</button>
+                <button class="button-small" onclick="rateQuestion({$QuestionID}, 4)"><span class="question-level rate4"></span>&nbsp;Difficult</button>
+                <button class="button-small" onclick="rateQuestion({$QuestionID}, 5)"><span class="question-level rate5"></span>&nbsp;Very hard</button>
+            </div>
+        </div>
+    {/if}
+    {if isset($ReferralLink)}
+        <div class="referral_link" style="font-size:large; margin-top: 1em; padding: 1em; border: solid 1px; border-radius: 3px;">
+            {$ReferralLink}
+        </div>
     {/if}
 {else}
      Unfortunately incorrect.
@@ -60,4 +73,9 @@
         {/if}
      {/if}
     Try again.
+    {if isset($ReferralLink)}
+        <div class="referral_link" style="font-size:large; margin-top: 5em; padding: 1em; border: solid 1px; border-radius: 3px;">
+            {$ReferralLink}
+        </div>
+    {/if}
 {/if}

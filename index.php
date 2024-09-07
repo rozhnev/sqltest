@@ -61,7 +61,13 @@ if (isset($pathParts[0]) && $pathParts[0] === 'login') {
     $action     = 'login';
     $loginProvider = $pathParts[1];
 // privacy-policy, logout actions
-} elseif (preg_match('@(?<lang>ru|en)/(?<action>privacy-policy|logout|about|menu)/?@i', $path, $params)) {
+} elseif (preg_match('@(?<lang>ru|en)/(?<action>privacy-policy|logout|about|menu)/\d+@i', $path, $params)) {
+    $lang       = $params['lang'];
+    $action     = $params['action'];
+    header("HTTP/1.1 301 Moved Permanently");
+    header("Location: /{$lang}/{$action}");
+    exit();
+} elseif (preg_match('@(?<lang>ru|en)/(?<action>privacy-policy|logout|about|menu|books|courses)/?@i', $path, $params)) {
     $lang       = $params['lang'];
     $action     = $params['action'];
 } elseif (preg_match('@(?<lang>ru|en)/question/(?<questionCategoryID>\d+)/(?<questionID>\d+)@i', $path, $params)) {
@@ -69,13 +75,20 @@ if (isset($pathParts[0]) && $pathParts[0] === 'login') {
     $action     = 'question';
     $questionCategoryID = $params['questionCategoryID'];
     $questionID = $params['questionID'];
+    // old URL format - redirect
+    $questionnire = new Questionnire($dbh, $lang);
+    $redirectLink = $questionnire->getQuestionLink($questionCategoryID, $questionID);
+    header("HTTP/1.1 301 Moved Permanently");
+    header("Location: $redirectLink");
+    exit();
 } elseif (preg_match('@(?<lang>ru|en)/question/(?<questionCategory>[a-z-]+)/(?<question>[a-z-]+)@i', $path, $params)) {
     $lang       = $params['lang'];
     $questionnire = new Questionnire($dbh, $lang);
     $action     = 'question';
     $questionCategoryID = $questionnire->getCategoryId($params['questionCategory']);
+    $QuestionnireName = $questionnire->getNameByCategory($params['questionCategory']) ?? 'category';
     $questionID = $questionnire->getQuestionId($params['question']);
-    $smarty->assign('CanonicalLink', "https://sqltest.online/{$lang}/question/{$questionCategoryID}/{$questionID}");
+    // $smarty->assign('CanonicalLink', "https://sqltest.online/{$lang}/question/{$questionCategoryID}/{$questionID}");
 } elseif (preg_match('@(?<lang>ru|en)/question/(?<questionID>\d+)/(?<action>query-help|query-run|query-test|rate|solutions|check-answers)@i', $path, $params)) {
     $lang       = $params['lang'];
     $action     = $params['action'];
@@ -92,11 +105,16 @@ if (isset($pathParts[0]) && $pathParts[0] === 'login') {
     $action     = 'question';
     $questionCategoryID = $params['questionCategory'] == 'employee' ? 2 : 1;
     $questionID = $params['questionID'];
+    // old URL format - redirect
+    $questionnire = new Questionnire($dbh, $lang);
+    $redirectLink = $questionnire->getQuestionLink($questionCategoryID, $questionID);
+    header("HTTP/1.1 301 Moved Permanently");
+    header("Location: $redirectLink");
+    exit();
 } elseif (preg_match('@sitemap@i', $path, $params)) {
     $action     = 'sitemap';
 } elseif (preg_match('@robots@i', $path, $params)) {
-    echo 'User-agent: *
-    Disallow:';
+    include 'robots.txt';
     die();
 } else {
     $lang       = (isset($pathParts[0]) && $pathParts[0] === 'ru') ||  getUserOSLanguage() =='ru' ? 'ru' : 'en';
@@ -143,10 +161,23 @@ switch ($action) {
         $smarty->assign('Lang', $lang);
         $smarty->assign('CategoriesCount', $questionnire->getCategoriesCount());
         $smarty->assign('QuestionsCount',  $questionnire->getQuestionsCount());
+        //$smarty->assign('QuestionnaireCategoriesLinks',  $questionnire->getQuestionnaireCategoriesLinks(3));
+        $smarty->assign('PageTitle', $lang === 'ru' 
+            ? 'SQLTest.online: твой персональный тренер по SQL'
+            : 'SQLTest.online: your personal SQL trainer'
+        );
+        $smarty->assign('PageDescription', $lang === 'ru' 
+            ? 'Хочешь научиться писать эффективные SQL-запросы? С SQLTest.online это просто! Решай разнообразные практические задачи, отслеживай свой прогресс и становись настоящим экспертом в области SQL.'
+            : 'Want to learn how to write effective SQL queries? With SQLTest.online it\'s easy! Solve various practical problems, track your progress and become a real expert in SQL.'
+        );
         $template = "about.tpl";
         break;        
     case 'privacy-policy':
         $smarty->assign('Lang', $lang);
+        $smarty->assign('PageTitle', $lang === 'ru' 
+            ? 'SQLTest.online: Политика конфиденциальности'
+            : 'SQLTest.online: Privacy Policy'
+        );
         $template = "privacy_policy.tpl";
         break;
     case 'donate':
@@ -189,6 +220,7 @@ switch ($action) {
         }
         if (!$queryTestResult['ok']) header( 'HTTP/1.1 418 BAD REQUEST' );
         $smarty->registerPlugin("modifier", "array_key_exists", "array_key_exists");
+        $smarty->assign('ReferralLink', Helper::getReferralLink($dbh, $lang));
         $template = "query_test_result.tpl";
         break;
     case 'check-answers':
@@ -200,6 +232,7 @@ switch ($action) {
             $user->saveQuestionAttempt($questionID, $answerResult, $answers);
         }
         if (!$answerResult['ok']) header( 'HTTP/1.1 418 BAD REQUEST' );
+        $smarty->assign('ReferralLink', Helper::getReferralLink($dbh, $lang));
         $template = "check_answer_result.tpl";
         break;
     case 'rate':
@@ -286,6 +319,18 @@ switch ($action) {
             $template = $mobileView ? "m.error.tpl" : "error.tpl";
         }
 
+        break;
+    case 'books':
+        $smarty->assign('Books', Helper::getBooks($dbh, $lang));
+        $template = "books.tpl";
+        $smarty->assign('PageTitle', $lang === 'ru' 
+            ? 'Изучаем SQL с нуля: лучшие книги для начинающих'
+            : 'Learning SQL from Scratch: The Best Books for Beginners'
+        );
+        $smarty->assign('PageDescription', $lang === 'ru' 
+            ? 'Хотите освоить язык SQL и стать востребованным специалистом в области баз данных? Мы собрали для вас подборку самых полезных книг, которые помогут вам сделать первые шаги в мире SQL.'
+            : 'Want to master the SQL language and become a sought-after database specialist? We have compiled a selection of the most useful books for you that will help you take your first steps in the world of SQL.'
+        );
         break;
     default:
         // stored for back compatibility

@@ -7,7 +7,7 @@
     --body-background-color: rgb(51, 102, 153);
     --regualr-text-color: #FFFFFF;
     --block-background-color: #126cc6;
-    --text-block-border-color: lightblue;
+    --text-block-border-color: lightgrey;
     --text-block-background-color: #FFFFFF;
     --special-text-color: #FFFFFF;
     --menu-link-color:  #0071DB;
@@ -23,7 +23,7 @@
     --sql-background-color: #eee;
     --sql-color:  #C800A4;
     --question-date-color: gray;
-    --arrow-borer-color: black;
+    --arrow-border-color: white;
 }
 [data-theme="dark"] {
     --body-background-color: #0D1017;
@@ -45,7 +45,7 @@
     --sql-background-color: #484F58;
     --sql-color:  #F85149;
     --question-date-color: #F0F6FC;
-    --arrow-borer-color: #F0F6FC;
+    --arrow-border-color: white;
 }
 .ace-github-dark .ace_gutter {
     background: #24292e !important;
@@ -166,8 +166,23 @@ body {
     right: 190px;
     top: 8px;
 }
-.mobile-container .site-name {
-    font-size: 1.5em;
+
+.site-name-wrapper {
+    display: flex;
+    justify-content: space-evenly;
+}
+.site-name  {
+    font-size: 1.5rem;
+}
+.mobile-container .site-name  {
+    font-size: 1.5em !important;
+}
+.site-promo {
+    font-size: 0.6em;
+    padding-top: 9px;
+}
+.mobile-container .site-promo {
+    font-size: small;
 }
 .login-popup  {
     opacity: 0;
@@ -218,12 +233,17 @@ body {
 .pointer-hand {
     cursor: pointer;
 }
-
+.login-buttons-wrapper {
+    display: flex;
+    flex-flow: wrap;
+    gap: 12px;
+    justify-content: center;
+}
 .social-login-button {
     width: 40px;
     height: 40px;
     display: inline-block;
-    margin: 0 12px;
+    margin: 0 5px;
     cursor: pointer;
 }
 
@@ -248,6 +268,7 @@ body {
 .top-menu h1,
 .top-menu h3 {
     display: inline;
+    margin: 0;
 }
 
 .top-menu a,
@@ -347,9 +368,6 @@ body {
     text-align: center;
     height: 100px;
     line-height: 32px;
-}
-.mobile-container .site-promo {
-    font-size: small;
 }
 .site-description {
     max-width: 55vw; 
@@ -505,6 +523,7 @@ body {
 .question {
     padding: 5px 15px;
     font-size: larger;
+    line-height: 1.3em;
 }
 .question a,
 .question a:visited,
@@ -513,6 +532,8 @@ body {
     color: var(--menu-link-color);
 }
 .question-title {
+    display: flex; 
+    width:100%;
     font-weight: bold;
     background-color: var(--question-title-bg-color);
     padding: 6px;
@@ -525,6 +546,7 @@ body {
     vertical-align: bottom;
     border-radius: 50%;
     background-color: gray;
+    margin-right: 5px;
 }
 .question-level.rate1 {
     background-color: #6dd320;
@@ -550,17 +572,21 @@ body {
 .question-title .question-dates {
     color: var(--question-date-color);
     font-size: small;
-    padding-left: 30%;
+    padding-left: 20%;
 }
 
 .question-navigate {
-    float: right;
-    padding: 0 12px;
+    display: flex; 
+    background-color: var(--block-background-color);  
+    border-bottom: 1px solid var(--text-block-border-color); 
+    color: white;
 }
-
+.question-navigate a {
+    padding: 4px 12px;
+}
 .question .sql,
 .code-result .sql {
-    background-color: var(--sql-background-color); 
+    /* background-color: var(--sql-background-color);  */
     color: var(--sql-color);
     padding: 0 3px;
 }
@@ -568,7 +594,7 @@ body {
 .arrow {
     display: inline-block;
     padding: 3px;
-    border: solid var(--arrow-borer-color);
+    border: solid var(--arrow-border-color);
     border-width: 0 3px 3px 0;
 }
 
@@ -580,6 +606,23 @@ body {
 .arrow-left {
     transform: rotate(135deg);
     -webkit-transform: rotate(135deg);
+}
+
+.question-rate-panel {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    column-gap: 10px;
+    align-items: center;
+    font-size: small;
+    margin-top: 10px;
+    font-style: italic;
+}
+.question-rate-panel .buttons {
+    flex-flow: row;
+    display: flex;
+    column-gap: 6px;
+    flex-wrap: wrap;
 }
 
 .question-action {
@@ -710,6 +753,10 @@ body {
     overflow: auto;
     margin-top: 10px;
 }
+.db-description h3{
+    border-bottom: 1px solid white;
+    padding-bottom: 5px;
+}
 .db-description table {
     border-collapse: collapse;
     width: 100%;
@@ -726,6 +773,7 @@ td {
 .db-description .sql {
     color: var(--special-text-color); /* wheat;*/
     font-weight: bold;
+    cursor: pointer;
 }
 
 .db-description .table-columns {
@@ -736,6 +784,7 @@ td {
 .db-description .table-wrapper {
     overflow-x: auto;
     padding: 7px 0;
+    margin-bottom: 1em;
 }
 
 .container .right .db-description .table-wrapper {

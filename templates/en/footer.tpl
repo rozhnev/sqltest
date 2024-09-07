@@ -25,6 +25,7 @@
                         © 2023-2024 SQLtest.online
                         <a href="/en/about" target="_self">About</a>
                         <a href="/en/privacy-policy" target="_self">Privacy policy</a>
+                        <a href="/en/books" target="_self">Books</a>
                     </div>
                 </div>
             </div>

@@ -25,6 +25,7 @@
                         © 2023-2024 SQLtest.online
                         <a href="/ru/about" target="_self">О проекте</a>
                         <a href="/ru/privacy-policy" target="_self">Политика конфиденциальности</a>
+                        <a href="/ru/books" target="_self">Книги</a>
                     </div>
                 </div>
             </div>

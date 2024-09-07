@@ -1,14 +1,32 @@
-<div class="db-description">
+<div id="db-description" class="db-description">
     <h2>Employee Database (Firebird)</h2>
     <p>
      Employee is a sample database that comes with the Firebird cross-platform database management system.
      You can use this database to explore Firebird SQL and other DBMS features.
     </p>
-    <p>
-    Below is a list of this DB tables:
-    </p>
-    <h3>Table: <span class='sql'>COUNTRIES</span></h3>
-    Table columns: <ul class="table-columns">
+    <p>Below is a list of this DB tables:</p>
+    <ul style="list-style-type: '▤ '; padding-inline-start: 20px;">
+      <li><span class='sql' onclick="scrollInfoPanel('COUNTRY_table_description')">COUNTRY</span> - table of countries.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('JOB_table_description')">JOB</span> - table of jobs.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('DEPARTMENT_table_description')">DEPARTMENT</span> - table of departments.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('EMPLOYEE_table_description')">EMPLOYEE</span> - table of employees.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('PROJECT_table_description')">PROJECT</span> - table of projects.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('EMPLOYEE_PROJECT_table_description')">EMPLOYEE_PROJECT</span> - table of employee to project relations.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('PROJ_DEPT_BUDGET_table_description')">PROJ_DEPT_BUDGET</span> - table of project budgets.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('SALARY_HISTORY_table_description')">SALARY_HISTORY</span> - table of employees salary changes history.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('CUSTOMER_table_description')">CUSTOMER</span> - table of customers.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('SALES_table_description')">SALES</span> - table of sales.</li>
+    </ul>
+    <h3 id="COUNTRY_table_description">
+      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+        <svg height="15" width="15" style="">
+          <polygon points="8,1 15,14 1,14" fill="white"/>
+        </svg>
+      </span>
+      Table <span class='sql'>COUNTRY</span>
+    </h3>
+    Table columns: 
+    <ul class="table-columns">
         <li><span class='sql'>COUNTRY</span> - Name of the country.</li>
         <li><span class='sql'>CURRENCY</span> - Currency used in the country.</li>
     </ul>
@@ -22,11 +40,18 @@
                 <td>USA</td>
                 <td>Dollar</td>
             </tr>
-            <!-- Add more rows as needed -->
         </table>
     </div>
-    <h3>Table: <span class='sql'>JOB</span></h3>
-    Table columns: <ul class="table-columns">
+    <h3 id="JOB_table_description">
+        <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+        <svg height="15" width="15" style="">
+            <polygon points="8,1 15,14 1,14" fill="white"/>
+        </svg>
+        </span>
+        Table <span class='sql'>JOB</span>
+    </h3>
+    Table columns: 
+    <ul class="table-columns">
         <li><span class='sql'>JOB_CODE</span> - Job code.</li>
         <li><span class='sql'>JOB_GRADE</span> - Job grade.</li>
         <li><span class='sql'>JOB_COUNTRY</span> - Country associated with the job.</li>
@@ -58,11 +83,18 @@
                 <td>No specific requirements.</td>
                 <td>[null]</td>
             </tr>
-            <!-- Add more rows as needed -->
         </table>
     </div>
-    <h3>Table: <span class='sql'>DEPARTMENT</span></h3>
-    Table columns: <ul class="table-columns">
+    <h3 id="DEPARTMENT_table_description">
+        <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+        <svg height="15" width="15" style="">
+            <polygon points="8,1 15,14 1,14" fill="white"/>
+        </svg>
+        </span>
+        Table <span class='sql'>DEPARTMENT</span>
+    </h3>
+    Table columns: 
+    <ul class="table-columns">
         <li><span class='sql'>DEPT_NO</span> - Department number.</li>
         <li><span class='sql'>DEPARTMENT</span> - Department name.</li>
         <li><span class='sql'>HEAD_DEPT</span> - Head department (can be null).</li>
@@ -91,11 +123,18 @@
                 <td>Monterey</td>
                 <td>(408) 555-1234</td>
             </tr>
-            <!-- Add more rows as needed -->
         </table>
     </div>
-    <h3>Table: <span class='sql'>EMPLOYEE</span></h3>
-    Table columns: <ul class="table-columns">
+    <h3 id="EMPLOYEE_table_description">
+        <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+        <svg height="15" width="15" style="">
+            <polygon points="8,1 15,14 1,14" fill="white"/>
+        </svg>
+        </span>
+        Table <span class='sql'>EMPLOYEE</span>
+    </h3>
+    Table columns: 
+    <ul class="table-columns">
         <li><span class='sql'>EMP_NO</span> - Employee number.</li>
         <li><span class='sql'>FIRST_NAME</span> - First name of the employee.</li>
         <li><span class='sql'>LAST_NAME</span> - Last name of the employee.</li>
@@ -136,11 +175,18 @@
                 <td>105900.00</td>
                 <td>Nelson, Robert</td>
             </tr>
-            <!-- Add more rows as needed -->
         </table>
     </div>
-    <h3>Table: <span class='sql'>PROJECT</span></h3>
-    Table columns: <ul class="table-columns">
+    <h3 id="PROJECT_table_description">
+        <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+        <svg height="15" width="15" style="">
+            <polygon points="8,1 15,14 1,14" fill="white"/>
+        </svg>
+        </span>
+        Table <span class='sql'>PROJECT</span>
+    </h3>
+    Table columns: 
+    <ul class="table-columns">
         <li><span class='sql'>PROJ_ID</span> - Project ID.</li>
         <li><span class='sql'>PROJ_NAME</span> - Project name.</li>
         <li><span class='sql'>PROJ_DESC</span> - Project description.</li>
@@ -163,11 +209,18 @@
                 <td>45</td>
                 <td>software</td>
             </tr>
-            <!-- Add more rows as needed -->
         </table>
     </div>
-    <h3>Table: <span class='sql'>EMPLOYEE_PROJECT</span></h3>
-    Table columns: <ul class="table-columns">
+    <h3 id="EMPLOYEE_PROJECT_table_description">
+        <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+        <svg height="15" width="15" style="">
+            <polygon points="8,1 15,14 1,14" fill="white"/>
+        </svg>
+        </span>
+        Table <span class='sql'>EMPLOYEE_PROJECT</span>
+    </h3>
+    Table columns: 
+    <ul class="table-columns">
         <li><span class='sql'>EMP_NO</span> - Employee number.</li>
         <li><span class='sql'>PROJ_ID</span> - Project ID.</li>
     </ul>
@@ -181,10 +234,16 @@
                 <td>144</td>
                 <td>DGPII</td>
             </tr>
-            <!-- Add more rows as needed -->
         </table>
     </div>
-    <h3>Table: <span class='sql'>PROJ_DEPT_BUDGET</span></h3>
+    <h3 id="PROJ_DEPT_BUDGET_table_description">
+        <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+        <svg height="15" width="15" style="">
+            <polygon points="8,1 15,14 1,14" fill="white"/>
+        </svg>
+        </span>
+        Table <span class='sql'>PROJ_DEPT_BUDGET</span>
+    </h3>
     Table columns: <ul class="table-columns">
         <li><span class='sql'>FISCAL_YEAR</span> - Fiscal year.</li>
         <li><span class='sql'>PROJ_ID</span> - Project ID.</li>
@@ -208,10 +267,16 @@
                 <td>[null]</td>
                 <td>200000.00</td>
             </tr>
-            <!-- Add more rows as needed -->
         </table>
     </div>
-    <h3>Table: <span class='sql'>SALARY_HISTORY</span></h3>
+    <h3 id="SALARY_HISTORY_table_description">
+        <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+        <svg height="15" width="15" style="">
+            <polygon points="8,1 15,14 1,14" fill="white"/>
+        </svg>
+        </span>
+        Table <span class='sql'>SALARY_HISTORY</span>
+    </h3>
     Table columns: <ul class="table-columns">
         <li><span class='sql'>EMP_NO</span> - Employee number.</li>
         <li><span class='sql'>CHANGE_DATE</span> - Date of salary change.</li>
@@ -238,10 +303,16 @@
                 <td>10.000000</td>
                 <td>22000.000000</td>
             </tr>
-            <!-- Add more rows as needed -->
         </table>
     </div>
-    <h3>Table: <span class='sql'>CUSTOMER</span></h3>
+    <h3 id="CUSTOMER_table_description">
+        <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+        <svg height="15" width="15" style="">
+            <polygon points="8,1 15,14 1,14" fill="white"/>
+        </svg>
+        </span>
+        Table <span class='sql'>CUSTOMER</span>
+    </h3>     
     Table columns: <ul class="table-columns">
         <li><span class='sql'>CUST_NO</span> - Customer number.</li>
         <li><span class='sql'>CUSTOMER</span> - Customer name.</li>
@@ -286,10 +357,16 @@
                 <td>92121</td>
                 <td>[null]</td>
             </tr>
-            <!-- Add more rows as needed -->
         </table>
     </div>
-    <h3>Table: <span class='sql'>SALES</span></h3>
+    <h3 id="SALES_table_description">
+        <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+        <svg height="15" width="15" style="">
+            <polygon points="8,1 15,14 1,14" fill="white"/>
+        </svg>
+        </span>
+        Table <span class='sql'>SALES</span>
+    </h3>
     Table columns: <ul class="table-columns">
         <li><span class='sql'>PO_NUMBER</span> - Purchase order number.</li>
         <li><span class='sql'>CUST_NO</span> - Customer number associated with the order.</li>
@@ -337,7 +414,6 @@
                 <td>hardware</td>
                 <td>1.000000000</td>
             </tr>
-            <!-- Add more rows as needed -->
         </table>
     </div>
 </div>

@@ -6,27 +6,31 @@
     {include file='../m.menu.tpl'}
     <div class="main">
         <div class="question-wrapper" id="question-wrapper">
-            <div class="question-title">
-                <div class="question-level rate{$Question.rate}" title="{$Question.question_rate|default:'Not rated yet'}"></div>
-                Task {$Question.number}:
-                {if $LoggedAsAdmin}
-                    <a href="/admin/question/{$NextQuestionId}" title="Edit" style="color:#333">&#9998;</a>
-                {/if}
-                <span class="question-dates">
-                    {if $Question.solved_date}
-                        Solved at: {$Question.solved_date}
-                    {elseif $Question.last_attempt_date}
-                        Last Attempt Date: {$Question.last_attempt_date}
+            <div class="question-title-bar" style="display: flex;">
+                <div class="question-title">
+                    <div class="question-level rate{$Question.rate}" title="{$Question.question_rate|default:'Not rated yet'}"></div>
+                    Task {$Question.number}:
+                    {if $LoggedAsAdmin}
+                        <a href="/admin/question/{$NextQuestionId}" title="Edit" style="color:#333">&#9998;</a>
                     {/if}
-                </span>
-                <span class="question-navigate">
-                    {if $PreviousQuestionId}
+                    <span class="question-dates">
+                        {if $Question.solved_date}
+                            Solved at: {$Question.solved_date}
+                        {elseif $Question.last_attempt_date}
+                            Last Attempt Date: {$Question.last_attempt_date}
+                        {/if}
+                    </span>
+                </div>
+                {if $PreviousQuestionId}
+                    <div class="question-navigate" style="border-right: 1px solid var(--text-block-border-color);">
                         <a href="/{$Lang}/question/{$Question.category_sef}/{$PreviousQuestionId}#question-wrapper" title="Previous task"><i class="arrow arrow-left"></i></a>
-                    {/if}
-                    {if $NextQuestionId}
+                    </div>
+                {/if}
+                {if $NextQuestionId}
+                    <div class="question-navigate">
                         <a href="/{$Lang}/question/{$Question.category_sef}/{$NextQuestionId}#question-wrapper" title="Next task"><i class="arrow arrow-right"></i></a>
-                    {/if}
-                </span>
+                    </div>
+                {/if}
             </div>
             <div class="question">
                 {$Question.task}

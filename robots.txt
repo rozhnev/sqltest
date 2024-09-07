@@ -1,2 +1,14 @@
 User-agent: *
+
+Disallow: /en/privacy-policy
+Disallow: /ru/privacy-policy
+Disallow: /en/donate
+Disallow: /ru/donate
+
+User-agent: Yandex
 Disallow:
+Clean-param: path
+
+Allow: /
+
+Sitemap: https://sqltest.online/sitemap.xml

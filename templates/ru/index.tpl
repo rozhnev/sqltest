@@ -6,59 +6,32 @@
     {include file='menu.tpl'}
     {include file='../splitter.tpl'}
     <div class="main">
-        {assign var=random_choice value=10|mt_rand:50}
-        {if $random_choice == 42}
         <div class="question-wrapper">
-            <div class="question-title">Помогите сделать SQLtest.online еще лучше! Пригласите друзей и коллег!</div>
-            <div style="font-size:smaller; padding: 0.5em;">
-                <p>Приветствую вас, любители SQL!</p>
-
-                <p>Я пишу вам сегодня, потому что мне нужна ваша помощь.</p>
-
-                <p>SQLtest.online – это бесплатная платформа, созданная для того, чтобы помочь людям всех уровней освоить SQL. Мы предлагаем широкий спектр интерактивных тестов, задач и обучающих материалов, которые помогут вам улучшить свои навыки SQL.</p>
-
-                <p>Платформа уже помогла множеству людей, но мы хотим сделать ее еще лучше. И именно здесь вы можете нам помочь!</p>
-
-                <p>Пригласите своих друзей и коллег присоединиться к SQLtest.online!</p>
-
-                <p>Чем больше людей будет пользоваться платформой, тем лучше она станет. Мы сможем добавить больше контента, улучшить функции и создать лучшее сообщество для любителей SQL.</p>
-
-                <p>Как вы можете помочь:
-                    <ul>
-                    <li>Расскажите о SQLtest.online своим друзьям и коллегам. Поделитесь ссылкой на наш сайт в социальных сетях, по электронной почте или лично.</li>
-                    <li>Оставьте отзыв о SQLtest.online. Ваш отзыв поможет нам понять, что мы делаем правильно, а что нужно улучшить.</li>
-                    <li>Напишите статью или пост в блоге о SQLtest.online. Поделитесь своим опытом работы с платформой.</li>
-                    <li>Вместе мы можем сделать SQLtest.online лучшим ресурсом для изучения SQL!</li>
-                    </ul>
-                </p>
-                <p>Спасибо за вашу помощь!</p>
-
-                <p>Команда SQLtest.online</p>
-            </div>
-        </div>
-        {/if}
-        <div class="question-wrapper">
-            <div class="question-title">
-                <div class="question-level rate{$Question.rate}" title="{$Question.question_rate|default:'Еще не оценено'}"></div>
-                Задание {$Question.number}:
-                {if $LoggedAsAdmin}
-                    <a href="/admin/question/{$NextQuestionId}" title="Edit" style="color:#333">&#9998;</a>
-                {/if}
-                <span class="question-dates">
-                    {if $Question.solved_date}
-                        Решено: {$Question.solved_date}
-                    {elseif $Question.last_attempt_date}
-                        Последняя попытка: {$Question.last_attempt_date}
+            <div class="question-title-bar" style="display: flex;">
+                <div class="question-title">
+                    <div class="question-level rate{$Question.rate}" title="{$Question.question_rate|default:'Еще не оценено'}"></div>
+                    Задание&nbsp;{$Question.number}:
+                    {if $LoggedAsAdmin}
+                        <a href="/admin/question/{$NextQuestionId}" title="Edit" style="color:#333">&#9998;</a>
                     {/if}
-                </span>
-                <span class="question-navigate">
-                    {if $PreviousQuestionId}
+                    <span class="question-dates">
+                        {if $Question.solved_date}
+                            Решено: {$Question.solved_date}
+                        {elseif $Question.last_attempt_date}
+                            Последняя попытка: {$Question.last_attempt_date}
+                        {/if}
+                    </span>
+                </div>
+                {if $PreviousQuestionId}
+                    <div class="question-navigate" style="border-right: 1px solid var(--text-block-border-color);">
                         <a href="/{$Lang}/question/{$Question.category_sef}/{$PreviousQuestionId}" title="Предыдущее задание"><i class="arrow arrow-left"></i></a>
-                    {/if}
-                    {if $NextQuestionId}
+                    </div>
+                {/if}
+                {if $NextQuestionId}
+                    <div class="question-navigate">
                         <a href="/{$Lang}/question/{$Question.category_sef}/{$NextQuestionId}" title="Следующее задание"><i class="arrow arrow-right"></i></a>
-                    {/if}
-                </span>
+                    </div>
+                {/if}
             </div>
             <div class="question">
                 {$Question.task}
@@ -77,7 +50,7 @@
                 </p>
             {else}
                 <p class="question-action">
-                    Напишите свой запрос в поле ниже и нажмите кнопку «Проверить!»{* (В случае ошибки вам придется просмотреть рекламный блок) *}
+                    Напишите свой запрос в поле ниже и нажмите кнопку «Проверить!»
                 </p>
                 <p class="question-action">
                     Для написания используйте синтаксис {$Question.dbms}. Описания таблиц приведены в правой панели. 

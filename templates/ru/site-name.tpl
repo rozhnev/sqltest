@@ -1,7 +1,9 @@
-        <a href="/ru/" target="_self" style="width: 20vw;">
-                <h1 class="site-name">SQLtest</h1>
-                <h3 class="site-promo" style="font-size: 1.2em"> - задачи по SQL</h3>
-        </a>
+        <a href="/ru/" target="_self" style="width: 20vw; display: flex;">
+            <h1 class="site-name-wrapper">
+                <span class="site-name">SQLtest: </span>
+                <span class="site-promo">задачи по SQL</span>
+            </h1>
+        </a>    
         <span  class="site-description">
-                Пройдите тест на знание SQL, научитесь составлять SQL запросы, подготовьтесь к собеседованиям. Наши практические задания по SQL подходят как новичкам, так и опытным специалистам.
+            Пройдите тест на знание SQL, научитесь составлять эффективные SQL запросы и решать задачи по SQL, подготовьтесь к собеседованиям. Наши задания по SQL подходят как новичкам, так и опытным специалистам.
         </span>
