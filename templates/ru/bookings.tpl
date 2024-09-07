@@ -43,10 +43,10 @@
     <h3>Таблица <span class='sql'>boarding_passes</span></h3>
     Колонки:
     <ul class="table-columns">
-        <li> <span class='sql'>ticket_no</span> - Ticket number.</li>
-        <li> <span class='sql'>flight_id</span> - Flight identificator.</li>
-        <li> <span class='sql'>boarding_no</span> - Boarding pass number.</li>
-        <li> <span class='sql'>seat_no</span> - Seat number.</li>
+        <li> <span class='sql'>ticket_no</span> - Номер билета.</li>
+        <li> <span class='sql'>flight_id</span> - Идентификатор рейса.</li>
+        <li> <span class='sql'>boarding_no</span> - Номер посадочного талона.</li>
+        <li> <span class='sql'>seat_no</span> - Номер места.</li>
     </ul>
     <div class="table-wrapper">
         <table class="">
