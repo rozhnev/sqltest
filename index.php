@@ -217,6 +217,9 @@ switch ($action) {
         }
         if ($user->logged()) {
             $user->saveQuestionAttempt($questionID, $queryTestResult, $sql);
+            if ($queryTestResult['ok']) {
+                $user->saveSolution($questionID, $queryTestResult, $sql);
+            }
         }
         if (!$queryTestResult['ok']) header( 'HTTP/1.1 418 BAD REQUEST' );
         $smarty->registerPlugin("modifier", "array_key_exists", "array_key_exists");

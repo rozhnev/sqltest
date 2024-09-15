@@ -443,7 +443,33 @@ class User
                     solved_at = LEAST(user_questions.solved_at, EXCLUDED.solved_at),
                     last_query = EXCLUDED.last_query,
                     query_cost = EXCLUDED.query_cost
-                ");
+            ");
+            $stmt->execute([$this->id, $questionID, $query, floatval($result['cost'])]);
+        }
+        catch (\Throwable $error) {
+            throw new Exception($error->getMessage());
+        }
+    }
+
+    /**
+     * Save Questoin attepmt in DB
+     *
+     * @param integer $questionID
+     * @param array $result
+     * @param string $query
+     * @return void
+     */
+    public function saveSolution(int $questionID, array $result, string $query): void
+    {
+        try {
+            $stmt = $this->dbh->prepare("
+                INSERT INTO user_solutions (
+                    user_id, question_id, query, query_cost, created_at
+                ) VALUES (
+                    ?, ?, ?, ?, CURRENT_TIMESTAMP
+                ) 
+                ON CONFLICT PRIMARY KEY DO NOTHING
+            ");
             $stmt->execute([$this->id, $questionID, $query, floatval($result['cost'])]);
         }
         catch (\Throwable $error) {
