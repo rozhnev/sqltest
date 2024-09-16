@@ -100,6 +100,9 @@ if (isset($pathParts[0]) && $pathParts[0] === 'login') {
 } elseif (preg_match('@(?<lang>ru|en)/(?<action>donate)@i', $path, $params)) {
     $lang       = $params['lang'];
     $action     = $params['action'];
+} elseif (preg_match('@(?<lang>ru|en)/(?<action>test)@i', $path, $params)) {
+    $lang       = $params['lang'];
+    $action     = $params['action'];    
 } elseif (preg_match('@(?<lang>ru|en)/(?<questionCategory>sakila|employee)/(?<questionID>\d+)@i', $path, $params)) {
     $lang       = $params['lang'];
     $action     = 'question';
@@ -289,6 +292,16 @@ switch ($action) {
         session_destroy();
         header("location:/$lang/");
         die();
+    case 'test':
+        if (!$user->logged()) {
+            $template = "restricted_without_login.tpl";
+            break;
+        }
+        $test = new Test($dbh, $user);
+        $userTest = $user->getTest() ?? $test->create();
+        
+        $template = "test.tpl";
+        break;
     case 'welcome':
         $questionnire = new Questionnire($dbh, $lang);
         $smarty->assign('Questionnire', $questionnire->get());
