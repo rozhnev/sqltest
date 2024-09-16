@@ -28,7 +28,7 @@ class Test
         $this->user = $user;
     }
 
-    public function create(): bool
+    public function create(): uuid
     {
         $this->id = vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex(random_bytes(16)), 4));
 
@@ -51,5 +51,7 @@ class Test
         $stmt = $this->dbh->prepare("INSERT INTO test_questionss (test_id, question_id) SELECT ?, id FROM questions WHERE rate = 5 ORDER BY RAND() LIMIT 1");
         $stmt->execute([$this->id]);
         $this->dbh->commit();
+
+        return $this->id;
     }
 }

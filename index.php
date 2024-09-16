@@ -298,7 +298,7 @@ switch ($action) {
             break;
         }
         $test = new Test($dbh, $user);
-        $userTest = $user->getTest() ?? $test->create();
+        $userTestId = $user->getLastTestId() ?? $test->create();
         
         $template = "test.tpl";
         break;
