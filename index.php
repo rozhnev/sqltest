@@ -100,9 +100,16 @@ if (isset($pathParts[0]) && $pathParts[0] === 'login') {
 } elseif (preg_match('@(?<lang>ru|en)/(?<action>donate)@i', $path, $params)) {
     $lang       = $params['lang'];
     $action     = $params['action'];
-} elseif (preg_match('@(?<lang>ru|en)/(?<action>test)@i', $path, $params)) {
+} elseif (preg_match('@(?<lang>ru|en)/test/start@i', $path, $params)) {
     $lang       = $params['lang'];
-    $action     = $params['action'];    
+    $action     = 'test_start';
+} elseif (preg_match('@(?<lang>ru|en)/test/create@i', $path, $params)) {
+    $lang       = $params['lang'];
+    $action     = 'test_create';
+} elseif (preg_match('@(?<lang>ru|en)/test/(?<testId>[a-z0-9-]+)@i', $path, $params)) {
+    $lang       = $params['lang'];
+    $action     = 'test';
+    $testId = $params['testId'];
 } elseif (preg_match('@(?<lang>ru|en)/(?<questionCategory>sakila|employee)/(?<questionID>\d+)@i', $path, $params)) {
     $lang       = $params['lang'];
     $action     = 'question';
@@ -292,14 +299,30 @@ switch ($action) {
         session_destroy();
         header("location:/$lang/");
         die();
-    case 'test':
+    case 'test_start':
+        if ($user->logged()) {
+            $smarty->assign('TestId', $user->getLastTestId());
+        }
+        $template = "test_start.tpl";
+        break;
+    case 'test_create':
         if (!$user->logged()) {
-            $template = "restricted_without_login.tpl";
-            break;
+            header("Location: /$lang/test/start");
+            exit();
         }
         $test = new Test($dbh, $user);
-        $userTestId = $user->getLastTestId() ?? $test->create();
-        
+
+        $userTestId = $test->create();
+        header("Location: /$lang/test/$userTestId");
+        exit();
+    case 'test':
+        if (!$user->logged()) {
+            header("Location: /$lang/test/start");
+            exit();
+        }
+        $test = new Test($dbh, $user);
+        $test->load($testId);
+        $smarty->assign('Questionnire', $test->getQuestionnire());
         $template = "test.tpl";
         break;
     case 'welcome':
