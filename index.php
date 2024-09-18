@@ -302,7 +302,14 @@ switch ($action) {
         die();
     case 'test_start':
         if ($user->logged()) {
-            $smarty->assign('TestId', $user->getLastTestId());
+            $userTestId = $user->getLastTestId();
+            if ($userTestId) {
+                $test = new Test($dbh, $user);
+                $test->setId($userTestId);
+                $test->getFirstUnsolvedQuestionId();
+                $smarty->assign('QuestionId', $userTestId);
+            }
+            $smarty->assign('TestId', $userTestId);
         }
         $template = "test_start.tpl";
         break;

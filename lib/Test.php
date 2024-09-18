@@ -43,6 +43,11 @@ class Test
         $this->user = $user;
     }
 
+    public function setId(string $id)
+    {
+        $this->id  = $id;
+    }
+
     public function create(): string
     {
         $this->id = vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex(random_bytes(16)), 4));
@@ -116,9 +121,20 @@ class Test
         ];
     }
 
-
     public function getQuestionnire(): array
     {
         return $this->questionnire;
+    }
+
+    public function getFirstUnsolvedQuestionId()
+    {
+        $stmt = $this->dbh->prepare("SELECT questions.id
+            FROM test_questions
+            JOIN questions ON questions.id = test_questions.question_id 
+            WHERE test_id = :test_id AND test_questions.solved_at is null 
+            ORDER BY questions.rate 
+            LIMIT 1;");
+        $stmt->execute([':test_id' => $this->id]);
+        return $stmt->fetchColumn(0);
     }
 }
