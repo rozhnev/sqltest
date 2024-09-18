@@ -106,10 +106,11 @@ if (isset($pathParts[0]) && $pathParts[0] === 'login') {
 } elseif (preg_match('@(?<lang>ru|en)/test/create@i', $path, $params)) {
     $lang       = $params['lang'];
     $action     = 'test_create';
-} elseif (preg_match('@(?<lang>ru|en)/test/(?<testId>[a-z0-9-]+)@i', $path, $params)) {
+} elseif (preg_match('@(?<lang>ru|en)/test/(?<testId>[a-z0-9-]+)/(?<questionID>\d+)@i', $path, $params)) {
     $lang       = $params['lang'];
     $action     = 'test';
     $testId = $params['testId'];
+    $questionID = $params['questionID'] ?? 1;
 } elseif (preg_match('@(?<lang>ru|en)/(?<questionCategory>sakila|employee)/(?<questionID>\d+)@i', $path, $params)) {
     $lang       = $params['lang'];
     $action     = 'question';
@@ -320,8 +321,16 @@ switch ($action) {
             header("Location: /$lang/test/start");
             exit();
         }
-        $test = new Test($dbh, $user);
+        $questionCategoryID = 102;
+        $test = new Test($dbh, $lang, $user);
         $test->load($testId);
+        $question = new Question($dbh, $questionID);
+        $questionData = $question->get($questionCategoryID, $lang, $user->getId());
+        $smarty->assign('Question', $questionData);
+        $smarty->assign('NextQuestionId', $question->getNextSefId($questionCategoryID));
+        $smarty->assign('PreviousQuestionId', $question->getPreviousSefId($questionCategoryID));
+        $smarty->assign('QuestionCategoryID', 'simple');
+        $db = 'sakila';
         $smarty->assign('Questionnire', $test->getQuestionnire());
         $template = "test.tpl";
         break;

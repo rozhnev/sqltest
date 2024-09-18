@@ -16,6 +16,13 @@ class Test
     private $id;
 
     /**
+     * Test language
+     *
+     * @var string
+     */
+    private $lang;
+
+    /**
      * Test user_id
      *
      * @var User
@@ -27,11 +34,12 @@ class Test
      *
      * @var Array
      */
-    private $questions;
+    private $questionnire;
 
-    public function __construct(PDO $dbh, User $user)
+    public function __construct(PDO $dbh, string $lang, User $user)
     {
         $this->dbh  = $dbh;
+        $this->lang = $lang;
         $this->user = $user;
     }
 
@@ -66,17 +74,51 @@ class Test
     {
         $this->id = $id;
 
-        $stmt = $this->dbh->prepare("SELECT * FROM tests JOIN test_questions ON test_questions.test_id = tests.id WHERE tests.id = :test_id;");
+        $stmt = $this->dbh->prepare("SELECT 
+                categories.id,
+                categories.title_sef sef,
+                categories.title_{$this->lang} questions_category,
+                questions.id question_id,
+                questions.title_sef question_sef,
+                questions.db_template,
+                questions.title_{$this->lang} question_title,
+                (test_questions.solved_at IS NOT NULL) solved
+        FROM tests 
+        JOIN test_questions ON test_questions.test_id = tests.id 
+        JOIN questions on questions.id = test_questions.question_id
+        JOIN question_categories ON question_categories.question_id = questions.id
+        JOIN categories ON categories.id = question_categories.category_id and categories.questionnire_id = 2
+        WHERE tests.id = :test_id;");
         $stmt->execute([':test_id' => $this->id]);
 
-        $this->questions = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $questionnire = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if ($questionnire) {
+            $menu = array_reduce(
+                $questionnire,
+                function($acc, $el) {
+                    if (!isset($acc[$el['id']])) $acc[$el['id']] = [
+                        'title'     => $el['questions_category'],
+                        'db'        => $el['db_template'],
+                        'sef'       => $el['sef'],
+                        'questions' => []
+                    ];
+                    $acc[$el['id']]['questions'][] = [$el['question_title'], $el['question_id'], $el['solved'], $el['question_sef']];
+                    return $acc;
+                },
+                []
+            );
+        } else {
+            $menu = [];
+        }
+        $this->questionnire = [
+            'name' => 'complexity',
+            'menu' => $menu
+        ];
     }
 
 
     public function getQuestionnire(): array
     {
-        return [
-            "menu"=>["questions"=>$this->questions]
-        ];
+        return $this->questionnire;
     }
 }

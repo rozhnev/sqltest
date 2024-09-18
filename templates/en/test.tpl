@@ -3,24 +3,26 @@
 <div class="container">
     {include file='popups.tpl'}
     {include file='top-menu.tpl'}
-    {foreach $Questionnire.menu as $categoryId => $panel}
-    <button class="accordion {if $categoryId eq $QuestionCategoryID}active{/if}">
-        {$panel.title}
-    </button>
-    <div class="panel {if $categoryId eq $QuestionCategoryID}active{/if}">
-        <ol>
-        {foreach $panel.questions as $question}
-        <li>
-            <a class="question-link {if $QuestionID == $question[1]} current-question{/if}{if $question[2]} solved{/if}" href="/{$Lang}/question/{$panel.sef}/{$question[3]}">
-                {$question[0]}
-            </a>
-        </li>
+    <div class="menu" id="menu">
+        {foreach $Questionnire.menu as $categoryId => $panel}
+        <button class="accordion {if $categoryId eq $QuestionCategoryID}active{/if}">
+            {$panel.title}
+        </button>
+        <div class="panel {if $categoryId eq $QuestionCategoryID}active{/if}">
+            <ol>
+            {foreach $panel.questions as $question}
+            <li>
+                <a class="question-link {if $QuestionID == $question[1]} current-question{/if}{if $question[2]} solved{/if}" href="/{$Lang}/question/{$panel.sef}/{$question[3]}">
+                    {$question[0]}
+                </a>
+            </li>
+            {/foreach}
+            </ol>
+        </div>
         {/foreach}
-        </ol>
     </div>
-    {/foreach}
     {include file='../splitter.tpl'}
-    {* <div class="main">
+    <div class="main">
         <div class="question-wrapper">
             <div class="question-title-bar" style="display: flex;">
                 <div class="question-title">
@@ -94,18 +96,6 @@
     </div>
 
     <div class="right" id="right-panel">
-        <div class="text-block user-solutions-count">
-            <p>Explore over <span style="font-weight:bold; color: #2EA043 !important;">{floor(($QuestionsCount - 1)/10) * 10}</span> diverse tasks on our platform.</p>
-        {if $Logged}
-            <p>
-                You {if $SolvedQuestionsCount < ($QuestionsCount/2)}have{else}already{/if} solved <span style="font-weight:bold;  color: #2EA043 !important;">{$SolvedQuestionsCount}</span> of them.
-                {if $SolvedQuestionsCount < $QuestionsCount} Keep going!{/if}
-            </p>
-        {else}
-            <p>Log in to save your progress.</p>
-            <button class="button blue" onClick="toggleLoginWindow()">Login</button>
-        {/if}
-        </div>
         {include file="{$DB}.tpl"}
-    </div> *}
+    </div> 
     {include file='footer.tpl'}
