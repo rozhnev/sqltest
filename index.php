@@ -304,10 +304,9 @@ switch ($action) {
         if ($user->logged()) {
             $userTestId = $user->getLastTestId();
             if ($userTestId) {
-                $test = new Test($dbh, $user);
+                $test = new Test($dbh, $lang, $user);
                 $test->setId($userTestId);
-                $test->getFirstUnsolvedQuestionId();
-                $smarty->assign('QuestionId', $userTestId);
+                $smarty->assign('QuestionId', $test->getFirstUnsolvedQuestionId());
             }
             $smarty->assign('TestId', $userTestId);
         }
@@ -318,7 +317,7 @@ switch ($action) {
             header("Location: /$lang/test/start");
             exit();
         }
-        $test = new Test($dbh, $user);
+        $test = new Test($dbh, $lang, $user);
 
         $userTestId = $test->create();
         header("Location: /$lang/test/$userTestId");
@@ -328,15 +327,16 @@ switch ($action) {
             header("Location: /$lang/test/start");
             exit();
         }
-        $questionCategoryID = 102;
         $test = new Test($dbh, $lang, $user);
         $test->load($testId);
         $question = new Question($dbh, $questionID);
+        $questionCategoryID = $question->getCategoryId(2); // By complexity
         $questionData = $question->get($questionCategoryID, $lang, $user->getId());
+        $smarty->assign('TestId', $testId);
         $smarty->assign('Question', $questionData);
         $smarty->assign('NextQuestionId', $question->getNextSefId($questionCategoryID));
         $smarty->assign('PreviousQuestionId', $question->getPreviousSefId($questionCategoryID));
-        $smarty->assign('QuestionCategoryID', 'simple');
+        $smarty->assign('QuestionCategoryID', $questionCategoryID);
         $db = 'sakila';
         $smarty->assign('Questionnire', $test->getQuestionnire());
         $template = "test.tpl";

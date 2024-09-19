@@ -425,4 +425,21 @@ class Question
         $solutions = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $solutions;
     }
+    /**
+     * Returns Category Id by Questionnire ID
+     *
+     * @param int $limit
+     * @return array
+     */
+    public function getCategoryId(int $qusestionnireId): int 
+    {
+        $stmt = $this->dbh->prepare("
+            SELECT category_id 
+            FROM question_categories qc 
+            JOIN categories on categories.id = category_id
+            WHERE question_id = :question_id and questionnire_id = :questionnire_id;");
+
+        $stmt->execute([':question_id' =>  $this->id, ':questionnire_id' => $qusestionnireId]);
+        return (string)$stmt->fetchColumn();
+    }
 }

@@ -12,7 +12,7 @@
             <ol>
             {foreach $panel.questions as $question}
             <li>
-                <a class="question-link {if $QuestionID == $question[1]} current-question{/if}{if $question[2]} solved{/if}" href="/{$Lang}/question/{$panel.sef}/{$question[3]}">
+                <a class="question-link {if $QuestionID == $question[1]} current-question{/if}{if $question[2]} solved{/if}" href="/{$Lang}/test/{$TestId}/{$question[1]}">
                     {$question[0]}
                 </a>
             </li>
