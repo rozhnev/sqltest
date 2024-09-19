@@ -330,14 +330,16 @@ switch ($action) {
         $test = new Test($dbh, $lang, $user);
         $test->load($testId);
         $question = new Question($dbh, $questionID);
-        $questionCategoryID = $question->getCategoryId(2); // By complexity
-        $questionData = $question->get($questionCategoryID, $lang, $user->getId());
+        // $questionCategoryID = $question->getCategoryId(2); // By complexity
+        // $questionData = $question->get($questionCategoryID, $lang, $user->getId());
+        $questionData = $test->getQuestionData($questionID);
+        $questionCategoryID = $questionData['category_id'];
         $smarty->assign('TestId', $testId);
         $smarty->assign('Question', $questionData);
-        $smarty->assign('NextQuestionId', $question->getNextSefId($questionCategoryID));
-        $smarty->assign('PreviousQuestionId', $question->getPreviousSefId($questionCategoryID));
+        $smarty->assign('NextQuestionId', $questionData['next_question_id']);
+        $smarty->assign('PreviousQuestionId', $questionData['previous_question_id']);
         $smarty->assign('QuestionCategoryID', $questionCategoryID);
-        $db = 'sakila';
+        $db = $questionData['db_template'];
         $smarty->assign('Questionnire', $test->getQuestionnire());
         $template = "test.tpl";
         break;
