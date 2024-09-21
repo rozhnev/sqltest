@@ -468,7 +468,7 @@ class User
                 ) VALUES (
                     ?, ?, ?, ?, CURRENT_TIMESTAMP
                 ) 
-                ON CONFLICT PRIMARY KEY DO NOTHING
+                ON CONFLICT (question_id, user_id, query) DO NOTHING
             ");
             $stmt->execute([$this->id, $questionID, $query, floatval($result['cost'])]);
         }

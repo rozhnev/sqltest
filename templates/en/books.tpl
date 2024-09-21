@@ -40,7 +40,7 @@
                     By purchasing books via our links, you will not only expand your library, but also help develop the sqltest.online project.
                 </p>
                 <div style="text-align: center; margin: 36px;">
-                    <a style="display:inline-block;width:240px; color: white;" href="/en/question/db-theory/what-is-sql" title="Перейти к тестам" class="button green">Start quiz</a>
+                    <a style="display:inline-block;width:240px; color: white;" href="/en/question/db-theory/what-is-sql" title="Start quiz" class="button green">Start quiz</a>
                 </div>
             </div>
 {if $MobileView}
