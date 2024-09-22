@@ -72,7 +72,7 @@
                 <button class="button green" id="checkAnswersBtn" onClick="checkAnswers('{$Lang}', {$QuestionID})">Check it!</button>
             {/if}
             {if $NextQuestionId}
-                <a href="/{$Lang}/question/{$Question.category_sef}/{$NextQuestionId}" title="Следующее задание" class="button green hidden">Next</a>
+                <a href="/{$Lang}/question/{$Question.category_sef}/{$NextQuestionId}" title="Next task" class="button green hidden">Next</a>
             {/if}
         </div>
         <div class="code-result ace-xcode" id="code-result"></div>
@@ -84,7 +84,7 @@
         {if $Logged}
             <p>
                 You {if $SolvedQuestionsCount < ($QuestionsCount/2)}have{else}already{/if} solved <span style="font-weight:bold;  color: #2EA043 !important;">{$SolvedQuestionsCount}</span> of them.
-                {if $SolvedQuestionsCount < $QuestionsCount} Keep going!{/if}
+                {if $SolvedQuestionsCount < $QuestionsCount} Keep&nbspgoing!{/if}
             </p>
         {else}
             <p>Log in to save your progress.</p>

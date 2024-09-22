@@ -84,7 +84,7 @@
         {if $Logged}
             <p>
                 Вы {if $SolvedQuestionsCount < ($QuestionsCount/2)}пока{else}уже{/if} решили <span style="font-weight:bold; color: #2EA043 !important;">{$SolvedQuestionsCount}</span> из них.
-                {if $SolvedQuestionsCount < $QuestionsCount} Не останавливайтесь!{/if}
+                {if $SolvedQuestionsCount < $QuestionsCount} Не&nbspостанавливайтесь!{/if}
             </p>
         {else}
             <p>Выполните вход для сохранения вашего прогресса.</p>
