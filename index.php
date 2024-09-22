@@ -100,9 +100,17 @@ if (isset($pathParts[0]) && $pathParts[0] === 'login') {
 } elseif (preg_match('@(?<lang>ru|en)/(?<action>donate)@i', $path, $params)) {
     $lang       = $params['lang'];
     $action     = $params['action'];
-} elseif (preg_match('@(?<lang>ru|en)/(?<action>test)@i', $path, $params)) {
+} elseif (preg_match('@(?<lang>ru|en)/test/start@i', $path, $params)) {
     $lang       = $params['lang'];
-    $action     = $params['action'];    
+    $action     = 'test_start';
+} elseif (preg_match('@(?<lang>ru|en)/test/create@i', $path, $params)) {
+    $lang       = $params['lang'];
+    $action     = 'test_create';
+} elseif (preg_match('@(?<lang>ru|en)/test/(?<testId>[a-z0-9-]+)/(?<questionID>\d+)@i', $path, $params)) {
+    $lang       = $params['lang'];
+    $action     = 'test';
+    $testId = $params['testId'];
+    $questionID = $params['questionID'] ?? 1;
 } elseif (preg_match('@(?<lang>ru|en)/(?<questionCategory>sakila|employee)/(?<questionID>\d+)@i', $path, $params)) {
     $lang       = $params['lang'];
     $action     = 'question';
@@ -292,14 +300,47 @@ switch ($action) {
         session_destroy();
         header("location:/$lang/");
         die();
+    case 'test_start':
+        if ($user->logged()) {
+            $userTestId = $user->getLastTestId();
+            if ($userTestId) {
+                $test = new Test($dbh, $lang, $user);
+                $test->setId($userTestId);
+                $smarty->assign('QuestionId', $test->getFirstUnsolvedQuestionId());
+            }
+            $smarty->assign('TestId', $userTestId);
+        }
+        $template = "test_start.tpl";
+        break;
+    case 'test_create':
+        if (!$user->logged()) {
+            header("Location: /$lang/test/start");
+            exit();
+        }
+        $test = new Test($dbh, $lang, $user);
+
+        $userTestId = $test->create();
+        header("Location: /$lang/test/$userTestId");
+        exit();
     case 'test':
         if (!$user->logged()) {
-            $template = "restricted_without_login.tpl";
-            break;
+            header("Location: /$lang/test/start");
+            exit();
         }
-        $test = new Test($dbh, $user);
-        $userTestId = $user->getLastTestId() ?? $test->create();
-        
+        $test = new Test($dbh, $lang, $user);
+        $test->load($testId);
+        $question = new Question($dbh, $questionID);
+        // $questionCategoryID = $question->getCategoryId(2); // By complexity
+        // $questionData = $question->get($questionCategoryID, $lang, $user->getId());
+        $questionData = $test->getQuestionData($questionID);
+        $questionCategoryID = $questionData['category_id'];
+        $smarty->assign('TestId', $testId);
+        $smarty->assign('Question', $questionData);
+        $smarty->assign('NextQuestionId', $questionData['next_question_id']);
+        $smarty->assign('PreviousQuestionId', $questionData['previous_question_id']);
+        $smarty->assign('QuestionCategoryID', $questionCategoryID);
+        $db = $questionData['db_template'];
+        $smarty->assign('Questionnire', $test->getQuestionnire());
         $template = "test.tpl";
         break;
     case 'welcome':

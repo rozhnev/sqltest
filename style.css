@@ -198,12 +198,13 @@ body {
     border: 1px solid gray;
     top: -1000px;
     min-width: 275px;
+    max-width: 320px;
 }
 
-.container .login-popup {
+.container .login-popup,
+.container3 .login-popup {
     width: 20%;
     left: 40%;
-
 }
 
 .mobile-container .login-popup {
