@@ -84,7 +84,7 @@
         {if $Logged}
             <p>
                 You {if $SolvedQuestionsCount < ($QuestionsCount/2)}have{else}already{/if} solved <span style="font-weight:bold;  color: #2EA043 !important;">{$SolvedQuestionsCount}</span> of them.
-                {if $SolvedQuestionsCount < $QuestionsCount} Keep going!{/if}
+                {if $SolvedQuestionsCount < $QuestionsCount} Keep&nbspgoing!{/if}
             </p>
         {else}
             <p>Log in to save your progress.</p>
