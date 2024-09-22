@@ -84,12 +84,12 @@
             <button class="button" id="getHelpBtn" onClick="getHelp('{$Lang}', {$QuestionID})">Get help</button>
             {if !isset($Question.answers)}
                 <button class="button" id="runQueryBtn" onClick="runQuery('{$Lang}', {$QuestionID})" title="CTRL+Enter">Run query</button>
-                <button class="button green" id="testQueryBtn" onClick="testQuery('{$Lang}', {$QuestionID})">Check it!</button>
-            {else}
-                <button class="button green" id="checkAnswersBtn" onClick="checkAnswers('{$Lang}', {$QuestionID})">Check it!</button>
             {/if}
-            {if $NextQuestionId}
-                <a href="/{$Lang}/question/{$Question.category_sef}/{$NextQuestionId}" title="Следующее задание" class="button green hidden">Next</a>
+            {if {$Question.possible_attempts} > 0}
+                <button class="button green" id="checkTestBtn" onClick="checkTest('{$Lang}', {$QuestionID})">Check it! ({$Question.possible_attempts})</button>
+            {/if}
+            {if $Question.next_question_id}
+                <a href="/{$Lang}/test/{$TestId}/{$Question.next_question_id}" title="Mext task" class="button green hidden">Next</a>
             {/if}
         </div>
         <div class="code-result ace-xcode" id="code-result"></div>

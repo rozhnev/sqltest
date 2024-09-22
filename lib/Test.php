@@ -161,6 +161,7 @@ class Test
                 last_attempt_date,
                 categories.title_sef category_sef,
                 solution last_query,
+                (3 - attempts) possible_attempts,
                 category_id 
             FROM questions
             LEFT JOIN question_rates ON question_rates.id = questions.rate
