@@ -334,6 +334,10 @@ switch ($action) {
         // $questionData = $question->get($questionCategoryID, $lang, $user->getId());
         $questionData = $test->getQuestionData($questionID);
         $questionCategoryID = $questionData['category_id'];
+        if ($questionData['have_answers']) {
+            $questionData['answers'] = $question->getAnswers($questionCategoryID, $lang, $user->getId());
+            $questionData['last_query'] = json_decode($questionData['last_query']??'[]', true);
+        }
         $smarty->assign('TestId', $testId);
         $smarty->assign('Question', $questionData);
         $smarty->assign('NextQuestionId', $questionData['next_question_id']);

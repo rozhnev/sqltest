@@ -39,14 +39,14 @@
                         {/if}
                     </span>
                 </div>
-                {if $PreviousQuestionId}
+                {if $Question.previous_question_id}
                     <div class="question-navigate" style="border-right: 1px solid var(--text-block-border-color);">
-                        <a href="/{$Lang}/question/{$Question.category_sef}/{$PreviousQuestionId}" title="Previous task"><i class="arrow arrow-left"></i></a>
+                        <a href="/{$Lang}/test/{$TestId}/{$Question.previous_question_id}" title="Previous task"><i class="arrow arrow-left"></i></a>
                     </div>
                 {/if}
-                {if $NextQuestionId}
+                {if $Question.next_question_id}
                     <div class="question-navigate">
-                        <a href="/{$Lang}/question/{$Question.category_sef}/{$NextQuestionId}" title="Next task"><i class="arrow arrow-right"></i></a>
+                        <a href="/{$Lang}/test/{$TestId}/{$Question.next_question_id}" title="Next task"><i class="arrow arrow-right"></i></a>
                     </div>
                 {/if}
             </div>

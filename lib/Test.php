@@ -146,15 +146,17 @@ class Test
     public function getQuestionData(int $qusestionId): array 
     {
         $stmt = $this->dbh->prepare("
-            SELECT 
+            WITH question_data AS (SELECT 
+                questions.id question_id,
                 questions.rate,
                 question_rates.rate_{$this->lang} question_rate,
                 questions.task_{$this->lang} task,
+                categories.title_{$this->lang} title,
                 dbms,
                 db_template,
                 ROW_NUMBER() OVER (PARTITION BY question_categories.category_id ORDER BY question_categories.sequence_position) number,
-                LEAD(test_questions.question_id) OVER (ORDER BY questions.rate) previous_question_id,
-                LAG(test_questions.question_id) OVER (ORDER BY questions.rate) next_question_id,
+                LAG(test_questions.question_id) OVER (ORDER BY questions.rate) previous_question_id,
+                LEAD(test_questions.question_id) OVER (ORDER BY questions.rate) next_question_id,
                 solved_at solved_date,
                 last_attempt_date,
                 categories.title_sef category_sef,
@@ -165,7 +167,10 @@ class Test
             JOIN question_categories ON questions.id = question_categories.question_id
             JOIN categories on categories.id = category_id AND questionnire_id = :questionnire_id
             JOIN test_questions ON test_questions.question_id = questions.id AND test_id = :test_id
-            WHERE questions.id = :question_id;");
+            ) SELECT 
+                question_data.*,
+                (exists (select true from answers where answers.question_id = question_data.question_id)) have_answers
+            FROM question_data WHERE question_id = :question_id;");
 
         $stmt->execute([':test_id' =>  $this->id, ':question_id' =>  $qusestionId, ':questionnire_id' => 2]);
         return $stmt->fetch(PDO::FETCH_ASSOC);;
