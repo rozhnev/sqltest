@@ -66,7 +66,7 @@
                 {$Question.task}
             </div>
             {if isset($Question.answers)}
-                <div class="answers">
+                <div class="answers" id="answers-list">
                 {foreach $Question.answers as $answer}
                     <div class="answer">
                         <input type="checkbox" id="answer-{$answer.id}" name="answers" value="{$answer.id}" {if $answer.id|in_array:$Question.last_query} checked{/if}>
@@ -93,12 +93,11 @@
         <div class="code-wrapper" id="sql-code" name="sql-code">{$Question.last_query}</div>
         {/if}
         <div class="code-buttons">
-            <button class="button" id="getHelpBtn" onClick="getHelp('{$Lang}', {$QuestionID})">Get help</button>
             {if !isset($Question.answers)}
                 <button class="button" id="runQueryBtn" onClick="runQuery('{$Lang}', {$QuestionID})" title="CTRL+Enter">Run query</button>
             {/if}
             {if {$Question.possible_attempts} > 0}
-                <button class="button green" id="checkTestBtn" onClick="checkTest('{$Lang}', {$QuestionID})">Check it! ({$Question.possible_attempts})</button>
+                <button class="button green" id="checkSolutionBtn" onClick="checkSolution('/{$Lang}/test/{$TestId}/check/{$QuestionID}')">Check it! ({$Question.possible_attempts})</button>
             {/if}
             {if $Question.next_question_id}
                 <a href="/{$Lang}/test/{$TestId}/{$Question.next_question_id}" title="Mext task" class="button green hidden">Next</a>

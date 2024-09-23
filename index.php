@@ -110,7 +110,12 @@ if (isset($pathParts[0]) && $pathParts[0] === 'login') {
     $lang       = $params['lang'];
     $action     = 'test';
     $testId = $params['testId'];
-    $questionID = $params['questionID'] ?? 1;
+    $questionID = $params['questionID'];
+} elseif (preg_match('@(?<lang>ru|en)/test/(?<testId>[a-z0-9-]+)/check/(?<questionID>\d+)@i', $path, $params)) {
+    $lang       = $params['lang'];
+    $action     = 'test-check-answer';
+    $testId = $params['testId'];
+    $questionID = $params['questionID'];
 } elseif (preg_match('@(?<lang>ru|en)/(?<questionCategory>sakila|employee)/(?<questionID>\d+)@i', $path, $params)) {
     $lang       = $params['lang'];
     $action     = 'question';
@@ -330,8 +335,7 @@ switch ($action) {
         $test = new Test($dbh, $lang, $user);
         $test->load($testId);
         $question = new Question($dbh, $questionID);
-        // $questionCategoryID = $question->getCategoryId(2); // By complexity
-        // $questionData = $question->get($questionCategoryID, $lang, $user->getId());
+
         $questionData = $test->getQuestionData($questionID);
         $questionCategoryID = $questionData['category_id'];
         if ($questionData['have_answers']) {
@@ -346,6 +350,8 @@ switch ($action) {
         $db = $questionData['db_template'];
         $smarty->assign('Questionnire', $test->getQuestionnire());
         $template = "test.tpl";
+        break;
+    case 'test-check-answer':
         break;
     case 'welcome':
         $questionnire = new Questionnire($dbh, $lang);

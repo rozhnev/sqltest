@@ -37,7 +37,7 @@
                 {$Question.task}
             </div>
             {if isset($Question.answers)}
-                <div class="answers">
+                <div class="answers" id="answers-list">
                 {foreach $Question.answers as $answer}
                     <div class="answer">
                         <input type="checkbox" id="answer-{$answer.id}" name="answers" value="{$answer.id}" {if $answer.id|in_array:$Question.last_query} checked{/if}>
