@@ -508,7 +508,7 @@ class User
 
     public function getLastTestId(): string
     {
-        $stmt = $this->dbh->prepare("SELECT id FROM tests WHERE user_id = :user_id and (closed_at is null or closed_at < current_timestamp) order by created_at desc limit 1;");
+        $stmt = $this->dbh->prepare("SELECT id FROM tests WHERE user_id = :user_id and (closed_at is null or closed_at > current_timestamp) order by created_at desc limit 1;");
         $stmt->execute([':user_id' => $this->id]);
         return $stmt->fetchColumn(0);
     }
