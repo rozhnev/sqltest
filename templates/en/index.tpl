@@ -86,6 +86,7 @@
                 You {if $SolvedQuestionsCount < ($QuestionsCount/2)}have{else}already{/if} solved <span style="font-weight:bold;  color: #2EA043 !important;">{$SolvedQuestionsCount}</span> of them.
                 {if $SolvedQuestionsCount < $QuestionsCount} Keep&nbspgoing!{/if}
             </p>
+            You rate is Intern. Get <a href="/{$Lang}/test/start">test to upgrate</a>
         {else}
             <p>Log in to save your progress.</p>
             <button class="button blue" onClick="toggleLoginWindow()">Login</button>
