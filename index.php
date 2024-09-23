@@ -113,7 +113,7 @@ if (isset($pathParts[0]) && $pathParts[0] === 'login') {
     $questionID = $params['questionID'];
 } elseif (preg_match('@(?<lang>ru|en)/test/(?<testId>[a-z0-9-]+)/check/(?<questionID>\d+)@i', $path, $params)) {
     $lang       = $params['lang'];
-    $action     = 'test-check-answer';
+    $action     = 'test-check';
     $testId = $params['testId'];
     $questionID = $params['questionID'];
 } elseif (preg_match('@(?<lang>ru|en)/(?<questionCategory>sakila|employee)/(?<questionID>\d+)@i', $path, $params)) {
@@ -351,7 +351,45 @@ switch ($action) {
         $smarty->assign('Questionnire', $test->getQuestionnire());
         $template = "test.tpl";
         break;
-    case 'test-check-answer':
+    case 'test-check':
+
+        if ($user->logged()) {
+            header("Location: /$lang/test/start");
+            exit();
+        }
+
+
+        $question = new Question($dbh, $questionID);
+
+        if (isset($_POST["query"])) {
+            $sql = $_POST["query"];
+            $checkResult = $question->checkQuery($sql);
+            $smarty->assign('QueryTestResult', $checkResult);
+            if ($checkResult['ok']) {
+                $preparedQuery = $question->prepareQuery($sql);
+                $query = new Query($preparedQuery);
+                $jsonResult = $query->getResult($question->getDB(), 'json');
+                $checkResult = $question->checkQueryResult($jsonResult);
+                $smarty->assign('QueryTestResult', $checkResult);
+                $smarty->assign('QueryBestCost', $question->getBestCost());
+            }
+            /*$user->saveQuestionAttempt($questionID, $checkResult, $sql);
+            if ($checkResult['ok']) {
+                $user->saveSolution($questionID, $checkResult, $sql);
+            }*/
+            $smarty->registerPlugin("modifier", "array_key_exists", "array_key_exists");
+        }
+
+        if (isset($_POST["answers"])) {
+            $answers = $_POST["answers"] ?? '[]';
+
+            $question = new Question($dbh, $questionID);
+            $checkResult = $question->checkAnswers($answers);
+            $smarty->assign('AnswerResult', $checkResult);
+            //$user->saveQuestionAttempt($questionID, $checkResult, $answers);
+        }
+        if (!$checkResult['ok']) header( 'HTTP/1.1 418 BAD REQUEST' );     
+        $template = "check_test_solution.tpl";
         break;
     case 'welcome':
         $questionnire = new Questionnire($dbh, $lang);
