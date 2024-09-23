@@ -147,6 +147,7 @@ class Test
     {
         $stmt = $this->dbh->prepare("
             WITH question_data AS (SELECT 
+                test_id,
                 questions.id question_id,
                 questions.rate,
                 question_rates.rate_{$this->lang} question_rate,
@@ -170,8 +171,11 @@ class Test
             JOIN test_questions ON test_questions.question_id = questions.id AND test_id = :test_id
             ) SELECT 
                 question_data.*,
+                tests.closed_at,
                 (exists (select true from answers where answers.question_id = question_data.question_id)) have_answers
-            FROM question_data WHERE question_id = :question_id;");
+            FROM question_data 
+            JOIN tests ON tests.id = question_data.test_id
+            WHERE question_id = :question_id;");
 
         $stmt->execute([':test_id' =>  $this->id, ':question_id' =>  $qusestionId, ':questionnire_id' => 2]);
         return $stmt->fetch(PDO::FETCH_ASSOC);;
