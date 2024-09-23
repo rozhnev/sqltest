@@ -4,6 +4,15 @@
     {include file='popups.tpl'}
     {include file='top-menu.tpl'}
     <div class="menu" id="menu">
+        <div id="test-timer" style="padding:5px 15px; border: 1px solid white; margin: 5px;"><span style="font-size:small;">Time to complete this test is</span> <span id="test-timer-time"></span></div>
+        <script>
+            const showTimer = ()=>{ldelim}
+                const time = Math.floor(Math.abs(new Date('{$Question.closed_at}') - new Date())/60000)
+                document.getElementById('test-timer-time').innerText = time + ' ' + (time>1 ? 'minutes': minute);
+            {rdelim};
+            showTimer();
+            setInterval(showTimer,  60000);
+        </script>
         {foreach $Questionnire.menu as $categoryId => $panel}
         <button class="accordion {if $categoryId eq $QuestionCategoryID}active{/if}">
             {$panel.title}
@@ -20,6 +29,9 @@
             </ol>
         </div>
         {/foreach}
+        <div style="display: flex;   align-items: center; justify-content: center; margin-top: 1em;">
+        <button class="button green" id="doneTest" onClick="doneTest('{$TestId}')">I am Done! Show my rate</button>
+        </div>
     </div>
     {include file='../splitter.tpl'}
     <div class="main">
