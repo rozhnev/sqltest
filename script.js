@@ -214,6 +214,41 @@ function testQuery(lang, questionId) {
         document.getElementById('code-result').innerHTML = 'Something went wrong. Please review your query and try again.';
     });
 }
+function checkSolution(url) {
+    setLoader('code-result');
+    let formData = new FormData();
+    if (window.sql_editor) {
+        formData.append('query', window.sql_editor.getValue());
+    }
+    if (document.getElementById('answers-list')) {
+        const answers = [...document.querySelectorAll('input[name=answers]:checked')]
+        .reduce(
+            (res, el)=>{res.push(parseInt(el.value)); return res;}, 
+            []
+        )
+        .toSorted();
+        formData.append('answers', JSON.stringify(answers));
+    }
+    fetch(url, {
+        method: "POST",
+        mode: "cors",
+        cache: "default",
+        credentials: "same-origin",
+        body: formData,
+    })
+    .then((async response=>{
+        if (response.ok) {
+            [...document.getElementsByClassName("button green")].map(el=>el.classList.toggle("hidden"));
+        }
+        return await response.text();
+    }))
+    .then((message)=>{
+        document.getElementById('code-result').innerHTML = message;
+    })
+    .catch(err=>{
+        document.getElementById('code-result').innerHTML = 'Something went wrong. Please review your query and try again.';
+    });
+}
 function showSolutions(questionId) {
     fetch(`/${lang}/question/${questionId}/solutions`, {
         method: "GET",
