@@ -21,7 +21,7 @@
     {/if}
 {/if}
 
-<title>{$SiteTitle}</title>
+<title>{$PageTitle}</title>
 <meta http-equiv = "content-language" content = "ru">
 <meta name="description" content="{$PageDescription}"/>
 <meta name="keywords" content="SQL тренажер, практические задачи по SQL, тест на знание SQL, sakila mysql, postgresql, sql server">
