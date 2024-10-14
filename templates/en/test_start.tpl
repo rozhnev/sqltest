@@ -25,7 +25,7 @@
                 </p>
                 </div>
                 {if $Logged}
-                    {if isset($TestId)}
+                    {if isset($Test)}
                         <div style="text-align: center; margin: 36px;">
                             <a style="display:inline-block;width:240px; color: white;" href="/en/test/{$TestId}/{$QuestionId}" title="Start quiz" class="button green">Continue test</a>
                         </div>

@@ -75,9 +75,11 @@ class Test
         return $this->id;
     }
 
-    public function load(string $id): void
+    public function load(): void
     {
-        $this->id = $id;
+        if (!$this->id) {
+            throw new Exception('Test not found');
+        }
 
         $stmt = $this->dbh->prepare("SELECT 
                 categories.id,

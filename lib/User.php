@@ -506,10 +506,10 @@ class User
         return $stmt->fetchColumn(0);
     }
 
-    public function getLastTestId(): string
+    public function getLastTest(): array
     {
-        $stmt = $this->dbh->prepare("SELECT id FROM tests WHERE user_id = :user_id and (closed_at is null or closed_at > current_timestamp) order by created_at desc limit 1;");
+        $stmt = $this->dbh->prepare("SELECT id, created_at, closed_at, (closed_at is not null or closed_at <= current_timestamp) test_closed FROM tests WHERE user_id = :user_id order by created_at desc limit 1;");
         $stmt->execute([':user_id' => $this->id]);
-        return $stmt->fetchColumn(0);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }

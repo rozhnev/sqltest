@@ -307,13 +307,16 @@ switch ($action) {
         die();
     case 'test_start':
         if ($user->logged()) {
-            $userTestId = $user->getLastTestId();
+            $userLastTest = $user->getLastTest();
+            print_r($userLastTest);
+            die();
             if ($userTestId) {
                 $test = new Test($dbh, $lang, $user);
                 $test->setId($userTestId);
+                
                 $smarty->assign('QuestionId', $test->getFirstUnsolvedQuestionId());
+                $smarty->assign('Test', $userLastTest);
             }
-            $smarty->assign('TestId', $userTestId);
         }
         $template = "test_start.tpl";
         break;
@@ -333,7 +336,8 @@ switch ($action) {
             exit();
         }
         $test = new Test($dbh, $lang, $user);
-        $test->load($testId);
+        $test->setId($testId);
+        $test->load();
         $question = new Question($dbh, $questionID);
 
         $questionData = $test->getQuestionData($questionID);
@@ -357,6 +361,7 @@ switch ($action) {
             header("Location: /$lang/test/start");
             exit();
         }
+        $test = new Test($dbh, $lang, $user);
 
 
         $question = new Question($dbh, $questionID);

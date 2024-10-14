@@ -7,8 +7,12 @@
         <div id="test-timer" style="padding:5px 15px; border: 1px solid white; margin: 5px;"><span style="font-size:small;">Time to complete this test is</span> <span id="test-timer-time"></span></div>
         <script>
             const showTimer = ()=>{ldelim}
-                const time = Math.floor(Math.abs(new Date('{$Question.closed_at}') - new Date())/60000)
-                document.getElementById('test-timer-time').innerText = time + ' ' + (time>1 ? 'minutes': minute);
+                const time = Math.floor((new Date('{$Question.closed_at}') - new Date())/60000);
+                if (time > 0) {
+                    document.getElementById('test-timer-time').innerText = time + ' ' + (time>1 ? 'minutes': 'minute');
+                } else {
+                    document.getElementById('test-timer').innerText = 'Test time is over!'
+                }
             {rdelim};
             showTimer();
             setInterval(showTimer,  60000);
