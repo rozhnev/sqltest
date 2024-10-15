@@ -1,5 +1,14 @@
-<title>{if isset($PageTitle)}{$PageTitle}{else}{if isset($Question) && $Question.title}SQL тренажер: {$Question.title}{else}SQL задачи{/if}{/if}</title>
-<meta http-equiv = "content-language" content = "ru">
+{if !isset($PageTitle)}
+    {if isset($Question) && $Question.title}
+        {if $Question.have_answers}
+            {assign var="PageTitle" value="Вопросы по SQL: {$Question.title}"}
+        {else}
+            {assign var="PageTitle" value="SQL тренажер: {$Question.title}"}
+        {/if}
+    {else}
+        {assign var="PageTitle" value="SQL задачи"}
+    {/if}
+{/if}
 {if !isset($PageDescription)}
     {if isset($Question) && $Question.title}
         {if $Question.have_answers}
@@ -11,6 +20,9 @@
         {assign var="PageDescription" value="Пройдите SQL тест. Решайте SQL задачи, пишите эффективные SQL запросы, изучайте концепции и повышайте уровень знаний. Станьте экспертом в SQL!"}
     {/if}
 {/if}
+
+<title>{$PageTitle}</title>
+<meta http-equiv = "content-language" content = "ru">
 <meta name="description" content="{$PageDescription}"/>
 <meta name="keywords" content="SQL тренажер, практические задачи по SQL, тест на знание SQL, sakila mysql, postgresql, sql server">
 <meta property="og:site_name" content="SQLtest.online">
