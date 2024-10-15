@@ -61,7 +61,7 @@ if (isset($pathParts[0]) && $pathParts[0] === 'login') {
     $action     = 'login';
     $loginProvider = $pathParts[1];
 // privacy-policy, logout actions
-} elseif (preg_match('@(?<lang>ru|en)/(?<action>privacy-policy|logout|about|menu)/\d+@i', $path, $params)) {
+} elseif (preg_match('@(?<lang>ru|en)/(?<action>privacy-policy|logout|about|menu|donate)/\d+@i', $path, $params)) {
     $lang       = $params['lang'];
     $action     = $params['action'];
     header("HTTP/1.1 301 Moved Permanently");
@@ -327,8 +327,8 @@ switch ($action) {
         $smarty->assign('Books', Helper::getBooks($dbh, $lang));
         $template = "books.tpl";
         $smarty->assign('PageTitle', $lang === 'ru' 
-            ? 'Изучаем SQL с нуля: лучшие книги для начинающих'
-            : 'Learning SQL from Scratch: The Best Books for Beginners'
+            ? 'Изучаем SQL: лучшие книги для начинающих и профи'
+            : 'Learning SQL: The Best Books for Beginners and Profi'
         );
         $smarty->assign('PageDescription', $lang === 'ru' 
             ? 'Хотите освоить язык SQL и стать востребованным специалистом в области баз данных? Мы собрали для вас подборку самых полезных книг, которые помогут вам сделать первые шаги в мире SQL.'
