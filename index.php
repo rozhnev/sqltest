@@ -130,6 +130,8 @@ session_start([
 if (($_SESSION && $_SESSION['user_id'])) {
     $user->set($_SESSION['user_id'], $_SESSION["admin"]);
 }
+Localizer::init($lang);
+$smarty->registerPlugin('block', 'translate', array('Localizer', 'translate'), true);
 
 switch ($action) {
     case 'login':

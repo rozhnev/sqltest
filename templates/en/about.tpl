@@ -32,7 +32,7 @@
                 </p>
             </div>
 {if $MobileView}
-    {include file='m.footer.tpl'}
+    {include file='../m.footer.tpl'}
 {else}
-    {include file='footer.tpl'}
+    {include file='../footer.tpl'}
 {/if}

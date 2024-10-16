@@ -93,4 +93,4 @@
         </div>
         {include file="{$DB}.tpl"}
     </div>
-    {include file='footer.tpl'}
+    {include file='../footer.tpl'}
