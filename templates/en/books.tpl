@@ -4,9 +4,9 @@
             <div class="header">
                 <div class="top-menu">
                     {if $MobileView}
-                        {include file='m.site-name.tpl'}
+                        {include file='../m.site-name.tpl'}
                     {else}
-                        {include file='site-name.tpl'}
+                        {include file='../site-name.tpl'}
                     {/if}
                     <span class="lang-swith"><a href="/ru/books" target="_self">RU</a></span>
                 </div>

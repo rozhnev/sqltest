@@ -3,7 +3,11 @@
     <div class="full-container">
     <div class="header">
         <div class="top-menu">
-            {include file='site-name.tpl'}
+            {if $MobileView}
+                {include file='m.site-name.tpl'}
+            {else}
+                {include file='site-name.tpl'}
+            {/if}
             <span class="lang-swith"><a href="/ru/" target="_self">RU</a></span>
         </div>
     </div>
