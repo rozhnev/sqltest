@@ -368,6 +368,7 @@ $smarty->assign('MobileView', $mobileView);
 $smarty->assign('Logged', $user->logged());
 $smarty->assign('LoggedAsAdmin', $user->isAdmin());
 $smarty->assign('Lang', $lang);
+$smarty->assign('Languages', ['en', 'ru']);
 $smarty->assign('DB', $db);
 $smarty->assign('QuestionID', $questionID);
 
