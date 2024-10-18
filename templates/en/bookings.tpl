@@ -7,12 +7,12 @@
     </p>
     <p>The Bookings Database contains 8 tables:</p>
     <ul style="list-style-type: '▤ '; padding-inline-start: 20px;">
-      <li><span class='sql' onclick="scrollInfoPanel('aircrafts_data_table_description')">aircrafts_data</span> - table of aircrafts.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('aircrafts_data_table_description')">aircrafts_data</span> - table of aircraft.</li>
       <li><span class='sql' onclick="scrollInfoPanel('airports_data_table_description')">airports_data</span> - table of airports.</li>
       <li><span class='sql' onclick="scrollInfoPanel('boarding_passes_table_description')">boarding_passes</span> - table of boarding passes.</li>
       <li><span class='sql' onclick="scrollInfoPanel('bookings_table_description')">bookings</span> - table of bookings.</li>
       <li><span class='sql' onclick="scrollInfoPanel('flights_table_description')">flights</span> - table of flights.</li>
-      <li><span class='sql' onclick="scrollInfoPanel('seats_table_description')">seats</span> - table of aircrafts seats.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('seats_table_description')">seats</span> - table of aircraft seats.</li>
       <li><span class='sql' onclick="scrollInfoPanel('ticket_flights_table_description')">ticket_flights</span> - table of ticket to flights relations.</li>
       <li><span class='sql' onclick="scrollInfoPanel('tickets_table_description')">tickets</span> - table of tickets.</li>
     </ul>
