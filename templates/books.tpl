@@ -1,4 +1,4 @@
-{include file='../short-header.tpl'}
+{include file='short-header.tpl'}
     <body>
         <div class="{if $MobileView}mobile-container{else}full-container{/if}">
             <div class="header">
@@ -6,17 +6,17 @@
                     {if $MobileView}
                         {include file='m.site-name.tpl'}
                     {else}
-                        {include file='site-name.tpl'}
+                            {include file='site-name.tpl'}
                     {/if}
-                    <span class="lang-swith"><a href="/ru/books" target="_self">RU</a></span>
+                    <div style="display: flex; justify-content: center; min-width: 100px;">
+                        {include file='theme-switcher.tpl'}
+                        {include file='lang-switcher.tpl' path="books"}
+                    </div>
                 </div>
             </div>
             <div class="container3">
-                <h2>Want to become a real SQL guru?</h2>
-                <h3>
-                    We have prepared for you a selection of the best books that will help you master the SQL language from scratch and improve your skills to perfection.
-                    <p>We have carefully studied many publications and selected only the most useful and relevant ones. </p>
-                    Our selection includes books for both beginners and experienced developers.
+                <h2>{translate}books_title{/translate}</h2>
+                <h3>{translate}books_description{/translate}</h3>
                 </h3>
                 <div class="books-container" style="display: flex; flex-flow: wrap; gap: 1em;">
                     {foreach $Books as $book}
@@ -35,12 +35,10 @@
                         </div>
                     {/foreach}
                 </div>
-                <p>
-                    Support our project!<br>
-                    By purchasing books via our links, you will not only expand your library, but also help develop the sqltest.online project.
+                <p>{translate}books_support{/translate}</p>
                 </p>
                 <div style="text-align: center; margin: 36px;">
-                    <a style="display:inline-block;width:240px; color: white;" href="/en/question/db-theory/what-is-sql" title="Start quiz" class="button green">Start quiz</a>
+                    <a style="display:inline-block;width:240px; color: white;" href="/{$Lang}/question/db-theory/what-is-sql" title="Start quiz" class="button green">Start quiz</a>
                 </div>
             </div>
 {if $MobileView}

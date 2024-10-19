@@ -224,7 +224,7 @@ switch ($action) {
         if (!$queryTestResult['ok']) header( 'HTTP/1.1 418 BAD REQUEST' );
         $smarty->registerPlugin("modifier", "array_key_exists", "array_key_exists");
         $smarty->assign('ReferralLink', Helper::getReferralLink($dbh, $lang));
-        $template = "query_test_result.tpl";
+        $template = "$lang/query_test_result.tpl";
         break;
     case 'check-answers':
         $answers = $_POST["answers"] ?? '[]';
@@ -236,7 +236,7 @@ switch ($action) {
         }
         if (!$answerResult['ok']) header( 'HTTP/1.1 418 BAD REQUEST' );
         $smarty->assign('ReferralLink', Helper::getReferralLink($dbh, $lang));
-        $template = "check_answer_result.tpl";
+        $template = "$lang/check_answer_result.tpl";
         break;
     case 'rate':
         if ($user->logged()) {
@@ -356,16 +356,17 @@ switch ($action) {
 }
 
 if ($lang == 'ru') {
-    $smarty->setTemplateDir('./templates/ru');
 } else {
     $lang = 'en';
-    $smarty->setTemplateDir('./templates/en');
 }
+Localizer::init($lang);
+$smarty->registerPlugin('block', 'translate', array('Localizer', 'translate'), true);
 
 $smarty->assign('MobileView', $mobileView);
 $smarty->assign('Logged', $user->logged());
 $smarty->assign('LoggedAsAdmin', $user->isAdmin());
 $smarty->assign('Lang', $lang);
+$smarty->assign('Languages', ['ru', 'en']);
 $smarty->assign('DB', $db);
 $smarty->assign('QuestionID', $questionID);
 

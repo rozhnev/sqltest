@@ -1,1 +1,0 @@
-{$Hint|default:'Try to solve the problem without hints.'}

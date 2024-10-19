@@ -9,7 +9,7 @@
         ],
         "data": [
             [
-                "Your query is empty."
+                "{translate}empty_query_result{/translate}"
             ]
         ]
     }

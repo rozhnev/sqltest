@@ -1,17 +1,3 @@
-{include file='../short-header.tpl'}
-    <body>
-            <div class="{if $MobileView}mobile-container{else}full-container{/if}">
-            <div class="header">
-                <div class="top-menu">
-                    {if $MobileView}
-                        {include file='m.site-name.tpl'}
-                    {else}
-                        {include file='site-name.tpl'}
-                    {/if}
-                    <span class="lang-swith"><a href="/ru/donate" target="_self">RU</a></span>
-                </div>
-            </div>
-            <div class="container3">
                 <p>
                     Thank you for finding a way to support SQLtest.online. Your contribution makes a significant contribution to the continuation of the activity and development of the project.
                 </p>
@@ -39,9 +25,3 @@
                     </p>
                 </div>
                 <p>Thank you for being a valuable part of SQLtest.online comunity!</p>
-            </div>
-{if $MobileView}
-    {include file='m.footer.tpl'}
-{else}
-    {include file='footer.tpl'}
-{/if}

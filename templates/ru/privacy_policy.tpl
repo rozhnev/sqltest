@@ -1,17 +1,3 @@
-{include file='../short-header.tpl'}
-    <body>
-        <div class="{if $MobileView}mobile-container{else}full-container{/if}">
-            <div class="header">
-                <div class="top-menu">
-                    {if $MobileView}
-                        {include file='m.site-name.tpl'}
-                    {else}
-                        {include file='site-name.tpl'}
-                    {/if}
-                    <span class="lang-swith"><a href="/en/privacy-policy" target="_self">EN</a></span>
-                </div>
-            </div>
-            <div class="container3">
                 <h2>Политика конфиденциальности</h2>
 
                     <p>Настоящая Политика конфиденциальности описывает, как SQLtest («мы», «нас» или «наш») собирает, использует и передает личную информацию.
@@ -67,9 +53,3 @@
                     <footer>
                         <p>Настоящая Политика конфиденциальности последний раз обновлялась 1 января 2024 г.</p>
                     </footer>
-            </div>
-{if $MobileView}
-    {include file='m.footer.tpl'}
-{else}
-    {include file='footer.tpl'}
-{/if}

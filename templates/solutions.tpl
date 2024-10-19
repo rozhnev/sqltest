@@ -1,9 +1,9 @@
 <div style="width: 21vw;">
     {if $QuestionSolutions}
-        <p>Look as another users solved this problem:</p>
+        <p>{translate}solutions_title{/translate}</p>
         {foreach $QuestionSolutions as $id=>$solution}
             <div class="solution-wrapper" id="solution-wrapper-{$id}">
-                <div class="solution-title">Solved at: {$solution.created_at} Query cost: {$solution.query_cost}</div>
+                <div class="solution-title">{translate}solution_title{/translate}: {$solution.created_at} {translate}solution_query_cost{/translate}: {$solution.query_cost}</div>
                 <div class="solution-block" id="solution-{$id}">{$solution.query}</div>
                 <div class="solution-footer">
                     <button class="button-small green" onClick="solutionRun('en', {$QuestionID}, {$id})">Run it</button>
@@ -16,7 +16,7 @@
     {else}
         <div class="solution-wrapper">
             <div style="padding: 2em;">
-                <p>Sorry, but no solution to this problem has been published yet.</p>
+                <p>{translate}no_solutions_yet{/translate}</p>
             </div>
         </div>
     {/if}
