@@ -1,7 +1,9 @@
-            <div style="display: flex; justify-content: center;">
-                {foreach $Languages as $l}
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                {foreach $Languages as $l => $name}
                     {if ($l !== $Lang)}
-                        <a href="/{$l}/{$path}" target="_self">{$l|upper}</a>
+                        <span style="padding: 7px;">
+                            <a href="/{$l}{$path}" title="{$name}" target="_self">{$l|upper}</a>
+                        </span>
                     {/if}
                 {/foreach}
             </div>

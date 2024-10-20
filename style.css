@@ -262,6 +262,8 @@ body {
     background-color: var(--block-background-color);
     padding: 7px;
     display: flex;
+    flex-flow: row;
+    justify-content: space-between;
     color: var(--special-text-color);
 }
 
