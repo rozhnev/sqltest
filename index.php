@@ -289,11 +289,6 @@ switch ($action) {
         session_destroy();
         header("location:/$lang/");
         die();
-    case 'welcome':
-        $questionnire = new Questionnire($dbh, $lang);
-        $smarty->assign('Questionnire', $questionnire->get());
-        $template = "welcome.tpl";
-        break;
     case 'question':
         try {
             $questionnire = new Questionnire($dbh, $lang);
@@ -354,9 +349,8 @@ switch ($action) {
         $smarty->registerPlugin("modifier", "in_array", "in_array");
         $template = $mobileView ? "m.index.tpl" : "index.tpl";
 }
-
-if ($lang == 'ru') {
-} else {
+$languages = ['ru' => 'Русский', 'en' => 'English', 'pt' => 'Português'];    
+if (!in_array($lang, array_keys($languages))) {
     $lang = 'en';
 }
 Localizer::init($lang);
@@ -366,7 +360,7 @@ $smarty->assign('MobileView', $mobileView);
 $smarty->assign('Logged', $user->logged());
 $smarty->assign('LoggedAsAdmin', $user->isAdmin());
 $smarty->assign('Lang', $lang);
-$smarty->assign('Languages', ['ru', 'en']);
+$smarty->assign('Languages', $languages);
 $smarty->assign('DB', $db);
 $smarty->assign('QuestionID', $questionID);
 
