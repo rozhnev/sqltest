@@ -1,10 +1,8 @@
 <?php
 $translations = [
     'books_title' => 'Want to become a real SQL guru?',
-    'books_description' => 'We have prepared for you a selection of the best books that will help you master the SQL language from scratch and improve your skills to perfection.
-    Our selection includes books for both beginners and experienced developers.',
-    'books_support' => 'Support our project!<br>
-    By purchasing books via our links, you will not only expand your library, but also help develop the sqltest.online project.',
+    'books_description' => 'We have prepared for you a selection of the best books that will help you master the SQL language from scratch and improve your skills to perfection. Our selection includes books for both beginners and experienced developers.',
+    'books_support' => 'Support our project!<br>By purchasing books via our links, you will not only expand your library, but also help develop the sqltest.online project.',
     'empty_query_result' => 'Your query is empty.',
     'error_message' => 'Oops! Something went wrong, but don\'t worry we have many other tasks <a href="/en/" target="_self">here</a>',
     'footer_about' => 'About',
