@@ -50,7 +50,7 @@ class Questionnire
                 questions_localization.title question_title,
                 (solved_at IS NOT NULL) solved
             FROM categories
-            JOIN categories_localization ON categories_localization.cagory_id = categories.id AND categories_localization.language =  :lang
+            JOIN categories_localization ON categories_localization.category_id = categories.id AND categories_localization.language =  :lang
             JOIN questionnires ON questionnires.id = categories.questionnire_id
             JOIN question_categories ON question_categories.category_id = categories.id
             JOIN questions ON question_categories.question_id = questions.id
