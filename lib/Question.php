@@ -90,8 +90,8 @@ class Question
      */
     public function getHint(string $lang): string 
     {
-        $stmt = $this->dbh->prepare("SELECT hint_{$lang} FROM questions WHERE id = ?");
-        $stmt->execute([$this->id]);
+        $stmt = $this->dbh->prepare("SELECT hint FROM questions_localization WHERE question_id = :id and language = :lang");
+        $stmt->execute([':id' => $this->id, ':lang' => $lang]);
         return (string)$stmt->fetchColumn();
     }
     /**
