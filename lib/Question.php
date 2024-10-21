@@ -57,23 +57,24 @@ class Question
                 categories.title_sef category_sef,
                 questions.title_sef question_sef,
                 question_categories.sequence_position number, 
-                questions.title_{$lang} title,
-                questions.task_{$lang} task,
+                questions_localization.title title,
+                questions_localization.task task,
                 dbms,
                 db_template,
                 last_attempt_at::date last_attempt_date, 
                 solved_at::date solved_date, 
                 last_query,
                 questions.rate,
-                rate_{$lang} question_rate,
+                question_rates_localization.rate question_rate,
                 (exists (select true from answers where question_id = questions.id)) have_answers
             FROM questions 
-            JOIN question_categories ON question_categories.question_id = questions.id and question_categories.category_id = :category_id
+            JOIN questions_localization on questions_localization.question_id = questions.id AND questions_localization.language =  :lang
+            JOIN question_categories ON question_categories.question_id = questions.id AND question_categories.category_id = :category_id
             JOIN categories on categories.id = question_categories.category_id
-            LEFT JOIN user_questions ON user_questions.question_id = questions.id and user_questions.user_id = :user_id
-            LEFT JOIN question_rates ON questions.rate = question_rates.id
+            LEFT JOIN user_questions ON user_questions.question_id = questions.id AND user_questions.user_id = :user_id
+            LEFT JOIN question_rates_localization ON questions.rate = question_rates_localization.id AND question_rates_localization.language = :lang
             WHERE questions.id = :id");
-        $stmt->execute([':category_id' => $questionCategoryID, ':user_id' => $userId, ':id' => $this->id]);
+        $stmt->execute([':category_id' => $questionCategoryID, ':user_id' => $userId, ':id' => $this->id, ':lang' => $lang]);
         $question = $stmt->fetch(PDO::FETCH_ASSOC);
         if ($question) {
             return $question;

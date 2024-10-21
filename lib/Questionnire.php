@@ -43,23 +43,25 @@ class Questionnire
             SELECT 
                 categories.id,
                 categories.title_sef sef,
-                categories.title_{$this->lang} questions_category,
+                categories_localization.title questions_category,
                 questions.id question_id,
                 questions.title_sef question_sef,
                 questions.db_template,
-                questions.title_{$this->lang} question_title,
+                questions_localization.title question_title,
                 (solved_at IS NOT NULL) solved
             FROM categories
+            JOIN categories_localization ON categories_localization.cagory_id = categories.id AND categories_localization.language =  :lang
             JOIN questionnires ON questionnires.id = categories.questionnire_id
             JOIN question_categories ON question_categories.category_id = categories.id
             JOIN questions ON question_categories.question_id = questions.id
-            LEFT JOIN user_questions ON user_questions.question_id = questions.id and user_questions.user_id = :userId
+            JOIN questions_localization on questions_localization.question_id = questions.id AND questions_localization.language = :lang
+            LEFT JOIN user_questions ON user_questions.question_id = questions.id AND user_questions.user_id = :userId
             WHERE not categories.deleted AND not questions.deleted AND
                 questionnires.name = :questionnire
             ORDER BY categories.sequence_position, question_categories.sequence_position
         ");
         try {
-            $stmt->execute([':userId' => $userId, ':questionnire' => $name]);
+            $stmt->execute([':userId' => $userId, ':questionnire' => $name, ':lang' => $this->lang]);
         } catch (Exception $e) {
             var_dump($e);
         }
