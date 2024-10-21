@@ -13,7 +13,7 @@ class Questionnire
      *
      * @var array<string>
      */
-    private $supportedlanguages = ['en', 'ru'];
+    private $supportedlanguages = ['en', 'ru', 'pt'];
 
     /**
      * Questionnire language
