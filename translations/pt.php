@@ -27,7 +27,7 @@ $translations = [
     'top_menu_login' => 'Entrar',
     'top_menu_logout' => 'Sair',
     'site_description' => 'Aproveite o poder da prática para dominar o SQL. Nossos exercícios interativos são projetados para solidificar sua compreensão, desde conceitos básicos até técnicas avançadas. Seja você um iniciante em SQL ou um profissional experiente, encontrará desafios adaptados ao seu nível de habilidade. Aumente sua confiança para entrevistas de emprego e aplicações do mundo real por meio da prática consistente.',
-    'site_promo' => 'aprimore suas habilidades SQL',
+    'site_promo' => 'problemas SQL',
     'something_went_wrong' => 'Ops! Algo deu errado, mas não se preocupe, temos muitas outras tarefas <a href="/pt/" target="_self">aqui</a>',
     'menu_small_add_placeholder' => 'A receita de anúncios e doações são nossas únicas fontes de financiamento. Por favor, não desative os anúncios ou <a href="/pt/donate" style="color: var(--special-text-color);">considere doar</a>.<br>Obrigado pelo seu apoio! ',
     'toast_sql_copied_to_buffer' => 'Código SQL copiado para a área de transferência',

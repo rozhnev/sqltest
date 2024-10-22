@@ -1,17 +1,21 @@
 <div class="header">
     <div class="top-menu">
-        <a href="/{$Lang}/" target="_self" style="width: 20vw; display: flex;">
-            <h1 class="site-name-wrapper">
-                <span class="site-name">SQLtest: </span>
-                <span class="site-promo">{translate}site_promo{/translate}</span>
-            </h1>
-        </a>    
-        <span  class="site-description">
-            {translate}site_description{/translate}
-        </span>
-        <div style="display: flex; flex-direction: row; justify-content: space-between;">
+        <div class="top-menu-left" style="width: 20vw; display: flex;">
+            <a href="/{$Lang}/" target="_self" style="width: 20vw; display: flex;">
+                <h1 class="site-name-wrapper">
+                    <span class="site-name">SQLtest: </span>
+                    <span class="site-promo">{translate}site_promo{/translate}</span>
+                </h1>
+            </a>
+        </div>
+        <div class="top-menu-center" style="width: 55vw; display: flex;">
+            <span  class="site-description">
+                {translate}site_description{/translate}
+            </span>
+        </div>
+        <div class="top-menu-right" style="width: 25vw; display: flex; justify-content: space-between; padding-right: 18px;">
             {include file='theme-switcher.tpl'}
-            <div style="display: flex; justify-content: center; min-width: 120px; padding-top: 12px;">
+            <div style="display: flex; min-width: 90px; margin: 12px; align-items: center; justify-content: center;">
                 <a href="/{$Lang}/donate" target="_self" class="donate-btn shake" id="donate-btn">{translate}top_menu_donate{/translate}</a>
             </div>
             {include file='lang-switcher.tpl'}
