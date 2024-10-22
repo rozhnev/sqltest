@@ -1,6 +1,6 @@
 <div class="header">
     <div class="top-menu">
-        <div class="top-menu-left" style="width: 20vw; display: flex;">
+        <div class="top-menu-left" style="width: 19vw; display: flex; align-items: center;">
             <a href="/{$Lang}/" target="_self" style="width: 20vw; display: flex;">
                 <h1 class="site-name-wrapper">
                     <span class="site-name">SQLtest: </span>
