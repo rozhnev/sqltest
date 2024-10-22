@@ -260,10 +260,10 @@ body {
 .top-menu {
     text-align: left;
     background-color: var(--block-background-color);
-    padding: 7px;
+    padding: 0 7px 7px 7px;
     display: flex;
     flex-flow: row;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     color: var(--special-text-color);
 }
 
@@ -852,10 +852,11 @@ td {
     position: absolute;
 }
 
-.container .donate-btn {
+/* .full-container .donate-btn, */
+/* .container .donate-btn {
     right: 60px;
     top: 20px;
-}
+} */
 .mobile-container .donate-btn {
     right: 50px;
     top: 8px;

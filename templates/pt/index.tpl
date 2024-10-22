@@ -1,15 +1,16 @@
-{include file='header.tpl'}
+{include file='../header.tpl'}
 <body>
-<div class="mobile-container">
+<div class="container">
     {include file='popups.tpl'}
-    {include file='m.top-menu.tpl' path="/question/{$QuestionCategoryID}/{$QuestionID}"}
-    {include file='m.menu.tpl'}
+    {include file='top-menu.tpl'}
+    {include file='menu.tpl'}
+    {include file='../splitter.tpl'}
     <div class="main">
-        <div class="question-wrapper" id="question-wrapper">
+        <div class="question-wrapper">
             <div class="question-title-bar" style="display: flex;">
                 <div class="question-title">
                     <div class="question-level rate{$Question.rate}" title="{$Question.question_rate|default:'Not rated yet'}"></div>
-                    Task {$Question.number}:
+                    Task&nbsp;{$Question.number}:
                     {if $LoggedAsAdmin}
                         <a href="/admin/question/{$NextQuestionId}" title="Edit" style="color:#333">&#9998;</a>
                     {/if}
@@ -23,12 +24,12 @@
                 </div>
                 {if $PreviousQuestionId}
                     <div class="question-navigate" style="border-right: 1px solid var(--text-block-border-color);">
-                        <a href="/{$Lang}/question/{$Question.category_sef}/{$PreviousQuestionId}#question-wrapper" title="Previous task"><i class="arrow arrow-left"></i></a>
+                        <a href="/{$Lang}/question/{$Question.category_sef}/{$PreviousQuestionId}" title="Previous task"><i class="arrow arrow-left"></i></a>
                     </div>
                 {/if}
                 {if $NextQuestionId}
                     <div class="question-navigate">
-                        <a href="/{$Lang}/question/{$Question.category_sef}/{$NextQuestionId}#question-wrapper" title="Next task"><i class="arrow arrow-right"></i></a>
+                        <a href="/{$Lang}/question/{$Question.category_sef}/{$NextQuestionId}" title="Next task"><i class="arrow arrow-right"></i></a>
                     </div>
                 {/if}
             </div>
@@ -36,7 +37,7 @@
                 {$Question.task}
             </div>
             {if isset($Question.answers)}
-                <div class="question">
+                <div class="answers">
                 {foreach $Question.answers as $answer}
                     <div class="answer">
                         <input type="checkbox" id="answer-{$answer.id}" name="answers" value="{$answer.id}" {if $answer.id|in_array:$Question.last_query} checked{/if}>
@@ -49,19 +50,18 @@
                 </p>
             {else}
                 <p class="question-action">
-                    Write your request in the field below and click the "Check it!" button.{* (If there is an error, you will have to review the ad unit)*}
+                    Write your request in the field below and click the "Check it!" button.
                 </p>
                 <p class="question-action">
-                    To write the answer, use {$Question.dbms} syntax.<br>
-                    Descriptions of the tables are given at the bottom of screen.
+                    To write the answer, use {$Question.dbms} syntax. Descriptions of the tables are given in the right panel.
                 </p>
             {/if}
         </div>
         {if !isset($Question.answers)}
-            <div class="code-actions">
-                <button onClick="copyCode(`SQL code copied to buffer`)">Copy code</button> <button onClick="clearEditor()">Clear editor</button>
-            </div>
-            <div class="code-wrapper" id="sql-code" name="sql-code">{$Question.last_query}</div>
+        <div class="code-actions">
+            <button onClick="copyCode(`SQL code copied to buffer`)">Copy code</button> <button onClick="clearEditor()">Clear editor</button>
+        </div>
+        <div class="code-wrapper" id="sql-code" name="sql-code">{$Question.last_query}</div>
         {/if}
         <div class="code-buttons">
             <button class="button" id="getHelpBtn" onClick="getHelp('{$Lang}', {$QuestionID})">Get help</button>
@@ -72,12 +72,25 @@
                 <button class="button green" id="checkAnswersBtn" onClick="checkAnswers('{$Lang}', {$QuestionID})">Check it!</button>
             {/if}
             {if $NextQuestionId}
-                <a href="/{$Lang}/question/{$Question.category_sef}/{$NextQuestionId}" title="Следующее задание" class="button green hidden">Next</a>
+                <a href="/{$Lang}/question/{$Question.category_sef}/{$NextQuestionId}" title="Next task" class="button green hidden">Next</a>
             {/if}
         </div>
         <div class="code-result ace-xcode" id="code-result"></div>
     </div>
-    <div class="right">
-        {include file="{$Lang}/{$DB}.tpl"}
+
+    <div class="right" id="right-panel">
+        <div class="text-block user-solutions-count">
+            <p>Explore over <span style="font-weight:bold; color: #2EA043 !important;">{floor(($QuestionsCount - 1)/10) * 10}</span> diverse tasks on our platform.</p>
+        {if $Logged}
+            <p>
+                You {if $SolvedQuestionsCount < ($QuestionsCount/2)}have{else}already{/if} solved <span style="font-weight:bold;  color: #2EA043 !important;">{$SolvedQuestionsCount}</span> of them.
+                {if $SolvedQuestionsCount < $QuestionsCount} Keep&nbspgoing!{/if}
+            </p>
+        {else}
+            <p>Log in to save your progress.</p>
+            <button class="button blue" onClick="toggleLoginWindow()">Login</button>
+        {/if}
+        </div>
+        {include file="{$DB}.tpl"}
     </div>
-    {include file='m.footer.tpl'}
+    {include file='footer.tpl'}

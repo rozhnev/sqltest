@@ -1,19 +1,11 @@
 {include file='short-header.tpl'}
     <body>
         <div class="{if $MobileView}mobile-container{else}full-container{/if}">
-            <div class="header">
-                <div class="top-menu">
-                    {if $MobileView}
-                        {include file='m.site-name.tpl'}
-                    {else}
-                            {include file='site-name.tpl'}
-                    {/if}
-                    <div style="display: flex; justify-content: center; min-width: 100px;">
-                        {include file='theme-switcher.tpl'}
-                        {include file='lang-switcher.tpl' path="books"}
-                    </div>
-                </div>
-            </div>
+            {if $MobileView}
+                {include file='m.top-menu.tpl' path="/books"}
+            {else}
+                {include file='top-menu.tpl' path="/books"}
+            {/if}
             <div class="container3">
                 <h2>{translate}books_title{/translate}</h2>
                 <h3>{translate}books_description{/translate}</h3>

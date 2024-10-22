@@ -2,7 +2,11 @@
 <body>
 <div class="container">
     {include file='popups.tpl'}
-    {include file='top-menu.tpl'}
+    {if $MobileView}
+        {include file='m.top-menu.tpl' path="/question/{$QuestionCategoryID}/{$QuestionID}"}
+    {else}
+        {include file='top-menu.tpl' path="/question/{$QuestionCategoryID}/{$QuestionID}"}
+    {/if}
     {include file='menu.tpl'}
     {include file='splitter.tpl'}
     <div class="main">

@@ -1,9 +1,9 @@
-{include file='header.tpl'}
+{include file='../header.tpl'}
 <body>
 <div class="mobile-container">
     {include file='popups.tpl'}
-    {include file='m.top-menu.tpl' path="/question/{$QuestionCategoryID}/{$QuestionID}"}
-    {include file='m.menu.tpl'}
+    {include file='m.top-menu.tpl'}
+    {include file='../m.menu.tpl'}
     <div class="main">
         <div class="question-wrapper" id="question-wrapper">
             <div class="question-title-bar" style="display: flex;">
@@ -78,6 +78,6 @@
         <div class="code-result ace-xcode" id="code-result"></div>
     </div>
     <div class="right">
-        {include file="{$Lang}/{$DB}.tpl"}
+        {include file="{$DB}.tpl"}
     </div>
     {include file='m.footer.tpl'}
