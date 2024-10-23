@@ -850,7 +850,13 @@ td {
     backface-visibility: hidden;
     perspective: 1000px;
 }
-
+.book-card {
+    display: flex;
+    min-width:340px;
+}
+.full-container .book-card {
+    max-width: 30%;
+}
 .help {
     color: darkred;
     background-color: white;
