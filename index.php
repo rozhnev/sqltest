@@ -174,10 +174,6 @@ switch ($action) {
         break;        
     case 'privacy-policy':
         $smarty->assign('Lang', $lang);
-        $smarty->assign('PageTitle', $lang === 'ru' 
-            ? 'SQLTest.online: Политика конфиденциальности'
-            : 'SQLTest.online: Privacy Policy'
-        );
         $template = "privacy_policy.tpl";
         break;
     case 'donate':

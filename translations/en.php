@@ -51,4 +51,6 @@ $translations = [
     'solution_title' => 'Solved at',
     'solution_query_cost' => 'Query cost',
     'no_solutions_yet' => 'Sorry, but no solution to this problem has been published yet.',
+    'privacy_policy_page_title' => 'SQLTest.online: Privacy Policy',
+    'privacy_policy_page_description' => 'At SQLTest, we value your privacy. This policy outlines how we collect, use, and protect your personal information when you visit our website. We are committed to maintaining the confidentiality and security of your data. By using our services, you agree to the practices described in this policy.',
 ];
