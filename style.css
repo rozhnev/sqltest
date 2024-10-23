@@ -270,19 +270,14 @@ body {
     color: var(--special-text-color);
 }
 
-.top-menu .lang-swith {
-    font-size: small;
-    position: absolute;
-}
-
-.container .lang-swith,
-.full-container .lang-swith {
-    right: 28px;
-    top: 28px;
-}
-.mobile-container .lang-swith {
-    right: 18px;
-    top: 14px;
+.lang-swith {
+    display: flex; 
+    row-gap: 10px; 
+    min-width: 30px; 
+    margin-top: 12px; 
+    align-items: center; 
+    justify-content: center; 
+    flex-flow: column;
 }
 .container .menu {
     grid-area: menu;
