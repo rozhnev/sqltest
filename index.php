@@ -11,7 +11,7 @@ $languages = ['ru' => 'Русский', 'en' => 'English', 'pt' => 'Português'/
 $languge_codes = array_keys($languages);
 $languge_codes_regexp = implode('|', $languge_codes);
 
-$mobileView = 1; (
+$mobileView =  (
     (isset($_SERVER['SERVER_NAME']) && $_SERVER['SERVER_NAME'] === 'm.sqltest.online') 
     // for local use
     //|| parse_url($_SERVER['HTTP_HOST'])['host'] === 'm.sqltest.local' 
@@ -168,14 +168,7 @@ switch ($action) {
         $smarty->assign('CategoriesCount', $questionnire->getCategoriesCount());
         $smarty->assign('QuestionsCount',  $questionnire->getQuestionsCount());
         //$smarty->assign('QuestionnaireCategoriesLinks',  $questionnire->getQuestionnaireCategoriesLinks(3));
-        $smarty->assign('PageTitle', $lang === 'ru' 
-            ? 'SQLTest.online: твой персональный тренер по SQL'
-            : 'SQLTest.online: your personal SQL trainer'
-        );
-        $smarty->assign('PageDescription', $lang === 'ru' 
-            ? 'Хочешь научиться писать эффективные SQL-запросы? С SQLTest.online это просто! Решай разнообразные практические задачи, отслеживай свой прогресс и становись настоящим экспертом в области SQL.'
-            : 'Want to learn how to write effective SQL queries? With SQLTest.online it\'s easy! Solve various practical problems, track your progress and become a real expert in SQL.'
-        );
+
         $smarty->registerPlugin("modifier", "floor", "floor");
         $template = "about.tpl";
         break;        
@@ -328,14 +321,6 @@ switch ($action) {
     case 'books':
         $smarty->assign('Books', Helper::getBooks($dbh, $lang));
         $template = "books.tpl";
-        $smarty->assign('PageTitle', $lang === 'ru' 
-            ? 'Изучаем SQL: лучшие книги для начинающих и профи'
-            : 'Learning SQL: The Best Books for Beginners and Profi'
-        );
-        $smarty->assign('PageDescription', $lang === 'ru' 
-            ? 'Хотите освоить язык SQL и стать востребованным специалистом в области баз данных? Мы собрали для вас подборку самых полезных книг, которые помогут вам сделать первые шаги в мире SQL.'
-            : 'Want to master the SQL language and become a sought-after database specialist? We have compiled a selection of the most useful books for you that will help you take your first steps in the world of SQL.'
-        );
         break;
     default:
         // stored for back compatibility
