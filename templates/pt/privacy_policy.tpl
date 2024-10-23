@@ -5,14 +5,14 @@
 <h3>1. Informações que Coletamos:</h3>
 
 <ol>
-    <li><strong>Google OAuth2:</strong> Quando você usa o SQLtest, podemos solicitar acesso às informações da sua conta Google via OAuth2. Isso pode incluir, mas não se limita a, seu endereço de e-mail e informações de perfil conforme especificado durante o processo de autorização.</li>
+    <li>Ao usar o SQLTest, podemos solicitar acesso às informações da sua conta de vários provedores OAuth, incluindo Google, Yandex, LinkedIn, GitHub e VK. Esse acesso pode incluir, mas não se limita, ao seu endereço de e-mail e detalhes do perfil conforme especificado durante o processo de autorização.</li>
 </ol>
 
 <h3>2. Como Usamos as Informações:</h3>
 
 <ol>
-    <li><strong>Autenticação:</strong> Usamos as informações obtidas através do Google OAuth2 para autenticar sua identidade e fornecer acesso aos nossos serviços.</li>
-    <li><strong>Gerenciamento de Conta:</strong> As informações da sua conta Google são usadas para gerenciar sua conta dentro do SQLtest.</li>
+    <li><strong>Autenticação:</strong> Usamos as informações obtidas através do OAuth2 para autenticar sua identidade e fornecer acesso aos nossos serviços.</li>
+    <li><strong>Gerenciamento de Conta:</strong> As informações da sua conta OAuth2 são usadas para gerenciar sua conta dentro do SQLtest.</li>
     <li><strong>Comunicação:</strong> Podemos usar seu endereço de e-mail para comunicar atualizações importantes, notificações ou questões relacionadas ao suporte.</li>
 </ol>
 
