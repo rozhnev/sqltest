@@ -102,8 +102,12 @@ class Question
      */
     public function getAnswers(int $questionCategoryID, string $lang, ?string $userId): array 
     {
-        $stmt = $this->dbh->prepare("SELECT id, {$lang} answer FROM answers WHERE question_id = ? ");
-        $stmt->execute([$this->id]);
+        $stmt = $this->dbh->prepare("
+            SELECT id, title AS answer 
+            FROM answers 
+            JOIN answers_localization ON answers_localization.answer_id = answers.id and answers_localization.language = :lang
+            WHERE question_id = :id ");
+        $stmt->execute([':id' => $this->id, ':lang' => $lang]);
         $answers = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         if ($answers) {
