@@ -158,14 +158,6 @@ body {
     right: 140px;
     top: 12px;
 }
-/* .container .theme-switch-wrapper {
-    right: 220px;
-    top: 22px;
-} */
-.mobile-container .theme-switch-wrapper {
-    right: 190px;
-    top: 8px;
-}
 
 .site-name-wrapper {
     display: flex;
@@ -852,15 +844,6 @@ td {
     position: absolute;
 }
 
-/* .full-container .donate-btn, */
-/* .container .donate-btn {
-    right: 60px;
-    top: 20px;
-} */
-.mobile-container .donate-btn {
-    right: 50px;
-    top: 8px;
-}
 .shake {
     animation: shake .82s cubic-bezier(.36, .07, .19, .97) both;
     transform: translate3d(0, 0, 0);

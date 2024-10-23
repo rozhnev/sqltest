@@ -3,6 +3,18 @@
 <div class="mobile-container">
     {include file='popups.tpl'}
     {include file='m.top-menu.tpl' path="/question/{$QuestionCategoryID}/{$QuestionID}"}
+    <div class="text-block user-solutions-count">
+        <p>Explore over <span style="font-weight:bold; color: #2EA043 !important;">{floor(($QuestionsCount - 1)/10) * 10}</span> diverse tasks on our platform.</p>
+        {if $Logged}
+            <p>
+                You {if $SolvedQuestionsCount < ($QuestionsCount/2)}have{else}already{/if} solved <span style="font-weight:bold;  color: #2EA043 !important;">{$SolvedQuestionsCount}</span> of them.
+                {if $SolvedQuestionsCount < $QuestionsCount} Keep&nbspgoing!{/if}
+            </p>
+        {else}
+            <p>Log in to save your progress.</p>
+            <button class="button blue" onClick="toggleLoginWindow()">Login</button>
+        {/if}
+    </div>
     {include file='m.menu.tpl'}
     <div class="main">
         <div class="question-wrapper" id="question-wrapper">
