@@ -30,7 +30,7 @@
                 <p>{translate}books_support{/translate}</p>
                 </p>
                 <div style="text-align: center; margin: 36px;">
-                    <a style="display:inline-block;width:240px; color: white;" href="/{$Lang}/question/db-theory/what-is-sql" title="Start quiz" class="button green">Start quiz</a>
+                    <a style="display:inline-block;width:240px; color: white;" href="/{$Lang}/question/db-theory/what-is-sql" title="Start quiz" class="button green">{translate}books_start_quiz{/translate}</a>
                 </div>
             </div>
 {if $MobileView}

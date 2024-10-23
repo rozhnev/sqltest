@@ -2,8 +2,8 @@
 $translations = [
     'books_title' => 'Quer se tornar um verdadeiro guru SQL?',
     'books_description' => 'Preparamos para você uma seleção dos melhores livros que o ajudarão a dominar a linguagem SQL do zero e aprimorar suas habilidades até a perfeição. Nossa seleção inclui livros para iniciantes e desenvolvedores experientes.',
-    'books_support' => 'Apoie o nosso projeto!<br>
-    Ao adquirir livros através dos nossos links, você não só vai expandir a sua biblioteca, mas também vai ajudar a desenvolver o projeto sqltest.online.',
+    'books_support' => 'Apoie o nosso projeto!<br>Ao adquirir livros através dos nossos links, você não só vai expandir a sua biblioteca, mas também vai ajudar a desenvolver o projeto sqltest.online.',
+    'books_start_quiz' => 'Iniciar teste',
     'empty_query_result' => 'Sua consulta está vazia.',
     'error_message' => 'Ops! Algo deu errado, mas não se preocupe, temos muitas outras tarefas <a href="/pt/" target="_self">aqui</a>',
     'footer_about' => 'Sobre',
