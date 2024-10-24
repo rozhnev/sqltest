@@ -1,22 +1,20 @@
 <div id="db-description" class="db-description">
   {literal}
     <h2>AdventureWorks Database (SQL Server)</h2>
-    <p>The AdventureWorks Database is a sample database that demonstrates the capabilities of SQL Server. It includes data
-      about
-      fictional manufacturing company.</p>
-    <p><a style="font-size: small; color: var(--special-text-color);" href="/images/adventureworks" target="ERDWindow">AdventureWorks DB ER diagram</a></p>
-    <p>The following is a list of these tables:</p>
+    <p>O Banco de Dados AdventureWorks é um banco de dados de amostra que demonstra as capacidades do SQL Server. Ele inclui dados sobre uma empresa de manufatura fictícia.</p>
+    <p><a style="font-size: small; color: var(--special-text-color);" href="/images/adventureworks" target="ERDWindow">Diagrama ER do Banco de Dados AdventureWorks</a></p>
+    <p>A seguir, uma lista das tabelas:</p>
     <ul style="list-style-type: '▤ '; padding-inline-start: 20px;">
-      <li><span class='sql' onclick="scrollInfoPanel('Address_table_description')">Address</span> - table of addresses.</li>
-      <li><span class='sql' onclick="scrollInfoPanel('Customer_table_description')">Customer</span> - table of customers</li>
-      <li><span class='sql' onclick="scrollInfoPanel('CustomerAddress_table_description')">CustomerAddress</span> - table of customer tot address relations.</li>
-      <li><span class='sql' onclick="scrollInfoPanel('Product_table_description')">Product</span> - table of products.</li>
-      <li><span class='sql' onclick="scrollInfoPanel('ProductCategory_table_description')">ProductCategory</span> - table of product categories.</li>
-      <li><span class='sql' onclick="scrollInfoPanel('ProductDescription_table_description')">ProductDescription</span> - table of product descriptions.</li>
-      <li><span class='sql' onclick="scrollInfoPanel('ProductModel_table_description')">ProductModel</span> - table of product models.</li>
-      <li><span class='sql' onclick="scrollInfoPanel('ProductModelProductDescription_table_description')">ProductModelProductDescription</span> - table of product models descriptions.</li>
-      <li><span class='sql' onclick="scrollInfoPanel('SalesOrderDetail_table_description')">SalesOrderDetail</span> - table of product sales orders.</li>
-      <li><span class='sql' onclick="scrollInfoPanel('SalesOrderHeader_table_description')">SalesOrderHeader</span> - table of product sales orders details.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('Address_table_description')">Address</span> - Tabela de endereços.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('Customer_table_description')">Customer</span> - Tabela de clientes.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('CustomerAddress_table_description')">CustomerAddress</span> - Tabela de relações entre clientes e endereços.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('Product_table_description')">Product</span> - Tabela de produtos.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('ProductCategory_table_description')">ProductCategory</span> - Tabela de categorias de produtos.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('ProductDescription_table_description')">ProductDescription</span> - Tabela de descrições de produtos.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('ProductModel_table_description')">ProductModel</span> - Tabela de modelos de produtos.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('ProductModelProductDescription_table_description')">ProductModelProductDescription</span> - Tabela de relações entre modelos de produtos e descrições de produtos.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('SalesOrderDetail_table_description')">SalesOrderDetail</span> - Tabela de detalhes de pedidos de venda de produtos.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('SalesOrderHeader_table_description')">SalesOrderHeader</span> - Tabela de cabeçalhos de pedidos de venda de produtos.</li>
     </ul>
     <a href="https://amzn.to/4cFPQwS" target="_blank" style="text-decoration: none;">
       <div style="display: flex; flex-direction: row; border: 1px solid white; padding: 0.3em; width: 98%;">
@@ -32,23 +30,23 @@
       </div>
     </a>
     <h3 id="Address_table_description">
-      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Rolar para cima">
         <svg height="15" width="15" style="">
           <polygon points="8,1 15,14 1,14" fill="white"/>
         </svg>
       </span>
-      Table <span class='sql'>Address</span>
+      Tabela <span class='sql'>Address</span>
     </h3>
-    Columns:
+    Colunas:
     <ul class="table-columns">
-      <li> <span class="sql">AddressID</span> - a unique identifier for each address.</li>
-      <li> <span class="sql">AddressLine1</span> - the first line of the address.</li>
-      <li> <span class="sql">AddressLine2</span> - the second line of the address.</li>
-      <li> <span class="sql">StateProvince</span> - city.</li>
-      <li> <span class="sql">CountryRegion</span> - country.</li>
-      <li> <span class="sql">PostalCode</span> - postal code.</li>
+      <li> <span class="sql">AddressID</span> - um identificador único para cada endereço.</li>
+      <li> <span class="sql">AddressLine1</span> - a primeira linha do endereço.</li>
+      <li> <span class="sql">AddressLine2</span> - a segunda linha do endereço.</li>
+      <li> <span class="sql">StateProvince</span> - cidade.</li>
+      <li> <span class="sql">CountryRegion</span> - país.</li>
+      <li> <span class="sql">PostalCode</span> - código postal.</li>
       <li> <span class="sql">rowguid</span> - guid.</li>
-      <li> <span class="sql">ModifiedDate</span> - timestamp of row creation or last update.</li>
+      <li> <span class="sql">ModifiedDate</span> - data e hora da criação ou última atualização da linha.</li>
     </ul>
 
     <div class="table-wrapper">
@@ -79,36 +77,36 @@
         </tbody>
       </table>
     </div>
-    Indexes:
+    Índices:
     <ul class="table-columns">
-      <li>PRIMARY KEY, btree (AddressID)</li>
+      <li>CHAVE PRIMÁRIA, btree (AddressID)</li>
     </ul>
     <h3 id="Customer_table_description">
-      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Rolar para cima">
         <svg height="15" width="15" style="">
           <polygon points="8,1 15,14 1,14" fill="white"/>
         </svg>
       </span>
-      Table <span class='sql'>Customer</span>
+      Tabela <span class='sql'>Customer</span>
     </h3>
-    Columns:
+    Colunas:
     <ul class="table-columns">
-      <li> <span class="sql">CustomerID</span> - a unique identifier for each customer.</li>
-      <li> <span class="sql">NameStyle</span> - 0 = The data in FirstName and LastName are stored in western style (first name, last name) order. 1 = Eastern style (last name, first name) order.
-Default: 0.</li>
-      <li> <span class="sql">Title</span> - title.</li>
-      <li> <span class="sql">FirstName</span> - name.</li>
-      <li> <span class="sql">MiddleName</span> - middle name.</li>
-      <li> <span class="sql">LastName</span> - last name.</li>
-      <li> <span class="sql">Suffix</span> - suffix.</li>
-      <li> <span class="sql">CompanyName</span> - company name.</li>
-      <li> <span class="sql">SalesPerson</span> - SalesPerson.</li>
-      <li> <span class="sql">EmailAddress</span> - E-mail.</li>
-      <li> <span class="sql">Phone</span> - phone number.</li>
-      <li> <span class="sql">PasswordHash</span> - password hash.</li>
+      <li> <span class="sql">CustomerID</span> - um identificador único para cada cliente.</li>
+      <li> <span class="sql">NameStyle</span> - 0 = Os dados em FirstName e LastName são armazenados no estilo ocidental (primeiro nome, sobrenome). 1 = Estilo oriental (sobrenome, primeiro nome).
+Padrão: 0.</li>
+      <li> <span class="sql">Title</span> - título.</li>
+      <li> <span class="sql">FirstName</span> - nome.</li>
+      <li> <span class="sql">MiddleName</span> - nome do meio.</li>
+      <li> <span class="sql">LastName</span> - sobrenome.</li>
+      <li> <span class="sql">Suffix</span> - sufixo.</li>
+      <li> <span class="sql">CompanyName</span> - nome da empresa.</li>
+      <li> <span class="sql">SalesPerson</span> - vendedor.</li>
+      <li> <span class="sql">EmailAddress</span> - e-mail.</li>
+      <li> <span class="sql">Phone</span> - número de telefone.</li>
+      <li> <span class="sql">PasswordHash</span> - hash da senha.</li>
       <li> <span class="sql">PasswordSalt</span> - salt.</li>
-      <li> <span class="sql">rowguid</span> - rowguid.</li>
-      <li> <span class="sql">ModifiedDate</span> - timestamp of row creation or last update.</li>
+      <li> <span class="sql">rowguid</span> - guid.</li>
+      <li> <span class="sql">ModifiedDate</span> - data e hora da criação ou última atualização da linha.</li>
     </ul>
 
     <div class="table-wrapper">
@@ -151,25 +149,25 @@ Default: 0.</li>
         </tbody>
       </table>
     </div>
-    Indexes:
+    Índices:
     <ul class="table-columns">
-      <li>PRIMARY KEY, btree (CustomerID)</li>
+      <li>CHAVE PRIMÁRIA, btree (CustomerID)</li>
     </ul>
     <h3 id="CustomerAddress_table_description">
-      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Rolar para cima">
         <svg height="15" width="15" style="">
           <polygon points="8,1 15,14 1,14" fill="white"/>
         </svg>
       </span>
-      Table <span class='sql'>CustomerAddress</span>
+      Tabela <span class='sql'>CustomerAddress</span>
     </h3>
-    Columns:
+    Colunas:
     <ul class="table-columns">
-      <li> <span class="sql">CustomerID</span> - unique identifier of client in the table <span class="sql">Customer</span>.</li>
-      <li> <span class="sql">AddressID</span> - unique identifier of address in the table <span class="sql">Address</span>.</li>
-      <li> <span class="sql">AddressType</span> - address type.</li>
+      <li> <span class="sql">CustomerID</span> - identificador único do cliente na tabela <span class="sql">Customer</span>.</li>
+      <li> <span class="sql">AddressID</span> - identificador único do endereço na tabela <span class="sql">Address</span>.</li>
+      <li> <span class="sql">AddressType</span> - tipo de endereço.</li>
       <li> <span class="sql">rowguid</span> - guid.</li>
-      <li> <span class="sql">ModifiedDate</span> - timestamp of row creation or last update.</li>
+      <li> <span class="sql">ModifiedDate</span> - data e hora da criação ou última atualização da linha.</li>
     </ul>
 
     <div class="table-wrapper">
@@ -192,39 +190,39 @@ Default: 0.</li>
         </tbody>
       </table>
     </div>
-    Indexes:
+    Índices:
     <ul class="table-columns">
-      <li>PRIMARY KEY, btree (CustomerID, AddressID)</li>
+      <li>CHAVE PRIMÁRIA, btree (CustomerID, AddressID)</li>
     </ul>
     <h3 id="Product_table_description">
-      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Rolar para cima">
         <svg height="15" width="15" style="">
           <polygon points="8,1 15,14 1,14" fill="white"/>
         </svg>
       </span>
-      Table <span class='sql'>Product</span>
+      Tabela <span class='sql'>Product</span>
     </h3>
-    Columns:
+    Colunas:
     <ul class="table-columns">
-      <li> <span class="sql">ProductID</span> - a unique identifier for each product.</li>
-      <li> <span class="sql">Name</span> - product name.</li>
-      <li> <span class="sql">ProductNumber</span> - article number.</li>
-      <li> <span class="sql">Color</span> - product color.</li>
-      <li> <span class="sql">StandardCost</span> - product price.</li>
-      <li> <span class="sql">ListPrice</span> - product price in the catalogue.</li>
-      <li> <span class="sql">Size</span> - product size.</li>
-      <li> <span class="sql">Weight</span> - product weight.</li>
-      <li> <span class="sql">ProductCategoryID</span> - foreign key pointing to table <span
-          class="sql">ProductCategory</span> - defines the product category.</li>
-      <li> <span class="sql">ProductModelID</span> - foreign key pointing to table <span class="sql">ProductModel</span> -
-        defines the product model.</li>
-      <li> <span class="sql">SellStartDate</span> - timestamp of the sales start date.</li>
-      <li> <span class="sql">SellEndDate</span> - timestamp of the sales end date.</li>
-      <li> <span class="sql">DiscontinuedDate</span> - timestamp of the sales end date.</li>
-      <li> <span class="sql">ThumbNailPhoto</span> - thumbnail photo of the product.</li>
-      <li> <span class="sql">ThumbnailPhotoFileName</span> - name of the photo thumbnail file.</li>
+      <li> <span class="sql">ProductID</span> - um identificador único para cada produto.</li>
+      <li> <span class="sql">Name</span> - nome do produto.</li>
+      <li> <span class="sql">ProductNumber</span> - número do artigo.</li>
+      <li> <span class="sql">Color</span> - cor do produto.</li>
+      <li> <span class="sql">StandardCost</span> - preço do produto.</li>
+      <li> <span class="sql">ListPrice</span> - preço do produto no catálogo.</li>
+      <li> <span class="sql">Size</span> - tamanho do produto.</li>
+      <li> <span class="sql">Weight</span> - peso do produto.</li>
+      <li> <span class="sql">ProductCategoryID</span> - chave estrangeira que aponta para a tabela <span
+          class="sql">ProductCategory</span> - define a categoria do produto.</li>
+      <li> <span class="sql">ProductModelID</span> - chave estrangeira que aponta para a tabela <span class="sql">ProductModel</span> -
+        define o modelo do produto.</li>
+      <li> <span class="sql">SellStartDate</span> - data e hora do início das vendas.</li>
+      <li> <span class="sql">SellEndDate</span> - data e hora do fim das vendas.</li>
+      <li> <span class="sql">DiscontinuedDate</span> - data e hora da descontinuação.</li>
+      <li> <span class="sql">ThumbNailPhoto</span> - miniatura da foto do produto.</li>
+      <li> <span class="sql">ThumbnailPhotoFileName</span> - nome do arquivo da miniatura da foto.</li>
       <li> <span class="sql">rowguid</span> - guid.</li>
-      <li> <span class="sql">ModifiedDate</span> - timestamp of row creation or last update.</li>
+      <li> <span class="sql">ModifiedDate</span> - data e hora da criação ou última atualização da linha.</li>
     </ul>
 
     <div class="table-wrapper">
@@ -271,25 +269,25 @@ Default: 0.</li>
         </tbody>
       </table>
     </div>
-    Indexes:
+    Índices:
     <ul class="table-columns">
-      <li>PRIMARY KEY, btree (ProductID, ProductCategoryID, ProductModelID)</li>
+      <li>CHAVE PRIMÁRIA, btree (ProductID, ProductCategoryID, ProductModelID)</li>
     </ul>
     <h3 id="ProductCategory_table_description">
-      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Rolar para cima">
         <svg height="15" width="15" style="">
           <polygon points="8,1 15,14 1,14" fill="white"/>
         </svg>
       </span>
-      Table <span class='sql'>ProductCategory</span>
+      Tabela <span class='sql'>ProductCategory</span>
     </h3>
-    Columns:
+    Colunas:
     <ul class="table-columns">
-      <li> <span class="sql">ProductCategoryID</span> - a unique identifier for each product category.</li>
-      <li> <span class="sql">ParentProductCategoryID</span> - identifier of the parent product category.</li>
-      <li> <span class="sql">Name</span> - name of the product category.</li>
+      <li> <span class="sql">ProductCategoryID</span> - um identificador único para cada categoria de produto.</li>
+      <li> <span class="sql">ParentProductCategoryID</span> - identificador da categoria de produto pai.</li>
+      <li> <span class="sql">Name</span> - nome da categoria de produto.</li>
       <li> <span class="sql">rowguid</span> - guid.</li>
-      <li> <span class="sql">ModifiedDate</span> - timestamp of row creation or last update.</li>
+      <li> <span class="sql">ModifiedDate</span> - data e hora da criação ou última atualização da linha.</li>
     </ul>
 
     <div class="table-wrapper">
@@ -312,24 +310,24 @@ Default: 0.</li>
         </tbody>
       </table>
     </div>
-    Indexes:
+    Índices:
     <ul class="table-columns">
-      <li>PRIMARY KEY, btree (ProductCategoryID)</li>
+      <li>CHAVE PRIMÁRIA, btree (ProductCategoryID)</li>
     </ul>
     <h3 id="ProductDescription_table_description">
-      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Rolar para cima">
         <svg height="15" width="15" style="">
           <polygon points="8,1 15,14 1,14" fill="white"/>
         </svg>
       </span>
-      Table <span class='sql'>ProductDescription</span>
+      Tabela <span class='sql'>ProductDescription</span>
     </h3>
-    Columns:
+    Colunas:
     <ul class="table-columns">
-      <li> <span class="sql">ProductDescriptionID</span> - a unique identifier for each product description.</li>
-      <li> <span class="sql">Description</span> - product description.</li>
+      <li> <span class="sql">ProductDescriptionID</span> - um identificador único para cada descrição de produto.</li>
+      <li> <span class="sql">Description</span> - descrição do produto.</li>
       <li> <span class="sql">rowguid</span> - guid.</li>
-      <li> <span class="sql">ModifiedDate</span> - timestamp of row creation or last update.</li>
+      <li> <span class="sql">ModifiedDate</span> - data e hora da criação ou última atualização da linha.</li>
     </ul>
     <div class="table-wrapper">
       <table>
@@ -349,25 +347,25 @@ Default: 0.</li>
         </tbody>
       </table>
     </div>
-    Indexes:
+    Índices:
     <ul class="table-columns">
-      <li>PRIMARY KEY, btree (ProductDescriptionID)</li>
+      <li>CHAVE PRIMÁRIA, btree (ProductDescriptionID)</li>
     </ul>
     <h3 id="ProductModel_table_description">
-      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Rolar para cima">
         <svg height="15" width="15" style="">
           <polygon points="8,1 15,14 1,14" fill="white"/>
         </svg>
       </span>
-      Table <span class='sql'>ProductModel</span>
+      Tabela <span class='sql'>ProductModel</span>
     </h3>
-    Columns:
+    Colunas:
     <ul class="table-columns">
-      <li> <span class="sql">ProductModelID</span> - a unique identifier for each product model.</li>
-      <li> <span class="sql">Name</span> - name of the product model.</li>
-      <li> <span class="sql">CatalogDescription</span> - description in XML format.</li>
+      <li> <span class="sql">ProductModelID</span> - um identificador único para cada modelo de produto.</li>
+      <li> <span class="sql">Name</span> - nome do modelo de produto.</li>
+      <li> <span class="sql">CatalogDescription</span> - descrição em formato XML.</li>
       <li> <span class="sql">rowguid</span> - guid.</li>
-      <li> <span class="sql">ModifiedDate</span> - timestamp of row creation or last update.</li>
+      <li> <span class="sql">ModifiedDate</span> - data e hora da criação ou última atualização da linha.</li>
     </ul>
 
     <div class="table-wrapper">
@@ -390,25 +388,25 @@ Default: 0.</li>
         </tbody>
       </table>
     </div>
-    Indexes:
+    Índices:
     <ul class="table-columns">
-      <li>PRIMARY KEY, btree (ProductModelID)</li>
+      <li>CHAVE PRIMÁRIA, btree (ProductModelID)</li>
     </ul>
     <h3 id="ProductModelProductDescription_table_description">
-      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Rolar para cima">
         <svg height="15" width="15" style="">
           <polygon points="8,1 15,14 1,14" fill="white"/>
         </svg>
       </span>
-      Table <span class='sql'>ProductModelProductDescription</span>
+      Tabela <span class='sql'>ProductModelProductDescription</span>
     </h3>
-    Columns:
+    Colunas:
     <ul class="table-columns">
-      <li> <span class="sql">ProductModelID</span> - unique identifier of client in the table <span class="sql">ProductModel</span>.</li>
-      <li> <span class="sql">ProductDescriptionID</span> - unique identifier of address in the table <span class="sql">ProductDescription</span>.</li>
-      <li> <span class="sql">Culture</span> - language code in ISO format.</li>
+      <li> <span class="sql">ProductModelID</span> - identificador único do modelo de produto na tabela <span class="sql">ProductModel</span>.</li>
+      <li> <span class="sql">ProductDescriptionID</span> - identificador único da descrição do produto na tabela <span class="sql">ProductDescription</span>.</li>
+      <li> <span class="sql">Culture</span> - código do idioma no formato ISO.</li>
       <li> <span class="sql">rowguid</span> - guid.</li>
-      <li> <span class="sql">ModifiedDate</span> - timestamp of row creation or last update.</li>
+      <li> <span class="sql">ModifiedDate</span> - data e hora da criação ou última atualização da linha.</li>
     </ul>
 
     <div class="table-wrapper">
@@ -431,30 +429,30 @@ Default: 0.</li>
         </tbody>
       </table>
     </div>
-    Indexes:
+    Índices:
     <ul class="table-columns">
-      <li>PRIMARY KEY, btree (ProductModelID, ProductDescriptionID)</li>
+      <li>CHAVE PRIMÁRIA, btree (ProductModelID, ProductDescriptionID)</li>
     </ul>
     <h3 id="SalesOrderDetail_table_description">
-      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Rolar para cima">
         <svg height="15" width="15" style="">
           <polygon points="8,1 15,14 1,14" fill="white"/>
         </svg>
       </span>
-      Table <span class='sql'>SalesOrderDetail</span>
+      Tabela <span class='sql'>SalesOrderDetail</span>
     </h3>    
-    Columns:
+    Colunas:
     <ul class="table-columns">
-      <li> <span class="sql">SalesOrderID</span> - foreign key referencing table <span class="sql">SalesOrderHeader</span>.</li>
-      <li> <span class="sql">SalesOrderDetailID</span> - a unique identifier of record in the table.</li>
-      <li> <span class="sql">OrderQty</span> - quantity.</li>
-      <li> <span class="sql">ProductID</span> - a foreign key referencing the table <span class="sql">Product</span>.
+      <li> <span class="sql">SalesOrderID</span> - chave estrangeira referenciando a tabela <span class="sql">SalesOrderHeader</span>.</li>
+      <li> <span class="sql">SalesOrderDetailID</span> - um identificador único do registro na tabela.</li>
+      <li> <span class="sql">OrderQty</span> - quantidade.</li>
+      <li> <span class="sql">ProductID</span> - uma chave estrangeira referenciando a tabela <span class="sql">Product</span>.
       </li>
-      <li> <span class="sql">UnitPrice</span> - price per unit of goods.</li>
-      <li> <span class="sql">UnitPriceDiscount</span> - price per unit of product with a discount.</li>
+      <li> <span class="sql">UnitPrice</span> - preço por unidade de mercadoria.</li>
+      <li> <span class="sql">UnitPriceDiscount</span> - preço por unidade de produto com desconto.</li>
       <li> <span class="sql">LineTotal</span> - Total.</li>
       <li> <span class="sql">rowguid</span> - guid.</li>
-      <li> <span class="sql">ModifiedDate</span> - timestamp of row creation or last update.</li>
+      <li> <span class="sql">ModifiedDate</span> - data e hora da criação ou última atualização da linha.</li>
     </ul>
     <div class="table-wrapper">
       <table>
@@ -484,45 +482,45 @@ Default: 0.</li>
         </tbody>
       </table>
     </div>
-    Indexes:
+    Índices:
     <ul class="table-columns">
-      <li>PRIMARY KEY, btree (SalesOrderID, SalesOrderDetailID, ProductID)</li>
+      <li>CHAVE PRIMÁRIA, btree (SalesOrderID, SalesOrderDetailID, ProductID)</li>
     </ul>
     <h3 id="SalesOrderHeader_table_description">
-      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Rolar para cima">
         <svg height="15" width="15" style="">
           <polygon points="8,1 15,14 1,14" fill="white"/>
         </svg>
       </span>
-      Table <span class='sql'>SalesOrderHeader</span>
+      Tabela <span class='sql'>SalesOrderHeader</span>
     </h3>        
-    Columns:
+    Colunas:
     <ul class="table-columns">
-      <li> <span class="sql">SalesOrderID</span> - a unique identifier of record in the table.</li>
-      <li> <span class="sql">RevisionNumber</span> - revision number.</li>
-      <li> <span class="sql">OrderDate</span> - timestamp for creating the order date.</li>
-      <li> <span class="sql">DueDate</span> - timestamp of the order payment date.</li>
-      <li> <span class="sql">ShipDate</span> - timestamp of the date the order was shipped.</li>
-      <li> <span class="sql">Status</span> - order status.</li>
-      <li> <span class="sql">OnlineOrderFlag</span> - online order (yes/no).</li>
-      <li> <span class="sql">SalesOrderNumber</span> - order number.</li>
-      <li> <span class="sql">PurchaseOrderNumber</span> - purchase number.</li>
-      <li> <span class="sql">AccountNumber</span> - account number.</li>
-      <li> <span class="sql">CustomerID</span> - foreign key referencing the table <span class="sql">Customer</span> -
-        defines the client.</li>
-      <li> <span class="sql">ShipToAddressID</span> - foreign key referencing table <span class="sql">Address</span> -
-        defines the delivery address.</li>
-      <li> <span class="sql">BillToAddressID</span> - foreign key referencing table <span class="sql">Address</span> -
-        defines the account address.</li>
-      <li> <span class="sql">ShipMethod</span> - delivery method.</li>
-      <li> <span class="sql">CreditCardApprovalCode</span> - credit card confirmation code.</li>
+      <li> <span class="sql">SalesOrderID</span> - um identificador único do registro na tabela.</li>
+      <li> <span class="sql">RevisionNumber</span> - número da revisão.</li>
+      <li> <span class="sql">OrderDate</span> - data e hora da criação do pedido.</li>
+      <li> <span class="sql">DueDate</span> - data e hora do vencimento do pedido.</li>
+      <li> <span class="sql">ShipDate</span> - data e hora do envio do pedido.</li>
+      <li> <span class="sql">Status</span> - status do pedido.</li>
+      <li> <span class="sql">OnlineOrderFlag</span> - pedido online (sim/não).</li>
+      <li> <span class="sql">SalesOrderNumber</span> - número do pedido.</li>
+      <li> <span class="sql">PurchaseOrderNumber</span> - número da compra.</li>
+      <li> <span class="sql">AccountNumber</span> - número da conta.</li>
+      <li> <span class="sql">CustomerID</span> - chave estrangeira referenciando a tabela <span class="sql">Customer</span> -
+        define o cliente.</li>
+      <li> <span class="sql">ShipToAddressID</span> - chave estrangeira referenciando a tabela <span class="sql">Address</span> -
+        define o endereço de entrega.</li>
+      <li> <span class="sql">BillToAddressID</span> - chave estrangeira referenciando a tabela <span class="sql">Address</span> -
+        define o endereço de cobrança.</li>
+      <li> <span class="sql">ShipMethod</span> - método de entrega.</li>
+      <li> <span class="sql">CreditCardApprovalCode</span> - código de aprovação do cartão de crédito.</li>
       <li> <span class="sql">SubTotal</span> - subtotal.</li>
-      <li> <span class="sql">TaxAmt</span> - taxes.</li>
-      <li> <span class="sql">Freight</span> - delivery cost.</li>
+      <li> <span class="sql">TaxAmt</span> - impostos.</li>
+      <li> <span class="sql">Freight</span> - custo de entrega.</li>
       <li> <span class="sql">TotalDue</span> - total.</li>
-      <li> <span class="sql">Comment</span> - comment.</li>
+      <li> <span class="sql">Comment</span> - comentário.</li>
       <li> <span class="sql">rowguid</span> - guid.</li>
-      <li> <span class="sql">ModifiedDate</span> - timestamp of row creation or last update.</li>
+      <li> <span class="sql">ModifiedDate</span> - data e hora da criação ou última atualização da linha.</li>
     </ul>
 
     <div class="table-wrapper">
@@ -579,9 +577,9 @@ Default: 0.</li>
         </tbody>
       </table>
     </div>
-    Indexes:
+    Índices:
     <ul class="table-columns">
-      <li>PRIMARY KEY, btree (SalesOrderID, CustomerID, ShipToAddressID, BillToAddressID)</li>
+      <li>CHAVE PRIMÁRIA, btree (SalesOrderID, CustomerID, ShipToAddressID, BillToAddressID)</li>
     </ul>
   {/literal}
 </div>

@@ -1,50 +1,50 @@
 <div id="db-description" class="db-description">
     {literal}
-    <h2>Bookings Database (PostgreSQL)</h2>
-    The subject area of this database is airline flights through various airports.
+    <h2>Banco de Dados Bookings (PostgreSQL)</h2>
+    A área de assunto deste banco de dados é voos de companhias aéreas através de vários aeroportos.
     <p>
-        <a style="font-size: small; color: var(--special-text-color);" href="/images/bookings" target="ERDWindow">ER diagram of the Bookings database</a>
+        <a style="font-size: small; color: var(--special-text-color);" href="/images/bookings" target="ERDWindow">Diagrama ER do banco de dados Bookings</a>
     </p>
-    <p>The Bookings Database contains 8 tables:</p>
+    <p>O Banco de Dados Bookings contém 8 tabelas:</p>
     <ul style="list-style-type: '▤ '; padding-inline-start: 20px;">
-      <li><span class='sql' onclick="scrollInfoPanel('aircrafts_data_table_description')">aircrafts_data</span> - table of aircraft.</li>
-      <li><span class='sql' onclick="scrollInfoPanel('airports_data_table_description')">airports_data</span> - table of airports.</li>
-      <li><span class='sql' onclick="scrollInfoPanel('boarding_passes_table_description')">boarding_passes</span> - table of boarding passes.</li>
-      <li><span class='sql' onclick="scrollInfoPanel('bookings_table_description')">bookings</span> - table of bookings.</li>
-      <li><span class='sql' onclick="scrollInfoPanel('flights_table_description')">flights</span> - table of flights.</li>
-      <li><span class='sql' onclick="scrollInfoPanel('seats_table_description')">seats</span> - table of aircraft seats.</li>
-      <li><span class='sql' onclick="scrollInfoPanel('ticket_flights_table_description')">ticket_flights</span> - table of ticket to flights relations.</li>
-      <li><span class='sql' onclick="scrollInfoPanel('tickets_table_description')">tickets</span> - table of tickets.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('aircrafts_data_table_description')">aircrafts_data</span> - tabela de aeronaves.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('airports_data_table_description')">airports_data</span> - tabela de aeroportos.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('boarding_passes_table_description')">boarding_passes</span> - tabela de cartões de embarque.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('bookings_table_description')">bookings</span> - tabela de reservas.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('flights_table_description')">flights</span> - tabela de voos.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('seats_table_description')">seats</span> - tabela de assentos de aeronaves.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('ticket_flights_table_description')">ticket_flights</span> - tabela de relações entre bilhetes e voos.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('tickets_table_description')">tickets</span> - tabela de bilhetes.</li>
     </ul>
     <a href="https://amzn.to/3T94Fkz" target="_blank" style="text-decoration: none;">
       <div style="display: flex; flex-direction: row; border: 1px solid white; padding: 0.3em; width: 98%;">
         <div  style = "width: 30%;">
-            <img style="width: 100%;" src="/images/learn-postgresql.jpg" alt="Learn PostgreSQL">
+            <img style="width: 100%;" src="/images/learn-postgresql.jpg" alt="Aprenda PostgreSQL">
         </div>
         <div style="font-size: 1em;  width: 70%;  padding: 0 0.7em; font-weight: 100;">
-            <div>Learn PostgreSQL: Use, manage and build secure and scalable databases with PostgreSQL by Luca Ferrari & Enrico Pirozzi</div>
+            <div>Aprenda PostgreSQL: Use, gerencie e construa bancos de dados seguros e escaláveis com PostgreSQL por Luca Ferrari & Enrico Pirozzi</div>
             <div style="font-size: small; padding-top: 0.5em;">
-            This new edition will help you learn PostgreSQL from scratch with the latest version, providing a complete focused view on aspects like configuration, high performance, partitioning, backup, server-side programming and replication.          </div>
+            Esta nova edição irá ajudá-lo a aprender PostgreSQL do zero com a versão mais recente, fornecendo uma visão completa e focada em aspectos como configuração, alto desempenho, particionamento, backup, programação do lado do servidor e replicação.          </div>
         </div>
       </div>
     </a>
     <h3 id="aircrafts_data_table_description">
-      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Rolar para cima">
         <svg height="15" width="15" style="">
           <polygon points="8,1 15,14 1,14" fill="white"/>
         </svg>
       </span>
-      Table <span class='sql'>aircrafts_data</span>
+      Tabela <span class='sql'>aircrafts_data</span>
     </h3>
-    Table columns:
+    Colunas da tabela:
     <ul class="table-columns">
-        <li> <span class='sql'>aircraft_code</span> - Unique code for each aircraft.</li>
-        <li> <span class='sql'>model</span> - Aircraft model name in English and Russian in JSON format.</li>
-        <li> <span class='sql'>range</span> - Aircraft fly range in kilometers.</li>
+        <li> <span class='sql'>aircraft_code</span> - Código único para cada aeronave.</li>
+        <li> <span class='sql'>model</span> - Nome do modelo da aeronave em inglês e russo no formato JSON.</li>
+        <li> <span class='sql'>range</span> - Alcance de voo da aeronave em quilômetros.</li>
     </ul>
-    Indexes:
+    Índices:
     <ul class="table-columns">
-        <li>PRIMARY KEY, btree (aircraft_code)</li>
+        <li>CHAVE PRIMÁRIA, btree (aircraft_code)</li>
     </ul>
     <div class="table-wrapper">
         <table class="">
@@ -55,20 +55,20 @@
         </table>
     </div>
     <h3 id="airports_data_table_description">
-      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Rolar para cima">
         <svg height="15" width="15" style="">
           <polygon points="8,1 15,14 1,14" fill="white"/>
         </svg>
       </span>
-      Table <span class='sql'>airports_data</span>
+      Tabela <span class='sql'>airports_data</span>
     </h3>
-    Table columns:
+    Colunas da tabela:
     <ul class="table-columns">
-        <li> <span class='sql'>airport_code</span> - Unique code for each airport.</li>
-        <li> <span class='sql'>airport_name</span> - Airport name in English and Russian in JSON format.</li>
-        <li> <span class='sql'>city</span> - Airport city in English and Russian in JSON format.</li>
-        <li> <span class='sql'>coordinates</span> - Airport coordinates as POINT(longitude, latitude).</li>
-        <li> <span class='sql'>timezone</span> - Airport timezone name.</li>
+        <li> <span class='sql'>airport_code</span> - Código único para cada aeroporto.</li>
+        <li> <span class='sql'>airport_name</span> - Nome do aeroporto em inglês e russo no formato JSON.</li>
+        <li> <span class='sql'>city</span> - Cidade do aeroporto em inglês e russo no formato JSON.</li>
+        <li> <span class='sql'>coordinates</span> - Coordenadas do aeroporto como POINT(longitude, latitude).</li>
+        <li> <span class='sql'>timezone</span> - Nome do fuso horário do aeroporto.</li>
     </ul>
     <div class="table-wrapper">
         <table class="">
@@ -78,24 +78,24 @@
             </tbody>
         </table>
     </div>
-    Indexes:
+    Índices:
     <ul class="table-columns">
-        <li>PRIMARY KEY, btree (airport_code)</li>
+        <li>CHAVE PRIMÁRIA, btree (airport_code)</li>
     </ul>
     <h3 id="boarding_passes_table_description">
-      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Rolar para cima">
         <svg height="15" width="15" style="">
           <polygon points="8,1 15,14 1,14" fill="white"/>
         </svg>
       </span>
-      Table <span class='sql'>boarding_passes</span>
+      Tabela <span class='sql'>boarding_passes</span>
     </h3>    
-    Table columns:
+    Colunas da tabela:
     <ul class="table-columns">
-        <li> <span class='sql'>ticket_no</span> - Ticket number.</li>
-        <li> <span class='sql'>flight_id</span> - Flight identificator.</li>
-        <li> <span class='sql'>boarding_no</span> - Boarding pass number.</li>
-        <li> <span class='sql'>seat_no</span> - Seat number.</li>
+        <li> <span class='sql'>ticket_no</span> - Número do bilhete.</li>
+        <li> <span class='sql'>flight_id</span> - Identificador do voo.</li>
+        <li> <span class='sql'>boarding_no</span> - Número do cartão de embarque.</li>
+        <li> <span class='sql'>seat_no</span> - Número do assento.</li>
     </ul>
     <div class="table-wrapper">
         <table class="">
@@ -105,57 +105,57 @@
             </tbody>
         </table>
     </div>
-    Indexes:
+    Índices:
     <ul class="table-columns">
-        <li>PRIMARY KEY, btree (ticket_no, flight_id)</li>
-        <li>UNIQUE CONSTRAINT, btree (flight_id, boarding_no)</li>
-        <li>UNIQUE CONSTRAINT, btree (flight_id, seat_no)</li>
+        <li>CHAVE PRIMÁRIA, btree (ticket_no, flight_id)</li>
+        <li>RESTRIÇÃO ÚNICA, btree (flight_id, boarding_no)</li>
+        <li>RESTRIÇÃO ÚNICA, btree (flight_id, seat_no)</li>
     </ul>
-    Foreign-key constraints:
+    Restrições de chave estrangeira:
     <ul class="table-columns">
-        <li>FOREIGN KEY (ticket_no, flight_id) REFERENCES ticket_flights(ticket_no, flight_id)</li>
+        <li>CHAVE ESTRANGEIRA (ticket_no, flight_id) REFERÊNCIAS ticket_flights(ticket_no, flight_id)</li>
     </ul>
     <h3 id="bookings_table_description">
-      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Rolar para cima">
         <svg height="15" width="15" style="">
           <polygon points="8,1 15,14 1,14" fill="white"/>
         </svg>
       </span>
-      Table <span class='sql'>bookings</span>
+      Tabela <span class='sql'>bookings</span>
     </h3>      
-    Table columns:
+    Colunas da tabela:
     <ul class="table-columns">
-        <li> <span class='sql'>book_ref</span> - Booking number.</li>
-        <li> <span class='sql'>book_date</span> - Booking date.</li>
-        <li> <span class='sql'>total_amount</span> - Total booking cost.</li>
+        <li> <span class='sql'>book_ref</span> - Número da reserva.</li>
+        <li> <span class='sql'>book_date</span> - Data da reserva.</li>
+        <li> <span class='sql'>total_amount</span> - Custo total da reserva.</li>
     </ul>
     <div class="table-wrapper">
         <table class=""><tbody><tr><th></th><th>book_ref</th><th>book_date</th><th>total_amount</th></tr><tr><td>1</td><td>00000F</td><td>2017-07-05 00:12:00+00</td><td>265700.00</td></tr></tbody></table>
     </div>
-    Indexes:
+    Índices:
     <ul class="table-columns">
-        <li>PRIMARY KEY, btree (book_ref)</li>
+        <li>CHAVE PRIMÁRIA, btree (book_ref)</li>
     </ul>
     <h3 id="flights_table_description">
-      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Rolar para cima">
         <svg height="15" width="15" style="">
           <polygon points="8,1 15,14 1,14" fill="white"/>
         </svg>
       </span>
-      Table <span class='sql'>flights</span>
+      Tabela <span class='sql'>flights</span>
     </h3>
-    Table columns:
+    Colunas da tabela:
     <ul class="table-columns">
-        <li> <span class='sql'>flight_id</span> - Flight ID.</li>
-        <li> <span class='sql'>flight_no</span> - Flight number.</li>
-        <li> <span class='sql'>scheduled_departure</span> - Scheduled departure time.</li>
-        <li> <span class='sql'>scheduled_arrival</span> - Scheduled arrival time.</li>
-        <li> <span class='sql'>departure_airport</span> - Airport of departure.</li>
-        <li> <span class='sql'>arrival_airport</span> - Airport of arrival.</li>
-        <li> <span class='sql'>status</span> - Flight status.</li>
-        <li> <span class='sql'>aircraft_code</span> - Aircraft code, IATA.</li>
-        <li> <span class='sql'>actual_departure</span> - Actual departure time.</li>
-        <li> <span class='sql'>actual_arrival</span> - Actual arrival time.</li>
+        <li> <span class='sql'>flight_id</span> - ID do voo.</li>
+        <li> <span class='sql'>flight_no</span> - Número do voo.</li>
+        <li> <span class='sql'>scheduled_departure</span> - Horário programado de partida.</li>
+        <li> <span class='sql'>scheduled_arrival</span> - Horário programado de chegada.</li>
+        <li> <span class='sql'>departure_airport</span> - Aeroporto de partida.</li>
+        <li> <span class='sql'>arrival_airport</span> - Aeroporto de chegada.</li>
+        <li> <span class='sql'>status</span> - Status do voo.</li>
+        <li> <span class='sql'>aircraft_code</span> - Código da aeronave, IATA.</li>
+        <li> <span class='sql'>actual_departure</span> - Horário real de partida.</li>
+        <li> <span class='sql'>actual_arrival</span> - Horário real de chegada.</li>
     </ul>
     <div class="table-wrapper">
         <table class=""><tbody>
@@ -172,24 +172,24 @@
                 <th>actual_arrival</th>
             </tr><tr><td>1</td><td>1185</td><td>PG0134</td><td>2017-09-10 06:50:00+00</td><td>2017-09-10 11:55:00+00</td><td>DME</td><td>BTK</td><td>Scheduled</td><td>319</td><td></td><td></td></tr></tbody></table>
     </div>
-    Indexes:
+    Índices:
     <ul class="table-columns">
-        <li>PRIMARY KEY, btree (flight_id)</li>
-        <li>UNIQUE CONSTRAINT, btree (flight_no, scheduled_departure)</li>
+        <li>CHAVE PRIMÁRIA, btree (flight_id)</li>
+        <li>RESTRIÇÃO ÚNICA, btree (flight_no, scheduled_departure)</li>
     </ul>
     <h3 id="seats_table_description">
-      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Rolar para cima">
         <svg height="15" width="15" style="">
           <polygon points="8,1 15,14 1,14" fill="white"/>
         </svg>
       </span>
-      Table <span class='sql'>seats</span>
+      Tabela <span class='sql'>seats</span>
     </h3>
-    Table columns:
+    Colunas da tabela:
     <ul class="table-columns">
-        <li> <span class='sql'>aircraft_code</span> - Aircraft code, IATA.</li>
-        <li> <span class='sql'>seat_no</span> - Seat number.</li>
-        <li> <span class='sql'>fare_conditions</span> - Travel class.</li>
+        <li> <span class='sql'>aircraft_code</span> - Código da aeronave, IATA.</li>
+        <li> <span class='sql'>seat_no</span> - Número do assento.</li>
+        <li> <span class='sql'>fare_conditions</span> - Classe de viagem.</li>
     </ul>
     <div class="table-wrapper">
         <table class=""><tbody><tr>
@@ -198,28 +198,28 @@
         </tr>
         <tr><td>1</td><td>319</td><td>2A</td><td>Business</td></tr></tbody></table>
     </div>
-    Indexes:
+    Índices:
     <ul class="table-columns">
-        <li>PRIMARY KEY, btree (aircraft_code, seat_no)</li>
+        <li>CHAVE PRIMÁRIA, btree (aircraft_code, seat_no)</li>
     </ul>
-    Foreign-key constraints:
+    Restrições de chave estrangeira:
     <ul class="table-columns">
-        <li>FOREIGN KEY (aircraft_code) REFERENCES aircrafts(aircraft_code) ON DELETE CASCADE</li>
+        <li>CHAVE ESTRANGEIRA (aircraft_code) REFERÊNCIAS aircrafts(aircraft_code) ON DELETE CASCADE</li>
     </ul>
     <h3 id="ticket_flights_table_description">
-      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Rolar para cima">
         <svg height="15" width="15" style="">
           <polygon points="8,1 15,14 1,14" fill="white"/>
         </svg>
       </span>
-      Table <span class='sql'>ticket_flights</span>
+      Tabela <span class='sql'>ticket_flights</span>
     </h3>
-    Table columns:
+    Colunas da tabela:
     <ul class="table-columns">
-        <li> <span class='sql'>ticket_no</span> - Ticket number.</li>
-        <li> <span class='sql'>flight_id</span> - Flight ID.</li>
-        <li> <span class='sql'>fare_conditions</span> - Travel class.</li>
-        <li> <span class='sql'>amount</span> - Travel cost.</li>
+        <li> <span class='sql'>ticket_no</span> - Número do bilhete.</li>
+        <li> <span class='sql'>flight_id</span> - ID do voo.</li>
+        <li> <span class='sql'>fare_conditions</span> - Classe de viagem.</li>
+        <li> <span class='sql'>amount</span> - Custo da viagem.</li>
     </ul>
     <div class="table-wrapper">
         <table class=""><tbody><tr>
@@ -230,30 +230,30 @@
             <th>amount</th>
         </tr><tr><td>1</td><td>0005432159776</td><td>30625</td><td>Business</td><td>42100.00</td></tr></tbody></table>
     </div>
-    Indexes:
+    Índices:
     <ul class="table-columns">
-        <li>PRIMARY KEY, btree (ticket_no, flight_id)</li>
+        <li>CHAVE PRIMÁRIA, btree (ticket_no, flight_id)</li>
     </ul>
-    Foreign-key constraints:
+    Restrições de chave estrangeira:
     <ul class="table-columns">
-        <li>FOREIGN KEY (flight_id) REFERENCES flights(flight_id)</li>
-        <li>FOREIGN KEY (ticket_no) REFERENCES tickets(ticket_no)</li>
+        <li>CHAVE ESTRANGEIRA (flight_id) REFERÊNCIAS flights(flight_id)</li>
+        <li>CHAVE ESTRANGEIRA (ticket_no) REFERÊNCIAS tickets(ticket_no)</li>
     </ul>
     <h3 id="tickets_table_description">
-      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
+      <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Rolar para cima">
         <svg height="15" width="15" style="">
           <polygon points="8,1 15,14 1,14" fill="white"/>
         </svg>
       </span>
-      Table <span class='sql'>tickets</span>
+      Tabela <span class='sql'>tickets</span>
     </h3>
-    Table columns:
+    Colunas da tabela:
     <ul class="table-columns">
-        <li> <span class='sql'>ticket_no</span> - Ticket number.</li>
-        <li> <span class='sql'>book_ref</span> - Booking number.</li>
-        <li> <span class='sql'>passenger_id</span> - Passenger ID.</li>
-        <li> <span class='sql'>passenger_name</span> - Passenger name.</li>
-        <li> <span class='sql'>contact_data</span> - Passenger contact information.</li>
+        <li> <span class='sql'>ticket_no</span> - Número do bilhete.</li>
+        <li> <span class='sql'>book_ref</span> - Número da reserva.</li>
+        <li> <span class='sql'>passenger_id</span> - ID do passageiro.</li>
+        <li> <span class='sql'>passenger_name</span> - Nome do passageiro.</li>
+        <li> <span class='sql'>contact_data</span> - Informações de contato do passageiro.</li>
     </ul>
     <div class="table-wrapper">
         <table class=""><tbody><tr>
@@ -265,13 +265,13 @@
             <th>contact_data</th></tr>
             <tr><td>1</td><td>0005432000987</td><td>06B046</td><td>8149 604011</td><td>VALERIY TIKHONOV</td><td>{"phone": "+70127117011"}</td></tr></tbody></table>
     </div>
-    Indexes:
+    Índices:
     <ul class="table-columns">
-        <li>PRIMARY KEY, btree (ticket_no)</li>
+        <li>CHAVE PRIMÁRIA, btree (ticket_no)</li>
     </ul>
-    Foreign-key constraints:
+    Restrições de chave estrangeira:
     <ul class="table-columns">
-        <li>FOREIGN KEY (book_ref) REFERENCES bookings(book_ref)</li>
+        <li>CHAVE ESTRANGEIRA (book_ref) REFERÊNCIAS bookings(book_ref)</li>
     </ul>    
     {/literal}
 </div>
