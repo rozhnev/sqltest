@@ -1,1 +1,1 @@
-{$Hint|default:'{translate}hint_default{/translate}'}
+{$Hint|default:"{translate}hint_default{/translate}"}
