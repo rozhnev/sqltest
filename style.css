@@ -443,10 +443,9 @@ body {
 }
 .menu .selector .selector-options {
     display: flex; 
-    align-items: left;
     column-gap: 4px; 
     padding: 5px; 
-    flex-flow: row wrap;
+    flex-flow: column;
 }
 .menu .panel {
     padding: 0;
