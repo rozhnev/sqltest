@@ -74,4 +74,5 @@ $translations = [
     'you_have_solved' => 'Вы решили',
     'you_have_already_solved' => 'Вы уже решили',
     'keep_going' => 'Продолжайте!',
+    'error_title' => 'Ошибка!',
 ];

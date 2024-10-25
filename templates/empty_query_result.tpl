@@ -3,7 +3,7 @@
     {
         "headers": [
             {
-                "header": "Error!",
+                "header": "{/literal}{translate}error_title{/translate}{literal}",
                 "pdo_type": 2
             }
         ],
