@@ -16,7 +16,7 @@
                     <div class="question-title">
                         <div class="question-level rate{$Question.rate}"
                             title="{$Question.question_rate|default:'Not rated yet'}"></div>
-                        Task&nbsp;{$Question.number}:
+                        {translate}question_title{/translate}&nbsp;{$Question.number}:
                         {if $LoggedAsAdmin}
                             <a href="/admin/question/{$NextQuestionId}" title="Edit" style="color:#333">&#9998;</a>
                         {/if}

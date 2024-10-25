@@ -4,15 +4,23 @@
     {include file='popups.tpl'}
     {include file='m.top-menu.tpl' path="/question/{$QuestionCategoryID}/{$QuestionID}"}
     <div class="text-block user-solutions-count">
-        <p>Explore over <span style="font-weight:bold; color: #2EA043 !important;">{floor(($QuestionsCount - 1)/10) * 10}</span> diverse tasks on our platform.</p>
+        {assign var="QuestionsCountRounded" value="{floor(($QuestionsCount - 1)/10) * 10}"}
+        <p>{translate}user_solutions_count{/translate}</p>
         {if $Logged}
+            {if $SolvedQuestionsCount < ($QuestionsCount/2)}
+                {assign var="YouHaveSolved" value="{translate}you_have_solved{/translate}"}
+            {else}
+                {assign var="YouHaveSolved" value="{translate}you_have_already_solved{/translate}"}
+            {/if}
             <p>
-                You {if $SolvedQuestionsCount < ($QuestionsCount/2)}have{else}already{/if} solved <span style="font-weight:bold;  color: #2EA043 !important;">{$SolvedQuestionsCount}</span> of them.
-                {if $SolvedQuestionsCount < $QuestionsCount} Keep&nbspgoing!{/if}
+                {translate}user_solutions_count_logged{/translate}
+                {if $SolvedQuestionsCount < $QuestionsCount}
+                    {translate}keep_going{/translate}
+                {/if}
             </p>
         {else}
-            <p>Log in to save your progress.</p>
-            <button class="button blue" onClick="toggleLoginWindow()">Login</button>
+            <p>{translate}user_solutions_count_not_logged{/translate}</p>
+            <button class="button blue" onClick="toggleLoginWindow()">{translate}top_menu_login{/translate}</button>
         {/if}
     </div>
     {include file='m.menu.tpl'}
@@ -21,15 +29,15 @@
             <div class="question-title-bar" style="display: flex;">
                 <div class="question-title">
                     <div class="question-level rate{$Question.rate}" title="{$Question.question_rate|default:'Not rated yet'}"></div>
-                    Task {$Question.number}:
+                    {translate}question_title{/translate}{$Question.number}:
                     {if $LoggedAsAdmin}
                         <a href="/admin/question/{$NextQuestionId}" title="Edit" style="color:#333">&#9998;</a>
                     {/if}
                     <span class="question-dates">
                         {if $Question.solved_date}
-                            Solved at: {$Question.solved_date}
+                            {translate}question_solved_at{/translate}: {$Question.solved_date}
                         {elseif $Question.last_attempt_date}
-                            Last Attempt Date: {$Question.last_attempt_date}
+                            {translate}question_last_attempt_date{/translate}: {$Question.last_attempt_date}
                         {/if}
                     </span>
                 </div>
@@ -56,35 +64,28 @@
                     </div>
                 {/foreach}
                 </div>
-                <p class="question-action">
-                    Mark ALL correct answers and click the "Check it!" button
-                </p>
+                <p class="question-action">{translate}question_action_mark_all_answers{/translate}</p>
             {else}
-                <p class="question-action">
-                    Write your request in the field below and click the "Check it!" button.{* (If there is an error, you will have to review the ad unit)*}
-                </p>
-                <p class="question-action">
-                    To write the answer, use {$Question.dbms} syntax.<br>
-                    Descriptions of the tables are given at the bottom of screen.
-                </p>
+                <p class="question-action">{translate}question_action_write_your_request{/translate}</p>
+                <p class="question-action">{translate}question_action_use_syntax{/translate}</p></p>
             {/if}
         </div>
         {if !isset($Question.answers)}
             <div class="code-actions">
-                <button onClick="copyCode(`SQL code copied to buffer`)">Copy code</button> <button onClick="clearEditor()">Clear editor</button>
+                <button onClick="copyCode(`{translate}toast_sql_copied_to_buffer{/translate}`)">{translate}question_action_copy_code{/translate}</button> <button onClick="clearEditor()">{translate}question_action_clear_editor{/translate}</button>
             </div>
             <div class="code-wrapper" id="sql-code" name="sql-code">{$Question.last_query}</div>
         {/if}
         <div class="code-buttons">
-            <button class="button" id="getHelpBtn" onClick="getHelp('{$Lang}', {$QuestionID})">Get help</button>
+            <button class="button" id="getHelpBtn" onClick="getHelp('{$Lang}', {$QuestionID})">{translate}question_action_get_help{/translate}</button>
             {if !isset($Question.answers)}
-                <button class="button" id="runQueryBtn" onClick="runQuery('{$Lang}', {$QuestionID})" title="CTRL+Enter">Run query</button>
-                <button class="button green" id="testQueryBtn" onClick="testQuery('{$Lang}', {$QuestionID})">Check it!</button>
+                <button class="button" id="runQueryBtn" onClick="runQuery('{$Lang}', {$QuestionID})" title="CTRL+Enter">{translate}question_action_run_query{/translate}</button>
+                <button class="button green" id="testQueryBtn" onClick="testQuery('{$Lang}', {$QuestionID})">{translate}question_action_test_query{/translate}</button>
             {else}
-                <button class="button green" id="checkAnswersBtn" onClick="checkAnswers('{$Lang}', {$QuestionID})">Check it!</button>
+                <button class="button green" id="checkAnswersBtn" onClick="checkAnswers('{$Lang}', {$QuestionID})">{translate}question_action_check_answers{/translate}</button>
             {/if}
             {if $NextQuestionId}
-                <a href="/{$Lang}/question/{$Question.category_sef}/{$NextQuestionId}" title="Следующее задание" class="button green hidden">Next</a>
+                <a href="/{$Lang}/question/{$Question.category_sef}/{$NextQuestionId}" title="{translate}question_action_next_title{/translate}" class="button green hidden">{translate}question_action_next{/translate}</a>
             {/if}
         </div>
         <div class="code-result ace-xcode" id="code-result"></div>

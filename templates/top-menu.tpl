@@ -19,11 +19,11 @@
                 <a href="/{$Lang}/donate" target="_self" class="donate-btn shake" id="donate-btn">{translate}top_menu_donate{/translate}</a>
             </div>
             {include file='lang-switcher.tpl'}
-            {if $Logged}
+            {* {if $Logged}
                 <span class="login-button"><a href="/{$Lang}/logout" target="_self">{translate}top_menu_logout{/translate}</a></span>
             {else}
-                {* <span class="login-button" onClick="toggleLoginWindow()">Login</span> *}
-            {/if}
+                <span class="login-button" onClick="toggleLoginWindow()">Login</span>
+            {/if} *}
         </div>
     </div>
 </div>
