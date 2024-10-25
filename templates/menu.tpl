@@ -1,6 +1,6 @@
 <div class="menu" id="menu">
     <div class="selector">
-        <div style="min-width: 9em;">{translate}menu_groups{/translate}</div>
+        <div style="white-space: nowrap;">{translate}menu_groups{/translate}</div>
         <div class="selector-options">
             <div>
                 <input type="radio" id="complexity_menu_groups" name="menu_groups" value="complexity" onClick="loadMenu(this.value)" {if $Questionnire.name == 'complexity'}checked{/if}>
