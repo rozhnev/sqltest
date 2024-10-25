@@ -9,7 +9,7 @@
         ],
         "data": [
             [
-                "{translate}empty_query_result{/translate}"
+                "{/literal}{translate}empty_query_result{/translate}{literal}"
             ]
         ]
     }
