@@ -143,7 +143,7 @@ switch ($action) {
         $_SESSION["user_id"] = $user->getId();
         $_SESSION["admin"] = $user->isAdmin();
         //TODO: last path should be restored on login
-        $template = "../login_result.tpl";
+        $template = "login_result.tpl";
         break;
     case 'menu':
         $QuestionnireName = $_GET['questionnire'] ?? 'category';
@@ -303,6 +303,7 @@ switch ($action) {
             }
             $smarty->assign('QuestionCategoryID', $questionCategoryID);
             $smarty->assign('Question', $questionData);
+            $smarty->assign('DBMS', $questionData['dbms']);
             $smarty->assign('NextQuestionId', $question->getNextSefId($questionCategoryID));
             $smarty->assign('PreviousQuestionId', $question->getPreviousSefId($questionCategoryID));
             $smarty->registerPlugin("modifier", "floor", "floor");
