@@ -6,10 +6,10 @@
                 <div class="solution-title">{translate}solution_title{/translate}: {$solution.created_at} {translate}solution_query_cost{/translate}: {$solution.query_cost}</div>
                 <div class="solution-block" id="solution-{$id}">{$solution.query}</div>
                 <div class="solution-footer">
-                    <button class="button-small green" onClick="solutionRun('en', {$QuestionID}, {$id})">Run it</button>
+                    <button class="button-small green" onClick="solutionRun('{$Lang}', {$QuestionID}, {$id})">{translate}solution_action_run{/translate}</button>
                     {* <button class="button-small green" onClick="solutionLike({$solution.id})">Like it! ({$solution.likes})</button>
                     <button class="button-small yellow" onClick="solutionDislike({$solution.id})">Dislike ({$solution.dislikes})</button> *}
-                    <button class="button-small red" onClick="solutionReport('en', {$QuestionID}, {$solution.id})">Wrong solution!</button>
+                    <button class="button-small red" onClick="solutionReport('{$Lang}', {$QuestionID}, {$solution.id})">{translate}solution_action_report{/translate}</button>
                 </div>
             </div>
         {/foreach}

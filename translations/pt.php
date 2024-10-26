@@ -74,4 +74,6 @@ $translations = [
     'you_have_already_solved' => 'Você já resolveu',
     'keep_going' => 'Continue!',
     'error_title' => 'Erro!',
+    'solution_action_run' => 'Executar',
+    'solution_action_report' => 'Solução errada!',
 ];

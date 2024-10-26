@@ -75,4 +75,6 @@ $translations = [
     'you_have_already_solved' => 'Вы уже решили',
     'keep_going' => 'Продолжайте!',
     'error_title' => 'Ошибка!',
+    'solution_action_run' => 'Выполнить',
+    'solution_action_report' => 'Неверное решение!',
 ];
