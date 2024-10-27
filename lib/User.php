@@ -499,7 +499,7 @@ class User
         }
     }
 
-    public function solvedQuestion(int $questionID): boolean 
+    public function solvedQuestion(int $questionID): bool
     {
         $stmt = $this->dbh->prepare("SELECT true FROM user_questions WHERE user_id = :user_id and question_id = :question_id and solved_at is not null;");
         $stmt->execute([':user_id' => $this->id, ':question_id' => $questionID]);
