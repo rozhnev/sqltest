@@ -499,6 +499,13 @@ class User
         }
     }
 
+    public function solvedQuestion(int $questionID): boolean 
+    {
+        $stmt = $this->dbh->prepare("SELECT true FROM user_questions WHERE user_id = :user_id and question_id = :question_id and solved_at is not null;");
+        $stmt->execute([':user_id' => $this->id, ':question_id' => $questionID]);
+        return $stmt->fetchColumn(0);
+    }
+
     public function getSolvedQuestionsCount(): int 
     {
         $stmt = $this->dbh->prepare("SELECT COUNT(question_id) FROM user_questions WHERE user_id = :user_id and solved_at is not null;");
