@@ -242,8 +242,14 @@ switch ($action) {
         $template = "rate_saved.tpl";
         break;
     case 'solutions':
-        $question = new Question($dbh, $questionID);
-        $smarty->assign('QuestionSolutions', $question->getSolutions());
+        if ($user->logged()) {
+            $questionSolved = $user->solvedQuestion($questionID);
+            $smarty->assign('QuestionSolved', $questionSolved);
+            if ($questionSolved) {
+                $question = new Question($dbh, $questionID);
+                $smarty->assign('QuestionSolutions', $question->getSolutions());
+            }
+        }
         $template = "solutions.tpl";
         break;
     case 'solution-like':
