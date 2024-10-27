@@ -1,6 +1,5 @@
 <div style="width: 21vw;">
     {if $Logged}
-        questionSolved
         {if !$QuestionSolved} 
             <div class="solution-wrapper">
                 <div style="padding: 2em;">
