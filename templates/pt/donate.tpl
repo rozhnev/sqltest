@@ -18,10 +18,10 @@
         .donation-section {
             background: #f8f9fa;
             border-radius: 10px;
-            padding: 2rem;
+            padding: 1rem 2rem;
             margin-bottom: 2rem;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            color: #79c0ff;
+            color: #333;
         }
         
         .donation-methods {
@@ -29,7 +29,7 @@
             grid-template-columns: 35% 60%;
             gap: 2rem;
             margin: 2rem 0;
-            color: #79c0ff;
+            color: #333;
         }
         
         .donation-method {
