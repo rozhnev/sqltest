@@ -31,6 +31,7 @@
             margin: 2rem 0;
             color: #333;
             flex-direction: row;
+            justify-content: center;
         }
         /* .donation-method {
             flex: 1;
@@ -51,6 +52,7 @@
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
             color: #79c0ff;
+            min-width: 420px;
         }
         @media (max-width: 768px) {
             .donation-method {
