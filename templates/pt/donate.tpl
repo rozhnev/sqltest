@@ -25,13 +25,25 @@
         }
         
         .donation-methods {
-            display: grid;
-            grid-template-columns: 35% 60%;
+            display: flex;
+            flex-wrap: wrap;
             gap: 2rem;
             margin: 2rem 0;
             color: #333;
+            flex-direction: row;
         }
-        
+        /* .donation-method {
+            flex: 1;
+            min-width: 300px; /* минимальная ширина колонки */
+        } */
+
+        .donation-method:first-child {
+            flex-basis: 35%;
+        }
+
+        .donation-method:last-child {
+            flex-basis: 60%;
+        }
         .donation-method {
             text-align: center;
             padding: 1.5rem;
@@ -40,7 +52,15 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
             color: #79c0ff;
         }
-        
+        @media (max-width: 768px) {
+            .donation-method {
+                flex-basis: 100% !important; /* на мобильных колонки занимают всю ширину */
+            }
+            .donation-methods {
+                gap: 2rem;
+                margin: 0;
+            }
+        }
         .crypto-address {
             background: #f1f1f1;
             padding: 0.5rem;
