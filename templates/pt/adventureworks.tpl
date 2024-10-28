@@ -1,5 +1,4 @@
 <div id="db-description" class="db-description">
-  {literal}
     <h2>AdventureWorks Database (SQL Server)</h2>
     <p>O Banco de Dados AdventureWorks é um banco de dados de amostra que demonstra as capacidades do SQL Server. Ele inclui dados sobre uma empresa de manufatura fictícia.</p>
     <p><a style="font-size: small; color: var(--special-text-color);" href="/images/adventureworks" target="ERDWindow">Diagrama ER do Banco de Dados AdventureWorks</a></p>
@@ -581,5 +580,4 @@ Padrão: 0.</li>
     <ul class="table-columns">
       <li>CHAVE PRIMÁRIA, btree (SalesOrderID, CustomerID, ShipToAddressID, BillToAddressID)</li>
     </ul>
-  {/literal}
 </div>

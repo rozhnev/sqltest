@@ -1,5 +1,4 @@
 <div id="db-description" class="db-description">
-    {literal}
     <h2>Banco de Dados Bookings (PostgreSQL)</h2>
     A área de assunto deste banco de dados é voos de companhias aéreas através de vários aeroportos.
     <p>
@@ -274,5 +273,4 @@
     <ul class="table-columns">
         <li>CHAVE ESTRANGEIRA (book_ref) REFERÊNCIAS bookings(book_ref)</li>
     </ul>    
-    {/literal}
 </div>
