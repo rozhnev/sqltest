@@ -28,6 +28,7 @@
         </div>
       </a>
     {/if}
+    {literal}
     <h3 id="aircrafts_data_table_description">
       <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Rolar para cima">
         <svg height="15" width="15" style="">
@@ -272,5 +273,6 @@
     Restrições de chave estrangeira:
     <ul class="table-columns">
         <li>CHAVE ESTRANGEIRA (book_ref) REFERÊNCIAS bookings(book_ref)</li>
-    </ul>    
+    </ul>
+    {/literal}
 </div>
