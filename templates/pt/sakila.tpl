@@ -21,19 +21,19 @@
     <li><span class='sql' onclick="scrollInfoPanel('staff_table_description')">staff</span> - tabela de funcionários da empresa.</li>
     <li><span class='sql' onclick="scrollInfoPanel('store_table_description')">store</span> - tabela de lojas da empresa.</li>
   </ul>
-  <a href="https://amzn.to/4dVmPhJ" target="_blank" style="text-decoration: none;">
-    <div style="display: flex; flex-direction: row; border: 1px solid white; padding: 0.3em; width: 98%;">
-      <div  style = "width: 30%;">
-          <img style="width: 100%;" src="/images/sql-in-10-minutes-by-ben-forta.jpg" alt="SQL em 10 Minutos por Dia por Ben Forta">
+  {if isset($Book)}
+    <a href="{$Book.referral_link}" target="_blank" style="text-decoration: none;">
+      <div style="display: flex; flex-direction: row; border: 1px solid white; padding: 0.3em; width: 98%;">
+        <div  style = "width: 30%;">
+            <img style="width: 100%;" src="{$Book.picture_link}" alt="{$Book.title}">
+        </div>
+        <div style="font-size: 1em;  width: 70%;  padding: 0 0.7em; font-weight: 100;">
+            <div>{$Book.title}</div>
+            <div style="font-size: small; padding-top: 0.5em;">{$Book.description}</div>
+        </div>
       </div>
-      <div style="font-size: 1em;  width: 70%;  padding: 0 0.7em; font-weight: 100;">
-          <div>SQL em 10 Minutos por Dia por Ben Forta</div>
-          <div style="font-size: small; padding-top: 0.5em;">
-          Seja você um desenvolvedor de aplicativos, administrador de banco de dados, designer de aplicativos web, desenvolvedor de aplicativos móveis ou usuário do Microsoft Office, um bom conhecimento prático de SQL é uma parte importante da interação com bancos de dados. E o livro "Ensine Você Mesmo SQL em 10 Minutos" oferece as respostas práticas e diretas que você precisa para ajudar você a fazer seu trabalho. 
-          </div>
-      </div>
-    </div>
-  </a>
+    </a>
+  {/if}
   <h3 id="actor_table_description">
     <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Rolar para cima">
       <svg height="15" width="15" style="">

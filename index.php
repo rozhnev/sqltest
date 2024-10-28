@@ -312,6 +312,8 @@ switch ($action) {
             $smarty->assign('DBMS', $questionData['dbms']);
             $smarty->assign('NextQuestionId', $question->getNextSefId($questionCategoryID));
             $smarty->assign('PreviousQuestionId', $question->getPreviousSefId($questionCategoryID));
+            $smarty->assign('Book', Helper::getBook($dbh, $lang, $questionData['dbms']));
+
             $smarty->registerPlugin("modifier", "floor", "floor");
             $smarty->registerPlugin("modifier", "in_array", "in_array");
             $template = $mobileView ? "m.index.tpl" : "index.tpl";
