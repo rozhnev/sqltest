@@ -33,10 +33,12 @@
             flex-direction: row;
             justify-content: center;
         }
-        /* .donation-method {
+        /*         
+        .donation-method {
             flex: 1;
-            min-width: 300px; /* минимальная ширина колонки */
-        } */
+            min-width: 300px;
+        }
+        */
 
         .donation-method:first-child {
             flex-basis: 35%;
@@ -52,7 +54,6 @@
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
             color: #79c0ff;
-            min-width: 420px;
         }
         @media (max-width: 768px) {
             .donation-method {
