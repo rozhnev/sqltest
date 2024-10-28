@@ -49,11 +49,5 @@
         </ol>
     </div>
     {/foreach}
-    <div class="menu-ad">
-        <div id="yandex_rtb_R-A-4716552-2">
-            <div class="question-wrapper">
-                {include file="{$Lang}/menu_bottom_add_placeholder.tpl"}
-            </div>
-        </div>
-    </div>
+    {include file="{$Lang}/menu_bottom_add.tpl"}
 </div>
