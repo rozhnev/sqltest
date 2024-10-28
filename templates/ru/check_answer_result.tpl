@@ -35,7 +35,7 @@
         ['Попробуте еще раз. Вы почти решили это!']
     ]}
     {$phrases[$phrase_id][0]}
-    <p>Ошибка в задании? <a target="_blank" href="https://t.me/sqlize">Сообщите! Мы всё исправим :)</a></p>
+    <p>Ошибка в задании? <a target="_blank" href="https://t.me/sqlize">Сообщите! Мы всё исправим 😊</a></p>
 {/if}
 {if isset($ReferralLink)}
     <div class="referral_link" style="font-size:large; margin-top: 3em; padding: 1em; border: solid 1px; border-radius: 3px;">
