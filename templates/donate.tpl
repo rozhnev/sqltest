@@ -56,6 +56,9 @@
             color: #79c0ff;
         }
         @media (max-width: 768px) {
+            .donation-container {
+                padding: 0.5rem;
+            }
             .donation-method {
                 flex-basis: 100% !important; /* на мобильных колонки занимают всю ширину */
             }
