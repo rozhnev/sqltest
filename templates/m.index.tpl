@@ -2,7 +2,7 @@
 <body>
 <div class="mobile-container">
     {include file='popups.tpl'}
-    {include file='m.top-menu.tpl' path="/question/{$QuestionCategoryID}/{$QuestionID}"}
+    {include file='m.top-menu.tpl' path="/question/{$Question.category_sef}/{$Question.question_sef}"}
     <div class="text-block user-solutions-count">
         {assign var="QuestionsCountRounded" value="{floor(($QuestionsCount - 1)/10) * 10}"}
         <p>{translate}user_solutions_count{/translate}</p>
@@ -29,7 +29,7 @@
             <div class="question-title-bar" style="display: flex;">
                 <div class="question-title">
                     <div class="question-level rate{$Question.rate}" title="{$Question.question_rate|default:'Not rated yet'}"></div>
-                    {translate}question_title{/translate}{$Question.number}:
+                    <span title="({$QuestionID})">{translate}question_title{/translate}{$Question.number}:</span>
                     {if $LoggedAsAdmin}
                         <a href="/admin/question/{$NextQuestionId}" title="Edit" style="color:#333">&#9998;</a>
                     {/if}

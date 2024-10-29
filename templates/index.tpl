@@ -4,9 +4,9 @@
     <div class="container">
         {include file='popups.tpl'}
         {if $MobileView}
-            {include file='m.top-menu.tpl' path="/question/{$QuestionCategoryID}/{$QuestionID}"}
+            {include file='m.top-menu.tpl' path="/question/{$Question.category_sef}/{$Question.question_sef}"}
         {else}
-            {include file='top-menu.tpl' path="/question/{$QuestionCategoryID}/{$QuestionID}"}
+            {include file='top-menu.tpl' path="/question/{$Question.category_sef}/{$Question.question_sef}"}
         {/if}
         {include file='menu.tpl'}
         {include file='splitter.tpl'}
@@ -14,9 +14,8 @@
             <div class="question-wrapper">
                 <div class="question-title-bar" style="display: flex;">
                     <div class="question-title">
-                        <div class="question-level rate{$Question.rate}"
-                            title="{$Question.question_rate|default:'Not rated yet'}"></div>
-                        {translate}question_title{/translate}&nbsp;{$Question.number}:
+                        <div class="question-level rate{$Question.rate}" title="{$Question.question_rate|default:'Not rated yet'}"></div>
+                        <span title="({$QuestionID})">{translate}question_title{/translate}&nbsp;{$Question.number}:</span>
                         {if $LoggedAsAdmin}
                             <a href="/admin/question/{$NextQuestionId}" title="Edit" style="color:#333">&#9998;</a>
                         {/if}
