@@ -409,7 +409,9 @@ body {
     background-color: var(--block-background-color);
     color: white;
     cursor: pointer;
-    padding: 12px;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
     width: 100%;
     text-align: left;
     border: none;
@@ -430,9 +432,11 @@ body {
     background-color: var(--accordion-hover);
     border-bottom: 1px solid var(--accordion-hover-border);
 }
-
-.accordion .eye-btn {
-    float: right;
+.accordion-title {
+    padding: 9px;
+}
+.accordion .accordion-icons {
+    padding: 9px 3px;
 }
 .menu .selector {
     display: flex; 
@@ -494,7 +498,7 @@ body {
 }
 
 .container .menu .menu-ad {
-    height: 32vh;
+    height: 36vh;
     margin-top: 1vh;
 }
 .mobile-container .menu .menu-ad {

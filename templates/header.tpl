@@ -32,7 +32,7 @@
         {if $CanonicalLink}
             <link rel="canonical" href="{$CanonicalLink}">
         {/if}
-            <link rel="stylesheet" type="text/css" href="/style.css?31" media="all">
+            <link rel="stylesheet" type="text/css" href="/style.css?32" media="all">
             <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/ace.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/ext-beautify.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/mode-sql.min.js"></script>
