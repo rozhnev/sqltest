@@ -1,5 +1,9 @@
 <?php
 $env    = parse_ini_string(file_get_contents(".env"), 1);
+if (isset($env['MAINTENANCE'])) {
+    include 'templates/maintainance.tpl';
+    die();
+}
 
 require 'vendor/autoload.php';
 $lang   = 'en';
