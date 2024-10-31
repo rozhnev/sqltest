@@ -79,4 +79,6 @@ $translations = [
     'error_title' => 'Ошибка!',
     'solution_action_run' => 'Выполнить',
     'solution_action_report' => 'Неверное решение!',
+
+    'check_your_skills' => 'Узнай свой рейтинг SQL!',
 ];

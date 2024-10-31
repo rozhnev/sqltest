@@ -108,11 +108,11 @@ if (isset($pathParts[0]) && $pathParts[0] === 'login') {
 } elseif (preg_match("@(?<lang>$languge_codes_regexp)/test/create@i", $path, $params)) {
     $lang       = $params['lang'];
     $action     = 'test_create';
-} elseif (preg_match("@(?<lang>$languge_codes_regexp)/test/(?<testId>[a-z0-9-]+)/(?<questionID>\d+)@i", $path, $params)) {
+} elseif (preg_match("@(?<lang>$languge_codes_regexp)/test/(?<testId>[a-z0-9-]+)/?(?<questionID>\d+)?@i", $path, $params)) {
     $lang       = $params['lang'];
     $action     = 'test';
     $testId = $params['testId'];
-    $questionID = $params['questionID'];
+    $questionID = $params['questionID'] ?? 0;
 } elseif (preg_match("@(?<lang>$languge_codes_regexp)/test/(?<testId>[a-z0-9-]+)/check/(?<questionID>\d+)@i", $path, $params)) {
     $lang       = $params['lang'];
     $action     = 'test-check';
@@ -313,15 +313,16 @@ switch ($action) {
     case 'test_start':
         if ($user->logged()) {
             $userLastTest = $user->getLastTest();
-            print_r($userLastTest);
-            die();
-            if ($userTestId) {
-                $test = new Test($dbh, $lang, $user);
-                $test->setId($userTestId);
+            $smarty->assign('LastTest', $userLastTest);
+            // print_r($userLastTest);
+            // die();
+            // if (isset($userLastTest) && $userLastTest['id']) {
+            //     $test = new Test($dbh, $lang, $user);
+            //     $test->setId($userTestId);
                 
-                $smarty->assign('QuestionId', $test->getFirstUnsolvedQuestionId());
-                $smarty->assign('Test', $userLastTest);
-            }
+            //     $smarty->assign('QuestionId', $test->getFirstUnsolvedQuestionId());
+            //     $smarty->assign('Test', $userLastTest);
+            // }
         }
         $template = "test_start.tpl";
         break;
@@ -343,6 +344,8 @@ switch ($action) {
         $test = new Test($dbh, $lang, $user);
         $test->setId($testId);
         $test->load();
+        if (!$questionID) $questionID = $test->getFirstUnsolvedQuestionId();
+
         $question = new Question($dbh, $questionID);
 
         $questionData = $test->getQuestionData($questionID);

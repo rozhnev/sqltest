@@ -78,4 +78,6 @@ $translations = [
     'error_title' => 'Erro!',
     'solution_action_run' => 'Executar',
     'solution_action_report' => 'Solução errada!',
+
+    'check_your_skills' => 'Obtenha sua classificação SQL!',
 ];

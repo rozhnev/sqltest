@@ -103,6 +103,7 @@
                             {translate}keep_going{/translate}
                         {/if}
                     </p>
+                    <button class="button green" onClick="location.href = '/{$Lang}/test/start';">{translate}check_your_skills{/translate}</button>
                 {else}
                     <p>{translate}user_solutions_count_not_logged{/translate}</p>
                     <button class="button blue" onClick="toggleLoginWindow()">{translate}top_menu_login{/translate}</button>
