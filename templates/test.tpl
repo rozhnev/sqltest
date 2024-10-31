@@ -2,7 +2,11 @@
 <body>
 <div class="container">
     {include file='popups.tpl'}
-    {include file='top-menu.tpl'}
+    {if $MobileView}
+        {include file='m.top-menu.tpl' path="/test/{$TestId}"}
+    {else}
+        {include file='top-menu.tpl' path="/test/{$TestId}"}
+    {/if}
     <div class="menu" id="menu">
         <div id="test-timer" style="padding:5px 15px; border: 1px solid white; margin: 5px;"><span style="font-size:small;">Time to complete this test is</span> <span id="test-timer-time"></span></div>
         <script>
