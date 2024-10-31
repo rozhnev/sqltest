@@ -1,17 +1,3 @@
-{include file='../short-header.tpl'}
-    <body>
-        <div class="{if $MobileView}mobile-container{else}full-container{/if}">
-            <div class="header">
-                <div class="top-menu">
-                    {if $MobileView}
-                        {include file='m.site-name.tpl'}
-                    {else}
-                        {include file='site-name.tpl'}
-                    {/if}
-                    <span class="lang-swith"><a href="/en/about" target="_self">EN</a></span>
-                </div>
-            </div>
-            <div class="container3">
                 <h1>Добро пожаловать на SQLTest.online – вашу персональную лабораторию для изучения и совершенствования SQL!<h1>
 
                 <h2 style="font-size: larger;">Хотите освоить язык структурированных запросов, чтобы уверенно работать с данными? Или, может быть, вы уже опытный разработчик, желающий расширить свои знания и подготовиться к сложным техническим собеседованиям? SQLTest.online – это идеальное место для вас!</h2>
@@ -61,9 +47,3 @@
                 <p>
                     Большое спасибо <a href ="https://t.me/artembuenas" target="_blank">Артему Латышеву</a> за его вклад в развитие проекта.
                 </p>
-            </div>
-{if $MobileView}
-    {include file='m.footer.tpl'}
-{else}
-    {include file='footer.tpl'}
-{/if}

@@ -62,5 +62,11 @@
         <changefreq>monthly</changefreq>
         <priority>0.3</priority>
       </url>
+      <url>
+        <loc>https://sqltest.online/pt/question/{$question['category']}/{$question['question']}</loc>
+        <lastmod>{$Today}</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+      </url>
     {/foreach}
 </urlset>

@@ -7,6 +7,9 @@ $smarty = new Smarty();
 $dbc    = new DB($env);
 $dbh    = $dbc->getInstance();
 $user   = new User($dbh, $env);
+$languages = ['ru' => 'Русский', 'en' => 'English', 'pt' => 'Português'/*, 'es' => 'Español'*/];    
+$languge_codes = array_keys($languages);
+$languge_codes_regexp = implode('|', $languge_codes);
 
 $mobileView =  (
     (isset($_SERVER['SERVER_NAME']) && $_SERVER['SERVER_NAME'] === 'm.sqltest.online') 
@@ -61,16 +64,16 @@ if (isset($pathParts[0]) && $pathParts[0] === 'login') {
     $action     = 'login';
     $loginProvider = $pathParts[1];
 // privacy-policy, logout actions
-} elseif (preg_match('@(?<lang>ru|en)/(?<action>privacy-policy|logout|about|menu)/\d+@i', $path, $params)) {
+} elseif (preg_match("@(?<lang>$languge_codes_regexp)/(?<action>privacy-policy|logout|about|menu|donate|books|courses)/\d+@i", $path, $params)) {
     $lang       = $params['lang'];
     $action     = $params['action'];
     header("HTTP/1.1 301 Moved Permanently");
     header("Location: /{$lang}/{$action}");
     exit();
-} elseif (preg_match('@(?<lang>ru|en)/(?<action>privacy-policy|logout|about|menu|books|courses)/?@i', $path, $params)) {
+} elseif (preg_match("@(?<lang>$languge_codes_regexp)/(?<action>privacy-policy|logout|about|menu|books|courses|donate)/?@i", $path, $params)) {
     $lang       = $params['lang'];
     $action     = $params['action'];
-} elseif (preg_match('@(?<lang>ru|en)/question/(?<questionCategoryID>\d+)/(?<questionID>\d+)@i', $path, $params)) {
+} elseif (preg_match("@(?<lang>$languge_codes_regexp)/question/(?<questionCategoryID>\d+)/(?<questionID>\d+)@i", $path, $params)) {
     $lang       = $params['lang'];
     $action     = 'question';
     $questionCategoryID = $params['questionCategoryID'];
@@ -81,42 +84,41 @@ if (isset($pathParts[0]) && $pathParts[0] === 'login') {
     header("HTTP/1.1 301 Moved Permanently");
     header("Location: $redirectLink");
     exit();
-} elseif (preg_match('@(?<lang>ru|en)/question/(?<questionCategory>[a-z-]+)/(?<question>[a-z-]+)@i', $path, $params)) {
+} elseif (preg_match("@(?<lang>$languge_codes_regexp)/question/(?<questionCategory>[a-z-]+)/(?<question>[a-z-]+)@i", $path, $params)) {
     $lang       = $params['lang'];
     $questionnire = new Questionnire($dbh, $lang);
     $action     = 'question';
     $questionCategoryID = $questionnire->getCategoryId($params['questionCategory']);
     $QuestionnireName = $questionnire->getNameByCategory($params['questionCategory']) ?? 'category';
     $questionID = $questionnire->getQuestionId($params['question']);
-    // $smarty->assign('CanonicalLink', "https://sqltest.online/{$lang}/question/{$questionCategoryID}/{$questionID}");
-} elseif (preg_match('@(?<lang>ru|en)/question/(?<questionID>\d+)/(?<action>query-help|query-run|query-test|rate|solutions|check-answers)@i', $path, $params)) {
+} elseif (preg_match("@(?<lang>$languge_codes_regexp)/question/(?<questionID>\d+)/(?<action>query-help|query-run|query-test|rate|solutions|check-answers)@i", $path, $params)) {
     $lang       = $params['lang'];
     $action     = $params['action'];
     $questionID = $params['questionID'];
-} elseif (preg_match('@(?<lang>ru|en)/solution/(?<solutionID>\d+)/(?<action>like|dislike|report)@i', $path, $params)) {
+} elseif (preg_match("@(?<lang>$languge_codes_regexp)/solution/(?<solutionID>\d+)/(?<action>like|dislike|report)@i", $path, $params)) {
     $lang       = $params['lang'];
     $action     = 'solution-' . $params['action'];
     $solutionID = $params['solutionID'];
-} elseif (preg_match('@(?<lang>ru|en)/(?<action>donate)@i', $path, $params)) {
+} elseif (preg_match("@(?<lang>$languge_codes_regexp)/(?<action>donate)@i", $path, $params)) {
     $lang       = $params['lang'];
     $action     = $params['action'];
-} elseif (preg_match('@(?<lang>ru|en)/test/start@i', $path, $params)) {
+} elseif (preg_match("@(?<lang>$languge_codes_regexp)/test/start@i", $path, $params)) {
     $lang       = $params['lang'];
     $action     = 'test_start';
-} elseif (preg_match('@(?<lang>ru|en)/test/create@i', $path, $params)) {
+} elseif (preg_match("@(?<lang>$languge_codes_regexp)/test/create@i", $path, $params)) {
     $lang       = $params['lang'];
     $action     = 'test_create';
-} elseif (preg_match('@(?<lang>ru|en)/test/(?<testId>[a-z0-9-]+)/(?<questionID>\d+)@i', $path, $params)) {
+} elseif (preg_match("@(?<lang>$languge_codes_regexp)/test/(?<testId>[a-z0-9-]+)/(?<questionID>\d+)@i", $path, $params)) {
     $lang       = $params['lang'];
     $action     = 'test';
     $testId = $params['testId'];
     $questionID = $params['questionID'];
-} elseif (preg_match('@(?<lang>ru|en)/test/(?<testId>[a-z0-9-]+)/check/(?<questionID>\d+)@i', $path, $params)) {
+} elseif (preg_match("@(?<lang>$languge_codes_regexp)/test/(?<testId>[a-z0-9-]+)/check/(?<questionID>\d+)@i", $path, $params)) {
     $lang       = $params['lang'];
     $action     = 'test-check';
     $testId = $params['testId'];
     $questionID = $params['questionID'];
-} elseif (preg_match('@(?<lang>ru|en)/(?<questionCategory>sakila|employee)/(?<questionID>\d+)@i', $path, $params)) {
+} elseif (preg_match("@(?<lang>$languge_codes_regexp)/question/(?<questionCategory>sakila|employee)/(?<questionID>\d+)@i", $path, $params)) {
     $lang       = $params['lang'];
     $action     = 'question';
     $questionCategoryID = $params['questionCategory'] == 'employee' ? 2 : 1;
@@ -133,12 +135,19 @@ if (isset($pathParts[0]) && $pathParts[0] === 'login') {
     include 'robots.txt';
     die();
 } else {
-    $lang       = (isset($pathParts[0]) && $pathParts[0] === 'ru') ||  getUserOSLanguage() =='ru' ? 'ru' : 'en';
+    if (isset($pathParts[0]) && in_array($pathParts[0], $languge_codes)) {
+        $lang = $pathParts[0];
+    } else {
+        $lang = getUserOSLanguage();
+    }
     $questionID = $pathParts[2] ?? 1;
     $action     = $pathParts[3] ?? 'question';
     $questionCategoryID = 1;
 }
 
+if (!in_array($lang, $languge_codes)) {
+    $lang = 'en';
+}
 session_start([
     'cookie_lifetime' => 86400,
 ]);
@@ -153,7 +162,7 @@ switch ($action) {
         $_SESSION["user_id"] = $user->getId();
         $_SESSION["admin"] = $user->isAdmin();
         //TODO: last path should be restored on login
-        $template = "../login_result.tpl";
+        $template = "login_result.tpl";
         break;
     case 'menu':
         $QuestionnireName = $_GET['questionnire'] ?? 'category';
@@ -178,22 +187,12 @@ switch ($action) {
         $smarty->assign('CategoriesCount', $questionnire->getCategoriesCount());
         $smarty->assign('QuestionsCount',  $questionnire->getQuestionsCount());
         //$smarty->assign('QuestionnaireCategoriesLinks',  $questionnire->getQuestionnaireCategoriesLinks(3));
-        $smarty->assign('PageTitle', $lang === 'ru' 
-            ? 'SQLTest.online: твой персональный тренер по SQL'
-            : 'SQLTest.online: your personal SQL trainer'
-        );
-        $smarty->assign('PageDescription', $lang === 'ru' 
-            ? 'Хочешь научиться писать эффективные SQL-запросы? С SQLTest.online это просто! Решай разнообразные практические задачи, отслеживай свой прогресс и становись настоящим экспертом в области SQL.'
-            : 'Want to learn how to write effective SQL queries? With SQLTest.online it\'s easy! Solve various practical problems, track your progress and become a real expert in SQL.'
-        );
+
+        $smarty->registerPlugin("modifier", "floor", "floor");
         $template = "about.tpl";
         break;        
     case 'privacy-policy':
         $smarty->assign('Lang', $lang);
-        $smarty->assign('PageTitle', $lang === 'ru' 
-            ? 'SQLTest.online: Политика конфиденциальности'
-            : 'SQLTest.online: Privacy Policy'
-        );
         $template = "privacy_policy.tpl";
         break;
     case 'donate':
@@ -240,7 +239,7 @@ switch ($action) {
         if (!$queryTestResult['ok']) header( 'HTTP/1.1 418 BAD REQUEST' );
         $smarty->registerPlugin("modifier", "array_key_exists", "array_key_exists");
         $smarty->assign('ReferralLink', Helper::getReferralLink($dbh, $lang));
-        $template = "query_test_result.tpl";
+        $template = "$lang/query_test_result.tpl";
         break;
     case 'check-answers':
         $answers = $_POST["answers"] ?? '[]';
@@ -252,7 +251,7 @@ switch ($action) {
         }
         if (!$answerResult['ok']) header( 'HTTP/1.1 418 BAD REQUEST' );
         $smarty->assign('ReferralLink', Helper::getReferralLink($dbh, $lang));
-        $template = "check_answer_result.tpl";
+        $template = "$lang/check_answer_result.tpl";
         break;
     case 'rate':
         if ($user->logged()) {
@@ -262,8 +261,14 @@ switch ($action) {
         $template = "rate_saved.tpl";
         break;
     case 'solutions':
-        $question = new Question($dbh, $questionID);
-        $smarty->assign('QuestionSolutions', $question->getSolutions());
+        if ($user->logged()) {
+            $questionSolved = $user->solvedQuestion($questionID);
+            $smarty->assign('QuestionSolved', $questionSolved);
+            if ($questionSolved) {
+                $question = new Question($dbh, $questionID);
+                $smarty->assign('QuestionSolutions', $question->getSolutions());
+            }
+        }
         $template = "solutions.tpl";
         break;
     case 'solution-like':
@@ -396,11 +401,6 @@ switch ($action) {
         if (!$checkResult['ok']) header( 'HTTP/1.1 418 BAD REQUEST' );     
         $template = "check_test_solution.tpl";
         break;
-    case 'welcome':
-        $questionnire = new Questionnire($dbh, $lang);
-        $smarty->assign('Questionnire', $questionnire->get());
-        $template = "welcome.tpl";
-        break;
     case 'question':
         try {
             $questionnire = new Questionnire($dbh, $lang);
@@ -419,8 +419,11 @@ switch ($action) {
             }
             $smarty->assign('QuestionCategoryID', $questionCategoryID);
             $smarty->assign('Question', $questionData);
+            $smarty->assign('DBMS', $questionData['dbms']);
             $smarty->assign('NextQuestionId', $question->getNextSefId($questionCategoryID));
             $smarty->assign('PreviousQuestionId', $question->getPreviousSefId($questionCategoryID));
+            $smarty->assign('Book', Helper::getBook($dbh, $lang, $questionData['dbms']));
+
             $smarty->registerPlugin("modifier", "floor", "floor");
             $smarty->registerPlugin("modifier", "in_array", "in_array");
             $template = $mobileView ? "m.index.tpl" : "index.tpl";
@@ -433,14 +436,6 @@ switch ($action) {
     case 'books':
         $smarty->assign('Books', Helper::getBooks($dbh, $lang));
         $template = "books.tpl";
-        $smarty->assign('PageTitle', $lang === 'ru' 
-            ? 'Изучаем SQL с нуля: лучшие книги для начинающих'
-            : 'Learning SQL from Scratch: The Best Books for Beginners'
-        );
-        $smarty->assign('PageDescription', $lang === 'ru' 
-            ? 'Хотите освоить язык SQL и стать востребованным специалистом в области баз данных? Мы собрали для вас подборку самых полезных книг, которые помогут вам сделать первые шаги в мире SQL.'
-            : 'Want to master the SQL language and become a sought-after database specialist? We have compiled a selection of the most useful books for you that will help you take your first steps in the world of SQL.'
-        );
         break;
     default:
         // stored for back compatibility
@@ -462,17 +457,14 @@ switch ($action) {
         $template = $mobileView ? "m.index.tpl" : "index.tpl";
 }
 
-if ($lang == 'ru') {
-    $smarty->setTemplateDir('./templates/ru');
-} else {
-    $lang = 'en';
-    $smarty->setTemplateDir('./templates/en');
-}
+Localizer::init($lang);
+$smarty->registerPlugin('block', 'translate', array('Localizer', 'translate'), true);
 
 $smarty->assign('MobileView', $mobileView);
 $smarty->assign('Logged', $user->logged());
 $smarty->assign('LoggedAsAdmin', $user->isAdmin());
 $smarty->assign('Lang', $lang);
+$smarty->assign('Languages', $languages);
 $smarty->assign('DB', $db);
 $smarty->assign('QuestionID', $questionID);
 

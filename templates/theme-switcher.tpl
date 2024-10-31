@@ -1,4 +1,4 @@
-<div style="display: flex; gap: 0.75rem; margin: auto;">
+<div style="display: flex; min-width: 90px; margin: 12px; align-items: center; justify-content: center;">
     <div class="theme-switch-wrapper">
         <label class="theme-switch" for="theme-switch-checkbox">
             <input type="checkbox" id="theme-switch-checkbox" />

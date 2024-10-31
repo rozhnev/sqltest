@@ -1,17 +1,3 @@
-{include file='../short-header.tpl'}
-    <body>
-        <div class="{if $MobileView}mobile-container{else}full-container{/if}">
-            <div class="header">
-                <div class="top-menu">
-                    {if $MobileView}
-                        {include file='m.site-name.tpl'}
-                    {else}
-                        {include file='site-name.tpl'}
-                    {/if}
-                    <span class="lang-swith"><a href="/ru/privacy-policy" target="_self">RU</a></span>
-                </div>
-            </div>
-            <div class="container3">
                 <h2>Privacy Policy for SQLtest</h2>
 
                 <p>This Privacy Policy describes how SQLtest ("we", "us", or "our") collects, uses, and shares personal information
@@ -20,16 +6,15 @@
                 <h3>1. Information We Collect:</h3>
 
                 <ol>
-                    <li><strong>Google OAuth2:</strong> When you use SQLtest, we may request access to your Google account
-                        information via OAuth2. This may include, but is not limited to, your email address and profile information as specified during the authorization process.</li>
+                    <li>When you use SQLTest, we may request access to your account information from various OAuth2 providers, including Google, Yandex, LinkedIn, GitHub, and VK. This may encompass, but is not limited to, your email address and profile details as specified during the authorization process.</li>
                 </ol>
 
                 <h3>2. How We Use the Information:</h3>
 
                 <ol>
-                    <li><strong>Authentication:</strong> We use the information obtained through Google OAuth2 to authenticate your
+                    <li><strong>Authentication:</strong> We use the information obtained through OAuth2 provider to authenticate your
                         identity and provide you access to our services.</li>
-                    <li><strong>Account Management:</strong> Your Google account information is used for managing your account within
+                    <li><strong>Account Management:</strong> Your account information is used for managing your account within
                         SQLtest.</li>
                     <li><strong>Communication:</strong> We may use your email address to communicate with you regarding important
                         updates, notifications, or support-related matters.</li>
@@ -68,9 +53,3 @@
                 <footer>
                     <p>This Privacy Policy was last updated on 2024-01-01.</p>
                 </footer>
-            </div>
-{if $MobileView}
-    {include file='m.footer.tpl'}
-{else}
-    {include file='footer.tpl'}
-{/if}
