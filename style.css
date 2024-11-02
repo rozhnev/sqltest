@@ -695,7 +695,7 @@ body {
     border: 1px solid var(--text-block-border-color);
     min-height: 28vh;
     padding: 15px;
-    max-height: 28vh;
+    max-height: 40vh;
     overflow: auto;
     color: var(--question-text);
     background-color: var(--text-block-background-color);
