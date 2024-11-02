@@ -4,13 +4,31 @@
             <a href="/{$Lang}/" target="_self" style="width: 20vw; display: flex;">
                 <h1 class="site-name-wrapper">
                     <span class="site-name">SQLtest: </span>
-                    <span class="site-promo">{translate}site_promo{/translate}</span>
+                    <span class="site-promo">
+                        {if $Action === 'question'}
+                            {if isset($Question.answers)}
+                                {translate}site_promo_question_quiz{/translate}
+                            {else}
+                                {translate}site_promo_question_task{/translate}
+                            {/if}
+                        {else}
+                            {translate}site_promo{/translate}
+                        {/if}
+                    </span>
                 </h1>
             </a>
         </div>
         <div class="top-menu-center" style="width: 55vw; display: flex;">
             <span  class="site-description">
-                {translate}site_description{/translate}
+                {if $Action === 'question'}
+                    {if isset($Question.answers)}
+                        {translate}site_description_question_quiz{/translate}
+                    {else}
+                        {translate}site_description_question_task{/translate}
+                    {/if}
+                {else}
+                    {translate}site_description{/translate}
+                {/if}
             </span>
         </div>
         <div class="top-menu-right" style="width: 25vw; display: flex; justify-content: space-between; padding-right: 18px;">

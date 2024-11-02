@@ -360,7 +360,7 @@ body {
 }
 .site-description {
     max-width: 55vw; 
-    display: flex; 
+    /* display: flex;  */
     padding: 0 0.5em;
     align-items: center;
 }
