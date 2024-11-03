@@ -361,7 +361,7 @@ body {
 }
 .site-description {
     max-width: 55vw; 
-    display: flex; 
+    /* display: flex;  */
     padding: 0 0.5em;
     align-items: center;
 }
@@ -696,7 +696,7 @@ body {
     border: 1px solid var(--text-block-border-color);
     min-height: 28vh;
     padding: 15px;
-    max-height: 28vh;
+    max-height: 40vh;
     overflow: auto;
     color: var(--question-text);
     background-color: var(--text-block-background-color);
@@ -744,7 +744,7 @@ body {
 }
 
 .db-description {
-    height: 90vh;
+    height: 100vh;
     overflow: auto;
     margin-top: 10px;
 }

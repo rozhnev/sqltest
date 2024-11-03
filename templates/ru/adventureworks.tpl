@@ -9,11 +9,11 @@
       <li><span class='sql' onclick="scrollInfoPanel('Address_table_description')">Address</span> - таблица адресов.</li>
       <li><span class='sql' onclick="scrollInfoPanel('Customer_table_description')">Customer</span> - таблица клиентов</li>
       <li><span class='sql' onclick="scrollInfoPanel('CustomerAddress_table_description')">CustomerAddress</span> - таблица отношений клиентов и адресов.</li>
-      <li><span class='sql' onclick="scrollInfoPanel('Product_table_description')">Product</span> - таблица продуктов.</li>
-      <li><span class='sql' onclick="scrollInfoPanel('ProductCategory_table_description')">ProductCategory</span> - таблица категорий продуктов.</li>
-      <li><span class='sql' onclick="scrollInfoPanel('ProductDescription_table_description')">ProductDescription</span> - таблица описаний продуктов.</li>
-      <li><span class='sql' onclick="scrollInfoPanel('ProductModel_table_description')">ProductModel</span> - таблица моделей продуктов.</li>
-      <li><span class='sql' onclick="scrollInfoPanel('ProductModelProductDescription_table_description')">ProductModelProductDescription</span> - таблица описаний моделей продуктов.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('Product_table_description')">Product</span> - таблица товаров.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('ProductCategory_table_description')">ProductCategory</span> - таблица категорий товаров.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('ProductDescription_table_description')">ProductDescription</span> - таблица описаний товаров.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('ProductModel_table_description')">ProductModel</span> - таблица моделей товаров.</li>
+      <li><span class='sql' onclick="scrollInfoPanel('ProductModelProductDescription_table_description')">ProductModelProductDescription</span> - таблица описаний моделей товаров.</li>
       <li><span class='sql' onclick="scrollInfoPanel('SalesOrderDetail_table_description')">SalesOrderDetail</span> - таблица заказов.</li>
       <li><span class='sql' onclick="scrollInfoPanel('SalesOrderHeader_table_description')">SalesOrderHeader</span> - таблица деталей заказов.</li>
     </ul>
@@ -206,22 +206,22 @@
     </h3>
     Колонки:
     <ul class="table-columns">
-      <li> <span class="sql">ProductID</span> - уникальный идентификатор для каждого продукта.</li>
-      <li> <span class="sql">Name</span> - наименование продукта.</li>
+      <li> <span class="sql">ProductID</span> - уникальный идентификатор для каждого товара.</li>
+      <li> <span class="sql">Name</span> - наименование товара.</li>
       <li> <span class="sql">ProductNumber</span> - артикул.</li>
-      <li> <span class="sql">Color</span> - цвет продукта.</li>
-      <li> <span class="sql">StandardCost</span> - цена продукта.</li>
-      <li> <span class="sql">ListPrice</span> - цена продукта в каталоге.</li>
-      <li> <span class="sql">Size</span> - размер продукта.</li>
-      <li> <span class="sql">Weight</span> - вес продукта.</li>
+      <li> <span class="sql">Color</span> - цвет товара.</li>
+      <li> <span class="sql">StandardCost</span> - цена товара.</li>
+      <li> <span class="sql">ListPrice</span> - цена товара в каталоге.</li>
+      <li> <span class="sql">Size</span> - размер товара.</li>
+      <li> <span class="sql">Weight</span> - вес товара.</li>
       <li> <span class="sql">ProductCategoryID</span> - внешний ключ, указывающий на таблицу <span
-          class="sql">ProductCategory</span> - определяет категорию продукта.</li>
+          class="sql">ProductCategory</span> - определяет категорию товара.</li>
       <li> <span class="sql">ProductModelID</span> - внешний ключ, указывающий на таблицу <span
-          class="sql">ProductModel</span> - определяет модель продукта.</li>
+          class="sql">ProductModel</span> - определяет модель товара.</li>
       <li> <span class="sql">SellStartDate</span> - временная метка даты начала продаж.</li>
       <li> <span class="sql">SellEndDate</span> - временная метка даты окончания продаж.</li>
       <li> <span class="sql">DiscontinuedDate</span> - временная метка даты окончания продаж.</li>
-      <li> <span class="sql">ThumbNailPhoto</span> - миниатюра фото продукта.</li>
+      <li> <span class="sql">ThumbNailPhoto</span> - миниатюра фото товара.</li>
       <li> <span class="sql">ThumbnailPhotoFileName</span> - имя файла миниатюры фото.</li>
       <li> <span class="sql">rowguid</span> - guid.</li>
       <li> <span class="sql">ModifiedDate</span> - временная метка создания или последнего обновления строки.</li>
@@ -285,9 +285,9 @@
     </h3>
     Колонки:
     <ul class="table-columns">
-      <li> <span class="sql">ProductCategoryID</span> - уникальный идентификатор для каждой категории продукта.</li>
-      <li> <span class="sql">ParentProductCategoryID</span> - идентификатор родительской категории продукта.</li>
-      <li> <span class="sql">Name</span> - название категории продукта.</li>
+      <li> <span class="sql">ProductCategoryID</span> - уникальный идентификатор для каждой категории товара.</li>
+      <li> <span class="sql">ParentProductCategoryID</span> - идентификатор родительской категории товара.</li>
+      <li> <span class="sql">Name</span> - название категории товара.</li>
       <li> <span class="sql">rowguid</span> - guid.</li>
       <li> <span class="sql">ModifiedDate</span> - временная метка создания или последнего обновления строки.</li>
     </ul>
@@ -326,8 +326,8 @@
     </h3>
     Колонки:
     <ul class="table-columns">
-      <li> <span class="sql">ProductDescriptionID</span> - уникальный идентификатор для каждого описания продукта.</li>
-      <li> <span class="sql">Description</span> - описание продукта.</li>
+      <li> <span class="sql">ProductDescriptionID</span> - уникальный идентификатор для каждого описания товара.</li>
+      <li> <span class="sql">Description</span> - описание товара.</li>
       <li> <span class="sql">rowguid</span> - guid.</li>
       <li> <span class="sql">ModifiedDate</span> - временная метка создания или последнего обновления строки.</li>
     </ul>
@@ -364,8 +364,8 @@
     </h3>
     Колонки:
     <ul class="table-columns">
-      <li> <span class="sql">ProductModelID</span> - уникальный идентификатор для каждой модели продукта.</li>
-      <li> <span class="sql">Name</span> - название модели продукта.</li>
+      <li> <span class="sql">ProductModelID</span> - уникальный идентификатор для каждой модели товара.</li>
+      <li> <span class="sql">Name</span> - название модели товара.</li>
       <li> <span class="sql">CatalogDescription</span> - описание в формате XML.</li>
       <li> <span class="sql">rowguid</span> - guid.</li>
       <li> <span class="sql">ModifiedDate</span> - временная метка создания или последнего обновления строки.</li>

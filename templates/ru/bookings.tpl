@@ -16,7 +16,7 @@
       <li><span class='sql' onclick="scrollInfoPanel('ticket_flights_table_description')">ticket_flights</span> - таблица связей билетов с рейсами.</li>
       <li><span class='sql' onclick="scrollInfoPanel('tickets_table_description')">tickets</span> - таблица билетов.</li>
     </ul>
-    <a href="https://book24.ru/r/iuZxo?erid=LjN8KKn37" target="_blank" style="text-decoration: none;">
+    <!-- <a href="https://book24.ru/r/iuZxo?erid=LjN8KKn37" target="_blank" style="text-decoration: none;">
       <div style="display: flex; flex-direction: row; border: 1px solid white; padding: 0.3em; width: 98%;">
         <div  style = "width: 30%;">
             <img style="width: 100%;" src="//ndc.book24.ru/resize/410x590/pim/products/images/6f/0f/018ee0c1-cb86-72ca-be63-928004a76f0f.jpg" alt="PostgreSQL Основы языка SQL : учебное пособие">
@@ -29,7 +29,13 @@
             </div>
         </div>
       </div>
-    </a>
+    </a> -->
+    <!-- admitad.banner: zba3p9bv14fec845fb2faf541d880b Hexlet.io -->
+        <a target="_blank" rel="nofollow" href="https://dhwnh.com/g/zba3p9bv14fec845fb2faf541d880b/?i=4&subid=python-dev&erid=LatgBe2JB"><img width="200" height="200" border="0" src="https://aflink.ru/b/zba3p9bv14fec845fb2faf541d880b/" alt="Hexlet.io"/></a>
+    <!-- /admitad.banner -->
+    <!-- admitad.banner: v76ghfjtdsfec845fb2fa804937a48 Читай-город -->
+        <a target="_blank" rel="nofollow" href="https://kjuzv.com/g/v76ghfjtdsfec845fb2fa804937a48/?i=4&subid=200-200&erid=LatgBYH9b"><img width="200" height="200" border="0" src="https://aflink.ru/b/v76ghfjtdsfec845fb2fa804937a48/" alt="Читай-город"/></a>
+    <!-- /admitad.banner -->
     <h3 id="aircrafts_data_table_description">
       <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
         <svg height="15" width="15" style="">

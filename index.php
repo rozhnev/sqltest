@@ -468,6 +468,7 @@ Localizer::init($lang);
 $smarty->registerPlugin('block', 'translate', array('Localizer', 'translate'), true);
 
 $smarty->assign('MobileView', $mobileView);
+$smarty->assign('Action', $action);
 $smarty->assign('Logged', $user->logged());
 $smarty->assign('LoggedAsAdmin', $user->isAdmin());
 $smarty->assign('Lang', $lang);
