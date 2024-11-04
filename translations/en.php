@@ -84,4 +84,7 @@ $translations = [
     'error_title' => 'Error!',
     'solution_action_run' => 'Run it',
     'solution_action_report' => 'Wrong solution!',
+
+    'test_time_to_complete' => 'Time to complete this test is',
+    'test_time_over' => 'Test time is over!'
 ];

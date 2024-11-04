@@ -112,16 +112,17 @@ if (isset($pathParts[0]) && $pathParts[0] === 'login') {
 } elseif (preg_match("@(?<lang>$languge_codes_regexp)/test/create@i", $path, $params)) {
     $lang       = $params['lang'];
     $action     = 'test_create';
+} elseif (preg_match("@(?<lang>$languge_codes_regexp)/test/(?<testId>[a-z0-9-]+)/check/(?<questionID>\d+)@i", $path, $params)) {
+    // MUST BE BEFORE test action
+    $lang       = $params['lang'];
+    $action     = 'test-check';
+    $testId = $params['testId'];
+    $questionID = $params['questionID'];
 } elseif (preg_match("@(?<lang>$languge_codes_regexp)/test/(?<testId>[a-z0-9-]+)/?(?<questionID>\d+)?@i", $path, $params)) {
     $lang       = $params['lang'];
     $action     = 'test';
     $testId = $params['testId'];
     $questionID = $params['questionID'] ?? 0;
-} elseif (preg_match("@(?<lang>$languge_codes_regexp)/test/(?<testId>[a-z0-9-]+)/check/(?<questionID>\d+)@i", $path, $params)) {
-    $lang       = $params['lang'];
-    $action     = 'test-check';
-    $testId = $params['testId'];
-    $questionID = $params['questionID'];
 } elseif (preg_match("@(?<lang>$languge_codes_regexp)/question/(?<questionCategory>sakila|employee)/(?<questionID>\d+)@i", $path, $params)) {
     $lang       = $params['lang'];
     $action     = 'question';
@@ -368,14 +369,20 @@ switch ($action) {
         $template = "test.tpl";
         break;
     case 'test-check':
-
-        if ($user->logged()) {
+        if (!$user->logged()) {
             header("Location: /$lang/test/start");
             exit();
         }
         $test = new Test($dbh, $lang, $user);
+        $test->setId($testId);
 
+        $template = "$lang/check_test_solution.tpl";
 
+        if ($test->getQuestionAttemptsCount($questionID) > 2) {
+            $checkResult = ['ok' => false, 'hints' => ['maxAttemptsReached' => true]];
+            $smarty->assign('QueryTestResult', $checkResult);
+            break;
+        }
         $question = new Question($dbh, $questionID);
 
         if (isset($_POST["query"])) {
@@ -405,8 +412,8 @@ switch ($action) {
             $smarty->assign('AnswerResult', $checkResult);
             //$user->saveQuestionAttempt($questionID, $checkResult, $answers);
         }
+        $test->increaseQuestionAttemptsCount($questionID);
         if (!$checkResult['ok']) header( 'HTTP/1.1 418 BAD REQUEST' );     
-        $template = "check_test_solution.tpl";
         break;
     case 'question':
         try {

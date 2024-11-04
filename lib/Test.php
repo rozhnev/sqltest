@@ -187,4 +187,30 @@ class Test
         $stmt->execute([':test_id' =>  $this->id, ':question_id' =>  $qusestionId, ':questionnire_id' => 2, ':lang' => $this->lang]);
         return $stmt->fetch(PDO::FETCH_ASSOC);;
     }
-}
+    public function getQuestionAttemptsCount(int $qusestionId): int 
+    {
+        $stmt = $this->dbh->prepare("
+            SELECT attempts 
+            FROM test_questions
+            WHERE test_id = :test_id AND question_id = :question_id
+        ");
+        $stmt->execute([':test_id' => $this->id, ':question_id' => $qusestionId]);
+
+        return $stmt->fetchColumn();
+    }
+
+    public function increaseQuestionAttemptsCount(int $qusestionId): void 
+    {
+        try {
+            $stmt = $this->dbh->prepare("
+                UPDATE test_questions 
+                SET attempts = attempts + 1
+                WHERE test_id = :test_id AND question_id = :question_id
+            ");
+            $stmt->execute([':test_id' => $this->id, ':question_id' => $qusestionId]);
+        }
+        catch (\Throwable $error) {
+            throw new Exception($error->getMessage());
+        }
+    }
+}   
