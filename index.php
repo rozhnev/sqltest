@@ -123,7 +123,10 @@ if (isset($pathParts[0]) && $pathParts[0] === 'login') {
     $action     = 'test';
     $testId = $params['testId'];
     $questionID = $params['questionID'] ?? 0;
-} elseif (preg_match("@(?<lang>$languge_codes_regexp)/question/(?<questionCategory>sakila|employee)/(?<questionID>\d+)@i", $path, $params)) {
+} elseif (
+    preg_match("@(?<lang>$languge_codes_regexp)/question/(?<questionCategory>sakila|employee)/(?<questionID>\d+)@i", $path, $params) ||
+    preg_match("@(?<lang>$languge_codes_regexp)/(?<questionCategory>sakila|employee)/(?<questionID>\d+)@i", $path, $params)
+) {
     $lang       = $params['lang'];
     $action     = 'question';
     $questionCategoryID = $params['questionCategory'] == 'employee' ? 2 : 1;
@@ -293,7 +296,9 @@ switch ($action) {
     case 'solution-report':
         if ($user->logged()) {
             $solution = new Solution($dbh, $solutionID);
-            $solution->report();
+            $questionID = $solution->report();
+            $question = new Question($dbh, $questionID);
+            $question->setBestQueryCost();
         }
         $template = "rate_saved.tpl";
         break;        
