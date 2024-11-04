@@ -417,7 +417,7 @@ switch ($action) {
             $smarty->assign('AnswerResult', $checkResult);
             //$user->saveQuestionAttempt($questionID, $checkResult, $answers);
         }
-        $test->increaseQuestionAttemptsCount($questionID);
+        $test->saveQuestionAttempt($questionID, $checkResult, );
         if (!$checkResult['ok']) header( 'HTTP/1.1 418 BAD REQUEST' );     
         break;
     case 'question':

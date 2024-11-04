@@ -199,15 +199,20 @@ class Test
         return $stmt->fetchColumn();
     }
 
-    public function increaseQuestionAttemptsCount(int $qusestionId): void 
+    public function saveQuestionAttempt(int $qusestionId, array $result, string $query): void
     {
         try {
             $stmt = $this->dbh->prepare("
                 UPDATE test_questions 
-                SET attempts = attempts + 1
+                SET 
+                    attempts = attempts + 1,
+                    last_attempt_at = CURRENT_TIMESTAMP, 
+                    solved_at = LEAST(test_questions.solved_at, :solved_at),
+                    last_query = :query,
+                    query_cost = :query_cost
                 WHERE test_id = :test_id AND question_id = :question_id
             ");
-            $stmt->execute([':test_id' => $this->id, ':question_id' => $qusestionId]);
+            $stmt->execute([':test_id' => $this->id, ':question_id' => $qusestionId, ':query' => $query, ':query_cost' => floatval($result['cost'])]);
         }
         catch (\Throwable $error) {
             throw new Exception($error->getMessage());
