@@ -9,7 +9,8 @@
                 {include file='top-menu.tpl' path="/privacy-policy"}
             {/if}
             <div class="container3">
-            {include file="{$Lang}/test_start.tpl"}
+                {include file='popups.tpl'}
+                {include file="{$Lang}/test_start.tpl"}
             </div>
 {if $MobileView}
     {include file='m.footer.tpl'}

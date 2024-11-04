@@ -11,6 +11,8 @@
                             {else}
                                 {translate}site_promo_question_task{/translate}
                             {/if}
+                        {elseif $Action === 'test'}
+                            {translate}site_promo_test{/translate}
                         {else}
                             {translate}site_promo{/translate}
                         {/if}
@@ -26,6 +28,8 @@
                     {else}
                         {translate}site_description_question_task{/translate}
                     {/if}
+                {elseif $Action === 'test'}
+                    {translate}site_description_test{/translate}
                 {else}
                     {translate}site_description{/translate}
                 {/if}

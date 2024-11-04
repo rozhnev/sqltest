@@ -33,9 +33,11 @@ $translations = [
     'site_description' => 'Harness the power of practice to master SQL. Our interactive exercises are designed to solidify your understanding, from foundational concepts to advanced techniques. Whether you\'re a SQL novice or a seasoned pro, you’ll find challenges tailored to your skill level. Boost your confidence for job interviews and real-world applications through consistent practice.',
     'site_description_question_task' => '<b>Sharpen your SQL skills with our interactive exercises!</b><br>Practice a wide range of SQL tasks, from basic queries to advanced techniques. Get immediate feedback on your solutions, helping you learn from mistakes and improve your skills. Boost your confidence for job interviews and real-world SQL applications.',
     'site_description_question_quiz' => '<b>Test your SQL knowledge with our comprehensive quizzes!</b><br>Assess your understanding of SQL fundamentals and advanced concepts through our challenging quizzes. Each quiz covers specific topics, from basic data retrieval to complex data manipulation. Identify knowledge gaps, reinforce learning, and boost your confidence. Prepare for SQL job interviews with our tests.',
+    'site_description_test' => '',
     'site_promo' => 'up your SQL skills',
     'site_promo_question_task' => 'interactive SQL practice',
     'site_promo_question_quiz' => 'interactive SQL quiz',
+    'site_promo_test' => 'get your SQL rank!',
     'something_went_wrong' => 'Oops! Something went wrong, but don\'t worry we have many other tasks <a href="/en/" target="_self">here</a>',
     'menu_small_add_placeholder' => 'Advertising income and donations are our sole funding sources. Please don’t disable ads or <a href="/en/donate" style="color: var(--special-text-color);">consider donating</a>.<br>Thank you for your support! 🙏🌟',
     'toast_sql_copied_to_buffer' => 'SQL code copied to buffer',
@@ -82,6 +84,4 @@ $translations = [
     'error_title' => 'Error!',
     'solution_action_run' => 'Run it',
     'solution_action_report' => 'Wrong solution!',
-
-    'check_your_skills' => 'Get your SQL rank!',
 ];

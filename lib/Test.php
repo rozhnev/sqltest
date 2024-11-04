@@ -84,20 +84,22 @@ class Test
         $stmt = $this->dbh->prepare("SELECT 
                 categories.id,
                 categories.title_sef sef,
-                categories.title_{$this->lang} questions_category,
+                categories_localization.title questions_category,
                 questions.id question_id,
                 questions.title_sef question_sef,
                 questions.db_template,
-                questions.title_{$this->lang} question_title,
+                questions_localization.title question_title,
                 (test_questions.solved_at IS NOT NULL) solved
         FROM tests 
         JOIN test_questions ON test_questions.test_id = tests.id 
         JOIN questions on questions.id = test_questions.question_id
+        JOIN questions_localization on questions_localization.question_id = questions.id AND questions_localization.language = :lang
         JOIN question_categories ON question_categories.question_id = questions.id
         JOIN categories ON categories.id = question_categories.category_id and categories.questionnire_id = 2
+        JOIN categories_localization ON categories_localization.category_id = categories.id AND categories_localization.language =  :lang
         WHERE tests.id = :test_id;");
-        $stmt->execute([':test_id' => $this->id]);
-
+        $stmt->execute([':test_id' => $this->id, ':lang' => $this->lang]);
+        
         $questionnire = $stmt->fetchAll(PDO::FETCH_ASSOC);
         if ($questionnire) {
             $menu = array_reduce(
@@ -152,9 +154,9 @@ class Test
                 test_id,
                 questions.id question_id,
                 questions.rate,
-                question_rates.rate_{$this->lang} question_rate,
-                questions.task_{$this->lang} task,
-                categories.title_{$this->lang} title,
+                question_rates_localization.rate question_rate,
+                questions_localization.task task,
+                categories_localization.title title,
                 dbms,
                 db_template,
                 ROW_NUMBER() OVER (PARTITION BY question_categories.category_id ORDER BY question_categories.sequence_position) number,
@@ -165,11 +167,14 @@ class Test
                 categories.title_sef category_sef,
                 solution last_query,
                 (3 - attempts) possible_attempts,
-                category_id 
+                question_categories.category_id 
             FROM questions
-            LEFT JOIN question_rates ON question_rates.id = questions.rate
+            JOIN questions_localization on questions_localization.question_id = questions.id AND questions_localization.language = :lang
+            JOIN question_rates ON question_rates.id = questions.rate
+            JOIN question_rates_localization ON question_rates_localization.id = question_rates.id AND question_rates_localization.language =  :lang
             JOIN question_categories ON questions.id = question_categories.question_id
             JOIN categories on categories.id = category_id AND questionnire_id = :questionnire_id
+            JOIN categories_localization ON categories_localization.category_id = categories.id AND categories_localization.language =  :lang
             JOIN test_questions ON test_questions.question_id = questions.id AND test_id = :test_id
             ) SELECT 
                 question_data.*,
@@ -179,7 +184,7 @@ class Test
             JOIN tests ON tests.id = question_data.test_id
             WHERE question_id = :question_id;");
 
-        $stmt->execute([':test_id' =>  $this->id, ':question_id' =>  $qusestionId, ':questionnire_id' => 2]);
+        $stmt->execute([':test_id' =>  $this->id, ':question_id' =>  $qusestionId, ':questionnire_id' => 2, ':lang' => $this->lang]);
         return $stmt->fetch(PDO::FETCH_ASSOC);;
     }
 }
