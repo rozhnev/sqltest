@@ -33,7 +33,7 @@ $translations = [
     'site_description' => 'Harness the power of practice to master SQL. Our interactive exercises are designed to solidify your understanding, from foundational concepts to advanced techniques. Whether you\'re a SQL novice or a seasoned pro, you’ll find challenges tailored to your skill level. Boost your confidence for job interviews and real-world applications through consistent practice.',
     'site_description_question_task' => '<b>Sharpen your SQL skills with our interactive exercises!</b><br>Practice a wide range of SQL tasks, from basic queries to advanced techniques. Get immediate feedback on your solutions, helping you learn from mistakes and improve your skills. Boost your confidence for job interviews and real-world SQL applications.',
     'site_description_question_quiz' => '<b>Test your SQL knowledge with our comprehensive quizzes!</b><br>Assess your understanding of SQL fundamentals and advanced concepts through our challenging quizzes. Each quiz covers specific topics, from basic data retrieval to complex data manipulation. Identify knowledge gaps, reinforce learning, and boost your confidence. Prepare for SQL job interviews with our tests.',
-    'site_description_test' => '',
+    'site_description_test' => '<b>Ready to test your SQL skills?</b><br>Take our diverse range of tests and get immediate feedback on your strengths and weaknesses. SQLtest.online will help you build a personalized learning plan to become a SQL master!  Confirm your rating and connect with a network of SQL professionals.',
     'site_promo' => 'up your SQL skills',
     'site_promo_question_task' => 'interactive SQL practice',
     'site_promo_question_quiz' => 'interactive SQL quiz',
@@ -84,7 +84,7 @@ $translations = [
     'error_title' => 'Error!',
     'solution_action_run' => 'Run it',
     'solution_action_report' => 'Wrong solution!',
-
+    'check_your_skills' => 'Check your skills!',
     'test_time_to_complete' => 'Time to complete this test is',
     'test_time_over' => 'Test time is over!'
 ];

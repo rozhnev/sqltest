@@ -33,11 +33,11 @@ $translations = [
     'site_description' => 'Aproveite o poder da prática para dominar o SQL. Nossos exercícios interativos são projetados para solidificar sua compreensão, desde conceitos básicos até técnicas avançadas. Seja você um iniciante em SQL ou um profissional experiente, encontrará desafios adaptados ao seu nível de habilidade. Aumente sua confiança para entrevistas de emprego e aplicações do mundo real por meio da prática consistente.',
     'site_description_question_task' => '<b>Aprimore suas habilidades em SQL com nossos exercícios interativos!</b><br>Pratique uma ampla gama de tarefas SQL, desde consultas básicas até técnicas avançadas. Receba feedback instantâneo sobre suas soluções, ajudando você a aprender com os erros e melhorar suas habilidades. Aumente sua confiança para entrevistas de emprego e aplicações SQL do mundo real.',
     'site_description_question_quiz' => '<b>Teste seus conhecimentos de SQL com nossos testes abrangentes!</b><br>Avalie seu entendimento dos fundamentos do SQL e conceitos avançados por meio de nossos testes desafiadores. Cada teste abrange tópicos específicos, desde a recuperação básica de dados até a manipulação complexa de dados. Identifique lacunas de conhecimento, reforce o aprendizado e aumente sua confiança. Prepare-se para entrevistas de emprego em SQL com nossos testes.',
-    'site_description_test' => '',
+    'site_description_test' => '<b>Pronto para testar suas habilidades em SQL?</b><br>Faça nossa gama diversificada de testes e receba feedback imediato sobre seus pontos fortes e fracos. O SQLtest.online ajudará você a construir um plano de aprendizado personalizado para se tornar um mestre em SQL! Confirme sua classificação e conecte-se a uma rede de profissionais em SQL.',
     'site_promo' => 'Melhore em SQL',
     'site_promo_question_task' => 'prática SQL',
     'site_promo_question_quiz' => 'teste SQL',
-    'site_promo_test' => 'Obtenha sua classificação SQL!',
+    'site_promo_test' => 'Avalie seu SQL agora!',
     'something_went_wrong' => 'Ops! Algo deu errado, mas não se preocupe, temos muitas outras tarefas <a href="/pt/" target="_self">aqui</a>',
     'menu_small_add_placeholder' => 'A receita de anúncios e doações são nossas únicas fontes de financiamento. Por favor, não desative os anúncios ou <a href="/pt/donate" style="color: var(--special-text-color);">considere doar</a>.<br>Obrigado pelo seu apoio! ',
     'toast_sql_copied_to_buffer' => 'Código SQL copiado para a área de transferência',
@@ -84,4 +84,7 @@ $translations = [
     'error_title' => 'Erro!',
     'solution_action_run' => 'Executar',
     'solution_action_report' => 'Solução errada!',
+    'check_your_skills' => 'Teste suas habilidades!',
+    'test_time_to_complete' => 'Tempo para completar este teste é',
+    'test_time_over' => 'O tempo do teste acabou!'
 ];

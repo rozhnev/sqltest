@@ -1,40 +1,40 @@
 <div>
-    <h2>Your Skills and Showcase Your Expertise with SQLTest.online!</h2>
-    <p>
-        Beyond just practicing SQL queries, sqltest.online empowers you to assess and showcase your professional skill level. Our interactive platform features a unique self-assessment tool that lets you rate your proficiency across various SQL domains.
-    </p><p>
-    This self-assessment tool goes beyond a simple yes/no format. You'll delve into specific areas like data manipulation, querying techniques, joining tables, and more. For each domain, you can choose between beginner, intermediate, or advanced levels, allowing for a nuanced evaluation of your strengths and areas for development.
-    </p><p>
-    Completing the self-assessment generates a personalized report outlining your skill distribution across different areas of SQL. This report becomes a valuable asset for your professional profile, demonstrating your proficiency to potential employers or collaborators. Additionally, the insights gained can guide your learning journey and help you focus on areas that require further attention.
-    </p>
+<h2>Ваши навыки и демонстрация вашего опыта с SQLTest.online!</h2>
+<p>
+Помимо просто практики SQL-запросов, sqltest.online дает вам возможность оценить и продемонстрировать свой профессиональный уровень. Наша интерактивная платформа включает в себя уникальный инструмент самооценки, который позволяет вам оценить свои навыки в различных областях SQL.
+</p><p>
+Этот инструмент самооценки выходит за рамки простого формата «да/нет». Вы углубитесь в определенные области, такие как обработка данных, методы запросов, соединение таблиц и многое другое. Для каждой области вы можете выбрать начальный, средний или продвинутый уровень, что позволяет провести тонкую оценку ваших сильных сторон и областей для развития.
+</p><p>
+Завершение самооценки создает персонализированный отчет, описывающий распределение ваших навыков в различных областях SQL. Этот отчет становится ценным активом для вашего профессионального профиля, демонстрируя ваши навыки потенциальным работодателям или коллегам. Кроме того, полученные знания могут направлять ваш учебный процесс и помочь вам сосредоточиться на областях, требующих дальнейшего внимания.
+</p>
 </div>
 {if $Logged}
-    {if isset($LastTest)}
-        {if $LastTest.closed}
-            {if $LastTest.rate > 0}
-                After last test you grade is {$LastTest.rate}! Do you want to improve the grate?
-            {else}
-                Your last test is time out. Want ot get a new chance?
-            {/if}
-            <div style="text-align: center; margin: 36px;">
-                <a style="display:inline-block;width:240px; color: white;" href="/{$Lang}/test/create" title="Start quiz" class="button green">Start test</a>
-            </div>
-        {else}
-            {* Continue open test *}
-            <div style="text-align: center; margin: 36px;">
-                <a style="display:inline-block;width:240px; color: white;" href="/{$Lang}/test/{$LastTest.id}" title="Start quiz" class="button green">Continue test</a>
-            </div>
-        {/if}
-    {else}
-        <div style="text-align: center; margin: 36px;">
-            <a style="display:inline-block;width:240px; color: white;" href="/{$Lang}/test/create" title="Start quiz" class="button green">Start test</a>
-        </div>
-    {/if}
+{if isset($LastTest)}
+{if $LastTest.closed}
+{if $LastTest.rate > 0}
+После последнего теста ваша оценка {$LastTest.rate}! Хотите улучшить решетку?
 {else}
-    <p class='warning'>
-        This page unavaliable for not logged users. Please do login to continue.
-    </p>
-    <div style="text-align: center; margin: 36px;">
-        <button class="button green" onClick="toggleLoginWindow()">Login</button>
-    </div>
+Ваш последний тест истек. Хотите получить новый шанс?
+{/if}
+<div style="text-align: center; margin: 36px;">
+<a style="display:inline-block;width:240px; color: white;" href="/{$Lang}/test/create" title="Начать тест" class="button green">Начать тест</a>
+</div>
+{else}
+{* Продолжить открытый тест *}
+<div style="text-align: center; margin: 36px;">
+<a style="display:inline-block;width:240px; color: white;" href="/{$Lang}/test/{$LastTest.id}" title="Начать тест" class="button green">Продолжить тест</a>
+</div>
+{/if}
+{else}
+<div style="text-align: center; margin: 36px;">
+<a style="display:inline-block;width:240px; color: white;" href="/{$Lang}/test/create" title="Начать тест" class="button green">Начать тест</a>
+</div>
+{/if}
+{else}
+<p class='warning'>
+Эта страница недоступна для незарегистрированных пользователей. Пожалуйста, войдите, чтобы продолжить.
+</p>
+<div style="text-align: center; margin: 36px;">
+<button class="button green" onClick="toggleLoginWindow()">Войти</button>
+</div>
 {/if}
