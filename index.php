@@ -273,7 +273,9 @@ switch ($action) {
     case 'solution-report':
         if ($user->logged()) {
             $solution = new Solution($dbh, $solutionID);
-            $solution->report();
+            $questionID = $solution->report();
+            $question = new Question($dbh, $questionID);
+            $question->setBestQueryCost();
         }
         $template = "rate_saved.tpl";
         break;        

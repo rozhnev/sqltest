@@ -33,9 +33,10 @@ class Solution
         return $stmt->execute([$this->id]);
     }
 
-    public function report(): bool 
+    public function report(): int 
     {
-        $stmt = $this->dbh->prepare("UPDATE user_solutions SET reported = true WHERE id = ?");
-        return $stmt->execute([$this->id]);
+        $stmt = $this->dbh->prepare("UPDATE user_solutions SET reported = true WHERE id = ? RETURNING question_id;");
+        $stmt->execute([$this->id]);
+        return $stmt->fetchColumn(0);
     }
 }

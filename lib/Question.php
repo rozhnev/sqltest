@@ -412,6 +412,24 @@ class Question
             ];
         }
     }
+
+    public function setBestQueryCost(): void 
+    {
+        $stmt = $this->dbh->prepare("
+            UPDATE questions 
+		    SET best_query_cost = rating.min_cost
+		    FROM (
+                SELECT 
+                    question_id, 
+                    MIN(query_cost) min_cost
+                FROM user_solutions
+                WHERE question_id = :question_id and not reported
+                GROUP BY question_id
+            ) rating 
+            WHERE questions.id = rating.question_id;");
+        $stmt->execute([':question_id' => $this->id]);
+    }
+    
     /**
      * Returns array of Question users solutions
      *
