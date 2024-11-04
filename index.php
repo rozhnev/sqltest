@@ -103,7 +103,10 @@ if (isset($pathParts[0]) && $pathParts[0] === 'login') {
     $lang       = $params['lang'];
     $action     = 'solution-' . $params['action'];
     $solutionID = $params['solutionID'];
-} elseif (preg_match("@(?<lang>$languge_codes_regexp)/question/(?<questionCategory>sakila|employee)/(?<questionID>\d+)@i", $path, $params)) {
+} elseif (
+    preg_match("@(?<lang>$languge_codes_regexp)/question/(?<questionCategory>sakila|employee)/(?<questionID>\d+)@i", $path, $params) ||
+    preg_match("@(?<lang>$languge_codes_regexp)/(?<questionCategory>sakila|employee)/(?<questionID>\d+)@i", $path, $params)
+) {
     $lang       = $params['lang'];
     $action     = 'question';
     $questionCategoryID = $params['questionCategory'] == 'employee' ? 2 : 1;
