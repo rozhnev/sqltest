@@ -17,7 +17,7 @@
                     const hours = (time - minutes) / 60;
                     document.getElementById('test-timer-time').innerText = (hours > 0 ? `${ldelim}hours{rdelim} ` :'') + (hours === 1 ? 'hour ': 'hours ') + minutes + ' ' + (minutes>1 ? 'minutes': 'minute');
                 {rdelim} else {ldelim}
-                    document.getElementById('test-timer').innerText = '{translate}test_time_over{/translate} {$Question.closed_at}'
+                    document.getElementById('test-timer').innerText = '{translate}test_time_over{/translate}'
                 {rdelim}
             {rdelim};
             showTimer();
