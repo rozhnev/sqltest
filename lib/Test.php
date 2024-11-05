@@ -53,7 +53,7 @@ class Test
         $this->id = vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex(random_bytes(16)), 4));
 
         $this->dbh->beginTransaction();
-        $stmt = $this->dbh->prepare("INSERT INTO tests (id, user_id) VALUES (?, ?)");
+        $stmt = $this->dbh->prepare("INSERT INTO tests (id, user_id, closed_at) VALUES (?, ?, CURRENT_TIMESTAMP + INTERVAL '3 hour')");
         $stmt->execute([$this->id, $this->user->getId()]);
 
         $stmt = $this->dbh->prepare("INSERT INTO test_questions (test_id, question_id) SELECT ?, id FROM questions WHERE rate = 1 ORDER BY random() LIMIT 5");
@@ -163,7 +163,7 @@ class Test
                 LAG(test_questions.question_id) OVER (ORDER BY questions.rate) previous_question_id,
                 LEAD(test_questions.question_id) OVER (ORDER BY questions.rate) next_question_id,
                 solved_at solved_date,
-                last_attempt_date,
+                last_attempt_at,
                 categories.title_sef category_sef,
                 solution last_query,
                 (3 - attempts) possible_attempts,

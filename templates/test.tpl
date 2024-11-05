@@ -17,7 +17,7 @@
                     const hours = (time - minutes) / 60;
                     document.getElementById('test-timer-time').innerText = (hours > 0 ? `${ldelim}hours{rdelim} ` :'') + (hours === 1 ? 'hour ': 'hours ') + minutes + ' ' + (minutes>1 ? 'minutes': 'minute');
                 {rdelim} else {ldelim}
-                    document.getElementById('test-timer').innerText = '{translate}test_time_over{/translate}'
+                    document.getElementById('test-timer').innerText = '{translate}test_time_over{/translate} {$Question.closed_at}'
                 {rdelim}
             {rdelim};
             showTimer();
@@ -56,8 +56,8 @@
                     <span class="question-dates">
                         {if $Question.solved_date}
                             Solved at: {$Question.solved_date}
-                        {elseif $Question.last_attempt_date}
-                            Last Attempt Date: {$Question.last_attempt_date}
+                        {elseif $Question.last_attempt_at}
+                            Last Attempt Date: {$Question.last_attempt_at}
                         {/if}
                     </span>
                 </div>
