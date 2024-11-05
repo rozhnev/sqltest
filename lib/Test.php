@@ -163,9 +163,9 @@ class Test
                 LAG(test_questions.question_id) OVER (ORDER BY questions.rate) previous_question_id,
                 LEAD(test_questions.question_id) OVER (ORDER BY questions.rate) next_question_id,
                 solved_at solved_date,
-                last_attempt_at,
+                to_char(last_attempt_at, 'YYYY-MM-dd HH24:mm:ss') last_attempt_at,
                 categories.title_sef category_sef,
-                solution last_query,
+                last_answer last_query,
                 (3 - attempts) possible_attempts,
                 question_categories.category_id 
             FROM questions
@@ -199,7 +199,7 @@ class Test
         return $stmt->fetchColumn();
     }
 
-    public function saveQuestionAttempt(int $qusestionId, array $result, string $query): void
+    public function saveQuestionAttempt(int $qusestionId, array $result, string $answer): void
     {
         try {
             $stmt = $this->dbh->prepare("
@@ -207,15 +207,15 @@ class Test
                 SET 
                     attempts = attempts + 1,
                     last_attempt_at = CURRENT_TIMESTAMP, 
-                    solved_at = LEAST(test_questions.solved_at, :solved_at),
-                    last_query = :query,
+                    solved_at = LEAST(test_questions.solved_at, CASE WHEN ".($result['ok'] ? 'true' : 'false')." THEN CURRENT_TIMESTAMP END),
+                    last_answer = :answer,
                     query_cost = :query_cost
                 WHERE test_id = :test_id AND question_id = :question_id
             ");
-            $stmt->execute([':test_id' => $this->id, ':question_id' => $qusestionId, ':query' => $query, ':query_cost' => floatval($result['cost'])]);
+            $stmt->execute([':test_id' => $this->id, ':question_id' => $qusestionId, ':answer' => $answer, ':query_cost' => floatval($result['cost'])]);
         }
         catch (\Throwable $error) {
             throw new Exception($error->getMessage());
         }
     }
-}   
+}

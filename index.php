@@ -324,15 +324,6 @@ switch ($action) {
         if ($user->logged()) {
             $userLastTest = $user->getLastTest();
             $smarty->assign('LastTest', $userLastTest);
-            // print_r($userLastTest);
-            // die();
-            // if (isset($userLastTest) && $userLastTest['id']) {
-            //     $test = new Test($dbh, $lang, $user);
-            //     $test->setId($userTestId);
-                
-            //     $smarty->assign('QuestionId', $test->getFirstUnsolvedQuestionId());
-            //     $smarty->assign('Test', $userLastTest);
-            // }
         }
         $template = "test_start.tpl";
         break;
@@ -391,7 +382,7 @@ switch ($action) {
         $question = new Question($dbh, $questionID);
 
         if (isset($_POST["query"])) {
-            $sql = $_POST["query"];
+            $sql = $_POST["query"] ?? '';
             $checkResult = $question->checkQuery($sql);
             $smarty->assign('QueryTestResult', $checkResult);
             if ($checkResult['ok']) {
@@ -402,10 +393,7 @@ switch ($action) {
                 $smarty->assign('QueryTestResult', $checkResult);
                 $smarty->assign('QueryBestCost', $question->getBestCost());
             }
-            /*$user->saveQuestionAttempt($questionID, $checkResult, $sql);
-            if ($checkResult['ok']) {
-                $user->saveSolution($questionID, $checkResult, $sql);
-            }*/
+            $test->saveQuestionAttempt($questionID, $checkResult, $sql);
             $smarty->registerPlugin("modifier", "array_key_exists", "array_key_exists");
         }
 
@@ -415,9 +403,9 @@ switch ($action) {
             $question = new Question($dbh, $questionID);
             $checkResult = $question->checkAnswers($answers);
             $smarty->assign('AnswerResult', $checkResult);
-            //$user->saveQuestionAttempt($questionID, $checkResult, $answers);
+            $test->saveQuestionAttempt($questionID, $checkResult, $answers);
         }
-        $test->saveQuestionAttempt($questionID, $checkResult, );
+
         if (!$checkResult['ok']) header( 'HTTP/1.1 418 BAD REQUEST' );     
         break;
     case 'question':
