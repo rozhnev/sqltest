@@ -187,7 +187,7 @@ class Test
         $stmt->execute([':test_id' =>  $this->id, ':question_id' =>  $qusestionId, ':questionnire_id' => 2, ':lang' => $this->lang]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
-    public function getQuestionAttemptsCount(int $qusestionId): int 
+    public function getQuestionAttemptsCount(int $qusestionId): array 
     {
         $stmt = $this->dbh->prepare("
             SELECT (tests.closed_at <= CURRENT_TIMESTAMP) timeout, (test_questions.max_attempts - test_questions.attempts) avaliable_attempts
@@ -197,12 +197,12 @@ class Test
         ");
         $stmt->execute([':test_id' => $this->id, ':question_id' => $qusestionId]);
         $res = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($res['$res'] < 1) {
+        if ($res['avaliable_attempts'] < 1) {
             return ['ok' => false, 'hints' => ['maxAttemptsReached' => true]];
         } elseif ($res['timeout']) {
             return ['ok' => false, 'hints' => ['timeOut' => true]];
         }
-        return return ['ok' => true];
+        return ['ok' => true];
     }
 
     public function saveQuestionAttempt(int $qusestionId, array $result, string $answer): void

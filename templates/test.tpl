@@ -40,7 +40,7 @@
         </div>
         {/foreach}
         <div style="display: flex;   align-items: center; justify-content: center; margin-top: 1em;">
-        <button class="button green" id="doneTest" onClick="doneTest('{$TestId}')">I am Done! Show my rate</button>
+            <button class="button green" id="doneTest" onClick="doneTest('{$TestId}')">{translate}test_show_my_rate{/translate}</button>
         </div>
     </div>
     {include file='splitter.tpl'}
@@ -49,15 +49,15 @@
             <div class="question-title-bar" style="display: flex;">
                 <div class="question-title">
                     <div class="question-level rate{$Question.rate}" title="{$Question.question_rate|default:'Not rated yet'}"></div>
-                    Task&nbsp;{$Question.number}:
+                    <span title="({$QuestionID})">{translate}question_title{/translate}&nbsp;{$Question.number}:</span>
                     {if $LoggedAsAdmin}
                         <a href="/admin/question/{$NextQuestionId}" title="Edit" style="color:#333">&#9998;</a>
                     {/if}
                     <span class="question-dates">
                         {if $Question.solved_date}
-                            Solved at: {$Question.solved_date}
+                            {translate}question_solved_at{/translate}: {$Question.solved_date}
                         {elseif $Question.last_attempt_at}
-                            Last Attempt Date: {$Question.last_attempt_at}
+                            {translate}question_last_attempt_date{/translate}: {$Question.last_attempt_at}
                         {/if}
                     </span>
                 </div>
@@ -84,30 +84,25 @@
                     </div>
                 {/foreach}
                 </div>
-                <p class="question-action">
-                    Mark ALL correct answers and click the "Check it!" button
-                </p>
+                <p class="question-action">{translate}question_action_mark_all_answers{/translate}</p>
             {else}
-                <p class="question-action">
-                    Write your request in the field below and click the "Check it!" button.
-                </p>
-                <p class="question-action">
-                    To write the answer, use {$Question.dbms} syntax. Descriptions of the tables are given in the right panel.
-                </p>
+                <p class="question-action">{translate}question_action_write_your_request{/translate}</p>
+                <p class="question-action">{translate}question_action_use_syntax{/translate}</p>
             {/if}
         </div>
         {if !isset($Question.answers)}
         <div class="code-actions">
-            <button onClick="copyCode(`SQL code copied to buffer`)">Copy code</button> <button onClick="clearEditor()">Clear editor</button>
+            <button onClick="copyCode(`{translate}toast_sql_copied_to_buffer{/translate}`)">{translate}question_action_copy_code{/translate}</button>
+            <button onClick="clearEditor()">{translate}question_action_clear_editor{/translate}</button>
         </div>
         <div class="code-wrapper" id="sql-code" name="sql-code">{$Question.last_query}</div>
         {/if}
         <div class="code-buttons">
             {if !isset($Question.answers)}
-                <button class="button" id="runQueryBtn" onClick="runQuery('{$Lang}', {$QuestionID})" title="CTRL+Enter">Run query</button>
+                <button class="button" id="runQueryBtn" onClick="runQuery('{$Lang}', {$QuestionID})" title="CTRL+Enter">{translate}question_action_run_query{/translate}</button>
             {/if}
             {if {$Question.possible_attempts} > 0}
-                <button class="button green" id="checkSolutionBtn" onClick="checkSolution('/{$Lang}/test/{$TestId}/check/{$QuestionID}')">Check it! ({$Question.possible_attempts})</button>
+                <button class="button green" id="checkSolutionBtn" onClick="checkSolution('/{$Lang}/test/{$TestId}/check/{$QuestionID}')"> {if !isset($Question.answers)}{translate}question_action_check_answers{/translate}{else}{translate}question_action_test_query{/translate}{/if} ({$Question.possible_attempts})</button>
             {/if}
             {if $Question.next_question_id}
                 <a href="/{$Lang}/test/{$TestId}/{$Question.next_question_id}" title="Mext task" class="button green hidden">Next</a>

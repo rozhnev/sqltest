@@ -87,5 +87,6 @@ $translations = [
     'solution_action_report' => 'Неверное решение!',
     'check_your_skills' => 'Проверь свои знания!',
     'test_time_to_complete' => 'Время на прохождение теста',
-    'test_time_over' => 'Время вышло!'
+    'test_time_over' => 'Время вышло!',
+    'test_show_my_rate' => 'Я готов! Покажите мою оценку',
 ];
