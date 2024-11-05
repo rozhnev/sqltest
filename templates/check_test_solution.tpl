@@ -18,6 +18,8 @@
      </div>
 {elseif array_key_exists('hints', $QueryTestResult) && array_key_exists('maxAttemptsReached', $QueryTestResult.hints)}
     Maximum attempt count reached.
+{elseif array_key_exists('hints', $QueryTestResult) && array_key_exists('timeOut', $QueryTestResult.hints)}
+    Test time is out. 
 {else}
      Unfortunately incorrect.
      {if array_key_exists('hints', $QueryTestResult) }

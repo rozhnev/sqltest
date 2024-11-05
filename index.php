@@ -372,7 +372,7 @@ switch ($action) {
         $test = new Test($dbh, $lang, $user);
         $test->setId($testId);
 
-        $template = "$lang/check_test_solution.tpl";
+        $template = "check_test_solution.tpl";
 
         if ($test->getQuestionAttemptsCount($questionID) > 2) {
             $checkResult = ['ok' => false, 'hints' => ['maxAttemptsReached' => true]];

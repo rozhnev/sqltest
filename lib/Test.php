@@ -185,18 +185,24 @@ class Test
             WHERE question_id = :question_id;");
 
         $stmt->execute([':test_id' =>  $this->id, ':question_id' =>  $qusestionId, ':questionnire_id' => 2, ':lang' => $this->lang]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);;
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
     public function getQuestionAttemptsCount(int $qusestionId): int 
     {
         $stmt = $this->dbh->prepare("
-            SELECT attempts 
+            SELECT (tests.closed_at <= CURRENT_TIMESTAMP) timeout, (test_questions.max_attempts - test_questions.attempts) avaliable_attempts
             FROM test_questions
+            JOIN tests ON tests.id = test_questions.test_id
             WHERE test_id = :test_id AND question_id = :question_id
         ");
         $stmt->execute([':test_id' => $this->id, ':question_id' => $qusestionId]);
-
-        return $stmt->fetchColumn();
+        $res = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($res['$res'] < 1) {
+            return ['ok' => false, 'hints' => ['maxAttemptsReached' => true]];
+        } elseif ($res['timeout']) {
+            return ['ok' => false, 'hints' => ['timeOut' => true]];
+        }
+        return return ['ok' => true];
     }
 
     public function saveQuestionAttempt(int $qusestionId, array $result, string $answer): void
@@ -208,6 +214,7 @@ class Test
                     attempts = attempts + 1,
                     last_attempt_at = CURRENT_TIMESTAMP, 
                     solved_at = LEAST(test_questions.solved_at, CASE WHEN ".($result['ok'] ? 'true' : 'false')." THEN CURRENT_TIMESTAMP END),
+                    solution = CASE WHEN ".($result['ok'] ? 'true' : 'false')." THEN :answer ELSE test_questions.solution END,
                     last_answer = :answer,
                     query_cost = :query_cost
                 WHERE test_id = :test_id AND question_id = :question_id
