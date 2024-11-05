@@ -8,24 +8,9 @@
         {include file='top-menu.tpl' path="/test/{$TestId}"}
     {/if}
     <div class="menu" id="menu">
-        <div id="test-timer" style="padding:5px 15px; border: 1px solid white; margin: 5px;"><span style="font-size:small;">{translate}test_time_to_complete{/translate}</span>:<br><span id="test-timer-time"></span></div>
-        <script>
-            const showTimer = ()=>{ldelim}
-                const time = Math.floor((new Date('{$Question.closed_at}') - new Date())/60000);
-                if (time > 0) {ldelim}
-                    const minutes = time % 60;
-                    const hours = (time - minutes) / 60;
-                    document.getElementById('test-timer-time').innerText = (hours > 0 ? `${ldelim}hours{rdelim} ` :'') + (hours === 1 ? 'hour ': 'hours ') + minutes + ' ' + (minutes>1 ? 'minutes': 'minute');
-                {rdelim} else {ldelim}
-                    document.getElementById('test-timer').innerText = '{translate}test_time_over{/translate}'
-                {rdelim}
-            {rdelim};
-            showTimer();
-            setInterval(showTimer,  60000);
-        </script>
         {foreach $Questionnire.menu as $categoryId => $panel}
         <button class="accordion {if $categoryId eq $QuestionCategoryID}active{/if}">
-            {$panel.title}
+            <span class="accordion-title">{$panel.title}</span>
         </button>
         <div class="panel {if $categoryId eq $QuestionCategoryID}active{/if}">
             <ol>
@@ -39,6 +24,11 @@
             </ol>
         </div>
         {/foreach}
+        <div id="test-timer" style="padding:5px 15px; border: 1px solid white; margin: 5px; display: flex; flex-direction: column;">
+            <span style="font-size:small;">{translate}test_time_to_complete{/translate}:</span>
+            <span id="test-timer-time"></span>
+        </div>
+
         <div style="display: flex;   align-items: center; justify-content: center; margin-top: 1em;">
             <button class="button green" id="doneTest" onClick="doneTest('{$TestId}')">{translate}test_show_my_rate{/translate}</button>
         </div>
@@ -110,7 +100,20 @@
         </div>
         <div class="code-result ace-xcode" id="code-result"></div>
     </div>
-
+    <script>
+        const showTimer = ()=>{ldelim}
+            const time = Math.floor((new Date('{$Question.closed_at}') - new Date())/60000);
+            if (time > 0) {ldelim}
+                const minutes = time % 60;
+                const hours = (time - minutes) / 60;
+                document.getElementById('test-timer-time').innerText = (hours > 0 ? `${ldelim}hours{rdelim} ` :'') + (hours === 1 ? 'hour ': 'hours ') + minutes + ' ' + (minutes>1 ? 'minutes': 'minute');
+            {rdelim} else {ldelim}
+                document.getElementById('test-timer').innerText = '{translate}test_time_over{/translate}'
+            {rdelim}
+        {rdelim};
+        showTimer();
+        setInterval(showTimer,  60000);
+    </script>
     <div class="right" id="right-panel">
         {include file="{$Lang}/{$DB}.tpl"}
     </div> 
