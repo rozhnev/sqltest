@@ -112,6 +112,10 @@ if (isset($pathParts[0]) && $pathParts[0] === 'login') {
 } elseif (preg_match("@(?<lang>$languge_codes_regexp)/test/create@i", $path, $params)) {
     $lang       = $params['lang'];
     $action     = 'test_create';
+} elseif (preg_match("@(?<lang>$languge_codes_regexp)/test/(?<testId>[a-z0-9-]+)/rate@i", $path, $params)) {
+    $lang       = $params['lang'];
+    $action     = 'test_rate';
+    $testId = $params['testId'];
 } elseif (preg_match("@(?<lang>$languge_codes_regexp)/test/(?<testId>[a-z0-9-]+)/check/(?<questionID>\d+)@i", $path, $params)) {
     // MUST BE BEFORE test action
     $lang       = $params['lang'];
@@ -337,6 +341,18 @@ switch ($action) {
         $userTestId = $test->create();
         header("Location: /$lang/test/$userTestId");
         exit();
+    case 'test_rate':
+        if (!$user->logged()) {
+            header("Location: /$lang/test/start");
+            exit();
+        }
+        $test = new Test($dbh, $lang, $user);
+        $test->setId($testId);
+        if(!$test->belongsToUser()) {
+            header("HTTP/1.1 404 Moved Permanently");
+            $template = $mobileView ? "m.error.tpl" : "error.tpl";
+            break;
+        }
     case 'test':
         if (!$user->logged()) {
             header("Location: /$lang/test/start");
