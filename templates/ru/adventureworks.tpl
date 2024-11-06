@@ -1,5 +1,4 @@
 <div id="db-description" class="db-description">
-  {literal}
     <h2>База данных AdventureWorks (SQL Server)</h2>
     <p>База данных AdventureWorks — это образец базы данных, демонстрирующий возможности SQL Server. Он включает данные о
       вымышленной производственной компании.</p>
@@ -17,20 +16,37 @@
       <li><span class='sql' onclick="scrollInfoPanel('SalesOrderDetail_table_description')">SalesOrderDetail</span> - таблица заказов.</li>
       <li><span class='sql' onclick="scrollInfoPanel('SalesOrderHeader_table_description')">SalesOrderHeader</span> - таблица деталей заказов.</li>
     </ul>
-    <a href="https://book24.ru/r/vPcru?erid=LjN8K1JdK" target="_blank" style="text-decoration: none;">
-      <div style="display: flex; flex-direction: row; border: 1px solid white; padding: 0.3em; width: 98%;">
-        <div  style = "width: 30%;">
-            <img style="width: 100%;" src="//ndc.book24.ru/resize/410x590/pim/products/images/2a/23/018edf56-f466-7e54-b41e-7cd2a6b02a23.jpg" alt="Грабер Мартин: SQL.">
-        </div>
-        <div style="font-size: 1em;  width: 70%;  padding: 0 0.7em; font-weight: 100;">
-            <div>Грабер Мартин: SQL</div>
-            <div style="font-size: small; padding-top: 0.5em;">
-            Классическая работа по SQL. Эта книга - отличный источник знаний для всех, кто программирует на SQL. 
-            В книге дано подробное описание языка, поэтому от читателя не требуется никакой предварительной подготовки. Сопровождаемая практическими учебными материалами, книга представляет собой полное справочное руководство по SQL.
+    {assign var=add_id value=0|mt_rand:4}
+    {if $add_id > 2}
+      <a href="https://book24.ru/r/vPcru?erid=LjN8K1JdK" target="_blank" style="text-decoration: none;">
+        <div style="display: flex; flex-direction: row; border: 1px solid white; padding: 0.3em; width: 98%;">
+          <div  style = "width: 30%;">
+              <img style="width: 100%;" src="//ndc.book24.ru/resize/410x590/pim/products/images/2a/23/018edf56-f466-7e54-b41e-7cd2a6b02a23.jpg" alt="Грабер Мартин: SQL.">
+          </div>
+          <div style="font-size: 1em;  width: 70%;  padding: 0 0.7em; font-weight: 100;">
+              <div>Грабер Мартин: SQL</div>
+              <div style="font-size: small; padding-top: 0.5em;">
+              Классическая работа по SQL. Эта книга - отличный источник знаний для всех, кто программирует на SQL. 
+              В книге дано подробное описание языка, поэтому от читателя не требуется никакой предварительной подготовки. Сопровождаемая практическими учебными материалами, книга представляет собой полное справочное руководство по SQL.
+            </div>
           </div>
         </div>
+      </a>
+    {else}
+      <div style="display: flex; flex-direction: row; gap:5px; border: 1px solid white; padding: 0.3em; width: 98%;">
+        <!-- admitad.banner: dhqiqt6h41fec845fb2f69bd3583e1 Netology -->
+          <a target="_blank" rel="nofollow" href="https://thevospad.com/g/dhqiqt6h41fec845fb2f69bd3583e1/?i=4&subid=free-neuronetwork&erid=LatgBSdq6">
+              <img style="width:100%;" border="0" src="https://aflink.ru/b/dhqiqt6h41fec845fb2f69bd3583e1/" alt="Netology"/>
+          </a>
+        <!-- /admitad.banner -->
+        <!-- admitad.banner: 8s4jme099rfec845fb2f3b8a152381 Karpov.courses -->
+          <a target="_blank" rel="nofollow" href="https://bywiola.com/g/8s4jme099rfec845fb2f3b8a152381/?i=4&subid=kaprov-courses&erid=LatgBXFig">
+              <img style="width:100%;" border="0" src="https://aflink.ru/b/8s4jme099rfec845fb2f3b8a152381/" alt="Karpov.courses"/>
+          </a>
+        <!-- /admitad.banner -->
       </div>
-    </a>
+    {/if}
+    {literal}
     <h3 id="Address_table_description">
       <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
         <svg height="15" width="15" style="">
