@@ -1,5 +1,4 @@
 <div id="db-description" class="db-description">
-  {literal}
     <h2>База данных AdventureWorks (SQL Server)</h2>
     <p>База данных AdventureWorks — это образец базы данных, демонстрирующий возможности SQL Server. Он включает данные о
       вымышленной производственной компании.</p>
@@ -47,7 +46,7 @@
         <!-- /admitad.banner -->
       </div>
     {/if}
-
+    {literal}
     <h3 id="Address_table_description">
       <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
         <svg height="15" width="15" style="">
