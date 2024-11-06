@@ -21,7 +21,9 @@
     <li><span class='sql' onclick="scrollInfoPanel('staff_table_description')">staff</span> - таблица сотрудников компании.</li>
     <li><span class='sql' onclick="scrollInfoPanel('store_table_description')">store</span> - таблица магазинов компании.</li>
   </ul>
-  {* <a href="https://book24.ru/r/MdRZN?erid=LjN8JzJBX" target="_blank" style="text-decoration: none;">
+  {assign var=add_id value=0|mt_rand:4}
+  {if $add_id > 2}
+  <a href="https://book24.ru/r/MdRZN?erid=LjN8JzJBX" target="_blank" style="text-decoration: none;">
     <div style="display: flex; flex-direction: row; border: 1px solid white; padding: 0.3em; width: 98%;">
       <div  style = "width: 30%;">
           <img style="width: 100%;" src="//ndc.book24.ru/resize/820x1180/pim/products/images/97/d1/01907881-ff4d-78d9-ac6a-7021d02597d1.jpg" alt="SQL: быстрое погружение.">
@@ -33,13 +35,22 @@
           </div>
       </div>
     </div>
-  </a> *}
-  <!-- admitad.banner: gdhe8x00bcfec845fb2f3b8a152381 Karpov.courses -->
-    <a target="_blank" rel="nofollow" href="https://bywiola.com/g/gdhe8x00bcfec845fb2f3b8a152381/?i=4&subid=sql-simulator&erid=2VSb5yk92kp"><img width="200" height="200" border="0" src="https://aflink.ru/b/gdhe8x00bcfec845fb2f3b8a152381/" alt="Karpov.courses"/></a>
-  <!-- /admitad.banner -->
-  <!-- admitad.banner: urkrefnghhfec845fb2f69bd3583e1 Netology -->
-    <a target="_blank" rel="nofollow" href="https://thevospad.com/g/urkrefnghhfec845fb2f69bd3583e1/?i=4&subid=free-sql-simulator&erid=LatgC8wYQ"><img width="200" height="200" border="0" src="https://aflink.ru/b/urkrefnghhfec845fb2f69bd3583e1/" alt="Netology"/></a>
-  <!-- /admitad.banner -->
+  </a>
+  {else}
+    <div style="display: flex; flex-direction: row; gap:5px; border: 1px solid white; padding: 0.3em; width: 98%;">
+
+      <!-- admitad.banner: gdhe8x00bcfec845fb2f3b8a152381 Karpov.courses -->
+        <a target="_blank" rel="nofollow" href="https://bywiola.com/g/gdhe8x00bcfec845fb2f3b8a152381/?i=4&subid=sql-simulator&erid=2VSb5yk92kp">
+          <img style="width:100%;" border="0" src="https://aflink.ru/b/gdhe8x00bcfec845fb2f3b8a152381/" alt="Karpov.courses"/>
+        </a>
+      <!-- /admitad.banner -->
+      <!-- admitad.banner: urkrefnghhfec845fb2f69bd3583e1 Netology -->
+        <a target="_blank" rel="nofollow" href="https://thevospad.com/g/urkrefnghhfec845fb2f69bd3583e1/?i=4&subid=free-sql-simulator&erid=LatgC8wYQ">
+          <img style="width:100%;" border="0" src="https://aflink.ru/b/urkrefnghhfec845fb2f69bd3583e1/" alt="Netology"/>
+        </a>
+      <!-- /admitad.banner -->
+    </div>
+  {/if}
   <h3 id="actor_table_description">
     <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
       <svg height="15" width="15" style="">
