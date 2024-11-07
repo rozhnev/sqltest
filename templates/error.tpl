@@ -6,8 +6,11 @@
             {else}
                 {include file='top-menu.tpl' path="/"}
             {/if}
+            {if !isset($ErrorMessage)}
+                {assign var="ErrorMessage" value="{translate}error_message{/translate}"}
+            {/if}
             <div class="container3">
-                <h3 style="margin: 50vh auto; text-align: center;">{translate}error_message{/translate}</h3>
+                <h3 style="margin: 50vh auto; text-align: center;">{$ErrorMessage}</h3>
             </div>
 {if $MobileView}
     {include file='m.footer.tpl'}

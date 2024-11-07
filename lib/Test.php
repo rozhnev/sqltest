@@ -97,7 +97,8 @@ class Test
         JOIN question_categories ON question_categories.question_id = questions.id
         JOIN categories ON categories.id = question_categories.category_id and categories.questionnire_id = 2
         JOIN categories_localization ON categories_localization.category_id = categories.id AND categories_localization.language =  :lang
-        WHERE tests.id = :test_id;");
+        WHERE tests.id = :test_id
+        ORDER BY question_categories.sequence_position;");
         $stmt->execute([':test_id' => $this->id, ':lang' => $this->lang]);
         
         $questionnire = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -127,7 +128,15 @@ class Test
 
     public function getQuestionnire(): array
     {
+        if (!$this->questionnire) $this->load();
         return $this->questionnire;
+    }
+
+    public function getData(): array
+    {
+        $stmt = $this->dbh->prepare("SELECT *, (tests.closed_at <= CURRENT_TIMESTAMP) timeout FROM tests  WHERE id = :test_id;");
+        $stmt->execute([':test_id' => $this->id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     public function getFirstUnsolvedQuestionId()
@@ -224,5 +233,155 @@ class Test
         catch (\Throwable $error) {
             throw new Exception($error->getMessage());
         }
+    }
+
+    public function belongsToUser(user $user): bool
+    {
+        $stmt = $this->dbh->prepare("SELECT true
+            FROM tests
+            WHERE id = :test_id AND user_id = :user_id 
+            LIMIT 1;");
+        $stmt->execute([':test_id' => $this->id, ':user_id' => $user->getId()]);
+        return $stmt->fetchColumn(0) ?? false;
+    }
+
+    public function calculateResult(): array
+    {
+        $stmt = $this->dbh->prepare("
+            SELECT 
+                test_questions.solved_at, 
+                test_questions.attempts,
+                questions.rate
+            FROM test_questions 
+            JOIN questions ON questions.id = test_questions.question_id 
+            WHERE test_id = :test_id ;
+        ");
+
+        $stmt->execute([':test_id' => $this->id]);
+
+        $testQuestions = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $testResult = array_reduce(
+            $testQuestions, 
+            function($res, $q) {
+                $res['total_questions']++;
+                $res['easy_questions']       += $q['rate']===1 ? 1 : 0;
+                $res['simple_questions']     += $q['rate']===2 ? 1 : 0;
+                $res['normal_questions']     += $q['rate']===3 ? 1 : 0;
+                $res['difficult_questions']  += $q['rate']===4 ? 1 : 0;
+                $res['hard_questions']       += $q['rate']===5 ? 1 : 0;
+
+                if ($q['solved_at']) {
+                    $res['solved_questions']++;
+                    $res['solved_easy_questions']       += $q['rate']===1 ? 1 : 0;
+                    $res['solved_simple_questions']     += $q['rate']===2 ? 1 : 0;
+                    $res['solved_normal_questions']     += $q['rate']===3 ? 1 : 0;
+                    $res['solved_difficult_questions']  += $q['rate']===4 ? 1 : 0;
+                    $res['solved_hard_questions']       += $q['rate']===5 ? 1 : 0;
+
+                    $res['solved_attempts']             += $q['attempts'];
+                    $res['solved_easy_attempts']        += $q['rate']===1 ? $q['attempts'] : 0;
+                    $res['solved_simple_attempts']      += $q['rate']===2 ? $q['attempts'] : 0;
+                    $res['solved_normal_attempts']      += $q['rate']===3 ? $q['attempts'] : 0;
+                    $res['solved_difficult_attempts']   += $q['rate']===4 ? $q['attempts'] : 0;
+                    $res['solved_hard_attempts']        += $q['rate']===5 ? $q['attempts'] : 0;
+                }
+                return $res;
+            }, 
+            [
+                'ok' => false,
+                'grade' => 0, 
+                'total_questions' => 0,
+                'easy_questions' => 0,
+                'simple_questions' => 0,
+                'normal_questions' => 0,
+                'difficult_questions' => 0,
+                'hard_questions' => 0,
+
+                'solved_questions' => 0,
+                'solved_easy_questions' => 0,
+                'solved_simple_questions' => 0,
+                'solved_normal_questions' => 0,
+                'solved_difficult_questions' => 0,
+                'solved_hard_questions' => 0,
+
+                'solved_attempts' => 0,
+                'solved_easy_attempts' => 0,
+                'solved_simple_attempts' => 0,
+                'solved_normal_attempts' => 0,
+                'solved_difficult_attempts' => 0,
+                'solved_hard_attempts' => 0,
+            ]
+        );
+
+        if ($testResult['solved_questions'] / 0.75 < $testResult['total_questions']) {
+            $testResult['ok'] = false;
+            $testResult['hints'][] = 'You must to solve at least ' . ceil($testResult['total_questions'] * 0.75);
+        } else {
+            if (
+                $testResult['solved_easy_questions'] = $testResult['easy_questions'] 
+            ) {
+                // solved all easy - Intern
+                $testResult['ok'] = true;
+                $testResult['grade']++;
+                $testResult['hints'][] = 'All easy tasks done';
+            }
+
+            if (
+                $testResult['solved_easy_questions'] = $testResult['easy_questions'] &&
+                ($testResult['solved_simple_questions'] + $testResult['solved_normal_questions'] + $testResult['solved_difficult_questions'] + $testResult['solved_hard_questions']) > ($testResult['simple_questions'] + $testResult['normal_questions'] + $testResult['difficult_questions'] + $testResult['hard_questions']) * 0.66
+            ) {
+                // solved all easy + 2/3 of rest questions - Junior
+                $testResult['ok'] = true;
+                $testResult['grade']++;
+                $testResult['hints'][] = '2/3 of simple, normal, difficult & hard tasks done';
+            }
+
+            if (
+                $testResult['solved_easy_questions'] = $testResult['easy_questions'] &&
+                $testResult['solved_simple_questions'] = $testResult['simple_questions'] &&
+                ($testResult['solved_normal_questions'] + $testResult['solved_difficult_questions'] + $testResult['solved_hard_questions']) > ($testResult['normal_questions'] + $testResult['difficult_questions'] + $testResult['hard_questions']) * 0.66
+            ) {
+                // solved all easy & simple + 2/3 of rest questions - Junior
+                $testResult['ok'] = true;
+                $testResult['grade']++;
+                $testResult['hints'][] = 'All simple tasks done';
+                $testResult['hints'][] = '2/3 of normal, difficult & hard tasks done';
+            }
+
+            if (
+                $testResult['solved_easy_questions'] = $testResult['easy_questions'] &&
+                $testResult['solved_simple_questions'] = $testResult['simple_questions'] &&
+                $testResult['solved_normal_questions'] = $testResult['normal_questions'] &&
+                ($testResult['solved_difficult_questions'] + $testResult['solved_hard_questions']) > ($testResult['difficult_questions'] + $testResult['hard_questions']) * 0.66
+            ) {
+                // solved all easy, simple & nomal  + 2/3 of difficult & hard questions - Middle
+                $testResult['ok'] = true;
+                $testResult['grade']++;
+                $testResult['hints'][] = 'All normal tasks done';
+                $testResult['hints'][] = '2/3 of difficult & hard tasks done';
+            }
+
+            if ($testResult['solved_questions'] = $testResult['total_questions']) {
+                // solved all
+                $testResult['ok'] = true;
+                $testResult['grade']++;
+                $testResult['hints'][] = 'All tasks done';
+            }
+        }
+        
+        // All questions solved with 1 attempt - promotion
+        if ($testResult['solved_attempts'] == $testResult['solved_questions']) {
+            $testResult['grade']++;
+            $testResult['hints'][] = 'All questions solved with 1 attempt';
+        }
+
+        // More then 2 attempt for question in average - penalty
+        if ($testResult['solved_attempts'] > 2 * $testResult['solved_questions']) {
+            $testResult['grade']--;
+            $testResult['hints'][] = 'You average attempts count more then 2. Grade decreased';
+        }
+
+        return $testResult;
     }
 }

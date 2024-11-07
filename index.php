@@ -348,11 +348,18 @@ switch ($action) {
         }
         $test = new Test($dbh, $lang, $user);
         $test->setId($testId);
-        if(!$test->belongsToUser()) {
+        if(!$test->belongsToUser($user)) {
             header("HTTP/1.1 404 Moved Permanently");
-            $template = $mobileView ? "m.error.tpl" : "error.tpl";
+            $smarty->assign('ErrorMessage', 'You are not permiited to do this action.');
+            $template = "error.tpl";
             break;
         }
+        $testResult = $test->calculateResult();
+        $smarty->assign('TestData', $test->getData());
+        $smarty->assign('TestResult', $testResult);
+
+        $template = "test_rate.tpl";
+        break;
     case 'test':
         if (!$user->logged()) {
             header("Location: /$lang/test/start");
@@ -360,7 +367,7 @@ switch ($action) {
         }
         $test = new Test($dbh, $lang, $user);
         $test->setId($testId);
-        $test->load();
+        // $test->load();
         if (!$questionID) $questionID = $test->getFirstUnsolvedQuestionId();
 
         $question = new Question($dbh, $questionID);
@@ -390,7 +397,7 @@ switch ($action) {
 
         $template = "check_test_solution.tpl";
 
-        if ($test->getQuestionAttemptsCount($questionID) > 2) {
+        if ($test->getQuestionAttemptsCount($questionID) < 0) {
             $checkResult = ['ok' => false, 'hints' => ['maxAttemptsReached' => true]];
             $smarty->assign('QueryTestResult', $checkResult);
             break;

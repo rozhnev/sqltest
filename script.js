@@ -238,7 +238,7 @@ function checkSolution(url) {
     })
     .then((async response=>{
         if (response.ok) {
-            [...document.getElementsByClassName("button green")].map(el=>el.classList.toggle("hidden"));
+            [...document.getElementById("checkSolutionBtn")].map(el=>el.classList.toggle("hidden"));
         }
         return await response.text();
     }))
