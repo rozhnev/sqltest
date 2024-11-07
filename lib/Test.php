@@ -90,15 +90,16 @@ class Test
                 questions.db_template,
                 questions_localization.title question_title,
                 (test_questions.solved_at IS NOT NULL) solved
-        FROM tests 
-        JOIN test_questions ON test_questions.test_id = tests.id 
-        JOIN questions on questions.id = test_questions.question_id
-        JOIN questions_localization on questions_localization.question_id = questions.id AND questions_localization.language = :lang
-        JOIN question_categories ON question_categories.question_id = questions.id
-        JOIN categories ON categories.id = question_categories.category_id and categories.questionnire_id = 2
-        JOIN categories_localization ON categories_localization.category_id = categories.id AND categories_localization.language =  :lang
-        WHERE tests.id = :test_id
-        ORDER BY question_categories.sequence_position;");
+            FROM tests 
+            JOIN test_questions ON test_questions.test_id = tests.id 
+            JOIN questions on questions.id = test_questions.question_id
+            JOIN questions_localization on questions_localization.question_id = questions.id AND questions_localization.language = :lang
+            JOIN question_categories ON question_categories.question_id = questions.id
+            JOIN categories ON categories.id = question_categories.category_id and categories.questionnire_id = 2
+            JOIN categories_localization ON categories_localization.category_id = categories.id AND categories_localization.language =  :lang
+            WHERE tests.id = :test_id
+            ORDER BY categories.sequence_position, question_categories.sequence_position
+        ");
         $stmt->execute([':test_id' => $this->id, ':lang' => $this->lang]);
         
         $questionnire = $stmt->fetchAll(PDO::FETCH_ASSOC);
