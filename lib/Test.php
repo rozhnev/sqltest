@@ -135,7 +135,15 @@ class Test
 
     public function getData(): array
     {
-        $stmt = $this->dbh->prepare("SELECT *, (tests.closed_at <= CURRENT_TIMESTAMP) timeout FROM tests  WHERE id = :test_id;");
+        $stmt = $this->dbh->prepare("
+            SELECT 
+                *, 
+                (tests.closed_at <= CURRENT_TIMESTAMP) timeout, 
+                TO_CHAR((tests.closed_at - CURRENT_TIMESTAMP),  'DD HH24:MI') time_to_end 
+            FROM tests  
+            WHERE id = :test_id;
+        ");
+        
         $stmt->execute([':test_id' => $this->id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
@@ -272,7 +280,7 @@ class Test
                 $res['difficult_questions']  += $q['rate']===4 ? 1 : 0;
                 $res['hard_questions']       += $q['rate']===5 ? 1 : 0;
 
-                if ($q['solved_at']) {
+                if (!is_null($q['solved_at'])) {
                     $res['solved_questions']++;
                     $res['solved_easy_questions']       += $q['rate']===1 ? 1 : 0;
                     $res['solved_simple_questions']     += $q['rate']===2 ? 1 : 0;
@@ -315,12 +323,12 @@ class Test
             ]
         );
 
-        if ($testResult['solved_questions'] / 0.75 < $testResult['total_questions']) {
+        if ($testResult['solved_questions'] / 0.66 < $testResult['total_questions']) {
             $testResult['ok'] = false;
-            $testResult['hints'][] = 'You must to solve at least ' . ceil($testResult['total_questions'] * 0.75);
+            $testResult['hints'][] = 'You must to solve at least ' . ceil($testResult['total_questions'] * 0.66);
         } else {
             if (
-                $testResult['solved_easy_questions'] = $testResult['easy_questions'] 
+                $testResult['solved_easy_questions'] === $testResult['easy_questions'] 
             ) {
                 // solved all easy - Intern
                 $testResult['ok'] = true;
@@ -329,7 +337,7 @@ class Test
             }
 
             if (
-                $testResult['solved_easy_questions'] = $testResult['easy_questions'] &&
+                $testResult['solved_easy_questions'] === $testResult['easy_questions'] &&
                 ($testResult['solved_simple_questions'] + $testResult['solved_normal_questions'] + $testResult['solved_difficult_questions'] + $testResult['solved_hard_questions']) > ($testResult['simple_questions'] + $testResult['normal_questions'] + $testResult['difficult_questions'] + $testResult['hard_questions']) * 0.66
             ) {
                 // solved all easy + 2/3 of rest questions - Junior
@@ -339,8 +347,8 @@ class Test
             }
 
             if (
-                $testResult['solved_easy_questions'] = $testResult['easy_questions'] &&
-                $testResult['solved_simple_questions'] = $testResult['simple_questions'] &&
+                $testResult['solved_easy_questions'] === $testResult['easy_questions'] &&
+                $testResult['solved_simple_questions'] === $testResult['simple_questions'] &&
                 ($testResult['solved_normal_questions'] + $testResult['solved_difficult_questions'] + $testResult['solved_hard_questions']) > ($testResult['normal_questions'] + $testResult['difficult_questions'] + $testResult['hard_questions']) * 0.66
             ) {
                 // solved all easy & simple + 2/3 of rest questions - Junior
@@ -351,9 +359,9 @@ class Test
             }
 
             if (
-                $testResult['solved_easy_questions'] = $testResult['easy_questions'] &&
-                $testResult['solved_simple_questions'] = $testResult['simple_questions'] &&
-                $testResult['solved_normal_questions'] = $testResult['normal_questions'] &&
+                $testResult['solved_easy_questions'] === $testResult['easy_questions'] &&
+                $testResult['solved_simple_questions'] === $testResult['simple_questions'] &&
+                $testResult['solved_normal_questions'] === $testResult['normal_questions'] &&
                 ($testResult['solved_difficult_questions'] + $testResult['solved_hard_questions']) > ($testResult['difficult_questions'] + $testResult['hard_questions']) * 0.66
             ) {
                 // solved all easy, simple & nomal  + 2/3 of difficult & hard questions - Middle
@@ -363,7 +371,7 @@ class Test
                 $testResult['hints'][] = '2/3 of difficult & hard tasks done';
             }
 
-            if ($testResult['solved_questions'] = $testResult['total_questions']) {
+            if ($testResult['solved_questions'] === $testResult['total_questions']) {
                 // solved all
                 $testResult['ok'] = true;
                 $testResult['grade']++;
@@ -378,7 +386,7 @@ class Test
         }
 
         // More then 2 attempt for question in average - penalty
-        if ($testResult['solved_attempts'] > 2 * $testResult['solved_questions']) {
+        if ($testResult['solved_attempts'] > 2 * $testResult['solved_questions'] && $testResult['grade'] > 1) {
             $testResult['grade']--;
             $testResult['hints'][] = 'You average attempts count more then 2. Grade decreased';
         }
