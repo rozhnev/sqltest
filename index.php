@@ -384,6 +384,7 @@ switch ($action) {
         $smarty->assign('PreviousQuestionId', $questionData['previous_question_id']);
         $smarty->assign('QuestionCategoryID', $questionCategoryID);
         $db = $questionData['db_template'];
+        $smarty->assign('DBMS', $questionData['dbms']);
         $smarty->assign('Questionnire', $test->getQuestionnire());
         $template = "test.tpl";
         break;
