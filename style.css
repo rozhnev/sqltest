@@ -795,6 +795,14 @@ td {
     /* text-decoration: none; */
     font-weight: bold;
 }
+.db-description .referal-add-block {
+    display: flex; 
+    flex-direction: row; 
+    gap:5px; border: 1px solid white; 
+    padding: 0.3em; 
+    width: 98%;
+    justify-content: space-between;
+}
 .solution-wrapper {
     margin: 0 0 12px 0;
     background-color: var(--text-block-background-color);

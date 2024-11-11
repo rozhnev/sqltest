@@ -16,36 +16,29 @@
       <li><span class='sql' onclick="scrollInfoPanel('tickets_table_description')">tickets</span> - таблица билетов.</li>
     </ul>
     {assign var=add_id value=0|mt_rand:4}
-    {if $add_id > 2}
-      <a href="https://book24.ru/r/iuZxo?erid=LjN8KKn37" target="_blank" style="text-decoration: none;">
-        <div style="display: flex; flex-direction: row; border: 1px solid white; padding: 0.3em; width: 98%;">
-
-          <div  style = "width: 30%;">
-              <img style="width: 100%;" src="//ndc.book24.ru/resize/410x590/pim/products/images/6f/0f/018ee0c1-cb86-72ca-be63-928004a76f0f.jpg" alt="PostgreSQL Основы языка SQL : учебное пособие">
-          </div>
-          <div style="font-size: 1em;  width: 70%;  padding: 0 0.7em; font-weight: 100;">
-              <div>Моргунов Евгений Павлович: PostgreSQL Основы языка SQL.</div>
-              <div style="font-size: small; padding-top: 0.5em;">
-                  Учебно-практическое пособие охватывает первую, базовую, часть учебного курса по языку SQL, созданного при участии российской компании Postgres Professional. 
-                  Учебный материал излагается в расчете на использование СУБД PostgreSQL. 
-              </div>
-          </div>
-        </div>
-      </a>
-    {else}
-      <div style="display: flex; flex-direction: row; gap:5px; border: 1px solid white; padding: 0.3em; width: 98%;">
-        <!-- admitad.banner: zba3p9bv14fec845fb2faf541d880b Hexlet.io -->
+    <div class="referal-add-block">
+        {if $add_id > 2}
+            <a href="https://book24.ru/r/iuZxo?erid=LjN8KKn37" target="_blank" style="text-decoration: none; display: flex;">
+                <div  style = "width: 30%;">
+                    <img style="width: 100%;" src="//ndc.book24.ru/resize/410x590/pim/products/images/6f/0f/018ee0c1-cb86-72ca-be63-928004a76f0f.jpg" alt="PostgreSQL Основы языка SQL : учебное пособие">
+                </div>
+                <div style="font-size: 1em;  width: 70%;  padding: 0 0.7em; font-weight: 100;">
+                    <div>Моргунов Евгений Павлович: PostgreSQL Основы языка SQL.</div>
+                    <div style="font-size: small; padding-top: 0.5em;">
+                        Учебно-практическое пособие охватывает первую, базовую, часть учебного курса по языку SQL, созданного при участии российской компании Postgres Professional. 
+                        Учебный материал излагается в расчете на использование СУБД PostgreSQL. 
+                    </div>
+                </div>
+            </a>
+        {else}
             <a target="_blank" rel="nofollow" href="https://dhwnh.com/g/zba3p9bv14fec845fb2faf541d880b/?i=4&subid=python-dev&erid=LatgBe2JB">
                 <img style="width:100%;" border="0" src="https://aflink.ru/b/zba3p9bv14fec845fb2faf541d880b/" alt="Hexlet.io"/>
             </a>
-        <!-- /admitad.banner -->
-        <!-- admitad.banner: v76ghfjtdsfec845fb2fa804937a48 Читай-город -->
             <a target="_blank" rel="nofollow" href="https://kjuzv.com/g/v76ghfjtdsfec845fb2fa804937a48/?i=4&subid=200-200&erid=LatgBYH9b">
                 <img style="width:100%;" border="0" src="https://aflink.ru/b/v76ghfjtdsfec845fb2fa804937a48/" alt="Читай-город"/>
             </a>
-        <!-- /admitad.banner -->
-      </div>
-    {/if}
+        {/if}
+    </div>
     {literal}
     <h3 id="aircrafts_data_table_description">
       <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
