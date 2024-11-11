@@ -491,6 +491,7 @@ switch ($action) {
 Localizer::init($lang);
 $smarty->registerPlugin('block', 'translate', array('Localizer', 'translate'), true);
 
+$smarty->assign('VERSION', $env['VERSION'] ?? 0);
 $smarty->assign('MobileView', $mobileView);
 $smarty->assign('Action', $action);
 $smarty->assign('Logged', $user->logged());
