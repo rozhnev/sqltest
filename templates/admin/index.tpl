@@ -13,8 +13,8 @@
             <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
             <link rel="icon" type="image/png" href="/favicons/favicon-32x32.png" sizes="32x32">
             <link rel="icon" type="image/png" href="/favicons/favicon-16x16.png" sizes="16x16">
-            <link rel="stylesheet" type="text/css" href="/style.css?33" media="all">
-            <link rel="stylesheet" type="text/css" href="/admin/style.css?33" media="all">
+            <link rel="stylesheet" type="text/css" href="/style.css?{$VERSION}" media="all">
+            <link rel="stylesheet" type="text/css" href="/admin/style.css?{$VERSION}" media="all">
             <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/ace.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/ext-beautify.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/mode-sql.min.js"></script>
@@ -23,7 +23,7 @@
             <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/theme-github_dark.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/ext-language_tools.js"></script>
             {* <script type="text/javascript" src="/script.js?8" defer></script> *}
-            <script type="text/javascript" src="/admin/script.js?12"></script>
+            <script type="text/javascript" src="/admin/script.js?{$VERSION}"></script>
             <script>
                 var lang = '{$Lang}',
                     db   = '{$DB}',
