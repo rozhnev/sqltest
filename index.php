@@ -81,9 +81,9 @@ if (isset($pathParts[0]) && $pathParts[0] === 'login') {
 } elseif (preg_match("@(?<lang>$languge_codes_regexp)/test/create@i", $path, $params)) {
     $lang       = $params['lang'];
     $action     = 'test_create';
-} elseif (preg_match("@(?<lang>$languge_codes_regexp)/test/(?<testId>[a-z0-9-]+)/rate@i", $path, $params)) {
+} elseif (preg_match("@(?<lang>$languge_codes_regexp)/test/(?<testId>[a-z0-9-]+)/result@i", $path, $params)) {
     $lang       = $params['lang'];
-    $action     = 'test_rate';
+    $action     = 'test_result';
     $testId = $params['testId'];
 } elseif (preg_match("@(?<lang>$languge_codes_regexp)/test/(?<testId>[a-z0-9-]+)/check/(?<questionID>\d+)@i", $path, $params)) {
     // MUST BE BEFORE test action
@@ -310,7 +310,7 @@ switch ($action) {
         $userTestId = $test->create();
         header("Location: /$lang/test/$userTestId");
         exit();
-    case 'test_rate':
+    case 'test_result':
         if (!$user->logged()) {
             header("Location: /$lang/test/start");
             exit();
@@ -327,7 +327,7 @@ switch ($action) {
         $smarty->assign('TestData', $test->getData());
         $smarty->assign('TestResult', $testResult);
 
-        $template = "test_rate.tpl";
+        $template = "test_result.tpl";
         break;
     case 'test':
         if (!$user->logged()) {

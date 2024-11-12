@@ -88,5 +88,5 @@ $translations = [
     'check_your_skills' => 'Проверь свои знания!',
     'test_time_to_complete' => 'Время на прохождение теста',
     'test_time_over' => 'Время вышло!',
-    'test_show_my_rate' => 'Я закончил! Хочу узнать оценку!',
+    'test_show_result' => 'Я закончил! Хочу узнать оценку!',
 ];

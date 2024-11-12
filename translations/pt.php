@@ -87,5 +87,5 @@ $translations = [
     'check_your_skills' => 'Teste suas habilidades!',
     'test_time_to_complete' => 'Tempo para completar este teste é',
     'test_time_over' => 'O tempo do teste acabou!',
-    'test_show_my_rate' => 'Terminei! Mostrar minha taxa',
+    'test_show_result' => 'Terminei! Mostrar minha taxa',
 ];

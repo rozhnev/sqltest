@@ -544,7 +544,7 @@ class User
 
     public function saveGrade(int $grade): void
     {
-        $stmt = $this->dbh->prepare("UPDATE users SET grade = :grade WHERE id = :user_id;");
+        $stmt = $this->dbh->prepare("UPDATE users SET grade = :grade, graded_at = CURRENT_TIMESTAMP WHERE id = :user_id;");
         $stmt->execute([':user_id' => $this->id, ':grade' => $grade]);
     }
 }

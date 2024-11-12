@@ -30,7 +30,7 @@
         </div>
 
         <div style="display: flex; align-items: center; justify-content: center; margin-top: 1em;">
-            <a class="button green" style="text-decoration: none;" id="doneTest" href="/{$Lang}/test/{$TestId}/rate">{translate}test_show_my_rate{/translate}</a>
+            <a class="button green" style="text-decoration: none;" id="doneTest" href="/{$Lang}/test/{$TestId}/result">{translate}test_show_result{/translate}</a>
         </div>
     </div>
     {include file='splitter.tpl'}
