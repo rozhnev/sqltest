@@ -205,7 +205,7 @@ class Test
         $stmt->execute([':test_id' =>  $this->id, ':question_id' =>  $qusestionId, ':questionnire_id' => 2, ':lang' => $this->lang]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
-    public function getQuestionAttemptsCount(int $qusestionId): array 
+    public function getQuestionAttemptStatus(int $qusestionId): array 
     {
         $stmt = $this->dbh->prepare("
             SELECT (tests.closed_at <= CURRENT_TIMESTAMP) timeout, (test_questions.max_attempts - test_questions.attempts) avaliable_attempts

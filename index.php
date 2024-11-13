@@ -81,6 +81,10 @@ if (isset($pathParts[0]) && $pathParts[0] === 'login') {
 } elseif (preg_match("@(?<lang>$languge_codes_regexp)/test/create@i", $path, $params)) {
     $lang       = $params['lang'];
     $action     = 'test_create';
+} elseif (preg_match("@(?<lang>$languge_codes_regexp)/test/(?<testId>[a-z0-9-]+)/grade@i", $path, $params)) {
+    $lang       = $params['lang'];
+    $action     = 'user_grade';
+    $testId = $params['testId'];    
 } elseif (preg_match("@(?<lang>$languge_codes_regexp)/test/(?<testId>[a-z0-9-]+)/result@i", $path, $params)) {
     $lang       = $params['lang'];
     $action     = 'test_result';
@@ -310,6 +314,26 @@ switch ($action) {
         $userTestId = $test->create();
         header("Location: /$lang/test/$userTestId");
         exit();
+    case 'user_grade':
+        if (!$user->logged()) {
+            header("Location: /$lang/test/start");
+            exit();
+        }
+        $test = new Test($dbh, $lang, $user);
+        $test->setId($testId);
+        if(!$test->belongsToUser($user)) {
+            header("HTTP/1.1 404 Moved Permanently");
+            $smarty->assign('ErrorMessage', 'You are not permiited to do this action.');
+            $template = "error.tpl";
+            break;
+        }
+        $testResult = $test->calculateResult();
+        if ($testResult['ok']) {
+            $user->saveGrade($testResult['grade']);
+        }
+        $smarty->assign('TestResult', $testResult);
+        $template = "user_grade.tpl";
+        break;
     case 'test_result':
         if (!$user->logged()) {
             header("Location: /$lang/test/start");
@@ -376,12 +400,13 @@ switch ($action) {
             break;
         }
         $template = "check_test_solution.tpl";
-
-        if ($test->getQuestionAttemptsCount($questionID) < 0) {
-            $checkResult = ['ok' => false, 'hints' => ['maxAttemptsReached' => true]];
-            $smarty->assign('QueryTestResult', $checkResult);
+        
+        $attemptStatus = $test->getQuestionAttemptStatus($questionID);
+        if (!$attemptStatus['ok']) {
+            $smarty->assign('QueryTestResult', $attemptStatus);
             break;
         }
+
         $question = new Question($dbh, $questionID);
 
         if (isset($_POST["query"])) {
