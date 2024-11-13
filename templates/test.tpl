@@ -92,17 +92,23 @@
                 <button class="button" id="runQueryBtn" onClick="runQuery('{$Lang}', {$QuestionID})" title="CTRL+Enter">{translate}question_action_run_query{/translate}</button>
             {/if}
             {if {$Question.possible_attempts} > 0}
-                <button class="button green" id="checkSolutionBtn" onClick="checkSolution('/{$Lang}/test/{$TestId}/check/{$QuestionID}')"> {if !isset($Question.answers)}{translate}question_action_check_answers{/translate}{else}{translate}question_action_test_query{/translate}{/if} ({$Question.possible_attempts})</button>
+                <button class="button green" id="checkSolutionBtn" onClick="checkSolution('/{$Lang}/test/{$TestId}/check/{$QuestionID}')">
+                    {if !isset($Question.answers)}{translate}question_action_check_answers{/translate}{else}{translate}question_action_test_query{/translate}{/if} (<span id="attemptsCount">{$Question.possible_attempts}</span>)
+                </button>
+            {else}
+                <button class="button gray">
+                    {translate}question_maximum_attempts_used{/translate}
+                </button>
             {/if}
             {if $Question.next_question_id}
-                <a href="/{$Lang}/test/{$TestId}/{$Question.next_question_id}" title="Mext task" class="button green hidden">Next</a>
+            <a href="/{$Lang}/test/{$TestId}/{$Question.next_question_id}" title="Mext task" class="button green{if {$Question.possible_attempts} > 0} hidden{/if}" id="nextQuestionBtn">{translate}question_action_next{/translate}</a>
             {/if}
         </div>
         <div class="code-result ace-xcode" id="code-result"></div>
     </div>
     <script>
         const showTimer = ()=>{ldelim}
-            const time = Math.floor((new Date('{$Question.closed_at}') - new Date())/60000);
+            const time = Math.floor((new Date('{$Question.closed_at}') - new Date())/60000) - ((new Date()).getTimezoneOffset());
             if (time > 0) {ldelim}
                 const minutes = time % 60;
                 const hours = (time - minutes) / 60;

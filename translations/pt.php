@@ -75,6 +75,7 @@ $translations = [
     'question_action_check_answers' => 'Verificar respostas',
     'question_action_next' => 'Próximo',
     'question_action_next_title' => 'Próxima tarefa',
+    'question_maximum_attempts_used' => 'Infelizmente, apesar de todos os seus esforços, você não conseguiu resolver este problema.',
     'user_solutions_count' => 'Explore mais de <span style="font-weight:bold; color: #2EA043 !important;">##QuestionsCountRounded##</span> tarefas diversas na nossa plataforma.',
     'user_solutions_count_logged' => '##YouHaveSolved## <span style="font-weight:bold;  color: #2EA043 !important;">##SolvedQuestionsCount##</span> delas. ',
     'user_solutions_count_not_logged' => 'Faça login para salvar seu progresso.',

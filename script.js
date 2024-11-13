@@ -239,6 +239,13 @@ function checkSolution(url) {
     .then((async response=>{
         if (response.ok) {
             document.getElementById("checkSolutionBtn").classList.toggle("hidden");
+            document.getElementById("nextQuestionBtn").classList.toggle("hidden");
+        } else {
+            // decrease attempts counter
+            let attempts = document.getElementById('attemptsCount').innerText;
+            if (parseInt(attempts) > 0) {
+                document.getElementById('attemptsCount').innerText = (attempts - 1).toString();
+            }
         }
         return await response.text();
     }))
