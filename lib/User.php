@@ -531,7 +531,7 @@ class User
         return $stmt->fetchColumn(0);
     }
 
-    public function getLastTest(): array
+    public function getLastTest(): ?array
     {
         $stmt = $this->dbh->prepare("
             SELECT id, created_at, closed_at, (closed_at is not null and closed_at <= current_timestamp) closed, rate 
@@ -539,7 +539,7 @@ class User
             WHERE user_id = :user_id order by created_at desc limit 1;
         ");
         $stmt->execute([':user_id' => $this->id]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
     }
 
     public function saveGrade(int $grade): void
