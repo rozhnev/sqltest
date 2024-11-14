@@ -88,5 +88,8 @@ $translations = [
     'check_your_skills' => 'Check your skills!',
     'test_time_to_complete' => 'Time to complete this test is',
     'test_time_over' => 'Test time is over!',
+    'test_time_out' => 'The time allotted for completing the test has expired. You can <a href="/en/test/##TestId##/result">proceed to the assessment</a>.',
+    'maximum_attempts_reached' => 'You have used the maximum number of attempts to solve the problem.',
+    'go_to_next_task' => 'Follow to <a href="/ru/test/##TestId##/##NextQuestion##">the next one</a>.',
     'test_show_result' => 'I am Done! Show my result',
 ];

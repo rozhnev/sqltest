@@ -222,7 +222,6 @@ switch ($action) {
             }
         }
         if (!$queryTestResult['ok']) header( 'HTTP/1.1 418 BAD REQUEST' );
-        $smarty->registerPlugin("modifier", "array_key_exists", "array_key_exists");
         $smarty->assign('ReferralLink', Helper::getReferralLink($dbh, $lang));
         $template = "$lang/query_test_result.tpl";
         break;
@@ -393,6 +392,7 @@ switch ($action) {
         }
         $test = new Test($dbh, $lang, $user);
         $test->setId($testId);
+        $smarty->assign('TestId', $testId);
         if(!$test->belongsToUser($user)) {
             header("HTTP/1.1 404 Moved Permanently");
             $smarty->assign('ErrorMessage', 'You are not permiited to do this action.');
@@ -400,7 +400,7 @@ switch ($action) {
             break;
         }
         $template = "check_test_solution.tpl";
-        
+
         $attemptStatus = $test->getQuestionAttemptStatus($questionID);
         if (!$attemptStatus['ok']) {
             $smarty->assign('QueryTestResult', $attemptStatus);
@@ -422,7 +422,6 @@ switch ($action) {
                 $smarty->assign('QueryBestCost', $question->getBestCost());
             }
             $test->saveQuestionAttempt($questionID, $checkResult, $sql);
-            $smarty->registerPlugin("modifier", "array_key_exists", "array_key_exists");
         }
 
         if (isset($_POST["answers"])) {
@@ -493,6 +492,7 @@ switch ($action) {
 }
 
 Localizer::init($lang);
+$smarty->registerPlugin("modifier", "array_key_exists", "array_key_exists");
 $smarty->registerPlugin('block', 'translate', array('Localizer', 'translate'), true);
 
 $smarty->assign('VERSION', $env['VERSION'] ?? 0);

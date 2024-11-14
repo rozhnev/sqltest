@@ -148,16 +148,16 @@ class Test
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function getFirstUnsolvedQuestionId()
+    public function getFirstUnsolvedQuestionId(): ?int
     {
         $stmt = $this->dbh->prepare("SELECT questions.id
             FROM test_questions
             JOIN questions ON questions.id = test_questions.question_id 
-            WHERE test_id = :test_id AND test_questions.solved_at is null 
+            WHERE test_id = :test_id AND test_questions.solved_at is null AND attempts < max_attempts
             ORDER BY questions.rate 
             LIMIT 1;");
         $stmt->execute([':test_id' => $this->id]);
-        return $stmt->fetchColumn(0);
+        return $stmt->fetchColumn(0) ?: null;
     }
     /**
      * Returns Category Id by Questionnire ID
@@ -205,6 +205,7 @@ class Test
         $stmt->execute([':test_id' =>  $this->id, ':question_id' =>  $qusestionId, ':questionnire_id' => 2, ':lang' => $this->lang]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
     public function getQuestionAttemptStatus(int $qusestionId): array 
     {
         $stmt = $this->dbh->prepare("
@@ -216,7 +217,11 @@ class Test
         $stmt->execute([':test_id' => $this->id, ':question_id' => $qusestionId]);
         $res = $stmt->fetch(PDO::FETCH_ASSOC);
         if ($res['avaliable_attempts'] < 1) {
-            return ['ok' => false, 'hints' => ['maxAttemptsReached' => true]];
+            return [
+                'ok' => false, 
+                'nextQuestion' => $this->getFirstUnsolvedQuestionId(),
+                'hints' => ['maxAttemptsReached' => true]
+            ];
         } elseif ($res['timeout']) {
             return ['ok' => false, 'hints' => ['timeOut' => true]];
         }
