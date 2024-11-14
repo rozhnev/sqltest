@@ -91,7 +91,11 @@
             {if !isset($Question.answers)}
                 <button class="button" id="runQueryBtn" onClick="runQuery('{$Lang}', {$QuestionID})" title="CTRL+Enter">{translate}question_action_run_query{/translate}</button>
             {/if}
-            {if {$Question.possible_attempts} > 0}
+            {if isset($TestData.timeout)}
+                <button class="button green">
+                    {translate}test_time_out{/translate}
+                </button>
+            {elseif {$Question.possible_attempts} > 0}
                 <button class="button green" id="checkSolutionBtn" onClick="checkSolution('/{$Lang}/test/{$TestId}/check/{$QuestionID}')">
                     {if !isset($Question.answers)}{translate}question_action_check_answers{/translate}{else}{translate}question_action_test_query{/translate}{/if} (<span id="attemptsCount">{$Question.possible_attempts}</span>)
                 </button>
