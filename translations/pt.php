@@ -93,4 +93,8 @@ $translations = [
     'maximum_attempts_reached' => 'Você usou o número máximo de tentativas para resolver o problema.',
     'go_to_next_task' => 'Siga para <a href="/ru/test/##TestId##/##NextQuestion##">o próximo</a>.',
     'test_show_result' => 'Terminei! Mostrar minha taxa',
+    'not_solved_minimum_tasks' => 'O teste não foi concluído. Você precisa resolver pelo menos ##MinTasksRequired## tarefas.',
+    'you_can_try_again' => 'Você poderá tentar novamente em ##NextTestTry## dias.',
+    'continue_practice' => 'Continuar praticando',
+    'test_result' => 'Resultados dos testes'
 ];

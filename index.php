@@ -346,8 +346,13 @@ switch ($action) {
             $template = "error.tpl";
             break;
         }
+        $testData = $test->getData();
+        $testEnd   = new DateTime($testData['closed_at']);
+        $testEnd -> add(new DateInterval('P1M0D'));
+        $testData['next_test_in'] = $testEnd->diff(new DateTime())->days;
+
         $testResult = $test->calculateResult();
-        $smarty->assign('TestData', $test->getData());
+        $smarty->assign('TestData', $testData);
         $smarty->assign('TestResult', $testResult);
 
         $template = "test_result.tpl";

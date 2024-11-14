@@ -94,4 +94,8 @@ $translations = [
     'maximum_attempts_reached' => 'Вы использовали максимальное количество попыток решения задачи.',
     'go_to_next_task' => 'Переходите к <a href="/ru/test/##TestId##/##NextQuestion##">следующей</a>.',
     'test_show_result' => 'Я закончил! Хочу узнать оценку!',
+    'not_solved_minimum_tasks' => 'Тест не был завершен. Вам необходимо решить как минимум ##MinTasksRequired## задач.',
+    'you_can_try_again' => 'Вы сможете попробовать снова через  ##NextTestTry## дней.',
+    'continue_practice' => 'Продолжить практику',
+    'test_result' => 'Результаты теста'
 ];

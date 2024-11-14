@@ -92,7 +92,7 @@
                 <button class="button" id="runQueryBtn" onClick="runQuery('{$Lang}', {$QuestionID})" title="CTRL+Enter">{translate}question_action_run_query{/translate}</button>
             {/if}
             {if isset($TestData.timeout)}
-                <button class="button green">
+                <button class="button red">
                     {translate}test_time_out{/translate}
                 </button>
             {elseif {$Question.possible_attempts} > 0}

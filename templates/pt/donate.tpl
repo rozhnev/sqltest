@@ -1,5 +1,5 @@
-<div class="donation-container">
-    <div class="donation-header">
+<div class="container800">
+    <div class="container800-header">
         <h1>Apoie o SQLtest.online</h1>
         <p>
             Obrigado por considerar apoiar o SQLtest.online! Sua contribuição nos ajuda a manter e melhorar a plataforma, 
