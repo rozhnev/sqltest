@@ -1,16 +1,28 @@
 <?php
 class Helper 
 {
-    public static function getReferralLink(PDO $dbh, string $lang): string
+    /**
+     * Returns referral link html code according language and view mode (mobile/desktop)
+     *
+     * @param PDO $dbh
+     * @param string $lang
+     * @param  string $mode
+     * @return string|null
+     */
+    public static function getReferralLink(PDO $dbh, string $lang, string $mode): string
     {
         $stmt = $dbh->prepare(
             "SELECT referral_link AS referralLink 
             FROM referral_links 
-            WHERE lang = :lang AND NOT deleted AND (active_till IS NULL OR active_till > CURRENT_DATE)
+            WHERE 
+                lang = :lang 
+                AND NOT deleted 
+                AND (active_till IS NULL OR active_till > CURRENT_DATE)
+                AND ((:mode = 'mobile' AND mobile) OR (:mode = 'desktop' AND desktop))
             ORDER BY random() LIMIT 1;"
         );
-        $stmt->execute([':lang' => $lang]);
-        return $stmt->fetchColumn(0);
+        $stmt->execute([':lang' => $lang, ':mode' => $mode]);
+        return $stmt->fetchColumn(0) ?: null;
     }
 
     public static function getBooks(PDO $dbh, string $lang): array
