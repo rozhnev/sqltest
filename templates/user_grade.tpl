@@ -7,18 +7,29 @@
                 {include file='top-menu.tpl' path="/"}
             {/if}
             <div class="container3">
-                <pre>
-                {var_export($TestData)}
-                </pre>
-                <pre>
-                {var_export($TestResult)}
-                </pre>
-                {if $TestResult.ok}
-                    {$grades = ['','Intern','Junior','Middle','Senior']}
-                    Your done the test with grade {$grades[$TestResult.grade]}
-                {else}
-                    The test did not done. You can not be graded.
-                {/if}
+                <div class="container800">
+                    {* <pre>
+                    {var_export($TestData)}
+                    </pre>
+                    <pre>
+                    {var_export($TestResult)}
+                    </pre> *}
+                    <div class="container800-section">
+                    {if $TestResult.ok}
+                        {$grades = ['','Intern','Junior','Middle','Senior']}
+                        {assign var="Grade" value="{$grades[$TestResult.grade-1]}"}
+                        <h2>{translate}test_done_with_grade{/translate}</h2>
+                        <div style="display: flex;">
+                        <img src="/images/user_grade_{$Grade}.jpeg" title="{$Grade}" style="margin: 0 auto;" alt="Your grade is {$Grade}">
+                        </div>
+                    {else}
+                        The test did not done. You can not be graded.
+                    {/if}
+                    <div style="text-align: center; margin: 36px;">
+                        <a style="display:inline-block;width:240px; color: white;" href="/{$Lang}/question/db-theory/what-is-sql" title="Start quiz" class="button green">{translate}continue_practice{/translate}</a>
+                    </div>
+                    </div>
+                </div>
             </div>
 {if $MobileView}
     {include file='m.footer.tpl'}

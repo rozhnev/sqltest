@@ -99,5 +99,6 @@ $translations = [
     'test_result' => 'Resultados dos testes',
     'test_done_with_grade' => 'Você concluiu o teste. Seu nível atual é ##Grade##.',
     'test_improve' => 'Você pode melhorar seus resultados em ##ImproveTimeoutHours## horas ##ImproveTimeoutMinutes## minutos.',
-    'return_to_test' => 'Retornar ao teste'
+    'return_to_test' => 'Retornar ao teste',
+    'save_my_grade' => 'Salve minha nota'
 ];

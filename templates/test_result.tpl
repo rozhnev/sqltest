@@ -32,7 +32,7 @@
                                         <a style="display:inline-block;width:240px; color: white;" href="/{$Lang}/test/{$TestData.id}" title="Начать тест" class="button green">{translate}return_to_test{/translate}</a>
                                     </div>
                                     <div style="text-align: center; margin: 36px;">
-                                        <a style="display:inline-block;width:240px; color: white;" href="/{$Lang}/test/{$TestData.id}/grade" title="Начать тест" class="button blue">Save my rate</a>
+                                        <a style="display:inline-block;width:240px; color: white;" href="/{$Lang}/test/{$TestData.id}/grade" title="Начать тест" class="button blue">{translate}save_my_grade{/translate}</a>
                                     </div>
                                 {/if}
                             {else}
