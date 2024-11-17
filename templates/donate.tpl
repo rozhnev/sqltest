@@ -1,14 +1,6 @@
 {include file='short-header.tpl'}
 <style>             
-        .donation-section {
-            background: #f8f9fa;
-            border-radius: 10px;
-            padding: 1rem 2rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            color: #333;
-        }
-        
+       
         .donation-methods {
             display: flex;
             flex-wrap: wrap;

@@ -238,8 +238,8 @@ function checkSolution(url) {
     })
     .then((async response=>{
         if (response.ok) {
-            document.getElementById("checkSolutionBtn").classList.toggle("hidden");
-            document.getElementById("nextQuestionBtn").classList.toggle("hidden");
+            document.getElementById("checkSolutionBtn") && document.getElementById("checkSolutionBtn").classList.toggle("hidden");
+            document.getElementById("nextQuestionBtn") && document.getElementById("nextQuestionBtn").classList.toggle("hidden");
         } else {
             // decrease attempts counter
             let attempts = document.getElementById('attemptsCount').innerText;

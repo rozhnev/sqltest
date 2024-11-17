@@ -24,9 +24,12 @@
             </ol>
         </div>
         {/foreach}
-        <div id="test-timer" style="padding:5px 15px; border: 1px solid white; margin: 5px; display: flex; flex-direction: column;">
-            <span style="font-size:small;">{translate}test_time_to_complete{/translate}:</span>
-            <span id="test-timer-time"></span>
+        <div id="test-timer" style="padding:5px 15px; border: 1px solid white; margin: 5px; display: flex; flex-direction: column; justify-items: center;">
+            <div  style="display: flex; flex-direction: row; justify-items: center; margin: 1em 0;">
+                <span>{translate}test_time_to_complete{/translate}: &nbsp;</span>
+                <span id="test-timer-time"></span>
+            </div>
+            <span style="padding-bottom: 1em;">Выполнено задач: {$TestData.solved_questions_count} из {$TestData.questions_count}</span>
         </div>
 
         <div style="display: flex; align-items: center; justify-content: center; margin-top: 1em;">
@@ -87,11 +90,12 @@
         </div>
         <div class="code-wrapper" id="sql-code" name="sql-code">{$Question.last_query}</div>
         {/if}
+        {* {var_export($TestData)} *}
         <div class="code-buttons">
             {if !isset($Question.answers)}
                 <button class="button" id="runQueryBtn" onClick="runQuery('{$Lang}', {$QuestionID})" title="CTRL+Enter">{translate}question_action_run_query{/translate}</button>
             {/if}
-            {if isset($TestData.timeout)}
+            {if isset($TestData.timeout) && $TestData.timeout}
                 <button class="button red">
                     {translate}test_time_out{/translate}
                 </button>

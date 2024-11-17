@@ -10,20 +10,26 @@
                 <div class="container800">
                 <div class="container800-header">
                     <h1>{translate}test_result{/translate}</h1>
+                </div>
+                    <div class="container800-section">
                         <p>
-                            {* <pre>
+                             {* <pre>
                             {var_export($TestData)}
-                            </pre>
+                            </pre> *}
+                            {*
                             <pre>
-                            {var_export($TestResult)} *}
-                            </pre>
+                            {var_export($TestResult)} 
+                            </pre>*}
                             {if $TestResult.ok}
                                 {$grades = ['Intern','Junior','Middle','Senior']}
-                                Your done the test with grade {$grades[$TestResult.grade-1]}
+                                {assign var="Grade" value="{$grades[$TestResult.grade-1]}"}
+                                <h2>{translate}test_done_with_grade{/translate}</h2>
                                 {if !$TestData.timeout}
-                                    You can improve your result in {$TestData.time_to_end}
+                                    {assign var="ImproveTimeoutHours" value="{($TestData.time_to_end  - $TestData.time_to_end  % 60) / 60}"}
+                                    {assign var="ImproveTimeoutMinutes" value="{$TestData.time_to_end % 60}"}
+                                    {translate}test_improve{/translate}
                                     <div style="text-align: center; margin: 36px;">
-                                        <a style="display:inline-block;width:240px; color: white;" href="/{$Lang}/test/{$TestData.id}" title="Начать тест" class="button green">Return to test</a>
+                                        <a style="display:inline-block;width:240px; color: white;" href="/{$Lang}/test/{$TestData.id}" title="Начать тест" class="button green">{translate}return_to_test{/translate}</a>
                                     </div>
                                     <div style="text-align: center; margin: 36px;">
                                         <a style="display:inline-block;width:240px; color: white;" href="/{$Lang}/test/{$TestData.id}/grade" title="Начать тест" class="button blue">Save my rate</a>
@@ -42,7 +48,7 @@
                                     </div>
                                 {else}
                                     <div style="text-align: center; margin: 36px;">
-                                        <a style="display:inline-block;width:240px; color: white;" href="/{$Lang}/test/{$TestData.id}" title="Начать тест" class="button green">Return to test</a>
+                                        <a style="display:inline-block;width:240px; color: white;" href="/{$Lang}/test/{$TestData.id}" title="Начать тест" class="button green">{translate}return_to_test{/translate}</a>
                                     </div>
                                 {/if}
                             {/if}

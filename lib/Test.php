@@ -139,8 +139,18 @@ class Test
             SELECT 
                 *, 
                 (tests.closed_at <= CURRENT_TIMESTAMP) timeout, 
-                TO_CHAR((tests.closed_at - CURRENT_TIMESTAMP),  'DD HH24:MI') time_to_end 
-            FROM tests  
+                extract(epoch from (tests.closed_at - CURRENT_TIMESTAMP))::int/60 time_to_end,
+                test_questions.questions_count,
+                test_questions.solved_questions_count
+            FROM tests
+            JOIN (
+                SELECT test_id id,
+                    COUNT(test_questions.question_id) questions_count,
+                    COUNT(test_questions.solved_at) solved_questions_count 
+                FROM test_questions
+                WHERE test_id = :test_id
+                GROUP BY test_id
+            ) test_questions USING(id)
             WHERE id = :test_id;
         ");
         

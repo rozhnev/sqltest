@@ -96,5 +96,8 @@ $translations = [
     'not_solved_minimum_tasks' => 'O teste não foi concluído. Você precisa resolver pelo menos ##MinTasksRequired## tarefas.',
     'you_can_try_again' => 'Você poderá tentar novamente em ##NextTestTry## dias.',
     'continue_practice' => 'Continuar praticando',
-    'test_result' => 'Resultados dos testes'
+    'test_result' => 'Resultados dos testes',
+    'test_done_with_grade' => 'Você concluiu o teste. Seu nível atual é ##Grade##.',
+    'test_improve' => 'Você pode melhorar seus resultados em ##ImproveTimeoutHours## horas ##ImproveTimeoutMinutes## minutos.',
+    'return_to_test' => 'Retornar ao teste'
 ];

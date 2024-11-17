@@ -1,34 +1,4 @@
-<div class="test-info-container">
     <style>
-        .test-info-container {
-            max-width: 800px;
-            margin: 2rem auto;
-            padding: 1rem;
-        }
-        
-        .test-section {
-            background: var(--background-color);
-            border-radius: 8px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        
-        .difficulty-list {
-            list-style: none;
-            padding: 0;
-            margin: 1.5rem 0;
-        }
-        
-        .difficulty-item {
-            display: flex;
-            align-items: center;
-            margin: 0.5rem 0;
-            padding: 0.5rem;
-            border-radius: 4px;
-            background: var(--background-color-secondary);
-        }
-        
         .rank-table {
             width: 100%;
             border-collapse: collapse;
@@ -44,21 +14,14 @@
         .rank-table th {
             background: var(--background-color-secondary);
         }
-        
-        .note-section {
-            background: var(--background-color-secondary);
-            padding: 1rem;
-            border-radius: 8px;
-            margin-top: 2rem;
-            font-style: italic;
-        }
-    </style>
+    </style> 
 
-    <div class="test-section">
+    <div class="container800-header">
         <h1>Проверьте свои знания SQL!</h1>
         
+    </div>
+    <div class="container800-section">
         <p>Наш тест состоит из 13 заданий разных уровней сложности, выбранных из базы заданий сайта случайным образом. Сложность заданий устанавливается по результатам голосования пользователей сайта.</p>
-        
         <h2>Структура теста:</h2>
         <ul class="difficulty-list">
             <li class="difficulty-item">4 задачи уровня "Просто"</li>
@@ -67,7 +30,8 @@
             <li class="difficulty-item">2 задачи уровня "Сложно"</li>
             <li class="difficulty-item">1 задача уровня "Трудно"</li>
         </ul>
-
+    </div>
+    <div class="container800-section">
         <h2>Время и ранги</h2>
         <p>Для выполнения теста отводится три часа времени. По окончании времени (или раньше) вы сможете получить один из рангов в SQL:</p>
         
@@ -93,7 +57,8 @@
                 <td>Решить все задачи</td>
             </tr>
         </table>
-
+    </div>
+    <div class="container800-section">
         <h2>Бонусы и штрафы</h2>
         <p>Успешное решение задания с первой попытки приносит дополнительные баллы, а большое количество попыток на одно задание может привести к снижению оценки.</p>
 
@@ -101,34 +66,42 @@
             <strong>Примечание:</strong> Система оценки может быть скорректирована в зависимости от результатов тестирования и обратной связи от участников.
         </div>
     </div>
-</div>
-{if $Logged}
-    {if isset($LastTest)}
-        {if $LastTest.closed}
-            {if $LastTest.rate > 0}
-                После последнего теста ваша оценка {$LastTest.rate}! Хотите улучшить решетку?
+    <div class="container800-section">
+        {if $Logged}
+            {if isset($LastTest)}
+                {if $LastTest.closed}
+                    {if $LastTest.rate eq 1}
+                        <h2>Отличное начало! По результатам теста ваш уровень — Intern.</h2>Это говорит о вашем потенциале. Хотите развиваться дальше и перейти на новый уровень?
+                    {elseif $LastTest.rate eq 2}
+                        <h2>Вы на правильном пути! Ваш текущий уровень — Junior.</h2>Это замечательный результат. Готовы ли вы расширить свои знания и навыки?
+                    {elseif $LastTest.rate eq 3}
+                        <h2>Вы достигли уровня Middle!</h2>Это замечательно! Но ведь всегда есть к чему стремиться, верно? Готовы бросить вызов себе и улучшить свои результаты?
+                    {elseif $LastTest.rate eq 4}
+                        <h2>Поздравляем! Ваш уровень - Senior!</h2>Готовы подтвердить свой статус?
+                    {else}
+                        <h2>Время вашего последнего теста вышло.</h2>Готовы попробовать еще раз?
+                    {/if}
+                    <div style="text-align: center; margin: 36px;">
+                        <a style="display:inline-block;width:240px; color: white;" href="/{$Lang}/test/create" title="Начать тест" class="button green">Начать тест</a>
+                    </div>
+                {else}
+                    {* Продолжить открытый тест *}
+                    <div style="text-align: center; margin: 36px;">
+                        <a style="display:inline-block;width:240px; color: white;" href="/{$Lang}/test/{$LastTest.id}" title="Начать тест" class="button green">Продолжить тест</a>
+                    </div>
+                {/if}
             {else}
-                Ваш последний тест истек. Хотите получить новый шанс?
+                <h2>Желаем удачи!</h2>
+                <div style="text-align: center; margin: 36px;">
+                    <a style="display:inline-block;width:240px; color: white;" href="/{$Lang}/test/create" title="Начать тест" class="button green">Начать тест</a>
+                </div>
             {/if}
-            <div style="text-align: center; margin: 36px;">
-                <a style="display:inline-block;width:240px; color: white;" href="/{$Lang}/test/create" title="Начать тест" class="button green">Начать тест</a>
-            </div>
         {else}
-            {* Продолжить открытый тест *}
+            <h2><span class='warning'>
+                Эта страница недоступна для незарегистрированных пользователей. Пожалуйста, войдите, чтобы продолжить.
+            </span></h2>
             <div style="text-align: center; margin: 36px;">
-                <a style="display:inline-block;width:240px; color: white;" href="/{$Lang}/test/{$LastTest.id}" title="Начать тест" class="button green">Продолжить тест</a>
+                <button class="button green" onClick="toggleLoginWindow()">Войти</button>
             </div>
         {/if}
-    {else}
-        <div style="text-align: center; margin: 36px;">
-            <a style="display:inline-block;width:240px; color: white;" href="/{$Lang}/test/create" title="Начать тест" class="button green">Начать тест</a>
-        </div>
-    {/if}
-{else}
-    <p class='warning'>
-        Эта страница недоступна для незарегистрированных пользователей. Пожалуйста, войдите, чтобы продолжить.
-    </p>
-    <div style="text-align: center; margin: 36px;">
-        <button class="button green" onClick="toggleLoginWindow()">Войти</button>
     </div>
-{/if}

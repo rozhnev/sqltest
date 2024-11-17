@@ -7,7 +7,7 @@
         </p>
     </div>
 
-    <div class="donation-section">
+    <div class="container800-section">
         <h2>Why Support Us?</h2>
         <p>
             Your support enables us to:
@@ -21,7 +21,7 @@
         </ul>
     </div>
 
-    <div class="donation-section">
+    <div class="container800-section">
         <h2>Ways to Support:</h2>
         <div class="donation-methods">
             <div class="donation-method">
