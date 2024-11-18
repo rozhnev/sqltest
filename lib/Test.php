@@ -338,7 +338,7 @@ class Test
             ]
         );
 
-        if ($testResult['solved_questions'] / 0.66 < $testResult['total_questions']) {
+        if ($testResult['solved_questions'] / 0.5 < $testResult['total_questions']) {
             $testResult['ok'] = false;
             $testResult['hints']['not_enought_tasks_solved'] = 'You must to solve at least ' . ceil($testResult['total_questions'] * 0.66);
             $testResult['hints']['must_to_solve'] = ceil($testResult['total_questions'] * 0.66);

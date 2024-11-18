@@ -4,9 +4,9 @@
     <body>
         <div class="{if $MobileView}mobile-container{else}full-container{/if}">
             {if $MobileView}
-                {include file='m.top-menu.tpl' path="/privacy-policy"}
+                {include file='m.top-menu.tpl' path="/test/start"}
             {else}
-                {include file='top-menu.tpl' path="/privacy-policy"}
+                {include file='top-menu.tpl' path="/test/start"}
             {/if}
             <div class="container3">
                 <div class="container800">
