@@ -101,5 +101,7 @@ $translations = [
     'test_done_with_grade' => 'Вы завершили тест. Ваш текущий уровень - ##Grade##.',
     'test_improve' => 'Вы можете улучшить свой результат в течении ##ImproveTimeoutHours## ч ##ImproveTimeoutMinutes## мин.',
     'return_to_test' => 'Продолжить тест',
-    'save_my_grade' => 'Сохранить мою оценку'
+    'save_my_grade' => 'Сохранить мою оценку',
+    'level_up' => 'повысь свой уровень!',
+    'confirm_you_grade' => 'пройдите тест и подтвердите свой уровень!'
 ];
