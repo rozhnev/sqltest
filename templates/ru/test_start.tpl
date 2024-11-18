@@ -17,8 +17,7 @@
     </style> 
 
     <div class="container800-header">
-        <h1>Проверьте свои знания SQL!</h1>
-        
+        <h1>Проверьте свои знания SQL!</h1> 
     </div>
     <div class="container800-section">
         <p>Наш тест состоит из 13 заданий разных уровней сложности, выбранных из базы заданий сайта случайным образом. Сложность заданий устанавливается по результатам голосования пользователей сайта.</p>
@@ -67,7 +66,7 @@
         </div>
     </div>
     <div class="container800-section">
-        {if $Logged}
+        {if $User->logged()}
             {if isset($LastTest)}
                 {if $LastTest.closed}
                     {if $LastTest.rate eq 1}

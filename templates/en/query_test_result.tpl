@@ -14,14 +14,14 @@
                 {else} Unfortunately, your result is a little low of the record. You have something to work on! {/if}
             {/if}
             </div>
-        {if $Logged}
+        {if $User->logged()}
             <div>
                 <button class="button green" onClick="showSolutions({$QuestionID})">Show me other solutions!</button>
             </div>
         {/if}
      {/if}
      </div>
-     {if !$Logged}
+     {if !$User->logged()}
         <p class="question-action">
             To save your progress and be able to see other solutions, please <a href="" onClick="toggleLoginWindow(); return false;">login</a>
         </p>

@@ -335,6 +335,16 @@ class User
     }
 
     /**
+     * Return User's grade
+     *
+     * @return int
+     */
+    public function grade(): int
+    {
+        return isset($this->grade);
+    }
+
+    /**
      * Set and return User admin status
      *
      * @return bool
