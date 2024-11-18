@@ -103,9 +103,7 @@
                             {translate}keep_going{/translate}
                         {/if}
                     </p>
-                    {$grades = ['Intern','Junior','Middle','Senior']}
-                    {assign var="Grade" value="{$grades[$UserGrade-1]}"}
-                    <button class="button green" onClick="location.href = '/{$Lang}/test/start';">{$Grade}, {translate}check_your_skills{/translate}</button>
+                    <button class="button green" onClick="location.href = '/{$Lang}/test/start';">{$User->grade()}, {translate}check_your_skills{/translate}</button>
                 {else}
                     <p>{translate}user_solutions_count_not_logged{/translate}</p>
                     <button class="button blue" onClick="toggleLoginWindow()">{translate}top_menu_login{/translate}</button>

@@ -30,6 +30,8 @@ class User
     private $grade;
     private $graded_at;
     private $admin = false;
+
+    private $grades = [ 1 => 'Intern', 2 => 'Junior', 3 => 'Middle', 4 => 'Senior'];
     /**
      * User current path
      *
@@ -337,11 +339,11 @@ class User
     /**
      * Return User's grade
      *
-     * @return int
+     * @return string
      */
-    public function grade(): int
+    public function grade(): ?string
     {
-        return isset($this->grade);
+        return $this->grade ? $this->grades[$this->grade] : null;
     }
 
     /**
