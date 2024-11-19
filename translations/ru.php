@@ -74,6 +74,7 @@ $translations = [
     'question_action_check_answers' => 'Проверить!',
     'question_action_next' => 'Далее',
     'question_action_next_title' => 'Следующее задание',
+    'question_action_previous_title' => 'Предыдущее задание',
     'user_solutions_count' => 'Откройте для себя более <span style="font-weight:bold; color: #2EA043 !important;">##QuestionsCountRounded##</span> уникальных заданий.',
     'user_solutions_count_logged' => '##YouHaveSolved## <span style="font-weight:bold;  color: #2EA043 !important;">##SolvedQuestionsCount##</span> из них. ',
     'user_solutions_count_not_logged' => 'Войдите, чтобы сохранить свой прогресс.',

@@ -73,6 +73,7 @@ $translations = [
     'question_action_check_answers' => 'Check answers',
     'question_action_next' => 'Next',
     'question_action_next_title' => 'Next task',
+    'question_action_previous_title' => 'Previous task',
     'user_solutions_count' => 'Explore over <span style="font-weight:bold; color: #2EA043 !important;">##QuestionsCountRounded##</span> diverse tasks on our platform.',
     'user_solutions_count_logged' => '##YouHaveSolved## <span style="font-weight:bold;  color: #2EA043 !important;">##SolvedQuestionsCount##</span> of them. ',
     'user_solutions_count_not_logged' => 'Log in to save your progress.',
