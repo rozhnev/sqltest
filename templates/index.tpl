@@ -16,9 +16,6 @@
                     <div class="question-title">
                         <div class="question-level rate{$Question.rate}" title="{$Question.question_rate|default:'Not rated yet'}"></div>
                         <span title="({$QuestionID})">{translate}question_title{/translate}&nbsp;{$Question.number}:</span>
-                        {if $LoggedAsAdmin}
-                            <a href="/admin/question/{$NextQuestionId}" title="Edit" style="color:#333">&#9998;</a>
-                        {/if}
                         <span class="question-dates">
                             {if $Question.solved_date}
                                 {translate}question_solved_at{/translate}: {$Question.solved_date}
@@ -27,6 +24,11 @@
                             {/if}
                         </span>
                     </div>
+                    {if $LoggedAsAdmin}
+                        <div class="question-navigate" style="border-right: 1px solid var(--text-block-border-color);">
+                            <a href="/admin/question/{$QuestionID}" title="Edit" style="color:white; text-decoration: none;"><i>✎</i></a>
+                        </div>
+                    {/if}
                     {if $PreviousQuestionId}
                         <div class="question-navigate" style="border-right: 1px solid var(--text-block-border-color);">
                             <a href="/{$Lang}/question/{$Question.category_sef}/{$PreviousQuestionId}" title="{translate}question_action_previous_title{/translate}">
@@ -41,6 +43,7 @@
                             </a>
                         </div>
                     {/if}
+
                 </div>
                 <div class="question">
                     {$Question.task}
