@@ -36,11 +36,11 @@ class Question
      *
      * @return array
      */
-    public function getData(): array 
+    public function getData(): ?array 
     {
         $stmt = $this->dbh->prepare("SELECT * FROM questions WHERE id = ?");
         $stmt->execute([$this->id]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
     }
     /**
      * Returns question task for provided language

@@ -12,9 +12,9 @@ $pathParts = explode('/', $path);
 $db         = '';
 $questionID = '';
 
-if (isset($pathParts[0]) && $pathParts[0] === 'question') {
+if (isset($pathParts[1]) && $pathParts[1] === 'question') {
     $action     = 'question';
-    $questionID = $pathParts[1] ?? '';
+    $questionID = $pathParts[2] ?? '';
 } elseif (isset($pathParts[0]) && $pathParts[0] === 'translate') {
     $action     = 'translate';
 }
@@ -53,11 +53,12 @@ switch ($action) {
 };
 
 
-// var_dump($user);
+Localizer::init('en');
+$smarty->registerPlugin('block', 'translate', array('Localizer', 'translate'), true);
 $smarty->assign('Logged', $user->logged());
 $smarty->assign('Admin', $user->isAdmin());
-$smarty->setTemplateDir('../templates/admin');
+$smarty->setTemplateDir('../templates');
 $smarty->assign('Lang', 'en');
 $smarty->assign('DB', 'sakila');
 $smarty->assign('QuestionID', '0');
-$smarty->display('index.tpl');
+$smarty->display('admin.tpl');
