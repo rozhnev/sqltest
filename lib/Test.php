@@ -206,7 +206,7 @@ class Test
             JOIN test_questions ON test_questions.question_id = questions.id AND test_id = :test_id
             ) SELECT 
                 question_data.*,
-                tests.closed_at,
+                to_char(tests.closed_at, 'YYYY-MM-DD HH24:II:SSOF') closed_at,
                 (exists (select true from answers where answers.question_id = question_data.question_id)) have_answers
             FROM question_data 
             JOIN tests ON tests.id = question_data.test_id
