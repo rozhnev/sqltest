@@ -436,7 +436,7 @@ switch ($action) {
 
             $question = new Question($dbh, $questionID);
             $checkResult = $question->checkAnswers($answers);
-            $smarty->assign('AnswerResult', $checkResult);
+            $smarty->assign('QueryTestResult', $checkResult);
             $test->saveQuestionAttempt($questionID, $checkResult, $answers);
         }
 
