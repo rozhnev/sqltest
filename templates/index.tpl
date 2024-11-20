@@ -9,7 +9,18 @@
             {include file='top-menu.tpl' path="/question/{$Question.category_sef}/{$Question.question_sef}"}
         {/if}
         {include file='menu.tpl'}
-        {include file='splitter.tpl'}
+        <div class="splitter">
+            <div class="pointer-hand" onClick="toggleInfoPanel(); return false;" title="{translate}hide_right_panel{/translate}">
+                <svg height="16" width="16">
+                    <polygon points="1,1 1,14 14,8" fill="white"/>
+                </svg>
+            </div>
+            <div class="pointer-hand hidden" onClick="toggleInfoPanel(); return false;" title="{translate}show_right_panel{/translate}">
+                <svg height="16" width="16">
+                    <polygon points="15,1 15,14 2,8" fill="white"/>
+                </svg>
+            </div>
+        </div>
         <div class="main">
             <div class="question-wrapper">
                 <div class="question-title-bar" style="display: flex;">
