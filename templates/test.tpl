@@ -29,7 +29,7 @@
                 <span>{translate}test_time_to_complete{/translate}: &nbsp;</span>
                 <span id="test-timer-time"></span>
             </div>
-            <span style="padding-bottom: 1em;">Выполнено задач: {$TestData.solved_questions_count} из {$TestData.questions_count}</span>
+            <span style="padding-bottom: 1em;">{translate}tasks_completed{/translate}: {$TestData.solved_questions_count} из {$TestData.questions_count}</span>
         </div>
 
         <div style="display: flex; align-items: center; justify-content: center; margin-top: 1em;">
