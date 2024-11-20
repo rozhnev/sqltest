@@ -17,7 +17,7 @@
                     <div class="container800-section">
                     {if $TestResult.ok}
                         {$grades = ['','Intern','Junior','Middle','Senior']}
-                        {assign var="Grade" value="{$grades[$TestResult.grade-1]}"}
+                        {assign var="Grade" value="{$grades[$TestResult.grade]}"}
                         <h2>{translate}test_done_with_grade{/translate}</h2>
                         <div style="display: flex;">
                         <img src="/images/user_grade_{$Grade}.jpeg" title="{$Grade}" style="margin: 0 auto;" alt="Your grade is {$Grade}">
