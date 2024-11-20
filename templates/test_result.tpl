@@ -29,10 +29,10 @@
                                     {assign var="ImproveTimeoutMinutes" value="{$TestData.time_to_end % 60}"}
                                     {translate}test_improve{/translate}
                                     <div style="text-align: center; margin: 36px;">
-                                        <a style="display:inline-block;width:240px; color: white;" href="/{$Lang}/test/{$TestData.id}" title="Начать тест" class="button green">{translate}return_to_test{/translate}</a>
+                                        <a style="display:inline-block;width:240px; color: white;" href="/{$Lang}/test/{$TestData.id}" title="{translate}return_to_test{/translate}" class="button green">{translate}return_to_test{/translate}</a>
                                     </div>
                                     <div style="text-align: center; margin: 36px;">
-                                        <a style="display:inline-block;width:240px; color: white;" href="/{$Lang}/test/{$TestData.id}/grade" title="Начать тест" class="button blue">{translate}save_my_grade{/translate}</a>
+                                        <a style="display:inline-block;width:240px; color: white;" href="/{$Lang}/test/{$TestData.id}/grade" title="{translate}save_my_grade{/translate}" class="button blue">{translate}save_my_grade{/translate}</a>
                                     </div>
                                 {/if}
                             {else}
@@ -44,11 +44,11 @@
                                     {assign var="NextTestTry" value="{$TestData.next_test_in}"}
                                     {translate}you_can_try_again{/translate} 
                                     <div style="text-align: center; margin: 36px;">
-                                        <a style="display:inline-block;width:240px; color: white;" href="/{$Lang}/question/db-theory/what-is-sql" title="Start quiz" class="button green">{translate}continue_practice{/translate}</a>
+                                        <a style="display:inline-block;width:240px; color: white;" href="/{$Lang}/question/db-theory/what-is-sql" title="{translate}continue_practice{/translate}" class="button green">{translate}continue_practice{/translate}</a>
                                     </div>
                                 {else}
                                     <div style="text-align: center; margin: 36px;">
-                                        <a style="display:inline-block;width:240px; color: white;" href="/{$Lang}/test/{$TestData.id}" title="Начать тест" class="button green">{translate}return_to_test{/translate}</a>
+                                        <a style="display:inline-block;width:240px; color: white;" href="/{$Lang}/test/{$TestData.id}" title="{translate}return_to_test{/translate}" class="button green">{translate}return_to_test{/translate}</a>
                                     </div>
                                 {/if}
                             {/if}
