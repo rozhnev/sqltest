@@ -113,7 +113,7 @@
     </div>
     <script>
         const showTimer = ()=>{ldelim}
-            const time = Math.floor((new Date('{$Question.closed_at}') - new Date())/60000) - ((new Date()).getTimezoneOffset());
+            const time = Math.floor((new Date('{$Question.closed_at}') - new Date())/60000) + ((new Date()).getTimezoneOffset());
             if (time > 0) {ldelim}
                 const minutes = time % 60;
                 const hours = (time - minutes) / 60;
