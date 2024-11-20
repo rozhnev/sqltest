@@ -9,6 +9,8 @@ $translations = [
     'books_page_title' => 'Learning SQL: The Best Books for Beginners and Profi',
     'books_page_description' => 'Want to master the SQL language and become a sought-after database specialist? We have compiled a selection of the most useful books for you that will help you take your first steps in the world of SQL.',
     'empty_query_result' => 'Your query is empty.',
+    'show_right_panel' => 'Show panel',
+    'hide_right_panel' => 'Hide panel',
     'error_message' => 'Oops! Something went wrong, but don\'t worry we have many other tasks <a href="/en/" target="_self">here</a>',
     'footer_about' => 'About',
     'footer_ask_in_chat' => 'Ask in our chat!',
