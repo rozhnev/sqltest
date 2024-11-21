@@ -7,7 +7,7 @@
         </p>
     </div>
 
-    <div class="container800-section>
+    <div class="container800-section">
         <h2>Por que apoiar?</h2>
         <p>Com o seu apoio, podemos:</p>
         <ul>
