@@ -27,8 +27,11 @@ class User
      * @var string|null
      */
     private $id;
-
+    private $grade;
+    private $graded_at;
     private $admin = false;
+
+    private $grades = [ 1 => 'Intern', 2 => 'Junior', 3 => 'Middle', 4 => 'Senior'];
     /**
      * User current path
      *
@@ -62,11 +65,28 @@ class User
                 return $this->loginVK($_GET['payload']);
             case 'linkedin':
                 return $this->loginLinkedin($_GET['code']);
+            case 'session':
+                return $this->loginSession($_SESSION);
             default:
                 throw new Exception('Not supported login provider'); 
         }
     }
-
+    public function loginSession(array $session): bool
+    {
+        if (($session && isset($session['user_id']))) {
+            $stmt = $this->dbh->prepare("SELECT id, grade, graded_at, admin FROM users WHERE id = :user_id;");
+            $stmt->execute([':user_id' => $session['user_id']]);
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($user) {
+                $this->id = $user['id'];
+                $this->grade = $user['grade'];
+                $this->graded_at = $user['graded_at'];
+                $this->admin = $user['admin'];
+                return true;
+            }
+        }
+        return false;
+    }
     /**
      * Proceed Linkedin login with code
      *
@@ -317,6 +337,16 @@ class User
     }
 
     /**
+     * Return User's grade
+     *
+     * @return string
+     */
+    public function grade(): ?string
+    {
+        return $this->grade ? $this->grades[$this->grade] : null;
+    }
+
+    /**
      * Set and return User admin status
      *
      * @return bool
@@ -511,5 +541,22 @@ class User
         $stmt = $this->dbh->prepare("SELECT COUNT(question_id) FROM user_questions WHERE user_id = :user_id and solved_at is not null;");
         $stmt->execute([':user_id' => $this->id]);
         return $stmt->fetchColumn(0);
+    }
+
+    public function getLastTest(): ?array
+    {
+        $stmt = $this->dbh->prepare("
+            SELECT id, created_at, closed_at, (closed_at is not null and closed_at <= current_timestamp) closed, rate 
+            FROM tests 
+            WHERE user_id = :user_id order by created_at desc limit 1;
+        ");
+        $stmt->execute([':user_id' => $this->id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
+    }
+
+    public function saveGrade(int $grade): void
+    {
+        $stmt = $this->dbh->prepare("UPDATE users SET grade = :grade, graded_at = CURRENT_TIMESTAMP WHERE id = :user_id;");
+        $stmt->execute([':user_id' => $this->id, ':grade' => $grade]);
     }
 }

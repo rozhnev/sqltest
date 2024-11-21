@@ -1,5 +1,5 @@
-<div class="donation-container">
-    <div class="donation-header">
+<div class="container800">
+    <div class="container800-header">
         <h1>Support SQLtest.online</h1>
         <p>
             Thank you for considering supporting SQLtest.online! Your contribution helps us maintain and improve the platform, 
@@ -7,7 +7,7 @@
         </p>
     </div>
 
-    <div class="donation-section">
+    <div class="container800-section">
         <h2>Why Support Us?</h2>
         <p>
             Your support enables us to:
@@ -21,7 +21,7 @@
         </ul>
     </div>
 
-    <div class="donation-section">
+    <div class="container800-section">
         <h2>Ways to Support:</h2>
         <div class="donation-methods">
             <div class="donation-method">

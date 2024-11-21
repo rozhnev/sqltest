@@ -9,7 +9,7 @@
         ['És demais! Pronto!', 'Não se esqueça de <a href="" onClick="toggleLoginWindow(); return false;">iniciar sessão</a> para manter todo o seu progresso são e salvo. 😎']
     ] }
     {$phrases[$phrase_id][0]}
-    {if !$Logged}
+    {if !$User->logged()}
         <p class="question-action">
             {$phrases[$phrase_id][1]}
         </p>

@@ -21,37 +21,6 @@ $mobileView =  (
     //|| parse_url($_SERVER['HTTP_HOST'])['host'] === 'm.sqltest.local' 
 );
 
-function getUserOSLanguage() {
-    $lang = 'en';
-    $langs = array();
-    if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
-        // Break up string into pieces (languages and q factors)
-        preg_match_all(
-            '/([a-z]{1,8}(-[a-z]{1,8})?)\s*(;\s*q\s*=\s*(1|0\.[0-9]+))?/i',
-            $_SERVER['HTTP_ACCEPT_LANGUAGE'],
-            $lang_parse
-        );
-        if (count($lang_parse[1])) {
-            // Create a list like 'en' => 0.8
-            $langs = array_combine($lang_parse[1], $lang_parse[4]);
-            // Set default to 1 for any without q factor
-            foreach ($langs as $lang => $val) {
-                if ($val === '') $langs[$lang] = 1;
-            }
-            // Sort list based on value
-            arsort($langs, SORT_NUMERIC);
-        }
-    }
-    // Extract most important (first)
-    foreach ($langs as $lang => $val) { break; }
-    // If complex language, simplify it
-    if (stristr($lang, "-")) {
-        $tmp = explode("-", $lang);
-        $lang = $tmp[0];
-    }
-    return $lang;
-}
-
 $path = isset($_SERVER['PATH_INFO']) ? trim($_SERVER['PATH_INFO'], '/') : trim($_SERVER['PHP_SELF'], '/');
 $pathParts = explode('/', $path);
 $db         = '';
@@ -103,6 +72,34 @@ if (isset($pathParts[0]) && $pathParts[0] === 'login') {
     $lang       = $params['lang'];
     $action     = 'solution-' . $params['action'];
     $solutionID = $params['solutionID'];
+} elseif (preg_match("@(?<lang>$languge_codes_regexp)/(?<action>donate)@i", $path, $params)) {
+    $lang       = $params['lang'];
+    $action     = $params['action'];
+} elseif (preg_match("@(?<lang>$languge_codes_regexp)/test/start@i", $path, $params)) {
+    $lang       = $params['lang'];
+    $action     = 'test_start';
+} elseif (preg_match("@(?<lang>$languge_codes_regexp)/test/create@i", $path, $params)) {
+    $lang       = $params['lang'];
+    $action     = 'test_create';
+} elseif (preg_match("@(?<lang>$languge_codes_regexp)/test/(?<testId>[a-z0-9-]+)/grade@i", $path, $params)) {
+    $lang       = $params['lang'];
+    $action     = 'user_grade';
+    $testId = $params['testId'];    
+} elseif (preg_match("@(?<lang>$languge_codes_regexp)/test/(?<testId>[a-z0-9-]+)/result@i", $path, $params)) {
+    $lang       = $params['lang'];
+    $action     = 'test_result';
+    $testId = $params['testId'];
+} elseif (preg_match("@(?<lang>$languge_codes_regexp)/test/(?<testId>[a-z0-9-]+)/check/(?<questionID>\d+)@i", $path, $params)) {
+    // MUST BE BEFORE test action
+    $lang       = $params['lang'];
+    $action     = 'test-check';
+    $testId = $params['testId'];
+    $questionID = $params['questionID'];
+} elseif (preg_match("@(?<lang>$languge_codes_regexp)/test/(?<testId>[a-z0-9-]+)/?(?<questionID>\d+)?@i", $path, $params)) {
+    $lang       = $params['lang'];
+    $action     = 'test';
+    $testId = $params['testId'];
+    $questionID = $params['questionID'] ?? 0;
 } elseif (
     preg_match("@(?<lang>$languge_codes_regexp)/question/(?<questionCategory>sakila|employee)/(?<questionID>\d+)@i", $path, $params) ||
     preg_match("@(?<lang>$languge_codes_regexp)/(?<questionCategory>sakila|employee)/(?<questionID>\d+)@i", $path, $params)
@@ -126,7 +123,7 @@ if (isset($pathParts[0]) && $pathParts[0] === 'login') {
     if (isset($pathParts[0]) && in_array($pathParts[0], $languge_codes)) {
         $lang = $pathParts[0];
     } else {
-        $lang = getUserOSLanguage();
+        $lang = Helper::getUserOSLanguage($_SERVER);
     }
     $questionID = $pathParts[2] ?? 1;
     $action     = $pathParts[3] ?? 'question';
@@ -140,8 +137,8 @@ session_start([
     'cookie_lifetime' => 86400,
 ]);
 
-if (($_SESSION && $_SESSION['user_id'])) {
-    $user->set($_SESSION['user_id'], $_SESSION["admin"]);
+if ($_SESSION) {
+    $user->loginSession($_SESSION);
 }
 
 switch ($action) {
@@ -300,6 +297,151 @@ switch ($action) {
         session_destroy();
         header("location:/$lang/");
         die();
+    case 'test_start':
+        if ($user->logged()) {
+            $userLastTest = $user->getLastTest();
+            $smarty->assign('LastTest', $userLastTest);
+        }
+        $template = "test_start.tpl";
+        break;
+    case 'test_create':
+        if (!$user->logged()) {
+            header("Location: /$lang/test/start");
+            exit();
+        }
+        $test = new Test($dbh, $lang, $user);
+
+        $userTestId = $test->create();
+        header("Location: /$lang/test/$userTestId");
+        exit();
+    case 'user_grade':
+        if (!$user->logged()) {
+            header("Location: /$lang/test/start");
+            exit();
+        }
+        $test = new Test($dbh, $lang, $user);
+        $test->setId($testId);
+        if(!$test->belongsToUser($user)) {
+            header("HTTP/1.1 404 Moved Permanently");
+            $smarty->assign('ErrorMessage', 'You are not permiited to do this action.');
+            $template = "error.tpl";
+            break;
+        }
+        $testResult = $test->calculateResult();
+        if ($testResult['ok']) {
+            $user->saveGrade($testResult['grade']);
+        }
+        $smarty->assign('TestResult', $testResult);
+        $template = "user_grade.tpl";
+        break;
+    case 'test_result':
+        if (!$user->logged()) {
+            header("Location: /$lang/test/start");
+            exit();
+        }
+        $test = new Test($dbh, $lang, $user);
+        $test->setId($testId);
+        if(!$test->belongsToUser($user)) {
+            header("HTTP/1.1 404 Moved Permanently");
+            $smarty->assign('ErrorMessage', 'You are not permiited to do this action.');
+            $template = "error.tpl";
+            break;
+        }
+        $testData = $test->getData();
+        $testEnd   = new DateTime($testData['closed_at']);
+        $testEnd -> add(new DateInterval('P1M0D'));
+        $testData['next_test_in'] = $testEnd->diff(new DateTime())->days;
+
+        $testResult = $test->calculateResult();
+        $smarty->assign('TestData', $testData);
+        $smarty->assign('TestResult', $testResult);
+
+        $template = "test_result.tpl";
+        break;
+    case 'test':
+        if (!$user->logged()) {
+            header("Location: /$lang/test/start");
+            exit();
+        }
+        $test = new Test($dbh, $lang, $user);
+        $test->setId($testId);
+        if(!$test->belongsToUser($user)) {
+            header("HTTP/1.1 404 Moved Permanently");
+            $smarty->assign('ErrorMessage', 'You are not permiited to do this action.');
+            $template = "error.tpl";
+            break;
+        }
+        if (!$questionID) $questionID = $test->getFirstUnsolvedQuestionId();
+
+        $question = new Question($dbh, $questionID);
+
+        $questionData = $test->getQuestionData($questionID);
+        $questionCategoryID = $questionData['category_id'];
+        if ($questionData['have_answers']) {
+            $questionData['answers'] = $question->getAnswers($questionCategoryID, $lang, $user->getId());
+            $questionData['last_query'] = json_decode($questionData['last_query']??'[]', true);
+        }
+        $smarty->assign('TestData', $test->getData());
+        $smarty->assign('TestId', $testId);
+        $smarty->assign('Question', $questionData);
+        $smarty->assign('NextQuestionId', $questionData['next_question_id']);
+        $smarty->assign('PreviousQuestionId', $questionData['previous_question_id']);
+        $smarty->assign('QuestionCategoryID', $questionCategoryID);
+        $db = $questionData['db_template'];
+        $smarty->assign('DBMS', $questionData['dbms']);
+        $smarty->assign('Questionnire', $test->getQuestionnire());
+        $template = "test.tpl";
+        break;
+    case 'test-check':
+        if (!$user->logged()) {
+            header("Location: /$lang/test/start");
+            exit();
+        }
+        $test = new Test($dbh, $lang, $user);
+        $test->setId($testId);
+        $smarty->assign('TestId', $testId);
+        if(!$test->belongsToUser($user)) {
+            header("HTTP/1.1 404 Moved Permanently");
+            $smarty->assign('ErrorMessage', 'You are not permiited to do this action.');
+            $template = "error.tpl";
+            break;
+        }
+        $template = "check_test_solution.tpl";
+
+        $attemptStatus = $test->getQuestionAttemptStatus($questionID);
+        if (!$attemptStatus['ok']) {
+            $smarty->assign('QueryTestResult', $attemptStatus);
+            break;
+        }
+
+        $question = new Question($dbh, $questionID);
+
+        if (isset($_POST["query"])) {
+            $sql = $_POST["query"] ?? '';
+            $checkResult = $question->checkQuery($sql);
+            $smarty->assign('QueryTestResult', $checkResult);
+            if ($checkResult['ok']) {
+                $preparedQuery = $question->prepareQuery($sql);
+                $query = new Query($preparedQuery);
+                $jsonResult = $query->getResult($question->getDB(), 'json');
+                $checkResult = $question->checkQueryResult($jsonResult);
+                $smarty->assign('QueryTestResult', $checkResult);
+                $smarty->assign('QueryBestCost', $question->getBestCost());
+            }
+            $test->saveQuestionAttempt($questionID, $checkResult, $sql);
+        }
+
+        if (isset($_POST["answers"])) {
+            $answers = $_POST["answers"] ?? '[]';
+
+            $question = new Question($dbh, $questionID);
+            $checkResult = $question->checkAnswers($answers);
+            $smarty->assign('QueryTestResult', $checkResult);
+            $test->saveQuestionAttempt($questionID, $checkResult, $answers);
+        }
+
+        if (!$checkResult['ok']) header( 'HTTP/1.1 418 BAD REQUEST' );     
+        break;
     case 'question':
         try {
             $questionnire = new Questionnire($dbh, $lang);
@@ -357,12 +499,13 @@ switch ($action) {
 }
 
 Localizer::init($lang);
+$smarty->registerPlugin("modifier", "array_key_exists", "array_key_exists");
 $smarty->registerPlugin('block', 'translate', array('Localizer', 'translate'), true);
 
 $smarty->assign('VERSION', $env['VERSION'] ?? 0);
 $smarty->assign('MobileView', $mobileView);
 $smarty->assign('Action', $action);
-$smarty->assign('Logged', $user->logged());
+$smarty->assign('User', $user);
 $smarty->assign('LoggedAsAdmin', $user->isAdmin());
 $smarty->assign('Lang', $lang);
 $smarty->assign('Languages', $languages);

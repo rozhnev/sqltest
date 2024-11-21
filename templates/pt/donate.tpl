@@ -1,5 +1,5 @@
-<div class="donation-container">
-    <div class="donation-header">
+<div class="container800">
+    <div class="container800-header">
         <h1>Apoie o SQLtest.online</h1>
         <p>
             Obrigado por considerar apoiar o SQLtest.online! Sua contribuição nos ajuda a manter e melhorar a plataforma, 
@@ -7,7 +7,7 @@
         </p>
     </div>
 
-    <div class="donation-section">
+    <div class="container800-section>
         <h2>Por que apoiar?</h2>
         <p>Com o seu apoio, podemos:</p>
         <ul>
@@ -20,7 +20,7 @@
         </ul>
     </div>
 
-    <div class="donation-section">
+    <div class="container800-section">
         <h2>Formas de Apoio:</h2>
         <div class="donation-methods">
             <div class="donation-method">

@@ -1,6 +1,38 @@
 <?php
 class Helper 
 {
+    public static function getUserOSLanguage(array $SERVER): string
+    {
+        $lang = 'en';
+        $langs = array();
+        if (isset($SERVER['HTTP_ACCEPT_LANGUAGE'])) {
+            // Break up string into pieces (languages and q factors)
+            preg_match_all(
+                '/([a-z]{1,8}(-[a-z]{1,8})?)\s*(;\s*q\s*=\s*(1|0\.[0-9]+))?/i',
+                $SERVER['HTTP_ACCEPT_LANGUAGE'],
+                $lang_parse
+            );
+            if (count($lang_parse[1])) {
+                // Create a list like 'en' => 0.8
+                $langs = array_combine($lang_parse[1], $lang_parse[4]);
+                // Set default to 1 for any without q factor
+                foreach ($langs as $lang => $val) {
+                    if ($val === '') $langs[$lang] = 1;
+                }
+                // Sort list based on value
+                arsort($langs, SORT_NUMERIC);
+            }
+        }
+        // Extract most important (first)
+        foreach ($langs as $lang => $val) { break; }
+        // If complex language, simplify it
+        if (stristr($lang, "-")) {
+            $tmp = explode("-", $lang);
+            $lang = $tmp[0];
+        }
+        return $lang;
+    }
+    
     /**
      * Returns referral link html code according language and view mode (mobile/desktop)
      *

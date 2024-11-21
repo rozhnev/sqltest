@@ -9,7 +9,7 @@
         ['You rock! You\'re all done!', 'Don\'t forget to <a href="" onClick="toggleLoginWindow(); return false;">log in</a> to keep all your progress safe and sound. 😎']
     ] }
     {$phrases[$phrase_id][0]}
-    {if !$Logged}
+    {if !$User->logged()}
         <p class="question-action">
             {$phrases[$phrase_id][1]}
         </p>

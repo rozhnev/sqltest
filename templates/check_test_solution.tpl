@@ -1,9 +1,6 @@
 {if $QueryTestResult.ok}
     <div style="font-size: larger; margin-bottom: 10px;">Great! You have completed the task!</div>
-    <div style="display: flex;
-    flex-flow: row;
-    flex-wrap: wrap;
-    line-height: 1.5em;">
+    <div style="display: flex; flex-flow: row; flex-wrap: wrap; line-height: 1.5em;">
         {if $QueryTestResult.cost > 0}
             <div style="flex: 2 1;">
             The cost of executing your query is {$QueryTestResult.cost} <span style="font-size: small;">(the lower the cost, the more effective the query)</span>
@@ -14,34 +11,13 @@
                 {else} Unfortunately, your result is a little low of the record. You have something to work on! {/if}
             {/if}
             </div>
-        {if $User->logged()}
-            <div>
-                <button class="button green" onClick="showSolutions({$QuestionID})">Show me other solutions!</button>
-            </div>
         {/if}
-     {/if}
-     </div>
-     {if !$User->logged()}
-        <p class="question-action">
-            To save your progress and be able to see other solutions, please <a href="" onClick="toggleLoginWindow(); return false;">login</a>
-        </p>
-    {else}
-        <div class="question-rate-panel">
-            <div style="min-width:280px;">Before starting the next test, please rate the difficulty of this task:</div>
-            <div class="buttons">
-                <button class="button-small" onclick="rateQuestion({$QuestionID}, 1)"><span class="question-level rate1"></span>&nbsp;Too easy</button>
-                <button class="button-small" onclick="rateQuestion({$QuestionID}, 2)"><span class="question-level rate2"></span>&nbsp;Simple</button>
-                <button class="button-small" onclick="rateQuestion({$QuestionID}, 3)"><span class="question-level rate3"></span>&nbsp;Normal</button>
-                <button class="button-small" onclick="rateQuestion({$QuestionID}, 4)"><span class="question-level rate4"></span>&nbsp;Difficult</button>
-                <button class="button-small" onclick="rateQuestion({$QuestionID}, 5)"><span class="question-level rate5"></span>&nbsp;Very hard</button>
-            </div>
-        </div>
-    {/if}
-    {if isset($ReferralLink)}
-        <div class="referral_link" style="font-size:large; margin-top: 1em; padding: 1em; border: solid 1px; border-radius: 3px;">
-            {$ReferralLink}
-        </div>
-    {/if}
+    </div>
+{elseif array_key_exists('hints', $QueryTestResult) && array_key_exists('maxAttemptsReached', $QueryTestResult.hints)}
+    {assign var="NextQuestion" value="{$QueryTestResult.nextQuestion}"}
+    {translate}maximum_attempts_reached{/translate}{if $QueryTestResult.nextQuestion} {translate}go_to_next_task{/translate}{/if}
+{elseif array_key_exists('hints', $QueryTestResult) && array_key_exists('timeOut', $QueryTestResult.hints)}
+    {translate}test_time_out{/translate} {translate}go_to_rate{/translate}
 {else}
      Unfortunately incorrect.
      {if array_key_exists('hints', $QueryTestResult) }
@@ -67,9 +43,6 @@
         {/if}
         {if array_key_exists('emptyQuery', $QueryTestResult.hints) }
             <p>Hint: your query is empty.</p>
-        {/if}
-        {if array_key_exists('wrongQuery', $QueryTestResult.hints) }
-            <p>Hint: your request does not meet the requirements described in the task. <a href="#" onclick="getHelp('ru', {$QuestionID}); return false;">Use the hint</a> and try to rewrite it.</p>
         {/if}
      {/if}
     Try again.

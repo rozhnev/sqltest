@@ -1,29 +1,6 @@
 {include file='short-header.tpl'}
-<style>
-        .donation-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-        }
-        
-        .donation-header {
-            text-align: center;
-            margin-bottom: 2rem;
-            /* color: #2c3e50; */
-            color: var(--regualr-text-color);
-        }
-        
-        .donation-section {
-            background: #f8f9fa;
-            border-radius: 10px;
-            padding: 1rem 2rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            color: #333;
-        }
-        
+<style>             
+       
         .donation-methods {
             display: flex;
             flex-wrap: wrap;
@@ -56,9 +33,6 @@
             color: #79c0ff;
         }
         @media (max-width: 768px) {
-            .donation-container {
-                padding: 0.5rem;
-            }
             .donation-method {
                 flex-basis: 100% !important; /* на мобильных колонки занимают всю ширину */
             }

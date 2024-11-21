@@ -1,5 +1,5 @@
-<div class="donation-container">
-    <div class="donation-header">
+<div class="container800">
+    <div class="container800-header">
         <h1>Поддержка SQLtest.online</h1>
         <p>
             Спасибо, что рассматриваете возможность поддержать SQLtest.online! 
@@ -7,7 +7,7 @@
         </p>
     </div>
 
-    <div class="donation-section">
+    <div class="container800-section">
         <h2>Почему важна ваша поддержка?</h2>
         <p>
             Благодаря вашей поддержке мы можем:
@@ -21,7 +21,7 @@
         </ul>
     </div>
 
-    <div class="donation-section">
+    <div class="container800-section">
         <h2>Способы поддержки:</h2>
         <div class="donation-methods">
             <div class="donation-method">

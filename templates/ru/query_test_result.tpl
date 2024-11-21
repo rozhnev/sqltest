@@ -15,13 +15,13 @@
             {/if}
             </div>
         {/if}
-        {if $Logged}
+        {if $User->logged()}
             <div>
                 <button class="button green" onClick="showSolutions({$QuestionID})">Покажите мне другие решения!</button>
             </div>
         {/if}
     </div>
-    {if !$Logged}
+    {if !$User->logged()}
         <p class="question-action">
             Для сохранения вашего прогресса и возможности увидеть другие варианты решения выполните <a href="" onClick="toggleLoginWindow(); return false;">вход на сайт</a>
         </p>

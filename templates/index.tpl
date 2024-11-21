@@ -108,7 +108,7 @@
             <div class="text-block user-solutions-count">
                 {assign var="QuestionsCountRounded" value="{floor(($QuestionsCount - 1)/10) * 10}"}
                 <p>{translate}user_solutions_count{/translate}</p>
-                {if $Logged}
+                {if $User->logged()}
                     {if $SolvedQuestionsCount < ($QuestionsCount/2)}
                         {assign var="YouHaveSolved" value="{translate}you_have_solved{/translate}"}
                     {else}
@@ -120,6 +120,15 @@
                             {translate}keep_going{/translate}
                         {/if}
                     </p>
+                    <button class="button green" onClick="location.href = '/{$Lang}/test/start';">
+                        {if !$User->grade()}
+                            {translate}check_your_skills{/translate}
+                        {elseif $User->grade() == 'Senior'}
+                            {$User->grade()}, {translate}confirm_you_grade{/translate}
+                        {else}
+                            {$User->grade()}, {translate}level_up{/translate}
+                        {/if}
+                    </button>
                 {else}
                     <p>{translate}user_solutions_count_not_logged{/translate}</p>
                     <button class="button blue" onClick="toggleLoginWindow()">{translate}top_menu_login{/translate}</button>

@@ -11,6 +11,8 @@
                             {else}
                                 {translate}site_promo_question_task{/translate}
                             {/if}
+                        {elseif $Action === 'test'}
+                            {translate}site_promo_test{/translate}
                         {else}
                             {translate}site_promo{/translate}
                         {/if}
@@ -26,6 +28,8 @@
                     {else}
                         {translate}site_description_question_task{/translate}
                     {/if}
+                {elseif $Action === 'test'}
+                    {translate}site_description_test{/translate}
                 {else}
                     {translate}site_description{/translate}
                 {/if}
@@ -37,11 +41,6 @@
                 <a href="/{$Lang}/donate" target="_self" class="donate-btn shake" id="donate-btn">{translate}top_menu_donate{/translate}</a>
             </div>
             {include file='lang-switcher.tpl'}
-            {* {if $Logged}
-                <span class="login-button"><a href="/{$Lang}/logout" target="_self">{translate}top_menu_logout{/translate}</a></span>
-            {else}
-                <span class="login-button" onClick="toggleLoginWindow()">Login</span>
-            {/if} *}
         </div>
     </div>
 </div>
