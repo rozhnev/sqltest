@@ -8,12 +8,6 @@
             {/if}
             <div class="container3">
                 <div class="container800">
-                    {* <pre>
-                    {var_export($TestData)}
-                    </pre>
-                    <pre>
-                    {var_export($TestResult)}
-                    </pre> *}
                     <div class="container800-section">
                     {if $TestResult.ok}
                         {$grades = ['','Intern','Junior','Middle','Senior']}
