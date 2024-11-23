@@ -41,7 +41,7 @@ class Helper
      * @param  string $mode
      * @return string|null
      */
-    public static function getReferralLink(PDO $dbh, string $lang, string $mode): string
+    public static function getReferralLink(PDO $dbh, string $lang, string $mode): ?string
     {
         $stmt = $dbh->prepare(
             "SELECT referral_link AS referralLink 
