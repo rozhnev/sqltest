@@ -97,7 +97,7 @@
             {/if}
         {else}
             <h2><span class='warning'>
-                Эта страница недоступна для незарегистрированных пользователей. Пожалуйста, войдите, чтобы продолжить.
+                Тестирование доступно только для пользователей сайта. Войдите в свой аккаунт, чтобы продолжить.
             </span></h2>
             <div style="text-align: center; margin: 36px;">
                 <button class="button green" onClick="toggleLoginWindow()">Войти</button>
