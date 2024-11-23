@@ -203,7 +203,10 @@ function testQuery(lang, questionId) {
     })
     .then((async response=>{
         if (response.ok) {
-            [...document.getElementsByClassName("button green")].map(el=>el.classList.toggle("hidden"));
+            // [...document.getElementsByClassName("button green")].map(el=>el.classList.toggle("hidden"));
+            document.getElementById("testQueryBtn") && document.getElementById("testQueryBtn").classList.toggle("hidden");
+            document.getElementById("checkAnswersBtn") && document.getElementById("checkAnswersBtn").classList.toggle("hidden");
+            document.getElementById("nextTaskBtn") && document.getElementById("nextTaskBtn").classList.toggle("hidden");
         }
         return await response.text();
     }))

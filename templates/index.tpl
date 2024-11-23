@@ -85,7 +85,7 @@
                         onClick="checkAnswers('{$Lang}', {$QuestionID})">{translate}question_action_check_answers{/translate}</button>
                 {/if}
                 {if $NextQuestionId}
-                    <a href="/{$Lang}/question/{$Question.category_sef}/{$NextQuestionId}" title="{translate}question_action_next_title{/translate}" class="button green hidden">
+                    <a id="nextTaskBtn" href="/{$Lang}/question/{$Question.category_sef}/{$NextQuestionId}" title="{translate}question_action_next_title{/translate}" class="button green hidden">
                         {translate}question_action_next{/translate}
                     </a>
                 {/if}
