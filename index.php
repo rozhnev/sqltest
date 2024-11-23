@@ -222,7 +222,6 @@ switch ($action) {
             }
         }
         if (!$queryTestResult['ok']) header( 'HTTP/1.1 418 BAD REQUEST' );
-        $smarty->registerPlugin("modifier", "array_key_exists", "array_key_exists");
         $smarty->assign('ReferralLink', Helper::getReferralLink($dbh, $lang, $mobileView ? 'mobile' : 'desk'));
         $template = "$lang/query_test_result.tpl";
         break;
