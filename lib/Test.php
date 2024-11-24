@@ -362,17 +362,17 @@ class Test
                 $testResult['hints'][] = '2/3 of simple, normal, difficult & hard tasks done';
             }
 
-            if (
-                $testResult['solved_easy_questions'] === $testResult['easy_questions'] &&
-                $testResult['solved_simple_questions'] === $testResult['simple_questions'] &&
-                ($testResult['solved_normal_questions'] + $testResult['solved_difficult_questions'] + $testResult['solved_hard_questions']) > ($testResult['normal_questions'] + $testResult['difficult_questions'] + $testResult['hard_questions']) * 0.66
-            ) {
-                // solved all easy & simple + 2/3 of rest questions - Junior
-                $testResult['ok'] = true;
-                $testResult['grade']++;
-                $testResult['hints'][] = 'All simple tasks done';
-                $testResult['hints'][] = '2/3 of normal, difficult & hard tasks done';
-            }
+            // if (
+            //     $testResult['solved_easy_questions'] === $testResult['easy_questions'] &&
+            //     $testResult['solved_simple_questions'] === $testResult['simple_questions'] &&
+            //     ($testResult['solved_normal_questions'] + $testResult['solved_difficult_questions'] + $testResult['solved_hard_questions']) > ($testResult['normal_questions'] + $testResult['difficult_questions'] + $testResult['hard_questions']) * 0.66
+            // ) {
+            //     // solved all easy & simple + 2/3 of rest questions - Junior
+            //     $testResult['ok'] = true;
+            //     $testResult['grade']++;
+            //     $testResult['hints'][] = 'All simple tasks done';
+            //     $testResult['hints'][] = '2/3 of normal, difficult & hard tasks done';
+            // }
 
             if (
                 $testResult['solved_easy_questions'] === $testResult['easy_questions'] &&
@@ -396,7 +396,7 @@ class Test
         }
         
         // All questions solved with 1 attempt - promotion
-        if ($testResult['solved_attempts'] == $testResult['solved_questions']) {
+        if ($testResult['solved_attempts'] == $testResult['solved_questions'] && $testResult['grade'] < 4) {
             $testResult['grade']++;
             $testResult['hints'][] = 'All questions solved with 1 attempt';
         }
