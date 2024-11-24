@@ -493,6 +493,9 @@ window.onload = function() {
         if (event.ctrlKey && event.key === 'Enter') {
             runQuery(lang, questionId);
         }
+        if (event.shiftKey && event.key === 'Enter') {
+            testQuery(lang, questionId);
+        }
     });
 
     window.YaAuthSuggest.init(

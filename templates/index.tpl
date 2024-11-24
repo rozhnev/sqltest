@@ -73,13 +73,10 @@
                 <div class="code-wrapper" id="sql-code" name="sql-code">{$Question.last_query}</div>
             {/if}
             <div class="code-buttons">
-                <button class="button" id="getHelpBtn"
-                    onClick="getHelp('{$Lang}', {$QuestionID})">{translate}question_action_get_help{/translate}</button>
+                <button class="button" id="getHelpBtn" onClick="getHelp('{$Lang}', {$QuestionID})">{translate}question_action_get_help{/translate}</button>
                 {if !isset($Question.answers)}
-                    <button class="button" id="runQueryBtn" onClick="runQuery('{$Lang}', {$QuestionID})"
-                        title="CTRL+Enter">{translate}question_action_run_query{/translate}</button>
-                    <button class="button green" id="testQueryBtn"
-                        onClick="testQuery('{$Lang}', {$QuestionID})">{translate}question_action_test_query{/translate}</button>
+                    <button class="button" id="runQueryBtn" onClick="runQuery('{$Lang}', {$QuestionID})" title="Ctrl+Enter">{translate}question_action_run_query{/translate}</button>
+                    <button class="button green" id="testQueryBtn" onClick="testQuery('{$Lang}', {$QuestionID})"  title="Shift+Enter">{translate}question_action_test_query{/translate}</button>
                 {else}
                     <button class="button green" id="checkAnswersBtn"
                         onClick="checkAnswers('{$Lang}', {$QuestionID})">{translate}question_action_check_answers{/translate}</button>
