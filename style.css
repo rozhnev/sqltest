@@ -727,6 +727,7 @@ body {
     background-position-x: 5px;
     background-position-y: 3px;
     padding-left: 2rem;
+    border-color: white;
 }
 .code-result {
     border: 1px solid var(--text-block-border-color);
