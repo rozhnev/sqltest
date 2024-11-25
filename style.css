@@ -717,7 +717,17 @@ body {
 .button.hidden {
     display: none;
 }
-
+.button.erd {
+    display: block; 
+    text-decoration: none; 
+    width: 95%; 
+    color: var(--special-text-color);
+    background: url('/images/erd.svg') no-repeat;
+    background-size: contain;
+    background-position-x: 5px;
+    background-position-y: 3px;
+    padding-left: 2rem;
+}
 .code-result {
     border: 1px solid var(--text-block-border-color);
     min-height: 28vh;
