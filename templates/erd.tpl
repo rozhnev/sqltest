@@ -28,8 +28,8 @@
         <div class="full-container">
             <div style="justify-items: center; margin-top: 5em;">
                 <h2 style="text-align: center;">{translate}erd_diagram{/translate}</h2>
-                <div>
-                    <img src="/images/{$Params.db|lower}_{$Params.theme|default:'ligth'}.png" title="" style="margin-top: 1em; max-with:100%;"/>
+                <div style="margin-top: 1em; max-width:100%;">
+                    <img src="/images/{$Params.db|lower}_{$Params.theme|default:'ligth'}.png" title="" style="max-width:100%;"/>
                 </div>
             </div>
         </div>
