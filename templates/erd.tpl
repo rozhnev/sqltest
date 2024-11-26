@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="{$Lang}" data-theme="{$Params.theme|default:'ligth'}">
     <head>
+        <title>{translate}erd_diagram{/translate}</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta http-equiv="Permissions-Policy" content="browsing-topics=('mc.yandex.com')">
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
