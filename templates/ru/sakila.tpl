@@ -2,7 +2,7 @@
   <h2>База данных Sakila (MySQL)</h2>
   Sakila - это пример базы данных, разработанный компанией MySQL, специально созданный для обучения и демонстрации возможностей систем управления базами данных (СУБД) на основе реляционной модели.
   <p>
-      <a class="button erd" href="/images/sakila" target="ERDWindow">
+      <a class="button erd" href="/{$Lang}/erd/Sakila" target="ERDWindow">
           ER диаграмма базы данных Sakila
       </a>
   </p>

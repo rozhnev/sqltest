@@ -39,6 +39,11 @@ class Controller
         $this->engine->assign('Books', Helper::getBooks($dbh, $this->lang));
         $this->engine->display("books.tpl");
     }
+    public function erd(array $params): void
+    {
+        $this->engine->assign('Params', $params);
+        $this->engine->display("erd.tpl");
+    }
     public function donate(): void
     {
         $this->engine->assign('Action', "donate");

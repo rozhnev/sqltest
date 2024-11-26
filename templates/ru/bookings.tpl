@@ -2,7 +2,7 @@
     <h2>База данных Bookings (PostgreSQL)</h2>
     Предметной областью этой базы данных являются рейсы авиакомпаний через различные аэропорты.
     <p>
-        <a class="button erd" href="/images/bookings" target="ERDWindow">
+        <a class="button erd" href="/{$Lang}/erd/Bookings" target="ERDWindow">
             ER диаграмма базы данных Bookings
         </a>
     </p>

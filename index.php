@@ -37,12 +37,15 @@ if (isset($pathParts[0]) && $pathParts[0] === 'login') {
     $action     = 'login';
     $loginProvider = $pathParts[1];
 // privacy-policy, logout actions
-} elseif (preg_match("@(?<lang>$languge_codes_regexp)/(?<action>privacy-policy|logout|about|menu|donate|books|courses)/\d+@i", $path, $params)) {
+} elseif (preg_match("@(?<lang>$languge_codes_regexp)/(?<action>privacy-policy|logout|about|menu|books|courses|donate)/\d+@i", $path, $params)) {
     $lang       = $params['lang'];
     $action     = $params['action'];
     header("HTTP/1.1 301 Moved Permanently");
     header("Location: /{$lang}/{$action}");
     exit();
+} elseif (preg_match("@(?<lang>$languge_codes_regexp)/(?<action>erd)/(?<db>Sakila|Bookings|AdventureWorks|Employee)\?theme=(?<theme>dark|light)@i", $_SERVER['REQUEST_URI'], $params)) {
+    $action     = $params['action'];
+    return (new Controller($smarty, $params['lang']))->$action($params);
 } elseif (preg_match("@(?<lang>$languge_codes_regexp)/(?<action>privacy-policy|logout|about|menu|books|courses|donate)/?@i", $path, $params)) {
     $lang       = $params['lang'];
     $action     = $params['action'];

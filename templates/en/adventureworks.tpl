@@ -4,9 +4,11 @@
     <p>The AdventureWorks Database is a sample database that demonstrates the capabilities of SQL Server. It includes data
       about
       fictional manufacturing company.</p>
-    <p><a  class="button erd" href="/images/adventureworks" target="ERDWindow">
-          AdventureWorks DB ER diagram
-    </a></p>
+    <p>
+        <a  class="button erd" href="/{$Lang}/erd/AdventureWorks" target="ERDWindow">
+            AdventureWorks DB ER diagram
+        </a>
+    </p>
     <p>The following is a list of these tables:</p>
     <ul style="list-style-type: '▤ '; padding-inline-start: 20px;">
       <li><span class='sql' onclick="scrollInfoPanel('Address_table_description')">Address</span> - table of addresses.</li>
