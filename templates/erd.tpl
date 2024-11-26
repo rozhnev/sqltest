@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{assign var="Db" value=$Params.db}
 <html xmlns="http://www.w3.org/1999/xhtml" lang="{$Lang}" data-theme="{$Params.theme|default:'ligth'}">
     <head>
         <title>{translate}erd_diagram{/translate}</title>
@@ -25,7 +26,6 @@
         </script>
     </head>
     <body>
-        {assign var="Db" value=$Params.db}
         <div class="full-container">
             <div style="justify-items: center; margin-top: 5em;">
                 <h2 style="text-align: center;">{translate}erd_diagram{/translate}</h2>
