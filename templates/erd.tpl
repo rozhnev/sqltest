@@ -12,17 +12,6 @@
         <!-- Yandex.RTB -->
         <script>window.yaContextCb=window.yaContextCb||[]</script>
         <script src="https://yandex.ru/ads/system/context.js" async></script>
-    </head>
-    <body>
-        {assign var="Db" value=$Params.db}
-        <div class="full-container">
-            <div style="justify-items: center; margin-top: 4em;">
-                <h2>{translate}erd_diagram{/translate}</h2>
-                <div>
-                    <img src="/images/{$Params.db|lower}_{$Params.theme|default:'ligth'}.png" title="" style="margin-top: 1em;"/>
-                </div>
-            </div>
-        </div>
         <!-- Yandex.RTB R-A-4716552-6 -->
         <script>
             window.yaContextCb.push(() => {ldelim}
@@ -33,5 +22,16 @@
                 {rdelim})
             {rdelim})
         </script>
+    </head>
+    <body>
+        {assign var="Db" value=$Params.db}
+        <div class="full-container">
+            <div style="justify-items: center; margin-top: 5em;">
+                <h2 style="text-align: center;">{translate}erd_diagram{/translate}</h2>
+                <div>
+                    <img src="/images/{$Params.db|lower}_{$Params.theme|default:'ligth'}.png" title="" style="margin-top: 1em; max-with:100%;"/>
+                </div>
+            </div>
+        </div>
     </body>
 </html>
