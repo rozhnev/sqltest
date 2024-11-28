@@ -18,6 +18,16 @@
                     {translate}keep_going{/translate}
                 {/if}
             </p>
+            <button class="button green" onClick="location.href = '/{$Lang}/test/start';">
+                {if !$User->grade()}
+                    {translate}check_your_skills{/translate}
+                {elseif $User->grade() == 'Senior'}
+                    {$User->grade()}, {translate}confirm_you_grade{/translate}
+                {else}
+                    {$User->grade()}, {translate}level_up{/translate}
+                {/if}
+            </button>
+            <button class="button blue logout" onClick="logout()" title="{translate}top_menu_logout{/translate}">&nbsp;</button>
         {else}
             <p>{translate}user_solutions_count_not_logged{/translate}</p>
             <button class="button blue" onClick="toggleLoginWindow()">{translate}top_menu_login{/translate}</button>
@@ -90,7 +100,7 @@
         </div>
         <div class="code-result ace-xcode" id="code-result"></div>
     </div>
-    <div class="right">
+    <div class="right" id="right-panel">
         {include file="{$Lang}/{$DB}.tpl"}
     </div>
     {include file='m.footer.tpl'}
