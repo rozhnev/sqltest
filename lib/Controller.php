@@ -21,12 +21,6 @@ class Controller
         $engine->assign('Languages', $this->languages);
         $engine->assign('Lang', $lang);
         $this->engine = $engine;
-        // $smarty->assign('User', $user);
-        // $smarty->assign('LoggedAsAdmin', $user->isAdmin());
-
-
-        // $smarty->assign('DB', $db);
-        // $smarty->assign('QuestionID', $questionID);
     }
 
     private function isMmobileView(): bool
@@ -48,6 +42,42 @@ class Controller
     {
         $this->engine->assign('Action', "donate");
         $this->engine->display("donate.tpl");
+    }
+
+    public function solution_like(PDO $dbh, User $user, array $params): void 
+    {
+        $this->engine->assign('Saved', false);
+        if ($user->logged()) {
+            $solution = new Solution($dbh, $params['solutionID']);
+            $this->engine->assign('Saved', $solution->like());
+        }
+        $this->engine->assign('User', $user);
+        $this->engine->display("rate_saved.tpl");
+    }
+
+    public function solution_dislike(PDO $dbh, User $user, array $params): void 
+    {
+        $this->engine->assign('Saved', false);
+        if ($user->logged()) {
+            $solution = new Solution($dbh, $params['solutionID']);
+            $this->engine->assign('Saved', $solution->dislike());
+        }
+        $this->engine->assign('User', $user);
+        $this->engine->display("rate_saved.tpl");
+    }
+
+    public function solution_report(PDO $dbh, User $user, array $params): void 
+    {
+        $this->engine->assign('Saved', false);
+        if ($user->logged() && ($user->isAdmin() || $user->grade() === 'Middle' || $user->grade() === 'Senior')) {
+            $solution = new Solution($dbh, $params['solutionID']);
+            $questionID = $solution->report();
+            $this->engine->assign('Saved', true);
+            $question = new Question($dbh, $questionID);
+            $question->setBestQueryCost();
+        }
+        $this->engine->assign('User', $user);
+        $this->engine->display("rate_saved.tpl");
     }
 }
 ?>

@@ -32,6 +32,12 @@ $smarty->registerPlugin("modifier", "mt_rand", "mt_rand");
 if ($mobileView) {
     $smarty->assign('CanonicalLink', "https://sqltest.online/{$path}");
 }
+session_start([
+    'cookie_lifetime' => 86400,
+]);
+if ($_SESSION) {
+    $user->loginSession($_SESSION);
+}
 
 if (isset($pathParts[0]) && $pathParts[0] === 'login') {
     $action     = 'login';
@@ -72,9 +78,8 @@ if (isset($pathParts[0]) && $pathParts[0] === 'login') {
     $action     = $params['action'];
     $questionID = $params['questionID'];
 } elseif (preg_match("@(?<lang>$languge_codes_regexp)/solution/(?<solutionID>\d+)/(?<action>like|dislike|report)@i", $path, $params)) {
-    $lang       = $params['lang'];
-    $action     = 'solution-' . $params['action'];
-    $solutionID = $params['solutionID'];
+    $action     = 'solution_' . $params['action'];
+    return (new Controller($smarty, $params['lang']))->$action($dbh, $user, $params);
 } elseif (preg_match("@(?<lang>$languge_codes_regexp)/(?<action>donate)@i", $path, $params)) {
     $lang       = $params['lang'];
     $action     = $params['action'];
@@ -135,13 +140,6 @@ if (isset($pathParts[0]) && $pathParts[0] === 'login') {
 
 if (!in_array($lang, $languge_codes)) {
     $lang = 'en';
-}
-session_start([
-    'cookie_lifetime' => 86400,
-]);
-
-if ($_SESSION) {
-    $user->loginSession($_SESSION);
 }
 
 switch ($action) {
@@ -257,30 +255,7 @@ switch ($action) {
             }
         }
         $template = "solutions.tpl";
-        break;
-    case 'solution-like':
-        if ($user->logged()) {
-            $solution = new Solution($dbh, $solutionID);
-            $solution->like();
-        }
-        $template = "rate_saved.tpl";
-        break;
-    case 'solution-dislike':
-        if ($user->logged()) {
-            $solution = new Solution($dbh, $solutionID);
-            $solution->dislike();
-        }
-        $template = "rate_saved.tpl";
-        break;
-    case 'solution-report':
-        if ($user->logged()) {
-            $solution = new Solution($dbh, $solutionID);
-            $questionID = $solution->report();
-            $question = new Question($dbh, $questionID);
-            $question->setBestQueryCost();
-        }
-        $template = "rate_saved.tpl";
-        break;        
+        break;      
     case 'logout':
         // Unset all of the session variables.
         $_SESSION = array();
