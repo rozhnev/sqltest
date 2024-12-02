@@ -24,6 +24,7 @@
     --sql-color:  #C800A4;
     --question-date-color: gray;
     --arrow-border-color: white;
+    --referral-link-background-color: aliceblue;
 }
 [data-theme="dark"] {
     --body-background-color: #0D1017;
@@ -46,6 +47,7 @@
     --sql-color:  #F85149;
     --question-date-color: #F0F6FC;
     --arrow-border-color: white;
+    --referral-link-background-color: #000000;
 }
 .ace-github-dark .ace_gutter {
     background: #24292e !important;
@@ -840,6 +842,13 @@ td {
     color: white;
     /* text-decoration: none; */
     font-weight: bold;
+}
+.code-result .referral-link {
+    font-size:large; 
+    padding: 1em; 
+    border: solid 1px; 
+    border-radius: 3px;
+    background-color: var(--referral-link-background-color);
 }
 .db-description .referal-add-block {
     display: flex; 

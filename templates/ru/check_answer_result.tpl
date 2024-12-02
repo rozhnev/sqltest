@@ -38,7 +38,7 @@
     <p>Ошибка в задании? <a target="_blank" href="https://t.me/sqlize">Сообщите! Мы всё исправим 😊</a></p>
 {/if}
 {if isset($ReferralLink)}
-    <div class="referral_link" style="font-size:large; margin-top: 3em; padding: 1em; border: solid 1px; border-radius: 3px;">
+    <div class="referral-link" style="margin-top: 3em;">
         {$ReferralLink}
     </div>
 {/if}

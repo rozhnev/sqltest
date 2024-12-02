@@ -38,7 +38,7 @@
         </div>
     {/if}
     {if isset($ReferralLink)}
-        <div class="referral_link" style="font-size:large; margin-top: 1em; padding: 1em; border: solid 1px; border-radius: 3px;">
+        <div class="referral-link" style="margin-top: 1em;">
             {$ReferralLink}
         </div>
     {/if}
@@ -74,7 +74,7 @@
      {/if}
     Try again.
     {if isset($ReferralLink)}
-        <div class="referral_link" style="font-size:large; margin-top: 5em; padding: 1em; border: solid 1px; border-radius: 3px;">
+        <div class="referral-link" style="margin-top: 5em;">
             {$ReferralLink}
         </div>
     {/if}
