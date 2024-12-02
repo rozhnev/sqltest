@@ -24,7 +24,7 @@
   {assign var=add_id value=0|mt_rand:4}
   <div class="referal-add-block">
       {if $add_id > 2}
-          <a href="https://book24.ru/r/MdRZN?erid=LjN8JzJBX" target="_blank" style="text-decoration: none; display: flex; ">
+          {* <a href="https://book24.ru/r/MdRZN?erid=LjN8JzJBX" target="_blank" style="text-decoration: none; display: flex; ">
               <div  style = "width: 30%;">
                   <img style="width: 100%;" src="//ndc.book24.ru/resize/820x1180/pim/products/images/97/d1/01907881-ff4d-78d9-ac6a-7021d02597d1.jpg" alt="SQL: быстрое погружение.">
               </div>
@@ -34,14 +34,20 @@
                     Книга «SQL: быстрое погружение» идеальна для всех, кто ищет новые перспективы карьерного роста; для разработчиков, которые хотят расширить свои навыки и знания в программировании; для любого человека, даже без опыта, кто хочет воспользоваться возможностями будущего, в котором будут править данные.
                   </div>
               </div>
+          </a> *}
+          <a target="_blank" rel="nofollow" href="https://xpuvo.com/g/pcrdvqwwkifec845fb2f47fc997f9b/?i=4&subid=english-3-free&erid=LatgCAF72">
+              <img style="width:100%;" border="0" src="https://aflink.ru/b/pcrdvqwwkifec845fb2f47fc997f9b/" alt="Инглекс"/>
+          </a>
+          <a target="_blank" rel="nofollow" href="https://bywiola.com/g/gdhe8x00bcfec845fb2f3b8a152381/?i=4&subid=sql-simulator&erid=2VSb5yk92kp">
+              <img style="width:100%;" border="0" src="https://aflink.ru/b/gdhe8x00bcfec845fb2f3b8a152381/" alt="Karpov.courses"/>
           </a>
       {else}
-            <a target="_blank" rel="nofollow" href="https://bywiola.com/g/gdhe8x00bcfec845fb2f3b8a152381/?i=4&subid=sql-simulator&erid=2VSb5yk92kp">
-              <img style="width:100%;" border="0" src="https://aflink.ru/b/gdhe8x00bcfec845fb2f3b8a152381/" alt="Karpov.courses"/>
-            </a>
-            <a target="_blank" rel="nofollow" href="https://thevospad.com/g/urkrefnghhfec845fb2f69bd3583e1/?i=4&subid=free-sql-simulator&erid=LatgC8wYQ">
+          <a target="_blank" rel="nofollow" href="https://thevospad.com/g/urkrefnghhfec845fb2f69bd3583e1/?i=4&subid=free-sql-simulator&erid=LatgC8wYQ">
               <img style="width:100%;" border="0" src="https://aflink.ru/b/urkrefnghhfec845fb2f69bd3583e1/" alt="Netology"/>
-            </a>
+          </a>
+          <a target="_blank" rel="nofollow" href="https://xpuvo.com/g/zzxaczy8lufec845fb2f47fc997f9b/?i=4&subid=learn-english-right&erid=LatgBf2HS">
+              <img style="width:100%;" border="0" src="https://aflink.ru/b/zzxaczy8lufec845fb2f47fc997f9b/" alt="Инглекс"/>
+          </a>
       {/if}
   </div>
   <h3 id="actor_table_description">
