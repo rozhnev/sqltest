@@ -1,4 +1,4 @@
-<div style="width: 21vw;">
+<div {if !$MobileView}style="width: 21vw;"{/if}>
     {if $User->logged()}
         {if !$QuestionSolved} 
             <div class="solution-wrapper">
@@ -16,7 +16,13 @@
                     <button class="button-small green" onClick="solutionRun('{$Lang}', {$QuestionID}, {$id})">{translate}solution_action_run{/translate}</button>
                         {* <button class="button-small green" onClick="solutionLike({$solution.id})">Like it! ({$solution.likes})</button>
                         <button class="button-small yellow" onClick="solutionDislike({$solution.id})">Dislike ({$solution.dislikes})</button> *}
-                        <button class="button-small red" onClick="solutionReport('{$Lang}', {$QuestionID}, {$solution.id})">{translate}solution_action_report{/translate}</button>
+                        <button 
+                            class="button-small red" 
+                            {if (!$User->isAdmin() && $User->grade() neq 'Middle' && $User->grade() neq 'Senior')} disabled style="opacity:0.4;" title="{translate}low_grades_restricted{/translate} {if $User->grade()}{translate}up_your_level{/translate}{else}{translate}determine_your_level{/translate}{/if}" {/if}
+                            onClick="solutionReport('{$Lang}', {$QuestionID}, {$solution.id})"
+                        >
+                            {translate}solution_action_report{/translate}
+                        </button>
                     </div>
                 </div>
             {/foreach}

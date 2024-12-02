@@ -3,7 +3,9 @@
     <h2>Bookings Database (PostgreSQL)</h2>
     The subject area of this database is airline flights through various airports.
     <p>
-        <a style="font-size: small; color: var(--special-text-color);" href="/images/bookings" target="ERDWindow">ER diagram of the Bookings database</a>
+        <a class="button erd" href="/{$Lang}/erd/Bookings" target="ERDWindow">
+            ER diagram of the Bookings database
+        </a>
     </p>
     <p>The Bookings Database contains 8 tables:</p>
     <ul style="list-style-type: '▤ '; padding-inline-start: 20px;">

@@ -58,6 +58,9 @@ $translations = [
     'solutions_title' => 'Veja como outros usuários resolveram este problema:',
     'solution_title' => 'Resolvido em',
     'solution_query_cost' => 'Custo da consulta',
+    'low_grades_restricted' => 'Available to Middle and Senior-level users only.',
+    'determine_your_level' => 'Faça o teste para determinar seu nível.',
+    'up_your_level' => 'Faça o teste para subir de nível.',
     'no_solutions_yet' => 'Desculpe, mas ainda não há solução publicada para este problema.',
     'login_needed' => 'Por favor, faça login no site para esta ação',
     'qustion_should_be_solved' => 'Você deve resolver o problema sozinho antes de ver as soluções dos outros usuários',
@@ -105,5 +108,6 @@ $translations = [
     'return_to_test' => 'Retornar ao teste',
     'save_my_grade' => 'Salve minha nota',
     'level_up' => 'suba de nível com nosso teste!',
-    'confirm_you_grade' => 'faça o teste e confirme sua expertise!'
+    'confirm_you_grade' => 'faça o teste e confirme sua expertise!',
+    'erd_diagram' => 'Diagrama ER do Banco de Dados ##Db##'
 ];

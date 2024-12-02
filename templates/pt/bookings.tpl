@@ -2,7 +2,9 @@
     <h2>Banco de Dados Bookings (PostgreSQL)</h2>
     A área de assunto deste banco de dados é voos de companhias aéreas através de vários aeroportos.
     <p>
-        <a style="font-size: small; color: var(--special-text-color);" href="/images/bookings" target="ERDWindow">Diagrama ER do banco de dados Bookings</a>
+        <a class="button erd" href="/{$Lang}/erd/Bookings" target="ERDWindow">
+            Diagrama ER do banco de dados Bookings
+        </a>
     </p>
     <p>O Banco de Dados Bookings contém 8 tabelas:</p>
     <ul style="list-style-type: '▤ '; padding-inline-start: 20px;">

@@ -35,6 +35,11 @@
         <div style="display: flex; align-items: center; justify-content: center; margin-top: 1em;">
             <a class="button green" style="text-decoration: none;" id="doneTest" href="/{$Lang}/test/{$TestId}/result">{translate}test_show_result{/translate}</a>
         </div>
+
+        <div class="menu-ad">
+            <div id="yandex_rtb_R-A-4716552-2">
+            </div>
+        </div>
     </div>
     {include file='splitter.tpl'}
     <div class="main">

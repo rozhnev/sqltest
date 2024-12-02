@@ -59,6 +59,9 @@ $translations = [
     'solution_title' => 'Solved at',
     'solution_query_cost' => 'Query cost',
     'no_solutions_yet' => 'Sorry, but no solution to this problem has been published yet.',
+    'low_grades_restricted' => 'Available to Middle and Senior-level users only.',
+    'determine_your_level' => 'Take the test to determine your level.',
+    'up_your_level' => 'Take the test to up your level.',
     'login_needed' => 'Please login to site this action',
     'qustion_should_be_solved' => 'You should to solve the problem yourself before look others solutions',
     'privacy_policy_page_title' => 'SQLTest.online: Privacy Policy',
@@ -105,5 +108,6 @@ $translations = [
     'return_to_test' => 'Return to test',
     'save_my_grade' => 'Save my grade',
     'level_up' => 'level up with our test!',
-    'confirm_you_grade' => 'take the test and confirm your expertise!'
+    'confirm_you_grade' => 'take the test and confirm your expertise!',
+    'erd_diagram' => '##Db## Data Base ER diagram'
 ];
