@@ -25,7 +25,7 @@
     <li><span class='sql' onclick="scrollInfoPanel('staff_table_description')">staff</span> - table of company staff.</li>
     <li><span class='sql' onclick="scrollInfoPanel('store_table_description')">store</span> - table of company stories.</li>
   </ul>
-  <a href="https://amzn.to/4dVmPhJ" target="_blank" style="text-decoration: none;">
+  {* <a href="https://amzn.to/4dVmPhJ" target="_blank" style="text-decoration: none;">
     <div style="display: flex; flex-direction: row; border: 1px solid white; padding: 0.3em; width: 98%;">
       <div  style = "width: 30%;">
           <img style="width: 100%;" src="/images/sql-in-10-minutes-by-ben-forta.jpg" alt="SQL in 10 Minutes a Day by Ben Forta">
@@ -37,6 +37,9 @@
           </div>
       </div>
     </div>
+  </a> *}
+  <a target="_blank" rel="nofollow" href="https://bywiola.com/g/u1k11fxms7fec845fb2fd629c4b097/?i=4">
+      <img style="width: 90%;" border="0" src="https://ad.admitad.com/b/u1k11fxms7fec845fb2fd629c4b097/" alt="edX Many Geos"/>
   </a>
   <h3 id="actor_table_description">
     <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
