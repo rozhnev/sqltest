@@ -34,7 +34,17 @@ if ($mobileView) {
 }
 session_start([
     'cookie_lifetime' => 86400,
+    'gc_maxlifetime' => 86400
 ]);
+if (isset($_COOKIE[session_name()])) {
+    setcookie(session_name(), $_COOKIE[session_name()], [
+        'expires' => time() + 86400,
+        'path' => '/',
+        'secure' => true,
+        'httponly' => true,
+        'samesite' => 'Lax'
+    ]);
+}
 if ($_SESSION) {
     $user->loginSession($_SESSION);
 }
