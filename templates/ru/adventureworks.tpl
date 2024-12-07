@@ -23,7 +23,7 @@
     {assign var=add_id value=0|mt_rand:4}
     <div class="referal-add-block">
         {if $add_id > 2}
-            <a href="https://book24.ru/r/vPcru?erid=LjN8K1JdK" target="_blank" style="text-decoration: none; display: flex;">
+            {* <a href="https://book24.ru/r/vPcru?erid=LjN8K1JdK" target="_blank" style="text-decoration: none; display: flex;">
                 <div  style = "width: 30%;">
                     <img style="width: 100%;" src="//ndc.book24.ru/resize/410x590/pim/products/images/2a/23/018edf56-f466-7e54-b41e-7cd2a6b02a23.jpg" alt="Грабер Мартин: SQL.">
                 </div>
@@ -34,13 +34,19 @@
                     В книге дано подробное описание языка, поэтому от читателя не требуется никакой предварительной подготовки. Сопровождаемая практическими учебными материалами, книга представляет собой полное справочное руководство по SQL.
                   </div>
                 </div>
-            </a>
-        {else}
-            <a target="_blank" rel="nofollow" href="https://thevospad.com/g/dhqiqt6h41fec845fb2f69bd3583e1/?i=4&subid=free-neuronetwork&erid=LatgBSdq6">
-                <img style="width:100%;" border="0" src="https://aflink.ru/b/dhqiqt6h41fec845fb2f69bd3583e1/" alt="Netology"/>
+            </a> *}
+            <a target="_blank" rel="nofollow" href="https://naiawork.com/g/63cmm8j9f5fec845fb2f5e445e6c7b/?i=4&subid=sql-from-zero&erid=LatgBvCNw">
+                <img style="width:100%;" border="0" src="https://aflink.ru/b/63cmm8j9f5fec845fb2f5e445e6c7b/" alt="Productstar"/>
             </a>
             <a target="_blank" rel="nofollow" href="https://bywiola.com/g/8s4jme099rfec845fb2f3b8a152381/?i=4&subid=kaprov-courses&erid=LatgBXFig">
                 <img style="width:100%;" border="0" src="https://aflink.ru/b/8s4jme099rfec845fb2f3b8a152381/" alt="Karpov.courses"/>
+            </a>
+        {else}
+            <a target="_blank" rel="nofollow" href="https://naiawork.com/g/61ci34ogwofec845fb2f5e445e6c7b/?i=4&subid=ds&erid=LatgC4G1h">
+                <img style="width:100%;" border="0" src="https://aflink.ru/b/61ci34ogwofec845fb2f5e445e6c7b/" alt="Productstar"/>
+            </a>
+            <a target="_blank" rel="nofollow" href="https://thevospad.com/g/dhqiqt6h41fec845fb2f69bd3583e1/?i=4&subid=free-neuronetwork&erid=LatgBSdq6">
+                <img style="width:100%;" border="0" src="https://aflink.ru/b/dhqiqt6h41fec845fb2f69bd3583e1/" alt="Netology"/>
             </a>
         {/if}
     </div>
