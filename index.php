@@ -251,7 +251,7 @@ switch ($action) {
     case 'rate':
         if ($user->logged()) {
             $rate = intval($_REQUEST['rate']);
-            $this->engine->assign('Saved', $user->saveQuestionRate($questionID, $rate));
+            $smarty->assign('Saved', $user->saveQuestionRate($questionID, $rate));
         }
         $template = "rate_saved.tpl";
         break;
