@@ -514,7 +514,7 @@ class User
      * @param integer $rate
      * @return void
      */
-    public function saveQuestionRate(int $questionID, int $rate): void
+    public function saveQuestionRate(int $questionID, int $rate): bool
     {
         try {
             $stmt = $this->dbh->prepare("
@@ -522,7 +522,7 @@ class User
                 SET rate = :rate
                 WHERE user_id = :user_id AND question_id = :question_id
             ");
-            $stmt->execute([':user_id' => $this->id, ':question_id' => $questionID, ':rate' => $rate]);
+            return $stmt->execute([':user_id' => $this->id, ':question_id' => $questionID, ':rate' => $rate]);
         }
         catch (\Throwable $error) {
             throw new Exception($error->getMessage());
