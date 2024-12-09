@@ -93,10 +93,7 @@ function toggleLoginWindow() {
     }
     ), 333)
 }
-function logout() {
-    cookieStore.delete("PHPSESSID")
-    .then(()=>{window.location.reload();})
-}
+
 function jsonToTable(jsonObject) {
     let htmlTable = '';
     let rn = 0;

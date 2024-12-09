@@ -27,7 +27,7 @@
                     {$User->grade()}, {translate}level_up{/translate}
                 {/if}
             </button>
-            <button class="button blue logout" onClick="logout()" title="{translate}top_menu_logout{/translate}">&nbsp;</button>
+            <button class="button blue logout" onClick="location.href = '/{$Lang}/logout';" title="{translate}top_menu_logout{/translate}">&nbsp;</button>
         {else}
             <p>{translate}user_solutions_count_not_logged{/translate}</p>
             <button class="button blue" onClick="toggleLoginWindow()">{translate}top_menu_login{/translate}</button>
