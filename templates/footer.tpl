@@ -2,7 +2,7 @@
                 <div class="footer-links">
                     <div>
                         {translate}footer_have_questions{/translate}
-                        <a target="_blank" href="https://t.me/sqlize" class="">
+                        <a target="_blank" href="{translate}telegram_link{/translate}" class=""> 
                             <span class="" style="background-color: #64a9dc;
                                     height: 24px;
                                     display: inline-block;

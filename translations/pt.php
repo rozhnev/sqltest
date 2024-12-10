@@ -109,5 +109,6 @@ $translations = [
     'save_my_grade' => 'Salve minha nota',
     'level_up' => 'suba de nível com nosso teste!',
     'confirm_you_grade' => 'faça o teste e confirme sua expertise!',
-    'erd_diagram' => 'Diagrama ER do Banco de Dados ##Db##'
+    'erd_diagram' => 'Diagrama ER do Banco de Dados ##Db##',
+    'telegram_link' => 'https://t.me/sqltest_online'
 ];

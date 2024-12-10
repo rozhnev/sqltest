@@ -111,5 +111,6 @@ $translations = [
     'save_my_grade' => 'Сохранить мою оценку',
     'level_up' => 'повысь свой уровень!',
     'confirm_you_grade' => 'пройдите тест и подтвердите свой уровень!',
-    'erd_diagram' => 'ER диаграмма базы данных ##Db##'
+    'erd_diagram' => 'ER диаграмма базы данных ##Db##',
+    'telegram_link' => 'https://t.me/sqlize'
 ];
