@@ -1,3 +1,11 @@
+        <style>
+            .menu-ad .question-wrapper a:link, a:visited {
+                color: var(--menu-link-color);
+            }
+            .menu-ad .question-wrapper a:hover, a:active {
+                color: var(--menu-link-color);
+            }
+        </style>
         <div class="menu-ad">
             <div id="yandex_rtb_R-A-4716552-2">
                 <div class="question-wrapper">
@@ -20,7 +28,7 @@
                             💡 Давайте вместе создадим качественный ресурс для изучения SQL!
                         </p>
                         <p>
-                            Текущая доступна по ссылке: <a href="https://querynomic.one/">Querynomic.One</a>
+                            Текущая доступна по ссылке: <a styel="color: var(--menu-link-color);"href="https://querynomic.one/">Querynomic.One</a>
                         </p>
                     </div>
                 </div>
