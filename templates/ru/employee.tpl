@@ -44,8 +44,11 @@
             <a target="_blank" rel="nofollow" href="https://dhwnh.com/g/sggtutr216fec845fb2faf541d880b/?i=4&subid=analytic-prof&erid=LatgBqBgQ">
                 <img style="width:100%;" border="0" src="https://aflink.ru/b/sggtutr216fec845fb2faf541d880b/" alt="Hexlet.io"/>
             </a>
-            <a target="_blank" rel="nofollow" href="https://bywiola.com/g/fiu7it8s2hfec845fb2f3b8a152381/?i=4&subid=data-enginere&erid=LatgBaH44">
+            {* <a target="_blank" rel="nofollow" href="https://bywiola.com/g/fiu7it8s2hfec845fb2f3b8a152381/?i=4&subid=data-enginere&erid=LatgBaH44">
                 <img style="width:100%;" border="0" src="https://aflink.ru/b/fiu7it8s2hfec845fb2f3b8a152381/" alt="Karpov.courses"/>
+            </a> *}
+            <a target="_blank" rel="nofollow" href="https://bywiola.com/g/vvs19xth4pfec845fb2f3b8a152381/?i=4&subid=analyst-ny&erid=2VSb5xzvfBn">
+                <img style="width:100%;" border="0" src="https://aflink.ru/b/vvs19xth4pfec845fb2f3b8a152381/" alt="Karpov.courses"/>
             </a>
         {/if}
     </div>
