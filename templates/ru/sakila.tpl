@@ -39,16 +39,18 @@
                   </div>
               </div>
           </a> *}
-          <a target="_blank" rel="nofollow" href="https://xpuvo.com/g/pcrdvqwwkifec845fb2f47fc997f9b/?i=4&subid=english-3-free&erid=LatgCAF72">
+          {* <a target="_blank" rel="nofollow" href="https://xpuvo.com/g/pcrdvqwwkifec845fb2f47fc997f9b/?i=4&subid=english-3-free&erid=LatgCAF72">
               <img style="width:100%;" border="0" src="https://aflink.ru/b/pcrdvqwwkifec845fb2f47fc997f9b/" alt="Инглекс"/>
-          </a>
+          </a> *}
           {* <a target="_blank" rel="nofollow" href="https://bywiola.com/g/gdhe8x00bcfec845fb2f3b8a152381/?i=4&subid=sql-simulator&erid=2VSb5yk92kp">
               <img style="width:100%;" border="0" src="https://aflink.ru/b/gdhe8x00bcfec845fb2f3b8a152381/" alt="Karpov.courses"/>
           </a> *}
           <a target="_blank" rel="nofollow" href="https://bywiola.com/g/vvs19xth4pfec845fb2f3b8a152381/?i=4&subid=analyst-ny&erid=2VSb5xzvfBn">
               <img style="width:100%;" border="0" src="https://aflink.ru/b/vvs19xth4pfec845fb2f3b8a152381/" alt="Karpov.courses"/>
           </a>
-<!-- /admitad.banner -->
+          <a target="_blank" rel="nofollow" href="https://codeaven.com/g/ss23iy3l6sfec845fb2fcfba9fca8a/?i=4">
+            <img style="width:100%;" border="0" src="https://ad.admitad.com/b/ss23iy3l6sfec845fb2fcfba9fca8a/" alt="hidemyname vpn"/>
+          </a>
       {else}
           <a target="_blank" rel="nofollow" href="https://thevospad.com/g/urkrefnghhfec845fb2f69bd3583e1/?i=4&subid=free-sql-simulator&erid=LatgC8wYQ">
               <img style="width:100%;" border="0" src="https://aflink.ru/b/urkrefnghhfec845fb2f69bd3583e1/" alt="Netology"/>

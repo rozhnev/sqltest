@@ -35,8 +35,11 @@
                   </div>
                 </div>
             </a> *}
-            <a target="_blank" rel="nofollow" href="https://naiawork.com/g/63cmm8j9f5fec845fb2f5e445e6c7b/?i=4&subid=sql-from-zero&erid=LatgBvCNw">
+            {* <a target="_blank" rel="nofollow" href="https://naiawork.com/g/63cmm8j9f5fec845fb2f5e445e6c7b/?i=4&subid=sql-from-zero&erid=LatgBvCNw">
                 <img style="width:100%;" border="0" src="https://aflink.ru/b/63cmm8j9f5fec845fb2f5e445e6c7b/" alt="Productstar"/>
+            </a> *}
+            <a target="_blank" rel="nofollow" href="https://codeaven.com/g/ss23iy3l6sfec845fb2fcfba9fca8a/?i=4">
+              <img style="width:100%;" border="0" src="https://ad.admitad.com/b/ss23iy3l6sfec845fb2fcfba9fca8a/" alt="hidemyname vpn"/>
             </a>
             {* <a target="_blank" rel="nofollow" href="https://bywiola.com/g/8s4jme099rfec845fb2f3b8a152381/?i=4&subid=kaprov-courses&erid=LatgBXFig">
                 <img style="width:100%;" border="0" src="https://aflink.ru/b/8s4jme099rfec845fb2f3b8a152381/" alt="Karpov.courses"/>
