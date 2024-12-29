@@ -706,6 +706,7 @@ body {
 }
 
 .button.green {
+    color: white;
     background-color: var(--green-btn-background);
 }
 .button.blue {
