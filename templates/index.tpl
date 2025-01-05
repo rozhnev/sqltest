@@ -78,7 +78,7 @@
                         <a 
                             id="tutorialLink" 
                             target="_blank" 
-                            href="https://querynomic.one/#/resources/core?id=%d0%92%d1%8b%d0%b1%d0%be%d1%80-%d0%ba%d0%be%d0%bb%d0%be%d0%bd%d0%be%d0%ba" 
+                            href="{$Question.tutorial_link}" 
                             title="{translate}question_action_tutorial{/translate}" 
                             class="button default"
                         >
