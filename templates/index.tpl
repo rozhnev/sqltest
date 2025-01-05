@@ -73,19 +73,34 @@
                 <div class="code-wrapper" id="sql-code" name="sql-code">{$Question.last_query}</div>
             {/if}
             <div class="code-buttons">
-                <button class="button" id="getHelpBtn" onClick="getHelp('{$Lang}', {$QuestionID})">{translate}question_action_get_help{/translate}</button>
-                {if !isset($Question.answers)}
-                    <button class="button" id="runQueryBtn" onClick="runQuery('{$Lang}', {$QuestionID})" title="Ctrl+Enter">{translate}question_action_run_query{/translate}</button>
-                    <button class="button green" id="testQueryBtn" onClick="testQuery('{$Lang}', {$QuestionID})"  title="Shift+Enter">{translate}question_action_test_query{/translate}</button>
-                {else}
-                    <button class="button green" id="checkAnswersBtn"
-                        onClick="checkAnswers('{$Lang}', {$QuestionID})">{translate}question_action_check_answers{/translate}</button>
-                {/if}
-                {if $NextQuestionId}
-                    <a id="nextTaskBtn" href="/{$Lang}/question/{$Question.category_sef}/{$NextQuestionId}" title="{translate}question_action_next_title{/translate}" class="button green hidden">
-                        {translate}question_action_next{/translate}
-                    </a>
-                {/if}
+                <div style="display: flex;">
+                    {if isset($Question.totorial_link)}
+                        <a 
+                            id="tutorialLink" 
+                            target="_blank" 
+                            href="https://querynomic.one/#/resources/core?id=%d0%92%d1%8b%d0%b1%d0%be%d1%80-%d0%ba%d0%be%d0%bb%d0%be%d0%bd%d0%be%d0%ba" 
+                            title="{translate}question_action_tutorial{/translate}" 
+                            class="button default"
+                        >
+                            {translate}question_action_tutorial{/translate}
+                        </a>
+                    {/if}
+                </div>
+                <div>
+                    <button class="button" id="getHelpBtn" onClick="getHelp('{$Lang}', {$QuestionID})">{translate}question_action_get_hint{/translate}</button>
+                    {if !isset($Question.answers)}
+                        <button class="button" id="runQueryBtn" onClick="runQuery('{$Lang}', {$QuestionID})" title="Ctrl+Enter">{translate}question_action_run_query{/translate}</button>
+                        <button class="button green" id="testQueryBtn" onClick="testQuery('{$Lang}', {$QuestionID})"  title="Shift+Enter">{translate}question_action_test_query{/translate}</button>
+                    {else}
+                        <button class="button green" id="checkAnswersBtn"
+                            onClick="checkAnswers('{$Lang}', {$QuestionID})">{translate}question_action_check_answers{/translate}</button>
+                    {/if}
+                    {if $NextQuestionId}
+                        <a id="nextTaskBtn" href="/{$Lang}/question/{$Question.category_sef}/{$NextQuestionId}" title="{translate}question_action_next_title{/translate}" class="button green hidden">
+                            {translate}question_action_next{/translate}
+                        </a>
+                    {/if}
+                </div>
             </div>
             <div class="code-result ace-xcode" id="code-result"></div>
         </div>
