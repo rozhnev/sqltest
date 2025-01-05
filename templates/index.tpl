@@ -74,7 +74,7 @@
             {/if}
             <div class="code-buttons">
                 <div style="display: flex;">
-                    {if isset($Question.totorial_link)}
+                    {if isset($Question.tutorial_link)}
                         <a 
                             id="tutorialLink" 
                             target="_blank" 

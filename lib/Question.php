@@ -59,6 +59,7 @@ class Question
                 question_categories.sequence_position number, 
                 questions_localization.title title,
                 questions_localization.task task,
+                questions_localization.tutorial_link,
                 dbms,
                 db_template,
                 last_attempt_at::date last_attempt_date, 
