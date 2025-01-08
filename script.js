@@ -497,25 +497,26 @@ window.onload = function() {
             testQuery(lang, questionId);
         }
     });
-
-    window.YaAuthSuggest.init(
-      {
-          client_id: '6a7ad9d0d23a496987255a596b83b9db',
-          response_type: 'code',
-          redirect_uri: `${window.location.protocol}//${window.location.host}/login/yandex/?lang=${lang}&db=${db}&questionId=${questionId}`
-      },
-      `${window.location.protocol}//${window.location.host}/login/yandex/?lang=${lang}&db=${db}&questionId=${questionId}`,
-      {
-          view: "button",
-          parentId: "yandexLogin",
-          buttonSize: 'm',
-          buttonView: 'icon',
-          buttonTheme: 'light',
-          buttonBorderRadius: "0",
-          buttonIcon: 'ya',
-      }
-    )
-    .then(({handler}) => handler())
-    .then(data => alert('Сообщение с токеном', data))
-    .catch(error => alert('Обработка ошибки', error));
+    if (document.getElementById('yandexLogin')) {
+        window.YaAuthSuggest.init(
+        {
+            client_id: '6a7ad9d0d23a496987255a596b83b9db',
+            response_type: 'code',
+            redirect_uri: `${window.location.protocol}//${window.location.host}/login/yandex/?lang=${lang}&db=${db}&questionId=${questionId}`
+        },
+        `${window.location.protocol}//${window.location.host}/login/yandex/?lang=${lang}&db=${db}&questionId=${questionId}`,
+        {
+            view: "button",
+            parentId: "yandexLogin",
+            buttonSize: 'm',
+            buttonView: 'icon',
+            buttonTheme: 'light',
+            buttonBorderRadius: "0",
+            buttonIcon: 'ya',
+        }
+        )
+        .then(({handler}) => handler())
+        .then(data => alert('Сообщение с токеном', data))
+        .catch(error => alert('Обработка ошибки', error));
+    }
 };
