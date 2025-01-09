@@ -16,11 +16,13 @@
             </div>
         </div>
     </div>
-    <div style="height: 5em;">
-        <div id="yandex_rtb_R-A-4716552-4">
-            <p style="padding: 5px; font-size:12px;">{translate}menu_small_add_placeholder{/translate}</p>
+    {if $User.show_ad}
+        <div style="height: 5em;">
+            <div id="yandex_rtb_R-A-4716552-4">
+                <p style="padding: 5px; font-size:12px;">{translate}menu_small_add_placeholder{/translate}</p>
+            </div>
         </div>
-    </div>
+    {/if}
     {foreach $Questionnire.menu as $categoryId => $panel}
     <button class="accordion {if $categoryId eq $QuestionCategoryID}active{/if}">
         <span class="accordion-title">{$panel.title}</span>
@@ -51,5 +53,7 @@
         </ol>
     </div>
     {/foreach}
-    {include file="{$Lang}/menu_bottom_add.tpl"}
+    {if $User.show_ad}
+        {include file="{$Lang}/menu_bottom_add.tpl"}
+    {/if}
 </div>

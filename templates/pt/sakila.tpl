@@ -25,19 +25,21 @@
     <li><span class='sql' onclick="scrollInfoPanel('staff_table_description')">staff</span> - tabela de funcionários da empresa.</li>
     <li><span class='sql' onclick="scrollInfoPanel('store_table_description')">store</span> - tabela de lojas da empresa.</li>
   </ul>
-  {if isset($Book)}
-    <a href="{$Book.referral_link}" target="_blank" style="text-decoration: none;">
-      <div style="display: flex; flex-direction: row; border: 1px solid white; padding: 0.3em; width: 98%;">
-        <div  style = "width: 30%;">
-            <img style="width: 100%;" src="{$Book.picture_link}" alt="{$Book.title}">
-        </div>
-        <div style="font-size: 1em;  width: 70%;  padding: 0 0.7em; font-weight: 100;">
-            <div>{$Book.title}</div>
-            <div style="font-size: small; padding-top: 0.5em;">{$Book.description}</div>
-        </div>
-      </div>
-    </a>
-  {/if}
+  {if $User.show_ad}
+      {if isset($Book)}
+        <a href="{$Book.referral_link}" target="_blank" style="text-decoration: none;">
+          <div style="display: flex; flex-direction: row; border: 1px solid white; padding: 0.3em; width: 98%;">
+            <div  style = "width: 30%;">
+                <img style="width: 100%;" src="{$Book.picture_link}" alt="{$Book.title}">
+            </div>
+            <div style="font-size: 1em;  width: 70%;  padding: 0 0.7em; font-weight: 100;">
+                <div>{$Book.title}</div>
+                <div style="font-size: small; padding-top: 0.5em;">{$Book.description}</div>
+            </div>
+          </div>
+        </a>
+      {/if}
+    {/if}
   <h3 id="actor_table_description">
     <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Rolar para cima">
       <svg height="15" width="15" style="">

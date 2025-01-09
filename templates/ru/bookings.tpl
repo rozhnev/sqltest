@@ -17,45 +17,47 @@
       <li><span class='sql' onclick="scrollInfoPanel('ticket_flights_table_description')">ticket_flights</span> - таблица связей билетов с рейсами.</li>
       <li><span class='sql' onclick="scrollInfoPanel('tickets_table_description')">tickets</span> - таблица билетов.</li>
     </ul>
-    {assign var=add_id value=0|mt_rand:4}
-    <div class="referal-add-block">
-        {if $add_id > 2}
-            {* <a href="https://book24.ru/r/iuZxo?erid=LjN8KKn37" target="_blank" style="text-decoration: none; display: flex;">
-                <div  style = "width: 30%;">
-                    <img style="width: 100%;" src="//ndc.book24.ru/resize/410x590/pim/products/images/6f/0f/018ee0c1-cb86-72ca-be63-928004a76f0f.jpg" alt="PostgreSQL Основы языка SQL : учебное пособие">
-                </div>
-                <div style="font-size: 1em;  width: 70%;  padding: 0 0.7em; font-weight: 100;">
-                    <div>Моргунов Евгений Павлович: PostgreSQL Основы языка SQL.</div>
-                    <div style="font-size: small; padding-top: 0.5em;">
-                        Учебно-практическое пособие охватывает первую, базовую, часть учебного курса по языку SQL, созданного при участии российской компании Postgres Professional. 
-                        Учебный материал излагается в расчете на использование СУБД PostgreSQL. 
+    {if $User.show_ad}
+        {assign var=add_id value=0|mt_rand:4}
+        <div class="referal-add-block">
+            {if $add_id > 2}
+                {* <a href="https://book24.ru/r/iuZxo?erid=LjN8KKn37" target="_blank" style="text-decoration: none; display: flex;">
+                    <div  style = "width: 30%;">
+                        <img style="width: 100%;" src="//ndc.book24.ru/resize/410x590/pim/products/images/6f/0f/018ee0c1-cb86-72ca-be63-928004a76f0f.jpg" alt="PostgreSQL Основы языка SQL : учебное пособие">
                     </div>
-                </div>
-            </a> *}
-            <a target="_blank" rel="nofollow" href="https://ujhjj.com/g/2fm4vusamufec845fb2f0da0172cef/?i=4&subid=sql&erid=LatgBVMfa">
-                <img style="width:100%;" border="0" src="https://aflink.ru/b/2fm4vusamufec845fb2f0da0172cef/" alt="Skillfactory.ru"/>
-            </a>
-            <a target="_blank" rel="nofollow" href="https://dhwnh.com/g/8gb84134qdfec845fb2faf541d880b/?i=4&subid=new-year&erid=LatgBjjaY">
-                <img style="width:100%;" border="0" src="https://aflink.ru/b/8gb84134qdfec845fb2faf541d880b/" alt="Hexlet.io"/>
-            </a>
-        {else}
-            <a target="_blank" rel="nofollow" href="https://codeaven.com/g/ss23iy3l6sfec845fb2fcfba9fca8a/?i=4">
-                <img style="width:100%;" border="0" src="https://ad.admitad.com/b/ss23iy3l6sfec845fb2fcfba9fca8a/" alt="hidemyname vpn"/>
-            </a>
-            <a target="_blank" rel="nofollow" href="https://dhwnh.com/g/yzp6x9svhbfec845fb2faf541d880b/?i=4&subid=new-year-da&erid=2VSb5w65Q1N">
-                <img style="width:100%;" border="0" src="https://aflink.ru/b/yzp6x9svhbfec845fb2faf541d880b/" alt="Hexlet.io"/>
-            </a>
-            {* <a target="_blank" rel="nofollow" href="https://dhwnh.com/g/zba3p9bv14fec845fb2faf541d880b/?i=4&subid=python-dev&erid=LatgBe2JB">
-                <img style="width:100%;" border="0" src="https://aflink.ru/b/zba3p9bv14fec845fb2faf541d880b/" alt="Hexlet.io"/>
-            </a>
-            <a target="_blank" rel="nofollow" href="https://kjuzv.com/g/v76ghfjtdsfec845fb2fa804937a48/?i=4&subid=200-200&erid=LatgBYH9b">
-                <img style="width:100%;" border="0" src="https://aflink.ru/b/v76ghfjtdsfec845fb2fa804937a48/" alt="Читай-город"/>
-            </a> *}
-            {* <a target="_blank" rel="nofollow" href="https://naiawork.com/g/63cmm8j9f5fec845fb2f5e445e6c7b/?i=4&subid=sql-from-zero&erid=LatgBvCNw">
-                <img style="width:100%;" border="0" src="https://aflink.ru/b/63cmm8j9f5fec845fb2f5e445e6c7b/" alt="Productstar"/>
-            </a> *}
-        {/if}
-    </div>
+                    <div style="font-size: 1em;  width: 70%;  padding: 0 0.7em; font-weight: 100;">
+                        <div>Моргунов Евгений Павлович: PostgreSQL Основы языка SQL.</div>
+                        <div style="font-size: small; padding-top: 0.5em;">
+                            Учебно-практическое пособие охватывает первую, базовую, часть учебного курса по языку SQL, созданного при участии российской компании Postgres Professional. 
+                            Учебный материал излагается в расчете на использование СУБД PostgreSQL. 
+                        </div>
+                    </div>
+                </a> *}
+                <a target="_blank" rel="nofollow" href="https://ujhjj.com/g/2fm4vusamufec845fb2f0da0172cef/?i=4&subid=sql&erid=LatgBVMfa">
+                    <img style="width:100%;" border="0" src="https://aflink.ru/b/2fm4vusamufec845fb2f0da0172cef/" alt="Skillfactory.ru"/>
+                </a>
+                <a target="_blank" rel="nofollow" href="https://dhwnh.com/g/8gb84134qdfec845fb2faf541d880b/?i=4&subid=new-year&erid=LatgBjjaY">
+                    <img style="width:100%;" border="0" src="https://aflink.ru/b/8gb84134qdfec845fb2faf541d880b/" alt="Hexlet.io"/>
+                </a>
+            {else}
+                <a target="_blank" rel="nofollow" href="https://codeaven.com/g/ss23iy3l6sfec845fb2fcfba9fca8a/?i=4">
+                    <img style="width:100%;" border="0" src="https://ad.admitad.com/b/ss23iy3l6sfec845fb2fcfba9fca8a/" alt="hidemyname vpn"/>
+                </a>
+                <a target="_blank" rel="nofollow" href="https://dhwnh.com/g/yzp6x9svhbfec845fb2faf541d880b/?i=4&subid=new-year-da&erid=2VSb5w65Q1N">
+                    <img style="width:100%;" border="0" src="https://aflink.ru/b/yzp6x9svhbfec845fb2faf541d880b/" alt="Hexlet.io"/>
+                </a>
+                {* <a target="_blank" rel="nofollow" href="https://dhwnh.com/g/zba3p9bv14fec845fb2faf541d880b/?i=4&subid=python-dev&erid=LatgBe2JB">
+                    <img style="width:100%;" border="0" src="https://aflink.ru/b/zba3p9bv14fec845fb2faf541d880b/" alt="Hexlet.io"/>
+                </a>
+                <a target="_blank" rel="nofollow" href="https://kjuzv.com/g/v76ghfjtdsfec845fb2fa804937a48/?i=4&subid=200-200&erid=LatgBYH9b">
+                    <img style="width:100%;" border="0" src="https://aflink.ru/b/v76ghfjtdsfec845fb2fa804937a48/" alt="Читай-город"/>
+                </a> *}
+                {* <a target="_blank" rel="nofollow" href="https://naiawork.com/g/63cmm8j9f5fec845fb2f5e445e6c7b/?i=4&subid=sql-from-zero&erid=LatgBvCNw">
+                    <img style="width:100%;" border="0" src="https://aflink.ru/b/63cmm8j9f5fec845fb2f5e445e6c7b/" alt="Productstar"/>
+                </a> *}
+            {/if}
+        </div>
+    {/if}
     {literal}
     <h3 id="aircrafts_data_table_description">
       <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">

@@ -74,13 +74,14 @@ class User
     public function loginSession(array $session): bool
     {
         if (($session && isset($session['user_id']))) {
-            $stmt = $this->dbh->prepare("SELECT id, grade, graded_at, admin FROM users WHERE id = :user_id;");
+            $stmt = $this->dbh->prepare("SELECT id, grade, graded_at, (hide_ad_till is null or hide_ad_till < current_date) show_ad, admin FROM users WHERE id = :user_id;");
             $stmt->execute([':user_id' => $session['user_id']]);
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
             if ($user) {
                 $this->id = $user['id'];
                 $this->grade = $user['grade'];
                 $this->graded_at = $user['graded_at'];
+                $this->show_ad = $user['show_ad'];
                 $this->admin = $user['admin'];
                 return true;
             }

@@ -17,18 +17,20 @@
       <li><span class='sql' onclick="scrollInfoPanel('ticket_flights_table_description')">ticket_flights</span> - tabela de relações entre bilhetes e voos.</li>
       <li><span class='sql' onclick="scrollInfoPanel('tickets_table_description')">tickets</span> - tabela de bilhetes.</li>
     </ul>
-    {if isset($Book)}
-      <a href="{$Book.referral_link}" target="_blank" style="text-decoration: none;">
-        <div style="display: flex; flex-direction: row; border: 1px solid white; padding: 0.3em; width: 98%;">
-          <div  style = "width: 30%;">
-              <img style="width: 100%;" src="{$Book.picture_link}" alt="{$Book.title}">
-          </div>
-          <div style="font-size: 1em;  width: 70%;  padding: 0 0.7em; font-weight: 100;">
-              <div>{$Book.title}</div>
-              <div style="font-size: small; padding-top: 0.5em;">{$Book.description}</div>
-          </div>
-        </div>
-      </a>
+    {if $User.show_ad}
+        {if isset($Book)}
+          <a href="{$Book.referral_link}" target="_blank" style="text-decoration: none;">
+            <div style="display: flex; flex-direction: row; border: 1px solid white; padding: 0.3em; width: 98%;">
+              <div  style = "width: 30%;">
+                  <img style="width: 100%;" src="{$Book.picture_link}" alt="{$Book.title}">
+              </div>
+              <div style="font-size: 1em;  width: 70%;  padding: 0 0.7em; font-weight: 100;">
+                  <div>{$Book.title}</div>
+                  <div style="font-size: small; padding-top: 0.5em;">{$Book.description}</div>
+              </div>
+            </div>
+          </a>
+        {/if}
     {/if}
     {literal}
     <h3 id="aircrafts_data_table_description">

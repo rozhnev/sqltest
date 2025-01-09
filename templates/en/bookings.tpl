@@ -1,5 +1,4 @@
 <div id="db-description" class="db-description">
-    {literal}
     <h2>Bookings Database (PostgreSQL)</h2>
     The subject area of this database is airline flights through various airports.
     <p>
@@ -18,18 +17,21 @@
       <li><span class='sql' onclick="scrollInfoPanel('ticket_flights_table_description')">ticket_flights</span> - table of ticket to flights relations.</li>
       <li><span class='sql' onclick="scrollInfoPanel('tickets_table_description')">tickets</span> - table of tickets.</li>
     </ul>
-    <a href="https://amzn.to/3T94Fkz" target="_blank" style="text-decoration: none;">
-      <div style="display: flex; flex-direction: row; border: 1px solid white; padding: 0.3em; width: 98%;">
-        <div  style = "width: 30%;">
-            <img style="width: 100%;" src="/images/learn-postgresql.jpg" alt="Learn PostgreSQL">
-        </div>
-        <div style="font-size: 1em;  width: 70%;  padding: 0 0.7em; font-weight: 100;">
-            <div>Learn PostgreSQL: Use, manage and build secure and scalable databases with PostgreSQL by Luca Ferrari & Enrico Pirozzi</div>
-            <div style="font-size: small; padding-top: 0.5em;">
-            This new edition will help you learn PostgreSQL from scratch with the latest version, providing a complete focused view on aspects like configuration, high performance, partitioning, backup, server-side programming and replication.          </div>
-        </div>
-      </div>
-    </a>
+    {if $User.show_ad}
+        <a href="https://amzn.to/3T94Fkz" target="_blank" style="text-decoration: none;">
+          <div style="display: flex; flex-direction: row; border: 1px solid white; padding: 0.3em; width: 98%;">
+            <div  style = "width: 30%;">
+                <img style="width: 100%;" src="/images/learn-postgresql.jpg" alt="Learn PostgreSQL">
+            </div>
+            <div style="font-size: 1em;  width: 70%;  padding: 0 0.7em; font-weight: 100;">
+                <div>Learn PostgreSQL: Use, manage and build secure and scalable databases with PostgreSQL by Luca Ferrari & Enrico Pirozzi</div>
+                <div style="font-size: small; padding-top: 0.5em;">
+                This new edition will help you learn PostgreSQL from scratch with the latest version, providing a complete focused view on aspects like configuration, high performance, partitioning, backup, server-side programming and replication.          </div>
+            </div>
+          </div>
+        </a>
+    {/if}
+    {literal}
     <h3 id="aircrafts_data_table_description">
       <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
         <svg height="15" width="15" style="">

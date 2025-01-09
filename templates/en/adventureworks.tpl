@@ -1,5 +1,4 @@
 <div id="db-description" class="db-description">
-  {literal}
     <h2>AdventureWorks Database (SQL Server)</h2>
     <p>The AdventureWorks Database is a sample database that demonstrates the capabilities of SQL Server. It includes data
       about
@@ -22,19 +21,22 @@
       <li><span class='sql' onclick="scrollInfoPanel('SalesOrderDetail_table_description')">SalesOrderDetail</span> - table of product sales orders.</li>
       <li><span class='sql' onclick="scrollInfoPanel('SalesOrderHeader_table_description')">SalesOrderHeader</span> - table of product sales orders details.</li>
     </ul>
-    <a href="https://amzn.to/4cFPQwS" target="_blank" style="text-decoration: none;">
-      <div style="display: flex; flex-direction: row; border: 1px solid white; padding: 0.3em; width: 98%;">
-        <div  style = "width: 30%;">
-            <img style="width: 100%;" src="/images/t-sql-fundamentals.jpg" alt="T-SQL Fundamentals by Itzik Ben-Gan">
-        </div>
-        <div style="font-size: 1em;  width: 70%;  padding: 0 0.7em; font-weight: 100;">
-            <div>T-SQL Fundamentals by Itzik Ben-Gan</div>
-            <div style="font-size: small; padding-top: 0.5em;">
-              Master Transact-SQL's fundamentals, and write correct, robust code for querying and modifying data with modern Microsoft data technologies, including SQL Server 2022, Azure SQL Database, and Azure SQL Managed Instance.
+    {if $User.show_ad}
+        <a href="https://amzn.to/4cFPQwS" target="_blank" style="text-decoration: none;">
+          <div style="display: flex; flex-direction: row; border: 1px solid white; padding: 0.3em; width: 98%;">
+            <div  style = "width: 30%;">
+                <img style="width: 100%;" src="/images/t-sql-fundamentals.jpg" alt="T-SQL Fundamentals by Itzik Ben-Gan">
             </div>
-        </div>
-      </div>
-    </a>
+            <div style="font-size: 1em;  width: 70%;  padding: 0 0.7em; font-weight: 100;">
+                <div>T-SQL Fundamentals by Itzik Ben-Gan</div>
+                <div style="font-size: small; padding-top: 0.5em;">
+                  Master Transact-SQL's fundamentals, and write correct, robust code for querying and modifying data with modern Microsoft data technologies, including SQL Server 2022, Azure SQL Database, and Azure SQL Managed Instance.
+                </div>
+            </div>
+          </div>
+        </a>
+    {/if}
+    {literal}
     <h3 id="Address_table_description">
       <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
         <svg height="15" width="15" style="">

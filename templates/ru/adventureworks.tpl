@@ -20,42 +20,44 @@
       <li><span class='sql' onclick="scrollInfoPanel('SalesOrderDetail_table_description')">SalesOrderDetail</span> - таблица заказов.</li>
       <li><span class='sql' onclick="scrollInfoPanel('SalesOrderHeader_table_description')">SalesOrderHeader</span> - таблица деталей заказов.</li>
     </ul>
-    {assign var=add_id value=0|mt_rand:4}
-    <div class="referal-add-block">
-        {if $add_id > 2}
-            {* <a href="https://book24.ru/r/vPcru?erid=LjN8K1JdK" target="_blank" style="text-decoration: none; display: flex;">
-                <div  style = "width: 30%;">
-                    <img style="width: 100%;" src="//ndc.book24.ru/resize/410x590/pim/products/images/2a/23/018edf56-f466-7e54-b41e-7cd2a6b02a23.jpg" alt="Грабер Мартин: SQL.">
-                </div>
-                <div style="font-size: 1em;  width: 70%;  padding: 0 0.7em; font-weight: 100;">
-                    <div>Грабер Мартин: SQL</div>
-                    <div style="font-size: small; padding-top: 0.5em;">
-                    Классическая работа по SQL. Эта книга - отличный источник знаний для всех, кто программирует на SQL. 
-                    В книге дано подробное описание языка, поэтому от читателя не требуется никакой предварительной подготовки. Сопровождаемая практическими учебными материалами, книга представляет собой полное справочное руководство по SQL.
-                  </div>
-                </div>
-            </a> *}
-            {* <a target="_blank" rel="nofollow" href="https://naiawork.com/g/63cmm8j9f5fec845fb2f5e445e6c7b/?i=4&subid=sql-from-zero&erid=LatgBvCNw">
-                <img style="width:100%;" border="0" src="https://aflink.ru/b/63cmm8j9f5fec845fb2f5e445e6c7b/" alt="Productstar"/>
-            </a> *}
-            <a target="_blank" rel="nofollow" href="https://codeaven.com/g/ss23iy3l6sfec845fb2fcfba9fca8a/?i=4">
-              <img style="width:100%;" border="0" src="https://ad.admitad.com/b/ss23iy3l6sfec845fb2fcfba9fca8a/" alt="hidemyname vpn"/>
-            </a>
-            {* <a target="_blank" rel="nofollow" href="https://bywiola.com/g/8s4jme099rfec845fb2f3b8a152381/?i=4&subid=kaprov-courses&erid=LatgBXFig">
-                <img style="width:100%;" border="0" src="https://aflink.ru/b/8s4jme099rfec845fb2f3b8a152381/" alt="Karpov.courses"/>
-            </a> *}
-            <a target="_blank" rel="nofollow" href="https://bywiola.com/g/vvs19xth4pfec845fb2f3b8a152381/?i=4&subid=analyst-ny&erid=2VSb5xzvfBn">
-                <img style="width:100%;" border="0" src="https://aflink.ru/b/vvs19xth4pfec845fb2f3b8a152381/" alt="Karpov.courses"/>
-            </a>
-        {else}
-            <a target="_blank" rel="nofollow" href="https://naiawork.com/g/61ci34ogwofec845fb2f5e445e6c7b/?i=4&subid=ds&erid=LatgC4G1h">
-                <img style="width:100%;" border="0" src="https://aflink.ru/b/61ci34ogwofec845fb2f5e445e6c7b/" alt="Productstar"/>
-            </a>
-            <a target="_blank" rel="nofollow" href="https://thevospad.com/g/dhqiqt6h41fec845fb2f69bd3583e1/?i=4&subid=free-neuronetwork&erid=LatgBSdq6">
-                <img style="width:100%;" border="0" src="https://aflink.ru/b/dhqiqt6h41fec845fb2f69bd3583e1/" alt="Netology"/>
-            </a>
-        {/if}
-    </div>
+    {if $User.show_ad}
+        {assign var=add_id value=0|mt_rand:4}
+        <div class="referal-add-block">
+            {if $add_id > 2}
+                {* <a href="https://book24.ru/r/vPcru?erid=LjN8K1JdK" target="_blank" style="text-decoration: none; display: flex;">
+                    <div  style = "width: 30%;">
+                        <img style="width: 100%;" src="//ndc.book24.ru/resize/410x590/pim/products/images/2a/23/018edf56-f466-7e54-b41e-7cd2a6b02a23.jpg" alt="Грабер Мартин: SQL.">
+                    </div>
+                    <div style="font-size: 1em;  width: 70%;  padding: 0 0.7em; font-weight: 100;">
+                        <div>Грабер Мартин: SQL</div>
+                        <div style="font-size: small; padding-top: 0.5em;">
+                        Классическая работа по SQL. Эта книга - отличный источник знаний для всех, кто программирует на SQL. 
+                        В книге дано подробное описание языка, поэтому от читателя не требуется никакой предварительной подготовки. Сопровождаемая практическими учебными материалами, книга представляет собой полное справочное руководство по SQL.
+                      </div>
+                    </div>
+                </a> *}
+                {* <a target="_blank" rel="nofollow" href="https://naiawork.com/g/63cmm8j9f5fec845fb2f5e445e6c7b/?i=4&subid=sql-from-zero&erid=LatgBvCNw">
+                    <img style="width:100%;" border="0" src="https://aflink.ru/b/63cmm8j9f5fec845fb2f5e445e6c7b/" alt="Productstar"/>
+                </a> *}
+                <a target="_blank" rel="nofollow" href="https://codeaven.com/g/ss23iy3l6sfec845fb2fcfba9fca8a/?i=4">
+                  <img style="width:100%;" border="0" src="https://ad.admitad.com/b/ss23iy3l6sfec845fb2fcfba9fca8a/" alt="hidemyname vpn"/>
+                </a>
+                {* <a target="_blank" rel="nofollow" href="https://bywiola.com/g/8s4jme099rfec845fb2f3b8a152381/?i=4&subid=kaprov-courses&erid=LatgBXFig">
+                    <img style="width:100%;" border="0" src="https://aflink.ru/b/8s4jme099rfec845fb2f3b8a152381/" alt="Karpov.courses"/>
+                </a> *}
+                <a target="_blank" rel="nofollow" href="https://bywiola.com/g/vvs19xth4pfec845fb2f3b8a152381/?i=4&subid=analyst-ny&erid=2VSb5xzvfBn">
+                    <img style="width:100%;" border="0" src="https://aflink.ru/b/vvs19xth4pfec845fb2f3b8a152381/" alt="Karpov.courses"/>
+                </a>
+            {else}
+                <a target="_blank" rel="nofollow" href="https://naiawork.com/g/61ci34ogwofec845fb2f5e445e6c7b/?i=4&subid=ds&erid=LatgC4G1h">
+                    <img style="width:100%;" border="0" src="https://aflink.ru/b/61ci34ogwofec845fb2f5e445e6c7b/" alt="Productstar"/>
+                </a>
+                <a target="_blank" rel="nofollow" href="https://thevospad.com/g/dhqiqt6h41fec845fb2f69bd3583e1/?i=4&subid=free-neuronetwork&erid=LatgBSdq6">
+                    <img style="width:100%;" border="0" src="https://aflink.ru/b/dhqiqt6h41fec845fb2f69bd3583e1/" alt="Netology"/>
+                </a>
+            {/if}
+        </div>
+    {/if}
     {literal}
     <h3 id="Address_table_description">
       <span class="pointer-hand" onClick="scrollInfoPanel('db-description'); return false;" title="Scroll up">
