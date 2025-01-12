@@ -19,7 +19,7 @@
       <li><span class='sql' onclick="scrollInfoPanel('SalesOrderDetail_table_description')">SalesOrderDetail</span> - Tabela de detalhes de pedidos de venda de produtos.</li>
       <li><span class='sql' onclick="scrollInfoPanel('SalesOrderHeader_table_description')">SalesOrderHeader</span> - Tabela de cabeçalhos de pedidos de venda de produtos.</li>
     </ul>
-    {if $User.show_ad}
+    {if $User->showAd()}
         {if isset($Book)}
           <a href="{$Book.referral_link}" target="_blank" style="text-decoration: none;">
             <div style="display: flex; flex-direction: row; border: 1px solid white; padding: 0.3em; width: 98%;">

@@ -7,7 +7,7 @@
         <li><span class='sql' onclick="scrollInfoPanel('penguins_table_description')">penguins</span> - таблица пингвинов.</li>
         <li><span class='sql' onclick="scrollInfoPanel('staff_table_description')">staff</span> - таблица сотрудников.</li>
     </ul>
-    {if $User.show_ad}
+    {if $User->showAd()}
         <div class="referal-add-block">
             <a href="https://book24.ru/r/MdRZN?erid=LjN8JzJBX" target="_blank" style="text-decoration: none; display: flex; ">
                 <div  style = "width: 30%;">

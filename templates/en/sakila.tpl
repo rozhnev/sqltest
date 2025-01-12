@@ -25,7 +25,7 @@
     <li><span class='sql' onclick="scrollInfoPanel('staff_table_description')">staff</span> - table of company staff.</li>
     <li><span class='sql' onclick="scrollInfoPanel('store_table_description')">store</span> - table of company stories.</li>
   </ul>
-  {if $User.show_ad}
+  {if $User->showAd()}
       {* <a href="https://amzn.to/4dVmPhJ" target="_blank" style="text-decoration: none;">
         <div style="display: flex; flex-direction: row; border: 1px solid white; padding: 0.3em; width: 98%;">
           <div  style = "width: 30%;">

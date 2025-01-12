@@ -25,7 +25,7 @@
     <li><span class='sql' onclick="scrollInfoPanel('staff_table_description')">staff</span> - tabela de funcionários da empresa.</li>
     <li><span class='sql' onclick="scrollInfoPanel('store_table_description')">store</span> - tabela de lojas da empresa.</li>
   </ul>
-  {if $User.show_ad}
+  {if $User->showAd()}
       {if isset($Book)}
         <a href="{$Book.referral_link}" target="_blank" style="text-decoration: none;">
           <div style="display: flex; flex-direction: row; border: 1px solid white; padding: 0.3em; width: 98%;">

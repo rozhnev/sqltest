@@ -16,7 +16,7 @@
             </div>
         </div>
     </div>
-    {if $User.show_ad}
+    {if $User->showAd()}
         <div style="height: 5em;">
             <div id="yandex_rtb_R-A-4716552-4">
                 <p style="padding: 5px; font-size:12px;">{translate}menu_small_add_placeholder{/translate}</p>
@@ -53,7 +53,7 @@
         </ol>
     </div>
     {/foreach}
-    {if $User.show_ad}
+    {if $User->showAd()}
         {include file="{$Lang}/menu_bottom_add.tpl"}
     {/if}
 </div>

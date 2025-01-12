@@ -29,6 +29,7 @@ class User
     private $id;
     private $grade;
     private $graded_at;
+    private $show_ad;
     private $admin = false;
 
     private $grades = [ 1 => 'Intern', 2 => 'Junior', 3 => 'Middle', 4 => 'Senior'];
@@ -375,6 +376,16 @@ class User
     public function isAdmin(): bool
     {
         return $this->admin;
+    }
+
+    /**
+     * Return User show advertising status
+     *
+     * @return bool
+     */
+    public function showAd(): bool
+    {
+        return $this->$show_ad;
     }
 
     /**

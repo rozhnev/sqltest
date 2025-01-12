@@ -17,7 +17,7 @@
       <li><span class='sql' onclick="scrollInfoPanel('ticket_flights_table_description')">ticket_flights</span> - table of ticket to flights relations.</li>
       <li><span class='sql' onclick="scrollInfoPanel('tickets_table_description')">tickets</span> - table of tickets.</li>
     </ul>
-    {if $User.show_ad}
+    {if $User->showAd()}
         <a href="https://amzn.to/3T94Fkz" target="_blank" style="text-decoration: none;">
           <div style="display: flex; flex-direction: row; border: 1px solid white; padding: 0.3em; width: 98%;">
             <div  style = "width: 30%;">

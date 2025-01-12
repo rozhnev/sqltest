@@ -17,7 +17,7 @@
       <li><span class='sql' onclick="scrollInfoPanel('ticket_flights_table_description')">ticket_flights</span> - таблица связей билетов с рейсами.</li>
       <li><span class='sql' onclick="scrollInfoPanel('tickets_table_description')">tickets</span> - таблица билетов.</li>
     </ul>
-    {if $User.show_ad}
+    {if $User->showAd()}
         {assign var=add_id value=0|mt_rand:4}
         <div class="referal-add-block">
             {if $add_id > 2}

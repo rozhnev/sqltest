@@ -21,7 +21,7 @@
       <li><span class='sql' onclick="scrollInfoPanel('SalesOrderDetail_table_description')">SalesOrderDetail</span> - table of product sales orders.</li>
       <li><span class='sql' onclick="scrollInfoPanel('SalesOrderHeader_table_description')">SalesOrderHeader</span> - table of product sales orders details.</li>
     </ul>
-    {if $User.show_ad}
+    {if $User->showAd()}
         <a href="https://amzn.to/4cFPQwS" target="_blank" style="text-decoration: none;">
           <div style="display: flex; flex-direction: row; border: 1px solid white; padding: 0.3em; width: 98%;">
             <div  style = "width: 30%;">

@@ -17,7 +17,7 @@
       <li><span class='sql' onclick="scrollInfoPanel('CUSTOMER_table_description')">CUSTOMER</span> - table of customers.</li>
       <li><span class='sql' onclick="scrollInfoPanel('SALES_table_description')">SALES</span> - table of sales.</li>
     </ul>
-    {if $User.show_ad}
+    {if $User->showAd()}
         {if isset($Book)}
             <a href="{$Book.referral_link}" target="_blank" style="text-decoration: none;">
                 <div style="display: flex; flex-direction: row; border: 1px solid white; padding: 0.3em; width: 98%;">

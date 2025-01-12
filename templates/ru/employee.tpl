@@ -17,7 +17,7 @@
         <li><span class='sql' onclick="scrollInfoPanel('CUSTOMER_table_description')">CUSTOMER</span> - таблица клиентов.</li>
         <li><span class='sql' onclick="scrollInfoPanel('SALES_table_description')">SALES</span> - таблица продаж.</li>
     </ul>
-    {if $User.show_ad}
+    {if $User->showAd()}
         {assign var=add_id value=0|mt_rand:4}
         <div class="referal-add-block">
             {if $add_id > 2}

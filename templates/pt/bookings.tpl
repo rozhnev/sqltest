@@ -17,7 +17,7 @@
       <li><span class='sql' onclick="scrollInfoPanel('ticket_flights_table_description')">ticket_flights</span> - tabela de relações entre bilhetes e voos.</li>
       <li><span class='sql' onclick="scrollInfoPanel('tickets_table_description')">tickets</span> - tabela de bilhetes.</li>
     </ul>
-    {if $User.show_ad}
+    {if $User->showAd()}
         {if isset($Book)}
           <a href="{$Book.referral_link}" target="_blank" style="text-decoration: none;">
             <div style="display: flex; flex-direction: row; border: 1px solid white; padding: 0.3em; width: 98%;">

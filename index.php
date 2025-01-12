@@ -233,7 +233,7 @@ switch ($action) {
             }
         }
         if (!$queryTestResult['ok']) header( 'HTTP/1.1 418 BAD REQUEST' );
-        if ($user->show_ad) {
+        if ($user->showAd()) {
             $smarty->assign('ReferralLink', Helper::getReferralLink($dbh, $lang, $mobileView ? 'mobile' : 'desktop'));
         }
         $template = "$lang/query_test_result.tpl";
@@ -247,7 +247,7 @@ switch ($action) {
             $user->saveQuestionAttempt($questionID, $answerResult, $answers);
         }
         if (!$answerResult['ok']) header( 'HTTP/1.1 418 BAD REQUEST' );
-        if ($user->show_ad) {
+        if ($user->showAd()) {
             $smarty->assign('ReferralLink', Helper::getReferralLink($dbh, $lang, $mobileView ? 'mobile' : 'desktop'));
         }
         $template = "$lang/check_answer_result.tpl";
