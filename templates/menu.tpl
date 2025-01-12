@@ -24,7 +24,7 @@
         </div>
     {/if}
     {foreach $Questionnire.menu as $categoryId => $panel}
-    <button class="accordion {if $categoryId eq $QuestionCategoryID}active{/if}">
+    <button class="accordion {if isset($QuestionCategoryID) && $categoryId eq $QuestionCategoryID}active{/if}">
         <span class="accordion-title">{$panel.title}</span>
         <span class="accordion-icons">
         <span class="eye-btn" title="Hide solved problems">
@@ -41,7 +41,7 @@
             </span>
         </span>
     </button>
-    <div class="panel {if $categoryId eq $QuestionCategoryID}active{/if}">
+    <div class="panel {if isset($QuestionCategoryID) && $categoryId eq $QuestionCategoryID}active{/if}">
         <ol>
         {foreach $panel.questions as $question}
         <li>
