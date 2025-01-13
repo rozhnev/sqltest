@@ -589,7 +589,7 @@ body {
     cursor: pointer;
 }
 .question-star.favored {
-    color: gold;
+    color: var(--sql-color); /*gold;*/
 }
 .question pre {
     font-family: Arial, Helvetica, sans-serif;
