@@ -79,5 +79,16 @@ class Controller
         $this->engine->assign('User', $user);
         $this->engine->display("rate_saved.tpl");
     }
+
+    public function question_favorite(PDO $dbh, User $user, array $params): void 
+    {
+        $this->engine->assign('Saved', false);
+        if ($user->logged()) {
+            $question = new Question($dbh, $params['questionID']);
+            $this->engine->assign('Saved', $question->favorite($user));
+        }
+        $this->engine->assign('User', $user);
+        $this->engine->display("rate_saved.tpl");
+    }
 }
 ?>

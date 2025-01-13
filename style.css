@@ -583,6 +583,14 @@ body {
 .question-level.rate5 {
     background-color: #990000;
 }
+.question-star {
+    padding: 0 0 0 6px;
+    font-size: small;
+    cursor: pointer;
+}
+.question-star.favored {
+    color: gold;
+}
 .question pre {
     font-family: Arial, Helvetica, sans-serif;
     line-height: 1.5;

@@ -449,4 +449,9 @@ class Question
         $solutions = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $solutions;
     }
+
+    public function favorite(User $user): bool
+    {
+        return true;
+    }
 }

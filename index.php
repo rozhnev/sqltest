@@ -87,6 +87,9 @@ if (isset($pathParts[0]) && $pathParts[0] === 'login') {
     $lang       = $params['lang'];
     $action     = $params['action'];
     $questionID = $params['questionID'];
+} elseif (preg_match("@(?<lang>$languge_codes_regexp)/question/(?<questionID>\d+)/(?<action>favorite)@i", $path, $params)) {
+    $action     = 'question_' . $params['action'];
+    return (new Controller($smarty, $params['lang']))->$action($dbh, $user, $params);
 } elseif (preg_match("@(?<lang>$languge_codes_regexp)/solution/(?<solutionID>\d+)/(?<action>like|dislike|report)@i", $path, $params)) {
     $action     = 'solution_' . $params['action'];
     return (new Controller($smarty, $params['lang']))->$action($dbh, $user, $params);

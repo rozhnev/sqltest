@@ -218,6 +218,26 @@ function testQuery(lang, questionId) {
         document.getElementById('code-result').innerHTML = 'Something went wrong. Please review your query and try again.';
     });
 }
+function toggleFavorites(lang, questionId) {
+    let formData = new FormData();
+    fetch(`/${lang}/question/${questionId}/favorite`, {
+        method: "POST",
+        mode: "cors",
+        cache: "default",
+        credentials: "same-origin",
+        body: formData,
+    })
+    .then((async response=>{
+        if (response.ok) {
+            if (document.getElementById("favoriteStar")) {
+                document.getElementById("favoriteStar").classList.toggle("favored");
+                // document.getElementById("favoriteStar").title = 'Favored'
+            } 
+        }
+    }))
+    .catch(err=>{
+    });
+}
 function checkSolution(url) {
     setLoader('code-result');
     let formData = new FormData();
