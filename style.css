@@ -159,7 +159,7 @@ body {
     color: #fff;
     text-align: center;
     border-radius: 3px;
-    padding: 16px;
+    padding: 16px !important;
     position: fixed;
     z-index: 1;
     left: 47%;
@@ -353,9 +353,7 @@ body {
     font-size: 18px;
     font-weight: bold;
 }
-
-.splitter .hidden,
-.accordion .hidden {
+.hidden {
     display: none;
 }
 .user-solutions-count {
@@ -372,7 +370,6 @@ body {
 }
 
 .right.hidden {
-    display: none;
     transition: easy 0.5s;
 }
 
@@ -498,7 +495,7 @@ body {
 
 .menu .panel a {
     color: var(--menu-link-color); 
-    display: block;
+    display: flex;
     margin: 7px 0;
     font-size: 1.1em;
     text-decoration: none;
@@ -583,10 +580,19 @@ body {
 .question-level.rate5 {
     background-color: #990000;
 }
-.question-star {
+.question-title .question-star {
     padding: 0 0 0 6px;
     font-size: small;
     cursor: pointer;
+}
+.question-title .question-star {
+    padding: 0 0 0 6px;
+    font-size: small;
+    cursor: pointer;
+}
+.question-link .question-star {
+    padding-left: 3px;
+    font-size: xx-small;
 }
 .question-star.favored {
     color: var(--sql-color); /*gold;*/
@@ -730,9 +736,6 @@ body {
     background-color: darkred;
 }
 
-.button.hidden {
-    display: none;
-}
 .button.erd {
     display: block; 
     text-decoration: none; 

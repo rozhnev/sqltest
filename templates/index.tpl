@@ -16,7 +16,7 @@
                     <div class="question-title">
                         <div class="question-level rate{$Question.rate}" title="{$Question.question_rate|default:'Not rated yet'}"></div>
                         <span title="({$QuestionID})">{translate}question_title{/translate}&nbsp;{$Question.number}:</span>
-                        <span id="favoriteStar" class="question-star{if isset($Question.favored) && $Question.favored} favored{/if}" title="{if isset($Question.favored) && $Question.favored}Favored{else}Click to add to favorites{/if}" onClick="toggleFavorites('{$Lang}', {$QuestionID})">★</span>
+                        <span id="favoriteStar" class="question-star{if isset($Question.favored) && $Question.favored} favored{/if}" title="{if isset($Question.favored) && $Question.favored}{translate}favorite{/translate}{else}{translate}add_to_favorites{/translate}{/if}" onClick="toggleFavorites('{$Lang}', {$QuestionID})">★</span>
                         <span class="question-dates">
                             {if $Question.solved_date}
                                 {translate}question_solved_at{/translate}: {$Question.solved_date}

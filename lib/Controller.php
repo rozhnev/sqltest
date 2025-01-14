@@ -82,13 +82,16 @@ class Controller
 
     public function question_favorite(PDO $dbh, User $user, array $params): void 
     {
-        $this->engine->assign('Saved', false);
-        if ($user->logged()) {
-            $question = new Question($dbh, $params['questionID']);
-            $this->engine->assign('Saved', $question->favorite($user));
+        if (!$user->logged()) {
+            $message = 'login_needed';
+        } elseif ($user->toggleFavorite($params['questionID']))  {
+            $message = 'done';
+        } else {
+            $message = 'something_went_wrong';
         }
-        $this->engine->assign('User', $user);
-        $this->engine->display("rate_saved.tpl");
+
+        $this->engine->assign('Message', Localizer::translateString($message));
+        $this->engine->display("user_message.tpl");
     }
 }
 ?>

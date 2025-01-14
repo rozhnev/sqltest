@@ -571,4 +571,21 @@ class User
         $stmt = $this->dbh->prepare("UPDATE users SET grade = :grade, graded_at = CURRENT_TIMESTAMP WHERE id = :user_id;");
         $stmt->execute([':user_id' => $this->id, ':grade' => $grade]);
     }
+
+
+    public function toggleFavorite(int $question_id): bool
+    {
+        $stmt = $this->dbh->prepare("
+            WITH t AS (
+                SELECT * FROM (VALUES (:user_id::uuid, :question_id::int)) AS t (user_id, question_id)
+            )
+            MERGE INTO favorites 
+            USING t ON favorites.user_id = t.user_id and favorites.question_id = t.question_id
+            WHEN NOT MATCHED THEN
+                INSERT VALUES(t.user_id, t.question_id)
+             WHEN MATCHED THEN DELETE;"
+        );
+
+        return $stmt->execute([':user_id' => $this->id, ':question_id' => $question_id]);
+    }
 }

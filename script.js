@@ -230,6 +230,8 @@ function toggleFavorites(lang, questionId) {
     .then((async response=>{
         if (response.ok) {
             if (document.getElementById("favoriteStar")) {
+                const message =  await response.text();
+                showToast(message);
                 document.getElementById("favoriteStar").classList.toggle("favored");
                 // document.getElementById("favoriteStar").title = 'Favored'
             } 
@@ -365,6 +367,16 @@ function toggleSolvedTasks(e) {
     saveUIConfig();
     return false;
 }
+function toggleNotFavoritsTasks(e) {
+    document.getElementById('toggleNotFavoritTasks').classList.toggle("favored");
+    [...document.getElementsByClassName("question-link solved")].map(el=>{
+        el.parentNode.classList.toggle("invisible")
+    });
+    window.UIConfig.hidenotFavoredTasks = !window.UIConfig.hidenotFavoredTasks;
+    saveUIConfig();
+    return false;
+}
+
 function toggleInfoPanel() {
     document.getElementsByClassName("right")[0].classList.toggle("hidden");
     document.getElementsByClassName("main")[0].classList.toggle("wide");

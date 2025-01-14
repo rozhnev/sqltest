@@ -48,7 +48,8 @@ class Questionnire
                 questions.title_sef question_sef,
                 questions.db_template,
                 questions_localization.title question_title,
-                (solved_at IS NOT NULL) solved
+                (solved_at IS NOT NULL) solved,
+                (favorites.question_id is not null) favored
             FROM categories
             JOIN categories_localization ON categories_localization.category_id = categories.id AND categories_localization.language =  :lang
             JOIN questionnires ON questionnires.id = categories.questionnire_id
@@ -56,6 +57,7 @@ class Questionnire
             JOIN questions ON question_categories.question_id = questions.id
             JOIN questions_localization on questions_localization.question_id = questions.id AND questions_localization.language = :lang
             LEFT JOIN user_questions ON user_questions.question_id = questions.id AND user_questions.user_id = :userId
+            LEFT JOIN favorites ON favorites.question_id = questions.id AND favorites.user_id = :userId
             WHERE not categories.deleted AND not questions.deleted AND
                 questionnires.name = :questionnire
             ORDER BY categories.sequence_position, question_categories.sequence_position
@@ -76,7 +78,7 @@ class Questionnire
                         'sef'       => $el['sef'],
                         'questions' => []
                     ];
-                    $acc[$el['id']]['questions'][] = [$el['question_title'], $el['question_id'], $el['solved'], $el['question_sef']];
+                    $acc[$el['id']]['questions'][] = [$el['question_title'], $el['question_id'], $el['solved'], $el['question_sef'], $el['favored']];
                     return $acc;
                 },
                 []
