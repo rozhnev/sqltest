@@ -71,8 +71,8 @@ class Question
                 (favorites.question_id is not null) favored
             FROM questions 
             JOIN questions_localization on questions_localization.question_id = questions.id AND questions_localization.language =  :lang
-            JOIN question_categories ON question_categories.question_id = questions.id AND question_categories.category_id = :category_id
-            JOIN categories on categories.id = question_categories.category_id
+            LEFT JOIN question_categories ON question_categories.question_id = questions.id AND question_categories.category_id = :category_id
+            LEFT JOIN categories on categories.id = question_categories.category_id
             LEFT JOIN user_questions ON user_questions.question_id = questions.id AND user_questions.user_id = :user_id
             LEFT JOIN question_rates_localization ON questions.rate = question_rates_localization.id AND question_rates_localization.language = :lang
             LEFT JOIN favorites ON favorites.question_id = questions.id AND favorites.user_id = :user_id

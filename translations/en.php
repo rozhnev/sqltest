@@ -44,6 +44,7 @@ $translations = [
     'something_went_wrong' => '😨 Oops! Something went wrong.',
     'done' => 'Done!',
     'favorite' => 'Favorite',
+    'favorites' => 'Favorites',
     'add_to_favorites' => 'Click to add to favorites',
     'menu_small_add_placeholder' => 'Advertising income and donations are our sole funding sources. Please don’t disable ads or <a href="/en/donate" style="color: var(--special-text-color);">consider donating</a>.<br>Thank you for your support! 🙏🌟',
     'toast_sql_copied_to_buffer' => 'SQL code copied to buffer',

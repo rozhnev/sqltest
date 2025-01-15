@@ -588,4 +588,24 @@ class User
 
         return $stmt->execute([':user_id' => $this->id, ':question_id' => $question_id]);
     }
+
+    public function getFavorites($lang): array
+    {
+        $stmt = $this->dbh->prepare("
+            SELECT 
+                questions_localization.title, 
+                questions_localization.question_id, 
+                null as solved_at, 
+                questions.title_sef, 
+                true as favored 
+            FROM favorites 
+            JOIN questions ON favorites.question_id = questions.id 
+            JOIN questions_localization ON questions.id = questions_localization.question_id AND questions_localization.language = :lang
+            WHERE user_id = :user_id;
+        ");
+        $stmt->execute([':lang' => $lang, ':user_id' => $this->id]);
+        // var_dump( $stmt->fetchAll(PDO::FETCH_NUM));
+        // die();
+        return $stmt->fetchAll(PDO::FETCH_NUM);
+    }
 }

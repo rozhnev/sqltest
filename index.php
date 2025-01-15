@@ -445,6 +445,7 @@ switch ($action) {
             if ($user->logged()) {
                 $user->setPath($path);
                 $user->save();
+                $smarty->assign('Favorites', $user->getFavorites($lang));
             }
             $smarty->assign('Questionnire', $questionnire->get($QuestionnireName, $user->getId()));
             $questionData = $question->get($questionCategoryID, $lang, $user->getId());
@@ -458,7 +459,7 @@ switch ($action) {
             $smarty->assign('NextQuestionId', $question->getNextSefId($questionCategoryID));
             $smarty->assign('PreviousQuestionId', $question->getPreviousSefId($questionCategoryID));
             $smarty->assign('Book', Helper::getBook($dbh, $lang, $questionData['dbms']));
-
+            
             $smarty->registerPlugin("modifier", "floor", "floor");
             $smarty->registerPlugin("modifier", "in_array", "in_array");
             $template = $mobileView ? "m.index.tpl" : "index.tpl";

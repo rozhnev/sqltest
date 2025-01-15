@@ -43,6 +43,7 @@ $translations = [
     'something_went_wrong' => '😨 Ops! Algo deu errado.',
     'done' => 'Feito!',
     'favorite' => 'Favorito',
+    'favorites' => 'Favoritos',
     'add_to_favorites' => 'Adicionar aos favoritos',
     'menu_small_add_placeholder' => 'A receita de anúncios e doações são nossas únicas fontes de financiamento. Por favor, não desative os anúncios ou <a href="/pt/donate" style="color: var(--special-text-color);">considere doar</a>.<br>Obrigado pelo seu apoio! ',
     'toast_sql_copied_to_buffer' => 'Código SQL copiado para a área de transferência',

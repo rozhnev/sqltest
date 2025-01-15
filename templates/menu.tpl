@@ -45,6 +45,23 @@
             {* <span id="toggleNotFavoritTasks" class="question-star favored" title="{translate}favorite{/translate}">★</span> *}
         </span>
     </div>
+    {if $User->logged()}
+        <button class="accordion {if isset($QuestionCategoryID) && 99 eq $QuestionCategoryID}active{/if}">
+            <span class="accordion-title"><span class="question-star favored" title="{translate}favorite{/translate}">★</span>&nbsp;{translate}favorites{/translate}</span>
+            
+        </button>
+        <div class="panel {if isset($QuestionCategoryID) && 99 eq $QuestionCategoryID}active{/if}">
+            <ul>
+            {foreach $Favorites as $question}
+            <li>
+                <a class="question-link {if $QuestionID == $question[1]} current-question{/if}{if $question[2]} solved{/if}" href="/{$Lang}/question/favorites/{$question[3]}">
+                    {$question[0]}
+                </a>
+            </li>
+            {/foreach}
+            </ul>
+        </div>
+    {/if}
     {foreach $Questionnire.menu as $categoryId => $panel}
     <button class="accordion {if isset($QuestionCategoryID) && $categoryId eq $QuestionCategoryID}active{/if}">
         <span class="accordion-title">{$panel.title}</span>
