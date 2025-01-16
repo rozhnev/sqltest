@@ -169,7 +169,9 @@ switch ($action) {
         $questionnire = new Questionnire($dbh, $lang);
         $smarty->assign('Questionnire', $questionnire->get($QuestionnireName, $user->getId()));
         $smarty->assign('Lang', $lang);
-        // var_dump($questionnire->get($QuestionnireName, $user->getId()));
+        if ($user->logged()) {
+            $smarty->assign('Favorites', $user->getFavorites($lang));
+        }
         $template = "menu.tpl";
         break;
     case 'sitemap':
@@ -459,7 +461,7 @@ switch ($action) {
             $smarty->assign('NextQuestionId', $question->getNextSefId($questionCategoryID));
             $smarty->assign('PreviousQuestionId', $question->getPreviousSefId($questionCategoryID));
             $smarty->assign('Book', Helper::getBook($dbh, $lang, $questionData['dbms']));
-            
+
             $smarty->registerPlugin("modifier", "floor", "floor");
             $smarty->registerPlugin("modifier", "in_array", "in_array");
             $template = $mobileView ? "m.index.tpl" : "index.tpl";
