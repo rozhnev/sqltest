@@ -601,7 +601,8 @@ class User
             FROM favorites 
             JOIN questions ON favorites.question_id = questions.id 
             JOIN questions_localization ON questions.id = questions_localization.question_id AND questions_localization.language = :lang
-            WHERE user_id = :user_id;
+            WHERE user_id = :user_id
+            ORDER BY questions_localization.title;
         ");
         $stmt->execute([':lang' => $lang, ':user_id' => $this->id]);
         // var_dump( $stmt->fetchAll(PDO::FETCH_NUM));

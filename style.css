@@ -487,7 +487,8 @@ body {
     overflow-y: scroll;
 }
 
-.menu .panel ol {
+.menu .panel ol,
+.menu .panel ul {
     color: var(--menu-link-color); 
     font-size: small;
     background-color: var(--text-block-background-color);
