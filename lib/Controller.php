@@ -79,5 +79,31 @@ class Controller
         $this->engine->assign('User', $user);
         $this->engine->display("rate_saved.tpl");
     }
+
+    public function solution_delete(PDO $dbh, User $user, array $params): void 
+    {
+        if ($user->logged()) {
+            $questionID = $user->deleteSolution($params['solutionID']);
+            $this->engine->assign('Saved', true);
+            $question = new Question($dbh, $questionID);
+            $question->setBestQueryCost();
+            $this->engine->assign('Message', Localizer::translateString('done'));
+        } else {
+            $this->engine->assign('Message', Localizer::translateString('login_needed'));
+        }
+        $this->engine->assign('User', $user);
+        $this->engine->display("user_message.tpl");
+    }
+    
+    public function my_solutions(PDO $dbh, User $user, array $params): void 
+    {
+        if ($user->logged()) {
+            $solutions = $user->getSolutions($params['questionID']);
+            $this->engine->assign('QuestionSolutions', $solutions);
+        }
+        $this->engine->assign('User', $user);
+        $this->engine->assign('QuestionID', $params['questionID']);
+        $this->engine->display("user_solutions.tpl");
+    }
 }
 ?>
