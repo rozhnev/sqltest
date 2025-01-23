@@ -31,5 +31,7 @@ class Localizer {
         return $translation;
 
     }
-
+    public static function translateString($name) {
+        return $translation = self::$translations[$name] ?? $name;
+    }
 }
