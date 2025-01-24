@@ -42,7 +42,15 @@ $translations = [
     'site_promo_question_quiz' => 'interactive SQL quiz',
     'site_promo_test' => 'get your SQL rank!',
     'something_went_wrong' => 'Oops! Something went wrong, but don\'t worry we have many other tasks <a href="/en/" target="_self">here</a>',
-    'menu_small_add_placeholder' => 'Advertising income and donations are our sole funding sources. Please don’t disable ads or <a href="/en/donate" style="color: var(--special-text-color);">consider donating</a>.<br>Thank you for your support! 🙏🌟',
+    'menu_small_add_placeholder' => '<div style="display: flex; flex-direction: column; align-items: center;">
+        Support us on <a href="https://boosty.to/phpize/donate" target="_blank">
+        <img src="https://static.boosty.to/assets/images/logo.b92ac.svg" 
+                            alt="Support on Boosty"
+                            style="background-color: white;
+                            padding: 3px;
+                            border-radius: 7px;
+                            margin: 5px auto;">
+                        </a></div>',    
     'toast_sql_copied_to_buffer' => 'SQL code copied to buffer',
     'login_popup_footer' => 'Login on the site is only required to save your progress. You can continue testing without logging into the site.',
     'rate_saved' => 'Thank you! Your vote has been counted.',

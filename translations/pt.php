@@ -41,7 +41,15 @@ $translations = [
     'site_promo_question_quiz' => 'teste SQL',
     'site_promo_test' => 'Avalie seu SQL agora!',
     'something_went_wrong' => 'Ops! Algo deu errado, mas não se preocupe, temos muitas outras tarefas <a href="/pt/" target="_self">aqui</a>',
-    'menu_small_add_placeholder' => 'A receita de anúncios e doações são nossas únicas fontes de financiamento. Por favor, não desative os anúncios ou <a href="/pt/donate" style="color: var(--special-text-color);">considere doar</a>.<br>Obrigado pelo seu apoio! ',
+    'menu_small_add_placeholder' => '<div style="display: flex; flex-direction: column; align-items: center;">
+        Apoie-nos em <a href="https://boosty.to/phpize/donate" target="_blank">
+        <img src="https://static.boosty.to/assets/images/logo.b92ac.svg" 
+                            alt="Apoie-nos em on Boosty"
+                            style="background-color: white;
+                            padding: 3px;
+                            border-radius: 7px;
+                            margin: 5px auto;">
+                        </a></div>', 
     'toast_sql_copied_to_buffer' => 'Código SQL copiado para a área de transferência',
     'login_popup_footer' => 'O login no site só é necessário para salvar seu progresso. Você pode continuar testando sem fazer login no site.',
     'rate_saved' => 'Obrigado! Seu voto foi computado.',
