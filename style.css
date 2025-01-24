@@ -874,6 +874,11 @@ td {
     height: 20vh;
     /* width: 21vw; */
 }
+.solutions-title {
+    font-weight: bold;
+    background-color: var(--question-title-bg-color);
+    padding: 6px;
+}
 .solution-title,
 .solution-footer {
     font-weight: bold;
