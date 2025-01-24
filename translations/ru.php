@@ -58,6 +58,7 @@ $translations = [
     'page_keywords' => 'SQL тренажер, практические задачи по SQL, тест на знание SQL, sakila mysql, postgresql, sql server',
     'solutions_title' => 'Посмотрите, как другие пользователи решили эту задачу:',
     'solution_title' => 'Решено',
+    'my_solutions_title' => 'Мои решения задачи',
     'solution_query_cost' => 'Стоимость',
     'low_grades_restricted' => 'Доступно только для пользователей уровня Middle или Senior.',
     'determine_your_level' => 'Пройдите тест, чтобы определить свой уровень.',

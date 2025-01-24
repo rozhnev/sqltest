@@ -57,6 +57,7 @@ $translations = [
     'page_keywords' => 'questionário prático de SQL, testar conhecimento de SQL, sakila mysql postgresql',
     'solutions_title' => 'Veja como outros usuários resolveram este problema:',
     'solution_title' => 'Resolvido em',
+    'my_solutions_title' => 'Minhas soluções para a tarefa',
     'solution_query_cost' => 'Custo da consulta',
     'low_grades_restricted' => 'Available to Middle and Senior-level users only.',
     'determine_your_level' => 'Faça o teste para determinar seu nível.',

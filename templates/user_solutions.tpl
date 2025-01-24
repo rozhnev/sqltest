@@ -1,7 +1,7 @@
 <div {if !$MobileView}style="width: 21vw;"{/if}>
     {if $User->logged()}
         {if $QuestionSolutions}
-            <p>{translate}solutions_title{/translate}</p>
+            <p>{translate}my_solutions_title{/translate}</p>
             {foreach $QuestionSolutions as $id=>$solution}
                 <div class="solution-wrapper" id="solution-wrapper-{$id}">
                     <div class="solution-title">{translate}solution_title{/translate}: {$solution.created_at} {translate}solution_query_cost{/translate}: {$solution.query_cost}</div>

@@ -57,6 +57,7 @@ $translations = [
     'page_default_description' => 'Take the SQL test. Solve SQL tasks, write effective SQL queries, learn concepts, and improve your knowledge. Become an SQL expert!',
     'page_keywords' => 'practical SQL quiz, SQL assessment, sakila mysql postgresql',
     'solutions_title' => 'Look as another users solved this problem:',
+    'my_solutions_title' => 'My solutions of the task',
     'solution_title' => 'Solved at',
     'solution_query_cost' => 'Query cost',
     'no_solutions_yet' => 'Sorry, but no solution to this problem has been published yet.',
