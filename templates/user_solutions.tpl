@@ -31,4 +31,5 @@
             </div>
         </div>
     {/if}
+    {translate}menu_small_add_placeholder{/translate}
 </div>
