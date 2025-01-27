@@ -302,7 +302,7 @@ class Question
     public function checkQueryResult(string $queryResult)
     {
         
-        $stmt = $this->dbh->prepare("SELECT query_valid_result FROM questions WHERE id = ?");
+        $stmt = $this->dbh->prepare("SELECT query_valid_result, pre_check_sort FROM questions WHERE id = ?");
         $stmt->execute([$this->id]);
         $questionData = $stmt->fetch(PDO::FETCH_ASSOC);
         $evaluatedResult = $this->evaluateValidResult($questionData['query_valid_result']);
@@ -359,6 +359,11 @@ class Question
             }
 
             // check rows order
+            if ($questionData['pre_check_sort']) {
+                // sort rows before compare
+                sort($resultObject[0]->data);
+                sort($queryValidResult->data);
+            }
             foreach ($queryValidResult->data as $i => $row) {
                 if ($row !== $resultObject[0]->data[$i]) {
                     // convert numeric strings to floating numbers

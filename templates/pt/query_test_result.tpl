@@ -16,7 +16,7 @@
             </div>
         {if $User->logged()}
             <div>
-                <button class="button green" onClick="showSolutions({$QuestionID})">Mostre-me outras soluções!</button>
+                <button class="button green" onClick="showOthersSolutions({$QuestionID})">Mostre-me outras soluções!</button>
             </div>
         {/if}
      {/if}

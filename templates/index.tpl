@@ -61,8 +61,12 @@
                     </div>
                     <p class="question-action">{translate}question_action_mark_all_answers{/translate}</p>
                 {else}
-                    <p class="question-action">{translate}question_action_write_your_request{/translate}</p>
                     <p class="question-action">{translate}question_action_use_syntax{/translate}</p>
+                    {if $Question.solved_date}
+                        <p class="question-action">{translate}you_already_solved_this_task{/translate}&nbsp;<button class="button-small blue" onClick="showMySolutions({$QuestionID})">{translate}view_solutions{/translate}</button></p>
+                    {else}
+                        <p class="question-action">{translate}question_action_write_your_request{/translate}</p>
+                    {/if}
                 {/if}
             </div>
             {if !isset($Question.answers)}

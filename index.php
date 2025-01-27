@@ -90,7 +90,10 @@ if (isset($pathParts[0]) && $pathParts[0] === 'login') {
 } elseif (preg_match("@(?<lang>$languge_codes_regexp)/question/(?<questionID>\d+)/(?<action>favorite)@i", $path, $params)) {
     $action     = 'question_' . $params['action'];
     return (new Controller($smarty, $params['lang']))->$action($dbh, $user, $params);
-} elseif (preg_match("@(?<lang>$languge_codes_regexp)/solution/(?<solutionID>\d+)/(?<action>like|dislike|report)@i", $path, $params)) {
+} elseif (preg_match("@(?<lang>$languge_codes_regexp)/question/(?<questionID>\d+)/(?<action>my-solutions)@i", $path, $params)) {
+    $action     = str_replace('-', '_', strtolower($params['action']));
+    return (new Controller($smarty, $params['lang']))->$action($dbh, $user, $params);
+} elseif (preg_match("@(?<lang>$languge_codes_regexp)/solution/(?<solutionID>\d+)/(?<action>like|dislike|report|delete)@i", $path, $params)) {
     $action     = 'solution_' . $params['action'];
     return (new Controller($smarty, $params['lang']))->$action($dbh, $user, $params);
 } elseif (preg_match("@(?<lang>$languge_codes_regexp)/(?<action>donate)@i", $path, $params)) {
