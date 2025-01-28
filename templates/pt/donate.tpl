@@ -24,6 +24,26 @@
         <h2>Formas de Apoio:</h2>
         <div class="donation-methods">
             <div class="donation-method">
+            <h3>Suporte em qualquer moeda</h3>
+                <p>Doe ou assine no Boosty:</p>
+                <p>
+                    <a href="https://boosty.to/phpize/donate" target="_blank">
+                        <img src="https://static.boosty.to/assets/images/logo.b92ac.svg" 
+                            alt="Donate or subsription on Boosty"
+                            style="width: 200px;
+                            background-color: white;
+                            padding: 10px;
+                            border-radius: 7px;">
+                    </a>
+                    <img src="/images/boosty-donate.png" 
+                    alt="Donate or subsription on Boosty"
+                    style="width: 200px;
+                    background-color: white;
+                    padding: 10px;
+                    border-radius: 7px;">
+                </p>
+            </div>
+            <div class="donation-method">
                 <h3>Apoie com Euro via Ko-fi</h3>
                 <p>Faça uma contribuição segura através da plataforma Ko-fi:</p>
                 <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>

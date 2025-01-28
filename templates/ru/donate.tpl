@@ -25,6 +25,26 @@
         <h2>Способы поддержки:</h2>
         <div class="donation-methods">
             <div class="donation-method">
+                <h3>Поддержка в любой валюте</h3>
+                <p>Пожертвование или подписка на Boosty:</p>
+                <p>
+                    <a href="https://boosty.to/phpize/donate" target="_blank">
+                        <img src="https://static.boosty.to/assets/images/logo.b92ac.svg" 
+                            alt="Пожертвование или подписка на Boosty"
+                            style="width: 200px;
+                            background-color: white;
+                            padding: 10px;
+                            border-radius: 7px;">
+                    </a>
+                    <img src="/images/boosty-donate.png" 
+                    alt="Пожертвование или подписка на Boosty"
+                    style="width: 200px;
+                    background-color: white;
+                    padding: 10px;
+                    border-radius: 7px;">
+                </p>
+            </div>
+            <div class="donation-method">
                 <h3>Поддержка в рублях</h3>
                 <p>Быстрый и безопасный платёж через CloudTips:</p>
                 <p>

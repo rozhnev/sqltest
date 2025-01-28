@@ -521,7 +521,8 @@ class User
 
     public function getSolutions(int $questionID): array
     {
-        $stmt = $this->dbh->prepare("SELECT id, query, query_cost, created_at, likes, dislikes, reported 
+        $stmt = $this->dbh->prepare("SELECT 
+                id, query, query_cost, created_at::date, likes, dislikes, reported 
             FROM user_solutions 
             WHERE user_id = ? AND question_id = ?
             ORDER BY created_at DESC;");
