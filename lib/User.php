@@ -519,6 +519,25 @@ class User
         }
     }
 
+    public function getSolutions(int $questionID): array
+    {
+        $stmt = $this->dbh->prepare("SELECT id, query, query_cost, created_at, likes, dislikes, reported 
+            FROM user_solutions 
+            WHERE user_id = ? AND question_id = ?
+            ORDER BY created_at DESC;");
+        $stmt->execute([$this->id, $questionID]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function deleteSolution(int $solutionID): int
+    {
+        $stmt = $this->dbh->prepare("DELETE
+            FROM user_solutions 
+            WHERE user_id = ? AND id = ? RETURNING question_id;");
+        $stmt->execute([$this->id, $solutionID]);
+        return $stmt->fetchColumn(0);
+    }
+
     /**
      * Save Questoin attepmt in DB
      *

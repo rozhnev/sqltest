@@ -260,8 +260,15 @@ function checkSolution(url) {
         document.getElementById('code-result').innerHTML = 'Something went wrong. Please review your query and try again.';
     });
 }
-function showSolutions(questionId) {
-    fetch(`/${lang}/question/${questionId}/solutions`, {
+function showMySolutions(questionId) {
+    showSolutions(questionId, 'my');
+}
+function showOthersSolutions(questionId) {
+    showSolutions(questionId, 'others');
+}
+function showSolutions(questionId, whom) {
+    const url = whom === 'my' ? `/${lang}/question/${questionId}/my-solutions` : `/${lang}/question/${questionId}/solutions`;
+    fetch(url, {
         method: "GET",
         mode: "cors",
         cache: "default",
@@ -309,7 +316,24 @@ function solutionDislike(solutionId) {
 }
 function solutionReport(lang, questionId, solutionId) {
     solutionUpdate(solutionId, 'report')
-    .then(()=>showSolutions(questionId));
+    .then(()=>showOthersSolutions(questionId));
+}
+function solutionDelete(lang, questionId, solutionId) {
+    return fetch(`/${lang}/solution/${solutionId}/delete`, {
+        method: "POST",
+        mode: "cors",
+        cache: "default",
+        credentials: "same-origin",
+    })
+    .then((async response=>{
+      if (response.ok) {
+        const message =  await response.text();
+        showToast(message);
+      }
+    }))
+    .then(()=>showMySolutions(questionId))
+    .catch(err=>{
+    });
 }
 function solutionRun(lang, questionId, solutionId) {
     const solution = ace.edit(`solution-${solutionId}`).getValue();
