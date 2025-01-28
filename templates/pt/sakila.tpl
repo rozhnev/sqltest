@@ -231,7 +231,7 @@
     <li> <span class='sql'>last_name</span> - Sobrenome do cliente.</li>
     <li> <span class='sql'>email</span> - Endereço de e-mail do cliente.</li>
     <li> <span class='sql'>address_id</span> - Chave estrangeira referenciando a tabela address.</li>
-    <li> <span class='sql'>active</span> - Indica se o cliente está ativo.</li>
+    <li> <span class='sql'>active</span> - Indica se o cliente está ativo (0/1).</li>
     <li> <span class='sql'>create_date</span> - Data e hora indicando quando o cliente foi adicionado ao banco de dados.</li>
     <li> <span class='sql'>last_update</span> - Quando a linha foi criada ou atualizada mais recentemente.</li>
   </ul>
@@ -255,7 +255,7 @@
         <td>Silva</td>
         <td>joao.silva@exemplo.com</td>
         <td>1</td>
-        <td>true</td>
+        <td>1</td>
         <td>2023-01-01 12:00:00</td>
         <td>2023-01-01 12:00:00</td>
       </tr>
@@ -557,7 +557,7 @@
     <li> <span class='sql'>picture</span> - Foto do membro da equipe.</li>
     <li> <span class='sql'>email</span> - Endereço de e-mail do membro da equipe.</li>
     <li> <span class='sql'>store_id</span> - Chave estrangeira referenciando a tabela store.</li>
-    <li> <span class='sql'>active</span> - Indica se o membro da equipe está ativo.</li>
+    <li> <span class='sql'>active</span> - Indica se o membro da equipe está ativo (0/1).</li>
     <li> <span class='sql'>username</span> - Nome de usuário para login.</li>
     <li> <span class='sql'>password</span> - Senha para login.</li>
     <li> <span class='sql'>last_update</span> - Quando a linha foi criada ou atualizada mais recentemente.</li>
@@ -585,7 +585,7 @@
         <td>[null]</td>
         <td>joao.silva@exemplo.com</td>
         <td>1</td>
-        <td>true</td>
+        <td>1</td>
         <td>joaosilva</td>
         <td>********</td>
         <td>2023-01-01 12:00:00</td>
