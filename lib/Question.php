@@ -86,6 +86,24 @@ class Question
         }
     }
     /**
+     * Returns question task for provided language
+     *
+     * @param string $lang
+     * @return string
+     */
+    public function getLocalizedQuestion(string $lang): array 
+    {
+        $stmt = $this->dbh->prepare("
+            SELECT 
+                questions_localization.task, 
+                questions_localization.hint
+            FROM questions_localization
+            WHERE questions_localization.question_id = :id and questions_localization.language =  :lang");
+        $stmt->execute([':id' => $this->id, ':lang' => $lang]);
+        return  $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    /**
      * Returns question hint for provided language
      *
      * @param string $lang
@@ -455,5 +473,23 @@ class Question
         $stmt->execute([$this->id]);
         $solutions = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $solutions;
+    }
+
+    public function explain(string $lang): string 
+    {
+        $gpt = new GPT();
+        $question = $this->getLocalizedQuestion($lang);
+        $languages = ['ru' => 'Russian', 'en' => 'English', 'pt' => 'Portuguese'/*, 'es' => 'Español'*/];
+
+        $dialog = [
+            ["role" => "system", "content" => 'You act as a SQL teach lead with high teaching skills; You sould explain how to solve the task, but not solve it. Provide the answer with maximum details.'], // Use the Sakila DB structure for this answer'],
+            ["role" => "system", "content" => 'Provide all anwers using markdown format. Wrap SQL keywords and names in <span class="sql"></span>, wrap paragraphs in <p></p>, provide SQL queries examples of it necessary in ```sql ``` tags'],
+            ["role" => "system", "content" => 'Provide all anwers in ' .  $languages[$lang] . ' language'],
+            [
+                'role' => 'user',
+                'content' => 'Teach me in ' . $languages[$lang] . ' how to solve next task. Do not provide any solution, just explain how I should to solve next task: ' . $question['task'] . ' Use the hint if needed: ' . $question['hint']
+            ]
+        ];
+        return $gpt->ask($dialog);
     }
 }

@@ -118,5 +118,18 @@ class Controller
         $this->engine->assign('QuestionID', $params['questionID']);
         $this->engine->display("user_solutions.tpl");
     }
+        
+    public function question_explain(PDO $dbh, User $user, array $params): void 
+    {
+        if ($user->logged()) {
+            $question = new Question($dbh, $params['questionID']);
+            $message = $question->explain($this->lang);
+            $this->engine->assign('Message', preg_replace('/```sql(.+)```/ims', '<div class="solution-block" id="gpt-solution">$1</div>', $message));
+        } else {
+            $this->engine->assign('Message', Localizer::translateString('login_needed'));
+        }
+        $this->engine->assign('User', $user);
+        $this->engine->display("gpt_solutions.tpl");
+    }
 }
 ?>

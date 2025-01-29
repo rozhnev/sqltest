@@ -92,6 +92,7 @@
                     {/if}
                 </div>
                 <div>
+                    <button class="button" onClick="showQuestionExplanation({$QuestionID})">AI {translate}question_action_get_hint{/translate}</button>
                     <button class="button" id="getHelpBtn" onClick="getHelp('{$Lang}', {$QuestionID})">{translate}question_action_get_hint{/translate}</button>
                     {if !isset($Question.answers)}
                         <button class="button" id="runQueryBtn" onClick="runQuery('{$Lang}', {$QuestionID})" title="Ctrl+Enter">{translate}question_action_run_query{/translate}</button>

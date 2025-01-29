@@ -3,9 +3,10 @@ class GPT {
     private $model = 'gpt-3.5-turbo';
     private $key;
 
-    public function __construct(string $key)
+    public function __construct()
     {
-        $this->key = $key;
+        $_ENV    = parse_ini_string(file_get_contents(".env"), 1);
+        $this->key = $_ENV['OPENAI_API_KEY'];
     }
 
     public function setModel(string $model) {

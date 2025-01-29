@@ -314,6 +314,35 @@ function showSolutions(questionId, whom) {
         document.getElementById('right-panel').innerHTML = 'Something went wrong.';
     });
 }
+function showQuestionExplanation(questionId) {
+    document.getElementById('right-panel').innerHTML = '<div id="gpt-explain" style="width:21vw; height:96vh;" class="question-wrapper"></div>';
+    setLoader('gpt-explain');
+    const url = `/${lang}/question/${questionId}/explain`;
+    fetch(url, {
+        method: "GET",
+        mode: "cors",
+        cache: "default",
+        credentials: "same-origin",
+    })
+    .then((async response=>{
+        if (!response.ok) throw Error('Something went wrong.');
+        return await response.text();
+    }))
+    .then((message)=>{
+        document.getElementById('gpt-explain').innerHTML = message;
+    })
+    .then(()=>{
+      [...document.getElementsByClassName("solution-block")].map(el=>{
+        ace
+          .edit(el.id, {mode: "ace/mode/mysql", dragEnabled: false,  useWorker: false, readOnly: true })
+          .setTheme(window.UIConfig.theme === 'dark' ? 'ace/theme/github_dark' : 'ace/theme/xcode');
+      });
+    })
+    .catch(err=>{
+        console.log(err);
+        document.getElementById('gpt-explain').innerHTML = 'Something went wrong.';
+    });
+}
 function solutionUpdate(solutionId, action) {
     return fetch(`/${lang}/solution/${solutionId}/${action}`, {
         method: "POST",
