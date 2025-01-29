@@ -1,3 +1,5 @@
+{assign var="PageTitle" value="{translate}donate_policy_page_title{/translate}"}
+{assign var="PageDescription" value="{translate}donate_policy_page_description{/translate}"}
 {include file='short-header.tpl'}
 <style>             
        
