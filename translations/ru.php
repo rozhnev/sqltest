@@ -42,14 +42,16 @@ $translations = [
     'site_promo_question_quiz' => 'вопросы по SQL',
     'site_promo_test' => 'Узнай свой SQL рейтинг!',
     'something_went_wrong' => 'Упс! Что-то пошло не так, но не  расстраивайтесь у нас есть много других интересных задач <a href="/ru/" target="_self">здесь</a>',
-    'menu_small_add_placeholder' => '<div style="display: flex; flex-direction: column; align-items: center;">Поддержите проект на <a href="https://boosty.to/phpize/donate" target="_blank">
-        <img src="https://static.boosty.to/assets/images/logo.b92ac.svg" 
-                            alt="Пожертвование или подписка на Boosty"
-                            style="background-color: white;
-                            padding: 3px;
-                            border-radius: 7px;
-                            margin: 5px auto;">
-                        </a></div>',
+    'menu_small_add_placeholder' => '<div style="display: flex; gap: 5px; flex-direction: column; align-items: center;">Поддержите проект на 
+                    <a href="https://pay.cloudtips.ru/p/60214a3d" target="_blank">
+                    <img src="https://static.tildacdn.com/tild3431-6231-4938-b464-663831306266/Horiz.svg" 
+                         alt="Оплата через CloudTips"
+                         style="width: 180px;
+                         background-color: white;
+                         padding: 5px;
+                         border-radius: 5px;">
+                    </a>
+            </div>',
     'toast_sql_copied_to_buffer' => 'SQL код скопирован в буфер обмена',
     'login_popup_footer' => 'Авторизация на сайте необходима только для сохранения вашего прогресса. Вы можете продолжать тестирование и без выполнения входа на сайт.',
     'rate_saved' => 'Спасибо! Ваш голос учтен.',
