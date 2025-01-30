@@ -83,14 +83,14 @@ if (isset($pathParts[0]) && $pathParts[0] === 'login') {
     $questionCategoryID = $questionnire->getCategoryId($params['questionCategory']);
     $QuestionnireName = $questionnire->getNameByCategory($params['questionCategory']) ?? 'category';
     $questionID = $questionnire->getQuestionId($params['question']);
-} elseif (preg_match("@(?<lang>$languge_codes_regexp)/question/(?<questionID>\d+)/(?<action>query-help|query-run|query-test|rate|solutions|check-answers)@i", $path, $params)) {
+} elseif (preg_match("@(?<lang>$languge_codes_regexp)/question/(?<questionID>\d+)/(?<action>query-help|query-run|query-test|rate|check-answers)@i", $path, $params)) {
     $lang       = $params['lang'];
     $action     = $params['action'];
     $questionID = $params['questionID'];
-} elseif (preg_match("@(?<lang>$languge_codes_regexp)/question/(?<questionID>\d+)/(?<action>my-solutions)@i", $path, $params)) {
+} elseif (preg_match("@(?<lang>$languge_codes_regexp)/question/(?<questionID>\d+)/(?<action>solutions|my-solutions)@i", $path, $params)) {
     $action     = str_replace('-', '_', strtolower($params['action']));
     return (new Controller($smarty, $params['lang']))->$action($dbh, $user, $params);
-} elseif (preg_match("@(?<lang>$languge_codes_regexp)/solution/(?<solutionID>\d+)/(?<action>like|dislike|report|delete)@i", $path, $params)) {
+} elseif (preg_match("@(?<lang>$languge_codes_regexp)/solution/(?<solutionID>\d+)/(?<action>like|unlike|report|delete)@i", $path, $params)) {
     $action     = 'solution_' . $params['action'];
     return (new Controller($smarty, $params['lang']))->$action($dbh, $user, $params);
 } elseif (preg_match("@(?<lang>$languge_codes_regexp)/(?<action>donate)@i", $path, $params)) {
@@ -261,18 +261,7 @@ switch ($action) {
             $smarty->assign('Saved', $user->saveQuestionRate($questionID, $rate));
         }
         $template = "rate_saved.tpl";
-        break;
-    case 'solutions':
-        if ($user->logged()) {
-            $questionSolved = $user->solvedQuestion($questionID);
-            $smarty->assign('QuestionSolved', $questionSolved);
-            if ($questionSolved) {
-                $question = new Question($dbh, $questionID);
-                $smarty->assign('QuestionSolutions', $question->getSolutions());
-            }
-        }
-        $template = "solutions.tpl";
-        break;      
+        break;    
     case 'logout':
         // Unset all of the session variables.
         $_SESSION = array();

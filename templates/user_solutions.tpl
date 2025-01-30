@@ -7,13 +7,21 @@
                     <div class="solution-title">{translate}solution_title{/translate}: {$solution.created_at} {translate}solution_query_cost{/translate}: {$solution.query_cost}</div>
                     <div class="solution-block" id="solution-{$id}">{$solution.query}</div>
                     <div class="solution-footer">
-                    <button class="button-small green" onClick="solutionRun('{$Lang}', {$QuestionID}, {$id})">{translate}solution_action_run{/translate}</button>
-                        <button 
-                            class="button-small red" 
-                            onClick="solutionDelete('{$Lang}', {$QuestionID}, {$solution.id})"
-                        >
-                            {translate}solution_action_delete{/translate}
-                        </button>
+                        <div style="font-size: larger;">
+                            {if $solution.likes > 0}
+                                <span style="color: white" id="solution-likes-count-{$solution.id}">{$solution.likes}</span>
+                                <span style="color: gold; cursor: pointer; font-size: x-large;">♦</span>
+                            {/if}
+                        </div>
+                        <div>
+                            <button class="button-small green" onClick="solutionRun('{$Lang}', {$QuestionID}, {$id})">{translate}solution_action_run{/translate}</button>
+                            <button 
+                                class="button-small red" 
+                                onClick="solutionDelete('{$Lang}', {$QuestionID}, {$solution.id})"
+                            >
+                                {translate}solution_action_delete{/translate}
+                            </button>
+                        </div>
                     </div>
                 </div>
             {/foreach}

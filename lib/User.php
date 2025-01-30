@@ -529,6 +529,23 @@ class User
         $stmt->execute([$this->id, $questionID]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    
+    public function getOthersSolutions(int $questionID, $limit = 3): array 
+    {
+        $stmt = $this->dbh->prepare("
+            SELECT 
+                id, question_id, query, query_cost, user_solutions.created_at::date created_at, 
+                likes, dislikes, 
+                solution_likes.solution_id is not null liked
+            FROM user_solutions 
+            LEFT JOIN solution_likes ON solution_id = id AND solution_likes.user_id = :user_id
+            WHERE question_id = :question_id AND NOT reported
+            ORDER BY query_cost ASC, (likes - dislikes) DESC, RANDOM()
+            LIMIT " . $limit);
+
+        $stmt->execute([':question_id' => $questionID, ':user_id' => $this->id]);
+        return  $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
     public function deleteSolution(int $solutionID): int
     {
@@ -537,6 +554,28 @@ class User
             WHERE user_id = ? AND id = ? RETURNING question_id;");
         $stmt->execute([$this->id, $solutionID]);
         return $stmt->fetchColumn(0);
+    }
+
+    public function likeSolution(int $solutionID): bool
+    {
+        $stmt = $this->dbh->prepare("WITH solution AS (
+	        INSERT INTO solution_likes (user_id, solution_id, created_at) 
+            VALUES (:user_id, :solution_id, current_timestamp) 
+	        ON CONFLICT (user_id, solution_id) DO NOTHING
+            RETURNING solution_id
+        ) UPDATE user_solutions SET likes = likes + 1 WHERE id IN (SELECT solution.solution_id FROM solution);");
+
+        return $stmt->execute([':user_id' => $this->id, ':solution_id' => $solutionID]);
+    }
+
+    public function unlikeSolution(int $solutionID): bool 
+    {
+        $stmt = $this->dbh->prepare("WITH solution AS (
+	        DELETE FROM solution_likes WHERE user_id = :user_id AND solution_id = :solution_id
+	        RETURNING solution_id
+        ) UPDATE user_solutions SET likes = likes - 1 WHERE id IN (SELECT solution.solution_id FROM solution);");
+
+        return $stmt->execute([':user_id' => $this->id, ':solution_id' => $solutionID]);
     }
 
     /**
