@@ -16,8 +16,8 @@
                         <div style="font-size: larger;">
                             <span style="color: white" id="solution-likes-count-{$solution.id}">{$solution.likes}</span>
                             <span id="solution-likes-{$solution.id}">
-                                <span class="{if $solution.liked} hidden{/if}"  title="{translate}solution_like{/translate}" style="color: gold; cursor: pointer;" onClick="solutionLike({$solution.id})" >♢</span>
-                                <span class="{if !$solution.liked} hidden{/if}" title="{translate}solution_unlike{/translate}" style="color: gold; cursor: pointer; font-size: x-large;" onClick="solutionUnlike({$solution.id})" >♦</span>
+                                <span class="{if $solution.liked} hidden{/if}"  title="{translate}solution_like{/translate}" style="color:#2EA043; cursor: pointer; font-size: large;" onClick="solutionLike({$solution.id})" >▲</span>
+                                <span class="{if !$solution.liked} hidden{/if}" title="{translate}solution_unlike{/translate}" style="color: darkred; cursor: pointer; font-size: large;" onClick="solutionUnlike({$solution.id})" >▼</span>
                             </span>
                         </div>
                         <div>
