@@ -19,7 +19,7 @@
     {if $User->showAd()}
         <div style="height: 5em;">
             <div id="yandex_rtb_R-A-4716552-4">
-                <p style="padding: 5px; font-size:12px;">{translate}menu_small_add_placeholder{/translate}</p>
+                {translate}menu_small_add_placeholder{/translate}
             </div>
         </div>
     {/if}

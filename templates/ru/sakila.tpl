@@ -253,7 +253,7 @@
     <li> <span class='sql'>last_name</span> – фамилия клиента.</li>
     <li> <span class='sql'>email</span> – адрес электронной почты клиента.</li>
     <li> <span class='sql'>address_id</span> - внешний ключ, ссылающийся на таблицу адресов.</li>
-    <li> <span class='sql'>active</span> – указывает, активен ли клиент.</li>
+    <li> <span class='sql'>active</span> – указывает, активен ли клиент (0/1).</li>
     <li> <span class='sql'>create_date</span> - временная метка, указывающая, когда клиент был добавлен в базу данных.</li>
     <li> <span class='sql'>last_update</span> - временная метка создания или последнего обновления строки.</li> 
   </ul>
@@ -277,7 +277,7 @@
         <td>Doe</td>
         <td>john.doe@example.com</td>
         <td>1</td>
-        <td>true</td>
+        <td>1</td>
         <td>2023-01-01 12:00:00</td>
         <td>2023-01-01 12:00:00</td>
       </tr>
@@ -577,7 +577,7 @@
     <li> <span class='sql'>picture</span> – изображение сотрудника.</li>
     <li> <span class='sql'>email</span> - адрес электронной почты сотрудника.</li>
     <li> <span class='sql'>store_id</span> - внешний ключ, ссылающийся на таблицу магазина.</li>
-    <li> <span class='sql'>active</span> – указывает, активен ли сотрудник.</li>
+    <li> <span class='sql'>active</span> – указывает, активен ли сотрудник (0/1).</li>
     <li> <span class='sql'>username</span> - имя пользователя для входа в систему.</li>
     <li> <span class='sql'>password</span> - пароль для входа.</li>
     <li> <span class='sql'>last_update</span> - временная метка создания или последнего обновления строки.</li> 
@@ -605,7 +605,7 @@
         <td>[null]</td>
         <td>john.doe@example.com</td>
         <td>1</td>
-        <td>true</td>
+        <td>1</td>
         <td>johndoe</td>
         <td>********</td>
         <td>2023-01-01 12:00:00</td>

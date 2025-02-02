@@ -46,7 +46,15 @@ $translations = [
     'favorite' => 'Favorite',
     'favorites' => 'Favorites',
     'add_to_favorites' => 'Click to add to favorites',
-    'menu_small_add_placeholder' => 'Advertising income and donations are our sole funding sources. Please don’t disable ads or <a href="/en/donate" style="color: var(--special-text-color);">consider donating</a>.<br>Thank you for your support! 🙏🌟',
+    'menu_small_add_placeholder' => '<div style="display: flex; flex-direction: column; align-items: center;">
+        Support us on <a href="https://boosty.to/phpize/donate" target="_blank">
+        <img src="https://static.boosty.to/assets/images/logo.b92ac.svg" 
+                            alt="Support on Boosty"
+                            style="background-color: white;
+                            padding: 3px;
+                            border-radius: 7px;
+                            margin: 5px auto;">
+                        </a></div>',    
     'toast_sql_copied_to_buffer' => 'SQL code copied to buffer',
     'login_popup_footer' => 'Login on the site is only required to save your progress. You can continue testing without logging into the site.',
     'rate_saved' => 'Thank you! Your vote has been counted.',
@@ -61,16 +69,19 @@ $translations = [
     'page_default_description' => 'Take the SQL test. Solve SQL tasks, write effective SQL queries, learn concepts, and improve your knowledge. Become an SQL expert!',
     'page_keywords' => 'practical SQL quiz, SQL assessment, sakila mysql postgresql',
     'solutions_title' => 'Look as another users solved this problem:',
+    'my_solutions_title' => 'My solutions of the task',
     'solution_title' => 'Solved at',
     'solution_query_cost' => 'Query cost',
     'no_solutions_yet' => 'Sorry, but no solution to this problem has been published yet.',
     'low_grades_restricted' => 'Available to Middle and Senior-level users only.',
     'determine_your_level' => 'Take the test to determine your level.',
     'up_your_level' => 'Take the test to up your level.',
-    'login_needed' => 'Please login to site this action',
+    'login_needed' => 'Please <a href="" onClick="toggleLoginWindow(); return false;">log in</a> to perform this action.',
     'qustion_should_be_solved' => 'You should to solve the problem yourself before look others solutions',
     'privacy_policy_page_title' => 'SQLTest.online: Privacy Policy',
     'privacy_policy_page_description' => 'At SQLTest, we value your privacy. This policy outlines how we collect, use, and protect your personal information when you visit our website. We are committed to maintaining the confidentiality and security of your data. By using our services, you agree to the practices described in this policy.',
+    'donate_policy_page_title' => 'Donate to SQLTest.online - support our project',
+    'donate_policy_page_description' => 'Support the development of SQLTest.online by making a donation. Your contribution will help us maintain and improve our platform, ensuring that we can continue to provide high-quality educational resources to users around the world. We appreciate your support!',
     'question_title' => 'Task&nbsp;',
     'question_solved_at' => 'Solved at',
     'question_last_attempt_date' => 'Last attempt date',

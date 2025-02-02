@@ -234,7 +234,7 @@
     <li> <span class='sql'>last_name</span> - Last name of the customer.</li>
     <li> <span class='sql'>email</span> - Email address of the customer.</li>
     <li> <span class='sql'>address_id</span> - Foreign key referencing the address table.</li>
-    <li> <span class='sql'>active</span> - Indicates whether the customer is active.</li>
+    <li> <span class='sql'>active</span> - Indicates whether the customer is active (0/1).</li>
     <li> <span class='sql'>create_date</span> - Timestamp indicating when the customer was added to the database.</li>
     <li> <span class='sql'>last_update</span> - When the row was created or most recently updated.</li>
   </ul>
@@ -258,7 +258,7 @@
         <td>Doe</td>
         <td>john.doe@example.com</td>
         <td>1</td>
-        <td>true</td>
+        <td>1</td>
         <td>2023-01-01 12:00:00</td>
         <td>2023-01-01 12:00:00</td>
       </tr>
@@ -558,7 +558,7 @@
     <li> <span class='sql'>picture</span> - Staff member picture.</li>
     <li> <span class='sql'>email</span> - Email address of the staff member.</li>
     <li> <span class='sql'>store_id</span> - Foreign key referencing the store table.</li>
-    <li> <span class='sql'>active</span> - Indicates whether the staff member is active.</li>
+    <li> <span class='sql'>active</span> - Indicates whether the staff member is active (0/1).</li>
     <li> <span class='sql'>username</span> - Username for login.</li>
     <li> <span class='sql'>password</span> - Password for login.</li>
     <li> <span class='sql'>last_update</span> - When the row was created or most recently updated.</li>
@@ -586,7 +586,7 @@
         <td>[null]</td>
         <td>john.doe@example.com</td>
         <td>1</td>
-        <td>true</td>
+        <td>1</td>
         <td>johndoe</td>
         <td>********</td>
         <td>2023-01-01 12:00:00</td>

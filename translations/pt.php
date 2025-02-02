@@ -45,7 +45,15 @@ $translations = [
     'favorite' => 'Favorito',
     'favorites' => 'Favoritos',
     'add_to_favorites' => 'Adicionar aos favoritos',
-    'menu_small_add_placeholder' => 'A receita de anúncios e doações são nossas únicas fontes de financiamento. Por favor, não desative os anúncios ou <a href="/pt/donate" style="color: var(--special-text-color);">considere doar</a>.<br>Obrigado pelo seu apoio! ',
+    'menu_small_add_placeholder' => '<div style="display: flex; flex-direction: column; align-items: center;">
+        Apoie-nos em <a href="https://boosty.to/phpize/donate" target="_blank">
+        <img src="https://static.boosty.to/assets/images/logo.b92ac.svg" 
+                            alt="Apoie-nos em on Boosty"
+                            style="background-color: white;
+                            padding: 3px;
+                            border-radius: 7px;
+                            margin: 5px auto;">
+                        </a></div>', 
     'toast_sql_copied_to_buffer' => 'Código SQL copiado para a área de transferência',
     'login_popup_footer' => 'O login no site só é necessário para salvar seu progresso. Você pode continuar testando sem fazer login no site.',
     'rate_saved' => 'Obrigado! Seu voto foi computado.',
@@ -61,16 +69,18 @@ $translations = [
     'page_keywords' => 'questionário prático de SQL, testar conhecimento de SQL, sakila mysql postgresql',
     'solutions_title' => 'Veja como outros usuários resolveram este problema:',
     'solution_title' => 'Resolvido em',
+    'my_solutions_title' => 'Minhas soluções para a tarefa',
     'solution_query_cost' => 'Custo da consulta',
     'low_grades_restricted' => 'Available to Middle and Senior-level users only.',
     'determine_your_level' => 'Faça o teste para determinar seu nível.',
     'up_your_level' => 'Faça o teste para subir de nível.',
     'no_solutions_yet' => 'Desculpe, mas ainda não há solução publicada para este problema.',
-    'login_needed' => 'Por favor, faça login no site para esta ação',
+    'login_needed' => 'Por favor, <a href="" onClick="toggleLoginWindow(); return false;">faça login</a> para executar esta ação.',
     'qustion_should_be_solved' => 'Você deve resolver o problema sozinho antes de ver as soluções dos outros usuários',
     'privacy_policy_page_title' => 'SQLTest.online: Política de Privacidade',
     'privacy_policy_page_description' => 'No SQLTest, valorizamos sua privacidade. Esta política descreve como coletamos, usamos e protegemos suas informações pessoais ao visitar nosso site. Estamos comprometidos em manter a confidencialidade e segurança dos seus dados. Ao utilizar nossos serviços, você concorda com as práticas descritas nesta política.',
-    'question_title' => 'Tarefa&nbsp;',
+    'donate_policy_page_title' => 'Doe para SQLTest.online - apoie nosso projeto',
+    'donate_policy_page_description' => 'Apoie o desenvolvimento do SQLTest.online fazendo uma doação. Sua contribuição nos ajudará a manter e melhorar nossa plataforma, garantindo que possamos continuar a fornecer recursos educacionais de alta qualidade para usuários ao redor do mundo. Agradecemos seu apoio!',    'question_title' => 'Tarefa&nbsp;',
     'question_solved_at' => 'Resolvido em',
     'question_last_attempt_date' => 'Última tentativa',
     'question_action_mark_all_answers' => 'Marque todas as respostas corretas e clique no botão "Verificar!"',
