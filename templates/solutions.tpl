@@ -11,7 +11,7 @@
             {foreach $QuestionSolutions as $id=>$solution}
                 <div class="solution-wrapper" id="solution-wrapper-{$id}">
                     <div class="solution-title">{translate}solution_title{/translate}: {$solution.created_at} {translate}solution_query_cost{/translate}: {$solution.query_cost}</div>
-                    <div class="solution-block" id="solution-{$id}">{$solution.query}</div>
+                    <div class="solution-block" id="solution-{$id}">{$solution.query|escape:"html"}</div>
                     <div class="solution-footer" style="display: flex; justify-content: space-between; align-items: center;">
                         <div style="font-size: larger;">
                             <span style="color: white" id="solution-likes-count-{$solution.id}">{$solution.likes}</span>
