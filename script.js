@@ -267,6 +267,8 @@ function showOthersSolutions(questionId) {
     showSolutions(questionId, 'others');
 }
 function showSolutions(questionId, whom) {
+    document.getElementById('right-panel').innerHTML = '<div id="pre-loader" style="width: 21vw;"></div>';
+    setLoader('pre-loader');
     const url = whom === 'my' ? `/${lang}/question/${questionId}/my-solutions` : `/${lang}/question/${questionId}/solutions`;
     fetch(url, {
         method: "GET",
