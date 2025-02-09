@@ -349,26 +349,6 @@ class User
     }
 
     /**
-     * Set and return User admin status
-     *
-     * @return bool
-     */
-    public function autorize(): bool
-    {
-        $this->admin = false;
-        if ($this->logged()) {
-            $stmt = $this->dbh->prepare("SELECT admin FROM users WHERE id = ?;");
-
-            if ($stmt->execute([$this->id])) {
-                $row = $stmt->fetch(PDO::FETCH_ASSOC);
-                $this->admin = $row['admin'];
-            }
-        }
-
-        return $this->admin;
-    }
-
-    /**
      * Return User admin status
      *
      * @return bool
@@ -519,6 +499,12 @@ class User
         }
     }
 
+    /**
+     * Returns the user's solutions for the specified question.
+     * 
+     * @param int $questionID The ID of the question.
+     * @return array The user's solutions for the specified question.
+     */
     public function getSolutions(int $questionID): array
     {
         $stmt = $this->dbh->prepare("SELECT 
@@ -529,7 +515,37 @@ class User
         $stmt->execute([$this->id, $questionID]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    
+    /**
+     * Returns the other users solutions for the specified question.
+     * 
+     * @param int $questionID The ID of the question.
+     * @param int $limit The maximum number of solutions to return.
+     * @return array The other users solutions for the specified question.
+     */
+    public function getOthersSolutions(int $questionID, $limit = 3): array 
+    {
+        $stmt = $this->dbh->prepare("
+            SELECT 
+                id, question_id, query, query_cost, user_solutions.created_at::date created_at, 
+                likes, dislikes, 
+                solution_likes.solution_id is not null liked
+            FROM user_solutions 
+            LEFT JOIN solution_likes ON solution_id = id AND solution_likes.user_id = :user_id
+            WHERE question_id = :question_id AND NOT reported
+            ORDER BY query_cost ASC, (likes - dislikes) DESC, RANDOM()
+            LIMIT " . $limit);
 
+        $stmt->execute([':question_id' => $questionID, ':user_id' => $this->id]);
+        return  $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Deletes a solution by its ID for the current user.
+     *
+     * @param int $solutionID The ID of the solution to delete.
+     * @return int The ID of the question associated with the deleted solution.
+     */
     public function deleteSolution(int $solutionID): int
     {
         $stmt = $this->dbh->prepare("DELETE
@@ -540,11 +556,45 @@ class User
     }
 
     /**
-     * Save Questoin attepmt in DB
+     * Likes a solution by its ID for the current user.
      *
-     * @param integer $questionID
-     * @param integer $rate
-     * @return void
+     * @param int $solutionID The ID of the solution to like.
+     * @return bool True on success, false on failure.
+     */
+    public function likeSolution(int $solutionID): bool
+    {
+        $stmt = $this->dbh->prepare("WITH solution AS (
+	        INSERT INTO solution_likes (user_id, solution_id, created_at) 
+            VALUES (:user_id, :solution_id, current_timestamp) 
+	        ON CONFLICT (user_id, solution_id) DO NOTHING
+            RETURNING solution_id
+        ) UPDATE user_solutions SET likes = likes + 1 WHERE id IN (SELECT solution.solution_id FROM solution);");
+
+        return $stmt->execute([':user_id' => $this->id, ':solution_id' => $solutionID]);
+    }
+
+    /**
+     * Unlikes a solution by its ID for the current user.
+     *
+     * @param int $solutionID The ID of the solution to unlike.
+     * @return bool True on success, false on failure.
+     */
+    public function unlikeSolution(int $solutionID): bool 
+    {
+        $stmt = $this->dbh->prepare("WITH solution AS (
+	        DELETE FROM solution_likes WHERE user_id = :user_id AND solution_id = :solution_id
+	        RETURNING solution_id
+        ) UPDATE user_solutions SET likes = likes - 1 WHERE id IN (SELECT solution.solution_id FROM solution);");
+
+        return $stmt->execute([':user_id' => $this->id, ':solution_id' => $solutionID]);
+    }
+
+    /**
+     * Saves the rating for a question in the database.
+     *
+     * @param int $questionID The ID of the question.
+     * @param int $rate The rating to save.
+     * @return bool True on success, false on failure.
      */
     public function saveQuestionRate(int $questionID, int $rate): bool
     {
@@ -561,6 +611,12 @@ class User
         }
     }
 
+    /**
+     * Returnt the statust of user's solution for the specified question.
+     * 
+     * @param int $questionID The ID of the question.
+     * @return bool True if the user has solved the question, false otherwise.
+     */
     public function solvedQuestion(int $questionID): bool
     {
         $stmt = $this->dbh->prepare("SELECT true FROM user_questions WHERE user_id = :user_id and question_id = :question_id and solved_at is not null;");
@@ -568,6 +624,11 @@ class User
         return $stmt->fetchColumn(0);
     }
 
+    /**
+     * Returns the number of questions solved by the user.
+     * 
+     * @return int The number of questions solved by the user.
+     */
     public function getSolvedQuestionsCount(): int 
     {
         $stmt = $this->dbh->prepare("SELECT COUNT(question_id) FROM user_questions WHERE user_id = :user_id and solved_at is not null;");
@@ -575,6 +636,11 @@ class User
         return $stmt->fetchColumn(0);
     }
 
+    /**
+     * Returns last user's test data.
+     * 
+     * @return array|null The last user's test data ot null in case never test taken.
+     */
     public function getLastTest(): ?array
     {
         $stmt = $this->dbh->prepare("
@@ -586,6 +652,12 @@ class User
         return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
     }
 
+    /**
+     * Save user's grade in DB
+     * 
+     * @param int $grade The grade to save.
+     * @return void
+     */
     public function saveGrade(int $grade): void
     {
         $stmt = $this->dbh->prepare("UPDATE users SET grade = :grade, graded_at = CURRENT_TIMESTAMP WHERE id = :user_id;");
