@@ -9,18 +9,17 @@
             {include file='top-menu.tpl' path="/question/{$Question.category_sef}/{$Question.question_sef}"}
         {/if}
         {include file='menu.tpl'}
-        {include file='splitter.tpl'}
         <div class="main">
             <div class="question-wrapper">
                 <div class="question-title-bar" style="display: flex;">
                     <div class="question-title">
                         <div class="question-level rate{$Question.rate}" title="{$Question.question_rate|default:'Not rated yet'}"></div>
-                        <span title="({$QuestionID})">{translate}question_title{/translate}{if $Question.number}&nbsp;{$Question.number}:{/if}</span>
-                        <span id="favoriteStar" class="question-star{if isset($Question.favored) && $Question.favored} favored{/if}" title="{if isset($Question.favored) && $Question.favored}{translate}favorite{/translate}{else}{translate}add_to_favorites{/translate}{/if}" onClick="toggleFavorites('{$Lang}', {$QuestionID})">★</span>
+                        <span style="line-height: 17px;" title="({$QuestionID})">{translate}question_title{/translate}{if $Question.number}&nbsp;{$Question.number}:{/if}</span>
+                        {if $User->logged()}
+                            <span id="favoriteStar" class="question-star{if isset($Question.favored) && $Question.favored} favored{/if}" title="{if isset($Question.favored) && $Question.favored}{translate}favorite{/translate}{else}{translate}add_to_favorites{/translate}{/if}" onClick="toggleFavorites('{$Lang}', {$QuestionID})">★</span>
+                        {/if}
                         <span class="question-dates">
-                            {if $Question.solved_date}
-                                {translate}question_solved_at{/translate}: {$Question.solved_date}
-                            {elseif $Question.last_attempt_date}
+                            {if !$Question.solved_date && $Question.last_attempt_date}
                                 {translate}question_last_attempt_date{/translate}: {$Question.last_attempt_date}
                             {/if}
                         </span>
@@ -63,7 +62,7 @@
                 {else}
                     <p class="question-action">{translate}question_action_use_syntax{/translate}</p>
                     {if $Question.solved_date}
-                        <p class="question-action">{translate}you_already_solved_this_task{/translate}&nbsp;<button class="button-small blue" onClick="showMySolutions({$QuestionID})">{translate}view_solutions{/translate}</button></p>
+                        <p class="question-action">{translate}you_already_solved_this_task{/translate}&nbsp;{$Question.solved_date}.&nbsp;<button class="button-small blue" onClick="showMySolutions({$QuestionID})">{translate}view_solutions{/translate}</button></p>
                     {else}
                         <p class="question-action">{translate}question_action_write_your_request{/translate}</p>
                     {/if}
@@ -135,10 +134,6 @@
                             {$User->grade()}, {translate}level_up{/translate}
                         {/if}
                     </button>
-                    <button class="button blue logout" onClick="location.href = '/{$Lang}/logout';" title="{translate}top_menu_logout{/translate}">&nbsp;</button>
-                {else}
-                    <p>{translate}user_solutions_count_not_logged{/translate}</p>
-                    <button class="button blue" onClick="toggleLoginWindow()">{translate}top_menu_login{/translate}</button>
                 {/if}
             </div>
             {include file="{$Lang}/{$DB}.tpl"}

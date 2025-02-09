@@ -1,9 +1,9 @@
 <div class="header">
     <div class="top-menu">
-        <div class="top-menu-left" style="width: 19vw; display: flex; align-items: center;">
-            <a href="/{$Lang}/" target="_self" style="width: 20vw; display: flex;">
+        <div class="top-menu-left" style="min-width: 12.5vw; display: flex; align-items: center; justify-content: space-between;">
+            <a href="/{$Lang}/" target="_self" style="display: flex;">
                 <h1 class="site-name-wrapper">
-                    <span class="site-name">SQLtest: </span>
+                    <span class="site-name">SQLtest</span>
                     <span class="site-promo">
                         {if $Action === 'question'}
                             {if isset($Question.answers)}
@@ -19,8 +19,9 @@
                     </span>
                 </h1>
             </a>
+            <div class="divider"></div>
         </div>
-        <div class="top-menu-center" style="width: 55vw; display: flex;">
+        <div class="top-menu-center" style="display: flex;">
             <span  class="site-description">
                 {if $Action === 'question'}
                     {if isset($Question.answers)}
@@ -35,12 +36,19 @@
                 {/if}
             </span>
         </div>
-        <div class="top-menu-right" style="width: 25vw; display: flex; justify-content: space-between; padding-right: 18px;">
-            {include file='theme-switcher.tpl'}
-            <div style="display: flex; min-width: 90px; margin: 12px; align-items: center; justify-content: center;">
-                <a href="/{$Lang}/donate" target="_self" class="donate-btn shake" id="donate-btn">{translate}top_menu_donate{/translate}</a>
-            </div>
+        <div class="top-menu-right" style="min-width: 15vw; display: flex; justify-content: space-between; align-items: center;">
+            <a href="/{$Lang}/donate" target="_self" id="donate-btn">
+                <button class="button default" >{translate}top_menu_donate{/translate}</button>    
+            </a>
+            {if $User->logged()}
+                <button class="button blue" onclick="location.href = '/ru/logout';">{translate}top_menu_logout{/translate}</button>
+            {else}
+                <button class="button blue" onClick="toggleLoginWindow()">{translate}top_menu_login{/translate}</button>
+            {/if}
+        </div>
+        <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; row-gap: 0.7em;">
             {include file='lang-switcher.tpl'}
+            {include file='theme-switcher.tpl'}
         </div>
     </div>
 </div>
