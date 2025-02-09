@@ -519,6 +519,12 @@ class User
         }
     }
 
+    /**
+     * Returns the user's solutions for the specified question.
+     * 
+     * @param int $questionID The ID of the question.
+     * @return array The user's solutions for the specified question.
+     */
     public function getSolutions(int $questionID): array
     {
         $stmt = $this->dbh->prepare("SELECT 
@@ -530,6 +536,13 @@ class User
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     
+    /**
+     * Returns the other users solutions for the specified question.
+     * 
+     * @param int $questionID The ID of the question.
+     * @param int $limit The maximum number of solutions to return.
+     * @return array The other users solutions for the specified question.
+     */
     public function getOthersSolutions(int $questionID, $limit = 3): array 
     {
         $stmt = $this->dbh->prepare("
@@ -597,7 +610,7 @@ class User
     }
 
     /**
-     * Saves the rating for a question attempt in the database.
+     * Saves the rating for a question in the database.
      *
      * @param int $questionID The ID of the question.
      * @param int $rate The rating to save.
@@ -618,6 +631,12 @@ class User
         }
     }
 
+    /**
+     * Returnt the statust of user's solution for the specified question.
+     * 
+     * @param int $questionID The ID of the question.
+     * @return bool True if the user has solved the question, false otherwise.
+     */
     public function solvedQuestion(int $questionID): bool
     {
         $stmt = $this->dbh->prepare("SELECT true FROM user_questions WHERE user_id = :user_id and question_id = :question_id and solved_at is not null;");
@@ -625,6 +644,11 @@ class User
         return $stmt->fetchColumn(0);
     }
 
+    /**
+     * Returns the number of questions solved by the user.
+     * 
+     * @return int The number of questions solved by the user.
+     */
     public function getSolvedQuestionsCount(): int 
     {
         $stmt = $this->dbh->prepare("SELECT COUNT(question_id) FROM user_questions WHERE user_id = :user_id and solved_at is not null;");
@@ -632,6 +656,11 @@ class User
         return $stmt->fetchColumn(0);
     }
 
+    /**
+     * Returns last user's test data.
+     * 
+     * @return array|null The last user's test data ot null in case never test taken.
+     */
     public function getLastTest(): ?array
     {
         $stmt = $this->dbh->prepare("
@@ -643,6 +672,12 @@ class User
         return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
     }
 
+    /**
+     * Save user's grade in DB
+     * 
+     * @param int $grade The grade to save.
+     * @return void
+     */
     public function saveGrade(int $grade): void
     {
         $stmt = $this->dbh->prepare("UPDATE users SET grade = :grade, graded_at = CURRENT_TIMESTAMP WHERE id = :user_id;");
