@@ -547,6 +547,12 @@ class User
         return  $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    /**
+     * Deletes a solution by its ID for the current user.
+     *
+     * @param int $solutionID The ID of the solution to delete.
+     * @return int The ID of the question associated with the deleted solution.
+     */
     public function deleteSolution(int $solutionID): int
     {
         $stmt = $this->dbh->prepare("DELETE
@@ -556,6 +562,12 @@ class User
         return $stmt->fetchColumn(0);
     }
 
+    /**
+     * Likes a solution by its ID for the current user.
+     *
+     * @param int $solutionID The ID of the solution to like.
+     * @return bool True on success, false on failure.
+     */
     public function likeSolution(int $solutionID): bool
     {
         $stmt = $this->dbh->prepare("WITH solution AS (
@@ -568,6 +580,12 @@ class User
         return $stmt->execute([':user_id' => $this->id, ':solution_id' => $solutionID]);
     }
 
+    /**
+     * Unlikes a solution by its ID for the current user.
+     *
+     * @param int $solutionID The ID of the solution to unlike.
+     * @return bool True on success, false on failure.
+     */
     public function unlikeSolution(int $solutionID): bool 
     {
         $stmt = $this->dbh->prepare("WITH solution AS (
@@ -579,11 +597,11 @@ class User
     }
 
     /**
-     * Save Questoin attepmt in DB
+     * Saves the rating for a question attempt in the database.
      *
-     * @param integer $questionID
-     * @param integer $rate
-     * @return void
+     * @param int $questionID The ID of the question.
+     * @param int $rate The rating to save.
+     * @return bool True on success, false on failure.
      */
     public function saveQuestionRate(int $questionID, int $rate): bool
     {
