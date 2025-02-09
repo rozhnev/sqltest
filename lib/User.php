@@ -349,26 +349,6 @@ class User
     }
 
     /**
-     * Set and return User admin status
-     *
-     * @return bool
-     */
-    public function autorize(): bool
-    {
-        $this->admin = false;
-        if ($this->logged()) {
-            $stmt = $this->dbh->prepare("SELECT admin FROM users WHERE id = ?;");
-
-            if ($stmt->execute([$this->id])) {
-                $row = $stmt->fetch(PDO::FETCH_ASSOC);
-                $this->admin = $row['admin'];
-            }
-        }
-
-        return $this->admin;
-    }
-
-    /**
      * Return User admin status
      *
      * @return bool
