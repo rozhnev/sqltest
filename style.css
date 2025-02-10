@@ -374,7 +374,7 @@ body {
 }
 .right {
     grid-area: right;
-    /* max-height: 100vh; */
+    width: 21vw;
     padding: 12px;
     overflow: auto;
     transition: easy 0.5s;
