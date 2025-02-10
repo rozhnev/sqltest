@@ -639,6 +639,8 @@ body {
     display: flex; 
     background-color: var(--block-background-color);  
     border-bottom: 1px solid var(--text-block-border-color); 
+    border-radius: 6px;
+    margin-left: 5px;
     color: white;
 }
 .question-navigate a {
@@ -712,6 +714,17 @@ body {
 .answer label {
     line-height: 20px;
 }
+.code-actions-upper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 0.5em;
+}
+.code-actions-upper > div {
+    display: flex;
+    flex-direction: row;
+    column-gap: 1em;
+}
 .code-actions {
     text-align: right;
     padding-bottom: 3px;
@@ -719,6 +732,7 @@ body {
 
 .code-wrapper {
     border: 1px solid var(--text-block-border-color);
+    border-radius: 6px;
     resize: vertical;
     min-height: 28vh;
     max-height: 28vh;
@@ -726,7 +740,7 @@ body {
 }
 
 .code-buttons {
-    justify-content: space-between;
+    justify-content: right;
     display: flex;
     flex-flow: row;
 }
@@ -744,9 +758,25 @@ body {
     min-width: 98px;
     margin: 7px 0;
     border: 1px solid var(--btn-border-color);
-    border-radius: 2px;
+    border-radius: 4px;
 }
-
+.text-button {
+    cursor: pointer;
+    display: flex;
+}
+.text-button > span {
+    padding: 2px;
+}
+.code-actions-upper a,
+.code-actions-upper a:visited {
+    text-decoration: none; 
+}
+.text-button.blue {
+    color: #0069E6
+}
+.text-button.red {
+    color: #E60000
+}
 .button.default {
     color: #8860D0;
     background-color: white;
