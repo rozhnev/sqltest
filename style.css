@@ -789,7 +789,8 @@ body {
     color: #8860D0;
     background-color: white;
 }
-.button.green {
+.button.green,
+.button-small.green {
     color: white;
     background-color: #11926E;
 }
@@ -954,11 +955,14 @@ td {
     width: 98%;
     justify-content: space-between;
 }
+.solutions {
+    width: 21vw;
+    border-radius: 6px;
+    padding: 12px;
+    background-color: var(--db-description-background-color);
+}
 .solution-wrapper {
     margin: 0 0 12px 0;
-    background-color: var(--text-block-background-color);
-    border: 1px solid var(--text-block-border-color);
-    color: var(--question-text);
 }
 .solution-block {
     height: 20vh;
@@ -966,15 +970,14 @@ td {
 }
 .solutions-title {
     font-weight: bold;
-    background-color: var(--question-title-bg-color);
-    color: var(--question-text);
-    padding: 6px;
+    color: #FFFFFF;
+    background-color: var(--db-description-background-color);
 }
 .solution-title,
 .solution-footer {
     font-weight: bold;
     font-size: small;
-    background-color: var(--question-title-bg-color);
+    /* background-color: var(--question-title-bg-color); */
     padding: 6px;
     display: flex; 
     justify-content: space-between; 
@@ -982,7 +985,7 @@ td {
 }
 .solution-footer {
     text-align: right;
-    background-color: var(--body-background-color);
+    /* background-color: var(--body-background-color); */
 }
 .question-footer .question-dates {
     color: var(--question-date-color);

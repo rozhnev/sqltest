@@ -1,4 +1,4 @@
-<div {if !$MobileView}style="width: 21vw;"{/if}>
+<div {if !$MobileView}class="solutions"{/if}>
     {if $User->logged()}
         {if !$QuestionSolved} 
             <div class="solution-wrapper">
