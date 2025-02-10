@@ -679,6 +679,10 @@ body {
     font-size: small;
     margin-top: 10px;
     font-style: italic;
+    border: 1px solid var(--text-block-border-color);
+    border-radius: 8px;
+    padding: 24px;
+    background-color: #1B9843;
 }
 .question-rate-panel .buttons {
     flex-flow: row;
@@ -833,7 +837,7 @@ body {
     margin-top: 0.5em;
 }
 .code-result {
-    border: 1px solid var(--text-block-border-color);
+    border-top: 1px solid var(--text-block-border-color);
     min-height: 28vh;
     padding: 15px;
     max-height: 40vh;
