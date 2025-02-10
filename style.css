@@ -743,6 +743,8 @@ body {
     justify-content: right;
     display: flex;
     flex-flow: row;
+    margin: 0.5em 0;
+    column-gap: 1em;
 }
 
 .code-buttons a {
@@ -759,7 +761,13 @@ body {
     margin: 7px 0;
     border: 1px solid var(--btn-border-color);
     border-radius: 4px;
+    display: flex;
 }
+.button > span{
+    line-height: 24px;
+    padding: 0 5px;
+}
+
 .text-button {
     cursor: pointer;
     display: flex;
@@ -783,7 +791,7 @@ body {
 }
 .button.green {
     color: white;
-    background-color: var(--green-btn-background);
+    background-color: #11926E;
 }
 .button.blue {
     background-color: var(--blue-btn-background);
@@ -814,6 +822,8 @@ body {
 }
 .top-menu .button {
     max-height: 3em;
+    font-size: large;
+    font-weight: bold;
 }
 .top-menu .divider {
     border-right: 1px solid silver; 

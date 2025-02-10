@@ -38,7 +38,7 @@
         </div>
         <div class="top-menu-right" style="min-width: 15vw; display: flex; justify-content: space-between; align-items: center;">
             <a href="/{$Lang}/donate" target="_self" id="donate-btn">
-                <button class="button default" >{translate}top_menu_donate{/translate}</button>    
+                <button class="button green" >{translate}top_menu_donate{/translate}</button>    
             </a>
             {if $User->logged()}
                 <button class="button blue" onclick="location.href = '/ru/logout';">{translate}top_menu_logout{/translate}</button>
