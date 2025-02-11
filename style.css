@@ -360,15 +360,16 @@ body {
 }
 .user-solutions-count {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-items: center;
     margin: 0 0 12px 0;
     background-color: var(--accordion-panel-bg-color);
     border: 1px solid var(--text-block-border-color);
     color: var(--question-text);
     border-radius: 6px;
-    padding: 0.5em;
     align-items: center;
+    justify-content: center;
+    column-gap: 1em;
 }
 .right {
     grid-area: right;
