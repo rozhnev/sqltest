@@ -10,6 +10,32 @@
         {/if}
         {include file='menu.tpl'}
         <div class="main">
+            <div class="text-block user-solutions-count">
+                {assign var="QuestionsCountRounded" value="{floor(($QuestionsCount - 1)/10) * 10}"}
+                <span>{translate}user_solutions_count{/translate}
+                {if $User->logged()}
+                    {if $SolvedQuestionsCount < ($QuestionsCount/2)}
+                        {assign var="YouHaveSolved" value="{translate}you_have_solved{/translate}"}
+                    {else}
+                        {assign var="YouHaveSolved" value="{translate}you_have_already_solved{/translate}"}
+                    {/if}
+                        {translate}user_solutions_count_logged{/translate}
+                        {if $SolvedQuestionsCount < $QuestionsCount}
+                            {translate}keep_going{/translate}
+                        {/if}
+                    <button class="button-small green" onClick="location.href = '/{$Lang}/test/start';">
+                        {if !$User->grade()}
+                            {translate}check_your_skills{/translate}
+                        {elseif $User->grade() == 'Senior'}
+                            {$User->grade()}, {translate}confirm_you_grade{/translate}
+                        {else}
+                            {$User->grade()}, {translate}level_up{/translate}
+                        {/if}
+                    </button>
+
+                {/if}
+                </span>
+            </div>
             <div class="question-wrapper">
                 <div class="question-title-bar" style="display: flex;">
                     <div class="question-title">
@@ -154,32 +180,6 @@
         </div>
 
         <div class="right" id="right-panel">
-            <div class="text-block user-solutions-count">
-                {assign var="QuestionsCountRounded" value="{floor(($QuestionsCount - 1)/10) * 10}"}
-                <span>{translate}user_solutions_count{/translate}</span>
-                {if $User->logged()}
-                    {if $SolvedQuestionsCount < ($QuestionsCount/2)}
-                        {assign var="YouHaveSolved" value="{translate}you_have_solved{/translate}"}
-                    {else}
-                        {assign var="YouHaveSolved" value="{translate}you_have_already_solved{/translate}"}
-                    {/if}
-                    <p>
-                        {translate}user_solutions_count_logged{/translate}
-                        {if $SolvedQuestionsCount < $QuestionsCount}
-                            {translate}keep_going{/translate}
-                        {/if}
-                    </p>
-                    <button class="button green" onClick="location.href = '/{$Lang}/test/start';">
-                        {if !$User->grade()}
-                            {translate}check_your_skills{/translate}
-                        {elseif $User->grade() == 'Senior'}
-                            {$User->grade()}, {translate}confirm_you_grade{/translate}
-                        {else}
-                            {$User->grade()}, {translate}level_up{/translate}
-                        {/if}
-                    </button>
-                {/if}
-            </div>
             {include file="{$Lang}/{$DB}.tpl"}
         </div>
 {include file='footer.tpl'}

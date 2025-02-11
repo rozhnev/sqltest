@@ -285,7 +285,7 @@ body {
 
 .header {
     grid-area: header;
-    min-height: 3vh;
+    min-height: 3dvh;
 }
 
 .top-menu {
@@ -324,12 +324,12 @@ body {
 .container .menu {
     grid-area: menu;
     width: 20vw;
-    max-height: 100vh;
+    max-height: 90dvh;
 }
 
 .mobile-container .menu {
     grid-area: menu;
-    /* height: 30vh; */
+    height: 90dvh;
     width: 99vw;
     padding: 0 3px;
     margin: 10px 0;
@@ -340,6 +340,7 @@ body {
     min-height: 85vh;
     color: white;
     width: 55vw;
+    height: 90dvh;
     transition: linear 0.5s;
 }
 
@@ -365,16 +366,17 @@ body {
     background-color: var(--accordion-panel-bg-color);
     border: 1px solid var(--text-block-border-color);
     color: var(--question-text);
-    border-radius: 6px 0 0 6px;
+    border-radius: 6px;
     padding: 0.5em;
-    /* align-items: center; */
+    align-items: center;
 }
 .right {
     grid-area: right;
-    width: 21vw;
+    width: 24dvw;
     padding: 12px;
     overflow: auto;
     transition: easy 0.5s;
+    height: 90dvh;
 }
 
 .right.hidden {
@@ -382,7 +384,7 @@ body {
 }
 .footer {
     grid-area: footer;
-    min-height: 4vh;
+    min-height: 3dvh;
     background-color: var(--block-background-color);
 }
 
@@ -910,9 +912,7 @@ body {
 }
 
 .db-description {
-    height: 100vh;
     overflow: auto;
-    margin-top: 10px;
     font-size: smaller;
     border-radius: 6px 0 0 0;
     padding: 0 0.5em;
