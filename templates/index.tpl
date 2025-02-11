@@ -62,9 +62,9 @@
                 {else}
                     <p class="question-action">{translate}question_action_use_syntax{/translate}</p>
                     {if $Question.solved_date}
-                        <p class="question-action">{translate}you_already_solved_this_task{/translate}&nbsp;{$Question.solved_date}.&nbsp;<button class="button-small blue" onClick="showMySolutions({$QuestionID})">{translate}view_solutions{/translate}</button></p>
+                        <span class="question-action">{translate}you_already_solved_this_task{/translate}&nbsp;{$Question.solved_date}.&nbsp;<button class="button-small blue" onClick="showMySolutions({$QuestionID})">{translate}view_solutions{/translate}</button></span>
                     {else}
-                        <p class="question-action">{translate}question_action_write_your_request{/translate}</p>
+                        <span class="question-action">{translate}question_action_write_your_request{/translate}</span>
                     {/if}
                 {/if}
             </div>
@@ -156,7 +156,7 @@
         <div class="right" id="right-panel">
             <div class="text-block user-solutions-count">
                 {assign var="QuestionsCountRounded" value="{floor(($QuestionsCount - 1)/10) * 10}"}
-                <p>{translate}user_solutions_count{/translate}</p>
+                <span>{translate}user_solutions_count{/translate}</span>
                 {if $User->logged()}
                     {if $SolvedQuestionsCount < ($QuestionsCount/2)}
                         {assign var="YouHaveSolved" value="{translate}you_have_solved{/translate}"}

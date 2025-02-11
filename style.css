@@ -113,12 +113,13 @@ body {
     padding: 2rem;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
+    color: var(--question-text);
 }
 .container800-header {
     text-align: center;
     margin-bottom: 2rem;
     /* color: #2c3e50; */
-    color: var(--regualr-text-color);
+    color: var(--question-text);
 }
 .container800-section {
     background: #f8f9fa;
@@ -146,8 +147,11 @@ body {
     padding: 5px 0;
 }
 .full-container .container3 {
-    padding: 0 20px !important;
+    padding: 2em !important;
     min-height: 80vh;
+    border-radius: 6px;
+    background-color: var(--accordion-panel-bg-color);
+    color: var(--question-text);
 }
 .mobile-container .container3 {
     padding: 0 10px !important;
@@ -354,9 +358,16 @@ body {
     display: none;
 }
 .user-solutions-count {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    margin: 0 0 12px 0;
+    background-color: var(--accordion-panel-bg-color);
+    border: 1px solid var(--text-block-border-color);
     color: var(--question-text);
-    padding: 0 5px;
-    text-align: center;
+    border-radius: 6px 0 0 6px;
+    padding: 0.5em;
+    /* align-items: center; */
 }
 .right {
     grid-area: right;
@@ -369,10 +380,10 @@ body {
 .right.hidden {
     transition: easy 0.5s;
 }
-
-.container .footer {
+.footer {
     grid-area: footer;
     min-height: 4vh;
+    background-color: var(--block-background-color);
 }
 
 .mobile-container .footer {
@@ -386,14 +397,13 @@ body {
 }
 .footer-links {
     display: flex;
-    align-items: center;
-    column-gap: 4px;
-    height: 3rem;
+    gap: 1em 4em;
+    max-height: 4rem;
     flex-flow: row wrap;
-    margin-top: 10px;
-}
-.container .footer-links {
-    width: 55vw;
+    margin: 10px 0;
+    width: 100%;
+    flex-direction: row;
+    justify-content: center;
 }
 .mobile-container .footer-links {
     width: 100vw;
@@ -493,11 +503,11 @@ body {
     border-radius: 0 0 6px 0;
 }
 .menu .selector .selector-options {
-    display: flex; 
-    column-gap: 4px; 
-    padding: 0.3em 1em 0.3em 0.3em; 
-    flex-flow: row;
+    display: flex;
+    padding: 0.5em 1em 0.3em 0.3em;
+    flex-flow: wrap;
     justify-content: space-between;
+    gap: 0.5em;
 }
 .menu .panel {
     padding: 0;
@@ -693,7 +703,7 @@ body {
 
 .question-action {
     font-style: italic;
-    padding: 0 15px 5px;
+    padding-left: 15px;
     font-size: smaller;
 }
 
@@ -766,7 +776,9 @@ body {
     border: 1px solid var(--btn-border-color);
     border-radius: 4px;
     display: flex;
+    max-width: max-content;
 }
+
 .button > span{
     line-height: 24px;
     padding: 0 5px;
@@ -828,13 +840,23 @@ body {
 .top-menu .button {
     max-height: 3em;
     font-size: large;
-    font-weight: bold;
+}
+.top-menu .button .currency {
+    background-color: gold;
+    border-radius: 50%;
+    padding: 2px 6px;
+    color: chocolate;
+    margin: 0 8px 0 0;
+    line-height: 16px;
 }
 .top-menu .divider {
     border-right: 1px solid silver; 
     display: block; 
     height: 85%; 
     margin-top: 0.5em;
+}
+.top-menu-right {
+    min-width: 18vw;display: flex;justify-content: space-between;align-items: center;
 }
 .code-result {
     border-top: 1px solid var(--text-block-border-color);

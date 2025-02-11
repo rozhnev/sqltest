@@ -36,7 +36,7 @@
                 {/if}
             </span>
         </div>
-        <div class="top-menu-right" style="min-width: 15vw; display: flex; justify-content: space-between; align-items: center;">
+        <div class="top-menu-right">
             <a href="/{$Lang}/donate" target="_self" id="donate-btn">
                 <button class="button green" >{translate}top_menu_donate{/translate}</button>    
             </a>
