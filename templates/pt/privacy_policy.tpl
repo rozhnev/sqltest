@@ -41,6 +41,4 @@
     <li><strong>Dúvidas:</strong> Se você tiver alguma dúvida ou preocupação sobre nossa Política de Privacidade, entre em contato conosco através do <a href="https://t.me/sqlize">nosso chat no Telegram</a>.</li>
 </ol>
 
-<footer>
-    <p>Esta Política de Privacidade foi atualizada pela última vez em 01/01/2024.</p>
-</footer>
+<p>Esta Política de Privacidade foi atualizada pela última vez em 01/01/2024.</p>

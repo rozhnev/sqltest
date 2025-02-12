@@ -3,7 +3,6 @@
     {include file='short-header.tpl'}
     <body>
         <div class="container">
-
             <header>
                 {if $MobileView}
                     {include file='m.top-menu.tpl' path="/about"}
@@ -12,7 +11,7 @@
                 {/if}
             </header>
             <main>
-            {include file="{$Lang}/privacy_policy.tpl"}
+                {include file="{$Lang}/privacy_policy.tpl"}
             </main>
             <footer>               
                 {if $MobileView}

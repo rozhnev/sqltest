@@ -2,8 +2,16 @@
 {assign var="PageDescription" value="{translate}books_page_description{/translate}"}
 {include file='short-header.tpl'}
 <body>
+    <style>
+        .book-card {
+            display: flex;
+            min-width:340px;
+        }
+        main .book-card {
+            max-width: 30%;
+        }
+    </style>
     <div class="container">
-
         <header>
             {if $MobileView}
                 {include file='m.top-menu.tpl' path="/about"}
