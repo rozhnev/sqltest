@@ -1,8 +1,5 @@
 {include file='header.tpl'}
 <body>
-<style>
-
-    </style>
     <div class="container">
         {include file='popups.tpl'}
         <header>
@@ -12,7 +9,7 @@
             {include file='top-menu.tpl' path="/question/{$Question.category_sef}/{$Question.question_sef}"}
         {/if}
         </header>
-        <main>
+        <main3>
             <div class="column">
                 {include file='menu.tpl'}
             </div>
@@ -188,7 +185,7 @@
             <div class="column">
                 {include file="{$Lang}/{$DB}.tpl"}
             </div>
-        </main>
+        </main3>
         <footer>
             {include file='footer.tpl'}
         </footer>

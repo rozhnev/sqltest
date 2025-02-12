@@ -77,12 +77,11 @@ a, a:visited {
     grid-template-rows: auto 1fr auto;
     height: 100%;
 }
-main {
+main3 {
     display: grid;
     grid-template-columns: 20% 60% 20%;
     overflow-y: auto;
 }
-
 .column {
     padding-top: 0.5em;
 }
@@ -97,7 +96,10 @@ main {
 .column:nth-child(3) {
     padding-left: 0.5em;
 }
-
+main {
+    display: grid;
+    overflow-y: auto;
+}
 .button {
     background-color: var(--block-background-color);
     color: white;
