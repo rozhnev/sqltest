@@ -1,8 +1,7 @@
-{assign var="PageTitle" value="{translate}donate_policy_page_title{/translate}"}
-{assign var="PageDescription" value="{translate}donate_policy_page_description{/translate}"}
-{include file='short-header.tpl'}
-<style>             
-       
+    {assign var="PageTitle" value="{translate}donate_policy_page_title{/translate}"}
+    {assign var="PageDescription" value="{translate}donate_policy_page_description{/translate}"}
+    {include file='short-header.tpl'}
+    <style>             
         .donation-methods {
             display: flex;
             flex-wrap: wrap;
@@ -66,17 +65,24 @@
         }
     </style>
     <body>
-        <div class="{if $MobileView}mobile-container{else}full-container{/if}">
-            {if $MobileView}
-                {include file='m.top-menu.tpl' path="/donate"}
-            {else}
-                {include file='top-menu.tpl' path="/donate"}
-            {/if}
-            <div class="container3">
+        <div class="container">
+            <header>
+                {if $MobileView}
+                    {include file='m.top-menu.tpl' path="/about"}
+                {else}
+                    {include file='top-menu.tpl' path="/about"}
+                {/if}
+            </header>
+            <main>
                 {include file="{$Lang}/donate.tpl"}
-            </div>
-{if $MobileView}
-    {include file='m.footer.tpl'}
-{else}
-    {include file='footer.tpl'}
-{/if}
+            </main>
+            <footer>               
+                {if $MobileView}
+                    {include file='m.footer.tpl'}
+                {else}
+                    {include file='footer.tpl'}
+                {/if}
+            </footer>
+        </div>
+    </body>
+</html>
