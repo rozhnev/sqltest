@@ -36,10 +36,10 @@
 </div>
 <div class="top-menu-buttons">
     <a href="/{$Lang}/donate" target="_self" id="donate-btn">
-        <button class="button green" >{translate}top_menu_donate{/translate}</button>    
+        <button class="button green"><span>{translate}top_menu_donate{/translate}</span></button>    
     </a>
     {if $User->logged()}
-        <button class="button blue" onclick="location.href = '/ru/logout';">{translate}top_menu_logout{/translate}</button>
+        <button class="button blue" onclick="location.href = '/ru/logout';"><span>{translate}top_menu_logout{/translate}</span></button>
     {else}
         <button class="button blue" onClick="toggleLoginWindow()">{translate}top_menu_login{/translate}</button>
     {/if}
