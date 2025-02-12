@@ -46,7 +46,7 @@ $translations = [
     'favorite' => 'Favorite',
     'favorites' => 'Favorites',
     'add_to_favorites' => 'Click to add to favorites',
-    'menu_small_add_placeholder' => '<div style="display: flex; flex-direction: column; align-items: center;">
+    'menu_small_add_placeholder' => '<div style="color: var(--question-text); display: flex; flex-direction: column; align-items: center;">
         Support us on <a href="https://boosty.to/phpize/donate" target="_blank">
         <img src="https://static.boosty.to/assets/images/logo.b92ac.svg" 
                             alt="Support on Boosty"
