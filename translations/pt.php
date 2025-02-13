@@ -29,7 +29,7 @@ $translations = [
     'footer_questions' => 'Perguntas?',
     'sql_copied_to_buffer' => 'Código SQL copiado para a área de transferência',
     'choose_login_method' => 'Escolha o método de login',
-    'top_menu_donate' => 'Doar',
+    'top_menu_donate' => '<span class="currency">€</span> Doar',
     'top_menu_login' => 'Entrar',
     'top_menu_logout' => 'Sair',
     'site_description' => 'Aproveite o poder da prática para dominar o SQL. Nossos exercícios interativos são projetados para solidificar sua compreensão, desde conceitos básicos até técnicas avançadas. Seja você um iniciante em SQL ou um profissional experiente, encontrará desafios adaptados ao seu nível de habilidade. Aumente sua confiança para entrevistas de emprego e aplicações do mundo real por meio da prática consistente.',
