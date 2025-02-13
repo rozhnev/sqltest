@@ -4,7 +4,7 @@
       about
       fictional manufacturing company.</p>
     <p>
-        <a  class="button erd" href="/{$Lang}/erd/AdventureWorks" target="ERDWindow">
+        <a  class="button-erd" href="/{$Lang}/erd/AdventureWorks" target="ERDWindow">
             AdventureWorks DB ER diagram
         </a>
     </p>

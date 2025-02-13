@@ -2,7 +2,7 @@
     <h2>Bookings Database (PostgreSQL)</h2>
     The subject area of this database is airline flights through various airports.
     <p>
-        <a class="button erd" href="/{$Lang}/erd/Bookings" target="ERDWindow">
+        <a class="button-erd" href="/{$Lang}/erd/Bookings" target="ERDWindow">
             ER diagram of the Bookings database
         </a>
     </p>

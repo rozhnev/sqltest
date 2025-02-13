@@ -2,7 +2,7 @@
   <h2>Sakila Database (MySQL)</h2>
   Sakila is a sample database developed by MySQL, specifically designed to teach and demonstrate the capabilities of database management systems (DBMS) based on the relational model.
   <p>
-      <a class="button erd" href="/{$Lang}/erd/Sakila" target="ERDWindow">
+      <a class="button-erd" href="/{$Lang}/erd/Sakila" target="ERDWindow">
         Sakila DB ER diagram
       </a>
   </p>

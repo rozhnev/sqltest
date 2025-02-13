@@ -2,7 +2,7 @@
     <h2>AdventureWorks Database (SQL Server)</h2>
     <p>O Banco de Dados AdventureWorks é um banco de dados de amostra que demonstra as capacidades do SQL Server. Ele inclui dados sobre uma empresa de manufatura fictícia.</p>
     <p>
-        <a  class="button erd" href="/{$Lang}/erd/AdventureWorks" target="ERDWindow">
+        <a  class="button-erd" href="/{$Lang}/erd/AdventureWorks" target="ERDWindow">
             Diagrama ER do Banco de Dados AdventureWorks
         </a>
     </p>
