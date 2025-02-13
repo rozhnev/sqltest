@@ -690,6 +690,20 @@ input:checked + .slider:before {
     border-bottom: 1px solid white;
     padding-bottom: 5px;
 }
+.db-description .button-erd {
+    display: block; 
+    text-decoration: none; 
+    width: 95%; 
+    color: var(--db-description-background-color);
+    background: url('/images/erd1.svg') no-repeat;
+    background-size: contain;
+    background-position-x: 5px;
+    background-position-y: 3px;
+    padding-left: 2rem;
+    border-color: white;
+    background-color: white;
+    padding: 12px;
+}
 .db-description table {
     border-collapse: collapse;
     width: 100%;

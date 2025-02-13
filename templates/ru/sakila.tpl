@@ -2,12 +2,12 @@
   <h2>База данных Sakila (MySQL)</h2>
   Sakila - это пример базы данных, разработанный компанией MySQL, специально созданный для обучения и демонстрации возможностей систем управления базами данных (СУБД) на основе реляционной модели.
   <p>
-      <a class="button erd" href="/{$Lang}/erd/Sakila" target="ERDWindow">
+      <a class="button-erd" href="/{$Lang}/erd/Sakila" target="ERDWindow">
           ER диаграмма базы данных Sakila
       </a>
   </p>
   <p>База данных Sakila содержит 15 основных таблиц, описывающих различные аспекты компании по прокату DVD-дисков.</p>
-  <p>Ниже приведен список этих таблиц:</p>
+  <h3>Ниже приведен список этих таблиц:</h3>
   <ul style="list-style-type: '▤ '; padding-inline-start: 20px;">
     <li><span class='sql' onclick="scrollInfoPanel('actor_table_description')">actor</span> - таблица актеров.</li>
     <li><span class='sql' onclick="scrollInfoPanel('address_table_description')">address</span> - таблица адресов клиентов и сотрудников.</li>
