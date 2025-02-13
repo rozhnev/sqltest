@@ -88,18 +88,19 @@ main3 {
     overflow-y: auto;
 }
 .column {
-    padding-top: 0.5em;
+    padding-top: 1rem;
 }
 
 .column:nth-child(1) {
-    padding-right: 0.5em;
+    /* padding-right: 0.5em; */
 }
 
 .column:nth-child(2) {
+    padding: 1rem 1.5rem 0 1.5rem;
 }
 
 .column:nth-child(3) {
-    padding-left: 0.5em;
+    /* padding-left: 0.5em; */
 }
 main {
     display: grid;
@@ -401,7 +402,7 @@ input:checked + .slider:before {
     justify-items: left;
     background-color: var(--db-description-background-color);
     padding: 0.5em 0;
-    border-radius: 0 0 6px 0;
+    border-radius: 0 6px 6px 0;
 }
 .menu .selector .selector-options {
     display: flex;
@@ -435,7 +436,8 @@ input:checked + .slider:before {
 }
 .menu .question-number {
     display: inline-block;
-    width: 2em;
+    width: 2rem;
+    min-width: 2rem;
     text-align: right;
 }
 .menu .panel a {
