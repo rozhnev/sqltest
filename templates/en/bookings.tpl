@@ -6,7 +6,7 @@
             ER diagram of the Bookings database
         </a>
     </p>
-    <p>The Bookings Database contains 8 tables:</p>
+    <h3>The Bookings Database contains 8 tables:</h3>
     <ul style="list-style-type: '▤ '; padding-inline-start: 20px;">
       <li><span class='sql' onclick="scrollInfoPanel('aircrafts_data_table_description')">aircrafts_data</span> - table of aircraft.</li>
       <li><span class='sql' onclick="scrollInfoPanel('airports_data_table_description')">airports_data</span> - table of airports.</li>

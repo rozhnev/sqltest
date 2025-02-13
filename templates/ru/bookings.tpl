@@ -6,7 +6,7 @@
             ER диаграмма базы данных Bookings
         </a>
     </p>
-    <p>База данных Bookings содержит 8 таблиц:</p>
+    <h3>База данных Bookings содержит 8 таблиц:</h3>
     <ul style="list-style-type: '▤ '; padding-inline-start: 20px;">
       <li><span class='sql' onclick="scrollInfoPanel('aircrafts_data_table_description')">aircrafts_data</span> - таблица самолетов.</li>
       <li><span class='sql' onclick="scrollInfoPanel('airports_data_table_description')">airports_data</span> - таблица аэропортов.</li>

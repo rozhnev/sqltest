@@ -7,7 +7,7 @@
       </a>
   </p>
   The Sakila database contains 15 main tables describing various aspects of a DVD rental company.
-  <p>Below is a list of these tables:</p>
+  <h3>Below is a list of these tables:</h3>
   <ul style="list-style-type: '▤ '; padding-inline-start: 20px;">
     <li><span class='sql' onclick="scrollInfoPanel('actor_table_description')">actor</span> - table of actors.</li>
     <li><span class='sql' onclick="scrollInfoPanel('address_table_description')">address</span> - table of customer and staff addresses</li>

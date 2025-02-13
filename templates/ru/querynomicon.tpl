@@ -1,7 +1,7 @@
 <div id="db-description" class="db-description">
     <h2>Querynomicon (SQLite)</h2>
     Компактная база данных для изучения основ SQL.
-    <p>База данных Bookings содержит таблицы:</p>
+    <h3>База данных Querynomicon содержит таблицы:</h3>
     <ul style="list-style-type: '▤ '; padding-inline-start: 20px;">
         <li><span class='sql' onclick="scrollInfoPanel('little_penguins_table_description')">little_penguins</span> - таблица малых пингвинов.</li>
         <li><span class='sql' onclick="scrollInfoPanel('penguins_table_description')">penguins</span> - таблица пингвинов.</li>

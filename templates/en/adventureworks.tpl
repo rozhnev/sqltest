@@ -8,7 +8,7 @@
             AdventureWorks DB ER diagram
         </a>
     </p>
-    <p>The following is a list of these tables:</p>
+    <h3>The following is a list of these tables:</h3>
     <ul style="list-style-type: '▤ '; padding-inline-start: 20px;">
       <li><span class='sql' onclick="scrollInfoPanel('Address_table_description')">Address</span> - table of addresses.</li>
       <li><span class='sql' onclick="scrollInfoPanel('Customer_table_description')">Customer</span> - table of customers</li>

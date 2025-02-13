@@ -4,7 +4,7 @@
     Employee - это образец базы данных, которая поставляется с кроссплатформенной системой управления базами данных Firebird. 
     Вы можете использовать эту базу данных для изучения возможностей Firebird SQL и других функций СУБД. 
     </p>
-    <p>Ниже приведен список таблиц этой базы данных:</p>
+    <h3>Ниже приведен список таблиц этой базы данных:</h3>
     <ul style="list-style-type: '▤ '; padding-inline-start: 20px;">
         <li><span class='sql' onclick="scrollInfoPanel('COUNTRY_table_description')">COUNTRY</span> - таблица стран.</li>
         <li><span class='sql' onclick="scrollInfoPanel('JOB_table_description')">JOB</span> - таблица должностей.</li>

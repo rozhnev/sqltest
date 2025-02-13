@@ -7,7 +7,7 @@
             ER диаграмма базы данных AdventureWorks
         </a>
     </p>
-    <p>Ниже приведен список этих таблиц:</p>
+    <h3>Ниже приведен список этих таблиц:</h3>
     <ul style="list-style-type: '▤ '; padding-inline-start: 20px;">
       <li><span class='sql' onclick="scrollInfoPanel('Address_table_description')">Address</span> - таблица адресов.</li>
       <li><span class='sql' onclick="scrollInfoPanel('Customer_table_description')">Customer</span> - таблица клиентов</li>

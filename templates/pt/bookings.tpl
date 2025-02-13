@@ -6,7 +6,7 @@
             Diagrama ER do banco de dados Bookings
         </a>
     </p>
-    <p>O Banco de Dados Bookings contém 8 tabelas:</p>
+    <h3>O Banco de Dados Bookings contém 8 tabelas:</h3>
     <ul style="list-style-type: '▤ '; padding-inline-start: 20px;">
       <li><span class='sql' onclick="scrollInfoPanel('aircrafts_data_table_description')">aircrafts_data</span> - tabela de aeronaves.</li>
       <li><span class='sql' onclick="scrollInfoPanel('airports_data_table_description')">airports_data</span> - tabela de aeroportos.</li>

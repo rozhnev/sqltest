@@ -6,7 +6,7 @@
             Diagrama ER do Banco de Dados AdventureWorks
         </a>
     </p>
-    <p>A seguir, uma lista das tabelas:</p>
+    <h3>A seguir, uma lista das tabelas:</h3>
     <ul style="list-style-type: '▤ '; padding-inline-start: 20px;">
       <li><span class='sql' onclick="scrollInfoPanel('Address_table_description')">Address</span> - Tabela de endereços.</li>
       <li><span class='sql' onclick="scrollInfoPanel('Customer_table_description')">Customer</span> - Tabela de clientes.</li>

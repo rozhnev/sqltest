@@ -4,7 +4,7 @@
      Employee is a sample database that comes with the Firebird cross-platform database management system.
      You can use this database to explore Firebird SQL and other DBMS features.
     </p>
-    <p>Below is a list of this DB tables:</p>
+    <h3>Below is a list of this DB tables:</h3>
     <ul style="list-style-type: '▤ '; padding-inline-start: 20px;">
       <li><span class='sql' onclick="scrollInfoPanel('COUNTRY_table_description')">COUNTRY</span> - table of countries.</li>
       <li><span class='sql' onclick="scrollInfoPanel('JOB_table_description')">JOB</span> - table of jobs.</li>

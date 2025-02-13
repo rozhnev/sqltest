@@ -7,7 +7,7 @@
       </a>
   </p>
   O banco de dados Sakila contém 15 tabelas principais descrevendo vários aspectos de uma empresa de aluguel de DVDs.
-  <p>Abaixo está uma lista dessas tabelas:</p>
+  <h3>Abaixo está uma lista dessas tabelas:</h3>
   <ul style="list-style-type: '▤ '; padding-inline-start: 20px;">
     <li><span class='sql' onclick="scrollInfoPanel('actor_table_description')">actor</span> - tabela de atores.</li>
     <li><span class='sql' onclick="scrollInfoPanel('address_table_description')">address</span> - tabela de endereços de clientes e funcionários</li>
