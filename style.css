@@ -68,6 +68,11 @@ body, html {
 .hidden {
     display: none;
 }
+.invisible {
+    overflow: hidden;
+    height: 0;
+}
+
 a, a:visited {
     text-decoration: none;
 }
