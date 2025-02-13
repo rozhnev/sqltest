@@ -692,17 +692,13 @@ input:checked + .slider:before {
 }
 .db-description .button-erd {
     display: block; 
-    text-decoration: none; 
-    width: 95%; 
     color: var(--db-description-background-color);
     background: url('/images/erd1.svg') no-repeat;
     background-size: contain;
     background-position-x: 5px;
-    background-position-y: 3px;
     padding-left: 2rem;
-    border-color: white;
     background-color: white;
-    padding: 12px;
+    padding: 12px 0 12px 54px;
 }
 .db-description table {
     border-collapse: collapse;
