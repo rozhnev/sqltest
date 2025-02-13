@@ -110,7 +110,7 @@ main {
     background-color: var(--block-background-color);
     color: white;
     cursor: pointer;
-    padding: 12px;
+    padding: 6px;
     text-align: center;
     min-width: 98px;
     margin: 7px 0;
@@ -499,6 +499,7 @@ input:checked + .slider:before {
     align-items: center;
     justify-content: center;
     column-gap: 1em;
+    padding: 8px;
 }
 
 .question-wrapper {
