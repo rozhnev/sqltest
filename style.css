@@ -12,7 +12,7 @@
     --text-block-background-color: #FFFFFF;
     --special-text-color: #FFFFFF;
     --menu-button-background-color: #466cbd;
-    --menu-link-color:  #0071DB;
+    --menu-link-color:  #333333;
     --border-color:  #0B4FCC;
     --btn-border-color:  slategrey;
     --donate-btn-background: gold;
@@ -173,8 +173,8 @@ main {
     opacity: 0;
     transition: opacity 0.3s ease-out;
     min-height: 96px;
-    background-color: var(--accordion-panel-bg-color);
-    color: #fff;
+    background-color: var(--block-background-color);
+    color: #FFFFFF;
     text-align: center;
     border-radius: 3px;
     padding: 0 !important;
@@ -195,10 +195,11 @@ main {
 .login-popup-header {
     text-align: right;
     padding: 5px 9px;
-    background-color: var(--block-background-color);
+    background-color: var(--accordion-panel-bg-color);
     border-top-right-radius: 3px;
     border-top-left-radius: 3px;
     margin-bottom: 12px;
+    color: var(--question-text);
 }
 
 .login-popup-footer {
@@ -418,15 +419,27 @@ input:checked + .slider:before {
 .menu .panel ol,
 .menu .panel ul {
     color: var(--menu-link-color); 
-    font-size: small;
+    font-size: medium;
 }
-
+.menu .panel ul {
+    padding-left: 3em;
+}
+.menu .panel ol {
+    list-style-type: none;
+    padding-left: 0.5em;
+}
+.menu .question-number {
+    display: inline-block;
+    width: 2em;
+    text-align: right;
+}
 .menu .panel a {
     color: var(--menu-link-color); 
     display: flex;
     margin: 7px 0;
-    font-size: 1.1em;
     text-decoration: none;
+    border-bottom: 1px solid silver;
+    padding-bottom: 6px;
 }
 .menu .accordion {
     background-color: var(--menu-button-background-color);
@@ -552,6 +565,9 @@ input:checked + .slider:before {
 .question-link .question-star {
     padding-left: 3px;
     font-size: xx-small;
+}
+.question-link.solved {
+    color: gray !important;
 }
 .question-star.favored {
     color: red;

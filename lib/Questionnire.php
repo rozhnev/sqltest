@@ -41,6 +41,7 @@ class Questionnire
     {
         $stmt = $this->dbh->prepare("
             SELECT 
+                ROW_NUMBER() OVER (PARTITION BY categories.id ORDER BY question_categories.sequence_position) question_number,
                 categories.id,
                 categories.title_sef sef,
                 categories_localization.title questions_category,
@@ -78,7 +79,7 @@ class Questionnire
                         'sef'       => $el['sef'],
                         'questions' => []
                     ];
-                    $acc[$el['id']]['questions'][] = [$el['question_title'], $el['question_id'], $el['solved'], $el['question_sef'], $el['favored']];
+                    $acc[$el['id']]['questions'][] = [$el['question_title'], $el['question_id'], $el['solved'], $el['question_sef'], $el['favored'], $el['question_number']];
                     return $acc;
                 },
                 []

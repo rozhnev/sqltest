@@ -689,7 +689,8 @@ class User
                 questions_localization.question_id, 
                 null as solved_at, 
                 questions.title_sef, 
-                true as favored 
+                true as favored,
+                ROW_NUMBER() OVER (ORDER BY questions_localization.title) question_number
             FROM favorites 
             JOIN questions ON favorites.question_id = questions.id 
             JOIN questions_localization ON questions.id = questions_localization.question_id AND questions_localization.language = :lang

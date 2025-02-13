@@ -29,15 +29,16 @@
                 <span class="accordion-title">{translate}favorites{/translate}&nbsp;<span class="question-star favored" title="{translate}favorite{/translate}">★</span></span>
             </button>
             <div class="panel {if isset($QuestionCategoryID) && 99 eq $QuestionCategoryID}active{/if}">
-                <ul>
+                <ol>
                 {foreach $Favorites as $question}
                 <li>
                     <a class="question-link {if $QuestionID == $question[1]} current-question{/if}{if $question[2]} solved{/if}" href="/{$Lang}/question/favorites/{$question[3]}">
+                        <span class="question-number">{$question[5]}.&nbsp;</span>
                         {$question[0]}
                     </a>
                 </li>
                 {/foreach}
-                </ul>
+                </ol>
             </div>
         {/if}
         {foreach $Questionnire.menu as $categoryId => $panel}
@@ -61,6 +62,7 @@
             {foreach $panel.questions as $question}
             <li>
                 <a class="question-link {if $QuestionID == $question[1]} current-question{/if}{if $question[2]} solved{/if}" href="/{$Lang}/question/{$panel.sef}/{$question[3]}">
+                    <span class="question-number">{$question[5]}.&nbsp;</span>
                     {$question[0]}
                     {if $question[4]}
                         <span class="question-star favored" title="{translate}favorite{/translate}">★</span>
