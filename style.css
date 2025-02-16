@@ -142,6 +142,10 @@ main {
     color: #8860D0;
     background-color: white;
 }
+.button-small {
+    border: none;
+    border-radius: 3px;
+}
 .button.green,
 .button-small.green {
     color: white;
@@ -156,11 +160,12 @@ main {
 }
 .toast {
     border: 1px solid var(--text-block-border-color);
+    border-radius: 6px;
     opacity: 0;
     transition: opacity 0.3s ease-out;
     min-width: 250px;
     margin-left: -125px;
-    background-color: var(--body-background-color);
+    background-color: var(--db-description-background-color);
     color: #fff;
     text-align: center;
     border-radius: 3px;
@@ -170,9 +175,9 @@ main {
     left: 47%;
     top: -90px;
 }
-.visible {
+.toast.visible {
     opacity: 100 !important;
-    top: 190px;
+    top: 50dvh;
     transition: opacity 0.3s ease-out, top 1s;
 }
 .login-popup  {
