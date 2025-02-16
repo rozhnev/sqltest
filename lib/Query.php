@@ -67,4 +67,70 @@ class Query
             throw new Exception('Can\'t qet query result');
         }
     }
+
+    /**
+     * Cleans the comments from the query.
+     *
+     * @return string The query string without comments.
+     */
+    public function cleanComments(): string
+    {
+        $inSingleQuoteString = false;
+        $inDoubleQuoteString = false;
+        $escaped = false;
+        $cleaned = '';
+        $length = strlen($this->sql);
+    
+        for ($i = 0; $i < $length; $i++) {
+            $char = $this->sql[$i];
+    
+            if ($inSingleQuoteString) {
+                if ($char === '\\' && !$escaped) {
+                    $escaped = true;
+                    $cleaned .= $char;
+                    continue;
+                } elseif ($char === '\'' && !$escaped) {
+                    $inSingleQuoteString = false;
+                } else {
+                    $escaped = false;
+                }
+                $cleaned .= $char;
+            } elseif ($inDoubleQuoteString) {
+                if ($char === '\\' && !$escaped) {
+                    $escaped = true;
+                    $cleaned .= $char;
+                    continue;
+                } elseif ($char === '"' && !$escaped) {
+                    $inDoubleQuoteString = false;
+                } else {
+                    $escaped = false;
+                }
+                $cleaned .= $char;
+            } else {
+                if ($char === '\'') {
+                    $inSingleQuoteString = true;
+                    $cleaned .= $char;
+                } elseif ($char === '"') {
+                    $inDoubleQuoteString = true;
+                    $cleaned .= $char;
+                } elseif ($char === '-' && $i + 1 < $length && $this->sql[$i + 1] === '-') {
+                    // Skip single-line comment
+                    while ($i < $length && $this->sql[$i] !== "\n") {
+                        $i++;
+                    }
+                } elseif ($char === '/' && $i + 1 < $length && $this->sql[$i + 1] === '*') {
+                    // Skip multi-line comment
+                    $i += 2;
+                    while ($i < $length && !($this->sql[$i] === '*' && $i + 1 < $length && $this->sql[$i + 1] === '/')) {
+                        $i++;
+                    }
+                    $i++;
+                } else {
+                    $cleaned .= $char;
+                }
+            }
+        }
+    
+        return $cleaned;
+    }
 }

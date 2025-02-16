@@ -264,7 +264,10 @@ class Question
      */
     public function checkQuery(string $query)
     {
-        if (empty($query)) {
+        $queryClass = new Query($query);
+        $cleanedQuery = $queryClass->cleanComments($query);
+
+        if (empty($cleanedQuery)) {
             $hints['emptyQuery'] = true;
             return [
                 'ok' => false,
@@ -277,8 +280,8 @@ class Question
         $questionData = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if (
-            (isset($questionData['query_match']) && !preg_match($questionData['query_match'], $query)) ||
-            (isset($questionData['query_not_match']) && preg_match($questionData['query_not_match'], $query))
+            (isset($questionData['query_match']) && !preg_match($questionData['query_match'], $cleanedQuery)) ||
+            (isset($questionData['query_not_match']) && preg_match($questionData['query_not_match'], $cleanedQuery))
         ) {
             $hints['wrongQuery'] = true;
             return [
