@@ -28,10 +28,13 @@
         .donation-method {
             text-align: center;
             padding: 1.5rem;
-            background: white;
+            /* background: white; */
             border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            color: #79c0ff;
+            /* box-shadow: 0 2px 4px rgba(0,0,0,0.05); */
+            color: var(--ligth-h2-color);
+            background-color: var(--ligth-panel-bg-color);
+            max-width: 40%;
+            min-width: 20rem;
         }
         @media (max-width: 768px) {
             .donation-method {
@@ -68,9 +71,9 @@
         <div class="container">
             <header>
                 {if $MobileView}
-                    {include file='m.top-menu.tpl' path="/about"}
+                    {include file='m.top-menu.tpl' path="/donate"}
                 {else}
-                    {include file='top-menu.tpl' path="/about"}
+                    {include file='top-menu.tpl' path="/donate"}
                 {/if}
             </header>
             <main>
