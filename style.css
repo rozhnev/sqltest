@@ -763,7 +763,7 @@ footer {
 }
 .footer-links {
     display: flex;
-    gap: 1em 4em;
+    gap: 0.5rem 2em;
     max-height: 4rem;
     flex-flow: row wrap;
     margin: 10px 0;
