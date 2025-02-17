@@ -113,7 +113,6 @@ main {
     cursor: pointer;
     padding: 6px;
     text-align: center;
-    min-width: 98px;
     margin: 7px 0;
     border: 1px solid var(--btn-border-color);
     border-radius: 4px;
@@ -322,6 +321,9 @@ header .divider {
 .top-menu-buttons {
     min-width: 18vw;display: flex;justify-content: space-between;align-items: center;
     padding-top: 0.5em;
+}
+.top-menu-buttons.mobile button {
+    font-size: large; min-width: 48px; min-height: 44px; display: block;
 }
 .top-menu-switchers {
     display: flex; flex-direction: column; justify-content: center; align-items: center; row-gap: 0.7em;
