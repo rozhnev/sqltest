@@ -2,7 +2,7 @@
 <div class="about">
     <div class="section top colored">
         <div>
-            <h2>Поддержка SQLtest.online</h2>
+            <h2>Поддержите SQLtest.online</h2>
         </div>
         <div style="display: block; text-align: left;">
             <p>
@@ -16,15 +16,12 @@
             </p>
         </div>
     </div>
-    <div class="section not-colored">
-
-    </div>
     <div class="section" style="height: 100%;">
         <div style="display: block;">      
                 <h2 style="color: var(--ligth-h2-color);">Способы поддержки:</h2>
                 <div class="donation-methods">
                     <div class="donation-method">
-                        <h3>Поддержка в рублях</h3>
+                        <h3>Поддержать в рублях</h3>
                         <p>Быстрый и безопасный платёж через CloudTips:</p>
                         <p>
                             <a href="https://pay.cloudtips.ru/p/60214a3d" target="_blank">
@@ -39,7 +36,7 @@
                     </div>
                     
                     <div class="donation-method">
-                        <h3>Поддержка в евро через Ko-fi</h3>
+                        <h3>Купить кофе за евро</h3>
                         <p>Удобный платёж через платформу Ko-fi:</p>
                         <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
                         <script type='text/javascript'>
@@ -49,8 +46,8 @@
                     </div>
         
                     <div class="donation-method">
-                        <h3>Криптовалюта - USDT (TRC20)</h3>
-                        <p>Поддержка с помощью USDT в сети TRON:</p>
+                        <h3>Помочь в криптовалюте</h3>
+                        <p>Перевод USDT в сети TRON (TRC20):</p>
                         <div class="crypto-address">
                             TFb65PXkvCDhK7WjTT5hkcP5WHwxYh51A8
                         </div>
@@ -58,8 +55,8 @@
                             alt="USDT QR код" 
                             style="max-width: 200px; margin: 1rem 0;">
                         <p class="warning-text">
-                            Важно: Отправляйте только USDT TRC20 на этот адрес.<br>
-                            Отправка любой другой криптовалюты приведёт к безвозвратной потере средств.
+                            Важно!<br>
+                            Отправляйте USDT только в сети TRC20. Отправка в любой другой сети приведёт к безвозвратной потере средств.
                         </p>
                     </div>
 
