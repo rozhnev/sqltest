@@ -147,6 +147,9 @@
   color: var(--ligth-h2-color);
   margin: 0;
 }
+.about .top p, .about .bottom p {
+  color: var(--ligth-h2-color);
+}
 .about .not-colored {
   color: var(--ligth-h2-color);
 }
