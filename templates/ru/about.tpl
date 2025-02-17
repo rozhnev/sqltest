@@ -57,22 +57,22 @@
     <div class="section not-colored">
         <div style="width: 100%";><b>Для кого подходит SQLTest.online?</b></div>
         <div>
-            <div style="display: flex; flex-direction: row; justify-content: space-between; gap: 1rem;">
-                <div class="section-column colored column33">
+            <div style="display: flex; flex-flow: row wrap; justify-content: space-between; gap: 1rem;">
+                <div class="section-column colored column30">
                     <img src="/images/graduation-cap.png" style="height: 64px;">
                     <div>
                         <div class="bold">Студенты</div>
                         <div style="font-size: small; margin-top: 0.5rem;">Изучайте SQL в рамках учебной программы или для самостоятельного обучения.</div>
                     </div>
                 </div>
-                <div class="section-column colored column33">
+                <div class="section-column colored column30">
                     <img src="/images/technologist.png" style="height: 64px;">
                     <div>
                         <div class="bold">Разработчики</div>
                         <div style="font-size: small; margin-top: 0.5rem;">Улучшайте свои навыки для работы с базами данных в проектах.</div>
                     </div>                
                 </div>
-                <div class="section-column colored column33">
+                <div class="section-column colored column30">
                     <img src="/images/bar-chart.png" style="height: 64px;">
                     <div>
                         <div class="bold">Аналитики данных</div>
@@ -85,22 +85,22 @@
     <div class="section not-colored">
         <div style="width: 100%";><b>Как начать?</b></div>
         <div>
-            <div style="display: flex; flex-direction: row; justify-content: space-between; gap: 1rem;">
-                <div class="section-column column33">
+            <div style="display: flex; flex-flow: row wrap; justify-content: space-between; gap: 1rem;">
+                <div class="section-column column30">
                     <img src="/images/start1.png" style="height: 150px;">
                     <div>
                         <div class="bold"><span style="color: var(--ligth-h1-color);">1.&nbsp;</span>Зайдите на сайт</div>
                         <div style="font-size: small; margin-top: 0.5rem;">Перейдите на SQLTest.online и выберите раздел "Задачи"</div>
                     </div>
                 </div>
-                <div class="section-column column33">
+                <div class="section-column column30">
                     <img src="/images/start2.png" style="height: 150px;">
                     <div>
                         <div class="bold"><span style="color: var(--ligth-h1-color);">2.&nbsp;</span>Выберите категорию</div>
                         <div style="font-size: small; margin-top: 0.5rem;">Выберите интересующую вас тему или уровень сложности</div>
                     </div>                
                 </div>
-                <div class="section-column column33">
+                <div class="section-column column30">
                     <img src="/images/start3.png" style="height: 150px;">
                     <div>
                         <div class="bold"><span style="color: var(--ligth-h1-color);">3.&nbsp;</span>Решайте задачи</div>
@@ -115,7 +115,7 @@
             <div class="section-column" style="padding: 0 0 0 2rem; white-space: nowrap;">
                 <b>Почему именно мы?</b>
             </div>
-            <div class="section-column">
+            <div class="section-column" style="max-width: 50rem;">
                 <ul>
                     <li><strong>Интерактивное обучение</strong><br>Решайте разнообразные SQL-задачи прямо в браузере. Не нужно устанавливать дополнительные программы или настраивать окружение.</li>
                     <li><strong>Разнообразие баз данных</strong><br>Практикуйтесь на популярных базах данных, таких как MySQL, PostgreSQL, MS SQL Server и Firebird.</li>
@@ -137,19 +137,19 @@
     </div>
     <div class="section not-colored">
         <div style="width: 100%;">
-            <div class="section-column" style="width: 70%;">
+            <div class="section-column" style="width: 65%;">
                 <h2>Следите за нашими новостями в социальных сетях</h2>
                 <h4>и подписывайтесь на рассылку, чтобы быть в курсе последних обновлений.</h4>
             </div>
-            <div class="section-column column33" style="display: flex; flex-direction: row; justify-content: space-around;">
-                <a href="https://t.me/sqlize" target="_blank">
-                    <div class="social-media-link">
+            <div class="section-column column30" style="display: flex; flex-flow: row wrap; justify-content: space-around;">
+                <a href="https://t.me/sqlize" target="_blank"class="social-media-link">
+                    <div>
                         <img src="/images/telegram_logo.png">
                         Telegram
                     </div>
                 </a>
-                <a href="https://www.linkedin.com/company/sqltest/" target="_blank">
-                    <div class="social-media-link">
+                <a href="https://www.linkedin.com/company/sqltest/" target="_blank"class="social-media-link">
+                    <div>
                         <img src="/images/linkedin_logo.png">
                         Linkedin
                     </div>
@@ -174,5 +174,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> 
 </div>
