@@ -101,6 +101,7 @@ main3 {
 
 .column:nth-child(3) {
     /* padding-left: 0.5em; */
+    /* overflow-y: hidden; */
 }
 main {
     display: grid;
@@ -685,7 +686,7 @@ input:checked + .slider:before {
     font-size: smaller;
 }
 .db-description {
-    overflow: auto;
+    overflow: hidden;
     font-size: smaller;
     border-radius: 6px 0 0 0;
     padding: 0 0.5em;

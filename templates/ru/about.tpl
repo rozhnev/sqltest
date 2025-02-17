@@ -89,34 +89,62 @@
         </div>  
     </div>
     <div class="section not-colored">
+        <div style="width: 100%";><b>Для кого подходит SQLTest.online?</b></div>
         <div>
-            <div class="section-column" style="padding: 0 0 0 2rem; white-space: nowrap;">
-                <b>Как начать?</b>
-            </div>
-            <div class="section-column">
-                <ul>
-                    <li><strong>Зайдите на сайт:</strong> Перейдите на <a href="https://sqltest.online/ru/">SQLTest.online</a> и выберите раздел "Задачи".</li>
-                    <li><strong>Выберите категорию:</strong> Выберите интересующую вас тему или уровень сложности.</li>
-                    <li><strong>Решайте задачи:</strong> Применяйте свои знания SQL для решения предложенных задач.</li>
-                    <li><strong>Анализируйте результаты:</strong> Проверяйте свои решения и изучайте правильные ответы.</li>
-                </ul>
+            <div style="display: flex; flex-direction: row; justify-content: space-between; gap: 1rem;">
+                <div class="section-column colored" style="width: 33%; padding: 1rem; border-radius: 3px;">
+                    <img src="/images/graduation-cap.png" style="height: 64px;">
+                    <div>
+                        <div>Студенты</div>
+                        <div style="font-size: small; margin-top: 0.5rem;">Изучайте SQL в рамках учебной программы или для самостоятельного обучения.</div>
+                    </div>
+                </div>
+                <div class="section-column colored" style="width: 33%; padding: 1rem; border-radius: 3px;">
+                    <img src="/images/technologist.png" style="height: 64px;">
+                    <div>
+                        <div>Разработчики</div>
+                        <div style="font-size: small; margin-top: 0.5rem;">Улучшайте свои навыки для работы с базами данных в проектах.</div>
+                    </div>                
+                </div>
+                <div class="section-column colored" style="width: 33%; padding: 1rem; border-radius: 3px;">
+                    <img src="/images/bar-chart.png" style="height: 64px;">
+                    <div>
+                        <div>Аналитики данных</div>
+                        <div style="font-size: small; margin-top: 0.5rem;">Получайте практический опыт работы с SQL для анализа данных.</div>
+                    </div>                    
+                </div>
             </div>
         </div>
     </div>
     <div class="section not-colored">
+        <div style="width: 100%";><b>Как начать?</b></div>
         <div>
-            <div class="section-column" style="padding: 0 0 0 2rem; white-space: nowrap;">
-                <b>Для кого подходит SQLTest.online?</b>
-            </div>
-            <div class="section-column">
-                <ul>
-                    <li><strong>Студенты:</strong> Изучайте SQL в рамках учебной программы или для самостоятельного обучения.</li>
-                    <li><strong>Разработчики:</strong> Улучшайте свои навыки для работы с базами данных в проектах.</li>
-                    <li><strong>Аналитики данных:</strong> Получайте практический опыт работы с SQL для анализа данных.</li>
-                </ul>
+            <div style="display: flex; flex-direction: row; justify-content: space-between; gap: 1rem;">
+                <div class="section-column" style="width: 33%;">
+                    <img src="/images/start1.png" style="height: 150px;">
+                    <div>
+                        <div><span style="color: var(--ligth-h1-color); font-weigt: bold;">1.&nbsp;</span>Зайдите на сайт</div>
+                        <div style="font-size: small; margin-top: 0.5rem;">Перейдите на SQLTest.online и выберите раздел "Задачи"</div>
+                    </div>
+                </div>
+                <div class="section-column" style="width: 33%;">
+                    <img src="/images/start2.png" style="height: 150px;">
+                    <div>
+                        <div><span style="color: var(--ligth-h1-color); font-weigt: bold;">2.&nbsp;</span>Выберите категорию</div>
+                        <div style="font-size: small; margin-top: 0.5rem;">Выберите интересующую вас тему или уровень сложности</div>
+                    </div>                
+                </div>
+                <div class="section-column" style="width: 33%;">
+                    <img src="/images/start3.png" style="height: 150px;">
+                    <div>
+                        <div><span style="color: var(--ligth-h1-color); font-weigt: bold;">3.&nbsp;</span>Решайте задачи</div>
+                        <div style="font-size: small; margin-top: 0.5rem;">Применяйте свои знания SQL для решения предложенных задач</div>
+                    </div>                    
+                </div>
             </div>
         </div>
     </div>
+\
     <div class="section colored">
         <div style="background-color: var(--block-background-color); color:white !important; padding: 1rem 2rem; display: block; width: 100%;"> 
             <h4>Все, кто интересуется программированием</h4>
@@ -127,8 +155,39 @@
         </div>
     </div>
     <div class="section not-colored">
-        <div>
-            Следите за нашими новостями в социальных сетях и подписывайтесь на рассылку, чтобы быть в курсе последних обновлений.
+        <div style="width: 100%;">
+            <div class="section-column" style="width: 70%;">
+                <h2>Следите за нашими новостями в социальных сетях</h2>
+                <h4>и подписывайтесь на рассылку, чтобы быть в курсе последних обновлений.</h4>
+            </div>
+            <div class="section-column" style="width: 30%; display: flex; flex-direction: row; justify-content: space-around;">
+                <a href="https://t.me/sqlize" target="_blank">
+                    <div style="background: #E9F6FC; color: #333333;
+                        margin: 0.5rem;
+                        width: 96x;
+                        height: 96px;
+                        font-size: small;
+                        align-items: center;
+                        text-align: center;
+                        padding: 8px;">
+                        <img src="/images/telegram_logo.png" style="height: 64px; display: block; margin-bottom: 5px;">
+                        Telegram
+                    </div>
+                </a>
+                <a href="https://www.linkedin.com/company/sqltest/" target="_blank">
+                    <div style="background: #E9F6FC; color: #333333;
+                        margin: 0.5rem;
+                        width: 96x;
+                        height: 96px;
+                        font-size: small;
+                        align-items: center;
+                        text-align: center;
+                        padding: 8px;">
+                        <img src="/images/linkedin_logo.png" style="height: 64px; display: block; margin-bottom: 5px;">
+                        Linkedin
+                    </div>
+                </a>
+            </div>
         </div>
     </div>
     <div class="section bottom colored">
