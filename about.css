@@ -38,11 +38,10 @@
   width: -moz-fit-content;
   width: fit-content;
 }
-.about .section .section-column:nth-child(1) {
-  width: 30%;
-}
-.about .section .section-column:nth-child(2) {
-  width: 70%;
+.about .section .section-column.column33 {
+  width: 33%;
+  padding: 1rem;
+  border-radius: 3px;
 }
 .about .section .credits {
   background: #E4F1FF;
@@ -67,6 +66,17 @@
 }
 .about .section ul li {
   margin-bottom: 5px;
+}
+.about .section .social-media-link {
+  background: #E9F6FC;
+  color: #333333;
+  margin: 0.5rem;
+  width: 96x;
+  height: 96px;
+  font-size: small;
+  align-items: center;
+  text-align: center;
+  padding: 8px;
 }
 .about .top {
   display: flex;
