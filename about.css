@@ -122,24 +122,24 @@
   gap: 1rem;
   align-items: center;
 }
-.about .top h1 {
-  color: var(--ligth-h1-color);
-  font-size: large;
-  margin: 0;
-}
-.about .top h2 {
-  color: var(--ligth-h2-color);
-  margin: 0;
-}
-.about .top h4 {
-  color: var(--ligth-h2-color);
-  margin: 0;
-}
 .about .bottom {
   border-radius: 2rem 2rem 0 0;
 }
 .about .colored {
   background-color: var(--ligth-panel-bg-color);
+}
+.about .top h1, .about .bottom h1 {
+  color: var(--ligth-h1-color);
+  font-size: large;
+  margin: 0;
+}
+.about .top h2, .about .bottom h2 {
+  color: var(--ligth-h2-color);
+  margin: 0;
+}
+.about .top h4, .about .bottom h4 {
+  color: var(--ligth-h2-color);
+  margin: 0;
 }
 .about .not-colored {
   color: var(--ligth-h2-color);

@@ -5,9 +5,9 @@
         <div class="container">
             <header>
                 {if $MobileView}
-                    {include file='m.top-menu.tpl' path="/about"}
+                    {include file='m.top-menu.tpl' path="/privacy-policy"}
                 {else}
-                    {include file='top-menu.tpl' path="/about"}
+                    {include file='top-menu.tpl' path="/privacy-policy"}
                 {/if}
             </header>
             <main>
