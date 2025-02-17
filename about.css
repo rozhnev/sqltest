@@ -38,6 +38,9 @@
   width: -moz-fit-content;
   width: fit-content;
 }
+.about .section .button.white {
+  border-color: white;
+}
 .about .section .section-column.column33 {
   width: 33%;
   padding: 1rem;

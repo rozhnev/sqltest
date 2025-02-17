@@ -73,22 +73,6 @@
         </div>  
     </div>
     <div class="section not-colored">
-        <div>
-            <div class="section-column" style="padding: 0 0 0 2rem; white-space: nowrap;">
-                <b>Почему именно мы?</b>
-            </div>
-            <div class="section-column">
-                <ul>
-                    <li><strong>Интерактивное обучение</strong><br>Решайте разнообразные SQL-задачи прямо в браузере. Не нужно устанавливать дополнительные программы или настраивать окружение.</li>
-                    <li><strong>Разнообразие баз данных</strong><br>Практикуйтесь на популярных базах данных, таких как MySQL, PostgreSQL, MS SQL Server и Firebird.</li>
-                    <li><strong>Постоянное обновление</strong><br>Мы регулярно добавляем новые задания, чтобы вы всегда находили интересные вызовы.</li>
-                    <li><strong>Подробная статистика</strong><br>Отслеживайте свой прогресс, анализируйте ошибки и улучшайте свои результаты.</li>
-                    <li><strong>Сообщество</strong><br>Общайтесь с другими пользователями, делитесь опытом и получайте помощь.</li>
-                </ul>
-            </div>
-        </div>  
-    </div>
-    <div class="section not-colored">
         <div style="width: 100%";><b>Для кого подходит SQLTest.online?</b></div>
         <div>
             <div style="display: flex; flex-direction: row; justify-content: space-between; gap: 1rem;">
@@ -144,6 +128,22 @@
             </div>
         </div>
     </div>
+    <div class="section not-colored">
+        <div>
+            <div class="section-column" style="padding: 0 0 0 2rem; white-space: nowrap;">
+                <b>Почему именно мы?</b>
+            </div>
+            <div class="section-column">
+                <ul>
+                    <li><strong>Интерактивное обучение</strong><br>Решайте разнообразные SQL-задачи прямо в браузере. Не нужно устанавливать дополнительные программы или настраивать окружение.</li>
+                    <li><strong>Разнообразие баз данных</strong><br>Практикуйтесь на популярных базах данных, таких как MySQL, PostgreSQL, MS SQL Server и Firebird.</li>
+                    <li><strong>Постоянное обновление</strong><br>Мы регулярно добавляем новые задания, чтобы вы всегда находили интересные вызовы.</li>
+                    <li><strong>Подробная статистика</strong><br>Отслеживайте свой прогресс, анализируйте ошибки и улучшайте свои результаты.</li>
+                    <li><strong>Сообщество</strong><br>Общайтесь с другими пользователями, делитесь опытом и получайте помощь.</li>
+                </ul>
+            </div>
+        </div>  
+    </div>    
     <div class="section colored">
         <div style="background-color: var(--block-background-color); color:white !important; padding: 1rem 2rem; display: block; width: 100%;"> 
             <h4>Все, кто интересуется программированием</h4>
