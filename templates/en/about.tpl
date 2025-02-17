@@ -47,9 +47,9 @@
             </div>
             <div class="section-column">
                 <ul>
-		    <li><b>Solid SQL knowledge</b><br> Understand the basics of the language and learn to write efficient queries.</li>
-		    <li><b>Practical skills</b><br> Gain experience working with real data.</li>
-		    <li><b>Confidence</b><br> Successfully solving tasks will boost your self-esteem and prepare you for any SQL challenges.</li>
+                    <li><b>Solid SQL knowledge</b><br> Understand the basics of the language and learn to write efficient queries.</li>
+                    <li><b>Practical skills</b><br> Gain experience working with real data.</li>
+                    <li><b>Confidence</b><br> Successfully solving tasks will boost your self-esteem and prepare you for any SQL challenges.</li>
                 </ul>
             </div>
         </div>
@@ -84,32 +84,32 @@
     </div>
     <div class="section not-colored">
         <div style="width: 100%;"><b>How to start?</b></div>
-        <div>
-            <div style="display: flex; flex-flow: row wrap; justify-content: space-between; gap: 1rem;">
-                <div class="section-column column30">
-                    <img src="/images/start1.png" style="height: 150px;">
+            <div>
+                <div style="display: flex; flex-flow: row wrap; justify-content: space-between; gap: 1rem;">
+                    <div class="section-column column30">
+                        <img src="/images/start1.png" style="height: 150px;">
+                        <div>
+                        <div class="bold"><span style="color: var(--ligth-h1-color);">1.&nbsp;</span>Visit the website</div>
+                        <div style="font-size: small; margin-top: 0.5rem;">Go to SQLTest.online and select the "Tasks" section</div>
+                    </div>
+                    </div>
+                    <div class="section-column column30">
+                        <img src="/images/start2.png" style="height: 150px;">
                     <div>
-		            <div class="bold"><span style="color: var(--ligth-h1-color);">1.&nbsp;</span>Visit the website</div>
-		            <div style="font-size: small; margin-top: 0.5rem;">Go to SQLTest.online and select the "Tasks" section</div>
+                        <div class="bold"><span style="color: var(--ligth-h1-color);">2.&nbsp;</span>Select a category</div>
+                        <div style="font-size: small; margin-top: 0.5rem;">Choose the topic or difficulty level that interests you</div>
+                    </div>                
                 </div>
+                    <div class="section-column column30">
+                        <img src="/images/start3.png" style="height: 150px;">
+                    <div>
+                        <div class="bold"><span style="color: var(--ligth-h1-color);">3.&nbsp;</span>Solve tasks</div>
+                        <div style="font-size: small; margin-top: 0.5rem;">Apply your SQL knowledge to solve the given tasks</div>
+                    </div>                    
                 </div>
-                <div class="section-column column30">
-                    <img src="/images/start2.png" style="height: 150px;">
-		        <div>
-		            <div class="bold"><span style="color: var(--ligth-h1-color);">2.&nbsp;</span>Select a category</div>
-		            <div style="font-size: small; margin-top: 0.5rem;">Choose the topic or difficulty level that interests you</div>
-		        </div>                
-		    </div>
-                <div class="section-column column30">
-                    <img src="/images/start3.png" style="height: 150px;">
-		        <div>
-		            <div class="bold"><span style="color: var(--ligth-h1-color);">3.&nbsp;</span>Solve tasks</div>
-		            <div style="font-size: small; margin-top: 0.5rem;">Apply your SQL knowledge to solve the given tasks</div>
-		        </div>                    
-		    </div>
-		</div>
-	    </div>
-	</div>
+            </div>
+        </div>
+    </div>
     <div class="section not-colored">
         <div>
             <div class="section-column" style="padding: 0 0 0 2rem; white-space: nowrap;">
@@ -117,11 +117,11 @@
             </div>
             <div class="section-column" style="max-width: 50rem;">
                 <ul>
-                <li><strong>Interactive learning</strong><br>Solve various SQL tasks directly in the browser. No need to install additional programs or set up an environment.</li>
-                <li><strong>Variety of databases</strong><br>Practice on popular databases such as MySQL, PostgreSQL, MS SQL Server, and Firebird.</li>
-                <li><strong>Constant updates</strong><br>We regularly add new tasks so you always find interesting challenges.</li>
-                <li><strong>Detailed statistics</strong><br>Track your progress, analyze mistakes, and improve your results.</li>
-                <li><strong>Community</strong><br>Interact with other users, share experiences, and get help.</li>
+                    <li><strong>Interactive learning</strong><br>Solve various SQL tasks directly in the browser. No need to install additional programs or set up an environment.</li>
+                    <li><strong>Variety of databases</strong><br>Practice on popular databases such as MySQL, PostgreSQL, MS SQL Server, and Firebird.</li>
+                    <li><strong>Constant updates</strong><br>We regularly add new tasks so you always find interesting challenges.</li>
+                    <li><strong>Detailed statistics</strong><br>Track your progress, analyze mistakes, and improve your results.</li>
+                    <li><strong>Community</strong><br>Interact with other users, share experiences, and get help.</li>
                 </ul>
             </div>
         </div>
