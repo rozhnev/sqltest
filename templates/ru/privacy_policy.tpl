@@ -5,7 +5,7 @@
             <h2>Политика конфиденциальности</h2>
         </div>
     </div>
-    <div class="section not-colored">
+    <div class="section not-colored" style="height: 100%;">
         <div style="display: block;">
 
             <p>Настоящая Политика конфиденциальности описывает, как SQLtest («мы», «нас» или «наш») собирает, использует и передает личную информацию.

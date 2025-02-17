@@ -6,7 +6,7 @@
             <h2>Política de Privacidade para SQLtest</h2>
         </div>
     </div>
-    <div class="section not-colored">
+    <div class="section not-colored" style="height: 100%;">
         <div style="display: block;">
             <p>Esta Política de Privacidade descreve como o SQLtest ("nós", "nos" ou "nosso") coleta, usa e compartilha informações pessoais quando você utiliza nosso serviço SQLtest.</p>
 

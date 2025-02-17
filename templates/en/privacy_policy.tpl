@@ -5,7 +5,7 @@
             <h2>Privacy Policy for SQLtest</h2>
         </div>
     </div>
-    <div class="section not-colored">
+    <div class="section not-colored" style="height: 100%;">
         <div style="display: block;">
             <p>This Privacy Policy describes how SQLtest ("we", "us", or "our") collects, uses, and shares personal information
                 when you use our SQLtest service.</p>
