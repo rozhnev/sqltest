@@ -19,16 +19,17 @@
                     <span>{translate}user_solutions_count{/translate}</span>
                     {if $User->logged()}
                         <span>
-                        {if $SolvedQuestionsCount < ($QuestionsCount/2)}
-                            {assign var="YouHaveSolved" value="{translate}you_have_solved{/translate}"}
-                        {else}
-                            {assign var="YouHaveSolved" value="{translate}you_have_already_solved{/translate}"}
-                        {/if}
+                            {if $SolvedQuestionsCount < ($QuestionsCount/2)}
+                                {assign var="YouHaveSolved" value="{translate}you_have_solved{/translate}"}
+                            {else}
+                                {assign var="YouHaveSolved" value="{translate}you_have_already_solved{/translate}"}
+                            {/if}
+                            
                             {translate}user_solutions_count_logged{/translate}
                             {if $SolvedQuestionsCount < $QuestionsCount}
                                 {translate}keep_going{/translate}
                             {/if}
-                            </span>
+                        </span>
 
                         <button class="button-small green" onClick="location.href = '/{$Lang}/test/start';">
                             {if !$User->grade()}

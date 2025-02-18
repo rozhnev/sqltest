@@ -242,6 +242,7 @@ main {
 }
 .login-popup.visible {
     top: 36% !important;
+    opacity: 1;
 }
 .login-button {
     position: absolute;
@@ -552,6 +553,19 @@ input:checked + .slider:before {
     border-radius: 50%;
     background-color: gray;
     margin-right: 5px;
+}
+.question-rate-panel {
+    border: 1px solid #1B9843;
+    border-radius: 6px;
+    padding: 16px;
+    background: #327A4A33;
+}
+.question-rate-panel input[type="radio" i] {
+    margin: -3px 8px 0 0;
+    vertical-align: middle;
+}
+.question-rate-panel label {
+    margin-right: 15px;
 }
 .question-level.rate1 {
     background-color: #6dd320;
