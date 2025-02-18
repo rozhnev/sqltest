@@ -28,7 +28,6 @@
     --question-title-bg-color: #E8F2FE;
     --question-date-color: gray;
     --arrow-border-color: white;
-    --referral-link-background-color: aliceblue;
 }
 [data-theme="dark"] {
     --body-background-color: #171B23;
@@ -55,7 +54,6 @@
     --sql-color:  #F85149;
     --question-date-color: #F0F6FC;
     --arrow-border-color: white;
-    --referral-link-background-color: #000000;
 }
 body, html {
     margin: 0;

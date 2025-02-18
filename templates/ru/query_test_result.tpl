@@ -53,7 +53,7 @@
         </div>
     {/if}
     {if isset($ReferralLink)}
-        <div class="referral-link" style="margin-top: 1em;">
+        <div class="question-wrapper" style="margin-top: 1em;">
             {$ReferralLink}
         </div>
     {/if}
