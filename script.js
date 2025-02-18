@@ -496,8 +496,9 @@ function applyUIConfig() {
 function setMenuEventListeners() {
     [...document.getElementsByClassName("accordion")].map(el=>{
       el.addEventListener ('click', function() {
-          for (let el of document.getElementsByClassName("panel")) el.classList.remove("active");
-          for (let el of document.getElementsByClassName("accordion")) el.classList.remove("active");
+          const parentElement = this.parentElement;
+          for (let el of parentElement.getElementsByClassName("panel")) el.classList.remove("active");
+          for (let el of parentElement.getElementsByClassName("accordion")) el.classList.remove("active");
           this.classList.toggle("active");
           const panel = this.nextElementSibling;
           panel.classList.toggle("active");

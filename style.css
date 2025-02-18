@@ -477,6 +477,39 @@ input:checked + .slider:before {
 .accordion .accordion-icons {
     display: none;
 }
+.db-description .accordion {
+    background-color: var(--menu-button-background-color);
+    color: white;
+    /* border-bottom: 1px solid white; */
+    width: 100%;
+    text-align: left;
+    font-size: larger;
+    padding: 3px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="15" width="15"><polygon points="1,4 12,9 1,15" fill="white"/></svg>');
+    background-repeat: no-repeat;
+    background-position: left;
+    padding-left: 18px;
+}
+.db-description .accordion.active {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="15" width="15"><polygon points="1,4 12,4 7,14" fill="white"/></svg>') !important;
+}
+.db-description .accordion .sql {
+    font-size: larger;
+}
+.db-description .accordion svg {
+    margin-top: 5px;
+}
+.db-description .panel {
+    display: none;
+    background-color: var(--accordion-panel-bg-color);
+    color: var(--menu-link-color);
+    padding: 6px;
+    font-size: medium;
+}
+.db-description .panel.active {
+    display: block !important;
+    transition: 0.4s;
+}
 .accordion.active .accordion-icons {
     display: block !important;
 }
@@ -734,7 +767,7 @@ td {
 }
 
 .db-description .sql {
-    color: var(--special-text-color); /* wheat;*/
+    /* color: var(--special-text-color); wheat; */
     font-weight: bold;
     cursor: pointer;
 }
