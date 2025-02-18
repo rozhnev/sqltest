@@ -485,16 +485,13 @@ input:checked + .slider:before {
     text-align: left;
     font-size: larger;
     padding: 3px;
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="15" width="15"><polygon points="1,4 12,9 1,15" fill="white"/></svg>');
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="12" width="12"><polygon points="1,4 8,7 1,11" fill="white"/></svg>');
     background-repeat: no-repeat;
-    background-position: left;
-    padding-left: 18px;
+    background-position: 0 7px;
+    padding-left: 12px;
 }
 .db-description .accordion.active {
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="15" width="15"><polygon points="1,4 12,4 7,14" fill="white"/></svg>') !important;
-}
-.db-description .accordion .sql {
-    font-size: larger;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="12" width="12"><polygon points="0,4 9,4 5,11" fill="white"/></svg>') !important;
 }
 .db-description .accordion svg {
     margin-top: 5px;
@@ -503,8 +500,16 @@ input:checked + .slider:before {
     display: none;
     background-color: var(--accordion-panel-bg-color);
     color: var(--menu-link-color);
-    padding: 6px;
+    padding: 6px 12px;
     font-size: medium;
+    margin: 0.5rem 0;
+}
+.db-description .panel ul {
+    list-style: none;
+    padding: 0;
+}
+.db-description .panel li {
+    margin-bottom: 0.5rem;
 }
 .db-description .panel.active {
     display: block !important;
@@ -804,6 +809,7 @@ td {
     padding: 0.3em; 
     width: 98%;
     justify-content: space-between;
+    margin-top: 1rem;
 }
 footer {
     background-color: var(--block-background-color);
