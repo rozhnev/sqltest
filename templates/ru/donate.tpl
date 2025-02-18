@@ -18,74 +18,75 @@
     </div>
     <div class="section" style="height: 100%;">
         <div style="display: block;">      
-                <h2 style="color: var(--ligth-h2-color);">Способы поддержки:</h2>
-                <div class="donation-methods">
-                    <div class="donation-method">
-                        <h3>Поддержать в рублях</h3>
-                        <p>Быстрый и безопасный платёж через CloudTips:</p>
-                        <p>
-                            <a href="https://pay.cloudtips.ru/p/60214a3d" target="_blank">
-                            <img src="https://static.tildacdn.com/tild3431-6231-4938-b464-663831306266/Horiz.svg" 
-                                alt="Оплата через CloudTips"
-                                style="width: 200px;
-                                background-color: white;
-                                padding: 10px;
-                                border-radius: 7px;">
-                            </a>
-                        </p>
-                    </div>
-                    
-                    <div class="donation-method">
-                        <h3>Купить кофе за евро</h3>
-                        <p>Удобный платёж через платформу Ko-fi:</p>
-                        <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
-                        <script type='text/javascript'>
-                            kofiwidget2.init('Поддержать на Ko-fi', 'revert-layer', 'D1D76X1T1');
-                            kofiwidget2.draw();
-                        </script>
-                    </div>
-        
-                    <div class="donation-method">
-                        <h3>Помочь в криптовалюте</h3>
-                        <p>Перевод USDT в сети TRON (TRC20):</p>
-                        <div class="crypto-address">
-                            TFb65PXkvCDhK7WjTT5hkcP5WHwxYh51A8
-                        </div>
-                        <img src="https://sqlize.online/favicons/usdt-TFb65PXkvCDhK7WjTT5hkcP5WHwxYh51A8.png" 
-                            alt="USDT QR код" 
-                            style="max-width: 200px; margin: 1rem 0;">
-                        <p class="warning-text">
-                            Важно!<br>
-                            Отправляйте USDT только в сети TRC20. Отправка в любой другой сети приведёт к безвозвратной потере средств.
-                        </p>
-                    </div>
-
-                    <div class="donation-method">
-                        <h3>Поддержка в любой валюте</h3>
-                        <p>Пожертвование или подписка на Boosty:</p>
-                        <p>
-                            <a href="https://boosty.to/phpize/donate" target="_blank">
-                                <img src="https://static.boosty.to/assets/images/logo.b92ac.svg" 
-                                    alt="Пожертвование или подписка на Boosty"
-                                    style="width: 200px;
-                                    background-color: white;
-                                    padding: 10px;
-                                    border-radius: 7px;">
-                            </a>
-                            <img src="/images/boosty-donate.png" 
-                            alt="Пожертвование или подписка на Boosty"
+            <h2 style="color: var(--ligth-h2-color);">Способы поддержки:</h2>
+            <div class="donation-methods">
+                <div class="donation-method">
+                    <h3>Поддержать в рублях</h3>
+                    <p>Быстрый и безопасный платёж через CloudTips:</p>
+                    <p>
+                        <a href="https://pay.cloudtips.ru/p/60214a3d" target="_blank">
+                        <img src="https://static.tildacdn.com/tild3431-6231-4938-b464-663831306266/Horiz.svg" 
+                            alt="Оплата через CloudTips"
                             style="width: 200px;
                             background-color: white;
                             padding: 10px;
                             border-radius: 7px;">
-                        </p>
+                        </a>
+                    </p>
+                </div>
+                
+                <div class="donation-method">
+                    <h3>Купить кофе за евро</h3>
+                    <p>Удобный платёж через платформу Ko-fi:</p>
+                    <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
+                    <script type='text/javascript'>
+                        kofiwidget2.init('Поддержать на Ko-fi', 'revert-layer', 'D1D76X1T1');
+                        kofiwidget2.draw();
+                    </script>
+                </div>
+    
+                <div class="donation-method">
+                    <h3>Помочь в криптовалюте</h3>
+                    <p>Перевод USDT в сети TRON (TRC20):</p>
+                    <div class="crypto-address">
+                        TFb65PXkvCDhK7WjTT5hkcP5WHwxYh51A8
                     </div>
+                    <img src="https://sqlize.online/favicons/usdt-TFb65PXkvCDhK7WjTT5hkcP5WHwxYh51A8.png" 
+                        alt="USDT QR код" 
+                        style="max-width: 200px; margin: 1rem 0;">
+                    <p class="warning-text">
+                        Важно!<br>
+                        Отправляйте USDT только в сети TRC20. Отправка в любой другой сети приведёт к безвозвратной потере средств.
+                    </p>
+                </div>
+
+                <div class="donation-method">
+                    <h3>Поддержка в любой валюте</h3>
+                    <p>Пожертвование или подписка на Boosty:</p>
+                    <p>
+                        <a href="https://boosty.to/phpize/donate" target="_blank">
+                            <img src="https://static.boosty.to/assets/images/logo.b92ac.svg" 
+                                alt="Пожертвование или подписка на Boosty"
+                                style="width: 200px;
+                                background-color: white;
+                                padding: 10px;
+                                border-radius: 7px;">
+                        </a>
+                        <img src="/images/boosty-donate.png" 
+                        alt="Пожертвование или подписка на Boosty"
+                        style="width: 200px;
+                        background-color: white;
+                        padding: 10px;
+                        border-radius: 7px;">
+                    </p>
                 </div>
             </div>
+        </div>
     </div>
     <div class="section bottom colored">
         <div>
-            <h4>Спасибо, что вы с нами! Ваша поддержка помогает делать SQLtest.online лучше. ❤️ 
+            <h4>
+                Спасибо, что вы с нами! Ваша поддержка помогает делать SQLtest.online лучше. ❤️ 
                 Вместе мы делаем изучение SQL доступнее и увлекательнее для каждого.
             </h4>
         </div>
