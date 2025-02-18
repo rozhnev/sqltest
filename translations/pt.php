@@ -4,7 +4,7 @@ $translations = [
     'about_page_description' => 'Quer aprender a escrever consultas SQL eficazes? Com o SQLTest.online é fácil! Resolva diversos problemas práticos, acompanhe o seu progresso e torne-se um verdadeiro especialista em SQL.',
     'books_title' => 'Quer se tornar um verdadeiro guru SQL?',
     'books_description' => 'Preparamos para você uma seleção dos melhores livros que o ajudarão a dominar a linguagem SQL do zero e aprimorar suas habilidades até a perfeição. Nossa seleção inclui livros para iniciantes e desenvolvedores experientes.',
-    'books_support' => 'Apoie o nosso projeto!<br>Ao adquirir livros através dos nossos links, você não só vai expandir a sua biblioteca, mas também vai ajudar a desenvolver o projeto sqltest.online.',
+    'books_support' => 'Apoie o nosso projeto!<br>Ao adquirir livros através dos nossos links, você não só vai expandir a sua biblioteca, mas também vai ajudar a desenvolver o projeto <a href="/##Lang##/">sqltest.online</a> ❤️',
     'books_start_quiz' => 'Iniciar teste',
     'books_page_title' => 'Aprender SQL: os melhores livros para iniciantes e profissionais',
     'books_page_description' => 'Quer dominar a linguagem SQL e tornar-se um especialista em bases de dados muito procurado? Compilámos para si uma seleção dos livros mais úteis que o ajudarão a dar os primeiros passos no mundo do SQL.',

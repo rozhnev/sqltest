@@ -4,7 +4,7 @@ $translations = [
     'about_page_description' => 'Want to learn how to write effective SQL queries? With SQLTest.online it\'s easy! Solve various practical problems, track your progress and become a real expert in SQL.',
     'books_title' => 'Want to become a real SQL guru?',
     'books_description' => 'We have prepared for you a selection of the best books that will help you master the SQL language from scratch and improve your skills to perfection. Our selection includes books for both beginners and experienced developers.',
-    'books_support' => 'Support our project!<br>By purchasing books via our links, you will not only expand your library, but also help develop the sqltest.online project.',
+    'books_support' => 'Support our project!<br>By purchasing books via our links, you will not only expand your library, but also help develop the <a href="/##Lang##/">sqltest.online</a> project ❤️',
     'books_start_quiz' => 'Start quiz',
     'books_page_title' => 'Learning SQL: The Best Books for Beginners and Profi',
     'books_page_description' => 'Want to master the SQL language and become a sought-after database specialist? We have compiled a selection of the most useful books for you that will help you take your first steps in the world of SQL.',

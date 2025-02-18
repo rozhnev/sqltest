@@ -150,6 +150,9 @@
 .about .top p, .about .bottom p {
   color: var(--ligth-h2-color);
 }
+.about .top a, .about .top a:visited, .about .bottom a, .about .bottom a:visited {
+  color: var(--ligth-h1-color);
+}
 .about .not-colored {
   color: var(--ligth-h2-color);
 }

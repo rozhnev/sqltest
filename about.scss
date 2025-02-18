@@ -143,6 +143,9 @@
         p {
             color: var(--ligth-h2-color);
         }
+        a, a:visited {
+            color: var(--ligth-h1-color);
+        }
     }
     .not-colored {
         color: var(--ligth-h2-color);
