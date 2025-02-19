@@ -23,7 +23,7 @@
             </div>
         </div>
     {/if}
-    <div class="menu-content">
+    <div id="menu-content" class="menu-content">
         {if $User->logged()}
             <button class="accordion {if isset($QuestionCategoryID) && 99 eq $QuestionCategoryID}active{/if}">
                 <span class="accordion-title">{translate}favorites{/translate}&nbsp;<span class="question-star favored" title="{translate}favorite{/translate}">★</span></span>

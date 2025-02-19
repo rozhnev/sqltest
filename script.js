@@ -497,8 +497,11 @@ function setMenuEventListeners() {
     [...document.getElementsByClassName("accordion")].map(el=>{
       el.addEventListener ('click', function() {
           const parentElement = this.parentElement;
-          for (let el of parentElement.getElementsByClassName("panel")) el.classList.remove("active");
-          for (let el of parentElement.getElementsByClassName("accordion")) el.classList.remove("active");
+          if (parentElement.id === 'menu-content') {
+            //close all panels
+            for (let el of parentElement.getElementsByClassName("panel")) el.classList.remove("active");
+            for (let el of parentElement.getElementsByClassName("accordion")) el.classList.remove("active");
+          }
           this.classList.toggle("active");
           const panel = this.nextElementSibling;
           panel.classList.toggle("active");
