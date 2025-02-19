@@ -186,7 +186,7 @@
         </div>
     </div>
     <div class="accordion">
-        <span><span class='sql'>EMPLOYEE_PROJECT</span> - распределение сотрудников по проектам.</span>
+        <span><span class='sql'>EMPLOYEE_PROJECT</span> - сотрудники по проектам.</span>
     </div>
     <div class="panel">
         <ul class="table-columns">
@@ -237,7 +237,7 @@
         </div>
     </div>
     <div class="accordion">
-        <span><span class='sql'>SALARY_HISTORY</span> - история изменений зарплаты сотрудиков.</span>
+        <span><span class='sql'>SALARY_HISTORY</span> - изменения зарплаты сотрудиков.</span>
     </div>
     <div class="panel">
         <ul class="table-columns">
