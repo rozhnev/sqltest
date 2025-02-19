@@ -542,21 +542,23 @@
         </ul>
     </div>
     {if $User->showAd()}
-        {* <a href="https://amzn.to/4dVmPhJ" target="_blank" style="text-decoration: none;">
-          <div style="display: flex; flex-direction: row; border: 1px solid white; padding: 0.3em; width: 98%;">
-            <div  style = "width: 30%;">
-                <img style="width: 100%;" src="/images/sql-in-10-minutes-by-ben-forta.jpg" alt="SQL in 10 Minutes a Day by Ben Forta">
-            </div>
-            <div style="font-size: 1em;  width: 70%;  padding: 0 0.7em; font-weight: 100;">
-                <div>SQL in 10 Minutes a Day by Ben Forta</div>
-                <div style="font-size: small; padding-top: 0.5em;">
-                Whether you're an application developer, database administrator, web application designer, mobile app developer, or Microsoft Office users, a good working knowledge of SQL is an important part of interacting with databases. And Sams Teach Yourself SQL in 10 Minutes offers the straightforward, practical answers you need to help you do your job. 
+        <div class="referal-add-block">
+            {* <a href="https://amzn.to/4dVmPhJ" target="_blank" style="text-decoration: none;">
+            <div style="display: flex; flex-direction: row; border: 1px solid white; padding: 0.3em; width: 98%;">
+                <div  style = "width: 30%;">
+                    <img style="width: 100%;" src="/images/sql-in-10-minutes-by-ben-forta.jpg" alt="SQL in 10 Minutes a Day by Ben Forta">
+                </div>
+                <div style="font-size: 1em;  width: 70%;  padding: 0 0.7em; font-weight: 100;">
+                    <div>SQL in 10 Minutes a Day by Ben Forta</div>
+                    <div style="font-size: small; padding-top: 0.5em;">
+                    Whether you're an application developer, database administrator, web application designer, mobile app developer, or Microsoft Office users, a good working knowledge of SQL is an important part of interacting with databases. And Sams Teach Yourself SQL in 10 Minutes offers the straightforward, practical answers you need to help you do your job. 
+                    </div>
                 </div>
             </div>
-          </div>
-        </a> *}
-        <a target="_blank" rel="nofollow" href="https://bywiola.com/g/u1k11fxms7fec845fb2fd629c4b097/?i=4">
-            <img style="width: 90%;" border="0" src="https://ad.admitad.com/b/u1k11fxms7fec845fb2fd629c4b097/" alt="edX Many Geos"/>
-        </a>
+            </a> *}
+            <a target="_blank" rel="nofollow" href="https://bywiola.com/g/u1k11fxms7fec845fb2fd629c4b097/?i=4">
+                <img style="width: 90%;" border="0" src="https://ad.admitad.com/b/u1k11fxms7fec845fb2fd629c4b097/" alt="edX Many Geos"/>
+            </a>
+        </div>
     {/if}
 </div>

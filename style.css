@@ -807,10 +807,9 @@ td {
     display: flex; 
     flex-direction: row; 
     gap:5px; border: 1px solid white; 
-    padding: 0.3em; 
-    width: 98%;
+    padding: 0.3em;
     justify-content: space-between;
-    margin-top: 1rem;
+    margin: 1rem 0;
 }
 footer {
     background-color: var(--block-background-color);
