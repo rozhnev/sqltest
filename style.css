@@ -510,6 +510,7 @@ input:checked + .slider:before {
 }
 .db-description .panel li {
     margin-bottom: 0.5rem;
+    display: flex;
 }
 .db-description .panel.active {
     display: block !important;
