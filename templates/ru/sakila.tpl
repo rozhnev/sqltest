@@ -303,8 +303,8 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class='sql'>film_id</span>идентификатор каждого фильма.</li>
-            <li> <span class='sql'>category_id</span>идентификатор для каждой категории.</li>
+            <li> <span class='sql'>film_id</span>идентификатор фильма.</li>
+            <li> <span class='sql'>category_id</span>идентификатор категории.</li>
             <li> <span class='sql'>last_update</span>дата и время последнего изменения.</li> 
         </ul>
         <div class="table-wrapper">
