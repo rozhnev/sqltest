@@ -276,8 +276,8 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class='sql'>actor_id</span>идентификатор актера.</li>
-            <li> <span class='sql'>film_id</span>идентификатор фильма.</li>
+            <li> <span class='sql'>actor_id</span>идентификатор актера (ВК).</li>
+            <li> <span class='sql'>film_id</span>идентификатор фильма (ВК).</li>
             <li> <span class='sql'>last_update</span>дата и время последнего изменения.</li> 
         </ul>
         <div class="table-wrapper">
@@ -303,8 +303,8 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class='sql'>film_id</span>идентификатор фильма.</li>
-            <li> <span class='sql'>category_id</span>идентификатор категории.</li>
+            <li> <span class='sql'>film_id</span>идентификатор фильма (ВК).</li>
+            <li> <span class='sql'>category_id</span>идентификатор категории (ВК).</li>
             <li> <span class='sql'>last_update</span>дата и время последнего изменения.</li> 
         </ul>
         <div class="table-wrapper">
@@ -332,7 +332,7 @@
         <ul class="table-columns">
             <li><span class='sql'>inventory_id</span>уникальный идентификатор записи (ПК).</li>
             <li><span class='sql'>film_id</span>идентификатор фильма (ВК).</li>
-            <li><span class='sql'>store_id</span>идентификатор филиала, в котором находится диск.</li>
+            <li><span class='sql'>store_id</span>идентификатор филиала, в котором находится диск (ВК).</li>
             <li><span class='sql'>last_update</span>дата и время последнего изменения.</li>
         </ul>
         <div class="table-wrapper">
@@ -389,8 +389,8 @@
         <ul class="table-columns">
             <li> <span class='sql' style="min-width: 8rem;">payment_id</span>уникальный идентификатор записи (ПК).</li>
             <li> <span class='sql' style="min-width: 8rem;">customer_id</span>идентификатор клиента (ВК).</li>
-            <li> <span class='sql' style="min-width: 8rem;">staff_id</span>идентификатор персонала принявшего платёж.</li>
-            <li> <span class='sql' style="min-width: 8rem;">rental_id</span>идентификатор записи аренды.</li>
+            <li> <span class='sql' style="min-width: 8rem;">staff_id</span>идентификатор персонала принявшего платёж (ВК).</li>
+            <li> <span class='sql' style="min-width: 8rem;">rental_id</span>идентификатор записи аренды (ВК).</li>
             <li> <span class='sql' style="min-width: 8rem;">amount</span>сумма платежа.</li>
             <li> <span class='sql' style="min-width: 8rem;">payment_date</span>дата и время платежа.</li>
             <li> <span class='sql' style="min-width: 8rem;">last_update</span>дата и время последнего изменения.</li> 
@@ -428,10 +428,10 @@
         <ul class="table-columns">
             <li> <span class='sql'>rental_id</span>уникальный идентификатор записи (ПК).</li>
             <li> <span class='sql'>rental_date</span>дата начала аренды.</li>
-            <li> <span class='sql'>inventory_id</span>идентификатор диска.</li>
-            <li> <span class='sql'>customer_id</span>идентификатор клиента.</li>
+            <li> <span class='sql'>inventory_id</span>идентификатор диска (ВК).</li>
+            <li> <span class='sql'>customer_id</span>идентификатор клиента (ВК).</li>
             <li> <span class='sql'>return_date</span>дата возврата фильма.</li>
-            <li> <span class='sql'>staff_id</span>идентификатор персонала выдавшего диск.</li>
+            <li> <span class='sql'>staff_id</span>идентификатор персонала выдавшего диск (ВК).</li>
             <li> <span class='sql'>last_update</span>дата и время последнего изменения.</li> 
         </ul>
         <div class="table-wrapper">
@@ -471,7 +471,7 @@
             <li> <span class='sql'>address_id</span>идентификатор адреса (ВК).</li>
             <li> <span class='sql'>picture</span>фотография сотрудника.</li>
             <li> <span class='sql'>email</span>адрес электронной почты сотрудника.</li>
-            <li> <span class='sql'>store_id</span>внешний ключ, ссылающийся на таблицу магазина.</li>
+            <li> <span class='sql'>store_id</span>внешний ключ, ссылающийся на таблицу магазина (ВК).</li>
             <li> <span class='sql'>active</span>идикатор активности сотрудника (0/1).</li>
             <li> <span class='sql'>username</span>имя пользователя для входа в систему.</li>
             <li> <span class='sql'>password</span>пароль для входа.</li>

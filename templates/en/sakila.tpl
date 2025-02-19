@@ -276,8 +276,8 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class='sql'>actor_id</span>identifier for actor.</li>
-            <li> <span class='sql'>film_id</span>identifier for film.</li>
+            <li> <span class='sql'>actor_id</span>identifier for actor (FK).</li>
+            <li> <span class='sql'>film_id</span>identifier for film (FK).</li>
             <li> <span class='sql'>last_update</span>date and time of last update.</li> 
           </ul>
           <div class="table-wrapper">
@@ -303,8 +303,8 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class='sql'>film_id</span>identifier for each film.</li>
-            <li> <span class='sql'>category_id</span>identifier for each category.</li>
+            <li> <span class='sql'>film_id</span>identifier for each film (FK).</li>
+            <li> <span class='sql'>category_id</span>identifier for each category (FK).</li>
             <li> <span class='sql'>last_update</span>date and time of last update.</li> 
           </ul>
           <div class="table-wrapper">
@@ -332,7 +332,7 @@
         <ul class="table-columns">
             <li><span class='sql'>inventory_id</span>unique record identifier (PK).</li>
             <li><span class='sql'>film_id</span>identifier of the film (FK).</li>
-            <li><span class='sql'>store_id</span>identifier of the store where the inventory is located.</li>
+            <li><span class='sql'>store_id</span>identifier of the store where the inventory is located (FK).</li>
             <li><span class='sql'>last_update</span>date and time of last update.</li>
         </ul>
         <div class="table-wrapper">
@@ -389,8 +389,8 @@
         <ul class="table-columns">
             <li> <span class='sql' style="min-width: 8rem;">payment_id</span>unique identifier of the record (PK).</li>
             <li> <span class='sql' style="min-width: 8rem;">customer_id</span>identifier of the customer (FK).</li>
-            <li> <span class='sql' style="min-width: 8rem;">staff_id</span>identifier of the staff member who received the payment.</li>
-            <li> <span class='sql' style="min-width: 8rem;">rental_id</span>identifier of the rental record.</li>
+            <li> <span class='sql' style="min-width: 8rem;">staff_id</span>identifier of the staff member who received the payment (FK).</li>
+            <li> <span class='sql' style="min-width: 8rem;">rental_id</span>identifier of the rental record (FK).</li>
             <li> <span class='sql' style="min-width: 8rem;">amount</span>payment amount.</li>
             <li> <span class='sql' style="min-width: 8rem;">payment_date</span>date and time of the payment.</li>
             <li> <span class='sql' style="min-width: 8rem;">last_update</span>date and time of the last update.</li>
@@ -428,10 +428,10 @@
         <ul class="table-columns">
         <li> <span class='sql'>rental_id</span>unique identifier of the record (PK).</li>
         <li> <span class='sql'>rental_date</span>rental start date.</li>
-        <li> <span class='sql'>inventory_id</span>identifier of the disk.</li>
-        <li> <span class='sql'>customer_id</span>identifier of the customer.</li>
+        <li> <span class='sql'>inventory_id</span>identifier of the disk (FK).</li>
+        <li> <span class='sql'>customer_id</span>identifier of the customer (FK).</li>
         <li> <span class='sql'>return_date</span>date of returning the film.</li>
-        <li> <span class='sql'>staff_id</span>identifier of the staff member who issued the disk.</li>
+        <li> <span class='sql'>staff_id</span>identifier of the staff member who issued the disk (FK).</li>
         <li> <span class='sql'>last_update</span>date and time of the last update.</li> 
         </ul>
         <div class="table-wrapper">
@@ -471,7 +471,7 @@
             <li> <span class='sql'>address_id</span>identifier of the address (FK).</li>
             <li> <span class='sql'>picture</span>photo of the staff member.</li>
             <li> <span class='sql'>email</span>email address of the staff member.</li>
-            <li> <span class='sql'>store_id</span>foreign key referencing the store table.</li>
+            <li> <span class='sql'>store_id</span>foreign key referencing the store table (FK).</li>
             <li> <span class='sql'>active</span>indicator of staff member's activity (0/1).</li>
             <li> <span class='sql'>username</span>username for system login.</li>
             <li> <span class='sql'>password</span>password for login.</li>
