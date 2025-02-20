@@ -271,20 +271,20 @@
             <li>PRIMARY KEY, btree (ProductDescriptionID)</li>
         </ul>
         <div class="table-wrapper">
-          <table>
-              <tr>
-                  <th>ProductDescriptionID</th>
-                  <th>Description</th>
-                  <th>rowguid</th>
-                  <th>ModifiedDate</th>
-              </tr>
-              <tr>
-                  <td>4</td>
-                  <td>Aluminum alloy cups; large diameter spindle.</td>
-                  <td>DFEBA528-DA11-4650-9D86-CAFDA7294EB0</td>
-                  <td>2007-06-01 00:00:00.000</td>
-              </tr>
-          </table>
+            <table>
+                <tr>
+                    <th>ProductDescriptionID</th>
+                    <th>Description</th>
+                    <th>rowguid</th>
+                    <th>ModifiedDate</th>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Aluminum alloy cups; large diameter spindle.</td>
+                    <td>DFEBA528-DA11-4650-9D86-CAFDA7294EB0</td>
+                    <td>2007-06-01 00:00:00.000</td>
+                </tr>
+            </table>
         </div>
     </div>
     <div class="accordion">
