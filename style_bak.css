@@ -296,38 +296,6 @@
     background-color: var(--referral-link-background-color);
 }
 
-.solutions {
-    width: 21vw;
-    border-radius: 6px;
-    padding: 12px;
-    background-color: var(--db-description-background-color);
-}
-.solution-wrapper {
-    margin: 0 0 12px 0;
-}
-.solution-block {
-    height: 20vh;
-    /* width: 21vw; */
-}
-.solutions-title {
-    font-weight: bold;
-    color: #FFFFFF;
-    background-color: var(--db-description-background-color);
-}
-.solution-title,
-.solution-footer {
-    font-weight: bold;
-    font-size: small;
-    /* background-color: var(--question-title-bg-color); */
-    padding: 6px;
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center;
-}
-.solution-footer {
-    text-align: right;
-    /* background-color: var(--body-background-color); */
-}
 .question-footer .question-dates {
     color: var(--question-date-color);
     font-size: small;

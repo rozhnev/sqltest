@@ -7,16 +7,16 @@
                     <div class="solution-title">{translate}solution_title{/translate}: {$solution.created_at} {translate}solution_query_cost{/translate}: {$solution.query_cost}</div>
                     <div class="solution-block" id="solution-{$id}">{$solution.query|escape:"html"}</div>
                     <div class="solution-footer">
-                        <div style="font-size: larger;">
+                        <div class="likes-count" {if $solution.likes === 0}style="visibility: hidden;"{/if}>
                             {if $solution.likes > 0}
                                 <span style="color: white" id="solution-likes-count-{$solution.id}">{$solution.likes}</span>
                                 <span style="color: gold; cursor: pointer; font-size: x-large;">♦</span>
                             {/if}
                         </div>
-                        <div>
-                            <button class="button-small green" onClick="solutionRun('{$Lang}', {$QuestionID}, {$id})">{translate}solution_action_run{/translate}</button>
+                        <div style="display: flex; column-gap: 1rem;">
+                            <button class="button green" onClick="solutionRun('{$Lang}', {$QuestionID}, {$id})">{translate}solution_action_run{/translate}</button>
                             <button 
-                                class="button-small red" 
+                                class="button red" 
                                 onClick="solutionDelete('{$Lang}', {$QuestionID}, {$solution.id})"
                             >
                                 {translate}solution_action_delete{/translate}

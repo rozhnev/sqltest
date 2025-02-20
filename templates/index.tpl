@@ -93,7 +93,7 @@
                     {else}
                         <p class="question-action">{translate}question_action_use_syntax{/translate}</p>
                         {if $Question.solved_date}
-                            <span class="question-action">{translate}you_already_solved_this_task{/translate}&nbsp;{$Question.solved_date}.&nbsp;<button class="button-small blue" onClick="showMySolutions({$QuestionID})">{translate}view_solutions{/translate}</button></span>
+                            <span class="question-action" style="display: flex; align-items: center; font-weight: bold; color: #2EA043 !important;">{translate}you_already_solved_this_task{/translate}.&nbsp;<button class="button green" onClick="showMySolutions({$QuestionID})">{translate}view_solutions{/translate}</button></span>
                         {else}
                             <span class="question-action">{translate}question_action_write_your_request{/translate}</span>
                         {/if}
@@ -183,7 +183,7 @@
                     </div>
                 {/if}
             </div>
-            <div class="column">
+            <div class="column" id="right-panel">
                 {include file="{$Lang}/{$DB}.tpl"}
             </div>
         </main3>

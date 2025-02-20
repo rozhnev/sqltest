@@ -811,6 +811,47 @@ td {
     justify-content: space-between;
     margin: 1rem 0;
 }
+.solutions {
+    border-radius: 6px 0 0 0;
+    padding: 12px;
+    background-color: var(--db-description-background-color);
+}
+.solution-wrapper {
+    margin: 0 0 12px 0;
+    background-color: var(--accordion-panel-bg-color);
+    border: 1px solid var(--text-block-border-color);
+    color: var(--question-text);
+    border-radius: 6px;
+    padding: 0.5em;
+}
+.solution-block {
+    height: 20vh;
+}
+.solutions-title {
+    font-weight: bold;
+    color: #FFFFFF;
+    background-color: var(--db-description-background-color);
+}
+.solution-title,
+.solution-footer {
+    font-weight: bold;
+    font-size: small;
+    padding: 6px;
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+}
+.solution-footer {
+    text-align: right;
+}
+.likes-count {
+    font-size: larger;
+    border: 1px solid var(--text-block-border-color);
+    color: var(--question-text);
+    padding: 0 5px 5px 5px;
+    border-radius: 6px;
+    background-color: var(--db-description-background-color);
+}
 footer {
     background-color: var(--block-background-color);
 }
