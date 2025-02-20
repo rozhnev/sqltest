@@ -561,6 +561,23 @@ input:checked + .slider:before {
     font-size: larger;
     line-height: 1.3em;
 }
+.answers {
+    padding: 5px 15px;
+}
+.answer {
+    padding:10px;
+    display: flex;
+    gap: 0.5em;
+}
+.answer input {
+    width: 16px;
+    min-width: 16px;
+    height: 16px;
+    min-height: 16px;
+}
+.answer label {
+    line-height: 20px;
+}
 .question a,
 .question a:visited,
 .code-result a,
@@ -574,6 +591,12 @@ input:checked + .slider:before {
 .code-result .result-table td:nth-child(1) {
     width: 16px;
     text-align: right;
+}
+.code-result .referral-link {
+    font-size:large; 
+    padding: 1em; 
+    border: solid 1px; 
+    border-radius: 6px;
 }
 .question-title {
     display: flex; 

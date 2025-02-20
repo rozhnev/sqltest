@@ -237,23 +237,6 @@
     font-weight: bold;
     font-style: italic;
 }
-.answers {
-    padding: 5px 15px;
-}
-.answer {
-    padding:10px;
-    display: flex;
-    gap: 0.5em;
-}
-.answer input {
-    width: 16px;
-    min-width: 16px;
-    height: 16px;
-    min-height: 16px;
-}
-.answer label {
-    line-height: 20px;
-}
 
 .code-actions {
     text-align: right;
@@ -286,14 +269,6 @@
 .code-result .hint-code {
     background-color: #eee;
     padding: 7px;
-}
-
-.code-result .referral-link {
-    font-size:large; 
-    padding: 1em; 
-    border: solid 1px; 
-    border-radius: 3px;
-    background-color: var(--referral-link-background-color);
 }
 
 .question-footer .question-dates {

@@ -41,10 +41,10 @@ class Helper
      * @param  string $mode
      * @return string|null
      */
-    public static function getReferralLink(PDO $dbh, string $lang, string $mode): ?string
+    public static function getReferralLink(PDO $dbh, string $lang, string $mode): ?array
     {
         $stmt = $dbh->prepare(
-            "SELECT referral_link AS referralLink 
+            "SELECT link, content
             FROM referral_links 
             WHERE 
                 lang = :lang 
@@ -54,7 +54,7 @@ class Helper
             ORDER BY random() LIMIT 1;"
         );
         $stmt->execute([':lang' => $lang, ':mode' => $mode]);
-        return $stmt->fetchColumn(0) ?: null;
+        return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
     }
 
     public static function getBooks(PDO $dbh, string $lang): array

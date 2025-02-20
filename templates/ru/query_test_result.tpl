@@ -53,9 +53,11 @@
         </div>
     {/if}
     {if isset($ReferralLink)}
-        <div class="question-wrapper" style="margin-top: 1em;">
-            {$ReferralLink}
-        </div>
+        <a id="referral-link" target="_blank" href="{$ReferralLink.link}">
+            <div class="referral-link" style="margin-top: 5em;">
+                {$ReferralLink.content}
+            </div>
+        </a>
     {/if}
 {else}
     К сожалению неверно. 
@@ -89,8 +91,10 @@
     {/if}
     Попробуйте ещё раз. Нашли ошибку в задании - <a target="_blank" href="https://t.me/sqlize">сообщите!</a>
     {if isset($ReferralLink)}
-        <div class="referral-link" style="margin-top: 5em;">
-            {$ReferralLink}
-        </div>
+        <a id="referral-link" target="_blank" href="{$ReferralLink.link}">
+            <div class="referral-link" style="margin-top: 5em;">
+                {$ReferralLink.content}
+            </div>
+        </a>
     {/if}
 {/if}

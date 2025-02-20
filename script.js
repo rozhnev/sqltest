@@ -180,7 +180,15 @@ function checkAnswers(lang, questionId) {
     })
     .then((async response=>{
         if (response.ok) {
-            [...document.getElementsByClassName("button green")].map(el=>el.classList.toggle("hidden"));
+            if (response.ok && document.getElementById("nextTaskBtn")) {
+                document.getElementById("nextTaskBtn").classList.toggle("hidden");
+                setTimeout(()=>{
+                    document.getElementById("main3").scrollTo({
+                        top: document.getElementById("nextTaskBtn").offsetTop,
+                        behavior: "smooth" 
+                    })
+                }, 300)
+            }
         }
         return await response.text();
     }))
@@ -203,11 +211,14 @@ function testQuery(lang, questionId) {
         body: formData,
     })
     .then((async response=>{
-        if (response.ok) {
-            // [...document.getElementsByClassName("button green")].map(el=>el.classList.toggle("hidden"));
-            // document.getElementById("testQueryBtn") && document.getElementById("testQueryBtn").classList.toggle("hidden");
-            // document.getElementById("checkAnswersBtn") && document.getElementById("checkAnswersBtn").classList.toggle("hidden");
-            document.getElementById("nextTaskBtn") && document.getElementById("nextTaskBtn").classList.toggle("hidden");
+        if (response.ok && document.getElementById("nextTaskBtn")) {
+            document.getElementById("nextTaskBtn").classList.toggle("hidden");
+            setTimeout(()=>{
+                document.getElementById("main3").scrollTo({
+                    top: document.getElementById("nextTaskBtn").offsetTop,
+                    behavior: "smooth" 
+                })
+            }, 300)
         }
         return await response.text();
     }))
@@ -419,14 +430,8 @@ function toggleInfoPanel() {
     saveUIConfig();
     return false;
 }
-function scrollInfoPanel(ancor) {
-    document.getElementById("db-description").scrollTo(
-        { 
-            top: (document.getElementById(ancor).offsetTop - document.getElementById("db-description").offsetTop), 
-            behavior: "smooth" 
-        }
-   )
-}
+
+document.getElementById("main3").scrollTo({top: document.getElementById("nextTaskBtn").offsetTop,             behavior: "smooth" })
 function scrollQuestionPanel() {
     const activePanel = document.getElementsByClassName("panel active")[0];
     const qurrentQuestion = document.getElementsByClassName("current-question")[0];
