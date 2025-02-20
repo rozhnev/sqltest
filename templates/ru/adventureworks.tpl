@@ -127,7 +127,7 @@
     <div class="panel">
         <ul class="table-columns">
             <li> <span class="sql">CustomerID</span>уникальный идентификатор записи (ПК).</li>
-            <li> <span class="sql">AddressID</span>уникальный идентификатор адреса в таблице <span class="sql">Address</span>.</li>
+            <li> <span class="sql">AddressID</span>идентификатор адреса в таблице Address.</li>
             <li> <span class="sql">AddressType</span>тип адреса.</li>
             <li> <span class="sql">rowguid</span>guid.</li>
             <li> <span class="sql">ModifiedDate</span>дата и время последнего изменения.</li>
