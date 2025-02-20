@@ -180,15 +180,15 @@ function checkAnswers(lang, questionId) {
     })
     .then((async response=>{
         if (response.ok) {
-            if (response.ok && document.getElementById("nextTaskBtn")) {
-                document.getElementById("nextTaskBtn").classList.toggle("hidden");
-                setTimeout(()=>{
-                    document.getElementById("main3").scrollTo({
-                        top: document.getElementById("nextTaskBtn").offsetTop,
-                        behavior: "smooth" 
-                    })
-                }, 300)
-            }
+        if (response.ok && document.getElementById("nextTaskBtn")) {
+            document.getElementById("nextTaskBtn").classList.toggle("hidden");
+            setTimeout(()=>{
+                document.getElementById("main3").scrollTo({
+                    top: document.getElementById("nextTaskBtn").offsetTop,
+                    behavior: "smooth" 
+                })
+            }, 300)
+        }
         }
         return await response.text();
     }))
@@ -431,7 +431,6 @@ function toggleInfoPanel() {
     return false;
 }
 
-document.getElementById("main3").scrollTo({top: document.getElementById("nextTaskBtn").offsetTop,             behavior: "smooth" })
 function scrollQuestionPanel() {
     const activePanel = document.getElementsByClassName("panel active")[0];
     const qurrentQuestion = document.getElementsByClassName("current-question")[0];

@@ -54,7 +54,7 @@ class Question
         $stmt = $this->dbh->prepare("
             SELECT 
                 question_categories.category_id,
-                categories.title_sef category_sef,
+                COALESCE(categories.title_sef, 'favorites') category_sef,
                 questions.title_sef question_sef,
                 question_categories.sequence_position number, 
                 questions_localization.title title,
