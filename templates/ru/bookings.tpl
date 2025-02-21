@@ -43,18 +43,9 @@
                 <a target="_blank" rel="nofollow" href="https://codeaven.com/g/ss23iy3l6sfec845fb2fcfba9fca8a/?i=4">
                     <img style="width:100%;" border="0" src="https://ad.admitad.com/b/ss23iy3l6sfec845fb2fcfba9fca8a/" alt="hidemyname vpn"/>
                 </a>
-                <a target="_blank" rel="nofollow" href="https://dhwnh.com/g/yzp6x9svhbfec845fb2faf541d880b/?i=4&subid=new-year-da&erid=2VSb5w65Q1N">
-                    <img style="width:100%;" border="0" src="https://aflink.ru/b/yzp6x9svhbfec845fb2faf541d880b/" alt="Hexlet.io"/>
+                <a target="_blank" rel="nofollow" href="https://ujhjj.com/g/2fm4vusamufec845fb2f0da0172cef/?i=4&subid=learn-sql&erid=LatgBVMfa">
+                    <img style="width:100%;" border="0" src="https://aflink.ru/b/2fm4vusamufec845fb2f0da0172cef/" alt="Skillfactory.ru"/>
                 </a>
-                {* <a target="_blank" rel="nofollow" href="https://dhwnh.com/g/zba3p9bv14fec845fb2faf541d880b/?i=4&subid=python-dev&erid=LatgBe2JB">
-                    <img style="width:100%;" border="0" src="https://aflink.ru/b/zba3p9bv14fec845fb2faf541d880b/" alt="Hexlet.io"/>
-                </a>
-                <a target="_blank" rel="nofollow" href="https://kjuzv.com/g/v76ghfjtdsfec845fb2fa804937a48/?i=4&subid=200-200&erid=LatgBYH9b">
-                    <img style="width:100%;" border="0" src="https://aflink.ru/b/v76ghfjtdsfec845fb2fa804937a48/" alt="Читай-город"/>
-                </a> *}
-                {* <a target="_blank" rel="nofollow" href="https://naiawork.com/g/63cmm8j9f5fec845fb2f5e445e6c7b/?i=4&subid=sql-from-zero&erid=LatgBvCNw">
-                    <img style="width:100%;" border="0" src="https://aflink.ru/b/63cmm8j9f5fec845fb2f5e445e6c7b/" alt="Productstar"/>
-                </a> *}
             {/if}
         </div>
     {/if}
