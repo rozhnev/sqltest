@@ -260,11 +260,7 @@
 .code-result a {
     text-decoration: none;
 }
-.code-result .sql_error {
-    background-color: var(--sql-background-color); 
-    color: var(--sql-color);
-    font-weight: bolder;
-}
+
 
 .code-result .hint-code {
     background-color: #eee;

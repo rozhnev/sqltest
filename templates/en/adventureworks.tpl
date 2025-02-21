@@ -486,7 +486,7 @@
     {if $User->showAd()}
       <div class="referal-add-block">
           <a href="https://amzn.to/4cFPQwS" target="_blank" style="text-decoration: none;">
-              <div style="display: flex; flex-direction: row; border: 1px solid white; padding: 0.3em; width: 98%;">
+              <div style="display: flex; flex-direction: row; padding: 0.5rem; width: 100%;">
                   <div  style = "width: 30%;">
                       <img style="width: 100%;" src="/images/t-sql-fundamentals.jpg" alt="T-SQL Fundamentals by Itzik Ben-Gan">
                   </div>

@@ -126,6 +126,10 @@ main {
 .text-button {
     cursor: pointer;
     display: flex;
+    align-items: center;
+}
+.mobile-container .text-button {
+    font-size: small;
 }
 .text-button > span {
     padding: 2px;
@@ -191,14 +195,18 @@ main {
     z-index: 1;
     border: 1px solid gray;
     top: -1000px;
-    min-width: 275px;
-    max-width: 320px;
+    min-width: 300px;
+    /* max-width: 320px; */
 }
 
 .container .login-popup,
 .container3 .login-popup {
     width: 20%;
     left: 40%;
+}
+.mobile-container .login-popup {
+    width: 80%;
+    left: 10%;
 }
 
 .login-popup-header {
@@ -294,11 +302,16 @@ header .divider {
     margin-top: 0.5em;
 }
 .top-menu-left {
-    min-width: 12.5vw; display: flex; align-items: center; justify-content: space-between;
+    min-width: 12.5vw; 
+    display: flex; 
+    flex-shrink: 0;
+    align-items: center; 
+    justify-content: space-between;
 }
 .site-name-wrapper {
     display: flex;
     justify-content: space-evenly;
+    padding-right: 0.5rem;
 }
 .site-name  {
     font-size: 1.5rem;
@@ -398,7 +411,7 @@ input:checked + .slider:before {
     justify-content: center; 
     flex-flow: rpw;
 }
-.menu .menu-content :first-child {
+.container .menu .menu-content :first-child {
     border-radius: 0 6px 0 0;
 }
 
@@ -409,7 +422,12 @@ input:checked + .slider:before {
     justify-items: left;
     background-color: var(--db-description-background-color);
     padding: 0.5em 0;
+}
+.container .menu .selector {
     border-radius: 0 6px 6px 0;
+}
+.mobile-container .menu .selector {
+    margin-bottom: 0.5rem;
 }
 .menu .selector .selector-options {
     display: flex;
@@ -529,7 +547,7 @@ input:checked + .slider:before {
 .accordion .accordion-icons {
     padding-top: 4px;
 }
-.container .menu .panel.active {
+.menu-content .panel.active {
     max-height: 22vh !important;
 }
 
@@ -689,6 +707,9 @@ input:checked + .slider:before {
     color: var(--sql-color);
     padding: 0 3px;
 }
+.code-result .sql_error {
+    color: red;
+}
 .arrow {
     display: inline-block;
     padding: 3px;
@@ -710,6 +731,10 @@ input:checked + .slider:before {
     flex-direction: row;
     justify-content: space-between;
     margin-bottom: 0.5em;
+}
+.mobile-container .code-buttons,
+.mobile-container .code-actions-upper {
+    padding: 0 0.5rem;
 }
 .code-actions-upper > div {
     display: flex;
@@ -764,11 +789,13 @@ input:checked + .slider:before {
 .db-description {
     overflow: hidden;
     font-size: smaller;
-    border-radius: 6px 0 0 0;
     padding: 0 0.5em;
     background-color:var(--db-description-background-color);
 }
-.db-description h3{
+.container .db-description {
+    border-radius: 6px 0 0 0;
+}
+.db-description h3 {
     border-bottom: 1px solid white;
     padding-bottom: 5px;
 }
