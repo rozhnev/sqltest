@@ -48,19 +48,17 @@ class Controller
     {
         $this->engine->assign('Saved', false);
         if ($user->logged()) {
-            $solution = new Solution($dbh, $params['solutionID']);
-            $this->engine->assign('Saved', $solution->like());
+            $this->engine->assign('Saved', $user->likeSolution($params['solutionID']));
         }
         $this->engine->assign('User', $user);
         $this->engine->display("rate_saved.tpl");
     }
 
-    public function solution_dislike(PDO $dbh, User $user, array $params): void 
+    public function solution_unlike(PDO $dbh, User $user, array $params): void 
     {
         $this->engine->assign('Saved', false);
         if ($user->logged()) {
-            $solution = new Solution($dbh, $params['solutionID']);
-            $this->engine->assign('Saved', $solution->dislike());
+            $this->engine->assign('Saved', $user->unlikeSolution($params['solutionID']));
         }
         $this->engine->assign('User', $user);
         $this->engine->display("rate_saved.tpl");
@@ -95,6 +93,20 @@ class Controller
         $this->engine->display("user_message.tpl");
     }
     
+    public function solutions(PDO $dbh, User $user, array $params): void 
+    {
+        if ($user->logged()) {
+            $questionSolved = $user->solvedQuestion($params['questionID']);
+            $this->engine->assign('QuestionSolved', $questionSolved);
+            if ($questionSolved) {
+                $this->engine->assign('QuestionSolutions', $user->getOthersSolutions($params['questionID']));
+            }
+        }
+        $this->engine->assign('User', $user);
+        $this->engine->assign('QuestionID', $params['questionID']);
+        $this->engine->display("solutions.tpl");
+    }
+
     public function my_solutions(PDO $dbh, User $user, array $params): void 
     {
         if ($user->logged()) {

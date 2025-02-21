@@ -353,9 +353,7 @@ body {
     font-size: 18px;
     font-weight: bold;
 }
-
-.splitter .hidden,
-.accordion .hidden {
+.hidden {
     display: none;
 }
 .user-solutions-count {
@@ -721,10 +719,6 @@ body {
 .button-small.red {
     background-color: darkred;
 }
-
-.button.hidden {
-    display: none;
-}
 .button.erd {
     display: block; 
     text-decoration: none; 
@@ -886,6 +880,9 @@ td {
     font-size: small;
     background-color: var(--question-title-bg-color);
     padding: 6px;
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
 }
 .solution-footer {
     text-align: right;

@@ -262,7 +262,10 @@ class Question
      */
     public function checkQuery(string $query)
     {
-        if (empty($query)) {
+        $queryClass = new Query($query);
+        $cleanedQuery = $queryClass->cleanComments($query);
+
+        if (empty($cleanedQuery)) {
             $hints['emptyQuery'] = true;
             return [
                 'ok' => false,
@@ -275,8 +278,8 @@ class Question
         $questionData = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if (
-            (isset($questionData['query_match']) && !preg_match($questionData['query_match'], $query)) ||
-            (isset($questionData['query_not_match']) && preg_match($questionData['query_not_match'], $query))
+            (isset($questionData['query_match']) && !preg_match($questionData['query_match'], $cleanedQuery)) ||
+            (isset($questionData['query_not_match']) && preg_match($questionData['query_not_match'], $cleanedQuery))
         ) {
             $hints['wrongQuery'] = true;
             return [
@@ -434,24 +437,5 @@ class Question
             ) rating 
             WHERE questions.id = rating.question_id;");
         $stmt->execute([':question_id' => $this->id]);
-    }
-    
-    /**
-     * Returns array of Question users solutions
-     *
-     * @param int $limit
-     * @return array
-     */
-    public function getSolutions($limit = 3): array 
-    {
-        $stmt = $this->dbh->prepare("
-            SELECT id, query, query_cost, created_at::date created_at, likes, dislikes
-            FROM user_solutions 
-            WHERE question_id = ? AND NOT reported
-            ORDER BY query_cost ASC, (likes - dislikes) ASC, RANDOM()
-            LIMIT " . $limit);
-        $stmt->execute([$this->id]);
-        $solutions = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $solutions;
     }
 }

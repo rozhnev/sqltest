@@ -267,6 +267,8 @@ function showOthersSolutions(questionId) {
     showSolutions(questionId, 'others');
 }
 function showSolutions(questionId, whom) {
+    document.getElementById('right-panel').innerHTML = '<div id="pre-loader" style="width: 21vw;"></div>';
+    setLoader('pre-loader');
     const url = whom === 'my' ? `/${lang}/question/${questionId}/my-solutions` : `/${lang}/question/${questionId}/solutions`;
     fetch(url, {
         method: "GET",
@@ -300,19 +302,27 @@ function solutionUpdate(solutionId, action) {
         credentials: "same-origin",
     })
     .then((async response=>{
-      if (response.ok) {
-        const message =  await response.text();
-        showToast(message);
-      }
+        if (response.ok) {
+            const message =  await response.text();
+            showToast(message);
+        }
     }))
     .catch(err=>{
     });
 }
 function solutionLike(solutionId) {
-    return solutionUpdate(solutionId, 'like');
+    return solutionUpdate(solutionId, 'like')
+    .then(()=>{
+            [...document.getElementById(`solution-likes-${solutionId}`).children].map(el=>el.classList.toggle("hidden"));
+            document.getElementById(`solution-likes-count-${solutionId}`).innerText = parseInt(document.getElementById(`solution-likes-count-${solutionId}`).innerText) + 1;
+    });
 }
-function solutionDislike(solutionId) {
-    return solutionUpdate(solutionId, 'dislike');
+function solutionUnlike(solutionId) {
+    return solutionUpdate(solutionId, 'unlike')
+    .then(()=>{
+        [...document.getElementById(`solution-likes-${solutionId}`).children].map(el=>el.classList.toggle("hidden"));
+        document.getElementById(`solution-likes-count-${solutionId}`).innerText = parseInt(document.getElementById(`solution-likes-count-${solutionId}`).innerText) - 1;
+    });
 }
 function solutionReport(lang, questionId, solutionId) {
     solutionUpdate(solutionId, 'report')
