@@ -214,10 +214,18 @@ function testQuery(lang, questionId) {
         if (response.ok && document.getElementById("nextTaskBtn")) {
             document.getElementById("nextTaskBtn").classList.toggle("hidden");
             setTimeout(()=>{
-                document.getElementById("main3").scrollTo({
-                    top: document.getElementById("nextTaskBtn").offsetTop,
-                    behavior: "smooth" 
-                })
+                if (document.getElementById("main3")) {
+                    document.getElementById("main3").scrollTo({
+                        top: document.getElementById("nextTaskBtn").offsetTop,
+                        behavior: "smooth" 
+                    })
+                } else {
+                    window.scrollTo({
+                        top: document.getElementById("db-description").offsetTop - window.outerHeight,
+                        behavior: "smooth" 
+                    })
+                }
+
             }, 300)
         }
         return await response.text();
