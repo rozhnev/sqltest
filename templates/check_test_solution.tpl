@@ -48,7 +48,7 @@
     Try again.
     {if isset($ReferralLink)}
         <a id="referral-link" target="_blank" href="{$ReferralLink.link}">
-            <div class="referral-link" style="margin-top: 5em;">
+            <div class="referral-link">
                 {$ReferralLink.content}
             </div>
         </a>
