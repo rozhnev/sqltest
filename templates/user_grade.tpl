@@ -1,14 +1,13 @@
     {include file='short-header.tpl'}
     <link rel="stylesheet" type="text/css" href="/about.css?{$VERSION}" media="all">
     <body>
-    <div class="container">
+        <div class="container">
             <header>
-                <div class="{if $MobileView}mobile-container{else}full-container{/if}">
-                    {if $MobileView}
-                        {include file='m.top-menu.tpl' path="/"}
-                    {else}
-                        {include file='top-menu.tpl' path="/"}
-                    {/if}
+                {if $MobileView}
+                    {include file='m.top-menu.tpl' path="/"}
+                {else}
+                    {include file='top-menu.tpl' path="/"}
+                {/if}
             </header>
             <main>
                 <div class="section colored">
