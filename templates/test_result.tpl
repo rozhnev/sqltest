@@ -4,9 +4,9 @@
     <div class="container">
         <header>
             {if $MobileView}
-                {include file='m.top-menu.tpl' path="/"}
+                {include file='m.top-menu.tpl' path="/test/{$TestData.id}/result"}
             {else}
-                {include file='top-menu.tpl' path="/"}
+                {include file='top-menu.tpl' path="/test/{$TestData.id}/result"}
             {/if}
         </header>
         <main>
