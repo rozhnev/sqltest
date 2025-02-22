@@ -504,11 +504,8 @@
                 <a target="_blank" rel="nofollow" href="https://codeaven.com/g/ss23iy3l6sfec845fb2fcfba9fca8a/?i=4">
                   <img style="width:100%;" border="0" src="https://ad.admitad.com/b/ss23iy3l6sfec845fb2fcfba9fca8a/" alt="hidemyname vpn"/>
                 </a>
-                {* <a target="_blank" rel="nofollow" href="https://bywiola.com/g/8s4jme099rfec845fb2f3b8a152381/?i=4&subid=kaprov-courses&erid=LatgBXFig">
-                    <img style="width:100%;" border="0" src="https://aflink.ru/b/8s4jme099rfec845fb2f3b8a152381/" alt="Karpov.courses"/>
-                </a> *}
-                <a target="_blank" rel="nofollow" href="https://bywiola.com/g/vvs19xth4pfec845fb2f3b8a152381/?i=4&subid=analyst-ny&erid=2VSb5xzvfBn">
-                    <img style="width:100%;" border="0" src="https://aflink.ru/b/vvs19xth4pfec845fb2f3b8a152381/" alt="Karpov.courses"/>
+                <a target="_blank" rel="nofollow" href="https://thevospad.com/g/go2e1mhf52fec845fb2f69bd3583e1/?i=4&subid=analyst-from-zero&erid=LatgC6bAt">
+                    <img style="width:100%;" border="0" src="https://aflink.ru/b/go2e1mhf52fec845fb2f69bd3583e1/" alt="Netology"/>
                 </a>
             {else}
                 <a target="_blank" rel="nofollow" href="https://naiawork.com/g/61ci34ogwofec845fb2f5e445e6c7b/?i=4&subid=ds&erid=LatgC4G1h">
