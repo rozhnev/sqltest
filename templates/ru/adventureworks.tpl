@@ -508,8 +508,8 @@
                     <img style="width:100%;" border="0" src="https://aflink.ru/b/go2e1mhf52fec845fb2f69bd3583e1/" alt="Netology"/>
                 </a>
             {else}
-                <a target="_blank" rel="nofollow" href="https://naiawork.com/g/61ci34ogwofec845fb2f5e445e6c7b/?i=4&subid=ds&erid=LatgC4G1h">
-                    <img style="width:100%;" border="0" src="https://aflink.ru/b/61ci34ogwofec845fb2f5e445e6c7b/" alt="Productstar"/>
+                <a target="_blank" rel="nofollow" href="https://ewwhk.com/g/brl8jkz38efec845fb2f0d79a64861/?i=4&subid=domains&erid=5jtCeReNwxHpfQTGR3xQ4Jh">
+                    <img style="width:100%;" border="0" src="https://aflink.ru/b/brl8jkz38efec845fb2f0d79a64861/" alt="REG.RU"/>
                 </a>
                 <a target="_blank" rel="nofollow" href="https://thevospad.com/g/dhqiqt6h41fec845fb2f69bd3583e1/?i=4&subid=free-neuronetwork&erid=LatgBSdq6">
                     <img style="width:100%;" border="0" src="https://aflink.ru/b/dhqiqt6h41fec845fb2f69bd3583e1/" alt="Netology"/>
