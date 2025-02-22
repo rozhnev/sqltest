@@ -7,10 +7,10 @@
     <h2>Querynomicon (SQLite)</h2>
     Компактная база данных для изучения основ SQL.
     <h3>База данных Querynomicon содержит таблицы:</h3>
-    <div class="accordion">
+    <div class="accordion active">
         <span><span class='sql'>little_penguins</span> - таблица малых пингвинов.</span>
     </div>
-    <div class="panel">
+    <div class="panel active">
         <ul class="table-columns">
             <li> <span class='sql'>species</span>Вид пингвина.</li>
             <li> <span class='sql'>island</span> — Остров проживания.</li>
@@ -78,6 +78,7 @@
                 </tr>
             </tbody></table>
         </div>
+    </div>
     <div class="accordion">
         <span><span class='sql'>staff</span> - таблица сотрудников.</span>
     </div>
