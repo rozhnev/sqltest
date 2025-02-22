@@ -1,7 +1,7 @@
 <div id="db-description" class="db-description">
     <style>
         .table-columns span {
-            min-width: 6rem;
+            min-width: 9rem;
         }
     </style>
     <h2>Querynomicon (SQLite)</h2>
@@ -13,7 +13,7 @@
     <div class="panel active">
         <ul class="table-columns">
             <li> <span class='sql'>species</span>Espécie de pinguim.</li>
-            <li> <span class='sql'>island</span> — Ilha de residência.</li>
+            <li> <span class='sql'>island</span>Ilha de residência.</li>
             <li> <span class='sql'>bill_length_mm</span>Comprimento do bico, mm.</li>
             <li> <span class='sql'>bill_depth_mm</span>Profundidade do bico, mm.</li>
             <li> <span class='sql'>flipper_length_mm</span>Comprimento da nadadeira, mm.</li>
@@ -49,7 +49,7 @@
     <div class="panel">
         <ul class="table-columns">
             <li> <span class='sql'>species</span>Espécie de pinguim.</li>
-            <li> <span class='sql'>island</span> — Ilha de residência.</li>
+            <li> <span class='sql'>island</span>Ilha de residência.</li>
             <li> <span class='sql'>bill_length_mm</span>Comprimento do bico, mm.</li>
             <li> <span class='sql'>bill_depth_mm</span>Profundidade do bico, mm.</li>
             <li> <span class='sql'>flipper_length_mm</span>Comprimento da nadadeira, mm.</li>

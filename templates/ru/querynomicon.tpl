@@ -1,7 +1,7 @@
 <div id="db-description" class="db-description">
     <style>
         .table-columns span {
-            min-width: 6rem;
+            min-width: 9rem;
         }
     </style>
     <h2>Querynomicon (SQLite)</h2>
@@ -13,7 +13,7 @@
     <div class="panel active">
         <ul class="table-columns">
             <li> <span class='sql'>species</span>Вид пингвина.</li>
-            <li> <span class='sql'>island</span> — Остров проживания.</li>
+            <li> <span class='sql'>island</span> Остров проживания.</li>
             <li> <span class='sql'>bill_length_mm</span>Длина клюва, мм.</li>
             <li> <span class='sql'>bill_depth_mm</span>Глубина клюва, мм.</li>
             <li> <span class='sql'>flipper_length_mm</span>Длина плавника, мм.</li>
@@ -49,7 +49,7 @@
     <div class="panel">
         <ul class="table-columns">
             <li> <span class='sql'>species</span>Вид пингвина.</li>
-            <li> <span class='sql'>island</span> — Остров проживания.</li>
+            <li> <span class='sql'>island</span> Остров проживания.</li>
             <li> <span class='sql'>bill_length_mm</span>Длина клюва, мм.</li>
             <li> <span class='sql'>bill_depth_mm</span>Глубина клюва, мм.</li>
             <li> <span class='sql'>flipper_length_mm</span>Длина плавника, мм.</li>

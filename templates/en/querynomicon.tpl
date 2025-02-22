@@ -1,24 +1,24 @@
 <div id="db-description" class="db-description">
     <style>
         .table-columns span {
-            min-width: 6rem;
+            min-width: 9rem;
         }
     </style>
     <h2>Querynomicon (SQLite)</h2>
-    Компактная база данных для изучения основ SQL.
-    <h3>База данных Querynomicon содержит таблицы:</h3>
-    <div class="accordion active">
-        <span><span class='sql'>little_penguins</span> - таблица малых пингвинов.</span>
+    A compact database for learning the basics of SQL.
+    <h3>The Querynomicon database contains tables:</h3>
+    <div class="accordion">
+        <span><span class='sql'>little_penguins</span> - table of little penguins.</span>
     </div>
-    <div class="panel active">
+    <div class="panel">
         <ul class="table-columns">
-            <li> <span class='sql'>species</span>Вид пингвина.</li>
-            <li> <span class='sql'>island</span> — Остров проживания.</li>
-            <li> <span class='sql'>bill_length_mm</span>Длина клюва, мм.</li>
-            <li> <span class='sql'>bill_depth_mm</span>Глубина клюва, мм.</li>
-            <li> <span class='sql'>flipper_length_mm</span>Длина плавника, мм.</li>
-            <li> <span class='sql'>body_mass_g</span>Масса тела, гр.</li>
-            <li> <span class='sql'>sex</span>Пол.</li>
+            <li> <span class='sql'>species</span>Penguin species.</li>
+            <li> <span class='sql'>island</span>Island of residence.</li>
+            <li> <span class='sql'>bill_length_mm</span>Bill length, mm.</li>
+            <li> <span class='sql'>bill_depth_mm</span>Bill depth, mm.</li>
+            <li> <span class='sql'>flipper_length_mm</span>Flipper length, mm.</li>
+            <li> <span class='sql'>body_mass_g</span>Body mass, g.</li>
+            <li> <span class='sql'>sex</span>Sex.</li>
         </ul>
         <div class="table-wrapper">
             <table class=""><tbody>
@@ -44,17 +44,17 @@
         </div>
     </div>
     <div class="accordion">
-        <span><span class='sql'>penguins</span> - таблица пингвинов.</span>
+        <span><span class='sql'>penguins</span> - table of penguins.</span>
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class='sql'>species</span>Вид пингвина.</li>
-            <li> <span class='sql'>island</span> — Остров проживания.</li>
-            <li> <span class='sql'>bill_length_mm</span>Длина клюва, мм.</li>
-            <li> <span class='sql'>bill_depth_mm</span>Глубина клюва, мм.</li>
-            <li> <span class='sql'>flipper_length_mm</span>Длина плавника, мм.</li>
-            <li> <span class='sql'>body_mass_g</span>Масса тела, гр.</li>
-            <li> <span class='sql'>sex</span>Пол.</li>
+            <li> <span class='sql'>species</span>Penguin species.</li>
+            <li> <span class='sql'>island</span>Island of residence.</li>
+            <li> <span class='sql'>bill_length_mm</span>Bill length, mm.</li>
+            <li> <span class='sql'>bill_depth_mm</span>Bill depth, mm.</li>
+            <li> <span class='sql'>flipper_length_mm</span>Flipper length, mm.</li>
+            <li> <span class='sql'>body_mass_g</span>Body mass, g.</li>
+            <li> <span class='sql'>sex</span>Sex.</li>
         </ul>
         <div class="table-wrapper">
             <table class=""><tbody>
@@ -78,17 +78,16 @@
                 </tr>
             </tbody></table>
         </div>
-    </div>
     <div class="accordion">
-        <span><span class='sql'>staff</span> - таблица сотрудников.</span>
+        <span><span class='sql'>staff</span> - table of employees.</span>
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class='sql'>ident</span>Номер сотрудника.</li>
-            <li> <span class='sql'>personal</span>Имя сотрудника.</li>
-            <li> <span class='sql'>family</span>Фамилия сотрудника.</li>
-            <li> <span class='sql'>dept</span>Подразделение.</li>
-            <li> <span class='sql'>age</span>Возраст.</li>
+            <li> <span class='sql'>ident</span>Employee number.</li>
+            <li> <span class='sql'>personal</span>Employee first name.</li>
+            <li> <span class='sql'>family</span>Employee last name.</li>
+            <li> <span class='sql'>dept</span>Department.</li>
+            <li> <span class='sql'>age</span>Age.</li>
         </ul>
         <div class="table-wrapper">
             <table class=""><tbody>
