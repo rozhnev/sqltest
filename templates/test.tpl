@@ -30,21 +30,24 @@
                         </ol>
                     </div>
                     {/foreach}
-                    <div id="test-timer" style="padding:5px 15px; border: 1px solid white; margin: 5px; display: flex; flex-direction: column; justify-items: center;">
-                        <div  style="display: flex; flex-direction: row; justify-items: center; margin: 1em 0;">
-                            <span>{translate}test_time_to_complete{/translate}: &nbsp;</span>
-                            <span id="test-timer-time" style="white-space: nowrap;"></span>
-                        </div>
-                        <span style="padding-bottom: 1em;">{translate}tasks_completed{/translate}: {$TestData.solved_questions_count} из {$TestData.questions_count}</span>
+                </div>
+                <div id="test-timer" style="
+                    color: var(--menu-link-color); 
+                    background-color: var(--accordion-panel-bg-color);
+                    padding:5px 15px; border: 1px solid var(--menu-link-color); margin: 5px; display: flex; flex-direction: column; justify-items: center;">
+                    <div  style="display: flex; flex-direction: row; justify-items: center; margin: 1em 0;">
+                        <span>{translate}test_time_to_complete{/translate}: &nbsp;</span>
+                        <span id="test-timer-time" style="white-space: nowrap;"></span>
                     </div>
+                    <span style="padding-bottom: 1em;">{translate}tasks_completed{/translate}: {$TestData.solved_questions_count} из {$TestData.questions_count}</span>
+                </div>
 
-                    <div style="display: flex; align-items: center; justify-content: center; margin-top: 1em;">
-                        <a class="button green" style="text-decoration: none;" id="doneTest" href="/{$Lang}/test/{$TestId}/result">{translate}test_show_result{/translate}</a>
-                    </div>
+                <div style="display: flex; align-items: center; justify-content: center; margin-top: 1em;">
+                    <a class="button green" style="text-decoration: none;" id="doneTest" href="/{$Lang}/test/{$TestId}/result">{translate}test_show_result{/translate}</a>
+                </div>
 
-                    <div class="menu-ad">
-                        <div id="yandex_rtb_R-A-4716552-2">
-                        </div>
+                <div class="menu-ad">
+                    <div id="yandex_rtb_R-A-4716552-2">
                     </div>
                 </div>
             </div>
