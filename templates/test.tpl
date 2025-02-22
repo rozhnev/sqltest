@@ -22,7 +22,8 @@
                         {foreach $panel.questions as $question}
                         <li>
                             <a class="question-link {if $QuestionID == $question[1]} current-question{/if}{if $question[2]} solved{/if}" href="/{$Lang}/test/{$TestId}/{$question[1]}">
-                                {$question[4]}.&nbsp;{$question[0]}
+                                {* {$question[4]}. *}
+                                -&nbsp;{$question[0]}
                             </a>
                         </li>
                         {/foreach}
@@ -32,7 +33,7 @@
                     <div id="test-timer" style="padding:5px 15px; border: 1px solid white; margin: 5px; display: flex; flex-direction: column; justify-items: center;">
                         <div  style="display: flex; flex-direction: row; justify-items: center; margin: 1em 0;">
                             <span>{translate}test_time_to_complete{/translate}: &nbsp;</span>
-                            <span id="test-timer-time"></span>
+                            <span id="test-timer-time" style="white-space: nowrap;"></span>
                         </div>
                         <span style="padding-bottom: 1em;">{translate}tasks_completed{/translate}: {$TestData.solved_questions_count} из {$TestData.questions_count}</span>
                     </div>
@@ -116,7 +117,12 @@
             {* {var_export($TestData)} *}
             <div class="code-buttons">
                 {if !isset($Question.answers)}
-                    <button class="button" id="runQueryBtn" onClick="runQuery('{$Lang}', {$QuestionID})" title="CTRL+Enter">{translate}question_action_run_query{/translate}</button>
+                    <button class="button" id="runQueryBtn" onClick="runQuery('{$Lang}', {$QuestionID})" title="Ctrl+Enter">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6.54518 8.16266C6.32996 8.10588 6.15108 7.95644 6.05692 7.75475C5.96276 7.55306 5.96305 7.31997 6.05771 7.11852L7.71846 3.58413C7.84222 3.32074 8.10717 3.15272 8.39819 3.15308C8.6892 3.15344 8.95373 3.32212 9.07684 3.58581L9.80947 5.15504C9.83566 5.14475 9.86271 5.13582 9.89054 5.12836C14.2378 3.9635 18.7064 6.5434 19.8712 10.8907C21.0361 15.2381 18.4562 19.7066 14.1089 20.8715C9.76155 22.0363 5.29302 19.4564 4.12815 15.1091C3.75772 13.7266 3.76606 12.3298 4.09049 11.031C4.19088 10.6292 4.59804 10.3848 4.9999 10.4852C5.40177 10.5855 5.64616 10.9927 5.54577 11.3946C5.28148 12.4526 5.27419 13.5906 5.57704 14.7209C6.52749 18.268 10.1735 20.373 13.7206 19.4226C17.2678 18.4721 19.3728 14.8261 18.4224 11.279C17.4874 7.78983 13.9444 5.69602 10.4528 6.53307L11.192 8.11637C11.3151 8.38006 11.2745 8.69117 11.088 8.9145C10.9014 9.13783 10.6025 9.23307 10.3211 9.15884L6.54518 8.16266Z" fill="#338FFF"/>
+                    </svg>
+                    <span>{translate}question_action_run_query{/translate}</span>
+                </button>
                 {/if}
                 {if isset($TestData.timeout) && $TestData.timeout}
                     <button class="button red">
@@ -124,7 +130,17 @@
                     </button>
                 {elseif {$Question.possible_attempts} > 0}
                     <button class="button green" id="checkSolutionBtn" onClick="checkSolution('/{$Lang}/test/{$TestId}/check/{$QuestionID}')">
-                        {if !isset($Question.answers)}{translate}question_action_check_answers{/translate}{else}{translate}question_action_test_query{/translate}{/if} (<span id="attemptsCount">{$Question.possible_attempts}</span>)
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M19.266 10.4837C20.2579 11.2512 20.2579 12.7486 19.266 13.5161C16.2685 15.8355 12.9213 17.6637 9.34979 18.9321L8.69732 19.1639C7.44904 19.6072 6.13053 18.7627 5.96154 17.4741C5.48938 13.8739 5.48938 10.1259 5.96154 6.52574C6.13053 5.23719 7.44905 4.39263 8.69732 4.83597L9.34979 5.06771C12.9213 6.33619 16.2685 8.16434 19.266 10.4837ZM18.3481 12.3298C18.5639 12.1628 18.5639 11.837 18.3481 11.67C15.4763 9.44796 12.2695 7.69648 8.84777 6.4812L8.1953 6.24947C7.87035 6.13406 7.49691 6.35401 7.44881 6.72079C6.99363 10.1915 6.99363 13.8083 7.44881 17.2791C7.49691 17.6458 7.87035 17.8658 8.19529 17.7504L8.84777 17.5187C12.2695 16.3034 15.4763 14.5519 18.3481 12.3298Z" fill="white"/>
+                        </svg>
+                        <span>
+                        {if !isset($Question.answers)}
+                            {translate}question_action_check_answers{/translate}
+                        {else}
+                            {translate}question_action_test_query{/translate}
+                        {/if} 
+                        (<span id="attemptsCount">{$Question.possible_attempts}</span>)
+                        </span>
                     </button>
                 {else}
                     <button class="button gray">
@@ -132,7 +148,14 @@
                     </button>
                 {/if}
                 {if $Question.next_question_id}
-                <a href="/{$Lang}/test/{$TestId}/{$Question.next_question_id}" title="Mext task" class="button green{if {$Question.possible_attempts} > 0} hidden{/if}" id="nextQuestionBtn">{translate}question_action_next{/translate}</a>
+                    <a href="/{$Lang}/test/{$TestId}/{$Question.next_question_id}" title="Mext task" class="button green{if {$Question.possible_attempts} > 0} hidden{/if}" id="nextQuestionBtn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M19.266 10.4837C20.2579 11.2512 20.2579 12.7486 19.266 13.5161C16.2685 15.8355 12.9213 17.6637 9.34979 18.9321L8.69732 19.1639C7.44904 19.6072 6.13053 18.7627 5.96154 17.4741C5.48938 13.8739 5.48938 10.1259 5.96154 6.52574C6.13053 5.23719 7.44905 4.39263 8.69732 4.83597L9.34979 5.06771C12.9213 6.33619 16.2685 8.16434 19.266 10.4837ZM18.3481 12.3298C18.5639 12.1628 18.5639 11.837 18.3481 11.67C15.4763 9.44796 12.2695 7.69648 8.84777 6.4812L8.1953 6.24947C7.87035 6.13406 7.49691 6.35401 7.44881 6.72079C6.99363 10.1915 6.99363 13.8083 7.44881 17.2791C7.49691 17.6458 7.87035 17.8658 8.19529 17.7504L8.84777 17.5187C12.2695 16.3034 15.4763 14.5519 18.3481 12.3298Z" fill="white"/>
+                        </svg>
+                        <span>
+                            {translate}question_action_next{/translate}
+                        </span>
+                    </a>
                 {/if}
             </div>
             <div class="code-result ace-xcode" id="code-result"></div>
@@ -143,7 +166,7 @@
                     if (time > 0) {ldelim}
                         const minutes = time % 60;
                         const hours = (time - minutes) / 60;
-                        document.getElementById('test-timer-time').innerText = (hours > 0 ? `${ldelim}hours{rdelim} ` :'') + (hours === 1 ? 'hour ': 'hours ') + minutes + ' ' + (minutes>1 ? 'minutes': 'minute');
+                        document.getElementById('test-timer-time').innerText = (hours > 0 ? `${ldelim}hours{rdelim} ` + (hours === 1 ? 'hour ': 'hours ') :'') + minutes + ' min';
                     {rdelim} else {ldelim}
                         document.getElementById('test-timer').innerText = '{translate}test_time_over{/translate}'
                     {rdelim}
