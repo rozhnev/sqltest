@@ -771,7 +771,7 @@ input:checked + .slider:before {
     border-top: 1px solid var(--text-block-border-color);
     min-height: 28vh;
     padding: 15px;
-    max-height: 40vh;
+    max-height: 50vh;
     overflow: auto;
     color: var(--question-text);
     background-color: var(--text-block-background-color);
