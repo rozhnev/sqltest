@@ -78,6 +78,7 @@
                 </tr>
             </tbody></table>
         </div>
+    </div>    
     <div class="accordion">
         <span><span class='sql'>staff</span> - table of employees.</span>
     </div>
