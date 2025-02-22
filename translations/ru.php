@@ -127,6 +127,7 @@ $translations = [
     'go_to_next_task' => 'Переходите к <a href="/ru/test/##TestId##/##NextQuestion##">следующей</a>.',
     'test_show_result' => 'Я закончил! Хочу узнать оценку!',
     'not_solved_minimum_tasks' => 'Тест не был завершен. Вам необходимо решить как минимум ##MinTasksRequired## задач.',
+    'grade_below_the_minimum' => 'Вы набрали недостаточно баллов для получения оценки.',
     'you_can_try_again' => 'Вы сможете попробовать снова через  ##NextTestTry## дней.',
     'continue_practice' => 'Продолжить практику',
     'test_result' => 'Результаты теста',

@@ -29,9 +29,15 @@
                                     {translate}test_improve{/translate}
                                 {/if}
                             {else}
-                                {if array_key_exists('hints', $TestResult) && array_key_exists('not_enought_tasks_solved', $TestResult.hints)}
-                                    {assign var="MinTasksRequired" value="{$TestResult.hints.must_to_solve}"}
-                                    {translate}not_solved_minimum_tasks{/translate} <br>
+                                {if array_key_exists('hints', $TestResult)}
+                                    {if array_key_exists('not_enought_tasks_solved', $TestResult.hints)}
+                                        {assign var="MinTasksRequired" value="{$TestResult.hints.must_to_solve}"}
+                                        {translate}not_solved_minimum_tasks{/translate} <br>
+                                    {/if}
+                                    {if array_key_exists('grade_below_the_minimum', $TestResult.hints)}
+                                        {assign var="MinTasksRequired" value="{$TestResult.hints.must_to_solve}"}
+                                        {translate}grade_below_the_minimum{/translate} <br>
+                                    {/if}
                                 {/if}
                                 {if $TestData.timeout}
                                     {assign var="NextTestTry" value="{$TestData.next_test_in}"}

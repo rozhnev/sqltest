@@ -338,11 +338,12 @@ class Test
                 'solved_hard_attempts' => 0,
             ]
         );
+        $must_to_solve = ceil($testResult['total_questions'] * 0.5);
 
-        if ($testResult['solved_questions'] / 0.5 < $testResult['total_questions']) {
+        if ($testResult['solved_questions'] < $must_to_solve) {
             $testResult['ok'] = false;
-            $testResult['hints']['not_enought_tasks_solved'] = 'You must to solve at least ' . ceil($testResult['total_questions'] * 0.5);
-            $testResult['hints']['must_to_solve'] = ceil($testResult['total_questions'] * 0.5);
+            $testResult['hints']['not_enought_tasks_solved'] = 'You must to solve at least ' . $must_to_solve;
+            $testResult['hints']['must_to_solve'] = $must_to_solve;
         } else {
             if (
                 $testResult['solved_easy_questions'] === $testResult['easy_questions'] 
@@ -407,7 +408,9 @@ class Test
             $testResult['grade']--;
             $testResult['hints'][] = 'You average attempts count more then 2. Grade decreased';
         }
-
+        if ($testResult['grade'] < 1) {
+            $testResult['hints']['grade_below_the_minimum'] = 'Your grade balow the minimum';
+        } 
         return $testResult;
     }
 }
