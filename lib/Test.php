@@ -89,7 +89,8 @@ class Test
                 questions.title_sef question_sef,
                 questions.db_template,
                 questions_localization.title question_title,
-                (test_questions.solved_at IS NOT NULL) solved
+                (test_questions.solved_at IS NOT NULL) solved,
+                ROW_NUMBER() OVER (PARTITION BY categories.id ORDER BY test_questions.question_id) question_order
             FROM tests 
             JOIN test_questions ON test_questions.test_id = tests.id 
             JOIN questions on questions.id = test_questions.question_id
@@ -113,7 +114,7 @@ class Test
                         'sef'       => $el['sef'],
                         'questions' => []
                     ];
-                    $acc[$el['id']]['questions'][] = [$el['question_title'], $el['question_id'], $el['solved'], $el['question_sef']];
+                    $acc[$el['id']]['questions'][] = [$el['question_title'], $el['question_id'], $el['solved'], $el['question_sef'], $el['question_order']];
                     return $acc;
                 },
                 []
