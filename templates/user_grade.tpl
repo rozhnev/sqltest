@@ -1,4 +1,5 @@
     {include file='short-header.tpl'}
+    <link rel="stylesheet" type="text/css" href="/about.css?{$VERSION}" media="all">
     <body>
     <div class="container">
             <header>
