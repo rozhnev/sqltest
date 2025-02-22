@@ -620,6 +620,7 @@ input:checked + .slider:before {
     padding: 1em; 
     border: solid 1px; 
     border-radius: 6px;
+    margin-top: 2rem;
 }
 .question-title {
     display: flex; 
