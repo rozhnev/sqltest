@@ -76,7 +76,7 @@
                     <p class="question-action">{translate}question_action_mark_all_answers{/translate}</p>
                 {else}
                     <p class="question-action">{translate}question_action_write_your_request{/translate}</p>
-                    <p class="question-action">{translate}question_action_use_syntax{/translate}</p></p>
+                    <p class="question-action">{translate}question_action_use_syntax{/translate} {translate}question_action_see_definitions_mobile{/translate}</p></p>
                 {/if}
             </div>
             {if !isset($Question.answers)}

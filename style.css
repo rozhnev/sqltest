@@ -579,6 +579,11 @@ input:checked + .slider:before {
     font-size: larger;
     line-height: 1.3em;
 }
+.question-action {
+    font-style: italic;
+    padding-left: 15px;
+    font-size: smaller;
+}
 .answers {
     padding: 5px 15px;
 }
@@ -904,6 +909,9 @@ td {
 }
 footer {
     background-color: var(--block-background-color);
+}
+.mobile-container footer {
+    padding-top: 0.3rem;
 }
 .footer-links {
     display: flex;

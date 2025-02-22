@@ -91,7 +91,7 @@
                         </div>
                         <p class="question-action">{translate}question_action_mark_all_answers{/translate}</p>
                     {else}
-                        <p class="question-action">{translate}question_action_use_syntax{/translate}</p>
+                        <p class="question-action">{translate}question_action_use_syntax{/translate} {translate}question_action_see_definitions{/translate}</p>
                         {if $Question.solved_date}
                             <span class="question-action" style="display: flex; align-items: center; font-weight: bold; color: #2EA043 !important;">{translate}you_already_solved_this_task{/translate}.&nbsp;<button class="button green" onClick="showMySolutions({$QuestionID})">{translate}view_solutions{/translate}</button></span>
                         {else}
