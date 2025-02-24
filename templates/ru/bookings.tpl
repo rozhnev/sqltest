@@ -204,8 +204,8 @@
                     <img style="width:100%;" border="0" src="https://aflink.ru/b/8gb84134qdfec845fb2faf541d880b/" alt="Hexlet.io"/>
                 </a>
             {else}
-                <a target="_blank" rel="nofollow" href="https://codeaven.com/g/ss23iy3l6sfec845fb2fcfba9fca8a/?i=4">
-                    <img style="width:100%;" border="0" src="https://ad.admitad.com/b/ss23iy3l6sfec845fb2fcfba9fca8a/" alt="hidemyname vpn"/>
+                <a target="_blank" rel="nofollow" href="https://dhwnh.com/g/6rwnj0ozlxfec845fb2f42f9f2178b/?i=4&erid=2VSb5zFnq8c">
+                    <img style="width:100%;" border="0" src="https://aflink.ru/b/6rwnj0ozlxfec845fb2f42f9f2178b/" alt="Puzzle Movies"/>
                 </a>
                 <a target="_blank" rel="nofollow" href="https://ujhjj.com/g/2fm4vusamufec845fb2f0da0172cef/?i=4&subid=learn-sql&erid=LatgBVMfa">
                     <img style="width:100%;" border="0" src="https://aflink.ru/b/2fm4vusamufec845fb2f0da0172cef/" alt="Skillfactory.ru"/>

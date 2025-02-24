@@ -501,8 +501,8 @@
                 {* <a target="_blank" rel="nofollow" href="https://naiawork.com/g/63cmm8j9f5fec845fb2f5e445e6c7b/?i=4&subid=sql-from-zero&erid=LatgBvCNw">
                     <img style="width:100%;" border="0" src="https://aflink.ru/b/63cmm8j9f5fec845fb2f5e445e6c7b/" alt="Productstar"/>
                 </a> *}
-                <a target="_blank" rel="nofollow" href="https://codeaven.com/g/ss23iy3l6sfec845fb2fcfba9fca8a/?i=4">
-                  <img style="width:100%;" border="0" src="https://ad.admitad.com/b/ss23iy3l6sfec845fb2fcfba9fca8a/" alt="hidemyname vpn"/>
+                <a target="_blank" rel="nofollow" href="https://dhwnh.com/g/jnv1nobkwkfec845fb2f42f9f2178b/?i=4&erid=2VSb5x8kCDv">
+                    <img style="width:100%;" border="0" src="https://aflink.ru/b/jnv1nobkwkfec845fb2f42f9f2178b/" alt="Puzzle Movies"/>
                 </a>
                 <a target="_blank" rel="nofollow" href="https://thevospad.com/g/go2e1mhf52fec845fb2f69bd3583e1/?i=4&subid=analyst-from-zero&erid=LatgC6bAt">
                     <img style="width:100%;" border="0" src="https://aflink.ru/b/go2e1mhf52fec845fb2f69bd3583e1/" alt="Netology"/>
