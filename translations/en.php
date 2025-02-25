@@ -46,15 +46,10 @@ $translations = [
     'favorite' => 'Favorite',
     'favorites' => 'Favorites',
     'add_to_favorites' => 'Click to add to favorites',
-    'menu_small_add_placeholder' => '<div style="color: var(--question-text); display: flex; flex-direction: column; align-items: center;">
-        Support us on <a href="https://boosty.to/phpize/donate" target="_blank">
-        <img src="https://static.boosty.to/assets/images/logo.b92ac.svg" 
-                            alt="Support on Boosty"
-                            style="background-color: white;
-                            padding: 3px;
-                            border-radius: 7px;
-                            margin: 5px auto;">
-                        </a></div>',    
+    'menu_small_add_placeholder' => "<div style='color: var(--question-text); display: flex; gap: 0.5rem; flex-direction: column; align-items: center;'>
+        Project's tough. <a href='https://ko-fi.com/D1D76X1T1' target='_blank'>
+            <img height='36' style='border:0px;height:36px;' src='https://storage.ko-fi.com/cdn/kofi6.png?v=6' border='0' alt='Buy Me a Coffee at ko-fi.com' />
+        </a></div>",    
     'toast_sql_copied_to_buffer' => 'SQL code copied to buffer',
     'login_popup_footer' => 'Login on the site is only required to save your progress. You can continue testing without logging into the site.',
     'rate_saved' => 'Thank you! Your vote has been counted.',
