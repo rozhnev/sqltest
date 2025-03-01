@@ -485,19 +485,49 @@
 
     {if $User->showAd()}
       <div class="referal-add-block">
-          <a href="https://amzn.to/4cFPQwS" target="_blank" style="text-decoration: none;">
-              <div style="display: flex; flex-direction: row; padding: 0.5rem; width: 100%;">
-                  <div  style = "width: 30%;">
-                      <img style="width: 100%;" src="/images/t-sql-fundamentals.jpg" alt="T-SQL Fundamentals by Itzik Ben-Gan">
-                  </div>
-                  <div style="font-size: 1em;  width: 70%;  padding: 0 0.7em; font-weight: 100;">
-                      <div>T-SQL Fundamentals by Itzik Ben-Gan</div>
-                      <div style="font-size: small; padding-top: 0.5em;">
-                        Master Transact-SQL's fundamentals, and write correct, robust code for querying and modifying data with modern Microsoft data technologies, including SQL Server 2022, Azure SQL Database, and Azure SQL Managed Instance.
-                      </div>
-                  </div>
-              </div>
-          </a>
+            <a id="spzn:child~SlXhnSS5RzWS8wv-b82-Pw" 
+                href="https://imp.i384100.net/c/5622383/1242836/14726?prodsku=spzn%3Achild%7ESlXhnSS5RzWS8wv-b82-Pw&u=https%3A%2F%2Fwww.coursera.org%2Fspecializations%2Fbi-foundations-sql-etl-data-warehouse&intsrc=PUI2_9419"            target="_blank"
+                style="
+                    display: block;
+                    max-width: 48%;
+                    height: 200px;
+                    background: url('https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://d15cw65ipctsrr.cloudfront.net/27/a156f51493441cb45d0a9ec83b22f9/ETL-Specialization-1200x1200.jpg?auto=format%2Ccompress&dpr=1&w=200&h=200&fit=crop') no-repeat;
+                "
+                >
+                <div style="
+                        background: white;
+                        color: black;
+                        margin: 5px;
+                        padding: 3px;
+                        border-radius: 3px;
+                        opacity: 75%;
+                        max-width: 88%;
+                ">
+                    SQL: A Practical Introduction for Querying Databases
+                </div>
+                <a id="spzn:child~RXPU-mWaEeunahLL3oLBRQ" 
+                    href="https://imp.i384100.net/c/5622383/1242836/14726?prodsku=spzn%3Achild%7ERXPU-mWaEeunahLL3oLBRQ&u=https%3A%2F%2Fwww.coursera.org%2Fspecializations%2Fdata-science-fundamentals-python-sql&intsrc=PUI2_9419"
+                    target="_blank"
+                    style="
+                        display: block;
+                        max-width: 48%;
+                        height: 200px;
+                        background: url('https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://d15cw65ipctsrr.cloudfront.net/bd/0202c87e244d30bdecd889bd2719ae/DataScienceFundamentalsPythonSQL.png?auto=format%2Ccompress&dpr=1&w=200&h=200&fit=crop') no-repeat;
+                    "
+                    >
+                    <div style="
+                            background: white;
+                            color: black;
+                            margin: 5px;
+                            padding: 3px;
+                            border-radius: 3px;
+                            opacity: 75%;
+                            max-width: 88%;
+                    ">
+                        Data Science Fundamentals with Python and SQL
+                    </div>
+                </a>
+            </a>
       </div>
   {/if}
 </div>
