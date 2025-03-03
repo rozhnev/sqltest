@@ -56,7 +56,7 @@
                                 {/if}
                             </span>
                         </div>
-                        {if $LoggedAsAdmin}
+                        {if $User->isAdmin()}
                             <div class="question-navigate" style="border-right: 1px solid var(--text-block-border-color);">
                                 <a href="/admin/question/{$QuestionID}" title="Edit" style="color:white; text-decoration: none;"><i>✎</i></a>
                             </div>
