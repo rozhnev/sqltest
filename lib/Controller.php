@@ -1,26 +1,58 @@
 <?php
 class Controller 
 {
+    private $dbh;
+    private $user;
     private $engine;
+    private $mobileView;
 
     private $lang;
 
     private $languages = ['ru' => 'Русский', 'en' => 'English', 'pt' => 'Português'/*, 'es' => 'Español'*/];
 
-    public function __construct(Smarty $engine, string $lang)
+    private function registerModifiers(array $mods): void
+    {
+        foreach ($mods as $mod) {
+            $this->engine->registerPlugin("modifier", $mod, $mod);
+        }
+    }
+
+    private function assignVariables(array $vars): void
+    {
+        foreach ($vars as $key => $value) {
+            $this->engine->assign($key, $value);
+        }
+    }
+
+    public function setLanguge(string $lang='en'): void
     {
         $this->lang = $lang;
-
-        $engine->assign('Lang', $lang);
+        $this->assignVariables(['Lang' => $lang]);
         Localizer::init($lang);
-        $engine->registerPlugin("modifier", "array_key_exists", "array_key_exists");
-        $engine->registerPlugin('block', 'translate', array('Localizer', 'translate'), true);
+    }
 
-        $engine->assign('VERSION', $env['VERSION'] ?? 0);
-        $engine->assign('MobileView', $this->isMmobileView());
-        $engine->assign('Languages', $this->languages);
-        $engine->assign('Lang', $lang);
-        $this->engine = $engine;
+    public function setCanonicalLink(string $path): void
+    {
+        $this->assignVariables([
+            'CanonicalLink' => $this->isMmobileView() ? "https://sqltest.online/{$path}" : null
+        ]);
+    }
+
+    public function __construct(PDO $dbh, Smarty $engine, User $user, bool $mobileView)
+    {
+        $this->dbh      = $dbh;
+        $this->user     = $user;
+        $this->engine   = $engine;
+        $this->mobileView = $mobileView;
+
+        $this->registerModifiers(["array_key_exists", "mt_rand"]);
+        $this->engine->registerPlugin('block', 'translate', array('Localizer', 'translate'), true);
+        $this->assignVariables([
+            'VERSION'       => $env['VERSION'] ?? 0,
+            'MobileView'    => $this->isMmobileView(),
+            'Languages'     => $this->languages,
+            'User'          => $this->user,
+        ]);
     }
 
     private function isMmobileView(): bool
@@ -38,12 +70,36 @@ class Controller
         $this->engine->assign('Params', $params);
         $this->engine->display("erd.tpl");
     }
-    public function donate(): void
+    /**
+     * Show about page
+     * @param array $params
+     */
+    public function about(array $params): void
     {
-        $this->engine->assign('Action', "donate");
+        $this->setLanguge($params['lang']);
+        $this->assignVariables(['Action' => 'about']);
+        $this->engine->display("about.tpl");
+    }
+    /**
+     * Show privacy policy page
+     * @param array $params
+     */
+    public function privacy_policy(array $params): void
+    {
+        $this->setLanguge($params['lang']);
+        $this->assignVariables(['Action' => 'privacy-policy']);
+        $this->engine->display("privacy_policy.tpl");
+    }
+    /**
+     * Show donate page
+     * @param array $params
+     */
+    public function donate($params): void
+    {
+        $this->setLanguge($params['lang']);
+        $this->engine->assign('Action', 'donate');
         $this->engine->display("donate.tpl");
     }
-
     public function solution_like(PDO $dbh, User $user, array $params): void 
     {
         $this->engine->assign('Saved', false);
@@ -129,6 +185,27 @@ class Controller
         $this->engine->assign('User', $user);
         $this->engine->assign('QuestionID', $params['questionID']);
         $this->engine->display("user_solutions.tpl");
+    }
+
+    public function question(array $params): void 
+    {
+        $questionnire = new Questionnire($this->dbh, $this->lang);
+        $question = new Question($this->dbh, $params['questionID']);
+        $questionData = $question->get($params['questionCategoryID'], $this->lang, $this->user->getId());
+
+        $this->registerModifiers(['floor', 'in_array']);
+        $this->assignVariables([
+            'QuestionID'            => $params['questionID'],
+            'Questionnire'          => $questionnire->get($params['QuestionnireName'], $this->user->getId()),
+            'QuestionCategoryID'    => $questionData['category_id'],
+            'Question'              => $questionData,
+            'NextQuestionId'        => $question->getNextSefId($params['questionCategoryID']),
+            'PreviousQuestionId'    => $question->getPreviousSefId($params['questionCategoryID']),
+            'DB'                    => $questionData['db_template'],
+            'Action'                => 'question',
+            'QuestionsCount'        =>  $questionnire->getQuestionsCount(),
+        ]);
+        $this->engine->display($this->mobileView ? "m.index.tpl" : "index.tpl");
     }
 }
 ?>

@@ -29,12 +29,8 @@ $pathParts = explode('/', $path);
 $db         = '';
 $questionID = '';
 $QuestionnireName = $_COOKIE['Questionnire'] ?? 'category';
-$smarty->assign('CanonicalLink', null);
-$smarty->registerPlugin("modifier", "mt_rand", "mt_rand");
 
-if ($mobileView) {
-    $smarty->assign('CanonicalLink', "https://sqltest.online/{$path}");
-}
+
 session_start([
     'cookie_lifetime' => SESSION_LIFETIME,
     'gc_maxlifetime' => SESSION_LIFETIME
@@ -53,6 +49,12 @@ if (isset($_COOKIE[session_name()])) {
 if ($_SESSION) {
     $user->loginSession($_SESSION);
 }
+
+$controller = new Controller($dbh, $smarty, $user, $mobileView);
+$router = (new Router($controller))->route($path);
+
+/*
+die('Not implemented yet');
 
 if (isset($pathParts[0]) && $pathParts[0] === 'login') {
     $action     = 'login';
@@ -500,10 +502,10 @@ $smarty->assign('VERSION', $env['VERSION'] ?? 0);
 $smarty->assign('MobileView', $mobileView);
 $smarty->assign('Action', $action);
 $smarty->assign('User', $user);
-$smarty->assign('LoggedAsAdmin', $user->isAdmin());
 $smarty->assign('Lang', $lang);
 $smarty->assign('Languages', $languages);
 $smarty->assign('DB', $db);
 $smarty->assign('QuestionID', $questionID);
 
 $smarty->display($template);
+*/
