@@ -1,5 +1,8 @@
 <?php
 $env    = parse_ini_string(file_get_contents(".env"), 1);
+
+defined('SESSION_LIFETIME') or define('SESSION_LIFETIME', $env['SESSION_LIFETIME'] ?? 86400);
+
 if (isset($env['MAINTENANCE'])) {
     include 'templates/maintainance.tpl';
     die();
@@ -33,18 +36,20 @@ if ($mobileView) {
     $smarty->assign('CanonicalLink', "https://sqltest.online/{$path}");
 }
 session_start([
-    'cookie_lifetime' => 86400,
-    'gc_maxlifetime' => 86400
+    'cookie_lifetime' => SESSION_LIFETIME,
+    'gc_maxlifetime' => SESSION_LIFETIME
 ]);
+
 if (isset($_COOKIE[session_name()])) {
     setcookie(session_name(), $_COOKIE[session_name()], [
-        'expires' => time() + 86400,
+        'expires' => time() + SESSION_LIFETIME,
         'path' => '/',
         'secure' => true,
         'httponly' => true,
         'samesite' => 'Lax'
     ]);
 }
+
 if ($_SESSION) {
     $user->loginSession($_SESSION);
 }
