@@ -87,6 +87,9 @@ if (isset($pathParts[0]) && $pathParts[0] === 'login') {
     $lang       = $params['lang'];
     $action     = $params['action'];
     $questionID = $params['questionID'];
+} elseif (preg_match("@(?<lang>$languge_codes_regexp)/question/(?<questionID>\d+)/(?<action>favorite)@i", $path, $params)) {
+    $action     = 'question_' . $params['action'];
+    return (new Controller($smarty, $params['lang']))->$action($dbh, $user, $params);
 } elseif (preg_match("@(?<lang>$languge_codes_regexp)/question/(?<questionID>\d+)/(?<action>solutions|my-solutions)@i", $path, $params)) {
     $action     = str_replace('-', '_', strtolower($params['action']));
     return (new Controller($smarty, $params['lang']))->$action($dbh, $user, $params);
@@ -169,7 +172,9 @@ switch ($action) {
         $questionnire = new Questionnire($dbh, $lang);
         $smarty->assign('Questionnire', $questionnire->get($QuestionnireName, $user->getId()));
         $smarty->assign('Lang', $lang);
-        // var_dump($questionnire->get($QuestionnireName, $user->getId()));
+        if ($user->logged()) {
+            $smarty->assign('Favorites', $user->getFavorites($lang));
+        }
         $template = "menu.tpl";
         break;
     case 'sitemap':
@@ -434,6 +439,7 @@ switch ($action) {
             if ($user->logged()) {
                 $user->setPath($path);
                 $user->save();
+                $smarty->assign('Favorites', $user->getFavorites($lang));
             }
             $smarty->assign('Questionnire', $questionnire->get($QuestionnireName, $user->getId()));
             $questionData = $question->get($questionCategoryID, $lang, $user->getId());

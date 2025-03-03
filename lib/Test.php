@@ -89,7 +89,8 @@ class Test
                 questions.title_sef question_sef,
                 questions.db_template,
                 questions_localization.title question_title,
-                (test_questions.solved_at IS NOT NULL) solved
+                (test_questions.solved_at IS NOT NULL) solved,
+                ROW_NUMBER() OVER (PARTITION BY categories.id ORDER BY test_questions.question_id) question_order
             FROM tests 
             JOIN test_questions ON test_questions.test_id = tests.id 
             JOIN questions on questions.id = test_questions.question_id
@@ -113,7 +114,7 @@ class Test
                         'sef'       => $el['sef'],
                         'questions' => []
                     ];
-                    $acc[$el['id']]['questions'][] = [$el['question_title'], $el['question_id'], $el['solved'], $el['question_sef']];
+                    $acc[$el['id']]['questions'][] = [$el['question_title'], $el['question_id'], $el['solved'], $el['question_sef'], $el['question_order']];
                     return $acc;
                 },
                 []
@@ -337,11 +338,12 @@ class Test
                 'solved_hard_attempts' => 0,
             ]
         );
+        $must_to_solve = ceil($testResult['total_questions'] * 0.5);
 
-        if ($testResult['solved_questions'] / 0.5 < $testResult['total_questions']) {
+        if ($testResult['solved_questions'] < $must_to_solve) {
             $testResult['ok'] = false;
-            $testResult['hints']['not_enought_tasks_solved'] = 'You must to solve at least ' . ceil($testResult['total_questions'] * 0.5);
-            $testResult['hints']['must_to_solve'] = ceil($testResult['total_questions'] * 0.5);
+            $testResult['hints']['not_enought_tasks_solved'] = 'You must to solve at least ' . $must_to_solve;
+            $testResult['hints']['must_to_solve'] = $must_to_solve;
         } else {
             if (
                 $testResult['solved_easy_questions'] === $testResult['easy_questions'] 
@@ -406,7 +408,9 @@ class Test
             $testResult['grade']--;
             $testResult['hints'][] = 'You average attempts count more then 2. Grade decreased';
         }
-
+        if ($testResult['grade'] < 1) {
+            $testResult['hints']['grade_below_the_minimum'] = 'Your grade balow the minimum';
+        } 
         return $testResult;
     }
 }

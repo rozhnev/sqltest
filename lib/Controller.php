@@ -78,6 +78,19 @@ class Controller
         $this->engine->display("rate_saved.tpl");
     }
 
+    public function question_favorite(PDO $dbh, User $user, array $params): void 
+    {
+        if (!$user->logged()) {
+            $message = 'login_needed';
+        } elseif ($user->toggleFavorite($params['questionID']))  {
+            $message = 'done';
+        } else {
+            $message = 'something_went_wrong';
+        }
+
+        $this->engine->assign('Message', Localizer::translateString($message));
+        $this->engine->display("user_message.tpl");
+    }
     public function solution_delete(PDO $dbh, User $user, array $params): void 
     {
         if ($user->logged()) {

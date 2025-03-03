@@ -663,4 +663,43 @@ class User
         $stmt = $this->dbh->prepare("UPDATE users SET grade = :grade, graded_at = CURRENT_TIMESTAMP WHERE id = :user_id;");
         $stmt->execute([':user_id' => $this->id, ':grade' => $grade]);
     }
+
+
+    public function toggleFavorite(int $question_id): bool
+    {
+        $stmt = $this->dbh->prepare("
+            WITH t AS (
+                SELECT * FROM (VALUES (:user_id::uuid, :question_id::int)) AS t (user_id, question_id)
+            )
+            MERGE INTO favorites 
+            USING t ON favorites.user_id = t.user_id and favorites.question_id = t.question_id
+            WHEN NOT MATCHED THEN
+                INSERT VALUES(t.user_id, t.question_id)
+             WHEN MATCHED THEN DELETE;"
+        );
+
+        return $stmt->execute([':user_id' => $this->id, ':question_id' => $question_id]);
+    }
+
+    public function getFavorites($lang): array
+    {
+        $stmt = $this->dbh->prepare("
+            SELECT 
+                questions_localization.title, 
+                questions_localization.question_id, 
+                null as solved_at, 
+                questions.title_sef, 
+                true as favored,
+                ROW_NUMBER() OVER (ORDER BY questions_localization.title) question_number
+            FROM favorites 
+            JOIN questions ON favorites.question_id = questions.id 
+            JOIN questions_localization ON questions.id = questions_localization.question_id AND questions_localization.language = :lang
+            WHERE user_id = :user_id
+            ORDER BY questions_localization.title;
+        ");
+        $stmt->execute([':lang' => $lang, ':user_id' => $this->id]);
+        // var_dump( $stmt->fetchAll(PDO::FETCH_NUM));
+        // die();
+        return $stmt->fetchAll(PDO::FETCH_NUM);
+    }
 }

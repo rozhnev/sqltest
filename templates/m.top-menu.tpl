@@ -1,14 +1,17 @@
-<div class="header">
-    <div class="top-menu">
-        <div class="top-menu-left" style="width: 25vw; display: flex; align-items: center;">
-            <a href="/{$Lang}/" target="_self"><h1 class="site-name">SQLtest</h1></a>
-        </div>
-        <div class="top-menu-right" style="width: 75vw; display: flex; justify-content: space-between; padding-right: 18px;">
-            {include file='theme-switcher.tpl'}
-            <div style="display: flex; min-width: 90px; margin: 12px; align-items: center; justify-content: center;">
-                <a href="/{$Lang}/donate" target="_self" class="donate-btn shake" id="donate-btn">{translate}top_menu_donate{/translate}</a>
-            </div>
-            {include file='lang-switcher.tpl'}
-        </div>
-    </div>
+<div class="top-menu-left" style="width: 25vw; display: flex; align-items: center;">
+    <a href="/{$Lang}/" target="_self"><h1 class="site-name">SQLtest</h1></a>
+</div>
+<div class="top-menu-buttons mobile">
+    <a href="/{$Lang}/donate" target="_self" id="donate-btn" style="display: block; margin-right: 2.5rem;">
+        <button class="button green">$</button>
+    </a>
+    {if $User->logged()}
+        <button class="button blue" onclick="location.href = '/ru/logout';"><span>⎆</span></button>
+    {else}
+        <button class="button blue" onClick="toggleLoginWindow()">⎆</button>
+    {/if}
+</div>
+<div class="top-menu-switchers">
+    {include file='lang-switcher.tpl'}
+    {include file='theme-switcher.tpl'}
 </div>

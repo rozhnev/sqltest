@@ -1,0 +1,160 @@
+
+:root {
+    --dark-panel-bg-color: #0B4FCC;
+    --ligth-panel-bg-color: #EEF2FC;
+    --ligth-h1-color: #0B4FCC;
+    --ligth-h2-color: #333333;
+}
+[data-theme="dark"] {
+    --dark-panel-bg-color: #0B4FCC;
+    --ligth-panel-bg-color: #21283A;
+    --ligth-h1-color: #0B4FCC;
+    --ligth-h2-color: #EEEEEE;
+}
+.about {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+    .bold {
+        font-weight: bold;
+    }
+    .section {
+        display: flex; 
+        gap: 1rem; 
+        padding: 1rem 2rem;
+        flex-direction: column;
+        align-items: center;
+        > div {
+            display: flex; flex-flow: row wrap; gap: 1rem; max-width: 1024px;
+        }
+        .fake-button {
+            color: var(--dark-panel-bg-color);
+            border: 1px solid var(--dark-panel-bg-color);
+            border-radius: 6px;
+            padding: 6px;
+            width: fit-content;
+        }
+        .button.white {
+            border-color: white;
+        }
+        .color-block {
+            color: #333333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            gap: 1rem;
+            max-width: 30rem;
+            > div {
+                display: flex;
+                flex-direction: column;
+                justify-content: left;
+                row-gap: 1rem;
+            }
+        }
+        .section-column.column30 {
+                width: 30%;
+                padding: 1rem; 
+                border-radius: 3px;
+                min-width: 20rem;
+        }
+        .credits {
+            background: #E4F1FF;
+            border: 1px solid #0069E6;
+            border-radius: 4px;
+            display: flex;
+            flex-direction: row;
+            color: #333333;
+            font-weight: bold;
+            padding: 2rem;
+            gap: 1rem;
+
+            a {
+                display: block;
+                padding: 5px 8px;
+                width: fit-content;
+            }
+        }
+        ul {
+            margin: 0;
+            list-style-type: none;
+            li {
+                margin-bottom: 5px;
+            }
+        }
+        .social-media-link {
+            display: block;
+            width: 96px;
+            > div {
+                background: #E9F6FC; 
+                color: #333333;
+                margin: 0.5rem;
+                width: 96x;
+                height: 96px;
+                font-size: small;
+                align-items: center;
+                text-align: center;
+                padding: 8px;
+                > img {
+                    height: 64px; display: block; margin-bottom: 5px;
+                }
+            }
+        }
+        .blue-block {
+            background-color: var(--block-background-color); 
+            color:white !important; 
+            padding: 1rem 2rem; 
+            display: block; 
+            width: 100%;
+        }
+    }
+    .top {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-radius: 0 0 2rem 2rem;
+        div {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            text-align: center;
+        }
+    }
+    .bottom {
+        border-radius: 2rem 2rem 0 0 ;
+    }
+    .colored {
+        background-color: var(--ligth-panel-bg-color);
+    }
+    .top, .bottom {
+        h1 {
+            color: var(--ligth-h1-color);
+            font-size: large;
+            margin: 0;
+        }
+        h2 {
+            color: var(--ligth-h2-color);
+            margin: 0;
+        }
+        h4 {
+            color: var(--ligth-h2-color);
+            margin: 0;
+        }
+        p {
+            color: var(--ligth-h2-color);
+        }
+        a, a:visited {
+            color: var(--ligth-h1-color);
+        }
+    }
+    .not-colored {
+        color: var(--ligth-h2-color);
+    }
+    .currency {
+        background-color: gold;
+        border-radius: 50%;
+        padding: 1px 6px;
+        color: chocolate;
+        margin: 0 8px 0 0;
+    }
+}

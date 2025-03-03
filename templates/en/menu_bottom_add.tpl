@@ -1,7 +1,16 @@
             <div class="menu-ad">
                 <div id="yandex_rtb_R-A-4716552-2">
-                    <div class="question-wrapper">
-                        <div class="question-title">Help make SQLtest.online even better!</div>
+                    <div style="
+                    margin: 0.5em 0 0 0; 
+                    background-color: var(--accordion-panel-bg-color);
+                    border: 1px solid var(--text-block-border-color);
+                    color: var(--question-text);
+                    border-radius: 0 6px 0 0;">
+                        <div style="
+                            background-color: var(--menu-button-background-color);
+                            border-radius: 0 6px 0 0;
+                            padding: 0.5em;
+                            color: white;">Help make SQLtest.online even better!</div>
                         <div style="font-size:small; padding: 0.5em;">
                             <p>Greetings, SQL lovers!</p>
         

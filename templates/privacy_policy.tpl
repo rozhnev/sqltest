@@ -1,18 +1,29 @@
-{assign var="PageTitle" value="{translate}privacy_policy_page_title{/translate}"}
-{assign var="PageDescription" value="{translate}privacy_policy_page_description{/translate}"}
-{include file='short-header.tpl'}
+    {assign var="PageTitle" value="{translate}privacy_policy_page_title{/translate}"}
+    {assign var="PageDescription" value="{translate}privacy_policy_page_description{/translate}"}
+    {include file='short-header.tpl'}
     <body>
-        <div class="{if $MobileView}mobile-container{else}full-container{/if}">
-            {if $MobileView}
+        {if $MobileView}
+            <header>
                 {include file='m.top-menu.tpl' path="/privacy-policy"}
-            {else}
-                {include file='top-menu.tpl' path="/privacy-policy"}
-            {/if}
-            <div class="container3">
-            {include file="{$Lang}/privacy_policy.tpl"}
+            </header>
+            <main>
+                {include file="{$Lang}/privacy_policy.tpl"}
+            </main>
+            <footer>               
+                {include file='m.footer.tpl'}
+            </footer>
+        {else}
+            <div class="container">
+                <header>
+                    {include file='top-menu.tpl' path="/privacy-policy"}
+                </header>
+                <main>
+                    {include file="{$Lang}/privacy_policy.tpl"}
+                </main>
+                <footer>               
+                    {include file='footer.tpl'}
+                </footer>
             </div>
-{if $MobileView}
-    {include file='m.footer.tpl'}
-{else}
-    {include file='footer.tpl'}
-{/if}
+        {/if}
+    </body>
+</html>

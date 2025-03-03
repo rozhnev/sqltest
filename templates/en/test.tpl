@@ -17,24 +17,26 @@
             showTimer();
             setInterval(showTimer,  60000);
         </script>
-        {foreach $Questionnire.menu as $categoryId => $panel}
-        <button class="accordion {if $categoryId eq $QuestionCategoryID}active{/if}">
-            {$panel.title}
-        </button>
-        <div class="panel {if $categoryId eq $QuestionCategoryID}active{/if}">
-            <ol>
-            {foreach $panel.questions as $question}
-            <li>
-                <a class="question-link {if $QuestionID == $question[1]} current-question{/if}{if $question[2]} solved{/if}" href="/{$Lang}/test/{$TestId}/{$question[1]}">
-                    {$question[0]}
-                </a>
-            </li>
+        <div id="menu-content" class="menu-content">
+            {foreach $Questionnire.menu as $categoryId => $panel}
+            <button class="accordion {if $categoryId eq $QuestionCategoryID}active{/if}">
+                {$panel.title}
+            </button>
+            <div class="panel {if $categoryId eq $QuestionCategoryID}active{/if}">
+                <ol>
+                {foreach $panel.questions as $question}
+                <li>
+                    <a class="question-link {if $QuestionID == $question[1]} current-question{/if}{if $question[2]} solved{/if}" href="/{$Lang}/test/{$TestId}/{$question[1]}">
+                        {$question[0]}
+                    </a>
+                </li>
+                {/foreach}
+                </ol>
+            </div>
             {/foreach}
-            </ol>
         </div>
-        {/foreach}
         <div style="display: flex;   align-items: center; justify-content: center; margin-top: 1em;">
-        <button class="button green" id="doneTest" onClick="doneTest('{$TestId}')">I am Done! Show my rate</button>
+            <button class="button green" id="doneTest" onClick="doneTest('{$TestId}')">I am Done! Show my rate</button>
         </div>
     </div>
     {include file='../splitter.tpl'}

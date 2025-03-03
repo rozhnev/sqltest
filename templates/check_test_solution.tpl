@@ -47,8 +47,10 @@
      {/if}
     Try again.
     {if isset($ReferralLink)}
-        <div class="referral-link" style="margin-top: 5em;">
-            {$ReferralLink}
-        </div>
+        <a id="referral-link" target="_blank" href="{$ReferralLink.link}">
+            <div class="referral-link">
+                {$ReferralLink.content}
+            </div>
+        </a>
     {/if}
 {/if}

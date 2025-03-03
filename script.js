@@ -180,7 +180,15 @@ function checkAnswers(lang, questionId) {
     })
     .then((async response=>{
         if (response.ok) {
-            [...document.getElementsByClassName("button green")].map(el=>el.classList.toggle("hidden"));
+        if (response.ok && document.getElementById("nextTaskBtn")) {
+            document.getElementById("nextTaskBtn").classList.toggle("hidden");
+            setTimeout(()=>{
+                document.getElementById("main3").scrollTo({
+                    top: document.getElementById("nextTaskBtn").offsetTop,
+                    behavior: "smooth" 
+                })
+            }, 300)
+        }
         }
         return await response.text();
     }))
@@ -203,11 +211,22 @@ function testQuery(lang, questionId) {
         body: formData,
     })
     .then((async response=>{
-        if (response.ok) {
-            // [...document.getElementsByClassName("button green")].map(el=>el.classList.toggle("hidden"));
-            document.getElementById("testQueryBtn") && document.getElementById("testQueryBtn").classList.toggle("hidden");
-            document.getElementById("checkAnswersBtn") && document.getElementById("checkAnswersBtn").classList.toggle("hidden");
-            document.getElementById("nextTaskBtn") && document.getElementById("nextTaskBtn").classList.toggle("hidden");
+        if (response.ok && document.getElementById("nextTaskBtn")) {
+            document.getElementById("nextTaskBtn").classList.toggle("hidden");
+            setTimeout(()=>{
+                if (document.getElementById("main3")) {
+                    document.getElementById("main3").scrollTo({
+                        top: document.getElementById("nextTaskBtn").offsetTop,
+                        behavior: "smooth" 
+                    })
+                } else {
+                    window.scrollTo({
+                        top: document.getElementById("db-description").offsetTop - window.outerHeight,
+                        behavior: "smooth" 
+                    })
+                }
+
+            }, 300)
         }
         return await response.text();
     }))
@@ -216,6 +235,28 @@ function testQuery(lang, questionId) {
     })
     .catch(err=>{
         document.getElementById('code-result').innerHTML = 'Something went wrong. Please review your query and try again.';
+    });
+}
+function toggleFavorites(lang, questionId) {
+    let formData = new FormData();
+    fetch(`/${lang}/question/${questionId}/favorite`, {
+        method: "POST",
+        mode: "cors",
+        cache: "default",
+        credentials: "same-origin",
+        body: formData,
+    })
+    .then((async response=>{
+        if (response.ok) {
+            if (document.getElementById("favoriteStar")) {
+                const message =  await response.text();
+                showToast(message);
+                document.getElementById("favoriteStar").classList.toggle("favored");
+                // document.getElementById("favoriteStar").title = 'Favored'
+            } 
+        }
+    }))
+    .catch(err=>{
     });
 }
 function checkSolution(url) {
@@ -379,6 +420,16 @@ function toggleSolvedTasks(e) {
     saveUIConfig();
     return false;
 }
+function toggleNotFavoritsTasks(e) {
+    document.getElementById('toggleNotFavoritTasks').classList.toggle("favored");
+    [...document.getElementsByClassName("question-link solved")].map(el=>{
+        el.parentNode.classList.toggle("invisible")
+    });
+    window.UIConfig.hidenotFavoredTasks = !window.UIConfig.hidenotFavoredTasks;
+    saveUIConfig();
+    return false;
+}
+
 function toggleInfoPanel() {
     document.getElementsByClassName("right")[0].classList.toggle("hidden");
     document.getElementsByClassName("main")[0].classList.toggle("wide");
@@ -387,14 +438,7 @@ function toggleInfoPanel() {
     saveUIConfig();
     return false;
 }
-function scrollInfoPanel(ancor) {
-    document.getElementById("db-description").scrollTo(
-        { 
-            top: (document.getElementById(ancor).offsetTop - document.getElementById("db-description").offsetTop), 
-            behavior: "smooth" 
-        }
-   )
-}
+
 function scrollQuestionPanel() {
     const activePanel = document.getElementsByClassName("panel active")[0];
     const qurrentQuestion = document.getElementsByClassName("current-question")[0];
@@ -464,8 +508,12 @@ function applyUIConfig() {
 function setMenuEventListeners() {
     [...document.getElementsByClassName("accordion")].map(el=>{
       el.addEventListener ('click', function() {
-          for (let el of document.getElementsByClassName("panel")) el.classList.remove("active");
-          for (let el of document.getElementsByClassName("accordion")) el.classList.remove("active");
+          const parentElement = this.parentElement;
+          if (parentElement.id === 'menu-content') {
+            //close all panels
+            for (let el of parentElement.getElementsByClassName("panel")) el.classList.remove("active");
+            for (let el of parentElement.getElementsByClassName("accordion")) el.classList.remove("active");
+          }
           this.classList.toggle("active");
           const panel = this.nextElementSibling;
           panel.classList.toggle("active");

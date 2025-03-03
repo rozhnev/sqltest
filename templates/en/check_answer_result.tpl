@@ -37,7 +37,9 @@
     <p>Error in task? <a target="_blank" href="https://t.me/sqlize">Report! We'll fix it 😊</a></p>
 {/if}
 {if isset($ReferralLink)}
-    <div class="referral-link" style="margin-top: 3em;">
-        {$ReferralLink}
-    </div>
+    <a id="referral-link" target="_blank" href="{$ReferralLink.link}">
+        <div class="referral-link">
+            {$ReferralLink.content}
+        </div>
+    </a>
 {/if}
