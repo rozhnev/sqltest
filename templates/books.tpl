@@ -10,6 +10,7 @@
     </style>
     <body>
         <div class="container">
+            {include file='popups.tpl'}
             <header>
                 {if $MobileView}
                     {include file='m.top-menu.tpl' path="/books"}

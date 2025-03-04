@@ -24,20 +24,6 @@ class Controller
         }
     }
 
-    public function setLanguge(string $lang='en'): void
-    {
-        $this->lang = $lang;
-        $this->assignVariables(['Lang' => $lang]);
-        Localizer::init($lang);
-    }
-
-    public function setCanonicalLink(string $path): void
-    {
-        $this->assignVariables([
-            'CanonicalLink' => $this->isMmobileView() ? "https://sqltest.online/{$path}" : null
-        ]);
-    }
-
     public function __construct(PDO $dbh, Smarty $engine, User $user, bool $mobileView)
     {
         $this->dbh      = $dbh;
@@ -60,11 +46,35 @@ class Controller
         return  (isset($_SERVER['SERVER_NAME']) && $_SERVER['SERVER_NAME'] === 'm.sqltest.online');
     }
 
+    public function setLanguge(string $lang='en'): void
+    {
+        $this->lang = $lang;
+        $this->assignVariables(['Lang' => $lang]);
+        Localizer::init($lang);
+    }
+
+    public function setCanonicalLink(string $path): void
+    {
+        $this->assignVariables([
+            'CanonicalLink' => $this->isMmobileView() ? "https://sqltest.online/{$path}" : null
+        ]);
+    }
+
+    /**
+     * Show books page
+     * @param array $params
+     */
     public function books(): void
     {
-        $this->engine->assign('Books', Helper::getBooks($dbh, $this->lang));
+        $this->engine->assign('Books', Helper::getBooks($this->dbh, $this->lang));
+        $this->assignVariables(['Action' => 'books']);
         $this->engine->display("books.tpl");
     }
+
+    /**
+     * Show ERD page for the selected database
+     * @param array $params
+     */
     public function erd(array $params): void
     {
         $this->engine->assign('Params', $params);
@@ -76,7 +86,6 @@ class Controller
      */
     public function about(array $params): void
     {
-        $this->setLanguge($params['lang']);
         $this->assignVariables(['Action' => 'about']);
         $this->engine->display("about.tpl");
     }
@@ -86,7 +95,6 @@ class Controller
      */
     public function privacy_policy(array $params): void
     {
-        $this->setLanguge($params['lang']);
         $this->assignVariables(['Action' => 'privacy-policy']);
         $this->engine->display("privacy_policy.tpl");
     }
@@ -96,10 +104,22 @@ class Controller
      */
     public function donate($params): void
     {
-        $this->setLanguge($params['lang']);
         $this->engine->assign('Action', 'donate');
         $this->engine->display("donate.tpl");
     }
+
+    /**
+     * Show login result page
+     * @param array $params
+     */
+    public function login(array $params): void
+    {
+        $this->user->login($params['loginProvider'], $_REQUEST);
+        $_SESSION["user_id"] = $this->user->getId();
+        $_SESSION["admin"] = $this->user->isAdmin();
+        $this->engine->display("login_result.tpl");
+    }
+
     public function solution_like(PDO $dbh, User $user, array $params): void 
     {
         $this->engine->assign('Saved', false);
@@ -134,19 +154,6 @@ class Controller
         $this->engine->display("rate_saved.tpl");
     }
 
-    public function question_favorite(PDO $dbh, User $user, array $params): void 
-    {
-        if (!$user->logged()) {
-            $message = 'login_needed';
-        } elseif ($user->toggleFavorite($params['questionID']))  {
-            $message = 'done';
-        } else {
-            $message = 'something_went_wrong';
-        }
-
-        $this->engine->assign('Message', Localizer::translateString($message));
-        $this->engine->display("user_message.tpl");
-    }
     public function solution_delete(PDO $dbh, User $user, array $params): void 
     {
         if ($user->logged()) {
@@ -161,8 +168,23 @@ class Controller
         $this->engine->assign('User', $user);
         $this->engine->display("user_message.tpl");
     }
+
+    public function question_favorite(PDO $dbh, User $user, array $params): void 
+    {
+        if (!$user->logged()) {
+            $message = 'login_needed';
+        } elseif ($user->toggleFavorite($params['questionID']))  {
+            $message = 'done';
+        } else {
+            $message = 'something_went_wrong';
+        }
+
+        $this->engine->assign('Message', Localizer::translateString($message));
+        $this->engine->display("user_message.tpl");
+    }
+
     
-    public function solutions(PDO $dbh, User $user, array $params): void 
+    public function question_solutions(PDO $dbh, User $user, array $params): void 
     {
         if ($user->logged()) {
             $questionSolved = $user->solvedQuestion($params['questionID']);
@@ -176,7 +198,7 @@ class Controller
         $this->engine->display("solutions.tpl");
     }
 
-    public function my_solutions(PDO $dbh, User $user, array $params): void 
+    public function question_my_solutions(PDO $dbh, User $user, array $params): void 
     {
         if ($user->logged()) {
             $solutions = $user->getSolutions($params['questionID']);
@@ -187,25 +209,240 @@ class Controller
         $this->engine->display("user_solutions.tpl");
     }
 
+    /**
+     * Show question page
+     * @param array $params
+     */
     public function question(array $params): void 
     {
         $questionnire = new Questionnire($this->dbh, $this->lang);
-        $question = new Question($this->dbh, $params['questionID']);
-        $questionData = $question->get($params['questionCategoryID'], $this->lang, $this->user->getId());
+
+        $questionID = $params['questionID'] ?? $questionnire->getQuestionId($params['question']);
+        $questionCategoryID = $params['questionCategoryID'] ?? $questionnire->getCategoryId($params['questionCategory']);
+        $questionnireName   = $questionnire->getNameByCategory($params['questionCategory']);
+
+        $question = new Question($this->dbh, $questionID);
+        $questionData = $question->get($questionCategoryID, $this->lang, $this->user->getId());
+        if ($questionData['have_answers']) {
+            $questionData['answers'] = $question->getAnswers($questionCategoryID, $this->lang, $this->user->getId());
+            $questionData['last_query'] = json_decode($questionData['last_query']??'[]', true);
+        }
+
+        if ($this->user->logged()) {
+            $this->user->setPath($params['path']);
+            $this->user->save();
+        }
 
         $this->registerModifiers(['floor', 'in_array']);
         $this->assignVariables([
-            'QuestionID'            => $params['questionID'],
-            'Questionnire'          => $questionnire->get($params['QuestionnireName'], $this->user->getId()),
-            'QuestionCategoryID'    => $questionData['category_id'],
+            'QuestionID'            => $questionID,
+            'Questionnire'          => $questionnire->get($questionnireName, $this->user->getId()),
+            'QuestionCategoryID'    => $questionCategoryID,
             'Question'              => $questionData,
-            'NextQuestionId'        => $question->getNextSefId($params['questionCategoryID']),
-            'PreviousQuestionId'    => $question->getPreviousSefId($params['questionCategoryID']),
+            'NextQuestionId'        => $question->getNextSefId($questionCategoryID),
+            'PreviousQuestionId'    => $question->getPreviousSefId($questionCategoryID),
             'DB'                    => $questionData['db_template'],
+            'DBMS'                  => $questionData['dbms'],
             'Action'                => 'question',
-            'QuestionsCount'        =>  $questionnire->getQuestionsCount(),
+            'QuestionsCount'        => $questionnire->getQuestionsCount(),
+            'SolvedQuestionsCount'  => $this->user->getSolvedQuestionsCount(),
+            'Book'                  => Helper::getBook($this->dbh, $this->lang, $questionData['dbms']),
+            'Favorites'             => $this->user->getFavorites($this->lang)
         ]);
         $this->engine->display($this->mobileView ? "m.index.tpl" : "index.tpl");
+    }
+
+    public function query_help(array $params): void 
+    {
+        $question = new Question($this->dbh, $params['questionID']);
+        $this->engine->assign('Hint', $question->getHint($this->lang));
+        $this->engine->display("hint.tpl");
+    }
+
+    public function query_run(array $params): void 
+    {
+        $sql = $_POST["query"] ?? '';
+        if (!empty($sql)) {
+            $question = new Question($this->dbh, $params['questionID']);
+            $queryPreCheck = $question->getQueryPreCheck();
+            $query = new Query($queryPreCheck . $sql);
+            $this->engine->assign('QeryResult', $query->getResult($question->getDB(), 'json'));
+        }
+
+        $this->engine->display("query_result.tpl");
+    }
+
+    public function query_test(array $params): void 
+    {
+        $sql = $_POST["query"] ?? '';
+        $question = new Question($this->dbh, $params['questionID']);
+        $queryTestResult = $question->checkQuery($sql);
+        $this->assignVariables([
+            'QuestionID'        => $params['questionID'],
+            'QueryTestResult'   => $queryTestResult
+        ]);
+        if ($queryTestResult['ok']) {
+            $preparedQuery = $question->prepareQuery($sql);
+            $query = new Query($preparedQuery);
+            $jsonResult = $query->getResult($question->getDB(), 'json');
+            $queryTestResult = $question->checkQueryResult($jsonResult);
+            $this->assignVariables([
+                'QueryTestResult' => $queryTestResult,
+                'QueryBestCost' => $question->getBestCost()
+            ]);
+        }
+        if ($this->user->logged()) {
+            $this->user->saveQuestionAttempt($params['questionID'], $queryTestResult, $sql);
+            if ($queryTestResult['ok']) {
+                $this->user->saveSolution($params['questionID'], $queryTestResult, $sql);
+            }
+        }
+        if (!$queryTestResult['ok']) header( 'HTTP/1.1 418 BAD REQUEST' );
+        if ($this->user->showAd()) {
+            $this->engine->assign('ReferralLink', Helper::getReferralLink($this->dbh, $this->lang, $this->isMmobileView() ? 'mobile' : 'desktop'));
+        }
+
+        $this->engine->display($this->lang . "/query_test_result.tpl");
+    }
+
+    public function check_answers(array $params): void 
+    {
+        $answers = $_POST["answers"] ?? '[]';
+        $question = new Question($this->dbh, $params['questionID']);
+        $answerResult = $question->checkAnswers($answers);
+        $this->engine->assign('AnswerResult', $answerResult);
+
+        if ($this->user->logged()) {
+            $this->user->saveQuestionAttempt($params['questionID'], $answerResult, $answers);
+        }
+
+        if (!$answerResult['ok']) header( 'HTTP/1.1 418 BAD REQUEST' );
+        if ($this->user->showAd()) {
+            $this->engine->assign('ReferralLink', Helper::getReferralLink($this->dbh, $this->lang, $this->isMmobileView() ? 'mobile' : 'desktop'));
+        }
+        $this->engine->display($this->lang . "/check_answer_result.tpl");
+    }
+
+    public function rate(array $params): void 
+    {
+        if ($this->user->logged()) {
+            $rate = intval($_REQUEST['rate']);
+            $this->engine->assign('Saved', $this->user->saveQuestionRate($params['questionID'], $rate));
+        }
+        $this->engine->display("rate_saved.tpl");
+    }
+
+    public function test_start(array $params): void 
+    {
+        if ($this->user->logged()) {
+            $this->engine->assign('LastTest', $this->user->getLastTest());
+        }
+        $this->engine->display("test_start.tpl");
+    }
+
+    public function test_create(array $params): void 
+    {
+        if (!$this->user->logged()) {
+            header("Location: /" . $this->lang . "/test/start");
+            exit();
+        }
+        $test = new Test($this->dbh, $this->lang, $this->user);
+
+        $userTestId = $test->create();
+        header("Location: /" . $this->lang . "/test/$userTestId");
+    }
+
+    public function test_result(array $params): void 
+    {
+        if (!$this->user->logged()) {
+            header("Location: /" . $this->lang . "/test/start");
+            exit();
+        }
+        $test = new Test($this->dbh, $this->lang, $this->user);
+        $test->setId($testId);
+
+        if(!$test->belongsToUser($this->user)) {
+            header("HTTP/1.1 404 Moved Permanently");
+            $this->engine->assign('ErrorMessage', Localizer::translateString('action_not_permiited'));
+            $this->engine->display("error.tpl");
+            exit();
+        }
+        $testData = $test->getData();
+        $testEnd   = new DateTime($testData['closed_at']);
+        $testEnd -> add(new DateInterval('P1M0D'));
+        $testData['next_test_in'] = $testEnd->diff(new DateTime())->days;
+
+        $testResult = $test->calculateResult();
+        $this->assignVariables([
+            'Test'          => $testData,
+            'TestResult'    => $testResult
+        ]);
+
+        $this->engine->display("test_result.tpl");
+    }
+
+    public function test_grade(array $params): void 
+    {
+        if (!$this->user->logged()) {
+            header("Location: /" . $this->lang . "/test/start");
+            exit();
+        }
+        $test = new Test($this->dbh, $this->lang, $this->user);
+        $test->setId($testId);
+
+        if(!$test->belongsToUser($this->user)) {
+            header("HTTP/1.1 404 Moved Permanently");
+            $this->engine->assign('ErrorMessage', Localizer::translateString('action_not_permiited'));
+            $this->engine->display("error.tpl");
+            exit();
+        }
+        $testResult = $test->calculateResult();
+        if ($testResult['ok']) {
+            $this->user->saveGrade($testResult['grade']);
+        }
+        $this->engine->assign('TestResult', $testResult);
+        $this->engine->display("user_grade.tpl");
+    }
+
+    public function test_question(array $params): void 
+    {
+        if (!$this->user->logged()) {
+            header("Location: /" . $this->lang . "/test/start");
+            exit();
+        }
+        $test = new Test($this->dbh, $this->lang, $this->user);
+        $test->setId($testId);
+
+        if(!$test->belongsToUser($this->user)) {
+            header("HTTP/1.1 404 Moved Permanently");
+            $this->engine->assign('ErrorMessage', Localizer::translateString('action_not_permiited'));
+            $this->engine->display("error.tpl");
+            exit();
+        }
+        $questionID = $params['questionID'] ?? $test->getFirstUnsolvedQuestionId();
+
+        $question = new Question($this->dbh, $questionID);
+
+        $questionData = $test->getQuestionData($questionID);
+        $questionCategoryID = $questionData['category_id'];
+        if ($questionData['have_answers']) {
+            $questionData['answers'] = $question->getAnswers($questionCategoryID, $this->lang, $this->user->getId());
+            $questionData['last_query'] = json_decode($questionData['last_query']??'[]', true);
+        }
+
+
+        $this->assignVariables([
+            'QuestionID'            => $questionID,
+            'TestId'                => $testId,
+            'Question'              => $questionData,
+            'NextQuestionId'        => $questionData['next_question_id'],
+            'PreviousQuestionId'    => $questionData['previous_question_id'],
+            'QuestionCategoryID'    => $questionCategoryID,
+            'DBMS'                  => $questionData['dbms'],
+            'DB'                    => $questionData['db_template'],
+            'Questionnire'          => $test->getQuestionnire(),
+        ]);
+        $this->engine->display("test.tpl");
     }
 }
 ?>

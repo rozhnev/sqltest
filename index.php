@@ -1,6 +1,7 @@
 <?php
 $env    = parse_ini_string(file_get_contents(".env"), 1);
 
+defined('DEFAULT_LANGUAGE') or define('DEFAULT_LANGUAGE', $env['DEFAULT_LANGUAGE'] ?? en);
 defined('SESSION_LIFETIME') or define('SESSION_LIFETIME', $env['SESSION_LIFETIME'] ?? 86400);
 
 if (isset($env['MAINTENANCE'])) {
@@ -9,7 +10,7 @@ if (isset($env['MAINTENANCE'])) {
 }
 
 require 'vendor/autoload.php';
-$lang   = 'en';
+
 $smarty = new Smarty();
 $dbc    = new DB($env);
 $dbh    = $dbc->getInstance();
@@ -24,7 +25,8 @@ $mobileView =  (
     //|| parse_url($_SERVER['HTTP_HOST'])['host'] === 'm.sqltest.local' 
 );
 
-$path = isset($_SERVER['PATH_INFO']) ? trim($_SERVER['PATH_INFO'], '/') : trim($_SERVER['PHP_SELF'], '/');
+$path = $_SERVER['REQUEST_URI'];
+
 $pathParts = explode('/', $path);
 $db         = '';
 $questionID = '';

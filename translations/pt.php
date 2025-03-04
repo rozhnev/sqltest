@@ -73,6 +73,7 @@ $translations = [
     'up_your_level' => 'Faça o teste para subir de nível.',
     'no_solutions_yet' => 'Desculpe, mas ainda não há solução publicada para este problema.',
     'login_needed' => 'Por favor, <a href="" onClick="toggleLoginWindow(); return false;">faça login</a> para executar esta ação.',
+    'action_not_permiited' => 'Você não tem permissão para executar esta ação.',
     'qustion_should_be_solved' => 'Você deve resolver o problema sozinho antes de ver as soluções dos outros usuários',
     'privacy_policy_page_title' => 'SQLTest.online: Política de Privacidade',
     'privacy_policy_page_description' => 'No SQLTest, valorizamos sua privacidade. Esta política descreve como coletamos, usamos e protegemos suas informações pessoais ao visitar nosso site. Estamos comprometidos em manter a confidencialidade e segurança dos seus dados. Ao utilizar nossos serviços, você concorda com as práticas descritas nesta política.',

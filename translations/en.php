@@ -74,6 +74,7 @@ $translations = [
     'determine_your_level' => 'Take the test to determine your level.',
     'up_your_level' => 'Take the test to up your level.',
     'login_needed' => 'Please <a href="" onClick="toggleLoginWindow(); return false;">log in</a> to perform this action.',
+    'action_not_permiited' => 'You are not allowed to perform this action.',
     'qustion_should_be_solved' => 'You should to solve the problem yourself before look others solutions',
     'privacy_policy_page_title' => 'SQLTest.online: Privacy Policy',
     'privacy_policy_page_description' => 'At SQLTest, we value your privacy. This policy outlines how we collect, use, and protect your personal information when you visit our website. We are committed to maintaining the confidentiality and security of your data. By using our services, you agree to the practices described in this policy.',

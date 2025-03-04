@@ -631,6 +631,7 @@ class User
      */
     public function getSolvedQuestionsCount(): int 
     {
+        if (!$this->logged()) return 0;
         $stmt = $this->dbh->prepare("SELECT COUNT(question_id) FROM user_questions WHERE user_id = :user_id and solved_at is not null;");
         $stmt->execute([':user_id' => $this->id]);
         return $stmt->fetchColumn(0);
@@ -683,6 +684,7 @@ class User
 
     public function getFavorites($lang): array
     {
+        if (!$this->logged()) return [];
         $stmt = $this->dbh->prepare("
             SELECT 
                 questions_localization.title, 
