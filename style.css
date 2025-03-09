@@ -147,6 +147,7 @@ main {
 .button-small {
     border: none;
     border-radius: 3px;
+    cursor: pointer;
 }
 .button.green,
 .button-small.green {
