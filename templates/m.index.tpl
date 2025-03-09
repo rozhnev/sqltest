@@ -7,7 +7,6 @@
         </header>
         <div class="text-block user-solutions-count">
             {assign var="QuestionsCountRounded" value="{floor(($QuestionsCount - 1)/10) * 10}"}
-            <p>{translate}user_solutions_count{/translate}</p>
             {if $User->logged()}
                 {if $SolvedQuestionsCount < ($QuestionsCount/2)}
                     {assign var="YouHaveSolved" value="{translate}you_have_solved{/translate}"}
@@ -30,6 +29,8 @@
                     {/if}
                 </button>
                 <button class="button blue logout" onClick="location.href = '/{$Lang}/logout';" title="{translate}top_menu_logout{/translate}">&nbsp;</button>
+            {else}
+                <p>{translate}user_solutions_count{/translate}</p>
             {/if}
         </div>
         {include file='m.menu.tpl'}
