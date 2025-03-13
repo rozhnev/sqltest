@@ -580,6 +580,10 @@ input:checked + .slider:before {
     font-size: larger;
     line-height: 1.3em;
 }
+.question a,
+.question a:visited {
+    color: #0069E6;
+}
 .question-action {
     font-style: italic;
     padding-left: 15px;
@@ -602,8 +606,6 @@ input:checked + .slider:before {
 .answer label {
     line-height: 20px;
 }
-.question a,
-.question a:visited,
 .code-result a,
 .code-result a:visited {
     color: var(--menu-link-color);
