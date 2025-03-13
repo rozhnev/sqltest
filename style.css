@@ -674,11 +674,6 @@ input:checked + .slider:before {
     font-size: small;
     cursor: pointer;
 }
-.question-title .question-star {
-    padding: 0 0 0 6px;
-    font-size: small;
-    cursor: pointer;
-}
 .question-link .question-star {
     padding-left: 3px;
     font-size: xx-small;
