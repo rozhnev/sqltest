@@ -2,25 +2,29 @@
 {assign var="PageDescription" value="{translate}privacy_policy_page_description{/translate}"}
 {include file='short-header.tpl'}
     <body>
-        <div class="container">
+        {include file='popups.tpl'}
+        {if $MobileView}
             <header>
-                {if $MobileView}
-                    {include file='m.top-menu.tpl' path="/test/start"}
-                {else}
-                    {include file='top-menu.tpl' path="/test/start"}
-                {/if}
+                {include file='m.top-menu.tpl' path="/donate"}
             </header>
             <main>
-                {include file='popups.tpl'}
                 {include file="{$Lang}/test_start.tpl"}
             </main>
             <footer>               
-                {if $MobileView}
-                    {include file='m.footer.tpl'}
-                {else}
-                    {include file='footer.tpl'}
-                {/if}
+                {include file='m.footer.tpl'}
             </footer>
-        </div>
+        {else}
+            <div class="container">
+                <header>
+                    {include file='top-menu.tpl' path="/donate"}
+                </header>
+                <main>
+                    {include file="{$Lang}/test_start.tpl"}
+                </main>
+                <footer>               
+                    {include file='footer.tpl'}
+                </footer>
+            </div>
+        {/if}
     </body>
 </html>
