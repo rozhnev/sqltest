@@ -16,7 +16,6 @@
             <div class="column">
                 <div class="text-block user-solutions-count">
                     {assign var="QuestionsCountRounded" value="{floor(($QuestionsCount - 1)/10) * 10}"}
-                    <span>{translate}user_solutions_count{/translate}</span>
                     {if $User->logged()}
                         <span>
                             {if $SolvedQuestionsCount < ($QuestionsCount/2)}
@@ -40,6 +39,8 @@
                                 {$User->grade()}, {translate}level_up{/translate}
                             {/if}
                         </button>
+                    {else}
+                        <span>{translate}user_solutions_count{/translate}</span>
                     {/if}
                 </div>
                 <div class="question-wrapper">
