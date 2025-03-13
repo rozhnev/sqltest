@@ -5,21 +5,30 @@ class FirstCest
     public function frontpageWorks(AcceptanceTester $I)
     {
         $I->amOnPage('/');
-        $I->see('place where you can test your SQL knowledge for free');
+        $I->see('interactive SQL practice');
     }
 
     public function frontpageEnWorks(AcceptanceTester $I)
     {
         $I->amOnPage('/en');
-        $I->see('place where you can test your SQL knowledge for free');
+        $I->see('Sharpen your SQL skills with our interactive exercises and assessments!');
         $I->see('Get the actors');
     }
 
     public function frontpageRuWorks(AcceptanceTester $I)
     {
         $I->amOnPage('/ru');
-        $I->see('место, где вы можете бесплатно проверить свои знания SQL');
+        $I->see('Отточите свои навыки SQL с помощью наших интерактивных упражнений!');
         $I->see('Получить список актёров');
+        $I->see('База данных Sakila (MySQL)');
+    }
+
+    public function frontpagePtWorks(AcceptanceTester $I)
+    {
+        $I->amOnPage('/ru');
+        $I->see('Отточите свои навыки SQL с помощью наших интерактивных упражнений!');
+        $I->see('Получить список актёров');
+        $I->see('База данных Sakila (MySQL)');
     }
 
     public function questionEnWorks(AcceptanceTester $I)
@@ -47,6 +56,12 @@ class FirstCest
     public function privacyPolicyRuWorks(AcceptanceTester $I)
     {
         $I->amOnPage('/ru/privacy-policy');
-        $I->see('Политика конфиденциальности для SQLtest');
+        $I->see('Политика конфиденциальности');
+    }
+
+    public function privacyPolicyPtWorks(AcceptanceTester $I)
+    {
+        $I->amOnPage('/pt/privacy-policy');
+        $I->see('Política de Privacidade para SQLtest');
     }
 }

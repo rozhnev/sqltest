@@ -8,10 +8,7 @@
 actor: FunctionalTester
 modules:
     enabled:
-        - WebDriver:
-            url: 'http://localhost'
-            browser: chrome # 'chrome' or 'firefox'
-            window_size: 1600x1024
-            port: 8000
+        - PhpBrowser:
+            url: https://sqltest.online
         - \Helper\Functional
     step_decorators: ~

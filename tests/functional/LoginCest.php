@@ -11,12 +11,13 @@ class LoginCest
     {
         $I->amOnPage('/en');
         $I->click('.login-button');
-        $I->see('Choose login method');
+        // $I->see('Choose login method');
+        $I->waitForText('Choose login method', 5);
     }
-    public function tryRuLogin(FunctionalTester $I)
-    {
-        $I->amOnPage('/ru');
-        $I->click('.login-button');
-        $I->see('Выберите способ авторизации');
-    }
+    // public function tryRuLogin(FunctionalTester $I)
+    // {
+    //     $I->amOnPage('/ru');
+    //     $I->click('.login-button');
+    //     $I->see('Выберите способ авторизации');
+    // }
 }

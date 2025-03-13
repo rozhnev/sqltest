@@ -41,7 +41,7 @@
     {if $User->logged()}
         <button class="button blue" onclick="location.href = '/ru/logout';"><span>{translate}top_menu_logout{/translate} ⎆</span></button>
     {else}
-        <button class="button blue" onClick="toggleLoginWindow()">⎆ {translate}top_menu_login{/translate}</button>
+        <button id="showLoginWindowBtn" class="button blue" onClick="toggleLoginWindow()">⎆ {translate}top_menu_login{/translate}</button>
     {/if}
 </div>
 <div class="top-menu-switchers">
