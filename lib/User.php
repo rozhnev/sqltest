@@ -695,7 +695,7 @@ class User
             ORDER BY user_achievements.earned_at DESC;");
 
         $stmt->execute([':user_id' => $this->id]);
-        return $stmt->fetch(PDO::FETCH_ASSOC) ?: [];
+        return $stmt->fetchAll(PDO::FETCH_ASSOC) ?: [];
     }
 
     public function toggleFavorite(int $question_id): bool
