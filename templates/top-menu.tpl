@@ -41,7 +41,7 @@
     {if $User->logged()}
         <button class="button blue" onclick="location.href = '/ru/logout';"><span>{translate}top_menu_logout{/translate} ⎆</span></button>
         <div style="position: relative;" onclick="toggleAchievements();">
-            {if $User->haveNewAchievement()}
+            {if $User->haveNewAchievement('{$Lang}')}
                 <svg width="48" height="48" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer;">
                     <defs>
                         <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">

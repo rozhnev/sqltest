@@ -93,14 +93,14 @@ function toggleLoginWindow() {
     }
     ), 333)
 }
-function toggleAchievements() {
+function toggleAchievements(lang) {
     console.log('toggleAchievements');
     const popup = document.getElementById('achievements-popup');
 
     setLoader('achievements-popup');
     popup.classList.toggle("hidden");
     // Load achievements when opening popup
-    fetch('/{$Lang}/user/achievements')
+    fetch(`/${lang}/user/achievements`)
         .then(response => response.json())
         .then(data => {
             let achievementsHtml = '<h3>{translate}achievements{/translate}</h3>';
