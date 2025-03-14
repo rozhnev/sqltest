@@ -102,7 +102,7 @@ class Controller
      * Show donate page
      * @param array $params
      */
-    public function donate($params): void
+    public function donate(array $params): void
     {
         $this->engine->assign('Action', 'donate');
         $this->engine->display("donate.tpl");
@@ -141,13 +141,13 @@ class Controller
         die();
     }
 
-    public function solution_like(PDO $dbh, User $user, array $params): void 
+    public function solution_like(array $params): void 
     {
         $this->engine->assign('Saved', false);
-        if ($user->logged()) {
-            $this->engine->assign('Saved', $user->likeSolution($params['solutionID']));
+        if ($this->user->logged()) {
+            $this->engine->assign('Saved', $this->user->likeSolution($params['solutionID']));
         }
-        $this->engine->assign('User', $user);
+        $this->engine->assign('User', $this->user);
         $this->engine->display("rate_saved.tpl");
     }
 
@@ -161,40 +161,43 @@ class Controller
         $this->engine->display("rate_saved.tpl");
     }
 
-    public function solution_report(PDO $dbh, User $user, array $params): void 
+    public function solution_report(array $params): void 
     {
         $this->engine->assign('Saved', false);
-        if ($user->logged() && ($user->isAdmin() || $user->grade() === 'Middle' || $user->grade() === 'Senior')) {
-            $solution = new Solution($dbh, $params['solutionID']);
+        if (
+            $this->user->logged() && 
+            ($this->user->isAdmin() || $this->user->grade() === 'Middle' || $this->user->grade() === 'Senior')
+        ) {
+            $solution = new Solution($this->dbh, $params['solutionID']);
             $questionID = $solution->report();
             $this->engine->assign('Saved', true);
-            $question = new Question($dbh, $questionID);
+            $question = new Question($this->dbh, $questionID);
             $question->setBestQueryCost();
         }
-        $this->engine->assign('User', $user);
+        $this->engine->assign('User', $this->user);
         $this->engine->display("rate_saved.tpl");
     }
 
-    public function solution_delete(PDO $dbh, User $user, array $params): void 
+    public function solution_delete(array $params): void 
     {
-        if ($user->logged()) {
-            $questionID = $user->deleteSolution($params['solutionID']);
+        if ($this->user->logged()) {
+            $questionID = $this->user->deleteSolution($params['solutionID']);
             $this->engine->assign('Saved', true);
-            $question = new Question($dbh, $questionID);
+            $question = new Question($this->dbh, $questionID);
             $question->setBestQueryCost();
             $this->engine->assign('Message', Localizer::translateString('done'));
         } else {
             $this->engine->assign('Message', Localizer::translateString('login_needed'));
         }
-        $this->engine->assign('User', $user);
+        $this->engine->assign('User', $this->user);
         $this->engine->display("user_message.tpl");
     }
 
-    public function question_favorite(PDO $dbh, User $user, array $params): void 
+    public function question_favorite(array $params): void 
     {
-        if (!$user->logged()) {
+        if (!$this->user->logged()) {
             $message = 'login_needed';
-        } elseif ($user->toggleFavorite($params['questionID']))  {
+        } elseif ($this->user->toggleFavorite($params['questionID']))  {
             $message = 'done';
         } else {
             $message = 'something_went_wrong';
@@ -205,27 +208,27 @@ class Controller
     }
 
     
-    public function question_solutions(PDO $dbh, User $user, array $params): void 
+    public function question_solutions(array $params): void 
     {
         if ($user->logged()) {
-            $questionSolved = $user->solvedQuestion($params['questionID']);
+            $questionSolved = $this->user->solvedQuestion($params['questionID']);
             $this->engine->assign('QuestionSolved', $questionSolved);
             if ($questionSolved) {
-                $this->engine->assign('QuestionSolutions', $user->getOthersSolutions($params['questionID']));
+                $this->engine->assign('QuestionSolutions', $this->user->getOthersSolutions($params['questionID']));
             }
         }
-        $this->engine->assign('User', $user);
+        $this->engine->assign('User', $this->user);
         $this->engine->assign('QuestionID', $params['questionID']);
         $this->engine->display("solutions.tpl");
     }
 
-    public function question_my_solutions(PDO $dbh, User $user, array $params): void 
+    public function question_my_solutions(array $params): void 
     {
         if ($user->logged()) {
-            $solutions = $user->getSolutions($params['questionID']);
+            $solutions = $this->user->getSolutions($params['questionID']);
             $this->engine->assign('QuestionSolutions', $solutions);
         }
-        $this->engine->assign('User', $user);
+        $this->engine->assign('User', $this->user);
         $this->engine->assign('QuestionID', $params['questionID']);
         $this->engine->display("user_solutions.tpl");
     }
