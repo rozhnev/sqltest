@@ -101,25 +101,15 @@ function toggleAchievements(lang) {
     popup.classList.toggle("hidden");
     // Load achievements when opening popup
     fetch(`/${lang}/user/achievements`)
-        .then(response => response.json())
-        .then(data => {
-            let achievementsHtml = '<h3>{translate}achievements{/translate}</h3>';
-            if (data.achievements && data.achievements.length > 0) {
-                data.achievements.forEach(achievement => {
-                    achievementsHtml += `<div class="achievement">
-                        <h4>${achievement.title}</h4>
-                        <p>${achievement.description}</p>
-                    </div>`;
-                });
-            } else {
-                achievementsHtml += '<p>{translate}no_achievements_yet{/translate}</p>';
-            }
-            popup.innerHTML = achievementsHtml;
-            popup.style.display = 'block';
+        .then((async response=>{
+            if (!response.ok) throw Error('Something went wrong.');
+            return await response.text();
+        }))
+        .then((message)=>{
+            popup.innerHTML = message;
         })
         .catch(error => {
-            popup.innerHTML = '<p>{translate}error_loading_achievements{/translate}</p>';
-            popup.style.display = 'block';
+            popup.innerHTML = '<p>Something went wrong.</p>';
         });
 }
 function jsonToTable(jsonObject) {
