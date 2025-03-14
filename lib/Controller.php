@@ -151,13 +151,13 @@ class Controller
         $this->engine->display("rate_saved.tpl");
     }
 
-    public function solution_unlike(PDO $dbh, User $user, array $params): void 
+    public function solution_unlike(array $params): void 
     {
         $this->engine->assign('Saved', false);
-        if ($user->logged()) {
-            $this->engine->assign('Saved', $user->unlikeSolution($params['solutionID']));
+        if ($this->user->logged()) {
+            $this->engine->assign('Saved', $this->user->unlikeSolution($params['solutionID']));
         }
-        $this->engine->assign('User', $user);
+        $this->engine->assign('User', $this->user);
         $this->engine->display("rate_saved.tpl");
     }
 
