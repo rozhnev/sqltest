@@ -663,7 +663,14 @@ class User
         $stmt = $this->dbh->prepare("UPDATE users SET grade = :grade, graded_at = CURRENT_TIMESTAMP WHERE id = :user_id;");
         $stmt->execute([':user_id' => $this->id, ':grade' => $grade]);
     }
-
+    public function haveNewAchievement(): bool
+    {
+        $stmt = $this->dbh->prepare("SELECT EXISTS (
+            SELECT true FROM user_achievements WHERE user_id = ':user_id' and viewed_at is null
+        );");
+        $stmt->execute([':user_id' => $this->id]);
+        return $stmt->fetchColumn(0);
+    }
     public function saveAchievement(int $achievement_id): void
     {
         $stmt = $this->dbh->prepare("
@@ -676,6 +683,18 @@ class User
         ");
 
         $stmt->execute([':user_id' => $this->id, ':achievement_id' => $achievement_id]);
+    }
+
+    public function achievements(): array
+    {
+        $stmt = $this->dbh->prepare("SELECT achievements.title, user_achievements.earned_at, viewed_at
+            FROM user_achievements
+            JOIN achievements ON user_achievements.achievement_id = achievements.id
+            WHERE user_id = :user_id
+            ORDER BY user_achievements.earned_at DESC;");
+
+        $stmt->execute([':user_id' => $this->id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC) ?: [];
     }
 
     public function toggleFavorite(int $question_id): bool

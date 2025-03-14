@@ -130,5 +130,16 @@ class Controller
         $this->engine->assign('QuestionID', $params['questionID']);
         $this->engine->display("user_solutions.tpl");
     }
+    
+    public function user_achievements(PDO $dbh, User $user, array $params): void 
+    {
+        $achievements = [];
+        if ($user->logged()) {
+            $achievements = $user->achievements();
+        }
+        $this->engine->assign('User', $user);
+        $this->engine->assign('Achievements', $achievements);
+        $this->engine->display("achievements.tpl");
+    }
 }
 ?>
