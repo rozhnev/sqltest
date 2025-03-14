@@ -11,9 +11,7 @@
                 <path d="M64 10 L81.87 52.63 L127 52.63 L90.5 80.88 L103.75 123 L64 100.5 L24.25 123 L37.5 80.88 L1 52.63 L46.13 52.63 Z" fill="url(#gradient)" stroke="#D4AF37" stroke-width="3"/>
             </svg>
         </div>
-        <div class="achievement-info">
-            <h3>{$achievement.earned_at}</h3>
-            <h3>{translate}{$achievement.title}{/translate}</h3>
-        </div>
+        <span>{$achievement.earned_at}</span>
+        <span>{$achievement.title}</span>
     </div>
 {/foreach}

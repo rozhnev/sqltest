@@ -688,7 +688,7 @@ class User
 
     public function achievements(): array
     {
-        $stmt = $this->dbh->prepare("SELECT achievements.title, user_achievements.earned_at, viewed_at
+        $stmt = $this->dbh->prepare("SELECT achievements.title, user_achievements.earned_at::date earned_at, viewed_at
             FROM user_achievements
             JOIN achievements ON user_achievements.achievement_id = achievements.id
             WHERE user_id = :user_id
