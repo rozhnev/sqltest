@@ -444,5 +444,16 @@ class Controller
         ]);
         $this->engine->display("test.tpl");
     }
+    
+    public function user_achievements(): void 
+    {
+        $achievements = [];
+        if ($this->user->logged()) {
+            $achievements = $this->user->achievements();
+        }
+        $this->engine->assign('User', $this->user);
+        $this->engine->assign('Achievements', $achievements);
+        $this->engine->display("achievements.tpl");
+    }
 }
 ?>

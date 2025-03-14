@@ -133,6 +133,9 @@ if (isset($pathParts[0]) && $pathParts[0] === 'login') {
     $action     = 'test';
     $testId = $params['testId'];
     $questionID = $params['questionID'] ?? 0;
+} elseif (preg_match("@(?<lang>$languge_codes_regexp)/user/(?<action>achievements|solutions)@i", $path, $params)) {
+    $action     = 'user_' . strtolower($params['action']);
+    return (new Controller($smarty, $params['lang']))->$action($dbh, $user, $params);
 } elseif (
     preg_match("@(?<lang>$languge_codes_regexp)/question/(?<questionCategory>sakila|employee)/(?<questionID>\d+)@i", $path, $params) ||
     preg_match("@(?<lang>$languge_codes_regexp)/(?<questionCategory>sakila|employee)/(?<questionID>\d+)@i", $path, $params)
@@ -170,6 +173,7 @@ if (!in_array($lang, $languge_codes)) {
 switch ($action) {
     case 'login':
         $user->login($loginProvider, $_REQUEST);
+        $user->saveAchievement(1); // login
         $_SESSION["user_id"] = $user->getId();
         $_SESSION["admin"] = $user->isAdmin();
         //TODO: last path should be restored on login
