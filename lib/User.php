@@ -667,7 +667,7 @@ class User
     public function haveNewAchievement(): bool
     {
         $stmt = $this->dbh->prepare("SELECT EXISTS (
-            SELECT true FROM user_achievements WHERE user_id = ':user_id' and viewed_at is null
+            SELECT true FROM user_achievements WHERE user_id = :user_id and viewed_at is null
         );");
         $stmt->execute([':user_id' => $this->id]);
         return $stmt->fetchColumn(0);
