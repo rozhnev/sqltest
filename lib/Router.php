@@ -31,7 +31,7 @@ class Router
             if (preg_match($pattern, $path, $params)) {
                 $params['path'] = $path;
                 $action = str_replace('-', '_', strtolower($params['action']));
-                $method = $params['class'] ? $params['class'] . '_' . $action : $action;
+                $method = isset($params['class']) ? $params['class'] . '_' . $action : $action;
                 // echo "Method: $method\n";
                 $this->controller->setLanguge($params['lang']);
 

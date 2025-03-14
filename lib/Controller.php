@@ -210,7 +210,7 @@ class Controller
     
     public function question_solutions(array $params): void 
     {
-        if ($user->logged()) {
+        if ($this->user->logged()) {
             $questionSolved = $this->user->solvedQuestion($params['questionID']);
             $this->engine->assign('QuestionSolved', $questionSolved);
             if ($questionSolved) {
@@ -224,7 +224,7 @@ class Controller
 
     public function question_my_solutions(array $params): void 
     {
-        if ($user->logged()) {
+        if ($this->user->logged()) {
             $solutions = $this->user->getSolutions($params['questionID']);
             $this->engine->assign('QuestionSolutions', $solutions);
         }
