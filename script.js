@@ -100,7 +100,7 @@ function toggleAchievements() {
     setLoader('achievements-popup');
     popup.classList.toggle("hidden");
     // Load achievements when opening popup
-    fetch('/{$Lang}/achievements')
+    fetch('/{$Lang}/user/achievements')
         .then(response => response.json())
         .then(data => {
             let achievementsHtml = '<h3>{translate}achievements{/translate}</h3>';
