@@ -166,6 +166,7 @@ if (!in_array($lang, $languge_codes)) {
 switch ($action) {
     case 'login':
         $user->login($loginProvider, $_REQUEST);
+        $user->saveAchievement(1); // login
         $_SESSION["user_id"] = $user->getId();
         $_SESSION["admin"] = $user->isAdmin();
         //TODO: last path should be restored on login
