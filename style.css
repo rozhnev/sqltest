@@ -351,6 +351,11 @@ header .divider {
     color: var(--question-text);
     border-radius: 6px 0 6px 6px;
 }
+.achievement {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
 .top-menu-switchers {
     display: flex; flex-direction: column; justify-content: center; align-items: center; row-gap: 0.7em;
 }
