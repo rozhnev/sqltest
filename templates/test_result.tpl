@@ -57,7 +57,7 @@
                             {assign var="ImproveTimeoutHours" value="{($TestData.time_to_end  - $TestData.time_to_end  % 60) / 60}"}
                             {assign var="ImproveTimeoutMinutes" value="{$TestData.time_to_end % 60}"}
                             <div style="text-align: center;">
-                                <a style="display:inline-block;width:240px; color: white;" href="/{$Lang}/test/{$TestData.id}" title="{translate}return_to_test{/translate}" class="button green">{translate}return_to_test{/translate}</a>
+                                <a style="display:inline-block;width:240px; color: white;" href="/{$Lang}/test/{$TestData.id}/question/" title="{translate}return_to_test{/translate}" class="button green">{translate}return_to_test{/translate}</a>
                             </div>
                             <div style="text-align: center;">
                                 <a style="display:inline-block;width:240px; color: white;" href="/{$Lang}/test/{$TestData.id}/grade" title="{translate}save_my_grade{/translate}" class="button blue">{translate}save_my_grade{/translate}</a>
@@ -71,7 +71,7 @@
                             </div>
                         {else}
                             <div style="text-align: center;">
-                                <a style="display:inline-block;width:240px; color: white;" href="/{$Lang}/test/{$TestData.id}" title="{translate}return_to_test{/translate}" class="button green">{translate}return_to_test{/translate}</a>
+                                <a style="display:inline-block;width:240px; color: white;" href="/{$Lang}/test/{$TestData.id}/question/" title="{translate}return_to_test{/translate}" class="button green">{translate}return_to_test{/translate}</a>
                             </div>
                         {/if}
                     {/if}
