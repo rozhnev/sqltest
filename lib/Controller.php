@@ -457,7 +457,7 @@ class Controller
 
         $this->assignVariables([
             'QuestionID'            => $questionID,
-            'TestId'                => $testId,
+            'TestId'                => $params['testId'],
             'Question'              => $questionData,
             'NextQuestionId'        => $questionData['next_question_id'],
             'PreviousQuestionId'    => $questionData['previous_question_id'],
