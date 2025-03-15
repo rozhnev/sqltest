@@ -4,9 +4,9 @@
     {include file='popups.tpl'}
     <header>
         {if $MobileView}
-            {include file='m.top-menu.tpl' path="/test/{$TestId}"}
+            {include file='m.top-menu.tpl' path="/test/{$TestId}/question/{$QuestionID}"}
         {else}
-            {include file='top-menu.tpl' path="/test/{$TestId}"}
+            {include file='top-menu.tpl' path="/test/{$TestId}/question/{$QuestionID}"}
         {/if}
     </header>
     <main3 id="main3">
