@@ -373,7 +373,7 @@ class Controller
         $test = new Test($this->dbh, $this->lang, $this->user);
 
         $userTestId = $test->create();
-        header("Location: /" . $this->lang . "/test/$userTestId");
+        header("Location: /" . $this->lang . "/test/$userTestId/question/");
     }
 
     public function test_result(array $params): void 
@@ -435,7 +435,7 @@ class Controller
             exit();
         }
         $test = new Test($this->dbh, $this->lang, $this->user);
-        $test->setId($testId);
+        $test->setId($params['testId']);
 
         if(!$test->belongsToUser($this->user)) {
             header("HTTP/1.1 404 Moved Permanently");
