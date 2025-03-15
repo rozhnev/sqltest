@@ -398,7 +398,7 @@ class Controller
 
         $testResult = $test->calculateResult();
         $this->assignVariables([
-            'Test'          => $testData,
+            'TestData'      => $testData,
             'TestResult'    => $testResult
         ]);
 
