@@ -454,7 +454,6 @@ class Controller
             $questionData['last_query'] = json_decode($questionData['last_query']??'[]', true);
         }
 
-
         $this->assignVariables([
             'QuestionID'            => $questionID,
             'TestId'                => $params['testId'],
@@ -465,6 +464,7 @@ class Controller
             'DBMS'                  => $questionData['dbms'],
             'DB'                    => $questionData['db_template'],
             'Questionnire'          => $test->getQuestionnire(),
+            'TestData'              => $test->getData(),
         ]);
         $this->engine->display("test.tpl");
     }
