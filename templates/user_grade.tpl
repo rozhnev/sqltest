@@ -13,11 +13,6 @@
                 <div class="about">
                     <div class="section top colored">
                         <div>
-                            <h2>Политика конфиденциальности</h2>
-                        </div>
-                    </div>
-                    <div class="section top colored">
-                        <div>
                             {if $TestResult.ok}
                                 {$grades = ['','Intern','Junior','Middle','Senior']}
                                 {assign var="Grade" value="{$grades[$TestResult.grade]}"}
