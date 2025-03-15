@@ -469,6 +469,61 @@ class Controller
         $this->engine->display("test.tpl");
     }
 
+    public function test_check(array $params): void 
+    {
+        if (!$this->user->logged()) {
+            header("Location: /" . $this->lang . "/test/start");
+            exit();
+        }
+        $test = new Test($this->dbh, $this->lang, $this->user);
+        $test->setId($params['testId']);
+
+        if(!$test->belongsToUser($this->user) || !isset($params['questionID'])) {
+            header("HTTP/1.1 404 Not found");
+            $this->engine->assign('ErrorMessage', Localizer::translateString('action_not_permiited'));
+            $this->engine->display("error.tpl");
+            exit();
+        }
+        $template = "check_test_solution.tpl";
+
+        $attemptStatus = $test->getQuestionAttemptStatus($params['questionID']);
+        if (!$attemptStatus['ok']) {
+            $smarty->assign('QueryTestResult', $attemptStatus);
+            $this->engine->display($template);
+            return;
+        }
+
+        $question = new Question($this->dbh, $params['questionID']);
+
+        if (isset($_POST["query"])) {
+            $sql = $_POST["query"] ?? '';
+            $checkResult = $question->checkQuery($sql);
+            $smarty->assign('QueryTestResult', $checkResult);
+            if ($checkResult['ok']) {
+                $preparedQuery = $question->prepareQuery($sql);
+                $query = new Query($preparedQuery);
+                $jsonResult = $query->getResult($question->getDB(), 'json');
+                $checkResult = $question->checkQueryResult($jsonResult);
+                $this->assignVariables([
+                    'QueryTestResult' => $checkResult,
+                    'QueryBestCost' => $question->getBestCost()
+                ]);
+            }
+            $test->saveQuestionAttempt($params['questionID'], $checkResult, $sql);
+        }
+
+        if (isset($_POST["answers"])) {
+            $answers = $_POST["answers"] ?? '[]';
+
+            $checkResult = $question->checkAnswers($answers);
+            $smarty->assign('QueryTestResult', $checkResult);
+            $test->saveQuestionAttempt($questionID, $checkResult, $answers);
+        }
+
+        if (!$checkResult['ok']) header( 'HTTP/1.1 418 BAD REQUEST' );
+        $this->engine->display($template);   
+    }
+
     public function user_achievements(): void 
     {
         $achievements = [];

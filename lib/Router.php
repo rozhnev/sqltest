@@ -14,7 +14,7 @@ class Router
         'solution'          => "@(?<lang>ru|en|pt)/(?<class>solution)/(?<solutionID>\d+)/(?<action>like|unlike|report|delete)@i",
         'tests'             => "@(?<lang>ru|en|pt)/(?<class>test)/(?<action>start|create)@i",
         'test'              => "@(?<lang>ru|en|pt)/(?<class>test)/(?<testId>[a-z0-9-]+)/(?<action>grade|result)@i",
-        'test_question'     => "@(?<lang>ru|en|pt)/(?<class>test)/(?<testId>[a-z0-9-]+)/(?<action>question)/?(?<questionID>\d+)?@i",
+        'test_question'     => "@(?<lang>ru|en|pt)/(?<class>test)/(?<testId>[a-z0-9-]+)/(?<action>question|check)/?(?<questionID>\d+)?@i",
         'user'              => "@(?<lang>ru|en|pt)/(?<class>user)/(?<action>achievements)@i",
     ];
 
