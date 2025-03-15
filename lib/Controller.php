@@ -488,7 +488,7 @@ class Controller
 
         $attemptStatus = $test->getQuestionAttemptStatus($params['questionID']);
         if (!$attemptStatus['ok']) {
-            $smarty->assign('QueryTestResult', $attemptStatus);
+            $this->engine->assign('QueryTestResult', $attemptStatus);
             $this->engine->display($template);
             return;
         }
@@ -498,7 +498,7 @@ class Controller
         if (isset($_POST["query"])) {
             $sql = $_POST["query"] ?? '';
             $checkResult = $question->checkQuery($sql);
-            $smarty->assign('QueryTestResult', $checkResult);
+            $this->engine->assign('QueryTestResult', $checkResult);
             if ($checkResult['ok']) {
                 $preparedQuery = $question->prepareQuery($sql);
                 $query = new Query($preparedQuery);
@@ -516,7 +516,7 @@ class Controller
             $answers = $_POST["answers"] ?? '[]';
 
             $checkResult = $question->checkAnswers($answers);
-            $smarty->assign('QueryTestResult', $checkResult);
+            $this->engine->assign('QueryTestResult', $checkResult);
             $test->saveQuestionAttempt($questionID, $checkResult, $answers);
         }
 
