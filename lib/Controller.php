@@ -407,12 +407,12 @@ class Controller
 
     public function test_grade(array $params): void 
     {
-        if (!$this->user->logged()) {
+        if (!$this->user->logged() || !isset($params['testId'])) {
             header("Location: /" . $this->lang . "/test/start");
             exit();
         }
         $test = new Test($this->dbh, $this->lang, $this->user);
-        $test->setId($testId);
+        $test->setId($params['testId']);
 
         if(!$test->belongsToUser($this->user)) {
             header("HTTP/1.1 404 Moved Permanently");
