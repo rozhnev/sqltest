@@ -517,7 +517,7 @@ class Controller
 
             $checkResult = $question->checkAnswers($answers);
             $this->engine->assign('QueryTestResult', $checkResult);
-            $test->saveQuestionAttempt($questionID, $checkResult, $answers);
+            $test->saveQuestionAttempt($params['questionID'], $checkResult, $answers);
         }
 
         if (!$checkResult['ok']) header( 'HTTP/1.1 418 BAD REQUEST' );
