@@ -358,6 +358,9 @@ header .divider {
     padding: 3px;
     gap: 0.5rem;
 }
+.achievements-popup h4 {
+    margin: 0.5rem 0;
+}
 .top-menu-switchers {
     display: flex; flex-direction: column; justify-content: center; align-items: center; row-gap: 0.7em;
 }
