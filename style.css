@@ -604,7 +604,9 @@ input:checked + .slider:before {
     line-height: 1.3em;
 }
 .question a,
-.question a:visited {
+.question a:visited 
+.achievement a,
+.achievement a:visited {
     color: #0069E6;
 }
 .question-action {
