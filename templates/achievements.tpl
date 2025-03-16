@@ -1,6 +1,6 @@
-<h3>{translate}recomended_achievement{translate}</h3>:
+<h3>{translate}recomended_achievement{/translate}</h3>:
 {$RecommendedAchievement}
-<h3>{translate}your_achievements{translate}:</h3>
+<h3>{translate}your_achievements{/translate}:</h3>
 {foreach $Achievements as $achievement}
     <div class="achievement">
         <div class="achievement-image">
