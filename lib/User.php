@@ -672,19 +672,6 @@ class User
         $stmt->execute([':user_id' => $this->id]);
         return $stmt->fetchColumn(0);
     }
-    public function saveAchievement(int $achievement_id): void
-    {
-        $stmt = $this->dbh->prepare("
-            INSERT INTO user_achievements (
-                user_id, achievement_id, earned_at
-            ) VALUES (
-                :user_id, :achievement_id, CURRENT_TIMESTAMP
-            ) 
-            ON CONFLICT (user_id, achievement_id) DO NOTHING
-        ");
-
-        $stmt->execute([':user_id' => $this->id, ':achievement_id' => $achievement_id]);
-    }
 
     public function achievements(string $lang): array
     {
