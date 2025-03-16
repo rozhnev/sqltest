@@ -365,7 +365,7 @@ header .divider {
     justify-content: flex-start;
     padding: 5px 0;
     margin: 3px 0;
-    align-items: anchor-center;
+    align-items: center;
     background-color: var(--menu-button-background-color);
     color: white;
 }
