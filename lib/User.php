@@ -644,8 +644,8 @@ class User
             SELECT
                 question_rates.id rate_id, 
                 LOWER(question_rates.rate_en) rate, 
-                COUNT(questions.id) total, 
-                COUNT(user_questions.question_id) solved
+                COUNT(questions.id) questions_count, 
+                COUNT(user_questions.question_id) solved_count
             FROM questions
             JOIN question_rates ON questions.rate = question_rates.id
             LEFT JOIN user_questions ON user_questions.question_id = questions.id AND user_id = :user_id AND solved_at is not null 
