@@ -637,6 +637,35 @@ class User
         return $stmt->fetchColumn(0);
     }
 
+    public function getSolvedQuestionsCountByRate(): array 
+    {
+        if (!$this->logged()) return 0;
+        $stmt = $this->dbh->prepare("WITH stats AS (
+            SELECT
+                question_rates.id rate_id, 
+                LOWER(question_rates.rate_en) rate, 
+                COUNT(questions.id) total, 
+                COUNT(user_questions.question_id) solved
+            FROM questions
+            JOIN question_rates ON questions.rate = question_rates.id
+            LEFT JOIN user_questions ON user_questions.question_id = questions.id AND user_id = :user_id AND solved_at is not null 
+            WHERE questions.deleted = false
+            GROUP BY question_rates.id, question_rates.rate_en
+        )
+        SELECT 
+            rate_id,
+            rate,
+            questions_count,
+            solved_count,
+            SUM(total) OVER () as total_questions,
+            SUM(solved) OVER () as total_solved
+        FROM stats
+        ORDER BY rate_id;");
+
+        $stmt->execute([':user_id' => $this->id]);
+        return  $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     /**
      * Returns last user's test data.
      * 
@@ -707,6 +736,25 @@ class User
             ON CONFLICT (user_id, achievement_id) DO NOTHING;");
 
         $stmt->execute([':user_id' => $this->id, ':achievement' => $achievement]);
+    }
+
+    public function updateAchievements(): void
+    {
+        $userSolvedQuestions = $this->getSolvedQuestionsCountByRate();
+        foreach ($userSolvedQuestions as $count) {
+            if ($count['solved_count'] > 0) {
+                $this->user->saveAchievement("first_".$count['rate']."_task_solved");
+            }
+            if ($count['questions_count'] === $count['solved_count']) {
+                $this->user->saveAchievement("all_".$count['rate']."_tasks_solved");
+            }
+            if ($count['total_questions'] === $count['total_solved']) {
+                $this->user->saveAchievement("all_tasks_solved");
+            }
+            if ($count['total_solved'] === 5) {
+                $this->user->saveAchievement("five_tasks_completed");
+            }
+        }
     }
 
     public function toggleFavorite(int $question_id): bool
