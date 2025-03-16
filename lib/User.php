@@ -703,7 +703,7 @@ class User
     public function saveAchievement(string $achievement): void
     {
         $stmt = $this->dbh->prepare("INSERT INTO user_achievements ( user_id, achievement_id, earned_at)
-            SELECT :user_id, achievements_id, CURRENT_TIMESTAMP FROM achievements WHERE title = :achievement
+            SELECT :user_id, achievements.id, CURRENT_TIMESTAMP FROM achievements WHERE title = :achievement
             ON CONFLICT (user_id, achievement_id) DO NOTHING;");
 
         $stmt->execute([':user_id' => $this->id, ':achievement' => $achievement]);
