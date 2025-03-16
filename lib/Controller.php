@@ -143,7 +143,20 @@ class Controller
         header("location:/" . $this->lang);
         die();
     }
-
+    public function menu(array $params): void 
+    {
+        $QuestionnireName = $_GET['questionnire'] ?? 'category';
+        setcookie("Questionnire", $QuestionnireName, time() + 86400 * 365, "/" );
+        $questionnire = new Questionnire($this->dbh, $this->lang);
+        $this->assignVariables([
+            'Questionnire'      => $questionnire->get($QuestionnireName, $this->user->getId()),
+            'Lang'              => $this->lang
+        ]);
+        if ($this->user->logged()) {
+            $smarty->assign('Favorites', $user->getFavorites($this->lang));
+        }
+        $this->engine->display("menu.tpl");
+    }
     public function solution_like(array $params): void 
     {
         $this->engine->assign('Saved', false);
