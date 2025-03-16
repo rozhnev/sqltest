@@ -657,8 +657,8 @@ class User
             rate,
             questions_count,
             solved_count,
-            SUM(total) OVER () as total_questions,
-            SUM(solved) OVER () as total_solved
+            SUM(questions_count) OVER () as total_questions,
+            SUM(solved_count) OVER () as total_solved
         FROM stats
         ORDER BY rate_id;");
 
