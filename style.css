@@ -332,7 +332,10 @@ header .divider {
     padding-top: 0.3em;
 }
 .top-menu-buttons {
-    min-width: 18vw;display: flex;justify-content: space-between;align-items: center;
+    min-width: 20rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding-top: 0.5em;
 }
 .top-menu-buttons.mobile button {
