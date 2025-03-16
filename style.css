@@ -260,8 +260,9 @@ main {
     top: 24px;
 }
 .yaPersonalButtonLogo {
-    width: 40px in !important;
+    width: 40px !important;
     height: 40px !important;
+    margin-bottom: 5px !important;
 }
 header {
     text-align: left;
@@ -387,6 +388,9 @@ header .divider {
     justify-content: flex-start;
     padding: 3px;
     gap: 0.5rem;
+}
+.achievement span{
+    min-width: 5.5rem;
 }
 .achievements-popup h4 {
     margin: 0.5rem 0;

@@ -1,5 +1,5 @@
 <div style="display: flex; flex-direction: column;">
-    <div class="login-option">
+    <div class="login-option" id="yandexLoginWrapper">
         <div class="social-login-button" id="yandexLogin"></div>
         <span>Yandex</span>
     </div>
