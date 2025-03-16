@@ -395,6 +395,7 @@ class Controller
         $test = new Test($this->dbh, $this->lang, $this->user);
 
         $userTestId = $test->create();
+        $this->user->saveAchievement('get_test');
         header("Location: /" . $this->lang . "/test/$userTestId/question/");
     }
 
