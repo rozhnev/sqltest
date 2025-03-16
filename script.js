@@ -87,14 +87,15 @@ function clearEditor() {
 }
 
 function toggleLoginWindow() {
-    const loginWindow = document.getElementById("login-popup");
-    setTimeout((function() {
-        loginWindow.classList.toggle("visible");
-    }
-    ), 333)
+    const popup = document.getElementById('login-menu');
+    popup.classList.toggle("hidden");
+    // const loginWindow = document.getElementById("login-popup");
+    // setTimeout((function() {
+    //     loginWindow.classList.toggle("visible");
+    // }
+    // ), 333)
 }
 function toggleAchievements(lang) {
-    console.log('toggleAchievements');
     const popup = document.getElementById('achievements-popup');
 
     setLoader('achievements-popup');

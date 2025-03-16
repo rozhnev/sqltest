@@ -43,7 +43,10 @@ class Controller
 
     private function isMmobileView(): bool
     {
-        return  (isset($_SERVER['SERVER_NAME']) && $_SERVER['SERVER_NAME'] === 'm.sqltest.online');
+        return  (isset($_SERVER['SERVER_NAME']) && (
+            $_SERVER['SERVER_NAME'] === 'm.sqltest.online' ||
+            $_SERVER['SERVER_NAME'] === 'm.localhost'
+        ));
     }
 
     public function setLanguge(string $lang='en'): void
@@ -289,7 +292,7 @@ class Controller
             'Book'                  => Helper::getBook($this->dbh, $this->lang, $questionData['dbms']),
             'Favorites'             => $this->user->getFavorites($this->lang)
         ]);
-        $this->engine->display($this->mobileView ? "m.index.tpl" : "index.tpl");
+        $this->engine->display($this->isMmobileView() ? "m.index.tpl" : "index.tpl");
     }
 
     public function query_help(array $params): void 

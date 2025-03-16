@@ -41,7 +41,7 @@
     {if $User->logged()}
         {* <button class="button blue" onclick="location.href = '/{$Lang}/logout';"><span>{translate}top_menu_logout{/translate} ⎆</span></button> *}
         <div style="position: relative;" onclick="toggleAchievements('{$Lang}');">
-            {if $User->haveNewAchievement()}
+            {* {if $User->haveNewAchievement()}
                 <svg width="36" height="36" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer;">
                     <defs>
                         <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -59,12 +59,29 @@
                     <circle cx="64" cy="72" r="20" fill="#E0E0E0" />
                     <text x="64" y="80" font-size="24" font-weight="bold" text-anchor="middle" fill="#606060">✓</text>
                 </svg>
-            {/if}
+            {/if} *}
+            <div class="button green" style="padding: 0; display: flex; align-items: center; justify-content: center;">
+                <svg width="36" height="36" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="32" cy="22" r="10" fill="#FFFFFF"/>
+                    <path d="M32 40C20 40 10 48 10 58H54C54 48 44 40 32 40Z" fill="#FFFFFF"/>
+                </svg>
+            </div>
             <div id="achievements-popup" class="achievements-popup hidden">
             </div>
         </div>
     {else}
-        <button id="showLoginWindowBtn" class="button blue" onClick="toggleLoginWindow()">⎆ {translate}top_menu_login{/translate}</button>
+        <button style="position: relative;" id="showLoginWindowBtn" class="button blue" onClick="toggleLoginWindow()">
+            ⎆ {translate}top_menu_login{/translate}
+            <div id="login-menu" class="login-menu hidden">
+                <div>
+                    <span class="login-popup-title">{translate}choose_login_method{/translate}:</span>
+                </div>
+                {include file='login-buttons.tpl'}
+                <div style="font-size: x-small; text-align: left;">
+                    {translate}login_popup_footer{/translate}
+                </div>
+            </div>
+        </button>
     {/if}
 </div>
 <div class="top-menu-switchers">

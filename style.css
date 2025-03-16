@@ -342,6 +342,32 @@ header .divider {
 .top-menu-buttons.mobile button {
     font-size: large; min-width: 48px; min-height: 44px; display: block;
 }
+.login-menu {
+    position: absolute;
+    top: 105%;
+    right: 0px;
+    padding: 10px;
+    z-index: 1000;
+    width: 14rem;
+    background-color: var(--accordion-panel-bg-color);
+    border: 1px solid var(--text-block-border-color);
+    color: var(--question-text);
+    border-radius: 6px 0 6px 6px;
+}
+.login-option {
+    border: 1px solid var(--text-block-border-color);
+    border-radius: 6px;
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    justify-items: center;
+    justify-content: flex-start;
+    padding: 5px 0;
+    margin: 3px 0;
+    align-items: anchor-center;
+    background-color: var(--menu-button-background-color);
+    color: white;
+}
 .achievements-popup {
     position: absolute;
     top: 100%;
@@ -349,7 +375,7 @@ header .divider {
     padding: 10px;
     box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 5px;
     z-index: 1000;
-    width: 36rem;
+    width: 400px;
     background-color: var(--accordion-panel-bg-color);
     border: 1px solid var(--text-block-border-color);
     color: var(--question-text);

@@ -28,7 +28,7 @@ $translations = [
     'footer_privacy_policy' => 'Política de privacidade',
     'footer_questions' => 'Perguntas?',
     'sql_copied_to_buffer' => 'Código SQL copiado para a área de transferência',
-    'choose_login_method' => 'Escolha o método de login',
+    'choose_login_method' => 'Método de login',
     'top_menu_donate' => '<span class="currency">€</span> Doar',
     'top_menu_login' => 'Entrar',
     'top_menu_logout' => 'Sair',

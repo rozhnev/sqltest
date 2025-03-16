@@ -8,7 +8,17 @@
     {if $User->logged()}
         <button class="button blue" onclick="location.href = '/ru/logout';"><span>⎆</span></button>
     {else}
-        <button id="showLoginWindowBtn" class="button blue" onClick="toggleLoginWindow()">⎆</button>
+        <button  style="position: relative;" id="showLoginWindowBtn" class="button blue" onClick="toggleLoginWindow()">⎆
+            <div id="login-menu" class="login-menu hidden">
+                <div>
+                    <span class="login-popup-title">{translate}choose_login_method{/translate}:</span>
+                </div>
+                {include file='login-buttons.tpl'}
+                <div style="font-size: x-small; text-align: left;">
+                    {translate}login_popup_footer{/translate}
+                </div>
+            </div>
+        </button>
     {/if}
 </div>
 <div class="top-menu-switchers">
