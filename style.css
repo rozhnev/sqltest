@@ -332,11 +332,12 @@ header .divider {
     padding-top: 0.3em;
 }
 .top-menu-buttons {
-    min-width: 20rem;
+    min-width: 16rem;
     display: flex;
-    justify-content: space-between;
+    justify-content: end;
     align-items: center;
     padding-top: 0.5em;
+    column-gap: 0.5rem;
 }
 .top-menu-buttons.mobile button {
     font-size: large; min-width: 48px; min-height: 44px; display: block;
