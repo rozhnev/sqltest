@@ -355,6 +355,8 @@ header .divider {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
+    padding: 3px;
+    gap: 0.5rem;
 }
 .top-menu-switchers {
     display: flex; flex-direction: column; justify-content: center; align-items: center; row-gap: 0.7em;

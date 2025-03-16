@@ -131,5 +131,7 @@ $translations = [
     'level_up' => 'suba de nível com nosso teste!',
     'confirm_you_grade' => 'faça o teste e confirme sua expertise!',
     'erd_diagram' => 'Diagrama ER do Banco de Dados ##Db##',
-    'telegram_link' => 'https://t.me/sqltest_online'
+    'telegram_link' => 'https://t.me/sqltest_online',
+    'your achievements' => 'Suas conquistas', 
+    'recomended_achievement' => 'Próxima conquista recomendada',
 ];

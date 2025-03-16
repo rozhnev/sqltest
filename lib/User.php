@@ -699,6 +699,20 @@ class User
         return $stmt->fetchAll(PDO::FETCH_ASSOC) ?: [];
     }
 
+    public function recommendedAchievement(string $lang): string
+    {
+        $stmt = $this->dbh->prepare("SELECT recommended
+            FROM achievements
+            JOIN achievements_localization ON achievements.id = achievements_localization.achievement_id AND achievements_localization.language = :lang
+            WHERE NOT achievements.deleted AND NOT EXISTS (
+                SELECT true FROM user_achievements WHERE user_id = :user_id AND achievement_id = achievements.id
+            ) 
+            ORDER BY achievements.id ASC LIMIT 1;");
+
+        $stmt->execute([':lang' => $lang, ':user_id' => $this->id]);
+        return $stmt->fetchColumn(0) ?: '';
+    }
+
     public function toggleFavorite(int $question_id): bool
     {
         $stmt = $this->dbh->prepare("

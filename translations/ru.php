@@ -139,5 +139,7 @@ $translations = [
     'level_up' => 'повысь свой уровень!',
     'confirm_you_grade' => 'пройдите тест и подтвердите свой уровень!',
     'erd_diagram' => 'ER диаграмма базы данных ##Db##',
-    'telegram_link' => 'https://t.me/sqlize'
+    'telegram_link' => 'https://t.me/sqlize',
+    'your_achievements' => 'Ваши достижения',
+    'recomended_achievement' => 'Рекомендуемые достижения',
 ];
