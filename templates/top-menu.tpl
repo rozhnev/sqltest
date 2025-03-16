@@ -39,7 +39,7 @@
         <button class="button green"><span>{translate}top_menu_donate{/translate}</span></button>    
     </a>
     {if $User->logged()}
-        <button class="button blue" onclick="location.href = '/{$Lang}/logout';"><span>{translate}top_menu_logout{/translate} ⎆</span></button>
+        {* <button class="button blue" onclick="location.href = '/{$Lang}/logout';"><span>{translate}top_menu_logout{/translate} ⎆</span></button> *}
         <div style="position: relative;" onclick="toggleAchievements('{$Lang}');">
             {if $User->haveNewAchievement()}
                 <svg width="36" height="36" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer;">

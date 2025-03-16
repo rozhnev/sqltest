@@ -554,7 +554,6 @@ class Controller
             $achievements = $this->user->achievements($this->lang);
             $this->engine->assign('RecommendedAchievement', $this->user->recommendedAchievement($this->lang));
         }
-        $this->engine->assign('User', $this->user);
         $this->engine->assign('Achievements', $achievements);
         $this->engine->display("achievements.tpl");
     }

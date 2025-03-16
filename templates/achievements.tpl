@@ -29,3 +29,5 @@
         <span>{$achievement.title}</span>
     </div>
 {/foreach}
+
+<button class="button blue" onclick="location.href = '/{$Lang}/logout';"><span>{translate}top_menu_logout{/translate} ⎆</span></button>
