@@ -528,7 +528,7 @@ class Controller
     {
         $achievements = [];
         if ($this->user->logged()) {
-            $achievements = $this->user->achievements();
+            $achievements = $this->user->achievements($this->lang);
         }
         $this->engine->assign('User', $this->user);
         $this->engine->assign('Achievements', $achievements);

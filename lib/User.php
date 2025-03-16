@@ -686,15 +686,16 @@ class User
         $stmt->execute([':user_id' => $this->id, ':achievement_id' => $achievement_id]);
     }
 
-    public function achievements(): array
+    public function achievements(string $lang): array
     {
-        $stmt = $this->dbh->prepare("SELECT achievements.title, user_achievements.earned_at::date earned_at, viewed_at
+        $stmt = $this->dbh->prepare("SELECT achievements_localization.title, user_achievements.earned_at::date earned_at, viewed_at
             FROM user_achievements
             JOIN achievements ON user_achievements.achievement_id = achievements.id
-            WHERE user_id = :user_id
+            JOIN achievements_localization ON achievements.id = achievements_localization.achievement_id AND achievements_localization.language = :lang
+            WHERE user_id = :user_id and not achievements.deleted_at
             ORDER BY user_achievements.earned_at DESC;");
 
-        $stmt->execute([':user_id' => $this->id]);
+        $stmt->execute([':lang' => $lang, ':user_id' => $this->id]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC) ?: [];
     }
 
