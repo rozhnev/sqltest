@@ -153,7 +153,7 @@ class Controller
             'Lang'              => $this->lang
         ]);
         if ($this->user->logged()) {
-            $smarty->assign('Favorites', $user->getFavorites($this->lang));
+            $this->engine->assign('Favorites', $user->getFavorites($this->lang));
         }
         $this->engine->display("menu.tpl");
     }
