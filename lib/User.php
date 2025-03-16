@@ -743,16 +743,16 @@ class User
         $userSolvedQuestions = $this->getSolvedQuestionsCountByRate();
         foreach ($userSolvedQuestions as $count) {
             if ($count['solved_count'] > 0) {
-                $this->user->saveAchievement("first_".$count['rate']."_task_solved");
+                $this->saveAchievement("first_".$count['rate']."_task_solved");
             }
             if ($count['questions_count'] === $count['solved_count']) {
-                $this->user->saveAchievement("all_".$count['rate']."_tasks_solved");
+                $this->saveAchievement("all_".$count['rate']."_tasks_solved");
             }
             if ($count['total_questions'] === $count['total_solved']) {
-                $this->user->saveAchievement("all_tasks_solved");
+                $this->saveAchievement("all_tasks_solved");
             }
             if ($count['total_solved'] === 5) {
-                $this->user->saveAchievement("five_tasks_completed");
+                $this->saveAchievement("five_tasks_completed");
             }
         }
     }
