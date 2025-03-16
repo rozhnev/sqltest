@@ -607,7 +607,7 @@ input:checked + .slider:before {
 .question a:visited 
 .achievement a,
 .achievement a:visited {
-    color: #0069E6;
+    color: #0069E6 !important;
 }
 .question-action {
     font-style: italic;
