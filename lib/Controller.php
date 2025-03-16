@@ -322,6 +322,7 @@ class Controller
             $this->user->saveQuestionAttempt($params['questionID'], $queryTestResult, $sql);
             if ($queryTestResult['ok']) {
                 $this->user->saveSolution($params['questionID'], $queryTestResult, $sql);
+                $this->user->saveAchievement('first_task_solved');
             }
         }
         if (!$queryTestResult['ok']) header( 'HTTP/1.1 418 BAD REQUEST' );
@@ -341,6 +342,9 @@ class Controller
 
         if ($this->user->logged()) {
             $this->user->saveQuestionAttempt($params['questionID'], $answerResult, $answers);
+            if ($answerResult['ok']) {
+                $this->user->saveAchievement('first_quiz_passed');
+            }
         }
 
         if (!$answerResult['ok']) header( 'HTTP/1.1 418 BAD REQUEST' );

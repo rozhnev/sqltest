@@ -1,4 +1,4 @@
->{if $RecommendedAchievement}
+{if $RecommendedAchievement}
 <h4>{translate}recomended_achievement{/translate}:</h4>
 <div class="achievement">
     <div class="achievement-image">
