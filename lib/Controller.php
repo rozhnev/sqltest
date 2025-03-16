@@ -153,7 +153,7 @@ class Controller
             'Lang'              => $this->lang
         ]);
         if ($this->user->logged()) {
-            $this->engine->assign('Favorites', $user->getFavorites($this->lang));
+            $this->engine->assign('Favorites', $this->user->getFavorites($this->lang));
         }
         $this->engine->display("menu.tpl");
     }
