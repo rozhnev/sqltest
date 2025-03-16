@@ -115,6 +115,9 @@ class Controller
     public function login(array $params): void
     {
         $this->user->login($params['loginProvider'], $_REQUEST);
+        if ($params['loginProvider'] !== 'session') {
+            $this->user->saveAchievement('registration');
+        }
         $_SESSION["user_id"] = $this->user->getId();
         $_SESSION["admin"] = $this->user->isAdmin();
         $this->engine->display("login_result.tpl");

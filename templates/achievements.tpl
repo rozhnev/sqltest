@@ -1,3 +1,4 @@
+>{if $RecommendedAchievement}
 <h4>{translate}recomended_achievement{/translate}:</h4>
 <div class="achievement">
     <div class="achievement-image">
@@ -9,7 +10,7 @@
     </div>
     <span>{$RecommendedAchievement}</span>
 </div>
-
+{/if}
 <h4>{translate}your_achievements{/translate}:</h4>
 {foreach $Achievements as $achievement}
     <div class="achievement">

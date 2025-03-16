@@ -699,7 +699,7 @@ class User
         return $stmt->fetchAll(PDO::FETCH_ASSOC) ?: [];
     }
 
-    public function recommendedAchievement(string $lang): string
+    public function recommendedAchievement(string $lang): ?string
     {
         $stmt = $this->dbh->prepare("SELECT recommended
             FROM achievements
@@ -710,7 +710,16 @@ class User
             ORDER BY achievements.id ASC LIMIT 1;");
 
         $stmt->execute([':lang' => $lang, ':user_id' => $this->id]);
-        return $stmt->fetchColumn(0) ?: '';
+        return $stmt->fetchColumn(0);
+    }
+
+    public function saveAchievement(string $achievement): void
+    {
+        $stmt = $this->dbh->prepare("INSERT INTO user_achievements ( user_id, achievement_id, earned_at)
+            SELECT :user_id, achievements_id, CURRENT_TIMESTAMP FROM achievements WHERE title = :achievement
+            ON CONFLICT (user_id, achievement_id) DO NOTHING;");
+
+        $stmt->execute([':user_id' => $this->id, ':achievement' => $achievement]);
     }
 
     public function toggleFavorite(int $question_id): bool
