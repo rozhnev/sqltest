@@ -692,7 +692,7 @@ class User
             FROM user_achievements
             JOIN achievements ON user_achievements.achievement_id = achievements.id
             JOIN achievements_localization ON achievements.id = achievements_localization.achievement_id AND achievements_localization.language = :lang
-            WHERE user_id = :user_id and not achievements.deleted_at
+            WHERE user_id = :user_id and not achievements.deleted
             ORDER BY user_achievements.earned_at DESC;");
 
         $stmt->execute([':lang' => $lang, ':user_id' => $this->id]);
