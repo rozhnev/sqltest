@@ -24,7 +24,7 @@
                 document.documentElement.setAttribute('data-theme', window.UIConfig.theme);
             </script>
             <meta Content-Security-Policy-Report-Only: script-src https://accounts.google.com/gsi/client; frame-src https://accounts.google.com/gsi/; connect-src https://accounts.google.com/gsi/; />
-            <meta http-equiv="Content-Security-Policy" content="frame-src 'self' mc.yandex.md mc.yandex.ru yandex.ru passport.yandex.ru oauth.yandex.ru yango.com passport.yango.com oauth.yango.com mc.yandex.com *.yastatic.net yastatic.net autofill.yandex.ru;">
+            <meta http-equiv="Content-Security-Policy" content="frame-src 'self' mc.yandex.md mc.yandex.ru mc.yandex.com yandex.ru passport.yandex.ru oauth.yandex.ru yango.com passport.yango.com oauth.yango.com yastatic.net autofill.yandex.ru;">
             <meta name="google-signin-client_id" content="340274762951-1d5m1pb8p9i2bhjbtuc4p8q9gveuk2ug.apps.googleusercontent.com">
             {include file='site-title.tpl'}
             <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">

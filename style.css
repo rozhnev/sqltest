@@ -394,7 +394,7 @@ header .divider {
     gap: 0.5rem;
 }
 .achievement span{
-    min-width: 5.5rem;
+    min-width: 100px;
 }
 .achievements-popup h4 {
     margin: 0.5rem 0;
