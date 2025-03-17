@@ -603,9 +603,9 @@ window.onload = function() {
         {
             client_id: '6a7ad9d0d23a496987255a596b83b9db',
             response_type: 'code',
-            redirect_uri: `${window.location.protocol}//${window.location.host}/${lang}/login/yandex/?db=${db}&questionId=${questionId}`
+            redirect_uri: `${window.location.protocol}//${window.location.host}//login/yandex/?lang=${lang}&db=${db}&questionId=${questionId}`
         },
-        `${window.location.protocol}//${window.location.host}/${lang}/login/yandex/?db=${db}&questionId=${questionId}`,
+        `${window.location.protocol}//${window.location.host}/login/yandex/?lang=${lang}&db=${db}&questionId=${questionId}`,
         {
             view: "button",
             parentId: "yandexLogin",
