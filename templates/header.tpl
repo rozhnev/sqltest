@@ -44,37 +44,35 @@
             <script>window.yaContextCb=window.yaContextCb||[]</script>
             <script src="https://yandex.ru/ads/system/context.js" async></script>
             <script type="text/javascript" src="/script.js?{$VERSION}" defer></script>
-            {if $MobileView}
-                {literal}
-                <script>
-                window.yaContextCb.push(()=>{
-                    Ya.Context.AdvManager.render({
-                        "blockId": "R-A-4716552-3",
-                        "type": "floorAd",
-                        "platform": "touch"
+            <script>
+                {if $MobileView}
+                    {literal}
+                    window.yaContextCb.push(()=>{
+                        Ya.Context.AdvManager.render({
+                            "blockId": "R-A-4716552-3",
+                            "type": "floorAd",
+                            "platform": "touch"
+                        })
                     })
-                })
-                </script>
-                {/literal}
-            {else}
-                {literal}
-                <script>
-                window.yaContextCb.push(()=>{
-                    Ya.Context.AdvManager.render({
-                        "blockId": "R-A-4716552-2",
-                        "renderTo": "yandex_rtb_R-A-4716552-2",
-                        darkTheme: window.UIConfig.theme === 'dark'
+                    {/literal}
+                {else}
+                    {literal}
+                    window.yaContextCb.push(()=>{
+                        Ya.Context.AdvManager.render({
+                            "blockId": "R-A-4716552-2",
+                            "renderTo": "yandex_rtb_R-A-4716552-2",
+                            darkTheme: window.UIConfig.theme === 'dark'
+                        })
+                    });
+                    window.yaContextCb.push(()=>{
+                        Ya.Context.AdvManager.render({
+                            "blockId": "R-A-4716552-4",
+                            "renderTo": "yandex_rtb_R-A-4716552-4",
+                            darkTheme: window.UIConfig.theme === 'dark'
+                        })
                     })
-                });
-                window.yaContextCb.push(()=>{
-                    Ya.Context.AdvManager.render({
-                        "blockId": "R-A-4716552-4",
-                        "renderTo": "yandex_rtb_R-A-4716552-4",
-                        darkTheme: window.UIConfig.theme === 'dark'
-                    })
-                })
-                {/literal}
-            {/if}
+                    {/literal}
+                {/if}
                 var lang = '{$Lang}',
                 db   = '{$DB}',
                 questionId = '{$QuestionID}';
