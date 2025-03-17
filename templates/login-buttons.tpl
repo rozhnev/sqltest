@@ -1,6 +1,6 @@
-<div style="display: flex; flex-direction: column;  width:190px;">
-    <div class="login-option yandexLoginWrapper" id="yandexLoginWrapper">
-        <div class="social-login-button-yandex" id="yandexLogin"></div>
+<div style="display: flex; flex-direction: column;  width:100%;">
+    <div class="login-option yandexLoginWrapper" id="yandexLoginWrapper"  style="width:100%;">
+        <div class="social-login-button-yandex" id="yandexLogin"  style="width:100%;"></div>
     </div>
     <div class="login-option" id="vkLogin" onClick="openVKLoginPopUp()">
         <div class="social-login-button" style="background-color: #0077ff; border-radius: 4px;">

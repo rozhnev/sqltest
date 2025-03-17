@@ -337,7 +337,7 @@ header .divider {
     padding-top: 0.3em;
 }
 .top-menu-buttons {
-    min-width: 16rem;
+    /* min-width: 16rem; */
     display: flex;
     justify-content: end;
     align-items: center;
@@ -345,7 +345,10 @@ header .divider {
     column-gap: 0.5rem;
 }
 .top-menu-buttons.mobile button {
-    font-size: large; min-width: 48px; min-height: 44px; display: block;
+    font-size: large; 
+    min-width: 48px; 
+    min-height: 44px; 
+    display: flex;
 }
 .login-menu {
     position: absolute;
@@ -353,7 +356,7 @@ header .divider {
     right: 0px;
     padding: 10px;
     z-index: 1000;
-    width: 214px;
+    width: 240px;
     background-color: var(--accordion-panel-bg-color);
     border: 1px solid var(--text-block-border-color);
     color: var(--question-text);
@@ -376,7 +379,7 @@ header .divider {
 .achievements-popup {
     position: absolute;
     top: 100%;
-    right: 5px;
+    /* right: 5px; */
     padding: 10px;
     box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 5px;
     z-index: 1000;

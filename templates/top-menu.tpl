@@ -34,7 +34,7 @@
         {/if}
     </span>
 </div>
-<div class="top-menu-buttons">
+<div class="top-menu-buttons" style="min-width: 16rem;">
     <a href="/{$Lang}/donate" target="_self" id="donate-btn">
         <button class="button green"><span>{translate}top_menu_donate{/translate}</span></button>    
     </a>
@@ -66,7 +66,7 @@
                     <path d="M32 40C20 40 10 48 10 58H54C54 48 44 40 32 40Z" fill="#FFFFFF"/>
                 </svg>
             </div>
-            <div id="achievements-popup" class="achievements-popup hidden">
+            <div id="achievements-popup" class="achievements-popup hidden" style="right: 5px;">
             </div>
         </div>
     {else}
