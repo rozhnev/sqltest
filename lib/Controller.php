@@ -355,8 +355,10 @@ class Controller
         $answers = $_POST["answers"] ?? '[]';
         $question = new Question($this->dbh, $params['questionID']);
         $answerResult = $question->checkAnswers($answers);
-        $this->engine->assign('AnswerResult', $answerResult);
-
+        $this->assignVariables([
+            'QuestionID'     => $params['questionID'],
+            'AnswerResult'   => $answerResult
+        ]);
         if ($this->user->logged()) {
             $this->user->saveQuestionAttempt($params['questionID'], $answerResult, $answers);
             if ($answerResult['ok']) {
