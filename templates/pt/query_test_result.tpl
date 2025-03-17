@@ -46,10 +46,10 @@
             <div style="min-width:280px; flex: 2 1; margin-bottom: 9px;">Прежде чем двигаться дальше, пожалуйста оцените сложность этого задания:</div>
             <div class="buttons">
                 <input type="radio" id="rate1" name="question_rate" value="Muito fácil" onChange="rateQuestion({$QuestionID}, 1)"><label for="rate1">Muito fácil</label>
-                <input type="radio" id="rate2" name="question_rate" value="Simples" onChange="rateQuestion({$QuestionID}, 2)"><label for="rate1">Simples</label>
-                <input type="radio" id="rate3" name="question_rate" value="Normal" onChange="rateQuestion({$QuestionID}, 3)"><label for="rate1">Normal</label>
-                <input type="radio" id="rate4" name="question_rate" value="Difícil" onChange="rateQuestion({$QuestionID}, 4)"><label for="rate1">Difícil</label>
-                <input type="radio" id="rate5" name="question_rate" value="Muito difícil" onChange="rateQuestion({$QuestionID}, 5)"><label for="rate1">Muito difícil</label>
+                <input type="radio" id="rate2" name="question_rate" value="Simples" onChange="rateQuestion({$QuestionID}, 2)"><label for="rate2">Simples</label>
+                <input type="radio" id="rate3" name="question_rate" value="Normal" onChange="rateQuestion({$QuestionID}, 3)"><label for="rate3>Normal</label>
+                <input type="radio" id="rate4" name="question_rate" value="Difícil" onChange="rateQuestion({$QuestionID}, 4)"><label for="rate4">Difícil</label>
+                <input type="radio" id="rate5" name="question_rate" value="Muito difícil" onChange="rateQuestion({$QuestionID}, 5)"><label for="rate5">Muito difícil</label>
             </div>
         </div>
     {/if}
