@@ -194,5 +194,6 @@
             {include file='footer.tpl'}
         </footer>
         </div>
+        {include file='counters.tpl'}
     </body>
 </html>

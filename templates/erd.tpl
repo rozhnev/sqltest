@@ -34,5 +34,6 @@
                 </div>
             </div>
         </div>
+        {include file='counters.tpl'}
     </body>
 </html>

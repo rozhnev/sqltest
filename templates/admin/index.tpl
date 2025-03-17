@@ -106,5 +106,6 @@
                 <a href="/{$Lang}/privacy-policy" target="_self">Privacy policy</a>
             </div>
         </div>
+        {include file='counters.tpl'}
     </body>
 </html>
