@@ -493,18 +493,6 @@ function openVKLoginPopUp() {
         `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=530,height=950,left=${(window.outerWidth - 530) / 2},top=${(window.outerHeight - 950) / 2}`
     );
 }
-function openYandexLoginPopUp(event) {
-    console.log('openYandexLoginPopUp', event);
-
-    event.preventDefault();
-    event.stopPropagation();
-    event.stopImmediatePropagation();
-    // Find the child element
-    const target = document.getElementById('yaPersonalButton');
-    if (target) {
-        target.click();
-    }
-}
 function openGoogleLoginPopUp() {
     const params = {
         response_type: 'code',
@@ -621,16 +609,15 @@ window.onload = function() {
         {
             view: "button",
             parentId: "yandexLogin",
-            buttonSize: 'l',
-            buttonView: 'icon',
+            buttonSize: 'xl',
+            buttonView: 'main',
             buttonTheme: 'light',
-            buttonBorderRadius: "3",
+            buttonBorderRadius: "6",
             buttonIcon: 'ya',
         }
         )
         .then(({handler}) => handler())
         .catch(error => alert('Обработка ошибки', error));
-        document.getElementById('yandexLoginWrapper').addEventListener('click', openYandexLoginPopUp);
     }
     
 };

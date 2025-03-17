@@ -259,11 +259,15 @@ main {
     right: 160px;
     top: 24px;
 }
-.yaPersonalButtonLogo {
+.yandexLoginWrapper{
+    padding: 0 !important;
+}
+/* .yaPersonalButtonLogo {
     width: 40px !important;
     height: 40px !important;
     margin-bottom: 5px !important;
-}
+} */
+
 header {
     text-align: left;
     background-color: var(--block-background-color);
@@ -349,7 +353,7 @@ header .divider {
     right: 0px;
     padding: 10px;
     z-index: 1000;
-    width: 14rem;
+    width: 214px;
     background-color: var(--accordion-panel-bg-color);
     border: 1px solid var(--text-block-border-color);
     color: var(--question-text);
@@ -366,7 +370,7 @@ header .divider {
     padding: 5px 0;
     margin: 3px 0;
     align-items: center;
-    background-color: var(--menu-button-background-color);
+    background-color: black;
     color: white;
 }
 .achievements-popup {
