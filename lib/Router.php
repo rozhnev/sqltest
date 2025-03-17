@@ -7,7 +7,7 @@ class Router
         'question'          => "@(?<lang>ru|en|pt)/(?<action>question)/(?<questionCategory>[a-z-]+)/(?<question>[a-z-]+)@i",
         'question-action'   => "@(?<lang>ru|en|pt)/question/(?<questionID>\d+)/(?<action>query-help|query-run|query-test|rate|check-answers)@i",
         'static-page'       => "@(?<lang>ru|en|pt)/(?<action>privacy-policy|logout|about|menu|books|courses|donate)/?@i",
-        'login'             => "@^/(?<action>login)/(?<loginProvider>[a-z]+)/\?lang=(?<lang>ru|en|pt)@i",
+        'login'             => "@(?<lang>ru|en|pt)/(?<action>login)/(?<loginProvider>[a-z]+)/?@i",
         'erd'               => "@(?<lang>ru|en|pt)/(?<action>erd)/(?<db>Sakila|Bookings|AdventureWorks|Employee)\?theme=(?<theme>dark|light)@i",
         'favorite'          => "@(?<lang>ru|en|pt)/(?<class>question)/(?<questionID>\d+)/(?<action>favorite)@i",
         'question_solutions'=> "@(?<lang>ru|en|pt)/(?<class>question)/(?<questionID>\d+)/(?<action>solutions|my-solutions)@i",
