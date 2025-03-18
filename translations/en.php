@@ -129,6 +129,7 @@ $translations = [
     'test_improve' => 'You can improve your results in ##ImproveTimeoutHours## hours ##ImproveTimeoutMinutes## minutes.',
     'return_to_test' => 'Return to test',
     'save_my_grade' => 'Save my grade',
+    'your_grade' => 'Your grade',
     'level_up' => 'level up with our test!',
     'confirm_you_grade' => 'take the test and confirm your expertise!',
     'erd_diagram' => '##Db## Data Base ER diagram',

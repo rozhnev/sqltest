@@ -29,5 +29,5 @@
         <span>{$achievement.title}</span>
     </div>
 {/foreach}
-
+<h4>{translate}your_grade{/translate}: {$User->grade()}</h4>
 <button class="button blue" onclick="location.href = '/{$Lang}/logout';"><span>{translate}top_menu_logout{/translate} ⎆</span></button>
