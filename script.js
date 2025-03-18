@@ -467,14 +467,15 @@ function scrollQuestionPanel() {
 }
 function openLinkedinLoginPopUp() {
     window.open(
-        `https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=77scnm5m8z804e&redirect_uri=${window.location.protocol}//${window.location.host}/${lang}/login/linkedin/&state=SignupAuth&scope=openid%20email%20profile`, 
+        `https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=77scnm5m8z804e&redirect_uri=${window.location.protocol}//${window.location.host}/login/linkedin/&state=SignupAuth&scope=openid%20email%20profile`, 
         'LinkedIn Login', 
         `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=530,height=950,left=${(window.outerWidth - 530) / 2},top=${(window.outerHeight - 950) / 2}`
     );
 }
 function openGitHubLoginPopUp() {
     window.open(
-        `https://github.com/login/oauth/authorize?client_id=9a1910d2a6c658fdffc3&redirect_uri=${window.location.protocol}//${window.location.host}/${lang}/login/github/&scope=user`, 'GitHub Login', 
+        `https://github.com/login/oauth/authorize?client_id=9a1910d2a6c658fdffc3&redirect_uri=${window.location.protocol}//${window.location.host}/login/github/&scope=user`, 
+        'GitHub Login', 
         `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=530,height=950,left=${(window.outerWidth - 530) / 2},top=${(window.outerHeight - 950) / 2}`
     );
 }
@@ -482,7 +483,7 @@ function openVKLoginPopUp() {
     const uuid = '29890eb2-6a16-0613-190f-250e54537e18'; // Generate a random string. We recommend using at least 36 characters. This string will be used to verify that the request is coming from your app.
     const appId = 51931966; // Your app identifier.
     // const redirect_uri = `${window.location.protocol}//${window.location.host}/login/vk/`;
-    const redirect_uri = `https://sqltest.online/${lang}/login/vk/`;
+    const redirect_uri = `https://sqltest.online/login/vk/?lang=${lang}`;
     const redirect_state = 'login'; // Your app's state or any arbitrary string that will be added to the URL after authentication.
 
     const query = `uuid=${uuid}&app_id=${appId}&response_type=silent_token&redirect_uri=${redirect_uri}&redirect_state=${redirect_state}`;
