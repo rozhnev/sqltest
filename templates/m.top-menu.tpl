@@ -13,13 +13,14 @@
             <div style="width: 100%; padding: 5px;">⎆</div>
         </button> *}
         <div style="position: relative;" onclick="toggleAchievements('{$Lang}');">
+            {$GradeColors = ['Intern'=>'#3F3F3F','Junior'=>'#00FF00','Middle'=>'#0000FF','Senior'=>'#FF0000']}
+            {assign var="GradeColor" value="{$GradeColors[$User->grade()]}"|default:'#FFFFFF'}
             <div class="button green" style="padding: 0; display: flex; align-items: center; justify-content: center;">
-                <svg width="44" height="44" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg width="36" height="36" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="32" cy="22" r="10" fill="#FFFFFF"/>
-                    <path d="M32 40C20 40 10 48 10 58H54C54 48 44 40 32 40Z" fill="#FFFFFF"/>
+                    <path d="M32 40C20 40 10 48 10 58H54C54 48 44 40 32 40Z" fill="{$GradeColor}"/>
                 </svg>
             </div>
-            
         </div>
     {else}
         <button  style="position: relative;" id="showLoginWindowBtn" class="button blue" onClick="toggleLoginWindow()">
