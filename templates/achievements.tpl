@@ -1,3 +1,14 @@
+{$GradeColors = ['Intern'=>'#3F3F3F','Junior'=>'#00FF00','Middle'=>'#0000FF','Senior'=>'#FF0000']}
+{assign var="GradeColor" value="{$GradeColors[$User->grade()]}"|default:'#FFFFFF'}
+<div style="    display: flex;    gap: 1rem;    align-items: center;">
+    <div class="button green" style="padding: 0; display: flex; align-items: center; justify-content: center;">
+        <svg width="36" height="36" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="32" cy="22" r="10" fill="#FFFFFF"/>
+            <path d="M32 40C20 40 10 48 10 58H54C54 48 44 40 32 40Z" fill="{$GradeColor}"/>
+        </svg>
+    </div>
+    {if isset($User->grade())}<h4>{translate}your_grade{/translate}: </h4>{$User->grade()}{/if}
+</div>
 {if $RecommendedAchievement}
 <h4>{translate}recomended_achievement{/translate}:</h4>
 <div class="achievement">
@@ -29,5 +40,4 @@
         <span>{$achievement.title}</span>
     </div>
 {/foreach}
-<h4>{translate}your_grade{/translate}: {$User->grade()}</h4>
-<button class="button blue" onclick="location.href = '/{$Lang}/logout';"><span>{translate}top_menu_logout{/translate} ⎆</span></button>
+<button class="button" onclick="location.href = '/{$Lang}/logout';"><span>{translate}top_menu_logout{/translate} ⎆</span></button>
