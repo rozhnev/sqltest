@@ -318,6 +318,7 @@ header .divider {
     display: flex;
     justify-content: space-evenly;
     padding-right: 0.5rem;
+    font-size: 1.5em;
 }
 .site-name  {
     font-size: 1.5rem;
@@ -656,6 +657,7 @@ input:checked + .slider:before {
     font-style: italic;
     padding-left: 15px;
     font-size: smaller;
+    margin: 3px 0;
 }
 .answers {
     padding: 5px 15px;
@@ -754,8 +756,9 @@ input:checked + .slider:before {
 }
 .question pre {
     font-family: Arial, Helvetica, sans-serif;
-    line-height: 1.5;
+    line-height: 1.2;
     white-space: pre-line;
+    margin: 0.5rem 0;
 }
 .question-title .question-dates {
     color: var(--question-date-color);
