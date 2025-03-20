@@ -314,15 +314,8 @@ header .divider {
     align-items: center; 
     justify-content: space-between;
 }
-.site-name-wrapper {
-    display: flex;
-    justify-content: space-evenly;
-    padding-right: 0.5rem;
-    font-size: 1.5em;
-    font-size: clamp(10px, 1vw, 14px);
-}
 .site-name  {
-    font-size: clamp(24px, 2vw, 32px);
+    font-size: clamp(24px, 1.5vw, 32px);
 }
 .mobile-container .site-name  {
     font-size: 1.5em !important;
@@ -330,6 +323,13 @@ header .divider {
 .site-promo {
     font-size: clamp(16px, 1vw, 20px);
     white-space: nowrap;
+}
+.site-name-wrapper {
+    display: flex;
+    justify-content: space-evenly;
+    padding-right: 0.5rem;
+    font-size: 1.5em;
+    font-size: clamp(10px, 0.9vw, 14px);
 }
 .mobile-container .site-promo {
     font-size: small;
