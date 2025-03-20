@@ -8,7 +8,7 @@
             <path d="M32 40C20 40 10 48 10 58H54C54 48 44 40 32 40Z" fill="{$GradeColor}"/>
         </svg>
     </div>
-    {if isset($User->grade())}<h4>{translate}hello{/translate}, {translate}graded_sql_developer{/translate}: </h4>{/if}
+    {if isset($User->grade())}<h4>{translate}hello{/translate}, {translate}graded_sql_developer{/translate}!</h4>{/if}
 </div>
 {if $RecommendedAchievement}
 <h4>{translate}recomended_achievement{/translate}:</h4>
