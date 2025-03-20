@@ -319,9 +319,10 @@ header .divider {
     justify-content: space-evenly;
     padding-right: 0.5rem;
     font-size: 1.5em;
+    font-size: clamp(10px, 1vw, 14px);
 }
 .site-name  {
-    font-size: 1.5rem;
+    font-size: clamp(24px, 1vw, 32px);
 }
 .mobile-container .site-name  {
     font-size: 1.5em !important;
@@ -344,6 +345,9 @@ header .divider {
     align-items: center;
     padding-top: 0.5em;
     column-gap: 0.5rem;
+}
+.site-description {
+    font-size: clamp(10px, 1vw, 14px);
 }
 .top-menu-buttons.mobile button {
     font-size: large; 
