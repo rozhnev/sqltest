@@ -994,7 +994,7 @@ footer {
     gap: 0.5rem 2em;
     max-height: 4rem;
     flex-flow: row wrap;
-    margin: 10px 0;
+    margin-top: 5px;
     width: 100%;
     flex-direction: row;
     justify-content: center;
