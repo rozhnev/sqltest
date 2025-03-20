@@ -143,4 +143,9 @@ $translations = [
     'telegram_link' => 'https://t.me/sqlize',
     'your_achievements' => 'Ваши достижения',
     'recomended_achievement' => 'Рекомендуемые достижения',
+    'hello' => 'Привет',
+    'intern_sql_developer' => 'стажер-разработчик SQL',
+    'junior_sql_developer' => 'младший разработчик SQL',
+    'middle_sql_developer' => 'разработчик SQL',
+    'senior_sql_developer' => 'старший разработчик SQL'
 ];

@@ -1,5 +1,6 @@
 {$GradeColors = ['Intern'=>'#3F3F3F','Junior'=>'#00FF00','Middle'=>'#0000FF','Senior'=>'#FF0000']}
 {assign var="GradeColor" value="{$GradeColors[$User->grade()]}"|default:'#FFFFFF'}
+{assign var="Grade" value="{$User->grade()}"}
 <div style="    display: flex;    gap: 1rem;    align-items: center;">
     <div class="button green" style="padding: 0; display: flex; align-items: center; justify-content: center;">
         <svg width="36" height="36" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -7,7 +8,7 @@
             <path d="M32 40C20 40 10 48 10 58H54C54 48 44 40 32 40Z" fill="{$GradeColor}"/>
         </svg>
     </div>
-    {if isset($User->grade())}<h4>{translate}your_grade{/translate}: </h4>{$User->grade()}{/if}
+    {if isset($User->grade())}<h4>{translate}hello{/translate}, {translate}graded_sql_developer{/translate}: </h4>{/if}
 </div>
 {if $RecommendedAchievement}
 <h4>{translate}recomended_achievement{/translate}:</h4>

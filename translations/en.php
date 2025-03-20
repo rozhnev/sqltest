@@ -136,4 +136,6 @@ $translations = [
     'telegram_link' => 'https://t.me/sqltest_online',
     'your_achievements' => 'Your achievements',
     'recomended_achievement' => 'Next recommeded achievement',
+    'hello' => 'Hello',
+    'graded_sql_developer' => '##Grade## SQL developer'
 ];
