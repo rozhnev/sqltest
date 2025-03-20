@@ -144,8 +144,5 @@ $translations = [
     'your_achievements' => 'Ваши достижения',
     'recomended_achievement' => 'Рекомендуемые достижения',
     'hello' => 'Привет',
-    'intern_sql_developer' => 'стажер-разработчик SQL',
-    'junior_sql_developer' => 'младший разработчик SQL',
-    'middle_sql_developer' => 'разработчик SQL',
-    'senior_sql_developer' => 'старший разработчик SQL'
+    'graded_sql_developer' => '##Grade## разработчик SQL',
 ];
