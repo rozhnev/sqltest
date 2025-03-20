@@ -984,6 +984,7 @@ td {
 }
 footer {
     background-color: var(--block-background-color);
+    font-size: clamp(10px, 0.9vw, 14px);
 }
 .mobile-container footer {
     padding-top: 0.3rem;
