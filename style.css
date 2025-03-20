@@ -322,7 +322,7 @@ header .divider {
     font-size: clamp(10px, 1vw, 14px);
 }
 .site-name  {
-    font-size: clamp(18px, 1vw, 24px);
+    font-size: clamp(24px, 2vw, 32px);
 }
 .mobile-container .site-name  {
     font-size: 1.5em !important;
