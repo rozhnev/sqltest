@@ -86,7 +86,7 @@ main3 {
     overflow-y: auto;
 }
 .column {
-    padding-top: 1rem;
+    padding-top: 0.7rem;
 }
 
 .column:nth-child(1) {
@@ -94,7 +94,7 @@ main3 {
 }
 
 .column:nth-child(2) {
-    padding: 1rem 1.5rem 0 1.5rem;
+    padding: 0.7rem 1rem 0 1rem;
 }
 
 .column:nth-child(3) {
@@ -271,7 +271,7 @@ main {
 header {
     text-align: left;
     background-color: var(--block-background-color);
-    padding: 0 7px 10px 7px;
+    padding: 0 7px 7px 7px;
     display: flex;
     flex-flow: row;
     gap: 1em;
