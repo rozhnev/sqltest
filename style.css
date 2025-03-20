@@ -322,13 +322,13 @@ header .divider {
     font-size: clamp(10px, 1vw, 14px);
 }
 .site-name  {
-    font-size: clamp(24px, 1vw, 32px);
+    font-size: clamp(18px, 1vw, 24px);
 }
 .mobile-container .site-name  {
     font-size: 1.5em !important;
 }
 .site-promo {
-    font-size: 0.6em;
+    font-size: clamp(16px, 1vw, 20px);
     white-space: nowrap;
 }
 .mobile-container .site-promo {
