@@ -33,7 +33,7 @@ class Router
                 $action = str_replace('-', '_', strtolower($params['action']));
                 $method = isset($params['class']) ? $params['class'] . '_' . $action : $action;
                 // echo "Method: $method\n";
-                $this->controller->setLanguge($params['lang']);
+                $this->controller->setLanguge($params['lang'] ?? DEFAULT_LANGUAGE);
 
                 return $this->controller->{$method}($params);
 
