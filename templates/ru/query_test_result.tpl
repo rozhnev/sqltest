@@ -89,13 +89,19 @@
             <p>Подсказка: ваш запрос не соответствует требованиям описанным в задаче. <a href="#" onclick="getHelp('ru', {$QuestionID}); return false;">Воспользуйтесь подсказкой</a> и попробуйте переписать его.</p>
         {/if}
     {/if}
-    Попробуйте ещё раз. Нашли ошибку в задании - 
-    <a target="_blank" href="https://t.me/sqlize" class=""> 
-        <span class="tg-icon">
-            <span class=""> </span>
-        </span>
-        сообщите!
-    </a>
+    <div>
+        Попробуйте ещё раз. Нашли ошибку в задании - 
+        <a style="display: flex;
+            column-gap: 6px;
+            justify-content: center;
+            align-items: center;" 
+        target="_blank" href="https://t.me/sqlize" class=""> 
+            <span class="tg-icon">
+                <span class=""> </span>
+            </span>
+            сообщите!
+        </a>
+    </div>
     {if isset($ReferralLink)}
         <a id="referral-link" target="_blank" href="{$ReferralLink.link}">
             <div class="referral-link">
