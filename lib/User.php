@@ -717,13 +717,25 @@ class User
 
     public function recommendedAchievement(string $lang): ?string
     {
-        $stmt = $this->dbh->prepare("SELECT recommended
-            FROM achievements
-            JOIN achievements_localization ON achievements.id = achievements_localization.achievement_id AND achievements_localization.language = :lang
-            WHERE NOT achievements.deleted AND NOT EXISTS (
-                SELECT true FROM user_achievements WHERE user_id = :user_id AND achievement_id = achievements.id
-            ) 
-            ORDER BY achievements.id ASC LIMIT 1;");
+        $stmt = $this->dbh->prepare("WITH user_completed_achievements AS (
+                SELECT ua.achievement_id
+                FROM user_achievements ua
+                WHERE ua.user_id = :user_id
+            )
+            SELECT al.recommended
+            FROM achievements a
+            JOIN achievements_localization al ON a.id = al.achievement_id AND al.language = :lang
+            WHERE not a.deleted 
+            AND NOT EXISTS (
+                SELECT 1 FROM user_completed_achievements WHERE achievement_id = a.id
+            )
+            AND NOT (
+                (a.id = 10 AND EXISTS (SELECT 1 FROM user_completed_achievements WHERE achievement_id = 12)) OR
+                (a.id IN (10, 12) AND EXISTS (SELECT 1 FROM user_completed_achievements WHERE achievement_id = 14)) OR
+                (a.id IN (10, 12, 14) AND EXISTS (SELECT 1 FROM user_completed_achievements WHERE achievement_id = 18))
+            )
+            ORDER BY a.id ASC
+            LIMIT 1;");
 
         $stmt->execute([':lang' => $lang, ':user_id' => $this->id]);
         return $stmt->fetchColumn(0);
