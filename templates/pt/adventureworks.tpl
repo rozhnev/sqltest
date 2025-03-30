@@ -20,7 +20,8 @@
             <li> <span class="sql">AddressID</span>um identificador único para cada endereço.</li>
             <li> <span class="sql">AddressLine1</span>a primeira linha do endereço.</li>
             <li> <span class="sql">AddressLine2</span>a segunda linha do endereço.</li>
-            <li> <span class="sql">StateProvince</span>cidade.</li>
+            <li> <span class="sql">City</span>cidade.</li>
+            <li> <span class="sql">StateProvince</span>estado ou província.</li>
             <li> <span class="sql">CountryRegion</span>país.</li>
             <li> <span class="sql">PostalCode</span>código postal.</li>
             <li> <span class="sql">rowguid</span>guid.</li>

@@ -21,7 +21,8 @@
             <li> <span class="sql">AddressID</span>уникальный идентификатор записи (ПК).</li>
             <li> <span class="sql">AddressLine1</span>первая строка адреса.</li>
             <li> <span class="sql">AddressLine2</span>вторая строка адреса.</li>
-            <li> <span class="sql">StateProvince</span>город.</li>
+            <li> <span class="sql">City</span>город.</li>
+            <li> <span class="sql">StateProvince</span>штат или провинция.</li>
             <li> <span class="sql">CountryRegion</span>страна.</li>
             <li> <span class="sql">PostalCode</span>почтовый индекс.</li>
             <li> <span class="sql">rowguid</span>guid.</li>
