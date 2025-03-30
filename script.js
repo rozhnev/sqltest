@@ -498,7 +498,7 @@ function openGoogleLoginPopUp() {
     const params = {
         response_type: 'code',
         client_id: '340274762951-1d5m1pb8p9i2bhjbtuc4p8q9gveuk2ug.apps.googleusercontent.com',
-        redirect_uri: `${window.location.protocol}//${window.location.host}/${lang}/login/google/`,
+        redirect_uri: `${window.location.protocol}//${window.location.host}/login/google/`,
         scope:'openid email',
         state: ''
     };
