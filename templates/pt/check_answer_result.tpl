@@ -8,7 +8,7 @@
         ['Parabéns por terminar a tarefa!', '<a href="" onClick="toggleLoginWindow(); return false;">Faça login</a> agora para guardar o seu progresso.'],
         ['És demais! Pronto!', 'Não se esqueça de <a href="" onClick="toggleLoginWindow(); return false;">iniciar sessão</a> para manter todo o seu progresso são e salvo. 😎']
     ] }
-    {$phrases[$phrase_id][0]}
+    <p>{$phrases[$phrase_id][0]}</p>
     {if !$User->logged()}
         <p class="question-action">
             {$phrases[$phrase_id][1]}
