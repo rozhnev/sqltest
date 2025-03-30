@@ -17,11 +17,11 @@
         <div class="question-rate-panel">
             <div style="min-width:280px;">Antes de iniciar o teste seguinte, avalie a dificuldade desta tarefa:</div>
             <div class="buttons">
-                <button class="button-small" onclick="rateQuestion({$QuestionID}, 1)"><span class="question-level rate1"></span>&nbsp;Muito fácil</button>
-                <button class="button-small" onclick="rateQuestion({$QuestionID}, 2)"><span class="question-level rate2"></span>&nbsp;Simples</button>
-                <button class="button-small" onclick="rateQuestion({$QuestionID}, 3)"><span class="question-level rate3"></span>&nbsp;Normal</button>
-                <button class="button-small" onclick="rateQuestion({$QuestionID}, 4)"><span class="question-level rate4"></span>&nbsp;Difícil</button>
-                <button class="button-small" onclick="rateQuestion({$QuestionID}, 5)"><span class="question-level rate5"></span>&nbsp;Muito difícil</button>                
+                <input type="radio" id="rate1" name="question_rate" value="Muito fácil" onChange="rateQuestion({$QuestionID}, 1)"><label for="rate1">Muito fácil</label>
+                <input type="radio" id="rate2" name="question_rate" value="Simples" onChange="rateQuestion({$QuestionID}, 2)"><label for="rate2">Simples</label>
+                <input type="radio" id="rate3" name="question_rate" value="Normal" onChange="rateQuestion({$QuestionID}, 3)"><label for="rate3">Normal</label>
+                <input type="radio" id="rate4" name="question_rate" value="Difícil" onChange="rateQuestion({$QuestionID}, 4)"><label for="rate4">Difícil</label>
+                <input type="radio" id="rate5" name="question_rate" value="Muito difícil" onChange="rateQuestion({$QuestionID}, 5)"><label for="rate5">Muito difícil</label>
             </div>
         </div>
     {/if}
