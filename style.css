@@ -533,8 +533,8 @@ input:checked + .slider:before {
 }
 .menu .question-number {
     display: inline-block;
-    width: 2rem;
-    min-width: 2rem;
+    width: 2.5rem;
+    min-width: 2.5rem;
     text-align: right;
 }
 .menu .panel a {

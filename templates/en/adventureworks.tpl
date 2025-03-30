@@ -23,7 +23,8 @@
             <li> <span class="sql">AddressID</span>a unique identifier for each address (PK).</li>
             <li> <span class="sql">AddressLine1</span>the first line of the address.</li>
             <li> <span class="sql">AddressLine2</span>the second line of the address.</li>
-            <li> <span class="sql">StateProvince</span>city.</li>
+            <li> <span class="sql">City</span>city.</li>
+            <li> <span class="sql">StateProvince</span>state or province.</li>
             <li> <span class="sql">CountryRegion</span>country.</li>
             <li> <span class="sql">PostalCode</span>postal code.</li>
             <li> <span class="sql">rowguid</span>guid.</li>
