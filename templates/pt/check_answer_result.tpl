@@ -15,7 +15,7 @@
         </p>
     {else}
         <div class="question-rate-panel">
-            <div style="min-width:280px;">Antes de iniciar o teste seguinte, avalie a dificuldade desta tarefa:</div>
+            <div style="min-width:280px; flex: 2 1; margin-bottom: 9px 0;">Antes de iniciar o teste seguinte, avalie a dificuldade desta tarefa:</div>
             <div class="buttons">
                 <input type="radio" id="rate1" name="question_rate" value="Muito fácil" onChange="rateQuestion({$QuestionID}, 1)"><label for="rate1">Muito fácil</label>
                 <input type="radio" id="rate2" name="question_rate" value="Simples" onChange="rateQuestion({$QuestionID}, 2)"><label for="rate2">Simples</label>
