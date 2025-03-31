@@ -15,9 +15,7 @@ class Router
         'tests'             => "@(?<lang>ru|en|pt)/(?<class>test)/(?<action>start|create)@i",
         'test'              => "@(?<lang>ru|en|pt)/(?<class>test)/(?<testId>[a-z0-9-]+)/(?<action>grade|result)@i",
         'test_question'     => "@(?<lang>ru|en|pt)/(?<class>test)/(?<testId>[a-z0-9-]+)/(?<action>question|check)/?(?<questionID>\d+)?@i",
-        'user'              => "@(?<lang>ru|en|pt)/(?<class>user)/(?<action>achievements)@i",
-        'user_profile'      => "@(?<lang>ru|en|pt)/(?<class>user)/(?<action>profile)@i",
-        'user_update'       => "@(?<lang>ru|en|pt)/api/(?<class>user)/(?<action>update)@i",
+        'user'              => "@(?<lang>ru|en|pt)/(?<class>user)/(?<action>achievements|profile|update)@i",
     ];
 
     public function __construct(Controller $controller)

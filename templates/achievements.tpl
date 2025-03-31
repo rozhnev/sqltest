@@ -41,4 +41,7 @@
         <span>{$achievement.title}</span>
     </div>
 {/foreach}
-<button class="button" onclick="location.href = '/{$Lang}/logout';"><span>{translate}top_menu_logout{/translate} ⎆</span></button>
+<div style="display: flex; gap: 1rem;">
+    <button class="button" onclick="location.href = '/{$Lang}/user/profile';"><span>👤︎ {translate}profile_title{/translate}</span></button>
+    <button class="button" onclick="location.href = '/{$Lang}/logout';"><span>⇥ {translate}top_menu_logout{/translate}</span></button>
+</div>

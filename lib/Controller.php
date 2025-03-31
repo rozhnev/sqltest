@@ -582,7 +582,9 @@ class Controller
         }
 
         $this->assignVariables([
-            'Title' => Localizer::translateString('profile_title')
+            'Action' => 'profile',
+            'Title' => Localizer::translateString('profile_title'),
+            'User'  => $this->user,
         ]);
 
         $this->engine->display("user_profile.tpl");

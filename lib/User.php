@@ -807,4 +807,50 @@ class User
         // die();
         return $stmt->fetchAll(PDO::FETCH_NUM);
     }
+
+    /**
+     * Get user's nickname
+     *
+     * @return string
+     */
+    public function getNickname(): string
+    {
+        if (!$this->logged()) {
+            return '';
+        }
+
+        $stmt = $this->dbh->prepare("SELECT nickname FROM users WHERE id = ?");
+        $stmt->execute([$this->id]);
+        return $stmt->fetchColumn() ?: '';
+    }
+
+    /**
+     * Set user's nickname
+     *
+     * @param string $nickname
+     * @return bool
+     * @throws Exception if nickname is invalid or update fails
+     */
+    public function setNickname(string $nickname): bool
+    {
+        if (!$this->logged()) {
+            throw new Exception(Localizer::translateString('login_needed'));
+        }
+
+        if (strlen($nickname) < 3 || strlen($nickname) > 50) {
+            throw new Exception(Localizer::translateString('nickname_length_error'));
+        }
+
+        // Only allow letters, numbers, and some special characters
+        if (!preg_match('/^[a-zA-Z0-9_\-. ]+$/', $nickname)) {
+            throw new Exception(Localizer::translateString('nickname_invalid_chars'));
+        }
+
+        $stmt = $this->dbh->prepare("UPDATE users SET nickname = ? WHERE id = ?");
+        if (!$stmt->execute([$nickname, $this->id])) {
+            throw new Exception(Localizer::translateString('update_failed'));
+        }
+
+        return true;
+    }
 }

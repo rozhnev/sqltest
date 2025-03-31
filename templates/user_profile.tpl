@@ -1,37 +1,99 @@
-<div class="profile-wrapper">
-    <div class="profile-header">
-        <h2>{translate}profile_title{/translate}</h2>
-    </div>
-    <div class="profile-content">
-        <div class="profile-field">
-            <span id="nickname-label">{translate}nickname{/translate}:</span>
-            <div class="nickname-container">
-                <span id="nickname-display" class="nickname">{$User->getNickname()}</span>
-                <input type="text" id="nickname-input" class="nickname-input hidden" value="{$User->getNickname()}" maxlength="50">
-                <div class="profile-actions">
-                    <button id="edit-btn" class="text-button" onclick="toggleNicknameEdit(true)" title="{translate}edit_nickname{/translate}">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M16.474 5.408l2.118 2.117m-.756-3.982L12.109 9.27a2.118 2.118 0 00-.58 1.082L11 13l2.648-.53c.41-.082.786-.283 1.082-.58l5.727-5.727a1.853 1.853 0 000-2.621 1.853 1.853 0 00-2.621 0z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M19 15v3a2 2 0 01-2 2H6a2 2 0 01-2-2V7a2 2 0 012-2h3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </button>
-                    <div id="save-cancel-btns" class="hidden">
-                        <button class="text-button green" onclick="saveNickname()" title="{translate}save_changes{/translate}">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </button>
-                        <button class="text-button red" onclick="toggleNicknameEdit(false)" title="{translate}cancel{/translate}">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M6 18L18 6M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </button>
+{assign var="PageTitle" value="{translate}about_page_title{/translate}"}
+{assign var="PageDescription" value="{translate}about_page_description{/translate}"}
+{include file='short-header.tpl'}
+<body>
+    {if $MobileView}
+        <header>
+            {include file='m.top-menu.tpl' path="/about"}
+        </header>
+        <main>
+            <div class="profile-wrapper">
+                <div class="profile-header">
+                    <h2>{translate}profile_title{/translate}</h2>
+                </div>
+                <div class="profile-content">
+                    <div class="profile-field">
+                        <span id="nickname-label">{translate}nickname{/translate}:</span>
+                        <div class="nickname-container">
+                            <span id="nickname-display" class="nickname">{$User->getNickname()}</span>
+                            <input type="text" id="nickname-input" class="nickname-input hidden" value="{$User->getNickname()}" maxlength="50">
+                            <div class="profile-actions">
+                                <button id="edit-btn" class="text-button" onclick="toggleNicknameEdit(true)" title="{translate}edit_nickname{/translate}">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M16.474 5.408l2.118 2.117m-.756-3.982L12.109 9.27a2.118 2.118 0 00-.58 1.082L11 13l2.648-.53c.41-.082.786-.283 1.082-.58l5.727-5.727a1.853 1.853 0 000-2.621 1.853 1.853 0 00-2.621 0z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M19 15v3a2 2 0 01-2 2H6a2 2 0 01-2-2V7a2 2 0 012-2h3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                                <div id="save-cancel-btns" class="hidden">
+                                    <button class="text-button green" onclick="saveNickname()" title="{translate}save_changes{/translate}">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </button>
+                                    <button class="text-button red" onclick="toggleNicknameEdit(false)" title="{translate}cancel{/translate}">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M6 18L18 6M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+        </main>
+        <footer>               
+            {include file='m.footer.tpl'}
+        </footer>
+    {else}
+        <div class="container">
+            <header>
+                {include file='top-menu.tpl' path="/about"}
+            </header>
+            <main>
+                <div class="profile-wrapper">
+                    <div class="profile-header">
+                        <h2>{translate}profile_title{/translate}</h2>
+                    </div>
+                    <div class="profile-content">
+                        <div class="profile-field">
+                            <span id="nickname-label">{translate}nickname{/translate}:</span>
+                            <div class="nickname-container">
+                                <span id="nickname-display" class="nickname">{$User->getNickname()}</span>
+                                <input type="text" id="nickname-input" class="nickname-input hidden" value="{$User->getNickname()}" maxlength="50">
+                                <div class="profile-actions">
+                                    <button id="edit-btn" class="text-button" onclick="toggleNicknameEdit(true)" title="{translate}edit_nickname{/translate}">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M16.474 5.408l2.118 2.117m-.756-3.982L12.109 9.27a2.118 2.118 0 00-.58 1.082L11 13l2.648-.53c.41-.082.786-.283 1.082-.58l5.727-5.727a1.853 1.853 0 000-2.621 1.853 1.853 0 00-2.621 0z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M19 15v3a2 2 0 01-2 2H6a2 2 0 01-2-2V7a2 2 0 012-2h3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </button>
+                                    <div id="save-cancel-btns" class="hidden">
+                                        <button class="text-button green" onclick="saveNickname()" title="{translate}save_changes{/translate}">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                        </button>
+                                        <button class="text-button red" onclick="toggleNicknameEdit(false)" title="{translate}cancel{/translate}">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M6 18L18 6M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <footer>               
+                {include file='footer.tpl'}
+            </footer>
         </div>
-    </div>
-</div>
+    {/if}
+    {include file='counters.tpl'}
+</body>
+</html>
 
 <style>
 .profile-wrapper {
@@ -76,9 +138,12 @@
     display: flex;
     gap: 0.5rem;
 }
-
+#save-cancel-btns {
+    display: flex;
+    gap: 0.5rem;
+}
 .hidden {
-    display: none;
+    display: none !important;
 }
 </style>
 
@@ -111,7 +176,7 @@ function saveNickname() {
     const newNickname = input.value.trim();
 
     if (newNickname && newNickname !== display.textContent) {
-        fetch(`/api/user/update-nickname`, {
+        fetch(`/{$Lang}/user/update`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
