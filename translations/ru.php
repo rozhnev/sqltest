@@ -145,4 +145,14 @@ $translations = [
     'recomended_achievement' => 'Рекомендуемые достижения',
     'hello' => 'Привет',
     'graded_sql_developer' => '##Grade## разработчик SQL',
+    'profile_title' => 'Профиль пользователя',
+    'nickname' => 'Никнейм',
+    'edit_nickname' => 'Изменить никнейм',
+    'save_changes' => 'Сохранить',
+    'cancel' => 'Отмена',
+    'nickname_updated' => 'Никнейм успешно обновлен',
+    'update_failed' => 'Не удалось обновить никнейм',
+    'nickname_empty' => 'Никнейм не может быть пустым',
+    'nickname_length_error' => 'Длина никнейма должна быть от 3 до 50 символов',
+    'nickname_invalid_chars' => 'Никнейм может содержать только буквы, цифры, пробелы, точки, подчеркивания и дефисы'
 ];

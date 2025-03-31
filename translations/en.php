@@ -46,10 +46,10 @@ $translations = [
     'favorite' => 'Favorite',
     'favorites' => 'Favorites',
     'add_to_favorites' => 'Click to add to favorites',
-    'menu_small_add_placeholder' => "<div style='color: var(--question-text); display: flex; gap: 0.5rem; flex-direction: column; align-items: center;'>
-        Support the project. <a href='https://ko-fi.com/D1D76X1T1' target='_blank'>
-            <img height='36' style='border:0px;height:36px;' src='https://storage.ko-fi.com/cdn/kofi6.png?v=6' border='0' alt='Buy Me a Coffee at ko-fi.com' />
-        </a></div>",    
+    'menu_small_add_placeholder' => '<div style="color: var(--question-text); display: flex; gap: 0.5rem; flex-direction: column; align-items: center;">
+        Support the project. <a href="https://ko-fi.com/D1D76X1T1" target="_blank">
+            <img height="36" style="border:0px;height:36px;" src="https://storage.ko-fi.com/cdn/kofi6.png?v=6" border="0" alt="Buy Me a Coffee at ko-fi.com" />
+        </a></div>',    
     'toast_sql_copied_to_buffer' => 'SQL code copied to buffer',
     'login_popup_footer' => 'Login on the site is only required to save your progress. You can continue testing without logging into the site.',
     'rate_saved' => 'Thank you! Your vote has been counted.',
@@ -111,7 +111,6 @@ $translations = [
     'solution_action_delete' => 'Delete solution!',
     'you_already_solved_this_task' => 'You already solved this task',
     'view_solutions' => 'View solutions',
-    'done' => 'Done!',
     'check_your_skills' => 'Check your skills!',
     'test_time_to_complete' => 'Time to complete this test is',
     'test_time_over' => 'Test time is over!',
@@ -137,5 +136,15 @@ $translations = [
     'your_achievements' => 'Your achievements',
     'recomended_achievement' => 'Next recommeded achievement',
     'hello' => 'Hello',
-    'graded_sql_developer' => '##Grade## SQL developer'
+    'graded_sql_developer' => '##Grade## SQL developer',
+    'profile_title' => 'User Profile',
+    'nickname' => 'Nickname',
+    'edit_nickname' => 'Edit Nickname',
+    'save_changes' => 'Save Changes',
+    'cancel' => 'Cancel',
+    'nickname_updated' => 'Nickname updated successfully',
+    'update_failed' => 'Failed to update nickname',
+    'nickname_empty' => 'Nickname cannot be empty',
+    'nickname_length_error' => 'Nickname must be between 3 and 50 characters',
+    'nickname_invalid_chars' => 'Nickname can only contain letters, numbers, spaces, dots, underscores and hyphens',
 ];

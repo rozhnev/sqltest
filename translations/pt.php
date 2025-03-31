@@ -137,4 +137,14 @@ $translations = [
     'recomended_achievement' => 'Próxima conquista recomendada',
     'hello' => 'Olá',
     'graded_sql_developer' => 'Desenvolvedor SQL ##Grade##',
+    'profile_title' => 'Perfil do Usuário',
+    'nickname' => 'Apelido',
+    'edit_nickname' => 'Editar apelido',
+    'save_changes' => 'Salvar',
+    'cancel' => 'Cancelar',
+    'nickname_updated' => 'Apelido atualizado com sucesso',
+    'update_failed' => 'Falha ao atualizar o apelido',
+    'nickname_empty' => 'O apelido não pode estar vazio',
+    'nickname_length_error' => 'O apelido deve ter entre 3 e 50 caracteres',
+    'nickname_invalid_chars' => 'O apelido pode conter apenas letras, números, espaços, pontos, sublinhados e hífens'
 ];
