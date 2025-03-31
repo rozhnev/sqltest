@@ -171,7 +171,7 @@
                     <a style="background: #EFFAB2; color: #79A01F; rotate: -3deg;" href ="https://t.me/artembuenas" target="_blank">Артему Латышеву</a>
                     <a style="background: #BFFDC9; color: #37B679; rotate: 2deg;" href ="https://t.me/alexgureev25" target="_blank">Александру Гурееву</a>
                     <a style="background: #FFE8A5; color: #D18328; rotate: -2deg;" href ="https://t.me/basanogijoe" target="_blank">Георгию Григорчуку</a>
-                    <a style="background: deepskyblue; color: whitesmoke;rotate: 4deg;" href="" target="_blank">Елене Сельской</a>
+                    <a style="background: deepskyblue; color: whitesmoke;rotate: 4deg;" href="mailto:evilenapol@gmail.com" target="_blank">Елене Сельской</a>
                 </div>
             </div>
         </div>
