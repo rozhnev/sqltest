@@ -581,10 +581,13 @@ class Controller
             exit();
         }
 
+        $questions = $this->user->getQuestions($this->lang); 
+
         $this->assignVariables([
             'Action' => 'profile',
-            'Title' => Localizer::translateString('profile_title'),
+            'Title' => Localizer::translateString('profile_page_title'),
             'User'  => $this->user,
+            'Questions' => $questions
         ]);
 
         $this->engine->display("user_profile.tpl");

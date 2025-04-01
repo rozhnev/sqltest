@@ -853,4 +853,31 @@ class User
 
         return true;
     }
+    public function getQuestions(string $lang): array
+    {
+            // Fetch questions data
+            $stmt = $this->dbh->prepare("
+            SELECT 
+                q.id,
+                ql.title,
+                q.dbms,
+                q.rate,
+                'sakila-db' as category,
+                'Category' as category_name,
+                q.title_sef slug,
+                uq.solved_at::date solved_at,
+                (f.question_id IS NOT NULL) as favorite
+            FROM user_questions uq
+            JOIN questions q ON q.id = uq.question_id
+            JOIN questions_localization ql ON q.id = ql.question_id AND ql.language = :lang
+            LEFT JOIN question_rates qr ON q.rate = qr.id
+            LEFT JOIN favorites f ON q.id = f.question_id AND f.user_id = :user_id
+            WHERE uq.user_id = :user_id AND q.deleted = false
+            ORDER BY q.id
+        ");
+        
+        $stmt->execute([':lang' => $lang, ':user_id' => $this->id]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 }

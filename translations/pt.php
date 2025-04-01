@@ -19,6 +19,7 @@ $translations = [
     'hint_default' => 'Tente resolver o problema sem dicas.',
     'category' => 'categoria',
     'complexity' => 'complexidade',
+    'complexity_level' => 'Nível de complexidade',
     'database' => 'banco de dados',
     'Donate' => 'Doar',
     'menu_groups' => 'Tarefas de grupo por',
@@ -137,7 +138,8 @@ $translations = [
     'recomended_achievement' => 'Próxima conquista recomendada',
     'hello' => 'Olá',
     'graded_sql_developer' => 'Desenvolvedor SQL ##Grade##',
-    'profile_title' => 'Perfil do Usuário',
+    'profile_page_title' => 'Perfil do Usuário',
+    'profile_page_description' => 'Gerencie seu perfil, conquistas e preferências de conta.',
     'nickname' => 'Apelido',
     'edit_nickname' => 'Editar apelido',
     'save_changes' => 'Salvar',
@@ -146,5 +148,7 @@ $translations = [
     'update_failed' => 'Falha ao atualizar o apelido',
     'nickname_empty' => 'O apelido não pode estar vazio',
     'nickname_length_error' => 'O apelido deve ter entre 3 e 50 caracteres',
-    'nickname_invalid_chars' => 'O apelido pode conter apenas letras, números, espaços, pontos, sublinhados e hífens'
+    'nickname_invalid_chars' => 'O apelido pode conter apenas letras, números, espaços, pontos, sublinhados e hífens',
+    'dbms' => 'Sistema de Gerenciamento de Banco de Dados',
+
 ];
