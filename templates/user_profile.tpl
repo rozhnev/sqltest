@@ -229,11 +229,18 @@ let table = new Tabulator("#questions-table", {
     pagination: true,
     paginationSize: 25,
     columns: [
-        {title: "{/literal}{translate}question_title{/translate}{literal}", field: "title", sorter: "string", widthGrow: 3},
-        {title: "{/literal}{translate}dbms{/translate}{literal}", field: "dbms", sorter: "string", headerFilter: "select", headerFilterParams: {
-            values: {"Firebird": "Firebird", "MySQL": "MySQL", "PostgreSQL":"PostgreSQL", "SQL Server 2022":"SQL Server 2022", "SQLite":"SQLite"}}},
+        {title: "{/literal}{translate}question_title{/translate}{literal}", field: "title", sorter: "string", widthGrow: 3, headerFilter: "input"},
+        {title: "{/literal}{translate}dbms{/translate}{literal}", field: "dbms", sorter: "string", headerFilter: "select", 
+            headerFilterParams: {
+                values: {"Firebird": "Firebird", "MySQL": "MySQL", "PostgreSQL":"PostgreSQL", "SQL Server 2022":"SQL Server 2022", "SQLite":"SQLite"}
+            }
+        },
         {title: "{/literal}{translate}complexity_level{/translate}{literal}", field: "rate", formatter: "star"},
-        {title: "{/literal}{translate}question_solved_at{/translate}{literal}", field: "solved_at", formatter: "date", widthGrow: 1},
+        {
+            title: "{/literal}{translate}question_solved_at{/translate}{literal}", 
+            field: "solved_at", 
+            formatter: "date",
+        },
         {title: "{/literal}{translate}favorite{/translate}{literal}", field: "favorite", formatter: "tickCross", widthGrow: 1}
     ],
     rowClick: function(e, row) {
