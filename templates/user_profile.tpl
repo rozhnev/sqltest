@@ -24,7 +24,7 @@
                     <div style="width: 100%;">
                         <div class="profile">
                             <div class="profile-field">
-                                <span id="nickname-label">{translate}nickname{/translate}:</span>
+                                <span class="profile-field-label" id="nickname-label">{translate}nickname{/translate}:</span>
                                 <div class="nickname-container">
                                     <span id="nickname-display" class="nickname">{$User->getNickname()}</span>
                                     <input type="text" id="nickname-input" class="nickname-input hidden" value="{$User->getNickname()}" maxlength="50">
@@ -51,7 +51,8 @@
                                 </div>
                             </div>
                             <div class="profile-field">
-                                <span id="nickname-label">{translate}your_grade{/translate}:</span>
+                                <span class="profile-field-label" id="grade-label">{translate}your_grade{/translate}:</span>
+                                {$User->grade()} SQL Developer
                             </div>
                         </div>
                     </div>
@@ -79,6 +80,13 @@
     display: flex;
     align-items: center;
     gap: 1rem;
+    margin: 0.5rem;
+}
+.profile-field-label {
+    font-size: 1.1em;
+    color: var(--ligth-h2-color);
+    font-weight: bold;
+    min-width: 5rem;
 }
 
 .nickname-container {
