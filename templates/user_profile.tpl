@@ -11,7 +11,7 @@
         
     {else}
         <header>
-            {include file='top-menu.tpl' path="/user//profile"}
+            {include file='top-menu.tpl' path="/user/profile"}
         </header>
         <main>
             <div class="about">
