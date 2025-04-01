@@ -116,14 +116,14 @@
 /* Custom Tabulator theme matching your site */
 .tabulator {
     background-color: var(--ligth-panel-bg-color);
-    border: 1px solid var(--text-block-border-color);
-    border-radius: 6px;
+    border: none;
 }
 
 .tabulator .tabulator-header {
     background-color: var(--ligth-panel-bg-color) !important;
     border-bottom: 1px solid var(--text-block-border-color);
-    color: white;
+    border: 1px solid var(--text-block-border-color);
+    border-radius: 6px;
 }
 .tabulator .tabulator-headers .tabulator-col {
     background-color: var(--ligth-panel-bg-color) !important;
@@ -154,6 +154,10 @@
 }
 
 /* Customize pagination buttons */
+.tabulator .tabulator-footer {
+    border: none;
+    background-color: var(--ligth-panel-bg-color);
+}
 .tabulator .tabulator-footer .tabulator-paginator {
     color: var(--regular-text-color);
 }
@@ -231,13 +235,13 @@ let table = new Tabulator("#questions-table", {
     pagination: true,
     paginationSize: 25,
     columns: [
-        {title: "{/literal}{translate}question_title{/translate}{literal}", field: "title", sorter: "string", widthGrow: 3, headerFilter: "input"},
+        {title: "{/literal}{translate}question_title{/translate}{literal}", field: "title", sorter: "string", widthGrow: 4, headerFilter: "input"},
         {title: "{/literal}{translate}dbms{/translate}{literal}", field: "dbms", sorter: "string", headerFilter: "select", 
             headerFilterParams: {
                 values: {"Firebird": "Firebird", "MySQL": "MySQL", "PostgreSQL":"PostgreSQL", "SQL Server 2022":"SQL Server 2022", "SQLite":"SQLite"}
             }
         },
-        {title: "{/literal}{translate}complexity_level{/translate}{literal}", field: "rate", formatter: "star"},
+        {title: "{/literal}{translate}complexity_level{/translate}{literal}", field: "rate", formatter: "star", widthGrow: 1.5},
         {
             title: "{/literal}{translate}question_solved_at{/translate}{literal}", 
             field: "solved_at", 
