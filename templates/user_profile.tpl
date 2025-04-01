@@ -22,31 +22,36 @@
                 </div>
                 <div class="section colored">
                     <div style="width: 100%;">
-                        <div class="profile-field">
-                            <span id="nickname-label">{translate}nickname{/translate}:</span>
-                            <div class="nickname-container">
-                                <span id="nickname-display" class="nickname">{$User->getNickname()}</span>
-                                <input type="text" id="nickname-input" class="nickname-input hidden" value="{$User->getNickname()}" maxlength="50">
-                                <div class="profile-actions">
-                                    <button id="edit-btn" class="text-button" onclick="toggleNicknameEdit(true)" title="{translate}edit_nickname{/translate}">
-                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M16.474 5.408l2.118 2.117m-.756-3.982L12.109 9.27a2.118 2.118 0 00-.58 1.082L11 13l2.648-.53c.41-.082.786-.283 1.082-.58l5.727-5.727a1.853 1.853 0 000-2.621 1.853 1.853 0 00-2.621 0z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                            <path d="M19 15v3a2 2 0 01-2 2H6a2 2 0 01-2-2V7a2 2 0 012-2h3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                        </svg>
-                                    </button>
-                                    <div id="save-cancel-btns" class="hidden">
-                                        <button class="text-button green" onclick="saveNickname()" title="{translate}save_changes{/translate}">
+                        <div class="profile">
+                            <div class="profile-field">
+                                <span id="nickname-label">{translate}nickname{/translate}:</span>
+                                <div class="nickname-container">
+                                    <span id="nickname-display" class="nickname">{$User->getNickname()}</span>
+                                    <input type="text" id="nickname-input" class="nickname-input hidden" value="{$User->getNickname()}" maxlength="50">
+                                    <div class="profile-actions">
+                                        <button id="edit-btn" class="text-button" onclick="toggleNicknameEdit(true)" title="{translate}edit_nickname{/translate}">
                                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                <path d="M16.474 5.408l2.118 2.117m-.756-3.982L12.109 9.27a2.118 2.118 0 00-.58 1.082L11 13l2.648-.53c.41-.082.786-.283 1.082-.58l5.727-5.727a1.853 1.853 0 000-2.621 1.853 1.853 0 00-2.621 0z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                <path d="M19 15v3a2 2 0 01-2 2H6a2 2 0 01-2-2V7a2 2 0 012-2h3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                             </svg>
                                         </button>
-                                        <button class="text-button red" onclick="toggleNicknameEdit(false)" title="{translate}cancel{/translate}">
-                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M6 18L18 6M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                            </svg>
-                                        </button>
+                                        <div id="save-cancel-btns" class="hidden">
+                                            <button class="text-button green" onclick="saveNickname()" title="{translate}save_changes{/translate}">
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                </svg>
+                                            </button>
+                                            <button class="text-button red" onclick="toggleNicknameEdit(false)" title="{translate}cancel{/translate}">
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M6 18L18 6M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                </svg>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="profile-field">
+                                <span id="nickname-label">{translate}your_grade{/translate}:</span>
                             </div>
                         </div>
                     </div>
@@ -56,11 +61,6 @@
                         <h2>{translate}tasks{/translate}</h2>
                     </div>
                     <div id="questions-table"></div>
-
-                </div>
-                <div class="section bottom colored">
-                    <div>
-                    </div>
                 </div>
             </div>
         </main>
@@ -228,20 +228,23 @@ function saveNickname() {
         toggleNicknameEdit(false);
     }
 }
-
+const tableData = {/literal}{$Questions|json_encode nofilter}{literal};
+const dbmsFilter = tableData.reduce((acc,el)=>{acc[el.dbms] = el.dbms; return acc;}, {});
+const rateFilter = tableData.reduce((acc,el)=>{acc[el.rate] = el.rate; return acc;}, {})
 let table = new Tabulator("#questions-table", {
-    data: {/literal}{$Questions|json_encode nofilter}{literal}, // Use preloaded data
+    data: tableData, // Use preloaded data
     layout: "fitColumns",
     pagination: true,
     paginationSize: 25,
+    selectable: false, // Enable row selection to ensure rowClick works
     columns: [
         {title: "{/literal}{translate}question_title{/translate}{literal}", field: "title", sorter: "string", widthGrow: 4, headerFilter: "input"},
         {title: "{/literal}{translate}dbms{/translate}{literal}", field: "dbms", sorter: "string", headerFilter: "select", 
-            headerFilterParams: {
-                values: {"Firebird": "Firebird", "MySQL": "MySQL", "PostgreSQL":"PostgreSQL", "SQL Server 2022":"SQL Server 2022", "SQLite":"SQLite"}
-            }
+            headerFilterParams: {values: dbmsFilter}
         },
-        {title: "{/literal}{translate}complexity_level{/translate}{literal}", field: "rate", formatter: "star", widthGrow: 1.5},
+        {title: "{/literal}{translate}complexity_level{/translate}{literal}", field: "rate",  widthGrow: 1.5, headerFilter: "select", 
+            headerFilterParams: {values: rateFilter}
+        },
         {
             title: "{/literal}{translate}question_solved_at{/translate}{literal}", 
             field: "solved_at", 
@@ -249,14 +252,14 @@ let table = new Tabulator("#questions-table", {
         },
         {title: "{/literal}{translate}favorite{/translate}{literal}", field: "favorite", formatter: "tickCross", widthGrow: 1}
     ],
-    rowClick: function(e, row) {
-        window.location.href = `/{$Lang}/question/${row.getData().category}/${row.getData().slug}`;
-    },
     // Add initial sort
     initialSort: [
         {column: "title", dir: "asc"},
         {column: "dbms", dir: "asc"}
     ]
+});
+table.on("rowClick", function(e, row){
+    window.location.href = "/{/literal}{$Lang}{literal}/question/" + row.getData().category + "/" + row.getData().slug;
 });
 </script>
 {/literal}

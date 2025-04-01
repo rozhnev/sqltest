@@ -861,17 +861,20 @@ class User
                 q.id,
                 ql.title,
                 q.dbms,
-                q.rate,
-                'sakila-db' as category,
-                'Category' as category_name,
+                -- q.rate,
+                qrl.rate rate,
+                c.title_sef as category,
                 q.title_sef slug,
                 uq.solved_at::date solved_at,
                 (f.question_id IS NOT NULL) as favorite
             FROM user_questions uq
             JOIN questions q ON q.id = uq.question_id
             JOIN questions_localization ql ON q.id = ql.question_id AND ql.language = :lang
+            JOIN question_categories qc ON qc.question_id = q.id
+            JOIN categories c ON qc.category_id = c.id AND c.questionnire_id = 3
             LEFT JOIN question_rates qr ON q.rate = qr.id
             LEFT JOIN favorites f ON q.id = f.question_id AND f.user_id = :user_id
+            LEFT JOIN question_rates_localization qrl ON q.rate = qrl.id AND qrl.language = :lang
             WHERE uq.user_id = :user_id AND q.deleted = false
             ORDER BY q.id
         ");
