@@ -9,6 +9,7 @@ $translations = [
     'books_page_title' => 'Aprender SQL: os melhores livros para iniciantes e profissionais',
     'books_page_description' => 'Quer dominar a linguagem SQL e tornar-se um especialista em bases de dados muito procurado? Compilámos para si uma seleção dos livros mais úteis que o ajudarão a dar os primeiros passos no mundo do SQL.',
     'empty_query_result' => 'Sua consulta está vazia.',
+    'tasks' => 'Tarefas',
     'show_all_tasks' => 'Mostrar todas as tarefas',
     'hide_hide_solved_tasks' => 'Ocultar tarefas resolvidas',
     'error_message' => 'Ops! Algo deu errado, mas não se preocupe, temos muitas outras tarefas <a href="/pt/" target="_self">aqui</a>',

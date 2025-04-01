@@ -53,7 +53,7 @@
                 </div>
                 <div class="section colored" style="height: 100%;">
                     <div style="width: 100%;">
-                        <h2>{translate}profile_page_title{/translate}</h2>
+                        <h2>{translate}tasks{/translate}</h2>
                     </div>
                     <div id="questions-table"></div>
 
@@ -75,6 +75,7 @@
 {literal}
 <style>
 .profile-field {
+    color: var(--ligth-h2-color);
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -126,6 +127,7 @@
 }
 .tabulator .tabulator-headers .tabulator-col {
     background-color: var(--ligth-panel-bg-color) !important;
+    color: var(--ligth-h2-color);
     padding: 8px;
 }
 .tabulator .tabulator-row {
