@@ -252,7 +252,7 @@ let tasksTable = new Tabulator("#questions-table", {
     data: tasksTableData, // Use preloaded data
     layout: "fitColumns",
     pagination: true,
-    paginationSize: 25,
+    paginationSize: 10,
     selectable: false, // Enable row selection to ensure rowClick works
     columns: [
         {title: "{/literal}{translate}question_title{/translate}{literal}", field: "title", sorter: "string", widthGrow: 4, headerFilter: "input"},
