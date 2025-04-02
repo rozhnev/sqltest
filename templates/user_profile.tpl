@@ -65,6 +65,12 @@
                         </div>
                         <div id="questions-table"></div>
                     </div>
+                    <div class="section colored" style="height: 100%;">
+                        <div style="width: 100%;">
+                            <h2>{translate}tests{/translate}</h2>
+                        </div>
+                        <div id="tests-table"></div>
+                    </div>
                 </div>
             </main>
             <footer>               
@@ -147,6 +153,7 @@
 
 .tabulator .tabulator-row:hover {
     background-color: var(--menu-button-background-color);
+    color: white;
     cursor: pointer;
 }
 /* Add to your existing CSS */
@@ -238,11 +245,11 @@ function saveNickname() {
         toggleNicknameEdit(false);
     }
 }
-const tableData = {/literal}{$Questions|json_encode nofilter}{literal};
-const dbmsFilter = tableData.reduce((acc,el)=>{acc[el.dbms] = el.dbms; return acc;}, {});
-const rateFilter = tableData.reduce((acc,el)=>{acc[el.rate] = el.rate; return acc;}, {})
-let table = new Tabulator("#questions-table", {
-    data: tableData, // Use preloaded data
+const tasksTableData = {/literal}{$Questions|json_encode nofilter}{literal};
+const dbmsFilter = tasksTableData.reduce((acc,el)=>{acc[el.dbms] = el.dbms; return acc;}, {});
+const rateFilter = tasksTableData.reduce((acc,el)=>{acc[el.rate] = el.rate; return acc;}, {})
+let tasksTable = new Tabulator("#questions-table", {
+    data: tasksTableData, // Use preloaded data
     layout: "fitColumns",
     pagination: true,
     paginationSize: 25,
@@ -268,7 +275,39 @@ let table = new Tabulator("#questions-table", {
         {column: "dbms", dir: "asc"}
     ]
 });
-table.on("rowClick", function(e, row){
+tasksTable.on("rowClick", function(e, row){
+    window.location.href = "/{/literal}{$Lang}{literal}/question/" + row.getData().category + "/" + row.getData().slug;
+});
+const testsTableData = {/literal}{$Tests|json_encode nofilter}{literal};
+
+let testsTable = new Tabulator("#tests-table", {
+    data: testsTableData, // Use preloaded data
+    layout: "fitColumns",
+    pagination: true,
+    paginationSize: 10,
+    selectable: false, // Enable row selection to ensure rowClick works
+    columns: [
+        {
+            title: "{/literal}{translate}date{/translate}{literal}", 
+            field: "created_at", 
+            formatter: "date",
+        },
+        {
+            title: "{/literal}{translate}question_solved_at{/translate}{literal}", 
+            field: "solved_at", 
+            formatter: "date",
+        },
+        {title: "{/literal}{translate}tasks_count{/translate}{literal}", field: "tasks_count", formatter: "number", widthGrow: 1},
+        {title: "{/literal}{translate}tasks_solved_count{/translate}{literal}", field: "tasks_solved_count", formatter: "number", widthGrow: 1},
+        {title: "{/literal}{translate}test_result{/translate}{literal}", field: "grade"},
+    ],
+    // Add initial sort
+    initialSort: [
+        {column: "created_at", dir: "desc"},
+        {column: "solved_at", dir: "desc"}
+    ]
+});
+tasksTable.on("rowClick", function(e, row){
     window.location.href = "/{/literal}{$Lang}{literal}/question/" + row.getData().category + "/" + row.getData().slug;
 });
 </script>

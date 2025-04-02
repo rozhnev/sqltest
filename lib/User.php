@@ -896,5 +896,27 @@ class User
         $stmt->execute([':lang' => $lang, ':user_id' => $this->id]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
+    public function getTests(string $lang): array
+    {
+            // Fetch questions data
+            $stmt = $this->dbh->prepare("
+            SELECT 
+                tests.id,
+                created_at::date created_at,
+                closed_at::date closed_at,
+                (closed_at is not null and closed_at <= current_timestamp) closed,
+                COUNT(tq.question_id) tasks_count,
+                COUNT(tq.solved_at) tasks_solved_count,
+                g.title_en grade
+            FROM tests
+            JOIN test_questions tq ON tests.id = tq.test_id
+            LEFT JOIN grades g ON tests.rate = g.id
+            WHERE tests.user_id = :user_id
+            GROUP BY tests.id, created_at, closed_at, g.title_en
+            ORDER BY created_at
+        ");
+        
+        $stmt->execute([':user_id' => $this->id]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
