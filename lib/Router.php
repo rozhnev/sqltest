@@ -39,7 +39,11 @@ class Router
 
             }
         }
-        $this->controller->setLanguge(DEFAULT_LANGUAGE);
+        if (preg_match("@(?<lang>ru|en|pt)/@i", $path, $params)) {
+            $this->controller->setLanguge($params['lang'] ?? DEFAULT_LANGUAGE);
+        } else {
+            $this->controller->setLanguge(DEFAULT_LANGUAGE);
+        }
         return $this->controller->question([
             'questionID'            => 1,
             'questionCategory'      => $env['DEFAULT_QUESTIONS_CATEGORY'] ?? 'sql-basics',
