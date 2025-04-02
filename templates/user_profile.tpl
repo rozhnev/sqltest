@@ -26,8 +26,8 @@
                             <div class="profile-field">
                                 <span class="profile-field-label" id="nickname-label">{translate}nickname{/translate}:</span>
                                 <div class="nickname-container">
-                                    <span id="nickname-display" class="nickname">{$User->getNickname()}</span>
-                                    <input type="text" id="nickname-input" class="nickname-input hidden" value="{$User->getNickname()}" maxlength="50">
+                                    <span id="nickname-display" class="nickname">{$User->nickname()}</span>
+                                    <input type="text" id="nickname-input" class="nickname-input hidden" value="{$User->nickname()}" maxlength="50">
                                     <div class="profile-actions">
                                         <button id="edit-btn" class="text-button" onclick="toggleNicknameEdit(true)" title="{translate}edit_nickname{/translate}">
                                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

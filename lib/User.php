@@ -31,6 +31,7 @@ class User
     private $graded_at;
     private $show_ad = true;
     private $admin = false;
+    private $nickname;
 
     private $grades = [ 1 => 'Intern', 2 => 'Junior', 3 => 'Middle', 4 => 'Senior'];
     /**
@@ -75,7 +76,9 @@ class User
     public function loginSession(array $session): bool
     {
         if (($session && isset($session['user_id']))) {
-            $stmt = $this->dbh->prepare("SELECT id, grade, graded_at, (hide_ad_till is null or hide_ad_till < current_date) show_ad, admin FROM users WHERE id = :user_id;");
+            $stmt = $this->dbh->prepare("SELECT 
+                    id, grade, graded_at, (hide_ad_till is null or hide_ad_till < current_date) show_ad, admin, nickname
+                FROM users WHERE id = :user_id;");
             $stmt->execute([':user_id' => $session['user_id']]);
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
             if ($user) {
@@ -84,6 +87,7 @@ class User
                 $this->graded_at = $user['graded_at'];
                 $this->show_ad = $user['show_ad'];
                 $this->admin = $user['admin'];
+                $this->nickname = $user['nickname'];
                 return true;
             }
         }
@@ -346,6 +350,16 @@ class User
     public function grade(): ?string
     {
         return $this->grade ? $this->grades[$this->grade] : null;
+    }
+
+    /**
+     * Return User's grade
+     *
+     * @return string
+     */
+    public function nickname(): ?string
+    {
+        return $this->nickname;
     }
 
     /**

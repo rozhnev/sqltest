@@ -1,4 +1,4 @@
-{$GradeColors = ['Intern'=>'#3F3F3F','Junior'=>'#00FF00','Middle'=>'#0000FF','Senior'=>'#FF0000']}
+{$GradeColors = [''=>null,'Intern'=>'#3F3F3F','Junior'=>'#00FF00','Middle'=>'#0000FF','Senior'=>'#FF0000']}
 {assign var="GradeColor" value="{$GradeColors[$User->grade()]}"|default:'#FFFFFF'}
 {assign var="Grade" value="{$User->grade()}"}
 <div style="    display: flex;    gap: 1rem;    align-items: center;">
@@ -8,7 +8,9 @@
             <path d="M32 40C20 40 10 48 10 58H54C54 48 44 40 32 40Z" fill="{$GradeColor}"/>
         </svg>
     </div>
-    {if isset($User->grade())}<h4>{translate}hello{/translate}, {translate}graded_sql_developer{/translate}!</h4>{/if}
+    <h4>
+        {translate}hello{/translate}{if $User->nickname()}, {$User->nickname()}{elseif $User->grade()}, {translate}graded_sql_developer{/translate}{/if}!
+    </h4>
 </div>
 {if $RecommendedAchievement}
 <h4>{translate}recomended_achievement{/translate}:</h4>

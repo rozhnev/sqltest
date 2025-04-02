@@ -13,7 +13,7 @@
             <div style="width: 100%; padding: 5px;">⎆</div>
         </button> *}
         <div style="position: relative;" onclick="toggleAchievements('{$Lang}');">
-            {$GradeColors = ['Intern'=>'#3F3F3F','Junior'=>'#00FF00','Middle'=>'#0000FF','Senior'=>'#FF0000']}
+            {$GradeColors = [''=>null,'Intern'=>'#3F3F3F','Junior'=>'#00FF00','Middle'=>'#0000FF','Senior'=>'#FF0000']}
             {assign var="GradeColor" value="{$GradeColors[$User->grade()]}"|default:'#FFFFFF'}
             <div class="button green" style="padding: 0; display: flex; align-items: center; justify-content: center;">
                 <svg width="36" height="36" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
