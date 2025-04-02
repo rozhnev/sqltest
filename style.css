@@ -183,6 +183,9 @@ main {
     top: 50dvh;
     transition: opacity 0.3s ease-out, top 1s;
 }
+.toast.error{
+    background: darkred;
+}
 .login-popup  {
     opacity: 0;
     transition: opacity 0.3s ease-out;

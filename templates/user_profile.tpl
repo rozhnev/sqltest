@@ -224,13 +224,13 @@ function saveNickname() {
             if (data.ok) {
                 display.textContent = newNickname;
                 toggleNicknameEdit(false);
-                showToast(/* 'success', */ '{/literal}{translate}nickname_updated{/translate}{literal}');
+                showToast('info', '{/literal}{translate}nickname_updated{/translate}{literal}');
             } else {
-                showToast(/* 'error', */ data.error || '{/literal}{translate}update_failed{/translate}{literal}');
+                showToast('error', data.error || '{/literal}{translate}update_failed{/translate}{literal}');
             }
         })
         .catch(error => {
-            showToast(/* 'error', */ '{/literal}{translate}update_failed{/translate}{literal}');
+            showToast('error', '{/literal}{translate}update_failed{/translate}{literal}');
             console.error('Error:', error);
         });
     } else {

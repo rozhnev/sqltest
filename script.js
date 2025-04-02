@@ -43,14 +43,21 @@ function setLoader(id) {
     return document.getElementById(id).innerHTML = '<div class="loader">Loading...</div>';
 }
 
-function showToast(msg) {
+function showToast(state, msg) {
     const toast = document.getElementById("toast");
+    if (state !== "error") {
+        toast.classList.remove("error");
+        state = "info";
+    }
     toast.innerText = msg || "...";
+    toast.classList.remove("info");
+    toast.classList.add(state);
     toast.classList.toggle("visible");
+    const showTime = state === "error" ? 5000 : 2000;
     setTimeout((function() {
         toast.classList.toggle("visible");
     }
-    ), 1999)
+    ), showTime)
 }
 function loadMenu(questionnire) {
     fetch(`/${lang}/menu?questionnire=${questionnire}`, {
@@ -76,7 +83,7 @@ function loadMenu(questionnire) {
 function copyCode(msg) {
     const editor = window.sql_editor;
     navigator.clipboard && navigator.clipboard.writeText(editor.getValue()),
-    showToast(msg)
+    showToast('info', msg)
 }
 
 function clearEditor() {
@@ -269,13 +276,14 @@ function toggleFavorites(lang, questionId) {
         if (response.ok) {
             if (document.getElementById("favoriteStar")) {
                 const message =  await response.text();
-                showToast(message);
+                showToast('info', message);
                 document.getElementById("favoriteStar").classList.toggle("favored");
                 // document.getElementById("favoriteStar").title = 'Favored'
             } 
         }
     }))
     .catch(err=>{
+        showToast('error', 'Something went wrong. Please ask admin for help.');
     });
 }
 function checkSolution(url) {
@@ -364,10 +372,11 @@ function solutionUpdate(solutionId, action) {
     .then((async response=>{
         if (response.ok) {
             const message =  await response.text();
-            showToast(message);
+            showToast('info', message);
         }
     }))
     .catch(err=>{
+        showToast('error', 'Something went wrong. Please ask admin for help.');
     });
 }
 function solutionLike(solutionId) {
@@ -398,11 +407,12 @@ function solutionDelete(lang, questionId, solutionId) {
     .then((async response=>{
       if (response.ok) {
         const message =  await response.text();
-        showToast(message);
+        showToast('info', message);
       }
     }))
     .then(()=>showMySolutions(questionId))
     .catch(err=>{
+        showToast('error', 'Something went wrong. Please ask admin for help.');
     });
 }
 function solutionRun(lang, questionId, solutionId) {
@@ -424,10 +434,11 @@ function rateQuestion(questionId, rate) {
     .then((async response=>{
         if (response.ok) {
             const message =  await response.text();
-            showToast(message);
+            showToast('info', message);
         }
     }))
     .catch(err=>{
+        showToast('error', 'Something went wrong. Please ask admin for help.');
     });
 }
 function toggleSolvedTasks(e) {
