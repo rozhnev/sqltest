@@ -7,6 +7,7 @@
 <link href="https://unpkg.com/tabulator-tables@5.5.2/dist/css/tabulator.min.css" rel="stylesheet">
 <script type="text/javascript" src="https://unpkg.com/tabulator-tables@5.5.2/dist/js/tabulator.min.js"></script>
 <body>
+    {include file='popups.tpl'}
     {if $MobileView}
         
     {else}
@@ -211,7 +212,7 @@ function saveNickname() {
     const newNickname = input.value.trim();
 
     if (newNickname && newNickname !== display.textContent) {
-        fetch(`/{$Lang}/user/update`, {
+        fetch(`/${lang}/user/update`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -223,13 +224,13 @@ function saveNickname() {
             if (data.ok) {
                 display.textContent = newNickname;
                 toggleNicknameEdit(false);
-                showToast('success', '{translate}nickname_updated{/translate}');
+                showToast(/* 'success', */ '{/literal}{translate}nickname_updated{/translate}{literal}');
             } else {
-                showToast('error', data.error || '{translate}update_failed{/translate}');
+                showToast(/* 'error', */ data.error || '{/literal}{translate}update_failed{/translate}{literal}');
             }
         })
         .catch(error => {
-            showToast('error', '{translate}update_failed{/translate}');
+            showToast(/* 'error', */ '{/literal}{translate}update_failed{/translate}{literal}');
             console.error('Error:', error);
         });
     } else {

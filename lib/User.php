@@ -856,7 +856,7 @@ class User
         }
 
         // Only allow letters, numbers, and some special characters
-        if (!preg_match('/^[a-zA-Z0-9_\-. ]+$/', $nickname)) {
+        if (!preg_match('/^[a-zA-Z0-9_\-.@ ]+$/', $nickname)) {
             throw new Exception(Localizer::translateString('nickname_invalid_chars'));
         }
 
