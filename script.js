@@ -33,6 +33,15 @@ function switchTheme(e) {
             darkTheme: window.UIConfig.theme === 'dark'
         });
     }
+    if (document.getElementById('yandex_rtb_R-A-4716552-7')) {
+        window.yaContextCb.push(() => {
+            Ya.Context.AdvManager.render({
+                "blockId": "R-A-4716552-7",
+                "renderTo": "yandex_rtb_R-A-4716552-7",
+                "darkTheme": window.UIConfig.theme === 'dark'
+            })
+        })
+    }
 }
 function formatCode() {
     const beautify = ace.require("ace/ext/beautify");

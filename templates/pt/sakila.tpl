@@ -543,9 +543,10 @@
     </div>
     {if $User->showAd()}
         <div class="referal-add-block">
-            <a target="_blank" rel="nofollow" href="https://bywiola.com/g/u1k11fxms7fec845fb2fd629c4b097/?i=4">
+            <div id="yandex_rtb_R-A-4716552-7"></div>
+            {* <a target="_blank" rel="nofollow" href="https://bywiola.com/g/u1k11fxms7fec845fb2fd629c4b097/?i=4">
                 <img style="width: 100%;" border="0" src="https://ad.admitad.com/b/u1k11fxms7fec845fb2fd629c4b097/" alt="edX Many Geos"/>
-            </a>
+            </a> *}
         </div>
     {/if}
 </div>
