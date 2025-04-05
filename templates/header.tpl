@@ -57,20 +57,33 @@
                     {/literal}
                 {else}
                     {literal}
-                    window.yaContextCb.push(()=>{
-                        Ya.Context.AdvManager.render({
-                            "blockId": "R-A-4716552-2",
-                            "renderTo": "yandex_rtb_R-A-4716552-2",
-                            darkTheme: window.UIConfig.theme === 'dark'
+                    if (document.getElementById('yandex_rtb_R-A-4716552-2')) {
+                        window.yaContextCb.push(()=>{
+                            Ya.Context.AdvManager.render({
+                                "blockId": "R-A-4716552-2",
+                                "renderTo": "yandex_rtb_R-A-4716552-2",
+                                darkTheme: window.UIConfig.theme === 'dark'
+                            })
+                        });
+                    }
+                    if (document.getElementById('yandex_rtb_R-A-4716552-4')) {
+                        window.yaContextCb.push(()=>{
+                            Ya.Context.AdvManager.render({
+                                "blockId": "R-A-4716552-4",
+                                "renderTo": "yandex_rtb_R-A-4716552-4",
+                                darkTheme: window.UIConfig.theme === 'dark'
+                            })
                         })
-                    });
-                    window.yaContextCb.push(()=>{
-                        Ya.Context.AdvManager.render({
-                            "blockId": "R-A-4716552-4",
-                            "renderTo": "yandex_rtb_R-A-4716552-4",
-                            darkTheme: window.UIConfig.theme === 'dark'
+                    }
+                    if (document.getElementById('yandex_rtb_R-A-4716552-7')) {
+                        window.yaContextCb.push(()=>{
+                            Ya.Context.AdvManager.render({
+                                "blockId": "R-A-4716552-4",
+                                "renderTo": "yandex_rtb_R-A-4716552-7",
+                                darkTheme: window.UIConfig.theme === 'dark'
+                            })
                         })
-                    })
+                    }
                     {/literal}
                 {/if}
                 var lang = '{$Lang}',
