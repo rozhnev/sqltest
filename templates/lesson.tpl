@@ -67,7 +67,7 @@
                 </div>
             </div>
             <div class="column" id="right-panel">
-                <div class="referal-add-block">
+                <div class="referal-add-block" style="height: 100%;">
                     <div id="yandex_rtb_R-A-4716552-7"></div>
                 </div>
             </div>
