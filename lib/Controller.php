@@ -567,5 +567,72 @@ class Controller
         ]);
         $this->engine->display("achievements.tpl");
     }
+
+    /**
+     * Show user profile page
+     * 
+     * @param array $params Route parameters
+     * @return void
+     */
+    public function user_profile(array $params): void
+    {
+        if (!$this->user->logged()) {
+            header("Location: /{$this->lang}/");
+            exit();
+        }
+
+        $questions = $this->user->getQuestions($this->lang);
+        $tests = $this->user->getTests($this->lang);
+
+        $this->assignVariables([
+            'Action' => 'profile',
+            'Title' => Localizer::translateString('profile_page_title'),
+            'User'  => $this->user,
+            'Questions' => $questions,
+            'Tests' => $tests,
+        ]);
+
+        $this->engine->display("user_profile.tpl");
+    }
+
+    /**
+     * Update user nickname
+     * 
+     * @param array $params Route parameters
+     * @return void
+     */
+    public function user_update(array $params): void
+    {
+        header('Content-Type: application/json');
+        
+        if (!$this->user->logged()) {
+            echo json_encode([
+                'ok' => false,
+                'error' => Localizer::translateString('login_needed')
+            ]);
+            return;
+        }
+
+        $data = json_decode(file_get_contents('php://input'), true);
+        $nickname = trim($data['nickname'] ?? '');
+
+        if (empty($nickname)) {
+            echo json_encode([
+                'ok' => false,
+                'error' => Localizer::translateString('nickname_empty')
+            ]);
+            return;
+        }
+
+        try {
+            $this->user->setNickname($nickname);
+            echo json_encode(['ok' => true]);
+        } catch (Exception $e) {
+            echo json_encode([
+                'ok' => false,
+                'error' => $e->getMessage()
+            ]);
+        }
+    }
 }
 ?>

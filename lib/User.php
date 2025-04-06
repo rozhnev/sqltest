@@ -31,6 +31,7 @@ class User
     private $graded_at;
     private $show_ad = true;
     private $admin = false;
+    private $nickname;
 
     private $grades = [ 1 => 'Intern', 2 => 'Junior', 3 => 'Middle', 4 => 'Senior'];
     /**
@@ -75,7 +76,9 @@ class User
     public function loginSession(array $session): bool
     {
         if (($session && isset($session['user_id']))) {
-            $stmt = $this->dbh->prepare("SELECT id, grade, graded_at, (hide_ad_till is null or hide_ad_till < current_date) show_ad, admin FROM users WHERE id = :user_id;");
+            $stmt = $this->dbh->prepare("SELECT 
+                    id, grade, graded_at, (hide_ad_till is null or hide_ad_till < current_date) show_ad, admin, nickname
+                FROM users WHERE id = :user_id;");
             $stmt->execute([':user_id' => $session['user_id']]);
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
             if ($user) {
@@ -84,6 +87,7 @@ class User
                 $this->graded_at = $user['graded_at'];
                 $this->show_ad = $user['show_ad'];
                 $this->admin = $user['admin'];
+                $this->nickname = $user['nickname'];
                 return true;
             }
         }
@@ -346,6 +350,16 @@ class User
     public function grade(): ?string
     {
         return $this->grade ? $this->grades[$this->grade] : null;
+    }
+
+    /**
+     * Return User's grade
+     *
+     * @return string
+     */
+    public function nickname(): ?string
+    {
+        return $this->nickname;
     }
 
     /**
@@ -806,5 +820,103 @@ class User
         // var_dump( $stmt->fetchAll(PDO::FETCH_NUM));
         // die();
         return $stmt->fetchAll(PDO::FETCH_NUM);
+    }
+
+    /**
+     * Get user's nickname
+     *
+     * @return string
+     */
+    public function getNickname(): string
+    {
+        if (!$this->logged()) {
+            return '';
+        }
+
+        $stmt = $this->dbh->prepare("SELECT nickname FROM users WHERE id = ?");
+        $stmt->execute([$this->id]);
+        return $stmt->fetchColumn() ?: '';
+    }
+
+    /**
+     * Set user's nickname
+     *
+     * @param string $nickname
+     * @return bool
+     * @throws Exception if nickname is invalid or update fails
+     */
+    public function setNickname(string $nickname): bool
+    {
+        if (!$this->logged()) {
+            throw new Exception(Localizer::translateString('login_needed'));
+        }
+
+        if (strlen($nickname) < 3 || strlen($nickname) > 50) {
+            throw new Exception(Localizer::translateString('nickname_length_error'));
+        }
+
+        // Only allow letters, numbers, and some special characters
+        if (!preg_match('/^[a-zA-Z0-9_\-.@ ]+$/', $nickname)) {
+            throw new Exception(Localizer::translateString('nickname_invalid_chars'));
+        }
+
+        $stmt = $this->dbh->prepare("UPDATE users SET nickname = ? WHERE id = ?");
+        if (!$stmt->execute([$nickname, $this->id])) {
+            throw new Exception(Localizer::translateString('update_failed'));
+        }
+
+        return true;
+    }
+    public function getQuestions(string $lang): array
+    {
+            // Fetch questions data
+            $stmt = $this->dbh->prepare("
+            SELECT 
+                q.id,
+                ql.title,
+                q.dbms,
+                -- q.rate,
+                qrl.rate rate,
+                c.title_sef as category,
+                q.title_sef slug,
+                uq.solved_at::date solved_at,
+                (f.question_id IS NOT NULL) as favorite
+            FROM user_questions uq
+            JOIN questions q ON q.id = uq.question_id
+            JOIN questions_localization ql ON q.id = ql.question_id AND ql.language = :lang
+            JOIN question_categories qc ON qc.question_id = q.id
+            JOIN categories c ON qc.category_id = c.id AND c.questionnire_id = 3
+            LEFT JOIN question_rates qr ON q.rate = qr.id
+            LEFT JOIN favorites f ON q.id = f.question_id AND f.user_id = :user_id
+            LEFT JOIN question_rates_localization qrl ON q.rate = qrl.id AND qrl.language = :lang
+            WHERE uq.user_id = :user_id AND q.deleted = false
+            ORDER BY q.id
+        ");
+        
+        $stmt->execute([':lang' => $lang, ':user_id' => $this->id]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function getTests(string $lang): array
+    {
+            // Fetch questions data
+            $stmt = $this->dbh->prepare("
+            SELECT 
+                tests.id,
+                created_at::date created_at,
+                closed_at::date closed_at,
+                (closed_at is not null and closed_at <= current_timestamp) closed,
+                COUNT(tq.question_id) tasks_count,
+                COUNT(tq.solved_at) tasks_solved_count,
+                g.title_en grade
+            FROM tests
+            JOIN test_questions tq ON tests.id = tq.test_id
+            LEFT JOIN grades g ON tests.rate = g.id
+            WHERE tests.user_id = :user_id
+            GROUP BY tests.id, created_at, closed_at, g.title_en
+            ORDER BY created_at
+        ");
+        
+        $stmt->execute([':user_id' => $this->id]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
