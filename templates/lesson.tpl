@@ -1,4 +1,6 @@
 {include file='header.tpl'}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/monokai-sublime.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 <body>
     <div class="container">
         {include file='popups.tpl'}
@@ -77,5 +79,6 @@
         </footer>
         </div>
         {include file='counters.tpl'}
+        <script>hljs.highlightAll();</script>
     </body>
 </html>
