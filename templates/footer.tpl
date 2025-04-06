@@ -23,3 +23,40 @@
         <a href="/{$Lang}/lesson/getting-started/introduction-to-databases" target="_self">{translate}lessons{/translate}</a>
     </div>
 </div>
+<script>
+    {if $MobileView}
+        {literal}
+        window.yaContextCb.push(()=>{
+            Ya.Context.AdvManager.render({
+                "blockId": "R-A-4716552-3",
+                "type": "floorAd",
+                "platform": "touch"
+            })
+        })
+        {/literal}
+    {else}
+        {literal}
+            window.yaContextCb.push(()=>{
+                Ya.Context.AdvManager.render({
+                    "blockId": "R-A-4716552-2",
+                    "renderTo": "yandex_rtb_R-A-4716552-2",
+                    darkTheme: window.UIConfig.theme === 'dark'
+                })
+            });
+            window.yaContextCb.push(()=>{
+                Ya.Context.AdvManager.render({
+                    "blockId": "R-A-4716552-4",
+                    "renderTo": "yandex_rtb_R-A-4716552-4",
+                    darkTheme: window.UIConfig.theme === 'dark'
+                })
+            })
+            window.yaContextCb.push(()=>{
+                Ya.Context.AdvManager.render({
+                    "blockId": "R-A-4716552-7",
+                    "renderTo": "yandex_rtb_R-A-4716552-7",
+                    darkTheme: window.UIConfig.theme === 'dark'
+                })
+            })
+        {/literal}
+    {/if}
+</script>
