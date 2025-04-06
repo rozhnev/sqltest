@@ -155,5 +155,8 @@ $translations = [
     'nickname_length_error' => 'O apelido deve ter entre 3 e 50 caracteres',
     'nickname_invalid_chars' => 'O apelido pode conter apenas letras, números, espaços, pontos, sublinhados e hífens',
     'dbms' => 'Sistema de Gerenciamento de Banco de Dados',
-
+    'lessons' => 'lições',
+    'lessons_page_title' => 'Curso de SQL para Iniciantes.',
+    'next_lesson' =>    'Próxima lição',
+    'previous_lesson' => 'Lição anterior',
 ];

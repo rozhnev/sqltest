@@ -648,6 +648,17 @@ input:checked + .slider:before {
     color: var(--question-text);
     border-radius: 6px;
     padding: 0.5em;
+    line-height: 1.5rem;
+}
+.question-wrapper table {
+    border-collapse: collapse;
+    border: 1px solid var(--text-block-border-color);
+}
+.question-wrapper th {
+    background-color: var(--accordion-panel-bg-color);
+    color: var(--question-text);
+    border: 1px solid var(--text-block-border-color);
+    padding: 5px 10px;
 }
 .question {
     padding: 5px 15px;

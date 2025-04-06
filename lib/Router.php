@@ -16,6 +16,7 @@ class Router
         'test'              => "@(?<lang>ru|en|pt)/(?<class>test)/(?<testId>[a-z0-9-]+)/(?<action>grade|result)@i",
         'test_question'     => "@(?<lang>ru|en|pt)/(?<class>test)/(?<testId>[a-z0-9-]+)/(?<action>question|check)/?(?<questionID>\d+)?@i",
         'user'              => "@(?<lang>ru|en|pt)/(?<class>user)/(?<action>achievements|profile|update)@i",
+        'lessons'           => "@(?<lang>ru|en|pt)/(?<action>lesson)/(?<module>[a-z-]+)/(?<lesson>[a-z-]+)@i",
     ];
 
     public function __construct(Controller $controller)

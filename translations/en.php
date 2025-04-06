@@ -155,4 +155,8 @@ $translations = [
     'nickname_length_error' => 'Nickname must be between 3 and 50 characters',
     'nickname_invalid_chars' => 'Nickname can only contain letters, numbers, spaces, dots, underscores and hyphens',
     'dbms' => 'DBMS',
+    'lessons' => 'Lessons',
+    'lessons_page_title' => 'SQL Course for Beginners.',
+    'next_lesson' =>    'Next lesson',
+    'previous_lesson' => 'Previous lesson',
 ];

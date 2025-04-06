@@ -634,5 +634,28 @@ class Controller
             ]);
         }
     }
+
+    public function lesson(array $params): void 
+    {
+        $lesson = new Lesson($this->dbh, $params['lesson']);
+
+        $parser = new \cebe\markdown\GithubMarkdown();
+        $lessonData = $lesson->get($this->lang);
+        $lessonData['content'] = $parser->parse($lessonData['content']);
+
+        $this->assignVariables([
+            'Action' => 'lesson',
+            'PageTitle' => Localizer::translateString('lessons_page_title') . ' ' .$lessonData['title'],
+            'PageDescription' => $lessonData['description'],
+            'Lessons' => $lesson->getList($this->lang),
+            'Lesson' => $lesson,
+            'LessonData' => $lessonData,
+            'NextLesson' => [
+                'slug' => '',
+                'moduleSlug' => ''
+            ]
+        ]);
+        $this->engine->display("lesson.tpl");
+    }
 }
 ?>

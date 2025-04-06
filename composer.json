@@ -1,6 +1,7 @@
 {
     "require": {
-        "smarty/smarty": "^4.3"
+        "smarty/smarty": "^4.3",
+        "cebe/markdown": "~1.2.0"
     },
     "autoload": {
         "classmap": [
