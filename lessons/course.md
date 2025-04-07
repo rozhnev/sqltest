@@ -23,14 +23,15 @@
 1.  **Introduction to SQL and Databases**
     *   Introduction to Databases
     *   Relational Database Concepts
+    *   Basic Types of data
     *   Overview of SQL
 2.  **Basic SQL Syntax and Queries**
     *   Select data from table
-    *   Connecting to a Database
-    *   Retrieving Data with the SELECT Statement
     *   Filtering Data with the WHERE Clause
     *   Sorting and Limiting Results
     *   Using Functions in SQL Queries
+    *   Aliasing columns
+
 3.  **Data Retrieval and Filtering**
     *   Basic Data Retrieval - The SELECT Statement
     *   Filtering Data with the WHERE Clause
@@ -42,6 +43,7 @@
     *   Grouping Data with GROUP BY
     *   Filtering Groups with HAVING
 5.  **Working with Multiple Tables**
+    *   Aliasing tables
     *   Using Aggregate Functions with Joins
     *   Understanding Joins: INNER JOIN, LEFT JOIN, RIGHT JOIN, FULL OUTER JOIN
     *   Combining Data from Multiple Tables
