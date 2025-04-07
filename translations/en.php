@@ -120,6 +120,7 @@ $translations = [
     'view_solutions' => 'View solutions',
     'check_your_skills' => 'Check your skills!',
     'test_time_to_complete' => 'Time to complete this test is',
+    'tasks_completed' => 'Tasks completed',
     'test_time_over' => 'Test time is over!',
     'test_time_out' => 'The time allotted for completing the test has expired.',
     'go_to_rate' => 'You can <a href="/en/test/##TestId##/result">proceed to the assessment</a>.',

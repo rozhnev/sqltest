@@ -120,6 +120,7 @@ $translations = [
     'done' => 'Feito!',
     'check_your_skills' => 'Teste suas habilidades!',
     'test_time_to_complete' => 'Tempo para completar este teste é',
+    'tasks_completed' => 'Tarefas concluídas',
     'test_time_over' => 'O tempo do teste acabou!',
     'test_time_out' => 'O tempo previsto para a conclusão do teste expirou.',
     'go_to_rate' => 'Você pode <a href="/pt/test/##TestId##/result">prosseguir para a avaliação</a>.',
