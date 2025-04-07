@@ -182,35 +182,8 @@
     </div>
     {/literal}                         
     {if $User->showAd()}
-        {assign var=add_id value=0|mt_rand:4}
         <div class="referal-add-block">
-            {if $add_id > 2}
-                {* <a href="https://book24.ru/r/iuZxo?erid=LjN8KKn37" target="_blank" style="text-decoration: none; display: flex;">
-                    <div  style = "width: 30%;">
-                        <img style="width: 100%;" src="//ndc.book24.ru/resize/410x590/pim/products/images/6f/0f/018ee0c1-cb86-72ca-be63-928004a76f0f.jpg" alt="PostgreSQL Основы языка SQL : учебное пособие">
-                    </div>
-                    <div style="font-size: 1em;  width: 70%;  padding: 0 0.7em; font-weight: 100;">
-                        <div>Моргунов Евгений Павлович: PostgreSQL Основы языка SQL.</div>
-                        <div style="font-size: small; padding-top: 0.5em;">
-                            Учебно-практическое пособие охватывает первую, базовую, часть учебного курса по языку SQL, созданного при участии российской компании Postgres Professional. 
-                            Учебный материал излагается в расчете на использование СУБД PostgreSQL. 
-                        </div>
-                    </div>
-                </a> *}
-                <a target="_blank" rel="nofollow" href="https://ujhjj.com/g/2fm4vusamufec845fb2f0da0172cef/?i=4&subid=sql&erid=LatgBVMfa">
-                    <img style="width:100%;" border="0" src="https://aflink.ru/b/2fm4vusamufec845fb2f0da0172cef/" alt="Skillfactory.ru"/>
-                </a>
-                <a target="_blank" rel="nofollow" href="https://dhwnh.com/g/8gb84134qdfec845fb2faf541d880b/?i=4&subid=new-year&erid=LatgBjjaY">
-                    <img style="width:100%;" border="0" src="https://aflink.ru/b/8gb84134qdfec845fb2faf541d880b/" alt="Hexlet.io"/>
-                </a>
-            {else}
-                <a target="_blank" rel="nofollow" href="https://dhwnh.com/g/6rwnj0ozlxfec845fb2f42f9f2178b/?i=4&erid=2VSb5zFnq8c">
-                    <img style="width:100%;" border="0" src="https://aflink.ru/b/6rwnj0ozlxfec845fb2f42f9f2178b/" alt="Puzzle Movies"/>
-                </a>
-                <a target="_blank" rel="nofollow" href="https://ujhjj.com/g/2fm4vusamufec845fb2f0da0172cef/?i=4&subid=learn-sql&erid=LatgBVMfa">
-                    <img style="width:100%;" border="0" src="https://aflink.ru/b/2fm4vusamufec845fb2f0da0172cef/" alt="Skillfactory.ru"/>
-                </a>
-            {/if}
+            <div id="yandex_rtb_R-A-4716552-7"></div>
         </div>
     {/if}
 </div>
