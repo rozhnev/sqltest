@@ -1,6 +1,12 @@
 {include file='header.tpl'}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/xcode.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<style>
+.question-wrapper li {
+    line-height: 1.5rem;
+    margin: 0.75rem 0;
+}
+</style>
 <body>
     <div class="container">
         {include file='popups.tpl'}

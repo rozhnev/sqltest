@@ -24,11 +24,8 @@
     *   Introduction to Databases
     *   Relational Database Concepts
     *   Overview of SQL
-    *   Understanding Relational Databases
-    *   Basic SQL Syntax and Conventions
-    *   Writing Your First SQL Query
 2.  **Basic SQL Syntax and Queries**
-    *   Understanding SQL Statements and Clauses
+    *   Select data from table
     *   Connecting to a Database
     *   Retrieving Data with the SELECT Statement
     *   Filtering Data with the WHERE Clause

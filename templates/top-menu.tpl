@@ -1,38 +1,20 @@
+{if !isset($SitePromo)}
+    {assign var="SitePromo" value="{translate}site_promo{/translate}"}
+{/if}
+{if !isset($SiteDescription)}
+    {assign var="SiteDescription" value="{translate}site_description{/translate}"}
+{/if}
 <div class="top-menu-left">
     <a href="/{$Lang}/" target="_self" style="display: flex;">
         <h1 class="site-name-wrapper">
             <span class="site-name">SQLtest</span>
-            <span class="site-promo">
-                {if $Action === 'question'}
-                    {if isset($Question.answers)}
-                        {translate}site_promo_question_quiz{/translate}
-                    {else}
-                        {translate}site_promo_question_task{/translate}
-                    {/if}
-                {elseif $Action === 'test'}
-                    {translate}site_promo_test{/translate}
-                {else}
-                    {translate}site_promo{/translate}
-                {/if}
-            </span>
+            <span class="site-promo">{$SitePromo}</span>
         </h1>
     </a>
     <div class="divider"></div>
 </div>
 <div class="top-menu-center">
-    <span  class="site-description">
-        {if $Action === 'question'}
-            {if isset($Question.answers)}
-                {translate}site_description_question_quiz{/translate}
-            {else}
-                {translate}site_description_question_task{/translate}
-            {/if}
-        {elseif $Action === 'test'}
-            {translate}site_description_test{/translate}
-        {else}
-            {translate}site_description{/translate}
-        {/if}
-    </span>
+    <span  class="site-description">{$SiteDescription}</span>
 </div>
 <div class="top-menu-buttons" style="min-width: 16rem;">
     <a href="/{$Lang}/donate" target="_self" id="donate-btn">

@@ -47,6 +47,7 @@ $translations = [
     'site_promo_question_task' => 'задачи по SQL',
     'site_promo_question_quiz' => 'вопросы по SQL',
     'site_promo_test' => 'Узнай свой SQL рейтинг!',
+    'site_promo_lessons' => 'уроки SQL',
     'something_went_wrong' => '😨 Упс! Что-то пошло не так.',
     'done' => 'Готово!',
     'favorite' => 'Избранное',

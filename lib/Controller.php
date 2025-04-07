@@ -278,6 +278,8 @@ class Controller
 
         $this->registerModifiers(['floor', 'in_array']);
         $this->assignVariables([
+            'SitePromo'             => Localizer::translateString(isset($questionData['answers']) ? 'site_promo_question_quiz' : 'site_promo_question_task'),
+            'SiteDescription'       => Localizer::translateString(isset($questionData['answers']) ? 'site_description_question_quiz' : 'site_description_question_task'),
             'QuestionID'            => $questionID,
             'Questionnire'          => $questionnire->get($questionnireName, $this->user->getId()),
             'QuestionCategoryID'    => $questionCategoryID,
@@ -388,6 +390,10 @@ class Controller
         if ($this->user->logged()) {
             $this->engine->assign('LastTest', $this->user->getLastTest());
         }
+        $this->assignVariables([
+            'SitePromo' => Localizer::translateString('site_promo_test'),
+            'SiteDescription'       => Localizer::translateString('site_description_test'),
+        ]);
         $this->engine->display("test_start.tpl");
     }
 
@@ -426,6 +432,8 @@ class Controller
 
         $testResult = $test->calculateResult();
         $this->assignVariables([
+            'SitePromo' => Localizer::translateString('site_promo_test'),
+            'SiteDescription'       => Localizer::translateString('site_description_test'),
             'TestData'      => $testData,
             'TestResult'    => $testResult
         ]);
@@ -485,6 +493,8 @@ class Controller
         }
 
         $this->assignVariables([
+            'SitePromo'             => Localizer::translateString('site_promo_test'),
+            'SiteDescription'       => Localizer::translateString('site_description_test'),
             'QuestionID'            => $questionID,
             'TestId'                => $params['testId'],
             'Question'              => $questionData,
@@ -644,15 +654,17 @@ class Controller
         $lessonData['content'] = $parser->parse($lessonData['content']);
 
         $this->assignVariables([
-            'Action' => 'lesson',
-            'PageTitle' => Localizer::translateString('lessons_page_title') . ' ' .$lessonData['title'],
-            'PageDescription' => $lessonData['description'],
-            'Lessons' => $lesson->getList($this->lang),
-            'Lesson' => $lesson,
-            'LessonData' => $lessonData,
-            'NextLesson' => [
-                'slug' => '',
-                'moduleSlug' => ''
+            'Action'            => 'lesson',
+            'PageTitle'         => Localizer::translateString('lessons_page_title') . ' ' .$lessonData['title'],
+            'SitePromo'         => Localizer::translateString('site_promo_lessons'),
+            'SiteDescription'   => $lessonData['description'],
+            'PageDescription'   => $lessonData['description'],
+            'Lessons'           => $lesson->getList($this->lang),
+            'Lesson'            => $lesson,
+            'LessonData'        => $lessonData,
+            'NextLesson'     => [
+                'slug'          => '',
+                'moduleSlug'    => ''
             ]
         ]);
         $this->engine->display("lesson.tpl");
