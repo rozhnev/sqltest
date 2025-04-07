@@ -23,7 +23,7 @@
 1.  **Introduction to SQL and Databases**
     *   Introduction to Databases
     *   Relational Database Concepts
-    *   Overview of SQL and its Importance in Data Analysis
+    *   Overview of SQL
     *   Understanding Relational Databases
     *   Basic SQL Syntax and Conventions
     *   Writing Your First SQL Query
