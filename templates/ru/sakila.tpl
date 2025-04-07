@@ -542,35 +542,9 @@
         </ul>
     </div>              
 
-  {if $User->showAd()}
-      {assign var=add_id value=0|mt_rand:4}
-      <div class="referal-add-block">
-          {if $add_id > 2}
-                {* <a href="https://book24.ru/r/MdRZN?erid=LjN8JzJBX" target="_blank" style="text-decoration: none; display: flex; ">
-                    <div  style = "width: 30%;">
-                        <img style="width: 100%;" src="//ndc.book24.ru/resize/820x1180/pim/products/images/97/d1/01907881-ff4d-78d9-ac6a-7021d02597d1.jpg" alt="SQL: быстрое погружение.">
-                    </div>
-                    <div style="font-size: 1em;  width: 70%;  padding: 0 0.7em; font-weight: 100;">
-                        <div>Шилдс Уолтер: SQL: быстрое погружение.</div>
-                        <div style="font-size: small; padding-top: 0.5em;">
-                            Книга «SQL: быстрое погружение» идеальна для всех, кто ищет новые перспективы карьерного роста; для разработчиков, которые хотят расширить свои навыки и знания в программировании; для любого человека, даже без опыта, кто хочет воспользоваться возможностями будущего, в котором будут править данные.
-                        </div>
-                    </div>
-                </a> *}
-                <a target="_blank" rel="nofollow" href="https://ujhjj.com/g/2d7wn4dbt9fec845fb2f0da0172cef/?i=4&subid=medicine-mfti&erid=LatgByYbB">
-                    <img style="width:100%;" border="0" src="https://aflink.ru/b/2d7wn4dbt9fec845fb2f0da0172cef/" alt="Skillfactory.ru"/>
-                </a>
-                <a target="_blank" rel="nofollow" href="https://codeaven.com/g/ss23iy3l6sfec845fb2fcfba9fca8a/?i=4">
-                    <img style="width:100%;" border="0" src="https://ad.admitad.com/b/ss23iy3l6sfec845fb2fcfba9fca8a/" alt="hidemyname vpn"/>
-                </a>
-            {else}
-                <a target="_blank" rel="nofollow" href="https://thevospad.com/g/urkrefnghhfec845fb2f69bd3583e1/?i=4&subid=free-sql-simulator&erid=LatgC8wYQ">
-                    <img style="width:100%;" border="0" src="https://aflink.ru/b/urkrefnghhfec845fb2f69bd3583e1/" alt="Netology"/>
-                </a>
-                <a target="_blank" rel="nofollow" href="https://ewwhk.com/g/brl8jkz38efec845fb2f0d79a64861/?i=4&subid=domains&erid=5jtCeReNwxHpfQTGR3xQ4Jh">
-                    <img style="width:83.3%;" border="0" src="https://aflink.ru/b/brl8jkz38efec845fb2f0d79a64861/" alt="REG.RU"/>
-                </a>
-            {/if}
-      </div>
-  {/if}
+    {if $User->showAd()}
+        <div class="referal-add-block">
+            <div id="yandex_rtb_R-A-4716552-7"></div>
+        </div>
+    {/if}
 </div>
