@@ -1,7 +1,8 @@
 # Lesson 3: Overview of SQL
 
 ## What is SQL?
-SQL (Structured Query Language) is a standard programming language used for managing and manipulating data in relational database management systems (RDBMS). It provides a powerful and flexible way to interact with databases, allowing users to perform various operations such as querying, inserting, updating, and deleting data.
+SQL (Structured Query Language) is a language used for managing and manipulating data in relational database management systems (RDBMS). It provides a powerful and flexible way to interact with databases, allowing users to perform various operations such as querying, inserting, updating, and deleting data.
+
 SQL was developed in the early 1970s by IBM and has since become the de facto standard for relational database management. It is widely used across various industries and applications, making it an essential skill for data analysts, developers, and database administrators.
 SQL is designed to be easy to learn and use, with a syntax that is both human-readable and machine-readable. It allows users to express complex queries and operations in a straightforward manner, making it accessible to both technical and non-technical users.
 
@@ -30,9 +31,10 @@ SQL operates on various objects within a database, including:
 *   **Data Types:** Define the type of data that can be stored in a column, such as INTEGER, VARCHAR, DATE, and BOOLEAN. Data types ensure that the data stored in a table is consistent and valid.
 
 ## Basic SQL Conventions
-THe unit of SQL is the **query**. A query is a request for data or information from a database.
+THe unit of SQL is the **query**. A query is a request to RDBMS for retreive or modify data.
+
 The basic structure of an SQL query consists of the following components:
-*   **Keywords:** Reserved words that have a specific meaning in SQL. Examples include SELECT, FROM, WHERE, and JOIN.
+*   **Statements:** Reserved words that have a specific meaning in SQL. Examples include SELECT, FROM, WHERE, and JOIN.
 *   **Clauses:** Components of a SQL statement that specify the action to be performed. Common clauses include SELECT, FROM, WHERE, GROUP BY, and ORDER BY.
 *   **Expressions:** Combinations of values, operators, and functions that evaluate to a single value. Expressions can be used in various parts of a SQL statement, such as the SELECT list or the WHERE clause.
 *   **Identifiers:** Names used to refer to database objects, such as tables, columns, and views. Identifiers can be simple (e.g., table_name) or qualified (e.g., schema_name.table_name).
