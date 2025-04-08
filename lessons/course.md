@@ -29,10 +29,9 @@
     *   Select data from table
     *   Filtering Data with the WHERE Clause
     *   Sorting and Limiting Results
-    *   Using Functions in SQL Queries
     *   Aliasing columns
 
-3.  **Data Retrieval and Filtering**
+3.  **Using Functions in SQL Queries**
     *   Basic Data Retrieval - The SELECT Statement
     *   Filtering Data with the WHERE Clause
     *   Using Comparison Operators and Logical Operators
