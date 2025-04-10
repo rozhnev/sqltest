@@ -677,18 +677,21 @@ class Controller
             'PageTitle'         => Localizer::translateString('playground_page_title'),
             'SitePromo'         => Localizer::translateString('site_promo_playground'),
             'SiteDescription'   => Localizer::translateString('site_description_playground'),
+            'QuestionID'            => 1,
+            'DB'                    => '',
         ]);
         $this->engine->display($this->isMmobileView() ? "m.playground.tpl" : "playground.tpl");
     }
 
-    public function playground_run(array $params): void 
+    public function playground_query_run(array $params): void 
     {
         $sql = $_POST["query"] ?? '';
         if (!empty($sql)) {
             $query = new Query($sql);
-            $this->engine->assign('QeryResult', $query->getResult('mysql', 'json'));
+            $this->engine->assign('QeryResult', $query->getResult('psql17', 'json'));
         }
-        $this->engine->display("playground_result.tpl");
+
+        $this->engine->display("query_result.tpl");
     }
 }
 ?>

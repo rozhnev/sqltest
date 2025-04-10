@@ -130,57 +130,37 @@
         {include file='counters.tpl'}
     </body>
     <script>
-        const editor = ace.edit("sql-code");
-        editor.setTheme("ace/theme/xcode");
-        editor.session.setMode("ace/mode/sql");
-
+        {literal}
         function executeQuery() {
-            const code = editor.getValue(); // Get code from Ace editor
-            let sqlVersion = null;
-
-            // Get selected SQL version from radio buttons
-            const radioButtons = document.querySelectorAll('input[name="database"]');
-            for (const radioButton of radioButtons) {
-                if (radioButton.checked) {
-                    sqlVersion = radioButton.value;
-                    break;
+            setLoader('code-result');
+            let formData = new FormData();
+            formData.append('query', window.sql_editor.getValue());
+            fetch(`/${lang}/playground/query-run`, {
+                method: "POST",
+                mode: "cors",
+                cache: "default",
+                credentials: "same-origin",
+                body: formData,
+            })
+            .then((async response=>{
+                if (!response.ok) throw Error('Something went wrong.');
+                return await response.text();
+            }))
+            .then(JSON.parse)
+            .then((JSONmessage)=>{
+                let html = '✓ (Done)';
+                if (JSONmessage && JSONmessage[0]) {
+                    const jsonObject = JSONmessage[0];
+                    html = jsonObject.error 
+                        ? errorToTable(jsonObject) 
+                        : jsonToTable(jsonObject);
                 }
-            }
-
-            const payload = {
-                language: "sql",
-                code: code,
-                sql_version: sqlVersion,
-                php_version: null // Or get this dynamically if needed
-            };
-
-            fetch('https://sqlize.online/hash.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(payload)
+                document.getElementById('code-result').innerHTML = html;
             })
-            .then(response => response.text()) // Or response.json() if the server returns JSON
-            .then(hash => {
-                // First request was successful, now make the second request
-                const formData = new FormData();
-                formData.append('sqles', hash);
-                formData.append('sql_version', sqlVersion);
-
-                return fetch('https://sqlize.online/sqleval.php', {
-                    method: 'POST',
-                    body: formData
-                });
-            })
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('code-result').innerText = data; // Display result
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                document.getElementById('code-result').innerText = 'An error occurred.';
+            .catch(err=>{
+                document.getElementById('code-result').innerHTML = 'Something went wrong. Please review your query and try again.';
             });
         }
+        {/literal}
     </script>
 </html>
