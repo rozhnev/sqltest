@@ -30,7 +30,6 @@
     *   Filtering Data with the WHERE Clause
     *   Sorting and Limiting Results
     *   Aliasing columns
-
 3.  **Using Functions in SQL Queries**
     *   Basic Data Retrieval - The SELECT Statement
     *   Filtering Data with the WHERE Clause
@@ -38,7 +37,7 @@
     *   Sorting and Limiting Results with ORDER BY and LIMIT
     *   Working with Functions: String, Numeric, and Date Functions
 4.  **Data Aggregation and Grouping**
-    *   Aggregate Functions: COUNT, SUM, AVG, MIN, MAX
+    *   Basic Aggregation Functions
     *   Grouping Data with GROUP BY
     *   Filtering Groups with HAVING
 5.  **Working with Multiple Tables**
