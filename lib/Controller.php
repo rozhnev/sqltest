@@ -680,5 +680,15 @@ class Controller
         ]);
         $this->engine->display($this->isMmobileView() ? "m.playground.tpl" : "playground.tpl");
     }
+
+    public function playground_run(array $params): void 
+    {
+        $sql = $_POST["query"] ?? '';
+        if (!empty($sql)) {
+            $query = new Query($sql);
+            $this->engine->assign('QeryResult', $query->getResult('mysql', 'json'));
+        }
+        $this->engine->display("playground_result.tpl");
+    }
 }
 ?>

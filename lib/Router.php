@@ -18,6 +18,7 @@ class Router
         'user'              => "@(?<lang>ru|en|pt)/(?<class>user)/(?<action>achievements|profile|update)@i",
         'lessons'           => "@(?<lang>ru|en|pt)/(?<action>lesson)/(?<module>[a-z-]+)/(?<lesson>[a-z-]+)@i",
         'playground'        => "@(?<lang>ru|en|pt)/(?<action>playground)/@i",
+        'playground_run'    => "@(?<lang>ru|en|pt)/(?<class>playground)/(?<action>run)@i",
     ];
 
     public function __construct(Controller $controller)
