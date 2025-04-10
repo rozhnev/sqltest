@@ -161,6 +161,7 @@ $translations = [
     'lessons_page_title' => 'Curso de SQL para Iniciantes.',
     'next_lesson' =>    'Próxima lição',
     'previous_lesson' => 'Lição anterior',
+    'playground' => 'SQL Playground',
     'site_promo_playground' => 'Experimente o SQL',
     'playground_page_title' => 'SQL Playground: Experimente o SQL Online',
     'site_description_playground' => 'Experimente o SQL online com nosso editor SQL interativo. Pratique consultas SQL, teste seu código e aprenda SQL de forma prática. Ideal para iniciantes e desenvolvedores experientes.',

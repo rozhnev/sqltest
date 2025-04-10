@@ -21,6 +21,7 @@
         <a href="/{$Lang}/privacy-policy" target="_self">{translate}footer_privacy_policy{/translate}</a>
         <a href="/{$Lang}/books" target="_self">{translate}footer_books{/translate}</a>
         <a href="/{$Lang}/lesson/getting-started/introduction-to-databases" target="_self">{translate}lessons{/translate}</a>
+        <a href="/{$Lang}/playground/" target="_self">{translate}playground{/translate}</a>
     </div>
 </div>
 <script>

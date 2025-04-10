@@ -161,6 +161,7 @@ $translations = [
     'lessons_page_title' => 'SQL Course for Beginners.',
     'next_lesson' =>    'Next lesson',
     'previous_lesson' => 'Previous lesson',
+    'playground' => 'SQL Playground',
     'site_promo_playground' => 'SQL Playground',
     'playground_page_title' => 'SQL Playground: Write and Execute SQL Queries Online',
     'site_description_playground' => 'SQL Playground is a free online SQL editor that allows you to write and execute SQL queries in a web browser. It supports various databases, including MySQL, PostgreSQL, and SQLite. You can practice SQL queries, test your skills, and learn SQL concepts in an interactive environment.',
