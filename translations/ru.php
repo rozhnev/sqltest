@@ -168,4 +168,8 @@ $translations = [
     'lessons_page_title' => 'Курс SQL для начинающих.',
     'next_lesson' => 'Следующий урок',
     'previous_lesson' => 'Предыдущий урок',
+    'site_promo_playground' => 'SQL Песочница',
+    'playground_page_title' => 'SQL Playground: онлайн редактор SQL',
+    'site_description_playground' => 'SQL Playground - это онлайн редактор SQL, который позволяет вам писать и выполнять SQL запросы в реальном времени. Идеально подходит для тестирования и отладки SQL запросов.',
+    'avaliable_databases' => 'Доступные базы данных',
 ];

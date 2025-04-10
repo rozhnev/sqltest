@@ -1,4 +1,26 @@
 {include file='header.tpl'}
+<style>
+    .menu-panel {
+        padding: 0;
+        background-color: var(--accordion-panel-bg-color);
+        color: #0071DB;
+        transition: max-height 0.2s ease-out;
+        text-align: left;
+        overflow-y: hidden;
+        max-height: 100%;
+    }
+    .menu-panel ul {
+        list-style-type: none;
+    }
+    .menu-panel .db-label {
+        color: var(--menu-link-color);
+        display: flex;
+        margin: 7px 0;
+        text-decoration: none;
+        border-bottom: 1px solid silver;
+        padding: 0.5rem;
+    }
+</style>
 <body>
     <div class="container">
         {include file='popups.tpl'}
@@ -14,16 +36,53 @@
                 <div class="menu" id="menu">
                     <div id="menu-content" class="menu-content">    
                         <button class="accordion active">
-                            <span class="accordion-title">{translate}avaliable_databases{/translate}avaliable_databases</span>
+                            <span class="accordion-title">{translate}avaliable_databases{/translate}</span>
                         </button>
-                        <div class="panel active">
-                            <ol>
+                        <div class="menu-panel active">
+                            <ul>
                                 <li>
-                                    <span class="question-link">
-                                        MySQL 8
-                                    </span>
+                                    <label class="db-label">
+                                        <input type="radio" name="database" value="mysql8">
+                                        MySQL
+                                    </label>
                                 </li>
-                            </ol>
+                                <li>
+                                    <label class="db-label">
+                                        <input type="radio" name="database" value="postgresql">
+                                        PostgreSQL
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="db-label">
+                                        <input type="radio" name="database" value="mariadb">
+                                        MariaDB
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="db-label">
+                                        <input type="radio" name="database" value="sqlite">
+                                        SQLite
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="db-label">
+                                        <input type="radio" name="database" value="sqlserver">
+                                        SQL Server
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="db-label">
+                                        <input type="radio" name="database" value="oracle">
+                                        Oracle
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="db-label">
+                                        <input type="radio" name="database" value="firebird">
+                                        Firebird
+                                    </label>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
