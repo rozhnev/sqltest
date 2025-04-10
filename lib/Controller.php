@@ -669,5 +669,16 @@ class Controller
         ]);
         $this->engine->display("lesson.tpl");
     }
+
+    public function playground(array $params): void 
+    {
+        $this->assignVariables([
+            'Action'            => 'playground',
+            'PageTitle'         => Localizer::translateString('playground_page_title'),
+            'SitePromo'         => Localizer::translateString('site_promo_playground'),
+            'SiteDescription'   => Localizer::translateString('site_description_playground'),
+        ]);
+        $this->engine->display($this->isMmobileView() ? "m.playground.tpl" : "playground.tpl");
+    }
 }
 ?>
