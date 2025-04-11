@@ -680,9 +680,12 @@ class Controller
         $this->assignVariables([
             'Action'            => 'lesson',
             'PageTitle'         => Localizer::translateString('lessons_page_title') . ' ' .$lessonData['title'],
+            'PageDescription'   => Localizer::translateString('lessons_page_description'),
             'SitePromo'         => Localizer::translateString('site_promo_lessons'),
             'SiteDescription'   => $lessonData['description'],
             'PageDescription'   => $lessonData['description'],
+            'PageOGTitle'       => Localizer::translateString('lessons_og_title'),
+            'PageOGDescription' => $lessonData['description'],
             'Lessons'           => $lesson->getList($this->lang),
             'Lesson'            => $lesson,
             'LessonData'        => $lessonData,
@@ -699,8 +702,11 @@ class Controller
         $this->assignVariables([
             'Action'            => 'playground',
             'PageTitle'         => Localizer::translateString('playground_page_title'),
+            'PageDescription'   => Localizer::translateString('playground_page_description'),
             'SitePromo'         => Localizer::translateString('site_promo_playground'),
             'SiteDescription'   => Localizer::translateString('site_description_playground'),
+            'PageOGTitle'       => Localizer::translateString('playground_og_title'),
+            'PageOGDescription' => Localizer::translateString('зplayground_og_description'),
             'QuestionID'            => 1,
             'DB'                    => '',
         ]);
