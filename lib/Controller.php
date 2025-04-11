@@ -699,7 +699,7 @@ class Controller
         $sql = $_POST["query"] ?? '';
         if (!empty($sql)) {
             $query = new Query($sql);
-            $this->engine->assign('QeryResult', $query->getResult('psql17', 'json'));
+            $this->engine->assign('QeryResult', $query->getResult($params['database'], 'json'));
         }
 
         $this->engine->display("query_result.tpl");
