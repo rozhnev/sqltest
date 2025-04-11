@@ -288,9 +288,22 @@ class Controller
         }
 
         $this->registerModifiers(['floor', 'in_array']);
+        if (isset($questionData['answers'])) {
+            $pageTitle = Localizer::translateString('page_question_title');
+            $pageDescription = Localizer::translateString('page_question_description');
+            $sitePromo = Localizer::translateString('site_promo_question_quiz');
+            $siteDescription = Localizer::translateString('site_description_question_quiz');
+        } else {
+            $pageTitle = Localizer::translateString('page_task_title');
+            $pageDescription = Localizer::translateString('page_task_description');
+            $sitePromo = Localizer::translateString('site_promo_question_task');
+            $siteDescription = Localizer::translateString('site_description_question_task');
+        }
         $this->assignVariables([
-            'SitePromo'             => Localizer::translateString(isset($questionData['answers']) ? 'site_promo_question_quiz' : 'site_promo_question_task'),
-            'SiteDescription'       => Localizer::translateString(isset($questionData['answers']) ? 'site_description_question_quiz' : 'site_description_question_task'),
+            'PageTitle'             => sprintf("%s: %s", $pageTitle, $questionData['title']),
+            'PageDescription'       => sprintf("%s: «%s»", $pageDescription, $questionData['title']),
+            'SitePromo'             => $sitePromo,
+            'SiteDescription'       => $siteDescription,
             'QuestionID'            => $questionID,
             'Questionnire'          => $questionnire->get($questionnireName, $this->user->getId()),
             'QuestionCategoryID'    => $questionCategoryID,

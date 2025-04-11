@@ -1,24 +1,8 @@
 {if !isset($PageTitle)}
-    {if isset($Question) && $Question.title}
-        {if $Question.have_answers}
-            {assign var="PageTitle" value="{translate}page_question_title{/translate}: {$Question.title}"}
-        {else}
-            {assign var="PageTitle" value="{translate}page_task_title{/translate}: {$Question.title}"}
-        {/if}
-    {else}
-        {assign var="PageTitle" value="{translate}page_default_title{/translate}"}
-    {/if}
+    {assign var="PageTitle" value="{translate}page_default_title{/translate}"}
 {/if}
 {if !isset($PageDescription)}
-    {if isset($Question) && $Question.title}
-        {if $Question.have_answers}
-            {assign var="PageDescription" value="{translate}page_question_description{/translate}: «{$Question.title}»"}
-        {else}
-            {assign var="PageDescription" value="{translate}page_task_description{/translate}: «{$Question.title}»"}
-        {/if}
-    {else}
-        {assign var="PageDescription" value="{translate}page_default_description{/translate}"}
-    {/if}
+    {assign var="PageDescription" value="{translate}page_default_description{/translate}"}
 {/if}
 
 <title>{$PageTitle}</title>
