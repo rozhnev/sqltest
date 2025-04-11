@@ -20,6 +20,9 @@
         border-bottom: 1px solid silver;
         padding: 0.5rem;
     }
+    .menu-panel .db-label input{
+        margin: 0 6px 0 0;
+    }
 </style>
 <body>
     <div class="container">
@@ -42,8 +45,14 @@
                             <ul>
                                 <li>
                                     <label class="db-label">
-                                        <input type="radio" name="database" value="mysql8">
+                                        <input type="radio" name="database" value="mysql80" checked>
                                         MySQL
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="db-label">
+                                        <input type="radio" name="database" value="mariadb115">
+                                        MariaDB
                                     </label>
                                 </li>
                                 <li>
@@ -54,32 +63,32 @@
                                 </li>
                                 <li>
                                     <label class="db-label">
-                                        <input type="radio" name="database" value="mariadb">
-                                        MariaDB
-                                    </label>
-                                </li>
-                                <li>
-                                    <label class="db-label">
-                                        <input type="radio" name="database" value="sqlite">
+                                        <input type="radio" name="database" value="sqlite3">
                                         SQLite
                                     </label>
                                 </li>
                                 <li>
                                     <label class="db-label">
-                                        <input type="radio" name="database" value="sqlserver">
-                                        SQL Server
+                                        <input type="radio" name="database" value="mssql2022">
+                                        MS SQL Server
                                     </label>
                                 </li>
                                 <li>
                                     <label class="db-label">
-                                        <input type="radio" name="database" value="oracle">
+                                        <input type="radio" name="database" value="oracle23">
                                         Oracle
                                     </label>
                                 </li>
                                 <li>
                                     <label class="db-label">
-                                        <input type="radio" name="database" value="firebird">
+                                        <input type="radio" name="database" value="firebird4">
                                         Firebird
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="db-label">
+                                        <input type="radio" name="database" value="soqol">
+                                        SoQoL
                                     </label>
                                 </li>
                             </ul>
@@ -134,8 +143,9 @@
         function executeQuery() {
             setLoader('code-result');
             let formData = new FormData();
+            const database = document.querySelector('input[name="database"]:checked').value;
             formData.append('query', window.sql_editor.getValue());
-            fetch(`/${lang}/playground/query-run`, {
+            fetch(`/${lang}/playground/${database}/query-run`, {
                 method: "POST",
                 mode: "cors",
                 cache: "default",
