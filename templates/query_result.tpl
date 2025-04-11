@@ -1,5 +1,5 @@
-{if isset($QeryResult)}
-    {$QeryResult}
+{if isset($QueryResult)}
+    {$QueryResult}
 {else}
     {literal}
         [

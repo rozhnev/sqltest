@@ -322,7 +322,7 @@ class Controller
             $question = new Question($this->dbh, $params['questionID']);
             $queryPreCheck = $question->getQueryPreCheck();
             $query = new Query($queryPreCheck . $sql);
-            $this->engine->assign('QeryResult', $query->getResult($question->getDB(), 'json'));
+            $this->engine->assign('QueryResult', $query->getResult($question->getDB(), 'json'));
         }
 
         $this->engine->display("query_result.tpl");
@@ -699,7 +699,7 @@ class Controller
         $sql = $_POST["query"] ?? '';
         if (!empty($sql)) {
             $query = new Query($sql);
-            $this->engine->assign('QeryResult', $query->getResult($params['database'], 'json'));
+            $this->engine->assign('QueryResult', $query->getResult($params['database'], 'json'));
         }
 
         $this->engine->display("query_result.tpl");
