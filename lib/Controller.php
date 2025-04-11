@@ -73,7 +73,18 @@ class Controller
         $this->assignVariables(['Action' => 'books']);
         $this->engine->display("books.tpl");
     }
-
+    public function redirect(array $params): void
+    {
+        $questionCategoryID = $params['questionCategoryId'];
+        $questionID = $params['questionId'];
+        if ($questionCategoryID && $questionID) {
+            $questionnire = new Questionnire($this->dbh, $params['lang']);
+            $redirectLink = $questionnire->getQuestionLink($questionCategoryID, $questionID);
+            header("HTTP/1.1 301 Moved Permanently");
+            header("Location: $redirectLink");
+            exit();
+        }
+    }
     /**
      * Show ERD page for the selected database
      * @param array $params

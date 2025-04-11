@@ -40,12 +40,11 @@ class Router
 
             }
         }
-        if (preg_match("@(?<lang>ru|en|pt)/(?<action>question)/(?<questionCategory>\d+)/(?<question>\d+)@i", $path, $params)) {
-            $this->controller->setLanguge($params['lang'] ?? DEFAULT_LANGUAGE);
-        } else {
-            $this->controller->setLanguge(DEFAULT_LANGUAGE);
+        // redirect old routes to new ones
+        if (preg_match("@(?<lang>ru|en|pt)/(?<action>question)/(?<questionCategoryId>\d+)/(?<questionId>\d+)@i", $path, $params)) {
+            return $this->controller->redirect($params);
         }
-        
+
         if (preg_match("@(?<lang>ru|en|pt)/@i", $path, $params)) {
             $this->controller->setLanguge($params['lang'] ?? DEFAULT_LANGUAGE);
         } else {
