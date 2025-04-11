@@ -31,11 +31,10 @@
     *   Sorting and Limiting Results
     *   Aliasing columns
 3.  **Using Functions in SQL Queries**
-    *   Basic Data Retrieval - The SELECT Statement
-    *   Filtering Data with the WHERE Clause
-    *   Using Comparison Operators and Logical Operators
-    *   Sorting and Limiting Results with ORDER BY and LIMIT
-    *   Working with Functions: String, Numeric, and Date Functions
+    *   Using Functions
+    *   Common String Functions
+    *   Common Mathematic Functions
+    *   Common Date & Time Functions
 4.  **Data Aggregation and Grouping**
     *   Basic Aggregation Functions
     *   Grouping Data with GROUP BY
