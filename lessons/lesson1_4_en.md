@@ -1,4 +1,4 @@
-# Lesson 3: Overview of SQL
+# Lesson 1.4: Overview of SQL
 
 ## What is SQL?
 SQL (Structured Query Language) is a language used for managing and manipulating data in relational database management systems (RDBMS). It provides a powerful and flexible way to interact with databases, allowing users to perform various operations such as querying, inserting, updating, and deleting data.

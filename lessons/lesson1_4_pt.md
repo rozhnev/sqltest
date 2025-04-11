@@ -1,4 +1,4 @@
-# Lição 3: Visão Geral do SQL
+# Lição 1.4: Visão Geral do SQL
 
 ## O que é SQL?
 SQL (Structured Query Language) é uma linguagem padrão usada para gerenciar e manipular dados em sistemas de gerenciamento de banco de dados relacional (SGBDR). Ele fornece uma maneira poderosa e flexível de interagir com bancos de dados, permitindo que os usuários executem várias operações, como consultas, inserção, atualização e exclusão de dados.

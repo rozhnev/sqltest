@@ -1,10 +1,10 @@
-## 2.2 Aliasing Columns
+# 2.4 Aliasing Columns
 
-### What is Column Aliasing?
+## What is Column Aliasing?
 
 Column aliasing allows you to assign a temporary, alternative name to a column in the result set of a `SELECT` query. This doesn't change the actual name of the column in the table; it only affects how the column is displayed in the query's output.
 
-### Syntax
+## Syntax
 
 You can create a column alias using the `AS` keyword, although it's often optional:
 
@@ -22,7 +22,7 @@ FROM table_name;
 - **`AS alias_name`**: The `AS` keyword followed by the desired alias name.  
 - **`alias_name`**: The new, temporary name for the column. If the alias contains spaces or special characters, it needs to be enclosed in double quotes (`"`).
 
-### Advantages of Column Aliasing
+## Advantages of Column Aliasing
 
 - **Improved Readability**: Aliases can make column names more descriptive and easier to understand, especially when dealing with complex queries or calculated columns.  
 - **Simplified Column Names**: If a column name is long or contains underscores, an alias can provide a shorter, more manageable name for use in the result set.  
@@ -56,7 +56,7 @@ FROM table_name;
     FROM actor;
     ```
 
-### Key Takeaways
+**Key Takeaways from this Lesson:**
 
 - Column aliasing provides temporary, descriptive names for columns in a query's result set.  
 - Use the `AS` keyword (or simply a space) to create an alias.  
