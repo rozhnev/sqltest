@@ -517,6 +517,7 @@ class Controller
         }
 
         $this->assignVariables([
+            'CanonicalLink'         => "https://sqltest.online/" . $this->lang . "/test/start",
             'SitePromo'             => Localizer::translateString('site_promo_test'),
             'SiteDescription'       => Localizer::translateString('site_description_test'),
             'QuestionID'            => $questionID,
