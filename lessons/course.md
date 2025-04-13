@@ -40,11 +40,10 @@
     *   Grouping Data with GROUP BY
     *   Filtering Groups with HAVING
 5.  **Working with Multiple Tables**
-    *   Aliasing tables
     *   Using Aggregate Functions with Joins
     *   Understanding Joins: INNER JOIN, LEFT JOIN, RIGHT JOIN, FULL OUTER JOIN
     *   Combining Data from Multiple Tables
-    *   Using Aliases for Tables and Columns
+    *   Using Aliases for Tables
     *   Working with Self-Joins
 6.  **Subqueries and Common Table Expressions (CTEs)**
     *   Understanding Subqueries: Inline Views and Nested Queries
@@ -52,9 +51,13 @@
     *   Common Table Expressions (CTEs) for Complex Queries
     *   Recursive CTEs for Hierarchical Data
 7.  **Data Manipulation Language (DML)**
+    *   Introduction to DML
+    *   Creating Tables
+    *   Constraints
     *   Inserting Data into Tables
     *   Updating Existing Data
     *   Deleting Data from Tables
+    *   Modifying Tables
     *   Using Transactions for Data Integrity
 8.  **Advanced SQL Techniques**
     *   Window Functions for Advanced Data Analysis
