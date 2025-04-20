@@ -40,11 +40,11 @@
     *   Grouping Data with GROUP BY
     *   Filtering Groups with HAVING
 5.  **Working with Multiple Tables**
-    *   Using Aggregate Functions with Joins
     *   Understanding Joins: INNER JOIN, LEFT JOIN, RIGHT JOIN, FULL OUTER JOIN
     *   Combining Data from Multiple Tables
     *   Using Aliases for Tables
     *   Working with Self-Joins
+    *   Using Aggregate Functions with Joins
 6.  **Subqueries and Common Table Expressions (CTEs)**
     *   Understanding Subqueries: Inline Views and Nested Queries
     *   Using Subqueries in SELECT, FROM, and WHERE Clauses
@@ -63,6 +63,8 @@
     *   Window Functions for Advanced Data Analysis
     *   Using ROW_NUMBER, RANK, DENSE_RANK, and NTILE
     *   Understanding Partitioning and Ordering in Window Functions
+    *   Understanding Window boundaries and frames
+    *   Using Window Functions for Running Totals and Moving Averages
     *   Using Common Table Expressions (CTEs) for Recursive Queries
 9.  **Data Transformation and Manipulation**
     *   Data Transformation Techniques for Analysis
