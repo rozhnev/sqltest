@@ -520,6 +520,8 @@ class Controller
             'CanonicalLink'         => "https://sqltest.online/" . $this->lang . "/test/start",
             'PageTitle'             => Localizer::translateString('test_page_title'),
             'PageDescription'       => Localizer::translateString('test_page_description'),
+            'PageOGTitle'           => Localizer::translateString('test_og_title'),
+            'PageOGDescription'     => Localizer::translateString('test_og_description'),
             'SitePromo'             => Localizer::translateString('site_promo_test'),
             'SiteDescription'       => Localizer::translateString('site_description_test'),
             'QuestionID'            => $questionID,
@@ -709,7 +711,7 @@ class Controller
             'SitePromo'         => Localizer::translateString('site_promo_playground'),
             'SiteDescription'   => Localizer::translateString('site_description_playground'),
             'PageOGTitle'       => Localizer::translateString('playground_og_title'),
-            'PageOGDescription' => Localizer::translateString('зplayground_og_description'),
+            'PageOGDescription' => Localizer::translateString('playground_og_description'),
             'QuestionID'            => 1,
             'DB'                    => '',
         ]);
