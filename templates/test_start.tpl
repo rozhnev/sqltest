@@ -1,5 +1,5 @@
-{assign var="PageTitle" value="{translate}privacy_policy_page_title{/translate}"}
-{assign var="PageDescription" value="{translate}privacy_policy_page_description{/translate}"}
+{assign var="PageTitle" value="{translate}test_page_title{/translate}"}
+{assign var="PageDescription" value="{translate}test_page_description{/translate}"}
 {include file='short-header.tpl'}
     <body>
         {include file='popups.tpl'}
