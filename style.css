@@ -564,6 +564,7 @@ input:checked + .slider:before {
     border-bottom: 2px solid var(--body-background-color);
     font-size: 0.9em;
 }
+
 .accordion.active {
     background-color: var(--accordion-active);
 }
@@ -768,6 +769,15 @@ input:checked + .slider:before {
     padding-left: 3px;
     font-size: xx-small;
 }
+.current-question {
+    border-left: 0.3rem solid #11926E;
+}
+
+.current-question .question-number {
+    width: 2.2rem !important;
+    min-width: 2.2rem !important;
+}
+
 .question-link.solved {
     color: gray !important;
 }
