@@ -615,7 +615,7 @@ window.onload = function() {
         if (event.ctrlKey && event.key === 'Enter') {
             runQuery(lang, questionId);
         }
-        if (event.shiftKey && event.key === 'Enter') {
+        if (event.altKey && event.key === 'Enter') {
             testQuery(lang, questionId);
         }
     });
