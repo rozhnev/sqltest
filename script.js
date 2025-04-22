@@ -615,9 +615,9 @@ window.onload = function() {
         if (event.ctrlKey && event.key === 'Enter') {
             runQuery(lang, questionId);
         }
-        if (event.altKey && event.key === 'Enter') {
-            testQuery(lang, questionId);
-        }
+        // if (event.altKey && event.key === 'Enter') {
+        //     testQuery(lang, questionId);
+        // }
     });
     if (document.getElementById('yandexLogin')) {
         window.YaAuthSuggest.init(
