@@ -164,8 +164,10 @@ class Test
         $stmt = $this->dbh->prepare("SELECT questions.id
             FROM test_questions
             JOIN questions ON questions.id = test_questions.question_id 
+            JOIN question_categories ON question_categories.question_id = questions.id
+            JOIN categories ON categories.id = question_categories.category_id and categories.questionnire_id = 2
             WHERE test_id = :test_id AND test_questions.solved_at is null AND attempts < max_attempts
-            ORDER BY questions.rate 
+            ORDER BY categories.sequence_position, question_categories.sequence_position
             LIMIT 1;");
         $stmt->execute([':test_id' => $this->id]);
         return $stmt->fetchColumn(0) ?: null;
