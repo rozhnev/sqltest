@@ -22,8 +22,8 @@
                         {foreach $panel.questions as $question}
                         <li>
                             <a class="question-link {if $QuestionID == $question[1]} current-question{/if}{if $question[2]} solved{/if}" href="/{$Lang}/test/{$TestId}/question/{$question[1]}">
-                                {* {$question[4]}. *}
-                                -&nbsp;{$question[0]}
+                                <span class="question-number">&nbsp;</span>
+                                {$question[0]}
                             </a>
                         </li>
                         {/foreach}
