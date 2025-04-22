@@ -92,7 +92,7 @@
                 {else}
                     {* Continue open test *}
                     <div style="text-align: center;">
-                        <a style="display:inline-block;width:240px; color: white;" href="/{$Lang}/test/{$LastTest.id}" title="Continuar teste" class="button green">Continuar teste</a>
+                        <a style="display:inline-block;width:240px; color: white;" href="/{$Lang}/test/{$LastTest.id}/question/" title="Continuar teste" class="button green">Continuar teste</a>
                     </div>
                 {/if}
             {else}
