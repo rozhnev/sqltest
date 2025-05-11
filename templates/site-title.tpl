@@ -5,10 +5,10 @@
     {assign var="PageDescription" value="{translate}page_default_description{/translate}"}
 {/if}
 {if !isset($PageOGTitle)}
-    {assign var="PageDescription" value="{translate}og_title{/translate}"}
+    {assign var="PageOGTitle" value="{translate}og_title{/translate}"}
 {/if}
 {if !isset($PageOGDescription)}
-    {assign var="PageDescription" value="{translate}og_description{/translate}{if isset($Question) && $Question.title}: {$Question.title}{else}.{/if}"}
+    {assign var="PageOGDescription" value="{translate}og_description{/translate}{if isset($Question) && $Question.title}: {$Question.title}{else}.{/if}"}
 {/if}
 <title>{$PageTitle}</title>
 <meta http-equiv = "content-language" content = "{$Lang}">
