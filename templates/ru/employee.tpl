@@ -321,7 +321,7 @@
         </div>    
     </div>
     <div class="accordion">
-        <span><span class='sql'>SALES</span> - список сотрудиков.</span>
+        <span><span class='sql'>SALES</span> - таблица продаж.</span>
     </div>
     <div class="panel">
         <ul class="table-columns">
