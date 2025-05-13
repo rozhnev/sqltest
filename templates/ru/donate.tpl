@@ -64,7 +64,7 @@
                     <h3>Поддержка в любой валюте</h3>
                     <p>Пожертвование или подписка на Boosty:</p>
                     <p>
-                        <a href="https://boosty.to/phpize/donate" target="_blank">
+                        <a href="https://boosty.to/phpize/donate" target="_blank" style="background-color: white; display: flex; padding: 12px; margin: 1rem auto; border-radius: 6px; width: 10rem;">
                             <svg width="145px" height="40px" alt="Пожертвование или подписка на Boosty" viewBox="0 0 145 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                 <defs>
                                     <linearGradient x1="61.5370404%" y1="13%" x2="34.2376801%" y2="129.365079%" id="linearGradient-1">
