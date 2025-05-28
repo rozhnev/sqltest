@@ -351,16 +351,16 @@ class Controller
         $jsonResult = $query->getResult($question->getDB(), 'json');
         $queryTestResult = $question->checkQueryResult($jsonResult);
         $this->assignVariables([
+            'QuestionID'        => $params['questionID'],
             'QueryTestResult' => $queryTestResult,
             'QueryBestCost' => $question->getBestCost()
         ]);
         if ($queryTestResult['ok']) {
-
-        $queryTestResult = $question->checkQuery($sql);
-            $this->assignVariables([
-                'QuestionID'        => $params['questionID'],
-                'QueryTestResult'   => $queryTestResult
-            ]);
+            $queryTestResult = $question->checkQuery($sql);
+            // If query is not ok, we will show the error message
+            if (!$queryTestResult['ok']) {
+                $this->engine->assign('QueryTestResult', $queryTestResult);
+            }
         }
         // if ($queryTestResult['ok']) {
         //     $preparedQuery = $question->prepareQuery($sql);
