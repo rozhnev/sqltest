@@ -345,21 +345,33 @@ class Controller
     {
         $sql = $_POST["query"] ?? '';
         $question = new Question($this->dbh, $params['questionID']);
-        $queryTestResult = $question->checkQuery($sql);
+        // Prepare query for testing and check result
+        $preparedQuery = $question->prepareQuery($sql);
+        $query = new Query($preparedQuery);
+        $jsonResult = $query->getResult($question->getDB(), 'json');
+        $queryTestResult = $question->checkQueryResult($jsonResult);
         $this->assignVariables([
-            'QuestionID'        => $params['questionID'],
-            'QueryTestResult'   => $queryTestResult
+            'QueryTestResult' => $queryTestResult,
+            'QueryBestCost' => $question->getBestCost()
         ]);
         if ($queryTestResult['ok']) {
-            $preparedQuery = $question->prepareQuery($sql);
-            $query = new Query($preparedQuery);
-            $jsonResult = $query->getResult($question->getDB(), 'json');
-            $queryTestResult = $question->checkQueryResult($jsonResult);
+
+        $queryTestResult = $question->checkQuery($sql);
             $this->assignVariables([
-                'QueryTestResult' => $queryTestResult,
-                'QueryBestCost' => $question->getBestCost()
+                'QuestionID'        => $params['questionID'],
+                'QueryTestResult'   => $queryTestResult
             ]);
         }
+        // if ($queryTestResult['ok']) {
+        //     $preparedQuery = $question->prepareQuery($sql);
+        //     $query = new Query($preparedQuery);
+        //     $jsonResult = $query->getResult($question->getDB(), 'json');
+        //     $queryTestResult = $question->checkQueryResult($jsonResult);
+        //     $this->assignVariables([
+        //         'QueryTestResult' => $queryTestResult,
+        //         'QueryBestCost' => $question->getBestCost()
+        //     ]);
+        // }
         if ($this->user->logged()) {
             $this->user->saveQuestionAttempt($params['questionID'], $queryTestResult, $sql);
             if ($queryTestResult['ok']) {
