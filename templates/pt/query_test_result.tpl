@@ -98,7 +98,15 @@
             <p>Dica: sua consulta está vazia.</p>
         {/if}
      {/if}
-    Tente novamente.
+    <div style="display: flex; column-gap: 6px; align-items: center;">
+        Tente novamente. Encontrou um erro na tarefa - 
+        <a style="display: flex; column-gap: 6px; justify-content: center; align-items: center;" target="_blank" href="https://t.me/sqltest_online" class=""> 
+            <span class="tg-icon">
+                <span class=""> </span>
+            </span>
+            avise-nos!
+        </a>
+    </div>
     {if isset($ReferralLink)}
         <a id="referral-link" target="_blank" href="{$ReferralLink.link}">
             <div class="referral-link">
