@@ -1,5 +1,6 @@
 {include file='header.tpl'}
 <body>
+    {include file='consent_banner.tpl'}
     <div class="container">
         {include file='popups.tpl'}
         <header>
@@ -14,6 +15,7 @@
                 {include file='menu.tpl'}
             </div>
             <div class="column">
+                {include file="{$Lang}/adblock_banner.tpl"}
                 <div class="question-wrapper">
                     <div class="question-title-bar" style="display: flex;">
                         <div class="question-title">
