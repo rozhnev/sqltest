@@ -43,14 +43,40 @@
                     its absolute security.</li>
             </ol>
 
-            <h3>5. Updates to This Privacy Policy:</h3>
+            <h3>5. Cookies and Tracking Technologies:</h3>
+            <ol>
+                <li><strong>Essential Cookies:</strong> We use necessary cookies to ensure our website functions properly. These cookies are required for basic site functionality and cannot be disabled.</li>
+                
+                <li><strong>Analytics Cookies:</strong> We use analytics cookies to understand how you use our website:
+                    <ul>
+                        <li>Google Analytics (_ga, _ga_*)</li>
+                        <li>Yandex Metrica (_ym_*)</li>
+                    </ul>
+                </li>
+
+                <li><strong>Cookie Management:</strong> You can control non-essential cookies through:
+                    <ul>
+                        <li>Our cookie consent banner when you first visit the site</li>
+                        <li>Your browser settings</li>
+                    </ul>
+                </li>
+
+                <li><strong>Cookie Duration:</strong> Cookies we use typically remain valid for:
+                    <ul>
+                        <li>Session cookies: until you close your browser</li>
+                        <li>Persistent cookies: up to 2 years for analytics</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <h3>6. Updates to This Privacy Policy:</h3>
 
             <ol>
                 <li><strong>Changes:</strong> We may update our Privacy Policy from time to time. Any changes will be effective
                     immediately upon posting the updated Privacy Policy on site <a href ="https://sqltest.online">SQLtest</a>.</li>
             </ol>
 
-            <h3>6. Contact Us:</h3>
+            <h3>7. Contact Us:</h3>
 
             <ol>
                 <li><strong>Questions:</strong> If you have any questions or concerns about our Privacy Policy, please contact
@@ -60,7 +86,7 @@
     </div>
     <div class="section bottom colored">
         <div>
-            <h4>This Privacy Policy was last updated on 2024-01-01.</h4>
+            <h4>This Privacy Policy was last updated on 2025-05-01.</h4>
         </div>
     </div>
 </div>
