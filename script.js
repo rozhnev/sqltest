@@ -619,7 +619,10 @@ window.onload = function() {
         //     testQuery(lang, questionId);
         // }
     });
-    if (document.getElementById('yandexLogin')) {
+    if (!Ya || !Ya.Context) {
+        document.getElementById('adBlockBanner').style.display = 'block';
+    }
+    if (document.getElementById('yandexLogin') && window.YaAuthSuggest) {
         window.YaAuthSuggest.init(
         {
             client_id: '6a7ad9d0d23a496987255a596b83b9db',
@@ -640,5 +643,5 @@ window.onload = function() {
         .then(({handler}) => handler())
         .catch(error => alert('Обработка ошибки', error));
     }
-    
+
 };
