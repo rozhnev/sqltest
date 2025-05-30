@@ -620,7 +620,7 @@ window.onload = function() {
         // }
     });
     if (!Ya || !Ya.Context) {
-        document.getElementById('adBlockBanner').style.display = 'block';
+        document.getElementById('userInfo').style.display = 'block';
     }
     if (document.getElementById('yandexLogin') && window.YaAuthSuggest) {
         window.YaAuthSuggest.init(

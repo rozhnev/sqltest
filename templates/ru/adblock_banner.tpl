@@ -1,4 +1,4 @@
-<div class="user-solutions-count" id="adBlockBanner" style="display: none;  transition: opacity 3s ease-out;">
+<div class="user-solutions-count" id="userInfo" style="display: none;  transition: opacity 3s ease-out;">
     Уважаемый пользователь,<br>
     Вы и многие другие пользуетесь этим сайтом бесплатно. Наши единственные источники финансирования — это реклама и пожертвования. Чтобы помочь нам сохранить этот проект бесплатным для всех, пожалуйста, рассмотрите возможность не блокировать рекламу на сайте.
     <br>
