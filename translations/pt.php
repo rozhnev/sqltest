@@ -83,7 +83,7 @@ $translations = [
     'determine_your_level' => 'Faça o teste para determinar seu nível.',
     'up_your_level' => 'Faça o teste para subir de nível.',
     'no_solutions_yet' => 'Desculpe, mas ainda não há solução publicada para este problema.',
-    'login_needed' => 'Esta ação não é permitida para usuários anônimos. Por favor <a href="" class="button-small green" style="padding: 3px;" onClick="toggleLoginWindow(); return false;">faça login</a> para realizá-la.',
+    'login_needed' => 'Esta ação não é permitida para usuários anônimos.<br>Por favor <a href="" class="button-small green" style="padding: 3px; margin-top: 3px; display: inline-block;" onClick="toggleLoginWindow(); return false;">faça login</a> para realizá-la.',
     'action_not_permiited' => 'Você não tem permissão para executar esta ação.',
     'qustion_should_be_solved' => 'Você deve resolver o problema sozinho antes de ver as soluções dos outros usuários',
     'privacy_policy_page_title' => 'SQLTest.online: Política de Privacidade',
