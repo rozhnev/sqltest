@@ -84,7 +84,7 @@ $translations = [
     'low_grades_restricted' => 'Available to Middle and Senior-level users only.',
     'determine_your_level' => 'Take the test to determine your level.',
     'up_your_level' => 'Take the test to up your level.',
-    'login_needed' => 'This action isn\'t allowed for anonymous users. Please <a href="" class="button-small green" style="padding: 3px;" onClick="toggleLoginWindow(); return false;">log in</a> to perform it.',
+    'login_needed' => 'This action isn\'t allowed for anonymous users.<br>Please <a href="" class="button-small green" style="padding: 3px; margin-top: 3px; display: inline-block;" onClick="toggleLoginWindow(); return false;">log in</a> to perform it.',
     'action_not_permiited' => 'You are not allowed to perform this action.',
     'qustion_should_be_solved' => 'You should to solve the problem yourself before look others solutions',
     'privacy_policy_page_title' => 'SQLTest.online: Privacy Policy',
