@@ -90,7 +90,7 @@ $translations = [
     'determine_your_level' => 'Пройдите тест, чтобы определить свой уровень.',
     'up_your_level' => 'Пройдите тест, чтобы повысить свой уровень.',
     'no_solutions_yet' => 'Извините, но пока не опубликовано ни одно из решений этой задачи.',
-    'login_needed' => 'Пожалуйста, <a href="" onClick="toggleLoginWindow(); return false;">войдите на сайт</a>, чтобы выполнить это действие.',
+    'login_needed' => 'Это действие недоступно анонимным пользователям. Пожалуйста <a href="" class="button-small green" style="padding: 3px;" onClick="toggleLoginWindow(); return false;">войдите в систему</a> чтобы выполнить его.',
     'action_not_permiited' => 'Действие не разрешено.',
     'qustion_should_be_solved' => 'Вы должны решить задачу самостоятельно, прежде чем просматривать решения других пользователей',
     'privacy_policy_page_title' => 'SQLTest.online: Политика конфиденциальности',
