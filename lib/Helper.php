@@ -1,6 +1,35 @@
 <?php
+use MaxMind\Db\Reader;
+
 class Helper 
 {
+    private static $country = null;
+
+    public static function getCountryFromIP(string $ip): ?string
+    {
+        $ip = filter_var($ip, FILTER_VALIDATE_IP);
+
+        if ($ip === false) {
+            return null;
+        }
+        if (self::$country) {
+            return self::$country;
+        }
+        /* Load the MaxMind database reader */
+        $maxmindReader = new Reader('GeoLite2-City.mmdb');
+        $geoData = $maxmindReader->get($ip);
+        if ($geoData && isset($geoData['country']['iso_code'])) {
+            self::$country = $geoData['country']['iso_code'];
+            return self::$country;
+        }
+        return null;
+    }
+    /**
+     * Returns user OS language from HTTP_ACCEPT_LANGUAGE header
+     *
+     * @param array $SERVER
+     * @return string
+     */
     public static function getUserOSLanguage(array $SERVER): string
     {
         $lang = 'en';

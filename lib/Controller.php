@@ -38,6 +38,7 @@ class Controller
             'MobileView'    => $this->isMmobileView(),
             'Languages'     => $this->languages,
             'User'          => $this->user,
+            'Country'       => Helper::getCountryFromIP($_SERVER["REMOTE_ADDR"]),
         ]);
     }
 
