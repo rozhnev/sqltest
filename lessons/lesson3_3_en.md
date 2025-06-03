@@ -1,150 +1,264 @@
-SQL provides several built-in functions to work with dates and times. These functions help you extract, manipulate, and format date/time values in your queries. Here’s a summary of the most commonly used date and time functions in SQL.
+# Lesson 3.3: Essential Date and Time Functions in SQL
 
-Lesson 3.3: Common SQL Date and Time functions
+Date and time functions in SQL allow you to extract, modify, and format date and time values. These functions are widely used for analyzing temporal data, filtering by date, calculating intervals, and formatting output. This lesson covers the most commonly used functions with examples based on the Sakila database.
 
+## Common Date and Time Functions
 
-## 1. **CURRENT_DATE**
-   - **Description**: Returns the current date (without the time) in the format `YYYY-MM-DD`.
-   - **Example**:
-     ```sql
-     SELECT CURRENT_DATE;
-     ```
-   - **Result**: `2025-04-20` (example)
+### `CURRENT_DATE` — Returns the current date (without time).
 
-## 2. **CURRENT_TIME**
-   - **Description**: Returns the current time (without the date) in the format `HH:MM:SS`.
-   - **Example**:
-     ```sql
-     SELECT CURRENT_TIME;
-     ```
-   - **Result**: `15:30:45` (example)
+**Syntax:**
+```sql
+CURRENT_DATE
+```
 
-## 3. **CURRENT_TIMESTAMP**
-   - **Description**: Returns the current date and time (both date and time parts) in the format `YYYY-MM-DD HH:MM:SS`.
-   - **Example**:
-     ```sql
-     SELECT CURRENT_TIMESTAMP;
-     ```
-   - **Result**: `2025-04-20 15:30:45` (example)
+**Example:**
+```sql
+SELECT CURRENT_DATE AS today;
+```
+**Result:** The current date, e.g.: `2025-06-03`
 
-## 4. **NOW()**
-   - **Description**: Returns the current date and time, equivalent to `CURRENT_TIMESTAMP`.
-   - **Example**:
-     ```sql
-     SELECT NOW();
-     ```
-   - **Result**: `2025-04-20 15:30:45` (example)
+### `CURRENT_TIME` — Returns the current time (without date).
 
-## 5. **DATE()**
-   - **Description**: Extracts the date part from a given date or datetime value.
-   - **Example**:
-     ```sql
-     SELECT DATE('2025-04-20 15:30:45');
-     ```
-   - **Result**: `2025-04-20`
+**Syntax:**
+```sql
+CURRENT_TIME
+```
 
-## 6. **TIME()**
-   - **Description**: Extracts the time part from a given date or datetime value.
-   - **Example**:
-     ```sql
-     SELECT TIME('2025-04-20 15:30:45');
-     ```
-   - **Result**: `15:30:45`
+**Example:**
+```sql
+SELECT CURRENT_TIME AS now_time;
+```
+**Result:** The current time, e.g.: `14:25:30`
 
-## 7. **YEAR()**
-   - **Description**: Extracts the year from a date or datetime value.
-   - **Example**:
-     ```sql
-     SELECT YEAR('2025-04-20');
-     ```
-   - **Result**: `2025`
+### `CURRENT_TIMESTAMP` / `NOW()` — Returns the current date and time.
 
-## 8. **MONTH()**
-   - **Description**: Extracts the month from a date or datetime value.
-   - **Example**:
-     ```sql
-     SELECT MONTH('2025-04-20');
-     ```
-   - **Result**: `4` (for April)
+**Syntax:**
+```sql
+CURRENT_TIMESTAMP
+NOW()
+```
 
-## 9. **DAY()**
-   - **Description**: Extracts the day of the month from a date or datetime value.
-   - **Example**:
-     ```sql
-     SELECT DAY('2025-04-20');
-     ```
-   - **Result**: `20`
+**Example:**
+```sql
+SELECT CURRENT_TIMESTAMP AS now_datetime;
+SELECT NOW() AS now_datetime;
+```
+**Result:** The current date and time, e.g.: `2025-06-03 14:25:30`
 
-## 10. **DATE_ADD()**
-   - **Description**: Adds a specified time interval to a date.
-   - **Example**:
-     ```sql
-     SELECT DATE_ADD('2025-04-20', INTERVAL 5 DAY);
-     ```
-   - **Result**: `2025-04-25`
+### `DATE()` — Extracts only the date from a datetime value.
 
-## 11. **DATE_SUB()**
-   - **Description**: Subtracts a specified time interval from a date.
-   - **Example**:
-     ```sql
-     SELECT DATE_SUB('2025-04-20', INTERVAL 5 DAY);
-     ```
-   - **Result**: `2025-04-15`
+**Syntax:**
+```sql
+DATE(datetime_value)
+```
 
-## 12. **DATEDIFF()**
-   - **Description**: Returns the number of days between two dates.
-   - **Example**:
-     ```sql
-     SELECT DATEDIFF('2025-04-20', '2025-04-15');
-     ```
-   - **Result**: `5`
+**Example:**
+```sql
+SELECT DATE(rental_date) AS rental_only_date
+FROM rental
+LIMIT 3;
+```
+**Result:** Returns only the date from the `rental_date` column.
 
-## 13. **DATE_FORMAT()**
-   - **Description**: Formats a date or datetime value according to a specific format.
-   - **Example**:
-     ```sql
-     SELECT DATE_FORMAT('2025-04-20', '%Y-%m-%d');
-     ```
-   - **Result**: `2025-04-20`
+### `TIME()` — Extracts only the time from a datetime value.
 
-   **Common Format Specifiers**:
-   - `%Y`: Year (four digits)
-   - `%m`: Month (two digits)
-   - `%d`: Day of the month (two digits)
-   - `%H`: Hour (24-hour format)
-   - `%i`: Minutes
-   - `%s`: Seconds
+**Syntax:**
+```sql
+TIME(datetime_value)
+```
 
-## 14. **STRFTIME()** (SQLite and PostgreSQL)
-   - **Description**: Similar to `DATE_FORMAT()`, it formats date/time values in a specified format.
-   - **Example**:
-     ```sql
-     SELECT STRFTIME('%Y-%m-%d', '2025-04-20');
-     ```
-   - **Result**: `2025-04-20`
+**Example:**
+```sql
+SELECT TIME(rental_date) AS rental_only_time
+FROM rental
+LIMIT 3;
+```
+**Result:** Returns only the time from the `rental_date` column.
 
-## 15. **TIMESTAMPDIFF()**
-   - **Description**: Returns the difference between two date/time values, measured in a specified unit (e.g., seconds, minutes, days).
-   - **Example**:
-     ```sql
-     SELECT TIMESTAMPDIFF(DAY, '2025-04-15', '2025-04-20');
-     ```
-   - **Result**: `5`
+### `YEAR()` — Extracts the year from a date value.
 
-## 16. **EXTRACT()**
-   - **Description**: Extracts a part of a date or time value (like year, month, day, hour, etc.).
-   - **Example**:
-     ```sql
-     SELECT EXTRACT(YEAR FROM '2025-04-20');
-     ```
-   - **Result**: `2025`
+**Syntax:**
+```sql
+YEAR(date_value)
+```
+
+**Example:**
+```sql
+SELECT YEAR(rental_date) AS rental_year
+FROM rental
+LIMIT 3;
+```
+**Result:** Returns the year from the rental date.
+
+### `MONTH()` — Extracts the month from a date value.
+
+**Syntax:**
+```sql
+MONTH(date_value)
+```
+
+**Example:**
+```sql
+SELECT MONTH(rental_date) AS rental_month
+FROM rental
+LIMIT 3;
+```
+**Result:** Returns the month from the rental date.
+
+### `DAY()` — Extracts the day of the month from a date value.
+
+**Syntax:**
+```sql
+DAY(date_value)
+```
+
+**Example:**
+```sql
+SELECT DAY(rental_date) AS rental_day
+FROM rental
+LIMIT 3;
+```
+**Result:** Returns the day of the month from the rental date.
+
+### `DATE_ADD()` — Adds a specified interval to a date.
+
+**Syntax:**
+```sql
+DATE_ADD(date, INTERVAL value unit)
+```
+
+**Example:**
+```sql
+SELECT DATE_ADD(rental_date, INTERVAL 7 DAY) AS return_due
+FROM rental
+LIMIT 3;
+```
+**Result:** Returns the date increased by 7 days.
+
+### `DATE_SUB()` — Subtracts a specified interval from a date.
+
+**Syntax:**
+```sql
+DATE_SUB(date, INTERVAL value unit)
+```
+
+**Example:**
+```sql
+SELECT DATE_SUB(rental_date, INTERVAL 3 DAY) AS three_days_before
+FROM rental
+LIMIT 3;
+```
+**Result:** Returns the date decreased by 3 days.
+
+### `DATEDIFF()` — Returns the number of days between two dates.
+
+**Syntax:**
+```sql
+DATEDIFF(date1, date2)
+```
+
+**Example:**
+```sql
+SELECT DATEDIFF(return_date, rental_date) AS rental_duration
+FROM rental
+WHERE return_date IS NOT NULL
+LIMIT 3;
+```
+**Result:** The number of days between the return date and the rental date.
+
+### `DATE_FORMAT()` — Formats a date in a specified format (MySQL).
+
+**Syntax:**
+```sql
+DATE_FORMAT(date, format)
+```
+
+**Example:**
+```sql
+SELECT DATE_FORMAT(rental_date, '%d.%m.%Y') AS formatted_date
+FROM rental
+LIMIT 3;
+```
+**Result:** Date in the format `dd.mm.yyyy`, e.g.: `03.06.2025`
+
+**Common format specifiers:**
+- `%Y`: Year (4 digits)
+- `%m`: Month (2 digits)
+- `%d`: Day of the month (2 digits)
+- `%H`: Hour (24-hour format)
+- `%i`: Minutes
+- `%s`: Seconds
+
+### `STRFTIME()` — Formats date/time (SQLite, PostgreSQL).
+
+**Syntax:**
+```sql
+STRFTIME(format, date)
+```
+
+**Example:**
+```sql
+SELECT STRFTIME('%Y-%m-%d', rental_date) AS formatted_date
+FROM rental
+LIMIT 3;
+```
+**Result:** Date in the format `yyyy-mm-dd`.
+
+### `TIMESTAMPDIFF()` — Difference between two dates/times in specified units (MySQL).
+
+**Syntax:**
+```sql
+TIMESTAMPDIFF(unit, datetime1, datetime2)
+```
+
+**Example:**
+```sql
+SELECT TIMESTAMPDIFF(DAY, rental_date, return_date) AS days_rented
+FROM rental
+WHERE return_date IS NOT NULL
+LIMIT 3;
+```
+**Result:** The number of days between the rental and return dates.
+
+### `EXTRACT()` — Extracts a part of a date or time (year, month, day, etc.).
+
+**Syntax:**
+```sql
+EXTRACT(part FROM date)
+```
+
+**Example:**
+```sql
+SELECT EXTRACT(YEAR FROM rental_date) AS rental_year
+FROM rental
+LIMIT 3;
+```
+**Result:** Extracts the year from the rental date.
 
 ---
 
-### Practical Usage Examples
+## Practical Usage
 
-1. **Finding users who registered in the last 30 days**:
+1. **Finding movies rented in the last 30 days:**
    ```sql
-   SELECT * 
-   FROM users 
-   WHERE registration_date > DATE_SUB(CURRENT_DATE, INTERVAL 30 DAY);
+   SELECT *
+   FROM rental
+   WHERE rental_date > DATE_SUB(CURRENT_DATE, INTERVAL 30 DAY);
+   ```
+2. **Counting rentals per month:**
+   ```sql
+   SELECT YEAR(rental_date) AS year, MONTH(rental_date) AS month, COUNT(*) AS rentals
+   FROM rental
+   GROUP BY year, month
+   ORDER BY year DESC, month DESC;
+   ```
+3. **Formatting rental date for a report:**
+   ```sql
+   SELECT DATE_FORMAT(rental_date, '%d.%m.%Y') AS formatted_rental
+   FROM rental
+   LIMIT 5;
+   ```
+
+## Key Takeaways from This Lesson
+
+Date and time functions allow you to flexibly analyze and transform temporal data in SQL. Use them for filtering, grouping, calculating intervals, and formatting dates in reports. Practice these functions with examples from the Sakila database to reinforce your skills.
