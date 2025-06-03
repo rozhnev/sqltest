@@ -344,16 +344,17 @@ class Controller
     public function query_test(array $params): void 
     {
         $sql = $_POST["query"] ?? '';
-        $question = new Question($this->dbh, $params['questionID']);
+        $questionID = $params['questionID'];
+        $question = new Question($this->dbh, $questionID);
         // Prepare query for testing and check result
         $preparedQuery = $question->prepareQuery($sql);
         $query = new Query($preparedQuery);
         $jsonResult = $query->getResult($question->getDB(), 'json');
         $queryTestResult = $question->checkQueryResult($jsonResult);
         $this->assignVariables([
-            'QuestionID'        => $params['questionID'],
-            'QueryTestResult' => $queryTestResult,
-            'QueryBestCost' => $question->getBestCost()
+            'QuestionID'        => $questionID,
+            'QueryTestResult'   => $queryTestResult,
+            'QueryBestCost'     => $question->getBestCost()
         ]);
         if ($queryTestResult['ok']) {
             $queryCheckResult = $question->checkQuery($sql);
@@ -363,27 +364,24 @@ class Controller
                 $queryTestResult['ok'] = false; // Set overall test result to false if query check failed
             }
         }
-        // if ($queryTestResult['ok']) {
-        //     $preparedQuery = $question->prepareQuery($sql);
-        //     $query = new Query($preparedQuery);
-        //     $jsonResult = $query->getResult($question->getDB(), 'json');
-        //     $queryTestResult = $question->checkQueryResult($jsonResult);
-        //     $this->assignVariables([
-        //         'QueryTestResult' => $queryTestResult,
-        //         'QueryBestCost' => $question->getBestCost()
-        //     ]);
-        // }
+
         if ($this->user->logged()) {
-            $this->user->saveQuestionAttempt($params['questionID'], $queryTestResult, $sql);
+            $this->user->saveQuestionAttempt($questionID, $queryTestResult, $sql);
             if ($queryTestResult['ok'] && $queryCheckResult['ok']) {
-                $this->user->saveSolution($params['questionID'], $queryTestResult, $sql);
+                $this->user->saveSolution($questionID, $queryTestResult, $sql);
                 $this->user->saveAchievement('first_task_solved');
                 $this->user->updateAchievements();
             }
         }
-        if (!$queryTestResult['ok']) header( 'HTTP/1.1 418 BAD REQUEST' );
+        if (!$queryTestResult['ok'] || !$queryCheckResult['ok']) {
+            header( 'HTTP/1.1 418 BAD REQUEST' );
+        }
+
         if ($this->user->showAd()) {
-            $this->engine->assign('ReferralLink', Helper::getReferralLink($this->dbh, $this->lang, $this->isMmobileView() ? 'mobile' : 'desktop'));
+            $this->engine->assign(
+                'ReferralLink', 
+                Helper::getReferralLink($this->dbh, $this->lang, $this->isMmobileView() ? 'mobile' : 'desktop')
+            );
         }
 
         $this->engine->display($this->lang . "/query_test_result.tpl");
