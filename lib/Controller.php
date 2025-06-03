@@ -356,10 +356,11 @@ class Controller
             'QueryBestCost' => $question->getBestCost()
         ]);
         if ($queryTestResult['ok']) {
-            $queryTestResult = $question->checkQuery($sql);
+            $queryCheckResult = $question->checkQuery($sql);
             // If query is not ok, we will show the error message
-            if (!$queryTestResult['ok']) {
-                $this->engine->assign('QueryTestResult', $queryTestResult);
+            if (!$queryCheckResult['ok']) {
+                $this->engine->assign('QueryTestResult', $queryCheckResult);
+                $queryTestResult['ok'] = false; // Set overall test result to false if query check failed
             }
         }
         // if ($queryTestResult['ok']) {
@@ -374,7 +375,7 @@ class Controller
         // }
         if ($this->user->logged()) {
             $this->user->saveQuestionAttempt($params['questionID'], $queryTestResult, $sql);
-            if ($queryTestResult['ok']) {
+            if ($queryTestResult['ok'] && $queryCheckResult['ok']) {
                 $this->user->saveSolution($params['questionID'], $queryTestResult, $sql);
                 $this->user->saveAchievement('first_task_solved');
                 $this->user->updateAchievements();
