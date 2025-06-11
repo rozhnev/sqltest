@@ -8,7 +8,7 @@
     Base de dados compacta para aprender os fundamentos do SQL.
     <h3>A base de dados Querynomicon contém tabelas:</h3>
     <div class="accordion active">
-        <span><span class='sql'>departments</span> - tabela de departamentos.</span>
+        <span><span class='sql'>department</span> - tabela de departamentos.</span>
     </div>
     <div class="panel">
         <ul class="table-columns">

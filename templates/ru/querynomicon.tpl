@@ -8,7 +8,7 @@
     Компактная база данных для изучения основ SQL.
     <h3>База данных Querynomicon содержит таблицы:</h3>
     <div class="accordion active">
-        <span><span class='sql'>departments</span> - таблица отделов.</span>
+        <span><span class='sql'>department</span> - таблица отделов.</span>
     </div>
     <div class="panel">
         <ul class="table-columns">

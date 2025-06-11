@@ -8,7 +8,7 @@
     A compact database for learning the basics of SQL.
     <h3>The Querynomicon database contains tables:</h3>
     <div class="accordion">
-        <span><span class='sql'>departments</span> - table of departments.</span>
+        <span><span class='sql'>department</span> - table of departments.</span>
     </div>
     <div class="panel">
         <ul class="table-columns">
