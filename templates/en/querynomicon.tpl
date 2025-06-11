@@ -135,10 +135,8 @@
     </div>
     {if $User->showAd()}
         <div class="referal-add-block">
-            <div id="yandex_rtb_R-A-4716552-7"></div>
-            {* <a target="_blank" rel="nofollow" href="https://bywiola.com/g/u1k11fxms7fec845fb2fd629c4b097/?i=4">
-                <img style="width: 100%;" border="0" src="https://ad.admitad.com/b/u1k11fxms7fec845fb2fd629c4b097/" alt="edX Many Geos"/>
-            </a> *}
+            <script async="async" data-cfasync="false" src="//pl26881648.profitableratecpm.com/93660caf229b7b6afe772e0ab435c7a9/invoke.js"></script>
+            <div id="container-93660caf229b7b6afe772e0ab435c7a9"></div>
         </div>
     {/if}
 </div>

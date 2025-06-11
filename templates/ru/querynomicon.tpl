@@ -135,17 +135,8 @@
     </div>
     {if $User->showAd()}
         <div class="referal-add-block">
-            <a href="https://book24.ru/r/MdRZN?erid=LjN8JzJBX" target="_blank" style="text-decoration: none; display: flex; ">
-                <div  style = "width: 30%;">
-                    <img style="width: 100%;" src="//ndc.book24.ru/resize/820x1180/pim/products/images/97/d1/01907881-ff4d-78d9-ac6a-7021d02597d1.jpg" alt="SQL: быстрое погружение.">
-                </div>
-                <div style="font-size: 1em;  width: 70%;  padding: 0 0.7em; font-weight: 100;">
-                    <div>Шилдс Уолтер: SQL: быстрое погружение.</div>
-                    <div style="font-size: small; padding-top: 0.5em;">
-                        Книга «SQL: быстрое погружение» идеальна для всех, кто ищет новые перспективы карьерного роста; для разработчиков, которые хотят расширить свои навыки и знания в программировании; для любого человека, даже без опыта, кто хочет воспользоваться возможностями будущего, в котором будут править данные.
-                    </div>
-                </div>
-            </a>
+            <script async="async" data-cfasync="false" src="//pl26881648.profitableratecpm.com/93660caf229b7b6afe772e0ab435c7a9/invoke.js"></script>
+            <div id="container-93660caf229b7b6afe772e0ab435c7a9"></div>
         </div>
     {/if}
 </div>
