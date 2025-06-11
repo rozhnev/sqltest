@@ -8,6 +8,30 @@
     Base de dados compacta para aprender os fundamentos do SQL.
     <h3>A base de dados Querynomicon contém tabelas:</h3>
     <div class="accordion active">
+        <span><span class='sql'>departments</span> - tabela de departamentos.</span>
+    </div>
+    <div class="panel">
+        <ul class="table-columns">
+            <li> <span class='sql'>ident</span>ID do departamento.</li>
+            <li> <span class='sql'>name</span>Nome do departamento.</li>
+            <li> <span class='sql'>building</span>Nome do prédio.</li>
+        </ul>
+        <div class="table-wrapper">
+            <table class=""><tbody>
+                <tr>
+                    <th>ident</th>
+                    <th>name</th>
+                    <th>building</th>
+                </tr>
+                <tr>
+                    <td>gen</td>
+                    <td>Genetics</td>
+                    <td>Chesson</td>
+                </tr>
+            </tbody></table>
+        </div>
+    </div>
+    <div class="accordion active">
         <span><span class='sql'>little_penguins</span> - tabela de pequenos pinguins.</span>
     </div>
     <div class="panel active">

@@ -8,6 +8,30 @@
     A compact database for learning the basics of SQL.
     <h3>The Querynomicon database contains tables:</h3>
     <div class="accordion">
+        <span><span class='sql'>departments</span> - table of departments.</span>
+    </div>
+    <div class="panel">
+        <ul class="table-columns">
+            <li> <span class='sql'>ident</span>Department ID.</li>
+            <li> <span class='sql'>name</span>Department name.</li>
+            <li> <span class='sql'>building</span>Building name.</li>
+        </ul>
+        <div class="table-wrapper">
+            <table class=""><tbody>
+                <tr>
+                    <th>ident</th>
+                    <th>name</th>
+                    <th>building</th>
+                </tr>
+                <tr>
+                    <td>gen</td>
+                    <td>Genetics</td>
+                    <td>Chesson</td>
+                </tr>
+            </tbody></table>
+        </div>
+    </div>
+    <div class="accordion">
         <span><span class='sql'>little_penguins</span> - table of little penguins.</span>
     </div>
     <div class="panel">

@@ -8,6 +8,30 @@
     Компактная база данных для изучения основ SQL.
     <h3>База данных Querynomicon содержит таблицы:</h3>
     <div class="accordion active">
+        <span><span class='sql'>departments</span> - таблица отделов.</span>
+    </div>
+    <div class="panel">
+        <ul class="table-columns">
+            <li> <span class='sql'>ident</span>ID отдела.</li>
+            <li> <span class='sql'>name</span>Название отдела.</li>
+            <li> <span class='sql'>building</span>Название здания.</li>
+        </ul>
+        <div class="table-wrapper">
+            <table class=""><tbody>
+                <tr>
+                    <th>ident</th>
+                    <th>name</th>
+                    <th>building</th>
+                </tr>
+                <tr>
+                    <td>gen</td>
+                    <td>Genetics</td>
+                    <td>Chesson</td>
+                </tr>
+            </tbody></table>
+        </div>
+    </div>
+    <div class="accordion active">
         <span><span class='sql'>little_penguins</span> - таблица малых пингвинов.</span>
     </div>
     <div class="panel active">
