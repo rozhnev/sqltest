@@ -767,6 +767,7 @@ input:checked + .slider:before {
     padding: 0 0 0 6px;
     font-size: small;
     cursor: pointer;
+    line-height: 17px;
 }
 .question-link .question-star {
     padding-left: 3px;
