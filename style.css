@@ -651,6 +651,9 @@ input:checked + .slider:before {
     padding: 0.5em;
     line-height: 1.5rem;
 }
+.question-wrapper h1 {
+    line-height: 1.5rem;
+}
 .question-wrapper table {
     border-collapse: collapse;
     border: 1px solid var(--text-block-border-color);
