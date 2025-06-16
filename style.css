@@ -652,7 +652,7 @@ input:checked + .slider:before {
     line-height: 1.5rem;
 }
 .question-wrapper h1 {
-    line-height: 1.5rem;
+    line-height: normal;
 }
 .question-wrapper table {
     border-collapse: collapse;
