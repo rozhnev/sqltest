@@ -114,7 +114,7 @@
     border: 1px solid var(--text-block-border-color);
     border-radius: 4px;
     background-color: var(--block-background-color);
-    color: var(--regualr-text-color);
+    color: var(--regular-text-color);
 }
 
 .profile-actions {

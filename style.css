@@ -5,7 +5,7 @@
 }
 :root {
     --body-background-color: #fefefe;
-    --regualr-text-color: #FFFFFF;
+    --regular-text-color: #FFFFFF;
     --block-background-color: #466cbd;
     --db-description-background-color:  #466cbd;
     --text-block-border-color: lightgrey;
@@ -31,7 +31,7 @@
 }
 [data-theme="dark"] {
     --body-background-color: #171B23;
-    --regualr-text-color: #F0F6FC;
+    --regular-text-color: #F0F6FC;
     --question-text: #F0F6FC;
     --text-block-border-color: #484F58;
     --block-background-color: #273E74;
@@ -61,7 +61,7 @@ body, html {
     height: 100%;
     font-family: "Lucida Grande", Tahoma, Arial, Verdana, sans-serif;
     background-color: var(--body-background-color);
-    color: var(--regualr-text-color);
+    color: var(--regular-text-color);
 }
 .hidden {
     display: none;
@@ -463,7 +463,7 @@ input:checked + .slider:before {
 }
 input:checked + .slider {
 	background-color: black;
-	color: var(--regualr-text-color);
+	color: var(--regular-text-color);
 }
 input:checked + .slider:before {
 	transform: translateX(26px);
