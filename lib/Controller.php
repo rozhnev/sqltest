@@ -4,7 +4,6 @@ class Controller
     private $dbh;
     private $user;
     private $engine;
-    private $mobileView;
 
     private $lang;
 
@@ -24,12 +23,11 @@ class Controller
         }
     }
 
-    public function __construct(PDO $dbh, Smarty $engine, User $user, bool $mobileView)
+    public function __construct(PDO $dbh, Smarty $engine, User $user, array $env)
     {
         $this->dbh      = $dbh;
         $this->user     = $user;
         $this->engine   = $engine;
-        $this->mobileView = $mobileView;
 
         $this->registerModifiers(["array_key_exists", "mt_rand"]);
         $this->engine->registerPlugin('block', 'translate', array('Localizer', 'translate'), true);
