@@ -148,7 +148,7 @@
 }
 .tabulator .tabulator-row {
     border-bottom: 1px solid var(--text-block-border-color);
-    color: var(--regular-text-color);
+    color: darkslategray;
 }
 
 .tabulator .tabulator-row:hover {
