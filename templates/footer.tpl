@@ -11,11 +11,11 @@
             {translate}footer_ask_in_telegram{/translate}
         </a>
         </div>
-    <div>
+    {* <div>
         <script src="https://yastatic.net/share2/share.js"></script>
         {translate}footer_like_site{/translate}
         <div class="ya-share2" data-curtain data-services="telegram,twitter,whatsapp,linkedin,reddit"></div>
-    </div>
+    </div> *}
     <div>
         <a href="/{$Lang}/about" target="_self">{translate}footer_about{/translate}</a>
         <a href="/{$Lang}/privacy-policy" target="_self">{translate}footer_privacy_policy{/translate}</a>
