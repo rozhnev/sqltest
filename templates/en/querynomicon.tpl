@@ -133,6 +133,40 @@
             </tbody></table>
         </div>
     </div>
+    <div class="accordion">
+        <span><span class='sql'>machine</span> - table of machines.</span>
+    </div>
+    <div class="panel">
+        <ul class="table-columns">
+            <li> <span class='sql'>ident</span>Machine ID.</li>
+            <li> <span class='sql'>name</span>Machine name.</li>
+            <li> <span class='sql'>details</span>JSON with details.</li>
+        </ul>
+        <div class="table-wrapper">
+            <table class=""><tbody>
+                <tr>
+                    <th>ident</th>
+                    <th>name</th>
+                    <th>details</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>WY401</td>
+                    <td>{"acquired": "2023-05-01"}</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Inphormex</td>
+                    <td>{"acquired": "2021-07-15", "refurbished": "2023-10-22"}</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>AutoPlate 9000</td>
+                    <td>{"note": "needs software update"}</td>
+                </tr>
+            </tbody></table>
+        </div>
+    </div>
     {if $User->showAd()}
         <div class="referal-add-block">
             <script async="async" data-cfasync="false" src="//pl26881648.profitableratecpm.com/93660caf229b7b6afe772e0ab435c7a9/invoke.js"></script>
