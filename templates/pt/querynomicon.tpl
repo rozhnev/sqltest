@@ -143,6 +143,7 @@
             <li> <span class='sql'>details</span>JSON com detalhes.</li>
         </ul>
         <div class="table-wrapper">
+            {literal}
             <table class=""><tbody>
                 <tr>
                     <th>ident</th>
@@ -165,6 +166,7 @@
                     <td>{"note": "needs software update"}</td>
                 </tr>
             </tbody></table>
+            {/literal}
         </div>
     </div>
     {if $User->showAd()}
