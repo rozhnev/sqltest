@@ -299,6 +299,7 @@ class Controller
         }
         $this->assignVariables([
             'PageTitle'             => sprintf("%s: %s", $pageTitle, $questionData['title']),
+            'PageOGTitle'           => sprintf("%s: %s", $pageTitle, $questionData['title']),
             'PageDescription'       => sprintf("%s: «%s»", $pageDescription, $questionData['title']),
             'SitePromo'             => $sitePromo,
             'SiteDescription'       => $siteDescription,
