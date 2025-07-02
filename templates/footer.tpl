@@ -10,7 +10,10 @@
             </span>
             {translate}footer_ask_in_telegram{/translate}
         </a>
-        </div>
+    </div>
+    +<!-- ShareThis BEGIN -->
+    <div class="sharethis-inline-share-buttons"></div>
+    <!-- ShareThis END -->
     {* <div>
         <script src="https://yastatic.net/share2/share.js"></script>
         {translate}footer_like_site{/translate}
