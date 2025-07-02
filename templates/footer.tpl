@@ -11,7 +11,7 @@
             {translate}footer_ask_in_telegram{/translate}
         </a>
     </div>
-    +<!-- ShareThis BEGIN -->
+    <!-- ShareThis BEGIN -->
     <div class="sharethis-inline-share-buttons"></div>
     <!-- ShareThis END -->
     {* <div>
