@@ -18,6 +18,7 @@
     </div> *}
     <div>
         <a href="/{$Lang}/about" target="_self">{translate}footer_about{/translate}</a>
+        <a href="#" target="_self" onclick="window.ceadConsent && window.ceadConsent.toggleBanner(); return false;">Cookie Settings</a>
         <a href="/{$Lang}/privacy-policy" target="_self">{translate}footer_privacy_policy{/translate}</a>
         <a href="/{$Lang}/books" target="_self">{translate}footer_books{/translate}</a>
         <a href="/{$Lang}/lesson/getting-started/introduction-to-databases" target="_self">{translate}lessons{/translate}</a>
@@ -66,4 +67,13 @@
             }
         {/literal}
     {/if}
+    window.cead = {
+        cookie: 'consent',
+        cookies: [
+            '_ga',
+            new RegExp('_ga_.+'),
+            new RegExp('_ym_.+')
+        ]
+    }
 </script>
+<script src="/js/cead.js"></script>
