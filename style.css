@@ -790,7 +790,7 @@ input:checked + .slider:before {
 }
 .question pre {
     font-family: Arial, Helvetica, sans-serif;
-    line-height: 1.2;
+    line-height: 1.5em;
     white-space: pre-line;
     margin: 0.5rem 0;
 }
