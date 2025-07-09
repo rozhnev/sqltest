@@ -794,6 +794,11 @@ input:checked + .slider:before {
     white-space: pre-line;
     margin: 0.5rem 0;
 }
+.question .attention {
+    font-weight: bold;
+    font-style: italic;
+}
+
 .question-title .question-dates {
     color: var(--question-date-color);
     font-size: small;
