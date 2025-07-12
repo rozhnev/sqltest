@@ -502,16 +502,20 @@
                 {* <a target="_blank" rel="nofollow" href="https://naiawork.com/g/63cmm8j9f5fec845fb2f5e445e6c7b/?i=4&subid=sql-from-zero&erid=LatgBvCNw">
                     <img style="width:100%;" border="0" src="https://aflink.ru/b/63cmm8j9f5fec845fb2f5e445e6c7b/" alt="Productstar"/>
                 </a> *}
-                <a target="_blank" rel="nofollow" href="https://dhwnh.com/g/jnv1nobkwkfec845fb2f42f9f2178b/?i=4&erid=2VSb5x8kCDv">
-                    <img style="width:100%;" border="0" src="https://aflink.ru/b/jnv1nobkwkfec845fb2f42f9f2178b/" alt="Puzzle Movies"/>
+                <!-- admitad.banner: zgiqkhys12fec845fb2f47ed6832c6 Atomic Heart [CPS] RU+CIS -->
+                <a target="_blank" rel="nofollow" href="https://rzekl.com/g/zgiqkhys12fec845fb2f47ed6832c6/?i=4&subid=InstinctOfExtermination&erid=5jtCeReNwxHpfQTGQG2GywH">
+                    <img style="width:100%;" border="0" src="https://aflink.ru/b/zgiqkhys12fec845fb2f47ed6832c6/" alt="Atomic Heart [CPS] RU+CIS"/>
                 </a>
+                <!-- /admitad.banner -->
                 <a target="_blank" rel="nofollow" href="https://thevospad.com/g/go2e1mhf52fec845fb2f69bd3583e1/?i=4&subid=analyst-from-zero&erid=LatgC6bAt">
                     <img style="width:100%;" border="0" src="https://aflink.ru/b/go2e1mhf52fec845fb2f69bd3583e1/" alt="Netology"/>
                 </a>
             {else}
-                <a target="_blank" rel="nofollow" href="https://ewwhk.com/g/brl8jkz38efec845fb2f0d79a64861/?i=4&subid=domains&erid=5jtCeReNwxHpfQTGR3xQ4Jh">
-                    <img style="width:83.3%;" border="0" src="https://aflink.ru/b/brl8jkz38efec845fb2f0d79a64861/" alt="REG.RU"/>
+                <!-- admitad.banner: 1x05fa2531fec845fb2f47ed6832c6 Atomic Heart [CPS] RU+CIS -->
+                <a target="_blank" rel="nofollow" href="https://rzekl.com/g/1x05fa2531fec845fb2f47ed6832c6/?i=4&subid=TheCharmsSeaDepths&erid=2bL9aMPo2e49hMef4piUxbAuHR">
+                    <img style="width:100%;" border="0" src="https://aflink.ru/b/1x05fa2531fec845fb2f47ed6832c6/" alt="Atomic Heart [CPS] RU+CIS"/>
                 </a>
+                <!-- /admitad.banner -->
                 <a target="_blank" rel="nofollow" href="https://thevospad.com/g/dhqiqt6h41fec845fb2f69bd3583e1/?i=4&subid=free-neuronetwork&erid=LatgBSdq6">
                     <img style="width:100%;" border="0" src="https://aflink.ru/b/dhqiqt6h41fec845fb2f69bd3583e1/" alt="Netology"/>
                 </a>
