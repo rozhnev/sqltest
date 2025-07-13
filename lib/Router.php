@@ -19,6 +19,7 @@ class Router
         'lessons'           => "@(?<lang>ru|en|pt)/(?<action>lesson)/(?<module>[a-z-]+)/(?<lesson>[a-z-]+)@i",
         'playground_run'    => "@(?<lang>ru|en|pt)/(?<class>playground)/(?<database>mysql80|mariadb115|psql17|sqlite3|mssql2022|oracle23|firebird4|soqol)/(?<action>query-run)@i",
         'playground'        => "@(?<lang>ru|en|pt)/(?<action>playground)/@i",
+        'sitemap'           => "@(?<action>sitemap)\.xml@i",
     ];
 
     public function __construct(Controller $controller)
