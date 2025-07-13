@@ -1,0 +1,11 @@
+<!-- A simple white cookie icon with transparent holes and a toggle "eye" for toggling the cookie banner -->
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Cookie base -->
+  <circle cx="64" cy="64" r="56" fill="#C2B280"/>
+  <!-- Cookie bite -->
+  <path d="M120 64a56 56 0 0 1-56 56 56 56 0 0 1-56-56 56 56 0 0 1 56-56c0 8 6 14 14 14s14 6 14 14 6 14 14 14 14 6 14 14z" fill="#E5D8B0"/>
+  <!-- Cookie holes -->
+  <circle cx="48" cy="60" r="8" fill="#A89B6D" fill-opacity="0.6"/>
+  <circle cx="80" cy="80" r="7" fill="#A89B6D" fill-opacity="0.6"/>
+  <circle cx="72" cy="44" r="5" fill="#A89B6D" fill-opacity="0.6"/>
+</svg>
