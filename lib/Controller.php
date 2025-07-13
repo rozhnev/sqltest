@@ -741,6 +741,8 @@ class Controller
     
     public function sitemap(array $params): void 
     {
+        header('Content-Type: text/xml; charset=utf-8');
+        header('X-Robots-Tag: all');
         $questionnire = new Questionnire($this->dbh, $this->lang);
 
         $this->assignVariables([
