@@ -738,5 +738,15 @@ class Controller
 
         $this->engine->display("query_result.tpl");
     }
+    
+    public function sitemap(array $params): void 
+    {
+        $questionnire = new Questionnire($this->dbh, $this->lang);
+
+        $this->assignVariables([
+            'Questionnire' => $questionnire->getMap(),
+        ]);
+        $this->engine->display("sitemap.tpl");
+    }
 }
 ?>
