@@ -747,6 +747,7 @@ class Controller
 
         $this->assignVariables([
             'Questionnire' => $questionnire->getMap(),
+            'Today' => date('Y-m-d'),
         ]);
         $this->engine->display("sitemap.tpl");
     }
