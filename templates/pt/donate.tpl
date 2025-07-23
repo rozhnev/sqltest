@@ -45,17 +45,9 @@
                 </div>
                 <div class="donation-method">
                     <h3>Apoie em Cripto</h3>
-                    <p>Apoie-nos usando USDT na rede TRON (USDT TRC20):</p>
-                    <div class="crypto-address">
-                        TFb65PXkvCDhK7WjTT5hkcP5WHwxYh51A8
-                    </div>
-                    <img src="https://sqlize.online/favicons/usdt-TFb65PXkvCDhK7WjTT5hkcP5WHwxYh51A8.png" 
-                        alt="Código QR USDT" 
-                        style="max-width: 200px; margin: 1rem 0;">
-                    <p class="warning-text">
-                        Importante!<br>
-                        Envie USDT apenas para o endereço TRC20. Enviar em qualquer outra blockchain pode resultar na perda permanente de fundos.
-                    </p>
+                    <iframe src="https://nowpayments.io/embeds/donation-widget?api_key=8881e1d0-aaef-46c4-9a60-298bb6f26c3b" width="346" height="623" frameborder="0" scrolling="no" style="overflow-y: hidden;">
+                        Can't load widget
+                    </iframe>
                 </div>
             </div>
         </div>
