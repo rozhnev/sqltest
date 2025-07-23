@@ -44,7 +44,6 @@
                         kofiwidget2.draw();
                     </script>
                 </div>
-    
                 <div class="donation-method">
                     <h3>Помочь в криптовалюте</h3>
                     <p>Перевод USDT в сети TRON (TRC20):</p>
@@ -58,6 +57,16 @@
                         Важно!<br>
                         Отправляйте USDT только в сети TRC20. Отправка в любой другой сети приведёт к безвозвратной потере средств.
                     </p>
+                </div>
+                <div class="donation-method">
+                    <h3>Помочь в криптовалюте</h3>
+                    <p>Перевод TON coins (Telegram Wallet):</p>
+                    <div class="crypto-address">
+                        UQA3QNs7uIyiRPF-1bpqnwXSzyBbQPBYYIZ1e8lOHFr1idnF
+                    </div>
+                    <img src="https://sqlize.online/favicons/ton-UQA3QNs7uIyiRPF-1bpqnwXSzyBbQPBYYIZ1e8lOHFr1idnF.png" 
+                        alt="TON Coins QR код" 
+                        style="max-width: 200px; margin: 1rem 0;">
                 </div>
             </div>
         </div>
