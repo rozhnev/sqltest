@@ -30,20 +30,6 @@
                     </script>
                 </div>
                 <div class="donation-method">
-                    <h3>Apoie em Rublos</h3>
-                    <p>Pagamento rápido e seguro através do CloudTips:</p>
-                    <p>
-                        <a href="https://pay.cloudtips.ru/p/60214a3d" target="_blank">
-                        <img src="https://static.tildacdn.com/tild3431-6231-4938-b464-663831306266/Horiz.svg" 
-                            alt="Pagamento CloudTips"
-                            style="width: 200px;
-                            background-color: white;
-                            padding: 10px;
-                            border-radius: 7px;">
-                        </a>
-                    </p>
-                </div>
-                <div class="donation-method">
                     <h3>Apoie em Cripto</h3>
                     <iframe src="https://nowpayments.io/embeds/donation-widget?api_key=8881e1d0-aaef-46c4-9a60-298bb6f26c3b" width="346" height="623" frameborder="0" scrolling="no" style="overflow-y: hidden;">
                         Can't load widget
