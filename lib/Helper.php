@@ -67,10 +67,11 @@ class Helper
     public static function updateReferralLinkStats(PDO $dbh, int $id): void
     {
         $stmt = $dbh->prepare(
-            "INSERT INTO referral_link_stats (link_id, date, shows)
-            VALUES (:link_id, CURRENT_DATE, 1) ON CONFLICT (link_id, date) DO UPDATE SET shows = shows + 1;"
+            "INSERT INTO referral_links_daily_stats (link_id, date, shows)
+            VALUES (:link_id, CURRENT_DATE, 1) 
+            ON CONFLICT (link_id, date) DO UPDATE SET shows = referral_links_daily_stats.shows + 1;"
         );
-        $stmt->execute([':id' => $id]);
+        $stmt->execute([':link_id' => $id]);
     }
     /**
      * Returns an array of books based on the specified language.
