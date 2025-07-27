@@ -44,7 +44,7 @@ class Helper
     public static function getReferralLink(PDO $dbh, string $lang, string $mode): ?array
     {
         $stmt = $dbh->prepare(
-            "SELECT link, content
+            "SELECT id, link, content
             FROM referral_links 
             WHERE 
                 lang = :lang 
@@ -57,6 +57,28 @@ class Helper
         return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
     }
 
+    /**
+    * Updates the referral link statistics in the database.
+    *
+    * @param PDO $dbh The database connection.
+    * @param int $id The ID of the referral link.
+    * @return void
+    */
+    public static function updateReferralLinkStats(PDO $dbh, int $id): void
+    {
+        $stmt = $dbh->prepare(
+            "INSERT INTO referral_link_stats (link_id, date, shows)
+            VALUES (:link_id, CURRENT_DATE, 1) ON CONFLICT (link_id, date) DO UPDATE SET shows = shows + 1;"
+        );
+        $stmt->execute([':id' => $id]);
+    }
+    /**
+     * Returns an array of books based on the specified language.
+     *
+     * @param PDO $dbh
+     * @param string $lang
+     * @return array
+     */
     public static function getBooks(PDO $dbh, string $lang): array
     {
         $stmt = $dbh->prepare(

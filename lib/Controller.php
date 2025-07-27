@@ -405,7 +405,9 @@ class Controller
 
         if (!$answerResult['ok']) header( 'HTTP/1.1 418 BAD REQUEST' );
         if ($this->user->showAd()) {
-            $this->engine->assign('ReferralLink', Helper::getReferralLink($this->dbh, $this->lang, $this->isMmobileView() ? 'mobile' : 'desktop'));
+            $referralLink = Helper::getReferralLink($this->dbh, $this->lang, $this->isMobileView() ? 'mobile' : 'desktop');
+            Helper::updateReferralLinkStats($this->dbh, $referralLink['id']);
+            $this->engine->assign('ReferralLink', $referralLink);
         }
         $this->engine->display($this->lang . "/check_answer_result.tpl");
     }
