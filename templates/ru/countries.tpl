@@ -22,7 +22,7 @@
                 </tr>
                 <tr>
                     <td>1</td>
-                    <td>Франция</td>
+                    <td>France</td>
                     <td>MultiPolygon(...) [SRID=4326]</td>
                 </tr>
             </table>
@@ -51,7 +51,7 @@
                 </tr>
                 <tr>
                     <td>1</td>
-                    <td>Париж</td>
+                    <td>Paris</td>
                     <td>1</td>
                     <td>Point(...) [SRID=4326]</td>
                 </tr>

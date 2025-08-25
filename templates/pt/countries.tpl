@@ -22,7 +22,7 @@
                 </tr>
                 <tr>
                     <td>1</td>
-                    <td>França</td>
+                    <td>France</td>
                     <td>MultiPolygon(...) [SRID=4326]</td>
                 </tr>
             </table>
