@@ -61,3 +61,10 @@
             <li>PRIMARY KEY, btree (id)</li>
             <li>FOREIGN KEY (country_id) REFERENCES countries(id)</li>
         </ul>
+    </div>
+    {if $User->showAd()}
+        <div class="referal-add-block">
+            <div id="yandex_rtb_R-A-4716552-7"></div>
+        </div>
+    {/if}
+</div>
