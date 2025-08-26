@@ -11,7 +11,7 @@
         <ul class="table-columns">
             <li><span class='sql'>id</span>unique record identifier (PK).</li>
             <li><span class='sql'>name</span>country name.</li>
-            <li><span class='sql'>geom</span>country geometry (MultiPolygon, SRID 4326).</li>
+            <li><span class='sql'>border</span>country geometry (MultiPolygon, SRID 4326).</li>
         </ul>
         <div class="table-wrapper">
             <table>
@@ -39,7 +39,7 @@
             <li><span class='sql'>id</span>unique record identifier (PK).</li>
             <li><span class='sql'>name</span>capital name.</li>
             <li><span class='sql'>country_id</span>reference to country (FK).</li>
-            <li><span class='sql'>geom</span>capital location (Point, SRID 4326).</li>
+            <li><span class='sql'>location</span>capital location (Point, SRID 4326).</li>
         </ul>
         <div class="table-wrapper">
             <table>

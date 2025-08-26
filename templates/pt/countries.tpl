@@ -11,7 +11,7 @@
         <ul class="table-columns">
             <li><span class='sql'>id</span>identificador único do registro (PK).</li>
             <li><span class='sql'>name</span>nome do país.</li>
-            <li><span class='sql'>geom</span>geometria do país (MultiPolygon, SRID 4326).</li>
+            <li><span class='sql'>border</span>geometria do país (MultiPolygon, SRID 4326).</li>
         </ul>
         <div class="table-wrapper">
             <table>
@@ -39,7 +39,7 @@
             <li><span class='sql'>id</span>identificador único do registro (PK).</li>
             <li><span class='sql'>name</span>nome da capital.</li>
             <li><span class='sql'>country_id</span>referência ao país (FK).</li>
-            <li><span class='sql'>geom</span>localização da capital (Point, SRID 4326).</li>
+            <li><span class='sql'>location</span>localização da capital (Point, SRID 4326).</li>
         </ul>
         <div class="table-wrapper">
             <table>

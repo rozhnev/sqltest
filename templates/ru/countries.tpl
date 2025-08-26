@@ -11,7 +11,7 @@
         <ul class="table-columns">
             <li><span class='sql'>id</span>уникальный идентификатор записи (PK).</li>
             <li><span class='sql'>name</span>название страны.</li>
-            <li><span class='sql'>geom</span>геометрия страны (MultiPolygon, SRID 4326).</li>
+            <li><span class='sql'>border</span>геометрия страны (MultiPolygon, SRID 4326).</li>
         </ul>
         <div class="table-wrapper">
             <table>
@@ -39,7 +39,7 @@
             <li><span class='sql'>id</span>уникальный идентификатор записи (PK).</li>
             <li><span class='sql'>name</span>название столицы.</li>
             <li><span class='sql'>country_id</span>ссылка на страну (FK).</li>
-            <li><span class='sql'>geom</span>координаты столицы (Point, SRID 4326).</li>
+            <li><span class='sql'>location</span>координаты столицы (Point, SRID 4326).</li>
         </ul>
         <div class="table-wrapper">
             <table>
