@@ -30,10 +30,10 @@
                 {/if}
             {/if}
             </div>
-            <div>
-                <button class="button green" onClick="showOthersSolutions({$QuestionID})">Mostre-me outras soluções!</button>
-            </div>
         {/if}
+        <div>
+            <button class="button green" onClick="showOthersSolutions({$QuestionID})">Mostre-me outras soluções!</button>
+        </div>
      </div>
      {if !$User->logged()}
         <p class="question-action">
