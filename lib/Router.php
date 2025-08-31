@@ -47,7 +47,10 @@ class Router
         if (preg_match("@(?<lang>ru|en|pt)/(?<action>question)/(?<questionCategoryId>\d+)/(?<questionId>\d+)@i", $path, $params)) {
             return $this->controller->redirect($params);
         }
-
+        if (preg_match("@(?<lang>ru|en|pt)/(?<questionCategory>sakila)/(?<questionId>\d+)@i", $path, $params)) {
+            $params['questionCategoryId'] = 1; // for sakila
+            return $this->controller->redirect($params);
+        }
         if (preg_match("@(?<lang>ru|en|pt)/@i", $path, $params)) {
             $this->controller->setLanguge($params['lang'] ?? DEFAULT_LANGUAGE);
         } else {
