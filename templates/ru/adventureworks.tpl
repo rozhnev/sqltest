@@ -485,9 +485,9 @@
 
     {if $User->showAd()}
         {assign var=add_id value=0|mt_rand:4}
-        <div class="referal-add-block">
+        {* <div class="referal-add-block">
             {if $add_id > 2}
-                {* <a href="https://book24.ru/r/vPcru?erid=LjN8K1JdK" target="_blank" style="text-decoration: none; display: flex;">
+                <a href="https://book24.ru/r/vPcru?erid=LjN8K1JdK" target="_blank" style="text-decoration: none; display: flex;">
                     <div  style = "width: 30%;">
                         <img style="width: 100%;" src="//ndc.book24.ru/resize/410x590/pim/products/images/2a/23/018edf56-f466-7e54-b41e-7cd2a6b02a23.jpg" alt="Грабер Мартин: SQL.">
                     </div>
@@ -498,10 +498,10 @@
                         В книге дано подробное описание языка, поэтому от читателя не требуется никакой предварительной подготовки. Сопровождаемая практическими учебными материалами, книга представляет собой полное справочное руководство по SQL.
                       </div>
                     </div>
-                </a> *}
-                {* <a target="_blank" rel="nofollow" href="https://naiawork.com/g/63cmm8j9f5fec845fb2f5e445e6c7b/?i=4&subid=sql-from-zero&erid=LatgBvCNw">
+                </a>
+                <a target="_blank" rel="nofollow" href="https://naiawork.com/g/63cmm8j9f5fec845fb2f5e445e6c7b/?i=4&subid=sql-from-zero&erid=LatgBvCNw">
                     <img style="width:100%;" border="0" src="https://aflink.ru/b/63cmm8j9f5fec845fb2f5e445e6c7b/" alt="Productstar"/>
-                </a> *}
+                </a>
                 <!-- admitad.banner: zgiqkhys12fec845fb2f47ed6832c6 Atomic Heart [CPS] RU+CIS -->
                 <a target="_blank" rel="nofollow" href="https://rzekl.com/g/zgiqkhys12fec845fb2f47ed6832c6/?i=4&subid=InstinctOfExtermination&erid=5jtCeReNwxHpfQTGQG2GywH">
                     <img style="width:100%;" border="0" src="https://aflink.ru/b/zgiqkhys12fec845fb2f47ed6832c6/" alt="Atomic Heart [CPS] RU+CIS"/>
@@ -520,6 +520,9 @@
                     <img style="width:100%;" border="0" src="https://aflink.ru/b/dhqiqt6h41fec845fb2f69bd3583e1/" alt="Netology"/>
                 </a>
             {/if}
+            *}
+                    {include file="ru/developers_channel_ad.tpl"}
+
         </div>
     {/if}
     {literal}

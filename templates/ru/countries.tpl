@@ -63,8 +63,9 @@
         </ul>
     </div>
     {if $User->showAd()}
-        <div class="referal-add-block">
+        {* <div class="referal-add-block">
             <div id="yandex_rtb_R-A-4716552-7"></div>
-        </div>
+        </div> *}
+        {include file="ru/developers_channel_ad.tpl"}
     {/if}
 </div>

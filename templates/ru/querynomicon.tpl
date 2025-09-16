@@ -170,9 +170,9 @@
         </div>
     </div>
     {if $User->showAd()}
-        <div class="referal-add-block">
-            {* <script async="async" data-cfasync="false" src="//pl26881648.profitableratecpm.com/93660caf229b7b6afe772e0ab435c7a9/invoke.js"></script>
-            <div id="container-93660caf229b7b6afe772e0ab435c7a9"></div> *}
+        {* <div class="referal-add-block">
+            <script async="async" data-cfasync="false" src="//pl26881648.profitableratecpm.com/93660caf229b7b6afe772e0ab435c7a9/invoke.js"></script>
+            <div id="container-93660caf229b7b6afe772e0ab435c7a9"></div>
             <!-- admitad.banner: zgiqkhys12fec845fb2f47ed6832c6 Atomic Heart [CPS] RU+CIS -->
             <a target="_blank" rel="nofollow" href="https://rzekl.com/g/zgiqkhys12fec845fb2f47ed6832c6/?i=4&subid=InstinctOfExtermination&erid=5jtCeReNwxHpfQTGQG2GywH">
                 <img style="width:100%;" border="0" src="https://aflink.ru/b/zgiqkhys12fec845fb2f47ed6832c6/" alt="Atomic Heart [CPS] RU+CIS"/>
@@ -181,6 +181,8 @@
             <a target="_blank" rel="nofollow" href="https://thevospad.com/g/go2e1mhf52fec845fb2f69bd3583e1/?i=4&subid=analyst-from-zero&erid=LatgC6bAt">
                 <img style="width:100%;" border="0" src="https://aflink.ru/b/go2e1mhf52fec845fb2f69bd3583e1/" alt="Netology"/>
             </a>
-        </div>
+        </div> *}
+                {include file="ru/developers_channel_ad.tpl"}
+
     {/if}
 </div>

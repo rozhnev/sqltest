@@ -376,9 +376,9 @@
     </div>                            
     {if $User->showAd()}
         {assign var=add_id value=0|mt_rand:4}
-        <div class="referal-add-block">
+        {* <div class="referal-add-block">
             {if $add_id > 2}
-                {* <a href="https://book24.ru/r/RaSLq?erid=LjN8KWDe6" target="_blank" style="text-decoration: none; display: flex; ">
+                <a href="https://book24.ru/r/RaSLq?erid=LjN8KWDe6" target="_blank" style="text-decoration: none; display: flex; ">
                     <div  style = "width: 30%;">
                         <img style="width: 100%;" src="//ndc.book24.ru/resize/410x590/pim/products/images/fa/ba/018ee5fc-fe2e-7df9-b671-01280c60faba.jpg" alt="PostgreSQL Основы языка SQL : учебное пособие">
                     </div>
@@ -391,7 +391,7 @@
                             Приведены практические примеры анализа воронки продаж и потребительской корзины.
                         </div>
                     </div>
-                </a> *}
+                </a> 
                 <a target="_blank" rel="nofollow" href="https://ujhjj.com/g/2fm4vusamufec845fb2f0da0172cef/?i=4&subid=sql&erid=LatgBVMfa">
                     <img style="width:100%;" border="0" src="https://aflink.ru/b/2fm4vusamufec845fb2f0da0172cef/" alt="Skillfactory.ru"/>
                 </a>
@@ -406,6 +406,10 @@
                     <img style="width:83.3%;" border="0" src="https://aflink.ru/b/brl8jkz38efec845fb2f0d79a64861/" alt="REG.RU"/>
                 </a>
             {/if}
+
         </div>
+                    *}
+
+        {include file="ru/developers_channel_ad.tpl"}
     {/if}
 </div>
