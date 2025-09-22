@@ -618,12 +618,16 @@
                 }
             }
         </style>
-        <div class="banner-container">
+        <a href="https://www.jdoqocy.com/click-101541078-17083149" target="_blank"  style="display: flex; margin: 1rem 0;">
+            <img src="https://www.ftjcfx.com/image-101541078-17083149" width="250" height="360" alt="" border="0"/>
+        </a>
+        {* <div class="banner-container">
             <a href="https://dbfrontiers.net/" target="_blank" rel="noopener noreferrer">
                 <div class="banner-title">Database Frontiers</div>
                 <div class="banner-slogan">Premier Conference for Database Professionals</div>
                 <div class="banner-button">Learn More</div>
             </a>
-        </div>
+        </div> *}
+
     {/if}
 </div>
