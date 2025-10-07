@@ -130,7 +130,7 @@ class Query
                 }
             }
         }
-    
-        return $cleaned;
+
+        return trim($cleaned);
     }
 }
