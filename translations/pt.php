@@ -52,7 +52,7 @@ $translations = [
     'favorite' => 'Favorito',
     'favorites' => 'Favoritos',
     'add_to_favorites' => 'Adicionar aos favoritos',
-    'menu_small_add_placeholder' => "<div style='color: var(--question-text); display: flex; gap: 0.5rem; flex-direction: column; align-items: center;'>
+    'menu_small_add_placeholder' => "<div style='color: var(--regular-text-color); display: flex; gap: 0.5rem; flex-direction: column; align-items: center;'>
         O projeto é difícil. <a href='https://ko-fi.com/D1D76X1T1' target='_blank'>
             <img height='36' style='border:0px;height:36px;' src='https://storage.ko-fi.com/cdn/kofi6.png?v=6' border='0' alt='Buy Me a Coffee at ko-fi.com' />
         </a></div>",
@@ -61,7 +61,7 @@ $translations = [
     'rate_saved' => 'Obrigado! Seu voto foi computado.',
     'rate_not_saved' => 'Para participar da avaliação, faça login no site',
     'og_title' => 'Questionário prático de SQL',
-    'og_description' => 'Problemas práticos de SQL',
+    'og_description' => 'SQLtest.online: Seu treinador interativo gratuito de SQL. Pratique e aprimore suas habilidades práticas em SQL com problemas do mundo real e feedback instantâneo para vários bancos de dados como MySQL, MS SQL e SQLite.',
     'playground_og_description' => 'SQL Playground: Experimente o SQL Online',
     'lessons_og_title' => 'Aulas de SQL para Iniciantes',
     'lessons_og_description' => 'Aprenda SQL com nossas aulas',
@@ -83,7 +83,7 @@ $translations = [
     'determine_your_level' => 'Faça o teste para determinar seu nível.',
     'up_your_level' => 'Faça o teste para subir de nível.',
     'no_solutions_yet' => 'Desculpe, mas ainda não há solução publicada para este problema.',
-    'login_needed' => 'Por favor, <a href="" onClick="toggleLoginWindow(); return false;">faça login</a> para executar esta ação.',
+    'login_needed' => 'Esta ação não é permitida para usuários anônimos.<br>Por favor <a href="" class="button-small green" style="padding: 3px; margin-top: 3px; display: inline-block;" onClick="toggleLoginWindow(); return false;">faça login</a> para realizá-la.',
     'action_not_permiited' => 'Você não tem permissão para executar esta ação.',
     'qustion_should_be_solved' => 'Você deve resolver o problema sozinho antes de ver as soluções dos outros usuários',
     'privacy_policy_page_title' => 'SQLTest.online: Política de Privacidade',
@@ -110,7 +110,7 @@ $translations = [
     'question_action_previous_title' => 'Tarefa anterior',
     'question_maximum_attempts_used' => 'Infelizmente, apesar de todos os seus esforços, você não conseguiu resolver este problema.',
     'user_solutions_count' => 'Explore mais de <span style="font-weight:bold; color: #2EA043 !important;">##QuestionsCountRounded##</span> tarefas diversas na nossa plataforma.',
-    'user_solutions_count_logged' => '##YouHaveSolved## <span style="font-weight:bold;  color: #2EA043 !important;">##SolvedQuestionsCount##</span> de <span style="font-weight:bold; color: #2EA043 !important;">##QuestionsCountRounded##</span> tarefas em nossa plataforma.',
+    'user_solutions_count_logged' => '##YouHaveSolved## <span style="font-weight:bold; color: #2EA043 !important;">##SolvedQuestionsCount##</span> de mais de <span style="font-weight:bold; color: #2EA043 !important;">##QuestionsCountRounded##</span> tarefas em nossa plataforma.',
     'user_solutions_count_not_logged' => 'Faça login para salvar seu progresso.',
     'you_have_solved' => 'Você resolveu',
     'you_have_already_solved' => 'Você já resolveu',

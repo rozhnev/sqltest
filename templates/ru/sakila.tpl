@@ -543,8 +543,17 @@
     </div>              
 
     {if $User->showAd()}
-        <div class="referal-add-block">
+        {* <div class="referal-add-block">
             <div id="yandex_rtb_R-A-4716552-7"></div>
-        </div>
+            <!-- admitad.banner: zgiqkhys12fec845fb2f47ed6832c6 Atomic Heart [CPS] RU+CIS -->
+            <a target="_blank" rel="nofollow" href="https://rzekl.com/g/zgiqkhys12fec845fb2f47ed6832c6/?i=4&subid=InstinctOfExtermination&erid=5jtCeReNwxHpfQTGQG2GywH">
+                <img style="width:100%;" border="0" src="https://aflink.ru/b/zgiqkhys12fec845fb2f47ed6832c6/" alt="Atomic Heart [CPS] RU+CIS"/>
+            </a>
+            <!-- /admitad.banner -->
+            <a target="_blank" rel="nofollow" href="https://thevospad.com/g/go2e1mhf52fec845fb2f69bd3583e1/?i=4&subid=analyst-from-zero&erid=LatgC6bAt">
+                <img style="width:100%;" border="0" src="https://aflink.ru/b/go2e1mhf52fec845fb2f69bd3583e1/" alt="Netology"/>
+            </a>
+        </div> *}
+        {include file="ru/developers_channel_ad.tpl"}
     {/if}
 </div>

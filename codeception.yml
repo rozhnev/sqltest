@@ -5,6 +5,16 @@ paths:
     support: tests/_support
     envs: tests/_envs
 actor_suffix: Tester
+settings:
+    backup_globals: false
+    colors: true
 extensions:
     enabled:
         - Codeception\Extension\RunFailed
+suites:
+    unit:
+        path: tests/unit/
+        actor: UnitTester
+        modules:
+            enabled:
+                - Asserts

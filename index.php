@@ -19,12 +19,6 @@ $languages = ['ru' => 'Русский', 'en' => 'English', 'pt' => 'Português'/
 $languge_codes = array_keys($languages);
 $languge_codes_regexp = implode('|', $languge_codes);
 
-$mobileView =  (
-    (isset($_SERVER['SERVER_NAME']) && $_SERVER['SERVER_NAME'] === 'm.sqltest.online') 
-    // for local use
-    //|| parse_url($_SERVER['HTTP_HOST'])['host'] === 'm.sqltest.local' 
-);
-
 $path = $_SERVER['REQUEST_URI'];
 
 $pathParts = explode('/', $path);
@@ -52,5 +46,5 @@ if ($_SESSION) {
     $user->loginSession($_SESSION);
 }
 
-$controller = new Controller($dbh, $smarty, $user, $mobileView);
+$controller = new Controller($dbh, $smarty, $user, $env);
 $router = (new Router($controller))->route($path);

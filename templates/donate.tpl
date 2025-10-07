@@ -17,7 +17,7 @@
             border-radius: 8px;
             color: var(--ligth-h2-color);
             background-color: var(--ligth-panel-bg-color);
-            max-width: 40%;
+            max-width: 45%;
             min-width: 20rem;
         }
         .crypto-address {

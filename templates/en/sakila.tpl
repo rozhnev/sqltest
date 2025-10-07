@@ -542,8 +542,92 @@
         </ul>
     </div>
     {if $User->showAd()}
-        <div class="referal-add-block">
+        {* <div class="referal-add-block">
             <div id="yandex_rtb_R-A-4716552-7"></div>
-        </div>
+        </div> *}
+        <style>
+            .banner-container {
+                width: 100%;
+                max-width: 728px; /* Common banner width (e.g., leaderboard) */
+                background-color: #336699; /* Professional blue */
+                color: #ffffff; /* White text */
+                padding: 20px 30px;
+                box-sizing: border-box;
+                text-align: center;
+                border-radius: 8px;
+                border: 1px solid white;
+                margin: 1rem 0;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                overflow: hidden;
+                position: relative;
+            }
+            .banner-container a {
+                text-decoration: none;
+                color: inherit; /* Inherit white color */
+                display: block; /* Make the whole banner clickable */
+            }
+            .banner-title {
+                font-size: 2.2em; /* Larger font for the main title */
+                font-weight: bold;
+                margin-bottom: 10px;
+                line-height: 1.2;
+            }
+            .banner-slogan {
+                font-size: 1.1em;
+                margin-bottom: 20px;
+                opacity: 0.9;
+            }
+            .banner-button {
+                display: inline-block;
+                background-color: #ff9900; /* Vibrant orange for call to action */
+                color: #333333; /* Dark text for contrast */
+                padding: 12px 25px;
+                border-radius: 5px;
+                font-size: 1.0em;
+                font-weight: bold;
+                text-transform: uppercase;
+                transition: background-color 0.3s ease;
+            }
+            .banner-button:hover {
+                background-color: #e68a00; /* Darker orange on hover */
+            }
+
+            /* Optional: Responsive adjustments */
+            @media (max-width: 768px) {
+                .banner-container {
+                    max-width: 90%;
+                    padding: 15px 20px;
+                }
+                .banner-title {
+                    font-size: 1.8em;
+                }
+                .banner-slogan {
+                    font-size: 1.0em;
+                }
+                .banner-button {
+                    padding: 10px 20px;
+                    font-size: 0.9em;
+                }
+            }
+            @media (max-width: 480px) {
+                .banner-title {
+                    font-size: 1.5em;
+                }
+                .banner-slogan {
+                    font-size: 0.9em;
+                }
+            }
+        </style>
+        <a href="https://www.jdoqocy.com/click-101541078-17083149" target="_blank"  style="display: flex; margin: 1rem 0;">
+            <img src="https://www.ftjcfx.com/image-101541078-17083149" width="250" height="360" alt="" border="0"/>
+        </a>
+        {* <div class="banner-container">
+            <a href="https://dbfrontiers.net/" target="_blank" rel="noopener noreferrer">
+                <div class="banner-title">Database Frontiers</div>
+                <div class="banner-slogan">Premier Conference for Database Professionals</div>
+                <div class="banner-button">Learn More</div>
+            </a>
+        </div> *}
+
     {/if}
 </div>

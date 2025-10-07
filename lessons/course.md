@@ -38,9 +38,10 @@
 4.  **Data Aggregation and Grouping**
     *   Basic Aggregation Functions
     *   Grouping Data with GROUP BY
-    *   Filtering Groups with HAVING
+    *   Filtering groupped data with HAVING
 5.  **Working with Multiple Tables**
-    *   Understanding Joins: INNER JOIN, LEFT JOIN, RIGHT JOIN, FULL OUTER JOIN
+    *   Understanding Joins
+    *   Join types: INNER JOIN, LEFT JOIN, RIGHT JOIN, FULL OUTER JOIN
     *   Combining Data from Multiple Tables
     *   Using Aliases for Tables
     *   Working with Self-Joins

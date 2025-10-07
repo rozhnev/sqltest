@@ -748,7 +748,7 @@ class User
                 (a.id IN (10, 12) AND EXISTS (SELECT 1 FROM user_completed_achievements WHERE achievement_id = 14)) OR
                 (a.id IN (10, 12, 14) AND EXISTS (SELECT 1 FROM user_completed_achievements WHERE achievement_id = 18))
             )
-            ORDER BY a.id ASC
+            ORDER BY a.sequence_position ASC
             LIMIT 1;");
 
         $stmt->execute([':lang' => $lang, ':user_id' => $this->id]);
@@ -864,7 +864,7 @@ class User
         if (!$stmt->execute([$nickname, $this->id])) {
             throw new Exception(Localizer::translateString('update_failed'));
         }
-
+        $this->saveAchievement("set_nickname");
         return true;
     }
     public function getQuestions(string $lang): array

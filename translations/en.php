@@ -53,7 +53,7 @@ $translations = [
     'favorite' => 'Favorite',
     'favorites' => 'Favorites',
     'add_to_favorites' => 'Click to add to favorites',
-    'menu_small_add_placeholder' => '<div style="color: var(--question-text); display: flex; gap: 0.5rem; flex-direction: column; align-items: center;">
+    'menu_small_add_placeholder' => '<div style="color: var(--regular-text-color); display: flex; gap: 0.5rem; flex-direction: column; align-items: center;">
         Support the project. <a href="https://ko-fi.com/D1D76X1T1" target="_blank">
             <img height="36" style="border:0px;height:36px;" src="https://storage.ko-fi.com/cdn/kofi6.png?v=6" border="0" alt="Buy Me a Coffee at ko-fi.com" />
         </a></div>',    
@@ -64,7 +64,7 @@ $translations = [
     'og_title' => 'Practical SQL quiz',
     'lessons_og_title' => 'SQL Lessons for Beginners',
     'playground_og_title' => 'SQL Playground: Write and Execute SQL Queries Online',
-    'og_description' => 'Practical SQL problems',
+    'og_description' => 'SQLtest.online: Your free interactive SQL trainer. Practice and enhance your practical SQL skills with real-world problems and instant feedback for various databases like MySQL, MS SQL, and SQLite.',
     'lessons_og_description' => 'Learn SQL from with our leesons',
     'playground_og_description' => 'SQL Playground: Write and Execute SQL Queries Online',
     'page_task_title' => 'SQL Assessment',
@@ -84,7 +84,7 @@ $translations = [
     'low_grades_restricted' => 'Available to Middle and Senior-level users only.',
     'determine_your_level' => 'Take the test to determine your level.',
     'up_your_level' => 'Take the test to up your level.',
-    'login_needed' => 'Please <a href="" onClick="toggleLoginWindow(); return false;">log in</a> to perform this action.',
+    'login_needed' => 'This action isn\'t allowed for anonymous users.<br>Please <a href="" class="button-small green" style="padding: 3px; margin-top: 3px; display: inline-block;" onClick="toggleLoginWindow(); return false;">log in</a> to perform it.',
     'action_not_permiited' => 'You are not allowed to perform this action.',
     'qustion_should_be_solved' => 'You should to solve the problem yourself before look others solutions',
     'privacy_policy_page_title' => 'SQLTest.online: Privacy Policy',
@@ -111,7 +111,7 @@ $translations = [
     'question_action_previous_title' => 'Previous task',
     'question_maximum_attempts_used' => 'Unfortunately, despite all your efforts, you were unable to solve this problem.',
     'user_solutions_count' => 'Explore over <span style="font-weight:bold; color: #2EA043 !important;">##QuestionsCountRounded##</span> diverse tasks on our platform.',
-    'user_solutions_count_logged' => '##YouHaveSolved## <span style="font-weight:bold;  color: #2EA043 !important;">##SolvedQuestionsCount##</span> of <span style="font-weight:bold; color: #2EA043 !important;">##QuestionsCountRounded##</span> tasks on our platform. ',
+    'user_solutions_count_logged' => '##YouHaveSolved## <span style="font-weight:bold;  color: #2EA043 !important;">##SolvedQuestionsCount##</span> of more than <span style="font-weight:bold; color: #2EA043 !important;">##QuestionsCountRounded##</span> tasks on our platform. ',
     'user_solutions_count_not_logged' => 'Log in to save your progress.',
     'you_have_solved' => 'You have solved',
     'you_have_already_solved' => 'You already solved',

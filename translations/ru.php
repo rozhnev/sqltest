@@ -53,7 +53,7 @@ $translations = [
     'favorite' => 'Избранное',
     'favorites' => 'Избранное',
     'add_to_favorites' => 'Добавить в избранное',
-    'menu_small_add_placeholder' => '<div style="color: var(--question-text); display: flex; gap: 5px; flex-direction: column; align-items: center;">Поддержите проект на 
+    'menu_small_add_placeholder' => '<div style="color: var(--regular-text-color); display: flex; gap: 5px; flex-direction: column; align-items: center;">Поддержите проект на 
                     <a href="https://pay.cloudtips.ru/p/60214a3d" target="_blank">
                     <img src="https://static.tildacdn.com/tild3431-6231-4938-b464-663831306266/Horiz.svg" 
                          alt="Оплата через CloudTips"
@@ -70,7 +70,7 @@ $translations = [
     'og_title' => 'Тренажёр SQL',
     'lessons_og_title' => 'SQL уроки для начинающих',
     'playground_og_title' => 'Онлайн SQL песочница',
-    'og_description' => 'Практические задачи и тесты по SQL',
+    'og_description' => 'SQLtest.online: Ваш бесплатный интерактивный тренажер SQL. Практикуйтесь и улучшайте свои практические навыки SQL с реальными задачами и мгновенной обратной связью для различных баз данных, таких как MySQL, MS SQL и SQLite.',
     'lessons_og_description' => 'Изучай SQL с нашими уроками.',
     'playground_og_description' => 'SQL Playground - онлайн редактор SQL для тестирования и отладки запросов.',
     'page_task_title' => 'SQL тренажер',
@@ -90,7 +90,7 @@ $translations = [
     'determine_your_level' => 'Пройдите тест, чтобы определить свой уровень.',
     'up_your_level' => 'Пройдите тест, чтобы повысить свой уровень.',
     'no_solutions_yet' => 'Извините, но пока не опубликовано ни одно из решений этой задачи.',
-    'login_needed' => 'Пожалуйста, <a href="" onClick="toggleLoginWindow(); return false;">войдите на сайт</a>, чтобы выполнить это действие.',
+    'login_needed' => 'Это действие недоступно анонимным пользователям.<br>Пожалуйста <a href="" class="button-small green" style="padding: 3px; margin-top: 3px; display: inline-block;" onClick="toggleLoginWindow(); return false;">войдите в систему</a> чтобы выполнить его.',
     'action_not_permiited' => 'Действие не разрешено.',
     'qustion_should_be_solved' => 'Вы должны решить задачу самостоятельно, прежде чем просматривать решения других пользователей',
     'privacy_policy_page_title' => 'SQLTest.online: Политика конфиденциальности',
@@ -117,7 +117,7 @@ $translations = [
     'question_action_next_title' => 'Следующее задание',
     'question_maximum_attempts_used' => 'К сожалению, несмотря на все старания, вам не удалось решить эту задачу.',
     'user_solutions_count' => 'Откройте для себя более <span style="font-weight:bold; color: #2EA043 !important;">##QuestionsCountRounded##</span> уникальных заданий.',
-    'user_solutions_count_logged' => '##YouHaveSolved## <span style="font-weight:bold;  color: #2EA043 !important;">##SolvedQuestionsCount##</span> из <span style="font-weight:bold; color: #2EA043 !important;">##QuestionsCountRounded##</span> уникальных заданий. ',
+    'user_solutions_count_logged' => '##YouHaveSolved## <span style="font-weight:bold;  color: #2EA043 !important;">##SolvedQuestionsCount##</span> из более <span style="font-weight:bold; color: #2EA043 !important;">##QuestionsCountRounded##</span> уникальных заданий. ',
     'user_solutions_count_not_logged' => 'Войдите, чтобы сохранить свой прогресс.',
     'you_have_solved' => 'Вы пока решили',
     'you_have_already_solved' => 'Вы уже решили',

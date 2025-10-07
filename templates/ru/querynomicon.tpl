@@ -8,6 +8,30 @@
     Компактная база данных для изучения основ SQL.
     <h3>База данных Querynomicon содержит таблицы:</h3>
     <div class="accordion active">
+        <span><span class='sql'>department</span> - таблица отделов.</span>
+    </div>
+    <div class="panel">
+        <ul class="table-columns">
+            <li> <span class='sql'>ident</span>ID отдела.</li>
+            <li> <span class='sql'>name</span>Название отдела.</li>
+            <li> <span class='sql'>building</span>Название здания.</li>
+        </ul>
+        <div class="table-wrapper">
+            <table class=""><tbody>
+                <tr>
+                    <th>ident</th>
+                    <th>name</th>
+                    <th>building</th>
+                </tr>
+                <tr>
+                    <td>gen</td>
+                    <td>Genetics</td>
+                    <td>Chesson</td>
+                </tr>
+            </tbody></table>
+        </div>
+    </div>
+    <div class="accordion active">
         <span><span class='sql'>little_penguins</span> - таблица малых пингвинов.</span>
     </div>
     <div class="panel active">
@@ -109,19 +133,56 @@
             </tbody></table>
         </div>
     </div>
-    {if $User->showAd()}
-        <div class="referal-add-block">
-            <a href="https://book24.ru/r/MdRZN?erid=LjN8JzJBX" target="_blank" style="text-decoration: none; display: flex; ">
-                <div  style = "width: 30%;">
-                    <img style="width: 100%;" src="//ndc.book24.ru/resize/820x1180/pim/products/images/97/d1/01907881-ff4d-78d9-ac6a-7021d02597d1.jpg" alt="SQL: быстрое погружение.">
-                </div>
-                <div style="font-size: 1em;  width: 70%;  padding: 0 0.7em; font-weight: 100;">
-                    <div>Шилдс Уолтер: SQL: быстрое погружение.</div>
-                    <div style="font-size: small; padding-top: 0.5em;">
-                        Книга «SQL: быстрое погружение» идеальна для всех, кто ищет новые перспективы карьерного роста; для разработчиков, которые хотят расширить свои навыки и знания в программировании; для любого человека, даже без опыта, кто хочет воспользоваться возможностями будущего, в котором будут править данные.
-                    </div>
-                </div>
-            </a>
+    <div class="accordion">
+        <span><span class='sql'>machine</span> - таблица машин.</span>
+    </div>
+    <div class="panel">
+        <ul class="table-columns">
+            <li> <span class='sql'>ident</span>Идентификатор машины.</li>
+            <li> <span class='sql'>name</span>Название машины.</li>
+            <li> <span class='sql'>details</span>Информация о машине в формате JSON.</li>
+        </ul>
+        <div class="table-wrapper">
+            {literal}
+            <table class=""><tbody>
+                <tr>
+                    <th>ident</th>
+                    <th>name</th>
+                    <th>details</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>WY401</td>
+                    <td>{"acquired": "2023-05-01"}</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Inphormex</td>
+                    <td>{"acquired": "2021-07-15", "refurbished": "2023-10-22"}</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>AutoPlate 9000</td>
+                    <td>{"note": "needs software update"}</td>
+                </tr>
+            </tbody></table>
+            {/literal}
         </div>
+    </div>
+    {if $User->showAd()}
+        {* <div class="referal-add-block">
+            <script async="async" data-cfasync="false" src="//pl26881648.profitableratecpm.com/93660caf229b7b6afe772e0ab435c7a9/invoke.js"></script>
+            <div id="container-93660caf229b7b6afe772e0ab435c7a9"></div>
+            <!-- admitad.banner: zgiqkhys12fec845fb2f47ed6832c6 Atomic Heart [CPS] RU+CIS -->
+            <a target="_blank" rel="nofollow" href="https://rzekl.com/g/zgiqkhys12fec845fb2f47ed6832c6/?i=4&subid=InstinctOfExtermination&erid=5jtCeReNwxHpfQTGQG2GywH">
+                <img style="width:100%;" border="0" src="https://aflink.ru/b/zgiqkhys12fec845fb2f47ed6832c6/" alt="Atomic Heart [CPS] RU+CIS"/>
+            </a>
+            <!-- /admitad.banner -->
+            <a target="_blank" rel="nofollow" href="https://thevospad.com/g/go2e1mhf52fec845fb2f69bd3583e1/?i=4&subid=analyst-from-zero&erid=LatgC6bAt">
+                <img style="width:100%;" border="0" src="https://aflink.ru/b/go2e1mhf52fec845fb2f69bd3583e1/" alt="Netology"/>
+            </a>
+        </div> *}
+                {include file="ru/developers_channel_ad.tpl"}
+
     {/if}
 </div>

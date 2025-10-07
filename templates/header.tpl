@@ -34,6 +34,7 @@
             <link rel="canonical" href="{$CanonicalLink}">
         {/if}
             <link rel="stylesheet" type="text/css" href="/style.css?{$VERSION}" media="all">
+            <link rel="stylesheet" type="text/css" href="/css/cead.css?{$VERSION}" media="all">
             <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/ace.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/ext-beautify.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/mode-sql.min.js"></script>
@@ -43,11 +44,13 @@
             <!-- Yandex.RTB -->
             <script>window.yaContextCb=window.yaContextCb||[]</script>
             <script src="https://yandex.ru/ads/system/context.js" async></script>
+            <!-- Yandex.RTB -->
             <script type="text/javascript" src="/script.js?{$VERSION}" defer></script>
             <script>
                 var lang = '{$Lang}',
                 db   = '{$DB}',
                 questionId = '{$QuestionID}';
             </script>
+            <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=685bb6a18ca9160019f294e2&product=sop' async='async'></script>
         </head>
 

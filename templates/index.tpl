@@ -1,6 +1,6 @@
 {include file='header.tpl'}
 <body>
-    {include file='consent_banner.tpl'}
+    {include file="{$Lang}/consent_banner.tpl"}
     <div class="container">
         {include file='popups.tpl'}
         <header>
