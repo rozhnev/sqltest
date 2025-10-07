@@ -241,8 +241,10 @@ class Question
      * @param string $query
      * @return string
      */
-    public function prepareQuery(string $query): string {
-        $preparedQuery = $query;
+    public function prepareQuery(string $sql): string {
+        $query = new Query($sql);
+        $cleanedQuery = $query->cleanComments();
+        $preparedQuery = $cleanedQuery;
         $stmt = $this->dbh->prepare("SELECT query_pre_check, query_check FROM questions WHERE id = ?");
         $stmt->execute([$this->id]);
         $conditions = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -252,7 +254,7 @@ class Question
         }
         // concat query_check if exists
         if (isset($conditions['query_check']) && !empty($conditions['query_check'])) {
-            $preparedQuery = $preparedQuery . PHP_EOL . ';' . PHP_EOL . str_replace("{{query}}", str_replace("'","''", $query) , $conditions['query_check']);
+            $preparedQuery = $preparedQuery . PHP_EOL . ';' . PHP_EOL . str_replace("{{query}}", str_replace("'","''", $cleanedQuery) , $conditions['query_check']);
         }
         return $preparedQuery;
     }
