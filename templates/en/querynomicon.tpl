@@ -170,91 +170,86 @@
         </div>
     </div>
     {if $User->showAd()}
-        {* <div class="referal-add-block">
-            <script async="async" data-cfasync="false" src="//pl26881648.profitableratecpm.com/93660caf229b7b6afe772e0ab435c7a9/invoke.js"></script>
-            <div id="container-93660caf229b7b6afe772e0ab435c7a9"></div>
-        </div> *}
-
-        <style>
-            .banner-container {
-                width: 100%;
-                max-width: 728px; /* Common banner width (e.g., leaderboard) */
-                background-color: #336699; /* Professional blue */
-                color: #ffffff; /* White text */
-                padding: 20px 30px;
-                box-sizing: border-box;
+         <style>
+            /* Base styles for the container */
+            .talkpal-ad-container {
+                width: 250px; /* Fixed width as requested */
+                height: 360px; /* Fixed height as requested */
+                background-color: #F0F2F5; /* Light grey, often a neutral background on tech sites. ADJUST THIS to match sqltest.online background! */
+                border: 1px solid #C0C0C0; /* Soft border. ADJUST THIS to match sqltest.online border/divider color! */
+                border-radius: 8px; /* Slightly rounded corners */
+                overflow: hidden; /* Ensure content stays within bounds */
+                font-family: Arial, sans-serif; /* Common web font. ADJUST THIS if sqltest.online uses a specific font! */
                 text-align: center;
-                border-radius: 8px;
-                border: 1px solid white;
-                margin: 1rem 0;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-                overflow: hidden;
-                position: relative;
-            }
-            .banner-container a {
-                text-decoration: none;
-                color: inherit; /* Inherit white color */
-                display: block; /* Make the whole banner clickable */
-            }
-            .banner-title {
-                font-size: 2.2em; /* Larger font for the main title */
-                font-weight: bold;
-                margin-bottom: 10px;
-                line-height: 1.2;
-            }
-            .banner-slogan {
-                font-size: 1.1em;
-                margin-bottom: 20px;
-                opacity: 0.9;
-            }
-            .banner-button {
-                display: inline-block;
-                background-color: #ff9900; /* Vibrant orange for call to action */
-                color: #333333; /* Dark text for contrast */
-                padding: 12px 25px;
-                border-radius: 5px;
-                font-size: 1.0em;
-                font-weight: bold;
-                text-transform: uppercase;
-                transition: background-color 0.3s ease;
-            }
-            .banner-button:hover {
-                background-color: #e68a00; /* Darker orange on hover */
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between; /* Distribute space between elements */
+                align-items: center;
+                box-sizing: border-box; /* Include padding in width/height */
+                text-decoration: none; /* Remove underline from the link */
+                color: inherit; /* Inherit color for text */
+                transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Smooth hover effects */
             }
 
-            /* Optional: Responsive adjustments */
-            @media (max-width: 768px) {
-                .banner-container {
-                    max-width: 90%;
-                    padding: 15px 20px;
-                }
-                .banner-title {
-                    font-size: 1.8em;
-                }
-                .banner-slogan {
-                    font-size: 1.0em;
-                }
-                .banner-button {
-                    padding: 10px 20px;
-                    font-size: 0.9em;
-                }
+            .talkpal-ad-container:hover {
+                transform: translateY(-3px); /* Slightly lift on hover */
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow on hover */
             }
-            @media (max-width: 480px) {
-                .banner-title {
-                    font-size: 1.5em;
-                }
-                .banner-slogan {
-                    font-size: 0.9em;
-                }
+
+            /* Logo styling */
+            .talkpal-ad-logo {
+                max-width: 80%; /* Ensure logo fits */
+                max-height: 80px; /* Limit logo height */
+                height: auto;
+                display: block; /* Remove extra space below image */
+                margin-bottom: 15px; /* Space below logo */
+            }
+
+            /* Text styling */
+            .talkpal-ad-text {
+                font-size: 18px; /* Slightly larger heading */
+                font-weight: bold;
+                color: #333333; /* Dark grey text. ADJUST THIS to match sqltest.online text color! */
+                margin-bottom: 10px; /* Space below heading */
+                line-height: 1.3;
+            }
+
+            .talkpal-ad-subtext {
+                font-size: 14px;
+                color: #555555; /* Slightly lighter text. ADJUST THIS! */
+                line-height: 1.4;
+                margin-bottom: 20px; /* Space above button */
+            }
+
+            /* Call to action button styling */
+            .talkpal-ad-button {
+                display: inline-block;
+                background-color: #007bff; /* A common "call to action" blue. ADJUST THIS to match sqltest.online primary button color or a complementary accent! */
+                color: #ffffff; /* White text on button */
+                padding: 10px 20px;
+                border-radius: 5px;
+                font-size: 16px;
+                font-weight: bold;
+                text-decoration: none; /* Remove underline */
+                transition: background-color 0.2s ease-in-out;
+                margin-top: auto; /* Push button to the bottom */
+            }
+
+            .talkpal-ad-button:hover {
+                background-color: #0056b3; /* Darker shade on hover */
             }
         </style>
-        <div class="banner-container">
-            <a href="https://dbfrontiers.net/" target="_blank" rel="noopener noreferrer">
-                <div class="banner-title">Database Frontiers</div>
-                <div class="banner-slogan">Premier Conference for Database Professionals</div>
-                <div class="banner-button">Learn More</div>
+
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-top: 1rem;">
+            <a href="https://www.jdoqocy.com/click-101541078-17083149" target="_blank" class="talkpal-ad-container">
+                <img src="https://www.ftjcfx.com/image-101541078-17083149" width="250" height="360" alt="" border="0"/>
+            </a>
+            <a href="https://talkpal.ai/" target="_blank" class="talkpal-ad-container" style="padding: 15px 10px;">
+                <img src="https://files.talkpal.ai/landing_images/talkpal-text-logo.svg" alt="Talkpal AI Logo" class="talkpal-ad-logo">
+                <div class="talkpal-ad-text">The fun and effective way to learn a language with AI!</div>
+                <div class="talkpal-ad-subtext">Practice speaking, listening & writing.</div>
+                <span class="talkpal-ad-button">Start Learning Now</span>
             </a>
         </div>
-
     {/if}
 </div>
