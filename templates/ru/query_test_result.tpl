@@ -6,8 +6,9 @@
         "Здорово! Вы решили задачу правильно!",
         "Молодец! Ваше решение верно!"
     ]}
+    {assign var="successIndex" value=$successVariants|@array_rand}
     <div style="font-size: larger; margin-bottom: 10px;">
-        {$successVariants|@array_rand}
+        {$successVariants[$successIndex]}
     </div>
     <div style="display: flex;
     flex-flow: row;
