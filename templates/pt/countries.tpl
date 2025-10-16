@@ -1,4 +1,9 @@
 <div id="db-description" class="db-description">
+    <style>
+        .table-columns span {
+            min-width: 6rem;
+        }
+    </style>
     <h2>Banco de Dados Countries (PostGIS)</h2>
     <p>
         O banco de dados Countries é um banco de dados de exemplo PostGIS projetado para análise geográfica e geoespacial. Ele inclui informações espaciais sobre países, capitais e dados da cidade de Nova York, como blocos censitários, homicídios, bairros, ruas e estações de metrô, adequado para aplicações GIS e consultas espaciais.
