@@ -1,5 +1,4 @@
 {if $QueryTestResult.ok}
-    <div style="font-size: larger; margin-bottom: 10px;">Great! You have completed the task!</div>
     {assign var="successVariants" value=[
         "Great job! You solved the task!",
         "Congratulations! The task was completed successfully!",
