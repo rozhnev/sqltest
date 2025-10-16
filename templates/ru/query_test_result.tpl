@@ -1,5 +1,14 @@
 {if $QueryTestResult.ok}
-    <div style="font-size: larger; margin-bottom: 10px;">Отлично! Вы справились с задачей!</div>
+    {assign var="successVariants" value=[
+        "Отлично! Вы справились с задачей!",
+        "Поздравляем! Задание выполнено успешно!",
+        "Превосходно! Ваш запрос дал верный результат!",
+        "Здорово! Вы решили задачу правильно!",
+        "Молодец! Ваше решение верно!"
+    ]}
+    <div style="font-size: larger; margin-bottom: 10px;">
+        {$successVariants|@array_rand}
+    </div>
     <div style="display: flex;
     flex-flow: row;
     flex-wrap: wrap;
