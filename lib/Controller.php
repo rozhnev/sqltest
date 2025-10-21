@@ -29,7 +29,7 @@ class Controller
         $this->user     = $user;
         $this->engine   = $engine;
 
-        $this->registerModifiers(["array_key_exists", "mt_rand"]);
+        $this->registerModifiers(["array_key_exists", "mt_rand", "array_rand"]);
         $this->engine->registerPlugin('block', 'translate', array('Localizer', 'translate'), true);
         $this->assignVariables([
             'VERSION'       => $env['VERSION'] ?? 0,
@@ -356,7 +356,7 @@ class Controller
             'QueryBestCost'     => $question->getBestCost()
         ]);
         if ($queryTestResult['ok']) {
-            $queryCheckResult = $question->checkQuery($sql);
+            $queryCheckResult = $question->checkQuery($sql, $this->lang);
             // If query is not ok, we will show the error message
             if (!$queryCheckResult['ok']) {
                 $this->engine->assign('QueryTestResult', $queryCheckResult);
