@@ -92,7 +92,7 @@
             <p>Подсказка: Возвращено несколько наборов результатов. Ожидается только один набор результатов.</p>
         {/if}
         {if array_key_exists('queryError', $QueryTestResult.hints) }
-            <p>Подсказка: запрос вернул ошибку: <span class="sql_error">{$QueryTestResult.hints.queryError}</span></p>
+            <p>Запрос вернул ошибку: <span class="sql_error">{$QueryTestResult.hints.queryError}</span></p>
         {/if}
         {if array_key_exists('columnsCount', $QueryTestResult.hints) }
             <p>Подсказка: результирующая таблица должна состоять из {$QueryTestResult.hints.columnsCount} колонок.</p>
