@@ -89,6 +89,9 @@
                 </span>
             </p>
         {/if}
+        {if array_key_exists('multipleResults', $QueryTestResult.hints) }
+            <p>Dica: múltiplos conjuntos de resultados retornados. Apenas um conjunto de resultados é esperado.</p>
+        {/if}
         {if array_key_exists('queryError', $QueryTestResult.hints) }
             <p>Dica: a consulta retorna o erro: <span class="sql_error">{$QueryTestResult.hints.queryError}</span></p>
         {/if}

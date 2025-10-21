@@ -89,6 +89,9 @@
                 </span>
             </p>
         {/if}
+        {if array_key_exists('multipleResults', $QueryTestResult.hints) }
+            <p>Hint: Multiple result sets returned. Only one result set is expected.</p>
+        {/if}
         {if array_key_exists('queryError', $QueryTestResult.hints) }
             <p>Hint: the query returns the error: <span class="sql_error">{$QueryTestResult.hints.queryError}</span></p>
         {/if}

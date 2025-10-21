@@ -349,6 +349,13 @@ class Question
                     'cost' => 0
                 ];
             }
+            if (count($resultObject) > 2) {
+                return [
+                    'ok' => false,
+                    'cost' => 0,
+                    'hints' => ['multipleResults' => 'Multiple result sets returned. Only one result set is expected.']
+                ];
+            }
             if (isset($resultObject[0]->error)) {
                 $hints['queryError'] = $resultObject[0]->error;
                 return [

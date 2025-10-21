@@ -88,6 +88,9 @@
                 </span>
             </p>
         {/if}
+        {if array_key_exists('multipleResults', $QueryTestResult.hints) }
+            <p>Подсказка: Возвращено несколько наборов результатов. Ожидается только один набор результатов.</p>
+        {/if}
         {if array_key_exists('queryError', $QueryTestResult.hints) }
             <p>Подсказка: запрос вернул ошибку: <span class="sql_error">{$QueryTestResult.hints.queryError}</span></p>
         {/if}
