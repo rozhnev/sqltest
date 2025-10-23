@@ -35,12 +35,12 @@
                 font-family: 'Tahoma';
                 color: white;
                 border-radius: 0px 4px 4px 0px;">
-                    <img src="/images/5199833295595106305.jpg" alt="DB developers channel" style="float: right; margin-left: 10px; width: 75px; height: auto; border-radius: 4px 4px 4px 4px;">
+                    <img src="/images/5199833295595106305.jpg" alt="DB developers channel" style="float: right; margin-left: 10px; width: 75px; max-width: 16%; height: auto; border-radius: 4px 4px 4px 4px;">
                     <b><span style="color: #63A9E4;">Telegram:</span> DB developers channel</b>
                     <p style="font-weight: 100; margin: 0;">
-                        💡 Канал для разработчиков БД: Oracle, PostgreSQL<br>
-                        📌 Задачи, лучшие практики, архитектура, оптимизация<br>
-                        🔄 Присоединяйся и развивайся вместе с нами!
+                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="Канал для разработчиков БД: Oracle, PostgreSQL">💡 Канал для разработчиков БД: Oracle, PostgreSQL</div>
+                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="Задачи, лучшие практики, архитектура, оптимизация">📌 Задачи, лучшие практики, архитектура, оптимизация</div>
+                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="Присоединяйся и развивайся вместе с нами!">🔄 Присоединяйся и развивайся вместе с нами!</div>
                     </p>
                 </div>
             </div>
