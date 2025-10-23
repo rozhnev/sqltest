@@ -484,51 +484,9 @@
     </div>
 
     {if $User->showAd()}
-        {assign var=add_id value=0|mt_rand:4}
-        {* <div class="referal-add-block">
-            {if $add_id > 2}
-                <a href="https://book24.ru/r/vPcru?erid=LjN8K1JdK" target="_blank" style="text-decoration: none; display: flex;">
-                    <div  style = "width: 30%;">
-                        <img style="width: 100%;" src="//ndc.book24.ru/resize/410x590/pim/products/images/2a/23/018edf56-f466-7e54-b41e-7cd2a6b02a23.jpg" alt="Грабер Мартин: SQL.">
-                    </div>
-                    <div style="font-size: 1em;  width: 70%;  padding: 0 0.7em; font-weight: 100;">
-                        <div>Грабер Мартин: SQL</div>
-                        <div style="font-size: small; padding-top: 0.5em;">
-                        Классическая работа по SQL. Эта книга - отличный источник знаний для всех, кто программирует на SQL. 
-                        В книге дано подробное описание языка, поэтому от читателя не требуется никакой предварительной подготовки. Сопровождаемая практическими учебными материалами, книга представляет собой полное справочное руководство по SQL.
-                      </div>
-                    </div>
-                </a>
-                <a target="_blank" rel="nofollow" href="https://naiawork.com/g/63cmm8j9f5fec845fb2f5e445e6c7b/?i=4&subid=sql-from-zero&erid=LatgBvCNw">
-                    <img style="width:100%;" border="0" src="https://aflink.ru/b/63cmm8j9f5fec845fb2f5e445e6c7b/" alt="Productstar"/>
-                </a>
-                <!-- admitad.banner: zgiqkhys12fec845fb2f47ed6832c6 Atomic Heart [CPS] RU+CIS -->
-                <a target="_blank" rel="nofollow" href="https://rzekl.com/g/zgiqkhys12fec845fb2f47ed6832c6/?i=4&subid=InstinctOfExtermination&erid=5jtCeReNwxHpfQTGQG2GywH">
-                    <img style="width:100%;" border="0" src="https://aflink.ru/b/zgiqkhys12fec845fb2f47ed6832c6/" alt="Atomic Heart [CPS] RU+CIS"/>
-                </a>
-                <!-- /admitad.banner -->
-                <a target="_blank" rel="nofollow" href="https://thevospad.com/g/go2e1mhf52fec845fb2f69bd3583e1/?i=4&subid=analyst-from-zero&erid=LatgC6bAt">
-                    <img style="width:100%;" border="0" src="https://aflink.ru/b/go2e1mhf52fec845fb2f69bd3583e1/" alt="Netology"/>
-                </a>
-            {else}
-                <!-- admitad.banner: 1x05fa2531fec845fb2f47ed6832c6 Atomic Heart [CPS] RU+CIS -->
-                <a target="_blank" rel="nofollow" href="https://rzekl.com/g/1x05fa2531fec845fb2f47ed6832c6/?i=4&subid=TheCharmsSeaDepths&erid=2bL9aMPo2e49hMef4piUxbAuHR">
-                    <img style="width:100%;" border="0" src="https://aflink.ru/b/1x05fa2531fec845fb2f47ed6832c6/" alt="Atomic Heart [CPS] RU+CIS"/>
-                </a>
-                <!-- /admitad.banner -->
-                <a target="_blank" rel="nofollow" href="https://thevospad.com/g/dhqiqt6h41fec845fb2f69bd3583e1/?i=4&subid=free-neuronetwork&erid=LatgBSdq6">
-                    <img style="width:100%;" border="0" src="https://aflink.ru/b/dhqiqt6h41fec845fb2f69bd3583e1/" alt="Netology"/>
-                </a>
-            {/if}
-            *}
-                    {include file="ru/developers_channel_ad.tpl"}
-
+        <div class="referal-add-block">
+            <div id="yandex_rtb_R-A-4716552-7"></div>
         </div>
+        {* {include file="ru/developers_channel_ad.tpl"} *}
     {/if}
-    {literal}
-
-  
-   
-
-  {/literal}
 </div>

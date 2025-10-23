@@ -182,17 +182,9 @@
     </div>
     {/literal}                         
     {if $User->showAd()}
-        {* <div class="referal-add-block">
+        <div class="referal-add-block">
             <div id="yandex_rtb_R-A-4716552-7"></div>
-            <!-- admitad.banner: 1x05fa2531fec845fb2f47ed6832c6 Atomic Heart [CPS] RU+CIS -->
-            <a target="_blank" rel="nofollow" href="https://rzekl.com/g/1x05fa2531fec845fb2f47ed6832c6/?i=4&subid=TheCharmsSeaDepths&erid=2bL9aMPo2e49hMef4piUxbAuHR">
-                <img style="width:100%;" border="0" src="https://aflink.ru/b/1x05fa2531fec845fb2f47ed6832c6/" alt="Atomic Heart [CPS] RU+CIS"/>
-            </a>
-            <!-- /admitad.banner -->
-            <a target="_blank" rel="nofollow" href="https://thevospad.com/g/dhqiqt6h41fec845fb2f69bd3583e1/?i=4&subid=free-neuronetwork&erid=LatgBSdq6">
-                <img style="width:100%;" border="0" src="https://aflink.ru/b/dhqiqt6h41fec845fb2f69bd3583e1/" alt="Netology"/>
-            </a>
-        </div> *}
-        {include file="ru/developers_channel_ad.tpl"}
+        </div>
+        {* {include file="ru/developers_channel_ad.tpl"} *}
     {/if}
 </div>
