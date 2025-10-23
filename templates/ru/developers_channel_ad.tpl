@@ -15,8 +15,9 @@
             .banner-content {
                 flex: 1; /* Takes up the rest of the space */
                 background-color: #293A4A;
-                padding: 20px;
-                font-family: 'Tahoma';
+                padding: 10px;
+                /* font-family: 'Tahoma'; */
+                font-size: 0.8em;
                 color: white;
                 line-height: 1.5;
                 border-radius: 0px 4px 4px 0px;
@@ -46,14 +47,14 @@
                 <div class="banner-content">
                     <img src="/images/5199833295595106305.jpg" alt="DB developers channel" class="top-right-image" class="top-right-img">
                     Telegram<br><b>DB developers channel</b><br>
-                    <p style="font-weight: 100;">
+                    <p style="font-weight: 100; margin: 5px 0 0 0;">
                         💡 Канал для разработчиков баз данных: Oracle, PostgreSQL<br>
-                        📌 Интересные задачи, фрагменты кода, лучшие практики, архитектура, оптимизация<br>
+                        📌 Задачи, код, лучшие практики, архитектура, оптимизация<br>
                         🔄 Присоединяйся к сообществу — развивайся вместе с нами!
                     </p>
-                    <p>#SQL #Oracle #PostgreSQL #PL/SQL #PL/pgSQL #DB</p>
+                    {* <p>#SQL #Oracle #PostgreSQL #PL/SQL #PL/pgSQL #DB</p>
                     
-                    <div class="viewchannel">VIEW CHANNEL</div>
+                    <div class="viewchannel">VIEW CHANNEL</div> *}
                 </div>
             </div>
         </a>

@@ -17,12 +17,12 @@
         </div>
     </div>
     {if $User->showAd()}
-        {* <div style="height: 5em;">
+        <div style="height: 5em;">
             <div id="yandex_rtb_R-A-4716552-4">
                 {translate}menu_small_add_placeholder{/translate}
             </div>
-        </div> *}
-        <a href="https://t.me/db_developers_channel" target="_blank" style="text-decoration: none;">
+        </div>
+        {* <a href="https://t.me/db_developers_channel" target="_blank" style="text-decoration: none;">
             <div style="display: flex; width: 100%; margin: 1em 0; max-height: 6em; overflow: hidden;
                 font-size: smaller;">
                 <div style="width: 5px;
@@ -38,13 +38,13 @@
                     <img src="/images/5199833295595106305.jpg" alt="DB developers channel" style="float: right; margin-left: 10px; width: 75px; max-width: 16%; height: auto; border-radius: 4px 4px 4px 4px;">
                     <b><span style="color: #63A9E4;">Telegram:</span> DB developers channel</b>
                     <p style="font-weight: 100; margin: 0;">
-                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="Канал для разработчиков БД: Oracle, PostgreSQL">💡 Канал для разработчиков БД: Oracle, PostgreSQL</div>
-                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="Задачи, лучшие практики, архитектура, оптимизация">📌 Задачи, лучшие практики, архитектура, оптимизация</div>
-                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="Присоединяйся и развивайся вместе с нами!">🔄 Присоединяйся и развивайся вместе с нами!</div>
+                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="Канал для разработчиков БД">💡 Канал для БД</div>
+                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="Задачи и лучшие практики">📌 Задачи и практика</div>
+                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="Присоединяйся и развивайся">🔄 Присоединяйся</div>
                     </p>
                 </div>
             </div>
-        </a>
+        </a> *}
     {/if}
     <div id="menu-content" class="menu-content">
         {if $User->logged()}
