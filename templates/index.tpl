@@ -189,7 +189,7 @@
                 </div>
             </div>
             <div class="column" id="right-panel">
-                {include file="ru/developers_channel_ad.tpl"}
+                {include file="{$Lang}/developers_channel_ad.tpl"}
                 {include file="{$Lang}/{$DB}.tpl"}
             </div>
         </main3>
