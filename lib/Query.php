@@ -55,14 +55,19 @@ class Query
         $ch = curl_init( "https://sqlize.online/sqleval.php" );
         if ($ch)
         {
-            curl_setopt($ch, CURLOPT_POST, 1);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, "sqlses={$this->hash}&sql_version={$db}&format={$format}");
-            curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+            $query = http_build_query([
+                'sqlses' => $this->hash,
+                'sql_version' => $db,
+                'format' => $format
+            ]);
+            curl_setopt($ch, CURLOPT_URL, "https://sqlize.online/sqleval.php?$query");
+            curl_setopt($ch, CURLOPT_HTTPGET, true);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             # Send request.
             $result = curl_exec($ch);
             curl_close($ch);
 
-            return preg_replace("/{$this->hash}\.?/", '', (string)$result);
+            return preg_replace("/" . preg_quote((string)$this->hash, '/') . "\.?/", '', (string)$result);
         } else {
             throw new Exception('Can\'t qet query result');
         }
