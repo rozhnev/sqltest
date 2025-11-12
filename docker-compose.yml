@@ -1,8 +1,6 @@
-version: "3.3"
-
 services:
   web:
-    image: sqltest:latest
+    image: rozhnev/sqltest:latest
     ports:
       - "8080:80"
     volumes:
