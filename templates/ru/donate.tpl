@@ -24,7 +24,7 @@
                     <h3>Поддержать в рублях</h3>
                     <p>Быстрый и безопасный платёж через CloudTips:</p>
                     <p>
-                        <a href="https://pay.cloudtips.ru/p/60214a3d" target="_blank">
+                        <a href="https://pay.cloudtips.ru/p/3686904b" target="_blank">
                         <img src="https://static.tildacdn.com/tild3431-6231-4938-b464-663831306266/Horiz.svg" 
                             alt="Оплата через CloudTips"
                             style="width: 200px;
