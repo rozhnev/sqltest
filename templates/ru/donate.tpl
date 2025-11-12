@@ -44,20 +44,11 @@
                         kofiwidget2.draw();
                     </script>
                 </div>
-    
                 <div class="donation-method">
                     <h3>Помочь в криптовалюте</h3>
-                    <p>Перевод USDT в сети TRON (TRC20):</p>
-                    <div class="crypto-address">
-                        TFb65PXkvCDhK7WjTT5hkcP5WHwxYh51A8
-                    </div>
-                    <img src="https://sqlize.online/favicons/usdt-TFb65PXkvCDhK7WjTT5hkcP5WHwxYh51A8.png" 
-                        alt="USDT QR код" 
-                        style="max-width: 200px; margin: 1rem 0;">
-                    <p class="warning-text">
-                        Важно!<br>
-                        Отправляйте USDT только в сети TRC20. Отправка в любой другой сети приведёт к безвозвратной потере средств.
-                    </p>
+                    <iframe src="https://nowpayments.io/embeds/donation-widget?api_key=8881e1d0-aaef-46c4-9a60-298bb6f26c3b" width="346" height="623" frameborder="0" scrolling="no" style="overflow-y: hidden;">
+                        Can't load widget
+                    </iframe>
                 </div>
             </div>
         </div>

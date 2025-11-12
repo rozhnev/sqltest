@@ -52,7 +52,7 @@
             </div>
             </div>
             <div class="column">
-                <div class="question-wrapper">
+                <div class="lesson-wrapper">
                     {$LessonData.content}
                 </div>
                 <div class="code-buttons" style="justify-content: space-between !important;">

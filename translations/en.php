@@ -111,7 +111,7 @@ $translations = [
     'question_action_previous_title' => 'Previous task',
     'question_maximum_attempts_used' => 'Unfortunately, despite all your efforts, you were unable to solve this problem.',
     'user_solutions_count' => 'Explore over <span style="font-weight:bold; color: #2EA043 !important;">##QuestionsCountRounded##</span> diverse tasks on our platform.',
-    'user_solutions_count_logged' => '##YouHaveSolved## <span style="font-weight:bold;  color: #2EA043 !important;">##SolvedQuestionsCount##</span> of <span style="font-weight:bold; color: #2EA043 !important;">##QuestionsCountRounded##</span> tasks on our platform. ',
+    'user_solutions_count_logged' => '##YouHaveSolved## <span style="font-weight:bold;  color: #2EA043 !important;">##SolvedQuestionsCount##</span> of more than <span style="font-weight:bold; color: #2EA043 !important;">##QuestionsCountRounded##</span> tasks on our platform. ',
     'user_solutions_count_not_logged' => 'Log in to save your progress.',
     'you_have_solved' => 'You have solved',
     'you_have_already_solved' => 'You already solved',

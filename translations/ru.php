@@ -117,7 +117,7 @@ $translations = [
     'question_action_next_title' => 'Следующее задание',
     'question_maximum_attempts_used' => 'К сожалению, несмотря на все старания, вам не удалось решить эту задачу.',
     'user_solutions_count' => 'Откройте для себя более <span style="font-weight:bold; color: #2EA043 !important;">##QuestionsCountRounded##</span> уникальных заданий.',
-    'user_solutions_count_logged' => '##YouHaveSolved## <span style="font-weight:bold;  color: #2EA043 !important;">##SolvedQuestionsCount##</span> из <span style="font-weight:bold; color: #2EA043 !important;">##QuestionsCountRounded##</span> уникальных заданий. ',
+    'user_solutions_count_logged' => '##YouHaveSolved## <span style="font-weight:bold;  color: #2EA043 !important;">##SolvedQuestionsCount##</span> из более <span style="font-weight:bold; color: #2EA043 !important;">##QuestionsCountRounded##</span> уникальных заданий. ',
     'user_solutions_count_not_logged' => 'Войдите, чтобы сохранить свой прогресс.',
     'you_have_solved' => 'Вы пока решили',
     'you_have_already_solved' => 'Вы уже решили',

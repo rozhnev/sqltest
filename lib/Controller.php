@@ -29,17 +29,17 @@ class Controller
         $this->user     = $user;
         $this->engine   = $engine;
 
-        $this->registerModifiers(["array_key_exists", "mt_rand"]);
+        $this->registerModifiers(["array_key_exists", "mt_rand", "array_rand"]);
         $this->engine->registerPlugin('block', 'translate', array('Localizer', 'translate'), true);
         $this->assignVariables([
             'VERSION'       => $env['VERSION'] ?? 0,
-            'MobileView'    => $this->isMmobileView(),
+            'MobileView'    => $this->isMobileView(),
             'Languages'     => $this->languages,
             'User'          => $this->user,
         ]);
     }
 
-    private function isMmobileView(): bool
+    private function isMobileView(): bool
     {
         return  (isset($_SERVER['SERVER_NAME']) && (
             $_SERVER['SERVER_NAME'] === 'm.sqltest.online' ||
@@ -57,7 +57,7 @@ class Controller
     public function setCanonicalLink(string $path): void
     {
         $this->assignVariables([
-            'CanonicalLink' => $this->isMmobileView() ? "https://sqltest.online/{$path}" : null
+            'CanonicalLink' => $this->isMobileView() ? "https://sqltest.online/{$path}" : null
         ]);
     }
 
@@ -317,7 +317,7 @@ class Controller
             'Book'                  => Helper::getBook($this->dbh, $this->lang, $questionData['dbms']),
             'Favorites'             => $this->user->getFavorites($this->lang)
         ]);
-        $this->engine->display($this->isMmobileView() ? "m.index.tpl" : "index.tpl");
+        $this->engine->display($this->isMobileView() ? "m.index.tpl" : "index.tpl");
     }
 
     public function query_help(array $params): void 
@@ -356,7 +356,7 @@ class Controller
             'QueryBestCost'     => $question->getBestCost()
         ]);
         if ($queryTestResult['ok']) {
-            $queryCheckResult = $question->checkQuery($sql);
+            $queryCheckResult = $question->checkQuery($sql, $this->lang);
             // If query is not ok, we will show the error message
             if (!$queryCheckResult['ok']) {
                 $this->engine->assign('QueryTestResult', $queryCheckResult);
@@ -377,10 +377,9 @@ class Controller
         }
 
         if ($this->user->showAd()) {
-            $this->engine->assign(
-                'ReferralLink', 
-                Helper::getReferralLink($this->dbh, $this->lang, $this->isMmobileView() ? 'mobile' : 'desktop')
-            );
+            $referralLink = Helper::getReferralLink($this->dbh, $this->lang, $this->isMobileView() ? 'mobile' : 'desktop');
+            Helper::updateReferralLinkStats($this->dbh, $referralLink['id']);
+            $this->engine->assign('ReferralLink', $referralLink);
         }
 
         $this->engine->display($this->lang . "/query_test_result.tpl");
@@ -405,7 +404,9 @@ class Controller
 
         if (!$answerResult['ok']) header( 'HTTP/1.1 418 BAD REQUEST' );
         if ($this->user->showAd()) {
-            $this->engine->assign('ReferralLink', Helper::getReferralLink($this->dbh, $this->lang, $this->isMmobileView() ? 'mobile' : 'desktop'));
+            $referralLink = Helper::getReferralLink($this->dbh, $this->lang, $this->isMobileView() ? 'mobile' : 'desktop');
+            Helper::updateReferralLinkStats($this->dbh, $referralLink['id']);
+            $this->engine->assign('ReferralLink', $referralLink);
         }
         $this->engine->display($this->lang . "/check_answer_result.tpl");
     }
@@ -725,7 +726,7 @@ class Controller
             'QuestionID'            => 1,
             'DB'                    => '',
         ]);
-        $this->engine->display($this->isMmobileView() ? "m.playground.tpl" : "playground.tpl");
+        $this->engine->display($this->isMobileView() ? "m.playground.tpl" : "playground.tpl");
     }
 
     public function playground_query_run(array $params): void 

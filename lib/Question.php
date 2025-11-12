@@ -120,7 +120,28 @@ class Question
             throw new Exception('Answers not found');
         }
     }
-        /**
+
+    /**
+     * Retrieve a localized hint message for a specific query check.
+     *
+     * Given the ID of a query check, returns a user-facing hint string
+     * in the requested language. Implementations should handle missing
+     * translations by falling back to a default language or returning
+     * an empty string when no hint is available.
+     *
+     * @param int    $queryCheckID  Identifier of the query check (e.g. primary key).
+     * @param string $lang          Language code (e.g. "en", "ru", "pt") used for localization.
+     *
+     * @return string A localized hint message for the query check, or an empty string if none is available.
+     */
+    public function getQueryHint(int $queryCheckID, string $lang): string
+    {
+        $stmt = $this->dbh->prepare("SELECT hint FROM query_checks_localization WHERE query_check_id = :queryCheckID AND language = :lang");
+        $stmt->execute([':queryCheckID' => $queryCheckID, ':lang' => $lang]);
+        return (string)$stmt->fetchColumn();
+    }
+
+    /**
      * Returns question answers for provided language
      *
      * @param string $lang
@@ -241,8 +262,10 @@ class Question
      * @param string $query
      * @return string
      */
-    public function prepareQuery(string $query): string {
-        $preparedQuery = $query;
+    public function prepareQuery(string $sql): string {
+        $query = new Query($sql);
+        $cleanedQuery = $query->cleanComments();
+        $preparedQuery = $cleanedQuery;
         $stmt = $this->dbh->prepare("SELECT query_pre_check, query_check FROM questions WHERE id = ?");
         $stmt->execute([$this->id]);
         $conditions = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -252,7 +275,7 @@ class Question
         }
         // concat query_check if exists
         if (isset($conditions['query_check']) && !empty($conditions['query_check'])) {
-            $preparedQuery = $preparedQuery . PHP_EOL . ';' . PHP_EOL . str_replace("{{query}}", str_replace("'","''", $query) , $conditions['query_check']);
+            $preparedQuery = $preparedQuery . PHP_EOL . ';' . PHP_EOL . str_replace("{{query}}", str_replace("'","''", $cleanedQuery) , $conditions['query_check']);
         }
         return $preparedQuery;
     }
@@ -262,7 +285,7 @@ class Question
      * @param string $query
      * @return array
      */
-    public function checkQuery(string $query)
+    public function checkQuery(string $query, string $lang = 'en'): array
     {
         $queryClass = new Query($query);
         $cleanedQuery = $queryClass->cleanComments($query);
@@ -275,21 +298,29 @@ class Question
                 'hints' => $hints
             ];
         }
-        $stmt = $this->dbh->prepare("SELECT query_match, query_not_match FROM questions WHERE id = ?");
-        $stmt->execute([$this->id]);
-        $questionData = $stmt->fetch(PDO::FETCH_ASSOC);
+        $stmt = $this->dbh->prepare("SELECT query_check_id AS id, query_match, regexp 
+            FROM question_query_checks 
+            JOIN query_checks ON query_check_id = id
+            WHERE question_id = ?;");
 
-        if (
-            (isset($questionData['query_match']) && !preg_match($questionData['query_match'], $cleanedQuery)) ||
-            (isset($questionData['query_not_match']) && preg_match($questionData['query_not_match'], $cleanedQuery))
-        ) {
-            $hints['wrongQuery'] = true;
-            return [
-                'ok' => false,
-                'cost' => 0,
-                'hints' => $hints
-            ];
+        $stmt->execute([$this->id]);
+        $checks = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($checks as $check) {
+            if (
+                ($check['query_match'] && !preg_match($check['regexp'], $cleanedQuery)) ||
+                (!$check['query_match'] && preg_match($check['regexp'], $cleanedQuery))
+            ) {
+                $hints['wrongQuery'] = true;
+                $hints['wrongQueryHints'][] = $this->getQueryHint((int)$check['id'], $lang);
+                return [
+                    'ok' => false,
+                    'cost' => 0,
+                    'hints' => $hints
+                ];
+            }
         }
+        
         return [
             'ok' => true,
             'cost' => 0
@@ -316,6 +347,13 @@ class Question
                 return [
                     'ok' => false,
                     'cost' => 0
+                ];
+            }
+            if (count($resultObject) > 2) {
+                return [
+                    'ok' => false,
+                    'cost' => 0,
+                    'hints' => ['multipleResults' => 'Multiple result sets returned. Only one result set is expected.']
                 ];
             }
             if (isset($resultObject[0]->error)) {

@@ -172,6 +172,7 @@
                     <a style="background: #BFFDC9; color: #37B679; rotate: 2deg;" href ="https://t.me/alexgureev25" target="_blank">Александру Гурееву</a>
                     <a style="background: #FFE8A5; color: #D18328; rotate: -2deg;" href ="https://t.me/basanogijoe" target="_blank">Георгию Григорчуку</a>
                     <a style="background: deepskyblue; color: whitesmoke;rotate: 4deg;" href="mailto:evilenapol@gmail.com" target="_blank">Елене Сельской</a>
+                    <a style="background: #069adf; color: #300e95; rotate: -1deg;" href ="" target="_blank">Ревякину Владимиру</a>
                 </div>
             </div>
         </div>
