@@ -39,6 +39,24 @@ class QueryTest extends TestCase
         $this->assertStringContainsString("'/* not a comment */'", $cleaned);
     }
 
+    public function testCleanCommentsRemovesHashSingleLineComments()
+    {
+        $sql = "SELECT * FROM users # this is a hash comment\nWHERE id = 2;";
+        $query = new Query($sql);
+        $cleaned = $query->cleanComments();
+        $this->assertStringNotContainsString('# this is a hash comment', $cleaned);
+        $this->assertStringContainsString('SELECT * FROM users', $cleaned);
+        $this->assertStringContainsString('WHERE id = 2;', $cleaned);
+    }
+
+    public function testCleanCommentsKeepsHashInsideQuotedStrings()
+    {
+        $sql = "SELECT '# not a comment' as test FROM users;";
+        $query = new Query($sql);
+        $cleaned = $query->cleanComments();
+        $this->assertStringContainsString("'# not a comment'", $cleaned);
+    }
+
     public function testConstructorStoresSql()
     {
         $sql = "SELECT 1;";

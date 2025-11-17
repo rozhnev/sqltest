@@ -119,7 +119,12 @@ class Query
                     $inDoubleQuoteString = true;
                     $cleaned .= $char;
                 } elseif ($char === '-' && $i + 1 < $length && $this->sql[$i + 1] === '-') {
-                    // Skip single-line comment
+                    // Skip single-line comment starting with --
+                    while ($i < $length && $this->sql[$i] !== "\n") {
+                        $i++;
+                    }
+                } elseif ($char === '#') {
+                    // Skip single-line comment starting with #
                     while ($i < $length && $this->sql[$i] !== "\n") {
                         $i++;
                     }
