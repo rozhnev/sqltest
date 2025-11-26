@@ -54,7 +54,7 @@ $translations = [
     'favorites' => 'Избранное',
     'add_to_favorites' => 'Добавить в избранное',
     'menu_small_add_placeholder' => '<div style="color: var(--regular-text-color); display: flex; gap: 5px; flex-direction: column; align-items: center;">Поддержите проект на 
-                    <a href="https://pay.cloudtips.ru/p/3686904b" target="_blank">
+                    <a href="https://pay.cloudtips.ru/p/60214a3d" target="_blank">
                     <img src="https://static.tildacdn.com/tild3431-6231-4938-b464-663831306266/Horiz.svg" 
                          alt="Оплата через CloudTips"
                          style="width: 180px;
