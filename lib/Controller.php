@@ -119,7 +119,27 @@ class Controller
         $this->engine->assign('Action', 'donate');
         $this->engine->display("donate.tpl");
     }
+    /**
+     * Show welcome page
+     * @param array $params
+     */
+    public function welcome(array $params): void
+    {
+        $questionnire = new Questionnire($this->dbh, $this->lang);
+        $questionnireName   = $questionnire->getNameByCategory($params['questionCategory']);
 
+        $this->assignVariables([
+            'PageTitle'             => 'Welcome to SQLTest.online: Learn and Practice SQL',
+            'PageOGTitle'           => 'Welcome to SQLTest.online: Learn and Practice SQL',
+            'PageDescription'       => 'Start your SQL journey with interactive challenges and real-time feedback at SQLTest.online.',
+            'Questionnire'          => $questionnire->get($questionnireName, $this->user->getId()),
+            'Question'              => [],
+            'Action'                => 'welcome',
+            'QuestionsCount'        => $questionnire->getQuestionsCount(),
+            'Favorites'             => $this->user->getFavorites($this->lang)
+        ]);
+        $this->engine->display("welcome.tpl");
+    }
     /**
      * Show login result page
      * @param array $params

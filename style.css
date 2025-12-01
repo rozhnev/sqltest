@@ -80,6 +80,11 @@ a, a:visited {
     grid-template-rows: auto 1fr auto;
     height: 100%;
 }
+main2 {
+    display: grid;
+    grid-template-columns: 20% 80%;
+    overflow-y: auto;
+}
 main3 {
     display: grid;
     grid-template-columns: 20% 55% 25%;

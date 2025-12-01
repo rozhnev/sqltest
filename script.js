@@ -402,6 +402,23 @@ function solutionUnlike(solutionId) {
         document.getElementById(`solution-likes-count-${solutionId}`).innerText = parseInt(document.getElementById(`solution-likes-count-${solutionId}`).innerText) - 1;
     });
 }
+// Cookie helpers and welcome-page handlers
+function setCookie(name, value, days) {
+    let expires = '';
+    if (days) {
+        const date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = '; expires=' + date.toUTCString();
+    }
+    document.cookie = name + '=' + (value || '') + expires + '; path=/';
+}
+function hideWelcome(hide) {
+    if (hide) {
+        setCookie('HideWelcome', '1', 365);
+    } else {
+        setCookie('HideWelcome', '', -1); // Remove cookie
+    }
+}
 function solutionReport(lang, questionId, solutionId) {
     solutionUpdate(solutionId, 'report')
     .then(()=>showOthersSolutions(questionId));

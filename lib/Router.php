@@ -57,6 +57,16 @@ class Router
             $this->controller->setLanguge(DEFAULT_LANGUAGE);
         }
 
+        // Show welcome page by default unless user previously chose to hide it (HideWelcome cookie)
+        $showWelcome = true;
+        if (!isset($_COOKIE['HideWelcome']) || $_COOKIE['HideWelcome'] !== '1') {
+            return $this->controller->welcome([
+                'questionID'        => 1,
+                'questionCategory'  => $env['DEFAULT_QUESTIONS_CATEGORY'] ?? 'sql-basics',
+                'path'              => $path,
+            ]);
+        }
+
         return $this->controller->question([
             'questionID'            => 1,
             'questionCategory'      => $env['DEFAULT_QUESTIONS_CATEGORY'] ?? 'sql-basics',
