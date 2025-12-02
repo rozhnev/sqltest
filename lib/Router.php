@@ -22,9 +22,31 @@ class Router
         'sitemap'           => "@(?<action>sitemap)\.xml@i",
     ];
 
+    private $supportedLangs = ['ru', 'en', 'pt'];
+
     public function __construct(Controller $controller)
     {
         $this->controller = $controller;
+    }
+
+    private function parseAcceptLanguageHeader(): ?string
+    {
+        if (empty($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
+            return DEFAULT_LANGUAGE;
+        }
+
+        $header = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
+        $entries = array_map('trim', explode(',', $header));
+
+        foreach ($entries as $entry) {
+            $parts = explode(';', $entry);
+            $tag = strtolower(trim($parts[0]));
+            $primary = explode('-', $tag)[0]; // e.g. pt-BR -> pt
+            if (in_array($primary, $this->supportedLangs, true)) {
+                return $primary;
+            }
+        }
+        return DEFAULT_LANGUAGE;
     }
 
     public function route(string $path)
@@ -37,7 +59,7 @@ class Router
                 $action = str_replace('-', '_', strtolower($params['action']));
                 $method = isset($params['class']) ? $params['class'] . '_' . $action : $action;
                 // echo "Method: $method\n";
-                $this->controller->setLanguge($params['lang'] ?? DEFAULT_LANGUAGE);
+                $this->controller->setLanguge($params['lang'] ?? $this->parseAcceptLanguageHeader());
 
                 return $this->controller->{$method}($params);
 
@@ -52,9 +74,9 @@ class Router
             return $this->controller->redirect($params);
         }
         if (preg_match("@(?<lang>ru|en|pt)/@i", $path, $params)) {
-            $this->controller->setLanguge($params['lang'] ?? DEFAULT_LANGUAGE);
+            $this->controller->setLanguge($params['lang'] ?? $this->parseAcceptLanguageHeader());
         } else {
-            $this->controller->setLanguge(DEFAULT_LANGUAGE);
+            $this->controller->setLanguge($this->parseAcceptLanguageHeader());
         }
 
         // Show welcome page by default unless user previously chose to hide it (HideWelcome cookie)
