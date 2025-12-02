@@ -77,7 +77,7 @@
             <div style="
                 display:flex; flex-flow: column;
                 align-items:center; gap:12px;
-                margin-top:1.5em;
+                margin:1.5em 0;
                 color: var(--question-text);
                 max-width: 95%;">
                 <div class="welcome-controls">
@@ -97,7 +97,20 @@
             </div>
         </div>
         <footer>
-            {include file='m.footer.tpl'}
+            <div class="footer-links">
+                <div>
+                    <a href="/{$Lang}/about" target="_self">{translate}footer_about{/translate}</a>
+                </div>
+                <div>
+                    <a href="/{$Lang}/privacy-policy" target="_self">{translate}footer_privacy_policy{/translate}</a>
+                </div>
+                <div>
+                    <a href="/{$Lang}/books" target="_self">{translate}footer_books{/translate}</a>
+                </div>
+            </div>
+            <div style="text-align: center; padding-bottom: 0.5rem; margin-top: 2rem;">
+                © 2023-2025 SQLtest.online
+            </div>
         </footer>
         </div>
         {include file='counters.tpl'}
