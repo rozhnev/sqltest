@@ -183,4 +183,6 @@ $translations = [
     'playground_page_description' => 'Use our free SQL Playground to write and execute SQL queries online! Practice and test your SQL skills with MySQL, PostgreSQL, and SQLite in your browser. Perfect for learning and experimenting with SQL!',
     'site_description_playground' => 'SQL Playground - это онлайн редактор SQL, который позволяет вам писать и выполнять SQL запросы в реальном времени. Идеально подходит для тестирования и отладки SQL запросов.',
     'avaliable_databases' => 'Доступные базы данных',
+    'dont_show_this_page_again' => 'Не показывать эту страницу снова',
+    'start_practicing' => 'Приступить к практике',
 ];
