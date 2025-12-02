@@ -138,7 +138,7 @@ class Controller
             'QuestionsCount'        => $questionnire->getQuestionsCount(),
             'Favorites'             => $this->user->getFavorites($this->lang)
         ]);
-        $this->engine->display("welcome.tpl");
+        $this->engine->display($this->isMobileView() ? "m.welcome.tpl" : "welcome.tpl");
     }
     /**
      * Show login result page
