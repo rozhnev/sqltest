@@ -838,7 +838,8 @@ input:checked + .slider:before {
 .answer .sql,
 .code-result .sql {
     color: var(--sql-color);
-    padding: 0 3px;
+    font-family: monospace;
+    font-size: x-large;
 }
 .code-result .sql_error {
     color: red;
