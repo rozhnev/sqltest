@@ -1,109 +1,74 @@
-# Lesson 5.1: Working with Multiple Tables — Understanding Joins in SQL
+# Lesson 5.1: Fundamentals of JOINs in SQL
 
-In real-world databases, data is often distributed across multiple tables. To analyze and retrieve meaningful information, you need to combine data from these tables. SQL provides JOIN operations to connect related tables based on common columns. In this lesson, you will learn the fundamentals of SQL joins, their types, and practical examples using the Sakila database.
+In relational databases, information is stored as a set of related tables. To extract meaningful data from them, you need to know how to join them. The `JOIN` operation in SQL is used for this purpose. It allows you to combine rows from two or more tables based on a related column.
 
-## What is a JOIN?
-A JOIN in SQL is used to combine rows from two or more tables based on a related column between them. This allows you to query and analyze data that spans multiple tables.
+This lesson lays the foundation for understanding `JOIN` as a key concept for working with relational data.
 
-## Types of Joins
+## The Core Concept of a JOIN
 
-### 1. INNER JOIN
-Returns only the rows where there is a match in both tables.
+A `JOIN` is a mechanism that allows you to combine rows from different tables into a single result set. The join is performed based on a condition that most often compares values in key columns.
 
-**Syntax:**
-```sql
-SELECT columns
-FROM table1
-INNER JOIN table2 ON table1.column = table2.column;
+Imagine two tables: `customer` and `payment`. The `payment` table has a `customer_id` column that indicates which customer made the payment. A `JOIN` lets you "glue" the rows from these two tables together so that for each payment, you can see the customer's name, not just their ID.
+
+**How it works:**
+1.  You specify the two tables you want to join.
+2.  You define the join condition in the `ON` clause, for example, `customer.customer_id = payment.customer_id`.
+3.  The database goes through the rows, finds matching pairs, and forms new, combined rows from them.
+
+**Visualization:**
+```
+  Table A (customer)      Table B (payment)
+  +----+-------+            +----+----------+
+  | id | name  |            | id | amount   |
+  +----+-------+            +----+----------+
+  | 1  | Ivan  | <-----\    | 1  | 100.00   |
+  | 2  | Maria |       \--->| 1  | 50.00    |
+  | 3  | Petr  |            | 3  | 200.00   |
+  +----+-------+            +----+----------+
 ```
 
-**Example:**
-```sql
-SELECT c.first_name, c.last_name, p.amount
-FROM customer c
-INNER JOIN payment p ON c.customer_id = p.customer_id;
-```
-*Returns customer names and their payments.*
+*The arrows show how rows from the `payment` table find their corresponding customer in the `customer` table based on the matching `id`.*
 
-### 2. LEFT JOIN (or LEFT OUTER JOIN)
-Returns all rows from the left table, and matched rows from the right table. Unmatched rows from the right table will have NULLs.
+## Practical Application
 
-**Syntax:**
-```sql
-SELECT columns
-FROM table1
-LEFT JOIN table2 ON table1.column = table2.column;
-```
+Let's see what this looks like in a real SQL query using the Sakila database.
 
-**Example:**
-```sql
-SELECT c.first_name, c.last_name, p.amount
-FROM customer c
-LEFT JOIN payment p ON c.customer_id = p.customer_id;
-```
-*Returns all customers, including those who have not made any payments.*
+1.  **Getting a list of customers and their payments:**
+    This query joins the `customer` and `payment` tables to show the customer's first and last name next to each payment.
+    ```sql
+    SELECT
+        c.first_name,
+        c.last_name,
+        p.amount,
+        p.payment_date
+    FROM
+        customer AS c
+    JOIN
+        payment AS p ON c.customer_id = p.customer_id;
+    ```
+    - `JOIN payment AS p` specifies that we are joining the `payment` table.
+    - `ON c.customer_id = p.customer_id` is the condition that defines how the rows are related.
+    - `c` and `p` are **aliases**, which make the query shorter and more readable.
 
-### 3. RIGHT JOIN (or RIGHT OUTER JOIN)
-Returns all rows from the right table, and matched rows from the left table. Unmatched rows from the left table will have NULLs.
-
-**Syntax:**
-```sql
-SELECT columns
-FROM table1
-RIGHT JOIN table2 ON table1.column = table2.column;
-```
-
-**Example:**
-```sql
-SELECT c.first_name, c.last_name, p.amount
-FROM customer c
-RIGHT JOIN payment p ON c.customer_id = p.customer_id;
-```
-*Returns all payments, including those not linked to a customer (if any).* 
-
-### 4. FULL OUTER JOIN
-Returns all rows when there is a match in either left or right table. Unmatched rows will have NULLs for missing columns.
-
-**Note:** Not all SQL databases support FULL OUTER JOIN directly.
-
-**Syntax:**
-```sql
-SELECT columns
-FROM table1
-FULL OUTER JOIN table2 ON table1.column = table2.column;
-```
-
-**Example:**
-```sql
-SELECT c.first_name, c.last_name, p.amount
-FROM customer c
-FULL OUTER JOIN payment p ON c.customer_id = p.customer_id;
-```
-*Returns all customers and all payments, matching where possible.*
-
-## Why Use Joins?
-- To combine related data from different tables
-- To perform complex queries and analysis
-- To avoid data duplication and maintain normalization
-
-## Practical Usage
-1. **List all rentals with customer and film information:**
-   ```sql
-   SELECT r.rental_id, c.first_name, c.last_name, f.title
-   FROM rental r
-   JOIN customer c ON r.customer_id = c.customer_id
-   JOIN inventory i ON r.inventory_id = i.inventory_id
-   JOIN film f ON i.film_id = f.film_id;
-   ```
-2. **Find customers who have not made any payments:**
-   ```sql
-   SELECT c.first_name, c.last_name
-   FROM customer c
-   LEFT JOIN payment p ON c.customer_id = p.customer_id
-   WHERE p.payment_id IS NULL;
-   ```
+2.  **Getting a list of films and their language:**
+    Let's join the `film` and `language` tables to show the title of each film and the language it is in.
+    ```sql
+    SELECT
+        f.title,
+        l.name AS language
+    FROM
+        film AS f
+    JOIN
+        language AS l ON f.language_id = l.language_id;
+    ```
+    Here, the relationship is established through the `language_id` key.
 
 ## Key Takeaways from This Lesson
-- Joins are essential for working with normalized databases.
-- Use INNER JOIN for matching data, LEFT/RIGHT JOIN for including unmatched rows, and FULL OUTER JOIN for all data.
-- Practice writing join queries to analyze data across multiple tables in SQL.
+
+- **JOIN** is a fundamental operation in SQL for working with relational data, allowing you to combine tables.
+- The join is based on a **condition** specified in the `ON` clause, which defines how the rows are related.
+- Using **aliases** for tables (`customer AS c`) is a good practice that improves query readability.
+- `JOIN` does not modify the original data; it only creates a temporary result set of rows.
+
+In the following lessons, we will explore the different types of joins (`INNER JOIN`, `LEFT JOIN`, `RIGHT JOIN`) in detail and see how they affect the final result.
+EOF
