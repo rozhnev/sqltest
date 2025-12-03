@@ -86,7 +86,7 @@
                 <div style="
                     display:flex; flex-flow: column;
                     align-items:center; gap:12px;
-                    margin-top:1.5em;
+                    margin:1.5em auto;
                     color: var(--question-text);
                     max-width: 1024px;">
                     <div class="welcome-controls">
