@@ -1,7 +1,7 @@
 <div id="db-description" class="db-description">
     <style>
         .table-columns span {
-            min-width: 6rem;
+            min-width: 7rem;
         }
     </style>
     <h2>Banco de Dados Countries (PostGIS)</h2>
@@ -14,9 +14,9 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li><span class='sql'>id</span>identificador único do registro (PK).</li>
-            <li><span class='sql'>name</span>nome do país.</li>
-            <li><span class='sql'>border</span>geometria do país (MultiPolygon, SRID 4326).</li>
+            <li><span class='sql'>id</span>identificador único do registro (PK)</li>
+            <li><span class='sql'>name</span>nome do país</li>
+            <li><span class='sql'>border</span>geometria do país (MultiPolygon, SRID 4326)</li>
         </ul>
         <div class="table-wrapper">
             <table>
@@ -41,10 +41,10 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li><span class='sql'>id</span>identificador único do registro (PK).</li>
-            <li><span class='sql'>name</span>nome da capital.</li>
-            <li><span class='sql'>country_id</span>referência ao país (FK).</li>
-            <li><span class='sql'>location</span>localização da capital (Point, SRID 4326).</li>
+            <li><span class='sql'>id</span>identificador único do registro (PK)</li>
+            <li><span class='sql'>name</span>nome da capital</li>
+            <li><span class='sql'>country_id</span>referência ao país (FK)</li>
+            <li><span class='sql'>location</span>localização da capital (Point, SRID 4326)</li>
         </ul>
         <div class="table-wrapper">
             <table>
@@ -72,16 +72,16 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li><span class='sql'>gid</span>identificador único do registro (PK).</li>
-            <li><span class='sql'>blkid</span>ID do bloco censitário.</li>
-            <li><span class='sql'>popn_total</span>população total.</li>
-            <li><span class='sql'>popn_white</span>população branca.</li>
-            <li><span class='sql'>popn_black</span>população negra.</li>
-            <li><span class='sql'>popn_nativ</span>população nativa.</li>
-            <li><span class='sql'>popn_asian</span>população asiática.</li>
-            <li><span class='sql'>popn_other</span>outra população.</li>
-            <li><span class='sql'>boroname</span>nome do bairro.</li>
-            <li><span class='sql'>geom</span>geometria do bloco censitário (MultiPolygon, SRID 4326).</li>
+            <li><span class='sql'>gid</span>identificador único do registro (PK)</li>
+            <li><span class='sql'>blkid</span>ID do bloco censitário</li>
+            <li><span class='sql'>popn_total</span>população total</li>
+            <li><span class='sql'>popn_white</span>população branca</li>
+            <li><span class='sql'>popn_black</span>população negra</li>
+            <li><span class='sql'>popn_nativ</span>população nativa</li>
+            <li><span class='sql'>popn_asian</span>população asiática</li>
+            <li><span class='sql'>popn_other</span>outra população</li>
+            <li><span class='sql'>boroname</span>nome do bairro</li>
+            <li><span class='sql'>geom</span>geometria do bloco censitário (MultiPolygon, SRID 4326)</li>
         </ul>
         <div class="table-wrapper">
             <table>
@@ -120,16 +120,16 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li><span class='sql'>gid</span>identificador único do registro (PK).</li>
-            <li><span class='sql'>incident_d</span>data do incidente.</li>
-            <li><span class='sql'>boroname</span>nome do bairro.</li>
-            <li><span class='sql'>num_victim</span>número de vítimas.</li>
-            <li><span class='sql'>primary_mo</span>motivo principal.</li>
-            <li><span class='sql'>id</span>ID do incidente.</li>
-            <li><span class='sql'>weapon</span>arma usada.</li>
-            <li><span class='sql'>light_dark</span>condição de luz ou escuro.</li>
-            <li><span class='sql'>year</span>ano do incidente.</li>
-            <li><span class='sql'>geom</span>localização do incidente (Point, SRID 4326).</li>
+            <li><span class='sql'>gid</span>identificador único do registro (PK)</li>
+            <li><span class='sql'>incident_d</span>data do incidente</li>
+            <li><span class='sql'>boroname</span>nome do bairro</li>
+            <li><span class='sql'>num_victim</span>número de vítimas</li>
+            <li><span class='sql'>primary_mo</span>motivo principal</li>
+            <li><span class='sql'>id</span>ID do incidente</li>
+            <li><span class='sql'>weapon</span>arma usada</li>
+            <li><span class='sql'>light_dark</span>condição de luz ou escuro</li>
+            <li><span class='sql'>year</span>ano do incidente</li>
+            <li><span class='sql'>geom</span>localização do incidente (Point, SRID 4326)</li>
         </ul>
         <div class="table-wrapper">
             <table>
@@ -168,10 +168,10 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li><span class='sql'>gid</span>identificador único do registro (PK).</li>
-            <li><span class='sql'>boroname</span>nome do bairro.</li>
-            <li><span class='sql'>name</span>nome do bairro.</li>
-            <li><span class='sql'>geom</span>geometria do bairro (MultiPolygon, SRID 4326).</li>
+            <li><span class='sql'>gid</span>identificador único do registro (PK)</li>
+            <li><span class='sql'>boroname</span>nome do bairro</li>
+            <li><span class='sql'>name</span>nome do bairro</li>
+            <li><span class='sql'>geom</span>geometria do bairro (MultiPolygon, SRID 4326)</li>
         </ul>
         <div class="table-wrapper">
             <table>
@@ -198,12 +198,12 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li><span class='sql'>gid</span>identificador único do registro (PK).</li>
-            <li><span class='sql'>id</span>ID da rua.</li>
-            <li><span class='sql'>name</span>nome da rua.</li>
-            <li><span class='sql'>oneway</span>indicador de mão única.</li>
-            <li><span class='sql'>type</span>tipo de rua.</li>
-            <li><span class='sql'>geom</span>geometria da rua (LineString, SRID 4326).</li>
+            <li><span class='sql'>gid</span>identificador único do registro (PK)</li>
+            <li><span class='sql'>id</span>ID da rua</li>
+            <li><span class='sql'>name</span>nome da rua</li>
+            <li><span class='sql'>oneway</span>indicador de mão única</li>
+            <li><span class='sql'>type</span>tipo de rua</li>
+            <li><span class='sql'>geom</span>geometria da rua (LineString, SRID 4326)</li>
         </ul>
         <div class="table-wrapper">
             <table>
@@ -234,22 +234,22 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li><span class='sql'>gid</span>identificador único do registro (PK).</li>
-            <li><span class='sql'>objectid</span>ID do objeto.</li>
-            <li><span class='sql'>id</span>ID da estação.</li>
-            <li><span class='sql'>name</span>nome da estação.</li>
-            <li><span class='sql'>alt_name</span>nome alternativo.</li>
-            <li><span class='sql'>cross_st</span>rua transversal.</li>
-            <li><span class='sql'>long_name</span>nome longo.</li>
-            <li><span class='sql'>label</span>rótulo.</li>
-            <li><span class='sql'>borough</span>bairro.</li>
-            <li><span class='sql'>nghbhd</span>bairro.</li>
-            <li><span class='sql'>routes</span>rotas.</li>
-            <li><span class='sql'>transfers</span>transferências.</li>
-            <li><span class='sql'>color</span>cor.</li>
-            <li><span class='sql'>express</span>indicador expresso.</li>
-            <li><span class='sql'>closed</span>indicador fechado.</li>
-            <li><span class='sql'>geom</span>localização da estação (Point, SRID 4326).</li>
+            <li><span class='sql'>gid</span>identificador único do registro (PK)</li>
+            <li><span class='sql'>objectid</span>ID do objeto</li>
+            <li><span class='sql'>id</span>ID da estação</li>
+            <li><span class='sql'>name</span>nome da estação</li>
+            <li><span class='sql'>alt_name</span>nome alternativo</li>
+            <li><span class='sql'>cross_st</span>rua transversal</li>
+            <li><span class='sql'>long_name</span>nome longo</li>
+            <li><span class='sql'>label</span>rótulo</li>
+            <li><span class='sql'>borough</span>bairro</li>
+            <li><span class='sql'>nghbhd</span>bairro</li>
+            <li><span class='sql'>routes</span>rotas</li>
+            <li><span class='sql'>transfers</span>transferências</li>
+            <li><span class='sql'>color</span>cor</li>
+            <li><span class='sql'>express</span>indicador expresso</li>
+            <li><span class='sql'>closed</span>indicador fechado</li>
+            <li><span class='sql'>geom</span>localização da estação (Point, SRID 4326)</li>
         </ul>
         <div class="table-wrapper">
             <table>

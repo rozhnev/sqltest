@@ -12,9 +12,9 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class='sql'>ident</span>ID do departamento.</li>
-            <li> <span class='sql'>name</span>Nome do departamento.</li>
-            <li> <span class='sql'>building</span>Nome do prédio.</li>
+            <li> <span class='sql'>ident</span>ID do departamento</li>
+            <li> <span class='sql'>name</span>Nome do departamento</li>
+            <li> <span class='sql'>building</span>Nome do prédio</li>
         </ul>
         <div class="table-wrapper">
             <table class=""><tbody>
@@ -36,13 +36,13 @@
     </div>
     <div class="panel active">
         <ul class="table-columns">
-            <li> <span class='sql'>species</span>Espécie de pinguim.</li>
-            <li> <span class='sql'>island</span>Ilha de residência.</li>
-            <li> <span class='sql'>bill_length_mm</span>Comprimento do bico, mm.</li>
-            <li> <span class='sql'>bill_depth_mm</span>Profundidade do bico, mm.</li>
-            <li> <span class='sql'>flipper_length_mm</span>Comprimento da nadadeira, mm.</li>
-            <li> <span class='sql'>body_mass_g</span>Massa corporal, g.</li>
-            <li> <span class='sql'>sex</span>Sexo.</li>
+            <li> <span class='sql'>species</span>Espécie de pinguim</li>
+            <li> <span class='sql'>island</span>Ilha de residência</li>
+            <li> <span class='sql'>bill_length_mm</span>Comprimento do bico, mm</li>
+            <li> <span class='sql'>bill_depth_mm</span>Profundidade do bico, mm</li>
+            <li> <span class='sql'>flipper_length_mm</span>Comprimento da nadadeira, mm</li>
+            <li> <span class='sql'>body_mass_g</span>Massa corporal, g</li>
+            <li> <span class='sql'>sex</span>Sexo</li>
         </ul>
         <div class="table-wrapper">
             <table class=""><tbody>
@@ -72,13 +72,13 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class='sql'>species</span>Espécie de pinguim.</li>
-            <li> <span class='sql'>island</span>Ilha de residência.</li>
-            <li> <span class='sql'>bill_length_mm</span>Comprimento do bico, mm.</li>
-            <li> <span class='sql'>bill_depth_mm</span>Profundidade do bico, mm.</li>
-            <li> <span class='sql'>flipper_length_mm</span>Comprimento da nadadeira, mm.</li>
-            <li> <span class='sql'>body_mass_g</span>Massa corporal, g.</li>
-            <li> <span class='sql'>sex</span>Sexo.</li>
+            <li> <span class='sql'>species</span>Espécie de pinguim</li>
+            <li> <span class='sql'>island</span>Ilha de residência</li>
+            <li> <span class='sql'>bill_length_mm</span>Comprimento do bico, mm</li>
+            <li> <span class='sql'>bill_depth_mm</span>Profundidade do bico, mm</li>
+            <li> <span class='sql'>flipper_length_mm</span>Comprimento da nadadeira, mm</li>
+            <li> <span class='sql'>body_mass_g</span>Massa corporal, g</li>
+            <li> <span class='sql'>sex</span>Sexo</li>
         </ul>
         <div class="table-wrapper">
             <table class=""><tbody>
@@ -108,11 +108,11 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class='sql'>ident</span>Número do funcionário.</li>
-            <li> <span class='sql'>personal</span>Nome do funcionário.</li>
-            <li> <span class='sql'>family</span>Sobrenome do funcionário.</li>
-            <li> <span class='sql'>dept</span>Departamento.</li>
-            <li> <span class='sql'>age</span>Idade.</li>
+            <li> <span class='sql'>ident</span>Número do funcionário</li>
+            <li> <span class='sql'>personal</span>Nome do funcionário</li>
+            <li> <span class='sql'>family</span>Sobrenome do funcionário</li>
+            <li> <span class='sql'>dept</span>Departamento</li>
+            <li> <span class='sql'>age</span>Idade</li>
         </ul>
         <div class="table-wrapper">
             <table class=""><tbody>
@@ -138,9 +138,9 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class='sql'>ident</span>ID da máquina.</li>
-            <li> <span class='sql'>name</span>Nome da máquina.</li>
-            <li> <span class='sql'>details</span>JSON com detalhes.</li>
+            <li> <span class='sql'>ident</span>ID da máquina</li>
+            <li> <span class='sql'>name</span>Nome da máquina</li>
+            <li> <span class='sql'>details</span>JSON com detalhes</li>
         </ul>
         <div class="table-wrapper">
             {literal}

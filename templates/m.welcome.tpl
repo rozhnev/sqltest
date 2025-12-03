@@ -61,9 +61,22 @@
                 [data-theme="dark"] .step-icon {
                     background: #333;
                 }
+                .community-text {
+                    /* Enables Flexbox for the content inside */
+                    display: flex;
+                    /* Aligns items vertically in the center */
+                    align-items: center;
+                    /* Allows content to wrap to the next line if necessary (optional) */
+                    flex-wrap: wrap; 
+                    /* Ensures a small space between items */
+                    gap: 5px; 
+                }
 
-
-                
+                .community-text a {
+                    /* Keep the display: inline-flex for alignment of icon/text within the link */
+                    display: inline-flex !important; 
+                    color: #FFA500; column-gap: 5px; align-items: anchor-center;
+                }
             </style>
             <div style="
                 margin: 0.5em auto;

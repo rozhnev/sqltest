@@ -1,7 +1,7 @@
 <div id="db-description" class="db-description">
     <style>
         .table-columns span {
-            min-width: 6rem;
+            min-width: 7rem;
         }
     </style>
     <h2>Countries Database (PostGIS)</h2>
@@ -14,9 +14,9 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li><span class='sql'>id</span>unique record identifier (PK).</li>
-            <li><span class='sql'>name</span>country name.</li>
-            <li><span class='sql'>border</span>country geometry (MultiPolygon, SRID 4326).</li>
+            <li><span class='sql'>id</span>unique record identifier (PK)</li>
+            <li><span class='sql'>name</span>country name</li>
+            <li><span class='sql'>border</span>country geometry (MultiPolygon, SRID 4326)</li>
         </ul>
         <div class="table-wrapper">
             <table>
@@ -41,10 +41,10 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li><span class='sql'>id</span>unique record identifier (PK).</li>
-            <li><span class='sql'>name</span>capital name.</li>
-            <li><span class='sql'>country_id</span>reference to country (FK).</li>
-            <li><span class='sql'>location</span>capital location (Point, SRID 4326).</li>
+            <li><span class='sql'>id</span>unique record identifier (PK)</li>
+            <li><span class='sql'>name</span>capital name</li>
+            <li><span class='sql'>country_id</span>reference to country (FK)</li>
+            <li><span class='sql'>location</span>capital location (Point, SRID 4326)</li>
         </ul>
         <div class="table-wrapper">
             <table>
@@ -72,16 +72,16 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li><span class='sql'>gid</span>unique record identifier (PK).</li>
-            <li><span class='sql'>blkid</span>census block ID.</li>
-            <li><span class='sql'>popn_total</span>total population.</li>
-            <li><span class='sql'>popn_white</span>white population.</li>
-            <li><span class='sql'>popn_black</span>black population.</li>
-            <li><span class='sql'>popn_nativ</span>native population.</li>
-            <li><span class='sql'>popn_asian</span>asian population.</li>
-            <li><span class='sql'>popn_other</span>other population.</li>
-            <li><span class='sql'>boroname</span>borough name.</li>
-            <li><span class='sql'>geom</span>census block geometry (MultiPolygon, SRID 4326).</li>
+            <li><span class='sql'>gid</span>unique record identifier (PK)</li>
+            <li><span class='sql'>blkid</span>census block ID</li>
+            <li><span class='sql'>popn_total</span>total population</li>
+            <li><span class='sql'>popn_white</span>white population</li>
+            <li><span class='sql'>popn_black</span>black population</li>
+            <li><span class='sql'>popn_nativ</span>native population</li>
+            <li><span class='sql'>popn_asian</span>asian population</li>
+            <li><span class='sql'>popn_other</span>other population</li>
+            <li><span class='sql'>boroname</span>borough name</li>
+            <li><span class='sql'>geom</span>census block geometry (MultiPolygon, SRID 4326)</li>
         </ul>
         <div class="table-wrapper">
             <table>
@@ -120,16 +120,16 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li><span class='sql'>gid</span>unique record identifier (PK).</li>
-            <li><span class='sql'>incident_d</span>incident date.</li>
-            <li><span class='sql'>boroname</span>borough name.</li>
-            <li><span class='sql'>num_victim</span>number of victims.</li>
-            <li><span class='sql'>primary_mo</span>primary motive.</li>
-            <li><span class='sql'>id</span>incident ID.</li>
-            <li><span class='sql'>weapon</span>weapon used.</li>
-            <li><span class='sql'>light_dark</span>light or dark condition.</li>
-            <li><span class='sql'>year</span>year of incident.</li>
-            <li><span class='sql'>geom</span>incident location (Point, SRID 4326).</li>
+            <li><span class='sql'>gid</span>unique record identifier (PK)</li>
+            <li><span class='sql'>incident_d</span>incident date</li>
+            <li><span class='sql'>boroname</span>borough name</li>
+            <li><span class='sql'>num_victim</span>number of victims</li>
+            <li><span class='sql'>primary_mo</span>primary motive</li>
+            <li><span class='sql'>id</span>incident ID</li>
+            <li><span class='sql'>weapon</span>weapon used</li>
+            <li><span class='sql'>light_dark</span>light or dark condition</li>
+            <li><span class='sql'>year</span>year of incident</li>
+            <li><span class='sql'>geom</span>incident location (Point, SRID 4326)</li>
         </ul>
         <div class="table-wrapper">
             <table>
@@ -168,10 +168,10 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li><span class='sql'>gid</span>unique record identifier (PK).</li>
-            <li><span class='sql'>boroname</span>borough name.</li>
-            <li><span class='sql'>name</span>neighborhood name.</li>
-            <li><span class='sql'>geom</span>neighborhood geometry (MultiPolygon, SRID 4326).</li>
+            <li><span class='sql'>gid</span>unique record identifier (PK)</li>
+            <li><span class='sql'>boroname</span>borough name</li>
+            <li><span class='sql'>name</span>neighborhood name</li>
+            <li><span class='sql'>geom</span>neighborhood geometry (MultiPolygon, SRID 4326)</li>
         </ul>
         <div class="table-wrapper">
             <table>
@@ -198,12 +198,12 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li><span class='sql'>gid</span>unique record identifier (PK).</li>
-            <li><span class='sql'>id</span>street ID.</li>
-            <li><span class='sql'>name</span>street name.</li>
-            <li><span class='sql'>oneway</span>one-way indicator.</li>
-            <li><span class='sql'>type</span>street type.</li>
-            <li><span class='sql'>geom</span>street geometry (LineString, SRID 4326).</li>
+            <li><span class='sql'>gid</span>unique record identifier (PK)</li>
+            <li><span class='sql'>id</span>street ID</li>
+            <li><span class='sql'>name</span>street name</li>
+            <li><span class='sql'>oneway</span>one-way indicator</li>
+            <li><span class='sql'>type</span>street type</li>
+            <li><span class='sql'>geom</span>street geometry (LineString, SRID 4326)</li>
         </ul>
         <div class="table-wrapper">
             <table>
@@ -234,22 +234,22 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li><span class='sql'>gid</span>unique record identifier (PK).</li>
-            <li><span class='sql'>objectid</span>object ID.</li>
-            <li><span class='sql'>id</span>station ID.</li>
-            <li><span class='sql'>name</span>station name.</li>
-            <li><span class='sql'>alt_name</span>alternative name.</li>
-            <li><span class='sql'>cross_st</span>cross street.</li>
-            <li><span class='sql'>long_name</span>long name.</li>
-            <li><span class='sql'>label</span>label.</li>
-            <li><span class='sql'>borough</span>borough.</li>
-            <li><span class='sql'>nghbhd</span>neighborhood.</li>
-            <li><span class='sql'>routes</span>routes.</li>
-            <li><span class='sql'>transfers</span>transfers.</li>
-            <li><span class='sql'>color</span>color.</li>
-            <li><span class='sql'>express</span>express indicator.</li>
-            <li><span class='sql'>closed</span>closed indicator.</li>
-            <li><span class='sql'>geom</span>station location (Point, SRID 4326).</li>
+            <li><span class='sql'>gid</span>unique record identifier (PK)</li>
+            <li><span class='sql'>objectid</span>object ID</li>
+            <li><span class='sql'>id</span>station ID</li>
+            <li><span class='sql'>name</span>station name</li>
+            <li><span class='sql'>alt_name</span>alternative name</li>
+            <li><span class='sql'>cross_st</span>cross street</li>
+            <li><span class='sql'>long_name</span>long name</li>
+            <li><span class='sql'>label</span>label</li>
+            <li><span class='sql'>borough</span>borough</li>
+            <li><span class='sql'>nghbhd</span>neighborhood</li>
+            <li><span class='sql'>routes</span>routes</li>
+            <li><span class='sql'>transfers</span>transfers</li>
+            <li><span class='sql'>color</span>color</li>
+            <li><span class='sql'>express</span>express indicator</li>
+            <li><span class='sql'>closed</span>closed indicator</li>
+            <li><span class='sql'>geom</span>station location (Point, SRID 4326)</li>
         </ul>
         <div class="table-wrapper">
             <table>

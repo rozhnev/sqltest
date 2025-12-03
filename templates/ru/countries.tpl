@@ -1,7 +1,7 @@
 <div id="db-description" class="db-description">
     <style>
         .table-columns span {
-            min-width: 6rem;
+            min-width: 7rem;
         }
     </style>
     <h2>База данных Countries (PostGIS)</h2>
@@ -14,9 +14,9 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li><span class='sql'>id</span>уникальный идентификатор записи (PK).</li>
-            <li><span class='sql'>name</span>название страны.</li>
-            <li><span class='sql'>border</span>геометрия страны (MultiPolygon, SRID 4326).</li>
+            <li><span class='sql'>id</span>уникальный идентификатор записи (PK)</li>
+            <li><span class='sql'>name</span>название страны</li>
+            <li><span class='sql'>border</span>геометрия страны (MultiPolygon, SRID 4326)</li>
         </ul>
         <div class="table-wrapper">
             <table>
@@ -41,10 +41,10 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li><span class='sql'>id</span>уникальный идентификатор записи (PK).</li>
-            <li><span class='sql'>name</span>название столицы.</li>
-            <li><span class='sql'>country_id</span>ссылка на страну (FK).</li>
-            <li><span class='sql'>location</span>координаты столицы (Point, SRID 4326).</li>
+            <li><span class='sql'>id</span>уникальный идентификатор записи (PK)</li>
+            <li><span class='sql'>name</span>название столицы</li>
+            <li><span class='sql'>country_id</span>ссылка на страну (FK)</li>
+            <li><span class='sql'>location</span>координаты столицы (Point, SRID 4326)</li>
         </ul>
         <div class="table-wrapper">
             <table>
@@ -72,16 +72,16 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li><span class='sql'>gid</span>уникальный идентификатор записи (PK).</li>
-            <li><span class='sql'>blkid</span>ID переписного блока.</li>
-            <li><span class='sql'>popn_total</span>общая численность населения.</li>
-            <li><span class='sql'>popn_white</span>численность белого населения.</li>
-            <li><span class='sql'>popn_black</span>численность черного населения.</li>
-            <li><span class='sql'>popn_nativ</span>численность коренного населения.</li>
-            <li><span class='sql'>popn_asian</span>численность азиатского населения.</li>
-            <li><span class='sql'>popn_other</span>численность другого населения.</li>
-            <li><span class='sql'>boroname</span>название района.</li>
-            <li><span class='sql'>geom</span>геометрия переписного блока (MultiPolygon, SRID 4326).</li>
+            <li><span class='sql'>gid</span>уникальный идентификатор записи (PK)</li>
+            <li><span class='sql'>blkid</span>ID переписного блока</li>
+            <li><span class='sql'>popn_total</span>общая численность населения</li>
+            <li><span class='sql'>popn_white</span>численность белого населения</li>
+            <li><span class='sql'>popn_black</span>численность черного населения</li>
+            <li><span class='sql'>popn_nativ</span>численность коренного населения</li>
+            <li><span class='sql'>popn_asian</span>численность азиатского населения</li>
+            <li><span class='sql'>popn_other</span>численность другого населения</li>
+            <li><span class='sql'>boroname</span>название района</li>
+            <li><span class='sql'>geom</span>геометрия переписного блока (MultiPolygon, SRID 4326)</li>
         </ul>
         <div class="table-wrapper">
             <table>
@@ -120,16 +120,16 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li><span class='sql'>gid</span>уникальный идентификатор записи (PK).</li>
-            <li><span class='sql'>incident_d</span>дата инцидента.</li>
-            <li><span class='sql'>boroname</span>название района.</li>
-            <li><span class='sql'>num_victim</span>число жертв.</li>
-            <li><span class='sql'>primary_mo</span>основной мотив.</li>
-            <li><span class='sql'>id</span>ID инцидента.</li>
-            <li><span class='sql'>weapon</span>использованное оружие.</li>
-            <li><span class='sql'>light_dark</span>условие света или темноты.</li>
-            <li><span class='sql'>year</span>год инцидента.</li>
-            <li><span class='sql'>geom</span>местоположение инцидента (Point, SRID 4326).</li>
+            <li><span class='sql'>gid</span>уникальный идентификатор записи (PK)</li>
+            <li><span class='sql'>incident_d</span>дата инцидента</li>
+            <li><span class='sql'>boroname</span>название района</li>
+            <li><span class='sql'>num_victim</span>число жертв</li>
+            <li><span class='sql'>primary_mo</span>основной мотив</li>
+            <li><span class='sql'>id</span>ID инцидента</li>
+            <li><span class='sql'>weapon</span>использованное оружие</li>
+            <li><span class='sql'>light_dark</span>условие света или темноты</li>
+            <li><span class='sql'>year</span>год инцидента</li>
+            <li><span class='sql'>geom</span>местоположение инцидента (Point, SRID 4326)</li>
         </ul>
         <div class="table-wrapper">
             <table>
@@ -168,10 +168,10 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li><span class='sql'>gid</span>уникальный идентификатор записи (PK).</li>
-            <li><span class='sql'>boroname</span>название района.</li>
-            <li><span class='sql'>name</span>название района.</li>
-            <li><span class='sql'>geom</span>геометрия района (MultiPolygon, SRID 4326).</li>
+            <li><span class='sql'>gid</span>уникальный идентификатор записи (PK)</li>
+            <li><span class='sql'>boroname</span>название района</li>
+            <li><span class='sql'>name</span>название района</li>
+            <li><span class='sql'>geom</span>геометрия района (MultiPolygon, SRID 4326)</li>
         </ul>
         <div class="table-wrapper">
             <table>
@@ -198,12 +198,12 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li><span class='sql'>gid</span>уникальный идентификатор записи (PK).</li>
-            <li><span class='sql'>id</span>ID улицы.</li>
-            <li><span class='sql'>name</span>название улицы.</li>
-            <li><span class='sql'>oneway</span>индикатор одностороннего движения.</li>
-            <li><span class='sql'>type</span>тип улицы.</li>
-            <li><span class='sql'>geom</span>геометрия улицы (LineString, SRID 4326).</li>
+            <li><span class='sql'>gid</span>уникальный идентификатор записи (PK)</li>
+            <li><span class='sql'>id</span>ID улицы</li>
+            <li><span class='sql'>name</span>название улицы</li>
+            <li><span class='sql'>oneway</span>индикатор одностороннего движения</li>
+            <li><span class='sql'>type</span>тип улицы</li>
+            <li><span class='sql'>geom</span>геометрия улицы (LineString, SRID 4326)</li>
         </ul>
         <div class="table-wrapper">
             <table>
@@ -234,22 +234,22 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li><span class='sql'>gid</span>уникальный идентификатор записи (PK).</li>
-            <li><span class='sql'>objectid</span>ID объекта.</li>
-            <li><span class='sql'>id</span>ID станции.</li>
-            <li><span class='sql'>name</span>название станции.</li>
-            <li><span class='sql'>alt_name</span>альтернативное название.</li>
-            <li><span class='sql'>cross_st</span>перекрестная улица.</li>
-            <li><span class='sql'>long_name</span>длинное название.</li>
-            <li><span class='sql'>label</span>метка.</li>
-            <li><span class='sql'>borough</span>район.</li>
-            <li><span class='sql'>nghbhd</span>район.</li>
-            <li><span class='sql'>routes</span>маршруты.</li>
-            <li><span class='sql'>transfers</span>пересадки.</li>
-            <li><span class='sql'>color</span>цвет.</li>
-            <li><span class='sql'>express</span>индикатор экспресса.</li>
-            <li><span class='sql'>closed</span>индикатор закрытия.</li>
-            <li><span class='sql'>geom</span>местоположение станции (Point, SRID 4326).</li>
+            <li><span class='sql'>gid</span>уникальный идентификатор записи (PK)</li>
+            <li><span class='sql'>objectid</span>ID объекта</li>
+            <li><span class='sql'>id</span>ID станции</li>
+            <li><span class='sql'>name</span>название станции</li>
+            <li><span class='sql'>alt_name</span>альтернативное название</li>
+            <li><span class='sql'>cross_st</span>перекрестная улица</li>
+            <li><span class='sql'>long_name</span>длинное название</li>
+            <li><span class='sql'>label</span>метка</li>
+            <li><span class='sql'>borough</span>район</li>
+            <li><span class='sql'>nghbhd</span>район</li>
+            <li><span class='sql'>routes</span>маршруты</li>
+            <li><span class='sql'>transfers</span>пересадки</li>
+            <li><span class='sql'>color</span>цвет</li>
+            <li><span class='sql'>express</span>индикатор экспресса</li>
+            <li><span class='sql'>closed</span>индикатор закрытия</li>
+            <li><span class='sql'>geom</span>местоположение станции (Point, SRID 4326)</li>
         </ul>
         <div class="table-wrapper">
             <table>

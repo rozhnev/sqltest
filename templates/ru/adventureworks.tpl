@@ -18,15 +18,15 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class="sql">AddressID</span>уникальный идентификатор записи (ПК).</li>
-            <li> <span class="sql">AddressLine1</span>первая строка адреса.</li>
-            <li> <span class="sql">AddressLine2</span>вторая строка адреса.</li>
-            <li> <span class="sql">City</span>город.</li>
-            <li> <span class="sql">StateProvince</span>штат или провинция.</li>
-            <li> <span class="sql">CountryRegion</span>страна.</li>
-            <li> <span class="sql">PostalCode</span>почтовый индекс.</li>
-            <li> <span class="sql">rowguid</span>guid.</li>
-            <li> <span class="sql">ModifiedDate</span>временная метка создания или последнего обновления строки.</li>
+            <li> <span class="sql">AddressID</span>уникальный идентификатор записи (ПК)</li>
+            <li> <span class="sql">AddressLine1</span>первая строка адреса</li>
+            <li> <span class="sql">AddressLine2</span>вторая строка адреса</li>
+            <li> <span class="sql">City</span>город</li>
+            <li> <span class="sql">StateProvince</span>штат или провинция</li>
+            <li> <span class="sql">CountryRegion</span>страна</li>
+            <li> <span class="sql">PostalCode</span>почтовый индекс</li>
+            <li> <span class="sql">rowguid</span>guid</li>
+            <li> <span class="sql">ModifiedDate</span>временная метка создания или последнего обновления строки</li>
         </ul>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (AddressID)</li>
@@ -63,22 +63,22 @@
     </div>
     <div class="panel">
     <ul class="table-columns">
-      <li> <span class="sql">CustomerID</span>уникальный идентификатор записи (ПК).</li>
+      <li> <span class="sql">CustomerID</span>уникальный идентификатор записи (ПК)</li>
       <li> <span class="sql">NameStyle</span>0 = Данные в FirstName и LastName хранятся в западном стиле (имя, фамилия). 1 = Восточный стиль (фамилия, имя) порядок.
-      По умолчанию: 0.</li>
-      <li> <span class="sql">Title</span>обращение.</li>
-      <li> <span class="sql">FirstName</span>имя.</li>
-      <li> <span class="sql">MiddleName</span>второе имя.</li>
-      <li> <span class="sql">LastName</span>фамилия.</li>
-      <li> <span class="sql">Suffix</span>суффикс.</li>
-      <li> <span class="sql">CompanyName</span>название компании.</li>
-      <li> <span class="sql">SalesPerson</span>контактная персона.</li>
-      <li> <span class="sql">EmailAddress</span>E-mail.</li>
-      <li> <span class="sql">Phone</span>номер телефона.</li>
-      <li> <span class="sql">PasswordHash</span>хеш пароля.</li>
-      <li> <span class="sql">PasswordSalt</span>соль.</li>
-      <li> <span class="sql">rowguid</span>rowguid.</li>
-      <li> <span class="sql">ModifiedDate</span>дата и время последнего изменения.</li>
+      По умолчанию: 0</li>
+      <li> <span class="sql">Title</span>обращение</li>
+      <li> <span class="sql">FirstName</span>имя</li>
+      <li> <span class="sql">MiddleName</span>второе имя</li>
+      <li> <span class="sql">LastName</span>фамилия</li>
+      <li> <span class="sql">Suffix</span>суффикс</li>
+      <li> <span class="sql">CompanyName</span>название компании</li>
+      <li> <span class="sql">SalesPerson</span>контактная персона</li>
+      <li> <span class="sql">EmailAddress</span>E-mail</li>
+      <li> <span class="sql">Phone</span>номер телефона</li>
+      <li> <span class="sql">PasswordHash</span>хеш пароля</li>
+      <li> <span class="sql">PasswordSalt</span>соль</li>
+      <li> <span class="sql">rowguid</span>rowguid</li>
+      <li> <span class="sql">ModifiedDate</span>дата и время последнего изменения</li>
     </ul>
     <ul class="table-columns">
       <li>PRIMARY KEY, btree (CustomerID)</li>
@@ -127,11 +127,11 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class="sql">CustomerID</span>уникальный идентификатор записи (ПК).</li>
-            <li> <span class="sql">AddressID</span>идентификатор адреса в таблице Address.</li>
-            <li> <span class="sql">AddressType</span>тип адреса.</li>
-            <li> <span class="sql">rowguid</span>guid.</li>
-            <li> <span class="sql">ModifiedDate</span>дата и время последнего изменения.</li>
+            <li> <span class="sql">CustomerID</span>уникальный идентификатор записи (ПК)</li>
+            <li> <span class="sql">AddressID</span>идентификатор адреса в таблице Address</li>
+            <li> <span class="sql">AddressType</span>тип адреса</li>
+            <li> <span class="sql">rowguid</span>guid</li>
+            <li> <span class="sql">ModifiedDate</span>дата и время последнего изменения</li>
         </ul>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (CustomerID, AddressID)</li>
@@ -160,23 +160,23 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class="sql">ProductID</span>уникальный идентификатор записи (ПК).</li>
-            <li> <span class="sql">Name</span>наименование товара.</li>
-            <li> <span class="sql">ProductNumber</span>артикул.</li>
-            <li> <span class="sql">Color</span>цвет товара.</li>
-            <li> <span class="sql">StandardCost</span>цена товара.</li>
-            <li> <span class="sql">ListPrice</span>цена товара в каталоге.</li>
-            <li> <span class="sql">Size</span>размер товара.</li>
-            <li> <span class="sql">Weight</span>вес товара.</li>
-            <li> <span class="sql">ProductCategoryID</span>идентификатор категории товара.</li>
-            <li> <span class="sql">ProductModelID</span>идентификатор модели товара.</li>
-            <li> <span class="sql">SellStartDate</span>временная метка даты начала продаж.</li>
-            <li> <span class="sql">SellEndDate</span>временная метка даты окончания продаж.</li>
-            <li> <span class="sql">DiscontinuedDate</span>временная метка даты окончания продаж.</li>
-            <li> <span class="sql">ThumbNailPhoto</span>миниатюра фото товара.</li>
-            <li> <span class="sql">ThumbnailPhotoFileName</span><br>имя файла миниатюры фото.</li>
-            <li> <span class="sql">rowguid</span>guid.</li>
-            <li> <span class="sql">ModifiedDate</span>дата и время последнего изменения.</li>
+            <li> <span class="sql" style="min-width: 11rem;">ProductID</span>уникальный идентификатор записи (ПК)</li>
+            <li> <span class="sql" style="min-width: 11rem;">Name</span>наименование товара</li>
+            <li> <span class="sql" style="min-width: 11rem;">ProductNumber</span>артикул</li>
+            <li> <span class="sql" style="min-width: 11rem;">Color</span>цвет товара</li>
+            <li> <span class="sql" style="min-width: 11rem;">StandardCost</span>цена товара</li>
+            <li> <span class="sql" style="min-width: 11rem;">ListPrice</span>цена товара в каталоге</li>
+            <li> <span class="sql" style="min-width: 11rem;">Size</span>размер товара</li>
+            <li> <span class="sql" style="min-width: 11rem;">Weight</span>вес товара</li>
+            <li> <span class="sql" style="min-width: 11rem;">ProductCategoryID</span>идентификатор категории товара</li>
+            <li> <span class="sql" style="min-width: 11rem;">ProductModelID</span>идентификатор модели товара</li>
+            <li> <span class="sql" style="min-width: 11rem;">SellStartDate</span>временная метка даты начала продаж</li>
+            <li> <span class="sql" style="min-width: 11rem;">SellEndDate</span>временная метка даты окончания продаж</li>
+            <li> <span class="sql" style="min-width: 11rem;">DiscontinuedDate</span>временная метка даты окончания продаж</li>
+            <li> <span class="sql" style="min-width: 11rem;">ThumbNailPhoto</span>миниатюра фото товара</li>
+            <li> <span class="sql" style="min-width: 14rem;">ThumbnailPhotoFileName</span>имя файла мини фото</li>
+            <li> <span class="sql" style="min-width: 11rem;">rowguid</span>guid</li>
+            <li> <span class="sql" style="min-width: 11rem;">ModifiedDate</span>дата и время последнего изменения</li>
         </ul>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (ProductID, ProductCategoryID, ProductModelID)</li>
@@ -229,11 +229,11 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class="sql">ProductCategoryID</span>уникальный идентификатор записи (ПК).</li>
-            <li> <span class="sql">ParentProductCategoryID</span><br>идентификатор родительской категории товара.</li>
-            <li> <span class="sql">Name</span>название категории товара.</li>
-            <li> <span class="sql">rowguid</span>guid.</li>
-            <li> <span class="sql">ModifiedDate</span>дата и время последнего изменения.</li>
+            <li> <span class="sql" style="min-width: 14.5rem;">ProductCategoryID</span>уникальный идентификатор записи (ПК)</li>
+            <li> <span class="sql" style="min-width: 14.5rem;">ParentProductCategoryID</span>ID родительской категории</li>
+            <li> <span class="sql" style="min-width: 14.5rem;">Name</span>название категории товара</li>
+            <li> <span class="sql" style="min-width: 14.5rem;">rowguid</span>guid</li>
+            <li> <span class="sql" style="min-width: 14.5rem;">ModifiedDate</span>дата и время последнего изменения</li>
         </ul>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (ProductCategoryID)</li>
@@ -262,10 +262,10 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class="sql">ProductDescriptionID</span>уникальный идентификатор записи (ПК).</li>
-            <li> <span class="sql">Description</span>описание товара.</li>
-            <li> <span class="sql">rowguid</span>guid.</li>
-            <li> <span class="sql">ModifiedDate</span>дата и время последнего изменения.</li>
+            <li> <span class="sql" style="min-width: 14rem;">ProductDescriptionID</span>уникальный идентификатор записи (ПК)</li>
+            <li> <span class="sql" style="min-width: 14rem;">Description</span>описание товара</li>
+            <li> <span class="sql" style="min-width: 14rem;">rowguid</span>guid</li>
+            <li> <span class="sql" style="min-width: 14rem;">ModifiedDate</span>дата и время последнего изменения</li>
         </ul>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (ProductDescriptionID)</li>
@@ -292,11 +292,11 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class="sql">ProductModelID</span>уникальный идентификатор записи (ПК).</li>
-            <li> <span class="sql">Name</span>название модели товара.</li>
-            <li> <span class="sql">CatalogDescription</span>описание в формате XML.</li>
-            <li> <span class="sql">rowguid</span>guid.</li>
-            <li> <span class="sql">ModifiedDate</span>дата и время последнего изменения.</li>
+            <li> <span class="sql" style="min-width: 12rem;">ProductModelID</span>уникальный идентификатор записи (ПК)</li>
+            <li> <span class="sql" style="min-width: 12rem;">Name</span>название модели товара</li>
+            <li> <span class="sql" style="min-width: 12rem;">CatalogDescription</span>описание в формате XML</li>
+            <li> <span class="sql" style="min-width: 12rem;">rowguid</span>guid</li>
+            <li> <span class="sql" style="min-width: 12rem;">ModifiedDate</span>дата и время последнего изменения</li>
         </ul>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (ProductModelID)</li>
@@ -325,11 +325,11 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class="sql">ProductModelID</span>идентификатор товара.</li>
-            <li> <span class="sql">ProductDescriptionID</span>идентификатор описания товара.</li>
-            <li> <span class="sql">Culture</span>языковой код в формате ISO.</li>
-            <li> <span class="sql">rowguid</span>guid.</li>
-            <li> <span class="sql">ModifiedDate</span>дата и время последнего изменения.</li>
+            <li> <span class="sql" style="min-width: 13rem;">ProductModelID</span>идентификатор товара</li>
+            <li> <span class="sql" style="min-width: 13rem;">ProductDescriptionID</span>ID описания товара</li>
+            <li> <span class="sql" style="min-width: 13rem;">Culture</span>языковой код в формате ISO</li>
+            <li> <span class="sql" style="min-width: 13rem;">rowguid</span>guid</li>
+            <li> <span class="sql" style="min-width: 13rem;">ModifiedDate</span>дата и время последнего изменения</li>
         </ul>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (ProductModelID, ProductDescriptionID)</li>
@@ -358,15 +358,15 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class="sql">SalesOrderID</span>идентификатор заказа.</li>
-            <li> <span class="sql">SalesOrderDetailID</span>уникальный идентификатор строки.</li>
-            <li> <span class="sql">OrderQty</span>количество.</li>
-            <li> <span class="sql">ProductID</span>идентификатор товара..</li>
-            <li> <span class="sql">UnitPrice</span>цена за единицу товара.</li>
-            <li> <span class="sql">UnitPriceDiscount</span>цена за единицу товара со скидкой.</li>
-            <li> <span class="sql">LineTotal</span>Итого.</li>
-            <li> <span class="sql">rowguid</span>guid.</li>
-            <li> <span class="sql">ModifiedDate</span>дата и время последнего изменения.</li>
+            <li> <span class="sql" style="min-width: 13rem;">SalesOrderID</span>идентификатор заказа</li>
+            <li> <span class="sql" style="min-width: 13rem;">SalesOrderDetailID</span>уникальный ID строки</li>
+            <li> <span class="sql" style="min-width: 13rem;">OrderQty</span>количество</li>
+            <li> <span class="sql" style="min-width: 13rem;">ProductID</span>идентификатор товара.</li>
+            <li> <span class="sql" style="min-width: 13rem;">UnitPrice</span>цена за единицу товара</li>
+            <li> <span class="sql" style="min-width: 13rem;">UnitPriceDiscount</span>цена за единицу товара со скидкой</li>
+            <li> <span class="sql" style="min-width: 13rem;">LineTotal</span>Итого</li>
+            <li> <span class="sql" style="min-width: 13rem;">rowguid</span>guid</li>
+            <li> <span class="sql" style="min-width: 13rem;">ModifiedDate</span>дата и время последнего изменения</li>
         </ul>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (SalesOrderID, SalesOrderDetailID, ProductID)</li>
@@ -403,28 +403,28 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class="sql">SalesOrderID</span>уникальный идентификатор записи (ПК).</li>
-            <li> <span class="sql">RevisionNumber</span>номер ревизии.</li>
-            <li> <span class="sql">OrderDate</span>временная метка создания даты заказа.</li>
-            <li> <span class="sql">DueDate</span>временная метка даты оплаты заказа.</li>
-            <li> <span class="sql">ShipDate</span>временная метка даты отправки заказа.</li>
-            <li> <span class="sql">Status</span>статус заказа.</li>
-            <li> <span class="sql">OnlineOrderFlag</span>онлайн-заказ (да/нет).</li>
-            <li> <span class="sql">SalesOrderNumber</span>номер заказа.</li>
-            <li> <span class="sql">PurchaseOrderNumber</span>номер покупки.</li>
-            <li> <span class="sql">AccountNumber</span>номер счета.</li>
-            <li> <span class="sql">CustomerID</span>идентификатор клиента.</li>
-            <li> <span class="sql">ShipToAddressID</span>идентификатор адреса доставки.</li>
-            <li> <span class="sql">BillToAddressID</span>идентификатор адреса для выставления счёта счета.</li>
-            <li> <span class="sql">ShipMethod</span>метод доставки.</li>
-            <li> <span class="sql">CreditCardApprovalCode</span><br>код подтверждения кредитной карты.</li>
-            <li> <span class="sql">SubTotal</span>промежуточный итог.</li>
-            <li> <span class="sql">TaxAmt</span>налоги.</li>
-            <li> <span class="sql">Freight</span>стоимость доставки.</li>
-            <li> <span class="sql">TotalDue</span>итого.</li>
-            <li> <span class="sql">Comment</span>комментарий.</li>
-            <li> <span class="sql">rowguid</span>guid.</li>
-            <li> <span class="sql">ModifiedDate</span>дата и время последнего изменения.</li>
+            <li> <span class="sql" style="min-width: 13rem;">SalesOrderID</span>уникальный идентификатор записи (ПК)</li>
+            <li> <span class="sql" style="min-width: 13rem;">RevisionNumber</span>номер ревизии</li>
+            <li> <span class="sql" style="min-width: 13rem;">OrderDate</span>временная метка создания даты заказа</li>
+            <li> <span class="sql" style="min-width: 13rem;">DueDate</span>временная метка даты оплаты заказа</li>
+            <li> <span class="sql" style="min-width: 13rem;">ShipDate</span>временная метка даты отправки заказа</li>
+            <li> <span class="sql" style="min-width: 13rem;">Status</span>статус заказа</li>
+            <li> <span class="sql" style="min-width: 13rem;">OnlineOrderFlag</span>онлайн-заказ (да/нет)</li>
+            <li> <span class="sql" style="min-width: 13rem;">SalesOrderNumber</span>номер заказа</li>
+            <li> <span class="sql" style="min-width: 13rem;">PurchaseOrderNumber</span>номер покупки</li>
+            <li> <span class="sql" style="min-width: 13rem;">AccountNumber</span>номер счета</li>
+            <li> <span class="sql" style="min-width: 13rem;">CustomerID</span>идентификатор клиента</li>
+            <li> <span class="sql" style="min-width: 13rem;">ShipToAddressID</span>идентификатор адреса доставки</li>
+            <li> <span class="sql" style="min-width: 13rem;">BillToAddressID</span>идентификатор адреса для выставления счёта счета</li>
+            <li> <span class="sql" style="min-width: 13rem;">ShipMethod</span>метод доставки</li>
+            <li> <span class="sql" style="min-width: 13rem;">CreditCardApprovalCode</span><br>код подтверждения кредитной карты</li>
+            <li> <span class="sql" style="min-width: 13rem;">SubTotal</span>промежуточный итог</li>
+            <li> <span class="sql" style="min-width: 13rem;">TaxAmt</span>налоги</li>
+            <li> <span class="sql" style="min-width: 13rem;">Freight</span>стоимость доставки</li>
+            <li> <span class="sql" style="min-width: 13rem;">TotalDue</span>итого</li>
+            <li> <span class="sql" style="min-width: 13rem;">Comment</span>комментарий</li>
+            <li> <span class="sql" style="min-width: 13rem;">rowguid</span>guid</li>
+            <li> <span class="sql" style="min-width: 13rem;">ModifiedDate</span>дата и время последнего изменения</li>
         </ul>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (SalesOrderID, CustomerID, ShipToAddressID, BillToAddressID)</li>

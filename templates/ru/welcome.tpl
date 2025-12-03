@@ -87,7 +87,22 @@
 
     <section>
         <h3>Сообщество</h3>
-        <p>Присоединяйтесь к сообществу обучающихся, делитесь идеями и задавайте вопросы. Русскоязычные пользователи могут вступить в наш <a style="color: #FFA500;" href="https://t.me/sqlize" target="_blank">Telegram-чат</a>, а англоязычные — в <a style="color: #FFA500;"href="https://t.me/sqltest_online" target="_blank">группу в Telegram</a>.</p>
+        <p class="community-text">
+            Присоединяйтесь к нашему сообществу! Для общения на русском языке вступайте в 
+            <a href="https://t.me/sqlize" target="_blank">
+            <span class="tg-icon"><span class=""></span></span> русскоязычную группу в Telegram
+            </a>.
+            Для международного общения на английском языке присоединяйтесь к 
+            <a href="https://t.me/sqltest_online" target="_blank">
+            <span class="tg-icon"><span class=""></span></span> Telegram International group
+            </a> или 
+            <a href="https://chat.whatsapp.com/GJ8IGw4Jh9R8zqzyW2lpCx" target="_blank">
+            <span class="whatsup-icon">
+                <span class=""> </span>
+            </span>
+            WhatsApp International Community
+            </a>. Обсуждайте задачи, делитесь опытом и задавайте вопросы — мы рады всем участникам!
+        </p>
     </section>
 
     <section>

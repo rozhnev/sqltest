@@ -18,9 +18,9 @@
     </div>
     <div class="panel active">
         <ul class="table-columns">
-            <li> <span class='sql'>aircraft_code</span>Código único para cada aeronave.</li>
-            <li> <span class='sql'>model</span>Nome do modelo da aeronave em inglês e russo no formato JSON.</li>
-            <li> <span class='sql'>range</span>Alcance de voo da aeronave em quilômetros.</li>
+            <li> <span class='sql'>aircraft_code</span>Código único para cada aeronave</li>
+            <li> <span class='sql'>model</span>Nome do modelo da aeronave em inglês e russo no formato JSON</li>
+            <li> <span class='sql'>range</span>Alcance de voo da aeronave em quilômetros</li>
         </ul>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (aircraft_code)</li>
@@ -39,11 +39,11 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class='sql'>airport_code</span>Código único para cada aeroporto.</li>
-            <li> <span class='sql'>airport_name</span>Nome do aeroporto em inglês e russo no formato JSON.</li>
-            <li> <span class='sql'>city</span>Cidade do aeroporto em inglês e russo no formato JSON.</li>
-            <li> <span class='sql'>coordinates</span>Coordenadas do aeroporto como POINT(longitude, latitude).</li>
-            <li> <span class='sql'>timezone</span>Nome do fuso horário do aeroporto.</li>
+            <li> <span class='sql'>airport_code</span>Código único para cada aeroporto</li>
+            <li> <span class='sql'>airport_name</span>Nome do aeroporto em inglês e russo no formato JSON</li>
+            <li> <span class='sql'>city</span>Cidade do aeroporto em inglês e russo no formato JSON</li>
+            <li> <span class='sql'>coordinates</span>Coordenadas do aeroporto como POINT(longitude, latitude)</li>
+            <li> <span class='sql'>timezone</span>Nome do fuso horário do aeroporto</li>
         </ul>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (airport_code)</li>
@@ -62,10 +62,10 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class='sql'>ticket_no</span>Número do bilhete.</li>
-            <li> <span class='sql'>flight_id</span>Identificador do voo.</li>
-            <li> <span class='sql'>boarding_no</span>Número do cartão de embarque.</li>
-            <li> <span class='sql'>seat_no</span>Número do assento.</li>
+            <li> <span class='sql'>ticket_no</span>Número do bilhete</li>
+            <li> <span class='sql'>flight_id</span>Identificador do voo</li>
+            <li> <span class='sql'>boarding_no</span>Número do cartão de embarque</li>
+            <li> <span class='sql'>seat_no</span>Número do assento</li>
         </ul>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (ticket_no, flight_id)</li>
@@ -89,9 +89,9 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class='sql'>book_ref</span>Número da reserva.</li>
-            <li> <span class='sql'>book_date</span>Data da reserva.</li>
-            <li> <span class='sql'>total_amount</span>Custo total da reserva.</li>
+            <li> <span class='sql'>book_ref</span>Número da reserva</li>
+            <li> <span class='sql'>book_date</span>Data da reserva</li>
+            <li> <span class='sql'>total_amount</span>Custo total da reserva</li>
         </ul>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (book_ref)</li>
@@ -105,16 +105,16 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class='sql'>flight_id</span>ID do voo.</li>
-            <li> <span class='sql'>flight_no</span>Número do voo.</li>
-            <li> <span class='sql'>scheduled_departure</span>Horário programado de partida.</li>
-            <li> <span class='sql'>scheduled_arrival</span>Horário programado de chegada.</li>
-            <li> <span class='sql'>departure_airport</span>Aeroporto de partida.</li>
-            <li> <span class='sql'>arrival_airport</span>Aeroporto de chegada.</li>
-            <li> <span class='sql'>status</span>Status do voo.</li>
-            <li> <span class='sql'>aircraft_code</span>Código da aeronave, IATA.</li>
-            <li> <span class='sql'>actual_departure</span>Horário real de partida.</li>
-            <li> <span class='sql'>actual_arrival</span>Horário real de chegada.</li>
+            <li> <span class='sql' style="min-width: 12rem;">flight_id</span>ID do voo</li>
+            <li> <span class='sql' style="min-width: 12rem;">flight_no</span>Número do voo</li>
+            <li> <span class='sql' style="min-width: 12rem;">scheduled_departure</span>Horário programado de partida</li>
+            <li> <span class='sql' style="min-width: 12rem;">scheduled_arrival</span>Horário programado de chegada</li>
+            <li> <span class='sql' style="min-width: 12rem;">departure_airport</span>Aeroporto de partida</li>
+            <li> <span class='sql' style="min-width: 12rem;">arrival_airport</span>Aeroporto de chegada</li>
+            <li> <span class='sql' style="min-width: 12rem;">status</span>Status do voo</li>
+            <li> <span class='sql' style="min-width: 12rem;">aircraft_code</span>Código da aeronave, IATA</li>
+            <li> <span class='sql' style="min-width: 12rem;">actual_departure</span>Horário real de partida</li>
+            <li> <span class='sql' style="min-width: 12rem;">actual_arrival</span>Horário real de chegada</li>
         </ul>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (flight_id)</li>
@@ -141,9 +141,9 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class='sql'>aircraft_code</span>Código da aeronave, IATA.</li>
-            <li> <span class='sql'>seat_no</span>Número do assento.</li>
-            <li> <span class='sql'>fare_conditions</span>Classe de viagem.</li>
+            <li> <span class='sql'>aircraft_code</span>Código da aeronave, IATA</li>
+            <li> <span class='sql'>seat_no</span>Número do assento</li>
+            <li> <span class='sql'>fare_conditions</span>Classe de viagem</li>
         </ul>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (aircraft_code, seat_no)</li>
@@ -164,10 +164,10 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class='sql'>ticket_no</span>Número do bilhete.</li>
-            <li> <span class='sql'>flight_id</span>ID do voo.</li>
-            <li> <span class='sql'>fare_conditions</span>Classe de viagem.</li>
-            <li> <span class='sql'>amount</span>Custo da viagem.</li>
+            <li> <span class='sql'>ticket_no</span>Número do bilhete</li>
+            <li> <span class='sql'>flight_id</span>ID do voo</li>
+            <li> <span class='sql'>fare_conditions</span>Classe de viagem</li>
+            <li> <span class='sql'>amount</span>Custo da viagem</li>
         </ul>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (ticket_no, flight_id)</li>
@@ -191,11 +191,11 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class='sql'>ticket_no</span>Número do bilhete.</li>
-            <li> <span class='sql'>book_ref</span>Número da reserva.</li>
-            <li> <span class='sql'>passenger_id</span>ID do passageiro.</li>
-            <li> <span class='sql'>passenger_name</span>Nome do passageiro.</li>
-            <li> <span class='sql'>contact_data</span>Informações de contato do passageiro.</li>
+            <li> <span class='sql'>ticket_no</span>Número do bilhete</li>
+            <li> <span class='sql'>book_ref</span>Número da reserva</li>
+            <li> <span class='sql'>passenger_id</span>ID do passageiro</li>
+            <li> <span class='sql'>passenger_name</span>Nome do passageiro</li>
+            <li> <span class='sql'>contact_data</span>Informações de contato do passageiro</li>
         </ul>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (ticket_no)</li>

@@ -89,7 +89,18 @@
 
     <section>
         <h3>Comunidade</h3>
-        <p>Junte-se à nossa comunidade de aprendizes para compartilhar ideias e tirar dúvidas. Usuários que falam inglês podem entrar em nosso <a style="color: #FFA500;" href="https://t.me/sqltest_online" target="_blank">grupo no Telegram</a>.</p>
+        <p class="community-text">
+        Junte-se à nossa comunidade de aprendizes para compartilhar ideias e tirar dúvidas. Usuários que falam inglês podem entrar em nosso 
+            <a href="https://t.me/sqltest_online" target="_blank">
+                <span class="tg-icon"><span class=""></span></span> grupo no Telegram
+                </a> ou 
+                <a href="https://chat.whatsapp.com/GJ8IGw4Jh9R8zqzyW2lpCx" target="_blank">
+                <span class="whatsup-icon">
+                    <span class=""> </span>
+                </span>
+                WhatsApp International Community
+            </a>.
+        </p>
     </section>
 
     <section>

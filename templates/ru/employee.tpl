@@ -1,7 +1,8 @@
 <div id="db-description" class="db-description">
     <style>
         .table-columns span {
-            min-width: 10rem;
+            min-width: 8rem;
+            display: inline-block;
         }
     </style>
     <h2>База данных Employee (Firebird)</h2>
@@ -16,8 +17,8 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li><span class='sql'>COUNTRY</span>Название страны.</li>
-            <li><span class='sql'>CURRENCY</span>Валюта, используемая в стране.</li>
+            <li><span class='sql'>COUNTRY</span>Название страны</li>
+            <li><span class='sql'>CURRENCY</span>Валюта, используемая в стране</li>
         </ul>
         <div class="table-wrapper">
             <table>
@@ -37,14 +38,14 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li><span class='sql'>JOB_CODE</span>Код работы.</li>
-            <li><span class='sql'>JOB_GRADE</span>Категория работы.</li>
-            <li><span class='sql'>JOB_COUNTRY</span>Страна, связанная с работой.</li>
-            <li><span class='sql'>JOB_TITLE</span>Название работы.</li>
-            <li><span class='sql'>MIN_SALARY</span>Минимальная зарплата по работе.</li>
-            <li><span class='sql'>MAX_SALARY</span>Максимальная зарплата по работе.</li>
-            <li><span class='sql'>JOB_REQUIREMENT</span>Требования к работе.</li>
-            <li><span class='sql'>LANGUAGE_REQ</span>Требования к языку.</li>
+            <li><span class='sql' style="min-width: 10rem;">JOB_CODE</span>Код работы</li>
+            <li><span class='sql' style="min-width: 10rem;">JOB_GRADE</span>Категория работы</li>
+            <li><span class='sql' style="min-width: 10rem;">JOB_COUNTRY</span>Страна, связанная с работой</li>
+            <li><span class='sql' style="min-width: 10rem;">JOB_TITLE</span>Название работы</li>
+            <li><span class='sql' style="min-width: 10rem;">MIN_SALARY</span>Минимальная зарплата по работе</li>
+            <li><span class='sql' style="min-width: 10rem;">MAX_SALARY</span>Максимальная зарплата по работе</li>
+            <li><span class='sql' style="min-width: 10rem;">JOB_REQUIREMENT</span>Требования к работе</li>
+            <li><span class='sql' style="min-width: 10rem;">LANGUAGE_REQ</span>Требования к языку</li>
         </ul>
         <div class="table-wrapper">
             <table>
@@ -76,13 +77,13 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li><span class='sql'>DEPT_NO</span>Номер отдела.</li>
-            <li><span class='sql'>DEPARTMENT</span>Название отдела.</li>
-            <li><span class='sql'>HEAD_DEPT</span>Главный отдел (может быть null).</li>
-            <li><span class='sql'>MNGR_NO</span>Номер менеджера.</li>
-            <li><span class='sql'>BUDGET</span>Бюджет отдела.</li>
-            <li><span class='sql'>LOCATION</span>Местоположение отдела.</li>
-            <li><span class='sql'>PHONE_NO</span>Телефонный номер отдела.</li>
+            <li><span class='sql'>DEPT_NO</span>Номер отдела</li>
+            <li><span class='sql'>DEPARTMENT</span>Название отдела</li>
+            <li><span class='sql'>HEAD_DEPT</span>Главный отдел (может быть null)</li>
+            <li><span class='sql'>MNGR_NO</span>Номер менеджера</li>
+            <li><span class='sql'>BUDGET</span>Бюджет отдела</li>
+            <li><span class='sql'>LOCATION</span>Местоположение отдела</li>
+            <li><span class='sql'>PHONE_NO</span>Телефонный номер отдела</li>
         </ul>
         <div class="table-wrapper">
             <table>
@@ -112,17 +113,17 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li><span class='sql'>EMP_NO</span>Номер сотрудника.</li>
-            <li><span class='sql'>FIRST_NAME</span>Имя сотрудника.</li>
-            <li><span class='sql'>LAST_NAME</span>Фамилия сотрудника.</li>
-            <li><span class='sql'>PHONE_EXT</span>Номер телефона сотрудника.</li>
-            <li><span class='sql'>HIRE_DATE</span>Дата приема на работу.</li>
-            <li><span class='sql'>DEPT_NO</span>Номер отдела.</li>
-            <li><span class='sql'>JOB_CODE</span>Код должности сотрудника.</li>
-            <li><span class='sql'>JOB_GRADE</span>Категория должности сотрудника.</li>
-            <li><span class='sql'>JOB_COUNTRY</span>Страна, связанная с должностью сотрудника.</li>
-            <li><span class='sql'>SALARY</span>Заработная плата сотрудника.</li>
-            <li><span class='sql'>FULL_NAME</span>Полное имя сотрудника.</li>
+            <li><span class='sql'>EMP_NO</span>Номер сотрудника</li>
+            <li><span class='sql'>FIRST_NAME</span>Имя сотрудника</li>
+            <li><span class='sql'>LAST_NAME</span>Фамилия сотрудника</li>
+            <li><span class='sql'>PHONE_EXT</span>Номер телефона сотрудника</li>
+            <li><span class='sql'>HIRE_DATE</span>Дата приема на работу</li>
+            <li><span class='sql'>DEPT_NO</span>Номер отдела</li>
+            <li><span class='sql'>JOB_CODE</span>Код должности сотрудника</li>
+            <li><span class='sql'>JOB_GRADE</span>Категория должности сотрудника</li>
+            <li><span class='sql'>JOB_COUNTRY</span>Страна, связанная с должностью сотрудника</li>
+            <li><span class='sql'>SALARY</span>Заработная плата сотрудника</li>
+            <li><span class='sql'>FULL_NAME</span>Полное имя сотрудника</li>
         </ul>
         <div class="table-wrapper">
             <table>
@@ -160,11 +161,11 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li><span class='sql'>PROJ_ID</span>Идентификатор проекта.</li>
-            <li><span class='sql'>PROJ_NAME</span>Название проекта.</li>
-            <li><span class='sql'>PROJ_DESC</span>Описание проекта.</li>
-            <li><span class='sql'>TEAM_LEADER</span>Руководитель проекта.</li>
-            <li><span class='sql'>PRODUCT</span>Продукт, связанный с проектом.</li>
+            <li><span class='sql'>PROJ_ID</span>Идентификатор проекта</li>
+            <li><span class='sql'>PROJ_NAME</span>Название проекта</li>
+            <li><span class='sql'>PROJ_DESC</span>Описание проекта</li>
+            <li><span class='sql'>TEAM_LEADER</span>Руководитель проекта</li>
+            <li><span class='sql'>PRODUCT</span>Продукт, связанный с проектом</li>
         </ul>
         <div class="table-wrapper">
             <table>
@@ -190,8 +191,8 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li><span class='sql'>EMP_NO</span>Номер сотрудника.</li>
-            <li><span class='sql'>PROJ_ID</span>Идентификатор проекта.</li>
+            <li><span class='sql'>EMP_NO</span>Номер сотрудника</li>
+            <li><span class='sql'>PROJ_ID</span>Идентификатор проекта</li>
         </ul>
         <div class="table-wrapper">
             <table>
@@ -211,11 +212,11 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li><span class='sql'>FISCAL_YEAR</span>Фискальный год.</li>
-            <li><span class='sql'>PROJ_ID</span>Идентификатор проекта.</li>
-            <li><span class='sql'>DEPT_NO</span>Номер отдела.</li>
-            <li><span class='sql'>QUART_HEAD_CNT</span>Количество сотрудников в отделе за квартал (может быть null).</li>
-            <li><span class='sql'>PROJECTED_BUDGET</span>Проектируемый бюджет на фискальный год.</li>
+            <li><span class='sql' style="min-width: 10rem;">FISCAL_YEAR</span>Фискальный год</li>
+            <li><span class='sql' style="min-width: 10rem;">PROJ_ID</span>Идентификатор проекта</li>
+            <li><span class='sql' style="min-width: 10rem;">DEPT_NO</span>Номер отдела</li>
+            <li><span class='sql' style="min-width: 10rem;">QUART_HEAD_CNT</span>Количество сотрудников в отделе за квартал (может быть null)</li>
+            <li><span class='sql' style="min-width: 10rem;">PROJECTED_BUDGET</span>Проектируемый бюджет на фискальный год</li>
         </ul>
         <div class="table-wrapper">
             <table>
@@ -237,16 +238,16 @@
         </div>
     </div>
     <div class="accordion">
-        <span><span class='sql'>SALARY_HISTORY</span> - изменения зарплаты сотрудиков.</span>
+        <span><span class='sql'>SALARY_HISTORY</span> - изменения зарплаты.</span>
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li><span class='sql'>EMP_NO</span>Номер сотрудника.</li>
-            <li><span class='sql'>CHANGE_DATE</span>Дата изменения заработной платы.</li>
-            <li><span class='sql'>UPDATER_ID</span>Идентификатор обновляющего.</li>
-            <li><span class='sql'>OLD_SALARY</span>Предыдущая заработная плата.</li>
-            <li><span class='sql'>PERCENT_CHANGE</span>Процентное изменение заработной платы.</li>
-            <li><span class='sql'>NEW_SALARY</span>Новая заработная плата после изменения.</li>
+            <li><span class='sql' style="min-width: 10rem;">EMP_NO</span>Номер сотрудника</li>
+            <li><span class='sql' style="min-width: 10rem;">CHANGE_DATE</span>Дата изменения заработной платы</li>
+            <li><span class='sql' style="min-width: 10rem;">UPDATER_ID</span>Идентификатор обновляющего</li>
+            <li><span class='sql' style="min-width: 10rem;">OLD_SALARY</span>Предыдущая заработная плата</li>
+            <li><span class='sql' style="min-width: 10rem;">PERCENT_CHANGE</span>Процентное изменение заработной платы</li>
+            <li><span class='sql' style="min-width: 10rem;">NEW_SALARY</span>Новая заработная плата после изменения</li>
         </ul>
         <div class="table-wrapper">
             <table>
@@ -274,18 +275,18 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li><span class='sql'>CUST_NO</span>Номер клиента.</li>
-            <li><span class='sql'>CUSTOMER</span>Название клиента.</li>
-            <li><span class='sql'>CONTACT_FIRST</span>Имя контактного лица.</li>
-            <li><span class='sql'>CONTACT_LAST</span>Фамилия контактного лица.</li>
-            <li><span class='sql'>PHONE_NO</span>Номер телефона клиента.</li>
-            <li><span class='sql'>ADDRESS_LINE1</span>Адрес, строка 1.</li>
-            <li><span class='sql'>ADDRESS_LINE2</span>Адрес, строка 2 (может быть null).</li>
-            <li><span class='sql'>CITY</span>Город клиента.</li>
-            <li><span class='sql'>STATE_PROVINCE</span>Штат или провинция клиента.</li>
-            <li><span class='sql'>COUNTRY</span>Страна клиента.</li>
-            <li><span class='sql'>POSTAL_CODE</span>Почтовый индекс клиента.</li>
-            <li><span class='sql'>ON_HOLD</span>Статус "На удержании" (может быть null).</li>
+            <li><span class='sql' style="min-width: 10rem;">CUST_NO</span>Номер клиента</li>
+            <li><span class='sql' style="min-width: 10rem;">CUSTOMER</span>Название клиента</li>
+            <li><span class='sql' style="min-width: 10rem;">CONTACT_FIRST</span>Имя контактного лица</li>
+            <li><span class='sql' style="min-width: 10rem;">CONTACT_LAST</span>Фамилия контактного лица</li>
+            <li><span class='sql' style="min-width: 10rem;">PHONE_NO</span>Номер телефона клиента</li>
+            <li><span class='sql' style="min-width: 10rem;">ADDRESS_LINE1</span>Адрес, строка 1</li>
+            <li><span class='sql' style="min-width: 10rem;">ADDRESS_LINE2</span>Адрес, строка 2 (может быть null)</li>
+            <li><span class='sql' style="min-width: 10rem;">CITY</span>Город клиента</li>
+            <li><span class='sql' style="min-width: 10rem;">STATE_PROVINCE</span>Штат или провинция клиента</li>
+            <li><span class='sql' style="min-width: 10rem;">COUNTRY</span>Страна клиента</li>
+            <li><span class='sql' style="min-width: 10rem;">POSTAL_CODE</span>Почтовый индекс клиента</li>
+            <li><span class='sql' style="min-width: 10rem;">ON_HOLD</span>Статус "На удержании" (может быть null)</li>
         </ul>
         <div class="table-wrapper">
             <table>
@@ -325,19 +326,19 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li><span class='sql'>PO_NUMBER</span>Номер заказа.</li>
-            <li><span class='sql'>CUST_NO</span>Номер клиента, связанный с заказом.</li>
-            <li><span class='sql'>SALES_REP</span>Номер представителя по продажам.</li>
-            <li><span class='sql'>ORDER_STATUS</span>Статус заказа.</li>
-            <li><span class='sql'>ORDER_DATE</span>Дата заказа.</li>
-            <li><span class='sql'>SHIP_DATE</span>Дата отгрузки.</li>
-            <li><span class='sql'>DATE_NEEDED</span>Требуемая дата (может быть null).</li>
-            <li><span class='sql'>PAID</span>Статус оплаты.</li>
-            <li><span class='sql'>QTY_ORDERED</span>Заказанное количество.</li>
-            <li><span class='sql'>TOTAL_VALUE</span>Общая стоимость заказа.</li>
-            <li><span class='sql'>DISCOUNT</span>Примененная скидка.</li>
-            <li><span class='sql'>ITEM_TYPE</span>Тип товара в заказе.</li>
-            <li><span class='sql'>AGED</span>Значение старения.</li>
+            <li><span class='sql'>PO_NUMBER</span>Номер заказа</li>
+            <li><span class='sql'>CUST_NO</span>Номер клиента, связанный с заказом</li>
+            <li><span class='sql'>SALES_REP</span>Номер представителя по продажам</li>
+            <li><span class='sql'>ORDER_STATUS</span>Статус заказа</li>
+            <li><span class='sql'>ORDER_DATE</span>Дата заказа</li>
+            <li><span class='sql'>SHIP_DATE</span>Дата отгрузки</li>
+            <li><span class='sql'>DATE_NEEDED</span>Требуемая дата (может быть null)</li>
+            <li><span class='sql'>PAID</span>Статус оплаты</li>
+            <li><span class='sql'>QTY_ORDERED</span>Заказанное количество</li>
+            <li><span class='sql'>TOTAL_VALUE</span>Общая стоимость заказа</li>
+            <li><span class='sql'>DISCOUNT</span>Примененная скидка</li>
+            <li><span class='sql'>ITEM_TYPE</span>Тип товара в заказе</li>
+            <li><span class='sql'>AGED</span>Значение старения</li>
         </ul>
         <div class="table-wrapper">
             <table>

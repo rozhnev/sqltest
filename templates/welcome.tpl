@@ -70,9 +70,12 @@
                     [data-theme="dark"] .step-icon {
                         background: #333;
                     }
-
-
-                    
+                    .community-text a {
+                        /* Keep the display: inline-flex for alignment of icon/text within the link */
+                        display: inline-flex !important; 
+                        color: #FFA500; column-gap: 5px; align-items: anchor-center;
+                        vertical-align: bottom;
+                    }
                 </style>
                 <div style="
                     margin: 0 auto;

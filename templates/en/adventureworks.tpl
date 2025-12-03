@@ -20,15 +20,15 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class="sql">AddressID</span>a unique identifier for each address (PK).</li>
-            <li> <span class="sql">AddressLine1</span>the first line of the address.</li>
-            <li> <span class="sql">AddressLine2</span>the second line of the address.</li>
-            <li> <span class="sql">City</span>city.</li>
-            <li> <span class="sql">StateProvince</span>state or province.</li>
-            <li> <span class="sql">CountryRegion</span>country.</li>
-            <li> <span class="sql">PostalCode</span>postal code.</li>
-            <li> <span class="sql">rowguid</span>guid.</li>
-            <li> <span class="sql">ModifiedDate</span>timestamp of row creation or last update.</li>
+            <li> <span class="sql">AddressID</span>unique identifier for each address (PK)</li>
+            <li> <span class="sql">AddressLine1</span>the first line of the address</li>
+            <li> <span class="sql">AddressLine2</span>the second line of the address</li>
+            <li> <span class="sql">City</span>city</li>
+            <li> <span class="sql">StateProvince</span>state or province</li>
+            <li> <span class="sql">CountryRegion</span>country</li>
+            <li> <span class="sql">PostalCode</span>postal code</li>
+            <li> <span class="sql">rowguid</span>guid</li>
+            <li> <span class="sql">ModifiedDate</span>timestamp of row creation or last update</li>
         </ul>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (AddressID)</li>
@@ -65,21 +65,21 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class="sql">CustomerID</span>a unique identifier for each customer (PK).</li>
-            <li> <span class="sql">NameStyle</span>0 = The data in FirstName and LastName are stored in western style (first name, last name) order. 1 = Eastern style (last name, first name) order. Default: 0.</li>
-            <li> <span class="sql">Title</span>title.</li>
-            <li> <span class="sql">FirstName</span>name.</li>
-            <li> <span class="sql">MiddleName</span>middle name.</li>
-            <li> <span class="sql">LastName</span>last name.</li>
-            <li> <span class="sql">Suffix</span>suffix.</li>
-            <li> <span class="sql">CompanyName</span>company name.</li>
-            <li> <span class="sql">SalesPerson</span>SalesPerson.</li>
-            <li> <span class="sql">EmailAddress</span>E-mail.</li>
-            <li> <span class="sql">Phone</span>phone number.</li>
-            <li> <span class="sql">PasswordHash</span>password hash.</li>
-            <li> <span class="sql">PasswordSalt</span>salt.</li>
-            <li> <span class="sql">rowguid</span>rowguid.</li>
-            <li> <span class="sql">ModifiedDate</span>timestamp of row creation or last update.</li>
+            <li> <span class="sql">CustomerID</span>unique identifier for each customer (PK)</li>
+            <li> <span class="sql">NameStyle</span>0 = The data in FirstName and LastName are stored in western style (first name, last name) order. 1 = Eastern style (last name, first name) order. Default: 0</li>
+            <li> <span class="sql">Title</span>title</li>
+            <li> <span class="sql">FirstName</span>name</li>
+            <li> <span class="sql">MiddleName</span>middle name</li>
+            <li> <span class="sql">LastName</span>last name</li>
+            <li> <span class="sql">Suffix</span>suffix</li>
+            <li> <span class="sql">CompanyName</span>company name</li>
+            <li> <span class="sql">SalesPerson</span>SalesPerson</li>
+            <li> <span class="sql">EmailAddress</span>E-mail</li>
+            <li> <span class="sql">Phone</span>phone number</li>
+            <li> <span class="sql">PasswordHash</span>password hash</li>
+            <li> <span class="sql">PasswordSalt</span>salt</li>
+            <li> <span class="sql">rowguid</span>rowguid</li>
+            <li> <span class="sql">ModifiedDate</span>timestamp of row creation or last update</li>
         </ul>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (CustomerID)</li>
@@ -128,11 +128,11 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class="sql">CustomerID</span>identifier of client in the Customer table.</li>
-            <li> <span class="sql">AddressID</span>identifier of address in the Address table.</li>
-            <li> <span class="sql">AddressType</span>address type.</li>
-            <li> <span class="sql">rowguid</span>guid.</li>
-            <li> <span class="sql">ModifiedDate</span>timestamp of row creation or last update.</li>
+            <li> <span class="sql">CustomerID</span>identifier of client in the Customer table</li>
+            <li> <span class="sql">AddressID</span>identifier of address in the Address table</li>
+            <li> <span class="sql">AddressType</span>address type</li>
+            <li> <span class="sql">rowguid</span>guid</li>
+            <li> <span class="sql">ModifiedDate</span>timestamp of row creation or last update</li>
         </ul>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (CustomerID, AddressID)</li>
@@ -161,23 +161,23 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class="sql">ProductID</span>a unique identifier for each product (PK).</li>
-            <li> <span class="sql">Name</span>product name.</li>
-            <li> <span class="sql">ProductNumber</span>article number.</li>
-            <li> <span class="sql">Color</span>product color.</li>
-            <li> <span class="sql">StandardCost</span>product price.</li>
-            <li> <span class="sql">ListPrice</span>product price in the catalogue.</li>
-            <li> <span class="sql">Size</span>product size.</li>
-            <li> <span class="sql">Weight</span>product weight.</li>
-            <li> <span class="sql">ProductCategoryID</span>foreign key pointing to ProductCategory table.</li>
-            <li> <span class="sql">ProductModelID</span>foreign key pointing to ProductModel table.</li>
-            <li> <span class="sql">SellStartDate</span>timestamp of the sales start date.</li>
-            <li> <span class="sql">SellEndDate</span>timestamp of the sales end date.</li>
-            <li> <span class="sql">DiscontinuedDate</span>timestamp of the sales end date.</li>
-            <li> <span class="sql">ThumbNailPhoto</span>thumbnail photo of the product.</li>
-            <li> <span class="sql">ThumbnailPhotoFileName</span><br>name of the photo thumbnail file.</li>
-            <li> <span class="sql">rowguid</span>guid.</li>
-            <li> <span class="sql">ModifiedDate</span>timestamp of row creation or last update.</li>
+            <li> <span class="sql" style="min-width: 12rem;">ProductID</span>unique identifier for each product (PK)</li>
+            <li> <span class="sql" style="min-width: 12rem;">Name</span>product name</li>
+            <li> <span class="sql" style="min-width: 12rem;">ProductNumber</span>article number</li>
+            <li> <span class="sql" style="min-width: 12rem;">Color</span>product color</li>
+            <li> <span class="sql" style="min-width: 12rem;">StandardCost</span>product price</li>
+            <li> <span class="sql" style="min-width: 12rem;">ListPrice</span>product price in the catalogue</li>
+            <li> <span class="sql" style="min-width: 12rem;">Size</span>product size</li>
+            <li> <span class="sql" style="min-width: 12rem;">Weight</span>product weight</li>
+            <li> <span class="sql" style="min-width: 12rem;">ProductCategoryID</span>foreign key pointing to ProductCategory table</li>
+            <li> <span class="sql" style="min-width: 12rem;">ProductModelID</span>foreign key pointing to ProductModel table</li>
+            <li> <span class="sql" style="min-width: 12rem;">SellStartDate</span>timestamp of the sales start date</li>
+            <li> <span class="sql" style="min-width: 12rem;">SellEndDate</span>timestamp of the sales end date</li>
+            <li> <span class="sql" style="min-width: 12rem;">DiscontinuedDate</span>timestamp of the sales end date</li>
+            <li> <span class="sql" style="min-width: 12rem;">ThumbNailPhoto</span>thumbnail photo of the product</li>
+            <li> <span class="sql" style="min-width: 12rem;">ThumbnailPhotoFileName</span><br>name of the photo thumbnail file</li>
+            <li> <span class="sql" style="min-width: 12rem;">rowguid</span>guid</li>
+            <li> <span class="sql" style="min-width: 12rem;">ModifiedDate</span>timestamp of row creation or last update</li>
         </ul>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (ProductID, ProductCategoryID, ProductModelID)</li>
@@ -230,11 +230,11 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class="sql">ProductCategoryID</span>a unique identifier for each product category (PK).</li>
-            <li> <span class="sql">ParentProductCategoryID</span><br>identifier of the parent product category.</li>
-            <li> <span class="sql">Name</span>name of the product category.</li>
-            <li> <span class="sql">rowguid</span>guid.</li>
-            <li> <span class="sql">ModifiedDate</span>timestamp of row creation or last update.</li>
+            <li> <span class="sql" style="min-width: 14.5rem;">ProductCategoryID</span>unique identifier for each product category (PK)</li>
+            <li> <span class="sql" style="min-width: 14.5rem;">ParentProductCategoryID</span>ID of the parent product category</li>
+            <li> <span class="sql" style="min-width: 14.5rem;">Name</span>name of the product category</li>
+            <li> <span class="sql" style="min-width: 14.5rem;">rowguid</span>guid</li>
+            <li> <span class="sql" style="min-width: 14.5rem;">ModifiedDate</span>timestamp of row creation or last update</li>
         </ul>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (ProductCategoryID)</li>
@@ -263,10 +263,10 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class="sql">ProductDescriptionID</span>a unique identifier for record (PK).</li>
-            <li> <span class="sql">Description</span>product description.</li>
-            <li> <span class="sql">rowguid</span>guid.</li>
-            <li> <span class="sql">ModifiedDate</span>timestamp of row creation or last update.</li>
+            <li> <span class="sql" style="min-width: 14.5rem;">ProductDescriptionID</span>unique ID for record (PK)</li>
+            <li> <span class="sql" style="min-width: 14.5rem;">Description</span>product description</li>
+            <li> <span class="sql" style="min-width: 14.5rem;">rowguid</span>guid</li>
+            <li> <span class="sql" style="min-width: 14.5rem;">ModifiedDate</span>timestamp of row creation or last update</li>
         </ul>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (ProductDescriptionID)</li>
@@ -293,11 +293,11 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class="sql">ProductModelID</span>a unique identifier for each product model (PK).</li>
-            <li> <span class="sql">Name</span>name of the product model.</li>
-            <li> <span class="sql">CatalogDescription</span>description in XML format.</li>
-            <li> <span class="sql">rowguid</span>guid.</li>
-            <li> <span class="sql">ModifiedDate</span>timestamp of row creation or last update.</li>
+            <li> <span class="sql" style="min-width: 12rem;">ProductModelID</span>unique ID for each record (PK)</li>
+            <li> <span class="sql" style="min-width: 12rem;">Name</span>name of the product model</li>
+            <li> <span class="sql" style="min-width: 12rem;">CatalogDescription</span>description in XML format</li>
+            <li> <span class="sql" style="min-width: 12rem;">rowguid</span>guid</li>
+            <li> <span class="sql" style="min-width: 12rem;">ModifiedDate</span>timestamp of row creation or last update</li>
         </ul>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (ProductModelID)</li>
@@ -326,11 +326,11 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class="sql">ProductModelID</span>identifier of client in the ProductModel table.</li>
-            <li> <span class="sql">ProductDescriptionID</span>identifier of address in the ProductDescription table.</li>
-            <li> <span class="sql">Culture</span>language code in ISO format.</li>
-            <li> <span class="sql">rowguid</span>guid.</li>
-            <li> <span class="sql">ModifiedDate</span>timestamp of row creation or last update.</li>
+            <li> <span class="sql" style="min-width: 14rem;">ProductModelID</span>ID of client in the ProductModel table</li>
+            <li> <span class="sql" style="min-width: 14rem;">ProductDescriptionID</span>ID of address in the ProductDescription table</li>
+            <li> <span class="sql" style="min-width: 14rem;">Culture</span>language code in ISO format</li>
+            <li> <span class="sql" style="min-width: 14rem;">rowguid</span>guid</li>
+            <li> <span class="sql" style="min-width: 14rem;">ModifiedDate</span>timestamp of row creation or last update</li>
         </ul>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (ProductModelID, ProductDescriptionID)</li>
@@ -359,15 +359,15 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-        <li> <span class="sql">SalesOrderID</span>foreign key referencing the SalesOrderHeader table.</li>
-        <li> <span class="sql">SalesOrderDetailID</span>a unique identifier of record in the table.</li>
-        <li> <span class="sql">OrderQty</span>quantity.</li>
-        <li> <span class="sql">ProductID</span>a foreign key referencing the Product table.</li>
-        <li> <span class="sql">UnitPrice</span>price per unit of goods.</li>
-        <li> <span class="sql">UnitPriceDiscount</span>price per unit of product with a discount.</li>
-        <li> <span class="sql">LineTotal</span>total amount by line.</li>
-        <li> <span class="sql">rowguid</span>guid.</li>
-        <li> <span class="sql">ModifiedDate</span>timestamp of row creation or last update.</li>
+        <li> <span class="sql" style="min-width: 12rem;">SalesOrderID</span>foreign key referencing the SalesOrderHeader table</li>
+        <li> <span class="sql" style="min-width: 12rem;">SalesOrderDetailID</span>unique identifier of record in the table</li>
+        <li> <span class="sql" style="min-width: 12rem;">OrderQty</span>quantity</li>
+        <li> <span class="sql" style="min-width: 12rem;">ProductID</span>a foreign key referencing the Product table</li>
+        <li> <span class="sql" style="min-width: 12rem;">UnitPrice</span>price per unit of goods</li>
+        <li> <span class="sql" style="min-width: 12rem;">UnitPriceDiscount</span>price per unit of product with a discount</li>
+        <li> <span class="sql" style="min-width: 12rem;">LineTotal</span>total amount by line</li>
+        <li> <span class="sql" style="min-width: 12rem;">rowguid</span>guid</li>
+        <li> <span class="sql" style="min-width: 12rem;">ModifiedDate</span>timestamp of row creation or last update</li>
         </ul>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (SalesOrderID, SalesOrderDetailID, ProductID)</li>
@@ -404,28 +404,28 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class="sql">SalesOrderID</span>a unique identifier of record in the table (PK).</li>
-            <li> <span class="sql">RevisionNumber</span>revision number.</li>
-            <li> <span class="sql">OrderDate</span>timestamp for creating the order date.</li>
-            <li> <span class="sql">DueDate</span>timestamp of the order payment date.</li>
-            <li> <span class="sql">ShipDate</span>timestamp of the date the order was shipped.</li>
-            <li> <span class="sql">Status</span>order status.</li>
-            <li> <span class="sql">OnlineOrderFlag</span>online order (yes/no).</li>
-            <li> <span class="sql">SalesOrderNumber</span>order number.</li>
-            <li> <span class="sql">PurchaseOrderNumber</span>purchase number.</li>
-            <li> <span class="sql">AccountNumber</span>account number.</li>
-            <li> <span class="sql">CustomerID</span>foreign key referencing the Customer table.</li>
-            <li> <span class="sql">ShipToAddressID</span>foreign key referencing the Address table defines the delivery address.</li>
-            <li> <span class="sql">BillToAddressID</span>foreign key referencing the Address table defines the account address.</li>
-            <li> <span class="sql">ShipMethod</span>delivery method.</li>
-            <li> <span class="sql">CreditCardApprovalCode</span><br>credit card confirmation code.</li>
-            <li> <span class="sql">SubTotal</span>subtotal.</li>
-            <li> <span class="sql">TaxAmt</span>taxes.</li>
-            <li> <span class="sql">Freight</span>delivery cost.</li>
-            <li> <span class="sql">TotalDue</span>total.</li>
-            <li> <span class="sql">Comment</span>comment.</li>
-            <li> <span class="sql">rowguid</span>guid.</li>
-            <li> <span class="sql">ModifiedDate</span>timestamp of row creation or last update.</li>
+            <li> <span class="sql" style="min-width: 12rem;">SalesOrderID</span>unique identifier of record in the table (PK)</li>
+            <li> <span class="sql" style="min-width: 12rem;">RevisionNumber</span>revision number</li>
+            <li> <span class="sql" style="min-width: 12rem;">OrderDate</span>timestamp for creating the order date</li>
+            <li> <span class="sql" style="min-width: 12rem;">DueDate</span>timestamp of the order payment date</li>
+            <li> <span class="sql" style="min-width: 12rem;">ShipDate</span>timestamp of the date the order was shipped</li>
+            <li> <span class="sql" style="min-width: 12rem;">Status</span>order status</li>
+            <li> <span class="sql" style="min-width: 12rem;">OnlineOrderFlag</span>online order (yes/no)</li>
+            <li> <span class="sql" style="min-width: 12rem;">SalesOrderNumber</span>order number</li>
+            <li> <span class="sql" style="min-width: 12rem;">PurchaseOrderNumber</span>purchase number</li>
+            <li> <span class="sql" style="min-width: 12rem;">AccountNumber</span>account number</li>
+            <li> <span class="sql" style="min-width: 12rem;">CustomerID</span>foreign key referencing the Customer table</li>
+            <li> <span class="sql" style="min-width: 12rem;">ShipToAddressID</span>foreign key referencing the Address table defines the delivery address</li>
+            <li> <span class="sql" style="min-width: 12rem;">BillToAddressID</span>foreign key referencing the Address table defines the account address</li>
+            <li> <span class="sql" style="min-width: 12rem;">ShipMethod</span>delivery method</li>
+            <li> <span class="sql" style="min-width: 12rem;">CreditCardApprovalCode</span><br>credit card confirmation code</li>
+            <li> <span class="sql" style="min-width: 12rem;">SubTotal</span>subtotal</li>
+            <li> <span class="sql" style="min-width: 12rem;">TaxAmt</span>taxes</li>
+            <li> <span class="sql" style="min-width: 12rem;">Freight</span>delivery cost</li>
+            <li> <span class="sql" style="min-width: 12rem;">TotalDue</span>total</li>
+            <li> <span class="sql" style="min-width: 12rem;">Comment</span>comment</li>
+            <li> <span class="sql" style="min-width: 12rem;">rowguid</span>guid</li>
+            <li> <span class="sql" style="min-width: 12rem;">ModifiedDate</span>timestamp of row creation or last update</li>
         </ul>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (SalesOrderID, CustomerID, ShipToAddressID, BillToAddressID)</li>

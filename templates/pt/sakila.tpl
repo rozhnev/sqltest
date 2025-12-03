@@ -1,7 +1,8 @@
 <div id="db-description" class="db-description">
     <style>
         .table-columns span {
-            min-width: 6rem;
+            min-width: 8rem;
+            display: inline-block;
         }
     </style>
     <h2>Banco de Dados Sakila (MySQL)</h2>
@@ -18,10 +19,10 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class='sql'>actor_id</span>identificador único do registro (PK).</li>
-            <li> <span class='sql'>first_name</span>primeiro nome do ator.</li>
-            <li> <span class='sql'>last_name</span>sobrenome do ator.</li>
-            <li> <span class='sql'>last_update</span>data e hora da última atualização.</li> 
+            <li> <span class='sql'>actor_id</span>identificador único do registro (PK)</li>
+            <li> <span class='sql'>first_name</span>primeiro nome do ator</li>
+            <li> <span class='sql'>last_name</span>sobrenome do ator</li>
+            <li> <span class='sql'>last_update</span>data e hora da última atualização</li> 
         </ul>
         <div class="table-wrapper">
             <table>
@@ -48,14 +49,14 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class='sql'>address_id</span>identificador único do registro (PK).</li>
-            <li> <span class='sql'>address</span>endereço postal.</li>
-            <li> <span class='sql'>address2</span>endereço adicional.</li>
-            <li> <span class='sql'>district</span>distrito ou região.</li>
-            <li> <span class='sql'>city_id</span>identificador da cidade (FK).</li>
-            <li> <span class='sql'>postal_code</span>código postal.</li>
-            <li> <span class='sql'>phone</span>número de telefone.</li>
-            <li> <span class='sql'>last_update</span>data e hora da última atualização.</li> 
+            <li> <span class='sql'>address_id</span>identificador único do registro (PK)</li>
+            <li> <span class='sql'>address</span>endereço postal</li>
+            <li> <span class='sql'>address2</span>endereço adicional</li>
+            <li> <span class='sql'>district</span>distrito ou região</li>
+            <li> <span class='sql'>city_id</span>identificador da cidade (FK)</li>
+            <li> <span class='sql'>postal_code</span>código postal</li>
+            <li> <span class='sql'>phone</span>número de telefone</li>
+            <li> <span class='sql'>last_update</span>data e hora da última atualização</li> 
         </ul>
         <div class="table-wrapper">
             <table>
@@ -90,9 +91,9 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class='sql'>category_id</span>identificador único do registro (PK).</li>
-            <li> <span class='sql'>name</span>nome da categoria.</li>
-            <li> <span class='sql'>last_update</span>data e hora da última atualização.</li> 
+            <li> <span class='sql'>category_id</span>identificador único do registro (PK)</li>
+            <li> <span class='sql'>name</span>nome da categoria</li>
+            <li> <span class='sql'>last_update</span>data e hora da última atualização</li> 
         </ul>
         <div class="table-wrapper">
             <table>
@@ -117,10 +118,10 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class='sql'>city_id</span>identificador único do registro (PK).</li>
-            <li> <span class='sql'>city</span>nome da cidade.</li>
-            <li> <span class='sql'>country_id</span>identificador do país (FK).</li>
-            <li> <span class='sql'>last_update</span>data e hora da última atualização.</li> 
+            <li> <span class='sql'>city_id</span>identificador único do registro (PK)</li>
+            <li> <span class='sql'>city</span>nome da cidade</li>
+            <li> <span class='sql'>country_id</span>identificador do país (FK)</li>
+            <li> <span class='sql'>last_update</span>data e hora da última atualização</li> 
         </ul>
         <div class="table-wrapper">
             <table>
@@ -147,9 +148,9 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class='sql'>country_id</span>identificador único do registro (PK).</li>
-            <li> <span class='sql'>country</span>nome do país.</li>
-            <li> <span class='sql'>last_update</span>data e hora da última atualização.</li> 
+            <li> <span class='sql'>country_id</span>identificador único do registro (PK)</li>
+            <li> <span class='sql'>country</span>nome do país</li>
+            <li> <span class='sql'>last_update</span>data e hora da última atualização</li> 
         </ul>
         <div class="table-wrapper">
             <table>
@@ -174,15 +175,15 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class='sql'>customer_id</span>identificador único do registro (PK).</li>
-            <li> <span class='sql'>store_id</span>identificador da loja (FK).</li>
-            <li> <span class='sql'>first_name</span>primeiro nome do cliente.</li>
-            <li> <span class='sql'>last_name</span>sobrenome do cliente.</li>
-            <li> <span class='sql'>email</span>endereço de e-mail do cliente.</li>
-            <li> <span class='sql'>address_id</span>identificador do endereço (FK).</li>
-            <li> <span class='sql'>active</span>indicador de atividade do cliente (0/1).</li>
-            <li> <span class='sql'>create_date</span>data e hora em que o cliente foi adicionado ao banco de dados.</li>
-            <li> <span class='sql'>last_update</span>data e hora da última atualização.</li> 
+            <li> <span class='sql'>customer_id</span>identificador único do registro (PK)</li>
+            <li> <span class='sql'>store_id</span>identificador da loja (FK)</li>
+            <li> <span class='sql'>first_name</span>primeiro nome do cliente</li>
+            <li> <span class='sql'>last_name</span>sobrenome do cliente</li>
+            <li> <span class='sql'>email</span>endereço de e-mail do cliente</li>
+            <li> <span class='sql'>address_id</span>identificador do endereço (FK)</li>
+            <li> <span class='sql'>active</span>indicador de atividade do cliente (0/1)</li>
+            <li> <span class='sql'>create_date</span>data e hora em que o cliente foi adicionado ao banco de dados</li>
+            <li> <span class='sql'>last_update</span>data e hora da última atualização</li> 
         </ul>
         <div class="table-wrapper">
             <table>
@@ -219,19 +220,19 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class='sql' style="min-width: 10rem;">film_id</span>identificador único do registro (PK).</li>
-            <li> <span class='sql' style="min-width: 10rem;">title</span>título do filme.</li>
-            <li> <span class='sql' style="min-width: 10rem;">description</span>breve descrição ou enredo do filme.</li>
-            <li> <span class='sql' style="min-width: 10rem;">release_year</span>ano em que o filme foi lançado.</li>
-            <li> <span class='sql' style="min-width: 10rem;">language_id</span>identificador do idioma do filme (FK).</li>
-            <li> <span class='sql' style="min-width: 10rem;">original_language_id</span>identificador do idioma original do filme, caso seja dublado em um novo idioma.</li>
-            <li> <span class='sql' style="min-width: 10rem;">rental_duration</span>duração do período de aluguel em dias.</li>
-            <li> <span class='sql' style="min-width: 10rem;">rental_rate</span>custo do aluguel do filme pelo período especificado na coluna duracao_aluguel.</li>
-            <li> <span class='sql' style="min-width: 10rem;">length</span>duração do filme em minutos.</li>
-            <li> <span class='sql' style="min-width: 10rem;">replacement_cost</span>valor da penalidade por perda ou dano do disco.</li>
-            <li> <span class='sql' style="min-width: 10rem;">rating</span>classificação atribuída ao filme. Pode ser um dos seguintes: G, PG, PG-13, R ou NC-17.</li>
-            <li> <span class='sql' style="min-width: 10rem;">special_features</span>lista de recursos especiais incluídos no DVD. Pode ser nenhum ou mais dos seguintes: Trailers, Comentários, Cenas Excluídas, Por Trás das Cenas.</li>
-            <li> <span class='sql' style="min-width: 10rem;">last_update</span>data e hora da última atualização.</li>
+            <li> <span class='sql' style="min-width: 13rem;">film_id</span>id único do registro (PK)</li>
+            <li> <span class='sql' style="min-width: 13rem;">title</span>título do filme</li>
+            <li> <span class='sql' style="min-width: 13rem;">description</span>breve descrição ou enredo do filme</li>
+            <li> <span class='sql' style="min-width: 13rem;">release_year</span>ano em que o filme foi lançado</li>
+            <li> <span class='sql' style="min-width: 13rem;">language_id</span>identificador do idioma do filme (FK)</li>
+            <li> <span class='sql' style="min-width: 13rem;">original_language_id</span>id do idioma original do filme, caso seja dublado em um novo idioma</li>
+            <li> <span class='sql' style="min-width: 13rem;">rental_duration</span>duração do período de aluguel em dias</li>
+            <li> <span class='sql' style="min-width: 13rem;">rental_rate</span>custo do aluguel do filme pelo período especificado na coluna duracao_aluguel</li>
+            <li> <span class='sql' style="min-width: 13rem;">length</span>duração do filme em minutos</li>
+            <li> <span class='sql' style="min-width: 13rem;">replacement_cost</span>valor da penalidade por perda ou dano do disco</li>
+            <li> <span class='sql' style="min-width: 13rem;">rating</span>classificação atribuída ao filme. Pode ser um dos seguintes: G, PG, PG-13, R ou NC-17</li>
+            <li> <span class='sql' style="min-width: 13rem;">special_features</span>lista de recursos especiais incluídos no DVD. Pode ser nenhum ou mais dos seguintes: Trailers, Comentários, Cenas Excluídas, Por Trás das Cenas</li>
+            <li> <span class='sql' style="min-width: 13rem;">last_update</span>data e hora da última atualização</li>
         </ul>
         <div class="table-wrapper">
             <table>
@@ -276,9 +277,9 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class='sql'>actor_id</span>identificador do ator (FK).</li>
-            <li> <span class='sql'>film_id</span>identificador do filme (FK).</li>
-            <li> <span class='sql'>last_update</span>data e hora da última atualização.</li> 
+            <li> <span class='sql'>actor_id</span>identificador do ator (FK)</li>
+            <li> <span class='sql'>film_id</span>identificador do filme (FK)</li>
+            <li> <span class='sql'>last_update</span>data e hora da última atualização</li> 
         </ul>
         <div class="table-wrapper">
             <table>
@@ -303,9 +304,9 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class='sql'>film_id</span>identificador de cada filme (FK).</li>
-            <li> <span class='sql'>category_id</span>identificador de cada categoria (FK).</li>
-            <li> <span class='sql'>last_update</span>data e hora da última atualização.</li> 
+            <li> <span class='sql'>film_id</span>identificador de cada filme (FK)</li>
+            <li> <span class='sql'>category_id</span>identificador de cada categoria (FK)</li>
+            <li> <span class='sql'>last_update</span>data e hora da última atualização</li> 
           </ul>
           <div class="table-wrapper">
             <table>
@@ -330,10 +331,10 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li><span class='sql'>inventory_id</span>identificador único do registro (PK).</li>
-            <li><span class='sql'>film_id</span>identificador do filme (FK).</li>
-            <li><span class='sql'>store_id</span>identificador da loja onde o inventário está localizado (FK).</li>
-            <li><span class='sql'>last_update</span>data e hora da última atualização.</li>
+            <li><span class='sql'>inventory_id</span>identificador único do registro (PK)</li>
+            <li><span class='sql'>film_id</span>identificador do filme (FK)</li>
+            <li><span class='sql'>store_id</span>id da loja onde o inventário está localizado (FK)</li>
+            <li><span class='sql'>last_update</span>data e hora da última atualização</li>
         </ul>
         <div class="table-wrapper">
             <table>
@@ -360,9 +361,9 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class='sql'>language_id</span>identificador único do registro (PK).</li>
-            <li> <span class='sql'>nome</span>nome do idioma.</li>
-            <li> <span class='sql'>last_update</span>data e hora da última atualização.</li> 
+            <li> <span class='sql'>language_id</span>identificador único do registro (PK)</li>
+            <li> <span class='sql'>nome</span>nome do idioma</li>
+            <li> <span class='sql'>last_update</span>data e hora da última atualização</li> 
         </ul>
         <div class="table-wrapper">
             <table>
@@ -387,13 +388,13 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class='sql' style="min-width: 8rem;">payment_id</span>identificador único do registro (PK).</li>
-            <li> <span class='sql' style="min-width: 8rem;">customer_id</span>identificador do cliente (FK).</li>
-            <li> <span class='sql' style="min-width: 8rem;">staff_id</span>identificador do funcionário que recebeu o pagamento (FK).</li>
-            <li> <span class='sql' style="min-width: 8rem;">rental_id</span>identificador do registro de aluguel (FK).</li>
-            <li> <span class='sql' style="min-width: 8rem;">amount</span>valor do pagamento.</li>
-            <li> <span class='sql' style="min-width: 8rem;">payment_date</span>data e hora do pagamento.</li>
-            <li> <span class='sql' style="min-width: 8rem;">last_update</span>data e hora da última atualização.</li>
+            <li> <span class='sql' style="min-width: 8rem;">payment_id</span>identificador único do registro (PK)</li>
+            <li> <span class='sql' style="min-width: 8rem;">customer_id</span>identificador do cliente (FK)</li>
+            <li> <span class='sql' style="min-width: 8rem;">staff_id</span>id do funcionário que recebeu o pagamento (FK)</li>
+            <li> <span class='sql' style="min-width: 8rem;">rental_id</span>identificador do registro de aluguel (FK)</li>
+            <li> <span class='sql' style="min-width: 8rem;">amount</span>valor do pagamento</li>
+            <li> <span class='sql' style="min-width: 8rem;">payment_date</span>data e hora do pagamento</li>
+            <li> <span class='sql' style="min-width: 8rem;">last_update</span>data e hora da última atualização</li>
         </ul>
         <div class="table-wrapper">
         <table>
@@ -426,13 +427,13 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class='sql'>rental_id</span>identificador único do registro (PK).</li>
-            <li> <span class='sql'>rental_date</span>data de início do aluguel.</li>
-            <li> <span class='sql'>inventory_id</span>identificador do disco (FK).</li>
-            <li> <span class='sql'>customer_id</span>identificador do cliente (FK).</li>
-            <li> <span class='sql'>return_date</span>data de devolução do filme.</li>
-            <li> <span class='sql'>staff_id</span>identificador do funcionário que emitiu o disco (FK).</li>
-            <li> <span class='sql'>last_update</span>data e hora da última atualização.</li> 
+            <li> <span class='sql'>rental_id</span>identificador único do registro (PK)</li>
+            <li> <span class='sql'>rental_date</span>data de início do aluguel</li>
+            <li> <span class='sql'>inventory_id</span>identificador do disco (FK)</li>
+            <li> <span class='sql'>customer_id</span>identificador do cliente (FK)</li>
+            <li> <span class='sql'>return_date</span>data de devolução do filme</li>
+            <li> <span class='sql'>staff_id</span>id do funcionário que emitiu o disco (FK)</li>
+            <li> <span class='sql'>last_update</span>data e hora da última atualização</li> 
         </ul>
         <div class="table-wrapper">
         <table>
@@ -465,17 +466,17 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class='sql'>staff_id</span>identificador único do registro (PK).</li>
-            <li> <span class='sql'>first_name</span>primeiro nome do membro da equipe.</li>
-            <li> <span class='sql'>last_name</span>sobrenome do membro da equipe.</li>
-            <li> <span class='sql'>address_id</span>identificador do endereço (FK).</li>
-            <li> <span class='sql'>picture</span>fotografia do membro da equipe.</li>
-            <li> <span class='sql'>email</span>endereço de e-mail do membro da equipe.</li>
-            <li> <span class='sql'>store_id</span>chave estrangeira referenciando a tabela de lojas (FK).</li>
-            <li> <span class='sql'>active</span>indicador de atividade do membro da equipe (0/1).</li>
-            <li> <span class='sql'>username</span>nome de usuário para login no sistema.</li>
-            <li> <span class='sql'>password</span>senha para login.</li>
-            <li> <span class='sql'>last_update</span>data e hora da última atualização.</li> 
+            <li> <span class='sql'>staff_id</span>identificador único do registro (PK)</li>
+            <li> <span class='sql'>first_name</span>primeiro nome do membro da equipe</li>
+            <li> <span class='sql'>last_name</span>sobrenome do membro da equipe</li>
+            <li> <span class='sql'>address_id</span>identificador do endereço (FK)</li>
+            <li> <span class='sql'>picture</span>fotografia do membro da equipe</li>
+            <li> <span class='sql'>email</span>endereço de e-mail do membro da equipe</li>
+            <li> <span class='sql'>store_id</span>chave estrangeira referenciando a tabela de lojas (FK)</li>
+            <li> <span class='sql'>active</span>indicador de atividade do membro da equipe (0/1)</li>
+            <li> <span class='sql'>username</span>nome de usuário para login no sistema</li>
+            <li> <span class='sql'>password</span>senha para login</li>
+            <li> <span class='sql'>last_update</span>data e hora da última atualização</li> 
         </ul>
         <div class="table-wrapper">
         <table>
@@ -516,10 +517,10 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class='sql' style="min-width: 8rem;">store_id</span>identificador único do registro (PK).</li>
-            <li> <span class='sql' style="min-width: 8rem;">manager_staff_id</span>identificador do gerente da loja (FK).</li>
-            <li> <span class='sql' style="min-width: 8rem;">address_id</span>identificador do endereço (FK).</li>
-            <li> <span class='sql' style="min-width: 8rem;">last_update</span>data e hora da última atualização.</li> 
+            <li> <span class='sql' style="min-width: 11rem;">store_id</span>identificador único do registro (PK)</li>
+            <li> <span class='sql' style="min-width: 11rem;">manager_staff_id</span>identificador do gerente da loja (FK)</li>
+            <li> <span class='sql' style="min-width: 11rem;">address_id</span>identificador do endereço (FK)</li>
+            <li> <span class='sql' style="min-width: 11rem;">last_update</span>data e hora da última atualização</li> 
         </ul>
         <div class="table-wrapper">
             <table>

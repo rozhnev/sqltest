@@ -12,9 +12,9 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class='sql'>ident</span>Department ID.</li>
-            <li> <span class='sql'>name</span>Department name.</li>
-            <li> <span class='sql'>building</span>Building name.</li>
+            <li> <span class='sql'>ident</span>Department ID</li>
+            <li> <span class='sql'>name</span>Department name</li>
+            <li> <span class='sql'>building</span>Building name</li>
         </ul>
         <div class="table-wrapper">
             <table class=""><tbody>
@@ -36,13 +36,13 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class='sql'>species</span>Penguin species.</li>
-            <li> <span class='sql'>island</span>Island of residence.</li>
-            <li> <span class='sql'>bill_length_mm</span>Bill length, mm.</li>
-            <li> <span class='sql'>bill_depth_mm</span>Bill depth, mm.</li>
-            <li> <span class='sql'>flipper_length_mm</span>Flipper length, mm.</li>
-            <li> <span class='sql'>body_mass_g</span>Body mass, g.</li>
-            <li> <span class='sql'>sex</span>Sex.</li>
+            <li> <span class='sql' style="min-width: 12rem;">species</span>Penguin species</li>
+            <li> <span class='sql' style="min-width: 12rem;">island</span>Island of residence</li>
+            <li> <span class='sql' style="min-width: 12rem;">bill_length_mm</span>Bill length, mm</li>
+            <li> <span class='sql' style="min-width: 12rem;">bill_depth_mm</span>Bill depth, mm</li>
+            <li> <span class='sql' style="min-width: 12rem;">flipper_length_mm</span>Flipper length, mm</li>
+            <li> <span class='sql' style="min-width: 12rem;">body_mass_g</span>Body mass, g</li>
+            <li> <span class='sql' style="min-width: 12rem;">sex</span>Sex</li>
         </ul>
         <div class="table-wrapper">
             <table class=""><tbody>
@@ -72,13 +72,13 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class='sql'>species</span>Penguin species.</li>
-            <li> <span class='sql'>island</span>Island of residence.</li>
-            <li> <span class='sql'>bill_length_mm</span>Bill length, mm.</li>
-            <li> <span class='sql'>bill_depth_mm</span>Bill depth, mm.</li>
-            <li> <span class='sql'>flipper_length_mm</span>Flipper length, mm.</li>
-            <li> <span class='sql'>body_mass_g</span>Body mass, g.</li>
-            <li> <span class='sql'>sex</span>Sex.</li>
+            <li> <span class='sql' style="min-width: 12rem;">species</span>Penguin species</li>
+            <li> <span class='sql' style="min-width: 12rem;">island</span>Island of residence</li>
+            <li> <span class='sql' style="min-width: 12rem;">bill_length_mm</span>Bill length, mm</li>
+            <li> <span class='sql' style="min-width: 12rem;">bill_depth_mm</span>Bill depth, mm</li>
+            <li> <span class='sql' style="min-width: 12rem;">flipper_length_mm</span>Flipper length, mm</li>
+            <li> <span class='sql' style="min-width: 12rem;">body_mass_g</span>Body mass, g</li>
+            <li> <span class='sql' style="min-width: 12rem;">sex</span>Sex</li>
         </ul>
         <div class="table-wrapper">
             <table class=""><tbody>
@@ -108,11 +108,11 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class='sql'>ident</span>Employee number.</li>
-            <li> <span class='sql'>personal</span>Employee first name.</li>
-            <li> <span class='sql'>family</span>Employee last name.</li>
-            <li> <span class='sql'>dept</span>Department.</li>
-            <li> <span class='sql'>age</span>Age.</li>
+            <li> <span class='sql'>ident</span>Employee number</li>
+            <li> <span class='sql'>personal</span>Employee first name</li>
+            <li> <span class='sql'>family</span>Employee last name</li>
+            <li> <span class='sql'>dept</span>Department</li>
+            <li> <span class='sql'>age</span>Age</li>
         </ul>
         <div class="table-wrapper">
             <table class=""><tbody>
@@ -138,9 +138,9 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class='sql'>ident</span>Machine ID.</li>
-            <li> <span class='sql'>name</span>Machine name.</li>
-            <li> <span class='sql'>details</span>JSON with details.</li>
+            <li> <span class='sql'>ident</span>Machine ID</li>
+            <li> <span class='sql'>name</span>Machine name</li>
+            <li> <span class='sql'>details</span>JSON with details</li>
         </ul>
         <div class="table-wrapper">
             {literal}

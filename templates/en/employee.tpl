@@ -16,8 +16,8 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li><span class='sql'>COUNTRY</span>Name of the country.</li>
-            <li><span class='sql'>CURRENCY</span>Currency used in the country.</li>
+            <li><span class='sql'>COUNTRY</span>Name of the country</li>
+            <li><span class='sql'>CURRENCY</span>Currency used in the country</li>
         </ul>
         <div class="table-wrapper">
             <table>
@@ -37,14 +37,14 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li><span class='sql'>JOB_CODE</span>Job code.</li>
-            <li><span class='sql'>JOB_GRADE</span>Job grade.</li>
-            <li><span class='sql'>JOB_COUNTRY</span>Country associated with the job.</li>
-            <li><span class='sql'>JOB_TITLE</span>Job title.</li>
-            <li><span class='sql'>MIN_SALARY</span>Minimum salary for the job.</li>
-            <li><span class='sql'>MAX_SALARY</span>Maximum salary for the job.</li>
-            <li><span class='sql'>JOB_REQUIREMENT</span>Job requirements.</li>
-            <li><span class='sql'>LANGUAGE_REQ</span>Language requirements.</li>
+            <li><span class='sql'>JOB_CODE</span>Job code</li>
+            <li><span class='sql'>JOB_GRADE</span>Job grade</li>
+            <li><span class='sql'>JOB_COUNTRY</span>Country associated with the job</li>
+            <li><span class='sql'>JOB_TITLE</span>Job title</li>
+            <li><span class='sql'>MIN_SALARY</span>Minimum salary for the job</li>
+            <li><span class='sql'>MAX_SALARY</span>Maximum salary for the job</li>
+            <li><span class='sql'>JOB_REQUIREMENT</span>Job requirements</li>
+            <li><span class='sql'>LANGUAGE_REQ</span>Language requirements</li>
         </ul>
         <div class="table-wrapper">
             <table>
@@ -76,13 +76,13 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li><span class='sql'>DEPT_NO</span>Department number.</li>
-            <li><span class='sql'>DEPARTMENT</span>Department name.</li>
-            <li><span class='sql'>HEAD_DEPT</span>Head department (can be null).</li>
-            <li><span class='sql'>MNGR_NO</span>Manager number.</li>
-            <li><span class='sql'>BUDGET</span>Department budget.</li>
-            <li><span class='sql'>LOCATION</span>Department location.</li>
-            <li><span class='sql'>PHONE_NO</span>Phone number for the department.</li>
+            <li><span class='sql'>DEPT_NO</span>Department number</li>
+            <li><span class='sql'>DEPARTMENT</span>Department name</li>
+            <li><span class='sql'>HEAD_DEPT</span>Head department (can be null)</li>
+            <li><span class='sql'>MNGR_NO</span>Manager number</li>
+            <li><span class='sql'>BUDGET</span>Department budget</li>
+            <li><span class='sql'>LOCATION</span>Department location</li>
+            <li><span class='sql'>PHONE_NO</span>Phone number for the department</li>
         </ul>
         <div class="table-wrapper">
             <table>
@@ -112,17 +112,17 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li><span class='sql'>EMP_NO</span>Employee number.</li>
-            <li><span class='sql'>FIRST_NAME</span>First name of the employee.</li>
-            <li><span class='sql'>LAST_NAME</span>Last name of the employee.</li>
-            <li><span class='sql'>PHONE_EXT</span>Phone extension for the employee.</li>
-            <li><span class='sql'>HIRE_DATE</span>Date of employee's hire.</li>
-            <li><span class='sql'>DEPT_NO</span>Department number.</li>
-            <li><span class='sql'>JOB_CODE</span>Job code for the employee.</li>
-            <li><span class='sql'>JOB_GRADE</span>Job grade for the employee.</li>
-            <li><span class='sql'>JOB_COUNTRY</span>Country associated with the employee's job.</li>
-            <li><span class='sql'>SALARY</span>Salary of the employee.</li>
-            <li><span class='sql'>FULL_NAME</span>Full name of the employee.</li>
+            <li><span class='sql'>EMP_NO</span>Employee number</li>
+            <li><span class='sql'>FIRST_NAME</span>First name of the employee</li>
+            <li><span class='sql'>LAST_NAME</span>Last name of the employee</li>
+            <li><span class='sql'>PHONE_EXT</span>Phone extension for the employee</li>
+            <li><span class='sql'>HIRE_DATE</span>Date of employee's hire</li>
+            <li><span class='sql'>DEPT_NO</span>Department number</li>
+            <li><span class='sql'>JOB_CODE</span>Job code for the employee</li>
+            <li><span class='sql'>JOB_GRADE</span>Job grade for the employee</li>
+            <li><span class='sql'>JOB_COUNTRY</span>Country associated with the employee's job</li>
+            <li><span class='sql'>SALARY</span>Salary of the employee</li>
+            <li><span class='sql'>FULL_NAME</span>Full name of the employee</li>
         </ul>
         <div class="table-wrapper">
             <table>
@@ -160,11 +160,11 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li><span class='sql'>PROJ_ID</span>Project ID.</li>
-            <li><span class='sql'>PROJ_NAME</span>Project name.</li>
-            <li><span class='sql'>PROJ_DESC</span>Project description.</li>
-            <li><span class='sql'>TEAM_LEADER</span>Team leader for the project.</li>
-            <li><span class='sql'>PRODUCT</span>Product associated with the project.</li>
+            <li><span class='sql'>PROJ_ID</span>Project ID</li>
+            <li><span class='sql'>PROJ_NAME</span>Project name</li>
+            <li><span class='sql'>PROJ_DESC</span>Project description</li>
+            <li><span class='sql'>TEAM_LEADER</span>Team leader for the project</li>
+            <li><span class='sql'>PRODUCT</span>Product associated with the project</li>
         </ul>
         <div class="table-wrapper">
             <table>
@@ -190,8 +190,8 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li><span class='sql'>EMP_NO</span>Employee number.</li>
-            <li><span class='sql'>PROJ_ID</span>Project ID.</li>
+            <li><span class='sql'>EMP_NO</span>Employee number</li>
+            <li><span class='sql'>PROJ_ID</span>Project ID</li>
         </ul>
         <div class="table-wrapper">
             <table>
@@ -211,11 +211,11 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li><span class='sql'>FISCAL_YEAR</span>Fiscal year.</li>
-            <li><span class='sql'>PROJ_ID</span>Project ID.</li>
-            <li><span class='sql'>DEPT_NO</span>Department number.</li>
-            <li><span class='sql'>QUART_HEAD_CNT</span>Quarter headcount (can be null).</li>
-            <li><span class='sql'>PROJECTED_BUDGET</span>Projected budget for the fiscal year.</li>
+            <li><span class='sql'>FISCAL_YEAR</span>Fiscal year</li>
+            <li><span class='sql'>PROJ_ID</span>Project ID</li>
+            <li><span class='sql'>DEPT_NO</span>Department number</li>
+            <li><span class='sql'>QUART_HEAD_CNT</span>Quarter headcount (can be null)</li>
+            <li><span class='sql'>PROJECTED_BUDGET</span>Projected budget for the fiscal year</li>
         </ul>
         <div class="table-wrapper">
             <table>
@@ -241,12 +241,12 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li><span class='sql'>EMP_NO</span>Employee number.</li>
-            <li><span class='sql'>CHANGE_DATE</span>Date of salary change.</li>
-            <li><span class='sql'>UPDATER_ID</span>Updater ID.</li>
-            <li><span class='sql'>OLD_SALARY</span>Previous salary.</li>
-            <li><span class='sql'>PERCENT_CHANGE</span>Percentage change in salary.</li>
-            <li><span class='sql'>NEW_SALARY</span>New salary after the change.</li>
+            <li><span class='sql'>EMP_NO</span>Employee number</li>
+            <li><span class='sql'>CHANGE_DATE</span>Date of salary change</li>
+            <li><span class='sql'>UPDATER_ID</span>Updater ID</li>
+            <li><span class='sql'>OLD_SALARY</span>Previous salary</li>
+            <li><span class='sql'>PERCENT_CHANGE</span>Percentage change in salary</li>
+            <li><span class='sql'>NEW_SALARY</span>New salary after the change</li>
         </ul>
         <div class="table-wrapper">
             <table>
@@ -274,18 +274,18 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li><span class='sql'>CUST_NO</span>Customer number.</li>
-            <li><span class='sql'>CUSTOMER</span>Customer name.</li>
-            <li><span class='sql'>CONTACT_FIRST</span>First name of the contact person.</li>
-            <li><span class='sql'>CONTACT_LAST</span>Last name of the contact person.</li>
-            <li><span class='sql'>PHONE_NO</span>Phone number for the customer.</li>
-            <li><span class='sql'>ADDRESS_LINE1</span> Address line 1.</li>
-            <li><span class='sql'>ADDRESS_LINE2</span>Address line 2 (can be null).</li>
-            <li><span class='sql'>CITY</span>City of the customer.</li>
-            <li><span class='sql'>STATE_PROVINCE</span>State or province of the customer.</li>
-            <li><span class='sql'>COUNTRY</span>Country of the customer.</li>
-            <li><span class='sql'>POSTAL_CODE</span>Postal code of the customer.</li>
-            <li><span class='sql'>ON_HOLD</span>On hold status (can be null).</li>
+            <li><span class='sql'>CUST_NO</span>Customer number</li>
+            <li><span class='sql'>CUSTOMER</span>Customer name</li>
+            <li><span class='sql'>CONTACT_FIRST</span>First name of the contact person</li>
+            <li><span class='sql'>CONTACT_LAST</span>Last name of the contact person</li>
+            <li><span class='sql'>PHONE_NO</span>Phone number for the customer</li>
+            <li><span class='sql'>ADDRESS_LINE1</span> Address line 1</li>
+            <li><span class='sql'>ADDRESS_LINE2</span>Address line 2 (can be null)</li>
+            <li><span class='sql'>CITY</span>City of the customer</li>
+            <li><span class='sql'>STATE_PROVINCE</span>State or province of the customer</li>
+            <li><span class='sql'>COUNTRY</span>Country of the customer</li>
+            <li><span class='sql'>POSTAL_CODE</span>Postal code of the customer</li>
+            <li><span class='sql'>ON_HOLD</span>On hold status (can be null)</li>
         </ul>
         <div class="table-wrapper">
             <table>
@@ -325,19 +325,19 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li><span class='sql'>PO_NUMBER</span>Purchase order number.</li>
-            <li><span class='sql'>CUST_NO</span>Customer number associated with the order.</li>
-            <li><span class='sql'>SALES_REP</span>Sales representative number.</li>
-            <li><span class='sql'>ORDER_STATUS</span>Order status.</li>
-            <li><span class='sql'>ORDER_DATE</span>Date of the order.</li>
-            <li><span class='sql'>SHIP_DATE</span>Date of shipment.</li>
-            <li><span class='sql'>DATE_NEEDED</span>Date needed (can be null).</li>
-            <li><span class='sql'>PAID</span>Payment status.</li>
-            <li><span class='sql'>QTY_ORDERED</span>Quantity ordered.</li>
-            <li><span class='sql'>TOTAL_VALUE</span>Total value of the order.</li>
-            <li><span class='sql'>DISCOUNT</span>Discount applied.</li>
-            <li><span class='sql'>ITEM_TYPE</span>Type of item in the order.</li>
-            <li><span class='sql'>AGED</span>Aged value.</li>
+            <li><span class='sql'>PO_NUMBER</span>Purchase order number</li>
+            <li><span class='sql'>CUST_NO</span>Customer number associated with the order</li>
+            <li><span class='sql'>SALES_REP</span>Sales representative number</li>
+            <li><span class='sql'>ORDER_STATUS</span>Order status</li>
+            <li><span class='sql'>ORDER_DATE</span>Date of the order</li>
+            <li><span class='sql'>SHIP_DATE</span>Date of shipment</li>
+            <li><span class='sql'>DATE_NEEDED</span>Date needed (can be null)</li>
+            <li><span class='sql'>PAID</span>Payment status</li>
+            <li><span class='sql'>QTY_ORDERED</span>Quantity ordered</li>
+            <li><span class='sql'>TOTAL_VALUE</span>Total value of the order</li>
+            <li><span class='sql'>DISCOUNT</span>Discount applied</li>
+            <li><span class='sql'>ITEM_TYPE</span>Type of item in the order</li>
+            <li><span class='sql'>AGED</span>Aged value</li>
         </ul>
         <div class="table-wrapper">
             <table>

@@ -1,7 +1,7 @@
 <div id="db-description" class="db-description">
     <style>
         .table-columns span {
-            min-width: 9rem;
+            min-width: 7rem;
         }
     </style>
     <h2>Querynomicon (SQLite)</h2>
@@ -12,9 +12,9 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class='sql'>ident</span>ID отдела.</li>
-            <li> <span class='sql'>name</span>Название отдела.</li>
-            <li> <span class='sql'>building</span>Название здания.</li>
+            <li> <span class='sql'>ident</span>ID отдела</li>
+            <li> <span class='sql'>name</span>Название отдела</li>
+            <li> <span class='sql'>building</span>Название здания</li>
         </ul>
         <div class="table-wrapper">
             <table class=""><tbody>
@@ -36,13 +36,13 @@
     </div>
     <div class="panel active">
         <ul class="table-columns">
-            <li> <span class='sql'>species</span>Вид пингвина.</li>
-            <li> <span class='sql'>island</span> Остров проживания.</li>
-            <li> <span class='sql'>bill_length_mm</span>Длина клюва, мм.</li>
-            <li> <span class='sql'>bill_depth_mm</span>Глубина клюва, мм.</li>
-            <li> <span class='sql'>flipper_length_mm</span>Длина плавника, мм.</li>
-            <li> <span class='sql'>body_mass_g</span>Масса тела, гр.</li>
-            <li> <span class='sql'>sex</span>Пол.</li>
+            <li> <span class='sql' style="min-width: 12rem;">species</span>Вид пингвина</li>
+            <li> <span class='sql' style="min-width: 12rem;">island</span> Остров проживания</li>
+            <li> <span class='sql' style="min-width: 12rem;">bill_length_mm</span>Длина клюва, мм</li>
+            <li> <span class='sql' style="min-width: 12rem;">bill_depth_mm</span>Глубина клюва, мм</li>
+            <li> <span class='sql' style="min-width: 12rem;">flipper_length_mm</span>Длина плавника, мм</li>
+            <li> <span class='sql' style="min-width: 12rem;">body_mass_g</span>Масса тела, гр</li>
+            <li> <span class='sql' style="min-width: 12rem;">sex</span>Пол</li>
         </ul>
         <div class="table-wrapper">
             <table class=""><tbody>
@@ -72,13 +72,13 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class='sql'>species</span>Вид пингвина.</li>
-            <li> <span class='sql'>island</span> Остров проживания.</li>
-            <li> <span class='sql'>bill_length_mm</span>Длина клюва, мм.</li>
-            <li> <span class='sql'>bill_depth_mm</span>Глубина клюва, мм.</li>
-            <li> <span class='sql'>flipper_length_mm</span>Длина плавника, мм.</li>
-            <li> <span class='sql'>body_mass_g</span>Масса тела, гр.</li>
-            <li> <span class='sql'>sex</span>Пол.</li>
+            <li> <span class='sql' style="min-width: 12rem;">species</span>Вид пингвина</li>
+            <li> <span class='sql' style="min-width: 12rem;">island</span> Остров проживания</li>
+            <li> <span class='sql' style="min-width: 12rem;">bill_length_mm</span>Длина клюва, мм</li>
+            <li> <span class='sql' style="min-width: 12rem;">bill_depth_mm</span>Глубина клюва, мм</li>
+            <li> <span class='sql' style="min-width: 12rem;">flipper_length_mm</span>Длина плавника, мм</li>
+            <li> <span class='sql' style="min-width: 12rem;">body_mass_g</span>Масса тела, гр</li>
+            <li> <span class='sql' style="min-width: 12rem;">sex</span>Пол</li>
         </ul>
         <div class="table-wrapper">
             <table class=""><tbody>
@@ -108,11 +108,11 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class='sql'>ident</span>Номер сотрудника.</li>
-            <li> <span class='sql'>personal</span>Имя сотрудника.</li>
-            <li> <span class='sql'>family</span>Фамилия сотрудника.</li>
-            <li> <span class='sql'>dept</span>Подразделение.</li>
-            <li> <span class='sql'>age</span>Возраст.</li>
+            <li> <span class='sql'>ident</span>Номер сотрудника</li>
+            <li> <span class='sql'>personal</span>Имя сотрудника</li>
+            <li> <span class='sql'>family</span>Фамилия сотрудника</li>
+            <li> <span class='sql'>dept</span>Подразделение</li>
+            <li> <span class='sql'>age</span>Возраст</li>
         </ul>
         <div class="table-wrapper">
             <table class=""><tbody>
@@ -138,9 +138,9 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class='sql'>ident</span>Идентификатор машины.</li>
-            <li> <span class='sql'>name</span>Название машины.</li>
-            <li> <span class='sql'>details</span>Информация о машине в формате JSON.</li>
+            <li> <span class='sql'>ident</span>Идентификатор машины</li>
+            <li> <span class='sql'>name</span>Название машины</li>
+            <li> <span class='sql'>details</span>Информация о машине в формате JSON</li>
         </ul>
         <div class="table-wrapper">
             {literal}
