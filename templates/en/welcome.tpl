@@ -49,7 +49,7 @@
 
     <section>
         <h3>Login is optional</h3>
-        <p>You can start solving challenges immediately without creating an account. Signing in is not required, but it unlocks features such as saving progress, earning and storing achievements, and viewing others' solutions. We recommend signing in for the full experience.</p>
+        <p>You can start solving challenges immediately without creating an account. Signing in is not required, but it unlocks features such as saving progress, earning and storing achievements, and viewing others solutions. We recommend signing in for the full experience.</p>
     </section>
 
     <section>
@@ -63,8 +63,8 @@
     </section>
 
     <section>
-        <h3>View other users' solutions</h3>
-        <p>After you correctly solve a challenge you will be able to view solutions submitted by other users. Comparing different approaches is one of the fastest ways to learn new techniques and optimize your queries. <em>(Viewing solutions is available to logged‑in users.)</em></p>
+        <h3>View other users solutions</h3>
+        <p>After you correctly solve a challenge you will be able to view solutions submitted by other users. Comparing different approaches is one of the fastest ways to learn new techniques and optimize your queries. <em>(Viewing solutions is available to logged‑in users only.)</em></p>
     </section>
 
     <section>
