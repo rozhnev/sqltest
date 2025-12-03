@@ -129,9 +129,9 @@ class Controller
         $questionnireName   = $questionnire->getNameByCategory($params['questionCategory']);
 
         $this->assignVariables([
-            'PageTitle'             => 'Welcome to SQLTest.online: Learn and Practice SQL',
-            'PageOGTitle'           => 'Welcome to SQLTest.online: Learn and Practice SQL',
-            'PageDescription'       => 'Start your SQL journey with interactive challenges and real-time feedback at SQLTest.online.',
+            'PageTitle'             => Localizer::translateString('welcome_page_title'),
+            'PageOGTitle'           => Localizer::translateString('welcome_page_title'),
+            'PageDescription'       => Localizer::translateString('welcome_page_description'),
             'Questionnire'          => $questionnire->get($questionnireName, $this->user->getId()),
             'Question'              => [],
             'Action'                => 'welcome',
