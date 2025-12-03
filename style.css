@@ -676,6 +676,8 @@ input:checked + .slider:before {
     color: var(--question-text);
     border-radius: 6px;
     padding: 0.5em;
+}
+.lesson-wrapper p {
     line-height: 1.5rem;
 }
 .lesson-wrapper a,
