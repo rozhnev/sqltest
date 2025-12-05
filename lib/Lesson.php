@@ -27,7 +27,8 @@ class Lesson
                 modules.slug AS module_slug
             FROM lessons 
             JOIN modules ON lessons.module_id = modules.id
-            WHERE lessons.slug = :slug");
+            WHERE lessons.slug = :slug 
+                and not lessons.deleted and not modules.deleted");
         $stmt->execute([':slug' => $this->slug]);
         $lesson = $stmt->fetch(PDO::FETCH_ASSOC);
         $this->moduleSlug = $lesson['module_slug'];
@@ -74,7 +75,9 @@ class Lesson
             JOIN modules_localization ON modules.id = modules_localization.module_id and modules_localization.language =  :lang
             join lessons on lessons.module_id = modules.id
             join lessons_localization ll on ll.lesson_id = lessons.id and ll.language  = :lang
-            WHERE modules_localization.language = :lang;
+            WHERE modules_localization.language = :lang
+                and not modules.deleted 
+                and not lessons.deleted;
         ");
 
         $stmt->execute([':lang' => $lang]);
