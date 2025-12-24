@@ -16,6 +16,12 @@
 {if !isset($PageOGImageAlt)}
     {assign var="PageOGImageAlt" value="SQLtest.online"}
 {/if}
+{if !isset($PageOGImageWidth)}
+    {assign var="PageOGImageWidth" value="512"}
+{/if}
+{if !isset($PageOGImageHeight)}
+    {assign var="PageOGImageHeight" value="512"}
+{/if}
 <title>{$PageTitle}</title>
 <meta http-equiv = "content-language" content = "{$Lang}">
 <meta name="description" content="{$PageDescription}"/>
@@ -31,7 +37,7 @@
 {/if}
 <meta property="og:image" content="{$PageOGImage}" />
 <meta property="og:image:alt" content="{$PageOGImageAlt}" />
-<meta property="og:image:width" content="512" />
-<meta property="og:image:height" content="512" />
+<meta property="og:image:width" content="{$PageOGImageWidth}" />
+<meta property="og:image:height" content="{$PageOGImageHeight}" />
 <meta property="og:image:type" content="image/png" />
 <meta property="og:updated_time" content="20240101T000000Z" />

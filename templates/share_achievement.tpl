@@ -2,8 +2,14 @@
 {assign var="PageDescription" value="{translate}share_achievement_page_description{/translate}"}
 {assign var="PageOGTitle" value="{translate}share_achievement_og_title{/translate}"}
 {assign var="PageOGDescription" value="{translate}share_achievement_og_description{/translate}"}
-{assign var="PageOGImage" value="https://sqltest.online/images/linkedin_logo.png"}
-{assign var="PageOGImageAlt" value="{translate}share_to_linkedin{/translate}"}
+{if isset($ShareImageUrl) && $ShareImageUrl}
+    {assign var="PageOGImage" value=$ShareImageUrl}
+{else}
+    {assign var="PageOGImage" value="https://sqltest.online/favicons/android-chrome-512x512.png"}
+{/if}
+{assign var="PageOGImageAlt" value="{$AchievementTitle}"}
+{assign var="PageOGImageWidth" value="1200"}
+{assign var="PageOGImageHeight" value="627"}
 {include file='short-header.tpl'}
 <body>
     <div class="container">

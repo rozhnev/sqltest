@@ -700,6 +700,7 @@ class Controller
     public function share(array $params): void
     {
         $type = strtolower($params['type'] ?? '');
+        $format = strtolower($params['format'] ?? '');
         if ($type !== 'achievement') {
             header('HTTP/1.1 404 Not Found');
             $this->engine->assign('ErrorMessage', Localizer::translateString('error_message'));
@@ -714,6 +715,9 @@ class Controller
 
         if (!$userId || $achievementId <= 0 || !$sig || !$this->validateAchievementShareToken($userId, $achievementId, $ts, $sig)) {
             header('HTTP/1.1 404 Not Found');
+            if ($format === 'image') {
+                return;
+            }
             $this->engine->assign('ErrorMessage', Localizer::translateString('error_message'));
             $this->engine->display('error.tpl');
             return;
@@ -739,13 +743,31 @@ class Controller
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         if (!$row) {
             header('HTTP/1.1 404 Not Found');
-            $this->engine->assign('ErrorMessage', Localizer::translateString('error_message'));
-            $this->engine->display('error.tpl');
+            if ($format !== 'image') {
+                $this->engine->assign('ErrorMessage', Localizer::translateString('error_message'));
+                $this->engine->display('error.tpl');
+            }
+            return;
+        }
+
+        if ($format === 'image') {
+            Achievement::renderShareImage($row);
             return;
         }
 
         $sharePageUrl = 'https://sqltest.online' . ($params['path'] ?? '');
         $linkedinShareUrl = 'https://www.linkedin.com/sharing/share-offsite/?url=' . rawurlencode($sharePageUrl);
+
+        $path = (string)($params['path'] ?? '');
+        $qPos = strpos($path, '?');
+        $shareImageUrl = null;
+        if ($qPos !== false) {
+            $base = substr($path, 0, $qPos);
+            $qs = substr($path, $qPos + 1);
+            $shareImageUrl = 'https://sqltest.online' . rtrim($base, '/') . '/image?' . $qs;
+        } else {
+            $shareImageUrl = 'https://sqltest.online' . rtrim($path, '/') . '/image';
+        }
 
         $this->assignVariables([
             'Action' => 'share-achievement',
@@ -753,6 +775,7 @@ class Controller
             'EarnedAt' => $row['earned_at'],
             'AchievementTitle' => $row['achievement_title'],
             'SharePageUrl' => $sharePageUrl,
+            'ShareImageUrl' => $shareImageUrl,
             'LinkedinShareUrl' => $linkedinShareUrl,
             'CanonicalLink' => $sharePageUrl,
         ]);
