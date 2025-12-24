@@ -410,9 +410,18 @@ header .divider {
     justify-content: flex-start;
     padding: 3px;
     gap: 0.5rem;
+    align-items: center;
 }
-.achievement span{
+.achievement .achievement-date{
     min-width: 100px;
+}
+.achievement .achievement-title{
+    flex: 1;
+    min-width: 100px;
+}
+.achievement .achievement-share{
+    margin-left: auto;
+    white-space: nowrap;
 }
 .achievements-popup h4 {
     margin: 0.5rem 0;

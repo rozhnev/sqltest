@@ -4,6 +4,7 @@ class Controller
     private $dbh;
     private $user;
     private $engine;
+    private $env;
 
     private $lang;
 
@@ -28,6 +29,7 @@ class Controller
         $this->dbh      = $dbh;
         $this->user     = $user;
         $this->engine   = $engine;
+        $this->env      = $env;
 
         $this->registerModifiers(["array_key_exists", "mt_rand", "array_rand"]);
         $this->engine->registerPlugin('block', 'translate', array('Localizer', 'translate'), true);
@@ -57,8 +59,50 @@ class Controller
     public function setCanonicalLink(string $path): void
     {
         $this->assignVariables([
-            'CanonicalLink' => $this->isMobileView() ? "https://sqltest.online/{$path}" : null
+            'CanonicalLink' => "https://sqltest.online{$path}"
         ]);
+    }
+
+    private function getAchievementShareSecret(): ?string
+    {
+        return $this->env['ACHIEVEMENT_SHARE_SECRET'] ?? $this->env['LINKEDIN_SECRET'] ?? null;
+    }
+
+    private function signAchievementShare(string $userId, int $achievementId, int $ts): string
+    {
+        $secret = $this->getAchievementShareSecret();
+        if (!$secret) {
+            throw new Exception('Share secret is not configured');
+        }
+        $payload = $userId . '|' . $achievementId . '|' . $ts;
+        return hash_hmac('sha256', $payload, $secret);
+    }
+
+    private function buildAchievementShareUrl(string $lang, string $userId, int $achievementId): string
+    {
+        $ts = time();
+        $sig = $this->signAchievementShare($userId, $achievementId, $ts);
+        $query = http_build_query([
+            'u' => $userId,
+            'a' => $achievementId,
+            'ts' => $ts,
+            'sig' => $sig,
+        ]);
+        return "https://sqltest.online/{$lang}/share/achievement?{$query}";
+    }
+
+    private function validateAchievementShareToken(string $userId, int $achievementId, int $ts, string $sig): bool
+    {
+        $ttl = (int)($this->env['ACHIEVEMENT_SHARE_TTL'] ?? 60 * 60 * 24 * 365);
+        if ($ts <= 0 || abs(time() - $ts) > $ttl) {
+            return false;
+        }
+        try {
+            $expected = $this->signAchievementShare($userId, $achievementId, $ts);
+        } catch (Exception $e) {
+            return false;
+        }
+        return hash_equals($expected, $sig);
     }
 
     /**
@@ -630,12 +674,90 @@ class Controller
         if ($this->user->logged()) {
             $achievements = $this->user->achievements($this->lang);
             $this->engine->assign('RecommendedAchievement', $this->user->recommendedAchievement($this->lang));
+
+            $userId = (string)$this->user->getId();
+            foreach ($achievements as &$achievement) {
+                if (!isset($achievement['achievement_id'])) {
+                    continue;
+                }
+                $shareUrl = $this->buildAchievementShareUrl(
+                    $this->lang,
+                    $userId,
+                    (int)$achievement['achievement_id']
+                );
+                $achievement['share_url'] = $shareUrl;
+                $achievement['linkedin_share_url'] = 'https://www.linkedin.com/sharing/share-offsite/?url=' . rawurlencode($shareUrl);
+            }
+            unset($achievement);
         }
         $this->assignVariables([
             'User'            => $this->user,
             'Achievements'    => $achievements
         ]);
         $this->engine->display("achievements.tpl");
+    }
+
+    public function share(array $params): void
+    {
+        $type = strtolower($params['type'] ?? '');
+        if ($type !== 'achievement') {
+            header('HTTP/1.1 404 Not Found');
+            $this->engine->assign('ErrorMessage', Localizer::translateString('error_message'));
+            $this->engine->display('error.tpl');
+            return;
+        }
+
+        $userId = (string)($_GET['u'] ?? '');
+        $achievementId = (int)($_GET['a'] ?? 0);
+        $ts = (int)($_GET['ts'] ?? 0);
+        $sig = (string)($_GET['sig'] ?? '');
+
+        if (!$userId || $achievementId <= 0 || !$sig || !$this->validateAchievementShareToken($userId, $achievementId, $ts, $sig)) {
+            header('HTTP/1.1 404 Not Found');
+            $this->engine->assign('ErrorMessage', Localizer::translateString('error_message'));
+            $this->engine->display('error.tpl');
+            return;
+        }
+
+        $stmt = $this->dbh->prepare(
+            "SELECT 
+                COALESCE(NULLIF(u.nickname, ''), u.login) AS share_user_name,
+                ua.earned_at::date AS earned_at,
+                al.title AS achievement_title
+            FROM user_achievements ua
+            JOIN users u ON u.id = ua.user_id
+            JOIN achievements a ON a.id = ua.achievement_id AND NOT a.deleted
+            JOIN achievements_localization al ON al.achievement_id = a.id AND al.language = :lang
+            WHERE ua.user_id = :user_id AND ua.achievement_id = :achievement_id
+            LIMIT 1"
+        );
+        $stmt->execute([
+            ':lang' => $this->lang,
+            ':user_id' => $userId,
+            ':achievement_id' => $achievementId,
+        ]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        if (!$row) {
+            header('HTTP/1.1 404 Not Found');
+            $this->engine->assign('ErrorMessage', Localizer::translateString('error_message'));
+            $this->engine->display('error.tpl');
+            return;
+        }
+
+        $sharePageUrl = 'https://sqltest.online' . ($params['path'] ?? '');
+        $linkedinShareUrl = 'https://www.linkedin.com/sharing/share-offsite/?url=' . rawurlencode($sharePageUrl);
+
+        $this->assignVariables([
+            'Action' => 'share-achievement',
+            'ShareUserName' => $row['share_user_name'],
+            'EarnedAt' => $row['earned_at'],
+            'AchievementTitle' => $row['achievement_title'],
+            'SharePageUrl' => $sharePageUrl,
+            'LinkedinShareUrl' => $linkedinShareUrl,
+            'CanonicalLink' => $sharePageUrl,
+        ]);
+
+        $this->engine->display('share_achievement.tpl');
     }
 
     /**

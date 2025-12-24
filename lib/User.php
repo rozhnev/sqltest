@@ -718,7 +718,10 @@ class User
 
     public function achievements(string $lang): array
     {
-        $stmt = $this->dbh->prepare("SELECT achievements_localization.title, user_achievements.earned_at::date earned_at, viewed_at
+        $stmt = $this->dbh->prepare("SELECT user_achievements.achievement_id,
+                achievements_localization.title,
+                user_achievements.earned_at::date earned_at,
+                viewed_at
             FROM user_achievements
             JOIN achievements ON user_achievements.achievement_id = achievements.id
             JOIN achievements_localization ON achievements.id = achievements_localization.achievement_id AND achievements_localization.language = :lang

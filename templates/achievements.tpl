@@ -39,8 +39,13 @@
                 <path d="M64 10 L81.87 52.63 L127 52.63 L90.5 80.88 L103.75 123 L64 100.5 L24.25 123 L37.5 80.88 L1 52.63 L46.13 52.63 Z" fill="url(#gradient)" stroke="#D4AF37" stroke-width="3"/>
             </svg>
         </div>
-        <span>{$achievement.earned_at}</span>
-        <span>{$achievement.title}</span>
+        <span class="achievement-date">{$achievement.earned_at}</span>
+        <span class="achievement-title">{$achievement.title}</span>
+        {if isset($achievement.linkedin_share_url)}
+            <a class="achievement-share text-button blue" target="_blank" rel="noopener noreferrer" href="{$achievement.linkedin_share_url}">
+                <span>{translate}share_to_linkedin{/translate}</span>
+            </a>
+        {/if}
     </div>
 {/foreach}
 <div style="display: flex; gap: 1rem;">
