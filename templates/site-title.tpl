@@ -10,6 +10,12 @@
 {if !isset($PageOGDescription)}
     {assign var="PageOGDescription" value="{translate}og_description{/translate}"}
 {/if}
+{if !isset($PageOGImage)}
+    {assign var="PageOGImage" value="https://sqltest.online/favicons/android-chrome-512x512.png"}
+{/if}
+{if !isset($PageOGImageAlt)}
+    {assign var="PageOGImageAlt" value="SQLtest.online"}
+{/if}
 <title>{$PageTitle}</title>
 <meta http-equiv = "content-language" content = "{$Lang}">
 <meta name="description" content="{$PageDescription}"/>
@@ -23,8 +29,9 @@
 {else}
 <meta property="og:url" content="https://sqltest.online/" />
 {/if}
-<meta property="og:image" content="https://sqltest.online/favicons/android-chrome-192x192.png" />
-<meta property="og:image:width" content="192" />
-<meta property="og:image:height" content="192" />
+<meta property="og:image" content="{$PageOGImage}" />
+<meta property="og:image:alt" content="{$PageOGImageAlt}" />
+<meta property="og:image:width" content="512" />
+<meta property="og:image:height" content="512" />
 <meta property="og:image:type" content="image/png" />
 <meta property="og:updated_time" content="20240101T000000Z" />
