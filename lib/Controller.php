@@ -755,8 +755,10 @@ class Controller
             Achievement::renderShareImage($row);
             return;
         }
+        
+        $domain = 'https:// ' . ($_SERVER['HTTP_HOST'] ?? 'sqltest.online');
 
-        $sharePageUrl = 'https://sqltest.online' . ($params['path'] ?? '');
+        $sharePageUrl =  $domain . ($params['path'] ?? '');
         $linkedinShareUrl = 'https://www.linkedin.com/sharing/share-offsite/?url=' . rawurlencode($sharePageUrl);
 
         $path = (string)($params['path'] ?? '');
@@ -765,9 +767,10 @@ class Controller
         if ($qPos !== false) {
             $base = substr($path, 0, $qPos);
             $qs = substr($path, $qPos + 1);
-            $shareImageUrl = 'https://sqltest.online' . rtrim($base, '/') . '/image?' . $qs;
+
+            $shareImageUrl =  $domain . rtrim($base, '/') . '/image?' . $qs;
         } else {
-            $shareImageUrl = 'https://sqltest.online' . rtrim($path, '/') . '/image';
+            $shareImageUrl =  $domain. rtrim($path, '/') . '/image';
         }
 
         $this->assignVariables([
