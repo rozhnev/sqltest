@@ -23,7 +23,7 @@
         <main>
 
                 {if isset($ShareImageUrl) && $ShareImageUrl}
-                    <div style="margin: 1rem 0;">
+                    <div style="margin: 1rem 0; display: flex; justify-content: center;">
                         <img
                             src="{$ShareImageUrl|escape}"
                             alt="{$AchievementTitle|escape}"
@@ -42,11 +42,10 @@
                         </p>
                     </div>
                 {/if}
-                <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; justify-content: center;">
                     <a class="button blue" target="_blank" rel="noopener noreferrer" href="{$LinkedinShareUrl}">
                         <span>{translate}share_to_linkedin{/translate}</span>
                     </a>
-                    <a class="button" target="_self" href="/{$Lang}/user/profile"><span>{translate}profile_page_title{/translate}</span></a>
                 </div>
         </main>
         <footer>
