@@ -23,6 +23,16 @@
         <main>
             <div class="text-block" style="margin: 2rem auto; max-width: 700px;">
                 <h2 style="margin-top: 0;">{translate}share_achievement_heading{/translate}</h2>
+                {if isset($ShareImageUrl) && $ShareImageUrl}
+                    <div style="margin: 1rem 0;">
+                        <img
+                            src="{$ShareImageUrl|escape}"
+                            alt="{$AchievementTitle|escape}"
+                            loading="lazy"
+                            style="display: block; width: 100%; height: auto; border-radius: 8px;"
+                        />
+                    </div>
+                {/if}
                 <p style="margin: 0.5rem 0;">
                     <strong>{$ShareUserName}</strong>
                     {translate}share_achievement_earned{/translate}
