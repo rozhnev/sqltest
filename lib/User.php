@@ -760,11 +760,13 @@ class User
 
     public function saveAchievement(string $achievement): void
     {
-        $stmt = $this->dbh->prepare("INSERT INTO user_achievements ( user_id, achievement_id, earned_at)
-            SELECT :user_id, achievements.id, CURRENT_TIMESTAMP FROM achievements WHERE title = :achievement
+        $userAchievementID = vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex(random_bytes(16)), 4));
+
+        $stmt = $this->dbh->prepare("INSERT INTO user_achievements ( user_id, achievement_id, earned_at, user_achievement_id)
+            SELECT :user_id, achievements.id, CURRENT_TIMESTAMP, :user_achievement_id FROM achievements WHERE title = :achievement
             ON CONFLICT (user_id, achievement_id) DO NOTHING;");
 
-        $stmt->execute([':user_id' => $this->id, ':achievement' => $achievement]);
+        $stmt->execute([':user_id' => $this->id, ':achievement' => $achievement, ':user_achievement_id' => $userAchievementID]);
     }
 
     public function updateAchievements(): void
