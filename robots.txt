@@ -1,9 +1,16 @@
 User-agent: *
 
-Disallow: /en/privacy-policy
-Disallow: /ru/privacy-policy
 Disallow: /en/donate
 Disallow: /ru/donate
+Disallow: /pt/donate
+
+Disallow: /en/test
+Disallow: /ru/test
+Disallow: /pt/test
+
+Disallow: /en/achievement
+Disallow: /ru/achievement
+Disallow: /pt/achievement
 
 User-agent: Yandex
 Disallow:

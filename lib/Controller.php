@@ -702,15 +702,18 @@ class Controller
         $achievement = new Achievement($this->dbh, $params['achievementID']);
 
         $achievementData = $achievement->getData($this->lang);
+
+        $imageUrl = 'https://' . ($_SERVER['HTTP_HOST'] ?? 'sqltest.online') . '/'. $this->lang . '/achievement/image/' . $params['achievementID'];
+
         $this->assignVariables([
             'Action' => 'share-achievement',
             'ShareUserName' => $achievementData['share_user_name'],
             'EarnedAt' => $achievementData['earned_at'],
             'AchievementTitle' => $achievementData['achievement_title'],
-            'SharePageUrl' => $sharePageUrl,
-            'ShareImageUrl' => $shareImageUrl,
-            'LinkedinShareUrl' => $linkedinShareUrl,
-            'CanonicalLink' => $sharePageUrl,
+            // 'SharePageUrl' => $sharePageUrl,
+            'ImageUrl' => $mageUrl,
+            // 'LinkedinShareUrl' => $linkedinShareUrl,
+            // 'CanonicalLink' => $sharePageUrl,
         ]);
 
         $this->engine->display('share_achievement.tpl');

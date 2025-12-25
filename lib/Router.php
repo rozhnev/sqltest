@@ -57,7 +57,7 @@ class Router
     {
         $this->controller->setCanonicalLink($path);
         foreach ($this->routes as $route => $pattern) {
-            echo "Route: $route, $path\n";
+            // echo "Route: $route, $path\n";
             if (preg_match($pattern, $path, $params)) {
                 $params['path'] = $path;
                 $action = str_replace('-', '_', strtolower($params['action']));

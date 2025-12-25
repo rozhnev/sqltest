@@ -22,10 +22,10 @@
         </header>
         <main>
 
-                {if isset($ShareImageUrl) && $ShareImageUrl}
+                {if isset($ImageUrl) && $ImageUrl}
                     <div style="margin: 1rem 0; display: flex; justify-content: center;">
                         <img
-                            src="{$ShareImageUrl|escape}"
+                            src="{$ImageUrl|escape}"
                             alt="{$AchievementTitle|escape}"
                             loading="lazy"
                         />
