@@ -756,7 +756,7 @@ class Controller
             return;
         }
         
-        $domain = 'https:// ' . ($_SERVER['HTTP_HOST'] ?? 'sqltest.online');
+        $domain = 'https://' . ($_SERVER['HTTP_HOST'] ?? 'sqltest.online');
 
         $sharePageUrl =  $domain . ($params['path'] ?? '');
         $linkedinShareUrl = 'https://www.linkedin.com/sharing/share-offsite/?url=' . rawurlencode($sharePageUrl);

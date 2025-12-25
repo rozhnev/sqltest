@@ -161,7 +161,6 @@ $translations = [
     'share_achievement_og_description' => 'Достижение SQLtest.online от ##EarnedAt##: «##AchievementTitle##».',
     'share_achievement_heading' => 'Достижение',
     'share_achievement_earned' => 'получил(а) достижение',
-    'share_achievement_note' => 'LinkedIn сформирует предпросмотр этой страницы при публикации.',
     'hello' => 'Привет',
     'test_page_title' => 'SQLTest.online: тесты на знание SQL',
     'test_page_description' => 'Проверьте свои знания SQL с помощью наших тестов! Ответьте на вопросы и получите мгновенную обратную связь. Узнайте, насколько хорошо вы владеете SQL и как улучшить свои навыки.',
