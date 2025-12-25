@@ -2,6 +2,71 @@
 
 class Achievement
 {
+    private static function getUiStrings(string $lang): array
+    {
+        $lang = strtolower($lang);
+        if ($lang === 'ru') {
+            return [
+                'label' => 'Достижение получено',
+                'earned' => 'Получено',
+                'site' => 'SQLtest.online',
+            ];
+        }
+        if ($lang === 'pt') {
+            return [
+                'label' => 'Conquista desbloqueada',
+                'earned' => 'Conquistada em',
+                'site' => 'SQLtest.online',
+            ];
+        }
+        return [
+            'label' => 'Achievement unlocked',
+            'earned' => 'Earned on',
+            'site' => 'SQLtest.online',
+        ];
+    }
+
+    private static function formatEarnedAt(string $earnedAt, string $lang): string
+    {
+        $earnedAt = trim($earnedAt);
+        if ($earnedAt === '') {
+            return '';
+        }
+
+        try {
+            $dt = new DateTime($earnedAt);
+        } catch (Exception $e) {
+            return $earnedAt;
+        }
+
+        $lang = strtolower($lang);
+        if ($lang === 'ru') {
+            return $dt->format('d.m.Y');
+        }
+        if ($lang === 'pt') {
+            return $dt->format('d/m/Y');
+        }
+        return $dt->format('M j, Y');
+    }
+
+    private static function clamp(string $text, int $maxChars): string
+    {
+        $text = trim($text);
+        if ($text === '') {
+            return '';
+        }
+        if (function_exists('mb_strlen') && function_exists('mb_substr')) {
+            if (mb_strlen($text, 'UTF-8') > $maxChars) {
+                return rtrim(mb_substr($text, 0, $maxChars - 1, 'UTF-8')) . '…';
+            }
+            return $text;
+        }
+        if (strlen($text) > $maxChars) {
+            return rtrim(substr($text, 0, $maxChars - 3)) . '...';
+        }
+        return $text;
+    }
+
     private static function getShareCardFontPath(): ?string
     {
         $candidates = [
@@ -74,23 +139,36 @@ class Achievement
         $text = imagecolorallocate($im, 23, 27, 35);     // #171B23
         $muted = imagecolorallocate($im, 72, 79, 88);    // #484F58
         $accent = imagecolorallocate($im, 255, 215, 0);  // #FFD700
+        $white = imagecolorallocate($im, 255, 255, 255);
 
         imagefilledrectangle($im, 0, 0, $width, $height, $bg);
 
         // Card area.
         $pad = 64;
         imagefilledrectangle($im, $pad, $pad, $width - $pad, $height - $pad, $card);
-        imagefilledrectangle($im, $pad, $pad, $width - $pad, $pad + 8, $accent);
+        imagefilledrectangle($im, $pad, $pad, $width - $pad, $pad + 10, $accent);
 
-        // Logo.
+        // Right-side accent panel to make the layout more "designed".
+        $rightPanelW = 320;
+        imagefilledrectangle(
+            $im,
+            $width - $pad - $rightPanelW,
+            $pad + 10,
+            $width - $pad,
+            $height - $pad,
+            $bg
+        );
+
+        // Logo (site icon).
         $root = realpath(__DIR__ . '/..');
         $logoPath = $root ? ($root . '/favicons/android-chrome-512x512.png') : null;
         if ($logoPath && is_file($logoPath)) {
             $logo = @imagecreatefrompng($logoPath);
             if ($logo) {
-                $logoTarget = 96;
-                $logoX = $pad + 32;
-                $logoY = $pad + 32;
+                $logoTarget = 112;
+                // Place into the right panel.
+                $logoX = $width - $pad - $rightPanelW + 40;
+                $logoY = $pad + 40;
                 imagecopyresampled(
                     $im,
                     $logo,
@@ -107,25 +185,58 @@ class Achievement
             }
         }
 
+        // Optional LinkedIn watermark (subtle) in the right panel.
+        $linkedinPath = $root ? ($root . '/images/linkedin_logo.png') : null;
+        if ($linkedinPath && is_file($linkedinPath)) {
+            $li = @imagecreatefrompng($linkedinPath);
+            if ($li) {
+                $liTargetW = 160;
+                $liTargetH = (int)round($liTargetW * (imagesy($li) / max(1, imagesx($li))));
+                $liX = $width - $pad - $rightPanelW + 40;
+                $liY = $height - $pad - 40 - $liTargetH;
+
+                $tmp = imagecreatetruecolor($liTargetW, $liTargetH);
+                imagealphablending($tmp, false);
+                imagesavealpha($tmp, true);
+                $transparent = imagecolorallocatealpha($tmp, 0, 0, 0, 127);
+                imagefill($tmp, 0, 0, $transparent);
+
+                imagecopyresampled($tmp, $li, 0, 0, 0, 0, $liTargetW, $liTargetH, imagesx($li), imagesy($li));
+
+                // Merge with some transparency (GD treats 0 as fully transparent, 100 as opaque).
+                imagecopymerge($im, $tmp, $liX, $liY, 0, 0, $liTargetW, $liTargetH, 35);
+
+                imagedestroy($tmp);
+                imagedestroy($li);
+            }
+        }
+
         $font = self::getShareCardFontPath();
         if (!$font || !function_exists('imagettftext') || !function_exists('imagettfbbox')) {
             $font = null;
         }
 
-        $title = (string)($data['achievement_title'] ?? '');
-        $userName = (string)($data['share_user_name'] ?? '');
-        $earnedAt = (string)($data['earned_at'] ?? '');
+        $lang = (string)($data['lang'] ?? 'en');
+        $ui = self::getUiStrings($lang);
 
-        $textX = $pad + 32;
-        $contentTop = $pad + 160;
-        $maxTextWidth = $width - ($pad * 2) - 64;
+        $title = self::clamp((string)($data['achievement_title'] ?? ''), 80);
+        $userName = self::clamp((string)($data['share_user_name'] ?? ''), 40);
+        $earnedAt = self::formatEarnedAt((string)($data['earned_at'] ?? ''), $lang);
+
+        $textX = $pad + 56;
+        $contentTop = $pad + 120;
+        $maxTextWidth = $width - ($pad * 2) - $rightPanelW - 80;
 
         if ($font) {
+            // Eyebrow label
+            $labelFontSize = 24;
+            imagettftext($im, $labelFontSize, 0, $textX, $contentTop, $muted, $font, $ui['label']);
+
             // Title (wrap to max 2 lines).
-            $titleFontSize = 48;
+            $titleFontSize = 52;
             $lines = self::wrapTextToWidth($title, $font, $titleFontSize, $maxTextWidth);
             $lines = array_slice($lines, 0, 2);
-            $y = $contentTop;
+            $y = $contentTop + 70;
             foreach ($lines as $line) {
                 imagettftext($im, $titleFontSize, 0, $textX, $y, $text, $font, $line);
                 $y += 58;
@@ -133,18 +244,33 @@ class Achievement
 
             // Subtitle.
             $subFontSize = 28;
-            $subY = $y + 20;
-            $subtitle = $userName !== '' ? ($userName . ' • ' . $earnedAt) : $earnedAt;
+            $subY = $y + 28;
+            $subtitle = $userName !== '' ? ($userName . ' • ' . $ui['earned'] . ' ' . $earnedAt) : ($ui['earned'] . ' ' . $earnedAt);
             imagettftext($im, $subFontSize, 0, $textX, $subY, $muted, $font, $subtitle);
 
             // Footer branding.
             $brandFontSize = 22;
-            imagettftext($im, $brandFontSize, 0, $textX, $height - $pad - 28, $muted, $font, 'SQLtest.online');
+            imagettftext($im, $brandFontSize, 0, $textX, $height - $pad - 28, $muted, $font, $ui['site']);
+
+            // Right panel text (white) for better contrast.
+            $panelFontSize = 22;
+            imagettftext(
+                $im,
+                $panelFontSize,
+                0,
+                $width - $pad - $rightPanelW + 40,
+                $pad + 200,
+                $white,
+                $font,
+                'Share on LinkedIn'
+            );
         } else {
             // Fallback: basic bitmap fonts.
-            imagestring($im, 5, $textX, $contentTop - 30, $title, $text);
-            imagestring($im, 4, $textX, $contentTop + 20, $userName . ' ' . $earnedAt, $muted);
-            imagestring($im, 3, $textX, $height - $pad - 20, 'SQLtest.online', $muted);
+            imagestring($im, 4, $textX, $contentTop - 20, $ui['label'], $muted);
+            imagestring($im, 5, $textX, $contentTop + 20, $title, $text);
+            $subtitle = $userName !== '' ? ($userName . ' - ' . $ui['earned'] . ' ' . $earnedAt) : ($ui['earned'] . ' ' . $earnedAt);
+            imagestring($im, 4, $textX, $contentTop + 60, $subtitle, $muted);
+            imagestring($im, 3, $textX, $height - $pad - 20, $ui['site'], $muted);
         }
 
         imagepng($im);

@@ -751,6 +751,7 @@ class Controller
         }
 
         if ($format === 'image') {
+            $row['lang'] = $this->lang;
             Achievement::renderShareImage($row);
             return;
         }
