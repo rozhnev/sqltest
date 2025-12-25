@@ -28,7 +28,6 @@
                             src="{$ShareImageUrl|escape}"
                             alt="{$AchievementTitle|escape}"
                             loading="lazy"
-                            style="display: block; width: 100%; height: auto; border-radius: 8px;"
                         />
                     </div>
                 {else}

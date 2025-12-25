@@ -154,7 +154,6 @@ $translations = [
     'share_achievement_og_description' => 'Conquista do SQLtest.online em ##EarnedAt##: “##AchievementTitle##”.',
     'share_achievement_heading' => 'Conquista',
     'share_achievement_earned' => 'conquistou a conquista',
-    'share_achievement_note' => 'O LinkedIn vai gerar uma prévia desta página quando você compartilhar.',
     'hello' => 'Olá',
     'test_page_title' => 'SQLTest.online: testes de conhecimento de SQL',
     'test_page_description' => 'Teste seus conhecimentos de SQL com nossos testes! Responda perguntas e receba feedback instantâneo. Descubra o quão bom você é em SQL e como melhorar suas habilidades.',
