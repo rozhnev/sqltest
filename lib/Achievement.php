@@ -147,12 +147,12 @@ class Achievement
         imagefilledrectangle($im, 0, 0, $width, $height, $bg);
 
         // Card area.
-        $pad = 64;
+        $pad = 36;
         imagefilledrectangle($im, $pad, $pad, $width - $pad, $height - $pad, $card);
         imagefilledrectangle($im, $pad, $pad, $width - $pad, $pad + 10, $accent);
 
         // Right-side accent panel to make the layout more "designed".
-        $rightPanelW = 320;
+        $rightPanelW = 360;
         imagefilledrectangle(
             $im,
             $width - $pad - $rightPanelW,
@@ -168,9 +168,9 @@ class Achievement
         if ($logoPath && is_file($logoPath)) {
             $logo = @imagecreatefrompng($logoPath);
             if ($logo) {
-                $logoTarget = 256;
+                $logoTarget = 196;
                 // Place into the right panel.
-                $logoX = $width - $pad - $rightPanelW + 40;
+                $logoX = $width - $pad - $rightPanelW + 24;
                 $logoY = $pad + 40;
                 imagecopyresampled(
                     $im,
@@ -210,7 +210,7 @@ class Achievement
             imagettftext($im, $labelFontSize, 0, $textX, $contentTop, $muted, $font, $ui['label']);
 
             // Title (wrap to max 2 lines).
-            $titleFontSize = 52;
+            $titleFontSize = 48;
             $lines = self::wrapTextToWidth($title, $font, $titleFontSize, $maxTextWidth);
             $lines = array_slice($lines, 0, 2);
             $y = $contentTop + 70;
@@ -220,7 +220,7 @@ class Achievement
             }
 
             // Subtitle.
-            $subFontSize = 28;
+            $subFontSize = 24;
             $subY = $y + 28;
             $subtitle = $userName !== '' ? ($userName . ' • ' . $ui['earned'] . ' ' . $earnedAt) : ($ui['earned'] . ' ' . $earnedAt);
             imagettftext($im, $subFontSize, 0, $textX, $subY, $muted, $font, $subtitle);
@@ -230,13 +230,13 @@ class Achievement
             imagettftext($im, $brandFontSize, 0, $textX, $height - $pad - 28, $muted, $font, $ui['site']);
 
             // Right panel text (white) for better contrast.
-            $panelFontSize = 22;
+            $panelFontSize = 16;
             imagettftext(
                 $im,
                 $panelFontSize,
                 0,
-                $width - $pad - $rightPanelW + 40,
-                $pad + 200,
+                $width - $pad - $rightPanelW + 20,
+                $pad + 300,
                 $white,
                 $font,
                 $ui['cta']
