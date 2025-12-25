@@ -719,7 +719,7 @@ class Controller
         $this->engine->display('share_achievement.tpl');
     }
     
-    public function achievement_image(array $params): void 
+    public function image(array $params): void 
     {
         $achievement = new Achievement($this->dbh, $params['achievementID']);
 
