@@ -14,7 +14,7 @@ class Achievement
 
     public function getData(string $lang): ?array
     {
-                $stmt = $this->dbh->prepare(
+        $stmt = $this->dbh->prepare(
             "SELECT 
                 COALESCE(NULLIF(u.nickname, ''), u.login) AS share_user_name,
                 ua.earned_at::date AS earned_at,
