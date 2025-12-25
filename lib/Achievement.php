@@ -2,6 +2,39 @@
 
 class Achievement
 {
+    private $dbh;
+    private $id;
+    
+    public function __construct(PDO $dbh, string $id)
+    {
+        $this->dbh  = $dbh;
+        $this->id = $id;
+    }
+
+
+    public function getData(string $lang): ?array
+    {
+                $stmt = $this->dbh->prepare(
+            "SELECT 
+                COALESCE(NULLIF(u.nickname, ''), u.login) AS share_user_name,
+                ua.earned_at::date AS earned_at,
+                al.title AS achievement_title
+            FROM user_achievements ua
+            JOIN users u ON u.id = ua.user_id
+            JOIN achievements a ON a.id = ua.achievement_id AND NOT a.deleted
+            JOIN achievements_localization al ON al.achievement_id = a.id AND al.language = :lang
+            WHERE user_achievement_id = :user_achievement_id
+            LIMIT 1"
+        );
+        $stmt->execute([
+            ':lang' => $lang,
+            ':user_achievement_id' => $this->id,
+        ]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $row ?: null;
+    }
+
     private static function getUiStrings(string $lang): array
     {
         $lang = strtolower($lang);
@@ -118,7 +151,7 @@ class Achievement
         return $lines;
     }
 
-    public static function renderShareImage(array $data): void
+    public static function renderShareImage(array $data, string $lang): void
     {
         // Avoid fatals on hosts without GD: fall back to a static image.
         if (!function_exists('imagecreatetruecolor') || !function_exists('imagepng')) {
@@ -193,7 +226,6 @@ class Achievement
             $font = null;
         }
 
-        $lang = (string)($data['lang'] ?? 'en');
         $ui = self::getUiStrings($lang);
 
         $title = self::clamp((string)($data['achievement_title'] ?? ''), 80);

@@ -7,8 +7,8 @@ class Router
         'question'          => "@(?<lang>ru|en|pt)/(?<action>question)/(?<questionCategory>[a-z-]+)/(?<question>[a-z-]+)@i",
         'question-action'   => "@(?<lang>ru|en|pt)/question/(?<questionID>\d+)/(?<action>query-help|query-run|query-test|rate|check-answers)@i",
         'static-page'       => "@(?<lang>ru|en|pt)/(?<action>privacy-policy|logout|about|menu|books|courses|donate)/?@i",
-        'share-image'       => "@(?<lang>ru|en|pt)/(?<action>share)/(?<type>achievement)/(?<format>image)/?@i",
-        'share'             => "@(?<lang>ru|en|pt)/(?<action>share)/(?<type>achievement)/?@i",
+        // 'share-image'       => "@(?<lang>ru|en|pt)/(?<action>share)/(?<type>achievement)/(?<format>image)/?@i",
+        // 'share'             => "@(?<lang>ru|en|pt)/(?<action>share)/(?<type>achievement)/?@i",
         'login'             => "@^/(?<action>login)/(?<loginProvider>[a-z]+)/(\?lang=(?<lang>ru|en|pt))?@i",
         'erd'               => "@(?<lang>ru|en|pt)/(?<action>erd)/(?<db>Sakila|Bookings|AdventureWorks|Employee)\?theme=(?<theme>dark|light)@i",
         'favorite'          => "@(?<lang>ru|en|pt)/(?<class>question)/(?<questionID>\d+)/(?<action>favorite)@i",
@@ -18,7 +18,8 @@ class Router
         'test'              => "@(?<lang>ru|en|pt)/(?<class>test)/(?<testId>[a-z0-9-]+)/(?<action>grade|result)@i",
         'test_question'     => "@(?<lang>ru|en|pt)/(?<class>test)/(?<testId>[a-z0-9-]+)/(?<action>question|check)/?(?<questionID>\d+)?@i",
         'user'              => "@(?<lang>ru|en|pt)/(?<class>user)/(?<action>achievements|profile|update)@i",
-        'achievement'       => "@(?<lang>ru|en|pt)/(?<action>achievement)/(?<achievementID>[a-z-]+)@i",
+        'achievement'       => "@(?<lang>ru|en|pt)/(?<action>achievement)/(?<achievementID>[a-z0-9-]+)@i",
+        'achievement_image' => "@(?<lang>ru|en|pt)/(?<action>achievement)/image/(?<achievementID>[a-z0-9-]+)@i",
         'lessons'           => "@(?<lang>ru|en|pt)/(?<action>lesson)/(?<module>[a-z-]+)/(?<lesson>[a-z-]+)@i",
         'playground_run'    => "@(?<lang>ru|en|pt)/(?<class>playground)/(?<database>mysql80|mariadb115|psql17|sqlite3|mssql2022|oracle23|firebird4|soqol)/(?<action>query-run)@i",
         'playground'        => "@(?<lang>ru|en|pt)/(?<action>playground)/@i",
@@ -56,7 +57,7 @@ class Router
     {
         $this->controller->setCanonicalLink($path);
         foreach ($this->routes as $route => $pattern) {
-            // echo "Route: $route, $path\n";
+            echo "Route: $route, $path\n";
             if (preg_match($pattern, $path, $params)) {
                 $params['path'] = $path;
                 $action = str_replace('-', '_', strtolower($params['action']));
@@ -68,6 +69,7 @@ class Router
 
             }
         }
+        // die();
         // redirect old routes to new ones
         if (preg_match("@(?<lang>ru|en|pt)/(?<action>question)/(?<questionCategoryId>\d+)/(?<questionId>\d+)@i", $path, $params)) {
             return $this->controller->redirect($params);

@@ -697,6 +697,34 @@ class Controller
         $this->engine->display("achievements.tpl");
     }
 
+    public function achievement(array $params): void 
+    {
+        $achievement = new Achievement($this->dbh, $params['achievementID']);
+
+        $achievementData = $achievement->getData($this->lang);
+        $this->assignVariables([
+            'Action' => 'share-achievement',
+            'ShareUserName' => $achievementData['share_user_name'],
+            'EarnedAt' => $achievementData['earned_at'],
+            'AchievementTitle' => $achievementData['achievement_title'],
+            'SharePageUrl' => $sharePageUrl,
+            'ShareImageUrl' => $shareImageUrl,
+            'LinkedinShareUrl' => $linkedinShareUrl,
+            'CanonicalLink' => $sharePageUrl,
+        ]);
+
+        $this->engine->display('share_achievement.tpl');
+    }
+    
+    public function achievement_image(array $params): void 
+    {
+        $achievement = new Achievement($this->dbh, $params['achievementID']);
+
+        $achievementData = $achievement->getData($this->lang);
+
+        Achievement::renderShareImage($achievementData, $this->lang);
+        return;
+    }
     public function share(array $params): void
     {
         $type = strtolower($params['type'] ?? '');
