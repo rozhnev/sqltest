@@ -9,6 +9,7 @@ class Achievement
             return [
                 'label' => 'Достижение получено',
                 'earned' => 'Получено',
+                'cta' => 'Прокачивай SQL каждый день',
                 'site' => 'SQLtest.online',
             ];
         }
@@ -16,12 +17,14 @@ class Achievement
             return [
                 'label' => 'Conquista desbloqueada',
                 'earned' => 'Conquistada em',
+                'cta' => 'Evolua seu SQL todos os dias',
                 'site' => 'SQLtest.online',
             ];
         }
         return [
             'label' => 'Achievement unlocked',
             'earned' => 'Earned on',
+            'cta' => 'Level up your SQL every day',
             'site' => 'SQLtest.online',
         ];
     }
@@ -165,7 +168,7 @@ class Achievement
         if ($logoPath && is_file($logoPath)) {
             $logo = @imagecreatefrompng($logoPath);
             if ($logo) {
-                $logoTarget = 112;
+                $logoTarget = 256;
                 // Place into the right panel.
                 $logoX = $width - $pad - $rightPanelW + 40;
                 $logoY = $pad + 40;
@@ -182,32 +185,6 @@ class Achievement
                     imagesy($logo)
                 );
                 imagedestroy($logo);
-            }
-        }
-
-        // Optional LinkedIn watermark (subtle) in the right panel.
-        $linkedinPath = $root ? ($root . '/images/linkedin_logo.png') : null;
-        if ($linkedinPath && is_file($linkedinPath)) {
-            $li = @imagecreatefrompng($linkedinPath);
-            if ($li) {
-                $liTargetW = 160;
-                $liTargetH = (int)round($liTargetW * (imagesy($li) / max(1, imagesx($li))));
-                $liX = $width - $pad - $rightPanelW + 40;
-                $liY = $height - $pad - 40 - $liTargetH;
-
-                $tmp = imagecreatetruecolor($liTargetW, $liTargetH);
-                imagealphablending($tmp, false);
-                imagesavealpha($tmp, true);
-                $transparent = imagecolorallocatealpha($tmp, 0, 0, 0, 127);
-                imagefill($tmp, 0, 0, $transparent);
-
-                imagecopyresampled($tmp, $li, 0, 0, 0, 0, $liTargetW, $liTargetH, imagesx($li), imagesy($li));
-
-                // Merge with some transparency (GD treats 0 as fully transparent, 100 as opaque).
-                imagecopymerge($im, $tmp, $liX, $liY, 0, 0, $liTargetW, $liTargetH, 35);
-
-                imagedestroy($tmp);
-                imagedestroy($li);
             }
         }
 
@@ -262,7 +239,7 @@ class Achievement
                 $pad + 200,
                 $white,
                 $font,
-                'Share on LinkedIn'
+                $ui['cta']
             );
         } else {
             // Fallback: basic bitmap fonts.
