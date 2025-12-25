@@ -8,10 +8,6 @@ Disallow: /en/test
 Disallow: /ru/test
 Disallow: /pt/test
 
-Disallow: /en/achievement
-Disallow: /ru/achievement
-Disallow: /pt/achievement
-
 User-agent: Yandex
 Disallow:
 Clean-param: path
