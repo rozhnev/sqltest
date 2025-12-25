@@ -711,7 +711,7 @@ class Controller
             'EarnedAt' => $achievementData['earned_at'],
             'AchievementTitle' => $achievementData['achievement_title'],
             // 'SharePageUrl' => $sharePageUrl,
-            'ImageUrl' => $mageUrl,
+            'ImageUrl' => $imageUrl,
             // 'LinkedinShareUrl' => $linkedinShareUrl,
             // 'CanonicalLink' => $sharePageUrl,
         ]);
