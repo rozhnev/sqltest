@@ -43,9 +43,9 @@
         <span class="achievement-date">{$achievement.earned_at}</span>
         <span class="achievement-title">{$achievement.title}</span>
 
-        {if isset($achievement.share_page_url)}
+        {if isset($achievement.share_url)}
             <a class="achievement-view text-button" target="_blank" rel="noopener noreferrer"
-               href="{$achievement.share_page_url|escape:'url'}"
+               href="{$achievement.share_url|escape:'url'}"
                title="{translate}view_achievement{/translate}"
                aria-label="{translate}view_achievement{/translate}">
                 <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
@@ -53,12 +53,15 @@
                 </svg>
             </a>
         {/if}
-
         {if isset($achievement.linkedin_share_url)}
-            <a class="achievement-share text-button blue" target="_blank" rel="noopener noreferrer"
-               href="{$achievement.linkedin_share_url|escape:'url'}">
+            <button type="button" class="achievement-share text-button blue" aria-label="{translate}share_to_linkedin{/translate}"
+                    onclick="window.open('{$achievement.linkedin_share_url|escape:'url'}','_blank')">
+                <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" style="vertical-align:middle; margin-right:6px;">
+                    <rect x="0" y="0" width="24" height="24" rx="2" fill="#0077B5"/>
+                    <path fill="#FFF" d="M6.94 8.5H4.5V19h2.44V8.5zM5.72 7.36a1.42 1.42 0 110-2.84 1.42 1.42 0 010 2.84zM11.5 13.5c0-2.26-1.2-3.32-2.8-3.32-1.4 0-2.02.77-2.37 1.31V8.5H4.5V19h2.44v-5.04c0-1.35.26-2.62 1.9-2.62 1.62 0 1.66 1.63 1.66 2.7V19H11.5v-5.5zM20 19h-2.44v-5.6c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.44-2.13 2.95V19H11.5V8.5H13.9v1.4h.03c.2-.38.7-1.03 1.88-1.03 2.01 0 2.95 1.31 2.95 3.79V19z"/>
+                </svg>
                 <span>{translate}share_to_linkedin{/translate}</span>
-            </a>
+            </button>
         {/if}
     </div>
 {/foreach}
