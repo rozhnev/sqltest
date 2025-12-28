@@ -32,7 +32,7 @@
 
             <h3>4. Visibilidade das conquistas:</h3>
             <ol>
-                <li><strong>Públicas por padrão:</strong> Por padrão, suas conquistas são públicas. Você pode alterar isso nas <a href="/pt/profile">configurações do perfil</a>.</li>
+                <li><strong>Públicas por padrão:</strong> Por padrão, suas conquistas são públicas. Você pode alterar isso nas <a href="/pt/user/profile">configurações do perfil</a>.</li>
             </ol>
 
             <h3>5. Atualizações desta Política de Privacidade:</h3>

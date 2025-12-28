@@ -37,7 +37,7 @@
 
             <h3>4. Achievements visibility:</h3>
             <ol>
-                <li><strong>Public by default:</strong> By default, your achievements are public. You can change this policy in your <a href="/en/profile">profile configuration</a>.</li>
+                <li><strong>Public by default:</strong> By default, your achievements are public. You can change this policy in your <a href="/en/user/profile">profile configuration</a>.</li>
             </ol>
 
             <h3>5. Security:</h3>
