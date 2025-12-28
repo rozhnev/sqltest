@@ -1,7 +1,26 @@
 {assign var="PageTitle" value="{translate}share_achievement_page_title{/translate}"}
 {assign var="PageDescription" value="{translate}share_achievement_page_description{/translate}"}
 {assign var="PageOGTitle" value="{translate}share_achievement_og_title{/translate}"}
-{assign var="PageOGDescription" value="{translate}share_achievement_og_description{/translate}"}
+
+{* Make OG description informative + long enough for LinkedIn *}
+{assign var="BaseOGDescription" value="{translate}share_achievement_og_description{/translate}"}
+{if isset($ShareUserName) && $ShareUserName && isset($AchievementTitle) && $AchievementTitle}
+    {assign var="PageOGDescription" value="{$ShareUserName|escape} unlocked “{$AchievementTitle|escape}” on SQLtest.online. {$BaseOGDescription}"}
+{elseif isset($AchievementTitle) && $AchievementTitle}
+    {assign var="PageOGDescription" value="Achievement unlocked: “{$AchievementTitle|escape}” on SQLtest.online. {$BaseOGDescription}"}
+{else}
+    {assign var="PageOGDescription" value=$BaseOGDescription}
+{/if}
+
+{* Add publication/updated time for LinkedIn cards *}
+{if isset($PageOGPublishedTime) && $PageOGPublishedTime}
+    <meta property="article:published_time" content="{$PageOGPublishedTime|escape}" />
+{/if}
+{if isset($PageOGModifiedTime) && $PageOGModifiedTime}
+    <meta property="article:modified_time" content="{$PageOGModifiedTime|escape}" />
+    <meta property="og:updated_time" content="{$PageOGModifiedTime|escape}" />
+{/if}
+
 {if isset($ShareImageUrl) && $ShareImageUrl}
     {assign var="PageOGImage" value=$ShareImageUrl}
 {else}

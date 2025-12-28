@@ -699,6 +699,8 @@ class Controller
             'LinkedinShareUrl' => $linkedinShareUrl,
             'CanonicalLink' => $sharePageUrl,
             'ShareImageUrl' => $imageUrl,
+            'PageOGPublishedTime' => $achievementData['earned_at_iso'],
+            'PageOGModifiedTime'  => $achievementData['earned_at_iso'],
         ]);
 
         $this->engine->display('share_achievement.tpl');
@@ -709,7 +711,6 @@ class Controller
         $achievement = new Achievement($this->dbh, $params['achievementID']);
 
         $achievementData = $achievement->getData($this->lang);
-        var_export($achievementData);
         Achievement::renderShareImage($achievementData, $this->lang);
         return;
     }

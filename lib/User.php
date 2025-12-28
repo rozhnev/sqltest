@@ -722,6 +722,7 @@ class User
                 user_achievements.user_achievement_id,
                 achievements_localization.title,
                 user_achievements.earned_at::date earned_at,
+                to_char((user_achievements.earned_at AT TIME ZONE 'UTC'), 'YYYY-MM-DD\"T\"HH24:MI:SS\"Z\"') AS earned_at_iso,
                 viewed_at
             FROM user_achievements
             JOIN achievements ON user_achievements.achievement_id = achievements.id
