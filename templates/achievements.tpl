@@ -39,10 +39,24 @@
                 <path d="M64 10 L81.87 52.63 L127 52.63 L90.5 80.88 L103.75 123 L64 100.5 L24.25 123 L37.5 80.88 L1 52.63 L46.13 52.63 Z" fill="url(#gradient)" stroke="#D4AF37" stroke-width="3"/>
             </svg>
         </div>
+
         <span class="achievement-date">{$achievement.earned_at}</span>
         <span class="achievement-title">{$achievement.title}</span>
+
+        {if isset($achievement.share_page_url)}
+            <a class="achievement-view text-button" target="_blank" rel="noopener noreferrer"
+               href="{$achievement.share_page_url|escape:'url'}"
+               title="{translate}view_achievement{/translate}"
+               aria-label="{translate}view_achievement{/translate}">
+                <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+                    <path fill="currentColor" d="M12 5c-7 0-10 7-10 7s3 7 10 7 10-7 10-7-3-7-10-7Zm0 12a5 5 0 1 1 0-10 5 5 0 0 1 0 10Zm0-8a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"/>
+                </svg>
+            </a>
+        {/if}
+
         {if isset($achievement.linkedin_share_url)}
-            <a class="achievement-share text-button blue" target="_blank" rel="noopener noreferrer" href="{$achievement.linkedin_share_url}">
+            <a class="achievement-share text-button blue" target="_blank" rel="noopener noreferrer"
+               href="{$achievement.linkedin_share_url|escape:'url'}">
                 <span>{translate}share_to_linkedin{/translate}</span>
             </a>
         {/if}

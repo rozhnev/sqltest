@@ -699,21 +699,51 @@ class Controller
 
     public function achievement(array $params): void 
     {
-        $achievement = new Achievement($this->dbh, $params['achievementID']);
+        $format = strtolower((string)($params['format'] ?? ''));
 
+        $achievement = new Achievement($this->dbh, $params['achievementID']);
         $achievementData = $achievement->getData($this->lang);
 
-        $imageUrl = 'https://' . ($_SERVER['HTTP_HOST'] ?? 'sqltest.online') . '/'. $this->lang . '/achievement/image/' . $params['achievementID'];
+        if (!$achievementData) {
+            header('HTTP/1.1 404 Not Found');
+            if ($format !== 'image') {
+                $this->engine->assign('ErrorMessage', Localizer::translateString('error_message'));
+                $this->engine->display('error.tpl');
+            }
+            return;
+        }
+
+        // Build absolute domain safely (works with proxies)
+        $host = (string)($_SERVER['HTTP_HOST'] ?? 'sqltest.online');
+
+        $scheme = 'http';
+        if (!empty($_SERVER['HTTP_X_FORWARDED_PROTO'])) {
+            $scheme = strtolower(trim(explode(',', (string)$_SERVER['HTTP_X_FORWARDED_PROTO'])[0]));
+        } elseif (!empty($_SERVER['REQUEST_SCHEME'])) {
+            $scheme = strtolower((string)$_SERVER['REQUEST_SCHEME']);
+        } elseif (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') {
+            $scheme = 'https';
+        }
+
+        if ($scheme !== 'https' && $scheme !== 'http') {
+            $scheme = 'https';
+        }
+
+        $domain = $scheme . '://' . $host;
+
+        $imageUrl = $domain . '/' . $this->lang . '/achievement/image/' . $params['achievementID'];
+        $sharePageUrl = $domain . (string)($params['path'] ?? '');
+        $linkedinShareUrl = 'https://www.linkedin.com/sharing/share-offsite/?url=' . rawurlencode($sharePageUrl);
 
         $this->assignVariables([
             'Action' => 'share-achievement',
             'ShareUserName' => $achievementData['share_user_name'],
             'EarnedAt' => $achievementData['earned_at'],
             'AchievementTitle' => $achievementData['achievement_title'],
-            // 'SharePageUrl' => $sharePageUrl,
+            'SharePageUrl' => $sharePageUrl,
             'ImageUrl' => $imageUrl,
-            // 'LinkedinShareUrl' => $linkedinShareUrl,
-            // 'CanonicalLink' => $sharePageUrl,
+            'LinkedinShareUrl' => $linkedinShareUrl,
+            'CanonicalLink' => $sharePageUrl,
         ]);
 
         $this->engine->display('share_achievement.tpl');
@@ -724,10 +754,11 @@ class Controller
         $achievement = new Achievement($this->dbh, $params['achievementID']);
 
         $achievementData = $achievement->getData($this->lang);
-
+        var_export($achievementData);
         Achievement::renderShareImage($achievementData, $this->lang);
         return;
     }
+    /*
     public function share(array $params): void
     {
         $type = strtolower($params['type'] ?? '');
@@ -817,7 +848,7 @@ class Controller
 
         $this->engine->display('share_achievement.tpl');
     }
-
+    */
     /**
      * Show user profile page
      * 

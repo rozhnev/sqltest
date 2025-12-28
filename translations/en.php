@@ -189,4 +189,5 @@ $translations = [
     'start_practicing' => 'Start practicing',
     'welcome_page_title' => 'Welcome to SQLTest.online: Learn and Practice SQL',
     'welcome_page_description' => 'Start your SQL journey with interactive challenges and real-time feedback at SQLTest.online. Enhance your skills through practical exercises and become a confident SQL user.',
+    'view_achievement' => 'View achievement',
 ];
