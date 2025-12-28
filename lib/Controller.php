@@ -688,6 +688,8 @@ class Controller
         $imageUrl = $this->domain . '/' . $this->lang . '/achievement/image/' . $params['achievementID'];
         $sharePageUrl = $this->domain . (string)($params['path'] ?? '');
         $linkedinShareUrl = 'https://www.linkedin.com/sharing/share-offsite/?url=' . rawurlencode($sharePageUrl);
+        $facebookShareUrl = 'https://www.facebook.com/sharer/sharer.php?u=' . rawurlencode($sharePageUrl);
+        $vkShareUrl = 'https://vk.com/share.php?url=' . rawurlencode($sharePageUrl);
 
         $this->assignVariables([
             'Action' => 'share-achievement',
@@ -697,6 +699,8 @@ class Controller
             'SharePageUrl' => $sharePageUrl,
             'ImageUrl' => $imageUrl,
             'LinkedinShareUrl' => $linkedinShareUrl,
+            'FacebookShareUrl' => $facebookShareUrl,
+            'VKShareUrl' => $vkShareUrl,
             'CanonicalLink' => $sharePageUrl,
             'ShareImageUrl' => $imageUrl,
             'PageOGPublishedTime' => $achievementData['earned_at_iso'],

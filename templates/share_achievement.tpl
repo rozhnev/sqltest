@@ -57,9 +57,28 @@
                     </div>
                 {/if}
                 <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; justify-content: center;">
-                    <a class="button blue" target="_blank" rel="noopener noreferrer" href="{$LinkedinShareUrl}">
-                        <span>{translate}share_to_linkedin{/translate}</span>
-                    </a>
+                    {if isset($LinkedinShareUrl) && $LinkedinShareUrl}
+                        <a class="button blue" target="_blank" rel="noopener noreferrer"
+                           href="{$LinkedinShareUrl|escape:'url'}">
+                            <span>{translate}share_to_linkedin{/translate}</span>
+                        </a>
+                    {/if}
+
+                    {if isset($FacebookShareUrl) && $FacebookShareUrl}
+                        <a class="button" target="_blank" rel="noopener noreferrer"
+                           style="background:#1877F2; border-color:#1877F2;"
+                           href="{$FacebookShareUrl|escape:'url'}">
+                            <span>{translate}share_to_facebook{/translate}</span>
+                        </a>
+                    {/if}
+
+                    {if isset($VKShareUrl) && $VKShareUrl}
+                        <a class="button" target="_blank" rel="noopener noreferrer"
+                           style="background:#0077FF; border-color:#0077FF;"
+                           href="{$VKShareUrl|escape:'url'}">
+                            <span>{translate}share_to_vk{/translate}</span>
+                        </a>
+                    {/if}
                 </div>
         </main>
         <footer>
