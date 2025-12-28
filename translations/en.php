@@ -147,6 +147,7 @@ $translations = [
     'telegram_link' => 'https://t.me/sqltest_online',
     'your_achievements' => 'Your achievements',
     'recomended_achievement' => 'Next recommeded achievement',
+    'share_your_achievement' => 'Share your achievement',
     'share_to_linkedin' => 'Share to LinkedIn',
     'share_to_facebook' => 'Share on Facebook',
     'share_to_vk'       => 'Share on VK',

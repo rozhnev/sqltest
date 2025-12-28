@@ -18,6 +18,7 @@ class Achievement
             "SELECT 
                 COALESCE(u.nickname, '') AS share_user_name,
                 ua.earned_at::date AS earned_at,
+                to_char((ua.earned_at AT TIME ZONE 'UTC'), 'YYYY-MM-DD\"T\"HH24:MI:SS\"Z\"') AS earned_at_iso,
                 al.title AS achievement_title
             FROM user_achievements ua
             JOIN users u ON u.id = ua.user_id
