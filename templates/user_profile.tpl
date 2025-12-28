@@ -61,6 +61,29 @@
                     </div>
                     <div class="section colored" style="height: 100%;">
                         <div style="width: 100%;">
+                            <h2>{translate}your_achievements{/translate}</h2>
+                        </div>
+
+                        <div class="profile-achievements">
+                            {if !isset($Achievements) || $Achievements|@count == 0}
+                                <div class="profile-achievements-empty">—</div>
+                            {else}
+                                {foreach $Achievements as $a}
+                                    <div class="profile-achievement">
+                                        <span class="pa-date">{$a.earned_at}</span>
+                                        <a class="pa-title pa-title-link"
+                                            href="/{$Lang}/achievement/{$a.user_achievement_id}"
+                                            target="_blank" rel="noopener noreferrer"
+                                            title="{translate}view_achievement{/translate}">
+                                            {$a.title|escape}
+                                        </a>
+                                    </div>
+                                {/foreach}
+                            {/if}
+                        </div>
+                    </div>
+                    <div class="section colored" style="height: 100%;">
+                        <div style="width: 100%;">
                             <h2>{translate}tasks{/translate}</h2>
                         </div>
                         <div id="questions-table"></div>
@@ -189,6 +212,48 @@
     background-color: var(--menu-button-background-color);
     color: white;
 }
+
+.profile-achievements {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+
+.profile-achievement {
+    display: flex;
+    gap: 12px;
+    align-items: baseline;
+    padding: 10px 12px;
+    border: 1px solid var(--text-block-border-color);
+    border-radius: 10px;
+    background: var(--block-background-color);
+    color: var(--regular-text-color);
+}
+
+.profile-achievement a {
+    color: var(--regular-text-color);
+}
+
+.pa-date {
+    flex: 0 0 auto;
+    opacity: 0.85;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+.pa-title {
+    flex: 1 1 auto;
+    min-width: 0;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+.profile-achievements-empty {
+    opacity: 0.7;
+    padding: 8px 2px;
+}
+
 </style>
 
 <script>

@@ -739,11 +739,13 @@ class Controller
             'Action' => 'profile',
             'Title' => Localizer::translateString('profile_page_title'),
             'User'  => $this->user,
-            'Questions' => $questions,
-            'Tests' => $tests,
+            'Questions'     => $this->user->getQuestions($this->lang),
+            'Tests'         => $this->user->getTests($this->lang),
+
+            'Achievements'  => $this->user->achievements($this->lang),
         ]);
 
-        $this->engine->display("user_profile.tpl");
+        $this->engine->display('user_profile.tpl');
     }
 
     /**

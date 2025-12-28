@@ -154,6 +154,7 @@ $translations = [
     'telegram_link' => 'https://t.me/sqlize',
     'your_achievements' => 'Ваши достижения',
     'recomended_achievement' => 'Рекомендуемые достижения',
+    'share_your_achievement' => 'Поделитесь своим достижением',
     'share_to_linkedin' => 'Поделиться в LinkedIn',
     'share_to_facebook' => 'Поделиться в Facebook',
     'share_to_vk'       => 'Поделиться во ВКонтакте',
