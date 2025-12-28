@@ -1,9 +1,8 @@
-
 <link rel="stylesheet" type="text/css" href="/about.css?{$VERSION}" media="all">
 <div class="about">
     <div class="section top colored">
         <div>
-            <h2>Política de Privacidade para SQLtest</h2>
+            <h2>Política de Privacidade do SQLtest</h2>
         </div>
     </div>
     <div class="section not-colored" style="height: 100%;">
@@ -31,10 +30,9 @@
                 <li><strong>Requisitos Legais:</strong> Podemos divulgar suas informações se exigido por lei ou em resposta a solicitações válidas de autoridades públicas.</li>
             </ol>
 
-            <h3>4. Segurança:</h3>
-
+            <h3>4. Visibilidade das conquistas:</h3>
             <ol>
-                <li><strong>Segurança de Dados:</strong> Tomamos precauções razoáveis para proteger suas informações. No entanto, nenhum método de transmissão pela internet ou armazenamento eletrônico é totalmente seguro, e não podemos garantir sua segurança absoluta.</li>
+                <li><strong>Públicas por padrão:</strong> Por padrão, suas conquistas são públicas. Você pode alterar isso nas <a href="/pt/profile">configurações do perfil</a>.</li>
             </ol>
 
             <h3>5. Atualizações desta Política de Privacidade:</h3>
@@ -53,7 +51,7 @@
     </div>
     <div class="section bottom colored">
         <div>
-            <h4>Esta Política de Privacidade foi atualizada pela última vez em 01/01/2024.</h4>
+            <h4>Esta Política de Privacidade foi atualizada pela última vez em 28/12/2025.</h4>
         </div>
     </div>
 </div>
