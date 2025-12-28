@@ -693,6 +693,7 @@ class Controller
 
         $this->assignVariables([
             'Action' => 'share-achievement',
+            'AchievementID' => $params['achievementID'],
             'ShareUserName' => $achievementData['share_user_name'],
             'EarnedAt' => $achievementData['earned_at'],
             'AchievementTitle' => $achievementData['achievement_title'],

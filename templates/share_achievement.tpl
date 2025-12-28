@@ -30,9 +30,9 @@
     <div class="container">
         <header>
             {if $MobileView}
-                {include file='m.top-menu.tpl' path="/share/achievement"}
+                {include file='m.top-menu.tpl' path="/share/achievement/{$AchievementID}"}
             {else}
-                {include file='top-menu.tpl' path="/share/achievement"}
+                {include file='top-menu.tpl' path="/share/achievement/{$AchievementID}"}
             {/if}
         </header>
         <main>
