@@ -16,7 +16,7 @@ class Achievement
     {
         $stmt = $this->dbh->prepare(
             "SELECT 
-                COALESCE(NULLIF(u.nickname, ''), u.login) AS share_user_name,
+                COALESCE(u.nickname, '') AS share_user_name,
                 ua.earned_at::date AS earned_at,
                 al.title AS achievement_title
             FROM user_achievements ua
