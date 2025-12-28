@@ -5,7 +5,7 @@ class Controller
     private $user;
     private $engine;
     private $env;
-
+    private $domain;
     private $lang;
 
     private $languages = ['ru' => 'Русский', 'en' => 'English', 'pt' => 'Português'/*, 'es' => 'Español'*/];
@@ -30,6 +30,24 @@ class Controller
         $this->user     = $user;
         $this->engine   = $engine;
         $this->env      = $env;
+
+        // Build absolute domain safely (works with proxies)
+        $host = (string)($_SERVER['HTTP_HOST'] ?? 'sqltest.online');
+
+        $scheme = 'http';
+        if (!empty($_SERVER['HTTP_X_FORWARDED_PROTO'])) {
+            $scheme = strtolower(trim(explode(',', (string)$_SERVER['HTTP_X_FORWARDED_PROTO'])[0]));
+        } elseif (!empty($_SERVER['REQUEST_SCHEME'])) {
+            $scheme = strtolower((string)$_SERVER['REQUEST_SCHEME']);
+        } elseif (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') {
+            $scheme = 'https';
+        }
+
+        if ($scheme !== 'https' && $scheme !== 'http') {
+            $scheme = 'https';
+        }
+
+        $this->domain = $scheme . '://' . $host;
 
         $this->registerModifiers(["array_key_exists", "mt_rand", "array_rand"]);
         $this->engine->registerPlugin('block', 'translate', array('Localizer', 'translate'), true);
@@ -61,48 +79,6 @@ class Controller
         $this->assignVariables([
             'CanonicalLink' => "https://sqltest.online{$path}"
         ]);
-    }
-
-    private function getAchievementShareSecret(): ?string
-    {
-        return $this->env['ACHIEVEMENT_SHARE_SECRET'] ?? $this->env['LINKEDIN_SECRET'] ?? null;
-    }
-
-    private function signAchievementShare(string $userId, int $achievementId, int $ts): string
-    {
-        $secret = $this->getAchievementShareSecret();
-        if (!$secret) {
-            throw new Exception('Share secret is not configured');
-        }
-        $payload = $userId . '|' . $achievementId . '|' . $ts;
-        return hash_hmac('sha256', $payload, $secret);
-    }
-
-    private function buildAchievementShareUrl(string $lang, string $userId, int $achievementId): string
-    {
-        $ts = time();
-        $sig = $this->signAchievementShare($userId, $achievementId, $ts);
-        $query = http_build_query([
-            'u' => $userId,
-            'a' => $achievementId,
-            'ts' => $ts,
-            'sig' => $sig,
-        ]);
-        return "https://sqltest.online/{$lang}/share/achievement?{$query}";
-    }
-
-    private function validateAchievementShareToken(string $userId, int $achievementId, int $ts, string $sig): bool
-    {
-        $ttl = (int)($this->env['ACHIEVEMENT_SHARE_TTL'] ?? 60 * 60 * 24 * 365);
-        if ($ts <= 0 || abs(time() - $ts) > $ttl) {
-            return false;
-        }
-        try {
-            $expected = $this->signAchievementShare($userId, $achievementId, $ts);
-        } catch (Exception $e) {
-            return false;
-        }
-        return hash_equals($expected, $sig);
     }
 
     /**
@@ -680,11 +656,7 @@ class Controller
                 if (!isset($achievement['achievement_id'])) {
                     continue;
                 }
-                $shareUrl = $this->buildAchievementShareUrl(
-                    $this->lang,
-                    $userId,
-                    (int)$achievement['achievement_id']
-                );
+                $shareUrl = $this->domain . '/' . $this->lang . '/achievement/' .$achievement['user_achievement_id'];
                 $achievement['share_url'] = $shareUrl;
                 $achievement['linkedin_share_url'] = 'https://www.linkedin.com/sharing/share-offsite/?url=' . rawurlencode($shareUrl);
             }
@@ -713,26 +685,8 @@ class Controller
             return;
         }
 
-        // Build absolute domain safely (works with proxies)
-        $host = (string)($_SERVER['HTTP_HOST'] ?? 'sqltest.online');
-
-        $scheme = 'http';
-        if (!empty($_SERVER['HTTP_X_FORWARDED_PROTO'])) {
-            $scheme = strtolower(trim(explode(',', (string)$_SERVER['HTTP_X_FORWARDED_PROTO'])[0]));
-        } elseif (!empty($_SERVER['REQUEST_SCHEME'])) {
-            $scheme = strtolower((string)$_SERVER['REQUEST_SCHEME']);
-        } elseif (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') {
-            $scheme = 'https';
-        }
-
-        if ($scheme !== 'https' && $scheme !== 'http') {
-            $scheme = 'https';
-        }
-
-        $domain = $scheme . '://' . $host;
-
-        $imageUrl = $domain . '/' . $this->lang . '/achievement/image/' . $params['achievementID'];
-        $sharePageUrl = $domain . (string)($params['path'] ?? '');
+        $imageUrl = $this->domain . '/' . $this->lang . '/achievement/image/' . $params['achievementID'];
+        $sharePageUrl = $this->domain . (string)($params['path'] ?? '');
         $linkedinShareUrl = 'https://www.linkedin.com/sharing/share-offsite/?url=' . rawurlencode($sharePageUrl);
 
         $this->assignVariables([
@@ -744,6 +698,7 @@ class Controller
             'ImageUrl' => $imageUrl,
             'LinkedinShareUrl' => $linkedinShareUrl,
             'CanonicalLink' => $sharePageUrl,
+            'ShareImageUrl' => $imageUrl,
         ]);
 
         $this->engine->display('share_achievement.tpl');
@@ -758,97 +713,7 @@ class Controller
         Achievement::renderShareImage($achievementData, $this->lang);
         return;
     }
-    /*
-    public function share(array $params): void
-    {
-        $type = strtolower($params['type'] ?? '');
-        $format = strtolower($params['format'] ?? '');
-        if ($type !== 'achievement') {
-            header('HTTP/1.1 404 Not Found');
-            $this->engine->assign('ErrorMessage', Localizer::translateString('error_message'));
-            $this->engine->display('error.tpl');
-            return;
-        }
-
-        $userId = (string)($_GET['u'] ?? '');
-        $achievementId = (int)($_GET['a'] ?? 0);
-        $ts = (int)($_GET['ts'] ?? 0);
-        $sig = (string)($_GET['sig'] ?? '');
-
-        if (!$userId || $achievementId <= 0 || !$sig || !$this->validateAchievementShareToken($userId, $achievementId, $ts, $sig)) {
-            header('HTTP/1.1 404 Not Found');
-            if ($format === 'image') {
-                return;
-            }
-            $this->engine->assign('ErrorMessage', Localizer::translateString('error_message'));
-            $this->engine->display('error.tpl');
-            return;
-        }
-
-        $stmt = $this->dbh->prepare(
-            "SELECT 
-                COALESCE(NULLIF(u.nickname, ''), u.login) AS share_user_name,
-                ua.earned_at::date AS earned_at,
-                al.title AS achievement_title
-            FROM user_achievements ua
-            JOIN users u ON u.id = ua.user_id
-            JOIN achievements a ON a.id = ua.achievement_id AND NOT a.deleted
-            JOIN achievements_localization al ON al.achievement_id = a.id AND al.language = :lang
-            WHERE ua.user_id = :user_id AND ua.achievement_id = :achievement_id
-            LIMIT 1"
-        );
-        $stmt->execute([
-            ':lang' => $this->lang,
-            ':user_id' => $userId,
-            ':achievement_id' => $achievementId,
-        ]);
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        if (!$row) {
-            header('HTTP/1.1 404 Not Found');
-            if ($format !== 'image') {
-                $this->engine->assign('ErrorMessage', Localizer::translateString('error_message'));
-                $this->engine->display('error.tpl');
-            }
-            return;
-        }
-
-        if ($format === 'image') {
-            $row['lang'] = $this->lang;
-            Achievement::renderShareImage($row);
-            return;
-        }
-        
-        $domain = 'https://' . ($_SERVER['HTTP_HOST'] ?? 'sqltest.online');
-
-        $sharePageUrl =  $domain . ($params['path'] ?? '');
-        $linkedinShareUrl = 'https://www.linkedin.com/sharing/share-offsite/?url=' . rawurlencode($sharePageUrl);
-
-        $path = (string)($params['path'] ?? '');
-        $qPos = strpos($path, '?');
-        $shareImageUrl = null;
-        if ($qPos !== false) {
-            $base = substr($path, 0, $qPos);
-            $qs = substr($path, $qPos + 1);
-
-            $shareImageUrl =  $domain . rtrim($base, '/') . '/image?' . $qs;
-        } else {
-            $shareImageUrl =  $domain. rtrim($path, '/') . '/image';
-        }
-
-        $this->assignVariables([
-            'Action' => 'share-achievement',
-            'ShareUserName' => $row['share_user_name'],
-            'EarnedAt' => $row['earned_at'],
-            'AchievementTitle' => $row['achievement_title'],
-            'SharePageUrl' => $sharePageUrl,
-            'ShareImageUrl' => $shareImageUrl,
-            'LinkedinShareUrl' => $linkedinShareUrl,
-            'CanonicalLink' => $sharePageUrl,
-        ]);
-
-        $this->engine->display('share_achievement.tpl');
-    }
-    */
+    
     /**
      * Show user profile page
      * 
