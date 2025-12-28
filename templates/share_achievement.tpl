@@ -16,10 +16,6 @@
 {if isset($PageOGPublishedTime) && $PageOGPublishedTime}
     <meta property="article:published_time" content="{$PageOGPublishedTime|escape}" />
 {/if}
-{if isset($PageOGModifiedTime) && $PageOGModifiedTime}
-    <meta property="article:modified_time" content="{$PageOGModifiedTime|escape}" />
-    <meta property="og:updated_time" content="{$PageOGModifiedTime|escape}" />
-{/if}
 
 {if isset($ShareImageUrl) && $ShareImageUrl}
     {assign var="PageOGImage" value=$ShareImageUrl}

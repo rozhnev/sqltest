@@ -40,4 +40,10 @@
 <meta property="og:image:width" content="{$PageOGImageWidth}" />
 <meta property="og:image:height" content="{$PageOGImageHeight}" />
 <meta property="og:image:type" content="image/png" />
-<meta property="og:updated_time" content="20240101T000000Z" />
+{if isset($PageOGModifiedTime) && $PageOGModifiedTime}
+    <meta property="article:modified_time" content="{$PageOGModifiedTime|escape}" />
+    <meta property="og:updated_time" content="{$PageOGModifiedTime|escape}" />
+{else}
+    <meta property="article:modified_time" content="2025-01-01T00:00:00Z" />
+    <meta property="og:updated_time" content="2025-01-01T00:00:00Z" />
+{/if}
