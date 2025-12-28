@@ -361,7 +361,7 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class='sql'>customer_id</span>unique record identifier (PK)</li>
+            <li> <span class='sql'>language_id</span>unique record identifier (PK)</li>
             <li> <span class='sql'>name</span>language name</li>
             <li> <span class='sql'>last_update</span>date and time of last update</li> 
         </ul>
