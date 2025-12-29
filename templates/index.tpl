@@ -189,6 +189,16 @@
                 </div>
             </div>
             <div class="column" id="right-panel">
+                {if $User->logged() &&  $User->getAuthProvider() === 'vk' && !$User->getEmail()}
+                    <div style="background:#fff3cd;color:#856404;border-left:6px solid #ffc107;padding:12px 16px;margin-bottom:16px;border-radius:4px;display:flex;gap:12px;align-items:flex-start;font-size:14px;line-height:1.4;">
+                        <div style="font-size:20px;line-height:1;margin-top:2px;">⚠️</div>
+                        <div>
+                            <strong style="display:block;margin-bottom:6px;">Внимание!</strong>
+                            <div>После 28 февраля 2026 года вход через ВКонтакте может стать недоступен. Чтобы не потерять доступ к аккаунту, пожалуйста, <a href="/{$Lang}/user/profile"><b style="color:#856404;">зайдите в профиль</b></a> и укажите адрес электронной почты и пароль — они понадобятся для авторизации, если вход через ВКонтакте будет отключён.</div>
+                            <div style="margin-top:8px;font-weight:600;">Мы прилагаем все усилия, чтобы предотвратить возможные неудобства и сохранить ваш доступ к сервису.</div>
+                        </div>
+                    </div>
+                {/if}
                 {* {include file="{$Lang}/developers_channel_ad.tpl"} *}
                 {include file="{$Lang}/{$DB}.tpl"}
             </div>

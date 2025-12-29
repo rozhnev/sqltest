@@ -875,6 +875,22 @@ class User
         return true;
     }
 
+    public function getAuthProvider(): string
+    {
+        if (!$this->logged()) {
+            return '';
+        }
+
+        $stmt = $this->dbh->prepare("SELECT login FROM users WHERE id = ?");
+        $stmt->execute([$this->id]);
+        $login = $stmt->fetchColumn() ?: '';
+        if (preg_match('/@(github|google|yandex|vk|linkedin)$/', $login, $m)) {
+            return $m[1];
+        } else {
+            return 'unknown';
+        }
+    }
+
     public function getEmail(): string
     {
         if (!$this->logged()) {
