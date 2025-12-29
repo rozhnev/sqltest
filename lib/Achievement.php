@@ -255,8 +255,10 @@ class Achievement
             // Subtitle.
             $subFontSize = 24;
             $subY = $y + 28;
-            $subtitle = $userName !== '' ? ($userName . ' • ' . $ui['earned'] . ' ' . $earnedAt) : ($ui['earned'] . ' ' . $earnedAt);
-            imagettftext($im, $subFontSize, 0, $textX, $subY, $muted, $font, $subtitle);
+            imagettftext($im, $subFontSize, 0, $textX, $subY, $muted, $font, $userName);
+
+            $subY = $subY + 32;
+            imagettftext($im, 18, 0, $textX, $subY, $muted, $font, $ui['earned'] . ' ' . $earnedAt);
 
             // Footer branding.
             $brandFontSize = 22;
