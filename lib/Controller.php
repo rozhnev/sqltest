@@ -744,6 +744,7 @@ class Controller
             'Tests'         => $this->user->getTests($this->lang),
 
             'Achievements'  => $this->user->achievements($this->lang),
+            'UserEmail'     => $this->user->getEmail(),
         ]);
 
         $this->engine->display('user_profile.tpl');
@@ -758,7 +759,7 @@ class Controller
     public function user_update(array $params): void
     {
         header('Content-Type: application/json');
-        
+
         if (!$this->user->logged()) {
             echo json_encode([
                 'ok' => false,
@@ -767,20 +768,42 @@ class Controller
             return;
         }
 
-        $data = json_decode(file_get_contents('php://input'), true);
-        $nickname = trim($data['nickname'] ?? '');
-
-        if (empty($nickname)) {
-            echo json_encode([
-                'ok' => false,
-                'error' => Localizer::translateString('nickname_empty')
-            ]);
-            return;
-        }
+        $data = json_decode(file_get_contents('php://input'), true) ?: [];
+        $updated = false;
 
         try {
-            $this->user->setNickname($nickname);
-            echo json_encode(['ok' => true]);
+            if (array_key_exists('nickname', $data)) {
+                $nickname = trim((string)$data['nickname']);
+                $this->user->setNickname($nickname);
+                $updated = true;
+            }
+
+            if (array_key_exists('email', $data)) {
+                $email = trim((string)$data['email']);
+                $this->user->setEmail($email);
+                $updated = true;
+            }
+
+            if (array_key_exists('password', $data)) {
+                $password = (string)$data['password'];
+                if ($password !== '') {
+                    $this->user->setPassword($password);
+                    $updated = true;
+                }
+            }
+
+            if (!$updated) {
+                echo json_encode([
+                    'ok' => false,
+                    'error' => Localizer::translateString('nothing_to_update')
+                ]);
+                return;
+            }
+
+            echo json_encode([
+                'ok' => true,
+                'message' => Localizer::translateString('profile_update_success')
+            ]);
         } catch (Exception $e) {
             echo json_encode([
                 'ok' => false,

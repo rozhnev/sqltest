@@ -874,6 +874,63 @@ class User
         $this->saveAchievement("set_nickname");
         return true;
     }
+
+    public function getEmail(): string
+    {
+        if (!$this->logged()) {
+            return '';
+        }
+
+        $stmt = $this->dbh->prepare("SELECT email FROM users WHERE id = ?");
+        $stmt->execute([$this->id]);
+        return $stmt->fetchColumn() ?: '';
+    }
+
+    public function setEmail(string $email): bool
+    {
+        if (!$this->logged()) {
+            throw new Exception(Localizer::translateString('login_needed'));
+        }
+
+        $email = trim($email);
+        if ($email === '') {
+            throw new Exception(Localizer::translateString('email_required'));
+        }
+
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            throw new Exception(Localizer::translateString('email_invalid'));
+        }
+
+        $stmt = $this->dbh->prepare("SELECT 1 FROM users WHERE email = ? AND id <> ?");
+        $stmt->execute([$email, $this->id]);
+        if ($stmt->fetch()) {
+            throw new Exception(Localizer::translateString('email_taken'));
+        }
+
+        $stmt = $this->dbh->prepare("UPDATE users SET email = ? WHERE id = ?");
+        if (!$stmt->execute([$email, $this->id])) {
+            throw new Exception(Localizer::translateString('update_failed'));
+        }
+        return true;
+    }
+
+    public function setPassword(string $password): bool
+    {
+        if (!$this->logged()) {
+            throw new Exception(Localizer::translateString('login_needed'));
+        }
+
+        if (strlen($password) < 8) {
+            throw new Exception(Localizer::translateString('password_length_error'));
+        }
+
+        $hash = password_hash($password, PASSWORD_DEFAULT);
+        $stmt = $this->dbh->prepare("UPDATE users SET password_hash = ? WHERE id = ?");
+        if (!$stmt->execute([$hash, $this->id])) {
+            throw new Exception(Localizer::translateString('update_failed'));
+        }
+        return true;
+    }
     public function getQuestions(string $lang): array
     {
             // Fetch questions data

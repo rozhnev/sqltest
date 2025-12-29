@@ -31,23 +31,10 @@
                                         <span id="nickname-display" class="nickname">{$User->nickname()}</span>
                                         <input type="text" id="nickname-input" class="nickname-input hidden" value="{$User->nickname()}" maxlength="50">
                                         <div class="profile-actions">
-                                            <button id="edit-btn" class="text-button" onclick="toggleNicknameEdit(true)" title="{translate}edit_nickname{/translate}">
-                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M16.474 5.408l2.118 2.117m-.756-3.982L12.109 9.27a2.118 2.118 0 00-.58 1.082L11 13l2.648-.53c.41-.082.786-.283 1.082-.58l5.727-5.727a1.853 1.853 0 000-2.621 1.853 1.853 0 00-2.621 0z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                                    <path d="M19 15v3a2 2 0 01-2 2H6a2 2 0 01-2-2V7a2 2 0 012-2h3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                                </svg>
-                                            </button>
-                                            <div id="save-cancel-btns" class="hidden">
-                                                <button class="text-button green" onclick="saveNickname()" title="{translate}save_changes{/translate}">
-                                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                                    </svg>
-                                                </button>
-                                                <button class="text-button red" onclick="toggleNicknameEdit(false)" title="{translate}cancel{/translate}">
-                                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path d="M6 18L18 6M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                                    </svg>
-                                                </button>
+                                            <button id="edit-btn" class="text-button edit-btn" onclick="toggleNicknameEdit(true)" title="{translate}edit_nickname{/translate}"></button>
+                                            <div id="save-cancel-btns" class="hidden save-cancel-btns">
+                                                <button class="text-button green save-btn" onclick="saveNickname()" title="{translate}save_changes{/translate}"></button>
+                                                <button class="text-button red cancel-btn" onclick="toggleNicknameEdit(false)" title="{translate}cancel{/translate}"></button>
                                             </div>
                                         </div>
                                     </div>
@@ -55,6 +42,37 @@
                                 <div class="profile-field">
                                     <span class="profile-field-label" id="grade-label">{translate}your_grade{/translate}:</span>
                                     {$User->grade()} SQL Developer
+                                </div>
+                                <div class="profile-field">
+                                    <span class="profile-field-label">{translate}email{/translate}:</span>
+                                    <div class="nickname-container">
+                                        <span id="email-display" class="nickname">{$UserEmail|escape}</span>
+                                        <input type="email" id="profile-email-input" class="nickname-input hidden" value="{$UserEmail|escape}" placeholder="{translate}email_placeholder{/translate}">
+                                        <div class="profile-actions">
+                                            <button id="email-edit-btn" class="text-button edit-btn" onclick="toggleEmailEdit(true)" title="{translate}edit_email{/translate}"></button>
+                                            <div id="email-save-cancel-btns" class="hidden save-cancel-btns">
+                                                <button id="save-email-btn" class="text-button green save-btn" onclick="saveEmailOnly()" title="{translate}save_changes{/translate}"></button>
+                                                <button class="text-button red cancel-btn" onclick="toggleEmailEdit(false)" title="{translate}cancel{/translate}"></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="profile-field">
+                                    <span class="profile-field-label">{translate}password{/translate}:</span>
+                                    <div class="nickname-container">
+                                        <span id="password-display" class="nickname">********</span>
+                                        <div id="password-edit-container" class="hidden" style="display: flex; flex-direction: column; gap: 0.5rem;">
+                                            <input id="profile-password-input" name="password" type="password" placeholder="{translate}new_password{/translate}" autocomplete="new-password" class="nickname-input" />
+                                            <input id="profile-password-confirm-input" name="password_confirm" type="password" placeholder="{translate}confirm_password{/translate}" autocomplete="new-password" class="nickname-input" />
+                                        </div>
+                                        <div class="profile-actions">
+                                            <button id="password-edit-btn" class="text-button edit-btn" onclick="togglePasswordEdit(true)" title="{translate}edit_password{/translate}"></button>
+                                            <div id="password-save-cancel-btns" class="hidden save-cancel-btns">
+                                                <button id="save-password-btn" class="text-button save-btn" onclick="savePasswordOnly()" title="{translate}save_changes{/translate}"></button>
+                                                <button class="text-button red cancel-btn" onclick="togglePasswordEdit(false)" title="{translate}cancel{/translate}"></button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -106,12 +124,32 @@
 </html>
 {literal}
 <style>
+.profile {
+    display: flex;
+    flex-direction: column !important;
+    gap: 1rem;
+    width: 100%;
+}
 .profile-field {
     color: var(--ligth-h2-color);
     display: flex;
     align-items: center;
-    gap: 1rem;
-    margin: 0.5rem;
+    column-gap: 1rem;
+}
+.profile-field-inline {
+    flex-wrap: wrap;
+}
+.profile-field-inline input {
+    flex: 1 1 250px;
+    border: 1px solid var(--text-block-border-color);
+    border-radius: 4px;
+    padding: 0.35rem 0.5rem;
+    background: var(--block-background-color);
+    color: var(--regular-text-color);
+}
+.profile-field-actions {
+    justify-content: flex-end;
+    width: 100%;
 }
 .profile-field-label {
     font-size: 1.1em;
@@ -136,17 +174,42 @@
     padding: 0.25rem;
     border: 1px solid var(--text-block-border-color);
     border-radius: 4px;
-    background-color: var(--block-background-color);
-    color: var(--regular-text-color);
 }
 
 .profile-actions {
     display: flex;
     gap: 0.5rem;
 }
-#save-cancel-btns {
+.save-cancel-btns {
     display: flex;
     gap: 0.5rem;
+}
+.save-btn {
+    width: 24px;
+    height: 24px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2316a34a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 13l4 4L19 7'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    border: 1px solid #16a34a;
+    border-radius: 3px;
+}
+.cancel-btn {
+    width: 24px;
+    height: 24px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23E60000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 18L18 6M6 6l12 12'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    border: 1px solid;
+    border-radius: 3px;
+}
+.edit-btn {
+    width: 24px;
+    height: 24px;
+    background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M16.474 5.408l2.118 2.117m-.756-3.982L12.109 9.27a2.118 2.118 0 00-.58 1.082L11 13l2.648-.53c.41-.082.786-.283 1.082-.58l5.727-5.727a1.853 1.853 0 000-2.621 1.853 1.853 0 00-2.621 0z' stroke='%230069E6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M19 15v3a2 2 0 01-2 2H6a2 2 0 01-2-2V7a2 2 0 012-2h3' stroke='%230069E6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    border: 1px solid #0069E6;
+    border-radius: 3px;
 }
 .hidden {
     display: none !important;
@@ -310,6 +373,146 @@ function saveNickname() {
         toggleNicknameEdit(false);
     }
 }
+
+function toggleEmailEdit(show) {
+    const display = document.getElementById('email-display');
+    const input = document.getElementById('profile-email-input');
+    const editBtn = document.getElementById('email-edit-btn');
+    const actionBtns = document.getElementById('email-save-cancel-btns');
+
+    if (show) {
+        display.classList.add('hidden');
+        input.classList.remove('hidden');
+        editBtn.classList.add('hidden');
+        actionBtns.classList.remove('hidden');
+        input.focus();
+        input.select();
+    } else {
+        display.classList.remove('hidden');
+        input.classList.add('hidden');
+        editBtn.classList.remove('hidden');
+        actionBtns.classList.add('hidden');
+        input.value = display.textContent;
+    }
+}
+
+const profileEmailInput = document.getElementById('profile-email-input');
+const saveEmailButton = document.getElementById('save-email-btn');
+let profileEmailCached = profileEmailInput ? profileEmailInput.value.trim() : '';
+
+function saveEmailOnly() {
+    if (!profileEmailInput || !saveEmailButton) {
+        return;
+    }
+
+    const display = document.getElementById('email-display');
+    const newEmail = profileEmailInput.value.trim();
+
+    if (!newEmail) {
+        showToast('error', '{/literal}{translate}email_required{/translate}{literal}');
+        return;
+    }
+
+    if (newEmail === profileEmailCached) {
+        toggleEmailEdit(false);
+        return;
+    }
+
+    saveEmailButton.disabled = true;
+    fetch(`/${lang}/user/update`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: newEmail })
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.ok) {
+                profileEmailCached = newEmail;
+                display.textContent = newEmail;
+                toggleEmailEdit(false);
+                showToast('info', data.message || '{/literal}{translate}profile_update_success{/translate}{literal}');
+            } else {
+                showToast('error', data.error || '{/literal}{translate}update_failed{/translate}{literal}');
+            }
+        })
+        .catch(() => {
+            showToast('error', '{/literal}{translate}update_failed{/translate}{literal}');
+        })
+        .finally(() => {
+            saveEmailButton.disabled = false;
+        });
+}
+
+function togglePasswordEdit(show) {
+    const display = document.getElementById('password-display');
+    const container = document.getElementById('password-edit-container');
+    const editBtn = document.getElementById('password-edit-btn');
+    const actionBtns = document.getElementById('password-save-cancel-btns');
+    const passInput = document.getElementById('profile-password-input');
+    const confirmInput = document.getElementById('profile-password-confirm-input');
+
+    if (show) {
+        display.classList.add('hidden');
+        container.classList.remove('hidden');
+        editBtn.classList.add('hidden');
+        actionBtns.classList.remove('hidden');
+        passInput.value = '';
+        confirmInput.value = '';
+        passInput.focus();
+    } else {
+        display.classList.remove('hidden');
+        container.classList.add('hidden');
+        editBtn.classList.remove('hidden');
+        actionBtns.classList.add('hidden');
+        passInput.value = '';
+        confirmInput.value = '';
+    }
+}
+
+function savePasswordOnly() {
+    const passInput = document.getElementById('profile-password-input');
+    const confirmInput = document.getElementById('profile-password-confirm-input');
+    const saveBtn = document.getElementById('save-password-btn');
+
+    const password = passInput.value;
+    const confirm = confirmInput.value;
+
+    if (!password) {
+        togglePasswordEdit(false);
+        return;
+    }
+
+    if (password !== confirm) {
+        showToast('error', '{/literal}{translate}passwords_dont_match{/translate}{literal}');
+        return;
+    }
+
+    saveBtn.disabled = true;
+    fetch(`/${lang}/user/update`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ password: password })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.ok) {
+            togglePasswordEdit(false);
+            showToast('info', data.message || '{/literal}{translate}profile_update_success{/translate}{literal}');
+        } else {
+            showToast('error', data.error || '{/literal}{translate}update_failed{/translate}{literal}');
+        }
+    })
+    .catch(() => {
+        showToast('error', '{/literal}{translate}update_failed{/translate}{literal}');
+    })
+    .finally(() => {
+        saveBtn.disabled = false;
+    });
+}
 const tasksTableData = {/literal}{$Questions|json_encode nofilter}{literal};
 const dbmsFilter = tasksTableData.reduce((acc,el)=>{acc[el.dbms] = el.dbms; return acc;}, {});
 const rateFilter = tasksTableData.reduce((acc,el)=>{acc[el.rate] = el.rate; return acc;}, {})
@@ -332,7 +535,7 @@ let tasksTable = new Tabulator("#questions-table", {
             field: "solved_at", 
             formatter: "date",
         },
-        {title: "{/literal}{translate}favorite{/translate}{literal}", field: "favorite", formatter: "tickCross", widthGrow: 1}
+        {title: "{/literal}{translate}favorite{/translate}{literal}", field: "favorite", formatter: "tickCross", width: 140, align: "center"},
     ],
     // Add initial sort
     initialSort: [
