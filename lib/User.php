@@ -654,27 +654,36 @@ class User
     public function getSolvedQuestionsCountByRate(): array 
     {
         if (!$this->logged()) return 0;
-        $stmt = $this->dbh->prepare("WITH stats AS (
-            SELECT
-                question_rates.id rate_id, 
-                LOWER(question_rates.rate_en) rate, 
-                COUNT(questions.id) questions_count, 
-                COUNT(user_questions.question_id) solved_count
-            FROM questions
-            JOIN question_rates ON questions.rate = question_rates.id
-            LEFT JOIN user_questions ON user_questions.question_id = questions.id AND user_id = :user_id AND solved_at is not null 
-            WHERE questions.deleted = false
-            GROUP BY question_rates.id, question_rates.rate_en
-        )
-        SELECT 
-            rate_id,
-            rate,
-            questions_count,
-            solved_count,
-            SUM(questions_count) OVER () as total_questions,
-            SUM(solved_count) OVER () as total_solved
-        FROM stats
-        ORDER BY rate_id;");
+        $stmt = $this->dbh->prepare("WITH 
+            quizes as (
+                select distinct question_id from answers
+            ),
+            stats AS (
+                SELECT
+                    question_rates.id rate_id, 
+                    LOWER(question_rates.rate_en) rate, 
+                    COUNT(questions.id) questions_count, 
+                    COUNT(quizes.question_id) quizzes_count, 
+                    COUNT(user_questions.question_id) solved_count,
+                    COUNT(user_questions.question_id) filter (where quizes.question_id is not null) quizzes_solved_count
+                FROM questions
+                JOIN question_rates ON questions.rate = question_rates.id
+                LEFT JOIN user_questions ON user_questions.question_id = questions.id AND user_id = :user_id AND solved_at is not null 
+                left join quizes on quizes.question_id = questions.id
+                WHERE questions.deleted = false
+                GROUP BY question_rates.id, question_rates.rate_en
+            )
+            SELECT 
+                rate_id,
+                rate,
+                questions_count,
+                solved_count,
+                SUM(questions_count) OVER () as total_questions,
+                SUM(quizzes_count) OVER () as total_quizzes,
+                SUM(solved_count) OVER () as total_solved,
+                SUM(quizzes_solved_count) OVER () as quizzes_solved_count
+            FROM stats
+            ORDER BY rate_id;");
 
         $stmt->execute([':user_id' => $this->id]);
         return  $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -783,6 +792,9 @@ class User
             }
             if ($count['total_questions'] === $count['total_solved']) {
                 $this->saveAchievement("all_tasks_solved");
+            }
+            if ($count['total_quizzes'] === $count['quizzes_solved_count']) {
+                $this->saveAchievement("theory_done");
             }
             if ($count['total_solved'] === 5) {
                 $this->saveAchievement("five_tasks_completed");
