@@ -305,14 +305,20 @@ class Achievement
 
                 $legendY = $barY + $barHeight + 35;
                 $legendX = $barX;
-                $legendFontSize = 14;
+                $legendFontSize = 11;
+                $bulletSize = 12;
                 foreach ($data['solved_tasks_rates'] as $r) {
+                    $c = $colors[$r['rate']] ?? $muted;
+
+                    // Draw colored bullet (circle)
+                    imagefilledellipse($im, (int)$legendX + 6, (int)$legendY - 5, $bulletSize, $bulletSize, $c);
+
                     $lText = $r['rate_title'] . ': ' . $r['count'];
                     $box = imagettfbbox($legendFontSize, 0, $font, $lText);
                     $lWidth = $box ? abs($box[2] - $box[0]) : 50;
 
-                    imagettftext($im, $legendFontSize, 0, (int)$legendX, $legendY, $muted, $font, $lText);
-                    $legendX += $lWidth + 30;
+                    imagettftext($im, $legendFontSize, 0, (int)($legendX + 18), $legendY, $muted, $font, $lText);
+                    $legendX += $lWidth + 45;
                 }
             }
 
