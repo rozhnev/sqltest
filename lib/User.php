@@ -785,7 +785,7 @@ class User
     {
         $stmt = $this->dbh->prepare("UPDATE user_achievements 
             SET viewed_at = CURRENT_TIMESTAMP 
-            WHERE user_id = :user_id AND user_achievement_id = :user_achievement_id;");
+            WHERE user_id = :user_id AND user_achievement_id = :user_achievement_id AND viewed_at IS NULL;");
 
         $stmt->execute([
             ':user_id' => $this->id, 
