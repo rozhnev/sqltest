@@ -35,7 +35,13 @@ class Achievement
         ]);
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($data && ($data['achievement_type'] === 'five_tasks_completed' || $data['achievement_type'] === '100_tasks_done')) {
+        if ($data && 
+            (
+                $data['achievement_type'] === 'five_tasks_completed' || 
+                $data['achievement_type'] === '100_tasks_done' || 
+                $data['achievement_type'] === 'all_tasks_solved'
+            )
+        ) {
             $stmt = $this->dbh->prepare(
                 "with d as (
                     select 
@@ -50,7 +56,7 @@ class Achievement
             $stmt->execute([
                 ':lang' => $lang,
                 ':user_id' => $data['user_id'],
-                ':count' => $data['achievement_type'] === 'five_tasks_completed' ? 5 : 100,
+                ':count' => $data['achievement_type'] === 'five_tasks_completed' ? 5 : ($data['achievement_type'] === '100_tasks_done' ? 100 : 9999),
             ]);
             $data['solved_tasks_rates'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
