@@ -684,6 +684,10 @@ class Controller
             }
             return;
         }
+        
+        if ($this->user->logged()) {
+            $this->user->markAchievementViewed($params['achievementID']);
+        }
 
         $imageUrl = $this->domain . '/' . $this->lang . '/achievement/image/' . $params['achievementID'];
         $sharePageUrl = $this->domain . (string)($params['path'] ?? '');

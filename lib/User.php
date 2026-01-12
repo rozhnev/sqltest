@@ -780,6 +780,19 @@ class User
         $stmt->execute([':user_id' => $this->id, ':achievement' => $achievement, ':user_achievement_id' => $userAchievementID]);
     }
 
+
+    public function markAchievementViewed(string $userAchievementID): void
+    {
+        $stmt = $this->dbh->prepare("UPDATE user_achievements 
+            SET viewed_at = CURRENT_TIMESTAMP 
+            WHERE user_id = :user_id AND user_achievement_id = :user_achievement_id;");
+
+        $stmt->execute([
+            ':user_id' => $this->id, 
+            ':user_achievement_id' => $userAchievementID
+        ]);
+    }
+
     public function updateAchievements(): void
     {
         $userSolvedQuestions = $this->getSolvedQuestionsCountByRate();
