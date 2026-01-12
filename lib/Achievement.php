@@ -282,7 +282,7 @@ class Achievement
             $subY = $subY + 32;
             imagettftext($im, 18, 0, $textX, $subY, $muted, $font, $ui['earned'] . ' ' . $earnedAt);
 
-            if (($data['achievement_type'] ?? '') === '100_tasks_done' && !empty($data['solved_tasks_rates'])) {
+            if ((isset($data['solved_tasks_rates']) && !empty($data['solved_tasks_rates']))) {
                 $barX = $textX;
                 $barY = $subY + 40;
                 $barHeight = 24;
@@ -297,8 +297,9 @@ class Achievement
                 ];
 
                 $currentX = $barX;
+                $solvedTasksCount = array_sum(array_column($data['solved_tasks_rates'], 'count')); 
                 foreach ($data['solved_tasks_rates'] as $r) {
-                    $segmentWidth = ($r['count'] / 100.0) * $barWidth;
+                    $segmentWidth = ($r['count'] / $solvedTasksCount) * $barWidth;
                     $c = $colors[$r['rate']] ?? $muted;
                     imagefilledrectangle($im, (int)$currentX, $barY, (int)($currentX + $segmentWidth), $barY + $barHeight, $c);
                     $currentX += $segmentWidth;
