@@ -799,6 +799,9 @@ class User
             if ($count['total_solved'] === 5) {
                 $this->saveAchievement("five_tasks_completed");
             }
+            if ($count['total_solved'] === 100) {
+                $this->saveAchievement("100_tasks_done");
+            }
         }
     }
 

@@ -35,7 +35,7 @@ class Achievement
         ]);
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($data && ($data['achievement_title'] === '100_tasks_done' || $data['achievement_type'] === '100_tasks_done')) {
+        if ($data && ($data['achievement_type'] === 'five_tasks_completed' || $data['achievement_type'] === '100_tasks_done')) {
             $stmt = $this->dbh->prepare(
                 "with d as (
                     select 
