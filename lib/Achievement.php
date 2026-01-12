@@ -45,11 +45,12 @@ class Achievement
                     join question_rates_localization qrl on q.rate = qrl.id and qrl.language = :lang
                     where user_id = :user_id and solved_at is not null
                 ) 
-                select rate, rate_title, count(*) from d where p <= 100 group by rate, rate_title order by rate;"
+                select rate, rate_title, count(*) from d where p <= :count group by rate, rate_title order by rate;"
             );
             $stmt->execute([
                 ':lang' => $lang,
                 ':user_id' => $data['user_id'],
+                ':count' => $data['achievement_type'] === 'five_tasks_completed' ? 5 : 100,
             ]);
             $data['solved_tasks_rates'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
