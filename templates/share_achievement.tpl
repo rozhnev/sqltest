@@ -57,7 +57,7 @@
                     </div>
                 {/if}
 
-                {if $SolvedTasksRates}
+                {* {if $SolvedTasksRates}
                     <div style="max-width: 700px; margin: 0 auto 2rem; padding: 0 1rem; width: 100%;">
                         <div style="display: flex; height: 16px; width: 100%; border-radius: 8px; overflow: hidden; margin: 1.5rem 0 1rem; background-color: #e9ecef; box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);">
                             {foreach $SolvedTasksRates as $rate}
@@ -88,7 +88,7 @@
                             {/foreach}
                         </div>
                     </div>
-                {/if}
+                {/if} *}
 
                 <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; justify-content: center;">
                     {if isset($LinkedinShareUrl) && $LinkedinShareUrl}
