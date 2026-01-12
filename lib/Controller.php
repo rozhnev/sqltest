@@ -697,6 +697,7 @@ class Controller
             'ShareUserName' => $achievementData['share_user_name'],
             'EarnedAt' => $achievementData['earned_at'],
             'AchievementTitle' => $achievementData['achievement_title'],
+            'SolvedTasksRates' => $achievementData['solved_tasks_rates'] ?? [],
             'SharePageUrl' => $sharePageUrl,
             'ImageUrl' => $imageUrl,
             'LinkedinShareUrl' => $linkedinShareUrl,
@@ -716,7 +717,7 @@ class Controller
         $achievement = new Achievement($this->dbh, $params['achievementID']);
 
         $achievementData = $achievement->getData($this->lang);
-        Achievement::renderShareImage($achievementData, $this->lang);
+        $achievement->renderShareImage($achievementData, $this->lang);
         return;
     }
     
