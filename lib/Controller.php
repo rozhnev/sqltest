@@ -323,6 +323,7 @@ class Controller
         if ($this->user->logged()) {
             $this->user->setPath($params['path']);
             $this->user->save();
+            $this->engine->assign('NewAchievement', $this->user->haveNewAchievement($this->lang));
         }
 
         $this->registerModifiers(['floor', 'in_array']);
@@ -697,6 +698,7 @@ class Controller
 
         $this->assignVariables([
             'Action' => 'share-achievement',
+            'User' => $this->user,
             'AchievementID' => $params['achievementID'],
             'ShareUserName' => $achievementData['share_user_name'],
             'EarnedAt' => $achievementData['earned_at'],
@@ -780,6 +782,12 @@ class Controller
             if (array_key_exists('nickname', $data)) {
                 $nickname = trim((string)$data['nickname']);
                 $this->user->setNickname($nickname);
+                $updated = true;
+            }
+
+            if (array_key_exists('full_name', $data)) {
+                $fullName = trim((string)$data['full_name']);
+                $this->user->setFullName($fullName);
                 $updated = true;
             }
 
