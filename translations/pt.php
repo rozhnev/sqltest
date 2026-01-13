@@ -146,6 +146,7 @@ $translations = [
     'erd_diagram' => 'Diagrama ER do Banco de Dados ##Db##',
     'telegram_link' => 'https://t.me/sqltest_online',
     'your_achievements' => 'Suas conquistas', 
+    'new_achievement_unlocked' => 'Nova conquista desbloqueada',
     'recomended_achievement' => 'Próxima conquista recomendada',
     'share_your_achievement' => 'Compartilhe sua conquista',
     'share_to_linkedin' => 'Compartilhar no LinkedIn',

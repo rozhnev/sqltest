@@ -17,7 +17,7 @@ class Achievement
         $stmt = $this->dbh->prepare(
             "SELECT 
                 ua.user_id,
-                COALESCE(u.nickname, '') AS share_user_name,
+                COALESCE(u.full_name, u.nickname, '') AS share_user_name,
                 ua.earned_at::date AS earned_at,
                 to_char((ua.earned_at AT TIME ZONE 'UTC'), 'YYYY-MM-DD\"T\"HH24:MI:SS\"Z\"') AS earned_at_iso,
                 a.title AS achievement_type,
@@ -39,6 +39,8 @@ class Achievement
             (
                 $data['achievement_type'] === 'five_tasks_completed' || 
                 $data['achievement_type'] === '100_tasks_done' || 
+                $data['achievement_type'] === '200_tasks_done' || 
+                $data['achievement_type'] === '300_tasks_done' || 
                 $data['achievement_type'] === 'all_tasks_solved'
             )
         ) {
@@ -53,10 +55,17 @@ class Achievement
                 ) 
                 select rate, rate_title, count(*) from d where p <= :count group by rate, rate_title order by rate;"
             );
+            $user_questions_count = [
+                'five_tasks_completed' => 5, 
+                '100_tasks_done' => 100, 
+                '200_tasks_done' => 200, 
+                '300_tasks_done' => 300, 
+                'all_tasks_solved' => 9999
+            ];
             $stmt->execute([
                 ':lang' => $lang,
                 ':user_id' => $data['user_id'],
-                ':count' => $data['achievement_type'] === 'five_tasks_completed' ? 5 : ($data['achievement_type'] === '100_tasks_done' ? 100 : 9999),
+                ':count' => $user_questions_count[$data['achievement_type']] ?? 9999,
             ]);
             $data['solved_tasks_rates'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
         }

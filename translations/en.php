@@ -146,6 +146,7 @@ $translations = [
     'erd_diagram' => '##Db## Data Base ER diagram',
     'telegram_link' => 'https://t.me/sqltest_online',
     'your_achievements' => 'Your achievements',
+    'new_achievement_unlocked' => 'New achievement unlocked',
     'recomended_achievement' => 'Next recommeded achievement',
     'share_your_achievement' => 'Share your achievement',
     'share_to_linkedin' => 'Share to LinkedIn',

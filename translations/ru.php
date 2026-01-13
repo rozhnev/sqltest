@@ -153,6 +153,7 @@ $translations = [
     'erd_diagram' => 'ER диаграмма базы данных ##Db##',
     'telegram_link' => 'https://t.me/sqlize',
     'your_achievements' => 'Ваши достижения',
+    'new_achievement_unlocked' => 'Новое достижение получено',
     'recomended_achievement' => 'Рекомендуемые достижения',
     'share_your_achievement' => 'Поделитесь своим достижением',
     'share_to_linkedin' => 'Поделиться в LinkedIn',

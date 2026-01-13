@@ -716,13 +716,19 @@ class User
         $stmt = $this->dbh->prepare("UPDATE users SET grade = :grade, graded_at = CURRENT_TIMESTAMP WHERE id = :user_id;");
         $stmt->execute([':user_id' => $this->id, ':grade' => $grade]);
     }
-    public function haveNewAchievement(): bool
+    public function haveNewAchievement(string $lang): array|false
     {
-        $stmt = $this->dbh->prepare("SELECT EXISTS (
-            SELECT true FROM user_achievements WHERE user_id = :user_id and viewed_at is null
-        );");
-        $stmt->execute([':user_id' => $this->id]);
-        return $stmt->fetchColumn(0);
+        $stmt = $this->dbh->prepare("SELECT
+                user_achievements.user_achievement_id,
+                achievements_localization.title
+            FROM user_achievements
+            JOIN achievements ON user_achievements.achievement_id = achievements.id
+            JOIN achievements_localization ON achievements.id = achievements_localization.achievement_id AND achievements_localization.language = :lang
+            WHERE user_id = :user_id and not achievements.deleted and viewed_at is null
+            ORDER BY user_achievements.earned_at ASC 
+            LIMIT 1;");
+        $stmt->execute([':lang' => $lang, ':user_id' => $this->id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC) ?: false;
     }
 
     public function achievements(string $lang): array
@@ -815,6 +821,12 @@ class User
             if ($count['total_solved'] === 100) {
                 $this->saveAchievement("100_tasks_done");
             }
+            if ($count['total_solved'] === 200) {
+                $this->saveAchievement("200_tasks_done");
+            }
+            if ($count['total_solved'] === 300) {
+                $this->saveAchievement("300_tasks_done");
+            }
         }
     }
 
@@ -869,6 +881,22 @@ class User
         }
 
         $stmt = $this->dbh->prepare("SELECT nickname FROM users WHERE id = ?");
+        $stmt->execute([$this->id]);
+        return $stmt->fetchColumn() ?: '';
+    }
+
+    /**
+     * Get user's full name
+     *
+     * @return string
+     */
+    public function getFullName(): string
+    {
+        if (!$this->logged()) {
+            return '';
+        }
+
+        $stmt = $this->dbh->prepare("SELECT full_name FROM users WHERE id = ?");
         $stmt->execute([$this->id]);
         return $stmt->fetchColumn() ?: '';
     }
