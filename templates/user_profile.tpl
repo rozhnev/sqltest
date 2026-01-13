@@ -31,10 +31,24 @@
                                         <span id="nickname-display" class="nickname">{$User->nickname()}</span>
                                         <input type="text" id="nickname-input" class="nickname-input hidden" value="{$User->nickname()}" maxlength="50">
                                         <div class="profile-actions">
-                                            <button id="edit-btn" class="text-button edit-btn" onclick="toggleNicknameEdit(true)" title="{translate}edit_nickname{/translate}"></button>
-                                            <div id="save-cancel-btns" class="hidden save-cancel-btns">
+                                            <button id="nickname-edit-btn" class="text-button edit-btn" onclick="toggleFieldEdit('nickname', true)" title="{translate}edit_nickname{/translate}"></button>
+                                            <div id="nickname-save-cancel-btns" class="hidden save-cancel-btns">
                                                 <button class="text-button green save-btn" onclick="saveNickname()" title="{translate}save_changes{/translate}"></button>
-                                                <button class="text-button red cancel-btn" onclick="toggleNicknameEdit(false)" title="{translate}cancel{/translate}"></button>
+                                                <button class="text-button red cancel-btn" onclick="toggleFieldEdit('nickname', false)" title="{translate}cancel{/translate}"></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="profile-field">
+                                    <span class="profile-field-label">{translate}full_name{/translate}:</span>
+                                    <div class="nickname-container">
+                                        <span id="fullname-display" class="nickname">{$User->getFullName()|escape}</span>
+                                        <input type="text" id="fullname-input" class="nickname-input hidden" value="{$User->getFullName()|escape}" maxlength="100">
+                                        <div class="profile-actions">
+                                            <button id="fullname-edit-btn" class="text-button edit-btn" onclick="toggleFieldEdit('fullname', true)" title="{translate}edit_full_name{/translate}"></button>
+                                            <div id="fullname-save-cancel-btns" class="hidden save-cancel-btns">
+                                                <button class="text-button green save-btn" onclick="saveFullName()" title="{translate}save_changes{/translate}"></button>
+                                                <button class="text-button red cancel-btn" onclick="toggleFieldEdit('fullname', false)" title="{translate}cancel{/translate}"></button>
                                             </div>
                                         </div>
                                     </div>
@@ -49,10 +63,10 @@
                                         <span id="email-display" class="nickname">{$UserEmail|escape}</span>
                                         <input type="email" id="profile-email-input" class="nickname-input hidden" value="{$UserEmail|escape}" placeholder="{translate}email_placeholder{/translate}">
                                         <div class="profile-actions">
-                                            <button id="email-edit-btn" class="text-button edit-btn" onclick="toggleEmailEdit(true)" title="{translate}edit_email{/translate}"></button>
+                                            <button id="email-edit-btn" class="text-button edit-btn" onclick="toggleFieldEdit('email', true)" title="{translate}edit_email{/translate}"></button>
                                             <div id="email-save-cancel-btns" class="hidden save-cancel-btns">
                                                 <button id="save-email-btn" class="text-button green save-btn" onclick="saveEmailOnly()" title="{translate}save_changes{/translate}"></button>
-                                                <button class="text-button red cancel-btn" onclick="toggleEmailEdit(false)" title="{translate}cancel{/translate}"></button>
+                                                <button class="text-button red cancel-btn" onclick="toggleFieldEdit('email', false)" title="{translate}cancel{/translate}"></button>
                                             </div>
                                         </div>
                                     </div>
@@ -66,10 +80,10 @@
                                             <input id="profile-password-confirm-input" name="password_confirm" type="password" placeholder="{translate}confirm_password{/translate}" autocomplete="new-password" class="nickname-input" />
                                         </div>
                                         <div class="profile-actions">
-                                            <button id="password-edit-btn" class="text-button edit-btn" onclick="togglePasswordEdit(true)" title="{translate}edit_password{/translate}"></button>
+                                            <button id="password-edit-btn" class="text-button edit-btn" onclick="toggleFieldEdit('password', true)" title="{translate}edit_password{/translate}"></button>
                                             <div id="password-save-cancel-btns" class="hidden save-cancel-btns">
                                                 <button id="save-password-btn" class="text-button save-btn" onclick="savePasswordOnly()" title="{translate}save_changes{/translate}"></button>
-                                                <button class="text-button red cancel-btn" onclick="togglePasswordEdit(false)" title="{translate}cancel{/translate}"></button>
+                                                <button class="text-button red cancel-btn" onclick="toggleFieldEdit('password', false)" title="{translate}cancel{/translate}"></button>
                                             </div>
                                         </div>
                                     </div>
@@ -320,25 +334,49 @@
 </style>
 
 <script>
-function toggleNicknameEdit(show) {
-    const display = document.getElementById('nickname-display');
-    const input = document.getElementById('nickname-input');
-    const editBtn = document.getElementById('edit-btn');
-    const actionBtns = document.getElementById('save-cancel-btns');
+function toggleFieldEdit(fieldName, show) {
+    const display = document.getElementById(`${fieldName}-display`);
+    const editBtn = document.getElementById(`${fieldName}-edit-btn`);
+    const actionBtns = document.getElementById(`${fieldName}-save-cancel-btns`);
 
-    if (show) {
-        display.classList.add('hidden');
-        input.classList.remove('hidden');
-        editBtn.classList.add('hidden');
-        actionBtns.classList.remove('hidden');
-        input.focus();
-        input.select();
+    if (fieldName === 'password') {
+        const container = document.getElementById('password-edit-container');
+        const passInput = document.getElementById('profile-password-input');
+        const confirmInput = document.getElementById('profile-password-confirm-input');
+
+        if (show) {
+            display.classList.add('hidden');
+            container.classList.remove('hidden');
+            editBtn.classList.add('hidden');
+            actionBtns.classList.remove('hidden');
+            passInput.value = '';
+            confirmInput.value = '';
+            passInput.focus();
+        } else {
+            display.classList.remove('hidden');
+            container.classList.add('hidden');
+            editBtn.classList.remove('hidden');
+            actionBtns.classList.add('hidden');
+            passInput.value = '';
+            confirmInput.value = '';
+        }
     } else {
-        display.classList.remove('hidden');
-        input.classList.add('hidden');
-        editBtn.classList.remove('hidden');
-        actionBtns.classList.add('hidden');
-        input.value = display.textContent;
+        const input = document.getElementById(fieldName === 'email' ? 'profile-email-input' : `${fieldName}-input`);
+
+        if (show) {
+            display.classList.add('hidden');
+            input.classList.remove('hidden');
+            editBtn.classList.add('hidden');
+            actionBtns.classList.remove('hidden');
+            input.focus();
+            input.select();
+        } else {
+            display.classList.remove('hidden');
+            input.classList.add('hidden');
+            editBtn.classList.remove('hidden');
+            actionBtns.classList.add('hidden');
+            input.value = display.textContent;
+        }
     }
 }
 
@@ -359,7 +397,7 @@ function saveNickname() {
         .then(data => {
             if (data.ok) {
                 display.textContent = newNickname;
-                toggleNicknameEdit(false);
+                toggleFieldEdit('nickname', false);
                 showToast('info', '{/literal}{translate}nickname_updated{/translate}{literal}');
             } else {
                 showToast('error', data.error || '{/literal}{translate}update_failed{/translate}{literal}');
@@ -370,29 +408,39 @@ function saveNickname() {
             console.error('Error:', error);
         });
     } else {
-        toggleNicknameEdit(false);
+        toggleFieldEdit('nickname', false);
     }
 }
 
-function toggleEmailEdit(show) {
-    const display = document.getElementById('email-display');
-    const input = document.getElementById('profile-email-input');
-    const editBtn = document.getElementById('email-edit-btn');
-    const actionBtns = document.getElementById('email-save-cancel-btns');
+function saveFullName() {
+    const display = document.getElementById('fullname-display');
+    const input = document.getElementById('fullname-input');
+    const newFullName = input.value.trim();
 
-    if (show) {
-        display.classList.add('hidden');
-        input.classList.remove('hidden');
-        editBtn.classList.add('hidden');
-        actionBtns.classList.remove('hidden');
-        input.focus();
-        input.select();
+    if (newFullName !== display.textContent) {
+        fetch(`/${lang}/user/update`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ full_name: newFullName })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.ok) {
+                display.textContent = newFullName;
+                toggleFieldEdit('fullname', false);
+                showToast('info', '{/literal}{translate}fullname_updated{/translate}{literal}');
+            } else {
+                showToast('error', data.error || '{/literal}{translate}update_failed{/translate}{literal}');
+            }
+        })
+        .catch(error => {
+            showToast('error', '{/literal}{translate}update_failed{/translate}{literal}');
+            console.error('Error:', error);
+        });
     } else {
-        display.classList.remove('hidden');
-        input.classList.add('hidden');
-        editBtn.classList.remove('hidden');
-        actionBtns.classList.add('hidden');
-        input.value = display.textContent;
+        toggleFieldEdit('fullname', false);
     }
 }
 
@@ -414,7 +462,7 @@ function saveEmailOnly() {
     }
 
     if (newEmail === profileEmailCached) {
-        toggleEmailEdit(false);
+        toggleFieldEdit('email', false);
         return;
     }
 
@@ -431,7 +479,7 @@ function saveEmailOnly() {
             if (data.ok) {
                 profileEmailCached = newEmail;
                 display.textContent = newEmail;
-                toggleEmailEdit(false);
+                toggleFieldEdit('email', false);
                 showToast('info', data.message || '{/literal}{translate}profile_update_success{/translate}{literal}');
             } else {
                 showToast('error', data.error || '{/literal}{translate}update_failed{/translate}{literal}');
@@ -445,32 +493,6 @@ function saveEmailOnly() {
         });
 }
 
-function togglePasswordEdit(show) {
-    const display = document.getElementById('password-display');
-    const container = document.getElementById('password-edit-container');
-    const editBtn = document.getElementById('password-edit-btn');
-    const actionBtns = document.getElementById('password-save-cancel-btns');
-    const passInput = document.getElementById('profile-password-input');
-    const confirmInput = document.getElementById('profile-password-confirm-input');
-
-    if (show) {
-        display.classList.add('hidden');
-        container.classList.remove('hidden');
-        editBtn.classList.add('hidden');
-        actionBtns.classList.remove('hidden');
-        passInput.value = '';
-        confirmInput.value = '';
-        passInput.focus();
-    } else {
-        display.classList.remove('hidden');
-        container.classList.add('hidden');
-        editBtn.classList.remove('hidden');
-        actionBtns.classList.add('hidden');
-        passInput.value = '';
-        confirmInput.value = '';
-    }
-}
-
 function savePasswordOnly() {
     const passInput = document.getElementById('profile-password-input');
     const confirmInput = document.getElementById('profile-password-confirm-input');
@@ -480,7 +502,7 @@ function savePasswordOnly() {
     const confirm = confirmInput.value;
 
     if (!password) {
-        togglePasswordEdit(false);
+        toggleFieldEdit('password', false);
         return;
     }
 
@@ -500,7 +522,7 @@ function savePasswordOnly() {
     .then(response => response.json())
     .then(data => {
         if (data.ok) {
-            togglePasswordEdit(false);
+            toggleFieldEdit('password', false);
             showToast('info', data.message || '{/literal}{translate}profile_update_success{/translate}{literal}');
         } else {
             showToast('error', data.error || '{/literal}{translate}update_failed{/translate}{literal}');
