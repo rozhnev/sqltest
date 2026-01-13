@@ -36,7 +36,7 @@
             {/if}
         </header>
         <main>
-            {$User->logged() && $User->getNickname() === ''}
+            {if $User->logged() && $User->getNickname() === ''}
                 Update your <a href="/{$Lang}/profile">profile</a> by full name to make your achievement shares more personal.
             {/if}
             {if isset($ImageUrl) && $ImageUrl}
