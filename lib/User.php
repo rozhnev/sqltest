@@ -902,6 +902,31 @@ class User
     }
 
     /**
+     * Set user's full name
+     *
+     * @param string $fullName
+     * @return bool
+     * @throws Exception if full name is invalid or update fails
+     */
+    public function setFullName(string $fullName): bool
+    {
+        if (!$this->logged()) {
+            throw new Exception(Localizer::translateString('login_needed'));
+        }
+
+        $fullName = trim($fullName);
+        if (strlen($fullName) > 100) {
+            throw new Exception(Localizer::translateString('fullname_length_error'));
+        }
+
+        $stmt = $this->dbh->prepare("UPDATE users SET full_name = ? WHERE id = ?");
+        if (!$stmt->execute([$fullName, $this->id])) {
+            throw new Exception(Localizer::translateString('update_failed'));
+        }
+        return true;
+    }
+
+    /**
      * Set user's nickname
      *
      * @param string $nickname

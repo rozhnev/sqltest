@@ -37,7 +37,7 @@
         </header>
         <main>
             {if $User->logged() && $User->getFullName() === ''}
-                <div class="user-solutions-count" style="background: var(--db-description-background-color); color: white; padding: 12px 16px; margin: 16px; border-radius: 4px; display: flex; align-items: center; gap: 12px;">
+                <div class="user-solutions-count" style="max-width: 1200px; margin: 16px auto; width: 1200px;">
                     {translate}update_profile_full_name{/translate}
                 </div>
             {/if}
