@@ -36,26 +36,28 @@
             {/if}
         </header>
         <main>
-
-                {if isset($ImageUrl) && $ImageUrl}
-                    <div style="margin: 1rem 0; display: flex; justify-content: center;">
-                        <img
-                            src="{$ImageUrl|escape}"
-                            alt="{$AchievementTitle|escape}"
-                            loading="lazy"
-                        />
-                    </div>
-                {else}
-                    <div class="text-block" style="margin: 2rem auto; max-width: 700px;">
-                        <h2 style="margin-top: 0;">{translate}share_achievement_heading{/translate}</h2>
-                        <p style="margin: 0.5rem 0;">
-                            <strong>{$ShareUserName}</strong>
-                            {translate}share_achievement_earned{/translate}
-                            <strong>{$AchievementTitle}</strong>
-                            <span style="opacity: 0.8;">({$EarnedAt})</span>
-                        </p>
-                    </div>
-                {/if}
+            {$User->logged() && User->getNickname() === ''}
+                Update your <a href="/{$Lang}/profile">profile</a> by full name to make your achievement shares more personal.
+            {/if}
+            {if isset($ImageUrl) && $ImageUrl}
+                <div style="margin: 1rem 0; display: flex; justify-content: center;">
+                    <img
+                        src="{$ImageUrl|escape}"
+                        alt="{$AchievementTitle|escape}"
+                        loading="lazy"
+                    />
+                </div>
+            {else}
+                <div class="text-block" style="margin: 2rem auto; max-width: 700px;">
+                    <h2 style="margin-top: 0;">{translate}share_achievement_heading{/translate}</h2>
+                    <p style="margin: 0.5rem 0;">
+                        <strong>{$ShareUserName}</strong>
+                        {translate}share_achievement_earned{/translate}
+                        <strong>{$AchievementTitle}</strong>
+                        <span style="opacity: 0.8;">({$EarnedAt})</span>
+                    </p>
+                </div>
+            {/if}
 
                 {* {if $SolvedTasksRates}
                     <div style="max-width: 700px; margin: 0 auto 2rem; padding: 0 1rem; width: 100%;">
