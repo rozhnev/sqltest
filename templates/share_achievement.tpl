@@ -37,7 +37,9 @@
         </header>
         <main>
             {if $User->logged() && $User->getFullName() === ''}
-                {translate}update_profile_full_name{/translate}
+                <div class="user-solutions-count" style="background: var(--db-description-background-color); color: white; padding: 12px 16px; margin: 16px; border-radius: 4px; display: flex; align-items: center; gap: 12px;">
+                    {translate}update_profile_full_name{/translate}
+                </div>
             {/if}
             {if isset($ImageUrl) && $ImageUrl}
                 <div style="margin: 1rem 0; display: flex; justify-content: center;">

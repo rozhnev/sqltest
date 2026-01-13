@@ -210,6 +210,6 @@ $translations = [
     'start_practicing' => 'Começar a praticar',
     'welcome_page_title' => 'Bem-vindo ao SQLTest.online: Aprenda e pratique SQL',
     'welcome_page_description' => 'Comece sua jornada em SQL com desafios interativos e feedback em tempo real no SQLTest.online. Aprimore suas habilidades por meio de exercícios práticos e torne-se um usuário confiante de SQL.',
-    'update_profile_full_name' => 'Atualize seu <a href="/pt/profile">perfil</a> com seu nome completo para tornar suas conquistas mais pessoais.',
+    'update_profile_full_name' => 'Atualize seu <a class="button small green" href="/pt/user/profile">perfil</a> com seu nome completo para tornar suas conquistas mais pessoais.',
     'view_achievement' => 'Ver conquista',
 ];
