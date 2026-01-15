@@ -815,16 +815,16 @@ class User
             if ($count['total_quizzes'] === $count['quizzes_solved_count']) {
                 $this->saveAchievement("theory_done");
             }
-            if ($count['total_solved'] === 5) {
+            if ($count['total_solved'] == 5) {
                 $this->saveAchievement("five_tasks_completed");
             }
-            if ($count['total_solved'] === 100) {
+            if ($count['total_solved'] == 100) {
                 $this->saveAchievement("100_tasks_done");
             }
-            if ($count['total_solved'] === 200) {
+            if ($count['total_solved'] == 200) {
                 $this->saveAchievement("200_tasks_done");
             }
-            if ($count['total_solved'] === 300) {
+            if ($count['total_solved'] == 300) {
                 $this->saveAchievement("300_tasks_done");
             }
         }
