@@ -14,7 +14,7 @@ from urllib.error import URLError, HTTPError
 
 # Configuration
 CONFIG = {
-    'SITE_URL': 'https://sqlize.online',
+    'SITE_URL': 'https://api.sqlize.online',
     'TIMEOUT': 10,  # seconds for HTTP request timeout
     
     # Management server settings
