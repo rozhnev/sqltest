@@ -22,7 +22,7 @@ class Query
 
     private function setHash(): void 
     {
-        $ch = curl_init( "https://sqlize.online/hash.php" );
+        $ch = curl_init( "https://api.sqlize.online/hash.php" );
         if ($ch)
         {
             # Setup request to send json via POST.
@@ -52,7 +52,7 @@ class Query
     public function getResult(string $db, string $format) : string
     {
         $this->setHash();
-        $ch = curl_init( "https://sqlize.online/sqleval.php" );
+        $ch = curl_init( "https://api.sqlize.online/sqleval.php" );
         if ($ch)
         {
             $query = http_build_query([
@@ -60,7 +60,7 @@ class Query
                 'sql_version' => $db,
                 'format' => $format
             ]);
-            curl_setopt($ch, CURLOPT_URL, "https://sqlize.online/sqleval.php?$query");
+            curl_setopt($ch, CURLOPT_URL, "https://api.sqlize.online/sqleval.php?$query");
             curl_setopt($ch, CURLOPT_HTTPGET, true);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             # Send request.
