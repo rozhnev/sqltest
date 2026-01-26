@@ -65,7 +65,8 @@
         }
         .mariadb-header .top-menu-center
         {
-            max-width: 53%;
+            max-width: 70%;
+            margin-right: 50px;
         }
         .mariadb-header .divider
         {
@@ -151,17 +152,14 @@
             transform: translateY(-2px);
             box-shadow: 0 12px 25px rgba(21, 208, 255, 0.4);
         }
-
-        .hero-cta {
-            margin-top: 1.5rem;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            align-items: center;
-        }
-
         .mariadb-highlight {
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+
+        .mariadb-highlight,
+        .mariadb-grid {
+            display: grid;
+            gap: 1.5rem;
         }
 
         .mariadb-highlight > div,
@@ -394,10 +392,31 @@
     <div class="mariadb-shell">
             <header class="mariadb-header">
                 <div class="mariadb-header-inner">
+                    {assign var="path" value="/challenge-mariadb"}
                     {if $MobileView}
                         {include file='m.top-menu.tpl' path="/challenge-mariadb"}
                     {else}
-                        {include file='top-menu.tpl' path="/challenge-mariadb"}
+                        {if !isset($SitePromo)}
+                            {assign var="SitePromo" value="{translate}site_promo{/translate}"}
+                        {/if}
+                        {if !isset($SiteDescription)}
+                            {assign var="SiteDescription" value="{translate}site_description{/translate}"}
+                        {/if}
+                        <div class="top-menu-left">
+                            <a href="/{$Lang}/" target="_self" style="display: flex;">
+                                <h1 class="site-name-wrapper">
+                                    <span class="site-name">SQLtest</span>
+                                    <span class="site-promo">{$SitePromo}</span>
+                                </h1>
+                            </a>
+                            <div class="divider"></div>
+                        </div>
+                        <div class="top-menu-center">
+                            <span  class="site-description">{$SiteDescription}</span>
+                        </div>
+                        <div class="top-menu-switchers">
+                            {include file='lang-switcher.tpl'}
+                        </div>
                     {/if}
                 </div>
             </header>
