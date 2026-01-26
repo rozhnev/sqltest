@@ -394,7 +394,7 @@
                 <div class="mariadb-header-inner">
                     {assign var="path" value="/challenge-mariadb"}
                     {if $MobileView}
-                        <div class="top-menu-left" style="width: 25vw; display: flex; align-items: center; position: relative;">
+                        <div class="top-menu-left" style="width: 70vw; display: flex; align-items: center; position: relative; margin:0; min-height: 50px;">
                             <a href="/{$Lang}/" target="_self"><h1 class="site-name">SQLtest</h1></a>
                             <div id="achievements-popup" class="achievements-popup hidden"></div>
                         </div>
