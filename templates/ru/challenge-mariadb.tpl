@@ -6,7 +6,16 @@
         · Silversquare delta, Avenue Arnaud Fraiteur 15-23, 1050 Brussels
     </p>
     <div class="hero-cta">
-        <a class="mariadb-button" href="/{$Lang}/test/start">Регистрация</a>
+        {if $User->logged() === false}
+            <button type="button" class="mariadb-button mariadb-register-btn">Регистрация</button>
+            <button type="button" class="mariadb-button mariadb-login-btn">Войти</button>
+        {else}
+            {if !$LastTest || $LastTest.closed}
+                <a class="mariadb-button" href="/{$Lang}/challenge-mariadb/start">Начать викторину</a>
+            {else}
+                <a class="mariadb-button" href="/{$Lang}/test/{$LastTest.id}/question/">Продолжить викторину</a>
+            {/if}
+        {/if}
         <span class="hero-note">10 теоретических и практических вопросов · призы для первых 10 победителей на FOSDEM</span>
     </div>
 </section>
@@ -92,5 +101,7 @@
             Узнать подробности про MariaDB Day Brussels
         </a>
     </p>
+    {if $User->logged() === false}
     <a class="mariadb-button" href="/{$Lang}/test/start">Регистрация</a>
+    {/if}
 </section>

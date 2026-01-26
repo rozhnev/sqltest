@@ -67,6 +67,8 @@ class User
                 return $this->loginVK($_GET['payload']);
             case 'linkedin':
                 return $this->loginLinkedin($_GET['code']);
+            case 'password':
+                return $this->loginPassword((string)($request['email'] ?? ''), (string)($request['password'] ?? ''));
             case 'session':
                 return $this->loginSession($_SESSION);
             default:
@@ -92,6 +94,35 @@ class User
             }
         }
         return false;
+    }
+
+    public function loginPassword(string $email, string $password): bool
+    {
+        if ($email === '' || $password === '') {
+            return false;
+        }
+
+        $normalizedEmail = strtolower($email);
+        $stmt = $this->dbh->prepare("SELECT id, login, password_hash, grade, graded_at, (hide_ad_till is null or hide_ad_till < current_date) show_ad, admin, nickname
+            FROM users WHERE LOWER(email) = :email AND password_hash IS NOT NULL;");
+        $stmt->execute([':email' => $normalizedEmail]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        if (!$user || !password_verify($password, $user['password_hash'])) {
+            return false;
+        }
+
+        $this->id = $user['id'];
+        $this->login = $user['login'];
+        $this->grade = $user['grade'];
+        $this->graded_at = $user['graded_at'];
+        $this->show_ad = $user['show_ad'];
+        $this->admin = $user['admin'];
+        $this->nickname = $user['nickname'];
+
+        $update = $this->dbh->prepare("UPDATE users SET last_login_at = CURRENT_TIMESTAMP WHERE id = :id");
+        $update->execute([':id' => $this->id]);
+
+        return true;
     }
     /**
      * Proceed Linkedin login with code
@@ -416,6 +447,11 @@ class User
         return $this->id;
     }
 
+    private function generateUUID(): string
+    {
+        return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex(random_bytes(16)), 4));
+    }
+
     /**
      * Store new user in DB update id
      *
@@ -423,7 +459,7 @@ class User
      */
     public function upsert(): void
     {
-        $this->id = vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex(random_bytes(16)), 4));
+        $this->id = $this->generateUUID();
 
         $stmt = $this->dbh->prepare("
             INSERT INTO users (id, login) VALUES (?, ?) 
@@ -433,6 +469,37 @@ class User
         if ($stmt->execute([$this->id, $this->login])) {
             $this->id = (string)$stmt->fetchColumn();
         }
+    }
+    public function register(string $email, string $password): bool
+    {
+        $email = strtolower(trim($email));
+        if ($email === '') {
+            throw new Exception(Localizer::translateString('email_required'));
+        }
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            throw new Exception(Localizer::translateString('email_invalid'));
+        }
+        if (strlen($password) < 8) {
+            throw new Exception(Localizer::translateString('password_length_error'));
+        }
+
+        $login = $email . '@password';
+        $stmt = $this->dbh->prepare("SELECT 1 FROM users WHERE LOWER(email) = :email OR login = :login;");
+        $stmt->execute([':email' => $email, ':login' => $login]);
+        if ($stmt->fetch()) {
+            throw new Exception(Localizer::translateString('email_taken'));
+        }
+
+        $hash = password_hash($password, PASSWORD_DEFAULT);
+        $userId = $this->generateUUID();
+
+        $insert = $this->dbh->prepare("INSERT INTO users (id, login, email, password_hash, created_at, last_login_at) 
+            VALUES (:id, :login, :email, :hash, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);");
+        if (!$insert->execute([':id' => $userId, ':login' => $login, ':email' => $email, ':hash' => $hash])) {
+            throw new Exception(Localizer::translateString('something_went_wrong'));
+        }
+
+        return $this->loginPassword($email, $password);
     }
 
     /**

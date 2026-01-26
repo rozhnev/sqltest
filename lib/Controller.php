@@ -166,13 +166,61 @@ class Controller
      */
     public function login(array $params): void
     {
-        $this->user->login($params['loginProvider'], $_REQUEST);
-        if ($params['loginProvider'] !== 'session') {
-            $this->user->saveAchievement('registration');
+        $isAjax = (isset($_REQUEST['ajax']) && $_REQUEST['ajax'] === '1');
+        $success = $this->user->login($params['loginProvider'], $_REQUEST);
+
+        if ($success) {
+            if ($params['loginProvider'] !== 'session') {
+                $this->user->saveAchievement('registration');
+            }
+            $_SESSION["user_id"] = $this->user->getId();
+            $_SESSION["admin"] = $this->user->isAdmin();
         }
-        $_SESSION["user_id"] = $this->user->getId();
-        $_SESSION["admin"] = $this->user->isAdmin();
+        if ($isAjax) {
+            header('Content-Type: application/json');
+            if ($success) {
+                echo json_encode(['status' => 'ok']);
+            } else {
+                http_response_code(401);
+                echo json_encode(['status' => 'error', 'message' => Localizer::translateString('action_not_permiited')]);
+            }
+            exit();
+        }
+
+        if (!$success) {
+            $this->engine->assign('ErrorMessage', Localizer::translateString('action_not_permiited'));
+            $this->engine->display("error.tpl");
+            return;
+        }
+
         $this->engine->display("login_result.tpl");
+    }
+
+    public function register(array $params): void
+    {
+        header('Content-Type: application/json');
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            http_response_code(405);
+            echo json_encode(['status' => 'error', 'message' => Localizer::translateString('action_not_permiited')]);
+            exit();
+        }
+
+        try {
+            $email = trim((string)($_POST['email'] ?? ''));
+            $password = (string)($_POST['password'] ?? '');
+
+            if ($this->user->register($email, $password)) {
+                $_SESSION["user_id"] = $this->user->getId();
+                $_SESSION["admin"] = $this->user->isAdmin();
+                echo json_encode(['status' => 'ok']);
+                exit();
+            }
+
+            echo json_encode(['status' => 'error', 'message' => Localizer::translateString('something_went_wrong')]);
+        } catch (Exception $error) {
+            echo json_encode(['status' => 'error', 'message' => $error->getMessage()]);
+        }
+        exit();
     }
 
     public function logout(array $params): void
@@ -473,7 +521,7 @@ class Controller
         $this->engine->display("test_start.tpl");
     }
 
-    public function test_mariadb(array $params): void 
+    public function challenge_mariadb(array $params): void 
     {
         $meta = [
             'en' => [
@@ -494,9 +542,36 @@ class Controller
         $this->assignVariables([
             'PageTitle'       => $langMeta['title'],
             'PageDescription' => $langMeta['description'],
-            'Action'          => 'test-mariadb'
+            'Action'          => 'challenge-mariadb',
+            'User'            => $this->user
         ]);
-        $this->engine->display("test_mariadb.tpl");
+        if ($this->user->logged()) {
+            $this->engine->assign('LastTest', $this->user->getLastTest());
+        }
+        $this->engine->display("challenge-mariadb.tpl");
+    }
+
+    public function challenge_mariadb_start(array $params): void
+    {
+        if (!$this->user->logged()) {
+            header("Location: /" . $this->lang . "/challenge-mariadb");
+            exit();
+        }
+
+        $this->challenge_mariadb_create($params);
+    }
+
+    public function challenge_mariadb_create(array $params): void 
+    {
+        if (!$this->user->logged()) {
+            header("Location: /" . $this->lang . "/test/start");
+            exit();
+        }
+        $test = new Test($this->dbh, $this->lang, $this->user);
+
+        $userTestId = $test->challenge_mariadb_create();
+        $this->user->saveAchievement('get_challenge_mariadb');
+        header("Location: /" . $this->lang . "/test/$userTestId/question/");
     }
 
     public function test_create(array $params): void 

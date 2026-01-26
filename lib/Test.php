@@ -75,6 +75,32 @@ class Test
         return $this->id;
     }
 
+    public function challenge_mariadb_create(): string
+    {
+        $this->id = vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex(random_bytes(16)), 4));
+
+        $this->dbh->beginTransaction();
+        $stmt = $this->dbh->prepare("INSERT INTO tests (id, user_id, closed_at) VALUES (?, ?, CURRENT_TIMESTAMP + INTERVAL '3 hour')");
+        $stmt->execute([$this->id, $this->user->getId()]);
+
+        $stmt = $this->dbh->prepare("INSERT INTO test_questions (test_id, question_id) VALUES
+            (:test_id, 101),
+            (:test_id, 102),
+            (:test_id, 103),
+            (:test_id, 104),
+            (:test_id, 105),
+            (:test_id, 106),
+            (:test_id, 107),
+            (:test_id, 108),
+            (:test_id, 109),
+            (:test_id, 110);"
+         );
+        $stmt->execute([':test_id' => $this->id]);
+        $this->dbh->commit();
+
+        return $this->id;
+    }
+
     public function load(): void
     {
         if (!$this->id) {
