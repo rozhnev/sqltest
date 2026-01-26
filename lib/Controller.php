@@ -473,6 +473,32 @@ class Controller
         $this->engine->display("test_start.tpl");
     }
 
+    public function test_mariadb(array $params): void 
+    {
+        $meta = [
+            'en' => [
+                'title'       => 'SQLTest.online: MariaDB Day Brussels SQL Quiz',
+                'description' => 'Ten theoretical and practical questions for MariaDB Day Brussels with prizes on the FOSDEM stage.'
+            ],
+            'ru' => [
+                'title'       => 'SQLTest.online: SQL-челлендж MariaDB Day Брюссель',
+                'description' => 'Десять теоретических и практических заданий, связанные с MariaDB Day Brussels и призами на FOSDEM.'
+            ],
+            'pt' => [
+                'title'       => 'SQLTest.online: Quiz SQL do MariaDB Day Bruxelas',
+                'description' => 'Dez questões teóricas e práticas alinhadas ao MariaDB Day Bruxelas e prémios no FOSDEM.'
+            ]
+        ];
+
+        $langMeta = $meta[$this->lang] ?? $meta['en'];
+        $this->assignVariables([
+            'PageTitle'       => $langMeta['title'],
+            'PageDescription' => $langMeta['description'],
+            'Action'          => 'test-mariadb'
+        ]);
+        $this->engine->display("test_mariadb.tpl");
+    }
+
     public function test_create(array $params): void 
     {
         if (!$this->user->logged()) {

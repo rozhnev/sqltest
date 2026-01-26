@@ -15,6 +15,7 @@ class Router
         'question_solutions'=> "@(?<lang>ru|en|pt)/(?<class>question)/(?<questionID>\d+)/(?<action>solutions|my-solutions)@i",
         'solution'          => "@(?<lang>ru|en|pt)/(?<class>solution)/(?<solutionID>\d+)/(?<action>like|unlike|report|delete)@i",
         'tests'             => "@(?<lang>ru|en|pt)/(?<class>test)/(?<action>start|create)@i",
+        'test-mariadb'      => "@(?<lang>ru|en|pt)/(?<class>test)/(?<action>mariadb)/?@i",
         'test'              => "@(?<lang>ru|en|pt)/(?<class>test)/(?<testId>[a-z0-9-]+)/(?<action>grade|result)@i",
         'test_question'     => "@(?<lang>ru|en|pt)/(?<class>test)/(?<testId>[a-z0-9-]+)/(?<action>question|check)/?(?<questionID>\d+)?@i",
         'user'              => "@(?<lang>ru|en|pt)/(?<class>user)/(?<action>achievements|profile|update)@i",
