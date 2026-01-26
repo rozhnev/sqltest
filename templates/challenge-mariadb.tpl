@@ -394,7 +394,13 @@
                 <div class="mariadb-header-inner">
                     {assign var="path" value="/challenge-mariadb"}
                     {if $MobileView}
-                        {include file='m.top-menu.tpl' path="/challenge-mariadb"}
+                        <div class="top-menu-left" style="width: 25vw; display: flex; align-items: center; position: relative;">
+                            <a href="/{$Lang}/" target="_self"><h1 class="site-name">SQLtest</h1></a>
+                            <div id="achievements-popup" class="achievements-popup hidden"></div>
+                        </div>
+                        <div class="top-menu-switchers">
+                            {include file='lang-switcher.tpl'}
+                        </div>
                     {else}
                         {if !isset($SitePromo)}
                             {assign var="SitePromo" value="{translate}site_promo{/translate}"}
