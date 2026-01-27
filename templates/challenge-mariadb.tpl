@@ -359,7 +359,7 @@
         }
 
         .mariadb-auth-feedback {
-            margin: 0;
+            margin: 10px 0;
             font-size: 0.95rem;
             color: rgba(255, 255, 255, 0.85);
             min-height: 1.25rem;
@@ -367,7 +367,6 @@
 
         .mariadb-auth-feedback.error {
             color: #ffbaba;
-            margin: 10px 0;
         }
 
         @media (max-width: 768px) {
