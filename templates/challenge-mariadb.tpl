@@ -375,10 +375,6 @@
                 font-size: 0.95rem;
             }
 
-            .mariadb-shell {
-                padding-top: 1rem;
-            }
-
             header,
             footer {
                 padding: 0 0.5rem;
