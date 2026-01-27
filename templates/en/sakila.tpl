@@ -5,7 +5,7 @@
             display: inline-block;
         }
     </style>
-    <h2>Sakila Database (MySQL)</h2>
+    <h2>Sakila Database</h2>
     Sakila is an example database designed by MySQL, specifically created for learning and demonstrating the capabilities of relational database management systems (RDBMS).
     <p>
         <a class="button-erd" href="/{$Lang}/erd/Sakila" target="ERDWindow">

@@ -5,7 +5,7 @@
             display: inline-block;
         }
     </style>
-    <h2>Banco de Dados Sakila (MySQL)</h2>
+    <h2>Banco de Dados Sakila</h2>
     Sakila é um banco de dados de exemplo projetado pelo MySQL, criado especificamente para aprendizado e demonstração das capacidades dos sistemas de gerenciamento de banco de dados relacionais (RDBMS).
     <p>
         <a class="button-erd" href="/{$Lang}/erd/Sakila" target="ERDWindow">
