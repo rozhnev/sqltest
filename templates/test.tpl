@@ -36,7 +36,7 @@
                     background-color: var(--accordion-panel-bg-color);
                     padding:5px 15px; border: 1px solid var(--menu-link-color); margin: 5px; display: flex; flex-direction: column; justify-items: center;">
                     <div  style="display: flex; flex-direction: row; justify-items: center; margin: 1em 0;">
-                        <span>{translate}test_time_to_complete{/translate}: &nbsp;</span>
+                        <span>{translate}test_time_to_complete{/translate}&nbsp;</span>
                         <span id="test-timer-time" style="white-space: nowrap;"></span>
                     </div>
                     <span style="padding-bottom: 1em;">{translate}tasks_completed{/translate}: {$TestData.solved_questions_count} из {$TestData.questions_count}</span>
@@ -169,7 +169,7 @@
                     if (time > 0) {ldelim}
                         const minutes = time % 60;
                         const hours = (time - minutes) / 60;
-                        document.getElementById('test-timer-time').innerText = (hours > 0 ? `${ldelim}hours{rdelim} ` + (hours === 1 ? 'hour ': 'hours ') :'') + minutes + ' min';
+                        document.getElementById('test-timer-time').innerText = (hours > 0 ? `${ldelim}hours{rdelim} ` + (hours === 1 ? '{translate}hour{/translate} ': '{translate}hours{/translate} ') :'') + minutes + ' {translate}min{/translate}';
                     {rdelim} else {ldelim}
                         document.getElementById('test-timer').innerText = '{translate}test_time_over{/translate}'
                     {rdelim}
