@@ -204,7 +204,7 @@ class Test
      * @param int $limit
      * @return array
      */
-    public function getQuestionData(int $qusestionId): array 
+    public function getQuestionData(int $qusestionId, int $questionnireId = 2): array 
     {
         $stmt = $this->dbh->prepare("
             WITH question_data AS (SELECT 
@@ -241,7 +241,7 @@ class Test
             JOIN tests ON tests.id = question_data.test_id
             WHERE question_id = :question_id;");
 
-        $stmt->execute([':test_id' =>  $this->id, ':question_id' =>  $qusestionId, ':questionnire_id' => 2, ':lang' => $this->lang]);
+        $stmt->execute([':test_id' =>  $this->id, ':question_id' =>  $qusestionId, ':questionnire_id' => $questionnireId, ':lang' => $this->lang]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
