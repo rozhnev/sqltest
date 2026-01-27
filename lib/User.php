@@ -470,7 +470,7 @@ class User
             $this->id = (string)$stmt->fetchColumn();
         }
     }
-    public function register(string $email, string $password): bool
+    public function register(string $email, string $password, string $fullName): bool
     {
         $email = strtolower(trim($email));
         if ($email === '') {
@@ -483,6 +483,14 @@ class User
             throw new Exception(Localizer::translateString('password_length_error'));
         }
 
+        $fullName = trim($fullName);
+        if ($fullName === '') {
+            throw new Exception(Localizer::translateString('full_name_required'));
+        }
+        if (strlen($fullName) > 100) {
+            throw new Exception(Localizer::translateString('fullname_length_error'));
+        }
+
         $login = $email . '@password';
         $stmt = $this->dbh->prepare("SELECT 1 FROM users WHERE LOWER(email) = :email OR login = :login;");
         $stmt->execute([':email' => $email, ':login' => $login]);
@@ -493,9 +501,9 @@ class User
         $hash = password_hash($password, PASSWORD_DEFAULT);
         $userId = $this->generateUUID();
 
-        $insert = $this->dbh->prepare("INSERT INTO users (id, login, email, password_hash, created_at, last_login_at) 
-            VALUES (:id, :login, :email, :hash, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);");
-        if (!$insert->execute([':id' => $userId, ':login' => $login, ':email' => $email, ':hash' => $hash])) {
+        $insert = $this->dbh->prepare("INSERT INTO users (id, login, email, password_hash, full_name, created_at, last_login_at) 
+            VALUES (:id, :login, :email, :hash, :full_name, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);");
+        if (!$insert->execute([':id' => $userId, ':login' => $login, ':email' => $email, ':hash' => $hash, ':full_name' => $fullName])) {
             throw new Exception(Localizer::translateString('something_went_wrong'));
         }
 

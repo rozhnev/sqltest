@@ -208,8 +208,9 @@ class Controller
         try {
             $email = trim((string)($_POST['email'] ?? ''));
             $password = (string)($_POST['password'] ?? '');
+            $fullName = trim((string)($_POST['full_name'] ?? ''));
 
-            if ($this->user->register($email, $password)) {
+            if ($this->user->register($email, $password, $fullName)) {
                 $_SESSION["user_id"] = $this->user->getId();
                 $_SESSION["admin"] = $this->user->isAdmin();
                 echo json_encode(['status' => 'ok']);

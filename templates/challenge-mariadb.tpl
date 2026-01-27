@@ -432,12 +432,13 @@
         <div id="mariadb-registration-popup" class="mariadb-auth-popup" role="dialog" aria-modal="true" aria-labelledby="mariadb-registration-title">
             <div class="mariadb-auth-card">
                 <button type="button" class="mariadb-auth-close" aria-label="Close registration form">&times;</button>
-                <h3 id="mariadb-registration-title">Registration</h3>
-                <form id="mariadb-registration-form">
-                    <input type="email" name="email" class="mariadb-auth-input" placeholder="Email" required autocomplete="email">
-                    <input type="password" name="password" class="mariadb-auth-input" placeholder="Password" required minlength="8" autocomplete="new-password">
-                    <input type="password" name="password_confirm" class="mariadb-auth-input" placeholder="Confirm password" required minlength="8" autocomplete="new-password">
-                    <button type="submit" class="mariadb-button">Register</button>
+                <h3 id="mariadb-registration-title">{translate}register_form_title{/translate}</h3>
+                <form id="mariadb-registration-form" data-fullname-required="{translate}full_name_required{/translate}" data-fullname-length="{translate}fullname_length_error{/translate}">
+                    <input type="text" name="full_name" class="mariadb-auth-input" placeholder="{translate}full_name_placeholder{/translate}" required autocomplete="name" maxlength="100">
+                    <input type="email" name="email" class="mariadb-auth-input" placeholder="{translate}registration_email_placeholder{/translate}" required autocomplete="email">
+                    <input type="password" name="password" class="mariadb-auth-input" placeholder="{translate}registration_password_placeholder{/translate}" required minlength="8" autocomplete="new-password">
+                    <input type="password" name="password_confirm" class="mariadb-auth-input" placeholder="{translate}registration_password_confirm_placeholder{/translate}" required minlength="8" autocomplete="new-password">
+                    <button type="submit" class="mariadb-button">{translate}register_button{/translate}</button>
                 </form>
                 <p class="mariadb-auth-feedback" role="status"></p>
             </div>
@@ -445,12 +446,12 @@
         <div id="mariadb-login-popup" class="mariadb-auth-popup" role="dialog" aria-modal="true" aria-labelledby="mariadb-login-title">
             <div class="mariadb-auth-card">
                 <button type="button" class="mariadb-auth-close" aria-label="Close login form">&times;</button>
-                <h3 id="mariadb-login-title">Login</h3>
+                <h3 id="mariadb-login-title">{translate}login_form_title{/translate}</h3>
                 <form id="mariadb-login-form">
-                    <input type="email" name="email" class="mariadb-auth-input" placeholder="Email" required autocomplete="email">
-                    <input type="password" name="password" class="mariadb-auth-input" placeholder="Password" required autocomplete="current-password">
+                    <input type="email" name="email" class="mariadb-auth-input" placeholder="{translate}login_email_placeholder{/translate}" required autocomplete="email">
+                    <input type="password" name="password" class="mariadb-auth-input" placeholder="{translate}login_password_placeholder{/translate}" required autocomplete="current-password">
                     <input type="hidden" name="ajax" value="1">
-                    <button type="submit" class="mariadb-button">Login</button>
+                    <button type="submit" class="mariadb-button">{translate}login_button{/translate}</button>
                 </form>
                 <p class="mariadb-auth-feedback" role="status"></p>
             </div>
@@ -480,6 +481,7 @@
             const loginFeedback = loginPopup?.querySelector('.mariadb-auth-feedback');
             const registerPassword = registerForm?.querySelector('[name=password]');
             const registerConfirm = registerForm?.querySelector('[name=password_confirm]');
+            const registerFullName = registerForm?.querySelector('[name=full_name]');
             const registerUrl = '/{$Lang}/register';
             const loginUrl = '/login/password/?lang={$Lang}';
 
@@ -502,6 +504,8 @@
 
             const setRegisterFeedback = createFeedbackSetter(registerFeedback);
             const setLoginFeedback = createFeedbackSetter(loginFeedback);
+            const registerFullNameRequiredMessage = registerForm?.dataset.fullnameRequired || 'Full name is required';
+            const registerFullNameLengthMessage = registerForm?.dataset.fullnameLength || 'Full name must be 100 characters or less';
 
             registerBtn?.addEventListener('click', (event) => {
                 event.preventDefault();
@@ -520,12 +524,22 @@
 
             registerForm?.addEventListener('submit', async (event) => {
                 event.preventDefault();
-                if (!registerPassword || !registerConfirm) return;
+                if (!registerPassword || !registerConfirm || !registerFullName) return;
+                const trimmedName = registerFullName.value.trim();
+                if (trimmedName === '') {
+                    setRegisterFeedback(registerFullNameRequiredMessage, true);
+                    return;
+                }
+                if (trimmedName.length > 100) {
+                    setRegisterFeedback(registerFullNameLengthMessage, true);
+                    return;
+                }
                 if (registerPassword.value !== registerConfirm.value) {
                     setRegisterFeedback('Passwords do not match', true);
                     return;
                 }
 
+                registerFullName.value = trimmedName;
                 const data = new FormData(registerForm);
                 setRegisterFeedback('Submitting…');
 
