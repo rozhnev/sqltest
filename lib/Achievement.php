@@ -286,7 +286,7 @@ class Achievement
             $y = $contentTop + 70;
             foreach ($lines as $line) {
                 imagettftext($im, $titleFontSize, 0, $textX, $y, $text, $font, $line);
-                $y += 58;
+                $y += 72;
             }
 
             // Subtitle.
