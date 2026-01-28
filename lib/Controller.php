@@ -707,7 +707,7 @@ class Controller
             $this->engine->display("error.tpl");
             exit();
         }
-        $template = "check_test_solution.tpl";
+        $template = $this->lang . "/check_test_solution.tpl";
 
         $attemptStatus = $test->getQuestionAttemptStatus($params['questionID']);
         if (!$attemptStatus['ok']) {
