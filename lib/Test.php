@@ -80,20 +80,18 @@ class Test
         $this->id = vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex(random_bytes(16)), 4));
 
         $this->dbh->beginTransaction();
-        $stmt = $this->dbh->prepare("INSERT INTO tests (id, user_id, closed_at) VALUES (?, ?, CURRENT_TIMESTAMP + INTERVAL '3 hour')");
+        $stmt = $this->dbh->prepare("INSERT INTO tests (id, user_id, closed_at, questionnire_id) VALUES (?, ?, CURRENT_TIMESTAMP + INTERVAL '3 hour')");
         $stmt->execute([$this->id, $this->user->getId()]);
 
         $stmt = $this->dbh->prepare("INSERT INTO test_questions (test_id, question_id) VALUES
-            (:test_id, 101),
-            (:test_id, 102),
-            (:test_id, 103),
-            (:test_id, 104),
-            (:test_id, 105),
-            (:test_id, 106),
-            (:test_id, 107),
-            (:test_id, 108),
-            (:test_id, 109),
-            (:test_id, 110);"
+            (:test_id, 20, 999),
+            (:test_id, 43, 999),
+            (:test_id, 80, 999),
+            (:test_id, 81, 999),
+            (:test_id, 387, 999),
+            (:test_id, 388, 999),
+            (:test_id, 389, 999),
+            (:test_id, 390, 999);"
          );
         $stmt->execute([':test_id' => $this->id]);
         $this->dbh->commit();
@@ -122,7 +120,7 @@ class Test
             JOIN questions on questions.id = test_questions.question_id
             JOIN questions_localization on questions_localization.question_id = questions.id AND questions_localization.language = :lang
             JOIN question_categories ON question_categories.question_id = questions.id
-            JOIN categories ON categories.id = question_categories.category_id and categories.questionnire_id = 2
+            JOIN categories ON categories.id = question_categories.category_id and categories.questionnire_id = tests.questionnire_id
             JOIN categories_localization ON categories_localization.category_id = categories.id AND categories_localization.language =  :lang
             WHERE tests.id = :test_id
             ORDER BY categories.sequence_position, question_categories.sequence_position
@@ -189,9 +187,10 @@ class Test
     {
         $stmt = $this->dbh->prepare("SELECT questions.id
             FROM test_questions
+            JOIN tests on tests.id = test_questions.test_id
             JOIN questions ON questions.id = test_questions.question_id 
             JOIN question_categories ON question_categories.question_id = questions.id
-            JOIN categories ON categories.id = question_categories.category_id and categories.questionnire_id = 2
+            JOIN categories ON categories.id = question_categories.category_id and categories.questionnire_id = tests.questionnire_id
             WHERE test_id = :test_id AND test_questions.solved_at is null AND attempts < max_attempts
             ORDER BY categories.sequence_position, question_categories.sequence_position
             LIMIT 1;");
@@ -204,7 +203,7 @@ class Test
      * @param int $limit
      * @return array
      */
-    public function getQuestionData(int $qusestionId, int $questionnireId = 2): array 
+    public function getQuestionData(int $qusestionId): array 
     {
         $stmt = $this->dbh->prepare("
             WITH question_data AS (SELECT 
@@ -226,13 +225,14 @@ class Test
                 (3 - attempts) possible_attempts,
                 question_categories.category_id 
             FROM questions
+            JOIN test_questions ON test_questions.question_id = questions.id AND test_id = :test_id
+            JOIN tests ON tests.id = test_questions.test_id
             JOIN questions_localization on questions_localization.question_id = questions.id AND questions_localization.language = :lang
             JOIN question_rates ON question_rates.id = questions.rate
             JOIN question_rates_localization ON question_rates_localization.id = question_rates.id AND question_rates_localization.language =  :lang
             JOIN question_categories ON questions.id = question_categories.question_id
-            JOIN categories on categories.id = category_id AND questionnire_id = :questionnire_id
+            JOIN categories on categories.id = category_id AND categories.questionnire_id = tests.questionnire_id
             JOIN categories_localization ON categories_localization.category_id = categories.id AND categories_localization.language =  :lang
-            JOIN test_questions ON test_questions.question_id = questions.id AND test_id = :test_id
             ) SELECT 
                 question_data.*,
                 to_char(tests.closed_at, 'YYYY-MM-DD HH24:MI:SSOF') closed_at,
@@ -241,7 +241,7 @@ class Test
             JOIN tests ON tests.id = question_data.test_id
             WHERE question_id = :question_id;");
 
-        $stmt->execute([':test_id' =>  $this->id, ':question_id' =>  $qusestionId, ':questionnire_id' => $questionnireId, ':lang' => $this->lang]);
+        $stmt->execute([':test_id' =>  $this->id, ':question_id' =>  $qusestionId, ':lang' => $this->lang]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
