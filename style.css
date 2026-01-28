@@ -948,6 +948,7 @@ input:checked + .slider:before {
     background-color: var(--text-block-background-color);
     box-shadow: 0 25px 45px var(--test-timer-shadow);
     transition: border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+    width: 95%;
     max-width: 95%;
 }
 .test-overview .timer-copy {
