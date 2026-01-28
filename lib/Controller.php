@@ -689,7 +689,7 @@ class Controller
             'Questionnire'          => $test->getQuestionnire(),
             'TestData'              => $test->getData(),
         ]);
-        $this->engine->display("test.tpl");
+        $this->engine->display($this->isMobileView() ? "m.test.tpl" : "test.tpl");
     }
 
     public function test_check(array $params): void 
