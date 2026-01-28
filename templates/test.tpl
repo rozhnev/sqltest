@@ -37,7 +37,7 @@
                             {translate}test_time_to_complete{/translate}
                             <span id="test-timer-time" class="timer-value"></span>
                         </span>
-                        <span class="timer-progress">{translate}tasks_completed{/translate}: {$TestData.solved_questions_count} из {$TestData.questions_count}</span>
+                        <span class="timer-progress">{translate}tasks_completed{/translate}: {$TestData.solved_questions_count} {translate}from{/translate} {$TestData.questions_count}</span>
                     </div>
                     <a class="button green timer-action" id="doneTest" href="/{$Lang}/test/{$TestId}/result">{translate}test_show_result{/translate}</a>
                 </div>

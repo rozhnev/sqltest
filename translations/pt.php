@@ -127,6 +127,7 @@ $translations = [
     'hour' => 'hora',
     'hours' => 'horas',
     'min' => 'min',
+    'from' => 'de',
     'tasks_completed' => 'Tarefas concluídas',
     'test_time_over' => 'O tempo do teste acabou!',
     'test_time_out' => 'O tempo previsto para a conclusão do teste expirou.',

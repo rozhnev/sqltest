@@ -134,6 +134,7 @@ $translations = [
     'hour' => 'час',
     'hours' => 'часа',
     'min' => 'мин',
+    'from' => 'из',
     'tasks_completed' => 'Выполнено задач',
     'test_time_over' => 'Время вышло!',
     'test_time_out' => 'Время отведенное на выполнение теста вышло.',
