@@ -218,7 +218,7 @@ class Test
                 ROW_NUMBER() OVER (PARTITION BY question_categories.category_id ORDER BY question_categories.sequence_position) number,
                 LAG(test_questions.question_id) OVER (ORDER BY questions.rate) previous_question_id,
                 LEAD(test_questions.question_id) OVER (ORDER BY questions.rate) next_question_id,
-                solved_at solved_date,
+                to_char(solved_at, 'YYYY-MM-dd HH24:mm:ss') solved_date,
                 to_char(last_attempt_at, 'YYYY-MM-dd HH24:mm:ss') last_attempt_at,
                 categories.title_sef category_sef,
                 last_answer last_query,
