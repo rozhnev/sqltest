@@ -141,8 +141,12 @@
                         </span>
                     </button>
                 {else}
-                    <button class="button gray">
-                        {translate}question_maximum_attempts_used{/translate}
+                    <button class="button gray" disabled>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="12" cy="12" r="10" stroke="#E60000" stroke-width="2"/>
+                            <path d="M11 7H13V13H11V7ZM11 15V17H13V15H11Z" fill="#E60000"/>
+                        </svg>
+                        <span>{translate}question_maximum_attempts_used{/translate}</span>
                     </button>
                 {/if}
                 {if $Question.next_question_id}

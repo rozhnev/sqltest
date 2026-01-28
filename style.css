@@ -188,6 +188,11 @@ main {
     color: white;
     background-color: #11926E;
 }
+.button.gray,
+.button-small.gray {
+    color: white;
+    background-color: gray;
+}
 .button.blue {
     background-color: var(--blue-btn-background);
 }
