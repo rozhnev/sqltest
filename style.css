@@ -941,7 +941,7 @@ input:checked + .slider:before {
     justify-content: space-between;
     align-items: center;
     gap: 1.25rem;
-    padding: 1rem;
+    padding: 0.5rem;
     margin: 0.75rem 0 1.25rem;
     border: 1px solid var(--text-block-border-color);
     border-radius: 6px;
@@ -958,7 +958,7 @@ input:checked + .slider:before {
 .test-overview .timer-title {
     font-size: 1rem;
     font-weight: 600;
-    color: var(--regular-text-color);
+    color: var(--test-timer-muted-text);
     display: inline-flex;
     align-items: center;
     gap: 0.35rem;
