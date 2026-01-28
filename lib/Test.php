@@ -194,8 +194,8 @@ class Test
             WHERE test_id = :test_id
             ORDER BY 
                 test_questions.solved_at is not null,  
-                (attempts < max_attempts), 
-                (max_attempts - attempts), 
+                (attempts < max_attempts) DESC, 
+                (max_attempts - attempts) DESC, 
                 categories.sequence_position, 
                 question_categories.sequence_position
             LIMIT 1;");
