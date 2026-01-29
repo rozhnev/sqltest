@@ -1,4 +1,13 @@
 {if $QueryTestResult.ok}
+    {assign var="successPhrases" value=[
+        "Brilliant query!",
+        "Great job — this one’s perfect!",
+        "You’re on fire, keep it up!",
+        "That’s a winner!",
+        "Nicely done — keep shining!"
+    ]}
+    {assign var="successIndex" value=$successPhrases|@array_rand}
+    {assign var="successPhrase" value=$successPhrases[$successIndex]}
     <style>
         .qts-celebration {
             position: relative;
@@ -18,8 +27,8 @@
             font-size: 1.35rem;
             font-weight: 700;
             color: inherit;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            text-transform: none;
         }
 
         .qts-message-glimmer {
@@ -114,7 +123,7 @@
 
     <div class="qts-celebration">
         <div class="qts-message">
-            Great! You have completed the task!
+            {$successPhrase}
             <span class="qts-message-glimmer">✨</span>
         </div>
         <div class="qts-badge">Mission: accomplished</div>
@@ -147,56 +156,112 @@
 {elseif array_key_exists('hints', $QueryTestResult) && array_key_exists('timeOut', $QueryTestResult.hints)}
     {translate}test_time_out{/translate} {translate}go_to_rate{/translate}
 {else}
+    {assign var="errorPhrases" value=[
+        "Try again—little tweak, big win!",
+        "So close! Polish this and it’s yours.",
+        "Almost there—give it another shot!",
+        "A small tweak and you’ll hit the bullseye.",
+        "Nice effort—re-run with a tiny change."
+    ]}
+    {assign var="errorIndex" value=$errorPhrases|@array_rand}
+    {assign var="errorPhrase" value=$errorPhrases[$errorIndex]}
     <style>
         .qts-error-card {
-            border: 1px solid var(--sql-color, #5a9bd8);
-            border-radius: 0.85rem;
-            padding: 1.1rem 1.25rem;
+            border: 1px solid var(--border-color, #0B4FCC);
+            border-radius: 1rem;
+            padding: 1.25rem 1.5rem;
             background:
-                radial-gradient(circle at 20% -5%, rgba(235, 248, 255, 0.9), rgba(235, 248, 255, 0) 45%),
-                linear-gradient(180deg, rgba(207, 229, 255, 0.55), rgba(92, 133, 196, 0.25));
-            box-shadow: 0 12px 28px rgba(18, 54, 99, 0.22);
-            animation: qts-breathe 3s ease-in-out infinite;
+                radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0) 50%),
+                linear-gradient(200deg, rgba(251, 125, 125, 0.3), rgba(173, 48, 64, 0.55));
             color: var(--regular-text-color, #f0f6fc);
+            box-shadow: 0 18px 42px rgba(77, 9, 16, 0.35);
+            animation: qts-breath 4s ease-in-out infinite;
             margin-bottom: 1rem;
+            position: relative;
+            overflow: hidden;
         }
 
-        .qts-error-header {
-            display: flex;
-            align-items: baseline;
-            justify-content: space-between;
-            gap: 0.5rem;
+        .qts-error-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 70% 50%, rgba(255, 255, 255, 0.25), transparent 60%);
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        .qts-error-stars {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        .qts-error-star {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accordion-hover, #006EF5);
+            animation: qts-twinkle 2.8s ease-in-out infinite;
+        }
+
+        .qts-error-body {
+            position: relative;
+            z-index: 1;
         }
 
         .qts-error-message {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-weight: 700;
-            letter-spacing: 0.03em;
-            color: var(--sql-color, #f85149);
+            letter-spacing: 0.04em;
+            color: var(--accordion-hover-border, #F0F6FC);
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
         }
 
         .qts-error-emoji {
-            font-size: 1.35rem;
-            animation: qts-floating 2.2s ease-in-out infinite;
+            font-size: 1.5rem;
+            animation: qts-hug 2.8s ease-in-out infinite;
         }
 
-        .qts-error-hints {
-            margin-top: 0.85rem;
+        .qts-error-helper {
+            margin-top: 0.55rem;
+            font-size: 0.95rem;
             color: var(--question-text, #f0f6fc);
         }
 
-        .qts-error-hints p {
-            margin: 0.35rem 0;
-        }
-
         .qts-error-cta {
-            margin-top: 0.8rem;
+            margin-top: 0.6rem;
             font-weight: 600;
             letter-spacing: 0.08em;
-            color: var(--question-text, #0B4FCC);
+            color: var(--accordion-active, #006EF5);
         }
 
-        @keyframes qts-breathe {
+        .qts-error-hints {
+            margin-top: 0.8rem;
+            color: var(--question-text, #f0f6fc);
+            line-height: 1.4;
+        }
+
+        .qts-error-hints p {
+            margin: 0.3rem 0;
+        }
+
+        .qts-error-referral {
+            margin-top: 0.85rem;
+        }
+
+        .qts-error-referral .referral-link {
+            border-radius: 0.75rem;
+            padding: 0.7rem 1.1rem;
+            border: 1px dashed rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.07);
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        @keyframes qts-breath {
             0% {
                 transform: scale(1);
             }
@@ -208,75 +273,84 @@
             }
         }
 
-        @keyframes qts-floating {
+        @keyframes qts-twinkle {
             0% {
-                transform: translateY(2px);
+                opacity: 0;
+                transform: scale(0.7);
             }
             50% {
-                transform: translateY(-4px);
+                opacity: 1;
+                transform: scale(1);
             }
             100% {
-                transform: translateY(2px);
+                opacity: 0;
+                transform: scale(0.7);
             }
         }
 
-        .qts-error-referral {
-            margin-top: 0.8rem;
-        }
-
-        .qts-error-referral .referral-link {
-            border-radius: 999px;
-            padding: 0.75rem 1rem;
-            border: 1px dashed rgba(255, 255, 255, 0.4);
-            background: rgba(255, 255, 255, 0.05);
-            font-size: 0.9rem;
-            text-align: center;
+        @keyframes qts-hug {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-3px);
+            }
+            100% {
+                transform: translateY(0);
+            }
         }
     </style>
 
-    <div class="qts-error-card" role="status" aria-live="assertive">
-        <div class="qts-error-header">
-            <div class="qts-error-message">
-                Almost there!
-                <span class="qts-error-emoji" role="img" aria-label="smiley">🤏</span>
-            </div>
-            <div class="qts-error-cta">Just tweak it and run again.</div>
+    <div class="qts-error-card" role="status" aria-live="polite">
+        <div class="qts-error-stars" aria-hidden="true">
+            <span class="qts-error-star" style="top: 8%; left: 15%; animation-delay: 0s"></span>
+            <span class="qts-error-star" style="top: 35%; left: 80%; animation-delay: 0.5s"></span>
+            <span class="qts-error-star" style="top: 60%; left: 40%; animation-delay: 1s"></span>
+            <span class="qts-error-star" style="top: 20%; left: 60%; animation-delay: 1.3s"></span>
         </div>
-        {if array_key_exists('hints', $QueryTestResult) }
-            <div class="qts-error-hints">
-                {if array_key_exists('queryError', $QueryTestResult.hints) }
-                    <p>Hint: the query returns the error: <span class="sql_error">{$QueryTestResult.hints.queryError}</span></p>
-                {/if}
-                {if array_key_exists('columnsCount', $QueryTestResult.hints) }
-                    <p>Hint: the result table must consist of {$QueryTestResult.hints.columnsCount} columns.</p>
-                {/if}
-                {if array_key_exists('columnsList', $QueryTestResult.hints) }
-                    <p>Hint: the resulting table should consist of the following columns: {$QueryTestResult.hints.columnsList}.</p>
-                {/if}
-                {if array_key_exists('rowsCount', $QueryTestResult.hints) }
-                    <p>Hint: the result must contain {$QueryTestResult.hints.rowsCount} rows.</p>
-                {/if}
-                {if array_key_exists('rowsData', $QueryTestResult.hints) }
-                    <p>Hint: the row number {$QueryTestResult.hints.rowsData.rowNumber} of the results table should contain the following values: 
-                        {$QueryTestResult.hints.rowsData.rowTable}
-                    </p>
-                    <p>your result:
-                        {$QueryTestResult.hints.rowsData.resultTable}
-                    </p>
-                {/if}
-                {if array_key_exists('emptyQuery', $QueryTestResult.hints) }
-                    <p>Hint: your query is empty.</p>
-                {/if}
+        <div class="qts-error-body">
+            <div class="qts-error-message">
+                {$errorPhrase}
+                <span class="qts-error-emoji" role="img" aria-label="sparkle">✨</span>
             </div>
-        {/if}
-        {if isset($ReferralLink)}
-            <div class="qts-error-referral">
-                <a id="referral-link" target="_blank" href="{$ReferralLink.link}">
-                    <div class="referral-link">
-                        {$ReferralLink.content}
-                    </div>
-                </a>
-            </div>
-        {/if}
+            {* <div class="qts-error-helper">We've got hints below to guide you toward the perfect query.</div> *}
+            {if array_key_exists('hints', $QueryTestResult)}
+                <div class="qts-error-hints">
+                    {if array_key_exists('queryError', $QueryTestResult.hints)}
+                        <p>Hint: the query returns the error: <span class="sql_error">{$QueryTestResult.hints.queryError}</span></p>
+                    {/if}
+                    {if array_key_exists('columnsCount', $QueryTestResult.hints)}
+                        <p>Hint: the result table must consist of {$QueryTestResult.hints.columnsCount} columns.</p>
+                    {/if}
+                    {if array_key_exists('columnsList', $QueryTestResult.hints)}
+                        <p>Hint: the resulting table should consist of the following columns: {$QueryTestResult.hints.columnsList}.</p>
+                    {/if}
+                    {if array_key_exists('rowsCount', $QueryTestResult.hints)}
+                        <p>Hint: the result must contain {$QueryTestResult.hints.rowsCount} rows.</p>
+                    {/if}
+                    {if array_key_exists('rowsData', $QueryTestResult.hints)}
+                        <p>Hint: the row number {$QueryTestResult.hints.rowsData.rowNumber} of the results table should contain the following values:
+                            {$QueryTestResult.hints.rowsData.rowTable}
+                        </p>
+                        <p>your result:
+                            {$QueryTestResult.hints.rowsData.resultTable}
+                        </p>
+                    {/if}
+                    {if array_key_exists('emptyQuery', $QueryTestResult.hints)}
+                        <p>Hint: your query is empty.</p>
+                    {/if}
+                </div>
+            {/if}
+            <div class="qts-error-cta">Keep going—you’re almost there.</div>
+            {if isset($ReferralLink)}
+                <div class="qts-error-referral">
+                    <a id="referral-link" target="_blank" href="{$ReferralLink.link}">
+                        <div class="referral-link">
+                            {$ReferralLink.content}
+                        </div>
+                    </a>
+                </div>
+            {/if}
+        </div>
     </div>
 {/if}
