@@ -190,19 +190,28 @@
             pointer-events: none;
         }
 
-        .qts-error-stars {
+        .qts-wisp {
             position: absolute;
-            inset: 0;
+            left: 70%;
+            top: 15%;
+            width: 3px;
+            height: 70px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0));
+            border-radius: 999px;
+            filter: blur(0.5px);
+            animation: qts-wisp-fade 3.6s ease-in-out infinite;
             pointer-events: none;
         }
 
-        .qts-error-star {
+        .qts-wisp::after {
+            content: '';
             position: absolute;
-            width: 6px;
-            height: 6px;
+            bottom: 12px;
+            left: -5px;
+            width: 18px;
+            height: 18px;
             border-radius: 50%;
-            background: var(--accordion-hover, #006EF5);
-            animation: qts-twinkle 2.8s ease-in-out infinite;
+            border: 1px solid rgba(255, 255, 255, 0.6);
         }
 
         .qts-error-body {
@@ -273,18 +282,18 @@
             }
         }
 
-        @keyframes qts-twinkle {
+        @keyframes qts-wisp-fade {
             0% {
-                opacity: 0;
-                transform: scale(0.7);
+                opacity: 0.2;
+                transform: translateY(0);
             }
             50% {
-                opacity: 1;
-                transform: scale(1);
+                opacity: 0.9;
+                transform: translateY(-10px) scaleX(1.1);
             }
             100% {
-                opacity: 0;
-                transform: scale(0.7);
+                opacity: 0.2;
+                transform: translateY(0);
             }
         }
 
@@ -302,18 +311,11 @@
     </style>
 
     <div class="qts-error-card" role="status" aria-live="polite">
-        <div class="qts-error-stars" aria-hidden="true">
-            <span class="qts-error-star" style="top: 8%; left: 15%; animation-delay: 0s"></span>
-            <span class="qts-error-star" style="top: 35%; left: 80%; animation-delay: 0.5s"></span>
-            <span class="qts-error-star" style="top: 60%; left: 40%; animation-delay: 1s"></span>
-            <span class="qts-error-star" style="top: 20%; left: 60%; animation-delay: 1.3s"></span>
-        </div>
+        <div class="qts-wisp" aria-hidden="true"></div>
         <div class="qts-error-body">
             <div class="qts-error-message">
                 {$errorPhrase}
-                <span class="qts-error-emoji" role="img" aria-label="sparkle">✨</span>
             </div>
-            {* <div class="qts-error-helper">We've got hints below to guide you toward the perfect query.</div> *}
             {if array_key_exists('hints', $QueryTestResult)}
                 <div class="qts-error-hints">
                     {if array_key_exists('queryError', $QueryTestResult.hints)}
