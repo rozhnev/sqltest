@@ -83,15 +83,15 @@ class Test
         $stmt = $this->dbh->prepare("INSERT INTO tests (id, user_id, closed_at, questionnire_id) VALUES (?, ?, CURRENT_TIMESTAMP + INTERVAL '3 hour', 999)");
         $stmt->execute([$this->id, $this->user->getId()]);
 
-        $stmt = $this->dbh->prepare("INSERT INTO test_questions (test_id, question_id) VALUES
-            (:test_id, 20),
-            (:test_id, 43),
-            (:test_id, 80),
-            (:test_id, 21),
-            (:test_id, 387),
-            (:test_id, 388),
-            (:test_id, 389),
-            (:test_id, 390);"
+        $stmt = $this->dbh->prepare("INSERT INTO test_questions (test_id, question_id, max_attempts) VALUES
+            (:test_id, 20, 5),
+            (:test_id, 43, 5),
+            (:test_id, 80, 5),
+            (:test_id, 21, 5),
+            (:test_id, 387, 3),
+            (:test_id, 388, 3),
+            (:test_id, 389, 3),
+            (:test_id, 390, 3);"
          );
         $stmt->execute([':test_id' => $this->id]);
         $this->dbh->commit();
