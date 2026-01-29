@@ -401,9 +401,9 @@
                             <a href="/{$Lang}/" target="_self"><h1 class="site-name">SQLtest</h1></a>
                             <div id="achievements-popup" class="achievements-popup hidden"></div>
                         </div>
-                        <div class="top-menu-switchers">
+                        {* <div class="top-menu-switchers">
                             {include file='lang-switcher.tpl'}
-                        </div>
+                        </div> *}
                     {else}
                         {if !isset($SitePromo)}
                             {assign var="SitePromo" value="{translate}site_promo{/translate}"}
