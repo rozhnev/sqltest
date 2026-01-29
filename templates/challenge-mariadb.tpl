@@ -16,6 +16,7 @@
             color: #f5fbff;
             font-family: 'Space Grotesk', 'Inter', 'Segoe UI', system-ui, sans-serif;
             line-height: 1.5em;
+            height: fit-content;
         }
 
         .mariadb-shell {
