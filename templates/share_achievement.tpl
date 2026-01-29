@@ -60,40 +60,6 @@
                     </p>
                 </div>
             {/if}
-
-                {* {if $SolvedTasksRates}
-                    <div style="max-width: 700px; margin: 0 auto 2rem; padding: 0 1rem; width: 100%;">
-                        <div style="display: flex; height: 16px; width: 100%; border-radius: 8px; overflow: hidden; margin: 1.5rem 0 1rem; background-color: #e9ecef; box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);">
-                            {foreach $SolvedTasksRates as $rate}
-                                {assign var="color" value="#6c757d"}
-                                {if $rate.rate == 1}{assign var="color" value="#28a745"}
-                                {elseif $rate.rate == 2}{assign var="color" value="#ffc107"}
-                                {elseif $rate.rate == 3}{assign var="color" value="#fd7e14"}
-                                {elseif $rate.rate == 4}{assign var="color" value="#dc3545"}
-                                {elseif $rate.rate == 5}{assign var="color" value="#212529"}
-                                {/if}
-                                <div style="width: {$rate.count}%; background-color: {$color};" title="{$rate.rate_title}: {$rate.count}"></div>
-                            {/foreach}
-                        </div>
-                        <div style="display: flex; flex-wrap: wrap; gap: 1rem 2rem; justify-content: center; font-size: 0.85rem; color: var(--question-text);">
-                            {foreach $SolvedTasksRates as $rate}
-                                {assign var="color" value="#6c757d"}
-                                {if $rate.rate == 1}{assign var="color" value="#28a745"}
-                                {elseif $rate.rate == 2}{assign var="color" value="#ffc107"}
-                                {elseif $rate.rate == 3}{assign var="color" value="#fd7e14"}
-                                {elseif $rate.rate == 4}{assign var="color" value="#dc3545"}
-                                {elseif $rate.rate == 5}{assign var="color" value="#212529"}
-                                {/if}
-                                <div style="display: flex; align-items: center; gap: 0.4rem;">
-                                    <span style="display: inline-block; width: 10px; height: 10px; border-radius: 50%; background-color: {$color};"></span>
-                                    <span style="font-weight: 500;">{$rate.rate_title}:</span>
-                                    <strong style="font-weight: 700;">{$rate.count}</strong>
-                                </div>
-                            {/foreach}
-                        </div>
-                    </div>
-                {/if} *}
-
                 <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; justify-content: center;">
                     {if isset($LinkedinShareUrl) && $LinkedinShareUrl}
                         <a class="button blue" target="_blank" rel="noopener noreferrer"
@@ -110,13 +76,13 @@
                         </a>
                     {/if}
 
-                    {if isset($VKShareUrl) && $VKShareUrl}
+                    {* {if isset($VKShareUrl) && $VKShareUrl}
                         <a class="button" target="_blank" rel="noopener noreferrer"
                            style="background:#0077FF; border-color:#0077FF;"
                            href="{$VKShareUrl}">
                             <span>{translate}share_to_vk{/translate}</span>
                         </a>
-                    {/if}
+                    {/if} *}
                 </div>
         </main>
         <footer>
