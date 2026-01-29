@@ -32,14 +32,20 @@
                     {/foreach}
                 </div>
                 <div id="test-timer" class="text-block test-overview">
-                    <div class="timer-copy">
-                        <span class="timer-title">
-                            {translate}test_time_to_complete{/translate}
-                            <span id="test-timer-time" class="timer-value"></span>
-                        </span>
-                        <span class="timer-progress">{translate}tasks_completed{/translate}: {$TestData.solved_questions_count} {translate}from{/translate} {$TestData.questions_count}</span>
-                    </div>
-                    <a class="button green timer-action" id="doneTest" href="/{$Lang}/test/{$TestId}/result">{translate}test_show_result{/translate}</a>
+                    {if isset($TestData.timeout) && $TestData.timeout}
+                        <button class="button red">
+                            {translate}test_time_out{/translate}
+                        </button>
+                    {else}
+                        <div class="timer-copy">
+                            <span class="timer-title">
+                                {translate}test_time_to_complete{/translate}
+                                <span id="test-timer-time" class="timer-value"></span>
+                            </span>
+                            <span class="timer-progress">{translate}tasks_completed{/translate}: {$TestData.solved_questions_count} {translate}from{/translate} {$TestData.questions_count}</span>
+                        </div>
+                        <a class="button green timer-action" id="doneTest" href="/{$Lang}/test/{$TestId}/result">{translate}test_show_result{/translate}</a>
+                    {/if}
                 </div>
                 <div class="menu-ad">
                     <div id="yandex_rtb_R-A-4716552-2">
@@ -123,9 +129,9 @@
                 </button>
                 {/if}
                 {if isset($TestData.timeout) && $TestData.timeout}
-                    <button class="button red">
+                    {* <button class="button red">
                         {translate}test_time_out{/translate}
-                    </button>
+                    </button> *}
                 {elseif {$Question.possible_attempts} > 0}
                     <button class="button green" id="checkSolutionBtn" onClick="checkSolution('/{$Lang}/test/{$TestId}/check/{$QuestionID}')">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
