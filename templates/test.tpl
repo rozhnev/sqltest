@@ -22,7 +22,9 @@
                         {foreach $panel.questions as $question}
                         <li>
                             <a class="question-link {if $QuestionID == $question[1]} current-question{/if}{if $question[2]} solved{/if}" href="/{$Lang}/test/{$TestId}/question/{$question[1]}">
-                                <span class="question-number">&nbsp;</span>
+                                <span class="question-number">
+                                    {if $question[2]}<span class="qts-error-emoji" role="img" aria-label="sparkle">✨</span>{/if} &nbsp;
+                                </span>
                                 {$question[0]}
                             </a>
                         </li>
