@@ -227,7 +227,7 @@ class Test
                 to_char(last_attempt_at, 'YYYY-MM-dd HH24:mm:ss') last_attempt_at,
                 categories.title_sef category_sef,
                 last_answer last_query,
-                (3 - attempts) possible_attempts,
+                (max_attempts - attempts) possible_attempts,
                 question_categories.category_id 
             FROM questions
             JOIN test_questions ON test_questions.question_id = questions.id AND test_id = :test_id
