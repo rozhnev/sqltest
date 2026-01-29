@@ -176,7 +176,7 @@
                         const hours = (time - minutes) / 60;
                         document.getElementById('test-timer-time').innerText = (hours > 0 ? `${ldelim}hours{rdelim} ` + (hours === 1 ? '{translate}hour{/translate} ': '{translate}hours{/translate} ') :'') + minutes + ' {translate}min{/translate}';
                     {rdelim} else {ldelim}
-                        document.getElementById('test-timer').innerText = '{translate}test_time_over{/translate}'
+                        document.getElementById('test-timer').innerHTML = '<button class="button red" style="margin: 3em auto; font-size: large; padding: 1em;" >{translate}test_time_over{/translate}</button>'
                     {rdelim}
                 {rdelim};
                 showTimer();
