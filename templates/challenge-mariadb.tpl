@@ -118,6 +118,7 @@
             margin: 1em 0;
             font-size: clamp(2rem, 4vw, 3rem);
             letter-spacing: -0.02em;
+            line-height: 1.2em;
         }
 
         .hero-subtitle {
