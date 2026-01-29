@@ -80,18 +80,18 @@ class Test
         $this->id = vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex(random_bytes(16)), 4));
 
         $this->dbh->beginTransaction();
-        $stmt = $this->dbh->prepare("INSERT INTO tests (id, user_id, closed_at, questionnire_id) VALUES (?, ?, CURRENT_TIMESTAMP + INTERVAL '3 hour')");
+        $stmt = $this->dbh->prepare("INSERT INTO tests (id, user_id, closed_at, questionnire_id) VALUES (?, ?, CURRENT_TIMESTAMP + INTERVAL '3 hour', 999)");
         $stmt->execute([$this->id, $this->user->getId()]);
 
         $stmt = $this->dbh->prepare("INSERT INTO test_questions (test_id, question_id) VALUES
-            (:test_id, 20, 999),
-            (:test_id, 43, 999),
-            (:test_id, 80, 999),
-            (:test_id, 21, 999),
-            (:test_id, 387, 999),
-            (:test_id, 388, 999),
-            (:test_id, 389, 999),
-            (:test_id, 390, 999);"
+            (:test_id, 20),
+            (:test_id, 43),
+            (:test_id, 80),
+            (:test_id, 21),
+            (:test_id, 387),
+            (:test_id, 388),
+            (:test_id, 389),
+            (:test_id, 390);"
          );
         $stmt->execute([':test_id' => $this->id]);
         $this->dbh->commit();

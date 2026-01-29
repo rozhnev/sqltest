@@ -15,6 +15,7 @@
             background-color: var(--mdb-surface);
             color: #f5fbff;
             font-family: 'Space Grotesk', 'Inter', 'Segoe UI', system-ui, sans-serif;
+            line-height: 1.5em;
         }
 
         .mariadb-shell {
@@ -114,7 +115,7 @@
         }
 
         .mariadb-hero h1 {
-            margin: 0;
+            margin: 1em 0;
             font-size: clamp(2rem, 4vw, 3rem);
             letter-spacing: -0.02em;
         }
@@ -184,6 +185,12 @@
         }
 
         .mariadb-list li::marker {
+            color: var(--mdb-emerald);
+        }
+
+        .mariadb-list a,
+        .mariadb-list a:visited
+        {
             color: var(--mdb-emerald);
         }
 
@@ -415,9 +422,9 @@
                         <div class="top-menu-center">
                             <span  class="site-description">{$SiteDescription}</span>
                         </div>
-                        <div class="top-menu-switchers">
+                        {* <div class="top-menu-switchers">
                             {include file='lang-switcher.tpl'}
-                        </div>
+                        </div> *}
                     {/if}
                 </div>
             </header>
