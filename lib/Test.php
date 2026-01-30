@@ -85,9 +85,10 @@ class Test
 
         $stmt = $this->dbh->prepare("INSERT INTO test_questions (test_id, question_id, max_attempts) VALUES
             (:test_id, 20, 5),
-            (:test_id, 43, 5),
-            (:test_id, 80, 5),
             (:test_id, 21, 5),
+            (:test_id, 69, 5),
+            (:test_id, 80, 5),
+            (:test_id, 111, 5),
             (:test_id, 387, 3),
             (:test_id, 388, 3),
             (:test_id, 389, 3),
