@@ -47,7 +47,7 @@
     </div>
 </section>
 <section class="mariadb-grid">
-    <article>
+    {* <article>
         <h3>Quiz format</h3>
         <p>
             Ten curated questions that mirror the MariaDB Day agenda: a mix of theoretical insights about the platform's 
@@ -58,7 +58,7 @@
             <li>Five hands-on tasks that run against MariaDB syntax, optimizer hints, and real-world data shapes.</li>
             <li>A 3-hour window to submit answers, letting you digest the conference talks and then prove mastery.</li>
         </ul>
-    </article>
+    </article> *}
     <article>
         <h3>How to participate</h3>
         <ol class="mariadb-list">
@@ -112,8 +112,8 @@
 </section> *}
 <section class="mariadb-final">
     <p>
-        Bring your curiosity, your laptop, and your appetite for MariaDB. The quiz mirrors the talks from the agenda you
-        just explored, giving you a chance to win prizes while celebrating the community at FOSDEM.
+        Bring your curiosity, your laptop, and your appetite for MariaDB. {*The quiz mirrors the talks from the agenda you
+        just explored, giving you a chance to win prizes while celebrating the community at FOSDEM.*}
         <a class="external-link" href="https://mariadb.org/events/mariadb-day-brussels/" target="_blank" rel="noreferrer">
             Learn more about MariaDB Day Brussels
         </a>
