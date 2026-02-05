@@ -531,6 +531,127 @@ function openVKLoginPopUp() {
         `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=530,height=950,left=${(window.outerWidth - 530) / 2},top=${(window.outerHeight - 950) / 2}`
     );
 }
+
+// Email/Password Login Functions
+function openEmailLoginPopUp() {
+    document.getElementById('emailLoginPopup').style.display = 'flex';
+    document.getElementById('loginFormContainer').style.display = 'block';
+    document.getElementById('registerFormContainer').style.display = 'none';
+}
+
+function closeEmailLoginPopUp() {
+    document.getElementById('emailLoginPopup').style.display = 'none';
+    document.getElementById('emailLoginForm').reset();
+    document.getElementById('emailRegisterForm').reset();
+    hideLoginError();
+    hideRegisterError();
+}
+
+function showLoginError(message) {
+    const errorDiv = document.getElementById('loginErrorMessage');
+    errorDiv.textContent = message;
+    errorDiv.style.display = 'block';
+}
+
+function hideLoginError() {
+    const errorDiv = document.getElementById('loginErrorMessage');
+    errorDiv.style.display = 'none';
+    errorDiv.textContent = '';
+}
+
+function showRegisterError(message) {
+    const errorDiv = document.getElementById('registerErrorMessage');
+    errorDiv.textContent = message;
+    errorDiv.style.display = 'block';
+}
+
+function hideRegisterError() {
+    const errorDiv = document.getElementById('registerErrorMessage');
+    errorDiv.style.display = 'none';
+    errorDiv.textContent = '';
+}
+
+function switchToRegister(event) {
+    event.preventDefault();
+    hideLoginError();
+    document.getElementById('loginFormContainer').style.display = 'none';
+    document.getElementById('registerFormContainer').style.display = 'block';
+}
+
+function switchToLogin(event) {
+    event.preventDefault();
+    hideRegisterError();
+    document.getElementById('registerFormContainer').style.display = 'none';
+    document.getElementById('loginFormContainer').style.display = 'block';
+}
+
+function handleEmailLogin(event) {
+    event.preventDefault();
+    hideLoginError();
+    
+    const email = document.getElementById('loginEmail').value;
+    const password = document.getElementById('loginPassword').value;
+    
+    // Send login request to server
+    const ajax = 1;
+    fetch('/login/password/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        },
+        body: new URLSearchParams({ email, password, ajax, lang }).toString()
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status && data.status === 'ok') {
+            window.location.reload(); // Reload page on successful login
+        } else {
+            showLoginError(data.message || 'Login failed. Please check your credentials.');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        showLoginError('An error occurred during login. Please try again.');
+    });
+}
+
+function handleEmailRegister(event) {
+    event.preventDefault();
+    hideRegisterError();
+    
+    const full_name = document.getElementById('registerName').value;
+    const email = document.getElementById('registerEmail').value;
+    const password = document.getElementById('registerPassword').value;
+    const passwordConfirm = document.getElementById('registerPasswordConfirm').value;
+    
+    if (password !== passwordConfirm) {
+        showRegisterError('Passwords do not match!');
+        return;
+    }
+    
+    // Send registration request to server
+    const ajax = 1;
+    fetch(`/${lang}/register/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        },
+        body: new URLSearchParams({ full_name, email, password, ajax, lang }).toString()
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status && data.status === 'ok') {
+            switchToLogin(event);
+        } else {
+            showRegisterError(data.message || 'Registration failed. Please try again.');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        showRegisterError('An error occurred during registration. Please try again.');
+    });
+}
+
 function openGoogleLoginPopUp() {
     const params = {
         response_type: 'code',

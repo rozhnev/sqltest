@@ -1360,3 +1360,124 @@ footer a:visited {
         box-shadow: 0em -3em 0 0, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0, -2em -2em 0 0.2em;
     }
 }
+
+/* Email Login/Register Popup Styles */
+.email-login-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 10000;
+    align-items: center;
+    justify-content: center;
+}
+
+.email-login-popup-content {
+    background: var(--text-block-background-color);
+    border: 1px solid var(--text-block-border-color);
+    border-radius: 8px;
+    padding: 30px;
+    max-width: 400px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.email-login-popup-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--question-text);
+    line-height: 1;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+}
+
+.email-login-popup-close:hover {
+    opacity: 0.7;
+}
+
+.email-login-popup-title {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: var(--question-text);
+}
+
+.email-login-input-group {
+    margin-bottom: 15px;
+}
+
+.email-login-input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--text-block-border-color);
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+    background-color: var(--text-block-background-color);
+    color: var(--question-text);
+}
+
+.email-login-input:focus {
+    outline: none;
+    border-color: var(--block-background-color);
+}
+
+.email-login-submit-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--green-btn-background);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.email-login-submit-btn:hover {
+    opacity: 0.9;
+}
+
+.email-login-switch-text {
+    text-align: center;
+    margin-top: 15px;
+    color: var(--question-text);
+}
+
+.email-login-link {
+    color: var(--blue-btn-background);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.email-login-link:hover {
+    text-decoration: underline;
+}
+
+.email-login-error-message {
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    background-color: #fee;
+    border: 1px solid #fcc;
+    color: #c33;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+[data-theme="dark"] .email-login-error-message {
+    background-color: rgba(220, 38, 38, 0.2);
+    border-color: rgba(220, 38, 38, 0.4);
+    color: #fca5a5;
+}

@@ -1,0 +1,35 @@
+name: Minify JavaScript
+
+on:
+  push:
+    paths:
+      - '**.js'
+      - '!**.min.js'
+
+jobs:
+  minify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      
+      - name: Install terser
+        run: npm install -g terser
+      
+      - name: Minify JavaScript
+        run: |
+          for file in $(find . -name "*.js" ! -name "*.min.js"); do
+            terser "$file" -c -m -o "${file%.js}.min.js" --source-map "url=${file%.js}.min.js.map"
+          done
+      
+      - name: Commit minified files
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add *.min.js *.min.js.map
+          git diff --quiet && git diff --staged --quiet || git commit -m "Auto-minify JavaScript [skip ci]"
+          git push
