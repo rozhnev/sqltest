@@ -22,10 +22,7 @@ jobs:
       
       - name: Minify JavaScript
         run: |
-          for file in $(find . -name "*.js" ! -name "*.min.js" ! -path "./node_modules/*" ! -path "./vendor/*"); do
-            echo "Minifying: $file"
-            terser "$file" -c -m -o "${file%.js}.min.js" --source-map
-          done
+          terser script.js -c -m -o "script.js.min.js" --source-map
       
       - name: Commit minified files
         run: |
