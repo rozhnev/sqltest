@@ -2,3 +2,11 @@ vendor/*
 **templates_c/
 composer.phar
 .env
+
+# Minified files (if generating during deployment)
+# *.min.js
+# *.min.js.map
+
+# Node modules (if using npm)
+node_modules/
+package-lock.json
