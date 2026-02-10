@@ -9,7 +9,7 @@
                 <img src="https://files.talkpal.ai/landing_images/talkpal-text-logo.svg" alt="Talkpal AI Logo" class="talkpal-ad-logo">
                 <div class="talkpal-ad-text">A forma divertida e eficaz de aprender uma língua com IA!</div>
                 <div class="talkpal-ad-subtext">Pratique a fala, a audição e a escrita.</div>
-                <span class="talkpal-ad-button">Comece a aprender agora</span>
+                <span class="talkpal-ad-button">Comece agora</span>
             </a>
         </div>
     {/if}
