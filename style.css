@@ -1105,7 +1105,7 @@ td {
     flex-direction: row; 
     gap:5px; border: 1px solid white; 
     padding: 0.3em;
-    justify-content: space-between;
+    justify-content: center
     margin: 1rem 0;
 }
 .solutions {
