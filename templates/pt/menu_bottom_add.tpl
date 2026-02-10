@@ -1,41 +1,16 @@
 <div class="menu-ad">
-    <div id="yandex_rtb_R-A-4716552-2">
-        <div style="
-            margin: 0.5em 0 0 0; 
-            background-color: var(--accordion-panel-bg-color);
-            border: 1px solid var(--text-block-border-color);
-            color: var(--question-text);
-            border-radius: 0 6px 0 0;">
-            <div style="
-                background-color: var(--menu-button-background-color);
-                border-radius: 0 6px 0 0;
-                padding: 0.5em;
-                color: white;">Ajude a tornar o SQLtest.online ainda melhor!</div>
-            <div style="font-size:small; padding: 0.5em;">
-                <p>Saudações, amantes do SQL!</p>
-
-                <p>Estou escrevendo para vocês hoje porque preciso da sua ajuda.</p>
-
-                O SQLtest.online é uma plataforma gratuita projetada para ajudar pessoas de todos os níveis a dominar o SQL.<br>
-                Oferecemos uma ampla gama de testes interativos, problemas e materiais de treinamento para ajudar você a melhorar suas habilidades em SQL.<br>
-                A plataforma já ajudou muitas pessoas, mas queremos torná-la ainda melhor. E é aqui que você pode nos ajudar!
-
-                <p>Como você pode ajudar:
-                    <ul>
-                        <li>Convide seus amigos e colegas para se juntarem ao SQLtest.online!</li>
-                        <li>Fale sobre o SQLtest.online para seus amigos e colegas. Compartilhe um link para nosso site nas redes sociais, por e-mail ou pessoalmente.</li>
-                        <li>Escreva um artigo ou post de blog sobre o SQLtest.online. Compartilhe sua experiência com a plataforma.</li>
-                        <li>Juntos, podemos fazer do SQLtest.online o melhor recurso para aprender SQL!</li>
-                    </ul>
-                </p>
-                <p>
-                    Quanto mais pessoas usarem a plataforma, melhor ela se tornará. Poderemos adicionar mais conteúdo, melhorar recursos e criar uma comunidade melhor para os entusiastas do SQL.
-                </p>
-                <p>
-                    Obrigado pela sua ajuda!<br>
-                    Equipe <a href='https://sqltest.online/pt'>SQLtest.online</a>
-                </p>
-            </div>
+    {if $User->showAd()}
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-top: 1rem;">
+            <a href="https://www.jdoqocy.com/click-101541078-17083149" target="_blank" class="talkpal-ad-container" style="background-color: #052d50; display: flex;">
+                <img src="https://www.ftjcfx.com/image-101541078-17083149" width="250" height="360" alt="Contabo.com" style="max-width: 100%; height: auto;" border="0"/>
+            </a>
+            <a href="https://www.tkqlhce.com/click-101561323-17139054" target="_blank" class="talkpal-ad-container" style="padding: 15px 10px;">
+                <img src="https://www.awltovhc.com/image-101561323-17139054" width="1" height="1" border="0"/>
+                <img src="https://files.talkpal.ai/landing_images/talkpal-text-logo.svg" alt="Talkpal AI Logo" class="talkpal-ad-logo">
+                <div class="talkpal-ad-text">The fun and effective way to learn a language with AI!</div>
+                <div class="talkpal-ad-subtext">Practice speaking, listening & writing.</div>
+                <span class="talkpal-ad-button">Start Learning Now</span>
+            </a>
         </div>
-    </div>
+    {/if}
 </div>
