@@ -543,7 +543,9 @@
         </ul>
     </div>
     {if $User->showAd()}
-        <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-top: 1rem;">
+        <div id="yandex_rtb_R-A-4716552-2">
+        </div>
+        {* <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-top: 1rem;">
             <a href="https://www.jdoqocy.com/click-101541078-17083149" target="_blank" class="talkpal-ad-container">
                 <img src="https://www.ftjcfx.com/image-101541078-17083149" width="250" height="360" alt="Contabo.com" style="max-width: 100%; height: auto;" border="0"/>
             </a>
@@ -554,7 +556,7 @@
                 <div class="talkpal-ad-subtext">Practice speaking, listening & writing.</div>
                 <span class="talkpal-ad-button">Start Learning Now</span>
             </a>
-        </div>
+        </div> *}
 
     {/if}
 </div>
