@@ -721,16 +721,17 @@ input:checked + .slider:before {
     padding: 0.5em;
 }
 .lesson-wrapper p {
-    line-height: 1.5rem;
+    line-height: 1.5em;
 }
 .lesson-wrapper a,
 .lesson-wrapper a:visited {
     color: var(--menu-link-color);
     text-decoration: underline;
 }
-.lesson-wrapper ul,
-.lesson-wrapper ol {
-    line-height: 2em;
+
+.lesson-wrapper li {
+    padding-top: 1em;
+    line-height: 1.5em;
 }
 .question {
     padding: 5px 15px;
