@@ -1,109 +1,103 @@
-# Lesson 5.1: Working with Multiple Tables — Understanding Joins in SQL
+# Lesson 5.2: INNER JOIN — Combining Matching Rows
 
-In real-world databases, data is often distributed across multiple tables. To analyze and retrieve meaningful information, you need to combine data from these tables. SQL provides JOIN operations to connect related tables based on common columns. In this lesson, you will learn the fundamentals of SQL joins, their types, and practical examples using the Sakila database.
+In the previous lesson, we established the fundamental concept of joining tables to retrieve related data. The most common and frequently used type of join is the **INNER JOIN**. In this lesson, we will explore its logic, syntax, and practical applications in detail.
 
-## What is a JOIN?
-A JOIN in SQL is used to combine rows from two or more tables based on a related column between them. This allows you to query and analyze data that spans multiple tables.
+## What is an INNER JOIN?
 
-## Types of Joins
+An `INNER JOIN` is an operation that combines rows from two tables only when there is a matching value in both tables based on a specified condition. If a row in Table A does not have a corresponding match in Table B, that row is excluded from the result set. Similarly, any rows in Table B that do not match Table A are also left out.
 
-### 1. INNER JOIN
-Returns only the rows where there is a match in both tables.
+Think of it as the **intersection** of two sets of data.
 
-**Syntax:**
+**Visualization:**
+```
+   Table A (customer)           Table B (payment)
+   +----+----------+            +----+----------+
+   | id | name     |            | id | amount   |
+   +----+----------+            +----+----------+
+   | 1  | Alice    | <--------> | 1  | 10.00    | (Match!)
+   | 2  | Bob      |            | 1  | 15.00    | (Match!)
+   | 3  | Charlie  |            | 4  | 20.00    | (No match for Charlie or ID 4)
+   +----+----------+            +----+----------+
+```
+*In this example, Charlie is excluded because he has no payments, and the payment with `customer_id` 4 is excluded because there is no customer with that ID.*
+
+## INNER JOIN Syntax
+
+The standard syntax for an `INNER JOIN` is:
+
 ```sql
-SELECT columns
-FROM table1
-INNER JOIN table2 ON table1.column = table2.column;
+SELECT
+    table1.column1,
+    table2.column2
+FROM
+    table1
+INNER JOIN
+    table2 ON table1.common_column = table2.common_column;
 ```
 
-**Example:**
+- `INNER JOIN`: Specifies that we only want matching rows.
+- `ON`: Defines the condition for matching (usually the Primary Key of one table and the Foreign Key of another).
+
+> **Note:** In most SQL databases (like MySQL, PostgreSQL, and SQL Server), the keyword `INNER` is optional. Writing `JOIN` and `INNER JOIN` will produce the exact same result.
+
+## Practical Examples (Sakila Database)
+
+### 1. Connecting Cities to Countries
+The `city` table contains a `country_id` which refers to the `country` table. To see the city name alongside its country name, we use an `INNER JOIN`.
+
 ```sql
-SELECT c.first_name, c.last_name, p.amount
-FROM customer c
-INNER JOIN payment p ON c.customer_id = p.customer_id;
+SELECT
+    ci.city,
+    co.country
+FROM
+    city AS ci
+INNER JOIN
+    country AS co ON ci.country_id = co.country_id;
 ```
-*Returns customer names and their payments.*
+*This query returns only cities that are linked to a valid country.*
 
-### 2. LEFT JOIN (or LEFT OUTER JOIN)
-Returns all rows from the left table, and matched rows from the right table. Unmatched rows from the right table will have NULLs.
+### 2. Listing Staff and Their Addresses
+To find where each staff member lives, we join the `staff` and `address` tables.
 
-**Syntax:**
 ```sql
-SELECT columns
-FROM table1
-LEFT JOIN table2 ON table1.column = table2.column;
-```
-
-**Example:**
-```sql
-SELECT c.first_name, c.last_name, p.amount
-FROM customer c
-LEFT JOIN payment p ON c.customer_id = p.customer_id;
-```
-*Returns all customers, including those who have not made any payments.*
-
-### 3. RIGHT JOIN (or RIGHT OUTER JOIN)
-Returns all rows from the right table, and matched rows from the left table. Unmatched rows from the left table will have NULLs.
-
-**Syntax:**
-```sql
-SELECT columns
-FROM table1
-RIGHT JOIN table2 ON table1.column = table2.column;
-```
-
-**Example:**
-```sql
-SELECT c.first_name, c.last_name, p.amount
-FROM customer c
-RIGHT JOIN payment p ON c.customer_id = p.customer_id;
-```
-*Returns all payments, including those not linked to a customer (if any).* 
-
-### 4. FULL OUTER JOIN
-Returns all rows when there is a match in either left or right table. Unmatched rows will have NULLs for missing columns.
-
-**Note:** Not all SQL databases support FULL OUTER JOIN directly.
-
-**Syntax:**
-```sql
-SELECT columns
-FROM table1
-FULL OUTER JOIN table2 ON table1.column = table2.column;
+SELECT
+    s.first_name,
+    s.last_name,
+    a.address,
+    a.district
+FROM
+    staff AS s
+INNER JOIN
+    address AS a ON s.address_id = a.address_id;
 ```
 
-**Example:**
+## Joining More Than Two Tables
+
+You can chain multiple `INNER JOIN` clauses to gather information from several tables at once. For example, to see which films an actor has appeared in, we need three tables: `actor`, `film`, and the junction table `film_actor`.
+
 ```sql
-SELECT c.first_name, c.last_name, p.amount
-FROM customer c
-FULL OUTER JOIN payment p ON c.customer_id = p.customer_id;
+SELECT
+    a.first_name,
+    a.last_name,
+    f.title
+FROM
+    actor AS a
+INNER JOIN
+    film_actor AS fa ON a.actor_id = fa.actor_id
+INNER JOIN
+    film AS f ON fa.film_id = f.film_id
+LIMIT 10;
 ```
-*Returns all customers and all payments, matching where possible.*
 
-## Why Use Joins?
-- To combine related data from different tables
-- To perform complex queries and analysis
-- To avoid data duplication and maintain normalization
-
-## Practical Usage
-1. **List all rentals with customer and film information:**
-   ```sql
-   SELECT r.rental_id, c.first_name, c.last_name, f.title
-   FROM rental r
-   JOIN customer c ON r.customer_id = c.customer_id
-   JOIN inventory i ON r.inventory_id = i.inventory_id
-   JOIN film f ON i.film_id = f.film_id;
-   ```
-2. **Find customers who have not made any payments:**
-   ```sql
-   SELECT c.first_name, c.last_name
-   FROM customer c
-   LEFT JOIN payment p ON c.customer_id = p.customer_id
-   WHERE p.payment_id IS NULL;
-   ```
+**How it works:**
+1. The first join connects `actor` and `film_actor` based on `actor_id`.
+2. The second join connects the result of the first join with the `film` table based on `film_id`.
+3. Only records that exist in all three tables satisfy the condition and appear in the results.
 
 ## Key Takeaways from This Lesson
-- Joins are essential for working with normalized databases.
-- Use INNER JOIN for matching data, LEFT/RIGHT JOIN for including unmatched rows, and FULL OUTER JOIN for all data.
-- Practice writing join queries to analyze data across multiple tables in SQL.
+
+- **INNER JOIN** is the default join type in SQL.
+- It returns rows only when there is a **match** in both tables.
+- Rows that do not meet the join condition are **discarded** from the result set.
+- You can join multiple tables by adding subsequent `INNER JOIN` statements.
+- Using **table aliases** (`AS ci`, `AS co`) makes complex joins much easier to read and write.

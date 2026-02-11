@@ -1,52 +1,57 @@
-# Lesson 1.4: Overview of SQL
+Learn about NULL values in SQL, understanding that NULL represents missing or unknown data. This lesson covers how NULL differs from zero or an empty string, the importance of IS NULL and IS NOT NULL operators, and how NULL affects database operations and logic.
 
-## What is SQL?
-SQL (Structured Query Language) is a language used for managing and manipulating data in relational database management systems (RDBMS). It provides a powerful and flexible way to interact with databases, allowing users to perform various operations such as querying, inserting, updating, and deleting data.
+# Lesson 1.4: Understanding NULL Values in SQL
 
-SQL was developed in the early 1970s by IBM and has since become the de facto standard for relational database management. It is widely used across various industries and applications, making it an essential skill for data analysts, developers, and database administrators.
-SQL is designed to be easy to learn and use, with a syntax that is both human-readable and machine-readable. It allows users to express complex queries and operations in a straightforward manner, making it accessible to both technical and non-technical users.
+In the world of databases, you will often encounter situations where data is missing, unknown, or not applicable. SQL uses a special marker called **NULL** to represent these cases. Understanding NULL is critical because it behaves differently than any other value.
 
-## Key Features of SQL
-*   **Declarative Language:** SQL is a declarative language, meaning users specify what they want to retrieve or manipulate without detailing how to do it. This abstraction allows for easier query writing and optimization.
-*   **Set-Based Operations:** SQL operates on sets of data rather than individual records, enabling efficient processing of large datasets.
+## What is NULL?
 
-## Subsets of SQL
-SQL is divided into several subsets, each serving a specific purpose:
-*   **Data Query Language (DQL):** Used for querying data from databases. The primary command is SELECT.
-*   **Data Definition Language (DDL):** Used for defining and managing database structures. Commands include CREATE, ALTER, and DROP.
-*   **Data Manipulation Language (DML):** Used for manipulating data within the database. Commands include INSERT, UPDATE, and DELETE.
-*   **Data Control Language (DCL):** Used for controlling access to data within the database. Commands include GRANT and REVOKE.
-*   **Transaction Control Language (TCL):** Used for managing transactions in the database. Commands include COMMIT, ROLLBACK, and SAVEPOINT.
+**NULL** is not a value; it is a **state** or a placeholder indicating that a data value does *not* exist in the database.
 
-## Objects of SQL
-SQL operates on various objects within a database, including:
-*   **Tables:** The primary structure for storing data in a relational database. Tables consist of rows and columns, where each row represents a record and each column represents an attribute of that record.
-*   **Views:** Virtual tables that provide a way to present data from one or more tables in a specific format. Views can simplify complex queries and enhance security by restricting access to certain data.
-*   **Indexes:** Structures that improve the speed of data retrieval operations on a database table. Indexes are created on one or more columns of a table to enhance query performance.
-*   **Stored Procedures:** Predefined SQL code that can be executed as a single unit. Stored procedures can encapsulate complex logic and improve performance by reducing network traffic.
-*   **Triggers:** Special types of stored procedures that automatically execute in response to certain events on a table, such as INSERT, UPDATE, or DELETE operations. Triggers can enforce business rules and maintain data integrity.
-*   **Schemas:** Logical containers for database objects, such as tables, views, and indexes. Schemas help organize and manage database objects, providing a way to group related objects together.
-*   **Constraints:** Rules applied to table columns to enforce data integrity. Common constraints include PRIMARY KEY, FOREIGN KEY, UNIQUE, NOT NULL, and CHECK.
-*   **Transactions:** A sequence of one or more SQL operations that are treated as a single unit of work. Transactions ensure data integrity and consistency by allowing multiple operations to be committed or rolled back as a group.
-*   **Data Types:** Define the type of data that can be stored in a column, such as INTEGER, VARCHAR, DATE, and BOOLEAN. Data types ensure that the data stored in a table is consistent and valid.
+It is important to remember what NULL is **NOT**:
+*   **NULL is not 0:** Zero is a number. NULL is the absence of a number.
+*   **NULL is not an empty string (' '):** An empty string is a piece of text with zero characters. NULL is the absence of text.
+*   **NULL is not "false":** In SQL logic, NULL remains "unknown."
 
-## Basic SQL Conventions
-THe unit of SQL is the **query**. A query is a request to RDBMS for retreive or modify data.
+## Why do we use NULL?
+*   **Unknown information:** For example, we might not know a customer's middle name yet.
+*   **Not applicable:** A "Company Tax ID" column would be NULL for an individual person.
+*   **Missing data:** Data that was overlooked during entry.
 
-The basic structure of an SQL query consists of the following components:
-*   **Statements:** Reserved words that have a specific meaning in SQL. Examples include SELECT, FROM, WHERE, and JOIN.
-*   **Clauses:** Components of a SQL statement that specify the action to be performed. Common clauses include SELECT, FROM, WHERE, GROUP BY, and ORDER BY.
-*   **Expressions:** Combinations of values, operators, and functions that evaluate to a single value. Expressions can be used in various parts of a SQL statement, such as the SELECT list or the WHERE clause.
-*   **Identifiers:** Names used to refer to database objects, such as tables, columns, and views. Identifiers can be simple (e.g., table_name) or qualified (e.g., schema_name.table_name).
-*   **Comments:** Non-executable text within SQL code that provides explanations or notes. Comments can be single-line (using --) or multi-line (using /* ... */).
+## Working with NULL: IS NULL and IS NOT NULL
 
+Because NULL represents an unknown state, you cannot use standard comparison operators like `=` or `<>` with it. Any comparison with NULL (e.g., `value = NULL`) will result in "unknown," not "true" or "false."
 
-## Writing Your First SQL Query
+To check for NULL values, you must use specific operators:
 
-A basic SQL query consists of a SELECT statement, a FROM clause, and an optional WHERE clause. For example:
-
+### 1. IS NULL
+Used to find records where a column has no value.
 ```sql
-SELECT column1, column2
-FROM table_name
-WHERE condition;
+SELECT *
+FROM address
+WHERE address2 IS NULL;
 ```
+
+### 2. IS NOT NULL
+Used to find records where a column contains *any* data.
+```sql
+SELECT *
+FROM address
+WHERE address2 IS NOT NULL;
+```
+
+## NULL in Calculations
+
+One of the most important things to remember is that **NULL propagates**. If you perform a mathematical operation with a NULL value, the result will always be NULL.
+
+*   `10 + NULL = NULL`
+*   `5 * NULL = NULL`
+*   `'Hello ' + NULL = NULL`
+
+## Key Takeaways from This Lesson
+
+*   **NULL** represents missing, unknown, or non-applicable data.
+*   It is **different** from zero, empty strings, or blank spaces.
+*   Standard comparisons (`=` or `<>`) **do not work** with NULL.
+*   Use **IS NULL** and **IS NOT NULL** to filter for missing data.
+*   Most mathematical operations involving NULL will result in **NULL**.
