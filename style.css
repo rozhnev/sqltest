@@ -728,6 +728,10 @@ input:checked + .slider:before {
     color: var(--menu-link-color);
     text-decoration: underline;
 }
+.lesson-wrapper ul,
+.lesson-wrapper ol {
+    line-height: 2em;
+}
 .question {
     padding: 5px 15px;
     font-size: larger;
