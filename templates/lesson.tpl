@@ -83,9 +83,18 @@
                 </div>
             </div>
             <div class="column" id="right-panel">
-                <div class="referal-add-block" style="height: 100%;">
-                    <div id="yandex_rtb_R-A-4716552-7"></div>
-                </div>
+                {if $User->showAd()}
+                    {if $Lang == 'ru'}
+                        <div class="referal-add-block" style="height: 100%;">
+                            <div id="yandex_rtb_R-A-4716552-7"></div>
+                        </div>
+                    {else}
+                        <div class="referal-add-block">
+                            <script async="async" data-cfasync="false" src="//pl26881648.profitableratecpm.com/93660caf229b7b6afe772e0ab435c7a9/invoke.js"></script>
+                            <div id="container-93660caf229b7b6afe772e0ab435c7a9"></div>
+                        </div>
+                    {/if}
+                {/if}   
             </div>
         </main3>
         <footer>
