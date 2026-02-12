@@ -379,12 +379,12 @@ class Controller
         if (isset($questionData['answers'])) {
             $pageTitle = Localizer::translateString('page_question_title');
             $pageDescription = Localizer::translateString('page_question_description');
-            $sitePromo = Localizer::translateString('site_promo_question_quiz');
+            $sitePromo = Localizer::translateString('site_promo');
             $siteDescription = Localizer::translateString('site_description_question_quiz');
         } else {
             $pageTitle = Localizer::translateString('page_task_title');
             $pageDescription = Localizer::translateString('page_task_description');
-            $sitePromo = Localizer::translateString('site_promo_question_task');
+            $sitePromo = Localizer::translateString('site_promo');
             $siteDescription = Localizer::translateString('site_description_question_task');
         }
         $this->assignVariables([
@@ -516,7 +516,7 @@ class Controller
             $this->engine->assign('LastTest', $this->user->getLastTest());
         }
         $this->assignVariables([
-            'SitePromo' => Localizer::translateString('site_promo_test'),
+            'SitePromo' => Localizer::translateString('site_promo'),
             'SiteDescription'       => Localizer::translateString('site_description_test'),
         ]);
         $this->engine->display("test_start.tpl");
@@ -610,7 +610,7 @@ class Controller
 
         $testResult = $test->calculateResult();
         $this->assignVariables([
-            'SitePromo' => Localizer::translateString('site_promo_test'),
+            'SitePromo' => Localizer::translateString('site_promo'),
             'SiteDescription'       => Localizer::translateString('site_description_test'),
             'TestData'      => $testData,
             'TestResult'    => $testResult
@@ -676,7 +676,7 @@ class Controller
             'PageDescription'       => Localizer::translateString('test_page_description'),
             'PageOGTitle'           => Localizer::translateString('test_og_title'),
             'PageOGDescription'     => Localizer::translateString('test_og_description'),
-            'SitePromo'             => Localizer::translateString('site_promo_test'),
+            'SitePromo'             => Localizer::translateString('site_promo'),
             'SiteDescription'       => Localizer::translateString('site_description_test'),
             'QuestionID'            => $questionID,
             'TestId'                => $params['testId'],
@@ -939,7 +939,7 @@ class Controller
             'Action'            => 'lesson',
             'PageTitle'         => Localizer::translateString('lessons_page_title') . ' ' .$lessonData['title'],
             'PageDescription'   => Localizer::translateString('lessons_page_description'),
-            'SitePromo'         => Localizer::translateString('site_promo_lessons'),
+            'SitePromo'         => Localizer::translateString('site_promo'),
             'SiteDescription'   => $lessonData['description'],
             'PageDescription'   => $lessonData['description'],
             'PageOGTitle'       => Localizer::translateString('lessons_og_title'),
@@ -961,7 +961,7 @@ class Controller
             'Action'            => 'playground',
             'PageTitle'         => Localizer::translateString('playground_page_title'),
             'PageDescription'   => Localizer::translateString('playground_page_description'),
-            'SitePromo'         => Localizer::translateString('site_promo_playground'),
+            'SitePromo'         => Localizer::translateString('site_promo'),
             'SiteDescription'   => Localizer::translateString('site_description_playground'),
             'PageOGTitle'       => Localizer::translateString('playground_og_title'),
             'PageOGDescription' => Localizer::translateString('playground_og_description'),

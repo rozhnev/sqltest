@@ -5,12 +5,12 @@
     {assign var="SiteDescription" value="{translate}site_description{/translate}"}
 {/if}
 <div class="top-menu-left">
-    <a href="/{$Lang}/" target="_self" style="display: flex;">
+    {* <a href="/{$Lang}/" target="_self" style="display: flex;"> *}
         <h1 class="site-name-wrapper">
             <span class="site-name">SQLtest</span>
             <span class="site-promo">{$SitePromo}</span>
         </h1>
-    </a>
+    {* </a> *}
     <div class="divider"></div>
 </div>
 <div class="top-menu-center">
