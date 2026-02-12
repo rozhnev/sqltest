@@ -356,6 +356,10 @@ header .divider {
     align-items: center; 
     justify-content: space-between;
 }
+.top-links {
+    display: flex;
+    gap: 0.5em;
+}
 .site-name  {
     font-size: clamp(24px, 1.5vw, 32px);
 }
