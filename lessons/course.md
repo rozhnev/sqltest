@@ -28,6 +28,7 @@
 2.  **Basic SQL Syntax and Queries**
     *   Select data from table
     *   Filtering Data with the WHERE Clause
+    *   Combining multiple conditions
     *   Sorting and Limiting Results
     *   Aliasing columns
 3.  **Using Functions in SQL Queries**
