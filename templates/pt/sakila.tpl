@@ -216,7 +216,7 @@
         </ul>
     </div>
     <div class="accordion">
-        <span class='sql'>film</span> - lista de filmes no banco de dados Sakila.
+        <span class='sql'>film</span> - lista de filmes no banco de dados.
     </div>
     <div class="panel">
         <ul class="table-columns">
@@ -327,7 +327,7 @@
           </ul>    
     </div>
     <div class="accordion">
-        <span class='sql'>inventory</span> - itens no banco de dados Sakila.
+        <span class='sql'>inventory</span> - itens no banco de dados.
     </div>
     <div class="panel">
         <ul class="table-columns">
