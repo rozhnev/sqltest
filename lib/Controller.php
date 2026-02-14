@@ -8,7 +8,7 @@ class Controller
     private $domain;
     private $lang;
 
-    private $languages = ['ru' => 'Русский', 'en' => 'English', 'pt' => 'Português'/*, 'es' => 'Español'*/];
+    private $languages = ['ru' => 'Русский', 'en' => 'English', 'pt' => 'Português', 'fr' => 'Français'/*, 'es' => 'Español'*/];
 
     private function registerModifiers(array $mods): void
     {

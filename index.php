@@ -15,7 +15,7 @@ $smarty = new Smarty();
 $dbc    = new DB($env);
 $dbh    = $dbc->getInstance();
 $user   = new User($dbh, $env);
-$languages = ['ru' => 'Русский', 'en' => 'English', 'pt' => 'Português'/*, 'es' => 'Español'*/];    
+$languages = ['ru' => 'Русский', 'en' => 'English', 'pt' => 'Português', 'fr' => 'Français'];    
 $languge_codes = array_keys($languages);
 $languge_codes_regexp = implode('|', $languge_codes);
 
