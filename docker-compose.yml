@@ -2,6 +2,6 @@ services:
   web:
     image: rozhnev/sqltest:latest
     ports:
-      - "8080:80"
+      - "8888:80"
     volumes:
       - ./:/var/www/html
