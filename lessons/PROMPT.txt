@@ -1,0 +1,54 @@
+Get the SQL task from https://sqltest.online/ru/question/bookings/aircraft-seats-map and explain me the solution in Russian, does not provide the solution code, only explane. 
+Provide the explanation in MarkDown format.
+
+После этого проверьте мое решение:
+select 
+    rtrim(seat_no, 'ABCDEFGHKJ')::int "row", 
+    json_agg(right(seat_no, 1) order by right(seat_no, 1)) seats , 
+    fare_conditions 
+from seats
+join aircrafts_data using(aircraft_code)
+where aircrafts_data.model->>'en' = 'Boeing 777-300'
+group by rtrim(seat_no, 'ABCDEFGHKJ'), fare_conditions
+order by "row";
+
+select * from penguins
+except
+select * from little_penguins;
+
+For above query generate problems for sqltest.online site. 
+Generate task short name and task texts in English Russian and Portugese. 
+The short name should be a short text (2-3 words) for each language.
+Generate hints for all languages about functions used for solution.
+When task contain constants wrap it into <b> HTML tag, database object names in tasks and hints wrap into <span class='sql'></span>.
+
+English
+Short name: Filter Little Penguins
+
+Task:
+Retrieve all records from the <span class='sql'>penguins</span> table that do not exist in the <span class='sql'>little_penguins</span> table. The result should show only those penguins that are unique to the first table.
+
+Hints:
+Use <span class='sql'>SELECT</span> to query both tables.
+Use the <span class='sql'>EXCEPT</span> operator to subtract the second result set from the first one.
+
+Русский
+Short name: Исключение маленьких пингвинов
+
+Задача:
+Извлеките все записи из таблицы <span class='sql'>penguins</span>, которых нет в таблице <span class='sql'>little_penguins</span>. Результат должен содержать только тех пингвинов, которые присутствуют исключительно в первой таблице.
+
+Подсказки:
+Используйте <span class='sql'>SELECT</span> для получения данных из обеих таблиц.
+Используйте оператор <span class='sql'>EXCEPT</span> для вычитания второго набора данных из первого.
+
+Português
+Short name: Excluir Pequenos Pinguins
+
+Tarefa:
+Recupere todos os registros da tabela <span class='sql'>penguins</span> que não existem na tabela <span class='sql'>little_penguins</span>. O resultado deve mostrar apenas os pinguins que são exclusivos da primeira tabela.
+
+Dicas:
+Use a instrução <span class='sql'>SELECT</span> para consultar ambas as tabelas.
+Use o operador <span class='sql'>EXCEPT</span> para subtrair o segundo conjunto de resultados do primeiro.
+
