@@ -45,14 +45,14 @@
                             <ul>
                                 <li>
                                     <label class="db-label">
-                                        <input type="radio" name="database" value="mysql80" checked>
-                                        MySQL
+                                        <input type="radio" name="database" value="mariadb118" checked>
+                                        MariaDB
                                     </label>
                                 </li>
                                 <li>
                                     <label class="db-label">
-                                        <input type="radio" name="database" value="mariadb115">
-                                        MariaDB
+                                        <input type="radio" name="database" value="mysql80">
+                                        MySQL
                                     </label>
                                 </li>
                                 <li>
