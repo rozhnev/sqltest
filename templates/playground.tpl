@@ -127,8 +127,18 @@
                 <div class="code-result ace-xcode" id="code-result"></div>
             </div>
             <div class="column" id="right-panel">
-                <div class="referal-add-block" style="height: 100%;">
-                    <div id="yandex_rtb_R-A-4716552-7"></div>
+                <div style="display:flex; justify-content: center;">
+                    <script>
+                        atOptions = {
+                        'key' : 'acc010b024bcd2bbf1573359d5f7f8d5',
+                        'format' : 'iframe',
+                        'height' : 600,
+                        'width' : 160,
+                        'params' : {}
+                        };
+                    </script>
+                    <script src="https://www.highperformanceformat.com/acc010b024bcd2bbf1573359d5f7f8d5/invoke.js"></script>
+                    {* <div id="yandex_rtb_R-A-4716552-7"></div> *}
                 </div>
             </div>
         </main3>
