@@ -8,6 +8,8 @@ Disallow: /en/test
 Disallow: /ru/test
 Disallow: /pt/test
 
+Disallow: /admin
+
 User-agent: Yandex
 Disallow:
 Clean-param: path
