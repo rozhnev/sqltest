@@ -1,6 +1,6 @@
 <?php
-class GPT {
-    private $model = 'gpt-3.5-turbo';
+class LLM {
+    private $model = 'gpt-4o-mini';
     private $key;
 
     public function __construct(string $key)
@@ -40,5 +40,20 @@ class GPT {
         }
         $answer = $response->choices[0]->message->content;
         return nl2br($answer);
+    }
+
+    public function parseMarkdown(string $markdown): string {
+        $parser = new \cebe\markdown\GithubMarkdown();
+        $parsed = $parser->parse($markdown);
+        $parsed = str_replace("<span class='sql'>", htmlspecialchars("<span class='sql'>", ENT_QUOTES | ENT_HTML5), $parsed);
+        $parsed = str_replace("</span>", htmlspecialchars("</span>", ENT_QUOTES | ENT_HTML5), $parsed);
+        return $parsed;
+    }
+
+    public function cleanupResult(string $result): string
+    {
+        $result = preg_replace('#<br\s*/?>#i', "\n", $result);
+        $result = strip_tags($result);
+        return trim(html_entity_decode($result, ENT_QUOTES | ENT_HTML5));
     }
 }
