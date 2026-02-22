@@ -25,6 +25,7 @@
     --accordion-panel-bg-color: #EEF2FC;
     --sql-background-color: #eee;
     --sql-color:  #C800A4;
+    --code-result-background-color: #F5F5F5;
     --question-title-bg-color: #E8F2FE;
     --question-date-color: gray;
     --arrow-border-color: white;
@@ -52,6 +53,7 @@
     --block-background-color: #273E74;
     --db-description-background-color:  #263E74;
     --text-block-background-color: #21262E;
+    --code-result-background-color: #21262E;
     --special-text-color: #FFFFFF;
     --menu-button-background-color: #263E74;
     --menu-link-color:  #FFFFFF;
@@ -1008,13 +1010,13 @@ input:checked + .slider:before {
 /* } */
 
 .code-result {
-    border-top: 1px solid var(--text-block-border-color);
+    /* border-top: 1px solid var(--text-block-border-color); */
     min-height: 28vh;
     padding: 15px;
     max-height: 50vh;
     overflow: auto;
     color: var(--question-text);
-    background-color: var(--text-block-background-color);
+    background-color: var(--code-result-background-color);
 }
 
 .code-result .result-table,
