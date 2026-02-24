@@ -664,8 +664,14 @@ class Controller
         $questionID = $params['questionID'] ?? $test->getFirstUnsolvedQuestionId();
 
         $question = new Question($this->dbh, $questionID);
-
-        $questionData = $test->getQuestionData($questionID);
+        try {
+            $questionData = $test->getQuestionData($questionID);
+        } catch (Exception $e) {
+            header("HTTP/1.1 404 Moved Permanently");
+            $this->engine->assign('ErrorMessage', Localizer::translateString('action_not_permiited'));
+            $this->engine->display("error.tpl");
+            exit();
+        }
         $questionCategoryID = $questionData['category_id'];
         if ($questionData['have_answers']) {
             $questionData['answers'] = $question->getAnswers($questionCategoryID, $this->lang, $this->user->getId());
@@ -702,6 +708,7 @@ class Controller
         }
         $test = new Test($this->dbh, $this->lang, $this->user);
         $test->setId($params['testId']);
+        $this->engine->assign('TestId', $params['testId']);
 
         if(!$test->belongsToUser($this->user) || !isset($params['questionID'])) {
             header("HTTP/1.1 404 Not found");
@@ -753,7 +760,7 @@ class Controller
     {
         $achievements = [];
         if ($this->user->logged()) {
-            $achievements = $this->user->achievements($this->lang);
+            $achievements = $this->user->achievements($this->lang, 5);
             $this->engine->assign('RecommendedAchievement', $this->user->recommendedAchievement($this->lang));
 
             $userId = (string)$this->user->getId();

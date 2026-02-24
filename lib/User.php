@@ -806,7 +806,7 @@ class User
         return $stmt->fetch(PDO::FETCH_ASSOC) ?: false;
     }
 
-    public function achievements(string $lang): array
+    public function achievements(string $lang, int $limit=0): array
     {
         $stmt = $this->dbh->prepare("SELECT user_achievements.achievement_id,
                 user_achievements.user_achievement_id,
@@ -818,7 +818,8 @@ class User
             JOIN achievements ON user_achievements.achievement_id = achievements.id
             JOIN achievements_localization ON achievements.id = achievements_localization.achievement_id AND achievements_localization.language = :lang
             WHERE user_id = :user_id and not achievements.deleted
-            ORDER BY user_achievements.earned_at DESC;");
+            ORDER BY user_achievements.earned_at DESC"
+            . ($limit > 0 ? " LIMIT $limit;" : ";"));
 
         $stmt->execute([':lang' => $lang, ':user_id' => $this->id]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC) ?: [];

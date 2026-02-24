@@ -248,7 +248,11 @@ class Test
             WHERE question_id = :question_id;");
 
         $stmt->execute([':test_id' =>  $this->id, ':question_id' =>  $qusestionId, ':lang' => $this->lang]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        if (!$result) {
+            throw new Exception('Question not found');
+        }
+        return $result;
     }
 
     public function getQuestionAttemptStatus(int $qusestionId): array 
