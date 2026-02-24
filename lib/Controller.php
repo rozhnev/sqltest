@@ -938,8 +938,14 @@ class Controller
 
     public function lesson(array $params): void 
     {
-        $lesson = new Lesson($this->dbh, $params['lesson']);
-
+        try {
+            $lesson = new Lesson($this->dbh, $params['lesson']);
+        } catch (Exception $e) {
+            header("HTTP/1.1 404 Not Found");
+            $this->engine->assign('ErrorMessage', Localizer::translateString('action_not_permiited'));
+            $this->engine->display("error.tpl");
+            exit();
+        }
         $parser = new \cebe\markdown\GithubMarkdown();
         $lessonData = $lesson->get($this->lang);
         $lessonData['content'] = $parser->parse($lessonData['content']);

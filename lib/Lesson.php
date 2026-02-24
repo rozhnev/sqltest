@@ -31,11 +31,11 @@ class Lesson
                 and not lessons.deleted and not modules.deleted");
         $stmt->execute([':slug' => $this->slug]);
         $lesson = $stmt->fetch(PDO::FETCH_ASSOC);
-        $this->moduleSlug = $lesson['module_slug'];
-        $this->id = $lesson['id'];
-        if (!$this->id) {
+        if (!$lesson) {
             throw new Exception("Lesson not found");
         }
+        $this->moduleSlug = $lesson['module_slug'];
+        $this->id = $lesson['id'];
     }
 
     public function slug(): string
