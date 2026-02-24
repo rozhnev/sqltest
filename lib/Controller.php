@@ -182,13 +182,13 @@ class Controller
                 echo json_encode(['status' => 'ok']);
             } else {
                 http_response_code(401);
-                echo json_encode(['status' => 'error', 'message' => Localizer::translateString('action_not_permiited')]);
+                echo json_encode(['status' => 'error', 'message' => Localizer::translateString('action_not_permitted')]);
             }
             exit();
         }
 
         if (!$success) {
-            $this->engine->assign('ErrorMessage', Localizer::translateString('action_not_permiited'));
+            $this->engine->assign('ErrorMessage', Localizer::translateString('action_not_permitted'));
             $this->engine->display("error.tpl");
             return;
         }
@@ -201,7 +201,7 @@ class Controller
         header('Content-Type: application/json');
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             http_response_code(405);
-            echo json_encode(['status' => 'error', 'message' => Localizer::translateString('action_not_permiited')]);
+            echo json_encode(['status' => 'error', 'message' => Localizer::translateString('action_not_permitted')]);
             exit();
         }
 
@@ -363,7 +363,14 @@ class Controller
         $questionnireName   = $questionnire->getNameByCategory($params['questionCategory']);
 
         $question = new Question($this->dbh, $questionID);
-        $questionData = $question->get($questionCategoryID, $this->lang, $this->user->getId());
+        try {
+            $questionData = $question->get($questionCategoryID, $this->lang, $this->user->getId());
+        } catch (Exception $e) {
+            header("HTTP/1.0 404 Not Found");
+            $this->engine->assign('ErrorMessage', Localizer::translateString('action_not_permitted'));
+            $this->engine->display("error.tpl");
+            return;
+        }
         if ($questionData['have_answers']) {
             $questionData['answers'] = $question->getAnswers($questionCategoryID, $this->lang, $this->user->getId());
             $questionData['last_query'] = json_decode($questionData['last_query']??'[]', true);
@@ -600,8 +607,8 @@ class Controller
         $test->setId($params['testId']);
 
         if(!$test->belongsToUser($this->user)) {
-            header("HTTP/1.1 404 Moved Permanently");
-            $this->engine->assign('ErrorMessage', Localizer::translateString('action_not_permiited'));
+            header("HTTP/1.1 404 Not Found");
+            $this->engine->assign('ErrorMessage', Localizer::translateString('action_not_permitted'));
             $this->engine->display("error.tpl");
             exit();
         }
@@ -631,8 +638,8 @@ class Controller
         $test->setId($params['testId']);
 
         if(!$test->belongsToUser($this->user)) {
-            header("HTTP/1.1 404 Moved Permanently");
-            $this->engine->assign('ErrorMessage', Localizer::translateString('action_not_permiited'));
+            header("HTTP/1.1 404 Not Found");
+            $this->engine->assign('ErrorMessage', Localizer::translateString('action_not_permitted'));
             $this->engine->display("error.tpl");
             exit();
         }
@@ -656,8 +663,8 @@ class Controller
         $test->setId($params['testId']);
 
         if(!$test->belongsToUser($this->user)) {
-            header("HTTP/1.1 404 Moved Permanently");
-            $this->engine->assign('ErrorMessage', Localizer::translateString('action_not_permiited'));
+            header("HTTP/1.1 404 Not Found");
+            $this->engine->assign('ErrorMessage', Localizer::translateString('action_not_permitted'));
             $this->engine->display("error.tpl");
             exit();
         }
@@ -667,8 +674,8 @@ class Controller
         try {
             $questionData = $test->getQuestionData($questionID);
         } catch (Exception $e) {
-            header("HTTP/1.1 404 Moved Permanently");
-            $this->engine->assign('ErrorMessage', Localizer::translateString('action_not_permiited'));
+            header("HTTP/1.1 404 Not Found");
+            $this->engine->assign('ErrorMessage', Localizer::translateString('action_not_permitted'));
             $this->engine->display("error.tpl");
             exit();
         }
@@ -712,7 +719,7 @@ class Controller
 
         if(!$test->belongsToUser($this->user) || !isset($params['questionID'])) {
             header("HTTP/1.1 404 Not found");
-            $this->engine->assign('ErrorMessage', Localizer::translateString('action_not_permiited'));
+            $this->engine->assign('ErrorMessage', Localizer::translateString('action_not_permitted'));
             $this->engine->display("error.tpl");
             exit();
         }
@@ -942,7 +949,7 @@ class Controller
             $lesson = new Lesson($this->dbh, $params['lesson']);
         } catch (Exception $e) {
             header("HTTP/1.1 404 Not Found");
-            $this->engine->assign('ErrorMessage', Localizer::translateString('action_not_permiited'));
+            $this->engine->assign('ErrorMessage', Localizer::translateString('action_not_permitted'));
             $this->engine->display("error.tpl");
             exit();
         }
