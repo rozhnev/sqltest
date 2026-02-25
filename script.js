@@ -728,7 +728,7 @@ function setEventListeners() {
         link.addEventListener(
             "click",
             (event) => {
-                openRequestedTab(event.target.href);
+                openRequestedTab(link.href);
                 event.preventDefault();
             },
             false,
