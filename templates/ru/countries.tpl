@@ -9,7 +9,7 @@
         База данных Countries является примером базы данных PostGIS, предназначенной для географического и геопространственного анализа. Она включает пространственную информацию о странах, столицах и данных Нью-Йорка, таких как переписные блоки, убийства, районы, улицы и станции метро, подходящих для ГИС-приложений и пространственных запросов.
     </p>
     <h3>Список таблиц:</h3>
-    <div class="accordion">
+    <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span><span class='sql'>countries</span> — список стран с геометрией.</span>
     </div>
     <div class="panel">
@@ -36,7 +36,7 @@
             <li>PRIMARY KEY, btree (id)</li>
         </ul>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span><span class='sql'>capitals</span> — список столиц с координатами.</span>
     </div>
     <div class="panel">
@@ -67,7 +67,7 @@
             <li>FOREIGN KEY (country_id) REFERENCES countries(id)</li>
         </ul>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span><span class='sql'>nyc_census_blocks</span> — демография блоков переписи Нью-Йорка.</span>
     </div>
     <div class="panel">
@@ -115,7 +115,7 @@
             <li>PRIMARY KEY, btree (gid)</li>
         </ul>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span><span class='sql'>nyc_homicides</span> — инциденты убийств в Нью-Йорке.</span>
     </div>
     <div class="panel">
@@ -163,7 +163,7 @@
             <li>PRIMARY KEY, btree (gid)</li>
         </ul>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span><span class='sql'>nyc_neighborhoods</span> — районы Нью-Йорка.</span>
     </div>
     <div class="panel">
@@ -193,7 +193,7 @@
             <li>PRIMARY KEY, btree (gid)</li>
         </ul>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span><span class='sql'>nyc_streets</span> — улицы Нью-Йорка.</span>
     </div>
     <div class="panel">
@@ -229,7 +229,7 @@
             <li>PRIMARY KEY, btree (gid)</li>
         </ul>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span><span class='sql'>nyc_subway_stations</span> — станции метро Нью-Йорка.</span>
     </div>
     <div class="panel">

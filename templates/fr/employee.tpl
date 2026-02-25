@@ -9,9 +9,9 @@
         Employee est une base de données d'exemple fournie avec le système de gestion de base de données multiplateforme Firebird.
         Vous pouvez utiliser cette base de données pour explorer le SQL Firebird et d'autres fonctionnalités du SGBD.
     </p>
-    <h3>Voici la liste des tables de cette base de données :</h3>
+    <h3>Tables de la base de données :</h3>
 
-    <div class="accordion">
+    <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
         <span><span class='sql'>COUNTRY</span> - table des pays.</span>
     </div>
     <div class="panel">
@@ -32,7 +32,7 @@
             </table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
         <span><span class='sql'>JOB</span> - grille des postes de l'entreprise.</span>
     </div>
     <div class="panel">
@@ -71,7 +71,7 @@
             </table>
         </div>    
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
         <span><span class='sql'>DEPARTMENT</span> - divisions de l'entreprise.</span>
     </div>
     <div class="panel">
@@ -107,7 +107,7 @@
             </table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
         <span><span class='sql'>EMPLOYEE</span> - liste des employés.</span>
     </div>
     <div class="panel">
@@ -155,7 +155,7 @@
             </table>
         </div>    
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
         <span><span class='sql'>PROJECT</span> - liste des projets.</span>
     </div>
     <div class="panel">
@@ -185,7 +185,7 @@
             </table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
         <span><span class='sql'>EMPLOYEE_PROJECT</span> - affectation des employés aux projets.</span>
     </div>
     <div class="panel">
@@ -206,7 +206,7 @@
             </table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
         <span><span class='sql'>PROJ_DEPT_BUDGET</span> - budgets des projets.</span>
     </div>
     <div class="panel">
@@ -236,7 +236,7 @@
             </table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
         <span><span class='sql'>SALARY_HISTORY</span> - historique des changements de salaire des employés.</span>
     </div>
     <div class="panel">
@@ -269,7 +269,7 @@
             </table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
         <span><span class='sql'>CUSTOMER</span> - clients de l'entreprise.</span>
     </div>
     <div class="panel">
@@ -320,7 +320,7 @@
             </table>
         </div>    
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
     <span><span class='sql'>SALES</span> - liste des ventes.</span>
     </div>
     <div class="panel">

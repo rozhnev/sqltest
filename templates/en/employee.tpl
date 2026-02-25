@@ -11,7 +11,7 @@
     </p>
     <h3>Below is a list of this DB tables:</h3>
 
-    <div class="accordion">
+    <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span><span class='sql'>COUNTRY</span> - countries table.</span>
     </div>
     <div class="panel">
@@ -32,7 +32,7 @@
             </table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span><span class='sql'>JOB</span> - company's staff schedule.</span>
     </div>
     <div class="panel">
@@ -71,7 +71,7 @@
             </table>
         </div>    
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span><span class='sql'>DEPARTMENT</span> - company divisions.</span>
     </div>
     <div class="panel">
@@ -107,7 +107,7 @@
             </table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span><span class='sql'>EMPLOYEE</span> - list of employees.</span>
     </div>
     <div class="panel">
@@ -155,7 +155,7 @@
             </table>
         </div>    
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span><span class='sql'>PROJECT</span> - list of projects.</span>
     </div>
     <div class="panel">
@@ -185,7 +185,7 @@
             </table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span><span class='sql'>EMPLOYEE_PROJECT</span> - employee-project mapping.</span>
     </div>
     <div class="panel">
@@ -206,7 +206,7 @@
             </table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span><span class='sql'>PROJ_DEPT_BUDGET</span> - project budgets.</span>
     </div>
     <div class="panel">
@@ -236,7 +236,7 @@
             </table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span><span class='sql'>SALARY_HISTORY</span> - history of employee salary changes.</span>
     </div>
     <div class="panel">
@@ -269,7 +269,7 @@
             </table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span><span class='sql'>CUSTOMER</span> - company clients.</span>
     </div>
     <div class="panel">
@@ -320,7 +320,7 @@
             </table>
         </div>    
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
     <span><span class='sql'>SALES</span> - list of sales.</span>
     </div>
     <div class="panel">

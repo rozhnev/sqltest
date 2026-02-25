@@ -5,13 +5,14 @@
         }
     </style>
     <h2>Base de données Bookings (PostgreSQL)</h2>
-    Le domaine de cette base de données est le transport aérien via divers aéroports.
+    Le domaine de cette base de données est le transport aérien via divers aéroports. La base de données Bookings contient 8 tables.
     <p>
-        <a class="button-erd" href="/{$Lang}/erd/Bookings" target="ERDWindow">
+        <a href="/{$Lang}/erd/Bookings" target="ERDWindow" style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
+            <img src="/images/erd_small_light.jpg" alt="Schéma ER de la base de données Bookings" style="width: 90%;">
             Schéma ER de la base de données Bookings
         </a>
     </p>
-    <h3>La base de données Bookings contient 8 tables :</h3>
+    <h3>Liste des tables :</h3>
     {literal}
     <div class="accordion active">
         <span><span class='sql'>aircrafts_data</span> - table des avions.</span>
@@ -34,7 +35,7 @@
             </table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
         <span><span class='sql'>airports_data</span> - table des aéroports.</span>
     </div>
     <div class="panel">
@@ -57,7 +58,7 @@
             </table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
         <span><span class='sql'>boarding_passes</span> - table des cartes d'embarquement.</span>
     </div>
     <div class="panel">
@@ -84,7 +85,7 @@
             </table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
         <span><span class='sql'>bookings</span> - table des réservations.</span>
     </div>
     <div class="panel">
@@ -100,7 +101,7 @@
             <table class=""><tbody><tr><th></th><th>book_ref</th><th>book_date</th><th>total_amount</th></tr><tr><td>1</td><td>00000F</td><td>2017-07-05 00:12:00+00</td><td>265700.00</td></tr></tbody></table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
         <span><span class='sql'>flights</span> - table des vols.</span>
     </div>
     <div class="panel">
@@ -136,7 +137,7 @@
                 </tr><tr><td>1</td><td>1185</td><td>PG0134</td><td>2017-09-10 06:50:00+00</td><td>2017-09-10 11:55:00+00</td><td>DME</td><td>BTK</td><td>Scheduled</td><td>319</td><td></td><td></td></tr></tbody></table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
         <span><span class='sql'>seats</span> - table des sièges d'avions.</span>
     </div>
     <div class="panel">
@@ -159,7 +160,7 @@
             <tr><td>1</td><td>319</td><td>2A</td><td>Business</td></tr></tbody></table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
         <span><span class='sql'>ticket_flights</span> - relations entre billets et vols.</span>
     </div>
     <div class="panel">
@@ -186,7 +187,7 @@
             </tr><tr><td>1</td><td>0005432159776</td><td>30625</td><td>Business</td><td>42100.00</td></tr></tbody></table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
         <span><span class='sql'>tickets</span> - table des billets.</span>
     </div>
     <div class="panel">

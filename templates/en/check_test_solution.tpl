@@ -152,7 +152,8 @@
     </div>
 {elseif array_key_exists('hints', $QueryTestResult) && array_key_exists('maxAttemptsReached', $QueryTestResult.hints)}
     {assign var="NextQuestion" value="{$QueryTestResult.nextQuestion}"}
-    {translate}maximum_attempts_reached{/translate}{if $QueryTestResult.nextQuestion} {translate}go_to_next_task{/translate}{/if}
+    {translate}maximum_attempts_reached{/translate}
+    {if $QueryTestResult.nextQuestion} {translate}go_to_next_task{/translate}{/if}
 {elseif array_key_exists('hints', $QueryTestResult) && array_key_exists('timeOut', $QueryTestResult.hints)}
     {translate}test_time_out{/translate} {translate}go_to_rate{/translate}
 {else}

@@ -8,12 +8,13 @@
     <p>База данных AdventureWorks — это образец базы данных, демонстрирующий возможности SQL Server. Он включает данные о
       вымышленной производственной компании.</p>
     <p>
-        <a  class="button-erd" href="/{$Lang}/erd/AdventureWorks" target="ERDWindow">
+        <a href="/{$Lang}/erd/AdventureWorks" target="ERDWindow" style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
+            <img src="/images/erd_small_light.jpg" alt="ER диаграмма базы данных AdventureWorks" style="width: 90%;">
             ER диаграмма базы данных AdventureWorks
         </a>
     </p>
     <h3>База данных содержит 10 таблиц:</h3>
-    <div class="accordion">
+    <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span><span class='sql'>Address</span> - таблица адресов.</span>
     </div>
     <div class="panel">
@@ -58,7 +59,7 @@
             </table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span><span class='sql'>Customer</span> - таблица клиентов.</span>
     </div>
     <div class="panel">
@@ -122,7 +123,7 @@
       </table>
     </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span><span class='sql'>CustomerAddress</span> - таблица связи клиентов и адресов.</span>
     </div>
     <div class="panel">
@@ -155,7 +156,7 @@
             </table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span><span class='sql'>Product</span> - таблица товаров.</span>
     </div>
     <div class="panel">
@@ -224,7 +225,7 @@
             </table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span><span class='sql'>ProductCategory</span> - категории товаров.</span>
     </div>
     <div class="panel">
@@ -257,7 +258,7 @@
             </table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span><span class='sql'>ProductDescription</span> - описание товаров.</span>
     </div>
     <div class="panel">
@@ -287,7 +288,7 @@
           </table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span><span class='sql'>ProductModel</span> - модели товаров.</span>
     </div>
     <div class="panel">
@@ -320,7 +321,7 @@
             </table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span><span class='sql'>ProductModelProductDescription</span> - описание моделей товаров.</span>
     </div>
     <div class="panel">
@@ -353,7 +354,7 @@
             </table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span><span class='sql'>SalesOrderDetail</span> - детали заказов.</span>
     </div>
     <div class="panel">
@@ -398,7 +399,7 @@
           </table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span><span class='sql'>SalesOrderHeader</span> - заказы.</span>
     </div>
     <div class="panel">

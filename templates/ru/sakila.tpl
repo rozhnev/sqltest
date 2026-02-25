@@ -7,14 +7,15 @@
   </style>
   <h2>База данных Sakila</h2>
   Sakila - это пример базы данных, разработанный компанией MySQL, специально созданный для обучения и демонстрации возможностей систем управления базами данных (СУБД) на основе реляционной модели.
-  <p>
-      <a class="button-erd" href="/{$Lang}/erd/Sakila" target="ERDWindow">
-          ER диаграмма базы данных Sakila
-      </a>
-  </p>
   <p>База данных Sakila содержит 15 основных таблиц, описывающих различные аспекты компании по прокату DVD-дисков.</p>
+    <p>
+        <a href="/{$Lang}/erd/Sakila" target="ERDWindow" style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
+            <img src="/images/erd_small_light.jpg" alt="ER диаграмма базы данных Sakila" style="width: 90%;">
+            ER диаграмма базы данных Sakila
+        </a>
+    </p>
   <h3>Список таблиц:</h3>
-  <div class="accordion">
+  <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
       <span><span class='sql'>actor</span> - таблица актеров</span>
   </div>
   <div class="panel">
@@ -44,7 +45,7 @@
           <li>PRIMARY KEY, btree (actor_id)</li>
       </ul>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span class='sql'>address</span> - адреса клиентов и сотрудников
     </div>
     <div class="panel">
@@ -86,7 +87,7 @@
             <li>PRIMARY KEY, btree (address_id)</li>
         </ul>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span class='sql'>category</span> - категории фильмов
     </div>
     <div class="panel">
@@ -113,7 +114,7 @@
             <li>PRIMARY KEY, btree (category_id)</li>
         </ul>    
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span class='sql'>city</span> - таблица городов
     </div>
     <div class="panel">
@@ -143,7 +144,7 @@
             <li>PRIMARY KEY, btree (city_id)</li>
         </ul>
     </div>    
-    <div class="accordion">
+    <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span class='sql'>country</span> - таблица стран
     </div>
     <div class="panel">
@@ -170,7 +171,7 @@
             <li>PRIMARY KEY, btree (country_id)</li>
         </ul>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span class='sql'>customer</span> - таблица клиентов
     </div>
     <div class="panel">
@@ -215,7 +216,7 @@
             <li>PRIMARY KEY, btree (customer_id)</li>
         </ul>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span class='sql'>film</span> - таблица фильмов
     </div>
     <div class="panel">
@@ -272,7 +273,7 @@
              <li>PRIMARY KEY, btree (film_id)</li>
         </ul>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span class='sql'>film_actor</span> - отношение актеров и фильмов
     </div>
     <div class="panel">
@@ -299,7 +300,7 @@
            <li>PRIMARY KEY, btree (actor_id, film_id)</li>
         </ul>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span class='sql'>film_category</span> - отношение фильмов к категориям
     </div>
     <div class="panel">
@@ -326,7 +327,7 @@
            <li>PRIMARY KEY, btree (film_id, category_id)</li>
         </ul>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span class='sql'>inventory</span> - список дисков в филиалах компании
     </div>
     <div class="panel">
@@ -356,7 +357,7 @@
             <li>PRIMARY KEY, btree (inventory_id)</li>
         </ul>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span class='sql'>language</span> - языки фильмов
     </div>
     <div class="panel">
@@ -383,7 +384,7 @@
             <li>PRIMARY KEY, btree (language_id)</li>
         </ul>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span class='sql'>payment</span> - платежи клиентов
     </div>
     <div class="panel">
@@ -422,7 +423,7 @@
            <li>PRIMARY KEY, btree (payment_id)</li>
         </ul>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span class='sql'>rental</span> - таблица аренды дисков
     </div>
     <div class="panel">
@@ -461,7 +462,7 @@
             <li>PRIMARY KEY, btree (rental_id)</li>
         </ul>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span class='sql'>staff</span> - сотрудники компании
     </div>
     <div class="panel">
@@ -512,7 +513,7 @@
           <li>PRIMARY KEY, btree (staff_id)</li>
         </ul>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span class='sql'>store</span> - филиалы компании
     </div>
     <div class="panel">

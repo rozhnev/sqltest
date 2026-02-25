@@ -5,13 +5,14 @@
         }
     </style>
     <h2>База данных Bookings (PostgreSQL)</h2>
-    Предметной областью этой базы данных являются рейсы авиакомпаний через различные аэропорты.
+    Предметной областью этой базы данных являются рейсы авиакомпаний через различные аэропорты. База данных Bookings содержит 8 таблиц.
     <p>
-        <a class="button-erd" href="/{$Lang}/erd/Bookings" target="ERDWindow">
+        <a href="/{$Lang}/erd/Bookings" target="ERDWindow" style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
+            <img src="/images/erd_small_light.jpg" alt="ER диаграмма базы данных Bookings" style="width: 90%;">
             ER диаграмма базы данных Bookings
         </a>
     </p>
-    <h3>База данных Bookings содержит 8 таблиц:</h3>
+    <h3>Список таблиц:</h3>
     {literal}
     <div class="accordion active">
         <span><span class='sql'>aircrafts_data</span> - таблица самолетов.</span>
@@ -29,7 +30,7 @@
             <li>PRIMARY KEY, btree (aircraft_code)</li>
         </ul>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span><span class='sql'>airports_data</span> - таблица аэропортов.</span>
     </div>
     <div class="panel">
@@ -52,7 +53,7 @@
             <li>PRIMARY KEY, btree (airport_code)</li>
         </ul>    
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span><span class='sql'>boarding_passes</span> - посадочные талоны.</span>
     </div>
     <div class="panel">
@@ -79,7 +80,7 @@
             <li>FOREIGN KEY (ticket_no, flight_id) REFERENCES ticket_flights(ticket_no, flight_id)</li>
         </ul>    
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span><span class='sql'>bookings</span> - бронирования билетов.</span>
     </div>
     <div class="panel">
@@ -95,7 +96,7 @@
             <li>PRIMARY KEY, btree (book_ref)</li>
         </ul>    
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span><span class='sql'>flights</span> - таблица полётов.</span>
     </div>
     <div class="panel">
@@ -119,7 +120,7 @@
             <li>UNIQUE CONSTRAINT, btree (flight_no, scheduled_departure)</li>
         </ul>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span><span class='sql'>seats</span> - таблица мест в самолетах.</span>
     </div>
     <div class="panel">
@@ -138,7 +139,7 @@
             <li>FOREIGN KEY (aircraft_code) REFERENCES aircrafts(aircraft_code) ON DELETE CASCADE</li>
         </ul>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span><span class='sql'>ticket_flights</span> - привязка билетов к рейсам.</span>
     </div>
     <div class="panel">
@@ -159,7 +160,7 @@
             <li>FOREIGN KEY (ticket_no) REFERENCES tickets(ticket_no)</li>
         </ul>    
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span><span class='sql'>tickets</span> - таблица билетов.</span>
     </div>
     <div class="panel">

@@ -27,6 +27,8 @@
                         </div>
                     </div>
                 {/if}
+                                            <div class="question-wrapper">
+
                 <div id="menu-content" class="menu-content">     
                     {foreach $Lessons as $moduleSlug => $module}
                     <button class="accordion {if isset({$Lesson->moduleSlug()}) && $moduleSlug eq {$Lesson->moduleSlug()}}active{/if}">
@@ -46,6 +48,7 @@
                     </div>
                     {/foreach}
                 </div>
+                                            </div>
                 {if $User->showAd()}
                     {* {include file="{$Lang}/menu_bottom_add.tpl"} *}
                 {/if}

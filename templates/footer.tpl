@@ -1,6 +1,6 @@
 <div class="footer-links">
     <div>
-        © 2023-2025 SQLtest.online
+        © 2023-2026 SQLtest.online
     </div>
     <div>
         {translate}footer_have_questions{/translate}

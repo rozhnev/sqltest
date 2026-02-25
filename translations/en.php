@@ -11,6 +11,7 @@ $translations = [
     'empty_query_result' => 'Your query is empty.',
     'date' => 'Date',
     'tasks' => 'Tasks',
+    'test' => 'Test',
     'tests' => 'Tests',
     'tasks_count' => 'Number of tasks',
     'tasks_solved_count' => 'Solved tasks',

@@ -10,12 +10,14 @@
         about fictional manufacturing company.
     </p>
     <p>
-        <a  class="button-erd" href="/{$Lang}/erd/AdventureWorks" target="ERDWindow">
+        <a href="/{$Lang}/erd/AdventureWorks" target="ERDWindow" style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
+            <img src="/images/erd_small_light.jpg" alt="ER diagram of the AdventureWorks database" style="width: 90%;">
             AdventureWorks DB ER diagram
         </a>
     </p>
+    <h3>The list of tables:</h3>
     <h3>The following is a list of DB tables:</h3>
-    <div class="accordion">
+    <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span><span class='sql'>Address</span> - table of addresses.</span>
     </div>
     <div class="panel">
@@ -60,7 +62,7 @@
             </table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span><span class='sql'>Customer</span> - table of customers.</span>
     </div>
     <div class="panel">
@@ -123,7 +125,7 @@
             </table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span><span class='sql'>CustomerAddress</span> - customer to address relations.</span>
     </div>
     <div class="panel">
@@ -156,7 +158,7 @@
             </table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span><span class='sql'>Product</span> - table of products.</span>
     </div>
     <div class="panel">
@@ -225,7 +227,7 @@
             </table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span><span class='sql'>ProductCategory</span> - table of product categories.</span>
     </div>
     <div class="panel">
@@ -258,7 +260,7 @@
             </table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span><span class='sql'>ProductDescription</span> - table of product descriptions.</span>
     </div>
     <div class="panel">
@@ -288,7 +290,7 @@
             </table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span><span class='sql'>ProductModel</span> - table of product models.</span>
     </div>
     <div class="panel">
@@ -321,7 +323,7 @@
             </table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span><span class='sql'>ProductModelProductDescription</span> - table of product models descriptions.</span>
     </div>
     <div class="panel">
@@ -354,7 +356,7 @@
             </table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span><span class='sql'>SalesOrderDetail</span> - table of sales orders details.</span>
     </div>
     <div class="panel">
@@ -399,7 +401,7 @@
           </table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span><span class='sql'>SalesOrderHeader</span> - product sales orders.</span>
     </div>
     <div class="panel">

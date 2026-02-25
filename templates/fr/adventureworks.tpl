@@ -10,12 +10,14 @@
         sur une entreprise de fabrication fictive.
     </p>
     <p>
-        <a  class="button-erd" href="/{$Lang}/erd/AdventureWorks" target="ERDWindow">
-            Schéma ER de la base de données AdventureWorks
+        <a href="/{$Lang}/erd/AdventureWorks" target="ERDWindow" style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
+            <img src="/images/erd_small_light.jpg" alt="Schéma ER de la base de données AdventureWorks" style="width: 90%;">
+            Schéma ER AdventureWorks
         </a>
     </p>
-    <h3>Voici la liste des tables de la base de données :</h3>
-    <div class="accordion">
+    <h3>Tables de la base de données :</h3>
+
+    <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
         <span><span class='sql'>Address</span> - table des adresses.</span>
     </div>
     <div class="panel">
@@ -60,7 +62,7 @@
             </table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
         <span><span class='sql'>Customer</span> - table des clients.</span>
     </div>
     <div class="panel">
@@ -123,7 +125,7 @@
             </table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
         <span><span class='sql'>CustomerAddress</span> - relations entre clients et adresses.</span>
     </div>
     <div class="panel">
@@ -156,7 +158,7 @@
             </table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
         <span><span class='sql'>Product</span> - table des produits.</span>
     </div>
     <div class="panel">
@@ -225,7 +227,7 @@
             </table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
         <span><span class='sql'>ProductCategory</span> - table des catégories de produits.</span>
     </div>
     <div class="panel">
@@ -258,7 +260,7 @@
             </table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
         <span><span class='sql'>ProductDescription</span> - table des descriptions de produits.</span>
     </div>
     <div class="panel">
@@ -288,7 +290,7 @@
             </table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
         <span><span class='sql'>ProductModel</span> - table des modèles de produits.</span>
     </div>
     <div class="panel">
@@ -321,7 +323,7 @@
             </table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
         <span><span class='sql'>ProductModelProductDescription</span> - table des descriptions des modèles de produits.</span>
     </div>
     <div class="panel">
@@ -354,7 +356,7 @@
             </table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
         <span><span class='sql'>SalesOrderDetail</span> - table des détails des commandes de vente.</span>
     </div>
     <div class="panel">
@@ -399,7 +401,7 @@
           </table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
         <span><span class='sql'>SalesOrderHeader</span> - commandes de vente de produits.</span>
     </div>
     <div class="panel">

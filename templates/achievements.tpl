@@ -122,7 +122,7 @@
 </div>
 {/if}
 
-<h4>{translate}your_achievements{/translate}:</h4>
+<h4>{translate}your_last_achievements{/translate}:</h4>
 
 {foreach $Achievements as $achievement}
     {assign var="gradId" value="gradient-`$achievement.achievement_id`"}
@@ -164,5 +164,5 @@
 
 <div style="display:flex; gap:1rem;">
     <button class="button" onclick="location.href='/{$Lang}/user/profile';"><span>{translate}profile_page_title{/translate}</span></button>
-    <button class="button" onclick="location.href='/{$Lang}/logout';"><span>{translate}top_menu_logout{/translate}</span></button>
+    <button class="button red" onclick="location.href='/{$Lang}/logout';"><span>{translate}top_menu_logout{/translate}</span></button>
 </div>

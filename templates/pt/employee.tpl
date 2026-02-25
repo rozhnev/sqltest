@@ -4,14 +4,13 @@
             min-width: 8rem;
         }
     </style>
-    <h2>Banco de Dados de Funcionários (Firebird)</h2>
+    <h2>Banco de Dados Employee (Firebird)</h2>
     <p>
         Employee é um banco de dados de exemplo que acompanha o sistema de gerenciamento de banco de dados Firebird multiplataforma.
         Você pode usar este banco de dados para explorar o Firebird SQL e outros recursos do DBMS.
     </p>
-    <h3>Abaixo está uma lista das tabelas deste banco de dados:</h3>
-
-    <div class="accordion">
+    <h3>Tabelas do banco de dados:</h3>
+    <div class="accordion" title="Clique para expandir, duplo clique para colar nome da tabela">
         <span><span class='sql'>COUNTRY</span> - tabela de países.</span>
     </div>
     <div class="panel">
@@ -32,7 +31,7 @@
             </table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Clique para expandir, duplo clique para colar nome da tabela">
         <span><span class='sql'>JOB</span> - horário de trabalho da empresa.</span>
     </div>
     <div class="panel">
@@ -71,7 +70,7 @@
             </table>
         </div>    
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Clique para expandir, duplo clique para colar nome da tabela">
         <span><span class='sql'>DEPARTMENT</span> - divisões da empresa.</span>
     </div>
     <div class="panel">
@@ -107,7 +106,7 @@
             </table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Clique para expandir, duplo clique para colar nome da tabela">
         <span><span class='sql'>EMPLOYEE</span> - lista de funcionários.</span>
     </div>
     <div class="panel">
@@ -155,7 +154,7 @@
             </table>
         </div>    
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Clique para expandir, duplo clique para colar nome da tabela">
         <span><span class='sql'>PROJECT</span> - lista de projetos.</span>
     </div>
     <div class="panel">
@@ -185,7 +184,7 @@
             </table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Clique para expandir, duplo clique para colar nome da tabela">
         <span><span class='sql'>EMPLOYEE_PROJECT</span> - funcionários em projetos.</span>
     </div>
     <div class="panel">
@@ -206,7 +205,7 @@
             </table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Clique para expandir, duplo clique para colar nome da tabela">
         <span><span class='sql'>PROJ_DEPT_BUDGET</span> - orçamentos de projetos.</span>
     </div>
     <div class="panel">
@@ -236,7 +235,7 @@
             </table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Clique para expandir, duplo clique para colar nome da tabela">
         <span><span class='sql'>SALARY_HISTORY</span> - histórico salarial dos funcionários.</span>
     </div>
     <div class="panel">
@@ -269,7 +268,7 @@
             </table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Clique para expandir, duplo clique para colar nome da tabela">
         <span><span class='sql'>CUSTOMER</span> - clientes da empresa.</span>
     </div>
     <div class="panel">
@@ -320,7 +319,7 @@
             </table>
         </div>    
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Clique para expandir, duplo clique para colar nome da tabela">
         <span><span class='sql'>SALES</span> - lista de vendas.</span>
     </div>
     <div class="panel">

@@ -7,13 +7,14 @@
     <h2>AdventureWorks Database (SQL Server)</h2>
     <p>O Banco de Dados AdventureWorks é um banco de dados de amostra que demonstra as capacidades do SQL Server. Ele inclui dados sobre uma empresa de manufatura fictícia.</p>
     <p>
-        <a  class="button-erd" href="/{$Lang}/erd/AdventureWorks" target="ERDWindow">
-            Diagrama ER do Banco de Dados AdventureWorks
+        <a href="/{$Lang}/erd/AdventureWorks" target="ERDWindow" style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
+            <img src="/images/erd_small_light.jpg" alt="Diagrama ER do Banco de Dados AdventureWorks" style="width: 90%;">
+            Diagrama ER - AdventureWorks
         </a>
     </p>
-    <h3>A seguir, uma lista das tabelas:</h3>
-    <div class="accordion">
-        <span><span class='sql'>Address</span> - Tabela de endereços.</span>
+    <h3>Lista das tabelas:</h3>
+    <div class="accordion" title="Clique para expandir, duplo clique para colar nome da tabela">
+        <span><span class='sql table-name-icon'>Address</span> - Tabela de endereços.</span>
     </div>
     <div class="panel">
         <ul class="table-columns">
@@ -57,8 +58,8 @@
             </table>
         </div>
     </div>
-    <div class="accordion">
-        <span><span class='sql'>Customer</span> - Tabela de clientes.</span>
+    <div class="accordion" title="Clique para expandir, duplo clique para colar nome da tabela">
+        <span><span class='sql table-name-icon'>Customer</span> - Tabela de clientes.</span>
     </div>
     <div class="panel">
         <ul class="table-columns">
@@ -120,8 +121,8 @@
             </table>
         </div>
     </div>
-    <div class="accordion">
-        <span><span class='sql'>CustomerAddress</span> - Tabela de relações entre clientes e endereços.</span>
+    <div class="accordion" title="Clique para expandir, duplo clique para colar nome da tabela">
+        <span><span class='sql table-name-icon'>CustomerAddress</span> - Tabela de relações entre clientes e endereços.</span>
     </div>
     <div class="panel">
         <ul class="table-columns">
@@ -153,8 +154,8 @@
             </table>
         </div>
     </div>
-    <div class="accordion">
-        <span><span class='sql'>Product</span> - Tabela de produtos.</span>
+    <div class="accordion" title="Clique para expandir, duplo clique para colar nome da tabela">
+        <span><span class='sql table-name-icon'>Product</span> - Tabela de produtos.</span>
     </div>
     <div class="panel">
         <ul class="table-columns">
@@ -223,8 +224,8 @@
             </table>
         </div>
     </div>
-    <div class="accordion">
-        <span><span class='sql'>ProductCategory</span> - Tabela de categorias de produtos.</span>
+    <div class="accordion" title="Clique para expandir, duplo clique para colar nome da tabela">
+        <span><span class='sql table-name-icon'>ProductCategory</span> - Tabela de categorias de produtos.</span>
     </div>
     <div class="panel">
         <ul class="table-columns">
@@ -256,8 +257,8 @@
             </table>
         </div>
     </div>
-    <div class="accordion">
-        <span><span class='sql'>ProductDescription</span> - Tabela de descrições de produtos.</span>
+    <div class="accordion" title="Clique para expandir, duplo clique para colar nome da tabela">
+        <span><span class='sql table-name-icon'>ProductDescription</span> - Tabela de descrições de produtos.</span>
     </div>
     <div class="panel">
         <ul class="table-columns">
@@ -286,8 +287,8 @@
             </table>
         </div>
     </div>
-    <div class="accordion">
-        <span><span class='sql'>ProductModel</span> - Tabela de modelos de produtos.</span>
+    <div class="accordion" title="Clique para expandir, duplo clique para colar nome da tabela">
+        <span><span class='sql table-name-icon'>ProductModel</span> - Tabela de modelos de produtos.</span>
     </div>
     <div class="panel">
         <ul class="table-columns">
@@ -319,8 +320,8 @@
             </table>
         </div>
     </div>
-    <div class="accordion">
-        <span><span class='sql'>ProductModelProductDescription</span> - Tabela de relações entre modelos de produtos e descrições de produtos.</span>
+    <div class="accordion" title="Clique para expandir, duplo clique para colar nome da tabela">
+        <span><span class='sql table-name-icon'>ProductModelProductDescription</span> - Tabela de relações entre modelos de produtos e descrições de produtos.</span>
     </div>
     <div class="panel">
         <ul class="table-columns">
@@ -352,8 +353,8 @@
             </table>
         </div>
     </div>
-    <div class="accordion">
-        <span><span class='sql'>SalesOrderDetail</span> - Tabela de detalhes de pedidos de venda de produtos.</span>
+    <div class="accordion" title="Clique para expandir, duplo clique para colar nome da tabela">
+        <span><span class='sql table-name-icon'>SalesOrderDetail</span> - Tabela de detalhes de pedidos de venda de produtos.</span>
     </div>
     <div class="panel">
         <ul class="table-columns">
@@ -397,8 +398,8 @@
           </table>
         </div>
     </div>
-    <div class="accordion">
-        <span><span class='sql'>SalesOrderHeader</span> - Tabela de cabeçalhos de pedidos de venda de produtos.</span>
+    <div class="accordion" title="Clique para expandir, duplo clique para colar nome da tabela">
+        <span><span class='sql table-name-icon'>SalesOrderHeader</span> - Tabela de cabeçalhos de pedidos de venda de produtos.</span>
     </div>
     <div class="panel">
         <ul class="table-columns">

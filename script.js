@@ -111,6 +111,12 @@ function toggleLoginWindow() {
     // }
     // ), 333)
 }
+
+function toggleMobileMenu() {
+    const dropdown = document.getElementById('mobileMenuDropdown');
+    dropdown.classList.toggle("hidden");
+}
+
 function toggleAchievements(lang) {
     const popup = document.getElementById('achievements-popup');
 
@@ -757,6 +763,19 @@ window.onload = function() {
         //     testQuery(lang, questionId);
         // }
     });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(event) {
+        const mobileMenuDropdown = document.getElementById('mobileMenuDropdown');
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        
+        if (mobileMenuDropdown && mobileMenuToggle && 
+            !mobileMenuDropdown.contains(event.target) && 
+            !mobileMenuToggle.contains(event.target)) {
+            mobileMenuDropdown.classList.add('hidden');
+        }
+    });
+
     if (!Ya || !Ya.Context) {
         document.getElementById('userInfo').style.display = 'block';
     }

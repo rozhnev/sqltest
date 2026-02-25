@@ -6,7 +6,7 @@
     </style>
     <h2>Querynomicon (SQLite)</h2>
     Компактная база данных для изучения основ SQL.
-    <h3>База данных Querynomicon содержит таблицы:</h3>
+    <h3>Таблицы базы данных Querynomicon:</h3>
     <div class="accordion active">
         <span><span class='sql'>department</span> - таблица отделов.</span>
     </div>
@@ -31,10 +31,10 @@
             </tbody></table>
         </div>
     </div>
-    <div class="accordion active">
+    <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span><span class='sql'>little_penguins</span> - таблица малых пингвинов.</span>
     </div>
-    <div class="panel active">
+    <div class="panel">
         <ul class="table-columns">
             <li> <span class='sql' style="min-width: 12rem;">species</span>Вид пингвина</li>
             <li> <span class='sql' style="min-width: 12rem;">island</span> Остров проживания</li>
@@ -67,7 +67,7 @@
             </tbody></table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span><span class='sql'>penguins</span> - таблица пингвинов.</span>
     </div>
     <div class="panel">
@@ -103,7 +103,7 @@
             </tbody></table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span><span class='sql'>staff</span> - таблица сотрудников.</span>
     </div>
     <div class="panel">
@@ -133,7 +133,7 @@
             </tbody></table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span><span class='sql'>machine</span> - таблица машин.</span>
     </div>
     <div class="panel">

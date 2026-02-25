@@ -7,14 +7,15 @@
     </style>
     <h2>Banco de Dados Sakila</h2>
     Sakila é um banco de dados de exemplo projetado pelo MySQL, criado especificamente para aprendizado e demonstração das capacidades dos sistemas de gerenciamento de banco de dados relacionais (RDBMS).
+    <p>O banco de dados Sakila contém 15 tabelas principais descrevendo vários aspectos de uma empresa de locação de DVDs.</p>
     <p>
-        <a class="button-erd" href="/{$Lang}/erd/Sakila" target="ERDWindow">
+        <a href="/{$Lang}/erd/Sakila" target="ERDWindow" style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
+            <img src="/images/erd_small_light.jpg" alt="Diagrama ER do banco de dados Sakila" style="width: 90%;">
             Diagrama ER do banco de dados Sakila
         </a>
     </p>
-    <p>O banco de dados Sakila contém 15 tabelas principais descrevendo vários aspectos de uma empresa de locação de DVDs.</p>
     <h3>Lista de Tabelas:</h3>
-    <div class="accordion">
+    <div class="accordion" title="Clique para expandir, duplo clique para colar nome da tabela">
         <span><span class='sql'>actor</span> - tabela de atores.</span>
     </div>
     <div class="panel">
@@ -44,7 +45,7 @@
             <li>PRIMARY KEY, btree (actor_id)</li>
         </ul>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Clique para expandir, duplo clique para colar nome da tabela">
         <span class='sql'>address</span> - endereços de clientes e funcionários.
     </div>
     <div class="panel">
@@ -86,7 +87,7 @@
             <li>PRIMARY KEY, btree (address_id)</li>
         </ul>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Clique para expandir, duplo clique para colar nome da tabela">
         <span class='sql'>category</span> - categorias de filmes.
     </div>
     <div class="panel">
@@ -113,7 +114,7 @@
             <li>PRIMARY KEY, btree (category_id)</li>
         </ul>    
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Clique para expandir, duplo clique para colar nome da tabela">
         <span class='sql'>city</span> - tabela de cidades.
     </div>
     <div class="panel">
@@ -143,7 +144,7 @@
             <li>PRIMARY KEY, btree (city_id)</li>
         </ul>
     </div>    
-    <div class="accordion">
+    <div class="accordion" title="Clique para expandir, duplo clique para colar nome da tabela">
         <span class='sql'>country</span> - tabela de países.
     </div>
     <div class="panel">
@@ -170,7 +171,7 @@
             <li>PRIMARY KEY, btree (country_id)</li>
         </ul>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Clique para expandir, duplo clique para colar nome da tabela">
         <span class='sql'>customer</span> - tabela de clientes.
     </div>
     <div class="panel">
@@ -215,8 +216,8 @@
             <li>PRIMARY KEY, btree (customer_id)</li>
         </ul>
     </div>
-    <div class="accordion">
-        <span class='sql'>film</span> - lista de filmes no banco de dados.
+    <div class="accordion" title="Clique para expandir, duplo clique para colar nome da tabela">
+        <span class='sql'>film</span> - tabela de filmes.
     </div>
     <div class="panel">
         <ul class="table-columns">
@@ -272,7 +273,7 @@
             <li>PRIMARY KEY, btree (film_id)</li>
         </ul>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Clique para expandir, duplo clique para colar nome da tabela">
         <span class='sql'>film_actor</span> - relação entre atores e filmes.
     </div>
     <div class="panel">
@@ -299,7 +300,7 @@
             <li>PRIMARY KEY, btree (actor_id, film_id)</li>
         </ul>      
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Clique para expandir, duplo clique para colar nome da tabela">
         <span class='sql'>film_category</span> - relação entre filmes e categorias.
     </div>
     <div class="panel">
@@ -326,8 +327,8 @@
               <li>PRIMARY KEY, btree (film_id, category_id)</li>
           </ul>    
     </div>
-    <div class="accordion">
-        <span class='sql'>inventory</span> - itens no banco de dados.
+    <div class="accordion" title="Clique para expandir, duplo clique para colar nome da tabela">
+        <span class='sql'>inventory</span> - tabela de inventário.
     </div>
     <div class="panel">
         <ul class="table-columns">
@@ -356,7 +357,7 @@
             <li>PRIMARY KEY, btree (inventory_id)</li>
         </ul>        
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Clique para expandir, duplo clique para colar nome da tabela">
         <span class='sql'>language</span> - idiomas dos filmes.
     </div>
     <div class="panel">
@@ -383,7 +384,7 @@
             <li>PRIMARY KEY, btree (language_id)</li>
         </ul>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Clique para expandir, duplo clique para colar nome da tabela">
         <span class='sql'>payment</span> - pagamentos dos clientes.
     </div>
     <div class="panel">
@@ -422,7 +423,7 @@
             <li>PRIMARY KEY, btree (payment_id)</li>
         </ul>      
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Clique para expandir, duplo clique para colar nome da tabela">
         <span class='sql'>rental</span> - aluguéis dos clientes.
     </div>
     <div class="panel">
@@ -461,7 +462,7 @@
             <li>PRIMARY KEY, btree (rental_id)</li>
         </ul>    
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Clique para expandir, duplo clique para colar nome da tabela">
         <span class='sql'>staff</span> - equipe da empresa.
     </div>
     <div class="panel">
@@ -512,7 +513,7 @@
             <li>PRIMARY KEY, btree (staff_id)</li>
         </ul>        
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Clique para expandir, duplo clique para colar nome da tabela">
         <span class='sql'>store</span> - histórias da empresa.
     </div>
     <div class="panel">

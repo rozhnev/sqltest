@@ -12,7 +12,7 @@
     </p>
     <h3>Список таблиц:</h3>
 
-    <div class="accordion">
+    <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span><span class='sql'>COUNTRY</span> - таблица стран.</span>
     </div>
     <div class="panel">
@@ -33,7 +33,7 @@
             </table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span><span class='sql'>JOB</span> - штатное расписание компании.</span>
     </div>
     <div class="panel">
@@ -72,7 +72,7 @@
             </table>
         </div>    
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span><span class='sql'>DEPARTMENT</span> - подразделения компании.</span>
     </div>
     <div class="panel">
@@ -108,7 +108,7 @@
             </table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span><span class='sql'>EMPLOYEE</span> - список сотрудников.</span>
     </div>
     <div class="panel">
@@ -156,7 +156,7 @@
             </table>
         </div>    
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span><span class='sql'>PROJECT</span> - список проектов.</span>
     </div>
     <div class="panel">
@@ -186,7 +186,7 @@
             </table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span><span class='sql'>EMPLOYEE_PROJECT</span> - сотрудники по проектам.</span>
     </div>
     <div class="panel">
@@ -207,7 +207,7 @@
             </table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span><span class='sql'>PROJ_DEPT_BUDGET</span> - бюджет проектов.</span>
     </div>
     <div class="panel">
@@ -237,7 +237,7 @@
             </table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span><span class='sql'>SALARY_HISTORY</span> - изменения зарплаты.</span>
     </div>
     <div class="panel">
@@ -270,7 +270,7 @@
             </table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span><span class='sql'>CUSTOMER</span> - клиенты компании.</span>
     </div>
     <div class="panel">
@@ -321,7 +321,7 @@
             </table>
         </div>    
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span><span class='sql'>SALES</span> - таблица продаж.</span>
     </div>
     <div class="panel">

@@ -6,8 +6,8 @@
     </style>
     <h2>Querynomicon (SQLite)</h2>
     Une base de données compacte pour apprendre les bases du SQL.
-    <h3>La base de données Querynomicon contient les tables suivantes :</h3>
-    <div class="accordion">
+    <h3>Tables de la base de données:</h3>
+    <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
         <span><span class='sql'>department</span> - table des départements.</span>
     </div>
     <div class="panel">
@@ -31,7 +31,7 @@
             </tbody></table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
         <span><span class='sql'>little_penguins</span> - table des petits pingouins.</span>
     </div>
     <div class="panel">
@@ -67,7 +67,7 @@
             </tbody></table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
         <span><span class='sql'>penguins</span> - table des pingouins.</span>
     </div>
     <div class="panel">
@@ -103,7 +103,7 @@
             </tbody></table>
         </div>
     </div>    
-    <div class="accordion">
+    <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
         <span><span class='sql'>staff</span> - table des employés.</span>
     </div>
     <div class="panel">
@@ -133,7 +133,7 @@
             </tbody></table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
         <span><span class='sql'>machine</span> - table des machines.</span>
     </div>
     <div class="panel">

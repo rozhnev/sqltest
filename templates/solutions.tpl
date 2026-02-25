@@ -1,13 +1,12 @@
-<div {if !$MobileView}class="solutions"{/if}>
+{* <div {if !$MobileView}class="solutions"{/if}> *}
+<div class="question-wrapper">
     {if $User->logged()}
         {if !$QuestionSolved} 
             <div class="solution-wrapper">
-                <div style="padding: 2em;">
-                    <p>{translate}qustion_should_be_solved{/translate}</p>
-                </div>
+                <h3>{translate}qustion_should_be_solved{/translate}</h3>
             </div>
         {elseif $QuestionSolutions}
-            <p>{translate}solutions_title{/translate}</p>
+            <h4>{translate}solutions_title{/translate}</h4>
             {foreach $QuestionSolutions as $id=>$solution}
                 <div class="solution-wrapper" id="solution-wrapper-{$id}">
                     <div class="solution-title">{translate}solution_title{/translate}: {$solution.created_at} {translate}solution_query_cost{/translate}: {$solution.query_cost}</div>

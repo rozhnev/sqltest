@@ -1,13 +1,24 @@
 <div class="top-menu-left" style="width: 25vw; display: flex; align-items: center; position: relative;">
-    <a href="/{$Lang}/" target="_self"><h1 class="site-name">SQLtest</h1></a>
+    <button class="button" id="mobileMenuToggle" style="padding: 0; display: flex; align-items: center; justify-content: center; margin-right: 0.5rem;" onclick="toggleMobileMenu()">
+        <div style="width: 100%; padding: 5px;">☰</div>
+    </button>
+    <a href="/{$Lang}/" target="_self"><h1 class="site-name">SQLtest.online</h1></a>
     <div id="achievements-popup" class="achievements-popup hidden"></div>
 </div>
+<div class="mobile-menu-dropdown hidden" id="mobileMenuDropdown">
+    <div class="mobile-menu-item">
+        {include file='theme-switcher.tpl'}
+    </div>
+    <div class="mobile-menu-item">
+        {include file='lang-switcher.tpl'}
+    </div>
+    <div class="mobile-menu-item">
+        <a href="/{$Lang}/donate" target="_self" id="donate-btn">
+            <button class="button green"><span>{translate}top_menu_donate{/translate}</span></button>    
+        </a>
+    </div>
+</div>
 <div class="top-menu-buttons mobile">
-    <a href="/{$Lang}/donate" target="_self" id="donate-btn" style="display: block; margin-right: 2.5rem;">
-        <button class="button green">
-            <div style="width: 100%; padding: 5px;">$</div>
-        </button>
-    </a>
     {if $User->logged()}
         {* <button class="button blue" onclick="location.href = '/ru/logout';">
             <div style="width: 100%; padding: 5px;">⎆</div>
@@ -36,8 +47,4 @@
             </div>
         </button>
     {/if}
-</div>
-<div class="top-menu-switchers">
-    {include file='lang-switcher.tpl'}
-    {include file='theme-switcher.tpl'}
 </div>

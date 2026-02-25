@@ -6,8 +6,8 @@
     </style>
     <h2>Querynomicon (SQLite)</h2>
     A compact database for learning the basics of SQL.
-    <h3>The Querynomicon database contains tables:</h3>
-    <div class="accordion">
+    <h3>The Querynomicon database tables:</h3>
+    <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span><span class='sql'>department</span> - table of departments.</span>
     </div>
     <div class="panel">
@@ -31,7 +31,7 @@
             </tbody></table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span><span class='sql'>little_penguins</span> - table of little penguins.</span>
     </div>
     <div class="panel">
@@ -67,7 +67,7 @@
             </tbody></table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span><span class='sql'>penguins</span> - table of penguins.</span>
     </div>
     <div class="panel">
@@ -103,7 +103,7 @@
             </tbody></table>
         </div>
     </div>    
-    <div class="accordion">
+    <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span><span class='sql'>staff</span> - table of employees.</span>
     </div>
     <div class="panel">
@@ -133,7 +133,7 @@
             </tbody></table>
         </div>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span><span class='sql'>machine</span> - table of machines.</span>
     </div>
     <div class="panel">

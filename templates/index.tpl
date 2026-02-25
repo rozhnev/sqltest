@@ -214,8 +214,14 @@
                         </div>
                     </div>
                 {/if}
-                {* {include file="{$Lang}/developers_channel_ad.tpl"} *}
+                {if $User->logged()}
+                    <div style="padding-right: 6px;">
+                        {include file="my_progress.tpl"}
+                    </div>
+                {/if}
+                <div class="question-wrapper" style="margin-right: 6px;">
                 {include file="{$Lang}/{$DB}.tpl"}
+                </div>
             </div>
         </main3>
         <footer>

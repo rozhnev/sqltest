@@ -9,7 +9,7 @@
         The Countries database is a PostGIS sample database designed for geographic and geospatial data analysis. It includes spatial information about countries, capitals, and New York City data such as census blocks, homicides, neighborhoods, streets, and subway stations, suitable for GIS applications and spatial queries.
     </p>
     <h3>Table List:</h3>
-    <div class="accordion">
+    <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span><span class='sql'>countries</span> - list of countries with geometry.</span>
     </div>
     <div class="panel">
@@ -36,7 +36,7 @@
             <li>PRIMARY KEY, btree (id)</li>
         </ul>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span><span class='sql'>capitals</span> - list of capitals with location.</span>
     </div>
     <div class="panel">
@@ -67,7 +67,7 @@
             <li>FOREIGN KEY (country_id) REFERENCES countries(id)</li>
         </ul>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span><span class='sql'>nyc_census_blocks</span> - New York City census blocks with demographic data.</span>
     </div>
     <div class="panel">
@@ -115,7 +115,7 @@
             <li>PRIMARY KEY, btree (gid)</li>
         </ul>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span><span class='sql'>nyc_homicides</span> - New York City homicide incidents.</span>
     </div>
     <div class="panel">
@@ -163,7 +163,7 @@
             <li>PRIMARY KEY, btree (gid)</li>
         </ul>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span><span class='sql'>nyc_neighborhoods</span> - New York City neighborhoods.</span>
     </div>
     <div class="panel">
@@ -193,7 +193,7 @@
             <li>PRIMARY KEY, btree (gid)</li>
         </ul>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span><span class='sql'>nyc_streets</span> - New York City streets.</span>
     </div>
     <div class="panel">
@@ -229,7 +229,7 @@
             <li>PRIMARY KEY, btree (gid)</li>
         </ul>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span><span class='sql'>nyc_subway_stations</span> - New York City subway stations.</span>
     </div>
     <div class="panel">

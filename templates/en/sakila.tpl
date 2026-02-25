@@ -7,14 +7,15 @@
     </style>
     <h2>Sakila Database</h2>
     Sakila is an example database designed by MySQL, specifically created for learning and demonstrating the capabilities of relational database management systems (RDBMS).
+    <p>The Sakila database contains 15 main tables describing various aspects of a DVD rental company.</p>
     <p>
-        <a class="button-erd" href="/{$Lang}/erd/Sakila" target="ERDWindow">
+        <a href="/{$Lang}/erd/Sakila" target="ERDWindow" style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
+            <img src="/images/erd_small_light.jpg" alt="ER diagram of the Sakila database" style="width: 90%;">
             ER diagram of the Sakila database
         </a>
     </p>
-    <p>The Sakila database contains 15 main tables describing various aspects of a DVD rental company.</p>
-    <h3>Table List:</h3>
-    <div class="accordion">
+    <h3>The list of tables:</h3>
+    <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span><span class='sql'>actor</span> - actor table.</span>
     </div>
     <div class="panel">
@@ -44,7 +45,7 @@
             <li>PRIMARY KEY, btree (actor_id)</li>
         </ul>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span class='sql'>address</span> - customer and staff addresses.
     </div>
     <div class="panel">
@@ -86,7 +87,7 @@
             <li>PRIMARY KEY, btree (address_id)</li>
         </ul>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span class='sql'>category</span> - film categories.
     </div>
     <div class="panel">
@@ -113,7 +114,7 @@
             <li>PRIMARY KEY, btree (category_id)</li>
         </ul>    
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span class='sql'>city</span> - city table.
     </div>
     <div class="panel">
@@ -143,7 +144,7 @@
             <li>PRIMARY KEY, btree (city_id)</li>
         </ul>
     </div>    
-    <div class="accordion">
+    <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span class='sql'>country</span> - country table.
     </div>
     <div class="panel">
@@ -170,7 +171,7 @@
             <li>PRIMARY KEY, btree (country_id)</li>
         </ul>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span class='sql'>customer</span> - customer table.
     </div>
     <div class="panel">
@@ -215,8 +216,8 @@
             <li>PRIMARY KEY, btree (customer_id)</li>
         </ul>
     </div>
-    <div class="accordion">
-        <span class='sql'>film</span> - list of films in Sakila database.
+    <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
+        <span class='sql'>film</span> - table of films.
     </div>
     <div class="panel">
         <ul class="table-columns">
@@ -272,7 +273,7 @@
             <li>PRIMARY KEY, btree (film_id)</li>
           </ul>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span class='sql'>film_actor</span> - actors to films relation.
     </div>
     <div class="panel">
@@ -299,7 +300,7 @@
             <li>PRIMARY KEY, btree (actor_id, film_id)</li>
           </ul>      
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span class='sql'>film_category</span> - films to categories relation.
     </div>
     <div class="panel">
@@ -326,8 +327,8 @@
               <li>PRIMARY KEY, btree (film_id, category_id)</li>
           </ul>    
     </div>
-    <div class="accordion">
-        <span class='sql'>inventory</span> - items in Sakila database.
+    <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
+        <span class='sql'>inventory</span> - table of items.
     </div>
     <div class="panel">
         <ul class="table-columns">
@@ -356,7 +357,7 @@
             <li>PRIMARY KEY, btree (inventory_id)</li>
         </ul>        
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span class='sql'>language</span> - films languages.
     </div>
     <div class="panel">
@@ -383,7 +384,7 @@
             <li>PRIMARY KEY, btree (language_id)</li>
         </ul>
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span class='sql'>payment</span> - customers payments.
     </div>
     <div class="panel">
@@ -422,7 +423,7 @@
             <li>PRIMARY KEY, btree (payment_id)</li>
         </ul>      
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span class='sql'>rental</span> - customers rentals.
     </div>
     <div class="panel">
@@ -461,7 +462,7 @@
             <li>PRIMARY KEY, btree (rental_id)</li>
         </ul>    
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span class='sql'>staff</span> - company staff.
     </div>
     <div class="panel">
@@ -512,7 +513,7 @@
             <li>PRIMARY KEY, btree (staff_id)</li>
         </ul>        
     </div>
-    <div class="accordion">
+    <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span class='sql'>store</span> - company stories.
     </div>
     <div class="panel">
