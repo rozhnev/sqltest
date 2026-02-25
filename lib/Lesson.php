@@ -77,7 +77,8 @@ class Lesson
             join lessons_localization ll on ll.lesson_id = lessons.id and ll.language  = :lang
             WHERE modules_localization.language = :lang
                 and not modules.deleted 
-                and not lessons.deleted;
+                and not lessons.deleted
+            ORDER BY modules.sequence_position, lessons.sequence_position;
         ");
 
         $stmt->execute([':lang' => $lang]);
