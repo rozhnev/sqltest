@@ -52,7 +52,13 @@
     *   Using Subqueries in SELECT, FROM, and WHERE Clauses
     *   Common Table Expressions (CTEs) for Complex Queries
     *   Recursive CTEs for Hierarchical Data
-7.  **Data Manipulation Language (DML)**
+7.  **Window Functions**
+    *   Window Functions for Advanced Data Analysis
+    *   Using ROW_NUMBER, RANK, DENSE_RANK, and NTILE
+    *   Understanding Partitioning and Ordering in Window Functions
+    *   Understanding Window boundaries and frames
+    *   Using Window Functions for Running Totals and Moving Averages    
+8.  **Data Manipulation Language (DML)**
     *   Introduction to DML
     *   Creating Tables
     *   Constraints
@@ -61,13 +67,6 @@
     *   Deleting Data from Tables
     *   Modifying Tables
     *   Using Transactions for Data Integrity
-8.  **Advanced SQL Techniques**
-    *   Window Functions for Advanced Data Analysis
-    *   Using ROW_NUMBER, RANK, DENSE_RANK, and NTILE
-    *   Understanding Partitioning and Ordering in Window Functions
-    *   Understanding Window boundaries and frames
-    *   Using Window Functions for Running Totals and Moving Averages
-    *   Using Common Table Expressions (CTEs) for Recursive Queries
 9.  **Data Transformation and Manipulation**
     *   Data Transformation Techniques for Analysis
     *   Using CASE Statements for Conditional Logic
