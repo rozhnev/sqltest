@@ -336,7 +336,7 @@ header {
     padding: 0 7px 7px 7px;
     display: flex;
     flex-flow: row;
-    gap: 1em;
+    /* gap: 1em; */
     justify-content: space-between;
     color: var(--question-text);
     border-bottom: 1px solid var(--text-block-border-color);
