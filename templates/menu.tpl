@@ -68,7 +68,7 @@
             {/if}
             {foreach $Questionnire.menu as $categoryId => $panel}
             <button class="accordion {if isset($QuestionCategoryID) && $categoryId eq $QuestionCategoryID}active{/if}">
-                <span class="accordion-title">{$panel.title}</span>
+                <span class="practice-list accordion-title">{$panel.title}</span>
                     <span class="accordion-icons">
                         <span class="eye-btn" title="{translate}hide_hide_solved_tasks{/translate}">
                             <svg width="16" height="16" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">

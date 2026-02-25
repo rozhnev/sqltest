@@ -17,7 +17,7 @@
                 <div id="menu-content" class="question-wrapper menu-content">
                     {foreach $Questionnire.menu as $categoryId => $panel}
                     <button class="accordion {if $categoryId eq $QuestionCategoryID}active{/if}">
-                        <span class="accordion-title">{$panel.title}</span>
+                        <span class="tests-list accordion-title">{$panel.title}</span>
                     </button>
                     <div class="panel {if $categoryId eq $QuestionCategoryID}active{/if}">
                         <ol>

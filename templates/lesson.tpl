@@ -27,28 +27,27 @@
                         </div>
                     </div>
                 {/if}
-                                            <div class="question-wrapper">
-
-                <div id="menu-content" class="menu-content">     
-                    {foreach $Lessons as $moduleSlug => $module}
-                    <button class="accordion {if isset({$Lesson->moduleSlug()}) && $moduleSlug eq {$Lesson->moduleSlug()}}active{/if}">
-                        <span class="accordion-title">{$module.title}</span>
-                    </button>
-                    <div class="panel {if isset({$Lesson->moduleSlug()}) && $moduleSlug eq {$Lesson->moduleSlug()}}active{/if}">
-                        <ol>
-                        {foreach $module.lessons as $lesson}
-                        <li>
-                            <a class="question-link {if $Lesson->slug() == $lesson.slug} current-question{/if}" href="/{$Lang}/lesson/{$moduleSlug}/{$lesson.slug}">
-                                <span class="question-number">{$lesson.number}.&nbsp;</span>
-                                {$lesson.title}
-                            </a>
-                        </li>
+                <div class="question-wrapper">
+                    <div id="menu-content" class="menu-content">     
+                        {foreach $Lessons as $moduleSlug => $module}
+                        <button class="accordion {if isset({$Lesson->moduleSlug()}) && $moduleSlug eq {$Lesson->moduleSlug()}}active{/if}">
+                            <span class="lessons-list accordion-title">{$module.title}</span>
+                        </button>
+                        <div class="panel {if isset({$Lesson->moduleSlug()}) && $moduleSlug eq {$Lesson->moduleSlug()}}active{/if}">
+                            <ol>
+                            {foreach $module.lessons as $lesson}
+                            <li>
+                                <a class="question-link {if $Lesson->slug() == $lesson.slug} current-question{/if}" href="/{$Lang}/lesson/{$moduleSlug}/{$lesson.slug}">
+                                    <span class="question-number">{$lesson.number}.&nbsp;</span>
+                                    {$lesson.title}
+                                </a>
+                            </li>
+                            {/foreach}
+                            </ol>
+                        </div>
                         {/foreach}
-                        </ol>
                     </div>
-                    {/foreach}
                 </div>
-                                            </div>
                 {if $User->showAd()}
                     {* {include file="{$Lang}/menu_bottom_add.tpl"} *}
                 {/if}

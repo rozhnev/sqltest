@@ -86,6 +86,15 @@
     --test-timer-shadow: rgba(3, 7, 18, 0.8);
     --test-timer-muted-text: rgba(240, 246, 252, 0.7);
 }
+[data-theme="dark"] .practice-list {
+    background-image: url('data:image/svg+xml;utf8,<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%23F0F6FC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><circle cx="6" cy="6" r="2"></circle><circle cx="6" cy="12" r="2"></circle><circle cx="6" cy="18" r="2"></circle><line x1="6" y1="8" x2="6" y2="10"></line><line x1="6" y1="14" x2="6" y2="16"></line><line x1="12" y1="6" x2="20" y2="6"></line><line x1="12" y1="12" x2="20" y2="12"></line><line x1="12" y1="18" x2="20" y2="18"></line></svg>');
+}
+[data-theme="dark"] .lessons-list {
+    background-image: url('data:image/svg+xml;utf8,<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%23F0F6FC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>');
+}
+[data-theme="dark"] .tests-list {
+    background-image: url('data:image/svg+xml;utf8,<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%23F0F6FC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="18" height="18" rx="2"></rect><polyline points="9 12 11 14 15 10"></polyline></svg>');
+}
 body, html {
     margin: 0;
     padding: 0;
@@ -1303,6 +1312,12 @@ footer a:visited {
     height:24px;
     background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M17.472 14.382c-.297-.149-1.758-.867-2.029-.967-.272-.099-.47-.148-.669.15-.198.297-.767.967-.94 1.166-.173.198-.347.223-.644.075-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.447-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.611-.916-2.206-.242-.579-.487.5-.669.51-.173.008-.372.01-.571.01-.198 0-.52.075-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.877 1.213 3.075.149.198 2.099 3.205 5.077 4.364.71.306 1.263.489 1.695.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.288.173-1.413-.075-.124-.272-.198-.57-.347z' fill='%23FFF' fill-rule='evenodd'/%3e%3c/svg%3e");
 }
+.bullets {
+    display:inline-block;
+    width: 24px;
+    height:24px;
+    background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M17.472 14.382c-.297-.149-1.758-.867-2.029-.967-.272-.099-.47-.148-.669.15-.198.297-.767.967-.94 1.166-.173.198-.347.223-.644.075-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.447-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.611-.916-2.206-.242-.579-.487.5-.669.51-.173.008-.372.01-.571.01-.198 0-.52.075-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.877 1.213 3.075.149.198 2.099 3.205 5.077 4.364.71.306 1.263.489 1.695.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.288.173-1.413-.075-.124-.272-.198-.57-.347z' fill='%23FFF' fill-rule='evenodd'/%3e%3c/svg%3e");
+}
 .loader {
     color: #50aaFF;
     font-size: 20px;
@@ -1648,4 +1663,29 @@ footer a:visited {
     background-color: rgba(220, 38, 38, 0.2);
     border-color: rgba(220, 38, 38, 0.4);
     color: #fca5a5;
+}
+
+.practice-list {
+    background-image: url('data:image/svg+xml;utf8,<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><circle cx="6" cy="6" r="2"></circle><circle cx="6" cy="12" r="2"></circle><circle cx="6" cy="18" r="2"></circle><line x1="6" y1="8" x2="6" y2="10"></line><line x1="6" y1="14" x2="6" y2="16"></line><line x1="12" y1="6" x2="20" y2="6"></line><line x1="12" y1="12" x2="20" y2="12"></line><line x1="12" y1="18" x2="20" y2="18"></line></svg>');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: left 0;
+    padding-left: 26px;
+    background-size: 24px;
+}
+.lessons-list {
+    background-image: url('data:image/svg+xml;utf8,<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%23333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: left 0;
+    padding-left: 26px;
+    background-size: 24px;
+}
+.tests-list {
+    background-image: url('data:image/svg+xml;utf8,<svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="%23333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="18" height="18" rx="2"></rect><polyline points="9 12 11 14 15 10"></polyline></svg>');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: left 0;
+    padding-left: 26px;
+    background-size: 28px;
 }
