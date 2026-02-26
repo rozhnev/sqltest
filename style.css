@@ -68,7 +68,7 @@
     --accordion-hover-border: #F0F6FC;
     --accordion-panel-bg-color: #21283A;
     --sql-background-color: #484F58;
-    --sql-color:  #00CED1;
+    --sql-color:  #4DA3FF; /* #00CED1 */
     --question-date-color: #F0F6FC;
     --arrow-border-color: white;
 
@@ -100,10 +100,10 @@
 }
 
 [data-theme="dark"] .db-description .accordion {
-    background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2016%2016'%20fill='%2300CED1'%20stroke='white'%20stroke-width='1.5'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Crect%20x='1.5'%20y='2'%20width='13'%20height='12'%20rx='1.5'/%3E%3Cline%20x1='1.5'%20y1='6'%20x2='14.5'%20y2='6'/%3E%3Cline%20x1='1.5'%20y1='10'%20x2='14.5'%20y2='10'/%3E%3Cline%20x1='6'%20y1='2'%20x2='6'%20y2='14'/%3E%3Cline%20x1='10'%20y1='2'%20x2='10'%20y2='14'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2016%2016'%20fill='%234DA3FF'%20stroke='white'%20stroke-width='1.5'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Crect%20x='1.5'%20y='2'%20width='13'%20height='12'%20rx='1.5'/%3E%3Cline%20x1='1.5'%20y1='6'%20x2='14.5'%20y2='6'/%3E%3Cline%20x1='1.5'%20y1='10'%20x2='14.5'%20y2='10'/%3E%3Cline%20x1='6'%20y1='2'%20x2='6'%20y2='14'/%3E%3Cline%20x1='10'%20y1='2'%20x2='10'%20y2='14'/%3E%3C/svg%3E");
 }
 [data-theme="dark"] .db-description .accordion.active {
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="12" width="12"><polygon points="0,4 9,4 5,11" fill="%2300CED1"/></svg>') !important;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="12" width="12"><polygon points="0,4 9,4 5,11" fill="%234DA3FF"/></svg>') !important;
 }
 body, html {
     margin: 0;
@@ -649,7 +649,7 @@ input:checked + .slider:before {
     padding: 3px;
     background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2016%2016'%20fill='%23C800A4'%20stroke='white'%20stroke-width='1.5'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Crect%20x='1.5'%20y='2'%20width='13'%20height='12'%20rx='1.5'/%3E%3Cline%20x1='1.5'%20y1='6'%20x2='14.5'%20y2='6'/%3E%3Cline%20x1='1.5'%20y1='10'%20x2='14.5'%20y2='10'/%3E%3Cline%20x1='6'%20y1='2'%20x2='6'%20y2='14'/%3E%3Cline%20x1='10'%20y1='2'%20x2='10'%20y2='14'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
-    background-position: left 7px;
+    background-position: left 8px;
     background-size: 1em 1em;
     padding-left: 1.3em;
 }
