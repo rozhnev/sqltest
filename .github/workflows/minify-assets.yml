@@ -9,6 +9,7 @@ on:
       - '**.js'
       - '!**.min.js'
       - 'style.css'
+      - 'admin/style.css'
       - '!**.min.css'
 
 jobs:
@@ -28,15 +29,17 @@ jobs:
       - name: Minify JavaScript
         run: |
           terser script.js -c -m -o "script.js.min.js" --source-map
+          terser admin/script.js -c -m -o "admin/script.min.js" --source-map
 
       - name: Minify CSS
         run: |
           cleancss -o "style.min.css" "style.css"
+          cleancss -o "admin/style.min.css" "admin/style.css"
       
       - name: Commit minified files
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add *.min.js *.min.js.map *.min.css
+          git add *.min.js *.min.js.map *.min.css admin/*.min.js admin/*.min.js.map admin/*.min.css
           git diff --quiet && git diff --staged --quiet || git commit -m "Auto-minify assets [skip ci]"
           git push
