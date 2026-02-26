@@ -5,8 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="Admin panel for SQLtest.online" />
         <title>SQLtest.online — Lesson editor</title>
-        <link rel="stylesheet" href="/style.css?{$VERSION}" media="all" />
-        <link rel="stylesheet" href="/admin/style.css?{$VERSION}" media="all" />
+        <link rel="stylesheet" href="/style.min.css?{$VERSION}" media="all" />
+        <link rel="stylesheet" href="/admin/style.min.css?{$VERSION}" media="all" />
         <script>
             window.ADMIN_CONFIG = {
                 lang: '{$Lang|escape:'javascript'}',

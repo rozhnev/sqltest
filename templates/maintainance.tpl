@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SQLtest.online - Maintenance</title>
-    <link rel="stylesheet" href="/style.css?{$VERSION}">
+    <link rel="stylesheet" href="/style.min.css?{$VERSION}">
     <style>
         .maintenance-container {
             max-width: 800px;
