@@ -159,7 +159,7 @@
                         </div>
                     </div>
                 {/if}
-                <div class="text-block user-solutions-count">
+                {* <div class="text-block user-solutions-count">
                     {assign var="QuestionsCountRounded" value="{floor(($QuestionsCount - 1)/10) * 10}"}
                     {if $User->logged()}
                         <span>
@@ -187,10 +187,10 @@
                     {else}
                         <span>{translate}user_solutions_count{/translate}</span>
                     {/if}
-                </div>
+                </div> *}
             </div>
             <div class="column" id="right-panel">
-                {if $User->logged() &&  $User->getAuthProvider() === 'vk' && !$User->getEmail()}
+                {* {if $User->logged() &&  $User->getAuthProvider() === 'vk' && !$User->getEmail()}
                     <div style="background:#fff3cd;color:#856404;border-left:6px solid #ffc107;padding:12px 16px;margin-bottom:16px;border-radius:4px;display:flex;gap:12px;align-items:flex-start;font-size:14px;line-height:1.4;">
                         <div style="font-size:20px;line-height:1;margin-top:2px;">⚠️</div>
                         <div>
@@ -199,7 +199,7 @@
                             <div style="margin-top:8px;font-weight:600;">Мы прилагаем все усилия, чтобы предотвратить возможные неудобства и сохранить ваш доступ к сервису.</div>
                         </div>
                     </div>
-                {/if}
+                {/if} *}
                 {if $User->logged()}
                     <div style="padding-right: 6px;">
                         {include file="my_progress.tpl"}
