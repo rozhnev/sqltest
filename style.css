@@ -1012,6 +1012,7 @@ input:checked + .slider:before {
     height: 25vh;
     max-height: 50vh;
     background-color: var(--text-block-background-color);
+    font-size: inherit;
 }
 .code-buttons {
     justify-content: right;
