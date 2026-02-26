@@ -1,5 +1,8 @@
 name: Minify Assets
 
+permissions:
+  contents: write
+  
 on:
   push:
     paths:
