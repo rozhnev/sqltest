@@ -50,13 +50,15 @@
 6.  **Subqueries and Common Table Expressions (CTEs)**
     *   Understanding Subqueries: Inline Views and Nested Queries
     *   Using Subqueries in SELECT, FROM, and WHERE Clauses
-    *   Common Table Expressions (CTEs) for Complex Queries
+    *   Correlated Subqueries
+    *   Common Table Expressions (CTEs)
     *   Recursive CTEs for Hierarchical Data
 7.  **Window Functions**
     *   Window Functions for Advanced Data Analysis
     *   Using ROW_NUMBER, RANK, DENSE_RANK, and NTILE
     *   Understanding Partitioning and Ordering in Window Functions
-    *   Understanding Window boundaries and frames
+    *   Understanding Window boundaries and frames. Named windows
+    *   LEAD, LAG, FIRST_VALUE, LAST_VALUE functions
     *   Using Window Functions for Running Totals and Moving Averages    
 8.  **Data Manipulation Language (DML)**
     *   Introduction to DML
