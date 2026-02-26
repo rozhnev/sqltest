@@ -1,10 +1,12 @@
-name: Minify JavaScript
+name: Minify Assets
 
 on:
   push:
     paths:
       - '**.js'
       - '!**.min.js'
+      - 'style.css'
+      - '!**.min.css'
 
 jobs:
   minify:
@@ -17,17 +19,21 @@ jobs:
         with:
           node-version: '18'
       
-      - name: Install terser
-        run: npm install -g terser
+      - name: Install minifiers
+        run: npm install -g terser clean-css-cli
       
       - name: Minify JavaScript
         run: |
           terser script.js -c -m -o "script.js.min.js" --source-map
+
+      - name: Minify CSS
+        run: |
+          cleancss -o "style.min.css" "style.css"
       
       - name: Commit minified files
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add *.min.js *.min.js.map
-          git diff --quiet && git diff --staged --quiet || git commit -m "Auto-minify JavaScript [skip ci]"
+          git add *.min.js *.min.js.map *.min.css
+          git diff --quiet && git diff --staged --quiet || git commit -m "Auto-minify assets [skip ci]"
           git push
