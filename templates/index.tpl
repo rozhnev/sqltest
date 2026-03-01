@@ -17,7 +17,7 @@
             <div class="column">
                 {include file="{$Lang}/adblock_banner.tpl"}
                 {if $User->logged() && $NewAchievement}
-                    <div class="user-solutions-count" id="userInfo" style="background: var(--db-description-background-color); color: white; padding: 12px 16px; margin-bottom: 16px; border-radius: 4px; display: flex; align-items: center; gap: 12px;">
+                    <div class="user-solutions-count" id="new-achievement" style="padding: 12px 16px; margin-bottom: 16px; border-radius: 4px; display: flex; align-items: center; gap: 12px;">
                         <div style="font-size: 20px;">🏆</div>
                         <div>
                             {translate}new_achievement_unlocked{/translate}!&nbsp;
