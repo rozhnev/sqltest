@@ -395,7 +395,7 @@ The task should describe what the student needs to accomplish without revealing 
 
     try {
         const response = await runLLM('generate-task', input, 'English');
-        const taskEn = document.getElementById('questionTaskEn');
+        const taskEn = document.getElementById('questionLLMResultEnglish');
         if (taskEn) {
             taskEn.value = response;
         }
