@@ -365,7 +365,7 @@ async function questionTranslateTo(sourceLanguage) {
         return;
     }
 
-    const toTranslate = `Title: ${title}\nTask: ${task}\nHint: ${hint}`.trim();
+    const toTranslate = `Title: ${title}geneTask: ${task}\nHint: ${hint}`.trim();
 
     try {
         const translated = await translateField(toTranslate, sourceLanguage, targetLanguage);
@@ -389,7 +389,7 @@ async function questionGenerateTaskFromQuery(questionId) {
 
     try {
         const response = await runLLM('generate-task-from-query', solutionQuery, 'English');
-        const taskEn = document.getElementById('questionLLMResultEN').innerHTML = response;
+        const taskEn = document.getElementById('questionLLMResultEN').innerHTML = response.replace(/\n/g, '<br>');
         showStatus('Task generated successfully', 'success');
     } catch (error) {
         console.error(error);
