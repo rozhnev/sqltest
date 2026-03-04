@@ -267,7 +267,7 @@ function handleLLM(string $openAiKey, string $method): void
             case 'edit':
                 respondJson(['result' => doEdit($llm, $payload)]);
                 break;
-            case 'generate-task':
+            case 'generate-task-from-query':
                 respondJson(['result' => doGenerateTask($llm, $payload)]);
                 break;
             default:
@@ -350,7 +350,13 @@ function doGenerateTask(LLM $llm, array $payload): string
         ['role' => 'system', 'content' => 'You are an experienced SQL instructor who creates clear, educational task descriptions for SQL exercises.'],
         ['role' => 'user', 'content' => "Based on the following SQL query, generate a clear and concise task description in {$language}."],
         ['role' => 'user', 'content' => "SQL Query:\n{$query}"],
-        ['role' => 'user', 'content' => 'The task should describe what the student needs to accomplish without revealing the exact solution. Focus on what data needs to be retrieved and any specific requirements. Keep it brief and learner-friendly.']
+        ['role' => 'user', 'content' => '
+        The task should describe what the student needs to accomplish without revealing the exact solution. Focus on what data needs to be retrieved and any specific requirements. Keep it brief and learner-friendly.
+        The response must conain short title, detailed task description, and a hint for the student. Format the response as follows:
+            Title: [short as possible title]
+            Task: [detailed task description, ideally 1-3 sentences, include table and columns names when it nessecary, use <span class="sql"><</span> for wrap reserved keywords and database objects names]
+            Hint: [a hint to help the student get started]`
+        ']
     ];
 
     return $llm->cleanupResult($llm->ask($messages));

@@ -387,18 +387,9 @@ async function questionGenerateTaskFromQuery(questionId) {
         return;
     }
 
-    const input = `Generate a clear and concise task description for this SQL query:
-
-${solutionQuery}
-
-The task should describe what the student needs to accomplish without revealing the exact solution. Focus on what data needs to be retrieved and any specific requirements.`;
-
     try {
-        const response = await runLLM('generate-task', input, 'English');
-        const taskEn = document.getElementById('questionLLMResultEnglish');
-        if (taskEn) {
-            taskEn.value = response;
-        }
+        const response = await runLLM('generate-task-from-query', solutionQuery, 'English');
+        const taskEn = document.getElementById('questionLLMResultEN').innerHTML = response;
         showStatus('Task generated successfully', 'success');
     } catch (error) {
         console.error(error);
