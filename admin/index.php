@@ -267,6 +267,9 @@ function handleLLM(string $openAiKey, string $method): void
             case 'edit':
                 respondJson(['result' => doEdit($llm, $payload)]);
                 break;
+            case 'generate-task':
+                respondJson(['result' => doGenerateTask($llm, $payload)]);
+                break;
             default:
                 respondJson(['error' => 'Unknown LLM task'], 400);
                 break;
@@ -328,6 +331,26 @@ function doEdit(LLM $llm, array $payload): string
         ['role' => 'system', 'content' => 'You rewrite educational content to sound polished and learner-friendly while keeping technical accuracy.'],
         ['role' => 'user', 'content' => "Rewrite the following text to be {$style} while keeping the SQL meaning intact:"],
         ['role' => 'user', 'content' => implode("\n\n", $sections)]
+    ];
+
+    return $llm->cleanupResult($llm->ask($messages));
+}
+
+function doGenerateTask(LLM $llm, array $payload): string
+{
+    $context = $payload['context'] ?? [];
+    $language = $payload['language'] ?? 'English';
+    $query = $context['question'] ?? '';
+
+    if (empty($query)) {
+        throw new Exception('SQL query is required to generate a task');
+    }
+
+    $messages = [
+        ['role' => 'system', 'content' => 'You are an experienced SQL instructor who creates clear, educational task descriptions for SQL exercises.'],
+        ['role' => 'user', 'content' => "Based on the following SQL query, generate a clear and concise task description in {$language}."],
+        ['role' => 'user', 'content' => "SQL Query:\n{$query}"],
+        ['role' => 'user', 'content' => 'The task should describe what the student needs to accomplish without revealing the exact solution. Focus on what data needs to be retrieved and any specific requirements. Keep it brief and learner-friendly.']
     ];
 
     return $llm->cleanupResult($llm->ask($messages));
