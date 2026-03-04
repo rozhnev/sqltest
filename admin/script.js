@@ -379,6 +379,32 @@ async function questionTranslateTo(sourceLanguage) {
     }
 }
 
+async function questionGenerateTaskFromQuery(questionId) {
+    const solutionQuery = document.getElementById('questionSolution')?.value.trim();
+    
+    if (!solutionQuery) {
+        showStatus('Provide a solution query first', 'info');
+        return;
+    }
+
+    const input = `Generate a clear and concise task description for this SQL query:
+
+${solutionQuery}
+
+The task should describe what the student needs to accomplish without revealing the exact solution. Focus on what data needs to be retrieved and any specific requirements.`;
+
+    try {
+        const response = await runLLM('generate-task', input, 'English');
+        const taskEn = document.getElementById('questionTaskEn');
+        if (taskEn) {
+            taskEn.value = response;
+        }
+        showStatus('Task generated successfully', 'success');
+    } catch (error) {
+        console.error(error);
+    }
+}
+
 async function questionLocalizationSave(questionId, language) {
     const id = parseInt(questionId, 10);
     if (!id) {
