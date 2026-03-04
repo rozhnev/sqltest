@@ -354,8 +354,9 @@ function doGenerateTask(LLM $llm, array $payload): string
         The task should describe what the student needs to accomplish without revealing the exact solution. Focus on what data needs to be retrieved and any specific requirements. Keep it brief and learner-friendly.
         The response must conain short title, detailed task description, and a hint for the student. Format the response as follows:
             Title: [short as possible title]
-            Task: [detailed task description, ideally 1-3 sentences, include table and columns names when it nessecary, use <span class="sql"><</span> for wrap reserved keywords and database objects names]
+            Task: [detailed task description, ideally 1-3 sentences, include table and columns names when it nessecary, ]
             Hint: [a hint to help the student get started]`
+        Wrap all reserved keywords and database objects names in <span class="sql"><</span> 
         ']
     ];
 
