@@ -7,6 +7,7 @@
             </div> *}
             <a href="https://redirect.appmetrica.yandex.com/serve/606193546294247668?clid=14743932&appmetrica_js_redirect=0" target="_blank" rel="nofollow">
                 <img src="/images/banner_240x400.jpg" alt="Яндекс — с Алисой АI">
+                <p style="font-size: x-small;">ERID: 5jtCeReNx12oajxTXb1tjxc</p>
             </a>
         {else}
             {* <script async="async" data-cfasync="false" src="//pl26881648.profitableratecpm.com/93660caf229b7b6afe772e0ab435c7a9/invoke.js"></script>
