@@ -89,8 +89,8 @@
                             <img src="/images/banner_240x400.jpg" alt="Яндекс — с Алисой АI">
                         </a>
                     {else}
-                        <script async="async" data-cfasync="false" src="//pl26881648.profitableratecpm.com/93660caf229b7b6afe772e0ab435c7a9/invoke.js"></script>
-                        <div id="container-93660caf229b7b6afe772e0ab435c7a9"></div>
+                        {* <script async="async" data-cfasync="false" src="//pl26881648.profitableratecpm.com/93660caf229b7b6afe772e0ab435c7a9/invoke.js"></script>
+                        <div id="container-93660caf229b7b6afe772e0ab435c7a9"></div> *}
                     {/if}
                     </div>
                 {/if} 

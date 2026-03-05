@@ -171,8 +171,8 @@
     </div>
     {if $User->showAd()}
         <div class="referal-add-block">
-            <script async="async" data-cfasync="false" src="//pl26881648.profitableratecpm.com/93660caf229b7b6afe772e0ab435c7a9/invoke.js"></script>
-            <div id="container-93660caf229b7b6afe772e0ab435c7a9"></div>
+            {* <script async="async" data-cfasync="false" src="//pl26881648.profitableratecpm.com/93660caf229b7b6afe772e0ab435c7a9/invoke.js"></script>
+            <div id="container-93660caf229b7b6afe772e0ab435c7a9"></div> *}
         </div>
     {/if}
 </div>
