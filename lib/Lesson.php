@@ -50,12 +50,25 @@ class Lesson
 
     public function get(string $lang): array
     {
-        $stmt = $this->dbh->prepare("SELECT
-                title,
-                content,
-                description
-            FROM lessons_localization
-            WHERE lessons_localization.lesson_id = :id AND lessons_localization.language = :lang");
+        $stmt = $this->dbh->prepare("
+        with lessons as (
+            select 
+                lessons.id,
+                lag(modules.slug) over(order by modules.sequence_position, lessons.sequence_position) prev_module_slug,
+                lag(lessons.slug) over(order by modules.sequence_position, lessons.sequence_position) prev_lesson_slug,
+                lead(modules.slug) over(order by modules.sequence_position, lessons.sequence_position) next_module_slug,
+                lead(lessons.slug) over(order by modules.sequence_position, lessons.sequence_position) next_lesson_slug
+            from lessons
+            join modules on modules.id = lessons.module_id
+        ) select 
+            lessons_localization.title,
+            lessons_localization.content,
+            lessons_localization.description,
+            lessons.* 
+        from lessons 
+        join lessons_localization on lessons_localization.lesson_id = lessons.id AND lessons_localization.language = :lang
+        where lessons.id = :id;
+        ");
         $stmt->execute([':id' => $this->id, ':lang' => $lang]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
@@ -99,8 +112,6 @@ class Lesson
             },
             []
         );
-        // echo "<pre>";
-        // var_export($menu);
         return $menu;
     }
 }

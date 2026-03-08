@@ -968,11 +968,7 @@ class Controller
             'PageOGDescription' => $lessonData['description'],
             'Lessons'           => $lesson->getList($this->lang),
             'Lesson'            => $lesson,
-            'LessonData'        => $lessonData,
-            'NextLesson'     => [
-                'slug'          => '',
-                'moduleSlug'    => ''
-            ]
+            'LessonData'        => $lessonData
         ]);
         $this->engine->display("lesson.tpl");
     }
