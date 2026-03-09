@@ -47,9 +47,9 @@
             <!-- Yandex.RTB -->
             <script type="text/javascript" src="/script.js?{$VERSION}" defer></script>
             <script>
-                var lang = '{$Lang}',
-                db   = '{$DB}',
-                questionId = '{$QuestionID}';
+                var lang = '{$Lang|default:"en"}',
+                db   = '{$DB|default:"null"}',
+                questionId = '{$QuestionID|default:"null"}';
             </script>
             <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=685bb6a18ca9160019f294e2&product=sop' async='async'></script>
         </head>
