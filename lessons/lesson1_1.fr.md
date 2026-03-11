@@ -36,6 +36,8 @@ Bien que ce cours se focalise principalement sur les **bases de données relatio
 
 Un **Système de Gestion de Bases de Données (SGBD)** est un logiciel qui agit comme intermédiaire entre les utilisateurs (ou les applications) et la base de données elle-même. Il fournit un moyen systématique et contrôlé de créer, lire, mettre à jour et supprimer des données, tout en assurant la sécurité, la cohérence et l'efficacité.
 
+<img src="/images/lessons/lesson1_1-dbms.jpg" alt="DBMS overview" width="100%">
+
 **Fonctions principales d'un SGBD :**
 
 * **Définition des données :** Permet de définir la structure (schéma) de la base de données — créer des tables, spécifier les types de données, définir des contraintes et établir des relations.

@@ -2,8 +2,6 @@
 
 Welcome to the exciting world of databases! In this first lesson, we'll lay the groundwork by understanding what databases are, why they're crucial in today's data-driven world, and the fundamental concepts we'll be exploring throughout this course.
 
-![DBMS overview](/images/lessons/lesson1_1-dbms.jpeg)
-
 ## What is a Database?
 
 At its core, a database is an organized collection of structured information, or data, typically stored electronically in a computer system. Think of it as a sophisticated digital filing cabinet. Instead of paper documents scattered everywhere, a database provides a structured way to store, manage, and retrieve information efficiently.
@@ -37,6 +35,8 @@ While this course will primarily focus on **Relational Databases**, it's helpful
 ## What is a DBMS?
 
 A **Database Management System (DBMS)** is software that acts as an intermediary between users (or applications) and the database itself. It provides a systematic and controlled way to create, read, update, and delete data, while also ensuring security, consistency, and efficiency.
+
+<img src="/images/lessons/lesson1_1-dbms.jpg" alt="DBMS overview" width="100%">
 
 **Core Functions of a DBMS:**
 
