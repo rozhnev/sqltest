@@ -6,7 +6,7 @@ SQL (Structured Query Language) is a language used for managing and manipulating
 SQL was developed in the early 1970s by IBM and has since become the de facto standard for relational database management. It is widely used across various industries and applications, making it an essential skill for data analysts, developers, and database administrators.
 SQL is designed to be easy to learn and use, with a syntax that is both human-readable and machine-readable. It allows users to express complex queries and operations in a straightforward manner, making it accessible to both technical and non-technical users.
 
-<img src="/images/lessons/lesson1_3-datatypes.jpg" alt="DBMS overview" width="100%">
+<img src="/images/lessons/lesson1_5-sql.jpg" alt="SQL overview" width="100%">
 
 ## Key Features of SQL
 *   **Declarative Language:** SQL is a declarative language, meaning users specify what they want to retrieve or manipulate without detailing how to do it. This abstraction allows for easier query writing and optimization.

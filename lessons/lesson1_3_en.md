@@ -2,7 +2,7 @@
 
 In relational databases, data types specify the kind of data that can be stored within a column. Choosing the correct data type is crucial for data integrity, storage efficiency, and query performance. This lesson covers common data types and their subtypes used in relational databases, along with their value ranges.
 
-<img src="/images/lessons/lesson1_3-datatypes.jpg" alt="DBMS overview" width="100%">
+<img src="/images/lessons/lesson1_3-datatypes.jpg" alt="Data Types" width="100%">
 
 ## Numeric Data Types
 

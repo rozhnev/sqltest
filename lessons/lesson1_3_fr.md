@@ -2,7 +2,7 @@
 
 Dans les bases de données relationnelles, les types de données spécifient le genre de données qui peuvent être stockées dans une colonne. Choisir le bon type de données est crucial pour l'intégrité des données, l'efficacité du stockage et les performances des requêtes. Cette leçon couvre les types de données courants et leurs sous-types utilisés dans les bases de données relationnelles, ainsi que leurs plages de valeurs.
 
-<img src="/images/lessons/lesson1_3-datatypes.jpg" alt="DBMS overview" width="100%">
+<img src="/images/lessons/lesson1_3-datatypes.jpg" alt="Data Types" width="100%">
 
 ## Types de données numériques
 

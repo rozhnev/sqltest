@@ -6,7 +6,7 @@ SQL (Structured Query Language) é uma linguagem padrão usada para gerenciar e 
 O SQL foi desenvolvido no início da década de 1970 pela IBM e, desde então, tornou-se o padrão de fato para gerenciamento de bancos de dados relacionais. É amplamente utilizado em vários setores e aplicações, tornando-se uma habilidade essencial para analistas de dados, desenvolvedores e administradores de banco de dados.
 O SQL foi projetado para ser fácil de aprender e usar, com uma sintaxe que é legível tanto para humanos quanto para máquinas. Ele permite que os usuários expressem consultas e operações complexas de forma simples, tornando-o acessível tanto para usuários técnicos quanto não técnicos.
 
-<img src="/images/lessons/lesson1_3-datatypes.jpg" alt="DBMS overview" width="100%">
+<img src="/images/lessons/lesson1_5-sql.jpg" alt="SQL overview" width="100%">
 
 ## Principais Características do SQL
 *   **Linguagem Declarativa:** SQL é uma linguagem declarativa, o que significa que os usuários especificam o que desejam obter ou modificar, sem detalhar como fazê-lo. Essa abstração simplifica a escrita e otimização de consultas.
