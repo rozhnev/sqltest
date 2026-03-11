@@ -30,6 +30,7 @@ if (!$user->isAdmin()) {
 
 $questionManager = new AdminQuestionManager($dbh);
 $lessonManager   = new AdminLessonManager($dbh);
+$submissionManager = new UserTaskSubmissionManager($dbh);
 $openAiKey       = $env['OPENAI_API_KEY'] ?? '';
 
 switch ($resource) {
@@ -56,6 +57,12 @@ switch ($resource) {
         break;
     case 'llm':
         handleLLM($openAiKey, $method);
+        break;
+    case 'user-submissions':
+        handleUserSubmissions($submissionManager, $_GET, $method);
+        break;
+    case 'user-submission':
+        handleUserSubmission($submissionManager, $questionManager, $resourceId, $method, $user);
         break;
     default:
         respondJson(['error' => 'Resource not found'], 404);
@@ -276,6 +283,52 @@ function handleLLM(string $openAiKey, string $method): void
         }
     } catch (Exception $error) {
         respondJson(['error' => $error->getMessage()], 500);
+    }
+}
+
+function handleUserSubmissions(UserTaskSubmissionManager $manager, array $query, string $method): void
+{
+    if ($method !== 'GET') {
+        respondMethodNotAllowed();
+    }
+
+    $limit = isset($query['limit']) ? (int)$query['limit'] : 100;
+    respondJson(['submissions' => $manager->listPending($limit)]);
+}
+
+function handleUserSubmission(
+    UserTaskSubmissionManager $manager,
+    AdminQuestionManager $questionManager,
+    int $submissionId,
+    string $method,
+    User $user
+): void {
+    if ($submissionId <= 0) {
+        respondJson(['error' => 'Submission identifier is required'], 400);
+    }
+    if ($method !== 'POST') {
+        respondMethodNotAllowed();
+    }
+
+    $payload = parseJsonBody();
+    $action = trim((string)($payload['action'] ?? ''));
+
+    try {
+        if ($action === 'approve') {
+            $categoryId = isset($payload['category_id']) ? (int)$payload['category_id'] : 0;
+            $submission = $manager->approve($submissionId, $categoryId, $questionManager, (string)$user->getId());
+            respondJson(['submission' => $submission]);
+        }
+
+        if ($action === 'reject') {
+            $note = trim((string)($payload['note'] ?? ''));
+            $submission = $manager->reject($submissionId, $note, (string)$user->getId());
+            respondJson(['submission' => $submission]);
+        }
+
+        respondJson(['error' => 'Unknown submission action'], 400);
+    } catch (Exception $error) {
+        respondJson(['error' => $error->getMessage()], 400);
     }
 }
 

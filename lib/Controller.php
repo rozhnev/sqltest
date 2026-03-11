@@ -24,6 +24,28 @@ class Controller
         }
     }
 
+    private function jsonResponse(array $payload, int $status = 200): void
+    {
+        http_response_code($status);
+        header('Content-Type: application/json');
+        echo json_encode($payload, JSON_UNESCAPED_UNICODE);
+        exit();
+    }
+
+    private function parseJsonBody(): array
+    {
+        $payload = json_decode(file_get_contents('php://input'), true);
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            return [];
+        }
+        return $payload ?? [];
+    }
+
+    private function getTaskSubmissionManager(): UserTaskSubmissionManager
+    {
+        return new UserTaskSubmissionManager($this->dbh);
+    }
+
     public function __construct(PDO $dbh, Smarty $engine, User $user, array $env)
     {
         $this->dbh      = $dbh;
@@ -129,6 +151,15 @@ class Controller
     {
         $this->assignVariables(['Action' => 'privacy-policy']);
         $this->engine->display("privacy_policy.tpl");
+    }
+    /**
+     * Show user agreement page
+     * @param array $params
+     */
+    public function user_agreement(array $params): void
+    {
+        $this->assignVariables(['Action' => 'user-agreement']);
+        $this->engine->display("user_agreement.tpl");
     }
     /**
      * Show donate page
@@ -860,7 +891,7 @@ class Controller
 
         $questions = $this->user->getQuestions($this->lang);
         $tests = $this->user->getTests($this->lang);
-
+        $userEmail = $this->user->getEmail();
         $this->assignVariables([
             'Action' => 'profile',
             'Title' => Localizer::translateString('profile_page_title'),
@@ -869,7 +900,8 @@ class Controller
             'Tests'         => $this->user->getTests($this->lang),
 
             'Achievements'  => $this->user->achievements($this->lang),
-            'UserEmail'     => $this->user->getEmail(),
+            'UserEmail'     => $userEmail['email'],
+            'EmailVerified' => $userEmail['email_verified'],
         ]);
 
         $this->engine->display('user_profile.tpl');
@@ -911,7 +943,7 @@ class Controller
 
             if (array_key_exists('email', $data)) {
                 $email = trim((string)$data['email']);
-                $this->user->setEmail($email);
+                $varified = $this->user->setEmail($email);
                 $updated = true;
             }
 
@@ -933,6 +965,7 @@ class Controller
 
             echo json_encode([
                 'ok' => true,
+                'verified' => $varified ?? null,
                 'message' => Localizer::translateString('profile_update_success')
             ]);
         } catch (Exception $e) {
@@ -940,6 +973,192 @@ class Controller
                 'ok' => false,
                 'error' => $e->getMessage()
             ]);
+        }
+    }
+
+    public function user_task_submissions(array $params): void
+    {
+        if (!$this->user->logged()) {
+            $this->jsonResponse([
+                'ok' => false,
+                'error' => Localizer::translateString('login_needed')
+            ], 401);
+        }
+        if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+            $this->jsonResponse(['ok' => false, 'error' => 'Method not allowed'], 405);
+        }
+
+        try {
+            $manager = $this->getTaskSubmissionManager();
+            $this->jsonResponse([
+                'ok' => true,
+                'submissions' => $manager->listForUser((string)$this->user->getId())
+            ]);
+        } catch (Exception $error) {
+            $this->jsonResponse(['ok' => false, 'error' => $error->getMessage()], 400);
+        }
+    }
+
+    public function user_task_submission_create(array $params): void
+    {
+        if (!$this->user->logged()) {
+            $this->jsonResponse([
+                'ok' => false,
+                'error' => Localizer::translateString('login_needed')
+            ], 401);
+        }
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            $this->jsonResponse(['ok' => false, 'error' => 'Method not allowed'], 405);
+        }
+        $payload = $this->parseJsonBody();
+
+        if (!isset($payload['agreement']) || !$payload['agreement']) {
+            $this->jsonResponse(['ok' => false, 'error' => Localizer::translateString('accept_user_agreement_before_submission')], 405);
+        }
+
+        $this->user->acceptUserAgreement();
+
+        try {
+            $manager = $this->getTaskSubmissionManager();
+            $submission = $manager->createForUser(
+                (string)$this->user->getId(),
+                $payload
+            );
+            $this->jsonResponse(['ok' => true, 'submission' => $submission]);
+        } catch (Exception $error) {
+            $this->jsonResponse(['ok' => false, 'error' => $error->getMessage()], 400);
+        }
+    }
+
+    public function user_task_submission_update(array $params): void
+    {
+        if (!$this->user->logged()) {
+            $this->jsonResponse([
+                'ok' => false,
+                'error' => Localizer::translateString('login_needed')
+            ], 401);
+        }
+        if ($_SERVER['REQUEST_METHOD'] !== 'PUT' && $_SERVER['REQUEST_METHOD'] !== 'POST') {
+            $this->jsonResponse(['ok' => false, 'error' => 'Method not allowed'], 405);
+        }
+
+        $submissionId = isset($params['submissionID']) ? (int)$params['submissionID'] : 0;
+        if ($submissionId <= 0) {
+            $this->jsonResponse(['ok' => false, 'error' => 'Submission identifier is required'], 400);
+        }
+
+        try {
+            $manager = $this->getTaskSubmissionManager();
+            $submission = $manager->updatePendingForUser(
+                $submissionId,
+                (string)$this->user->getId(),
+                $this->parseJsonBody()
+            );
+            $this->jsonResponse(['ok' => true, 'submission' => $submission]);
+        } catch (Exception $error) {
+            $this->jsonResponse(['ok' => false, 'error' => $error->getMessage()], 400);
+        }
+    }
+
+    public function user_task_submission_delete(array $params): void
+    {
+        if (!$this->user->logged()) {
+            $this->jsonResponse([
+                'ok' => false,
+                'error' => Localizer::translateString('login_needed')
+            ], 401);
+        }
+        if ($_SERVER['REQUEST_METHOD'] !== 'DELETE' && $_SERVER['REQUEST_METHOD'] !== 'POST') {
+            $this->jsonResponse(['ok' => false, 'error' => 'Method not allowed'], 405);
+        }
+
+        $submissionId = isset($params['submissionID']) ? (int)$params['submissionID'] : 0;
+        if ($submissionId <= 0) {
+            $this->jsonResponse(['ok' => false, 'error' => 'Submission identifier is required'], 400);
+        }
+
+        try {
+            $manager = $this->getTaskSubmissionManager();
+            $deleted = $manager->deletePendingForUser($submissionId, (string)$this->user->getId());
+            $this->jsonResponse(['ok' => $deleted]);
+        } catch (Exception $error) {
+            $this->jsonResponse(['ok' => false, 'error' => $error->getMessage()], 400);
+        }
+    }
+
+    public function user_submission_requirements(array $params): void
+    {
+        if (!$this->user->logged()) {
+            $this->jsonResponse([
+                'ok' => false,
+                'error' => Localizer::translateString('login_needed')
+            ], 401);
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+            $this->jsonResponse(['ok' => false, 'error' => 'Method not allowed'], 405);
+        }
+
+        try {
+            $requirements = $this->user->getSubmissionRequirements();
+            $manager = $this->getTaskSubmissionManager();
+            $submissions = $manager->listForUser((string)$this->user->getId());
+            $this->jsonResponse([
+                'ok' => true,
+                'requirements' => [
+                    'email' => $requirements['email'],
+                    'email_verified' => (bool)$requirements['email_verified'],
+                    'agreement_accepted' => (bool)$requirements['agreement_accepted'],
+                    'has_submissions' => count($submissions) > 0,
+                ]
+            ]);
+        } catch (Exception $error) {
+            $this->jsonResponse(['ok' => false, 'error' => $error->getMessage()], 400);
+        }
+    }
+
+    public function user_send_email_verification_code(array $params): void
+    {
+        if (!$this->user->logged()) {
+            $this->jsonResponse([
+                'ok' => false,
+                'error' => Localizer::translateString('login_needed')
+            ], 401);
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            $this->jsonResponse(['ok' => false, 'error' => 'Method not allowed'], 405);
+        }
+
+        try {
+            $this->user->sendEmailVerificationCode($this->lang ?? 'en');
+            $this->jsonResponse(['ok' => true]);
+        } catch (Exception $error) {
+            $this->jsonResponse(['ok' => false, 'error' => $error->getMessage()], 400);
+        }
+    }
+
+    public function user_confirm_email_verification_code(array $params): void
+    {
+        if (!$this->user->logged()) {
+            $this->jsonResponse([
+                'ok' => false,
+                'error' => Localizer::translateString('login_needed')
+            ], 401);
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            $this->jsonResponse(['ok' => false, 'error' => 'Method not allowed'], 405);
+        }
+
+        $payload = $this->parseJsonBody();
+        $code = trim((string)($payload['code'] ?? ''));
+
+        try {
+            $this->user->confirmEmailVerificationCode($code);
+            $this->jsonResponse(['ok' => true]);
+        } catch (Exception $error) {
+            $this->jsonResponse(['ok' => false, 'error' => $error->getMessage()], 400);
         }
     }
 

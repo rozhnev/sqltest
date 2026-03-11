@@ -1048,18 +1048,235 @@ class User
         }
     }
 
-    public function getEmail(): string
+    public function getEmail(): array
     {
         if (!$this->logged()) {
-            return '';
+            return [
+                'email' => '',
+                'email_verified' => false,
+            ];
         }
 
-        $stmt = $this->dbh->prepare("SELECT email FROM users WHERE id = ?");
+        $stmt = $this->dbh->prepare("SELECT email, email_verified_at IS NOT NULL AS email_verified FROM users WHERE id = ?");
         $stmt->execute([$this->id]);
-        return $stmt->fetchColumn() ?: '';
+        $row = $stmt->fetch(PDO::FETCH_ASSOC) ?: [];
+        return [
+            'email' => (string)($row['email'] ?? ''),
+            'email_verified' => (bool)($row['email_verified'] ?? false),
+        ];
     }
 
-    public function setEmail(string $email): bool
+    public function getSubmissionRequirements(): array
+    {
+        if (!$this->logged()) {
+            return [
+                'email' => '',
+                'email_verified' => false,
+                'agreement_accepted' => false,
+            ];
+        }
+
+        $stmt = $this->dbh->prepare("SELECT
+                email,
+                email_verified_at IS NOT NULL AS email_verified,
+                user_agreement_accepted_at IS NOT NULL AS agreement_accepted
+            FROM users
+            WHERE id = :id");
+        $stmt->execute([':id' => $this->id]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC) ?: [];
+
+        return [
+            'email' => (string)($row['email'] ?? ''),
+            'email_verified' => (bool)($row['email_verified'] ?? false),
+            'agreement_accepted' => (bool)($row['agreement_accepted'] ?? false),
+        ];
+    }
+
+    public function acceptUserAgreement(): bool
+    {
+        if (!$this->logged()) {
+            throw new Exception(Localizer::translateString('login_needed'));
+        }
+
+        $stmt = $this->dbh->prepare("UPDATE users
+            SET user_agreement_accepted_at = COALESCE(user_agreement_accepted_at, CURRENT_TIMESTAMP)
+            WHERE id = :id");
+        return $stmt->execute([':id' => $this->id]);
+    }
+
+    public function sendEmailVerificationCode(string $lang = 'en'): bool
+    {
+        if (!$this->logged()) {
+            throw new Exception(Localizer::translateString('login_needed'));
+        }
+
+        $emailData = $this->getEmail();
+        $email = $emailData['email'] ?? '';
+
+        if ($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            throw new Exception('Valid email is required before verification');
+        }
+
+        if ($emailData['email_verified']) {
+            throw new Exception('Email already verified');
+        }
+
+        $code = (string)random_int(100000, 999999);
+        $codeHash = hash('sha256', $code);
+
+        $cleanupStmt = $this->dbh->prepare("DELETE FROM user_email_verification_codes
+            WHERE user_id = :user_id AND used_at IS NULL");
+        $cleanupStmt->execute([':user_id' => $this->id]);
+
+        $insertStmt = $this->dbh->prepare("INSERT INTO user_email_verification_codes (
+                user_id,
+                email,
+                code_hash,
+                expires_at,
+                created_at
+            ) VALUES (
+                :user_id,
+                :email,
+                :code_hash,
+                CURRENT_TIMESTAMP + INTERVAL '15 minutes',
+                CURRENT_TIMESTAMP
+            )");
+        $insertStmt->execute([
+            ':user_id' => $this->id,
+            ':email' => $email,
+            ':code_hash' => $codeHash,
+        ]);
+
+        // Send email via SMTP using PHPMailer
+        $sent = $this->sendVerificationEmail($email, $code, $lang);
+        if (!$sent) {
+            throw new Exception('Failed to send verification code');
+        }
+
+        return true;
+    }
+
+    /**
+     * Send verification email via SMTP
+     * 
+     * @param string $email Recipient email
+     * @param string $code Verification code
+     * @param string $lang Language code (en, ru, fr, pt)
+     * @return bool Success status
+     */
+    private function sendVerificationEmail(string $email, string $code, string $lang): bool
+    {
+        // Load translations for the specified language
+        $translationFile = realpath(".") . "/translations/{$lang}.php";
+        if (!file_exists($translationFile)) {
+            $lang = 'en'; // Fallback to English
+            $translationFile = realpath(".") . "/translations/en.php";
+        }
+        require $translationFile;
+        $trans = $translations ?? [];
+
+        $subject = $trans['email_verification_subject'] ?? 'SQLTest.online - Email Verification Code';
+        $greeting = $trans['email_verification_greeting'] ?? 'Hello!';
+        $body = $trans['email_verification_body'] ?? 'Your email verification code for SQLTest.online is:';
+        $expires = $trans['email_verification_expires'] ?? 'This code expires in 15 minutes.';
+        $footer = $trans['email_verification_footer'] ?? 'If you did not request this code, please ignore this email.';
+        $regards = $trans['email_verification_regards'] ?? 'Best regards,\nThe SQLTest.online Team';
+
+        try {
+            $mail = new \PHPMailer\PHPMailer\PHPMailer(true);
+            
+            // SMTP Configuration
+            $mail->isSMTP();
+            $mail->Host = $this->env['SMTP_HOST'] ?? 'localhost';
+            $mail->SMTPAuth = true;
+            $mail->Username = $this->env['SMTP_USER'] ?? '';
+            $mail->Password = $this->env['SMTP_PASS'] ?? '';
+            $mail->Port = (int)($this->env['SMTP_PORT'] ?? 587);
+            
+            // Enable TLS encryption if port is 587
+            if ($mail->Port == 587) {
+                $mail->SMTPSecure = \PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS;
+            } elseif ($mail->Port == 465) {
+                $mail->SMTPSecure = \PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_SMTPS;
+            }
+
+            // Sender and recipient
+            $mail->setFrom('support@sqltest.online', 'SQLTest.online');
+            $mail->addAddress($email);
+
+            // Email content
+            $mail->isHTML(false);
+            $mail->CharSet = 'UTF-8';
+            $mail->Subject = $subject;
+            
+            $message = "{$greeting}\n\n";
+            $message .= "{$body}\n\n";
+            $message .= "    {$code}\n\n";
+            $message .= "{$expires}\n\n";
+            $message .= "{$footer}\n\n";
+            $message .= "---\n";
+            $message .= str_replace('\\n', "\n", $regards);
+            
+            $mail->Body = $message;
+
+            return $mail->send();
+        } catch (\Exception $e) {
+            error_log("Email sending failed: " . $e->getMessage());
+            return false;
+        }
+    }
+
+    public function confirmEmailVerificationCode(string $code): bool
+    {
+        if (!$this->logged()) {
+            throw new Exception(Localizer::translateString('login_needed'));
+        }
+
+        $code = trim($code);
+        if (!preg_match('/^\d{6}$/', $code)) {
+            throw new Exception('Verification code must be 6 digits');
+        }
+
+        $emailData = $this->getEmail();
+        $email = $emailData['email'] ?? '';
+        
+        if ($email === '') {
+            throw new Exception('Valid email is required before verification');
+        }
+
+        $stmt = $this->dbh->prepare("SELECT id, code_hash
+            FROM user_email_verification_codes
+            WHERE user_id = :user_id
+              AND email = :email
+              AND used_at IS NULL
+              AND expires_at > CURRENT_TIMESTAMP
+            ORDER BY id DESC
+            LIMIT 1");
+        $stmt->execute([
+            ':user_id' => $this->id,
+            ':email' => $email,
+        ]);
+        $record = $stmt->fetch(PDO::FETCH_ASSOC);
+        if (!$record) {
+            throw new Exception('Verification code is missing or expired');
+        }
+
+        if (!hash_equals((string)$record['code_hash'], hash('sha256', $code))) {
+            throw new Exception('Invalid verification code');
+        }
+
+        $markCodeStmt = $this->dbh->prepare("UPDATE user_email_verification_codes
+            SET used_at = CURRENT_TIMESTAMP
+            WHERE id = :id");
+        $markCodeStmt->execute([':id' => $record['id']]);
+
+        $verifyEmailStmt = $this->dbh->prepare("UPDATE users
+            SET email_verified_at = CURRENT_TIMESTAMP
+            WHERE id = :id");
+        return $verifyEmailStmt->execute([':id' => $this->id]);
+    }
+
+    public function setEmail(string $email): ?string
     {
         if (!$this->logged()) {
             throw new Exception(Localizer::translateString('login_needed'));
@@ -1080,11 +1297,17 @@ class User
             throw new Exception(Localizer::translateString('email_taken'));
         }
 
-        $stmt = $this->dbh->prepare("UPDATE users SET email = ? WHERE id = ?");
-        if (!$stmt->execute([$email, $this->id])) {
+        $stmt = $this->dbh->prepare("UPDATE users SET 
+                email = ?, 
+                email_verified_at = CASE WHEN email <> ? THEN NULL ELSE email_verified_at END 
+            WHERE id = ? 
+            RETURNING email_verified_at;
+        ");
+
+        if (!$stmt->execute([$email, $email, $this->id])) {
             throw new Exception(Localizer::translateString('update_failed'));
         }
-        return true;
+        return $stmt->fetchColumn();
     }
 
     public function setPassword(string $password): bool

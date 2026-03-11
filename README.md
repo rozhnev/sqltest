@@ -2,6 +2,22 @@
 
 Code of SQLtest.online site
 
+## Setup
+
+1. Install dependencies:
+```bash
+composer install
+```
+
+2. Configure environment variables:
+   - Copy `.env.example` to `.env`
+   - Set SMTP credentials for email verification:
+     - `SMTP_HOST` - SMTP server hostname
+     - `SMTP_PORT` - SMTP server port (587 for TLS, 465 for SSL)
+     - `SMTP_USER` - SMTP username
+     - `SMTP_PASS` - SMTP password
+   - Configure OAuth providers if needed
+
 ## How to add your test:
 
 1. Clone the repository.
