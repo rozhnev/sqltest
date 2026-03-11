@@ -1,6 +1,8 @@
-# Lição 1.3: Tipos de Dados Básicos em SQL
+# Lição 1.3: Tipos de Dados Básicos
 
-Em SQL, os tipos de dados especificam o tipo de dados que podem ser armazenados em uma coluna. Escolher o tipo de dados correto é crucial para a integridade dos dados, eficiência de armazenamento e desempenho da consulta. Esta lição aborda os tipos de dados comuns e seus subtipos usados em bancos de dados SQL, juntamente com seus intervalos de valores.
+Em bases de dados relacionais, os tipos de dados especificam o tipo de dados que podem ser armazenados numa coluna. Escolher o tipo de dados correto é crucial para a integridade dos dados, eficiência de armazenamento e desempenho das consultas. Esta lição aborda os tipos de dados comuns e os seus subtipos usados em bases de dados relacionais, juntamente com os seus intervalos de valores.
+
+<img src="/images/lessons/lesson1_3-datatypes.jpg" alt="DBMS overview" width="100%">
 
 ## Tipos de Dados Numéricos
 
@@ -86,10 +88,6 @@ Os tipos de dados de data e hora são usados para armazenar valores temporais.
 ### JSON
 *   Armazena dados JSON (JavaScript Object Notation).
 *   Permite armazenar dados semiestruturados em uma coluna de banco de dados.
-
-## Valores NULL
-
-É importante entender o conceito de `NULL` em SQL. `NULL` representa um valor ausente ou desconhecido. Uma coluna pode ser definida para permitir ou não valores `NULL`. Ao contrário de outros tipos de dados, `NULL` não é um tipo de dados em si, mas sim uma propriedade de uma coluna. É crucial lidar com valores `NULL` corretamente em consultas para evitar resultados inesperados. Comparações com `NULL` devem ser feitas usando `IS NULL` ou `IS NOT NULL`.
 
 ## Escolhendo o Tipo de Dados Certo
 

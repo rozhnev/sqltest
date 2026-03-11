@@ -1,6 +1,8 @@
-# Lesson 1.3: Basic Data Types in SQL
+# Lesson 1.3: Basic Data Types
 
-In SQL, data types specify the kind of data that can be stored within a column. Choosing the correct data type is crucial for data integrity, storage efficiency, and query performance. This lesson covers common data types and their subtypes used in SQL databases, along with their value ranges.
+In relational databases, data types specify the kind of data that can be stored within a column. Choosing the correct data type is crucial for data integrity, storage efficiency, and query performance. This lesson covers common data types and their subtypes used in relational databases, along with their value ranges.
+
+<img src="/images/lessons/lesson1_3-datatypes.jpg" alt="DBMS overview" width="100%">
 
 ## Numeric Data Types
 
@@ -86,10 +88,6 @@ Date and time data types are used to store temporal values.
 ### JSON
 *   Stores JSON (JavaScript Object Notation) data.
 *   Allows storing semi-structured data within a database column.
-
-## NULL Values
-
-It's important to understand the concept of `NULL` in SQL. `NULL` represents a missing or unknown value. A column can be defined to allow or disallow `NULL` values. Unlike other data types, `NULL` is not a data type itself, but rather a property of a column. It's crucial to handle `NULL` values properly in queries to avoid unexpected results. Comparisons with `NULL` should be done using `IS NULL` or `IS NOT NULL`.
 
 ## Choosing the Right Data Type
 

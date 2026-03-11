@@ -1,6 +1,8 @@
-# Leçon 1.3 : Types de données de base en SQL
+# Leçon 1.3 : Types de données de base
 
-En SQL, les types de données spécifient le genre de données qui peuvent être stockées dans une colonne. Choisir le bon type de données est crucial pour l'intégrité des données, l'efficacité du stockage et les performances des requêtes. Cette leçon couvre les types de données courants et leurs sous-types utilisés dans les bases de données SQL, ainsi que leurs plages de valeurs.
+Dans les bases de données relationnelles, les types de données spécifient le genre de données qui peuvent être stockées dans une colonne. Choisir le bon type de données est crucial pour l'intégrité des données, l'efficacité du stockage et les performances des requêtes. Cette leçon couvre les types de données courants et leurs sous-types utilisés dans les bases de données relationnelles, ainsi que leurs plages de valeurs.
+
+<img src="/images/lessons/lesson1_3-datatypes.jpg" alt="DBMS overview" width="100%">
 
 ## Types de données numériques
 
@@ -87,9 +89,6 @@ Les types de données de date et d'heure sont utilisés pour stocker des valeurs
 *   Stocke des données au format JSON (JavaScript Object Notation).
 *   Permet de stocker des données semi-structurées dans une colonne de base de données.
 
-## Valeurs NULL
-
-Il est important de comprendre le concept de `NULL` en SQL. `NULL` représente une valeur manquante ou inconnue. Une colonne peut être définie pour autoriser ou interdire les valeurs `NULL`. Contrairement aux autres types de données, `NULL` n'est pas un type de données en soi, mais plutôt une propriété d'une colonne. Il est crucial de gérer correctement les valeurs `NULL` dans les requêtes pour éviter des résultats inattendus. Les comparaisons avec `NULL` doivent être effectuées en utilisant `IS NULL` ou `IS NOT NULL`.
 
 ## Choisir le bon type de données
 
