@@ -34,7 +34,7 @@ Embora este curso se concentre principalmente em **Bases de Dados Relacionais**,
 
 ## O Que é um SGBD?
 
-Um **Sistema de Gestão de Bases de Dados (SGBD)** é um software que atua como intermediário entre os utilizadores (ou aplicações) e a própria base de dados. Fornece uma forma sistemática e controlada de criar, ler, atualizar e eliminar dados, garantindo simultaneamente segurança, consistência e eficiência.
+Um **Sistema de Gestão de Bases de Dados (SGBD)** é um software que atua como intermediário entre os utilizadores (ou aplicações) e a própria base de dados. Fornece uma forma sistemática e controlada de criar, ler, atualizar e eliminar dados, garantindo simultaneamente segurança, consistência e eficiência. Em inglês, usa-se a sigla DBMS (Database Management System).
 
 <img src="/images/lessons/lesson1_1-dbms.jpg" alt="DBMS overview" width="100%">
 
