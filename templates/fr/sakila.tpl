@@ -545,6 +545,9 @@
     </div>
     {if $User->showAd()}
         <div class="referal-add-block">
+            <a href="https://www.jdoqocy.com/pt112nmvsmu9BABFEBAHI9BHCECAIC" target="_blank">
+                <img src="https://www.tqlkg.com/fa100z15u-yJLKLPOLKRSJLRMOMLKS" alt=""  style="width: 100%; border: 0;"/>
+            </a>
             {* <script async="async" data-cfasync="false" src="//pl26881648.profitableratecpm.com/93660caf229b7b6afe772e0ab435c7a9/invoke.js"></script>
             <div id="container-93660caf229b7b6afe772e0ab435c7a9"></div> *}
         </div>
