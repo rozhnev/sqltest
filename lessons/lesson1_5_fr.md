@@ -1,54 +1,57 @@
-# Leçon 1.5 : Présentation de SQL
+Apprenez-en davantage sur les valeurs NULL en SQL, en comprenant que NULL représente des données manquantes ou inconnues. Cette leçon explique en quoi NULL diffère de zéro ou d'une chaîne vide, l'importance des opérateurs IS NULL et IS NOT NULL, et comment NULL affecte les opérations et la logique de la base de données.
 
-## Qu'est-ce que SQL ?
-SQL (Structured Query Language - Langage de requête structuré) est un langage utilisé pour gérer et manipuler les données dans les systèmes de gestion de bases de données relationnelles (SGBDR). Il offre un moyen puissant et flexible d'interagir avec les bases de données, permettant aux utilisateurs d'effectuer diverses opérations telles que l'interrogation, l'insertion, la mise à jour et la suppression de données.
+# Leçon 1.5 : Comprendre les valeurs NULL en SQL
 
-SQL a été développé au début des années 1970 par IBM et est devenu depuis la norme de facto pour la gestion des bases de données relationnelles. Il est largement utilisé dans divers secteurs et applications, ce qui en fait une compétence essentielle pour les analystes de données, les développeurs et les administrateurs de bases de données.
-SQL est conçu pour être facile à apprendre et à utiliser, avec une syntaxe à la fois lisible par l'homme et par la machine. Il permet aux utilisateurs d'exprimer des requêtes et des opérations complexes de manière simple, ce qui le rend accessible aux utilisateurs techniques et non techniques.
+Dans le monde des bases de données, vous rencontrerez souvent des situations où des données sont manquantes, inconnues ou non applicables. SQL utilise un marqueur spécial appelé **NULL** pour représenter ces cas. Comprendre NULL est essentiel car il se comporte différemment de toute autre valeur.
 
-<img src="/images/lessons/lesson1_5-sql.jpg" alt="SQL overview" width="100%">
+## Qu'est-ce que NULL ?
 
-## Principales caractéristiques de SQL
-*   **Langage déclaratif :** SQL est un langage déclaratif, ce qui signifie que les utilisateurs spécifient ce qu'ils souhaitent récupérer ou manipuler sans détailler comment le faire. Cette abstraction permet une écriture et une optimisation plus faciles des requêtes.
-*   **Opérations basées sur les ensembles :** SQL opère sur des ensembles de données plutôt que sur des enregistrements individuels, ce qui permet un traitement efficace de grands ensembles de données.
+**NULL** n'est pas une valeur ; c'est un **état** ou un espace réservé indiquant qu'une valeur de donnée n'existe *pas* dans la base de données.
 
-## Sous-ensembles de SQL
-SQL est divisé en plusieurs sous-ensembles, chacun servant un objectif spécifique :
-*   **Data Query Language (DQL - Langage de requête de données) :** Utilisé pour interroger les données des bases de données. La commande principale est SELECT.
-*   **Data Definition Language (DDL - Langage de définition de données) :** Utilisé pour définir et gérer les structures de base de données. Les commandes incluent CREATE, ALTER et DROP.
-*   **Data Manipulation Language (DML - Langage de manipulation de données) :** Utilisé pour manipuler les données au sein de la base de données. Les commandes incluent INSERT, UPDATE et DELETE.
-*   **Data Control Language (DCL - Langage de contrôle de données) :** Utilisé pour contrôler l'accès aux données au sein de la base de données. Les commandes incluent GRANT et REVOKE.
-*   **Transaction Control Language (TCL - Langage de contrôle des transactions) :** Utilisé pour gérer les transactions dans la base de données. Les commandes incluent COMMIT, ROLLBACK et SAVEPOINT.
+Il est important de se rappeler ce que NULL **N'EST PAS** :
+*   **NULL n'est pas 0 :** Zéro est un nombre. NULL est l'absence de nombre.
+*   **NULL n'est pas une chaîne vide ('') :** Une chaîne vide est un morceau de texte avec zéro caractère. NULL est l'absence de texte.
+*   **NULL n'est pas "faux" (false) :** Dans la logique SQL, NULL reste "inconnu".
 
-## Objets de SQL
-SQL opère sur divers objets au sein d'une base de données, notamment :
-*   **Tables :** La structure principale pour stocker les données dans une base de données relationnelle. Les tables sont composées de lignes et de colonnes, où chaque ligne représente un enregistrement et chaque colonne représente un attribut de cet enregistrement.
-*   **Vues (Views) :** Tables virtuelles qui permettent de présenter les données d'une ou plusieurs tables dans un format spécifique. Les vues peuvent simplifier les requêtes complexes et améliorer la sécurité en restreignant l'accès à certaines données.
-*   **Index :** Structures qui améliorent la vitesse des opérations de récupération de données sur une table de base de données. Des index sont créés sur une ou plusieurs colonnes d'une table pour améliorer les performances des requêtes.
-*   **Procédures stockées (Stored Procedures) :** Code SQL prédéfini qui peut être exécuté comme une seule unité. Les procédures stockées peuvent encapsuler une logique complexe et améliorer les performances en réduisant le trafic réseau.
-*   **Déclencheurs (Triggers) :** Types spéciaux de procédures stockées qui s'exécutent automatiquement en réponse à certains événements sur une table, tels que des opérations INSERT, UPDATE ou DELETE. Les déclencheurs peuvent appliquer des règles métier et maintenir l'intégrité des données.
-*   **Schémas (Schemas) :** Conteneurs logiques pour les objets de base de données, tels que les tables, les vues et les index. Les schémas aident à organiser et à gérer les objets de base de données, offrant un moyen de regrouper les objets connexes.
-*   **Contraintes (Constraints) :** Règles appliquées aux colonnes de table pour assurer l'intégrité des données. Les contraintes courantes incluent PRIMARY KEY (Clé primaire), FOREIGN KEY (Clé étrangère), UNIQUE, NOT NULL et CHECK.
-*   **Transactions :** Une séquence d'une ou plusieurs opérations SQL traitées comme une seule unité de travail. Les transactions garantissent l'intégrité et la cohérence des données en permettant à plusieurs opérations d'être validées (committed) ou annulées (rolled back) en tant que groupe.
-*   **Types de données :** Définissent le type de données pouvant être stockées dans une colonne, comme INTEGER, VARCHAR, DATE et BOOLEAN. Les types de données garantissent que les données stockées dans une table sont cohérentes et valides.
+## Pourquoi utilisons-nous NULL ?
+*   **Information inconnue :** Par exemple, nous pourrions ne pas encore connaître le deuxième prénom d'un client.
+*   **Non applicable :** Une colonne "Identifiant fiscal de l'entreprise" serait NULL pour une personne physique.
+*   **Données manquantes :** Données qui ont été oubliées lors de la saisie.
 
-## Conventions de base de SQL
-L'unité de SQL est la **requête** (query). Une requête est une demande adressée au SGBDR pour récupérer ou modifier des données.
+## Travailler avec NULL : IS NULL et IS NOT NULL
 
-La structure de base d'une requête SQL se compose des éléments suivants :
-*   **Mots-clés (Statements/Statements) :** Mots réservés qui ont une signification spécifique en SQL. Exemples : SELECT, FROM, WHERE et JOIN.
-*   **Clauses :** Composants d'une instruction SQL qui spécifient l'action à effectuer. Les clauses courantes incluent SELECT, FROM, WHERE, GROUP BY et ORDER BY.
-*   **Expressions :** Combinaisons de valeurs, d'opérateurs et de fonctions qui s'évaluent en une valeur unique. Les expressions peuvent être utilisées dans diverses parties d'une instruction SQL, telles que la liste SELECT ou la clause WHERE.
-*   **Identifiants :** Noms utilisés pour désigner les objets de la base de données, tels que les tables, les colonnes et les vues. Les identifiants peuvent être simples (ex : nom_table) ou qualifiés (ex : nom_schema.nom_table).
-*   **Commentaires :** Texte non exécutable dans le code SQL qui fournit des explications ou des notes. Les commentaires peuvent être sur une seule ligne (en utilisant --) ou sur plusieurs lignes (en utilisant /* ... */).
+Comme NULL représente un état inconnu, vous ne pouvez pas utiliser les opérateurs de comparaison standard comme `=` ou `<>` avec lui. Toute comparaison avec NULL (ex : `valeur = NULL`) se soldera par un résultat "inconnu", et non "vrai" ou "faux".
 
+Pour vérifier les valeurs NULL, vous devez utiliser des opérateurs spécifiques :
 
-## Écrire votre première requête SQL
-
-Une requête SQL de base se compose d'une instruction SELECT, d'une clause FROM et d'une clause WHERE facultative. Par exemple :
-
+### 1. IS NULL
+Utilisé pour trouver des enregistrements où une colonne n'a pas de valeur.
 ```sql
-SELECT colonne1, colonne2
-FROM nom_table
-WHERE condition;
+SELECT *
+FROM address
+WHERE address2 IS NULL;
 ```
+
+### 2. IS NOT NULL
+Utilisé pour trouver des enregistrements où une colonne contient *n'importe quelle* donnée.
+```sql
+SELECT *
+FROM address
+WHERE address2 IS NOT NULL;
+```
+
+## NULL dans les calculs
+
+L'une des choses les plus importantes à retenir est que **NULL se propage**. Si vous effectuez une opération mathématique avec une valeur NULL, le résultat sera toujours NULL.
+
+*   `10 + NULL = NULL`
+*   `5 * NULL = NULL`
+*   `'Bonjour ' + NULL = NULL`
+
+## Points clés de cette leçon
+
+*   **NULL** représente des données manquantes, inconnues ou non applicables.
+*   Il est **différent** de zéro, des chaînes vides ou des espaces blancs.
+*   Les comparaisons standard (`=` ou `<>`) **ne fonctionnent pas** avec NULL.
+*   Utilisez **IS NULL** et **IS NOT NULL** pour filtrer les données manquantes.
+*   La plupart des opérations mathématiques impliquant NULL donneront **NULL**.

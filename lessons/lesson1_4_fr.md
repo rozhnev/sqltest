@@ -1,57 +1,111 @@
-Apprenez-en davantage sur les valeurs NULL en SQL, en comprenant que NULL représente des données manquantes ou inconnues. Cette leçon explique en quoi NULL diffère de zéro ou d'une chaîne vide, l'importance des opérateurs IS NULL et IS NOT NULL, et comment NULL affecte les opérations et la logique de la base de données.
+# Leçon 1.4 : Types de données de base
 
-# Leçon 1.4 : Comprendre les valeurs NULL en SQL
+Dans les bases de données relationnelles, les types de données spécifient le genre de données qui peuvent être stockées dans une colonne. Choisir le bon type de données est crucial pour l'intégrité des données, l'efficacité du stockage et les performances des requêtes. Cette leçon couvre les types de données courants et leurs sous-types utilisés dans les bases de données relationnelles, ainsi que leurs plages de valeurs.
 
-Dans le monde des bases de données, vous rencontrerez souvent des situations où des données sont manquantes, inconnues ou non applicables. SQL utilise un marqueur spécial appelé **NULL** pour représenter ces cas. Comprendre NULL est essentiel car il se comporte différemment de toute autre valeur.
+<img src="/images/lessons/lesson1_3-datatypes.jpg" alt="Data Types" width="100%">
 
-## Qu'est-ce que NULL ?
+## Types de données numériques
 
-**NULL** n'est pas une valeur ; c'est un **état** ou un espace réservé indiquant qu'une valeur de donnée n'existe *pas* dans la base de données.
+Les types de données numériques sont utilisés pour stocker des valeurs numériques.
 
-Il est important de se rappeler ce que NULL **N'EST PAS** :
-*   **NULL n'est pas 0 :** Zéro est un nombre. NULL est l'absence de nombre.
-*   **NULL n'est pas une chaîne vide ('') :** Une chaîne vide est un morceau de texte avec zéro caractère. NULL est l'absence de texte.
-*   **NULL n'est pas "faux" (false) :** Dans la logique SQL, NULL reste "inconnu".
+### INTEGER (Entier)
+*   Stocke des nombres entiers.
+*   Sous-types :
+    *   `INT` ou `INTEGER` : Généralement un entier de 4 octets.
+    *   `SMALLINT` : Généralement un entier de 2 octets.
+    *   `BIGINT` : Généralement un entier de 8 octets.
+    *   `TINYINT` : Généralement un entier de 1 octet.
+*   Plages (approximatives, peuvent varier selon le système de base de données) :
+    *   `TINYINT` : -128 à 127 (signé) ou 0 à 255 (non signé)
+    *   `SMALLINT` : -32 768 à 32 767
+    *   `INT` : -2 147 483 648 à 2 147 483 647
+    *   `BIGINT` : -9 223 372 036 854 775 808 à 9 223 372 036 854 775 807
 
-## Pourquoi utilisons-nous NULL ?
-*   **Information inconnue :** Par exemple, nous pourrions ne pas encore connaître le deuxième prénom d'un client.
-*   **Non applicable :** Une colonne "Identifiant fiscal de l'entreprise" serait NULL pour une personne physique.
-*   **Données manquantes :** Données qui ont été oubliées lors de la saisie.
+### DECIMAL / NUMERIC
+*   Stocke des valeurs numériques exactes avec une précision et une échelle spécifiées.
+*   Précision : Le nombre total de chiffres.
+*   Échelle : Le nombre de chiffres à droite de la virgule décimale.
+*   Exemple : `DECIMAL(10, 2)` peut stocker des nombres avec 10 chiffres au total, dont 2 après la virgule.
+*   Plage : Dépend de la précision et de l'échelle.
 
-## Travailler avec NULL : IS NULL et IS NOT NULL
+### FLOAT / REAL (Flottant / Réel)
+*   Stocke des valeurs numériques approximatives avec une précision à virgule flottante.
+*   Sous-types :
+    *   `FLOAT` : Nombre à virgule flottante en simple précision.
+    *   `DOUBLE` / `DOUBLE PRECISION` : Nombre à virgule flottante en double précision.
+    *   `REAL` : Un synonyme de `FLOAT` dans certaines bases de données.
+*   Plage : Varie selon l'implémentation spécifique, mais couvre généralement une large gamme de valeurs avec une précision limitée.
 
-Comme NULL représente un état inconnu, vous ne pouvez pas utiliser les opérateurs de comparaison standard comme `=` ou `<>` avec lui. Toute comparaison avec NULL (ex : `valeur = NULL`) se soldera par un résultat "inconnu", et non "vrai" ou "faux".
+## Types de données de caractères / chaînes de caractères
 
-Pour vérifier les valeurs NULL, vous devez utiliser des opérateurs spécifiques :
+Les types de données de caractères sont utilisés pour stocker du texte.
 
-### 1. IS NULL
-Utilisé pour trouver des enregistrements où une colonne n'a pas de valeur.
-```sql
-SELECT *
-FROM address
-WHERE address2 IS NULL;
-```
+### CHAR
+*   Stocke des chaînes de caractères de longueur fixe.
+*   Vous spécifiez la longueur lors de la définition de la colonne.
+*   Exemple : `CHAR(10)` stocke des chaînes d'exactement 10 caractères.
+*   Si la chaîne stockée est plus courte que la longueur spécifiée, elle est complétée par des espaces.
 
-### 2. IS NOT NULL
-Utilisé pour trouver des enregistrements où une colonne contient *n'importe quelle* donnée.
-```sql
-SELECT *
-FROM address
-WHERE address2 IS NOT NULL;
-```
+### VARCHAR
+*   Stocke des chaînes de caractères de longueur variable.
+*   Vous spécifiez la longueur maximale lors de la définition de la colonne.
+*   Exemple : `VARCHAR(255)` stocke des chaînes allant jusqu'à 255 caractères.
+*   N'utilise que l'espace nécessaire pour stocker la chaîne réelle.
 
-## NULL dans les calculs
+### TEXT
+*   Stocke de grandes chaînes de caractères de longueur variable.
+*   Souvent utilisé pour stocker des documents, des articles ou d'autres données textuelles volumineuses.
+*   La longueur maximale est généralement beaucoup plus grande que celle de `VARCHAR`.
 
-L'une des choses les plus importantes à retenir est que **NULL se propage**. Si vous effectuez une opération mathématique avec une valeur NULL, le résultat sera toujours NULL.
+## Types de données de date et d'heure
 
-*   `10 + NULL = NULL`
-*   `5 * NULL = NULL`
-*   `'Bonjour ' + NULL = NULL`
+Les types de données de date et d'heure sont utilisés pour stocker des valeurs temporelles.
 
-## Points clés de cette leçon
+### DATE
+*   Stocke une date (année, mois, jour).
+*   Format : Varie selon le système de base de données (ex : AAAA-MM-JJ, MM/JJ/AAAA).
 
-*   **NULL** représente des données manquantes, inconnues ou non applicables.
-*   Il est **différent** de zéro, des chaînes vides ou des espaces blancs.
-*   Les comparaisons standard (`=` ou `<>`) **ne fonctionnent pas** avec NULL.
-*   Utilisez **IS NULL** et **IS NOT NULL** pour filtrer les données manquantes.
-*   La plupart des opérations mathématiques impliquant NULL donneront **NULL**.
+### TIME (Heure)
+*   Stocke une heure (heure, minute, seconde).
+*   Format : Varie selon le système de base de données (ex : HH:MM:SS).
+
+### DATETIME / TIMESTAMP
+*   Stocke à la fois la date et l'heure.
+*   Format : Varie selon le système de base de données (ex : AAAA-MM-JJ HH:MM:SS).
+*   `TIMESTAMP` a souvent un comportement spécial lié aux fuseaux horaires et aux mises à jour automatiques.
+
+## Type de données booléen
+
+### BOOLEAN
+*   Stocke des valeurs vrai/faux (true/false).
+*   Certaines bases de données peuvent représenter les valeurs booléennes par des entiers (ex : 0 pour faux, 1 pour vrai).
+
+## Autres types de données
+
+### BLOB (Binary Large Object)
+*   Stocke des données binaires, telles que des images, des fichiers audio ou vidéo.
+
+### JSON
+*   Stocke des données au format JSON (JavaScript Object Notation).
+*   Permet de stocker des données semi-structurées dans une colonne de base de données.
+
+
+## Choisir le bon type de données
+
+*   Considérez le type de données que vous devez stocker (numérique, texte, date/heure, etc.).
+*   Choisissez le plus petit type de données capable d'accueillir la plage de valeurs attendue.
+*   Utilisez `VARCHAR` au lieu de `CHAR` à moins que vous n'ayez besoin de chaînes de longueur fixe.
+*   Utilisez `DECIMAL` pour les valeurs numériques exactes, en particulier pour les devises.
+*   Soyez conscient des types de données spécifiques et de leur comportement dans votre système de base de données.
+
+En comprenant les types de données disponibles et leurs caractéristiques, vous pouvez concevoir des bases de données efficaces, fiables et faciles à entretenir.
+
+**Points clés de cette leçon :**
+
+*   **L'importance des types de données :** Choisir le type de données approprié est crucial pour l'intégrité des données, l'efficacité du stockage et les performances des requêtes.
+*   **Types numériques :** `INTEGER`, `DECIMAL` et `FLOAT` sont utilisés pour stocker des données numériques, chacun avec des caractéristiques différentes en matière de précision et de plage.
+*   **Types de chaînes :** `CHAR`, `VARCHAR` et `TEXT` sont utilisés pour stocker des données textuelles, avec des contraintes de longueur et des implications de stockage variables.
+*   **Types de date/heure :** `DATE`, `TIME` et `DATETIME` sont utilisés pour stocker des données temporelles, avec des formats spécifiques qui varient selon les systèmes de base de données.
+*   **Autres types :** `BOOLEAN`, `BLOB` et `JSON` permettent de stocker respectivement des valeurs booléennes, des données binaires et des données semi-structured.
+*   **Valeurs NULL :** `NULL` représente une valeur manquante ou inconnue et n'est pas un type de données en soi. Il est crucial de gérer correctement les valeurs `NULL` dans les requêtes.
+*   **Choisir judicieusement :** Tenez compte de la nature des données, de la précision requise et des implications de stockage lors du choix d'un type de données pour une colonne.

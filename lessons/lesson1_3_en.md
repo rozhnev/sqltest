@@ -1,110 +1,84 @@
-# Lesson 1.3: Basic Data Types
+# Lesson 1.3: Relational Database Concepts
 
-In relational databases, data types specify the kind of data that can be stored within a column. Choosing the correct data type is crucial for data integrity, storage efficiency, and query performance. This lesson covers common data types and their subtypes used in relational databases, along with their value ranges.
+In the previous lessons, we introduced the concept of databases and looked at the main database types. Now, we'll dive deeper into the core components of **Relational Databases**, which are fundamental to understanding how data is organized and accessed using SQL.
 
-<img src="/images/lessons/lesson1_3-datatypes.jpg" alt="Data Types" width="100%">
+<img src="/images/lessons/lesson1_2-rdb.jpg" alt="DBMS overview" width="100%">
 
-## Numeric Data Types
+##   Tables, Columns, and Rows
 
-Numeric data types are used to store numerical values.
+Relational databases organize data into structures called **tables**. Think of a table as a spreadsheet:
 
-### INTEGER
-*   Stores whole numbers (integers).
-*   Subtypes:
-    *   `INT` or `INTEGER`: Typically a 4-byte integer.
-    *   `SMALLINT`: Typically a 2-byte integer.
-    *   `BIGINT`: Typically an 8-byte integer.
-    *   `TINYINT`: Typically a 1-byte integer.
-*   Ranges (approximate, may vary by database system):
-    *   `TINYINT`: -128 to 127 (signed) or 0 to 255 (unsigned)
-    *   `SMALLINT`: -32,768 to 32,767
-    *   `INT`: -2,147,483,648 to 2,147,483,647
-    *   `BIGINT`: -9,223,372,036,854,775,808 to 9,223,372,036,854,775,807
+* **Table:** A collection of related data. For example, a table might store information about customers, products, or orders.
+* **Column:** A vertical set of data within a table. Each column represents a specific attribute or characteristic of the data. For instance, in a "Customers" table, columns might be "CustomerID," "FirstName," "LastName," and "Email."
+* **Row:** A horizontal set of data within a table. Each row represents a single instance or record of the data. In a "Customers" table, each row would represent a single customer.
 
-### DECIMAL / NUMERIC
-*   Stores exact numeric values with a specified precision and scale.
-*   Precision: The total number of digits.
-*   Scale: The number of digits to the right of the decimal point.
-*   Example: `DECIMAL(10, 2)` can store numbers with 10 total digits, 2 of which are after the decimal point.
-*   Range: Depends on the precision and scale.
+**Example:**
 
-### FLOAT / REAL
-*   Stores approximate numeric values with floating-point precision.
-*   Subtypes:
-    *   `FLOAT`: Single-precision floating-point number.
-    *   `DOUBLE` / `DOUBLE PRECISION`: Double-precision floating-point number.
-    *   `REAL`: A synonym for `FLOAT` in some databases.
-*   Range: Varies depending on the specific implementation, but generally covers a wide range of values with limited precision.
+Let's visualize a simple "Customers" table:
 
-## Character / String Data Types
+|   CustomerID   |   FirstName   |   LastName   |   Email                |
+| :------------- | :------------ | :----------- | :--------------------- |
+|   1            |   John        |   Doe        |   john.doe@example.com   |
+|   2            |   Jane        |   Smith      |   jane.smith@example.com   |
+|   3            |   David       |   Lee        |   david.lee@example.com    |
 
-Character data types are used to store text.
+* The entire structure is the **table** named "Customers."
+* "CustomerID," "FirstName," "LastName," and "Email" are the **columns**.
+* Each line (e.g., "1 | John | Doe | john.doe@example.com") is a **row**.
 
-### CHAR
-*   Stores fixed-length character strings.
-*   You specify the length when defining the column.
-*   Example: `CHAR(10)` stores strings of exactly 10 characters.
-*   If the stored string is shorter than the specified length, it's padded with spaces.
+##   Keys: Ensuring Data Integrity
 
-### VARCHAR
-*   Stores variable-length character strings.
-*   You specify the maximum length when defining the column.
-*   Example: `VARCHAR(255)` stores strings up to 255 characters long.
-*   Only uses the space needed to store the actual string.
+**Keys** are a critical concept in relational databases. They are used to establish relationships between tables and enforce data integrity. Here are the main types of keys:
 
-### TEXT
-*   Stores large variable-length character strings.
-*   Often used for storing documents, articles, or other large text data.
-*   The maximum length is typically much larger than `VARCHAR`.
+###   Primary Key
 
-## Date and Time Data Types
+* A **Primary Key** is a column (or a set of columns) that uniquely identifies each row in a table.
+* **Characteristics of a Primary Key:**
+    * **Unique:** No two rows can have the same primary key value.
+    * **Not Null:** A primary key column cannot contain NULL values.
+* In our "Customers" table, "CustomerID" is a good candidate for the primary key because each customer has a unique ID, and it cannot be empty.
 
-Date and time data types are used to store temporal values.
+###   Foreign Key
 
-### DATE
-*   Stores a date (year, month, day).
-*   Format: Varies depending on the database system (e.g., YYYY-MM-DD, MM/DD/YYYY).
+* A **Foreign Key** is a column (or a set of columns) in one table that refers to the Primary Key in another table.
+* Foreign keys establish relationships between tables.
+* For example, if we have an "Orders" table, it might have a "CustomerID" column that is a foreign key referencing the "CustomerID" in the "Customers" table. This links each order to the customer who placed it.
 
-### TIME
-*   Stores a time (hour, minute, second).
-*   Format: Varies depending on the database system (e.g., HH:MM:SS).
+###   Unique Key
 
-### DATETIME / TIMESTAMP
-*   Stores both date and time.
-*   Format: Varies depending on the database system (e.g., YYYY-MM-DD HH:MM:SS).
-*   `TIMESTAMP` often has special behavior related to time zones and automatic updates.
+* A **Unique Key** is a column (or a set of columns) that ensures that the values in the column(s) are unique across all rows in the table.
+* **Difference from Primary Key:**
+    * A table can have only one primary key, but it can have multiple unique keys.
+    * Unique key columns *can* allow NULL values (though implementations vary slightly).
+* In our "Customers" table, "Email" could be a unique key, ensuring that each customer has a unique email address.
 
-## Boolean Data Type
+##   ACID: Reliable Transactions in Databases
 
-### BOOLEAN
-*   Stores true/false values.
-*   Some databases may represent boolean values as integers (e.g., 0 for false, 1 for true).
+When working with relational databases, another core concept is the **ACID** model. ACID defines the properties that make database transactions safe and reliable.
 
-## Other Data Types
+A **transaction** is a group of operations treated as one unit of work. For example, transferring money between two bank accounts usually involves at least two operations:
 
-### BLOB (Binary Large Object)
-*   Stores binary data, such as images, audio, or video files.
+1. Subtract money from Account A.
+2. Add money to Account B.
 
-### JSON
-*   Stores JSON (JavaScript Object Notation) data.
-*   Allows storing semi-structured data within a database column.
+Both steps must succeed together, or neither should be applied.
 
-## Choosing the Right Data Type
+**ACID stands for:**
 
-*   Consider the type of data you need to store (numeric, text, date/time, etc.).
-*   Choose the smallest data type that can accommodate the range of values you expect.
-*   Use `VARCHAR` instead of `CHAR` unless you need fixed-length strings.
-*   Use `DECIMAL` for exact numeric values, especially when dealing with currency.
-*   Be aware of the specific data types and their behavior in your database system.
+* **Atomicity:** A transaction is "all or nothing." If one step fails, the whole transaction is rolled back.
+* **Consistency:** A transaction must move the database from one valid state to another, preserving all defined rules and constraints.
+* **Isolation:** Concurrent transactions should not interfere with each other in a way that causes incorrect results.
+* **Durability:** Once a transaction is committed, its changes are permanent, even if there is a power loss or system crash.
 
-By understanding the available data types and their characteristics, you can design databases that are efficient, reliable, and easy to maintain.
+These properties are essential in real-world systems such as banking, e-commerce, and inventory management, where incorrect or partial updates can cause serious problems.
 
-**Key Takeaways from this Lesson:**
+##   Importance of These Concepts
 
-*   **Data Types Matter:** Selecting the appropriate data type is crucial for data integrity, storage efficiency, and query performance.
-*   **Numeric Types:** `INTEGER`, `DECIMAL`, and `FLOAT` are used for storing numerical data, each with different characteristics regarding precision and range.
-*   **String Types:** `CHAR`, `VARCHAR`, and `TEXT` are used for storing text data, with varying length constraints and storage implications.
-*   **Date/Time Types:** `DATE`, `TIME`, and `DATETIME` are used for storing temporal data, with specific formats that vary across database systems.
-*   **Other Types:** `BOOLEAN`, `BLOB`, and `JSON` provide support for storing boolean values, binary data, and semi-structured data, respectively.
-*   **NULL Values:** `NULL` represents a missing or unknown value and is not a data type itself. It's crucial to handle `NULL` values properly in queries.
-*   **Choosing Wisely:** Consider the nature of the data, the required precision, and the storage implications when selecting a data type for a column.
+Understanding tables, columns, rows, and keys is fundamental to working with relational databases.
+
+* They define how data is structured and organized.
+* They allow us to query and retrieve specific information efficiently.
+* Keys ensure data integrity and establish relationships between different sets of data.
+* ACID properties ensure that data changes remain correct and reliable, even under failures or concurrent access.
+
+In the following lessons, we will build upon these concepts as we learn to use SQL to interact with relational databases.

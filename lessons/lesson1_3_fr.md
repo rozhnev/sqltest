@@ -1,111 +1,78 @@
-# Leçon 1.3 : Types de données de base
+# Leçon 1.3 : Concepts des bases relationnelles
 
-Dans les bases de données relationnelles, les types de données spécifient le genre de données qui peuvent être stockées dans une colonne. Choisir le bon type de données est crucial pour l'intégrité des données, l'efficacité du stockage et les performances des requêtes. Cette leçon couvre les types de données courants et leurs sous-types utilisés dans les bases de données relationnelles, ainsi que leurs plages de valeurs.
+Dans la leçon précédente, nous avons introduit le concept de base de données. Maintenant, nous allons approfondir les composants centraux des **bases relationnelles**, essentiels pour comprendre comment les données sont organisées et consultées via SQL.
 
-<img src="/images/lessons/lesson1_3-datatypes.jpg" alt="Data Types" width="100%">
+<img src="/images/lessons/lesson1_2-rdb.jpg" alt="DBMS overview" width="100%">
 
-## Types de données numériques
+## Tables, colonnes et lignes
 
-Les types de données numériques sont utilisés pour stocker des valeurs numériques.
+Les bases relationnelles organisent les données en structures appelées **tables**. Pensez à une table comme à une feuille de calcul :
 
-### INTEGER (Entier)
-*   Stocke des nombres entiers.
-*   Sous-types :
-    *   `INT` ou `INTEGER` : Généralement un entier de 4 octets.
-    *   `SMALLINT` : Généralement un entier de 2 octets.
-    *   `BIGINT` : Généralement un entier de 8 octets.
-    *   `TINYINT` : Généralement un entier de 1 octet.
-*   Plages (approximatives, peuvent varier selon le système de base de données) :
-    *   `TINYINT` : -128 à 127 (signé) ou 0 à 255 (non signé)
-    *   `SMALLINT` : -32 768 à 32 767
-    *   `INT` : -2 147 483 648 à 2 147 483 647
-    *   `BIGINT` : -9 223 372 036 854 775 808 à 9 223 372 036 854 775 807
+* **Table :** Une collection de données liées, par exemple les clients, produits ou commandes.
+* **Colonne :** Un ensemble vertical de données dans une table. Chaque colonne représente un attribut (ex. CustomerID, FirstName, LastName, Email).
+* **Ligne :** Un ensemble horizontal de données dans une table. Chaque ligne représente un enregistrement individuel (un client, une commande, etc.).
 
-### DECIMAL / NUMERIC
-*   Stocke des valeurs numériques exactes avec une précision et une échelle spécifiées.
-*   Précision : Le nombre total de chiffres.
-*   Échelle : Le nombre de chiffres à droite de la virgule décimale.
-*   Exemple : `DECIMAL(10, 2)` peut stocker des nombres avec 10 chiffres au total, dont 2 après la virgule.
-*   Plage : Dépend de la précision et de l'échelle.
+**Exemple :**
 
-### FLOAT / REAL (Flottant / Réel)
-*   Stocke des valeurs numériques approximatives avec une précision à virgule flottante.
-*   Sous-types :
-    *   `FLOAT` : Nombre à virgule flottante en simple précision.
-    *   `DOUBLE` / `DOUBLE PRECISION` : Nombre à virgule flottante en double précision.
-    *   `REAL` : Un synonyme de `FLOAT` dans certaines bases de données.
-*   Plage : Varie selon l'implémentation spécifique, mais couvre généralement une large gamme de valeurs avec une précision limitée.
+Visualisons une table "Customers" simple :
 
-## Types de données de caractères / chaînes de caractères
+| CustomerID | FirstName | LastName | Email |
+| :--------: | :-------: | :------: | :---: |
+| 1 | John | Doe | john.doe@example.com |
+| 2 | Jane | Smith | jane.smith@example.com |
+| 3 | David | Lee | david.lee@example.com |
 
-Les types de données de caractères sont utilisés pour stocker du texte.
+* La structure entière est la **table** "%20Customers%20".
+* "CustomerID", "FirstName", "LastName", "Email" sont les **colonnes**.
+* Chaque ligne (ex. "1 | John | Doe | ...") est un **enregistrement**.
 
-### CHAR
-*   Stocke des chaînes de caractères de longueur fixe.
-*   Vous spécifiez la longueur lors de la définition de la colonne.
-*   Exemple : `CHAR(10)` stocke des chaînes d'exactement 10 caractères.
-*   Si la chaîne stockée est plus courte que la longueur spécifiée, elle est complétée par des espaces.
+## Les clés : garantir l'intégrité des données
 
-### VARCHAR
-*   Stocke des chaînes de caractères de longueur variable.
-*   Vous spécifiez la longueur maximale lors de la définition de la colonne.
-*   Exemple : `VARCHAR(255)` stocke des chaînes allant jusqu'à 255 caractères.
-*   N'utilise que l'espace nécessaire pour stocker la chaîne réelle.
+Les **clés** sont cruciales en relationnel : elles établissent des relations entre tables et font respecter l'intégrité des données. Principaux types :
 
-### TEXT
-*   Stocke de grandes chaînes de caractères de longueur variable.
-*   Souvent utilisé pour stocker des documents, des articles ou d'autres données textuelles volumineuses.
-*   La longueur maximale est généralement beaucoup plus grande que celle de `VARCHAR`.
+### Clé primaire (Primary Key)
+* Colonne (ou ensemble de colonnes) qui identifie de façon unique chaque ligne.
+* Caractéristiques :
+  * **Unique**
+  * **Non NULL**
+* Ex : "CustomerID" est souvent une bonne clé primaire.
 
-## Types de données de date et d'heure
+### Clé étrangère (Foreign Key)
+* Colonne dans une table qui référence la clé primaire d'une autre table.
+* Sert à établir des relations entre tables.
+* Exemple : si une table "Orders" contient un champ "CustomerID" qui référence "Customers.CustomerID".
 
-Les types de données de date et d'heure sont utilisés pour stocker des valeurs temporelles.
+### Clé unique (Unique Key)
+* Colonne (ou ensemble) qui garantit l'unicité des valeurs dans la table.
+* Différence par rapport à la clé primaire : une table peut avoir plusieurs clés uniques.
+* Les colonnes uniques peuvent inclure des valeurs NULL selon le SGBD.
+* Exemple : la colonne "Email" pourrait être une clé unique.
 
-### DATE
-*   Stocke une date (année, mois, jour).
-*   Format : Varie selon le système de base de données (ex : AAAA-MM-JJ, MM/JJ/AAAA).
+## ACID : des transactions fiables en base de données
 
-### TIME (Heure)
-*   Stocke une heure (heure, minute, seconde).
-*   Format : Varie selon le système de base de données (ex : HH:MM:SS).
+Dans les bases relationnelles, une autre notion fondamentale est le modèle **ACID**. ACID définit les propriétés qui rendent les transactions sûres et fiables.
 
-### DATETIME / TIMESTAMP
-*   Stocke à la fois la date et l'heure.
-*   Format : Varie selon le système de base de données (ex : AAAA-MM-JJ HH:MM:SS).
-*   `TIMESTAMP` a souvent un comportement spécial lié aux fuseaux horaires et aux mises à jour automatiques.
+Une **transaction** est un groupe d'opérations traité comme une seule unité de travail. Par exemple, un virement bancaire entre deux comptes implique généralement au moins deux opérations :
 
-## Type de données booléen
+1. Débiter le compte A.
+2. Créditer le compte B.
 
-### BOOLEAN
-*   Stocke des valeurs vrai/faux (true/false).
-*   Certaines bases de données peuvent représenter les valeurs booléennes par des entiers (ex : 0 pour faux, 1 pour vrai).
+Ces deux étapes doivent réussir ensemble, sinon aucune ne doit être appliquée.
 
-## Autres types de données
+**ACID signifie :**
 
-### BLOB (Binary Large Object)
-*   Stocke des données binaires, telles que des images, des fichiers audio ou vidéo.
+* **Atomicité :** Une transaction est « tout ou rien ». Si une étape échoue, toute la transaction est annulée.
+* **Cohérence :** Une transaction doit faire passer la base d'un état valide à un autre en respectant toutes les règles et contraintes définies.
+* **Isolation :** Les transactions concurrentes ne doivent pas interférer entre elles d'une façon qui produirait des résultats incorrects.
+* **Durabilité :** Une fois validées (commit), les modifications d'une transaction sont permanentes, même en cas de panne ou de coupure électrique.
 
-### JSON
-*   Stocke des données au format JSON (JavaScript Object Notation).
-*   Permet de stocker des données semi-structurées dans une colonne de base de données.
+Ces propriétés sont essentielles dans des systèmes réels comme la banque, l'e-commerce ou la gestion des stocks, où des mises à jour partielles ou incorrectes peuvent avoir de lourdes conséquences.
 
+## Importance de ces concepts
 
-## Choisir le bon type de données
+* Ils définissent la structure et l'organisation des données.
+* Ils facilitent l'interrogation et la récupération efficace des informations.
+* Les clés assurent l'intégrité et relient les données entre elles.
+* Les propriétés ACID garantissent des modifications de données correctes et fiables, même en cas de pannes ou d'accès concurrents.
 
-*   Considérez le type de données que vous devez stocker (numérique, texte, date/heure, etc.).
-*   Choisissez le plus petit type de données capable d'accueillir la plage de valeurs attendue.
-*   Utilisez `VARCHAR` au lieu de `CHAR` à moins que vous n'ayez besoin de chaînes de longueur fixe.
-*   Utilisez `DECIMAL` pour les valeurs numériques exactes, en particulier pour les devises.
-*   Soyez conscient des types de données spécifiques et de leur comportement dans votre système de base de données.
-
-En comprenant les types de données disponibles et leurs caractéristiques, vous pouvez concevoir des bases de données efficaces, fiables et faciles à entretenir.
-
-**Points clés de cette leçon :**
-
-*   **L'importance des types de données :** Choisir le type de données approprié est crucial pour l'intégrité des données, l'efficacité du stockage et les performances des requêtes.
-*   **Types numériques :** `INTEGER`, `DECIMAL` et `FLOAT` sont utilisés pour stocker des données numériques, chacun avec des caractéristiques différentes en matière de précision et de plage.
-*   **Types de chaînes :** `CHAR`, `VARCHAR` et `TEXT` sont utilisés pour stocker des données textuelles, avec des contraintes de longueur et des implications de stockage variables.
-*   **Types de date/heure :** `DATE`, `TIME` et `DATETIME` sont utilisés pour stocker des données temporelles, avec des formats spécifiques qui varient selon les systèmes de base de données.
-*   **Autres types :** `BOOLEAN`, `BLOB` et `JSON` permettent de stocker respectivement des valeurs booléennes, des données binaires et des données semi-structured.
-*   **Valeurs NULL :** `NULL` représente une valeur manquante ou inconnue et n'est pas un type de données en soi. Il est crucial de gérer correctement les valeurs `NULL` dans les requêtes.
-*   **Choisir judicieusement :** Tenez compte de la nature des données, de la précision requise et des implications de stockage lors du choix d'un type de données pour une colonne.
+Dans les leçons suivantes, nous exploiterons ces notions pour apprendre à utiliser SQL avec des bases relationnelles.

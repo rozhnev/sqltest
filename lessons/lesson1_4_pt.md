@@ -1,57 +1,110 @@
-Aprenda sobre os valores NULL no SQL, entendendo que o NULL representa dados ausentes ou desconhecidos. Esta lição aborda como o NULL difere de zero ou de uma string vazia, a importância dos operadores IS NULL e IS NOT NULL e como o NULL afeta as operações e a lógica do banco de dados.
+# Lição 1.4: Tipos de Dados Básicos
 
-# Lição 1.4: Entendendo os Valores NULL no SQL
+Em bases de dados relacionais, os tipos de dados especificam o tipo de dados que podem ser armazenados numa coluna. Escolher o tipo de dados correto é crucial para a integridade dos dados, eficiência de armazenamento e desempenho das consultas. Esta lição aborda os tipos de dados comuns e os seus subtipos usados em bases de dados relacionais, juntamente com os seus intervalos de valores.
 
-No mundo dos bancos de dados, você encontrará frequentemente situações em que os dados estão ausentes, são desconhecidos ou não se aplicam. O SQL usa um marcador especial chamado **NULL** para representar esses casos. Entender o NULL é fundamental porque ele se comporta de maneira diferente de qualquer outro valor.
+<img src="/images/lessons/lesson1_3-datatypes.jpg" alt="Data Types" width="100%">
 
-## O que é NULL?
+## Tipos de Dados Numéricos
 
-**NULL** não é um valor; é um **estado** ou um espaço reservado indicando que um valor de dado *não existe* no banco de dados.
+Os tipos de dados numéricos são usados para armazenar valores numéricos.
 
-É importante lembrar o que o NULL **NÃO** é:
-*   **NULL não é 0:** Zero é um número. NULL é a ausência de um número.
-*   **NULL não é uma string vazia (' '):** Uma string vazia é um pedaço de texto com zero caracteres. NULL é a ausência de texto.
-*   **NULL não é "falso":** Na lógica SQL, o NULL permanece como "desconhecido".
+### INTEGER
+*   Armazena números inteiros.
+*   Subtipos:
+    *   `INT` ou `INTEGER`: Tipicamente um inteiro de 4 bytes.
+    *   `SMALLINT`: Tipicamente um inteiro de 2 bytes.
+    *   `BIGINT`: Tipicamente um inteiro de 8 bytes.
+    *   `TINYINT`: Tipicamente um inteiro de 1 byte.
+*   Intervalos (aproximados, podem variar de acordo com o sistema de banco de dados):
+    *   `TINYINT`: -128 a 127 (com sinal) ou 0 a 255 (sem sinal)
+    *   `SMALLINT`: -32.768 a 32.767
+    *   `INT`: -2.147.483.648 a 2.147.483.647
+    *   `BIGINT`: -9.223.372.036.854.775.808 a 9.223.372.036.854.775.807
 
-## Por que usamos NULL?
-*   **Informação desconhecida:** Por exemplo, podemos ainda não saber o nome do meio de um cliente.
-*   **Não aplicável:** Uma coluna "CNPJ da Empresa" seria NULL para uma pessoa física.
-*   **Dados ausentes:** Dados que foram esquecidos durante a entrada.
+### DECIMAL / NUMERIC
+*   Armazena valores numéricos exatos com uma precisão e escala especificadas.
+*   Precisão: O número total de dígitos.
+*   Escala: O número de dígitos à direita do ponto decimal.
+*   Exemplo: `DECIMAL(10, 2)` pode armazenar números com 10 dígitos totais, 2 dos quais estão após o ponto decimal.
+*   Intervalo: Depende da precisão e escala.
 
-## Trabalhando com NULL: IS NULL e IS NOT NULL
+### FLOAT / REAL
+*   Armazena valores numéricos aproximados com precisão de ponto flutuante.
+*   Subtipos:
+    *   `FLOAT`: Número de ponto flutuante de precisão simples.
+    *   `DOUBLE` / `DOUBLE PRECISION`: Número de ponto flutuante de precisão dupla.
+    *   `REAL`: Um sinônimo para `FLOAT` em alguns bancos de dados.
+*   Intervalo: Varia dependendo da implementação específica, mas geralmente cobre uma ampla gama de valores com precisão limitada.
 
-Como o NULL representa um estado desconhecido, você não pode usar operadores de comparação padrão como `=` ou `<>` com ele. Qualquer comparação com NULL (ex: `valor = NULL`) resultará em "desconhecido", não em "verdadeiro" ou "falso".
+## Tipos de Dados de Caractere / String
 
-Para verificar valores NULL, você deve usar operadores específicos:
+Os tipos de dados de caractere são usados para armazenar texto.
 
-### 1. IS NULL
-Usado para encontrar registros onde uma coluna não tem valor.
-```sql
-SELECT *
-FROM address
-WHERE address2 IS NULL;
-```
+### CHAR
+*   Armazena strings de caracteres de comprimento fixo.
+*   Você especifica o comprimento ao definir a coluna.
+*   Exemplo: `CHAR(10)` armazena strings de exatamente 10 caracteres.
+*   Se a string armazenada for menor que o comprimento especificado, ela será preenchida com espaços.
 
-### 2. IS NOT NULL
-Usado para encontrar registros onde uma coluna contém *qualquer* dado.
-```sql
-SELECT *
-FROM address
-WHERE address2 IS NOT NULL;
-```
+### VARCHAR
+*   Armazena strings de caracteres de comprimento variável.
+*   Você especifica o comprimento máximo ao definir a coluna.
+*   Exemplo: `VARCHAR(255)` armazena strings de até 255 caracteres.
+*   Usa apenas o espaço necessário para armazenar a string real.
 
-## NULL em Cálculos
+### TEXT
+*   Armazena strings de caracteres de comprimento variável grandes.
+*   Frequentemente usado para armazenar documentos, artigos ou outros dados de texto grandes.
+*   O comprimento máximo é normalmente muito maior que `VARCHAR`.
 
-Uma das coisas mais importantes a lembrar é que o **NULL se propaga**. Se você realizar uma operação matemática com um valor NULL, o resultado será sempre NULL.
+## Tipos de Dados de Data e Hora
 
-*   `10 + NULL = NULL`
-*   `5 * NULL = NULL`
-*   `'Olá ' + NULL = NULL`
+Os tipos de dados de data e hora são usados para armazenar valores temporais.
 
-## Principais Conclusões desta Lição
+### DATE
+*   Armazena uma data (ano, mês, dia).
+*   Formato: Varia dependendo do sistema de banco de dados (por exemplo, AAAA-MM-DD, MM/DD/AAAA).
 
-*   **NULL** representa dados ausentes, desconhecidos ou não aplicáveis.
-*   É **diferente** de zero, strings vazias ou espaços em branco.
-*   Comparações padrão (`=` ou `<>`) **não funcionam** com NULL.
-*   Use **IS NULL** e **IS NOT NULL** para filtrar dados ausentes.
-*   A maioria das operações matemáticas envolvendo NULL resultará em **NULL**.
+### TIME
+*   Armazena uma hora (hora, minuto, segundo).
+*   Formato: Varia dependendo do sistema de banco de dados (por exemplo, HH:MM:SS).
+
+### DATETIME / TIMESTAMP
+*   Armazena data e hora.
+*   Formato: Varia dependendo do sistema de banco de dados (por exemplo, AAAA-MM-DD HH:MM:SS).
+*   `TIMESTAMP` geralmente tem um comportamento especial relacionado a fusos horários e atualizações automáticas.
+
+## Tipo de Dados Booleano
+
+### BOOLEAN
+*   Armazena valores verdadeiro/falso.
+*   Alguns bancos de dados podem representar valores booleanos como inteiros (por exemplo, 0 para falso, 1 para verdadeiro).
+
+## Outros Tipos de Dados
+
+### BLOB (Binary Large Object)
+*   Armazena dados binários, como imagens, arquivos de áudio ou vídeo.
+
+### JSON
+*   Armazena dados JSON (JavaScript Object Notation).
+*   Permite armazenar dados semiestruturados em uma coluna de banco de dados.
+
+## Escolhendo o Tipo de Dados Certo
+
+*   Considere o tipo de dados que você precisa armazenar (numérico, texto, data/hora, etc.).
+*   Escolha o menor tipo de dados que possa acomodar o intervalo de valores que você espera.
+*   Use `VARCHAR` em vez de `CHAR`, a menos que precise de strings de comprimento fixo.
+*   Use `DECIMAL` para valores numéricos exatos, especialmente ao lidar com moeda.
+*   Esteja ciente dos tipos de dados específicos e seu comportamento em seu sistema de banco de dados.
+
+Ao entender os tipos de dados disponíveis e suas características, você pode projetar bancos de dados que sejam eficientes, confiáveis e fáceis de manter.
+
+**Principais Conclusões desta Lição:**
+
+*   **Tipos de Dados Importam:** Selecionar o tipo de dados apropriado é crucial para a integridade dos dados, eficiência de armazenamento e desempenho da consulta.
+*   **Tipos Numéricos:** `INTEGER`, `DECIMAL` e `FLOAT` são usados para armazenar dados numéricos, cada um com diferentes características em relação à precisão e intervalo.
+*   **Tipos de String:** `CHAR`, `VARCHAR` e `TEXT` são usados para armazenar dados de texto, com diferentes restrições de comprimento e implicações de armazenamento.
+*   **Tipos de Data/Hora:** `DATE`, `TIME` e `DATETIME` são usados para armazenar dados temporais, com formatos específicos que variam entre os sistemas de banco de dados.
+*   **Outros Tipos:** `BOOLEAN`, `BLOB` e `JSON` fornecem suporte para armazenar valores booleanos, dados binários e dados semiestruturados, respectivamente.
+*   **Valores NULL:** `NULL` representa um valor ausente ou desconhecido e não é um tipo de dados em si. É crucial lidar com valores `NULL` corretamente em consultas.
+*   **Escolhendo Sabiamente:** Considere a natureza dos dados, a precisão necessária e as implicações de armazenamento ao selecionar um tipo de dados para uma coluna.

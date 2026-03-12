@@ -1,84 +1,332 @@
-# Lição 1.2: Conceitos de Bases de Dados Relacionais
+# Lição 1.2: Diferentes Tipos de Bases de Dados
 
-Na lição anterior, introduzimos o conceito de bases de dados. Agora, vamos aprofundar os componentes centrais das **Bases de Dados Relacionais**, que são fundamentais para compreender como os dados são organizados e acedidos utilizando SQL.
+Na lição anterior, introduzimos a ideia geral de uma base de dados e de um SGBD. Na prática, porém, nem todas as bases de dados são construídas da mesma forma. Diferentes tipos de bases de dados são otimizados para diferentes tipos de dados, padrões de consulta, requisitos de escalabilidade e necessidades de consistência.
 
-<img src="/images/lessons/lesson1_2-rdb.jpg" alt="DBMS overview" width="100%">
+Nesta lição, vamos analisar os tipos de bases de dados mais comuns, as suas principais diferenças, casos de uso típicos e exemplos do mundo real. Também vamos olhar com mais atenção para as **Bases de Dados Relacionais**, porque continuarão a ser o nosso principal foco ao longo deste curso.
 
-##   Tabelas, Colunas e Linhas
+## Porque Existem Diferentes Tipos de Bases de Dados?
 
-As bases de dados relacionais organizam os dados em estruturas chamadas **tabelas**. Pense numa tabela como uma folha de cálculo:
+Nenhum único modelo de base de dados é perfeito para todas as aplicações.
 
-* **Tabela:** Uma coleção de dados relacionados. Por exemplo, uma tabela pode armazenar informações sobre clientes, produtos ou encomendas.
-* **Coluna:** Um conjunto vertical de dados dentro de uma tabela. Cada coluna representa um atributo ou característica específica dos dados. Por exemplo, numa tabela "Clientes", as colunas podem ser "CustomerID", "FirstName", "LastName" e "Email".
-* **Linha:** Um conjunto horizontal de dados dentro de uma tabela. Cada linha representa uma única instância ou registo dos dados. Numa tabela "Clientes", cada linha representaria um único cliente.
+Por exemplo:
 
-**Exemplo:**
+* Um sistema bancário precisa de forte consistência e transações fiáveis.
+* Um sistema de caching precisa de pesquisas por chave extremamente rápidas.
+* Uma rede social pode precisar de armazenamento documental flexível e de análise de relações em estilo grafo.
+* Uma plataforma analítica pode precisar de analisar milhares de milhões de valores de forma eficiente para relatórios.
 
-Vamos visualizar uma tabela "Clientes" simples:
+Como sistemas diferentes resolvem problemas diferentes, vários modelos de bases de dados surgiram ao longo do tempo.
 
-|   CustomerID   |   FirstName   |   LastName   |   Email                |
-| :------------- | :------------ | :----------- | :--------------------- |
-|   1            |   John        |   Doe        |   john.doe@example.com   |
-|   2            |   Jane        |   Smith      |   jane.smith@example.com   |
-|   3            |   David       |   Lee        |   david.lee@example.com    |
+## Principais Tipos de Bases de Dados Num Relance
 
-* Toda a estrutura é a **tabela** chamada "Clientes".
-* "CustomerID", "FirstName", "LastName" e "Email" são as **colunas**.
-* Cada linha (por exemplo, "1 | John | Doe | john.doe@example.com") é uma **linha**.
+Aqui está uma comparação rápida antes de analisarmos cada tipo com mais detalhe:
 
-##   Chaves: Garantindo a Integridade dos Dados
+| Tipo | Modelo de Dados | Pontos Fortes | Casos de Uso Comuns | Exemplos |
+|------|-----------------|---------------|---------------------|----------|
+| **Relacional** | Tabelas com linhas e colunas | Forte consistência, SQL, joins, dados estruturados | Banca, ERP, CRM, e-commerce, relatórios | PostgreSQL, MySQL, MariaDB, SQLite, Oracle |
+| **Chave-Valor** | Chave associada a um valor | Pesquisas muito rápidas, escalabilidade simples | Caching, sessões, feature flags, carrinhos de compras | Redis, Amazon DynamoDB, Riak |
+| **Documental** | Documentos do tipo JSON | Esquema flexível, dados aninhados | Gestão de conteúdo, perfis de utilizador, catálogos, aplicações web | MongoDB, Couchbase, Firestore |
+| **Colunas Largas** | Linhas com colunas flexíveis agrupadas em famílias | Elevada taxa de escrita, escalabilidade horizontal | Registo de eventos, IoT, cargas distribuídas em grande escala | Apache Cassandra, HBase, ScyllaDB |
+| **Grafo** | Nós e arestas | Consultas centradas em relações | Redes sociais, deteção de fraude, motores de recomendação | Neo4j, Amazon Neptune, ArangoDB |
+| **Séries Temporais** | Registos com marca temporal | Ingestão e agregação eficientes ao longo do tempo | Monitorização, métricas, sensores, dados financeiros | InfluxDB, TimescaleDB, OpenTSDB |
+| **Colunar Analítica** | Dados armazenados por coluna em vez de por linha | Análises e agregações rápidas | BI, dashboards, data warehousing, OLAP | ClickHouse, DuckDB, Amazon Redshift, BigQuery |
+| **Em Memória** | Dados armazenados principalmente em RAM | Latência extremamente baixa | Caching, leaderboards, contadores em tempo real | Redis, Memcached, SAP HANA |
 
-As **chaves** são um conceito crítico nas bases de dados relacionais. São utilizadas para estabelecer relações entre tabelas e impor a integridade dos dados. Aqui estão os principais tipos de chaves:
+## Bases de Dados Relacionais
 
-###   Chave Primária (Primary Key)
+As bases de dados relacionais armazenam os dados em **tabelas** compostas por **linhas** e **colunas**. As tabelas podem ser ligadas entre si através de **relações**, normalmente usando chaves primárias e chaves estrangeiras.
 
-* Uma **Chave Primária** é uma coluna (ou um conjunto de colunas) que identifica exclusivamente cada linha numa tabela.
-* **Características de uma Chave Primária:**
-    * **Única:** Nenhuma linha pode ter o mesmo valor de chave primária.
-    * **Não Nula:** Uma coluna de chave primária não pode conter valores NULL.
-* Na nossa tabela "Clientes", "CustomerID" é um bom candidato para a chave primária porque cada cliente tem um ID único e não pode estar vazio.
+Este modelo é especialmente adequado quando os dados estão bem estruturados e quando a correção, a consistência e as consultas complexas são importantes.
 
-###   Chave Estrangeira (Foreign Key)
+### Propriedades Fundamentais das Bases de Dados Relacionais
 
-* Uma **Chave Estrangeira** é uma coluna (ou um conjunto de colunas) numa tabela que se refere à Chave Primária noutra tabela.
-* As chaves estrangeiras estabelecem relações entre tabelas.
-* Por exemplo, se tivermos uma tabela "Encomendas", ela pode ter uma coluna "CustomerID" que é uma chave estrangeira que se refere à "CustomerID" na tabela "Clientes". Isto liga cada encomenda ao cliente que a fez.
+**1. Esquema estruturado**
 
-###   Chave Única (Unique Key)
+As bases de dados relacionais exigem normalmente um esquema claramente definido. Antes de armazenar dados, definem-se tabelas, colunas, tipos de dados, restrições e relações.
 
-* Uma **Chave Única** é uma coluna (ou um conjunto de colunas) que garante que os valores na(s) coluna(s) são únicos em todas as linhas da tabela.
-* **Diferença da Chave Primária:**
-    * Uma tabela pode ter apenas uma chave primária, mas pode ter várias chaves únicas.
-    * As colunas de chave única *podem* permitir valores NULL (embora as implementações variem ligeiramente).
-* Na nossa tabela "Clientes", "Email" pode ser uma chave única, garantindo que cada cliente tem um endereço de email único.
+Isto torna a estrutura previsível e mais fácil de validar.
 
-##   ACID: Transações Fiáveis em Bases de Dados
+**2. Relações entre tabelas**
 
-Ao trabalhar com bases de dados relacionais, outro conceito fundamental é o modelo **ACID**. O ACID define as propriedades que tornam as transações de base de dados seguras e fiáveis.
+Uma grande força dos sistemas relacionais é a capacidade de modelar relações de forma explícita.
 
-Uma **transação** é um grupo de operações tratado como uma única unidade de trabalho. Por exemplo, uma transferência de dinheiro entre duas contas bancárias normalmente envolve pelo menos duas operações:
+Por exemplo:
 
-1. Debitar dinheiro da Conta A.
-2. Creditar dinheiro na Conta B.
+* Uma tabela `customers` pode estar relacionada com uma tabela `orders`.
+* Uma tabela `orders` pode estar relacionada com uma tabela `order_items`.
 
-Ambos os passos devem ser concluídos em conjunto, ou então nenhum deve ser aplicado.
+Isto torna as bases de dados relacionais muito adequadas para sistemas de negócio em que as entidades estão interligadas.
 
-**ACID significa:**
+**3. Suporte a SQL**
 
-* **Atomicidade:** Uma transação é "tudo ou nada". Se um passo falhar, toda a transação é revertida.
-* **Consistência:** Uma transação deve levar a base de dados de um estado válido para outro, preservando todas as regras e restrições definidas.
-* **Isolamento:** Transações concorrentes não devem interferir entre si de forma a causar resultados incorretos.
-* **Durabilidade:** Depois de uma transação ser confirmada (commit), as alterações tornam-se permanentes, mesmo em caso de falha de energia ou crash do sistema.
+As bases de dados relacionais são normalmente consultadas usando **SQL (Structured Query Language)**. O SQL fornece uma forma padrão de filtrar, juntar, agregar, ordenar e modificar dados estruturados.
 
-Estas propriedades são essenciais em sistemas reais como banca, comércio eletrónico e gestão de inventário, onde atualizações incorretas ou parciais podem causar problemas graves.
+**4. Transações ACID**
 
-##   Importância Destes Conceitos
+As bases de dados relacionais são bem conhecidas por suportarem as propriedades **ACID**:
 
-Compreender tabelas, colunas, linhas e chaves é fundamental para trabalhar com bases de dados relacionais.
+* **Atomicidade:** Uma transação é totalmente bem-sucedida ou falha por completo.
+* **Consistência:** Os dados têm de permanecer válidos segundo as regras definidas.
+* **Isolamento:** Transações concorrentes não devem interferir incorretamente umas com as outras.
+* **Durabilidade:** Depois de confirmados, os dados permanecem armazenados mesmo após falhas.
 
-* Definem como os dados são estruturados e organizados.
-* Permitem-nos consultar e recuperar informações específicas de forma eficiente.
-* As chaves garantem a integridade dos dados e estabelecem relações entre diferentes conjuntos de dados.
-* As propriedades ACID garantem que as alterações aos dados permanecem corretas e fiáveis, mesmo com falhas ou acesso concorrente.
+Estas propriedades são críticas em sistemas como banca, faturação, reservas e controlo de inventário.
 
-Nas lições seguintes, vamos construir sobre estes conceitos à medida que aprendemos a usar SQL para interagir com bases de dados relacionais.
+**5. Restrições de integridade dos dados**
+
+As bases de dados relacionais podem aplicar regras diretamente ao nível da base de dados, por exemplo:
+
+* chaves primárias
+* chaves estrangeiras
+* restrições de unicidade
+* restrições `NOT NULL`
+* restrições `CHECK`
+
+Estas funcionalidades ajudam a evitar dados inválidos ou inconsistentes.
+
+**6. Joins poderosos e relatórios**
+
+As bases de dados relacionais destacam-se quando é necessário combinar informação de várias tabelas. Esta é uma das razões pelas quais continuam a ser centrais em relatórios, análise, finanças, operações e muitos sistemas transacionais.
+
+**7. Normalização e redução de redundância**
+
+A conceção relacional recorre frequentemente à **normalização**, o que significa organizar os dados em tabelas relacionadas para reduzir a duplicação e melhorar a consistência.
+
+Por exemplo, a informação de um cliente pode ser armazenada uma única vez numa tabela `customers` em vez de ser repetida em cada registo de encomenda.
+
+### Casos de Uso Comuns para Bases de Dados Relacionais
+
+As bases de dados relacionais são normalmente a melhor escolha quando:
+
+* os dados são estruturados e claramente definidos
+* as relações entre entidades são importantes
+* as transações têm de ser fiáveis
+* a consistência é mais importante do que a flexibilidade do esquema
+* a aplicação precisa de consultas complexas e relatórios
+
+### Exemplos de Bases de Dados Relacionais
+
+* **PostgreSQL:** Poderosa base de dados relacional open source com forte suporte a standards e funcionalidades avançadas.
+* **MySQL:** Base de dados relacional popular, amplamente usada em aplicações web.
+* **MariaDB:** Fork comunitário do MySQL.
+* **SQLite:** Base de dados relacional leve e embebida, armazenada num único ficheiro.
+* **Oracle Database:** Base de dados relacional de nível empresarial.
+* **Microsoft SQL Server:** Base de dados relacional amplamente usada em ambientes empresariais.
+
+## Bases de Dados Chave-Valor
+
+As bases de dados chave-valor armazenam os dados como um par simples: uma **chave** e o respetivo **valor**.
+
+A chave funciona como um identificador único, e a base de dados recupera o valor diretamente a partir dessa chave. Este modelo é muito simples e muito rápido.
+
+### Principais Diferenças
+
+* O acesso aos dados baseia-se normalmente numa única chave, em vez de joins complexos.
+* A base de dados muitas vezes não compreende a estrutura interna do valor.
+* Está otimizada para leituras e escritas extremamente rápidas.
+
+### Casos de Uso Típicos
+
+* caching de resultados de consultas
+* armazenamento de sessões de utilizador
+* carrinhos de compras
+* feature flags
+* limitação de taxa
+* leaderboards e contadores
+
+### Exemplos
+
+* **Redis**
+* **Amazon DynamoDB**
+* **Riak**
+
+## Bases de Dados Documentais
+
+As bases de dados documentais armazenam dados como **documentos**, normalmente num formato semelhante a JSON. Cada documento pode conter campos, arrays e objetos aninhados.
+
+Ao contrário das bases de dados relacionais, nem todos os documentos precisam de ter exatamente a mesma estrutura.
+
+### Principais Diferenças
+
+* O esquema é flexível ou semi-flexível.
+* Dados relacionados podem muitas vezes ser armazenados em conjunto no mesmo documento.
+* São convenientes para aplicações cuja estrutura evolui com frequência.
+
+### Casos de Uso Típicos
+
+* sistemas de gestão de conteúdo
+* catálogos de produtos
+* perfis de utilizador
+* aplicações móveis e web
+* prototipagem de sistemas com requisitos em mudança
+
+### Exemplos
+
+* **MongoDB**
+* **Couchbase**
+* **Google Firestore**
+
+## Bases de Dados de Colunas Largas
+
+As bases de dados de colunas largas, por vezes chamadas **bases de dados de família de colunas**, armazenam dados em linhas, mas cada linha pode ter um conjunto muito grande e flexível de colunas. São concebidas para distribuição por muitos servidores e para elevada taxa de escrita.
+
+### Principais Diferenças
+
+* O esquema é mais flexível do que nas bases de dados relacionais.
+* Estão otimizadas para armazenamento distribuído em grande escala.
+* Lidam bem com conjuntos de dados massivos e cargas pesadas de escrita.
+* Tipicamente não suportam joins relacionais da mesma forma que as bases de dados SQL.
+
+### Casos de Uso Típicos
+
+* registo de eventos
+* telemetria IoT
+* sistemas de mensagens
+* aplicações com muita escrita
+* sistemas distribuídos geograficamente
+
+### Exemplos
+
+* **Apache Cassandra**
+* **Apache HBase**
+* **ScyllaDB**
+
+## Bases de Dados Colunares Analíticas
+
+Uma base de dados **colunar** armazena os valores da mesma coluna juntos em disco, em vez de armazenar uma linha completa. Isto é diferente de uma base de dados de colunas largas.
+
+O armazenamento colunar é especialmente eficiente para consultas analíticas que leem algumas colunas de um conjunto de dados muito grande.
+
+### Principais Diferenças
+
+* Otimizadas para analisar e agregar grandes volumes de dados.
+* Muito eficientes para relatórios e análise.
+* Normalmente menos adequadas para cargas transacionais intensas com muitas pequenas atualizações de linhas.
+
+### Casos de Uso Típicos
+
+* business intelligence
+* dashboards
+* data warehousing
+* relatórios analíticos
+* análise de logs em grande escala
+
+### Exemplos
+
+* **ClickHouse**
+* **DuckDB**
+* **Amazon Redshift**
+* **Google BigQuery**
+
+## Bases de Dados em Grafo
+
+As bases de dados em grafo são concebidas para dados em que as relações são a parte mais importante do modelo. Armazenam **nós** (entidades) e **arestas** (relações).
+
+### Principais Diferenças
+
+* A navegação por relações é rápida e natural.
+* São ideais quando é necessário consultar caminhos, redes e dados ligados.
+* São frequentemente mais adequadas do que as bases de dados relacionais para consultas com múltiplos saltos entre relações.
+
+### Casos de Uso Típicos
+
+* redes sociais
+* deteção de fraude
+* sistemas de recomendação
+* topologia de rede
+* grafos de conhecimento
+
+### Exemplos
+
+* **Neo4j**
+* **Amazon Neptune**
+* **ArangoDB**
+
+## Bases de Dados de Séries Temporais
+
+As bases de dados de séries temporais são especializadas em pontos de dados associados ao tempo. Estão otimizadas para elevadas taxas de ingestão, políticas de retenção, compressão e agregação baseada no tempo.
+
+### Principais Diferenças
+
+* Cada registo está associado a um timestamp.
+* As consultas focam-se frequentemente em intervalos como a última hora, o último dia ou o último mês.
+* Fornecem agregações eficientes sobre janelas temporais.
+
+### Casos de Uso Típicos
+
+* monitorização de servidores
+* métricas de aplicações
+* dados de sensores
+* dados do mercado bolsista
+* medições industriais
+
+### Exemplos
+
+* **InfluxDB**
+* **TimescaleDB**
+* **OpenTSDB**
+
+## Bases de Dados em Memória
+
+As bases de dados em memória armazenam a maioria ou a totalidade dos dados em RAM em vez de em disco. Isto torna-as extremamente rápidas, embora a memória seja mais cara do que o armazenamento em disco.
+
+Algumas bases de dados em memória são usadas apenas como caches temporárias, enquanto outras também podem persistir dados em disco.
+
+### Casos de Uso Típicos
+
+* caching
+* armazenamento de sessões
+* contadores em tempo real
+* leaderboards de jogos
+* sistemas de latência ultra-baixa
+
+### Exemplos
+
+* **Redis**
+* **Memcached**
+* **SAP HANA**
+
+## Escolher o Tipo Certo de Base de Dados
+
+Ao selecionar uma base de dados, convém fazer perguntas como estas:
+
+* Os dados são altamente estruturados ou flexíveis?
+* Preciso de transações ACID fortes?
+* Vou executar joins complexos?
+* A pesquisa por chave com baixa latência é a principal prioridade?
+* A carga é transacional ou analítica?
+* O sistema vai escalar por muitos servidores?
+* As relações entre entidades são centrais para a aplicação?
+
+Em muitos sistemas reais, as organizações usam mais do que um tipo de base de dados. Por exemplo:
+
+* uma base de dados relacional para os principais dados de negócio
+* Redis para caching
+* uma base de dados documental para conteúdo flexível
+* um armazém colunar para análise
+
+Isto é frequentemente chamado de **persistência poliglota**.
+
+## Resumo das Principais Diferenças
+
+As principais diferenças entre tipos de bases de dados normalmente envolvem:
+
+* o **modelo de dados** — tabelas, documentos, pares chave-valor, grafos ou registos com marca temporal
+* a **flexibilidade do esquema** — estrutura fixa versus flexível
+* o **estilo de consulta** — SQL, pesquisa por chave, consultas documentais, navegação em grafo, análise por janelas temporais
+* o **modelo de consistência** — fortes garantias transacionais versus compromissos orientados para escalabilidade
+* o **perfil de desempenho** — otimizado para transações, análise, relações ou acesso ultra-rápido
+
+## Principais Conclusões Desta Lição
+
+* Existem diferentes tipos de bases de dados porque diferentes aplicações têm diferentes requisitos técnicos e de negócio.
+* As **Bases de Dados Relacionais** são mais conhecidas pelos seus esquemas estruturados, SQL, relações, restrições de integridade e transações ACID.
+* As **bases de dados chave-valor** são excelentes para pesquisas rápidas e caching.
+* As **bases de dados documentais** são úteis quando a estrutura dos dados é flexível ou evolui com frequência.
+* As **bases de dados de colunas largas** são construídas para cargas distribuídas, de grande escala e com muita escrita.
+* As **bases de dados colunares analíticas** são otimizadas para relatórios e análise em grande escala.
+* As **bases de dados em grafo** são ideais para dados ricos em relações.
+* As **bases de dados de séries temporais** especializam-se em métricas e eventos baseados no tempo.
+* Muitos sistemas modernos usam vários tipos de bases de dados em conjunto.
+
+Na próxima lição, vamos aprofundar a estrutura interna das **Bases de Dados Relacionais**, incluindo tabelas, linhas, colunas, chaves e restrições de integridade.

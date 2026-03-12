@@ -1,110 +1,84 @@
-# Lição 1.3: Tipos de Dados Básicos
+# Lição 1.3: Conceitos de Bases de Dados Relacionais
 
-Em bases de dados relacionais, os tipos de dados especificam o tipo de dados que podem ser armazenados numa coluna. Escolher o tipo de dados correto é crucial para a integridade dos dados, eficiência de armazenamento e desempenho das consultas. Esta lição aborda os tipos de dados comuns e os seus subtipos usados em bases de dados relacionais, juntamente com os seus intervalos de valores.
+Na lição anterior, introduzimos o conceito de bases de dados. Agora, vamos aprofundar os componentes centrais das **Bases de Dados Relacionais**, que são fundamentais para compreender como os dados são organizados e acedidos utilizando SQL.
 
-<img src="/images/lessons/lesson1_3-datatypes.jpg" alt="Data Types" width="100%">
+<img src="/images/lessons/lesson1_2-rdb.jpg" alt="DBMS overview" width="100%">
 
-## Tipos de Dados Numéricos
+##   Tabelas, Colunas e Linhas
 
-Os tipos de dados numéricos são usados para armazenar valores numéricos.
+As bases de dados relacionais organizam os dados em estruturas chamadas **tabelas**. Pense numa tabela como uma folha de cálculo:
 
-### INTEGER
-*   Armazena números inteiros.
-*   Subtipos:
-    *   `INT` ou `INTEGER`: Tipicamente um inteiro de 4 bytes.
-    *   `SMALLINT`: Tipicamente um inteiro de 2 bytes.
-    *   `BIGINT`: Tipicamente um inteiro de 8 bytes.
-    *   `TINYINT`: Tipicamente um inteiro de 1 byte.
-*   Intervalos (aproximados, podem variar de acordo com o sistema de banco de dados):
-    *   `TINYINT`: -128 a 127 (com sinal) ou 0 a 255 (sem sinal)
-    *   `SMALLINT`: -32.768 a 32.767
-    *   `INT`: -2.147.483.648 a 2.147.483.647
-    *   `BIGINT`: -9.223.372.036.854.775.808 a 9.223.372.036.854.775.807
+* **Tabela:** Uma coleção de dados relacionados. Por exemplo, uma tabela pode armazenar informações sobre clientes, produtos ou encomendas.
+* **Coluna:** Um conjunto vertical de dados dentro de uma tabela. Cada coluna representa um atributo ou característica específica dos dados. Por exemplo, numa tabela "Clientes", as colunas podem ser "CustomerID", "FirstName", "LastName" e "Email".
+* **Linha:** Um conjunto horizontal de dados dentro de uma tabela. Cada linha representa uma única instância ou registo dos dados. Numa tabela "Clientes", cada linha representaria um único cliente.
 
-### DECIMAL / NUMERIC
-*   Armazena valores numéricos exatos com uma precisão e escala especificadas.
-*   Precisão: O número total de dígitos.
-*   Escala: O número de dígitos à direita do ponto decimal.
-*   Exemplo: `DECIMAL(10, 2)` pode armazenar números com 10 dígitos totais, 2 dos quais estão após o ponto decimal.
-*   Intervalo: Depende da precisão e escala.
+**Exemplo:**
 
-### FLOAT / REAL
-*   Armazena valores numéricos aproximados com precisão de ponto flutuante.
-*   Subtipos:
-    *   `FLOAT`: Número de ponto flutuante de precisão simples.
-    *   `DOUBLE` / `DOUBLE PRECISION`: Número de ponto flutuante de precisão dupla.
-    *   `REAL`: Um sinônimo para `FLOAT` em alguns bancos de dados.
-*   Intervalo: Varia dependendo da implementação específica, mas geralmente cobre uma ampla gama de valores com precisão limitada.
+Vamos visualizar uma tabela "Clientes" simples:
 
-## Tipos de Dados de Caractere / String
+|   CustomerID   |   FirstName   |   LastName   |   Email                |
+| :------------- | :------------ | :----------- | :--------------------- |
+|   1            |   John        |   Doe        |   john.doe@example.com   |
+|   2            |   Jane        |   Smith      |   jane.smith@example.com   |
+|   3            |   David       |   Lee        |   david.lee@example.com    |
 
-Os tipos de dados de caractere são usados para armazenar texto.
+* Toda a estrutura é a **tabela** chamada "Clientes".
+* "CustomerID", "FirstName", "LastName" e "Email" são as **colunas**.
+* Cada linha (por exemplo, "1 | John | Doe | john.doe@example.com") é uma **linha**.
 
-### CHAR
-*   Armazena strings de caracteres de comprimento fixo.
-*   Você especifica o comprimento ao definir a coluna.
-*   Exemplo: `CHAR(10)` armazena strings de exatamente 10 caracteres.
-*   Se a string armazenada for menor que o comprimento especificado, ela será preenchida com espaços.
+##   Chaves: Garantindo a Integridade dos Dados
 
-### VARCHAR
-*   Armazena strings de caracteres de comprimento variável.
-*   Você especifica o comprimento máximo ao definir a coluna.
-*   Exemplo: `VARCHAR(255)` armazena strings de até 255 caracteres.
-*   Usa apenas o espaço necessário para armazenar a string real.
+As **chaves** são um conceito crítico nas bases de dados relacionais. São utilizadas para estabelecer relações entre tabelas e impor a integridade dos dados. Aqui estão os principais tipos de chaves:
 
-### TEXT
-*   Armazena strings de caracteres de comprimento variável grandes.
-*   Frequentemente usado para armazenar documentos, artigos ou outros dados de texto grandes.
-*   O comprimento máximo é normalmente muito maior que `VARCHAR`.
+###   Chave Primária (Primary Key)
 
-## Tipos de Dados de Data e Hora
+* Uma **Chave Primária** é uma coluna (ou um conjunto de colunas) que identifica exclusivamente cada linha numa tabela.
+* **Características de uma Chave Primária:**
+    * **Única:** Nenhuma linha pode ter o mesmo valor de chave primária.
+    * **Não Nula:** Uma coluna de chave primária não pode conter valores NULL.
+* Na nossa tabela "Clientes", "CustomerID" é um bom candidato para a chave primária porque cada cliente tem um ID único e não pode estar vazio.
 
-Os tipos de dados de data e hora são usados para armazenar valores temporais.
+###   Chave Estrangeira (Foreign Key)
 
-### DATE
-*   Armazena uma data (ano, mês, dia).
-*   Formato: Varia dependendo do sistema de banco de dados (por exemplo, AAAA-MM-DD, MM/DD/AAAA).
+* Uma **Chave Estrangeira** é uma coluna (ou um conjunto de colunas) numa tabela que se refere à Chave Primária noutra tabela.
+* As chaves estrangeiras estabelecem relações entre tabelas.
+* Por exemplo, se tivermos uma tabela "Encomendas", ela pode ter uma coluna "CustomerID" que é uma chave estrangeira que se refere à "CustomerID" na tabela "Clientes". Isto liga cada encomenda ao cliente que a fez.
 
-### TIME
-*   Armazena uma hora (hora, minuto, segundo).
-*   Formato: Varia dependendo do sistema de banco de dados (por exemplo, HH:MM:SS).
+###   Chave Única (Unique Key)
 
-### DATETIME / TIMESTAMP
-*   Armazena data e hora.
-*   Formato: Varia dependendo do sistema de banco de dados (por exemplo, AAAA-MM-DD HH:MM:SS).
-*   `TIMESTAMP` geralmente tem um comportamento especial relacionado a fusos horários e atualizações automáticas.
+* Uma **Chave Única** é uma coluna (ou um conjunto de colunas) que garante que os valores na(s) coluna(s) são únicos em todas as linhas da tabela.
+* **Diferença da Chave Primária:**
+    * Uma tabela pode ter apenas uma chave primária, mas pode ter várias chaves únicas.
+    * As colunas de chave única *podem* permitir valores NULL (embora as implementações variem ligeiramente).
+* Na nossa tabela "Clientes", "Email" pode ser uma chave única, garantindo que cada cliente tem um endereço de email único.
 
-## Tipo de Dados Booleano
+##   ACID: Transações Fiáveis em Bases de Dados
 
-### BOOLEAN
-*   Armazena valores verdadeiro/falso.
-*   Alguns bancos de dados podem representar valores booleanos como inteiros (por exemplo, 0 para falso, 1 para verdadeiro).
+Ao trabalhar com bases de dados relacionais, outro conceito fundamental é o modelo **ACID**. O ACID define as propriedades que tornam as transações de base de dados seguras e fiáveis.
 
-## Outros Tipos de Dados
+Uma **transação** é um grupo de operações tratado como uma única unidade de trabalho. Por exemplo, uma transferência de dinheiro entre duas contas bancárias normalmente envolve pelo menos duas operações:
 
-### BLOB (Binary Large Object)
-*   Armazena dados binários, como imagens, arquivos de áudio ou vídeo.
+1. Debitar dinheiro da Conta A.
+2. Creditar dinheiro na Conta B.
 
-### JSON
-*   Armazena dados JSON (JavaScript Object Notation).
-*   Permite armazenar dados semiestruturados em uma coluna de banco de dados.
+Ambos os passos devem ser concluídos em conjunto, ou então nenhum deve ser aplicado.
 
-## Escolhendo o Tipo de Dados Certo
+**ACID significa:**
 
-*   Considere o tipo de dados que você precisa armazenar (numérico, texto, data/hora, etc.).
-*   Escolha o menor tipo de dados que possa acomodar o intervalo de valores que você espera.
-*   Use `VARCHAR` em vez de `CHAR`, a menos que precise de strings de comprimento fixo.
-*   Use `DECIMAL` para valores numéricos exatos, especialmente ao lidar com moeda.
-*   Esteja ciente dos tipos de dados específicos e seu comportamento em seu sistema de banco de dados.
+* **Atomicidade:** Uma transação é "tudo ou nada". Se um passo falhar, toda a transação é revertida.
+* **Consistência:** Uma transação deve levar a base de dados de um estado válido para outro, preservando todas as regras e restrições definidas.
+* **Isolamento:** Transações concorrentes não devem interferir entre si de forma a causar resultados incorretos.
+* **Durabilidade:** Depois de uma transação ser confirmada (commit), as alterações tornam-se permanentes, mesmo em caso de falha de energia ou crash do sistema.
 
-Ao entender os tipos de dados disponíveis e suas características, você pode projetar bancos de dados que sejam eficientes, confiáveis e fáceis de manter.
+Estas propriedades são essenciais em sistemas reais como banca, comércio eletrónico e gestão de inventário, onde atualizações incorretas ou parciais podem causar problemas graves.
 
-**Principais Conclusões desta Lição:**
+##   Importância Destes Conceitos
 
-*   **Tipos de Dados Importam:** Selecionar o tipo de dados apropriado é crucial para a integridade dos dados, eficiência de armazenamento e desempenho da consulta.
-*   **Tipos Numéricos:** `INTEGER`, `DECIMAL` e `FLOAT` são usados para armazenar dados numéricos, cada um com diferentes características em relação à precisão e intervalo.
-*   **Tipos de String:** `CHAR`, `VARCHAR` e `TEXT` são usados para armazenar dados de texto, com diferentes restrições de comprimento e implicações de armazenamento.
-*   **Tipos de Data/Hora:** `DATE`, `TIME` e `DATETIME` são usados para armazenar dados temporais, com formatos específicos que variam entre os sistemas de banco de dados.
-*   **Outros Tipos:** `BOOLEAN`, `BLOB` e `JSON` fornecem suporte para armazenar valores booleanos, dados binários e dados semiestruturados, respectivamente.
-*   **Valores NULL:** `NULL` representa um valor ausente ou desconhecido e não é um tipo de dados em si. É crucial lidar com valores `NULL` corretamente em consultas.
-*   **Escolhendo Sabiamente:** Considere a natureza dos dados, a precisão necessária e as implicações de armazenamento ao selecionar um tipo de dados para uma coluna.
+Compreender tabelas, colunas, linhas e chaves é fundamental para trabalhar com bases de dados relacionais.
+
+* Definem como os dados são estruturados e organizados.
+* Permitem-nos consultar e recuperar informações específicas de forma eficiente.
+* As chaves garantem a integridade dos dados e estabelecem relações entre diferentes conjuntos de dados.
+* As propriedades ACID garantem que as alterações aos dados permanecem corretas e fiáveis, mesmo com falhas ou acesso concorrente.
+
+Nas lições seguintes, vamos construir sobre estes conceitos à medida que aprendemos a usar SQL para interagir com bases de dados relacionais.

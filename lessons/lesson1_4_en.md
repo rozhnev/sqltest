@@ -1,57 +1,110 @@
-Learn about NULL values in SQL, understanding that NULL represents missing or unknown data. This lesson covers how NULL differs from zero or an empty string, the importance of IS NULL and IS NOT NULL operators, and how NULL affects database operations and logic.
+# Lesson 1.4: Basic Data Types
 
-# Lesson 1.4: Understanding NULL Values in SQL
+In relational databases, data types specify the kind of data that can be stored within a column. Choosing the correct data type is crucial for data integrity, storage efficiency, and query performance. This lesson covers common data types and their subtypes used in relational databases, along with their value ranges.
 
-In the world of databases, you will often encounter situations where data is missing, unknown, or not applicable. SQL uses a special marker called **NULL** to represent these cases. Understanding NULL is critical because it behaves differently than any other value.
+<img src="/images/lessons/lesson1_3-datatypes.jpg" alt="Data Types" width="100%">
 
-## What is NULL?
+## Numeric Data Types
 
-**NULL** is not a value; it is a **state** or a placeholder indicating that a data value does *not* exist in the database.
+Numeric data types are used to store numerical values.
 
-It is important to remember what NULL is **NOT**:
-*   **NULL is not 0:** Zero is a number. NULL is the absence of a number.
-*   **NULL is not an empty string (' '):** An empty string is a piece of text with zero characters. NULL is the absence of text.
-*   **NULL is not "false":** In SQL logic, NULL remains "unknown."
+### INTEGER
+*   Stores whole numbers (integers).
+*   Subtypes:
+    *   `INT` or `INTEGER`: Typically a 4-byte integer.
+    *   `SMALLINT`: Typically a 2-byte integer.
+    *   `BIGINT`: Typically an 8-byte integer.
+    *   `TINYINT`: Typically a 1-byte integer.
+*   Ranges (approximate, may vary by database system):
+    *   `TINYINT`: -128 to 127 (signed) or 0 to 255 (unsigned)
+    *   `SMALLINT`: -32,768 to 32,767
+    *   `INT`: -2,147,483,648 to 2,147,483,647
+    *   `BIGINT`: -9,223,372,036,854,775,808 to 9,223,372,036,854,775,807
 
-## Why do we use NULL?
-*   **Unknown information:** For example, we might not know a customer's middle name yet.
-*   **Not applicable:** A "Company Tax ID" column would be NULL for an individual person.
-*   **Missing data:** Data that was overlooked during entry.
+### DECIMAL / NUMERIC
+*   Stores exact numeric values with a specified precision and scale.
+*   Precision: The total number of digits.
+*   Scale: The number of digits to the right of the decimal point.
+*   Example: `DECIMAL(10, 2)` can store numbers with 10 total digits, 2 of which are after the decimal point.
+*   Range: Depends on the precision and scale.
 
-## Working with NULL: IS NULL and IS NOT NULL
+### FLOAT / REAL
+*   Stores approximate numeric values with floating-point precision.
+*   Subtypes:
+    *   `FLOAT`: Single-precision floating-point number.
+    *   `DOUBLE` / `DOUBLE PRECISION`: Double-precision floating-point number.
+    *   `REAL`: A synonym for `FLOAT` in some databases.
+*   Range: Varies depending on the specific implementation, but generally covers a wide range of values with limited precision.
 
-Because NULL represents an unknown state, you cannot use standard comparison operators like `=` or `<>` with it. Any comparison with NULL (e.g., `value = NULL`) will result in "unknown," not "true" or "false."
+## Character / String Data Types
 
-To check for NULL values, you must use specific operators:
+Character data types are used to store text.
 
-### 1. IS NULL
-Used to find records where a column has no value.
-```sql
-SELECT *
-FROM address
-WHERE address2 IS NULL;
-```
+### CHAR
+*   Stores fixed-length character strings.
+*   You specify the length when defining the column.
+*   Example: `CHAR(10)` stores strings of exactly 10 characters.
+*   If the stored string is shorter than the specified length, it's padded with spaces.
 
-### 2. IS NOT NULL
-Used to find records where a column contains *any* data.
-```sql
-SELECT *
-FROM address
-WHERE address2 IS NOT NULL;
-```
+### VARCHAR
+*   Stores variable-length character strings.
+*   You specify the maximum length when defining the column.
+*   Example: `VARCHAR(255)` stores strings up to 255 characters long.
+*   Only uses the space needed to store the actual string.
 
-## NULL in Calculations
+### TEXT
+*   Stores large variable-length character strings.
+*   Often used for storing documents, articles, or other large text data.
+*   The maximum length is typically much larger than `VARCHAR`.
 
-One of the most important things to remember is that **NULL propagates**. If you perform a mathematical operation with a NULL value, the result will always be NULL.
+## Date and Time Data Types
 
-*   `10 + NULL = NULL`
-*   `5 * NULL = NULL`
-*   `'Hello ' + NULL = NULL`
+Date and time data types are used to store temporal values.
 
-## Key Takeaways from This Lesson
+### DATE
+*   Stores a date (year, month, day).
+*   Format: Varies depending on the database system (e.g., YYYY-MM-DD, MM/DD/YYYY).
 
-*   **NULL** represents missing, unknown, or non-applicable data.
-*   It is **different** from zero, empty strings, or blank spaces.
-*   Standard comparisons (`=` or `<>`) **do not work** with NULL.
-*   Use **IS NULL** and **IS NOT NULL** to filter for missing data.
-*   Most mathematical operations involving NULL will result in **NULL**.
+### TIME
+*   Stores a time (hour, minute, second).
+*   Format: Varies depending on the database system (e.g., HH:MM:SS).
+
+### DATETIME / TIMESTAMP
+*   Stores both date and time.
+*   Format: Varies depending on the database system (e.g., YYYY-MM-DD HH:MM:SS).
+*   `TIMESTAMP` often has special behavior related to time zones and automatic updates.
+
+## Boolean Data Type
+
+### BOOLEAN
+*   Stores true/false values.
+*   Some databases may represent boolean values as integers (e.g., 0 for false, 1 for true).
+
+## Other Data Types
+
+### BLOB (Binary Large Object)
+*   Stores binary data, such as images, audio, or video files.
+
+### JSON
+*   Stores JSON (JavaScript Object Notation) data.
+*   Allows storing semi-structured data within a database column.
+
+## Choosing the Right Data Type
+
+*   Consider the type of data you need to store (numeric, text, date/time, etc.).
+*   Choose the smallest data type that can accommodate the range of values you expect.
+*   Use `VARCHAR` instead of `CHAR` unless you need fixed-length strings.
+*   Use `DECIMAL` for exact numeric values, especially when dealing with currency.
+*   Be aware of the specific data types and their behavior in your database system.
+
+By understanding the available data types and their characteristics, you can design databases that are efficient, reliable, and easy to maintain.
+
+**Key Takeaways from this Lesson:**
+
+*   **Data Types Matter:** Selecting the appropriate data type is crucial for data integrity, storage efficiency, and query performance.
+*   **Numeric Types:** `INTEGER`, `DECIMAL`, and `FLOAT` are used for storing numerical data, each with different characteristics regarding precision and range.
+*   **String Types:** `CHAR`, `VARCHAR`, and `TEXT` are used for storing text data, with varying length constraints and storage implications.
+*   **Date/Time Types:** `DATE`, `TIME`, and `DATETIME` are used for storing temporal data, with specific formats that vary across database systems.
+*   **Other Types:** `BOOLEAN`, `BLOB`, and `JSON` provide support for storing boolean values, binary data, and semi-structured data, respectively.
+*   **NULL Values:** `NULL` represents a missing or unknown value and is not a data type itself. It's crucial to handle `NULL` values properly in queries.
+*   **Choosing Wisely:** Consider the nature of the data, the required precision, and the storage implications when selecting a data type for a column.
