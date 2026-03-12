@@ -218,6 +218,9 @@
     {/literal}
     {if $User->showAd()}
         <div class="referal-add-block">
+            <a href="https://www.kqzyfj.com/86104kjspjr6878CE9F9G68E9B9898" target="_blank">
+                <img src="https://www.awltovhc.com/60106z15u-yJLKLPRMSMTJLRMOMLML" alt="" style="border: 0; width: 100%;"/>
+            </a>        
             {* <script async="async" data-cfasync="false" src="//pl26881648.profitableratecpm.com/93660caf229b7b6afe772e0ab435c7a9/invoke.js"></script>
             <div id="container-93660caf229b7b6afe772e0ab435c7a9"></div> *}
         </div>
