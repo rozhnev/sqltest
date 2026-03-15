@@ -68,5 +68,37 @@
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
       </url>
+      <url>
+        <loc>https://sqltest.online/fr/question/{$question['category']}/{$question['question']}</loc>
+        <lastmod>{$Today}</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+      </url>
+    {/foreach}
+    {foreach from=$Lessons item=lesson}
+      <url>
+        <loc>https://sqltest.online/ru/lesson/{$lesson['module']}/{$lesson['slug']}</loc>
+        <lastmod>{$Today}</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.3</priority>
+      </url>
+      <url>
+        <loc>https://sqltest.online/en/lesson/{$lesson['module']}/{$lesson['slug']}</loc>
+        <lastmod>{$Today}</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.3</priority>
+      </url>
+      <url>
+        <loc>https://sqltest.online/pt/lesson/{$lesson['module']}/{$lesson['slug']}</loc>
+        <lastmod>{$Today}</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+      </url>
+      <url>
+        <loc>https://sqltest.online/fr/lesson/{$lesson['module']}/{$lesson['slug']}</loc>
+        <lastmod>{$Today}</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+      </url>
     {/foreach}
 </urlset>

@@ -1006,9 +1006,11 @@ class Controller
         header('Content-Type: text/xml; charset=utf-8');
         header('X-Robots-Tag: all');
         $questionnire = new Questionnire($this->dbh, $this->lang);
+        $lessons = new Lesson($this->dbh, 'introduction-to-databases');
 
         $this->assignVariables([
             'Questionnire' => $questionnire->getMap(),
+            'Lessons' => $lessons->getMap(),
             'Today' => date('Y-m-d'),
         ]);
         $this->engine->display("sitemap.tpl");

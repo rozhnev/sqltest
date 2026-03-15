@@ -73,7 +73,6 @@ class Lesson
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-
     public function getList(string $lang): array
     {
         $stmt = $this->dbh->prepare("SELECT
@@ -113,5 +112,22 @@ class Lesson
             []
         );
         return $menu;
+    }
+
+    public function getMap(): array
+    {
+        $stmt = $this->dbh->prepare("SELECT
+                modules.id,
+                modules.slug AS module,
+                lessons.id AS lesson_id,
+                lessons.slug AS lesson
+            FROM modules
+            JOIN lessons on lessons.module_id = modules.id
+            WHERE not modules.deleted and not lessons.deleted
+            ORDER BY modules.sequence_position, lessons.sequence_position;
+        ");
+
+        $stmt->execute();
+        return  $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
