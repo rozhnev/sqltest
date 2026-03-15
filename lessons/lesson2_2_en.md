@@ -1,8 +1,6 @@
 This SQL lesson focuses on row filtration using the WHERE clause. Learn how to use comparison operators, range filters with BETWEEN, list matching with IN, and pattern matching with LIKE. The lesson also covers the critical distinction of handling NULL values with IS NULL and IS NOT NULL. Master data filtering techniques to retrieve precise information and optimize your database queries for efficient analysis.
 
-# Lesson 2.2 Rows Filtration: The WHERE Clause
-
-## Filtering Data with the WHERE Clause
+# Lesson 2.2 Filtering Data with the WHERE Clause
 
 The `SELECT` statement by itself returns all rows from a table. However, in real-world scenarios, you usually only need a subset of data that meets specific criteria. This is where the `WHERE` clause comes in.
 

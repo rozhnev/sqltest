@@ -1,8 +1,6 @@
 Cette leçon SQL se concentre sur le filtrage des lignes à l'aide de la clause WHERE. Apprenez à utiliser les opérateurs de comparaison, les filtres de plage avec BETWEEN, la correspondance de liste avec IN et la recherche de motifs avec LIKE. La leçon couvre également la distinction cruciale de la gestion des valeurs NULL avec IS NULL et IS NOT NULL. Maîtrisez les techniques de filtrage des données pour extraire des informations précises et optimiser vos requêtes de base de données pour une analyse efficace.
 
-# Leçon 2.2 Filtrage des lignes : la clause WHERE
-
-## Filtrage des données avec la clause WHERE
+# Leçon 2.2 Filtrage des données avec la clause WHERE
 
 L'instruction `SELECT` seule renvoie toutes les lignes d'une table. Cependant, dans des scénarios réels, vous n'avez généralement besoin que d'un sous-ensemble de données répondant à des critères spécifiques. C'est là qu'intervient la clause `WHERE`.
 

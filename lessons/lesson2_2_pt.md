@@ -1,8 +1,6 @@
 Esta lição de SQL foca na filtragem de linhas usando a cláusula WHERE. Aprenda a usar operadores de comparação, filtros de intervalo com BETWEEN, correspondência de listas com IN e correspondência de padrões com LIKE. A lição também aborda a distinção crítica do tratamento de valores NULL com IS NULL e IS NOT NULL. Domine as técnicas de filtragem de dados para recuperar informações precisas e otimizar suas consultas de banco de dados para uma análise eficiente.
 
-# Lição 2.2 Filtragem de Linhas: A Cláusula WHERE
-
-## Filtragem de Dados com a Cláusula WHERE
+# Lição 2.2 Filtragem de Dados com a Cláusula WHERE
 
 A instrução `SELECT`, por si só, retorna todas as linhas de uma tabela. No entanto, em cenários do mundo real, você geralmente precisa apenas de um subconjunto de dados que atenda a critérios específicos. É aqui que entra a cláusula `WHERE`.
 
