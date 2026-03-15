@@ -36,7 +36,7 @@
         </div>
     </div>
     <div class="form-group">
-        <label for="questionLLMResult{$language|upper}">LLM Result</label>
+        <span class="form-label">LLM Result</span>
         <div id="questionLLMResult{$language|upper}" name="question[localizations][{$language}][review_result]" rows="3"></div>
     </div>
 </div>

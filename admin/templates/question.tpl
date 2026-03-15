@@ -77,7 +77,7 @@
                                 </div>
                             </div>
                             <div class="field-row">
-                                <label>Query checks</label>
+                                <span class="form-label">Query checks</span>
                                 <div class="checks-table-wrapper">
                                     <div class="checks-table-scroll" style="max-height: 250px; overflow-y: auto;">
                                         <table class="checks-table" id="questionChecks">
