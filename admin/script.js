@@ -529,11 +529,19 @@ async function safeFetch(url, options = {}) {
     }
 }
 
-function showStatus(message, type = 'info') {
-    const bar = document.getElementById('statusBar');
-    bar.textContent = message;
-    bar.dataset.status = type;
-    bar.classList.add('is-visible');
-    clearTimeout(state.statusTimer);
-    state.statusTimer = setTimeout(() => bar.classList.remove('is-visible'), 4500);
+function showStatus(message, state = 'info') {
+    const toast = document.getElementById("toast");
+    if (state !== "error") {
+        toast.classList.remove("error");
+        state = "info";
+    }
+    toast.innerText = message || "...";
+    toast.classList.remove("info");
+    toast.classList.add(state);
+    toast.classList.toggle("visible");
+    const showTime = state === "error" ? 5000 : 2000;
+    setTimeout((function() {
+        toast.classList.toggle("visible");
+    }
+    ), showTime)
 }

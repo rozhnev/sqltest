@@ -19,6 +19,7 @@
         <script src="/admin/script.js?{$VERSION}" defer></script>
     </head>
     <body>
+        <div class="toast" id="toast"></div>
         <div class="admin-shell">
             <header class="admin-shell__header">
                 <div>
@@ -193,7 +194,6 @@
                     </section>
                 </aside>
             </div>
-            <div id="statusBar" class="status-bar"></div>
         </div>
     </body>
 </html>
