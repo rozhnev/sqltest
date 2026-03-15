@@ -945,8 +945,9 @@ class Controller
 
     public function lesson(array $params): void 
     {
+        $slug = $params['lesson'] ?? 'introduction-to-databases';
         try {
-            $lesson = new Lesson($this->dbh, $params['lesson']);
+            $lesson = new Lesson($this->dbh, $slug);
         } catch (Exception $e) {
             header("HTTP/1.1 404 Not Found");
             $this->engine->assign('ErrorMessage', Localizer::translateString('action_not_permitted'));

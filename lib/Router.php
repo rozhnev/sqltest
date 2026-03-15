@@ -21,7 +21,8 @@ class Router
         'user'              => "@(?<lang>ru|en|pt|fr)/(?<class>user)/(?<action>achievements|profile|update)@i",
         'achievement_image' => "@(?<lang>ru|en|pt|fr)/achievement/(?<action>image)/(?<achievementID>[a-z0-9-]+)@i",
         'achievement'       => "@(?<lang>ru|en|pt|fr)/(?<action>achievement)/(?<achievementID>[a-z0-9-]+)@i",
-        'lessons'           => "@(?<lang>ru|en|pt|fr)/(?<action>lesson)/(?<module>[a-z-]+)/(?<lesson>[a-z-]+)@i",
+        // Accepts with both module and lesson
+        'lessons'           => "@(?<lang>ru|en|pt|fr)/(?<action>lesson)(?:/(?<module>[a-z-]+))?(?:/(?<lesson>[a-z-]+))?@i",
         'playground_run'    => "@(?<lang>ru|en|pt|fr)/(?<class>playground)/(?<database>mysql80|mariadb115|psql17|sqlite3|mssql2022|oracle23|firebird4|soqol)/(?<action>query-run)@i",
         'playground'        => "@(?<lang>ru|en|pt|fr)/(?<action>playground)/@i",
         'sitemap'           => "@(?<action>sitemap)\.xml@i",
