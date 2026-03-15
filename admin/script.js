@@ -373,7 +373,7 @@ async function questionTranslateTo(sourceLanguage) {
         if (container) {
             container.innerHTML = translated.replace(/\n/g, '<br>');
         }
-        // showStatus(`Translation to ${targetLabel} ready`, 'success');
+        showStatus(`Translation to ${targetLabel} ready`, 'success');
     } catch (error) {
         console.error(error);
     }
