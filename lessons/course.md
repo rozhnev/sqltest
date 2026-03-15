@@ -61,7 +61,17 @@
     *   Understanding Window boundaries and frames. Named windows
     *   LEAD, LAG, FIRST_VALUE, LAST_VALUE functions
     *   Using Window Functions for Running Totals and Moving Averages    
-8.  **Data Manipulation Language (DML)**
+8.  **Views and Temporary Tables**
+    *   Understanding Views
+    *   Creating and Managing Views
+    *   Modifying and Dropping Views
+    *   Updatable Views
+    *   Materialized Views
+    *   Introduction to Temporary Tables
+    *   Creating and Using Temporary Tables
+    *   Differences Between Views, Temporary Tables, and CTEs
+    *   Use Cases and Best Practices
+9.  **Data Manipulation Language (DML)**
     *   Introduction to DML
     *   Creating Tables
     *   Constraints
@@ -70,27 +80,26 @@
     *   Deleting Data from Tables
     *   Modifying Tables
     *   Using Transactions for Data Integrity
-9.  **Data Transformation and Manipulation**
+10. **Data Transformation and Manipulation**
     *   Data Transformation Techniques for Analysis
     *   Using CASE Statements for Conditional Logic
     *   String Manipulation and Formatting
     *   Date and Time Functions for Data Analysis
     *   Data Type Conversion and Formatting
     *   Data Cleaning and Preparation Techniques
-10. **Data Exploration and Analysis Techniques**
+11. **Data Exploration and Analysis Techniques**
     *   Data Exploration Techniques in SQL
     *   Using SQL for Data Analysis and Reporting
-    *   Creating Views for Simplified Queries
     *   Generating Reports with SQL Queries
     *   Best Practices for Data Exploration and Analysis
-11. **Best Practices for SQL Coding**
+12. **Best Practices for SQL Coding**
     *   Writing Efficient SQL Queries
     *   Understanding Query Optimization Techniques
     *   Using Indexes for Performance Improvement
     *   Best Practices for Code Readability and Maintainability
     *   Error Handling and Debugging Techniques
     *   Version Control for SQL Scripts
-12. **Real-World SQL Applications**
+13. **Real-World SQL Applications**
     *   Case Studies in Data Analysis with SQL
     *   SQL in Business Intelligence and Reporting
     *   SQL for Data Warehousing and ETL Processes
