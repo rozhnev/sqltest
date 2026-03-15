@@ -22,6 +22,7 @@
 
 1.  **Introduction to SQL and Databases**
     *   Introduction to Databases
+    *   Different Types of Databases and Their Use Cases
     *   Relational Database Concepts
     *   Basic Types of data
     *   Overview of SQL
