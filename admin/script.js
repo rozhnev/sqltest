@@ -429,7 +429,7 @@ async function questionLocalizationSave(questionId, language) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)
         });
-        // showStatus(`Localization saved (${language})`, 'success');
+        showStatus(`Localization saved (${language})`, 'success');
         // const saved = response.localization || {};
         // if (state.selectedQuestion) {
         //     state.selectedQuestion.localizations = state.selectedQuestion.localizations || {};
