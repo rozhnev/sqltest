@@ -358,14 +358,14 @@ async function questionTranslateTo(sourceLanguage) {
     const targetLanguage = document.getElementById(`translate${normalizedLanguage}ToLang`)?.value.trim() || '';
     const title = document.getElementById(`questionTitle${normalizedLanguage}`)?.value.trim();
     const task  = document.getElementById(`questionTask${normalizedLanguage}`)?.value.trim();
-    const hint  = document.getElementById(`questionHint${normalizedLanguage}`)?.value.trim();
+    const hint  = document.getElementById(`questionHint${normalizedLanguage}`)?.value.trim() || '';
 
-    if (!title || !task || !hint) {
-        showStatus('Provide title, task, and hint in Source language before translating.', 'info');
+    if (!title || !task) {
+        showStatus('Provide title and task in Source language before translating.', 'info');
         return;
     }
 
-    const toTranslate = `Title: ${title}geneTask: ${task}\nHint: ${hint}`.trim();
+    const toTranslate = `Title: ${title}\nTask: ${task}\nHint: ${hint}`.trim();
 
     try {
         const translated = await translateField(toTranslate, sourceLanguage, targetLanguage);
