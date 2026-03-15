@@ -120,7 +120,7 @@ class Lesson
                 modules.id,
                 modules.slug AS module,
                 lessons.id AS lesson_id,
-                lessons.slug AS lesson
+                lessons.slug AS slug
             FROM modules
             JOIN lessons on lessons.module_id = modules.id
             WHERE not modules.deleted and not lessons.deleted
