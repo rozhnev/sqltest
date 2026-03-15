@@ -18,6 +18,29 @@ FROM payment;
 ```
 **Результат:** Возвращает общее количество строк в таблице `payment`.
 
+### `COUNT(column)` и `COUNT(*)`
+
+Эти две формы похожи, но работают по-разному:
+
+- `COUNT(*)` считает **все строки** в результирующем наборе;
+- `COUNT(column)` считает только строки, где `column` имеет значение **NOT NULL**.
+
+Поэтому, если в столбце есть `NULL`, результат `COUNT(column)` может быть меньше, чем `COUNT(*)`.
+
+**Пример (Sakila):**
+```sql
+SELECT
+   COUNT(*) AS total_rentals,
+   COUNT(return_date) AS returned_rentals
+FROM rental;
+```
+
+**Пояснение:**
+
+- `total_rentals` считает все строки таблицы `rental`;
+- `returned_rentals` считает только строки, где `return_date` заполнен;
+- для невозвращённых аренд `return_date = NULL`, поэтому они не попадают в `COUNT(return_date)`.
+
 ### `SUM()` — Вычисляет сумму значений
 
 **Синтаксис:**
@@ -77,9 +100,9 @@ FROM payment;
 ## Практическое применение
 
 1. **Подсчет количества клиентов:**
-   Используйте `COUNT(customer_id)`, чтобы узнать, сколько клиентов в базе данных.
+   Используйте `COUNT(*)`, чтобы узнать, сколько клиентов в базе данных.
    ```sql
-   SELECT COUNT(customer_id) AS total_customers
+   SELECT COUNT(*) AS total_customers
    FROM customer;
    ```
 2. **Вычисление общей суммы продаж по сотрудникам:**

@@ -18,6 +18,29 @@ FROM payment;
 ```
 **Result:** Returns the total number of rows in the `payment` table.
 
+### `COUNT(column)` vs `COUNT(*)`
+
+These two forms are similar but not identical:
+
+- `COUNT(*)` counts **all rows** in the result set.
+- `COUNT(column)` counts only rows where `column` is **NOT NULL**.
+
+So, if the column contains `NULL` values, `COUNT(column)` can return a smaller number than `COUNT(*)`.
+
+**Example (Sakila):**
+```sql
+SELECT
+   COUNT(*) AS total_rentals,
+   COUNT(return_date) AS returned_rentals
+FROM rental;
+```
+
+**Explanation:**
+
+- `total_rentals` counts every row in `rental`.
+- `returned_rentals` counts only rows where `return_date` has a value.
+- Rentals that are not returned yet have `return_date = NULL`, so they are excluded from `COUNT(return_date)`.
+
 ### `SUM()` — Calculates the sum of values
 
 **Syntax:**
@@ -77,9 +100,9 @@ FROM payment;
 ## Practical Usage
 
 1. **Counting the number of customers:**
-   Use `COUNT(customer_id)` to find out how many customers are in the database.
+   Use `COUNT(*)` to find out how many customers are in the database.
    ```sql
-   SELECT COUNT(customer_id) AS total_customers
+   SELECT COUNT(*) AS total_customers
    FROM customer;
    ```
 2. **Calculating total sales per staff:**
