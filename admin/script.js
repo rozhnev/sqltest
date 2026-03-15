@@ -412,8 +412,8 @@ async function questionLocalizationSave(questionId, language) {
     const task  = document.getElementById(`questionTask${normalizedLanguage}`)?.value.trim();
     const hint  = document.getElementById(`questionHint${normalizedLanguage}`)?.value.trim();
 
-    if (!title || !task || !hint || title === '' || task === '' || hint === '') {
-        showStatus('All fields are required', 'error');
+    if (!title || !task || title === '' || task === '' ) {
+        showStatus('Title and task fields are required', 'error');
         return;
     }
     const payload = {
