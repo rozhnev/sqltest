@@ -1,6 +1,6 @@
 Esta lição apresenta a instrução `INSERT INTO`, o comando principal usado para adicionar novos registros a uma tabela de banco de dados. Você aprenderá a sintaxe para inserir dados em todas as colunas, bem como especificar colunas específicas para a entrada de dados. Também abordaremos a inserção de múltiplas linhas e a importância da correspondência entre tipos de dados. Ao final desta lição, você será capaz de popular as tabelas do seu banco de dados com novas informações de forma precisa e eficiente.
 
-# Lição 8.1: A Instrução INSERT INTO
+# Lição 8.2: A Instrução INSERT INTO
 
 Até agora, focamos em recuperar dados de tabelas existentes usando a instrução `SELECT`. Agora, começaremos a explorar a **Linguagem de Manipulação de Dados (DML)**, começando por como adicionar novos dados às suas tabelas usando a instrução `INSERT INTO`.
 

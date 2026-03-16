@@ -1,6 +1,6 @@
 This lesson introduces the `INSERT INTO` statement, the primary command used to add new records to a database table. You will learn the syntax for inserting data into all columns, as well as how to specify specific columns for data entry. We will also cover multi-row inserts and the importance of matching data types. By the end of this lesson, you will be able to populate your database tables with new information accurately and efficiently.
 
-# Lesson 8.1: The INSERT INTO Statement
+# Lesson 8.2: The INSERT INTO Statement
 
 So far, we have focused on retrieving data from existing tables using the `SELECT` statement. Now, we will begin exploring **Data Manipulation Language (DML)**, starting with how to add new data to your tables using the `INSERT INTO` statement.
 
