@@ -7,8 +7,9 @@
 <div class="top-menu-left">
     {* <a href="/{$Lang}/" target="_self" style="display: flex;"> *}
         <h1 class="site-name-wrapper">
-            <span class="site-name">SQLtest.online</span>
-
+            <a href="/{$Lang}/" target="_self">
+                <span class="site-name">SQLtest.online</span>
+            </a>
             {* <span class="site-promo">{$SitePromo}</span> *}
         </h1>
         <h2>
