@@ -8,7 +8,7 @@
     <style>
         .maintenance-container {
             max-width: 680px;
-            margin: 3rem auto;
+            margin: 0 auto;
             padding: 2rem 1.5rem;
             text-align: center;
         }
@@ -122,7 +122,7 @@
 </head>
 <body>
     <div class="full-container">
-        <div class="container3">
+        <div class="container3" style="background-color: var(--body-background-color);">
             <div class="maintenance-container">
 
                 <div class="maintenance-logo">
