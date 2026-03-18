@@ -126,7 +126,7 @@
             <div class="maintenance-container">
 
                 <div class="maintenance-logo">
-                    <span class="logo-sql">SQL</span><span class="logo-test">test</span><span class="logo-dot">●</span><span class="logo-test">online</span>
+                    <span class="logo-sql">SQL</span><span class="logo-test">test</span>.<span class="logo-test">online</span>
                 </div>
 
                 <span class="maintenance-status">Maintenance in progress</span>
