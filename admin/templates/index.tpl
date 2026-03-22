@@ -13,23 +13,22 @@
             <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
             <link rel="icon" type="image/png" href="/favicons/favicon-32x32.png" sizes="32x32">
             <link rel="icon" type="image/png" href="/favicons/favicon-16x16.png" sizes="16x16">
+            <link rel="preconnect" href="https://cdnjs.cloudflare.com">
             <link rel="stylesheet" type="text/css" href="/style.min.css" media="all">
             <link rel="stylesheet" type="text/css" href="/admin/style.min.css?{$VERSION}" media="all">
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/ace.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/ext-beautify.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/mode-sql.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/mode-mysql.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/theme-xcode.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/theme-github_dark.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/ext-language_tools.js"></script>
-            {* <script type="text/javascript" src="/script.js?8" defer></script> *}
+            <script defer src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/ace.min.js"></script>
+            <script defer src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/ext-beautify.js"></script>
+            <script defer src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/mode-sql.min.js"></script>
+            <script defer src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/mode-mysql.min.js"></script>
+            <script defer src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/theme-xcode.min.js"></script>
+            <script defer src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/theme-github_dark.min.js"></script>
+            <script defer src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/ext-language_tools.js"></script>
             <script type="text/javascript" src="/admin/script.js?{$VERSION}"></script>
             <script>
                 var lang = '{$Lang}',
                     db   = '{$DB}',
                     questionId = '{$QuestionID}';
             </script>
-            <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=685bb6a18ca9160019f294e2&product=sop' async='async'></script>
         </head>
         <body>
             <div class="admin-container">
@@ -106,5 +105,6 @@
                 <a href="/{$Lang}/privacy-policy" target="_self">Privacy policy</a>
             </div>
         </div>
+        <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=685bb6a18ca9160019f294e2&product=sop' async='async'></script>
     </body>
 </html>
