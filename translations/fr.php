@@ -36,7 +36,7 @@ $translations = [
     'footer_questions' => 'Questions ?',
     'sql_copied_to_buffer' => 'Code SQL copié dans le presse-papiers',
     'choose_login_method' => 'Choisissez la méthode de connexion',
-    'top_menu_donate' => '<span class="currency">€</span> Soutenir',
+    'top_menu_donate' => '<span class="currency">€</span> Gardez SQLtest gratuit',
     'top_menu_login' => 'Connexion',
     'top_menu_logout' => 'Déconnexion',
     'site_description' => 'Exploitez la puissance de la pratique pour maîtriser le SQL. Nos exercices interactifs sont conçus pour consolider votre compréhension, des concepts fondamentaux aux techniques avancées. Que vous soyez novice en SQL ou un professionnel chevronné, vous trouverez des défis adaptés à votre niveau. Améliorez votre confiance pour les entretiens d\'embauche et les applications réelles grâce à une pratique constante.',
