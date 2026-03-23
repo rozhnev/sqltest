@@ -14,7 +14,7 @@ function openRequestedTab(href) {
 function switchTheme(e) {
     const currentTheme = e.target.checked ?  'dark' : 'light';
     if (window.sql_editor) {
-        window.sql_editor.setTheme(currentTheme === 'dark' ? 'ace/theme/github_dark' : 'ace/theme/xcode');
+        window.sql_editor.setTheme(getAceTheme(currentTheme));
     }
     document.documentElement.setAttribute('data-theme', currentTheme);
     window.UIConfig.theme = currentTheme;
@@ -43,6 +43,11 @@ function switchTheme(e) {
         })
     }
 }
+
+function getAceTheme(theme) {
+    return theme === 'dark' ? 'ace/theme/github_dark' : 'ace/theme/xcode';
+}
+
 function formatCode() {
     const beautify = ace.require("ace/ext/beautify");
     const editor_session = window.sql_editor.session;
@@ -369,8 +374,13 @@ function showSolutions(questionId, whom) {
     .then(()=>{
       [...document.getElementsByClassName("solution-block")].map(el=>{
         ace
-          .edit(el.id, {mode: "ace/mode/mysql", dragEnabled: false,  useWorker: false, readOnly: true })
-          .setTheme(window.UIConfig.theme === 'dark' ? 'ace/theme/github_dark' : 'ace/theme/xcode');
+                    .edit(el.id, {
+                            mode: "ace/mode/mysql",
+                            theme: getAceTheme(window.UIConfig.theme),
+                            dragEnabled: false,
+                            useWorker: false,
+                            readOnly: true
+                    });
       });
     })
     .catch(err=>{
@@ -743,12 +753,12 @@ if (document.getElementById("sql-code")) {
 
     window.sql_editor = ace.edit("sql-code", {
         mode: "ace/mode/mysql",
+        theme: getAceTheme(window.UIConfig.theme),
         selectionStyle: "text",
         dragEnabled: false,
         useWorker: false
     });
 
-    window.sql_editor.setTheme(window.UIConfig.theme === 'dark' ? 'ace/theme/github_dark' : 'ace/theme/xcode');
     window.sql_editor.setShowPrintMargin(false);
     window.sql_editor.setOptions({enableBasicAutocompletion: true});
 }
