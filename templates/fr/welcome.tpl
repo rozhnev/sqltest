@@ -1,32 +1,32 @@
 <div class="welcome-container">
     <div class="welcome-page-header">
-        <h2 style="margin: 0">Bienvenue sur SQLTest.online</h2>
+        <h2 style="margin: 0">Apprendre le SQL en ligne avec SQLTest.online</h2>
     </div>
 
     <section>
-        <p>SQLTest.online est une plateforme d'apprentissage interactive qui vous aide à acquérir des compétences concrètes et pratiques en SQL et en bases de données. La meilleure façon d'apprendre est de résoudre de vrais problèmes, c'est pourquoi nous vous proposons des tâches pratiques et un retour instantané.</p>
+        <p>SQLTest.online est une plateforme gratuite pour apprendre le SQL en ligne, pratiquer sur de vrais exercices de base de données et améliorer vos requêtes SQL. Que vous prépariez un entretien, un examen ou un projet professionnel, vous progressez avec des exercices pratiques et un retour instantané.</p>
         <p>Notre devise : <b>Maîtriser le SQL — une requête à la fois.</b></p>
     </section>
 
     <section>
-        <h3>Comment ça marche</h3>
+        <h3>Comment fonctionne SQLTest</h3>
         <div class="welcome-card">
             <p>
-                Notre base de données de questions contient {$QuestionsCount} tâches allant de simples requêtes <code class="sql">SELECT</code> à des problèmes analytiques complexes qui reflètent des scénarios du monde réel.
-                Les tâches sont regroupées par difficulté, par sujet et par base de données utilisée.
+                Notre banque d'exercices SQL contient {$QuestionsCount} tâches, des requêtes <code class="sql">SELECT</code> de base aux problèmes analytiques avancés inspirés de cas réels.
+                Les exercices sont organisés par niveau, par thème et par moteur de base de données.
             </p>
-            <p style="margin-top: 1em;">Chaque problème comprend des tests qui valident les résultats de votre requête ainsi que toute condition spécifique à la tâche.</p>
+            <p style="margin-top: 1em;">Chaque tâche inclut des tests automatiques qui valident le résultat de votre requête et les conditions demandées.</p>
         </div>
     </section>
 
     <section>
-        <h3>Pour commencer</h3>
+        <h3>Commencer la pratique SQL</h3>
 
         <div class="step-card">
             <div class="step-icon">📂</div>
             <div class="step-content">
-                <h4>Choisissez un défi</h4>
-                <p>Explorez par sujet ou par niveau de difficulté.</p>
+                <h4>Choisissez un exercice SQL</h4>
+                <p>Parcourez les tâches par thème, difficulté ou type de base de données.</p>
             </div>
         </div>
 
@@ -34,62 +34,62 @@
             <div class="step-icon">✍️</div>
             <div class="step-content">
                 <h4>Écrivez votre requête</h4>
-                <p>Utilisez l'éditeur intégré pour concevoir votre solution.</p>
+                <p>Utilisez l'éditeur SQL intégré pour rédiger votre solution.</p>
             </div>
         </div>
 
         <div class="step-card">
             <div class="step-icon">✅</div>
             <div class="step-content">
-                <h4>Exécutez et itérez</h4>
-                <p>Obtenez un retour instantané et améliorez votre requête jusqu'à ce qu'elle réussisse les tests.</p>
+                <h4>Exécutez, testez et améliorez</h4>
+                <p>Obtenez un retour instantané et améliorez votre requête jusqu'à validation complète.</p>
             </div>
         </div>
     </section>
 
     <section>
-        <h3>La connexion est facultative</h3>
-        <p>Vous pouvez commencer à résoudre des défis immédiatement sans créer de compte. L'identification n'est pas obligatoire, mais elle débloque des fonctionnalités telles que l'enregistrement de votre progression, l'obtention et le stockage d'accomplissements, ainsi que la consultation des solutions des autres. Nous vous recommandons de vous connecter pour profiter de l'expérience complète.</p>
+        <h3>Compte non obligatoire</h3>
+        <p>Vous pouvez commencer à résoudre des exercices SQL immédiatement, sans créer de compte. La connexion reste facultative, mais elle débloque des fonctionnalités utiles comme la sauvegarde de progression, les accomplissements et l'accès aux solutions d'autres utilisateurs.</p>
     </section>
 
     <section>
-        <h3>Avantages pour les utilisateurs connectés</h3>
+        <h3>Avantages des utilisateurs connectés</h3>
         <ul>
             <li>Enregistrez vos progrès et reprenez les défis à tout moment</li>
             <li>Obtenez et affichez des accomplissements au fil de votre apprentissage</li>
-            <li>Suivez votre historique d'apprentissage personnel et vos statistiques</li>
+            <li>Suivez votre historique d'apprentissage et vos statistiques de performance</li>
             <li>Consultez et comparez les solutions d'autres utilisateurs</li>
         </ul>
     </section>
 
     <section>
-        <h3>Consulter les solutions des autres utilisateurs</h3>
-        <p>Une fois que vous aurez résolu un défi correctement, vous pourrez voir les solutions soumises par d'autres utilisateurs. Comparer différentes approches est l'un des moyens les plus rapides d'apprendre de nouvelles techniques et d'optimiser vos requêtes. <em>(La consultation des solutions est réservée aux utilisateurs connectés.)</em></p>
+        <h3>Comparer les solutions des autres utilisateurs</h3>
+        <p>Après avoir résolu correctement un exercice, vous pouvez consulter les solutions soumises par d'autres utilisateurs. Comparer plusieurs approches est l'un des moyens les plus efficaces d'apprendre de nouvelles techniques SQL et d'optimiser les performances. <em>(Fonction réservée aux utilisateurs connectés.)</em></p>
     </section>
 
     <section>
-        <h3>Accomplissements et progression</h3>
-        <p>Obtenez des accomplissements en accomplissant des tâches, en maîtrisant des sujets et en améliorant votre efficacité. Les accomplissements et le suivi de la progression personnelle sont enregistrés pour les utilisateurs connectés, afin que vous puissiez bâtir un historique durable de votre apprentissage.</p>
+        <h3>Accomplissements et suivi de progression</h3>
+        <p>Obtenez des accomplissements en validant des tâches, en maîtrisant les notions SQL et en améliorant l'efficacité de vos requêtes. Les utilisateurs connectés bénéficient d'un suivi durable de leur progression.</p>
     </section>
 
     <section>
         <h3>Passez le test de compétences SQL</h3>
-        <p>Dès que vous vous sentez prêt, tentez le test. Le test est conçu pour évaluer vos compétences SQL à travers une série de défis pratiques. Le rang que vous atteignez n'est pas officiel, mais il reflète votre maîtrise et votre compréhension des concepts SQL.</p>
+        <p>Quand vous vous sentez prêt, passez le test SQL pour évaluer votre niveau sur des défis pratiques. Le rang obtenu n'est pas une certification officielle, mais il fournit un bon indicateur de votre maîtrise du SQL.</p>
     </section>
 
     <section>
-        <h3>Conseils rapides</h3>
+        <h3>Conseils rapides pour apprendre le SQL</h3>
         <ul>
-            <li>Essayez plusieurs approches — différentes solutions peuvent avoir des performances très variées.</li>
+            <li>Essayez plusieurs approches — différentes solutions SQL peuvent avoir des performances très différentes.</li>
             <li>Lisez attentivement les conditions de la tâche — certains problèmes exigent une instruction spécifique ou une forme de résultat particulière.</li>
-            <li>Utilisez le coût estimé de la requête (lorsqu'il est disponible) pour en apprendre davantage sur l'efficacité, mais concentrez-vous d'abord sur l'exactitude.</li>
+            <li>Utilisez le coût estimé de la requête (si disponible) pour progresser en optimisation, mais privilégiez d'abord la justesse.</li>
         </ul>
     </section>
 
     <section>
         <h3>Communauté</h3>
         <p class="community-text">
-            Rejoignez notre communauté d'apprenants ! Tous les utilisateurs sont les bienvenus pour participer à nos chats en anglais sur 
+            Rejoignez la communauté SQLTest. Tous les utilisateurs sont les bienvenus pour participer à nos chats en anglais sur 
             <a href="https://t.me/sqltest_online" target="_blank" >
             <span class="tg-icon">
                 <span class=""> </span>
@@ -103,7 +103,7 @@
             </span>
             WhatsApp
             </a>
-            pour partager des idées et poser des questions.
+            pour poser des questions, partager des idées et progresser ensemble.
         </p>
     </section>
 

@@ -1,32 +1,32 @@
 <div class="welcome-container">
     <div class="welcome-page-header">
-        <h2 style="margin: 0">Welcome to SQLTest.online</h2>
+        <h2 style="margin: 0">Learn SQL Online with SQLTest.online</h2>
     </div>
 
     <section>
-        <p>SQLTest.online is an interactive learning platform that helps you build practical, real-world SQL and database skills. The best way to learn is by solving real problems, so we give you hands-on tasks and instant feedback.</p>
+        <p>SQLTest.online is a free interactive SQL learning platform where you can practice SQL online, solve real database tasks, and improve your query-writing skills. If you want to learn SQL for work, study, or interview preparation, you can train with hands-on exercises and instant feedback.</p>
         <p>Our motto: <b>Master SQL — one query at a time.</b></p>
     </section>
 
     <section>
-        <h3>How it works</h3>
+        <h3>How SQLTest Works</h3>
         <div class="welcome-card">
             <p>
-                Our question database contains {$QuestionsCount} tasks ranging from simple <code class="sql">SELECT</code> queries to complex analytical problems that mirror real-world scenarios.
-                Tasks are grouped by difficulty, topic, and the database used.
+                Our SQL question bank includes {$QuestionsCount} practice tasks, from basic <code class="sql">SELECT</code> queries to advanced analytical SQL problems based on real-world scenarios.
+                Exercises are organized by difficulty, topic, and database engine.
             </p>
-            <p style="margin-top: 1em;">Each problem includes tests that validate your query results and any task-specific conditions.</p>
+            <p style="margin-top: 1em;">Each task contains automated tests that validate query results and task-specific conditions.</p>
         </div>
     </section>
 
     <section>
-        <h3>Getting started</h3>
+        <h3>Getting Started with SQL Practice</h3>
 
         <div class="step-card">
             <div class="step-icon">📂</div>
             <div class="step-content">
-                <h4>Choose a challenge</h4>
-                <p>Explore by topic or difficulty level.</p>
+                <h4>Choose an SQL challenge</h4>
+                <p>Browse exercises by topic, difficulty, or database type.</p>
             </div>
         </div>
 
@@ -34,62 +34,62 @@
             <div class="step-icon">✍️</div>
             <div class="step-content">
                 <h4>Write your query</h4>
-                <p>Use the built-in editor to craft your solution.</p>
+                <p>Use the built-in SQL editor to write your solution.</p>
             </div>
         </div>
 
         <div class="step-card">
             <div class="step-icon">✅</div>
             <div class="step-content">
-                <h4>Run and iterate</h4>
-                <p>Get instant feedback and improve your query until it passes the tests.</p>
+                <h4>Run, test, and improve</h4>
+                <p>Get instant feedback and refine your query until all tests pass.</p>
             </div>
         </div>
     </section>
 
     <section>
-        <h3>Login is optional</h3>
-        <p>You can start solving challenges immediately without creating an account. Signing in is not required, but it unlocks features such as saving progress, earning and storing achievements, and viewing others solutions. We recommend signing in for the full experience.</p>
+        <h3>No Account Required</h3>
+        <p>You can start solving SQL challenges immediately without creating an account. Signing in is optional, but it unlocks extra features such as saving progress, earning achievements, and viewing other users' solutions.</p>
     </section>
 
     <section>
-        <h3>Benefits for logged‑in users</h3>
+        <h3>Benefits for Logged‑In Users</h3>
         <ul>
             <li>Save your progress and resume challenges anytime</li>
             <li>Earn and display achievements as you learn</li>
-            <li>Track your personal learning history and stats</li>
+            <li>Track your personal learning history and performance stats</li>
             <li>View and compare solutions from other users</li>
         </ul>
     </section>
 
     <section>
-        <h3>View other users solutions</h3>
-        <p>After you correctly solve a challenge you will be able to view solutions submitted by other users. Comparing different approaches is one of the fastest ways to learn new techniques and optimize your queries. <em>(Viewing solutions is available to logged‑in users only.)</em></p>
+        <h3>Compare Solutions from Other Users</h3>
+        <p>After you solve a challenge correctly, you can review solutions submitted by other users. Comparing approaches is one of the fastest ways to learn new SQL techniques and optimize query performance. <em>(Available for logged‑in users.)</em></p>
     </section>
 
     <section>
-        <h3>Achievements & progress</h3>
-        <p>Earn achievements as you complete tasks, master topics, and improve efficiency. Achievements and personal progress tracking are saved for logged‑in users so you can build a persistent record of your learning.</p>
+        <h3>Achievements and Progress Tracking</h3>
+        <p>Earn achievements as you complete tasks, master SQL topics, and improve query efficiency. Logged‑in users get persistent progress tracking to build a long-term record of SQL learning.</p>
     </section>
 
     <section>
         <h3>Take the SQL Skill Test</h3>
-        <p>When you feel ready, try the test. The test is designed to evaluate your SQL skills through a series of practical challenges. The rank you achieve is not official, but it reflects your proficiency and understanding of SQL concepts.</p>
+        <p>When you feel ready, take the SQL skill test to evaluate your knowledge with practical challenges. Your result is not an official certification, but it gives a useful benchmark of your SQL proficiency.</p>
     </section>
 
     <section>
-        <h3>Quick tips</h3>
+        <h3>Quick SQL Learning Tips</h3>
         <ul>
-            <li>Try multiple approaches — different solutions can have very different performance characteristics.</li>
-            <li>Read the task conditions carefully — some problems require a specific statement or result shape.</li>
-            <li>Use the estimated query cost (when available) to learn about efficiency, but focus on correctness first.</li>
+            <li>Try multiple approaches — different SQL solutions can have very different performance characteristics.</li>
+            <li>Read task conditions carefully — some problems require a specific statement or result format.</li>
+            <li>Use estimated query cost (when available) to learn optimization, but focus on correctness first.</li>
         </ul>
     </section>
 
     <section>
         <h3>Community</h3>
         <p class="community-text">
-            Join our community of learners! All users are welcome to participate in our English-speaking chats on 
+            Join the SQLTest learning community. All users are welcome to participate in our English-speaking chats on 
             <a href="https://t.me/sqltest_online" target="_blank" >
             <span class="tg-icon">
                 <span class=""> </span>
@@ -103,12 +103,12 @@
             </span>
             WhatsApp
             </a>
-            to share ideas and ask questions.
+            to ask questions, share ideas, and improve your SQL skills together.
         </p>
     </section>
 
     <section>
         <h3>Support</h3>
-        <p>If you need help, have feedback, or want to report a problem, email us at <a style="color: #FFA500;" href="mailto:support@sqltest.online">support@sqltest.online</a>.</p>
+        <p>If you need help, have feedback, or want to report an issue, email us at <a style="color: #FFA500;" href="mailto:support@sqltest.online">support@sqltest.online</a>.</p>
     </section>
 </div>
