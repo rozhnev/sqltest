@@ -73,6 +73,6 @@ LIMIT 5 OFFSET 10;
 *   `LIMIT` restricts the number of rows in the result set.
 *   `OFFSET` skips a specified number of rows before returning data.
 *   Combining `LIMIT` and `OFFSET` is the standard way to implement pagination.
-*   Always use `ORDER BY` with these clauses to ensure predictable results.
+*   Always use `ORDER BY` with these clauses to ensure predictable results. Truly predictable results are guaranteed only when sorting by unique values (or by a combination of columns that defines a unique order).
 
 In the next lesson, we will see how to **combine WHERE, ORDER BY, and LIMIT** to build powerful and precise queries.

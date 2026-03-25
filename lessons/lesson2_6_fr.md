@@ -73,6 +73,6 @@ LIMIT 5 OFFSET 10;
 *   `LIMIT` restreint le nombre de lignes dans l'ensemble de résultats.
 *   `OFFSET` saute un nombre spécifié de lignes avant de renvoyer les données.
 *   La combinaison de `LIMIT` et `OFFSET` est la méthode standard pour implémenter la pagination.
-*   Utilisez toujours `ORDER BY` avec ces clauses pour garantir des résultats prévisibles.
+*   Utilisez toujours `ORDER BY` avec ces clauses pour garantir des résultats prévisibles. Des résultats réellement prévisibles ne sont garantis que si le tri repose sur des valeurs uniques (ou sur une combinaison de colonnes définissant un ordre unique).
 
 Dans la leçon suivante, nous verrons comment **combiner WHERE, ORDER BY et LIMIT** pour construire des requêtes puissantes et précises.
