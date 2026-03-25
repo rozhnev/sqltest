@@ -813,9 +813,9 @@ input:checked + .slider:before {
     padding-top: 1em;
     line-height: 1.5em;
 }
-.lesson-wrapper code {
-    color: #4DA3FF;
-}
+/* .lesson-wrapper code {
+    color: var(--sql-color);
+} */
 .question {
     padding: 5px 15px;
     font-size: larger;
