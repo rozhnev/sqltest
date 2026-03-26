@@ -68,7 +68,7 @@ class Lesson
                 lessons.* 
             from lessons 
             join lessons_localization on lessons_localization.lesson_id = lessons.id AND lessons_localization.language = :lang
-            where lessons.id = :id and not lessons.deleted;
+            where lessons.id = :id;
         ");
         $stmt->execute([':id' => $this->id, ':lang' => $lang]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
