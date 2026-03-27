@@ -11,13 +11,20 @@ FROM table
 GROUP BY column1;
 ```
 
+### Regra importante
+
+Ao usar `GROUP BY`, toda coluna selecionada em `SELECT` deve:
+
+- ou estar incluída na cláusula `GROUP BY`;
+- ou estar envolvida por uma função de agregação (`SUM`, `COUNT`, `AVG`, `MIN`, `MAX`, etc.).
+
 ### Exemplo: Total de pagamentos por cliente
 ```sql
 SELECT customer_id, SUM(amount) AS total_paid
 FROM payment
 GROUP BY customer_id;
 ```
-**Resultado:** Retorna o valor total dos pagamentos para cada cliente.
+**Resultado:** Retorna o identificador do cliente e o valor total dos pagamentos para cada cliente.
 
 ### Exemplo: Número de pagamentos por funcionário
 ```sql
@@ -25,15 +32,26 @@ SELECT staff_id, COUNT(*) AS payments_count
 FROM payment
 GROUP BY staff_id;
 ```
-**Resultado:** Mostra quantos pagamentos cada funcionário processou.
+**Resultado:** Retorna o identificador do funcionário e a quantidade de pagamentos processados por cada funcionário.
 
 ### Exemplo: Pagamento médio por data
 ```sql
 SELECT DATE(payment_date) AS pay_date, AVG(amount) AS avg_payment
 FROM payment
-GROUP BY pay_date;
+GROUP BY DATE(payment_date);
 ```
 **Resultado:** Retorna o valor médio dos pagamentos para cada data.
+
+### Variante: GROUP BY com alias
+```sql
+SELECT DATE(payment_date) AS pay_date, AVG(amount) AS avg_payment
+FROM payment
+GROUP BY pay_date;
+```
+
+Essa variante funciona em MySQL/MariaDB, onde é permitido usar alias no `GROUP BY`.
+Porém, esse comportamento não é universal em todos os SGBDs e não é considerado SQL padrão portável.
+Para consultas entre diferentes SGBDs, é mais seguro usar a forma completa `GROUP BY DATE(payment_date)`.
 
 ## Usando GROUP BY com Múltiplas Colunas
 
@@ -45,7 +63,7 @@ SELECT staff_id, customer_id, SUM(amount) AS total_paid
 FROM payment
 GROUP BY staff_id, customer_id;
 ```
-**Resultado:** Mostra quanto cada funcionário recebeu de cada cliente.
+**Resultado:** Retorna o identificador do funcionário, o identificador do cliente e o valor total dos pagamentos para cada par funcionário-cliente.
 
 ## Aplicações Práticas
 
@@ -62,12 +80,12 @@ GROUP BY staff_id, customer_id;
    ```
 2. **Número de clientes por país:**
    ```sql
-   SELECT country, COUNT(*) AS customers_count
+   SELECT co.country, COUNT(*) AS customers_count
    FROM customer cu
    JOIN address a ON cu.address_id = a.address_id
    JOIN city ci ON a.city_id = ci.city_id
    JOIN country co ON ci.country_id = co.country_id
-   GROUP BY country;
+   GROUP BY co.country;
    ```
 
 ## Principais Conclusões desta Lição

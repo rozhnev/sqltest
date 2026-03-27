@@ -1,55 +1,73 @@
-# Урок 4.2: Группировка данных с помощью GROUP BY в SQL
+# Lesson 4.2: Grouping Data with GROUP BY in SQL
 
-Группировка данных — важный инструмент для анализа и обобщения информации в SQL. Оператор `GROUP BY` позволяет объединять строки с одинаковыми значениями в указанных столбцах и применять агрегатные функции к каждой группе. В этом уроке вы узнаете, как использовать `GROUP BY` для создания отчетов и анализа данных на примерах из базы Sakila.
+Grouping data is a key tool for analysis and summarization in SQL. The `GROUP BY` clause allows you to combine rows with the same values in specified columns and apply aggregation functions to each group. In this lesson, you'll learn how to use `GROUP BY` for reporting and data analysis with examples from the Sakila database.
 
-## Основы использования GROUP BY
+## Basics of Using GROUP BY
 
-### Синтаксис
+### Syntax
 ```sql
 SELECT column1, AGG_FUNCTION(column2)
 FROM table
 GROUP BY column1;
 ```
 
-### Пример: Сумма платежей по каждому клиенту
+### Important Rule
+
+When using `GROUP BY`, every selected column in `SELECT` must:
+
+- either be included in the `GROUP BY` clause;
+- or be wrapped in an aggregation function (`SUM`, `COUNT`, `AVG`, `MIN`, `MAX`, etc.).
+
+### Example: Total payments per customer
 ```sql
 SELECT customer_id, SUM(amount) AS total_paid
 FROM payment
 GROUP BY customer_id;
 ```
-**Результат:** Возвращает сумму всех платежей для каждого клиента.
+**Result:** Returns the customer identifier and the total amount of payments for each customer.
 
-### Пример: Количество платежей по сотруднику
+### Example: Number of payments per staff
 ```sql
 SELECT staff_id, COUNT(*) AS payments_count
 FROM payment
 GROUP BY staff_id;
 ```
-**Результат:** Показывает, сколько платежей обработал каждый сотрудник.
+**Result:** Returns the staff identifier and the number of payments processed by each staff member.
 
-### Пример: Средний платеж по дате
+### Example: Average payment by date
+```sql
+SELECT DATE(payment_date) AS pay_date, AVG(amount) AS avg_payment
+FROM payment
+GROUP BY DATE(payment_date);
+```
+**Result:** Returns the average payment amount for each date.
+
+### Variant: GROUP BY using alias
 ```sql
 SELECT DATE(payment_date) AS pay_date, AVG(amount) AS avg_payment
 FROM payment
 GROUP BY pay_date;
 ```
-**Результат:** Возвращает средний размер платежа по каждой дате.
 
-## Использование GROUP BY с несколькими столбцами
+This variant works in MySQL/MariaDB, where using an alias in `GROUP BY` is allowed.
+However, this behavior is not universal across all DBMSs and is not considered portable standard SQL.
+For cross-DB queries, it is safer to use the full form `GROUP BY DATE(payment_date)`.
 
-Вы можете группировать данные сразу по нескольким столбцам для более детального анализа.
+## Using GROUP BY with Multiple Columns
 
-### Пример: Сумма платежей по сотруднику и клиенту
+You can group data by several columns at once for more detailed analysis.
+
+### Example: Total payments by staff and customer
 ```sql
 SELECT staff_id, customer_id, SUM(amount) AS total_paid
 FROM payment
 GROUP BY staff_id, customer_id;
 ```
-**Результат:** Показывает, сколько каждый сотрудник получил от каждого клиента.
+**Result:** Returns the staff identifier, customer identifier, and total amount of payments for each staff-customer pair.
 
-## Практическое применение
+## Practical Usage
 
-1. **Анализ продаж по категориям фильмов:**
+1. **Sales analysis by film category:**
    ```sql
    SELECT c.name AS category, SUM(p.amount) AS total_sales
    FROM payment p
@@ -60,16 +78,16 @@ GROUP BY staff_id, customer_id;
    JOIN category c ON fc.category_id = c.category_id
    GROUP BY c.name;
    ```
-2. **Количество клиентов по странам:**
+2. **Number of customers by country:**
    ```sql
-   SELECT country, COUNT(*) AS customers_count
+   SELECT co.country, COUNT(*) AS customers_count
    FROM customer cu
    JOIN address a ON cu.address_id = a.address_id
    JOIN city ci ON a.city_id = ci.city_id
    JOIN country co ON ci.country_id = co.country_id
-   GROUP BY country;
+   GROUP BY co.country;
    ```
 
-## Основные выводы из этого урока
+## Key Takeaways from This Lesson
 
-Оператор `GROUP BY` позволяет группировать данные и применять агрегатные функции к каждой группе. Это мощный инструмент для создания отчетов и анализа информации в SQL. Практикуйтесь с `GROUP BY` на примерах из базы Sakila, чтобы научиться быстро получать сводные данные и строить аналитические запросы.
+The `GROUP BY` clause lets you group data and apply aggregation functions to each group. It's a powerful tool for reporting and data analysis in SQL. Practice using `GROUP BY` with examples from the Sakila database to quickly get summary data and build analytical queries.
