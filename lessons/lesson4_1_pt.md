@@ -55,6 +55,8 @@ FROM payment;
 ```
 **Resultado:** Retorna a soma total da coluna `amount`.
 
+**Comentário:** a função `SUM(amount)` ignora `NULL`. Se todos os valores do conjunto forem `NULL`, o resultado será `NULL`.
+
 ### `AVG()` — Calcula o valor médio
 
 **Sintaxe:**
@@ -68,6 +70,40 @@ SELECT AVG(amount) AS average_amount
 FROM payment;
 ```
 **Resultado:** Retorna o valor médio da coluna `amount`.
+
+**Comentário:** a função `AVG(amount)` considera no cálculo apenas as linhas em que `amount` não é `NULL`.
+
+Se você precisar incluir as linhas com `NULL` na quantidade de linhas (denominador), use uma das opções abaixo:
+
+```sql
+SELECT
+   AVG(amount) AS avg_ignore_null,
+   AVG(COALESCE(amount, 0)) AS avg_include_null_as_zero,
+   SUM(amount) / COUNT(*) AS avg_sum_div_all_rows
+FROM payment;
+```
+
+**Explicação:**
+
+- `avg_ignore_null` é o comportamento padrão de `AVG`, em que `NULL` é ignorado;
+- `avg_include_null_as_zero` substitui `NULL` por `0`, então todas as linhas entram no cálculo;
+- `avg_sum_div_all_rows` divide a soma pelo total de linhas (`COUNT(*)`), o que também inclui as linhas com `NULL` no denominador.
+
+### `MAX()` — Encontra o valor máximo
+
+**Sintaxe:**
+```sql
+MAX(expressão)
+```
+
+**Exemplo:**
+```sql
+SELECT MAX(amount) AS max_amount
+FROM payment;
+```
+**Resultado:** Retorna o maior valor na coluna `amount`.
+
+**Comentário:** a função `MAX(amount)` ignora `NULL`. Se todos os valores forem `NULL`, o resultado será `NULL`.
 
 ### `MIN()` — Encontra o valor mínimo
 
@@ -83,19 +119,38 @@ FROM payment;
 ```
 **Resultado:** Retorna o menor valor na coluna `amount`.
 
-### `MAX()` — Encontra o valor máximo
+**Comentário:** a função `MIN(amount)` ignora `NULL`. Se todos os valores forem `NULL`, o resultado será `NULL`.
 
-**Sintaxe:**
+#### `MIN(column)` e `ORDER BY column LIMIT 1` — o resultado é sempre igual?
+
+Nem sempre.
+
+Compare:
+
 ```sql
-MAX(expressão)
+SELECT MIN(column_name) FROM table_name;
+SELECT column_name FROM table_name ORDER BY column_name LIMIT 1;
 ```
 
-**Exemplo:**
+- `MIN(column_name)` ignora `NULL` e procura o menor valor entre os não `NULL`;
+- `ORDER BY column_name LIMIT 1` retorna a primeira linha após a ordenação;
+- se `NULL` for ordenado primeiro no seu SGBD (por exemplo, MySQL/MariaDB em `ASC`), a segunda consulta pode retornar `NULL`, enquanto `MIN()` retorna o menor valor não `NULL`.
+
+Elas coincidem quando:
+
+- não há `NULL` na coluna;
+- ou `NULL` é ordenado por último;
+- ou você exclui explicitamente os `NULL`.
+
+**Versão confiável, equivalente a `MIN()`:**
+
 ```sql
-SELECT MAX(amount) AS max_amount
-FROM payment;
+SELECT column_name
+FROM table_name
+WHERE column_name IS NOT NULL
+ORDER BY column_name
+LIMIT 1;
 ```
-**Resultado:** Retorna o maior valor na coluna `amount`.
 
 ## Aplicações Práticas
 

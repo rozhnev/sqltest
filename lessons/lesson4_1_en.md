@@ -55,6 +55,8 @@ FROM payment;
 ```
 **Result:** Returns the total sum of the `amount` column.
 
+**Comment:** `SUM(amount)` ignores `NULL`. If all values in the set are `NULL`, the result is `NULL`.
+
 ### `AVG()` — Calculates the average value
 
 **Syntax:**
@@ -68,6 +70,40 @@ SELECT AVG(amount) AS average_amount
 FROM payment;
 ```
 **Result:** Returns the average value of the `amount` column.
+
+**Comment:** `AVG(amount)` includes only rows where `amount` is not `NULL`.
+
+If you need to include rows with `NULL` in the row count (denominator), use one of these options:
+
+```sql
+SELECT
+   AVG(amount) AS avg_ignore_null,
+   AVG(COALESCE(amount, 0)) AS avg_include_null_as_zero,
+   SUM(amount) / COUNT(*) AS avg_sum_div_all_rows
+FROM payment;
+```
+
+**Explanation:**
+
+- `avg_ignore_null` is standard `AVG` behavior, where `NULL` values are ignored.
+- `avg_include_null_as_zero` replaces `NULL` with `0`, so all rows are included in the calculation.
+- `avg_sum_div_all_rows` divides the sum by the total number of rows (`COUNT(*)`), which also includes rows with `NULL` in the denominator.
+
+### `MAX()` — Finds the maximum value
+
+**Syntax:**
+```sql
+MAX(expression)
+```
+
+**Example:**
+```sql
+SELECT MAX(amount) AS max_amount
+FROM payment;
+```
+**Result:** Returns the largest value in the `amount` column.
+
+**Comment:** `MAX(amount)` ignores `NULL`. If all values are `NULL`, the result is `NULL`.
 
 ### `MIN()` — Finds the minimum value
 
@@ -83,19 +119,38 @@ FROM payment;
 ```
 **Result:** Returns the smallest value in the `amount` column.
 
-### `MAX()` — Finds the maximum value
+**Comment:** `MIN(amount)` ignores `NULL`. If all values are `NULL`, the result is `NULL`.
 
-**Syntax:**
+#### `MIN(column)` and `ORDER BY column LIMIT 1` — are they always the same?
+
+Not always.
+
+Compare:
+
 ```sql
-MAX(expression)
+SELECT MIN(column_name) FROM table_name;
+SELECT column_name FROM table_name ORDER BY column_name LIMIT 1;
 ```
 
-**Example:**
+- `MIN(column_name)` ignores `NULL` and finds the minimum among non-`NULL` values.
+- `ORDER BY column_name LIMIT 1` returns the first row after sorting.
+- If `NULL` is sorted first in your DBMS (for example, in MySQL/MariaDB with `ASC`), the second query may return `NULL`, while `MIN()` still returns the minimum non-`NULL` value.
+
+They match if:
+
+- there are no `NULL` values in the column,
+- or `NULL` is sorted last,
+- or you explicitly exclude `NULL`.
+
+**Reliable version equivalent to `MIN()`:**
+
 ```sql
-SELECT MAX(amount) AS max_amount
-FROM payment;
+SELECT column_name
+FROM table_name
+WHERE column_name IS NOT NULL
+ORDER BY column_name
+LIMIT 1;
 ```
-**Result:** Returns the largest value in the `amount` column.
 
 ## Practical Usage
 
