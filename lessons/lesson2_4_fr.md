@@ -36,6 +36,14 @@ L'utilisation d'alias offre plusieurs avantages pour la présentation des donné
 *   **Création d'un résultat plus convivial :** Les alias vous permettent de personnaliser les en-têtes de colonnes dans l'ensemble de résultats pour qu'ils soient plus explicites pour les utilisateurs finaux ou les outils de reporting.
 *   **Utilisation de colonnes calculées :** Les alias sont essentiels lors de la création de colonnes calculées (par exemple, à l'aide de fonctions ou d'expressions), car ces colonnes n'ont pas de nom intrinsèque.
 
+## Remarque importante sur la portabilité
+
+Il faut être prudent avec la portée des alias en SQL. Selon le SGBD, les règles peuvent varier de manière significative : une base de données peut autoriser un alias dans une partie donnée de la requête, tandis qu'une autre renverra une erreur dans exactement le même cas.
+
+Cela est particulièrement important dans les cas limites, par exemple avec `HAVING`, les constructions de fenêtre avec `OVER`, les sous-requêtes dans la liste `SELECT` et d'autres expressions plus avancées. Dans ce genre de situations, il ne faut pas se fier à une intuition générale ni à des habitudes prises dans un autre dialecte SQL.
+
+Règle pratique : si une requête doit rester portable, vérifiez toujours la documentation du SGBD concerné ou testez le comportement expérimentalement.
+
 ## Exemples
 
 Voyons quelques exemples pratiques en utilisant la structure de la base de données Sakila.

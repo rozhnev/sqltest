@@ -36,6 +36,14 @@ Using aliases provides several benefits for data presentation and query construc
 *   **Creating More User-Friendly Output:** Aliases allow you to customize the column headers in the result set to be more meaningful for end-users or reporting tools.
 *   **Working with Calculated Columns:** Aliases are essential when creating calculated columns (e.g., using functions or expressions) because these columns don't have inherent names.
 
+## An Important Note on Portability
+
+Be careful with alias visibility in SQL. Different database systems can handle it quite differently: one database may allow an alias in a certain part of the query, while another may raise an error in the same situation.
+
+This is especially important in edge cases such as `HAVING`, window definitions with `OVER`, subqueries in the `SELECT` list, and other more advanced expressions. In these situations, it is not safe to rely on general intuition or habits from another SQL dialect.
+
+As a practical rule, if a query needs to be portable, always check the documentation for your specific database system or test the behavior experimentally.
+
 ## Examples
 
 Let's look at some practical examples using the Sakila database structure.

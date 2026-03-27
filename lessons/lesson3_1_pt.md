@@ -1,6 +1,6 @@
-# Lição 3.1: Usando Funções em Consultas SQL
+# Lição 3.1: Funções SQL Integradas
 
-As funções SQL são rotinas pré-definidas que executam operações específicas nos dados. Elas permitem manipular dados, realizar cálculos e formatar resultados diretamente em suas consultas SQL. As funções podem ser usadas em várias partes de uma consulta, como na cláusula `SELECT` para transformar a saída ou na cláusula `WHERE` para filtrar dados com base em valores calculados.
+As funções SQL são operações predefinidas que aceitam argumentos, executam ações sobre os dados e retornam um valor. Elas permitem manipular dados, realizar cálculos e formatar resultados diretamente em suas consultas SQL. As funções podem ser usadas em várias partes de uma consulta, como na cláusula `SELECT` para transformar a saída ou na cláusula `WHERE` para filtrar dados com base em valores calculados.
 
 ## O que são Funções SQL?
 
@@ -101,7 +101,7 @@ Esta consulta recupera todas as colunas da tabela `transactions` onde o valor ab
 
 ---
 
-## Tipos Comuns de Funções SQL
+## Tipos Comuns de Funções SQL Integradas
 
 As funções SQL podem ser amplamente categorizadas nos seguintes tipos:
 
@@ -122,4 +122,4 @@ As funções SQL podem ser amplamente categorizadas nos seguintes tipos:
 
 **Principais Conclusões desta Lição:**
 
-Ao dominar o uso de funções em consultas SQL, você poderá realizar manipulações e análises poderosas de dados, extraindo insights valiosos de suas informações.
+Ao dominar o uso de funções integradas em consultas SQL, você poderá realizar manipulações e análises poderosas de dados, extraindo insights valiosos de suas informações.

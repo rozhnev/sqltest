@@ -54,6 +54,45 @@ FROM actor
 ORDER BY last_name, first_name; -- Primeiro por last_name, depois por first_name para empates
 ```
 
+## Ordenando por Expressões
+
+Você pode ordenar não apenas por colunas brutas, mas também por expressões. O SQL primeiro avalia a expressão para cada linha (por exemplo, um resultado numérico, de texto ou booleano) e, em seguida, o `ORDER BY` ordena as linhas usando esses valores avaliados como chave de ordenação.
+
+### Exemplo 1: Ordenando por uma Expressão Numérica
+Ordene filmes pela duração de aluguel em semanas (`rental_duration / 7`):
+
+```sql
+SELECT title, rental_duration
+FROM film
+ORDER BY rental_duration / 7 DESC;
+```
+
+### Exemplo 2: Ordenando por uma Expressão de Texto
+Ordene atores sem diferenciar maiúsculas e minúsculas pelo nome completo:
+
+```sql
+SELECT first_name, last_name
+FROM actor
+ORDER BY LOWER(first_name || ' ' || last_name);
+```
+
+### Exemplo 3: Ordenando por uma Expressão Booleana
+Coloque filmes com classificação 'G' primeiro:
+
+```sql
+SELECT title, rating
+FROM film
+ORDER BY (rating = 'G') DESC, title;
+```
+
+A ordenação booleana pode variar entre dialetos SQL. Para um comportamento totalmente portável, use `CASE`:
+
+```sql
+SELECT title, rating
+FROM film
+ORDER BY CASE WHEN rating = 'G' THEN 0 ELSE 1 END, title;
+```
+
 ## Ordenando por Aliases ou Posições de Coluna
 
 Na maioria dos dialetos SQL, você também pode ordenar pelo alias de uma coluna ou por sua posição numérica na lista `SELECT`.
@@ -80,6 +119,7 @@ ORDER BY 2;
 *   Use `ORDER BY` para ordenar as linhas em seu conjunto de resultados.
 *   `ASC` (padrão) ordena em ordem crescente; `DESC` ordena em ordem decrescente.
 *   Você pode ordenar por múltiplas colunas para refinar ainda mais a ordem.
+*   Você pode ordenar por expressões que retornam resultados numéricos, de texto ou booleanos.
 *   A ordenação também pode ser feita usando aliases de coluna ou posições numéricas.
 
 Na próxima lição, aprenderemos sobre **Funções de Agregação**, que nos permitem realizar cálculos em conjuntos de dados.

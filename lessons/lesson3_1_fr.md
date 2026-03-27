@@ -1,6 +1,6 @@
-# Leçon 3.1 : Utilisation des fonctions dans les requêtes SQL
+# Leçon 3.1 : Fonctions SQL intégrées
 
-Les fonctions SQL sont des routines intégrées qui effectuent des opérations spécifiques sur les données. Elles vous permettent de manipuler des données, d'effectuer des calculs et de formater les résultats au sein de vos requêtes SQL. Les fonctions peuvent être utilisées dans diverses parties d'une requête, comme la clause `SELECT` pour transformer la sortie, ou la clause `WHERE` pour filtrer les données en fonction de valeurs calculées.
+Les fonctions SQL sont des opérations prédéfinies qui acceptent des arguments, effectuent des actions sur les données et renvoient une valeur. Elles vous permettent de manipuler des données, d'effectuer des calculs et de formater les résultats au sein de vos requêtes SQL. Les fonctions peuvent être utilisées dans diverses parties d'une requête, comme la clause `SELECT` pour transformer la sortie, ou la clause `WHERE` pour filtrer les données en fonction de valeurs calculées.
 
 ## Que sont les fonctions SQL ?
 
@@ -101,7 +101,7 @@ Cette requête récupère toutes les colonnes de la table `transactions` où la 
 
 ---
 
-## Types courants de fonctions SQL
+## Types courants de fonctions SQL intégrées
 
 Les fonctions SQL peuvent être globalement classées dans les types suivants :
 
@@ -122,4 +122,4 @@ Les fonctions SQL peuvent être globalement classées dans les types suivants :
 
 **Points clés de cette leçon :**
 
-En maîtrisant l'utilisation des fonctions dans les requêtes SQL, vous pouvez effectuer des manipulations et des analyses de données puissantes, extrayant ainsi des informations précieuses de vos données.
+En maîtrisant l'utilisation des fonctions intégrées dans les requêtes SQL, vous pouvez effectuer des manipulations et des analyses de données puissantes, extrayant ainsi des informations précieuses de vos données.

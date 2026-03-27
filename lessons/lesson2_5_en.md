@@ -54,6 +54,45 @@ FROM actor
 ORDER BY last_name, first_name; -- First by last_name, then by first_name for ties
 ```
 
+## Sorting by Expressions
+
+You can sort not only by raw columns, but also by expressions. SQL first evaluates the expression for each row (for example, a numeric, text, or boolean result), and then `ORDER BY` sorts the rows using those evaluated results as the sort key.
+
+### Example 1: Sorting by a Numeric Expression
+Sort films by rental duration in weeks (`rental_duration / 7`):
+
+```sql
+SELECT title, rental_duration
+FROM film
+ORDER BY rental_duration / 7 DESC;
+```
+
+### Example 2: Sorting by a Text Expression
+Sort actors case-insensitively by full name:
+
+```sql
+SELECT first_name, last_name
+FROM actor
+ORDER BY LOWER(first_name || ' ' || last_name);
+```
+
+### Example 3: Sorting by a Boolean Expression
+Place films with rating 'G' first:
+
+```sql
+SELECT title, rating
+FROM film
+ORDER BY (rating = 'G') DESC, title;
+```
+
+Boolean sorting can differ between SQL dialects. For fully portable behavior, use `CASE`:
+
+```sql
+SELECT title, rating
+FROM film
+ORDER BY CASE WHEN rating = 'G' THEN 0 ELSE 1 END, title;
+```
+
 ## Sorting by Column Aliases or Positions
 
 In most SQL dialects, you can also sort by a column's alias or its numerical position in the `SELECT` list.
@@ -80,6 +119,7 @@ ORDER BY 2;
 *   Use `ORDER BY` to sort the rows in your result set.
 *   `ASC` (default) sorts in ascending order; `DESC` sorts in descending order.
 *   You can sort by multiple columns to refine the order further.
+*   You can sort by expressions that return numeric, text, or boolean results.
 *   Sorting can also be done using column aliases or numerical positions.
 
 In the next lesson, we will learn about **Aggregate Functions**, which allow us to perform calculations on sets of data.

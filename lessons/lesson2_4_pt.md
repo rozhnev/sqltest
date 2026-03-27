@@ -36,6 +36,14 @@ O uso de aliases oferece vários benefícios para a apresentação de dados e a 
 *   **Criar Saídas Mais Amigáveis:** Os aliases permitem personalizar os cabeçalhos das colunas no conjunto de resultados para torná-los mais significativos para usuários finais ou ferramentas de relatórios.
 *   **Trabalhar com Colunas Calculadas:** Os aliases são essenciais ao criar colunas calculadas (por exemplo, usando funções ou expressões), pois essas colunas não possuem nomes próprios.
 
+## Observação Importante sobre Portabilidade
+
+É preciso ter cuidado com o escopo dos aliases em SQL. Em diferentes SGBDs, as regras podem variar bastante: um banco de dados pode permitir o uso de um alias em certa parte da consulta, enquanto outro pode gerar erro exatamente na mesma situação.
+
+Isso é especialmente importante em casos limítrofes, como `HAVING`, construções de janela com `OVER`, subconsultas na lista `SELECT` e outras expressões mais avançadas. Nessas situações, não é seguro confiar apenas na intuição geral ou em hábitos trazidos de outro dialeto SQL.
+
+Como regra prática, se a consulta precisar ser portátil, sempre verifique a documentação do SGBD específico ou teste o comportamento experimentalmente.
+
 ## Exemplos
 
 Vamos ver alguns exemplos práticos usando a estrutura do banco de dados Sakila.

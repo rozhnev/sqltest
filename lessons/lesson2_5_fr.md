@@ -54,6 +54,45 @@ FROM actor
 ORDER BY last_name, first_name; -- D'abord par nom, puis par prénom en cas d'égalité
 ```
 
+## Tri par expressions
+
+Vous pouvez trier non seulement par des colonnes brutes, mais aussi par des expressions. SQL évalue d'abord l'expression pour chaque ligne (par exemple un résultat numérique, textuel ou booléen), puis `ORDER BY` trie les lignes en utilisant ces valeurs évaluées comme clé de tri.
+
+### Exemple 1 : Tri par expression numérique
+Trier les films par durée de location en semaines (`rental_duration / 7`) :
+
+```sql
+SELECT title, rental_duration
+FROM film
+ORDER BY rental_duration / 7 DESC;
+```
+
+### Exemple 2 : Tri par expression textuelle
+Trier les acteurs sans tenir compte de la casse sur le nom complet :
+
+```sql
+SELECT first_name, last_name
+FROM actor
+ORDER BY LOWER(first_name || ' ' || last_name);
+```
+
+### Exemple 3 : Tri par expression booléenne
+Placer d'abord les films classés 'G' :
+
+```sql
+SELECT title, rating
+FROM film
+ORDER BY (rating = 'G') DESC, title;
+```
+
+Le tri booléen peut varier selon les dialectes SQL. Pour un comportement entièrement portable, utilisez `CASE` :
+
+```sql
+SELECT title, rating
+FROM film
+ORDER BY CASE WHEN rating = 'G' THEN 0 ELSE 1 END, title;
+```
+
 ## Tri par alias de colonne ou par position
 
 Dans la plupart des dialectes SQL, vous pouvez également trier par l'alias d'une colonne ou par sa position numérique dans la liste `SELECT`.
@@ -80,6 +119,7 @@ ORDER BY 2;
 *   Utilisez `ORDER BY` pour trier les lignes de votre ensemble de résultats.
 *   `ASC` (par défaut) trie par ordre croissant ; `DESC` trie par ordre décroissant.
 *   Vous pouvez trier par plusieurs colonnes pour affiner davantage l'ordre.
+*   Vous pouvez trier par des expressions qui renvoient des résultats numériques, textuels ou booléens.
 *   Le tri peut également être effectué en utilisant des alias de colonnes ou des positions numériques.
 
 Dans la leçon suivante, nous découvrirons les **fonctions d'agrégation**, qui nous permettent d'effectuer des calculs sur des ensembles de données.

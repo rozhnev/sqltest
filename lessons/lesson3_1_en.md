@@ -1,6 +1,6 @@
-# Lesson 3.1: Using Functions in SQL Queries
+# Lesson 3.1: Built-in SQL Functions
 
-SQL functions are pre-built routines that perform specific operations on data. They allow you to manipulate data, perform calculations, and format results within your SQL queries. Functions can be used in various parts of a query, such as the `SELECT` clause to transform output, or the `WHERE` clause to filter data based on calculated values.
+SQL functions are predefined operations that accept arguments, perform actions on data, and return a value. They allow you to manipulate data, perform calculations, and format results within your SQL queries. Functions can be used in various parts of a query, such as the `SELECT` clause to transform output, or the `WHERE` clause to filter data based on calculated values.
 
 ## What are SQL Functions?
 
@@ -101,7 +101,7 @@ This query retrieves all columns from the `transactions` table where the absolut
 
 ---
 
-## Common Types of SQL Functions
+## Common Types of Built-in SQL Functions
 
 SQL functions can be broadly categorized into the following types:
 
@@ -122,5 +122,5 @@ SQL functions can be broadly categorized into the following types:
 
 **Key Takeaways from this Lesson:**
 
-By mastering the use of functions in SQL queries, you can perform powerful data manipulation and analysis, extracting valuable insights from your data.
+By mastering the use of built-in functions in SQL queries, you can perform powerful data manipulation and analysis, extracting valuable insights from your data.
 

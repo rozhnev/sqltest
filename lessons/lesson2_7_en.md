@@ -6,9 +6,11 @@ So far, we have learned how to filter rows (`WHERE`), sort them (`ORDER BY`), an
 
 ## The Order of Clauses
 
-SQL has a strict order for how these clauses must appear in your query. If you place them in the wrong order, the database will return an error.
+SQL has a strict order for how these clauses must appear **in the text of your query**. If you place them in the wrong order, the database will return an error.
 
-The correct sequence is:
+Below is the correct sequence **only for the clauses we have studied so far in this module**. The full order of SQL query parts is broader and will expand as you learn new language constructs.
+
+The correct sequence in the text of the query is:
 1.  **`SELECT`** (What columns?)
 2.  **`FROM`** (Which table?)
 3.  **`WHERE`** (Filter the rows first)
@@ -16,13 +18,18 @@ The correct sequence is:
 5.  **`LIMIT`** (Take the top X results from the sorted list)
 6.  **`OFFSET`** (Skip X rows if needed)
 
-## Logic: How it Works
+Important: this order describes **how you write the query**, not its logical processing order. Logically, SQL handles the parts of the query differently.
+
+## Logical Processing Order
 
 When you run a combined query, the database processes it conceptually like this:
-1.  It looks at the **`FROM`** table.
-2.  It filters out rows that don't match the **`WHERE`** condition.
-3.  It takes the remaining rows and sorts them according to **`ORDER BY`**.
-4.  Finally, it looks at the sorted result and applies the **`LIMIT`** to give you just the portion you asked for.
+1.  First, it determines the data source from **`FROM`**.
+2.  Next, it applies the filtering conditions from **`WHERE`**.
+3.  After that, it forms the selected column list from **`SELECT`**.
+4.  Then it sorts the result according to **`ORDER BY`**.
+5.  Finally, it applies **`OFFSET`** to skip rows if needed, and then **`LIMIT`** to return the required subset of the sorted rows.
+
+That is why `WHERE` cannot refer to aliases defined in `SELECT`: at the filtering stage, the selected column list has not yet been logically formed.
 
 ## Examples
 

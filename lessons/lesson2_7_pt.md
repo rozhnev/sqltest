@@ -6,9 +6,11 @@ Até agora, aprendemos como filtrar linhas (`WHERE`), ordená-las (`ORDER BY`) e
 
 ## A Ordem das Cláusulas
 
-O SQL possui uma ordem estrita para como essas cláusulas devem aparecer em sua consulta. Se você as colocar na ordem errada, o banco de dados retornará um erro.
+O SQL possui uma ordem estrita para como essas cláusulas devem aparecer **no texto da consulta**. Se você as colocar na ordem errada, o banco de dados retornará um erro.
 
-A sequência correta é:
+A sequência abaixo está correta **apenas para as cláusulas que já estudamos até aqui neste módulo**. A ordem completa das partes de uma consulta SQL é mais ampla e será expandida à medida que você aprender novas construções da linguagem.
+
+A sequência correta no texto da consulta é:
 1.  **`SELECT`** (Quais colunas?)
 2.  **`FROM`** (Qual tabela?)
 3.  **`WHERE`** (Filtre as linhas primeiro)
@@ -16,13 +18,18 @@ A sequência correta é:
 5.  **`LIMIT`** (Pegue os primeiros X resultados da lista ordenada)
 6.  **`OFFSET`** (Pule X linhas, se necessário)
 
-## Lógica: Como Funciona
+Importante: essa ordem descreve **como você escreve a consulta**, e não sua ordem lógica de processamento. Logicamente, o SQL trata as partes da consulta de outra forma.
+
+## Ordem Lógica de Processamento
 
 Quando você executa uma consulta combinada, o banco de dados a processa conceitualmente assim:
-1.  Ele olha para a tabela no **`FROM`**.
-2.  Ele filtra as linhas que não correspondem à condição **`WHERE`**.
-3.  Ele pega as linhas restantes e as ordena de acordo com o **`ORDER BY`**.
-4.  Finalmente, ele olha para o resultado ordenado e aplica o **`LIMIT`** para fornecer apenas a parte que você solicitou.
+1.  Primeiro, ele determina a fonte de dados a partir de **`FROM`**.
+2.  Em seguida, aplica as condições de filtragem de **`WHERE`**.
+3.  Depois disso, forma a lista de colunas selecionadas a partir de **`SELECT`**.
+4.  Então, ordena o resultado conforme **`ORDER BY`**.
+5.  Por fim, aplica **`OFFSET`** para pular linhas, se necessário, e depois **`LIMIT`** para retornar a parte necessária das linhas ordenadas.
+
+É por isso que `WHERE` não pode se referir a aliases definidos em `SELECT`: na etapa de filtragem, a lista de colunas selecionadas ainda não foi logicamente formada.
 
 ## Exemplos
 

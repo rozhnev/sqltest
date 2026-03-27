@@ -6,9 +6,11 @@ Jusqu'à présent, nous avons appris à filtrer les lignes (`WHERE`), à les tri
 
 ## L'ordre des clauses
 
-SQL impose un ordre strict pour l'apparition de ces clauses dans votre requête. Si vous les placez dans le mauvais ordre, la base de données renverra une erreur.
+SQL impose un ordre strict pour l'apparition de ces clauses **dans le texte de la requête**. Si vous les placez dans le mauvais ordre, la base de données renverra une erreur.
 
-La séquence correcte est :
+La séquence ci-dessous est correcte **uniquement pour les clauses que nous avons déjà étudiées dans ce module**. L'ordre complet des parties d'une requête SQL est plus large et sera enrichi à mesure que vous découvrirez de nouvelles constructions du langage.
+
+La séquence correcte dans le texte de la requête est :
 1.  **`SELECT`** (Quelles colonnes ?)
 2.  **`FROM`** (Quelle table ?)
 3.  **`WHERE`** (Filtrer les lignes d'abord)
@@ -16,13 +18,18 @@ La séquence correcte est :
 5.  **`LIMIT`** (Prendre les X premiers résultats de la liste triée)
 6.  **`OFFSET`** (Sauter X lignes si nécessaire)
 
-## Logique : Comment ça marche
+Important : cet ordre décrit **la manière d'écrire la requête**, et non son ordre logique d'exécution. Logiquement, SQL traite les différentes parties autrement.
+
+## Ordre logique de traitement
 
 Lorsque vous exécutez une requête combinée, la base de données la traite conceptuellement de cette manière :
-1.  Elle examine la table spécifiée dans le **`FROM`**.
-2.  Elle filtre les lignes qui ne correspondent pas à la condition **`WHERE`**.
-3.  Elle prend les lignes restantes et les trie selon le **`ORDER BY`**.
-4.  Enfin, elle examine le résultat trié et applique le **`LIMIT`** pour ne vous donner que la portion demandée.
+1.  D'abord, elle détermine la source des données à partir de **`FROM`**.
+2.  Ensuite, elle applique les conditions de filtrage de **`WHERE`**.
+3.  Après cela, elle forme la liste des colonnes sélectionnées à partir de **`SELECT`**.
+4.  Puis, elle trie le résultat selon **`ORDER BY`**.
+5.  Enfin, elle applique **`OFFSET`** pour ignorer des lignes si nécessaire, puis **`LIMIT`** pour renvoyer la partie requise des lignes triées.
+
+C'est pourquoi `WHERE` ne peut pas faire référence à des alias définis dans `SELECT` : au moment du filtrage, la liste des colonnes sélectionnées n'est pas encore logiquement formée.
 
 ## Exemples
 
