@@ -1,150 +1,210 @@
-SQL provides several built-in functions to work with dates and times. These functions help you extract, manipulate, and format date/time values in your queries. Here’s a summary of the most commonly used date and time functions in SQL.
+# Lesson 3.3: Core Mathematical Functions in SQL
 
-Lesson 3.3: Common SQL Date and Time functions
+Mathematical functions in SQL are used to perform calculations on numeric data. They let you round values, find minimum and maximum values, compute remainders, and much more. This lesson covers the most commonly used mathematical functions, with examples based on the Sakila database.
 
+Important: numeric data in SQL can use different types (`INTEGER`, `REAL`/`FLOAT`, `DECIMAL`/`NUMERIC`). The same formula can produce different results depending on the data type (for example, because of integer division, rounding, and precision). If data types are ignored, the final result may differ from what you expect.
 
-## 1. **CURRENT_DATE**
-   - **Description**: Returns the current date (without the time) in the format `YYYY-MM-DD`.
-   - **Example**:
-     ```sql
-     SELECT CURRENT_DATE;
-     ```
-   - **Result**: `2025-04-20` (example)
+## Common Mathematical Functions
 
-## 2. **CURRENT_TIME**
-   - **Description**: Returns the current time (without the date) in the format `HH:MM:SS`.
-   - **Example**:
-     ```sql
-     SELECT CURRENT_TIME;
-     ```
-   - **Result**: `15:30:45` (example)
+### `ABS()` - Returns the absolute value of a number.
 
-## 3. **CURRENT_TIMESTAMP**
-   - **Description**: Returns the current date and time (both date and time parts) in the format `YYYY-MM-DD HH:MM:SS`.
-   - **Example**:
-     ```sql
-     SELECT CURRENT_TIMESTAMP;
-     ```
-   - **Result**: `2025-04-20 15:30:45` (example)
+**Syntax:**
+```sql
+ABS(number)
+```
 
-## 4. **NOW()**
-   - **Description**: Returns the current date and time, equivalent to `CURRENT_TIMESTAMP`.
-   - **Example**:
-     ```sql
-     SELECT NOW();
-     ```
-   - **Result**: `2025-04-20 15:30:45` (example)
+**Example:**
+```sql
+SELECT ABS(amount - 5) AS abs_difference
+FROM payment
+LIMIT 3;
+```
+**Result:** Returns the absolute difference between `amount` and 5.
 
-## 5. **DATE()**
-   - **Description**: Extracts the date part from a given date or datetime value.
-   - **Example**:
-     ```sql
-     SELECT DATE('2025-04-20 15:30:45');
-     ```
-   - **Result**: `2025-04-20`
+### `CEIL()` / `CEILING()` - Rounds a number up (to the nearest integer).
 
-## 6. **TIME()**
-   - **Description**: Extracts the time part from a given date or datetime value.
-   - **Example**:
-     ```sql
-     SELECT TIME('2025-04-20 15:30:45');
-     ```
-   - **Result**: `15:30:45`
+**Syntax:**
+```sql
+CEIL(number)
+CEILING(number)
+```
 
-## 7. **YEAR()**
-   - **Description**: Extracts the year from a date or datetime value.
-   - **Example**:
-     ```sql
-     SELECT YEAR('2025-04-20');
-     ```
-   - **Result**: `2025`
+**Example:**
+```sql
+SELECT CEIL(amount) AS rounded_up
+FROM payment
+LIMIT 3;
+```
+**Result:** Rounds `amount` up to the nearest integer.
 
-## 8. **MONTH()**
-   - **Description**: Extracts the month from a date or datetime value.
-   - **Example**:
-     ```sql
-     SELECT MONTH('2025-04-20');
-     ```
-   - **Result**: `4` (for April)
+### `FLOOR()` - Rounds a number down (to the nearest integer).
 
-## 9. **DAY()**
-   - **Description**: Extracts the day of the month from a date or datetime value.
-   - **Example**:
-     ```sql
-     SELECT DAY('2025-04-20');
-     ```
-   - **Result**: `20`
+**Syntax:**
+```sql
+FLOOR(number)
+```
 
-## 10. **DATE_ADD()**
-   - **Description**: Adds a specified time interval to a date.
-   - **Example**:
-     ```sql
-     SELECT DATE_ADD('2025-04-20', INTERVAL 5 DAY);
-     ```
-   - **Result**: `2025-04-25`
+**Example:**
+```sql
+SELECT FLOOR(amount) AS rounded_down
+FROM payment
+LIMIT 3;
+```
+**Result:** Rounds `amount` down to the nearest integer.
 
-## 11. **DATE_SUB()**
-   - **Description**: Subtracts a specified time interval from a date.
-   - **Example**:
-     ```sql
-     SELECT DATE_SUB('2025-04-20', INTERVAL 5 DAY);
-     ```
-   - **Result**: `2025-04-15`
+### `ROUND()` - Rounds a number to a specified number of decimal places.
 
-## 12. **DATEDIFF()**
-   - **Description**: Returns the number of days between two dates.
-   - **Example**:
-     ```sql
-     SELECT DATEDIFF('2025-04-20', '2025-04-15');
-     ```
-   - **Result**: `5`
+**Syntax:**
+```sql
+ROUND(number, decimals)
+```
 
-## 13. **DATE_FORMAT()**
-   - **Description**: Formats a date or datetime value according to a specific format.
-   - **Example**:
-     ```sql
-     SELECT DATE_FORMAT('2025-04-20', '%Y-%m-%d');
-     ```
-   - **Result**: `2025-04-20`
+**Example:**
+```sql
+SELECT ROUND(amount, 1) AS rounded_amount
+FROM payment
+LIMIT 3;
+```
+**Result:** Rounds `amount` to one decimal place.
 
-   **Common Format Specifiers**:
-   - `%Y`: Year (four digits)
-   - `%m`: Month (two digits)
-   - `%d`: Day of the month (two digits)
-   - `%H`: Hour (24-hour format)
-   - `%i`: Minutes
-   - `%s`: Seconds
+### `POWER()` / `POW()` - Raises a number to a power.
 
-## 14. **STRFTIME()** (SQLite and PostgreSQL)
-   - **Description**: Similar to `DATE_FORMAT()`, it formats date/time values in a specified format.
-   - **Example**:
-     ```sql
-     SELECT STRFTIME('%Y-%m-%d', '2025-04-20');
-     ```
-   - **Result**: `2025-04-20`
+**Syntax:**
+```sql
+POWER(number, exponent)
+POW(number, exponent)
+```
 
-## 15. **TIMESTAMPDIFF()**
-   - **Description**: Returns the difference between two date/time values, measured in a specified unit (e.g., seconds, minutes, days).
-   - **Example**:
-     ```sql
-     SELECT TIMESTAMPDIFF(DAY, '2025-04-15', '2025-04-20');
-     ```
-   - **Result**: `5`
+**Example:**
+```sql
+SELECT POWER(amount, 2) AS squared_amount
+FROM payment
+LIMIT 3;
+```
+**Result:** Squares `amount`.
 
-## 16. **EXTRACT()**
-   - **Description**: Extracts a part of a date or time value (like year, month, day, hour, etc.).
-   - **Example**:
-     ```sql
-     SELECT EXTRACT(YEAR FROM '2025-04-20');
-     ```
-   - **Result**: `2025`
+### `SQRT()` - Returns the square root of a number.
 
----
+**Syntax:**
+```sql
+SQRT(number)
+```
 
-### Practical Usage Examples
+**Example:**
+```sql
+SELECT SQRT(amount) AS sqrt_amount
+FROM payment
+LIMIT 3;
+```
+**Result:** Returns the square root of `amount`.
 
-1. **Finding users who registered in the last 30 days**:
-   ```sql
-   SELECT * 
-   FROM users 
-   WHERE registration_date > DATE_SUB(CURRENT_DATE, INTERVAL 30 DAY);
+### `MOD()` - Returns the remainder of a division.
+
+**Syntax:**
+```sql
+MOD(dividend, divisor)
+```
+
+**Example:**
+```sql
+SELECT MOD(payment_id, 5) AS mod_result
+FROM payment
+LIMIT 3;
+```
+**Result:** Returns the remainder of `payment_id` divided by 5.
+
+### `SIGN()` - Returns the sign of a number (-1, 0, or 1).
+
+**Syntax:**
+```sql
+SIGN(number)
+```
+
+**Example:**
+```sql
+SELECT SIGN(amount - 5) AS sign_value
+FROM payment
+LIMIT 3;
+```
+**Result:** Returns -1 if negative, 0 if zero, and 1 if positive.
+
+### `GREATEST()` - Returns the largest value among the provided values (MySQL, PostgreSQL).
+
+**Syntax:**
+```sql
+GREATEST(value1, value2, ...)
+```
+
+**Example:**
+```sql
+SELECT GREATEST(amount, 5) AS max_value
+FROM payment
+LIMIT 3;
+```
+**Result:** Returns the larger value between `amount` and 5.
+
+**Important (`NULL`):** `GREATEST()` behavior depends on the DBMS.
+- In MySQL/MariaDB, if at least one argument is `NULL`, the result is usually `NULL`.
+- In PostgreSQL, `NULL` arguments are ignored, and `NULL` is returned only if all arguments are `NULL`.
+
+### `LEAST()` - Returns the smallest value among the provided values (MySQL, PostgreSQL).
+
+**Syntax:**
+```sql
+LEAST(value1, value2, ...)
+```
+
+**Example:**
+```sql
+SELECT LEAST(amount, 5) AS min_value
+FROM payment
+LIMIT 3;
+```
+**Result:** Returns the smaller value between `amount` and 5.
+
+**Important (`NULL`):** `LEAST()` follows the same DBMS-specific `NULL` behavior as `GREATEST()`.
+
+To make behavior predictable across DBMSs, `COALESCE()` is often used, for example:
+```sql
+SELECT GREATEST(COALESCE(value1, 0), COALESCE(value2, 0));
+```
+
+### `RAND()` - Returns a random number between 0 and 1.
+
+**Syntax:**
+```sql
+RAND()
+```
+
+**Example:**
+```sql
+SELECT RAND() AS random_value
+FROM payment
+LIMIT 3;
+```
+**Result:** Returns a random number between 0 and 1.
+
+**Important:** do not assume that `RAND()` is always re-evaluated for every row in every context. Depending on the DBMS, execution plan, use of CTEs/subqueries, and other factors, the same random value can be reused for multiple rows.
+
+If distinct row-level random values are critical, verify behavior on your DBMS and query shape.
+
+## Practical Use Cases
+
+1. **Rounding payment amounts:**
+   Use `ROUND(amount, 0)` to round values to whole numbers.
+
+2. **Finding records by remainder:**
+   Use `MOD(payment_id, 2)` to separate even and odd payment IDs.
+
+3. **Computing square roots:**
+   Use `SQRT(amount)` to analyze payment distributions.
+
+4. **Comparing values:**
+   Use `GREATEST()` and `LEAST()` to pick the maximum or minimum from multiple values.
+
+5. **Controlling data types:**
+   If precision matters, explicitly cast values to the required type (for example, `CAST(value AS DECIMAL(10,2))`) to avoid surprises caused by integer arithmetic and rounding.
+
+## Key Takeaways from This Lesson
+
+SQL mathematical functions help you calculate, analyze, and transform numeric data. Master these functions to work effectively with numbers in SQL queries. Practice with Sakila-based examples to reinforce your skills.
