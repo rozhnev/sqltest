@@ -1,4 +1,3 @@
-
 # Lesson 3.2: Common String Functions in SQL
 
 String functions in SQL are used to manipulate and transform text data. These functions are essential for cleaning, formatting, and extracting information from string columns in a database. This lesson covers some of the most commonly used string functions and provides practical examples.
@@ -33,17 +32,28 @@ FROM employees;
 ```
 **Result:** Converts all `last_name` values to lowercase.
 
-### `LENGTH()` or `LEN()` Returns the length of a string (number of characters).
+### `LENGTH()`, `CHAR_LENGTH()`, or `LEN()` - Returns the length of a string (in characters or bytes, depending on the DBMS).
 
 **Syntax:**
 ```sql
-LENGTH(string) -- For most databases
-LEN(string)    -- For SQL Server
+CHAR_LENGTH(string) -- Number of characters (for example, in MySQL)
+LENGTH(string)      -- In MySQL: length in bytes
+LEN(string)         -- In SQL Server: length in characters
 ```
+
+Important: in different DBMSs, “string length” may mean different things. Some functions return length in characters, while others return length in bytes. Always check which unit a specific function uses in your DBMS.
+
+**When `LENGTH()` and `CHAR_LENGTH()` can differ (for example, in MySQL):**
+- For strings containing only Latin letters and digits, the values often match.
+- For strings with multibyte characters (Cyrillic, emoji, CJK characters), `LENGTH()` is usually greater than `CHAR_LENGTH()` because it counts bytes.
+
+**Quick example:**
+- `'SQL'`: `LENGTH` = 3, `CHAR_LENGTH` = 3
+- `'Привет'`: `LENGTH` = 12, `CHAR_LENGTH` = 6
 
 **Example:**
 ```sql
-SELECT LENGTH(product_name) AS name_length
+SELECT CHAR_LENGTH(product_name) AS name_length
 FROM products;
 ```
 **Result:** Returns the number of characters in each `product_name`.
@@ -77,11 +87,30 @@ FROM employees;
 ```
 **Result:** Combines `first_name` and `last_name` into a single `full_name`.
 
-### `TRIM()` - Removes leading and trailing spaces from a string.
+**Important:** `CONCAT()` behavior with `NULL` depends on the DBMS. For example, in MySQL and MariaDB, if at least one argument is `NULL`, the result of `CONCAT()` is also `NULL`.
+
+### `CONCAT_WS()` - Concatenates strings with a separator and usually skips `NULL` values.
+
+**Syntax:**
+```sql
+CONCAT_WS(separator, string1, string2, ...)
+```
+
+**Example:**
+```sql
+SELECT CONCAT_WS(' ', first_name, last_name) AS full_name
+FROM employees;
+```
+**Result:** Combines `first_name` and `last_name` with a space, skipping `NULL` values in the arguments.
+
+If you need NULL-safe concatenation without a separator, you can use `CONCAT_WS('', string1, string2, ...)`.
+
+### `TRIM()` - Removes leading and trailing characters from a string, most often spaces.
 
 **Syntax:**
 ```sql
 TRIM(string)
+TRIM([characters FROM] string)
 ```
 
 **Example:**
@@ -89,6 +118,8 @@ TRIM(string)
 SELECT TRIM('   SQL Basics   ') AS trimmed_string;
 ```
 **Result:** Returns `'SQL Basics'` without leading or trailing spaces.
+
+In the simplest case, `TRIM()` removes spaces from both ends of a string. In some DBMSs, the function also allows you to specify exactly which characters should be removed.
 
 ### `REPLACE()` - Replaces occurrences of a substring within a string.
 
@@ -156,13 +187,13 @@ FROM employees;
    Use `TRIM()` and `REPLACE()` to clean up messy data, such as removing extra spaces or unwanted characters.
 
 2. **Formatting Output:**
-   Use `UPPER()`, `LOWER()`, and `CONCAT()` to standardize and format text for reports.
+   Use `UPPER()`, `LOWER()`, `CONCAT()`, and `CONCAT_WS()` to standardize and format text for reports.
 
 3. **Extracting Information:**
    Use `SUBSTRING()`, `LEFT()`, and `RIGHT()` to extract specific parts of a string, such as prefixes or domain names.
 
 4. **Validating Data:**
-   Use `LENGTH()` and `INSTR()` to validate the structure of strings, such as checking the length of phone numbers or the presence of an `@` symbol in email addresses.
+   Use character-counting functions (for example, `CHAR_LENGTH()` or `LEN()`) and `INSTR()` to validate string structure, such as checking the length of phone numbers or the presence of an `@` symbol in email addresses.
 
 **Key Takeaways from this Lesson:**
 

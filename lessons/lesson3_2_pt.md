@@ -32,17 +32,28 @@ FROM employees;
 ```
 **Resultado:** Converte todos os valores de `last_name` para minúsculas.
 
-### `LENGTH()` ou `LEN()` - Retorna o comprimento de uma string (número de caracteres).
+### `LENGTH()`, `CHAR_LENGTH()` ou `LEN()` - Retorna o comprimento de uma string (em caracteres ou bytes, dependendo do SGBD).
 
 **Sintaxe:**
 ```sql
-LENGTH(string) -- Para a maioria dos bancos de dados
-LEN(string)    -- Para SQL Server
+CHAR_LENGTH(string) -- Número de caracteres (por exemplo, no MySQL)
+LENGTH(string)      -- No MySQL: comprimento em bytes
+LEN(string)         -- No SQL Server: comprimento em caracteres
 ```
+
+Importante: em diferentes SGBDs, “comprimento da string” pode significar coisas diferentes. Algumas funções retornam o comprimento em caracteres, enquanto outras retornam em bytes. Sempre verifique em qual unidade uma função trabalha no seu SGBD.
+
+**Quando `LENGTH()` e `CHAR_LENGTH()` podem ser diferentes (por exemplo, no MySQL):**
+- Para strings com apenas letras latinas e dígitos, os valores costumam coincidir.
+- Para strings com caracteres multibyte (cirílico, emoji, ideogramas), `LENGTH()` geralmente é maior que `CHAR_LENGTH()`, porque conta bytes.
+
+**Exemplo curto:**
+- `'SQL'`: `LENGTH` = 3, `CHAR_LENGTH` = 3
+- `'Привет'`: `LENGTH` = 12, `CHAR_LENGTH` = 6
 
 **Exemplo:**
 ```sql
-SELECT LENGTH(product_name) AS name_length
+SELECT CHAR_LENGTH(product_name) AS name_length
 FROM products;
 ```
 **Resultado:** Retorna o número de caracteres em cada `product_name`.
@@ -76,11 +87,30 @@ FROM employees;
 ```
 **Resultado:** Combina `first_name` e `last_name` em um único `full_name`.
 
-### `TRIM()` - Remove espaços em branco no início e no final de uma string.
+**Importante:** o comportamento de `CONCAT()` com `NULL` depende do SGBD. Por exemplo, no MySQL e no MariaDB, se pelo menos um argumento for `NULL`, o resultado de `CONCAT()` também será `NULL`.
+
+### `CONCAT_WS()` - Concatena strings com um separador e normalmente ignora valores `NULL`.
+
+**Sintaxe:**
+```sql
+CONCAT_WS(separator, string1, string2, ...)
+```
+
+**Exemplo:**
+```sql
+SELECT CONCAT_WS(' ', first_name, last_name) AS full_name
+FROM employees;
+```
+**Resultado:** Combina `first_name` e `last_name` com um espaço, ignorando valores `NULL` nos argumentos.
+
+Se você precisar de uma concatenação NULL-safe sem separador, pode usar `CONCAT_WS('', string1, string2, ...)`.
+
+### `TRIM()` - Remove caracteres no início e no final de uma string, geralmente espaços.
 
 **Sintaxe:**
 ```sql
 TRIM(string)
+TRIM([characters FROM] string)
 ```
 
 **Exemplo:**
@@ -88,6 +118,8 @@ TRIM(string)
 SELECT TRIM('   SQL Basics   ') AS trimmed_string;
 ```
 **Resultado:** Retorna `'SQL Basics'` sem os espaços em branco no início ou no final.
+
+No caso mais simples, `TRIM()` remove espaços nas extremidades da string. Em alguns SGBDs, a função também permite informar explicitamente quais caracteres devem ser removidos.
 
 ### `REPLACE()` - Substitui ocorrências de uma substring dentro de uma string.
 
@@ -155,13 +187,13 @@ FROM employees;
    Use `TRIM()` e `REPLACE()` para limpar dados desorganizados, como remover espaços extras ou caracteres indesejados.
 
 2. **Formatação de Saída:**
-   Use `UPPER()`, `LOWER()` e `CONCAT()` para padronizar e formatar texto para relatórios.
+   Use `UPPER()`, `LOWER()`, `CONCAT()` e `CONCAT_WS()` para padronizar e formatar texto para relatórios.
 
 3. **Extração de Informações:**
    Use `SUBSTRING()`, `LEFT()` e `RIGHT()` para extrair partes específicas de uma string, como prefixos ou nomes de domínio.
 
 4. **Validação de Dados:**
-   Use `LENGTH()` e `INSTR()` para validar a estrutura de strings, como verificar o comprimento de números de telefone ou a presença de um símbolo `@` em endereços de e-mail.
+   Use funções que contam caracteres (por exemplo, `CHAR_LENGTH()` ou `LEN()`) e `INSTR()` para validar a estrutura de strings, como verificar o comprimento de números de telefone ou a presença de um símbolo `@` em endereços de e-mail.
 
 **Principais Conclusões desta Aula:**
 
