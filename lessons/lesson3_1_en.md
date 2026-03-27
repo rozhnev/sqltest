@@ -1,10 +1,10 @@
 # Lesson 3.1: Built-in SQL Functions
 
-SQL functions are predefined operations that accept arguments, perform actions on data, and return a value. They allow you to manipulate data, perform calculations, and format results within your SQL queries. Functions can be used in various parts of a query, such as the `SELECT` clause to transform output, or the `WHERE` clause to filter data based on calculated values.
-
 ## What are SQL Functions?
 
-SQL functions are similar to functions in other programming languages. They accept input values (arguments), perform a specific operation, and return a result. Functions can be built-in (provided by the database system) or user-defined (created by users). This lesson focuses on built-in functions.
+A SQL function is a predefined operation that accepts input values (arguments) and returns a result. Functions can be built-in (provided by the database system) or user-defined (created by developers), but in this lesson we focus only on built-in functions.
+
+Built-in SQL functions help process data directly in a query: transform values, perform calculations, and work with text, dates, and numbers. This lets you get more informative results without additional processing in the application layer.
 
 ## Common Syntax
 
@@ -48,7 +48,7 @@ This query retrieves the `salary` column from the `employees` table and rounds e
 ---
 
 ### Example 3: Date Function (`NOW`)
-The `NOW()` function have not arguments and returns the current date and time.
+The `NOW()` function takes no arguments and returns the current date and time.
 
 ```sql
 SELECT NOW() AS current_datetime;

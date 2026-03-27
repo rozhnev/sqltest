@@ -1,10 +1,10 @@
 # Leçon 3.1 : Fonctions SQL intégrées
 
-Les fonctions SQL sont des opérations prédéfinies qui acceptent des arguments, effectuent des actions sur les données et renvoient une valeur. Elles vous permettent de manipuler des données, d'effectuer des calculs et de formater les résultats au sein de vos requêtes SQL. Les fonctions peuvent être utilisées dans diverses parties d'une requête, comme la clause `SELECT` pour transformer la sortie, ou la clause `WHERE` pour filtrer les données en fonction de valeurs calculées.
-
 ## Que sont les fonctions SQL ?
 
-Les fonctions SQL sont similaires aux fonctions d'autres langages de programmation. Elles acceptent des valeurs d'entrée (arguments), effectuent une opération spécifique et renvoient un résultat. Les fonctions peuvent être intégrées (fournies par le système de base de données) ou définies par l'utilisateur (créées par les utilisateurs). Cette leçon se concentre sur les fonctions intégrées.
+Une fonction SQL est une opération prédéfinie qui accepte des valeurs d'entrée (arguments) et renvoie un résultat. Les fonctions peuvent être intégrées (fournies par le SGBD) ou définies par l'utilisateur (créées par les développeurs), mais dans cette leçon nous nous concentrons uniquement sur les fonctions intégrées.
+
+Les fonctions SQL intégrées permettent de traiter les données directement dans la requête : transformer des valeurs, effectuer des calculs et travailler avec du texte, des dates et des nombres. Cela permet d'obtenir des résultats plus informatifs sans traitement supplémentaire côté application.
 
 ## Syntaxe courante
 
