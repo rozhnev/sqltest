@@ -2,9 +2,11 @@
 
 Date and time functions in SQL allow you to extract, modify, and format date and time values. These functions are widely used for analyzing temporal data, filtering by date, calculating intervals, and formatting output. This lesson covers the most commonly used functions with examples based on the Sakila database.
 
+*Important*: `CURRENT_DATE`, `CURRENT_TIME`, and `CURRENT_TIMESTAMP` are, in many DBMSs, special SQL expressions (or aliases of corresponding functions), not "regular" functions in the form `NAME(arg1, arg2, ...)`. Because of this, syntax and behavior details can differ across DBMSs.
+
 ## Common Date and Time Functions
 
-### `CURRENT_DATE` — Returns the current date (without time).
+### `CURRENT_DATE` — A special expression that returns the current date (without time).
 
 **Syntax:**
 ```sql
@@ -17,24 +19,28 @@ SELECT CURRENT_DATE AS today;
 ```
 **Result:** The current date, e.g.: `2025-06-03`
 
-### `CURRENT_TIME` — Returns the current time (without date).
+### `CURRENT_TIME` — A special expression/alias that returns the current time (without date).
 
 **Syntax:**
 ```sql
 CURRENT_TIME
+CURRENT_TIME()
+CURRENT_TIME(precision)
 ```
 
 **Example:**
 ```sql
 SELECT CURRENT_TIME AS now_time;
 ```
-**Result:** The current time, e.g.: `14:25:30`
+**Result:** The current time. With precision specified (for example, `CURRENT_TIME(3)`), the value includes fractional seconds.
 
-### `CURRENT_TIMESTAMP` / `NOW()` — Returns the current date and time.
+### `CURRENT_TIMESTAMP` / `NOW()` — Returns the current date and time (often as a special expression/alias).
 
 **Syntax:**
 ```sql
 CURRENT_TIMESTAMP
+CURRENT_TIMESTAMP()
+CURRENT_TIMESTAMP(precision)
 NOW()
 ```
 
@@ -44,6 +50,10 @@ SELECT CURRENT_TIMESTAMP AS now_datetime;
 SELECT NOW() AS now_datetime;
 ```
 **Result:** The current date and time, e.g.: `2025-06-03 14:25:30`
+
+*Important*: in most DBMSs, `CURRENT_DATE`/`CURRENT_TIME`/`CURRENT_TIMESTAMP` are fixed at the start of statement execution (and in some modes, at transaction start). So within one query, all rows usually get the same value.
+
+If you need a "current timestamp" at the moment a function is evaluated for a specific row, use DBMS-specific alternatives (for example, `SYSDATE()` in MySQL/MariaDB, `clock_timestamp()` in PostgreSQL).
 
 ### `DATE()` — Extracts only the date from a datetime value.
 

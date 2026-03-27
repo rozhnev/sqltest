@@ -2,9 +2,11 @@
 
 As funções de data e hora em SQL permitem extrair, modificar e formatar valores de data e hora. Essas funções são amplamente utilizadas para analisar dados temporais, filtrar por data, calcular intervalos e formatar a saída. Esta aula cobre as funções mais usadas com exemplos baseados no banco de dados Sakila.
 
+*Importante*: `CURRENT_DATE`, `CURRENT_TIME` e `CURRENT_TIMESTAMP`, em muitos SGBDs, são expressões SQL especiais (ou aliases de funções correspondentes), e não "funções comuns" no formato `NAME(arg1, arg2, ...)`. Por isso, a sintaxe e os detalhes de comportamento podem variar entre SGBDs.
+
 ## Funções Comuns de Data e Hora
 
-### `CURRENT_DATE` — Retorna a data atual (sem hora).
+### `CURRENT_DATE` — Expressão especial que retorna a data atual (sem hora).
 
 **Sintaxe:**
 ```sql
@@ -17,24 +19,28 @@ SELECT CURRENT_DATE AS hoje;
 ```
 **Resultado:** A data atual, por exemplo: `2025-06-03`
 
-### `CURRENT_TIME` — Retorna a hora atual (sem data).
+### `CURRENT_TIME` — Expressão especial/alias que retorna a hora atual (sem data).
 
 **Sintaxe:**
 ```sql
 CURRENT_TIME
+CURRENT_TIME()
+CURRENT_TIME(precision)
 ```
 
 **Exemplo:**
 ```sql
 SELECT CURRENT_TIME AS hora_atual;
 ```
-**Resultado:** A hora atual, por exemplo: `14:25:30`
+**Resultado:** A hora atual. Com precisão informada (por exemplo, `CURRENT_TIME(3)`), o valor inclui frações de segundo.
 
-### `CURRENT_TIMESTAMP` / `NOW()` — Retorna a data e hora atuais.
+### `CURRENT_TIMESTAMP` / `NOW()` — Retorna a data e hora atuais (frequentemente como expressão especial/alias).
 
 **Sintaxe:**
 ```sql
 CURRENT_TIMESTAMP
+CURRENT_TIMESTAMP()
+CURRENT_TIMESTAMP(precision)
 NOW()
 ```
 
@@ -44,6 +50,10 @@ SELECT CURRENT_TIMESTAMP AS data_hora_atual;
 SELECT NOW() AS data_hora_atual;
 ```
 **Resultado:** A data e hora atuais, por exemplo: `2025-06-03 14:25:30`
+
+*Importante*: na maioria dos SGBDs, `CURRENT_DATE`/`CURRENT_TIME`/`CURRENT_TIMESTAMP` são fixados no início da execução da consulta (e, em alguns modos, no início da transação). Portanto, em uma mesma consulta, todas as linhas normalmente recebem o mesmo valor.
+
+Se você precisa de uma "marca temporal atual" no momento da avaliação para cada linha, use alternativas específicas do SGBD (por exemplo, `SYSDATE()` no MySQL/MariaDB, `clock_timestamp()` no PostgreSQL).
 
 ### `DATE()` — Extrai apenas a data de um valor datetime.
 
