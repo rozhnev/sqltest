@@ -5,7 +5,7 @@ Ao trabalhar com dados agrupados no SQL, muitas vezes é necessário filtrar os 
 ## O Papel do HAVING
 
 - `WHERE` filtra linhas antes do agrupamento.
-- `HAVING` filtra grupos após a agregação.
+- `HAVING` filtra grupos após a agregação. `HAVING` é mais comumente usado com funções de agregação, mas também pode ser aplicado a colunas não agregadas (geralmente colunas do `GROUP BY`).
 
 ### Sintaxe
 
@@ -89,7 +89,7 @@ HAVING COUNT(*) > 50 AND SUM(amount) > 500;
 ## Principais Conclusões desta Lição
 
 - Use `HAVING` para filtrar grupos após a agregação.
-- `HAVING` funciona com funções agregadas, enquanto `WHERE` não.
+- `HAVING` funciona com dados agregados, enquanto `WHERE` não.
 - Combine `HAVING` com `GROUP BY` para análises e relatórios poderosos.
 
 Pratique o uso do `HAVING` em suas próprias consultas para obter insights mais profundos de dados agrupados no SQL.

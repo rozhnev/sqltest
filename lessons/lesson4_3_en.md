@@ -5,7 +5,7 @@ When working with grouped data in SQL, you often need to filter the results of a
 ## The Role of HAVING
 
 - `WHERE` filters rows before grouping.
-- `HAVING` filters groups after aggregation.
+- `HAVING` filters groups after aggregation. `HAVING` is most commonly used with aggregate functions, but it can also be applied to non-aggregated columns (usually columns from `GROUP BY`).
 
 ### Syntax
 
@@ -89,7 +89,7 @@ HAVING COUNT(*) > 50 AND SUM(amount) > 500;
 ## Key Takeaways from This Lesson
 
 - Use `HAVING` to filter groups after aggregation.
-- `HAVING` works with aggregate functions, while `WHERE` does not.
+- `HAVING` works with aggregated data, while `WHERE` does not.
 - Combine `HAVING` with `GROUP BY` for powerful data analysis and reporting.
 
 Practice using `HAVING` with your own queries to gain deeper insights from grouped data in SQL.
