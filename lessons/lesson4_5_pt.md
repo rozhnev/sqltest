@@ -7,7 +7,9 @@
 - totais por cliente;
 - total geral de todo o conjunto de dados.
 
-É possível escrever várias consultas e combiná-las com `UNION ALL`, mas isso fica mais verboso e difícil de manter. Para esses casos, o SQL oferece extensões de agrupamento: `ROLLUP`, `CUBE` e `GROUPING SETS`.
+É possível escrever várias consultas e combiná-las com `UNION ALL`, mas isso fica mais verboso e difícil de manter. Para esses casos, o SQL usa modificadores da expressão de agrupamento: `ROLLUP`, `CUBE` e `GROUPING SETS`.
+
+De forma mais precisa: esses modificadores enriquecem o resultado agregado com linhas de nível mais alto de agregação (subtotais e total geral).
 
 Importante: nesta aula, todos os exemplos práticos usam **SQL Server (AdventureWorks)**.
 
@@ -26,6 +28,7 @@ A agregação avançada ajuda a:
 - construir relatórios multinível em uma única consulta;
 - reduzir duplicação de SQL;
 - obter resultados consistentes entre detalhe, subtotais e total geral.
+- enriquecer o resultado detalhado com linhas em níveis mais altos de agregação.
 
 ## Ideia básica
 

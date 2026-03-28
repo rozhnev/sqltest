@@ -7,7 +7,9 @@ As reporting needs grow, regular `GROUP BY` is often not enough. For example, yo
 - totals by customer;
 - a grand total for the whole dataset.
 
-You can write multiple queries and combine them with `UNION ALL`, but that is verbose and harder to maintain. SQL provides grouping extensions for these tasks: `ROLLUP`, `CUBE`, and `GROUPING SETS`.
+You can write multiple queries and combine them with `UNION ALL`, but that is verbose and harder to maintain. For these tasks, SQL uses grouping expression modifiers: `ROLLUP`, `CUBE`, and `GROUPING SETS`.
+
+More precisely: these modifiers enrich aggregated query results with rows at a higher level of aggregation (subtotals and grand total).
 
 Important: all practical examples in this lesson use **SQL Server (AdventureWorks)**.
 
@@ -26,6 +28,7 @@ Advanced aggregation helps you:
 - build multi-level reports in a single query;
 - reduce SQL duplication;
 - produce consistent detail, subtotals, and grand totals.
+- enrich detail-level output with rows at higher aggregation levels.
 
 ## Core Idea
 

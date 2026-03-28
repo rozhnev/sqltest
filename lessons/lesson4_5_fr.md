@@ -7,7 +7,9 @@ Quand les besoins de reporting augmentent, un simple `GROUP BY` ne suffit souven
 - des totaux par client ;
 - un total global sur tout le jeu de données.
 
-On peut écrire plusieurs requêtes et les combiner avec `UNION ALL`, mais cette approche est plus verbeuse et plus difficile à maintenir. SQL propose des extensions de regroupement pour cela : `ROLLUP`, `CUBE` et `GROUPING SETS`.
+On peut écrire plusieurs requêtes et les combiner avec `UNION ALL`, mais cette approche est plus verbeuse et plus difficile à maintenir. Pour ces cas, SQL utilise des modificateurs de l'expression de regroupement : `ROLLUP`, `CUBE` et `GROUPING SETS`.
+
+Formulation plus précise : ces modificateurs enrichissent le résultat agrégé avec des lignes d'un niveau d'agrégation plus élevé (sous-totaux et total global).
 
 Important : dans cette leçon, tous les exemples pratiques utilisent **SQL Server (AdventureWorks)**.
 
@@ -26,6 +28,7 @@ L'agrégation avancée permet de :
 - construire des rapports multi-niveaux avec une seule requête ;
 - réduire la duplication du SQL ;
 - obtenir des résultats cohérents entre détail, sous-totaux et total global.
+- enrichir le résultat détaillé avec des lignes d'agrégation de niveau supérieur.
 
 ## Idée de base
 
