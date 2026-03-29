@@ -376,6 +376,27 @@
     </div>                            
     {if $User->showAd()}
         <div class="referal-add-block">
+            {if $Book}
+                <div class="book-card">
+                    <a href="{{$Book.referral_link}}" target="_blank" style="text-decoration: none; color: var(--question-color);">
+                        <div style="display: flex; flex-direction: row;     border: 1px solid var(--text-block-border-color);
+color: var(--question-text);
+border-radius: 6px; padding: 0.3em; width: 98%;">
+                        <div  style = "width: 25%;">
+                            <img style="width: 100%;" src="{{$Book.picture_link}}" alt="{{$Book.title|escape:"html"}}">
+                        </div>
+                        <div style="font-size: 1em;  width: 75%;  padding: 0 0.7em; font-weight: 100; height: 250px; overflow: auto;">
+                            <div>{{$Book.title|escape:"html"}}</div>
+                            <div style="font-size: small; padding-top: 0.5em;">{{$Book.description|escape:"html"}}</div>
+                        </div>
+                        </div>
+                    </a>
+                </div>
+            {else}
+                <a href="https://www.kqzyfj.com/86104kjspjr6878CE9F9G68E9B9898" target="_blank">
+                    <img src="https://www.awltovhc.com/60106z15u-yJLKLPRMSMTJLRMOMLML" alt="" style="border: 0; width: 100%;"/>
+                </a>
+            {/if}        
             {* <script async="async" data-cfasync="false" src="//pl26881648.profitableratecpm.com/93660caf229b7b6afe772e0ab435c7a9/invoke.js"></script>
             <div id="container-93660caf229b7b6afe772e0ab435c7a9"></div> *}
         </div>
