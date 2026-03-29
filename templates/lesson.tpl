@@ -60,7 +60,7 @@
                 <div class="code-buttons" style="justify-content: space-between !important;">
                     <div id="prevTaskBtn">
                         {if $LessonData.prev_lesson_slug}
-                        <a class="button" href="/{$Lang}/lesson/{$LessonData.prev_module_slug}/{$LessonData.prev_lesson_slug}}" title="{translate}previous_lesson{/translate}">
+                        <a class="button" href="/{$Lang}/lesson/{$LessonData.prev_module_slug}/{$LessonData.prev_lesson_slug}" title="{translate}previous_lesson{/translate}">
                             <i class="run-icon" style="transform: scaleX(-1);"></i>
                             <span>{translate}previous_lesson{/translate}</span>
                         </a>
@@ -74,7 +74,7 @@
                     </div>
                     <div id="nextTaskBtn">
                         {if $LessonData.next_lesson_slug}
-                        <a class="button green" href="/{$Lang}/lesson/{$LessonData.next_module_slug}/{$LessonData.next_lesson_slug}}" title="{translate}next_lesson{/translate}">
+                        <a class="button green" href="/{$Lang}/lesson/{$LessonData.next_module_slug}/{$LessonData.next_lesson_slug}" title="{translate}next_lesson{/translate}">
                             <span>{translate}next_lesson{/translate}</span>
                             <i class="run-icon"></i>
                         </a>
