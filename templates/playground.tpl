@@ -87,12 +87,12 @@
                                             Firebird
                                         </label>
                                     </li>
-                                    <li>
+                                    {* <li>
                                         <label class="db-label">
                                             <input type="radio" name="database" value="soqol">
                                             SoQoL
                                         </label>
-                                    </li>
+                                    </li> *}
                                 </ul>
                             </div>
                         </div>
