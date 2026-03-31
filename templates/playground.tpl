@@ -24,6 +24,29 @@
     .menu-panel .db-label input{
         margin: 0 6px 0 0;
     }
+    .playground-content {
+        margin: 12px 6px 0;
+        font-size: small;
+    }
+    .playground-text-section {
+        padding: 1.5rem;
+    }
+    .playground-text-section h1,
+    .playground-text-section h2 {
+        margin: 0 0 0.75rem;
+    }
+    .playground-text-section p {
+        margin: 0 0 1rem;
+        line-height: 1.65;
+    }
+    .playground-text-section ul {
+        margin: 0 0 1.25rem;
+        padding-left: 1.25rem;
+    }
+    .playground-text-section li {
+        margin-bottom: 0.5rem;
+        line-height: 1.55;
+    }
 </style>
 <body>
     <div class="container">
@@ -98,6 +121,25 @@
                         </div>
                     </div>
                 </div>
+                <section class="playground-content">
+                    <div class="question-wrapper playground-text-section">
+                        <h1>{translate}playground_content_title{/translate}</h1>
+                        <p>{translate}playground_content_intro{/translate}</p>
+
+                        <h2>{translate}playground_content_features_title{/translate}</h2>
+                        <ul>
+                            <li>{translate}playground_content_feature_1{/translate}</li>
+                            <li>{translate}playground_content_feature_2{/translate}</li>
+                            <li>{translate}playground_content_feature_3{/translate}</li>
+                        </ul>
+
+                        <h2>{translate}playground_content_supported_title{/translate}</h2>
+                        <p>{translate}playground_content_supported_text{/translate}</p>
+
+                        <h2>{translate}playground_content_use_cases_title{/translate}</h2>
+                        <p>{translate}playground_content_use_cases_text{/translate}</p>
+                    </div>
+                </section>
             </div>
             <div class="column">
                 <div class="question-wrapper" style="margin-right: 6px;">
