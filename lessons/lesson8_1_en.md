@@ -1,4 +1,4 @@
-This lesson introduces the `CREATE TABLE` statement, the primary Data Definition Language (DDL) command used to create new tables in a database. You will learn the basic syntax, how to define columns and their data types, and how to use important constraints such as `PRIMARY KEY`, `NOT NULL`, and `DEFAULT`. By the end of this lesson, you will be able to create tables with a clear and reliable structure.
+This lesson introduces the `CREATE TABLE` statement, the primary Data Definition Language (DDL) command used to create new tables in a database. You will learn the basic syntax, how to define columns and their data types, and how to use important constraints and column parameters such as `PRIMARY KEY`, `NOT NULL`, `DEFAULT`, `CHARACTER SET`, and `COLLATE`. By the end of this lesson, you will be able to create tables with a clear and reliable structure.
 
 # Lesson 8.1: The CREATE TABLE Statement
 
@@ -20,9 +20,9 @@ CREATE TABLE table_name (
 
 After the table name, the columns are listed inside parentheses. For each column, you need to specify:
 
-- the column name;
-- the data type;
-- and, when needed, constraints such as `NOT NULL`, `PRIMARY KEY`, `DEFAULT`, and others.
+- the column name (required);
+- the data type (required);
+- and, when needed, additional characteristics such as encoding, constraints, comments, and others.
 
 ## Example of a Simple Table
 
@@ -61,7 +61,7 @@ When creating tables, it is important to choose suitable data types. Here are so
 - `DECIMAL(p, s)` for exact numeric values, such as money;
 - `BOOLEAN` for logical values `TRUE` or `FALSE`.
 
-Choosing the right data type helps save space, maintain data quality, and avoid errors.
+Choosing the right data type helps save space, maintain data quality, and avoid errors. You can read more about data types <a href="/en/lesson/getting-started/basic-data-types">here</a>.
 
 ---
 
@@ -95,8 +95,27 @@ CREATE TABLE students (
 
 Now `first_name` and `last_name` cannot be left empty.
 
-### 3. `DEFAULT`
-This lets you define a default value that will be used if no value is provided during insertion.
+### 3. `CHECK`
+The `CHECK` constraint defines a condition that the values in a column must satisfy.
+
+```sql
+CREATE TABLE products (
+    product_id INT PRIMARY KEY,
+    product_name VARCHAR(100) NOT NULL,
+    price DECIMAL(10, 2) CHECK (price >= 0)
+);
+```
+
+In this example, the database will not allow a product with a negative price to be stored.
+
+---
+
+## Additional Column Parameters
+
+In addition to constraints, columns can have extra parameters. These do not directly forbid or allow values, but they help define the column's behavior more precisely.
+
+### 1. `DEFAULT`
+The `DEFAULT` parameter defines the value that will be used if no value is provided during insertion.
 
 ```sql
 CREATE TABLE products (
@@ -107,6 +126,19 @@ CREATE TABLE products (
 ```
 
 If no price is provided when adding a product, the database will automatically use `0.00`.
+
+### 2. `CHARACTER SET` and `COLLATE`
+For text columns, you can explicitly specify the character set and the collation rules.
+
+```sql
+CREATE TABLE customers (
+    customer_id INT PRIMARY KEY,
+    first_name VARCHAR(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+    last_name VARCHAR(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+);
+```
+
+Here, `CHARACTER SET` defines the encoding used to store text data, while `COLLATE` defines how strings are compared and sorted. This is especially important when a table needs to work correctly with different languages and characters.
 
 ---
 
@@ -160,6 +192,7 @@ When creating tables, it is helpful to keep a few rules in mind:
 - define a `PRIMARY KEY` for tables where each row must be uniquely identified;
 - use `NOT NULL` for truly required fields;
 - use `DEFAULT` when a column has a natural default value;
+- explicitly set `CHARACTER SET` and `COLLATE` for text fields when needed;
 - try to make the structure clear and predictable from the start.
 
 A well-designed table reduces errors and makes it easier to work later with `INSERT`, `UPDATE`, and `SELECT`.
@@ -188,8 +221,9 @@ Once this table is created, we can start adding rows to it using `INSERT INTO`.
 
 *   The `CREATE TABLE` statement is used to create new tables in a database.
 *   Each column must have a name and a data type.
-*   Constraints such as `PRIMARY KEY`, `NOT NULL`, `UNIQUE`, and `DEFAULT` help control data quality.
+*   Constraints such as `PRIMARY KEY`, `NOT NULL`, `UNIQUE`, and `CHECK` help control data quality.
+*   Additional column parameters such as `DEFAULT`, `CHARACTER SET`, and `COLLATE` help fine-tune data storage and behavior.
 *   A well-designed table makes future work with data simpler and more reliable.
 *   `IF NOT EXISTS` helps avoid errors when creating a table more than once.
 
-In the next lesson, we will learn how to add new rows to tables using the `INSERT INTO` statement.
+In the <a href="/en/lesson/data-manipulation/the-insert-into-statement">next lesson</a>, we will learn how to add new rows to tables using the `INSERT INTO` statement.

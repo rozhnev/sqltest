@@ -1,4 +1,4 @@
-Esta lição apresenta a instrução `CREATE TABLE`, o principal comando da Linguagem de Definição de Dados (DDL) usado para criar novas tabelas em um banco de dados. Você aprenderá a sintaxe básica, como definir colunas e seus tipos de dados, e como usar restrições importantes, como `PRIMARY KEY`, `NOT NULL` e `DEFAULT`. Ao final desta lição, você será capaz de criar tabelas com uma estrutura clara e confiável.
+Esta lição apresenta a instrução `CREATE TABLE`, o principal comando da Linguagem de Definição de Dados (DDL) usado para criar novas tabelas em um banco de dados. Você aprenderá a sintaxe básica, como definir colunas e seus tipos de dados, e como usar restrições importantes e parâmetros de coluna, como `PRIMARY KEY`, `NOT NULL`, `DEFAULT`, `CHARACTER SET` e `COLLATE`. Ao final desta lição, você será capaz de criar tabelas com uma estrutura clara e confiável.
 
 # Lição 8.1: A Instrução CREATE TABLE
 
@@ -20,9 +20,9 @@ CREATE TABLE table_name (
 
 Após o nome da tabela, as colunas são listadas entre parênteses. Para cada coluna, você precisa especificar:
 
-- o nome da coluna;
-- o tipo de dado;
-- e, quando necessário, restrições como `NOT NULL`, `PRIMARY KEY`, `DEFAULT` e outras.
+- o nome da coluna (obrigatório);
+- o tipo de dado (obrigatório);
+- e, quando necessário, características adicionais como codificação, restrições, comentários e outras.
 
 ## Exemplo de uma Tabela Simples
 
@@ -61,7 +61,7 @@ Ao criar tabelas, é importante escolher tipos de dados adequados. Aqui estão a
 - `DECIMAL(p, s)` para valores numéricos exatos, como quantias em dinheiro;
 - `BOOLEAN` para valores lógicos `TRUE` ou `FALSE`.
 
-Escolher o tipo de dado correto ajuda a economizar espaço, manter a qualidade dos dados e evitar erros.
+Escolher o tipo de dado correto ajuda a economizar espaço, manter a qualidade dos dados e evitar erros. Você pode ler mais sobre tipos de dados <a href="/pt/lesson/getting-started/basic-data-types">aqui</a>.
 
 ---
 
@@ -95,8 +95,27 @@ CREATE TABLE students (
 
 Agora `first_name` e `last_name` não podem ficar vazios.
 
-### 3. `DEFAULT`
-Permite definir um valor padrão que será usado caso nenhum valor seja informado durante a inserção.
+### 3. `CHECK`
+A restrição `CHECK` define uma condição que os valores de uma coluna devem satisfazer.
+
+```sql
+CREATE TABLE products (
+    product_id INT PRIMARY KEY,
+    product_name VARCHAR(100) NOT NULL,
+    price DECIMAL(10, 2) CHECK (price >= 0)
+);
+```
+
+Neste exemplo, o banco de dados não permitirá salvar um produto com preço negativo.
+
+---
+
+## Parâmetros adicionais de coluna
+
+Além das restrições, as colunas podem ter parâmetros extras. Eles não proíbem nem permitem valores diretamente, mas ajudam a definir o comportamento da coluna com mais precisão.
+
+### 1. `DEFAULT`
+O parâmetro `DEFAULT` define o valor que será usado caso nenhum valor seja informado durante a inserção.
 
 ```sql
 CREATE TABLE products (
@@ -107,6 +126,19 @@ CREATE TABLE products (
 ```
 
 Se nenhum preço for informado ao adicionar um produto, o banco de dados usará automaticamente `0.00`.
+
+### 2. `CHARACTER SET` e `COLLATE`
+Para colunas de texto, você pode definir explicitamente o conjunto de caracteres e as regras de comparação.
+
+```sql
+CREATE TABLE customers (
+    customer_id INT PRIMARY KEY,
+    first_name VARCHAR(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+    last_name VARCHAR(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+);
+```
+
+Aqui, `CHARACTER SET` define a codificação usada para armazenar dados de texto, enquanto `COLLATE` define como as strings serão comparadas e ordenadas. Isso é especialmente importante quando uma tabela precisa funcionar corretamente com diferentes idiomas e caracteres.
 
 ---
 
@@ -160,6 +192,7 @@ Ao criar tabelas, vale a pena lembrar algumas regras:
 - defina uma `PRIMARY KEY` para tabelas em que cada linha precisa ser identificada de forma única;
 - use `NOT NULL` para campos realmente obrigatórios;
 - use `DEFAULT` quando uma coluna tiver um valor padrão natural;
+- para campos de texto, defina `CHARACTER SET` e `COLLATE` explicitamente quando necessário;
 - tente tornar a estrutura clara e previsível desde o início.
 
 Uma tabela bem projetada reduz erros e facilita o trabalho posterior com `INSERT`, `UPDATE` e `SELECT`.
@@ -188,8 +221,9 @@ Depois que essa tabela for criada, poderemos começar a adicionar linhas usando 
 
 *   A instrução `CREATE TABLE` é usada para criar novas tabelas em um banco de dados.
 *   Cada coluna deve ter um nome e um tipo de dado.
-*   Restrições como `PRIMARY KEY`, `NOT NULL`, `UNIQUE` e `DEFAULT` ajudam a controlar a qualidade dos dados.
+*   Restrições como `PRIMARY KEY`, `NOT NULL`, `UNIQUE` e `CHECK` ajudam a controlar a qualidade dos dados.
+*   Parâmetros adicionais de coluna, como `DEFAULT`, `CHARACTER SET` e `COLLATE`, ajudam a ajustar com mais precisão o armazenamento e o comportamento dos dados.
 *   Uma tabela bem projetada torna o trabalho futuro com dados mais simples e confiável.
 *   `IF NOT EXISTS` ajuda a evitar erros ao criar a mesma tabela mais de uma vez.
 
-Na próxima lição, aprenderemos como adicionar novas linhas às tabelas usando a instrução `INSERT INTO`.
+Na <a href="/pt/lesson/data-manipulation/the-insert-into-statement">próxima lição</a>, aprenderemos como adicionar novas linhas às tabelas usando a instrução `INSERT INTO`.

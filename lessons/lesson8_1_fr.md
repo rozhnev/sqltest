@@ -1,4 +1,4 @@
-Cette leçon présente l’instruction `CREATE TABLE`, la commande principale du langage de définition de données (DDL) utilisée pour créer de nouvelles tables dans une base de données. Vous apprendrez la syntaxe de base, comment définir les colonnes et leurs types de données, ainsi que l’utilisation de contraintes importantes telles que `PRIMARY KEY`, `NOT NULL` et `DEFAULT`. À la fin de cette leçon, vous serez capable de créer des tables avec une structure claire et fiable.
+Cette leçon présente l’instruction `CREATE TABLE`, la commande principale du langage de définition de données (DDL) utilisée pour créer de nouvelles tables dans une base de données. Vous apprendrez la syntaxe de base, comment définir les colonnes et leurs types de données, ainsi que l’utilisation de contraintes importantes et de paramètres de colonne tels que `PRIMARY KEY`, `NOT NULL`, `DEFAULT`, `CHARACTER SET` et `COLLATE`. À la fin de cette leçon, vous serez capable de créer des tables avec une structure claire et fiable.
 
 # Leçon 8.1 : L’instruction CREATE TABLE
 
@@ -20,9 +20,9 @@ CREATE TABLE table_name (
 
 Après le nom de la table, les colonnes sont listées entre parenthèses. Pour chaque colonne, vous devez préciser :
 
-- le nom de la colonne ;
-- le type de données ;
-- et, si nécessaire, des contraintes comme `NOT NULL`, `PRIMARY KEY`, `DEFAULT` et d’autres.
+- le nom de la colonne (obligatoire) ;
+- le type de données (obligatoire) ;
+- si nécessaire, des caractéristiques supplémentaires comme l’encodage, les contraintes, les commentaires et d’autres paramètres.
 
 ## Exemple d’une table simple
 
@@ -61,7 +61,7 @@ Lors de la création de tables, il est important de choisir des types de donnée
 - `DECIMAL(p, s)` pour les valeurs numériques exactes, par exemple les montants financiers ;
 - `BOOLEAN` pour les valeurs logiques `TRUE` ou `FALSE`.
 
-Le bon choix du type de données permet d’économiser de l’espace, d’améliorer la qualité des données et d’éviter des erreurs.
+Le bon choix du type de données permet d’économiser de l’espace, d’améliorer la qualité des données et d’éviter des erreurs. Vous trouverez plus de détails sur les types de données <a href="/fr/lesson/getting-started/basic-data-types">ici</a>.
 
 ---
 
@@ -95,8 +95,27 @@ CREATE TABLE students (
 
 Désormais, `first_name` et `last_name` ne peuvent plus être laissés vides.
 
-### 3. `DEFAULT`
-Elle permet de définir une valeur par défaut qui sera utilisée si aucune valeur n’est fournie lors de l’insertion.
+### 3. `CHECK`
+La contrainte `CHECK` définit une condition que les valeurs d’une colonne doivent respecter.
+
+```sql
+CREATE TABLE products (
+    product_id INT PRIMARY KEY,
+    product_name VARCHAR(100) NOT NULL,
+    price DECIMAL(10, 2) CHECK (price >= 0)
+);
+```
+
+Dans cet exemple, la base de données n’autorisera pas l’enregistrement d’un produit avec un prix négatif.
+
+---
+
+## Paramètres supplémentaires des colonnes
+
+En plus des contraintes, les colonnes peuvent avoir des paramètres supplémentaires. Ils n’interdisent pas ou n’autorisent pas directement des valeurs, mais ils permettent de définir plus précisément le comportement d’une colonne.
+
+### 1. `DEFAULT`
+Le paramètre `DEFAULT` définit la valeur qui sera utilisée si aucune valeur n’est fournie lors de l’insertion.
 
 ```sql
 CREATE TABLE products (
@@ -107,6 +126,19 @@ CREATE TABLE products (
 ```
 
 Si aucun prix n’est fourni lors de l’ajout d’un produit, la base de données utilisera automatiquement `0.00`.
+
+### 2. `CHARACTER SET` et `COLLATE`
+Pour les colonnes textuelles, vous pouvez préciser explicitement l’encodage et les règles de comparaison des chaînes.
+
+```sql
+CREATE TABLE customers (
+    customer_id INT PRIMARY KEY,
+    first_name VARCHAR(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+    last_name VARCHAR(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+);
+```
+
+Ici, `CHARACTER SET` définit l’encodage utilisé pour stocker les données textuelles, tandis que `COLLATE` définit la manière dont les chaînes sont comparées et triées. C’est particulièrement important lorsqu’une table doit fonctionner correctement avec différentes langues et différents caractères.
 
 ---
 
@@ -160,6 +192,7 @@ Lors de la création de tables, il est utile de garder quelques règles en tête
 - définissez une `PRIMARY KEY` pour les tables où chaque ligne doit être identifiée de manière unique ;
 - utilisez `NOT NULL` pour les champs réellement obligatoires ;
 - utilisez `DEFAULT` lorsqu’une colonne possède une valeur naturelle par défaut ;
+- pour les champs textuels, définissez explicitement `CHARACTER SET` et `COLLATE` si nécessaire ;
 - essayez de rendre la structure claire et prévisible dès le départ.
 
 Une table bien conçue réduit les erreurs et facilite le travail futur avec `INSERT`, `UPDATE` et `SELECT`.
@@ -188,8 +221,9 @@ Une fois cette table créée, nous pourrons commencer à y ajouter des lignes av
 
 *   L’instruction `CREATE TABLE` est utilisée pour créer de nouvelles tables dans une base de données.
 *   Chaque colonne doit avoir un nom et un type de données.
-*   Des contraintes comme `PRIMARY KEY`, `NOT NULL`, `UNIQUE` et `DEFAULT` aident à contrôler la qualité des données.
+*   Des contraintes comme `PRIMARY KEY`, `NOT NULL`, `UNIQUE` et `CHECK` aident à contrôler la qualité des données.
+*   Des paramètres supplémentaires de colonne comme `DEFAULT`, `CHARACTER SET` et `COLLATE` aident à affiner le stockage et le comportement des données.
 *   Une table bien conçue rend le travail avec les données plus simple et plus fiable.
 *   `IF NOT EXISTS` permet d’éviter des erreurs lors de créations répétées de la même table.
 
-Dans la prochaine leçon, nous verrons comment ajouter de nouvelles lignes dans les tables avec l’instruction `INSERT INTO`.
+Dans la <a href="/fr/lesson/data-manipulation/the-insert-into-statement">prochaine leçon</a>, nous verrons comment ajouter de nouvelles lignes dans les tables avec l’instruction `INSERT INTO`.
