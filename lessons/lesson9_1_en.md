@@ -1,76 +1,227 @@
-This lesson introduces the `INSERT INTO` statement, the primary command used to add new records to a database table. You will learn the syntax for inserting data into all columns, as well as how to specify specific columns for data entry. We will also cover multi-row inserts and the importance of matching data types. By the end of this lesson, you will be able to populate your database tables with new information accurately and efficiently.
+This lesson introduces the `CREATE TABLE` statement, the primary Data Definition Language (DDL) command used to create new tables in a database. You will learn the basic syntax, how to define columns and their data types, and how to use important constraints and column parameters such as `PRIMARY KEY`, `NOT NULL`, `DEFAULT`, `CHARACTER SET`, and `COLLATE`. By the end of this lesson, you will be able to create tables with a clear and reliable structure.
 
-# Lesson 9.1: The INSERT INTO Statement
+# Lesson 9.1: The CREATE TABLE Statement
 
-So far, we have focused on retrieving data from existing tables using the `SELECT` statement. Now, we will begin exploring **Data Manipulation Language (DML)**, starting with how to add new data to your tables using the `INSERT INTO` statement.
+So far, we have mostly worked with existing tables and retrieved data from them. But in real database work, it is important not only to read data, but also to know how to **create the structure used to store it**. That is where the `CREATE TABLE` statement comes in.
+
+`CREATE TABLE` belongs to **Data Definition Language (DDL)**. It is used to describe how a table should be structured: which columns it will contain, which data types those columns will use, and which rules will apply to the values stored in them.
 
 ## The Basic Syntax
 
-There are two primary ways to use the `INSERT INTO` statement.
-
-### 1. Specifying Columns (Recommended)
-This is the safest and most common method. You explicitly list the columns you want to fill, followed by the values for those columns.
+The simplest form of the statement looks like this:
 
 ```sql
-INSERT INTO table_name (column1, column2, column3)
-VALUES (value1, value2, value3);
+CREATE TABLE table_name (
+    column1 data_type,
+    column2 data_type,
+    column3 data_type
+);
 ```
 
-### 2. Without Specifying Columns
-If you are providing values for **all** columns in the table in the exact order they were defined, you can omit the column names. However, this is less flexible and can lead to errors if the table structure changes.
+After the table name, the columns are listed inside parentheses. For each column, you need to specify:
+
+- the column name (required);
+- the data type (required);
+- and, when needed, additional characteristics such as encoding, constraints, comments, and others.
+
+## Example of a Simple Table
+
+Let's create a `students` table:
 
 ```sql
-INSERT INTO table_name
-VALUES (value1, value2, value3, ...);
+CREATE TABLE students (
+    student_id INT,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    birth_date DATE,
+    created_at TIMESTAMP
+);
 ```
+
+In this example:
+
+- `student_id` is an integer;
+- `first_name` and `last_name` are text values up to 50 characters long;
+- `birth_date` stores the date of birth;
+- `created_at` stores the date and time when the record was created.
+
+After running this command, the table will be created, but it will still be empty.
 
 ---
 
-## Important Rules for Inserting Data
-*   **Data Types:** The values you provide must match the data type of the corresponding column (e.g., you cannot insert text into a numeric column).
-*   **Strings and Dates:** Just like in the `WHERE` clause, string (text) and date values must be enclosed in single quotes (`'`).
-*   **Numbers:** Numeric values do not require quotes.
-*   **NULL Values:** If a column allows `NULL` and you don't provide a value for it, it will be filled with `NULL` (or a default value if one is defined).
+## Commonly Used Data Types
+
+When creating tables, it is important to choose suitable data types. Here are some of the most common ones:
+
+- `INT` for whole numbers;
+- `VARCHAR(n)` for variable-length strings up to `n` characters;
+- `TEXT` for long text values;
+- `DATE` for calendar dates;
+- `TIMESTAMP` for date and time values, often used to store when a row was created or updated;
+- `DECIMAL(p, s)` for exact numeric values, such as money;
+- `BOOLEAN` for logical values `TRUE` or `FALSE`.
+
+Choosing the right data type helps save space, maintain data quality, and avoid errors. You can read more about data types <a href="/en/lesson/getting-started/basic-data-types">here</a>.
 
 ---
 
-## Examples
+## Column Constraints
 
-### Example 1: Inserting a New Actor
-Let's add a new actor to the `actor` table in the Sakila database.
+Constraints define rules for the data stored in a table.
 
-```sql
-INSERT INTO actor (first_name, last_name)
-VALUES ('JOHNNY', 'DEPP');
-```
-*Note: We didn't specify the `actor_id` because it is usually auto-generated by the database.*
-
-### Example 2: Inserting into Specific Columns
-If we have a table with many columns but only want to fill a few:
+### 1. `PRIMARY KEY`
+A primary key uniquely identifies each row in a table.
 
 ```sql
-INSERT INTO customer (first_name, last_name, email, store_id, address_id)
-VALUES ('ALICE', 'JOHNSON', 'alice.j@example.com', 1, 5);
+CREATE TABLE students (
+    student_id INT PRIMARY KEY,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50)
+);
 ```
 
-### Example 3: Multi-row Insert
-Most modern databases allow you to insert multiple rows in a single statement by separating the sets of values with commas.
+The `student_id` column cannot contain duplicate values or `NULL`.
+
+### 2. `NOT NULL`
+This constraint requires that a column must always contain a value.
 
 ```sql
-INSERT INTO actor (first_name, last_name)
-VALUES 
-    ('TOM', 'HANKS'),
-    ('MERYL', 'STREEP'),
-    ('LEONARDO', 'DICAPRIO');
+CREATE TABLE students (
+    student_id INT PRIMARY KEY,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL
+);
 ```
+
+Now `first_name` and `last_name` cannot be left empty.
+
+### 3. `CHECK`
+The `CHECK` constraint defines a condition that the values in a column must satisfy.
+
+```sql
+CREATE TABLE products (
+    product_id INT PRIMARY KEY,
+    product_name VARCHAR(100) NOT NULL,
+    price DECIMAL(10, 2) CHECK (price >= 0)
+);
+```
+
+In this example, the database will not allow a product with a negative price to be stored.
+
+---
+
+## Additional Column Parameters
+
+In addition to constraints, columns can have extra parameters. These do not directly forbid or allow values, but they help define the column's behavior more precisely.
+
+### 1. `DEFAULT`
+The `DEFAULT` parameter defines the value that will be used if no value is provided during insertion.
+
+```sql
+CREATE TABLE products (
+    product_id INT PRIMARY KEY,
+    product_name VARCHAR(100) NOT NULL,
+    price DECIMAL(10, 2) DEFAULT 0.00
+);
+```
+
+If no price is provided when adding a product, the database will automatically use `0.00`.
+
+### 2. `CHARACTER SET` and `COLLATE`
+For text columns, you can explicitly specify the character set and the collation rules.
+
+```sql
+CREATE TABLE customers (
+    customer_id INT PRIMARY KEY,
+    first_name VARCHAR(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+    last_name VARCHAR(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+);
+```
+
+Here, `CHARACTER SET` defines the encoding used to store text data, while `COLLATE` defines how strings are compared and sorted. This is especially important when a table needs to work correctly with different languages and characters.
+
+---
+
+## Example of a Table with Multiple Rules
+
+Here is a more realistic example of an `employees` table:
+
+```sql
+CREATE TABLE employees (
+    employee_id INT PRIMARY KEY,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    email VARCHAR(100) UNIQUE,
+    hire_date DATE NOT NULL,
+    salary DECIMAL(10, 2) DEFAULT 0.00
+);
+```
+
+What is happening here:
+
+- `employee_id` is the unique identifier for an employee;
+- `first_name` and `last_name` are required;
+- `email` must be unique;
+- `hire_date` is required;
+- `salary` defaults to `0.00`.
+
+This structure better reflects real-world data requirements.
+
+---
+
+## Using `IF NOT EXISTS`
+
+In many database systems, you can avoid an error if the table already exists by using `IF NOT EXISTS`:
+
+```sql
+CREATE TABLE IF NOT EXISTS departments (
+    department_id INT PRIMARY KEY,
+    department_name VARCHAR(100) NOT NULL
+);
+```
+
+This is useful when rerunning practice scripts or migrations.
+
+---
+
+## What to Pay Attention To
+
+When creating tables, it is helpful to keep a few rules in mind:
+
+- choose data types thoughtfully, rather than making everything overly generic;
+- define a `PRIMARY KEY` for tables where each row must be uniquely identified;
+- use `NOT NULL` for truly required fields;
+- use `DEFAULT` when a column has a natural default value;
+- explicitly set `CHARACTER SET` and `COLLATE` for text fields when needed;
+- try to make the structure clear and predictable from the start.
+
+A well-designed table reduces errors and makes it easier to work later with `INSERT`, `UPDATE`, and `SELECT`.
+
+---
+
+## Practical Example
+
+Imagine that we want to create a table for storing books:
+
+```sql
+CREATE TABLE books (
+    book_id INT PRIMARY KEY,
+    title VARCHAR(200) NOT NULL,
+    author VARCHAR(100) NOT NULL,
+    published_date DATE,
+    price DECIMAL(8, 2) DEFAULT 0.00
+);
+```
+
+Once this table is created, we can start adding rows to it using `INSERT INTO`.
 
 ---
 
 **Key Takeaways from this Lesson:**
 
-*   The `INSERT INTO` statement is used to add new rows to a table.
-*   Explicitly listing column names is recommended for better code reliability and readability.
-*   String and date values must be enclosed in single quotes.
-*   You can insert multiple rows at once to improve performance and reduce code.
-
-In the next lesson, we will learn how to **Create Tables** from scratch and define their structure.
+*   The `CREATE TABLE` statement is used to create new tables in a database.
+*   Each column must have a name and a data type.
+*   Constraints such as `PRIMARY KEY`, `NOT NULL`, `UNIQUE`, and `CHECK` help control data quality.
+*   Additional column parameters such as `DEFAULT`, `CHARACTER SET`, and `COLLATE` help fine-tune data storage and behavior.
+*   A well-designed table makes future work with data simpler and more reliable.
+*   `IF NOT EXISTS` helps avoid errors when creating a table more than once.
