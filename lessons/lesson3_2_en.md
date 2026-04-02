@@ -89,7 +89,7 @@ FROM employees;
 
 **Important:** `CONCAT()` behavior with `NULL` depends on the DBMS. For example, in MySQL and MariaDB, if at least one argument is `NULL`, the result of `CONCAT()` is also `NULL`.
 
-### `CONCAT_WS()` - Concatenates strings with a separator and usually skips `NULL` values.
+### `CONCAT_WS()` - Concatenates strings, inserting a separator between them and skipping `NULL` values.
 
 **Syntax:**
 ```sql

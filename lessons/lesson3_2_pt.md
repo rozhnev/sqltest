@@ -89,7 +89,7 @@ FROM employees;
 
 **Importante:** o comportamento de `CONCAT()` com `NULL` depende do SGBD. Por exemplo, no MySQL e no MariaDB, se pelo menos um argumento for `NULL`, o resultado de `CONCAT()` também será `NULL`.
 
-### `CONCAT_WS()` - Concatena strings com um separador e normalmente ignora valores `NULL`.
+### `CONCAT_WS()` - Concatena strings, inserindo um separador entre elas e ignorando valores `NULL`.
 
 **Sintaxe:**
 ```sql

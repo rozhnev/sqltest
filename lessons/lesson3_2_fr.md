@@ -89,7 +89,7 @@ FROM employees;
 
 **Important :** le comportement de `CONCAT()` face à `NULL` dépend du SGBD. Par exemple, dans MySQL et MariaDB, si au moins un argument vaut `NULL`, le résultat de `CONCAT()` est également `NULL`.
 
-### `CONCAT_WS()` - Concatène des chaînes avec un séparateur et ignore généralement les valeurs `NULL`.
+### `CONCAT_WS()` - Concatène des chaînes en insérant un séparateur entre elles et en ignorant les valeurs `NULL`.
 
 **Syntaxe :**
 ```sql
