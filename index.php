@@ -45,5 +45,5 @@ if ($_SESSION) {
     $user->loginSession($_SESSION);
 }
 
-$controller = new Controller($dbh, $smarty, $user, $env);
+$controller = new Controller($dbh, $smarty, $user, $env, $languages);
 $router = (new Router($controller))->route($path);

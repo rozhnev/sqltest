@@ -7,8 +7,7 @@ class Controller
     private $env;
     private $domain;
     private $lang;
-
-    private $languages = ['ru' => 'Русский', 'en' => 'English', 'pt' => 'Português', 'fr' => 'Français'/*, 'es' => 'Español'*/];
+    private array $languages;
 
     private function registerModifiers(array $mods): void
     {
@@ -24,12 +23,13 @@ class Controller
         }
     }
 
-    public function __construct(PDO $dbh, Smarty $engine, User $user, array $env)
+    public function __construct(PDO $dbh, Smarty $engine, User $user, array $env, array $languages)
     {
-        $this->dbh      = $dbh;
-        $this->user     = $user;
-        $this->engine   = $engine;
-        $this->env      = $env;
+        $this->dbh          = $dbh;
+        $this->user         = $user;
+        $this->engine       = $engine;
+        $this->env          = $env;
+        $this->languages    = $languages;
 
         // Build absolute domain safely (works with proxies)
         $host = (string)($_SERVER['HTTP_HOST'] ?? 'sqltest.online');
