@@ -15,7 +15,7 @@ $smarty = new Smarty();
 $dbc    = new DB($env);
 $dbh    = $dbc->getInstance();
 $user   = new User($dbh, $env);
-$languge_codes = array_keys($languages);
+$languge_codes = array_keys($config['languages']);
 
 $path = $_SERVER['REQUEST_URI'];
 
@@ -44,5 +44,5 @@ if ($_SESSION) {
     $user->loginSession($_SESSION);
 }
 
-$controller = new Controller($dbh, $smarty, $user, $env, $languages);
+$controller = new Controller($dbh, $smarty, $user, $env, $config);
 $router = (new Router($controller, $languge_codes))->route($path);

@@ -6,6 +6,7 @@ class Controller
     private $engine;
     private $env;
     private $domain;
+    private $host;
     private $lang;
     private array $languages;
 
@@ -23,16 +24,17 @@ class Controller
         }
     }
 
-    public function __construct(PDO $dbh, Smarty $engine, User $user, array $env, array $languages)
+    public function __construct(PDO $dbh, Smarty $engine, User $user, array $env, array $config)
     {
         $this->dbh          = $dbh;
         $this->user         = $user;
         $this->engine       = $engine;
         $this->env          = $env;
-        $this->languages    = $languages;
+        $this->domain       = $config['domain'] ?? 'localhost';
+        $this->languages    = $config['languages'] ?? [];
 
         // Build absolute domain safely (works with proxies)
-        $host = (string)($_SERVER['HTTP_HOST'] ?? 'sqltest.online');
+        $host = (string)($_SERVER['HTTP_HOST'] ?? $this->domain);
 
         $scheme = 'http';
         if (!empty($_SERVER['HTTP_X_FORWARDED_PROTO'])) {
@@ -47,7 +49,7 @@ class Controller
             $scheme = 'https';
         }
 
-        $this->domain = $scheme . '://' . $host;
+        $this->host = $scheme . '://' . $host;
 
         $this->registerModifiers(["array_key_exists", "mt_rand", "array_rand"]);
         $this->engine->registerPlugin('block', 'translate', array('Localizer', 'translate'), true);
@@ -61,10 +63,10 @@ class Controller
 
     private function isMobileView(): bool
     {
-        return  (isset($_SERVER['SERVER_NAME']) && (
-            $_SERVER['SERVER_NAME'] === 'm.sqltest.online' ||
-            $_SERVER['SERVER_NAME'] === 'm.localhost'
-        ));
+        return  (
+            isset($_SERVER['SERVER_NAME']) && 
+            $_SERVER['SERVER_NAME'] === "m.{$this->domain}"
+        );
     }
 
     public function setLanguge(string $lang='en'): void
@@ -77,7 +79,7 @@ class Controller
     public function setCanonicalLink(string $path): void
     {
         $this->assignVariables([
-            'CanonicalLink' => "https://sqltest.online{$path}"
+            'CanonicalLink' => "{$this->host}{$path}"
         ]);
     }
 
@@ -686,7 +688,7 @@ class Controller
         }
 
         $this->assignVariables([
-            'CanonicalLink'         => "https://sqltest.online/" . $this->lang . "/test/start",
+            'CanonicalLink'         => "https://{$this->domain}/{$this->lang}/test/start",
             'PageTitle'             => Localizer::translateString('test_page_title'),
             'PageDescription'       => Localizer::translateString('test_page_description'),
             'PageOGTitle'           => Localizer::translateString('test_og_title'),
@@ -775,7 +777,7 @@ class Controller
                 if (!isset($achievement['achievement_id'])) {
                     continue;
                 }
-                $shareUrl = $this->domain . '/' . $this->lang . '/achievement/' .$achievement['user_achievement_id'];
+                $shareUrl = "https://{$this->host}/{$this->lang}/achievement/" .$achievement['user_achievement_id'];
                 $achievement['share_url'] = $shareUrl;
                 $achievement['linkedin_share_url'] = 'https://www.linkedin.com/sharing/share-offsite/?url=' . rawurlencode($shareUrl);
             }
@@ -808,8 +810,8 @@ class Controller
             $this->user->markAchievementViewed($params['achievementID']);
         }
 
-        $imageUrl = $this->domain . '/' . $this->lang . '/achievement/image/' . $params['achievementID'];
-        $sharePageUrl = $this->domain . (string)($params['path'] ?? '');
+        $imageUrl = $this->host . '/' . $this->lang . '/achievement/image/' . $params['achievementID'];
+        $sharePageUrl = $this->host . (string)($params['path'] ?? '');
         $linkedinShareUrl = 'https://www.linkedin.com/sharing/share-offsite/?url=' . rawurlencode($sharePageUrl);
         $facebookShareUrl = 'https://www.facebook.com/sharer/sharer.php?u=' . rawurlencode($sharePageUrl);
         $vkShareUrl = 'https://vk.com/share.php?url=' . rawurlencode($sharePageUrl);
