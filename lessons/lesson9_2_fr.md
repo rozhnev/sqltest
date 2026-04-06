@@ -1,170 +1,144 @@
-Cette leçon présente les tables temporaires, un type spécial de table qui existe pendant une durée limitée et qui est généralement utilisé pour des résultats intermédiaires de calcul. Vous découvrirez ce que sont les tables temporaires, comment les créer, en quoi elles diffèrent des tables classiques et dans quels cas elles sont particulièrement utiles. À la fin de cette leçon, vous saurez utiliser les tables temporaires avec assurance pour simplifier des scénarios SQL complexes.
+Cette leçon présente les instructions `TRUNCATE` et `DROP TABLE`, utilisées pour supprimer des données ou des tables dans une base de données. Vous apprendrez en quoi elles diffèrent l’une de l’autre et de `DELETE`, dans quels cas utiliser chacune d’elles et quels risques il faut garder à l’esprit. À la fin de cette leçon, vous saurez choisir l’instruction adaptée pour vider ou supprimer une table.
 
-# Leçon 9.2 : Tables temporaires
+# Leçon 9.2 : Les instructions TRUNCATE et DROP TABLE
 
-Dans la leçon précédente, nous avons vu la création de tables avec `CREATE TABLE`. Examinons maintenant un type particulier de table : les **tables temporaires**. Elles permettent de stocker des données intermédiaires au sein d’une session ou d’une transaction et sont souvent utilisées dans les requêtes analytiques, les processus ETL et les traitements de données en plusieurs étapes.
+Dans la leçon précédente, nous avons appris à créer des tables avec `CREATE TABLE`. Mais dans un vrai travail sur une base de données, il est important non seulement de créer la structure, mais aussi de comprendre comment vider des tables ou les supprimer complètement. Pour cela, SQL fournit les instructions `TRUNCATE` et `DROP TABLE`.
 
-Contrairement aux tables classiques, les tables temporaires ne sont pas destinées au stockage permanent des données. Elles sont créées pour une durée limitée, puis supprimées automatiquement ou rendues indisponibles à la fin de la session.
+Les deux appartiennent au langage de définition de données (DDL), mais elles répondent à des besoins différents. `TRUNCATE` supprime rapidement toutes les lignes d’une table, tandis que `DROP TABLE` supprime la table elle-même avec sa structure.
 
-## Qu’est-ce qu’une table temporaire
+## Ce que fait `TRUNCATE`
 
-Une table temporaire est une table créée pour stocker temporairement des données pendant le travail d’un utilisateur ou l’exécution d’un script.
+L’instruction `TRUNCATE` supprime toutes les lignes d’une table, mais la table elle-même reste en place.
 
-En général, ces tables :
+Après l’exécution de `TRUNCATE` :
 
-- existent uniquement dans le cadre de la connexion ou de la transaction en cours ;
-- servent aux calculs intermédiaires ;
-- permettent de découper une logique complexe en plusieurs étapes plus lisibles ;
-- aident à réutiliser un résultat intermédiaire dans plusieurs requêtes.
+- la structure de la table est conservée ;
+- les noms de colonnes, les types de données et les contraintes restent inchangés ;
+- la table devient vide ;
+- dans de nombreux SGBD, l’opération est plus rapide qu’un `DELETE` massif.
 
-Dans de nombreux SGBD, les tables temporaires sont créées avec le mot-clé `TEMPORARY` ou `TEMP`.
-
-## Syntaxe de base
-
-Une des formes courantes de création d’une table temporaire est la suivante :
+### Syntaxe de `TRUNCATE`
 
 ```sql
-CREATE TEMPORARY TABLE table_name (
-    column1 data_type,
-    column2 data_type,
-    column3 data_type
-);
+TRUNCATE TABLE table_name;
 ```
 
-Ensuite, vous pouvez travailler avec la table temporaire presque comme avec une table classique : insérer des données, les lire, les mettre à jour et les supprimer.
-
-## Exemple de création d’une table temporaire
-
-Supposons que nous voulions enregistrer la liste des clients ayant effectué plus de 30 paiements :
+### Exemple de `TRUNCATE`
 
 ```sql
-CREATE TEMPORARY TABLE active_customers AS
-SELECT customer_id, COUNT(*) AS payment_count
-FROM payment
-GROUP BY customer_id
-HAVING COUNT(*) > 30;
+TRUNCATE TABLE logs;
 ```
 
-Nous pouvons maintenant utiliser cette table temporaire dans les requêtes suivantes :
-
-```sql
-SELECT ac.customer_id, ac.payment_count, c.first_name, c.last_name
-FROM active_customers ac
-JOIN customer c ON ac.customer_id = c.customer_id
-ORDER BY ac.payment_count DESC;
-```
-
-*Résultat : nous obtenons la liste des clients actifs et pouvons réutiliser l’ensemble de données déjà préparé sans relancer l’agrégation initiale.*
+Après cela, la table `logs` existera toujours dans la base de données, mais toutes ses lignes seront supprimées.
 
 ---
 
-## En quoi une table temporaire diffère d’une table classique
+## Ce que fait `DROP TABLE`
 
-Même si les tables temporaires et les tables classiques se ressemblent par leur structure, il existe plusieurs différences importantes.
+L’instruction `DROP TABLE` supprime complètement une table.
 
-### 1. Durée de vie
+Après l’exécution de `DROP TABLE` :
 
-- **Une table classique** reste dans la base de données tant que vous ne la supprimez pas explicitement.
-- **Une table temporaire** existe pendant une durée limitée, généralement jusqu’à la fin d’une session ou d’une transaction.
+- toutes les données de la table sont supprimées ;
+- la structure de la table est supprimée ;
+- la table n’existe plus dans la base de données ;
+- elle ne peut plus être utilisée dans les requêtes suivantes tant qu’elle n’a pas été recréée.
 
-### 2. Objectif
-
-- **Une table classique** sert au stockage permanent des données métier.
-- **Une table temporaire** sert à des données intermédiaires, techniques ou préparatoires.
-
-### 3. Portée de visibilité
-
-- **Une table classique** est accessible à tous les utilisateurs disposant des droits nécessaires.
-- **Une table temporaire** est généralement visible uniquement dans la connexion en cours.
-
-### 4. Utilisation pratique
-
-- **Une table classique** stocke les clients, commandes, produits, paiements et autres informations principales.
-- **Une table temporaire** stocke les résultats d’un filtrage intermédiaire, d’une agrégation ou d’une préparation de données pour un rapport.
-
----
-
-## Quand les tables temporaires sont particulièrement utiles
-
-Les tables temporaires sont utiles si :
-
-- la requête est trop complexe et plus facile à découper en étapes ;
-- le même résultat intermédiaire est nécessaire plusieurs fois ;
-- il faut stocker temporairement des données nettoyées ou agrégées ;
-- vous voulez simplifier la lecture et la maintenance d’un script SQL.
-
-Par exemple, vous pouvez d’abord constituer une table temporaire avec les films souhaités, puis calculer des métriques uniquement sur cet ensemble.
+### Syntaxe de `DROP TABLE`
 
 ```sql
-CREATE TEMPORARY TABLE expensive_films AS
-SELECT film_id, title, rental_rate
-FROM film
-WHERE rental_rate >= 4.00;
-
-SELECT COUNT(*) AS film_count, AVG(rental_rate) AS avg_rate
-FROM expensive_films;
+DROP TABLE table_name;
 ```
 
-*Résultat : la logique est divisée en deux étapes claires, préparation des données puis analyse.*
+### Exemple de `DROP TABLE`
+
+```sql
+DROP TABLE old_reports;
+```
+
+Après cela, la table `old_reports` sera entièrement supprimée de la base de données.
 
 ---
 
-## Table temporaire et CTE classique
+## En quoi `TRUNCATE` diffère de `DROP TABLE`
 
-Dans certains cas, on peut utiliser un CTE (`WITH`) au lieu d’une table temporaire. La différence est la suivante :
+Même si ces deux instructions suppriment des données, la différence entre elles est fondamentale.
 
-- **un CTE** n’existe que dans le cadre d’une seule requête ;
-- **une table temporaire** peut être utilisée dans plusieurs requêtes pendant la session ;
-- **un CTE** est pratique pour une logique compacte dans une seule instruction SQL ;
-- **une table temporaire** est pratique si le résultat intermédiaire doit être réutilisé.
+### 1. Ce qui est supprimé exactement
 
-Si le résultat n’est nécessaire qu’une seule fois, un CTE est souvent plus simple. S’il est nécessaire à plusieurs étapes, une table temporaire est généralement plus pratique.
+- `TRUNCATE` supprime uniquement les lignes.
+- `DROP TABLE` supprime à la fois les lignes et la table elle-même.
+
+### 2. Peut-on encore utiliser la table
+
+- Après `TRUNCATE`, la table reste disponible et on peut y réinsérer des données.
+- Après `DROP TABLE`, la table a disparu, et il faut la recréer avant de pouvoir l’utiliser de nouveau.
+
+### 3. Quand l’utiliser
+
+- `TRUNCATE` convient lorsqu’il faut vider rapidement une table tout en conservant sa structure.
+- `DROP TABLE` convient lorsque la table n’est plus du tout nécessaire.
+
+---
+
+## En quoi `TRUNCATE` diffère de `DELETE`
+
+Les débutants comparent souvent `TRUNCATE` à `DELETE`, car les deux commandes peuvent supprimer des données d’une table.
+
+Les principales différences sont les suivantes :
+
+- `DELETE` peut être utilisé avec `WHERE` pour supprimer seulement une partie des lignes ;
+- `TRUNCATE` supprime toutes les lignes de la table d’un seul coup ;
+- `DELETE` appartient au DML, tandis que `TRUNCATE` est généralement classé dans le DDL ;
+- `TRUNCATE` est souvent plus rapide dans de nombreux SGBD lorsqu’il faut vider entièrement une table ;
+- le comportement en matière de journalisation, d’annulation et de réinitialisation des compteurs d’identité dépend du SGBD utilisé.
+
+S’il faut supprimer seulement une partie des données, on utilise généralement `DELETE`. S’il faut vider rapidement toute la table tout en conservant sa structure, `TRUNCATE` est souvent plus pratique.
 
 ---
 
 ## Points d’attention
 
-Lors de l’utilisation des tables temporaires, il est utile de retenir quelques règles :
+Lors de l’utilisation de `TRUNCATE` et `DROP TABLE`, il est important de retenir quelques règles :
 
-- ne les utilisez pas lorsqu’une requête simple suffit ;
-- donnez aux tables temporaires des noms explicites qui reflètent leur rôle ;
-- vérifiez à quel moment la table est supprimée dans votre SGBD ;
-- ne conservez pas les données dans des tables temporaires plus longtemps que nécessaire ;
-- vérifiez les particularités de syntaxe de votre SGBD, car le comportement de `TEMPORARY TABLE` peut varier.
+- vérifiez toujours s’il faut supprimer seulement les données ou toute la structure de la table ;
+- n’utilisez pas `DROP TABLE` si la structure de la table est encore nécessaire ;
+- ne remplacez pas `DELETE` par `TRUNCATE` si vous devez supprimer seulement une partie des lignes ;
+- gardez à l’esprit que, dans certains SGBD, `TRUNCATE` ne peut pas être exécuté si la table est référencée par des clés étrangères ;
+- souvenez-vous que le comportement de `TRUNCATE` et la possibilité d’annuler l’opération dépendent du SGBD utilisé.
 
-Bien utilisée, une table temporaire rend un SQL complexe plus lisible et plus facile à maintenir.
+Une mauvaise utilisation de ces instructions peut entraîner une perte de données ou de structure.
 
 ---
 
 ## Exemple pratique
 
-Imaginons que nous devions trouver les clients qui ont loué des films de la catégorie `Action`, puis construire un rapport séparé pour eux.
+Imaginons que nous ayons une table auxiliaire `daily_import` dans laquelle des données intermédiaires provenant d’un système externe sont chargées chaque jour.
+
+Si cette table est utilisée régulièrement, mais qu’elle doit être complètement vidée avant chaque nouveau chargement, `TRUNCATE` convient :
 
 ```sql
-CREATE TEMPORARY TABLE action_customers AS
-SELECT DISTINCT r.customer_id
-FROM rental r
-JOIN inventory i      ON r.inventory_id = i.inventory_id
-JOIN film_category fc ON i.film_id = fc.film_id
-JOIN category c       ON fc.category_id = c.category_id
-WHERE c.name = 'Action';
-
-SELECT ac.customer_id, cu.first_name, cu.last_name
-FROM action_customers ac
-JOIN customer cu ON ac.customer_id = cu.customer_id
-ORDER BY cu.last_name, cu.first_name;
+TRUNCATE TABLE daily_import;
 ```
 
-Cette approche est particulièrement pratique si, après cette liste, vous devez exécuter plusieurs autres requêtes analytiques.
+Après cela, la structure de la table est conservée et de nouvelles données peuvent y être chargées.
+
+Si la table a été créée uniquement pour une tâche ponctuelle et qu’elle n’est plus nécessaire, on peut la supprimer complètement :
+
+```sql
+DROP TABLE daily_import;
+```
+
+Dans le premier cas, nous préparons la table existante pour une nouvelle utilisation. Dans le second, nous supprimons complètement un objet devenu inutile de la base de données.
 
 ---
 
 **Points clés de cette leçon :**
 
-*   Les tables temporaires servent au stockage temporaire de données intermédiaires.
-*   Elles existent généralement uniquement dans le cadre de la session ou de la transaction en cours.
-*   Leur syntaxe et leur usage sont proches des tables classiques, mais elles ne sont pas destinées au stockage permanent.
-*   Les tables temporaires sont particulièrement utiles dans les requêtes complexes en plusieurs étapes et dans les scénarios analytiques.
-*   Si un résultat intermédiaire n’est nécessaire que dans une seule requête, un CTE peut être préférable.
+*   `TRUNCATE` supprime toutes les lignes d’une table mais conserve sa structure.
+*   `DROP TABLE` supprime à la fois les données et la table elle-même.
+*   `TRUNCATE` et `DELETE` répondent à des besoins proches, mais fonctionnent différemment.
+*   Avant de les utiliser, il faut bien comprendre s’il faut vider une table ou la supprimer complètement.
+*   Le comportement de `TRUNCATE` et `DROP TABLE` peut légèrement varier selon les SGBD.
 
-Dans la prochaine leçon, nous verrons en quoi les tables temporaires diffèrent des vues et dans quels cas il vaut mieux utiliser chacun de ces outils.
+Dans la prochaine leçon, nous étudierons les tables temporaires et verrons dans quels cas elles sont utiles pour des résultats intermédiaires.

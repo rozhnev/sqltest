@@ -1,170 +1,144 @@
-This lesson introduces temporary tables, a special type of table that exists for a limited time and is usually used for intermediate calculation results. You will learn what temporary tables are, how to create them, how they differ from regular tables, and in which tasks they are especially useful. By the end of this lesson, you will be able to confidently use temporary tables to simplify complex SQL scenarios.
+This lesson introduces the `TRUNCATE` and `DROP TABLE` statements, which are used to remove data or tables from a database. You will learn how they differ from each other and from `DELETE`, when to use each one, and which risks should be kept in mind. By the end of this lesson, you will be able to choose the right statement for clearing or removing a table.
 
-# Lesson 9.2: Temporary Tables
+# Lesson 9.2: The TRUNCATE and DROP TABLE Statements
 
-In the previous lesson, we discussed creating tables with `CREATE TABLE`. Now let’s look at a special type of table: **temporary tables**. They help store intermediate data within a session or transaction and are often used in analytical queries, ETL processes, and multi-step data processing.
+In the previous lesson, we learned how to create tables with `CREATE TABLE`. But in real database work, it is important not only to create structure, but also to understand how to clear tables or remove them completely. For that, SQL provides the `TRUNCATE` and `DROP TABLE` statements.
 
-Unlike regular tables, temporary tables are not intended for permanent data storage. They are created for a limited period and are then automatically removed or become unavailable after the session ends.
+Both belong to Data Definition Language (DDL), but they solve different tasks. `TRUNCATE` quickly removes all rows from a table, while `DROP TABLE` removes the table itself together with its structure.
 
-## What Is a Temporary Table
+## What `TRUNCATE` Does
 
-A temporary table is a table created for short-term data storage while a user is working or a script is running.
+The `TRUNCATE` statement removes all rows from a table, but the table itself remains.
 
-These tables are typically:
+After running `TRUNCATE`:
 
-- available only within the current connection or transaction;
-- used for intermediate calculations;
-- useful for splitting complex logic into several clearer steps;
-- helpful when you need to reuse an intermediate result in multiple queries.
+- the table structure is preserved;
+- column names, data types, and constraints remain;
+- the table becomes empty;
+- in many DBMSs, the operation is faster than a large `DELETE`.
 
-In many DBMSs, temporary tables are created using the `TEMPORARY` or `TEMP` keyword.
-
-## Basic Syntax
-
-One common way to create a temporary table looks like this:
+### `TRUNCATE` Syntax
 
 ```sql
-CREATE TEMPORARY TABLE table_name (
-    column1 data_type,
-    column2 data_type,
-    column3 data_type
-);
+TRUNCATE TABLE table_name;
 ```
 
-After that, you can work with the temporary table almost like with a regular one: insert data, select from it, update rows, and delete rows.
-
-## Example: Creating a Temporary Table
-
-Suppose we want to store a list of customers who made more than 30 payments:
+### `TRUNCATE` Example
 
 ```sql
-CREATE TEMPORARY TABLE active_customers AS
-SELECT customer_id, COUNT(*) AS payment_count
-FROM payment
-GROUP BY customer_id
-HAVING COUNT(*) > 30;
+TRUNCATE TABLE logs;
 ```
 
-Now we can use this temporary table in subsequent queries:
-
-```sql
-SELECT ac.customer_id, ac.payment_count, c.first_name, c.last_name
-FROM active_customers ac
-JOIN customer c ON ac.customer_id = c.customer_id
-ORDER BY ac.payment_count DESC;
-```
-
-*Result: we get a list of active customers and can reuse the already prepared dataset without rerunning the original aggregation.*
+After that, the `logs` table will still exist in the database, but all its rows will be removed.
 
 ---
 
-## How a Temporary Table Differs from a Regular Table
+## What `DROP TABLE` Does
 
-Although temporary and regular tables are structurally similar, there are several important differences.
+The `DROP TABLE` statement removes a table completely.
 
-### 1. Lifetime
+After running `DROP TABLE`:
 
-- **A regular table** stays in the database permanently until you explicitly drop it.
-- **A temporary table** exists for a limited time, usually until the end of a session or transaction.
+- all table data is removed;
+- the table structure is removed;
+- the table no longer exists in the database;
+- it cannot be referenced in later queries unless it is created again.
 
-### 2. Purpose
-
-- **A regular table** is used for permanent storage of business data.
-- **A temporary table** is used for intermediate, technical, or preparatory data.
-
-### 3. Visibility Scope
-
-- **A regular table** is available to all users with the required permissions.
-- **A temporary table** is usually visible only within the current connection.
-
-### 4. Practical Use
-
-- **A regular table** stores customers, orders, products, payments, and other core information.
-- **A temporary table** stores results of intermediate filtering, aggregation, or data preparation for a report.
-
----
-
-## When Temporary Tables Are Especially Useful
-
-Use temporary tables when:
-
-- a query is too complex and easier to split into stages;
-- the same intermediate result is needed more than once;
-- you need to temporarily store cleaned or aggregated data;
-- you want to simplify readability and maintenance of an SQL script.
-
-For example, you can first build a temporary table with selected films and then calculate metrics only for them.
+### `DROP TABLE` Syntax
 
 ```sql
-CREATE TEMPORARY TABLE expensive_films AS
-SELECT film_id, title, rental_rate
-FROM film
-WHERE rental_rate >= 4.00;
-
-SELECT COUNT(*) AS film_count, AVG(rental_rate) AS avg_rate
-FROM expensive_films;
+DROP TABLE table_name;
 ```
 
-*Result: the logic is split into two clear steps, data preparation and analysis.*
+### `DROP TABLE` Example
+
+```sql
+DROP TABLE old_reports;
+```
+
+After that, the `old_reports` table will be fully removed from the database.
 
 ---
 
-## Temporary Table vs. Regular CTE
+## How `TRUNCATE` Differs from `DROP TABLE`
 
-In some cases, you can use a CTE (`WITH`) instead of a temporary table. The difference is that:
+Although both statements remove data, there is a fundamental difference between them.
 
-- **a CTE** exists only within a single query;
-- **a temporary table** can be used in multiple queries during a session;
-- **a CTE** is convenient for compact logic inside one SQL statement;
-- **a temporary table** is convenient when the intermediate result must be reused.
+### 1. What exactly is removed
 
-If a result is needed only once, a CTE is often simpler. If it is needed across multiple steps, a temporary table is usually more convenient.
+- `TRUNCATE` removes only rows.
+- `DROP TABLE` removes both the rows and the table itself.
+
+### 2. Whether the table can still be used
+
+- After `TRUNCATE`, the table remains and new data can be inserted into it again.
+- After `DROP TABLE`, the table is gone, and it must be recreated before it can be used again.
+
+### 3. When to use it
+
+- `TRUNCATE` is suitable when you need to quickly clear a table while keeping its structure.
+- `DROP TABLE` is suitable when the table is no longer needed at all.
+
+---
+
+## How `TRUNCATE` Differs from `DELETE`
+
+Beginners often compare `TRUNCATE` with `DELETE`, because both commands can remove data from a table.
+
+The main differences are:
+
+- `DELETE` can be used with `WHERE` to remove only part of the rows;
+- `TRUNCATE` removes all rows from the table at once;
+- `DELETE` belongs to DML, while `TRUNCATE` is usually treated as DDL;
+- `TRUNCATE` is often faster in many DBMSs when the whole table must be cleared;
+- behavior related to logging, rollback, and identity counter resets depends on the specific DBMS.
+
+If you need to remove only part of the data, `DELETE` is usually the right choice. If you need to quickly clear the whole table but keep its structure, `TRUNCATE` is often more convenient.
 
 ---
 
 ## What to Pay Attention To
 
-When working with temporary tables, it is useful to keep a few rules in mind:
+When using `TRUNCATE` and `DROP TABLE`, it is important to remember a few rules:
 
-- do not use them where one simple query is enough;
-- give temporary tables clear names that reflect their purpose;
-- pay attention to when the table is dropped in your DBMS;
-- do not keep data in temporary tables longer than necessary;
-- check syntax specifics in your DBMS, because `TEMPORARY TABLE` behavior can differ.
+- always check whether you need to remove only the data or the whole table structure;
+- do not use `DROP TABLE` if the table structure will still be needed;
+- do not replace `DELETE` with `TRUNCATE` if you need to remove only part of the rows;
+- remember that in some DBMSs `TRUNCATE` cannot be used if the table is referenced by foreign keys;
+- keep in mind that `TRUNCATE` behavior and rollback support depend on the specific DBMS.
 
-When used well, a temporary table makes complex SQL more readable and manageable.
+Using these statements incorrectly can lead to loss of data or table structure.
 
 ---
 
 ## Practical Example
 
-Imagine that we need to find customers who rented films from the `Action` category and then build a separate report for them.
+Imagine that we have a helper table called `daily_import` into which intermediate data from an external system is loaded every day.
+
+If the table is used regularly but must be completely cleared before each new load, `TRUNCATE` is appropriate:
 
 ```sql
-CREATE TEMPORARY TABLE action_customers AS
-SELECT DISTINCT r.customer_id
-FROM rental r
-JOIN inventory i      ON r.inventory_id = i.inventory_id
-JOIN film_category fc ON i.film_id = fc.film_id
-JOIN category c       ON fc.category_id = c.category_id
-WHERE c.name = 'Action';
-
-SELECT ac.customer_id, cu.first_name, cu.last_name
-FROM action_customers ac
-JOIN customer cu ON ac.customer_id = cu.customer_id
-ORDER BY cu.last_name, cu.first_name;
+TRUNCATE TABLE daily_import;
 ```
 
-This approach is especially convenient if, after this list, you need to run several additional analytical queries.
+After that, the table structure remains, and new data can be loaded into it again.
+
+If the table was created only for a one-time task and is no longer needed, it can be removed completely:
+
+```sql
+DROP TABLE daily_import;
+```
+
+In the first case, we prepare the existing table for reuse. In the second, we completely remove an object that is no longer needed from the database.
 
 ---
 
 **Key takeaways from this lesson:**
 
-*   Temporary tables are used for short-term storage of intermediate data.
-*   They usually exist only within the current session or transaction.
-*   In syntax and usage, they are similar to regular tables but are not meant for permanent data storage.
-*   Temporary tables are especially useful in complex multi-step queries and analytical scenarios.
-*   If an intermediate result is needed in only one query, a CTE may be a better option.
+*   `TRUNCATE` removes all rows from a table but keeps its structure.
+*   `DROP TABLE` removes both the data and the table itself.
+*   `TRUNCATE` and `DELETE` solve similar problems, but they work differently.
+*   Before using them, it is important to understand whether you need to clear a table or remove it completely.
+*   The behavior of `TRUNCATE` and `DROP TABLE` can differ slightly across DBMSs.
 
-In the next lesson, we will look at how temporary tables differ from views and when each of these tools is better to use.
+In the next lesson, we will look at temporary tables and understand when they are convenient for intermediate results.
