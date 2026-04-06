@@ -4,6 +4,7 @@ class Router
     private $controller;
     private array $routes;
     private array $supportedLangs;
+    private string $langPattern;
 
     public function __construct(Controller $controller, array $supportedLangs)
     {
@@ -16,7 +17,7 @@ class Router
             'question-action'   => "@(?<lang>{$this->langPattern})/question/(?<questionID>\d+)/(?<action>query-help|query-run|query-test|rate|check-answers)@i",
             'static-page'       => "@(?<lang>{$this->langPattern})/(?<action>privacy-policy|logout|about|menu|books|courses|donate)/?@i",
             'register'          => "@(?<lang>{$this->langPattern})/(?<action>register)/?@i",
-            'login'             => "@^/(?<action>login)/(?<loginProvider>[a-z]+)/(\?lang=(?<lang>{$this->langPattern}))?@i",
+            'login'             => "@^/(?<action>login)/(?<loginProvider>[a-z]+)/?$@i",
             'erd'               => "@(?<lang>{$this->langPattern})/(?<action>erd)/(?<db>Sakila|Bookings|AdventureWorks|Employee)\?theme=(?<theme>dark|light)@i",
             'favorite'          => "@(?<lang>{$this->langPattern})/(?<class>question)/(?<questionID>\d+)/(?<action>favorite)@i",
             'question_solutions'=> "@(?<lang>{$this->langPattern})/(?<class>question)/(?<questionID>\d+)/(?<action>solutions|my-solutions)@i",
@@ -57,13 +58,20 @@ class Router
         return DEFAULT_LANGUAGE;
     }
 
-    public function route(string $path)
+    public function route(string $url)
     {
+        $path = parse_url($url, PHP_URL_PATH) ?: '/';
+        $query = [];
+        parse_str((string)(parse_url($url, PHP_URL_QUERY) ?? ''), $query);
+
         $this->controller->setCanonicalLink($path);
         foreach ($this->routes as $route => $pattern) {
             // echo "Route: $route, $path\n";
             if (preg_match($pattern, $path, $params)) {
                 $params['path'] = $path;
+                if ($route === 'login' && isset($query['lang']) && in_array((string)$query['lang'], $this->supportedLangs, true)) {
+                    $params['lang'] = (string)$query['lang'];
+                }
                 if ($route === 'challenge-mariadb-start') {
                     $params['action'] = 'challenge-mariadb_start';
                 }
