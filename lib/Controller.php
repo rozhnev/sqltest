@@ -63,9 +63,18 @@ class Controller
 
     private function isMobileView(): bool
     {
-        return  (
-            isset($_SERVER['SERVER_NAME']) && 
-            $_SERVER['SERVER_NAME'] === "m.{$this->domain}"
+        if (isset($_SERVER['SERVER_NAME']) && $_SERVER['SERVER_NAME'] === "m.{$this->domain}") {
+            return true;
+        }
+
+        $userAgent = strtolower((string)($_SERVER['HTTP_USER_AGENT'] ?? ''));
+        if ($userAgent === '') {
+            return false;
+        }
+
+        return (bool) preg_match(
+            '/android|iphone|ipad|ipod|blackberry|bb10|iemobile|opera mini|mobile|windows phone|webos|kindle|silk/i',
+            $userAgent
         );
     }
 
