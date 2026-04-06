@@ -8,14 +8,13 @@ if (isset($env['MAINTENANCE'])) {
     include 'templates/maintainance.tpl';
     die();
 }
-
+include_once 'config.php';
 require 'vendor/autoload.php';
 
 $smarty = new Smarty();
 $dbc    = new DB($env);
 $dbh    = $dbc->getInstance();
 $user   = new User($dbh, $env);
-$languages = ['ru' => 'Русский', 'en' => 'English', 'pt' => 'Português', 'fr' => 'Français'];    
 $languge_codes = array_keys($languages);
 $languge_codes_regexp = implode('|', $languge_codes);
 

@@ -1,0 +1,2 @@
+<?php
+$languages = ['ru' => 'Русский', 'en' => 'English', 'pt' => 'Português', 'fr' => 'Français'];    

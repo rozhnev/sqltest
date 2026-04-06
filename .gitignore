@@ -2,6 +2,7 @@ vendor/*
 **templates_c/
 composer.phar
 .env
+config.php
 
 # Minified files (if generating during deployment)
 # *.min.js
