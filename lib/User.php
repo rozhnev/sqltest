@@ -130,7 +130,7 @@ class User
      * @param string $code
      * @return bool
      */
-    public function loginLinkedin(string $code): bool
+    public function loginLinkedin(string $domain, string $code): bool
     {
         $ch = curl_init('https://www.linkedin.com/oauth/v2/accessToken');
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -140,7 +140,7 @@ class User
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([
             'grant_type'    => 'authorization_code',
             'code'          => $code,
-            'redirect_uri'  => "https://{$this->domain}/login/linkedin/",
+            'redirect_uri'  => "https://{$domain}/login/linkedin/",
             'client_id'     => $this->env['LINKEDIN_CLIENT_ID'],
             'client_secret' => $this->env['LINKEDIN_SECRET']
         ]));
