@@ -1,5 +1,6 @@
 
 let windowObjectReference = null; // global variable
+const externalScriptPromises = {};
 
 function loadExternalScriptOnce(src) {
     if (externalScriptPromises[src]) {
