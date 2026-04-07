@@ -108,7 +108,7 @@ class Achievement
 
     private static function clamp(string $text, int $maxChars): string
     {
-        $text = trim($text);
+        $text = trim(self::normalizeTextEncoding($text));
         if ($text === '') {
             return '';
         }
@@ -121,6 +121,37 @@ class Achievement
         if (strlen($text) > $maxChars) {
             return rtrim(substr($text, 0, $maxChars - 3)) . '...';
         }
+        return $text;
+    }
+
+    private static function normalizeTextEncoding(string $text): string
+    {
+        if ($text === '') {
+            return '';
+        }
+
+        if (function_exists('mb_check_encoding') && mb_check_encoding($text, 'UTF-8')) {
+            return $text;
+        }
+
+        $encodings = ['Windows-1251', 'KOI8-R', 'ISO-8859-1', 'ISO-8859-15', 'CP1252'];
+
+        if (function_exists('mb_detect_encoding') && function_exists('mb_convert_encoding')) {
+            $detectedEncoding = mb_detect_encoding($text, $encodings, true);
+            if ($detectedEncoding !== false) {
+                return mb_convert_encoding($text, 'UTF-8', $detectedEncoding);
+            }
+        }
+
+        if (function_exists('iconv')) {
+            foreach ($encodings as $encoding) {
+                $convertedText = @iconv($encoding, 'UTF-8//IGNORE', $text);
+                if ($convertedText !== false && $convertedText !== '') {
+                    return $convertedText;
+                }
+            }
+        }
+
         return $text;
     }
 
@@ -144,6 +175,8 @@ class Achievement
 
     private static function wrapTextToWidth(string $text, string $fontPath, int $fontSize, int $maxWidth): array
     {
+        $text = self::normalizeTextEncoding($text);
+
         if (!function_exists('imagettfbbox')) {
             $single = trim($text);
             return $single === '' ? [] : [$single];
@@ -248,10 +281,11 @@ class Achievement
         }
 
         $ui = self::getUiStrings($lang);
+        $ui = array_map([self::class, 'normalizeTextEncoding'], $ui);
 
         $title = self::clamp((string)($data['achievement_title'] ?? ''), 80);
         $userName = self::clamp((string)($data['share_user_name'] ?? ''), 40);
-        $earnedAt = self::formatEarnedAt((string)($data['earned_at'] ?? ''), $lang);
+        $earnedAt = self::normalizeTextEncoding(self::formatEarnedAt((string)($data['earned_at'] ?? ''), $lang));
 
         $textX = $pad + 56;
         $contentTop = $pad + 120;
@@ -313,7 +347,7 @@ class Achievement
                     // Draw colored bullet (circle)
                     imagefilledellipse($im, (int)$legendX + 6, (int)$legendY - 5, $bulletSize, $bulletSize, $c);
 
-                    $lText = $r['rate_title'] . ': ' . $r['count'];
+                    $lText = self::normalizeTextEncoding($r['rate_title'] . ': ' . $r['count']);
                     $box = imagettfbbox($legendFontSize, 0, $font, $lText);
                     $lWidth = $box ? abs($box[2] - $box[0]) : 50;
 
