@@ -2,74 +2,74 @@
 
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-      <loc>https://sqltest.online/</loc>
+      <loc>https://{$Domain}/</loc>
       <lastmod>{$Today}</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.8</priority>
     </url>
     <url>
-      <loc>https://sqltest.online/ru</loc>
+      <loc>https://{$Domain}/ru</loc>
       <lastmod>{$Today}</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.8</priority>
     </url>
     <url>
-      <loc>https://sqltest.online/ru/books</loc>
+      <loc>https://{$Domain}/ru/books</loc>
       <lastmod>{$Today}</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.8</priority>
     </url>
     <url>
-      <loc>https://sqltest.online/en/books</loc>
+      <loc>https://{$Domain}/en/books</loc>
       <lastmod>{$Today}</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.8</priority>
     </url>
     <url>
-      <loc>https://sqltest.online/en/about</loc>
+      <loc>https://{$Domain}/en/about</loc>
       <lastmod>{$Today}</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.3</priority>
     </url>
     <url>
-      <loc>https://sqltest.online/ru/about</loc>
+      <loc>https://{$Domain}/ru/about</loc>
       <lastmod>{$Today}</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.3</priority>
     </url>
     <url>
-      <loc>https://sqltest.online/en/privacy-policy</loc>
+      <loc>https://{$Domain}/en/privacy-policy</loc>
       <lastmod>{$Today}</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.3</priority>
     </url>
     <url>
-      <loc>https://sqltest.online/ru/privacy-policy</loc>
+      <loc>https://{$Domain}/ru/privacy-policy</loc>
       <lastmod>{$Today}</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.3</priority>
     </url>
     {foreach from=$Questionnire item=question}
       <url>
-        <loc>https://sqltest.online/ru/question/{$question['category']}/{$question['question']}</loc>
+        <loc>https://{$Domain}/ru/question/{$question['category']}/{$question['question']}</loc>
         <lastmod>{$Today}</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.3</priority>
       </url>
       <url>
-        <loc>https://sqltest.online/en/question/{$question['category']}/{$question['question']}</loc>
+        <loc>https://{$Domain}/en/question/{$question['category']}/{$question['question']}</loc>
         <lastmod>{$Today}</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.3</priority>
       </url>
       <url>
-        <loc>https://sqltest.online/pt/question/{$question['category']}/{$question['question']}</loc>
+        <loc>https://{$Domain}/pt/question/{$question['category']}/{$question['question']}</loc>
         <lastmod>{$Today}</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
       </url>
       <url>
-        <loc>https://sqltest.online/fr/question/{$question['category']}/{$question['question']}</loc>
+        <loc>https://{$Domain}/fr/question/{$question['category']}/{$question['question']}</loc>
         <lastmod>{$Today}</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
@@ -77,25 +77,25 @@
     {/foreach}
     {foreach from=$Lessons item=lesson}
       <url>
-        <loc>https://sqltest.online/ru/lesson/{$lesson['module']}/{$lesson['slug']}</loc>
+        <loc>https://{$Domain}/ru/lesson/{$lesson['module']}/{$lesson['slug']}</loc>
         <lastmod>{$Today}</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.3</priority>
       </url>
       <url>
-        <loc>https://sqltest.online/en/lesson/{$lesson['module']}/{$lesson['slug']}</loc>
+        <loc>https://{$Domain}/en/lesson/{$lesson['module']}/{$lesson['slug']}</loc>
         <lastmod>{$Today}</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.3</priority>
       </url>
       <url>
-        <loc>https://sqltest.online/pt/lesson/{$lesson['module']}/{$lesson['slug']}</loc>
+        <loc>https://{$Domain}/pt/lesson/{$lesson['module']}/{$lesson['slug']}</loc>
         <lastmod>{$Today}</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
       </url>
       <url>
-        <loc>https://sqltest.online/fr/lesson/{$lesson['module']}/{$lesson['slug']}</loc>
+        <loc>https://{$Domain}/fr/lesson/{$lesson['module']}/{$lesson['slug']}</loc>
         <lastmod>{$Today}</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>

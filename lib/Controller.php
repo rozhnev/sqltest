@@ -1024,6 +1024,7 @@ class Controller
         $lessons = new Lesson($this->dbh, 'introduction-to-databases');
 
         $this->assignVariables([
+            'Domain' => $this->domain,
             'Questionnire' => $questionnire->getMap(),
             'Lessons' => $lessons->getMap(),
             'Today' => date('Y-m-d'),
