@@ -55,6 +55,8 @@ class Controller
         $this->engine->registerPlugin('block', 'translate', array('Localizer', 'translate'), true);
         $this->assignVariables([
             'VERSION'       => $env['VERSION'] ?? 0,
+            'YANDEX_METRIKA_ID' => $env['YANDEX_METRIKA_ID'] ?? '',
+            'GOOGLE_TAG_MANAGER_ID' => $env['GOOGLE_TAG_MANAGER_ID'] ?? '',
             'MobileView'    => $this->isMobileView(),
             'Languages'     => $this->languages,
             'User'          => $this->user,

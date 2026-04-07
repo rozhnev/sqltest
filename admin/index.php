@@ -73,6 +73,8 @@ function renderAdminTemplate(User $user, array $env, int $lessonId = 0): void
     $smarty->assign('Lang', 'en');
     $smarty->assign('DB', $env['DB_NAME'] ?? 'sakila');
     $smarty->assign('VERSION', $env['APP_VERSION'] ?? time());
+    $smarty->assign('YANDEX_METRIKA_ID', $env['YANDEX_METRIKA_ID'] ?? '');
+    $smarty->assign('GOOGLE_TAG_MANAGER_ID', $env['GOOGLE_TAG_MANAGER_ID'] ?? '');
     $smarty->assign('QuestionID', 0);
     $smarty->assign('LessonID', max(0, $lessonId));
     $smarty->display('index.tpl');
