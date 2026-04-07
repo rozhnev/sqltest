@@ -155,6 +155,63 @@ class Achievement
         return $text;
     }
 
+    private static function getFontRenderEncoding(string $lang): string
+    {
+        $lang = strtolower($lang);
+
+        if ($lang === 'ru') {
+            return 'Windows-1251';
+        }
+
+        return 'Windows-1252';
+    }
+
+    private static function prepareTextForFontRendering(string $text, string $lang): string
+    {
+        $text = self::normalizeTextEncoding($text);
+        if ($text === '') {
+            return '';
+        }
+
+        $targetEncoding = self::getFontRenderEncoding($lang);
+
+        if (function_exists('iconv')) {
+            $convertedText = @iconv('UTF-8', $targetEncoding . '//TRANSLIT//IGNORE', $text);
+            if ($convertedText !== false && $convertedText !== '') {
+                return $convertedText;
+            }
+        }
+
+        if (function_exists('mb_convert_encoding')) {
+            $convertedText = @mb_convert_encoding($text, $targetEncoding, 'UTF-8');
+            if ($convertedText !== '') {
+                return $convertedText;
+            }
+        }
+
+        return $text;
+    }
+
+    private static function drawTrueTypeText($image, int $fontSize, int $x, int $y, int $color, string $fontPath, string $text, string $lang): void
+    {
+        imagettftext(
+            $image,
+            $fontSize,
+            0,
+            $x,
+            $y,
+            $color,
+            $fontPath,
+            self::prepareTextForFontRendering($text, $lang)
+        );
+    }
+
+    private static function getTrueTypeTextWidth(string $text, string $fontPath, int $fontSize, string $lang): int
+    {
+        $box = imagettfbbox($fontSize, 0, $fontPath, self::prepareTextForFontRendering($text, $lang));
+        return $box ? abs($box[2] - $box[0]) : 0;
+    }
+
     private static function getShareCardFontPath(): ?string
     {
         $candidates = [
@@ -173,7 +230,7 @@ class Achievement
         return null;
     }
 
-    private static function wrapTextToWidth(string $text, string $fontPath, int $fontSize, int $maxWidth): array
+    private static function wrapTextToWidth(string $text, string $fontPath, int $fontSize, int $maxWidth, string $lang): array
     {
         $text = self::normalizeTextEncoding($text);
 
@@ -188,8 +245,7 @@ class Achievement
 
         foreach ($words as $word) {
             $test = $current === '' ? $word : ($current . ' ' . $word);
-            $box = imagettfbbox($fontSize, 0, $fontPath, $test);
-            $width = $box ? (abs($box[2] - $box[0])) : 0;
+            $width = self::getTrueTypeTextWidth($test, $fontPath, $fontSize, $lang);
             if ($width > $maxWidth && $current !== '') {
                 $lines[] = $current;
                 $current = $word;
@@ -280,6 +336,10 @@ class Achievement
             $font = null;
         }
 
+        if (function_exists('setlocale')) {
+            setlocale(LC_CTYPE, 'C.UTF-8', 'en_US.UTF-8', 'ru_RU.UTF-8', 'pt_PT.UTF-8', 'fr_FR.UTF-8');
+        }
+
         $ui = self::getUiStrings($lang);
         $ui = array_map([self::class, 'normalizeTextEncoding'], $ui);
 
@@ -294,25 +354,25 @@ class Achievement
         if ($font) {
             // Eyebrow label
             $labelFontSize = 24;
-            imagettftext($im, $labelFontSize, 0, $textX, $contentTop, $muted, $font, $ui['label']);
+            self::drawTrueTypeText($im, $labelFontSize, $textX, $contentTop, $muted, $font, $ui['label'], $lang);
 
             // Title (wrap to max 2 lines).
             $titleFontSize = 48;
-            $lines = self::wrapTextToWidth($title, $font, $titleFontSize, $maxTextWidth);
+            $lines = self::wrapTextToWidth($title, $font, $titleFontSize, $maxTextWidth, $lang);
             $lines = array_slice($lines, 0, 2);
             $y = $contentTop + 70;
             foreach ($lines as $line) {
-                imagettftext($im, $titleFontSize, 0, $textX, $y, $text, $font, $line);
+                self::drawTrueTypeText($im, $titleFontSize, $textX, $y, $text, $font, $line, $lang);
                 $y += 72;
             }
 
             // Subtitle.
             $subFontSize = 24;
             $subY = $y + 28;
-            imagettftext($im, $subFontSize, 0, $textX, $subY, $muted, $font, $userName);
+            self::drawTrueTypeText($im, $subFontSize, $textX, $subY, $muted, $font, $userName, $lang);
 
             $subY = $subY + 32;
-            imagettftext($im, 18, 0, $textX, $subY, $muted, $font, $ui['earned'] . ' ' . $earnedAt);
+            self::drawTrueTypeText($im, 18, $textX, $subY, $muted, $font, $ui['earned'] . ' ' . $earnedAt, $lang);
 
             if ((isset($data['solved_tasks_rates']) && !empty($data['solved_tasks_rates']))) {
                 $barX = $textX;
@@ -348,29 +408,28 @@ class Achievement
                     imagefilledellipse($im, (int)$legendX + 6, (int)$legendY - 5, $bulletSize, $bulletSize, $c);
 
                     $lText = self::normalizeTextEncoding($r['rate_title'] . ': ' . $r['count']);
-                    $box = imagettfbbox($legendFontSize, 0, $font, $lText);
-                    $lWidth = $box ? abs($box[2] - $box[0]) : 50;
+                    $lWidth = self::getTrueTypeTextWidth($lText, $font, $legendFontSize, $lang);
 
-                    imagettftext($im, $legendFontSize, 0, (int)($legendX + 18), $legendY, $muted, $font, $lText);
+                    self::drawTrueTypeText($im, $legendFontSize, (int)($legendX + 18), $legendY, $muted, $font, $lText, $lang);
                     $legendX += $lWidth + 45;
                 }
             }
 
             // Footer branding.
             $brandFontSize = 22;
-            imagettftext($im, $brandFontSize, 0, $textX, $height - $pad - 28, $muted, $font, $ui['site']);
+            self::drawTrueTypeText($im, $brandFontSize, $textX, $height - $pad - 28, $muted, $font, $ui['site'], $lang);
 
             // Right panel text (white) for better contrast.
             $panelFontSize = 16;
-            imagettftext(
+            self::drawTrueTypeText(
                 $im,
                 $panelFontSize,
-                0,
                 $width - $pad - $rightPanelW + 20,
                 $pad + 300,
                 $white,
                 $font,
-                $ui['cta']
+                $ui['cta'],
+                $lang
             );
         } else {
             // Fallback: basic bitmap fonts.
