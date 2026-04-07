@@ -75,28 +75,11 @@ class Achievement
 
     private static function getUiStrings(string $lang): array
     {
-        $lang = strtolower($lang);
-        if ($lang === 'ru') {
-            return [
-                'label' => 'Достижение получено',
-                'earned' => 'Получено',
-                'cta' => 'Прокачивай SQL каждый день',
-                'site' => 'SQLtest.online',
-            ];
-        }
-        if ($lang === 'pt') {
-            return [
-                'label' => 'Conquista desbloqueada',
-                'earned' => 'Conquistada em',
-                'cta' => 'Evolua seu SQL todos os dias',
-                'site' => 'SQLtest.online',
-            ];
-        }
         return [
-            'label' => 'Achievement unlocked',
-            'earned' => 'Earned on',
-            'cta' => 'Level up your SQL every day',
-            'site' => 'SQLtest.online',
+            'label' => Localizer::translateString('achievement_share_card_label'),
+            'earned' => Localizer::translateString('achievement_share_card_earned'),
+            'cta' => Localizer::translateString('achievement_share_card_cta'),
+            'site' => Localizer::translateString('achievement_share_card_site'),
         ];
     }
 
