@@ -542,7 +542,7 @@ function openVKLoginPopUp() {
     const uuid = '29890eb2-6a16-0613-190f-250e54537e18'; // Generate a random string. We recommend using at least 36 characters. This string will be used to verify that the request is coming from your app.
     const appId = 51931966; // Your app identifier.
     // const redirect_uri = `${window.location.protocol}//${window.location.host}/login/vk/`;
-    const redirect_uri = `https://sqltest.online/login/vk/?lang=${lang}`;
+    const redirect_uri = `${window.location.protocol}//${window.location.host}/login/vk/?lang=${lang}`;
     const redirect_state = 'login'; // Your app's state or any arbitrary string that will be added to the URL after authentication.
 
     const query = `uuid=${uuid}&app_id=${appId}&response_type=silent_token&redirect_uri=${redirect_uri}&redirect_state=${redirect_state}`;
