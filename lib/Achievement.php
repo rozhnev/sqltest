@@ -173,6 +173,41 @@ class Achievement
         return $lines;
     }
 
+    private static function fillVerticalGradient($image, int $width, int $height, array $startColor, array $endColor): void
+    {
+        for ($y = 0; $y < $height; $y++) {
+            $ratio = $height > 1 ? ($y / ($height - 1)) : 0;
+            $red = (int)round($startColor[0] + (($endColor[0] - $startColor[0]) * $ratio));
+            $green = (int)round($startColor[1] + (($endColor[1] - $startColor[1]) * $ratio));
+            $blue = (int)round($startColor[2] + (($endColor[2] - $startColor[2]) * $ratio));
+            $color = imagecolorallocate($image, $red, $green, $blue);
+            imageline($image, 0, $y, $width, $y, $color);
+        }
+    }
+
+    private static function fillRoundedRectangle($image, int $x1, int $y1, int $x2, int $y2, int $radius, int $color): void
+    {
+        imagefilledrectangle($image, $x1 + $radius, $y1, $x2 - $radius, $y2, $color);
+        imagefilledrectangle($image, $x1, $y1 + $radius, $x2, $y2 - $radius, $color);
+        imagefilledellipse($image, $x1 + $radius, $y1 + $radius, $radius * 2, $radius * 2, $color);
+        imagefilledellipse($image, $x2 - $radius, $y1 + $radius, $radius * 2, $radius * 2, $color);
+        imagefilledellipse($image, $x1 + $radius, $y2 - $radius, $radius * 2, $radius * 2, $color);
+        imagefilledellipse($image, $x2 - $radius, $y2 - $radius, $radius * 2, $radius * 2, $color);
+    }
+
+    private static function drawCenteredText($image, int $fontSize, int $centerX, int $baselineY, int $color, string $fontPath, string $text): void
+    {
+        $box = imagettfbbox($fontSize, 0, $fontPath, $text);
+        if (!$box) {
+            imagettftext($image, $fontSize, 0, $centerX, $baselineY, $color, $fontPath, $text);
+            return;
+        }
+
+        $width = abs($box[2] - $box[0]);
+        $x = (int)round($centerX - ($width / 2));
+        imagettftext($image, $fontSize, 0, $x, $baselineY, $color, $fontPath, $text);
+    }
+
     public function renderShareImage(array $data, string $lang): void
     {
         // Avoid fatals on hosts without GD: fall back to a static image.
@@ -191,31 +226,40 @@ class Achievement
         imagealphablending($im, true);
         imagesavealpha($im, true);
 
-        // Colors based on existing site palette.
-        $bg = imagecolorallocate($im, 39, 62, 116);      // #273E74
-        $card = imagecolorallocate($im, 238, 242, 252);  // #EEF2FC
-        $text = imagecolorallocate($im, 23, 27, 35);     // #171B23
-        $muted = imagecolorallocate($im, 72, 79, 88);    // #484F58
-        $accent = imagecolorallocate($im, 255, 215, 0);  // #FFD700
+        self::fillVerticalGradient($im, $width, $height, [18, 30, 68], [43, 69, 131]);
+
+        $paper = imagecolorallocate($im, 250, 247, 240);
+        $paperInset = imagecolorallocate($im, 255, 252, 247);
+        $text = imagecolorallocate($im, 27, 33, 49);
+        $muted = imagecolorallocate($im, 97, 102, 115);
+        $accent = imagecolorallocate($im, 210, 165, 63);
+        $accentDark = imagecolorallocate($im, 132, 94, 24);
+        $panel = imagecolorallocate($im, 32, 47, 92);
+        $panelSoft = imagecolorallocate($im, 56, 79, 140);
         $white = imagecolorallocate($im, 255, 255, 255);
+        $line = imagecolorallocate($im, 225, 214, 187);
+        $shadow = imagecolorallocatealpha($im, 14, 21, 41, 110);
 
-        imagefilledrectangle($im, 0, 0, $width, $height, $bg);
+        $pad = 42;
+        self::fillRoundedRectangle($im, $pad + 10, $pad + 18, $width - $pad + 8, $height - $pad + 18, 34, $shadow);
+        self::fillRoundedRectangle($im, $pad, $pad, $width - $pad, $height - $pad, 34, $paper);
+        self::fillRoundedRectangle($im, $pad + 18, $pad + 18, $width - $pad - 18, $height - $pad - 18, 28, $paperInset);
 
-        // Card area.
-        $pad = 36;
-        imagefilledrectangle($im, $pad, $pad, $width - $pad, $height - $pad, $card);
-        imagefilledrectangle($im, $pad, $pad, $width - $pad, $pad + 10, $accent);
+        imagerectangle($im, $pad + 24, $pad + 24, $width - $pad - 24, $height - $pad - 24, $line);
+        imagerectangle($im, $pad + 34, $pad + 34, $width - $pad - 34, $height - $pad - 34, $line);
 
-        // Right-side accent panel to make the layout more "designed".
-        $rightPanelW = 360;
-        imagefilledrectangle(
+        $rightPanelW = 292;
+        self::fillRoundedRectangle(
             $im,
             $width - $pad - $rightPanelW,
-            $pad + 10,
-            $width - $pad,
-            $height - $pad,
-            $bg
+            $pad + 26,
+            $width - $pad - 26,
+            $height - $pad - 26,
+            26,
+            $panel
         );
+        imagefilledellipse($im, $width - $pad - 70, $pad + 78, 150, 150, $panelSoft);
+        imagefilledellipse($im, $width - $pad - 182, $height - $pad - 96, 180, 180, $panelSoft);
 
         // Logo (site icon).
         $root = realpath(__DIR__ . '/..');
@@ -223,10 +267,9 @@ class Achievement
         if ($logoPath && is_file($logoPath)) {
             $logo = @imagecreatefrompng($logoPath);
             if ($logo) {
-                $logoTarget = 196;
-                // Place into the right panel.
-                $logoX = $width - $pad - $rightPanelW + 24;
-                $logoY = $pad + 40;
+                $logoTarget = 140;
+                $logoX = $width - $pad - $rightPanelW + 74;
+                $logoY = $pad + 56;
                 imagecopyresampled(
                     $im,
                     $logo,
@@ -253,39 +296,50 @@ class Achievement
         $title = self::clamp((string)($data['achievement_title'] ?? ''), 80);
         $userName = self::clamp((string)($data['share_user_name'] ?? ''), 40);
         $earnedAt = self::formatEarnedAt((string)($data['earned_at'] ?? ''), $lang);
+        $achievementType = self::clamp((string)($data['achievement_type'] ?? ''), 32);
 
-        $textX = $pad + 56;
-        $contentTop = $pad + 120;
-        $maxTextWidth = $width - ($pad * 2) - $rightPanelW - 80;
+        $textX = $pad + 76;
+        $contentTop = $pad + 110;
+        $maxTextWidth = $width - ($pad * 2) - $rightPanelW - 130;
 
         if ($font) {
-            // Eyebrow label
             $labelFontSize = 24;
-            imagettftext($im, $labelFontSize, 0, $textX, $contentTop, $muted, $font, $ui['label']);
+            imagettftext($im, $labelFontSize, 0, $textX, $contentTop, $accentDark, $font, strtoupper($ui['label']));
 
-            // Title (wrap to max 2 lines).
-            $titleFontSize = 48;
+            imageline($im, $textX, $contentTop + 18, $textX + 180, $contentTop + 18, $accent);
+
+            $titleFontSize = 52;
             $lines = self::wrapTextToWidth($title, $font, $titleFontSize, $maxTextWidth);
             $lines = array_slice($lines, 0, 2);
-            $y = $contentTop + 70;
+            $y = $contentTop + 96;
             foreach ($lines as $line) {
                 imagettftext($im, $titleFontSize, 0, $textX, $y, $text, $font, $line);
                 $y += 72;
             }
 
-            // Subtitle.
-            $subFontSize = 24;
-            $subY = $y + 28;
-            imagettftext($im, $subFontSize, 0, $textX, $subY, $muted, $font, $userName);
+            $recipientLabel = $lang === 'ru' ? 'SQL Explorer' : 'SQL Explorer';
+            $recipientBoxTop = $y + 6;
+            self::fillRoundedRectangle($im, $textX - 18, $recipientBoxTop, $textX + $maxTextWidth - 10, $recipientBoxTop + 116, 22, $paper);
+            imagerectangle($im, $textX - 18, $recipientBoxTop, $textX + $maxTextWidth - 10, $recipientBoxTop + 116, $line);
 
-            $subY = $subY + 32;
-            imagettftext($im, 18, 0, $textX, $subY, $muted, $font, $ui['earned'] . ' ' . $earnedAt);
+            $subFontSize = 20;
+            $subY = $recipientBoxTop + 36;
+            imagettftext($im, $subFontSize, 0, $textX + 8, $subY, $muted, $font, $recipientLabel);
+
+            $nameFontSize = 30;
+            $nameY = $subY + 52;
+            imagettftext($im, $nameFontSize, 0, $textX + 8, $nameY, $text, $font, $userName);
+
+            $metaY = $recipientBoxTop + 158;
+            imagettftext($im, 18, 0, $textX, $metaY, $muted, $font, $ui['earned'] . ' ' . $earnedAt);
 
             if ((isset($data['solved_tasks_rates']) && !empty($data['solved_tasks_rates']))) {
                 $barX = $textX;
-                $barY = $subY + 40;
-                $barHeight = 24;
+                $barY = $metaY + 34;
+                $barHeight = 22;
                 $barWidth = $maxTextWidth;
+
+                self::fillRoundedRectangle($im, $barX, $barY, $barX + $barWidth, $barY + $barHeight, 11, $line);
 
                 $colors = [
                     1 => imagecolorallocate($im, 40, 167, 69),
@@ -304,9 +358,9 @@ class Achievement
                     $currentX += $segmentWidth;
                 }
 
-                $legendY = $barY + $barHeight + 35;
+                $legendY = $barY + $barHeight + 34;
                 $legendX = $barX;
-                $legendFontSize = 11;
+                $legendFontSize = 12;
                 $bulletSize = 12;
                 foreach ($data['solved_tasks_rates'] as $r) {
                     $c = $colors[$r['rate']] ?? $muted;
@@ -323,29 +377,36 @@ class Achievement
                 }
             }
 
-            // Footer branding.
-            $brandFontSize = 22;
-            imagettftext($im, $brandFontSize, 0, $textX, $height - $pad - 28, $muted, $font, $ui['site']);
+            $brandFontSize = 20;
+            imagettftext($im, $brandFontSize, 0, $textX, $height - $pad - 54, $accentDark, $font, $ui['site']);
+            imagettftext($im, 15, 0, $textX, $height - $pad - 22, $muted, $font, 'sqltest.online');
 
-            // Right panel text (white) for better contrast.
-            $panelFontSize = 16;
-            imagettftext(
-                $im,
-                $panelFontSize,
-                0,
-                $width - $pad - $rightPanelW + 20,
-                $pad + 300,
-                $white,
-                $font,
-                $ui['cta']
-            );
+            $sealX = $width - $pad - $rightPanelW - 48;
+            $sealY = $height - $pad - 106;
+            imagefilledellipse($im, $sealX, $sealY, 122, 122, $accent);
+            imagefilledellipse($im, $sealX, $sealY, 92, 92, $paperInset);
+            imagefilledellipse($im, $sealX, $sealY, 76, 76, $accent);
+            self::drawCenteredText($im, 15, $sealX, $sealY - 6, $paperInset, $font, 'CERTIFIED');
+            self::drawCenteredText($im, 13, $sealX, $sealY + 22, $paperInset, $font, 'SQL SKILLS');
+
+            self::drawCenteredText($im, 17, $width - $pad - (int)($rightPanelW / 2) - 14, $pad + 238, $white, $font, strtoupper($ui['site']));
+            $panelLines = self::wrapTextToWidth($ui['cta'], $font, 24, $rightPanelW - 70);
+            $panelY = $pad + 330;
+            foreach (array_slice($panelLines, 0, 3) as $panelLine) {
+                self::drawCenteredText($im, 24, $width - $pad - (int)($rightPanelW / 2) - 14, $panelY, $white, $font, $panelLine);
+                $panelY += 42;
+            }
+
+            if ($achievementType !== '') {
+                self::fillRoundedRectangle($im, $width - $pad - $rightPanelW + 36, $height - $pad - 172, $width - $pad - 56, $height - $pad - 132, 18, $paperInset);
+                self::drawCenteredText($im, 15, $width - $pad - (int)($rightPanelW / 2) - 10, $height - $pad - 145, $accentDark, $font, strtoupper(str_replace('_', ' ', $achievementType)));
+            }
         } else {
-            // Fallback: basic bitmap fonts.
-            imagestring($im, 4, $textX, $contentTop - 20, $ui['label'], $muted);
-            imagestring($im, 5, $textX, $contentTop + 20, $title, $text);
-            $subtitle = $userName !== '' ? ($userName . ' - ' . $ui['earned'] . ' ' . $earnedAt) : ($ui['earned'] . ' ' . $earnedAt);
-            imagestring($im, 4, $textX, $contentTop + 60, $subtitle, $muted);
-            imagestring($im, 3, $textX, $height - $pad - 20, $ui['site'], $muted);
+            imagestring($im, 5, $textX, $contentTop - 8, $ui['label'], $accentDark);
+            imagestring($im, 5, $textX, $contentTop + 42, $title, $text);
+            imagestring($im, 5, $textX, $contentTop + 88, $userName, $text);
+            imagestring($im, 4, $textX, $contentTop + 122, $ui['earned'] . ' ' . $earnedAt, $muted);
+            imagestring($im, 4, $textX, $height - $pad - 28, $ui['site'], $accentDark);
         }
 
         imagepng($im);
