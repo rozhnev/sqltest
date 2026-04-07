@@ -790,7 +790,7 @@ class Controller
                 if (!isset($achievement['achievement_id'])) {
                     continue;
                 }
-                $shareUrl = "https://{$this->host}/{$this->lang}/achievement/" .$achievement['user_achievement_id'];
+                $shareUrl = "{$this->host}/{$this->lang}/achievement/" .$achievement['user_achievement_id'];
                 $achievement['share_url'] = $shareUrl;
                 $achievement['linkedin_share_url'] = 'https://www.linkedin.com/sharing/share-offsite/?url=' . rawurlencode($shareUrl);
             }
