@@ -58,6 +58,7 @@ class Controller
             'YANDEX_METRIKA_ID' => $env['YANDEX_METRIKA_ID'] ?? '',
             'GOOGLE_TAG_MANAGER_ID' => $env['GOOGLE_TAG_MANAGER_ID'] ?? '',
             'GOOGLE_CLIENT_ID' => $env['GOOGLE_CLIENT_ID'] ?? '',
+            'GITHUB_CLIENT_ID' => $env['GITHUB_CLIENT_ID'] ?? '',
             'MobileView'    => $this->isMobileView(),
             'Languages'     => $this->languages,
             'User'          => $this->user,

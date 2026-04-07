@@ -526,8 +526,14 @@ function openLinkedinLoginPopUp() {
     );
 }
 function openGitHubLoginPopUp() {
+    const githubClientId = window.AppConfig?.githubClientId || '';
+    if (!githubClientId) {
+        showToast('error', 'GitHub login is not configured.');
+        return;
+    }
+
     window.open(
-        `https://github.com/login/oauth/authorize?client_id=9a1910d2a6c658fdffc3&redirect_uri=${window.location.protocol}//${window.location.host}/login/github/&scope=user`, 
+        `https://github.com/login/oauth/authorize?client_id=${encodeURIComponent(githubClientId)}&redirect_uri=${window.location.protocol}//${window.location.host}/login/github/&scope=user`, 
         'GitHub Login', 
         `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=530,height=950,left=${(window.outerWidth - 530) / 2},top=${(window.outerHeight - 950) / 2}`
     );
