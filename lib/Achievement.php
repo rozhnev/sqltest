@@ -128,6 +128,7 @@ class Achievement
     {
         $candidates = [
             '/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf',
+            '/usr/share/fonts/liberation-fonts/LiberationSans-Regular.ttf',
             '/usr/share/fonts/dejavu/DejaVuSans.ttf',
             '/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf',
             '/System/Library/Fonts/Supplemental/Arial.ttf',
