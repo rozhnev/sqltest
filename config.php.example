@@ -1,2 +1,5 @@
 <?php
-$languages = ['ru' => 'Русский', 'en' => 'English', 'pt' => 'Português', 'fr' => 'Français'];    
+$config = [
+    'domain' => 'localhost',
+    'languages' => ['ru' => 'Русский', 'en' => 'English', 'pt' => 'Português', 'fr' => 'Français']
+];    
