@@ -1,5 +1,26 @@
 
 let windowObjectReference = null; // global variable
+
+function lazyInitShareThis() {
+    if (!document.querySelector('.sharethis-inline-share-buttons')) {
+        return;
+    }
+
+    const loadShareThis = () => {
+        runWhenBrowserIdle(() => {
+            loadExternalScriptOnce('https://platform-api.sharethis.com/js/sharethis.js#property=685bb6a18ca9160019f294e2&product=sop')
+                .catch(error => console.error(error));
+        });
+    };
+
+    if (document.readyState === 'complete') {
+        loadShareThis();
+        return;
+    }
+
+    window.addEventListener('load', loadShareThis, { once: true });
+}
+
 function openRequestedTab(href) {
     if (windowObjectReference === null || windowObjectReference.closed) {
         // const url = `${href}_${window.UIConfig.theme === 'dark' ?  'dark' : 'light'}.png`;
@@ -761,6 +782,7 @@ function setEventListeners() {
 setMenuEventListeners();
 setEventListeners();
 applyUIConfig();
+lazyInitShareThis();
 if (document.getElementById("sql-code")) {
 
     window.sql_editor = ace.edit("sql-code", {

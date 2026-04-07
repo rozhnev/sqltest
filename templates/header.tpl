@@ -59,6 +59,5 @@
                     githubClientId: '{$GITHUB_CLIENT_ID|escape:"javascript"}'
                 });
             </script>
-            <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=685bb6a18ca9160019f294e2&product=sop' async='async'></script>
         </head>
 
