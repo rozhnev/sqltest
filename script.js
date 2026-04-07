@@ -1,5 +1,38 @@
 
 let windowObjectReference = null; // global variable
+
+function loadExternalScriptOnce(src) {
+    if (externalScriptPromises[src]) {
+        return externalScriptPromises[src];
+    }
+
+    externalScriptPromises[src] = new Promise((resolve, reject) => {
+        const existingScript = document.querySelector(`script[src="${src}"]`);
+        if (existingScript) {
+            if (existingScript.dataset.loaded === 'true') {
+                resolve();
+                return;
+            }
+
+            existingScript.addEventListener('load', () => resolve(), { once: true });
+            existingScript.addEventListener('error', () => reject(new Error(`Failed to load script: ${src}`)), { once: true });
+            return;
+        }
+
+        const script = document.createElement('script');
+        script.src = src;
+        script.async = true;
+        script.onload = () => {
+            script.dataset.loaded = 'true';
+            resolve();
+        };
+        script.onerror = () => reject(new Error(`Failed to load script: ${src}`));
+        document.head.appendChild(script);
+    });
+
+    return externalScriptPromises[src];
+}
+
 function runWhenBrowserIdle(callback, timeout = 2000) {
     if ('requestIdleCallback' in window) {
         window.requestIdleCallback(callback, { timeout });
