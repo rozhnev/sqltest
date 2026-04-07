@@ -1,6 +1,13 @@
 
 let windowObjectReference = null; // global variable
+function runWhenBrowserIdle(callback, timeout = 2000) {
+    if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(callback, { timeout });
+        return;
+    }
 
+    window.setTimeout(callback, 1500);
+}
 function lazyInitShareThis() {
     if (!document.querySelector('.sharethis-inline-share-buttons')) {
         return;
