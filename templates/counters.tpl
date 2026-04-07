@@ -19,7 +19,9 @@
     ym({/literal}{$YANDEX_METRIKA_ID}{literal}, "init", {
         clickmap:true,
         trackLinks:true,
-        accurateTrackBounce:true
+        accurateTrackBounce:true,
+        webvisor:false, // Disable this to save the most weight
+        trackHash:false
     });
     {/literal}
 </script>
