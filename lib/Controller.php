@@ -180,7 +180,7 @@ class Controller
     public function login(array $params): void
     {
         $isAjax = (isset($_REQUEST['ajax']) && $_REQUEST['ajax'] === '1');
-        $success = $this->user->login($params['loginProvider'], $_REQUEST);
+        $success = $this->user->login($this->domain, $params['loginProvider'], $_REQUEST);
 
         if ($success) {
             if ($params['loginProvider'] !== 'session') {

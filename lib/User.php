@@ -54,19 +54,19 @@ class User
      * @param array $request
      * @return bool
      */
-    public function login(string $provider, $request): bool
+    public function login(string $domain, string $provider, $request): bool
     {
         switch ($provider) {
             case 'yandex':
                 return $this->loginYandex($_GET['code']);
             case 'github':
-                return $this->loginGithub($_GET['code']);
+                return $this->loginGithub($domain, $_GET['code']);
             case 'google':
                 return $this->loginGoogle($_GET['code']);
             case 'vk':
                 return $this->loginVK($_GET['payload']);
             case 'linkedin':
-                return $this->loginLinkedin($_GET['code']);
+                return $this->loginLinkedin($domain, $_GET['code']);
             case 'password':
                 return $this->loginPassword((string)($request['email'] ?? ''), (string)($request['password'] ?? ''));
             case 'session':
@@ -140,7 +140,7 @@ class User
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([
             'grant_type'    => 'authorization_code',
             'code'          => $code,
-            'redirect_uri'  => 'https://sqltest.online/login/linkedin/',
+            'redirect_uri'  => "https://{$this->domain}/login/linkedin/",
             'client_id'     => $this->env['LINKEDIN_CLIENT_ID'],
             'client_secret' => $this->env['LINKEDIN_SECRET']
         ]));
@@ -258,7 +258,7 @@ class User
      * @param string $code
      * @return bool
      */
-    public function loginGithub(string $code): bool
+    public function loginGithub(string $domain, string $code): bool
     {
         $params = array(
             'grant_type'    => 'authorization_code',
@@ -291,7 +291,7 @@ class User
                         'Authorization: Bearer ' . $data['access_token'],
                         'Accept: application/vnd.github+json',
                         'X-GitHub-Api-Version: 2022-11-28',
-                        'User-Agent: SQLtest.online'
+                        'User-Agent: ' . $domain
                     ]);
                     curl_setopt($ch, CURLOPT_HEADER, false);
                     $info = curl_exec($ch);
