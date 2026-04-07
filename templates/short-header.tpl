@@ -20,6 +20,9 @@
                 }
                 window.UIConfig = loadUIConfig();
                 document.documentElement.setAttribute('data-theme', window.UIConfig.theme);
+                window.AppConfig = Object.assign({}, window.AppConfig, {
+                    googleClientId: '{$GOOGLE_CLIENT_ID|escape:"javascript"}'
+                });
             </script>
             {include file='site-title.tpl'}
             <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">

@@ -669,9 +669,15 @@ function handleEmailRegister(event) {
 }
 
 function openGoogleLoginPopUp() {
+    const googleClientId = window.AppConfig?.googleClientId || document.querySelector('meta[name="google-signin-client_id"]')?.content || '';
+    if (!googleClientId) {
+        showToast('error', 'Google login is not configured.');
+        return;
+    }
+
     const params = {
         response_type: 'code',
-        client_id: '340274762951-1d5m1pb8p9i2bhjbtuc4p8q9gveuk2ug.apps.googleusercontent.com',
+        client_id: googleClientId,
         redirect_uri: `${window.location.protocol}//${window.location.host}/login/google/`,
         scope:'openid email',
         state: ''
