@@ -18,7 +18,7 @@ class Router
             'static-page'       => "@(?<lang>{$this->langPattern})/(?<action>privacy-policy|logout|about|menu|books|courses|donate)/?@i",
             'register'          => "@(?<lang>{$this->langPattern})/(?<action>register)/?@i",
             'login'             => "@^/(?<action>login)/(?<loginProvider>[a-z]+)/?$@i",
-            'erd'               => "@(?<lang>{$this->langPattern})/(?<action>erd)/(?<db>Sakila|Bookings|AdventureWorks|Employee)\?theme=(?<theme>dark|light)@i",
+            'erd'               => "@(?<lang>{$this->langPattern})/(?<action>erd)/(?<db>Sakila|Bookings|AdventureWorks|Employee)/?@i",
             'favorite'          => "@(?<lang>{$this->langPattern})/(?<class>question)/(?<questionID>\d+)/(?<action>favorite)@i",
             'question_solutions'=> "@(?<lang>{$this->langPattern})/(?<class>question)/(?<questionID>\d+)/(?<action>solutions|my-solutions)@i",
             'solution'          => "@(?<lang>{$this->langPattern})/(?<class>solution)/(?<solutionID>\d+)/(?<action>like|unlike|report|delete)@i",
@@ -71,6 +71,9 @@ class Router
                 $params['path'] = $path;
                 if ($route === 'login' && isset($query['lang']) && in_array((string)$query['lang'], $this->supportedLangs, true)) {
                     $params['lang'] = (string)$query['lang'];
+                }
+                if ($route === 'erd') {
+                    $params['theme'] = (string)$query['theme'] ?? 'light';
                 }
                 if ($route === 'challenge-mariadb-start') {
                     $params['action'] = 'challenge-mariadb_start';
