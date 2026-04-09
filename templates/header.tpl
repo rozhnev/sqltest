@@ -49,7 +49,7 @@
             <script>window.yaContextCb=window.yaContextCb||[]</script>
             <script src="https://yandex.ru/ads/system/context.js" async></script>
             <!-- Yandex.RTB -->
-            <script type="text/javascript" src="/script.js?{$VERSION}" defer></script>
+            <script type="text/javascript" src="/script.min.js?{$VERSION}" defer></script>
             <script>
                 var lang = '{$Lang|default:"en"}',
                 db   = '{$DB|default:"null"}',
