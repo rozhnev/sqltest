@@ -7,6 +7,11 @@
 </div>
 <div class="mobile-menu-dropdown hidden" id="mobileMenuDropdown">
     <div class="mobile-menu-item">
+        <a href="/{$Lang}/lesson/getting-started/introduction-to-databases" target="_self">
+            <button class="button blue"><span>{translate}lessons{/translate}</span></button>
+        </a>
+    </div>
+    <div class="mobile-menu-item">
         {include file='theme-switcher.tpl'}
     </div>
     <div class="mobile-menu-item">
