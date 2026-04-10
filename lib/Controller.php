@@ -986,7 +986,7 @@ class Controller
             'Lesson'            => $lesson,
             'LessonData'        => $lessonData
         ]);
-        $this->engine->display("lesson.tpl");
+        $this->engine->display($this->isMobileView() ? "m.lesson.tpl" : "lesson.tpl");
     }
 
     public function playground(array $params): void 
