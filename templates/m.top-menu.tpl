@@ -7,9 +7,25 @@
 </div>
 <div class="mobile-menu-dropdown hidden" id="mobileMenuDropdown">
     <div class="mobile-menu-item">
-        <a href="/{$Lang}/lesson/getting-started/introduction-to-databases" target="_self">
-            <button class="button blue"><span>{translate}lessons{/translate}</span></button>
-        </a>
+        <h2>
+            <a class="practice-list" href="/{$Lang}/" target="_self" style="display: flex; align-items: center; gap: 4px; font-size: 0.75em;">
+                {translate}practice{/translate}
+            </a>
+        </h2>
+    </div>
+    <div class="mobile-menu-item">
+        <h2>
+            <a class="lessons-list" href="/{$Lang}/lesson/getting-started/introduction-to-databases" target="_self" style="display: flex; align-items: center; gap: 4px; font-size: 0.75em;">
+                {translate}lessons{/translate}
+            </a>
+        </h2>
+    </div>
+    <div class="mobile-menu-item">
+        <h2>
+            <a class="tests-list" href="/{$Lang}/test/start" target="_self" style="display: flex; align-items: center; gap: 4px; font-size: 0.75em;">
+                {translate}test{/translate}
+            </a>
+        </h2>
     </div>
     <div class="mobile-menu-item">
         {include file='theme-switcher.tpl'}
