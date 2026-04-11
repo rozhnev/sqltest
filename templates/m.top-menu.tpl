@@ -35,7 +35,7 @@
     </div>
     <div class="mobile-menu-item">
         <a href="/{$Lang}/donate" target="_self" id="donate-btn">
-            <button class="button green"><span>{translate}top_menu_donate{/translate}</span></button>    
+            <button class="button green"><span>{translate}mobile_menu_donate{/translate}</span></button>    
         </a>
     </div>
 </div>
