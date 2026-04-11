@@ -67,25 +67,21 @@ GROUP BY staff_id, customer_id;
 
 ## Utilisation pratique
 
-1. **Analyse des ventes par catégorie de film :**
+À ce stade, il vaut mieux s'exercer avec `GROUP BY` sur une seule table. Dans les prochaines leçons, vous verrez aussi comment utiliser les agrégations dans des requêtes qui combinent plusieurs tables.
+
+1. **Rapport de chiffre d'affaires par jour :**
    ```sql
-   SELECT c.name AS categorie, SUM(p.amount) AS ventes_totales
-   FROM payment p
-   JOIN rental r ON p.rental_id = r.rental_id
-   JOIN inventory i ON r.inventory_id = i.inventory_id
-   JOIN film f ON i.film_id = f.film_id
-   JOIN film_category fc ON f.film_id = fc.film_id
-   JOIN category c ON fc.category_id = c.category_id
-   GROUP BY c.name;
+   SELECT DATE(payment_date) AS pay_date, SUM(amount) AS total_sales
+   FROM payment
+   GROUP BY DATE(payment_date)
+   ORDER BY pay_date;
    ```
-2. **Nombre de clients par pays :**
+2. **Clients les plus actifs par nombre de locations :**
    ```sql
-   SELECT co.country, COUNT(*) AS nb_clients
-   FROM customer cu
-   JOIN address a ON cu.address_id = a.address_id
-   JOIN city ci ON a.city_id = ci.city_id
-   JOIN country co ON ci.country_id = co.country_id
-   GROUP BY co.country;
+   SELECT customer_id, COUNT(*) AS rentals_count
+   FROM rental
+   GROUP BY customer_id
+   ORDER BY rentals_count DESC;
    ```
 
 ## Points clés de cette leçon

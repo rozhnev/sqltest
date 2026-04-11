@@ -67,25 +67,21 @@ GROUP BY staff_id, customer_id;
 
 ## Aplicações Práticas
 
-1. **Análise de vendas por categoria de filme:**
+Nesta etapa, é melhor praticar `GROUP BY` usando apenas uma tabela. Nas próximas lições, você verá como usar agregações também em consultas que combinam dados de várias tabelas.
+
+1. **Relatório de receita por dia:**
    ```sql
-   SELECT c.name AS category, SUM(p.amount) AS total_sales
-   FROM payment p
-   JOIN rental r ON p.rental_id = r.rental_id
-   JOIN inventory i ON r.inventory_id = i.inventory_id
-   JOIN film f ON i.film_id = f.film_id
-   JOIN film_category fc ON f.film_id = fc.film_id
-   JOIN category c ON fc.category_id = c.category_id
-   GROUP BY c.name;
+   SELECT DATE(payment_date) AS pay_date, SUM(amount) AS total_sales
+   FROM payment
+   GROUP BY DATE(payment_date)
+   ORDER BY pay_date;
    ```
-2. **Número de clientes por país:**
+2. **Clientes mais ativos pelo número de locações:**
    ```sql
-   SELECT co.country, COUNT(*) AS customers_count
-   FROM customer cu
-   JOIN address a ON cu.address_id = a.address_id
-   JOIN city ci ON a.city_id = ci.city_id
-   JOIN country co ON ci.country_id = co.country_id
-   GROUP BY co.country;
+   SELECT customer_id, COUNT(*) AS rentals_count
+   FROM rental
+   GROUP BY customer_id
+   ORDER BY rentals_count DESC;
    ```
 
 ## Principais Conclusões desta Lição

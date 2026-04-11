@@ -67,25 +67,21 @@ GROUP BY staff_id, customer_id;
 
 ## Практическое применение
 
-1. **Анализ продаж по категориям фильмов:**
+На этом этапе лучше тренироваться с `GROUP BY` на одной таблице. В следующих уроках вы увидите, как использовать агрегатные функции и в запросах, которые объединяют данные из нескольких таблиц.
+
+1. **Отчёт по выручке за каждый день:**
    ```sql
-   SELECT c.name AS category, SUM(p.amount) AS total_sales
-   FROM payment p
-   JOIN rental r ON p.rental_id = r.rental_id
-   JOIN inventory i ON r.inventory_id = i.inventory_id
-   JOIN film f ON i.film_id = f.film_id
-   JOIN film_category fc ON f.film_id = fc.film_id
-   JOIN category c ON fc.category_id = c.category_id
-   GROUP BY c.name;
+   SELECT DATE(payment_date) AS pay_date, SUM(amount) AS total_sales
+   FROM payment
+   GROUP BY DATE(payment_date)
+   ORDER BY pay_date;
    ```
-2. **Количество клиентов по странам:**
+2. **Самые активные клиенты по количеству аренд:**
    ```sql
-   SELECT co.country, COUNT(*) AS customers_count
-   FROM customer cu
-   JOIN address a ON cu.address_id = a.address_id
-   JOIN city ci ON a.city_id = ci.city_id
-   JOIN country co ON ci.country_id = co.country_id
-   GROUP BY co.country;
+   SELECT customer_id, COUNT(*) AS rentals_count
+   FROM rental
+   GROUP BY customer_id
+   ORDER BY rentals_count DESC;
    ```
 
 ## Основные выводы из этого урока

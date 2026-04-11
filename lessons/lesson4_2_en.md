@@ -67,25 +67,21 @@ GROUP BY staff_id, customer_id;
 
 ## Practical Usage
 
-1. **Sales analysis by film category:**
+At this stage, it is best to practice `GROUP BY` on a single table. In the following lessons, you will learn how to use aggregation in queries that combine data from multiple tables.
+
+1. **Daily revenue report:**
    ```sql
-   SELECT c.name AS category, SUM(p.amount) AS total_sales
-   FROM payment p
-   JOIN rental r ON p.rental_id = r.rental_id
-   JOIN inventory i ON r.inventory_id = i.inventory_id
-   JOIN film f ON i.film_id = f.film_id
-   JOIN film_category fc ON f.film_id = fc.film_id
-   JOIN category c ON fc.category_id = c.category_id
-   GROUP BY c.name;
+   SELECT DATE(payment_date) AS pay_date, SUM(amount) AS total_sales
+   FROM payment
+   GROUP BY DATE(payment_date)
+   ORDER BY pay_date;
    ```
-2. **Number of customers by country:**
+2. **Most active customers by number of rentals:**
    ```sql
-   SELECT co.country, COUNT(*) AS customers_count
-   FROM customer cu
-   JOIN address a ON cu.address_id = a.address_id
-   JOIN city ci ON a.city_id = ci.city_id
-   JOIN country co ON ci.country_id = co.country_id
-   GROUP BY co.country;
+   SELECT customer_id, COUNT(*) AS rentals_count
+   FROM rental
+   GROUP BY customer_id
+   ORDER BY rentals_count DESC;
    ```
 
 ## Key Takeaways from This Lesson
