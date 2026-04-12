@@ -374,11 +374,44 @@
                 </tr>
             </table>
         </div>
-    </div>                            
+    </div>
+    <h3>Ниже приведен список представлений этой БД:</h3>
+    <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки имени представления в редактор">
+        <span><span class='sql'>PHONE_LIST</span> - представление со списком телефонов сотрудников.</span>
+    </div>
+    <div class="panel">
+        <ul class="table-columns">
+            <li><span class='sql'>EMP_NO</span>Номер сотрудника</li>
+            <li><span class='sql'>FIRST_NAME</span>Имя сотрудника</li>
+            <li><span class='sql'>LAST_NAME</span>Фамилия сотрудника</li>
+            <li><span class='sql'>PHONE_EXT</span>Добавочный номер сотрудника</li>
+            <li><span class='sql'>LOCATION</span>Местоположение отдела</li>
+            <li><span class='sql'>PHONE_NO</span>Телефонный номер отдела</li>
+        </ul>
+        <div class="table-wrapper">
+            <table>
+                <tr>
+                    <th>EMP_NO</th>
+                    <th>FIRST_NAME</th>
+                    <th>LAST_NAME</th>
+                    <th>PHONE_EXT</th>
+                    <th>LOCATION</th>
+                    <th>PHONE_NO</th>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Robert</td>
+                    <td>Nelson</td>
+                    <td>250</td>
+                    <td>Monterey</td>
+                    <td>(408) 555-1234</td>
+                </tr>
+            </table>
+        </div>
+    </div>
     {if $User->showAd()}
         <div class="referal-add-block">
             <div id="yandex_rtb_R-A-4716552-7"></div>
         </div>
-        {* {include file="ru/developers_channel_ad.tpl"} *}
     {/if}
 </div>

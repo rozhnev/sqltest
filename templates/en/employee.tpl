@@ -397,6 +397,14 @@
                     <th>LOCATION</th>
                     <th>PHONE_NO</th>
                 </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Robert</td>
+                    <td>Nelson</td>
+                    <td>250</td>
+                    <td>Monterey</td>
+                    <td>(408) 555-1234</td>
+                </tr>
             </table>
         </div>
     </div>

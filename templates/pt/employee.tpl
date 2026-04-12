@@ -372,9 +372,64 @@
                 </tr>
             </table>
         </div>
-    </div>                            
+    </div>
+    <h3>Abaixo está a lista de views deste banco de dados:</h3>
+    <div class="accordion" title="Clique para expandir, dê um clique duplo para colar o nome da view no editor">
+        <span><span class='sql'>PHONE_LIST</span> - view com a lista de telefones dos funcionários.</span>
+    </div>
+    <div class="panel">
+        <ul class="table-columns">
+            <li><span class='sql'>EMP_NO</span>Número do funcionário</li>
+            <li><span class='sql'>FIRST_NAME</span>Primeiro nome do funcionário</li>
+            <li><span class='sql'>LAST_NAME</span>Sobrenome do funcionário</li>
+            <li><span class='sql'>PHONE_EXT</span>Ramal do telefone do funcionário</li>
+            <li><span class='sql'>LOCATION</span>Localização do departamento</li>
+            <li><span class='sql'>PHONE_NO</span>Número de telefone do departamento</li>
+        </ul>
+        <div class="table-wrapper">
+            <table>
+                <tr>
+                    <th>EMP_NO</th>
+                    <th>FIRST_NAME</th>
+                    <th>LAST_NAME</th>
+                    <th>PHONE_EXT</th>
+                    <th>LOCATION</th>
+                    <th>PHONE_NO</th>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Robert</td>
+                    <td>Nelson</td>
+                    <td>250</td>
+                    <td>Monterey</td>
+                    <td>(408) 555-1234</td>
+                </tr>
+            </table>
+        </div>
+    </div>
     {if $User->showAd()}
         <div class="referal-add-block">
+            {if $Book}
+                <div class="book-card">
+                    <a href="{{$Book.referral_link}}" target="_blank" style="text-decoration: none; color: var(--question-color);">
+                        <div style="display: flex; flex-direction: row;     border: 1px solid var(--text-block-border-color);
+color: var(--question-text);
+border-radius: 6px; padding: 0.3em; width: 98%;">
+                        <div  style = "width: 25%;">
+                            <img style="width: 100%;" src="{{$Book.picture_link}}" alt="{{$Book.title|escape:"html"}}">
+                        </div>
+                        <div style="font-size: 1em;  width: 75%;  padding: 0 0.7em; font-weight: 100; height: 250px; overflow: auto;">
+                            <div>{{$Book.title|escape:"html"}}</div>
+                            <div style="font-size: small; padding-top: 0.5em;">{{$Book.description|escape:"html"}}</div>
+                        </div>
+                        </div>
+                    </a>
+                </div>
+            {else}
+                <a href="https://www.kqzyfj.com/86104kjspjr6878CE9F9G68E9B9898" target="_blank">
+                    <img src="https://www.awltovhc.com/60106z15u-yJLKLPRMSMTJLRMOMLML" alt="" style="border: 0; width: 100%;"/>
+                </a>
+            {/if}        
             {* <script async="async" data-cfasync="false" src="//pl26881648.profitableratecpm.com/93660caf229b7b6afe772e0ab435c7a9/invoke.js"></script>
             <div id="container-93660caf229b7b6afe772e0ab435c7a9"></div> *}
         </div>
