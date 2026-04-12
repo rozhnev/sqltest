@@ -265,7 +265,7 @@ function runQuery(lang, questionId) {
       document.getElementById('code-result').innerHTML = html;
   })
   .catch(err=>{
-    document.getElementById('code-result').innerHTML = 'Something went wrong. Please review your query and try again or contact us by email: <a href="mailto:support@sqlize.online">support@sqlize.online</a>.';
+    document.getElementById('code-result').innerHTML = 'Something went wrong. Please review your query and try again or contact us by email: <a href="mailto:support@sqltest.online">support@sqltest.online</a>.';
   });
 }
 function checkAnswers(lang, questionId) {
@@ -304,7 +304,7 @@ function checkAnswers(lang, questionId) {
         document.getElementById('code-result').innerHTML = message;
     })
     .catch(err=>{
-        document.getElementById('code-result').innerHTML = 'Something went wrong. Please review your query and try again.';
+        document.getElementById('code-result').innerHTML = 'Something went wrong. Please review your query and try again or contact us by email: <a href="mailto:support@sqltest.online">support@sqltest.online</a>.';
     });
 }
 function testQuery(lang, questionId) {
@@ -333,7 +333,6 @@ function testQuery(lang, questionId) {
                         behavior: "smooth" 
                     })
                 }
-
             }, 300)
         }
         return await response.text();
@@ -342,7 +341,7 @@ function testQuery(lang, questionId) {
         document.getElementById('code-result').innerHTML = message;
     })
     .catch(err=>{
-        document.getElementById('code-result').innerHTML = 'Something went wrong. Please review your query and try again or contact us by email: <a href="mailto:support@sqlize.online">support@sqlize.online</a>.';
+        document.getElementById('code-result').innerHTML = 'Something went wrong. Please review your query and try again or contact us by email: <a href="mailto:support@sqltest.online">support@sqltest.online</a>.';
     });
 }
 function toggleFavorites(lang, questionId) {
