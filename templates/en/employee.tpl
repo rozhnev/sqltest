@@ -373,7 +373,33 @@
                 </tr>
             </table>
         </div>
-    </div>                            
+    </div>
+    <h3>Below is a list of this DB views:</h3>
+    <div class="accordion" title="Click to expand, double-click to paste view name into the editor">
+        <span><span class='sql'>PHONE_LIST</span> - employee phone list view.</span>
+    </div>
+    <div class="panel">
+        <ul class="table-columns">
+            <li><span class='sql'>EMP_NO</span>Employee number</li>
+            <li><span class='sql'>FIRST_NAME</span>First name of the employee</li>
+            <li><span class='sql'>LAST_NAME</span>Last name of the employee</li>
+            <li><span class='sql'>PHONE_EXT</span>Phone extension for the employee</li>
+            <li><span class='sql'>LOCATION</span>Department location</li>
+            <li><span class='sql'>PHONE_NO</span>Department phone number</li>
+        </ul>
+        <div class="table-wrapper">
+            <table>
+                <tr>
+                    <th>EMP_NO</th>
+                    <th>FIRST_NAME</th>
+                    <th>LAST_NAME</th>
+                    <th>PHONE_EXT</th>
+                    <th>LOCATION</th>
+                    <th>PHONE_NO</th>
+                </tr>
+            </table>
+        </div>
+    </div>
     {if $User->showAd()}
         <div class="referal-add-block">
             {if $Book}
