@@ -95,7 +95,7 @@
                             <div id="yandex_rtb_R-A-4716552-7"></div>
                         </div>
                     {else}
-                        <script async="async" data-cfasync="false" src="//pl26881648.profitableratecpm.com/93660caf229b7b6afe772e0ab435c7a9/invoke.js"></script>
+                        <script async="async" data-cfasync="false" src="https://pl26881648.profitablecpmratenetwork.com/93660caf229b7b6afe772e0ab435c7a9/invoke.js"></script>
                         <div class="referal-add-block">
                             <div id="container-93660caf229b7b6afe772e0ab435c7a9"></div>
                         </div>
