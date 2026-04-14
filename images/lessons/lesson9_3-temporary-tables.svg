@@ -1,0 +1,80 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="88" y1="44" x2="1116" y2="598" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F5F7FB"/>
+      <stop offset="0.5" stop-color="#E8F6F1"/>
+      <stop offset="1" stop-color="#FFF4DE"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#123B4A"/>
+      <stop offset="1" stop-color="#1B5B6B"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#F59E0B"/>
+      <stop offset="1" stop-color="#EA580C"/>
+    </linearGradient>
+    <filter id="shadow" x="0" y="0" width="1200" height="630" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="12" stdDeviation="18" flood-color="#0F172A" flood-opacity="0.14"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="630" rx="28" fill="url(#bg)"/>
+  <circle cx="150" cy="124" r="84" fill="#D8F0E6"/>
+  <circle cx="1062" cy="98" r="72" fill="#FDE9C5"/>
+  <circle cx="1028" cy="556" r="102" fill="#D9EEF8"/>
+
+  <rect x="64" y="58" width="504" height="514" rx="28" fill="url(#panel)" filter="url(#shadow)"/>
+  <text x="106" y="130" fill="#F8FAFC" font-family="Segoe UI, Arial, sans-serif" font-size="52" font-weight="700">SQL TEMP</text>
+  <text x="106" y="174" fill="#C9E7E1" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="500">Store intermediate results.</text>
+  <text x="106" y="204" fill="#C9E7E1" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="500">Use them across several steps.</text>
+
+  <rect x="104" y="220" width="424" height="152" rx="20" fill="#0F2E3A" stroke="#2F7A87" stroke-width="2"/>
+  <text x="132" y="254" fill="#F59E0B" font-family="Consolas, Monaco, monospace" font-size="18">CREATE TEMPORARY TABLE</text>
+  <text x="180" y="280" fill="#F59E0B" font-family="Consolas, Monaco, monospace" font-size="18">tmp_active_customers AS</text>
+  <text x="132" y="308" fill="#E2E8F0" font-family="Consolas, Monaco, monospace" font-size="18">SELECT customer_id, COUNT(*)</text>
+  <text x="132" y="333" fill="#E2E8F0" font-family="Consolas, Monaco, monospace" font-size="18">FROM payment</text>
+  <text x="132" y="358" fill="#E2E8F0" font-family="Consolas, Monaco, monospace" font-size="18">GROUP BY customer_id;</text>
+
+  <rect x="104" y="396" width="424" height="134" rx="20" fill="#F8FAFC"/>
+  <rect x="128" y="420" width="378" height="24" rx="8" fill="#D9EEF8"/>
+  <rect x="128" y="458" width="378" height="18" rx="6" fill="#E5E7EB"/>
+  <rect x="128" y="486" width="246" height="18" rx="6" fill="#E5E7EB"/>
+  <rect x="390" y="486" width="116" height="18" rx="6" fill="#FDE9C5"/>
+  <text x="146" y="437" fill="#123B4A" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="700">tmp_active_customers</text>
+  <text x="146" y="471" fill="#475569" font-family="Segoe UI, Arial, sans-serif" font-size="15">customer_id: 27</text>
+  <text x="146" y="499" fill="#475569" font-family="Segoe UI, Arial, sans-serif" font-size="15">customer_id: 46</text>
+  <text x="410" y="499" fill="#9A3412" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="700">COUNT &gt; 30</text>
+
+  <rect x="620" y="96" width="480" height="118" rx="24" fill="#FFFFFF" stroke="#BCD3DE" stroke-width="2" filter="url(#shadow)"/>
+  <text x="648" y="138" fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="29" font-weight="700">Temporary table</text>
+  <text x="648" y="172" fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="29" font-weight="700">for intermediate data</text>
+  <text x="648" y="202" fill="#475569" font-family="Segoe UI, Arial, sans-serif" font-size="18">Visible in one session, useful across multiple queries</text>
+
+  <rect x="620" y="252" width="140" height="184" rx="24" fill="#FFFFFF" stroke="#BCD3DE" stroke-width="2"/>
+  <rect x="644" y="282" width="92" height="22" rx="8" fill="#D8F0E6"/>
+  <rect x="644" y="320" width="92" height="14" rx="6" fill="#E5E7EB"/>
+  <rect x="644" y="346" width="92" height="14" rx="6" fill="#E5E7EB"/>
+  <rect x="644" y="372" width="92" height="14" rx="6" fill="#E5E7EB"/>
+  <text x="650" y="298" fill="#14532D" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="700">payment</text>
+
+  <rect x="786" y="252" width="156" height="184" rx="24" fill="url(#accent)"/>
+  <text x="810" y="302" fill="#FFF7ED" font-family="Segoe UI, Arial, sans-serif" font-size="21" font-weight="700">TMP TABLE</text>
+  <text x="810" y="350" fill="#FFEDD5" font-family="Segoe UI, Arial, sans-serif" font-size="14">SESSION ONLY</text>
+  <text x="810" y="400" fill="#FFF7ED" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">REUSE</text>
+
+  <rect x="968" y="252" width="120" height="184" rx="24" fill="#FFFFFF" stroke="#BCD3DE" stroke-width="2"/>
+  <rect x="988" y="282" width="80" height="22" rx="8" fill="#D9EEF8"/>
+  <rect x="988" y="320" width="80" height="14" rx="6" fill="#E5E7EB"/>
+  <rect x="988" y="346" width="80" height="14" rx="6" fill="#E5E7EB"/>
+  <rect x="988" y="372" width="80" height="14" rx="6" fill="#E5E7EB"/>
+  <text x="995" y="298" fill="#123B4A" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="700">query</text>
+
+  <path d="M760 344H786" stroke="#2F7A87" stroke-width="5" stroke-linecap="round"/>
+  <path d="M942 344H968" stroke="#2F7A87" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="773" cy="344" r="8" fill="#2F7A87"/>
+  <circle cx="955" cy="344" r="8" fill="#2F7A87"/>
+
+  <rect x="620" y="476" width="480" height="86" rx="22" fill="#0F172A"/>
+  <text x="650" y="514" fill="#F8FAFC" font-family="Segoe UI, Arial, sans-serif" font-size="21" font-weight="600">Create once, analyze in several steps,</text>
+  <text x="650" y="544" fill="#F8FAFC" font-family="Segoe UI, Arial, sans-serif" font-size="21" font-weight="600">then let it disappear with the session</text>
+</svg>
