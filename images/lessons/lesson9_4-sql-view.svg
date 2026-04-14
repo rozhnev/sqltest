@@ -1,0 +1,81 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="88" y1="44" x2="1116" y2="598" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F5F7FB"/>
+      <stop offset="0.5" stop-color="#E8F6F1"/>
+      <stop offset="1" stop-color="#FFF4DE"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#123B4A"/>
+      <stop offset="1" stop-color="#1B5B6B"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#F59E0B"/>
+      <stop offset="1" stop-color="#EA580C"/>
+    </linearGradient>
+    <filter id="shadow" x="0" y="0" width="1200" height="630" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="12" stdDeviation="18" flood-color="#0F172A" flood-opacity="0.14"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="630" rx="28" fill="url(#bg)"/>
+  <circle cx="146" cy="128" r="86" fill="#D8F0E6"/>
+  <circle cx="1038" cy="100" r="70" fill="#FDE9C5"/>
+  <circle cx="1030" cy="560" r="98" fill="#D9EEF8"/>
+
+  <rect x="64" y="58" width="504" height="514" rx="28" fill="url(#panel)" filter="url(#shadow)"/>
+  <text x="106" y="132" fill="#F8FAFC" font-family="Segoe UI, Arial, sans-serif" font-size="54" font-weight="700">SQL VIEW</text>
+  <text x="106" y="176" fill="#C9E7E1" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="500">Save query. Reuse logic.</text>
+  <text x="106" y="206" fill="#C9E7E1" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="500">Simplify analysis.</text>
+
+  <rect x="104" y="220" width="424" height="146" rx="20" fill="#0F2E3A" stroke="#2F7A87" stroke-width="2"/>
+  <text x="132" y="255" fill="#F59E0B" font-family="Consolas, Monaco, monospace" font-size="18">CREATE VIEW customer_summary AS</text>
+  <text x="132" y="282" fill="#E2E8F0" font-family="Consolas, Monaco, monospace" font-size="18">SELECT customer_id, SUM(amount)</text>
+  <text x="132" y="309" fill="#E2E8F0" font-family="Consolas, Monaco, monospace" font-size="18">FROM payment</text>
+  <text x="132" y="336" fill="#E2E8F0" font-family="Consolas, Monaco, monospace" font-size="18">GROUP BY customer_id;</text>
+
+  <rect x="104" y="382" width="424" height="148" rx="20" fill="#F8FAFC"/>
+  <rect x="128" y="406" width="378" height="26" rx="8" fill="#D9EEF8"/>
+  <rect x="128" y="446" width="378" height="20" rx="6" fill="#E5E7EB"/>
+  <rect x="128" y="478" width="378" height="20" rx="6" fill="#E5E7EB"/>
+  <text x="146" y="425" fill="#123B4A" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="700">customer_id</text>
+  <text x="350" y="425" fill="#123B4A" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="700">total_amount</text>
+  <text x="146" y="461" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="16">14</text>
+  <text x="350" y="461" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="16">182.45</text>
+  <text x="146" y="493" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="16">27</text>
+  <text x="350" y="493" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="16">299.90</text>
+
+  <rect x="610" y="100" width="420" height="120" rx="24" fill="#FFFFFF" stroke="#BCD3DE" stroke-width="2"/>
+  <text x="626" y="140" fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="27" font-weight="700">Virtual table over real data</text>
+  <text x="626" y="170" fill="#475569" font-family="Segoe UI, Arial, sans-serif" font-size="17">A named query layer for reports,</text>
+  <text x="626" y="195" fill="#475569" font-family="Segoe UI, Arial, sans-serif" font-size="17">analytics, and reuse</text>
+
+  <rect x="612" y="254" width="148" height="198" rx="24" fill="#FFFFFF" stroke="#BCD3DE" stroke-width="2"/>
+  <rect x="638" y="284" width="96" height="22" rx="8" fill="#D9EEF8"/>
+  <rect x="638" y="322" width="96" height="14" rx="6" fill="#E5E7EB"/>
+  <rect x="638" y="348" width="96" height="14" rx="6" fill="#E5E7EB"/>
+  <rect x="638" y="374" width="96" height="14" rx="6" fill="#E5E7EB"/>
+  <text x="650" y="300" fill="#123B4A" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="700">payment</text>
+
+  <rect x="778" y="254" width="148" height="198" rx="24" fill="#FFFFFF" stroke="#BCD3DE" stroke-width="2"/>
+  <rect x="804" y="284" width="96" height="22" rx="8" fill="#D8F0E6"/>
+  <rect x="804" y="322" width="96" height="14" rx="6" fill="#E5E7EB"/>
+  <rect x="804" y="348" width="96" height="14" rx="6" fill="#E5E7EB"/>
+  <rect x="804" y="374" width="96" height="14" rx="6" fill="#E5E7EB"/>
+  <text x="810" y="300" fill="#14532D" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="700">customer</text>
+
+  <rect x="944" y="254" width="90" height="198" rx="24" fill="url(#accent)"/>
+  <text x="960" y="320" fill="#FFF7ED" font-family="Segoe UI, Arial, sans-serif" font-size="19" font-weight="700">VIEW</text>
+  <text x="964" y="352" fill="#FFEDD5" font-family="Segoe UI, Arial, sans-serif" font-size="13">JOIN</text>
+  <text x="955" y="376" fill="#FFEDD5" font-family="Segoe UI, Arial, sans-serif" font-size="13">FILTER</text>
+  <text x="960" y="400" fill="#FFEDD5" font-family="Segoe UI, Arial, sans-serif" font-size="13">REUSE</text>
+
+  <path d="M760 372H778" stroke="#2F7A87" stroke-width="5" stroke-linecap="round"/>
+  <path d="M926 372H944" stroke="#2F7A87" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="769" cy="372" r="8" fill="#2F7A87"/>
+  <circle cx="935" cy="372" r="8" fill="#2F7A87"/>
+
+  <rect x="610" y="480" width="420" height="88" rx="22" fill="#0F172A"/>
+  <text x="635" y="518" fill="#F8FAFC" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="600">Views make SQL shorter, clearer,</text>
+  <text x="635" y="548" fill="#F8FAFC" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="600">and easier to maintain</text>
+</svg>
