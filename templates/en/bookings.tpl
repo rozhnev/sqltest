@@ -235,8 +235,6 @@ border-radius: 6px; padding: 0.3em; width: 98%;">
                     </a>
                 </div>
             {/if}
-            {* <script async="async" data-cfasync="false" src="//pl26881648.profitableratecpm.com/93660caf229b7b6afe772e0ab435c7a9/invoke.js"></script>
-            <div id="container-93660caf229b7b6afe772e0ab435c7a9"></div> *}
         </div>
     {/if}
 </div>
