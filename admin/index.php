@@ -350,16 +350,27 @@ function doGenerateTask(LLM $llm, array $payload): string
 
     $messages = [
         ['role' => 'system', 'content' => 'You are an experienced SQL instructor who creates clear, educational task descriptions for SQL exercises.'],
-        ['role' => 'user', 'content' => "Based on the following SQL query, generate a clear and concise task description in {$language}."],
+        ['role' => 'user', 'content' => "Based on the following SQL query, generate a clear and concise exercise in {$language}."],
         ['role' => 'user', 'content' => "SQL Query:\n{$query}"],
         ['role' => 'user', 'content' => '
-        The task should describe what the student needs to accomplish without revealing the exact solution. Focus on what data needs to be retrieved and any specific requirements. Keep it brief and learner-friendly.
-        Use imperative tone and be concise. Use <span class="sql"><</span> for wrap reserved keywords and database objects names.
-        Use <b></b> to highlight important details in the task description. Define the output format (columns and sorting) clearly if it is not obvious from the query.
-        The response must conain short title, detailed task description, and a hint for the student. Format the response as follows:
-            Title: [short as possible title]
-            Task: [detailed task description, ideally 1-3 sentences, describe required output format (columns and sorting) if it is not self-evident from the query, but do not reveal the exact solution]
-            Hint: [a hint to help the student get started]`
+        The task should describe what the student needs to accomplish without revealing the exact solution. 
+        Use an imperative, professional, and clear tone.
+        Specify which tables and columns should be used.
+        Clearly define the required output format: list the exact column names and specify the sort order.
+        
+        Formatting rules:
+        - Wrap SQL keywords (e.g., <span class="sql">SELECT</span>) and database objects (e.g., <span class="sql">customer</span>) in <span class="sql"></span> tags.
+        - Use <b></b> tags for key requirements or important constraints.
+        
+        The response must contain three parts:
+        1. Title: A very short (2-4 words) descriptive title.
+        2. Task: A clear description (1-3 sentences) of the goal, including output requirements.
+        3. Hint: A helpful, brief nudge (focus on the "how" or a specific SQL concept) without giving the code.
+
+        Format the response exactly like this:
+            Title: [Title text]
+            Task: [Task text]
+            Hint: [Hint text]
         ']
     ];
 
