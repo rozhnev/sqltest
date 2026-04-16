@@ -73,6 +73,13 @@
                                 <textarea id="questionSolution" name="question[solution_query]" rows="4">{$Question.solution_query|default:''|escape:'html'}</textarea>
                                 <div class="panel__actions">
                                     <div style="display:flex; flex-direction:row; align-items:center; gap:8px;">
+                                        <div class="select-surface select-surface--inline">
+                                            <select id="generateTaskLanguage">
+                                                {foreach from=$Languages item=lang}
+                                                    <option value="{$lang|escape:'html'}"{if $Lang === $lang} selected{/if}>{$LanguageLabels[$lang]|default:$lang|upper}</option>
+                                                {/foreach}
+                                            </select>
+                                        </div>
                                         <button type="button" class="button green" id="questionGenerateTaskBtn" onClick="questionGenerateTaskFromQuery({$QuestionID})">Generate task from query</button>
                                     </div>
                                 </div>

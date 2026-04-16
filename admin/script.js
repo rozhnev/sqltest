@@ -381,6 +381,9 @@ async function questionTranslateTo(sourceLanguage) {
 
 async function questionGenerateTaskFromQuery(questionId) {
     const solutionQuery = document.getElementById('questionSolution')?.value.trim();
+    const languageSelect = document.getElementById('generateTaskLanguage');
+    const languageCode = languageSelect ? languageSelect.value : 'en';
+    const languageLabel = LANGUAGE_LABELS[languageCode.toUpperCase()] || 'English';
     
     if (!solutionQuery) {
         showStatus('Provide a solution query first', 'info');
@@ -388,9 +391,13 @@ async function questionGenerateTaskFromQuery(questionId) {
     }
 
     try {
-        const response = await runLLM('generate-task-from-query', solutionQuery, 'English');
-        const taskEn = document.getElementById('questionLLMResultEN').innerHTML = response.replace(/\n/g, '<br>');
-        showStatus('Task generated successfully', 'success');
+        const response = await runLLM('generate-task-from-query', solutionQuery, languageLabel);
+        const resultContainerId = `questionLLMResult${languageCode.toUpperCase()}`;
+        const resultContainer = document.getElementById(resultContainerId);
+        if (resultContainer) {
+            resultContainer.innerHTML = response.replace(/\n/g, '<br>');
+        }
+        showStatus(`Task generated successfully in ${languageLabel}`, 'success');
     } catch (error) {
         console.error(error);
     }
