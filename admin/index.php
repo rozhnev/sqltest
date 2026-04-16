@@ -314,7 +314,7 @@ function doQuestionReview(LLM $llm, array $payload): string
         ['role' => 'system', 'content' => 'You act as a senior SQL instructor who proofreads questions for clarity, fairness, and accuracy.'],
         ['role' => 'user', 'content' => "Review the following SQL question in {$language}. Provide short feedback on clarity, correctness, and polish. The title must be short as possible. Use bullet points if possible. Use <span class='sql'><</span> for wrap reserved keywords and database objects names in task and hint."],
         ['role' => 'user', 'content' => implode("\n\n", $sections)],
-        ['role' => 'user', 'content' => 'Provide improved versions of the title, question, and hint if applicable, but keep the original meaning and technical content intact.']
+        ['role' => 'user', 'content' => 'Provide improved versions of the title, question, and hint if applicable, but keep the original meaning and technical content intact. Use imperative tone and be concise. If the original content is good, just say it is fine.']
     ];
     return $llm->parseMarkdown($llm->ask($messages));
 }
@@ -354,11 +354,12 @@ function doGenerateTask(LLM $llm, array $payload): string
         ['role' => 'user', 'content' => "SQL Query:\n{$query}"],
         ['role' => 'user', 'content' => '
         The task should describe what the student needs to accomplish without revealing the exact solution. Focus on what data needs to be retrieved and any specific requirements. Keep it brief and learner-friendly.
+        Use imperative tone and be concise. Use <span class="sql"><</span> for wrap reserved keywords and database objects names.
+        Use <b></b> to highlight important details in the task description. Define the output format (columns and sorting) clearly if it is not obvious from the query.
         The response must conain short title, detailed task description, and a hint for the student. Format the response as follows:
             Title: [short as possible title]
             Task: [detailed task description, ideally 1-3 sentences, describe required output format (columns and sorting) if it is not self-evident from the query, but do not reveal the exact solution]
             Hint: [a hint to help the student get started]`
-        Wrap all reserved keywords and database objects names in <span class="sql"><</span> 
         ']
     ];
 
