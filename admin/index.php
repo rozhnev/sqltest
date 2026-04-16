@@ -356,7 +356,8 @@ function doGenerateTask(LLM $llm, array $payload): string
         The task should describe what the student needs to accomplish without revealing the exact solution. 
         Use an imperative, professional, and clear tone.
         Specify which tables and columns should be used.
-        Clearly define the required output format: list the exact column names and specify the sort order.
+        Clearly define the required output format: list ALL exact column names (including calculated/aliased ones) and specify the sort order.
+        Focus on the main SQL concept used in the query (e.g., window functions, aggregations, bucketing) as the primary goal of the task.
         
         Formatting rules:
         - Wrap SQL keywords (e.g., <span class="sql">SELECT</span>) and database objects (e.g., <span class="sql">customer</span>) in <span class="sql"></span> tags.
