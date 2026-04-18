@@ -6,6 +6,8 @@ Na lição anterior, falamos sobre a criação de tabelas com `CREATE TABLE`. Ag
 
 Diferentemente das tabelas comuns, as tabelas temporárias não são destinadas ao armazenamento permanente de dados. Elas são criadas por um período limitado e depois são removidas automaticamente ou ficam indisponíveis após o encerramento da sessão.
 
+<img src="/images/lessons/lesson9_3-temporary-tables.svg" alt="Temporary Tables" width="100%">
+
 ## O que é uma tabela temporária
 
 Uma tabela temporária é uma tabela criada para armazenar dados temporariamente durante o trabalho do usuário ou a execução de um script.

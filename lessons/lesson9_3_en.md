@@ -6,6 +6,8 @@ In the previous lesson, we discussed creating tables with `CREATE TABLE`. Now le
 
 Unlike regular tables, temporary tables are not intended for permanent data storage. They are created for a limited period and are then automatically removed or become unavailable after the session ends.
 
+<img src="/images/lessons/lesson9_3-temporary-tables.svg" alt="Temporary Tables" width="100%">
+
 ## What Is a Temporary Table
 
 A temporary table is a table created for short-term data storage while a user is working or a script is running.

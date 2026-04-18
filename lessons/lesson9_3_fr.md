@@ -6,6 +6,8 @@ Dans la leçon précédente, nous avons vu la création de tables avec `CREATE T
 
 Contrairement aux tables classiques, les tables temporaires ne sont pas destinées au stockage permanent des données. Elles sont créées pour une durée limitée, puis supprimées automatiquement ou rendues indisponibles à la fin de la session.
 
+<img src="/images/lessons/lesson9_3-temporary-tables.svg" alt="Temporary Tables" width="100%">
+
 ## Qu’est-ce qu’une table temporaire
 
 Une table temporaire est une table créée pour stocker temporairement des données pendant le travail d’un utilisateur ou l’exécution d’un script.
