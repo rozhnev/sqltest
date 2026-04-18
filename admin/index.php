@@ -360,7 +360,7 @@ function doGenerateTask(LLM $llm, array $payload): string
         Focus on the main SQL concept used in the query (e.g., window functions, aggregations, bucketing) as the primary goal of the task.
         
         Formatting rules:
-        - Wrap SQL keywords (e.g., <span class="sql">SELECT</span>) and database objects (e.g., <span class="sql">customer</span>) in <span class="sql"></span> tags.
+        - Wrap SQL keywords (e.g., <span class="sql">SELECT</span>), database objects (e.g., <span class="sql">customer</span>), and ALL column names (e.g., <span class="sql">customer_id</span>, <span class="sql">bucket</span>) in <span class="sql"></span> tags.
         - Use <b></b> tags for key requirements or important constraints.
         
         The response must contain three parts:
