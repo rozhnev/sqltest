@@ -4,6 +4,8 @@ This lesson introduces the `INSERT INTO` statement, the primary command used to 
 
 So far, we have focused on retrieving data from existing tables using the `SELECT` statement. Now, we will begin exploring **Data Manipulation Language (DML)**, starting with how to add new data to your tables using the `INSERT INTO` statement.
 
+<img src="/images/lessons/lesson8_1-insert-into.svg" alt="Lesson illustration" width="100%">
+
 ## The Basic Syntax
 
 There are two primary ways to use the `INSERT INTO` statement.
@@ -66,11 +68,51 @@ VALUES
 
 ---
 
+## Inserting Data from Another Query (`INSERT INTO ... SELECT`)
+
+Sometimes you don't need to enter data manually, but rather transfer it from one table to another (e.g., during archiving or report generation). For this, a combination of `INSERT INTO` and `SELECT` is used.
+
+### Syntax
+
+```sql
+INSERT INTO target_table (column1, column2, column3)
+SELECT source_column1, source_column2, source_column3
+FROM source_table
+WHERE condition;
+```
+
+### Flexibility in Data Formation
+
+An important feature of this command is that in the `SELECT` block you can combine different types of values:
+
+1.  **Selected values**: directly from the source table (`source_column1`).
+2.  **Calculated values**: the result of formulas or functions (e.g., `amount * 0.1`).
+3.  **Constant values**: fixed data that is not in the source table (e.g., insertion date or a status as a string).
+
+### Example: Creating an Archive of Inactive Customers
+
+Suppose we have a `customer_archive` table, and we want to transfer data there from the main `customer` table, adding the archiving date and a status note:
+
+```sql
+INSERT INTO customer_archive (customer_id, full_name, archived_at, status_note)
+SELECT 
+    customer_id, 
+    CONCAT(first_name, ' ', last_name), -- Calculated value (Full Name)
+    CURRENT_DATE,                       -- Constant (current date)
+    'Auto-archived'                     -- Constant (text label)
+FROM customer
+WHERE active = 0;
+```
+
+*Note: The number and order of columns in `INSERT INTO` must strictly match the number and order of columns returned in the `SELECT`.*
+
+---
+
 **Key Takeaways from this Lesson:**
 
 *   The `INSERT INTO` statement is used to add new rows to a table.
+*   The `INSERT INTO ... SELECT` command allows copying data from one table to another.
+*   In the `SELECT` block, you can combine real data from the table, calculated fields, and constants.
 *   Explicitly listing column names is recommended for better code reliability and readability.
 *   String and date values must be enclosed in single quotes.
-*   You can insert multiple rows at once to improve performance and reduce code.
-
-In the next lesson, we will learn how to **Create Tables** from scratch and define their structure.
+*   You can insert multiple rows at once to improve performance.

@@ -4,6 +4,8 @@ Cette leçon présente la commande `INSERT INTO`, utilisée pour ajouter de nouv
 
 Jusqu'à présent, nous nous sommes concentrés sur la récupération de données à l'aide de la commande `SELECT`. Nous allons maintenant explorer le **langage de manipulation de données (DML)**, en commençant par l'ajout de nouvelles données dans vos tables avec la commande `INSERT INTO`.
 
+<img src="/images/lessons/lesson8_1-insert-into.svg" alt="Lesson illustration" width="100%">
+
 ## Syntaxe de base
 
 Il existe deux façons principales d'utiliser la commande `INSERT INTO`.
@@ -66,11 +68,51 @@ VALUES
 
 ---
 
+## Insérer des données à partir d'une autre requête (`INSERT INTO ... SELECT`)
+
+Parfois, vous n'avez pas besoin de saisir les données manuellement, mais plutôt de les transférer d'une table à une autre (par exemple, lors de l'archivage ou de la génération de rapports). Pour cela, on utilise une combinaison de `INSERT INTO` et `SELECT`.
+
+### Syntaxe
+
+```sql
+INSERT INTO target_table (column1, column2, column3)
+SELECT source_column1, source_column2, source_column3
+FROM source_table
+WHERE condition;
+```
+
+### Flexibilité dans la formation des données
+
+Une caractéristique importante de cette commande est que dans le bloc `SELECT`, vous pouvez combiner différents types de valeurs :
+
+1.  **Valeurs sélectionnées** : directement à partir de la table source (`source_column1`).
+2.  **Valeurs calculées** : le résultat de formules ou de fonctions (par exemple, `amount * 0.1`).
+3.  **Valeurs constantes** : des données fixes qui ne sont pas dans la table source (par exemple, la date d'insertion ou un statut sous forme de chaîne).
+
+### Exemple : Création d'une archive de clients inactifs
+
+Supposons que nous ayons une table `customer_archive` et que nous souhaitions y transférer des données de la table principale `customer`, en ajoutant la date d'archivage et une note de statut :
+
+```sql
+INSERT INTO customer_archive (customer_id, full_name, archived_at, status_note)
+SELECT 
+    customer_id, 
+    CONCAT(first_name, ' ', last_name), -- Valeur calculée (Nom Complet)
+    CURRENT_DATE,                       -- Constante (date actuelle)
+    'Auto-archived'                     -- Constante (étiquette texte)
+FROM customer
+WHERE active = 0;
+```
+
+*Remarque : Le nombre et l'ordre des colonnes dans `INSERT INTO` doivent correspondre strictement au nombre et à l'ordre des colonnes renvoyées dans le `SELECT`.*
+
+---
+
 **Points clés de cette leçon :**
 
 *   La commande `INSERT INTO` permet d'ajouter de nouvelles lignes dans une table.
+*   La commande `INSERT INTO ... SELECT` permet de copier des données d'une table à une autre.
+*   Dans le bloc `SELECT`, vous pouvez combiner des données réelles de la table, des champs calculés et des constantes.
 *   Il est recommandé de lister explicitement les noms de colonnes pour plus de fiabilité et de lisibilité.
 *   Les valeurs de type texte ou date doivent être entourées de guillemets simples.
-*   Vous pouvez insérer plusieurs lignes à la fois pour améliorer les performances et réduire le code.
-
-Dans la prochaine leçon, nous apprendrons à **créer des tables** et à définir leur structure.
+*   Vous pouvez insérer plusieurs lignes à la fois pour améliorer les performances.

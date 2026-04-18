@@ -1,0 +1,61 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background with a soft gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f8f9fa;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e9ecef;stop-opacity:1" />
+    </linearGradient>
+    <dropShadow id="shadow" dx="2" dy="4" stdDeviation="3" flood-opacity="0.1" />
+  </defs>
+  
+  <rect width="1200" height="630" fill="url(#bgGradient)" />
+  
+  <!-- Decorative circular shapes -->
+  <circle cx="1100" cy="100" r="150" fill="#dee2e6" opacity="0.4" />
+  <circle cx="50" cy="580" r="100" fill="#adb5bd" opacity="0.2" />
+
+  <!-- Left Side Panel (Main Topic) -->
+  <rect x="0" y="0" width="450" height="630" fill="#212529" />
+  <text x="50" y="280" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="#ffffff">INSERT</text>
+  <text x="50" y="340" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="#ffffff">INTO ...</text>
+  <rect x="50" y="370" width="100" height="8" fill="#198754" />
+  <text x="50" y="420" font-family="Arial, sans-serif" font-size="24" fill="#ced4da">Adding Data to DB</text>
+
+  <!-- Right Side (Visualizing Insertion) -->
+  
+  <!-- Table Header -->
+  <rect x="550" y="80" width="550" height="60" fill="#212529" rx="5" filter="url(#shadow)" />
+  <text x="570" y="118" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#ffffff">Table: Actor</text>
+  <text x="750" y="118" font-family="Arial, sans-serif" font-size="16" fill="#adb5bd">first_name | last_name</text>
+
+  <!-- Existing Rows -->
+  <rect x="550" y="150" width="550" height="50" fill="#ffffff" rx="5" filter="url(#shadow)" />
+  <text x="570" y="182" font-family="Arial, sans-serif" font-size="18" fill="#495057">1  PENELOPE  GUINESS</text>
+  
+  <rect x="550" y="210" width="550" height="50" fill="#ffffff" rx="5" filter="url(#shadow)" />
+  <text x="570" y="242" font-family="Arial, sans-serif" font-size="18" fill="#495057">2  NICK      WAHLBERG</text>
+
+  <!-- New Row (The Insertion) -->
+  <rect x="550" y="300" width="550" height="70" fill="#e8f5e9" stroke="#198754" stroke-width="2" stroke-dasharray="8 4" rx="5" filter="url(#shadow)" />
+  <text x="570" y="342" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#1b5e20">+  JOHNNY    DEPP</text>
+  <text x="980" y="342" font-family="Arial, sans-serif" font-size="14" fill="#1b5e20">NEW ROW</text>
+
+  <!-- Arrow/Flow -->
+  <path d="M500 335 L540 335" stroke="#198754" stroke-width="4" marker-end="url(#arrowhead)" />
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#198754" />
+    </marker>
+  </defs>
+
+  <!-- INSERT INTO ... SELECT Visualization -->
+  <rect x="550" y="420" width="550" height="150" rx="15" fill="#ffffff" filter="url(#shadow)" stroke="#dee2e6" />
+  <text x="580" y="460" font-family="Courier New, monospace" font-size="18" font-weight="bold" fill="#0d6efd">INSERT INTO archive</text>
+  <text x="580" y="490" font-family="Courier New, monospace" font-size="18" fill="#212529">SELECT customer_id,</text>
+  <text x="650" y="520" font-family="Courier New, monospace" font-size="18" fill="#212529">full_name, 'Archived'</text>
+  <text x="580" y="550" font-family="Courier New, monospace" font-size="18" fill="#212529">FROM customer WHERE ...</text>
+  
+  <!-- Tags for combination -->
+  <rect x="920" y="435" width="160" height="24" rx="4" fill="#fff3cd" />
+  <text x="930" y="452" font-family="Arial, sans-serif" font-size="12" fill="#856404">Data + Computed + Const</text>
+</svg>
