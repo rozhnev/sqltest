@@ -60,8 +60,17 @@
     *   Understanding Partitioning and Ordering in Window Functions
     *   Understanding Window boundaries and frames. Named windows
     *   LEAD, LAG, FIRST_VALUE, LAST_VALUE functions
-    *   Using Window Functions for Running Totals and Moving Averages    
-8.  **Views and Temporary Tables**
+    *   Using Window Functions for Running Totals and Moving Averages   
+8.  **Data Manipulation Language (DML)**
+    *   Introduction to DML
+    *   Creating Tables
+    *   Constraints
+    *   Inserting Data into Tables
+    *   Updating Existing Data
+    *   Deleting Data from Tables
+    *   Modifying Tables
+    *   Using Transactions for Data Integrity     
+9.  **Data Definition Language (DDL)**
     *   Understanding Views
     *   Creating and Managing Views
     *   Modifying and Dropping Views
@@ -71,34 +80,25 @@
     *   Creating and Using Temporary Tables
     *   Differences Between Views, Temporary Tables, and CTEs
     *   Use Cases and Best Practices
-9.  **Data Manipulation Language (DML)**
-    *   Introduction to DML
-    *   Creating Tables
-    *   Constraints
-    *   Inserting Data into Tables
-    *   Updating Existing Data
-    *   Deleting Data from Tables
-    *   Modifying Tables
-    *   Using Transactions for Data Integrity
-10. **Data Transformation and Manipulation**
+10. **Best Practices for SQL Coding**
+    *   [Best Practices for Code Readability and Maintainability](lessons/lesson10_1_ru.md)
+    *   [Writing Efficient SQL Queries](lessons/lesson10_2_ru.md)
+    *   [Understanding Query Optimization Techniques](lessons/lesson10_3_ru.md)
+    *   Using Indexes for Performance Improvement
+    *   Error Handling and Debugging Techniques
+    *   Version Control for SQL Scripts    
+11. **Data Exploration and Analysis Techniques**
+    *   Data Exploration Techniques in SQL
+    *   Using SQL for Data Analysis and Reporting
+    *   Generating Reports with SQL Queries
+    *   Best Practices for Data Exploration and Analysis    
+12. **Data Transformation and Manipulation**
     *   Data Transformation Techniques for Analysis
     *   Using CASE Statements for Conditional Logic
     *   String Manipulation and Formatting
     *   Date and Time Functions for Data Analysis
     *   Data Type Conversion and Formatting
     *   Data Cleaning and Preparation Techniques
-11. **Data Exploration and Analysis Techniques**
-    *   Data Exploration Techniques in SQL
-    *   Using SQL for Data Analysis and Reporting
-    *   Generating Reports with SQL Queries
-    *   Best Practices for Data Exploration and Analysis
-12. **Best Practices for SQL Coding**
-    *   Writing Efficient SQL Queries
-    *   Understanding Query Optimization Techniques
-    *   Using Indexes for Performance Improvement
-    *   Best Practices for Code Readability and Maintainability
-    *   Error Handling and Debugging Techniques
-    *   Version Control for SQL Scripts
 13. **Real-World SQL Applications**
     *   Case Studies in Data Analysis with SQL
     *   SQL in Business Intelligence and Reporting
