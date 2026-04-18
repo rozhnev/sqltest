@@ -108,6 +108,45 @@ WHERE active = 0;
 
 ---
 
+## Trabalhando com NULL e Valores Padrão
+
+Ao inserir uma linha, nem sempre é necessário fornecer um valor para cada coluna. O banco de dados lida com valores ausentes de duas formas: através de `NULL` e através de valores padrão das colunas.
+
+### Inserindo NULL Explicitamente
+
+Se uma coluna permite `NULL`, você pode passar a palavra-chave `NULL` diretamente como valor:
+
+```sql
+INSERT INTO customer (first_name, last_name, email, store_id, address_id)
+VALUES ('BOB', 'SMITH', NULL, 1, 5);
+```
+
+Aqui, a coluna `email` será armazenada como `NULL`, significando "nenhum valor conhecido".
+
+### Usando Valores Padrão da Coluna
+
+Se uma coluna tiver um valor `DEFAULT` definido no esquema da tabela, você pode omiti-la completamente da lista de colunas. O banco de dados a preencherá automaticamente:
+
+```sql
+INSERT INTO actor (first_name, last_name)
+VALUES ('CATE', 'BLANCHETT');
+```
+
+Colunas como `actor_id` (auto-incremento) e `last_update` (timestamp padrão) são preenchidas pelo banco de dados sem nenhuma entrada explícita.
+
+### Usando DEFAULT Explicitamente
+
+Você também pode usar a palavra-chave `DEFAULT` para acionar o valor padrão de uma coluna, mantendo-a na lista:
+
+```sql
+INSERT INTO actor (actor_id, first_name, last_name, last_update)
+VALUES (DEFAULT, 'CATE', 'BLANCHETT', DEFAULT);
+```
+
+Isso é útil quando sua instrução lista todas as colunas, mas você ainda deseja que o banco de dados cuide de algumas delas.
+
+---
+
 **Principais Conclusões desta Lição:**
 
 *   A instrução `INSERT INTO` é usada para adicionar novas linhas a uma tabela.
@@ -116,3 +155,6 @@ WHERE active = 0;
 *   Listar explicitamente os nomes das colunas é recomendado para melhor confiabilidade e legibilidade do código.
 *   Valores de string e data devem estar entre aspas simples.
 *   Você pode inserir várias linhas de uma só vez para melhorar o desempenho.
+*   Colunas com `NULL` ou valor `DEFAULT` podem ser omitidas ou passadas explicitamente usando as palavras-chave `NULL` e `DEFAULT`.
+
+Na próxima lição, veremos como **modificar registros existentes** usando a instrução `UPDATE`.

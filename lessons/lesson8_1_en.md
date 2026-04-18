@@ -108,6 +108,45 @@ WHERE active = 0;
 
 ---
 
+## Working with NULL and Default Values
+
+When inserting a row, you don't always need to supply a value for every column. The database handles missing values in two ways: through `NULL` and through column defaults.
+
+### Inserting NULL Explicitly
+
+If a column allows `NULL`, you can pass the keyword `NULL` directly as the value:
+
+```sql
+INSERT INTO customer (first_name, last_name, email, store_id, address_id)
+VALUES ('BOB', 'SMITH', NULL, 1, 5);
+```
+
+Here the `email` column will be stored as `NULL`, meaning "no value known".
+
+### Relying on Column Defaults
+
+If a column has a `DEFAULT` value defined in the table schema, you can omit it entirely from the column list. The database will fill it automatically:
+
+```sql
+INSERT INTO actor (first_name, last_name)
+VALUES ('CATE', 'BLANCHETT');
+```
+
+Columns like `actor_id` (auto-increment) and `last_update` (default timestamp) are populated by the database without any explicit input.
+
+### Inserting DEFAULT Explicitly
+
+You can also use the `DEFAULT` keyword to trigger a column's default value while still listing the column:
+
+```sql
+INSERT INTO actor (actor_id, first_name, last_name, last_update)
+VALUES (DEFAULT, 'CATE', 'BLANCHETT', DEFAULT);
+```
+
+This is useful when your insert statement lists all columns but you still want the database to handle specific ones.
+
+---
+
 **Key Takeaways from this Lesson:**
 
 *   The `INSERT INTO` statement is used to add new rows to a table.
@@ -116,3 +155,6 @@ WHERE active = 0;
 *   Explicitly listing column names is recommended for better code reliability and readability.
 *   String and date values must be enclosed in single quotes.
 *   You can insert multiple rows at once to improve performance.
+*   Columns with `NULL` or `DEFAULT` values can be omitted or passed explicitly using the `NULL` and `DEFAULT` keywords.
+
+In the next lesson, we will look at how to **modify existing records** using the `UPDATE` statement.

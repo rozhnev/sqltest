@@ -108,6 +108,45 @@ WHERE active = 0;
 
 ---
 
+## Travailler avec NULL et les valeurs par défaut
+
+Lors de l'insertion d'une ligne, il n'est pas toujours nécessaire de fournir une valeur pour chaque colonne. La base de données gère les valeurs manquantes de deux façons : via `NULL` et via les valeurs par défaut des colonnes.
+
+### Insérer NULL explicitement
+
+Si une colonne accepte `NULL`, vous pouvez passer le mot-clé `NULL` directement comme valeur :
+
+```sql
+INSERT INTO customer (first_name, last_name, email, store_id, address_id)
+VALUES ('BOB', 'SMITH', NULL, 1, 5);
+```
+
+Ici, la colonne `email` sera stockée avec la valeur `NULL`, ce qui signifie « aucune valeur connue ».
+
+### S'appuyer sur les valeurs par défaut
+
+Si une colonne possède une valeur `DEFAULT` définie dans le schéma de la table, vous pouvez l'omettre entièrement de la liste des colonnes. La base de données la remplira automatiquement :
+
+```sql
+INSERT INTO actor (first_name, last_name)
+VALUES ('CATE', 'BLANCHETT');
+```
+
+Les colonnes comme `actor_id` (auto-incrément) et `last_update` (horodatage par défaut) sont remplies par la base de données sans aucune saisie explicite.
+
+### Utiliser DEFAULT explicitement
+
+Vous pouvez également utiliser le mot-clé `DEFAULT` pour déclencher la valeur par défaut d'une colonne tout en la maintenant dans la liste :
+
+```sql
+INSERT INTO actor (actor_id, first_name, last_name, last_update)
+VALUES (DEFAULT, 'CATE', 'BLANCHETT', DEFAULT);
+```
+
+C'est utile lorsque votre instruction liste toutes les colonnes mais que vous souhaitez que la base de données en gère certaines.
+
+---
+
 **Points clés de cette leçon :**
 
 *   La commande `INSERT INTO` permet d'ajouter de nouvelles lignes dans une table.
@@ -116,3 +155,6 @@ WHERE active = 0;
 *   Il est recommandé de lister explicitement les noms de colonnes pour plus de fiabilité et de lisibilité.
 *   Les valeurs de type texte ou date doivent être entourées de guillemets simples.
 *   Vous pouvez insérer plusieurs lignes à la fois pour améliorer les performances.
+*   Les colonnes acceptant `NULL` ou ayant une valeur `DEFAULT` peuvent être omises ou transmises explicitement à l'aide des mots-clés `NULL` et `DEFAULT`.
+
+Dans la prochaine leçon, nous verrons comment **modifier des enregistrements existants** avec la commande `UPDATE`.
