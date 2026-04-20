@@ -38,7 +38,59 @@
                         </div>
                     </div>
                 </div> *}
-                {if $User->showAd()}
+                {math equation="x % 2" x=$smarty.now assign="show_appeal"}
+                {if !$User->showAd() || $show_appeal}
+                    <div style="
+                        margin: 0.5em 0 0 0;
+                        background-color: var(--accordion-panel-bg-color);
+                        border: 1px solid var(--text-block-border-color);
+                        color: var(--question-text);
+                        border-radius: 0 6px 0 0;">
+
+                        <div style="
+                            background-color: var(--menu-button-background-color);
+                            border-radius: 0 6px 0 0;
+                            padding: 0.5em;
+                            color: white;">
+                            🙏 Help sqltest.online grow!
+                        </div>
+
+                        <div style="font-size: small; padding: 0.5em; line-height: 1.6;">
+                            <p>Hey there!</p>
+
+                            <p>
+                                If <strong>sqltest.online</strong> has ever helped you learn SQL, practice for an interview,
+                                or just satisfy your curiosity - I'd love to hear about it.
+                            </p>
+
+                            <p>
+                                This project is something I built and maintain on my own, completely <strong>free</strong>,
+                                because I believe SQL skills should be accessible to everyone.
+                                No subscriptions, no paywalls - just a tool I genuinely enjoy making better.
+                            </p>
+
+                            <p>If you've found it useful, the best thing you can do is <strong>share your honest opinion</strong>:</p>
+
+                            <ul style="list-style: none; padding-left: 0.5em;">
+                                <li>🟠 On <strong>Reddit</strong> - <a href="https://www.reddit.com/r/SQL/" target="_blank" style="color: var(--menu-link-color);">r/SQL</a>,
+                                    <a href="https://www.reddit.com/r/learnprogramming/" target="_blank" style="color: var(--menu-link-color);">r/learnprogramming</a>,
+                                    <a href="https://www.reddit.com/r/webdev/" target="_blank" style="color: var(--menu-link-color);">r/webdev</a></li>
+                                <li>🔵 On <strong>Facebook</strong> or anywhere your developer community hangs out</li>
+                            </ul>
+
+                            <p>
+                                And if you do post - please send me the link at
+                                <a href="mailto:rozhnev@gmail.com" style="color: var(--menu-link-color);">✉️&nbsp;rozhnev@gmail.com</a>.
+                                I'd love to read it and say thank you personally.
+                            </p>
+
+                            <p>
+                                ❤️ Thank you for using sqltest.online. You're the reason it keeps going.<br><br>
+                                Slava Rozhnev, creator of <a href="https://sqltest.online/en" style="color: var(--menu-link-color);">sqltest.online</a>
+                            </p>
+                        </div>
+                    </div>
+                {else}
                     <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-top: 1rem;">
                         <a href="https://www.jdoqocy.com/click-101541078-17083149" target="_blank" class="talkpal-ad-container" style="background-color: #052d50; display: flex;">
                             <img src="https://www.ftjcfx.com/image-101541078-17083149" width="250" height="360" alt="Contabo.com" style="max-width: 100%; height: auto;" border="0"/>
@@ -51,6 +103,5 @@
                             <span class="talkpal-ad-button">Start Learning Now</span>
                         </a>
                     </div>
-
                 {/if}
             </div>
