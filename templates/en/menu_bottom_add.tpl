@@ -60,26 +60,26 @@
 
                             <p>
                                 If <strong>sqltest.online</strong> has ever helped you learn SQL, practice for an interview,
-                                or just satisfy your curiosity - I'd love to hear about it.
+                                or just satisfy your curiosity. I'd love to hear about it.
                             </p>
 
                             <p>
                                 This project is something I built and maintain on my own, completely <strong>free</strong>,
                                 because I believe SQL skills should be accessible to everyone.
-                                No subscriptions, no paywalls - just a tool I genuinely enjoy making better.
+                                No subscriptions, no paywalls. Just a tool I genuinely enjoy making better.
                             </p>
 
                             <p>If you've found it useful, the best thing you can do is <strong>share your honest opinion</strong>:</p>
 
                             <ul style="list-style: none; padding-left: 0.5em;">
-                                <li>🟠 On <strong>Reddit</strong> - <a href="https://www.reddit.com/r/SQL/" target="_blank" style="color: var(--menu-link-color);">r/SQL</a>,
+                                <li>🟠 <strong>Reddit:</strong> <a href="https://www.reddit.com/r/SQL/" target="_blank" style="color: var(--menu-link-color);">r/SQL</a>,
                                     <a href="https://www.reddit.com/r/learnprogramming/" target="_blank" style="color: var(--menu-link-color);">r/learnprogramming</a>,
                                     <a href="https://www.reddit.com/r/webdev/" target="_blank" style="color: var(--menu-link-color);">r/webdev</a></li>
                                 <li>🔵 On <strong>Facebook</strong> or anywhere your developer community hangs out</li>
                             </ul>
 
                             <p>
-                                And if you do post - please send me the link at
+                                And if you do post, please send me the link at
                                 <a href="mailto:rozhnev@gmail.com" style="color: var(--menu-link-color);">✉️&nbsp;rozhnev@gmail.com</a>.
                                 I'd love to read it and say thank you personally.
                             </p>

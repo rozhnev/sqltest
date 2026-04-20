@@ -60,26 +60,26 @@
 
                             <p>
                                 Si <strong>sqltest.online</strong> vous a déjà aidé à apprendre le SQL, à préparer un entretien
-                                ou simplement à satisfaire votre curiosité - j'adorerais l'entendre.
+                                ou simplement à satisfaire votre curiosité. J'adorerais l'entendre.
                             </p>
 
                             <p>
                                 Ce projet est quelque chose que j'ai construit et que je maintiens seul, entièrement <strong>gratuit</strong>,
                                 parce que je crois que les compétences SQL doivent être accessibles à tous.
-                                Pas d'abonnement, pas de barrière payante - juste un outil que j'aime améliorer.
+                                Pas d'abonnement, pas de barrière payante. Juste un outil que j'aime améliorer.
                             </p>
 
                             <p>Si vous l'avez trouvé utile, la meilleure chose à faire est de <strong>partager votre avis honnête</strong> :</p>
 
                             <ul style="list-style: none; padding-left: 0.5em;">
-                                <li>🟠 Sur <strong>Reddit</strong> - <a href="https://www.reddit.com/r/SQL/" target="_blank" style="color: var(--menu-link-color);">r/SQL</a>,
+                                <li>🟠 <strong>Reddit :</strong> <a href="https://www.reddit.com/r/SQL/" target="_blank" style="color: var(--menu-link-color);">r/SQL</a>,
                                     <a href="https://www.reddit.com/r/learnprogramming/" target="_blank" style="color: var(--menu-link-color);">r/learnprogramming</a>,
                                     <a href="https://www.reddit.com/r/webdev/" target="_blank" style="color: var(--menu-link-color);">r/webdev</a></li>
                                 <li>🔵 Sur <strong>Facebook</strong> ou partout où votre communauté de développeurs se retrouve</li>
                             </ul>
 
                             <p>
-                                Et si vous publiez - envoyez-moi le lien à
+                                Et si vous publiez, envoyez-moi le lien à
                                 <a href="mailto:rozhnev@gmail.com" style="color: var(--menu-link-color);">✉️&nbsp;rozhnev@gmail.com</a>.
                                 Je serais ravi de lire ce que vous avez écrit et de vous remercier personnellement.
                             </p>

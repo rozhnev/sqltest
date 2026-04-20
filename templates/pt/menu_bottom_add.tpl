@@ -21,26 +21,26 @@
 
                 <p>
                     Se o <strong>sqltest.online</strong> já te ajudou a aprender SQL, a preparar uma entrevista
-                    ou simplesmente a satisfazer a sua curiosidade - adoraria saber.
+                    ou simplesmente a satisfazer a sua curiosidade. Adoraria saber.
                 </p>
 
                 <p>
                     Este projeto é algo que criei e mantenho sozinho, completamente <strong>gratuito</strong>,
                     porque acredito que as competências em SQL devem ser acessíveis a todos.
-                    Sem subscrições, sem barreiras pagas — apenas uma ferramenta que genuinamente gosto de melhorar.
+                    Sem subscrições, sem barreiras pagas. Apenas uma ferramenta que genuinamente gosto de melhorar.
                 </p>
 
                 <p>Se o achaste útil, a melhor coisa que podes fazer é <strong>partilhar a tua opinião honesta</strong>:</p>
 
                 <ul style="list-style: none; padding-left: 0.5em;">
-                    <li>🟠 No <strong>Reddit</strong> - <a href="https://www.reddit.com/r/SQL/" target="_blank" style="color: var(--menu-link-color);">r/SQL</a>,
+                    <li>🟠 <strong>Reddit:</strong> <a href="https://www.reddit.com/r/SQL/" target="_blank" style="color: var(--menu-link-color);">r/SQL</a>,
                         <a href="https://www.reddit.com/r/learnprogramming/" target="_blank" style="color: var(--menu-link-color);">r/learnprogramming</a>,
                         <a href="https://www.reddit.com/r/webdev/" target="_blank" style="color: var(--menu-link-color);">r/webdev</a></li>
                     <li>🔵 No <strong>Facebook</strong> ou em qualquer lugar onde a tua comunidade de programadores se reúna</li>
                 </ul>
 
                 <p>
-                    E se publicares - envia-me o link para
+                    E se publicares, envia-me o link para
                     <a href="mailto:rozhnev@gmail.com" style="color: var(--menu-link-color);">✉️&nbsp;rozhnev@gmail.com</a>.
                     Adoraria ler o que escreveste e agradecer-te pessoalmente.
                 </p>
