@@ -91,12 +91,10 @@
                                 <p style="font-size: x-small;">ERID: 5jtCeReNx12oajxTXb1tjxc</p>
                             </a>
                         </div>
-                        <div class="referal-add-block">
-                            <div id="yandex_rtb_R-A-4716552-7"></div>
-                        </div>
-                    {else}
-
                     {/if}
+                    <div class="referal-add-block">
+                        <div id="yandex_rtb_R-A-4716552-7"></div>
+                    </div>
                 {/if} 
             </div>
         </main3>
