@@ -1015,7 +1015,22 @@ class Controller
 
         $this->engine->display("query_result.tpl");
     }
-    
+    public function embed(array $params): void 
+    {
+        $this->assignVariables([
+            'Action'            => 'embed',
+            'PageTitle'         => Localizer::translateString('embed_page_title'),
+            'PageDescription'   => Localizer::translateString('playground_page_description'),
+            'SitePromo'         => Localizer::translateString('site_promo'),
+            'SiteDescription'   => Localizer::translateString('site_description_playground'),
+            'PageOGTitle'       => Localizer::translateString('playground_og_title'),
+            'PageOGDescription' => Localizer::translateString('playground_og_description'),
+            'QuestionID'            => 1,
+            'DB'                    => '',
+        ]);
+        $this->engine->display("embed.tpl");
+    }
+
     public function sitemap(array $params): void 
     {
         header('Content-Type: text/xml; charset=utf-8');
