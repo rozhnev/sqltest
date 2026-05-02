@@ -1,21 +1,18 @@
 <div id="db-description" class="db-description">
     {if $User->showAd()}
-        <div class="referal-add-block">
         {if $Lang == 'ru'}
-            {* <div class="referal-add-block">
-                <div id="yandex_rtb_R-A-4716552-7"></div>
-            </div> *}
-            <a href="https://redirect.appmetrica.yandex.com/serve/606193546294247668?clid=14743932&appmetrica_js_redirect=0" target="_blank" rel="nofollow">
-                <img src="/images/banner_240x400.jpg" alt="Яндекс — с Алисой АI">
-                <p style="font-size: x-small;">ERID: 5jtCeReNx12oajxTXb1tjxc</p>
-            </a>
+            <div class="referal-add-block">
+                <a href="https://redirect.appmetrica.yandex.com/serve/606193546294247668?clid=14743932&appmetrica_js_redirect=0" target="_blank" rel="nofollow">
+                    <img src="/images/banner_240x400.jpg" alt="Яндекс — с Алисой АI">
+                    <p style="font-size: x-small;">ERID: 5jtCeReNx12oajxTXb1tjxc</p>
+                </a>
+            </div>
         {/if}
-        {if $Book}
+        {if $Book}        
+            <div class="referal-add-block">
                 <div class="book-card">
                     <a href="{{$Book.referral_link}}" target="_blank" style="text-decoration: none; color: var(--question-color);">
-                        <div style="display: flex; flex-direction: row;     border: 1px solid var(--text-block-border-color);
-color: var(--question-text);
-border-radius: 6px; padding: 0.3em; width: 98%;">
+                        <div style="display: flex; flex-direction: row; border: 1px solid var(--text-block-border-color);color: var(--question-text); border-radius: 6px; padding: 0.3em; width: 98%;">
                         <div  style = "width: 25%;">
                             <img style="width: 100%;" src="{{$Book.picture_link}}" alt="{{$Book.title|escape:"html"}}">
                         </div>
@@ -26,7 +23,7 @@ border-radius: 6px; padding: 0.3em; width: 98%;">
                         </div>
                     </a>
                 </div>
-            {/if}
-        </div>
+            </div>
+        {/if}
     {/if} 
 </div>
