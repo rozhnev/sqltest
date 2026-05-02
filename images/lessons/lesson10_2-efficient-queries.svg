@@ -1,0 +1,54 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background with a soft gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f1f3f5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e9ecef;stop-opacity:1" />
+    </linearGradient>
+    <dropShadow id="shadow" dx="2" dy="4" stdDeviation="3" flood-opacity="0.1" />
+  </defs>
+  
+  <rect width="1200" height="630" fill="url(#bgGradient)" />
+  
+  <!-- Decorative circular shapes -->
+  <circle cx="1050" cy="550" r="120" fill="#dee2e6" opacity="0.3" />
+  <circle cx="100" cy="50" r="80" fill="#adb5bd" opacity="0.1" />
+
+  <!-- Left Side Panel (Main Topic) -->
+  <rect x="0" y="0" width="450" height="630" fill="#212529" />
+  <text x="50" y="280" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="#ffffff">EFFICIENT</text>
+  <text x="50" y="340" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="#ffffff">QUERIES</text>
+  <rect x="50" y="370" width="100" height="8" fill="#0dcaf0" />
+  <text x="50" y="420" font-family="Arial, sans-serif" font-size="24" fill="#6c757d">Optimization &amp; Speed</text>
+
+  <!-- Right Side (Light Cards/Diagrams) -->
+  
+  <!-- Card 1: SELECT * vs Columns -->
+  <rect x="500" y="60" width="620" height="160" rx="15" fill="#ffffff" filter="url(#shadow)" />
+  <text x="530" y="105" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#212529">Data Retrieval</text>
+  <text x="530" y="145" font-family="Courier New, monospace" font-size="18" fill="#dc3545">SELECT * FROM all_data; (Slow)</text>
+  <text x="530" y="185" font-family="Courier New, monospace" font-size="18" fill="#198754">SELECT id, name FROM data; (Fast)</text>
+  <path d="M1060 170 l5 5 l10 -10" stroke="#198754" stroke-width="3" fill="none" />
+
+  <!-- Card 2: Filter Early -->
+  <rect x="500" y="250" width="620" height="160" rx="15" fill="#ffffff" filter="url(#shadow)" />
+  <text x="530" y="295" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#212529">Filter Early (WHERE)</text>
+  <rect x="530" y="320" width="220" height="60" rx="8" fill="#e9ecef" />
+  <text x="545" y="355" font-family="Arial, sans-serif" font-size="16" fill="#495057">1,000,000 Rows</text>
+  <path d="M760 350 L840 350" stroke="#212529" stroke-width="2" marker-end="url(#arrowhead)" />
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#212529" />
+    </marker>
+  </defs>
+  <rect x="850" y="320" width="220" height="60" rx="8" fill="#0dcaf0" />
+  <text x="865" y="355" font-family="Arial, sans-serif" font-size="16" fill="#212529">100 Filtered Rows</text>
+
+  <!-- Card 3: Index Usage -->
+  <rect x="500" y="440" width="620" height="130" rx="15" fill="#ffffff" filter="url(#shadow)" />
+  <text x="530" y="485" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#212529">Index Optimization</text>
+  <text x="530" y="525" font-family="Courier New, monospace" font-size="18" fill="#dc3545">WHERE YEAR(date) = 2024</text>
+  <text x="820" y="525" font-family="Arial, sans-serif" font-size="16" fill="#dc3545">❌ No Index</text>
+  <text x="530" y="555" font-family="Courier New, monospace" font-size="18" fill="#198754">WHERE date >= '2024-01-01'</text>
+  <text x="820" y="555" font-family="Arial, sans-serif" font-size="16" fill="#198754">✅ Use Index</text>
+</svg>

@@ -1,0 +1,48 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background with a soft gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f8f9fa;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e9ecef;stop-opacity:1" />
+    </linearGradient>
+    <dropShadow id="shadow" dx="2" dy="4" stdDeviation="3" flood-opacity="0.1" />
+  </defs>
+  
+  <rect width="1200" height="630" fill="url(#bgGradient)" />
+  
+  <!-- Decorative circular shapes -->
+  <circle cx="1100" cy="100" r="150" fill="#dee2e6" opacity="0.4" />
+  <circle cx="50" cy="580" r="100" fill="#adb5bd" opacity="0.2" />
+
+  <!-- Left Side Panel (Main Topic) -->
+  <rect x="0" y="0" width="450" height="630" fill="#212529" />
+  <text x="50" y="280" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="#ffffff">SQL CODE</text>
+  <text x="50" y="340" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="#ffffff">QUALITY</text>
+  <rect x="50" y="370" width="100" height="8" fill="#ffc107" />
+  <text x="50" y="420" font-family="Arial, sans-serif" font-size="24" fill="#ced4da">Readability &amp; Style</text>
+
+  <!-- Right Side (Light Cards/Diagrams) -->
+  
+  <!-- Card 1: Formatting -->
+  <rect x="500" y="80" width="620" height="150" rx="15" fill="#ffffff" filter="url(#shadow)" />
+  <text x="530" y="125" font-family="Courier New, monospace" font-size="20" font-weight="bold" fill="#0d6efd">-- SELECT Formatting</text>
+  <text x="530" y="160" font-family="Courier New, monospace" font-size="18" fill="#495057">SELECT column1,</text>
+  <text x="605" y="185" font-family="Courier New, monospace" font-size="18" fill="#495057">column2</text>
+  <text x="530" y="210" font-family="Courier New, monospace" font-size="18" fill="#495057">FROM table_name;</text>
+  <circle cx="1070" cy="120" r="15" fill="#198754" />
+  <path d="M1062 120 l5 5 l10 -10" stroke="white" stroke-width="3" fill="none" />
+
+  <!-- Card 2: Naming Rules -->
+  <rect x="500" y="260" width="620" height="150" rx="15" fill="#ffffff" filter="url(#shadow)" />
+  <text x="530" y="305" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#212529">Naming Conventions</text>
+  <rect x="530" y="330" width="250" height="35" rx="5" fill="#f8f9fa" stroke="#dee2e6" />
+  <text x="545" y="354" font-family="Courier New, monospace" font-size="16" fill="#dc3545">customerOrder (Bad)</text>
+  <rect x="800" y="330" width="280" height="35" rx="5" fill="#f8f9fa" stroke="#198754" />
+  <text x="815" y="354" font-family="Courier New, monospace" font-size="16" fill="#198754">customer_order (Good)</text>
+  <text x="530" y="390" font-family="Arial, sans-serif" font-size="16" fill="#6c757d">Use snake_case and prefixes like v_ for views.</text>
+
+  <!-- Card 3: Comments -->
+  <rect x="500" y="440" width="620" height="110" rx="15" fill="#ffffff" filter="url(#shadow)" />
+  <text x="530" y="485" font-family="Courier New, monospace" font-size="18" fill="#6c757d">/* Explain the WHY */</text>
+  <text x="530" y="515" font-family="Courier New, monospace" font-size="18" fill="#495057">WHERE active = 1 -- Filter active results</text>
+</svg>
