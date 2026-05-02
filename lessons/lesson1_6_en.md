@@ -15,7 +15,7 @@ SQL is designed to be easy to learn and use, with a syntax that is both human-re
 ## Subsets of SQL
 SQL is divided into several subsets, each serving a specific purpose:
 *   **Data Query Language (DQL):** Used for querying data from databases. The primary command is SELECT.
-*   **Data Definition Language (DDL):** Used for defining and managing database structures. Commands include CREATE, ALTER, and DROP.
+*   **Data Definition Language (DDL):** Used for defining and managing database structures. Commands include CREATE, ALTER, DROP, REANME and TRUNCATE.
 *   **Data Manipulation Language (DML):** Used for manipulating data within the database. Commands include INSERT, UPDATE, and DELETE.
 *   **Data Control Language (DCL):** Used for controlling access to data within the database. Commands include GRANT and REVOKE.
 *   **Transaction Control Language (TCL):** Used for managing transactions in the database. Commands include COMMIT, ROLLBACK, and SAVEPOINT.

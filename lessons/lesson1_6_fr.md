@@ -15,7 +15,7 @@ SQL est conçu pour être facile à apprendre et à utiliser, avec une syntaxe �
 ## Sous-ensembles de SQL
 SQL est divisé en plusieurs sous-ensembles, chacun servant un objectif spécifique :
 *   **Data Query Language (DQL - Langage de requête de données) :** Utilisé pour interroger les données des bases de données. La commande principale est SELECT.
-*   **Data Definition Language (DDL - Langage de définition de données) :** Utilisé pour définir et gérer les structures de base de données. Les commandes incluent CREATE, ALTER et DROP.
+*   **Data Definition Language (DDL - Langage de définition de données) :** Utilisé pour définir et gérer les structures de base de données. Les commandes incluent CREATE, ALTER, DROP, REANME et TRUNCATE..
 *   **Data Manipulation Language (DML - Langage de manipulation de données) :** Utilisé pour manipuler les données au sein de la base de données. Les commandes incluent INSERT, UPDATE et DELETE.
 *   **Data Control Language (DCL - Langage de contrôle de données) :** Utilisé pour contrôler l'accès aux données au sein de la base de données. Les commandes incluent GRANT et REVOKE.
 *   **Transaction Control Language (TCL - Langage de contrôle des transactions) :** Utilisé pour gérer les transactions dans la base de données. Les commandes incluent COMMIT, ROLLBACK et SAVEPOINT.

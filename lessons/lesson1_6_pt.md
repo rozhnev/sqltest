@@ -15,7 +15,7 @@ O SQL foi projetado para ser fácil de aprender e usar, com uma sintaxe que é l
 ## Subconjuntos do SQL
 O SQL é dividido em vários subconjuntos, cada um servindo a um propósito específico:
 *   **Linguagem de Consulta de Dados (DQL):** Usada para consultar dados de bancos de dados. O comando principal é SELECT.
-*   **Linguagem de Definição de Dados (DDL):** Usada para definir e gerenciar estruturas de banco de dados. Os comandos incluem CREATE, ALTER e DROP.
+*   **Linguagem de Definição de Dados (DDL):** Usada para definir e gerenciar estruturas de banco de dados. Os comandos incluem CREATE, ALTER, DROP, REANME e TRUNCATE.
 *   **Linguagem de Manipulação de Dados (DML):** Usada para manipular dados em um banco de dados. Os comandos incluem INSERT, UPDATE e DELETE.
 *   **Linguagem de Controle de Dados (DCL):** Usada para controlar o acesso aos dados em um banco de dados. Os comandos incluem GRANT e REVOKE.
 *   **Linguagem de Controle de Transações (TCL):** Usada para gerenciar transações em um banco de dados. Os comandos incluem COMMIT, ROLLBACK e SAVEPOINT.
