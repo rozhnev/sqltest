@@ -162,14 +162,35 @@ SELECT * FROM sakila.actor LIMIT 5;
 
 <h2 id="pricing"><a href="#pricing" style="color: inherit; text-decoration: none;">Pricing Policy</a></h2>
 
-<p>SQLize Embed is distributed on a <strong>paid subscription basis</strong>.</p>
+<p>SQLize Embed is distributed on a <strong>paid subscription basis</strong> per domain.</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Plan</th>
+            <th>Price</th>
+            <th>Included requests</th>
+            <th>Extra usage</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Per-Domain License</strong></td>
+            <td><strong>$10 / month</strong></td>
+            <td>1,000 API requests / month</td>
+            <td>$1 per 1,000 requests over the monthly limit</td>
+        </tr>
+    </tbody>
+</table>
 
 <ul>
-    <li><strong>Per-Domain Licensing</strong>: A subscription is required for each top-level domain where the script is hosted.</li>
-    <li><strong>On-Demand Pricing</strong>: We offer flexible pricing based on your traffic and usage requirements.</li>
+    <li><strong>Per-Domain Licensing</strong>: One subscription covers one top-level domain. Each additional domain requires a separate license.</li>
+    <li><strong>Included quota</strong>: 1,000 API requests per month are included in the base price.</li>
+    <li><strong>Overage</strong>: Additional usage beyond the monthly limit is billed at $1 per 1,000 requests.</li>
+    <li><strong>Special pricing &amp; discounts</strong>: Available on request for high-volume or educational use cases.</li>
 </ul>
 
-<p>For a custom quote and to obtain your license key, please contact us at <a href="mailto:support@sqlize.com">support@sqlize.com</a>.</p>
+<p>To obtain your license key or request a custom quote, contact us at <a href="mailto:support@sqlize.com">support@sqlize.com</a>.</p>
 
 <hr>
 
