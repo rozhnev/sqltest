@@ -122,6 +122,7 @@ SELECT * FROM sakila.actor LIMIT 5;
     <tbody>
         <tr><td><code>mysql80</code></td><td>MySQL 8.0</td></tr>
         <tr><td><code>mysql93</code></td><td>MySQL 9.3.0</td></tr>
+        <tr><td><code>mysql97_sakila</code></td><td>MySQL 9.7 Sakila (ReadOnly)</td></tr>
         <tr><td><code>mariadb123</code></td><td>MariaDB 12.3</td></tr>
         <tr><td><code>mariadb118</code></td><td>MariaDB 11.8</td></tr>
         <tr><td><code>mariadb</code></td><td>MariaDB 10</td></tr>
@@ -142,7 +143,7 @@ SELECT * FROM sakila.actor LIMIT 5;
         <tr><td><code>clickhouse</code></td><td>ClickHouse</td></tr>
     </tbody>
 </table>
-<p><em>Note: Preloaded datasets like <code>mysql80_sakila</code>, <code>mariadb118_openflights</code>, and <code>psql10demo</code> are also available.</em></p>
+<p><em>Note: Preloaded datasets like <code>mysql97_sakila</code>, <code>psql17postgis</code>, <code>mssql2022aw</code>, <code>mysql80_sakila</code>, <code>mariadb118_openflights</code>, and <code>psql10demo</code> are also available.</em></p>
 
 <hr>
 
@@ -300,6 +301,27 @@ INSERT INTO temp_users VALUES (1, 'John Doe'), (2, 'Jane Smith');
              code-rows="4">
 SELECT * FROM temp_users;
         </div>
+    </div>
+
+    <hr>
+
+    <!-- Example 7: Preloaded Databases -->
+    <h2 id="example-preloaded"><a href="#example-preloaded" style="color: inherit; text-decoration: none;">7. Preloaded Database Examples</a></h2>
+    <p>Use read-only preloaded databases to query real data without any setup.</p>
+
+    <h3 id="example-mysql97-sakila"><a href="#example-mysql97-sakila" style="color: inherit; text-decoration: none;">MySQL 9.7 — Sakila</a></h3>
+    <div data-sqlize-editor data-sql-version="mysql97_sakila" code-rows="5">
+SELECT actor_id, first_name, last_name FROM actor LIMIT 10;
+    </div>
+
+    <h3 id="example-psql17postgis"><a href="#example-psql17postgis" style="color: inherit; text-decoration: none;">PostgreSQL 17 + PostGIS Workshop</a></h3>
+    <div data-sqlize-editor data-sql-version="psql17postgis" code-rows="5">
+SELECT name, ST_AsText(geom) FROM nyc_neighborhoods LIMIT 5;
+    </div>
+
+    <h3 id="example-mssql2022aw"><a href="#example-mssql2022aw" style="color: inherit; text-decoration: none;">MS SQL Server 2022 — AdventureWorks</a></h3>
+    <div data-sqlize-editor data-sql-version="mssql2022aw" code-rows="5">
+SELECT TOP 10 ProductID, Name, ListPrice FROM Production.Product ORDER BY ListPrice DESC;
     </div>
 
     <hr>

@@ -30,6 +30,7 @@
                 'mysql80': 'MySQL 8.0',
                 'mysql80_sakila': 'MySQL 8.0 Sakila (ReadOnly)',
                 'mysql93': 'MySQL 9.3.0',
+                'mysql97_sakila': 'MySQL 9.7 Sakila (ReadOnly)',
                 'mariadb118': 'MariaDB 11.8',
                 'mariadb118_openflights': 'MariaDB 11.8 OpenFlights (ReadOnly)',
                 'mariadb': 'MariaDB 10',
