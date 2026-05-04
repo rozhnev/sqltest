@@ -322,7 +322,7 @@ SELECT name, ST_AsText(geom) FROM nyc_neighborhoods LIMIT 5;
 
     <h3 id="example-mssql2022aw"><a href="#example-mssql2022aw" style="color: inherit; text-decoration: none;">MS SQL Server 2022 — AdventureWorks</a></h3>
     <div data-sqlize-editor data-sql-version="mssql2022aw" code-rows="5">
-SELECT TOP 10 ProductID, Name, ListPrice FROM Production.Product ORDER BY ListPrice DESC;
+SELECT TOP 10 ProductID, Name, ListPrice FROM Product ORDER BY ListPrice DESC;
     </div>
 
     <hr>
