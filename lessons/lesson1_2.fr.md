@@ -1,12 +1,24 @@
-# Leçon 1.2 : Différents types de bases de données
+---
+title: "Types de bases de données : relationnelle, NoSQL, clé-valeur et plus"
+description: "Découvrez les principaux types de bases de données — relationnelles, clé-valeur, documentaires, graphes, séries temporelles et colonnaires — avec leurs différences et cas d'usage."
+keywords: ["types de bases de données", "base de données relationnelle vs NoSQL", "comparaison types BDD", "base de données relationnelle", "types NoSQL", "choisir une base de données"]
+---
 
-Dans la leçon précédente, nous avons introduit l'idée générale d'une base de données et d'un SGBD. En pratique, cependant, toutes les bases de données ne sont pas construites de la même manière. Différents types de bases de données sont optimisés pour différents types de données, modèles de requêtes, exigences de scalabilité et besoins de cohérence.
+_Leçon 1.2 · Temps de lecture : ~15 min_
 
-Dans cette leçon, nous allons examiner les types de bases de données les plus courants, leurs différences clés, leurs cas d'usage typiques et des exemples concrets. Nous porterons également une attention particulière aux **bases de données relationnelles**, car elles resteront le principal focus de ce cours.
+Il existe de nombreux **types de bases de données**, chacun optimisé pour un type de données, un modèle de requête ou des exigences de scalabilité spécifiques. Dans cette leçon, vous découvrirez les principaux modèles de bases de données — relationnelles, clé-valeur, documentaires, à colonnes larges, graphes, séries temporelles et colonnaires — avec leurs différences clés, leurs cas d'usage typiques et des exemples de systèmes réels.
 
-## Pourquoi existe-t-il différents types de bases de données ?
+# Types de bases de données : relationnelles, NoSQL et au-delà
 
-Un seul modèle de base de données n'est pas parfait pour toutes les applications.
+Dans la leçon précédente, nous avons introduit l'idée générale d'une base de données et d'un SGBD. En pratique, toutes les bases de données ne sont pas construites de la même manière. Différents types sont optimisés pour différents types de données, modèles de requêtes, exigences de scalabilité et besoins de cohérence.
+
+Nous porterons également une attention particulière aux **bases de données relationnelles**, car elles resteront le principal focus de ce cours.
+
+<img src="/images/lessons/lesson1_2-database-types.svg" alt="Schéma présentant les principaux types de bases de données, dont les bases relationnelles, clé-valeur, documentaires, graphe, séries temporelles, colonnaires, à colonnes larges, en mémoire et de recherche" width="100%">
+
+## Pourquoi Existe-t-il Différents Types de Bases de Données ?
+
+Aucun modèle de base de données n'est parfait pour toutes les applications.
 
 Par exemple :
 
@@ -17,7 +29,7 @@ Par exemple :
 
 Parce que différents systèmes résolvent différents problèmes, plusieurs modèles de bases de données ont émergé au fil du temps.
 
-## Principaux types de bases de données en un coup d'oeil
+## Principaux Types de Bases de Données : Tableau Comparatif
 
 Voici une comparaison rapide avant d'examiner chaque type plus en détail :
 
@@ -25,270 +37,108 @@ Voici une comparaison rapide avant d'examiner chaque type plus en détail :
 |------|-------------------|--------|----------------------|----------|
 | **Relationnelle** | Tables avec lignes et colonnes | Cohérence forte, SQL, jointures, données structurées | Banque, ERP, CRM, e-commerce, reporting | PostgreSQL, MySQL, MariaDB, SQLite, Oracle |
 | **Clé-valeur** | Clé associée à une valeur | Recherches très rapides, scalabilité simple | Cache, sessions, feature flags, paniers d'achat | Redis, Amazon DynamoDB, Riak |
-| **Documentaire** | Documents de type JSON | Schéma flexible, données imbriquées | Gestion de contenu, profils utilisateurs, catalogues, applications web | MongoDB, Couchbase, Firestore |
-| **À colonnes larges** | Lignes avec colonnes flexibles regroupées en familles | Haut débit d'écriture, scalabilité horizontale | Journalisation d'événements, IoT, charges distribuées à grande échelle | Apache Cassandra, HBase, ScyllaDB |
-| **Graphe** | Noeuds et arêtes | Requêtes centrées sur les relations | Réseaux sociaux, détection de fraude, moteurs de recommandation | Neo4j, Amazon Neptune, ArangoDB |
+| **Documentaire** | Documents de type JSON | Schéma flexible, données imbriquées | Gestion de contenu, profils utilisateurs, catalogues | MongoDB, Couchbase, Firestore |
+| **À colonnes larges** | Lignes avec colonnes flexibles en familles | Haut débit d'écriture, scalabilité horizontale | Journalisation, IoT, charges distribuées à grande échelle | Apache Cassandra, HBase, ScyllaDB |
+| **Graphe** | Nœuds et arêtes | Requêtes centrées sur les relations | Réseaux sociaux, détection de fraude, recommandations | Neo4j, Amazon Neptune, ArangoDB |
 | **Séries temporelles** | Enregistrements horodatés | Ingestion et agrégation efficaces dans le temps | Supervision, métriques, capteurs, données financières | InfluxDB, TimescaleDB, OpenTSDB |
-| **Colonnaire analytique** | Données stockées par colonne plutôt que par ligne | Analyses et agrégations rapides | BI, tableaux de bord, entreposage de données, OLAP | ClickHouse, DuckDB, Amazon Redshift, BigQuery |
-| **En mémoire** | Données stockées principalement en RAM | Latence extrêmement faible | Cache, classements, compteurs en temps réel | Redis, Memcached, SAP HANA |
+| **Colonnaire analytique** | Données stockées par colonne | Analyses et agrégations rapides | BI, tableaux de bord, data warehousing, OLAP | ClickHouse, DuckDB, Amazon Redshift, BigQuery |
+| **En mémoire** | Données principalement en RAM | Latence extrêmement faible | Cache, classements, compteurs en temps réel | Redis, Memcached, SAP HANA |
 
-## Bases de données relationnelles
+## Bases de Données Relationnelles
 
 Les bases de données relationnelles stockent les données dans des **tables** composées de **lignes** et de **colonnes**. Les tables peuvent être liées entre elles par des **relations**, généralement à l'aide de clés primaires et de clés étrangères.
 
 Ce modèle est particulièrement adapté lorsque les données sont bien structurées et que l'exactitude, la cohérence et les requêtes complexes sont importantes.
 
-### Propriétés fondamentales des bases de données relationnelles
+### Propriétés Fondamentales des Bases Relationnelles
 
-**1. Schéma structuré**
+**1. Schéma structuré** — exige un schéma clairement défini avec tables, colonnes, types de données, contraintes et relations. La structure est prévisible et facile à valider.
 
-Les bases de données relationnelles exigent généralement un schéma clairement défini. Avant de stocker les données, on définit les tables, les colonnes, les types de données, les contraintes et les relations.
+**2. Relations entre les tables** — capacité à modéliser explicitement les relations entre entités (ex. `customers` → `orders` → `order_items`). Idéal pour les systèmes métiers.
 
-Cela rend la structure prévisible et plus facile à valider.
+**3. Prise en charge de SQL** — standard pour filtrer, joindre, agréger, trier et modifier des données structurées.
 
-**2. Relations entre les tables**
+**4. Transactions ACID** :
+* **Atomicité :** une transaction réussit entièrement ou échoue entièrement.
+* **Cohérence :** les données restent valides selon les règles définies.
+* **Isolation :** les transactions concurrentes ne s'interfèrent pas incorrectement.
+* **Durabilité :** les données validées sont conservées même après une panne.
 
-L'une des grandes forces des systèmes relationnels est la capacité à modéliser explicitement les relations.
+**5. Contraintes d'intégrité** — clés primaires, clés étrangères, unicité, `NOT NULL`, `CHECK` pour prévenir les données invalides.
 
-Par exemple :
+**6. Jointures puissantes** — idéales pour combiner des données de plusieurs tables en reporting et analytique.
 
-* Une table `customers` peut être liée à une table `orders`.
-* Une table `orders` peut être liée à une table `order_items`.
+**7. Normalisation** — réduction de la duplication via des tables liées.
 
-Cela rend les bases relationnelles particulièrement adaptées aux systèmes métiers où les entités sont interconnectées.
+### Cas d'Usage Courants
 
-**3. Prise en charge de SQL**
-
-Les bases de données relationnelles sont généralement interrogées avec **SQL (Structured Query Language)**. SQL fournit une manière standard de filtrer, joindre, agréger, trier et modifier des données structurées.
-
-**4. Transactions ACID**
-
-Les bases de données relationnelles sont bien connues pour prendre en charge les propriétés **ACID** :
-
-* **Atomicité :** Une transaction réussit entièrement ou échoue entièrement.
-* **Cohérence :** Les données doivent rester valides selon les règles définies.
-* **Isolation :** Les transactions concurrentes ne doivent pas interférer incorrectement les unes avec les autres.
-* **Durabilité :** Une fois validées, les données restent stockées même après une panne.
-
-Ces propriétés sont essentielles dans des systèmes comme la banque, la facturation, les réservations et la gestion des stocks.
-
-**5. Contraintes d'intégrité des données**
-
-Les bases de données relationnelles peuvent appliquer directement des règles au niveau de la base de données, par exemple :
-
-* clés primaires
-* clés étrangères
-* contraintes d'unicité
-* contraintes `NOT NULL`
-* contraintes `CHECK`
-
-Ces fonctionnalités aident à empêcher les données invalides ou incohérentes.
-
-**6. Jointures puissantes et reporting**
-
-Les bases de données relationnelles excellent lorsqu'il faut combiner des informations provenant de plusieurs tables. C'est l'une des raisons pour lesquelles elles restent centrales pour le reporting, l'analytique, la finance, les opérations et de nombreux systèmes transactionnels.
-
-**7. Normalisation et réduction de la redondance**
-
-La conception relationnelle utilise souvent la **normalisation**, c'est-à-dire l'organisation des données dans des tables liées afin de réduire la duplication et d'améliorer la cohérence.
-
-Par exemple, les informations d'un client peuvent être stockées une seule fois dans une table `customers` au lieu d'être répétées dans chaque enregistrement de commande.
-
-### Cas d'usage courants des bases de données relationnelles
-
-Les bases de données relationnelles sont généralement le meilleur choix lorsque :
-
-* les données sont structurées et clairement définies
-* les relations entre entités sont importantes
-* les transactions doivent être fiables
-* la cohérence est plus importante que la flexibilité du schéma
-* l'application a besoin de requêtes complexes et de reporting
-
-### Exemples de bases de données relationnelles
-
-* **PostgreSQL :** Base de données relationnelle open source puissante, avec un bon respect des standards et des fonctionnalités avancées.
-* **MySQL :** Base de données relationnelle populaire, très utilisée dans les applications web.
-* **MariaDB :** Fork communautaire de MySQL.
-* **SQLite :** Base de données relationnelle légère intégrée, stockée dans un seul fichier.
-* **Oracle Database :** Base de données relationnelle de niveau entreprise.
-* **Microsoft SQL Server :** Base de données relationnelle largement utilisée dans les environnements d'entreprise.
-
-## Bases de données clé-valeur
-
-Les bases de données clé-valeur stockent les données sous la forme d'une paire simple : une **clé** et la **valeur** qui lui est associée.
-
-La clé agit comme un identifiant unique, et la base récupère la valeur directement à partir de cette clé. Ce modèle est très simple et très rapide.
-
-### Différences clés
-
-* L'accès aux données repose généralement sur une seule clé plutôt que sur des jointures complexes.
-* La base de données ne comprend souvent pas la structure interne de la valeur.
-* Elle est optimisée pour des lectures et écritures extrêmement rapides.
-
-### Cas d'usage typiques
-
-* mise en cache de résultats de requêtes
-* stockage des sessions utilisateur
-* paniers d'achat
-* feature flags
-* limitation de débit
-* classements et compteurs
+Les bases relationnelles sont le meilleur choix quand les données sont structurées, les relations importantes, les transactions fiables requises et les requêtes complexes nécessaires.
 
 ### Exemples
 
-* **Redis**
-* **Amazon DynamoDB**
-* **Riak**
+* **PostgreSQL**, **MySQL**, **MariaDB**, **SQLite**, **Oracle Database**, **Microsoft SQL Server**
 
-## Bases de données documentaires
+## Bases de Données Clé-Valeur
 
-Les bases de données documentaires stockent les données sous forme de **documents**, généralement dans un format proche de JSON. Chaque document peut contenir des champs, des tableaux et des objets imbriqués.
+Stockent les données comme une paire **clé** + **valeur**. Accès direct par clé — modèle très simple et très rapide.
 
-Contrairement aux bases de données relationnelles, tous les documents n'ont pas besoin d'avoir exactement la même structure.
+**Cas d'usage :** cache, sessions, paniers, feature flags, classements.
 
-### Différences clés
+**Exemples :** **Redis**, **Amazon DynamoDB**, **Riak**
 
-* Le schéma est flexible ou semi-flexible.
-* Les données liées peuvent souvent être stockées ensemble dans un même document.
-* Elles sont pratiques pour les applications dont la structure évolue fréquemment.
+## Bases de Données Documentaires
 
-### Cas d'usage typiques
+Stockent les données sous forme de **documents** JSON. Chaque document peut avoir une structure différente.
 
-* systèmes de gestion de contenu
-* catalogues produits
-* profils utilisateurs
-* applications mobiles et web
-* prototypage de systèmes avec exigences changeantes
+**Cas d'usage :** gestion de contenu, catalogues produits, profils utilisateurs, applications web et mobiles.
 
-### Exemples
+**Exemples :** **MongoDB**, **Couchbase**, **Google Firestore**
 
-* **MongoDB**
-* **Couchbase**
-* **Google Firestore**
+## Bases de Données à Colonnes Larges
 
-## Bases de données à colonnes larges
+Stockent les données en lignes avec un ensemble flexible de colonnes. Conçues pour la distribution sur de nombreux serveurs et un haut débit d'écriture.
 
-Les bases de données à colonnes larges, parfois appelées **bases de données en familles de colonnes**, stockent les données en lignes, mais chaque ligne peut contenir un très grand nombre de colonnes flexibles. Elles sont conçues pour être distribuées sur de nombreux serveurs et pour offrir un haut débit d'écriture.
+**Cas d'usage :** journalisation d'événements, IoT, messagerie, systèmes distribués géographiquement.
 
-### Différences clés
+**Exemples :** **Apache Cassandra**, **Apache HBase**, **ScyllaDB**
 
-* Le schéma est plus flexible que dans les bases de données relationnelles.
-* Elles sont optimisées pour le stockage distribué à grande échelle.
-* Elles gèrent bien les volumes massifs de données et les charges d'écriture importantes.
-* Elles ne prennent généralement pas en charge les jointures relationnelles de la même manière que les bases SQL.
+## Bases de Données Colonnaires Analytiques
 
-### Cas d'usage typiques
+Stockent les valeurs d'une même colonne ensemble sur disque — différent des bases à colonnes larges. Efficaces pour les requêtes analytiques lisant peu de colonnes sur de très grands volumes.
 
-* journalisation d'événements
-* télémétrie IoT
-* systèmes de messagerie
-* applications à forte écriture
-* systèmes distribués géographiquement
+**Cas d'usage :** business intelligence, data warehousing, dashboards, analyses de logs.
 
-### Exemples
+**Exemples :** **ClickHouse**, **DuckDB**, **Amazon Redshift**, **Google BigQuery**
 
-* **Apache Cassandra**
-* **Apache HBase**
-* **ScyllaDB**
+## Bases de Données Graphe
 
-## Bases de données colonnaires analytiques
+Conçues pour les données où les relations sont la partie la plus importante. Stockent des **nœuds** (entités) et des **arêtes** (relations). Parcours des relations rapide et naturel.
 
-Une base de données **colonnaire** stocke ensemble sur disque les valeurs d'une même colonne au lieu de stocker une ligne complète. Cela est différent d'une base de données à colonnes larges.
+**Cas d'usage :** réseaux sociaux, détection de fraude, recommandations, graphes de connaissances.
 
-Le stockage colonnaire est particulièrement efficace pour les requêtes analytiques qui lisent quelques colonnes dans un très grand jeu de données.
+**Exemples :** **Neo4j**, **Amazon Neptune**, **ArangoDB**
 
-### Différences clés
+## Bases de Données de Séries Temporelles
 
-* Optimisées pour analyser et agréger de grands volumes de données.
-* Très efficaces pour le reporting et l'analytique.
-* Généralement moins adaptées aux charges transactionnelles lourdes impliquant de nombreuses petites mises à jour de lignes.
+Spécialisées pour les données associées au temps, optimisées pour l'ingestion, la rétention et l'agrégation temporelle.
 
-### Cas d'usage typiques
+**Cas d'usage :** supervision de serveurs, métriques, données de capteurs, données boursières.
 
-* business intelligence
-* tableaux de bord
-* entreposage de données
-* reporting analytique
-* analyse de journaux à grande échelle
+**Exemples :** **InfluxDB**, **TimescaleDB**, **OpenTSDB**
 
-### Exemples
+## Bases de Données en Mémoire
 
-* **ClickHouse**
-* **DuckDB**
-* **Amazon Redshift**
-* **Google BigQuery**
+Stockent la plupart des données en RAM plutôt que sur disque — extrêmement rapides, mais mémoire plus coûteuse.
 
-## Bases de données graphe
+**Cas d'usage :** cache, sessions, compteurs en temps réel, classements de jeux.
 
-Les bases de données graphe sont conçues pour les données où les relations constituent la partie la plus importante du modèle. Elles stockent des **noeuds** (entités) et des **arêtes** (relations).
+**Exemples :** **Redis**, **Memcached**, **SAP HANA**
 
-### Différences clés
+---
 
-* Le parcours des relations est rapide et naturel.
-* Elles sont idéales lorsqu'il faut interroger des chemins, des réseaux et des données fortement connectées.
-* Elles sont souvent mieux adaptées que les bases relationnelles pour les requêtes sur des relations à plusieurs sauts.
+## Comment Choisir le Bon Type de Base de Données ?
 
-### Cas d'usage typiques
-
-* réseaux sociaux
-* détection de fraude
-* systèmes de recommandation
-* topologie réseau
-* graphes de connaissances
-
-### Exemples
-
-* **Neo4j**
-* **Amazon Neptune**
-* **ArangoDB**
-
-## Bases de données de séries temporelles
-
-Les bases de données de séries temporelles sont spécialisées pour les points de données associés au temps. Elles sont optimisées pour des taux d'ingestion élevés, des politiques de rétention, la compression et l'agrégation basée sur le temps.
-
-### Différences clés
-
-* Chaque enregistrement est associé à un horodatage.
-* Les requêtes se concentrent souvent sur des intervalles comme la dernière heure, le dernier jour ou le dernier mois.
-* Elles permettent des agrégations efficaces sur des fenêtres temporelles.
-
-### Cas d'usage typiques
-
-* supervision de serveurs
-* métriques applicatives
-* données de capteurs
-* données de marché boursier
-* mesures industrielles
-
-### Exemples
-
-* **InfluxDB**
-* **TimescaleDB**
-* **OpenTSDB**
-
-## Bases de données en mémoire
-
-Les bases de données en mémoire stockent la plupart ou la totalité des données en RAM plutôt que sur disque. Cela les rend extrêmement rapides, même si la mémoire coûte plus cher que le stockage sur disque.
-
-Certaines bases en mémoire sont utilisées uniquement comme caches temporaires, tandis que d'autres peuvent également persister les données sur disque.
-
-### Cas d'usage typiques
-
-* cache
-* stockage de sessions
-* compteurs en temps réel
-* classements de jeux
-* systèmes à très faible latence
-
-### Exemples
-
-* **Redis**
-* **Memcached**
-* **SAP HANA**
-
-## Choisir le bon type de base de données
-
-Lorsqu'on choisit une base de données, il faut se poser des questions comme :
+Questions à se poser :
 
 * Les données sont-elles très structurées ou flexibles ?
 * Ai-je besoin de transactions ACID fortes ?
@@ -296,37 +146,43 @@ Lorsqu'on choisit une base de données, il faut se poser des questions comme :
 * La recherche rapide par clé est-elle la priorité absolue ?
 * La charge est-elle transactionnelle ou analytique ?
 * Le système devra-t-il évoluer sur de nombreux serveurs ?
-* Les relations entre entités sont-elles centrales dans l'application ?
+* Les relations entre entités sont-elles centrales ?
 
-Dans de nombreux systèmes réels, les organisations utilisent plus d'un type de base de données. Par exemple :
+Dans de nombreux systèmes réels, on utilise plusieurs types de bases de données — c'est la **persistance polyglotte** : relationnelle pour les données métier, Redis pour le cache, documentaire pour le contenu flexible, colonnaire pour l'analytique.
 
-* une base de données relationnelle pour les données métier principales
-* Redis pour le cache
-* une base de données documentaire pour le contenu flexible
-* un entrepôt colonnaire pour l'analytique
+## Résumé : Différences Clés Entre Types de Bases de Données
 
-On appelle souvent cela la **persistance polyglotte**.
+* **Modèle de données** — tables, documents, clé-valeur, graphes, enregistrements horodatés
+* **Flexibilité du schéma** — fixe ou flexible
+* **Style de requête** — SQL, clé, documents, graphes, fenêtres temporelles
+* **Modèle de cohérence** — ACID fort ou compromis pour la scalabilité
+* **Profil de performance** — transactions, analytique, relations ou accès ultra-rapide
 
-## Résumé des différences clés
+---
 
-Les principales différences entre les types de bases de données portent généralement sur :
+**Points clés :**
 
-* le **modèle de données** — tables, documents, paires clé-valeur, graphes ou enregistrements horodatés
-* la **flexibilité du schéma** — structure fixe ou flexible
-* le **style de requête** — SQL, recherche par clé, requêtes documentaires, parcours de graphes, analyse par fenêtres temporelles
-* le **modèle de cohérence** — fortes garanties transactionnelles ou compromis orientés scalabilité
-* le **profil de performance** — optimisé pour les transactions, l'analytique, les relations ou l'accès ultra-rapide
+* Différents types de bases de données existent car différentes applications ont des besoins différents.
+* Les **bases relationnelles** excellent pour les schémas structurés, SQL, relations, intégrité et ACID.
+* Les **bases clé-valeur** sont idéales pour le cache et les recherches rapides.
+* Les **bases documentaires** sont utiles pour les données flexibles ou changeantes.
+* Les **bases à colonnes larges** sont conçues pour les charges distribuées et massives.
+* Les **bases colonnaires analytiques** s'optimisent pour le reporting et l'analytique.
+* Les **bases graphe** sont parfaites pour les données riches en relations.
+* Les **bases de séries temporelles** spécialisent les métriques et événements liés au temps.
+* La **persistance polyglotte** combine plusieurs types selon les besoins.
 
-## Points clés de cette leçon
+---
 
-* Différents types de bases de données existent parce que différentes applications ont des besoins techniques et métiers différents.
-* Les **bases de données relationnelles** sont surtout connues pour leurs schémas structurés, SQL, relations, contraintes d'intégrité et transactions ACID.
-* Les **bases clé-valeur** sont excellentes pour les recherches rapides et le cache.
-* Les **bases documentaires** sont utiles lorsque la structure des données est flexible ou évolue fréquemment.
-* Les **bases à colonnes larges** sont conçues pour les charges distribuées, massives et à forte écriture.
-* Les **bases colonnaires analytiques** sont optimisées pour le reporting et l'analytique à grande échelle.
-* Les **bases graphe** sont idéales pour les données riches en relations.
-* Les **bases de séries temporelles** sont spécialisées dans les métriques et événements liés au temps.
-* De nombreux systèmes modernes utilisent plusieurs types de bases de données ensemble.
+## Questions Fréquentes
 
-Dans la prochaine leçon, nous approfondirons la structure interne des **bases de données relationnelles**, notamment les tables, lignes, colonnes, clés et contraintes d'intégrité.
+### Quelle est la différence entre bases relationnelles et NoSQL ?
+Les **bases relationnelles** utilisent un schéma fixe, des transactions ACID et SQL. **NoSQL** est un terme générique pour les modèles clé-valeur, documentaires, à colonnes larges et graphes — ils échangent certaines garanties de cohérence contre flexibilité ou scalabilité. Le bon choix dépend de vos données et de votre charge.
+
+### Quand utiliser une base documentaire plutôt que relationnelle ?
+Utilisez une **base documentaire** quand les données ont une structure imbriquée variable et que les jointures entre collections sont rares. Utilisez une **base relationnelle** quand les données sont structurées, les entités interreliées, et que vous avez besoin de transactions fiables et de requêtes multi-tables complexes.
+
+### Une application peut-elle utiliser plusieurs types de bases de données ?
+Oui — c'est la **persistance polyglotte**. C'est courant en production : PostgreSQL pour les données transactionnelles, Redis pour le cache, ClickHouse pour l'analytique. Chaque type est utilisé là où il excelle.
+
+→ [Leçon 1.3 : Structure d'une base relationnelle — tables, lignes, colonnes et clés](lesson1_3.fr.md)

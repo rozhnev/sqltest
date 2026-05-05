@@ -1,0 +1,188 @@
+<svg viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .title-main { font-size: 32px; font-weight: bold; fill: #1a237e; }
+      .label-bold { font-size: 12px; font-weight: bold; fill: #1a237e; }
+      .label-text { font-size: 11px; fill: #424242; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#f5f7fa"/>
+
+  <!-- Decorative elements -->
+  <circle cx="100" cy="100" r="80" fill="#1976d2" opacity="0.06"/>
+  <circle cx="1100" cy="550" r="90" fill="#00897b" opacity="0.06"/>
+
+  <!-- Main Title -->
+  <text x="600" y="45" text-anchor="middle" class="title-main">DATABASE TYPES &amp; MODELS</text>
+
+  <!-- Central rounded box -->
+  <rect x="100" y="80" width="1000" height="520" fill="#d4e8f7" rx="20" stroke="#1976d2" stroke-width="2"/>
+
+  <!-- Row 1: Core Types -->
+  <!-- Relational -->
+  <g>
+    <!-- Icon: Tables -->
+    <rect x="125" y="120" width="40" height="40" fill="#bbdefb" stroke="#1976d2" stroke-width="2" rx="4"/>
+    <rect x="132" y="128" width="8" height="8" fill="#1976d2"/>
+    <rect x="145" y="128" width="8" height="8" fill="#1976d2"/>
+    <rect x="132" y="140" width="8" height="8" fill="#1976d2"/>
+    <rect x="145" y="140" width="8" height="8" fill="#1976d2"/>
+    
+    <!-- Label -->
+    <rect x="120" y="170" width="160" height="80" fill="#ffffff" stroke="#1976d2" stroke-width="1.5" rx="6"/>
+    <text x="200" y="190" text-anchor="middle" class="label-bold">RELATIONAL</text>
+    <text x="200" y="207" text-anchor="middle" class="label-text">SQL Tables</text>
+    <text x="200" y="220" text-anchor="middle" class="label-text">ACID, Joins</text>
+    <text x="200" y="233" text-anchor="middle" class="label-text">PostgreSQL, MySQL</text>
+  </g>
+
+  <!-- Key-Value -->
+  <g>
+    <!-- Icon: Key & Value -->
+    <circle cx="335" cy="140" r="10" fill="#e1bee7" stroke="#7b1fa2" stroke-width="2"/>
+    <line x1="345" y1="140" x2="380" y2="140" stroke="#7b1fa2" stroke-width="2"/>
+    <rect x="380" y="140" width="15" height="10" fill="#7b1fa2"/>
+    
+    <!-- Label -->
+    <rect x="315" y="170" width="160" height="80" fill="#ffffff" stroke="#7b1fa2" stroke-width="1.5" rx="6"/>
+    <text x="395" y="190" text-anchor="middle" class="label-bold">KEY-VALUE</text>
+    <text x="395" y="207" text-anchor="middle" class="label-text">Fast Lookup</text>
+    <text x="395" y="220" text-anchor="middle" class="label-text">Caching</text>
+    <text x="395" y="233" text-anchor="middle" class="label-text">Redis, DynamoDB</text>
+  </g>
+
+  <!-- Document -->
+  <g>
+    <!-- Icon: JSON Document -->
+    <rect x="525" y="120" width="40" height="40" fill="#ffe0b2" stroke="#f57c00" stroke-width="2" rx="4"/>
+    <text x="545" y="147" text-anchor="middle" font-size="24" fill="#f57c00">{}</text>
+    
+    <!-- Label -->
+    <rect x="515" y="170" width="160" height="80" fill="#ffffff" stroke="#f57c00" stroke-width="1.5" rx="6"/>
+    <text x="595" y="190" text-anchor="middle" class="label-bold">DOCUMENT</text>
+    <text x="595" y="207" text-anchor="middle" class="label-text">JSON Format</text>
+    <text x="595" y="220" text-anchor="middle" class="label-text">Flexible Schema</text>
+    <text x="595" y="233" text-anchor="middle" class="label-text">MongoDB, Firebase</text>
+  </g>
+
+  <!-- Graph -->
+  <g>
+    <!-- Icon: Graph Nodes -->
+    <circle cx="730" cy="137" r="6" fill="#4db8a8" stroke="#00796b" stroke-width="2"/>
+    <circle cx="755" cy="150" r="6" fill="#4db8a8" stroke="#00796b" stroke-width="2"/>
+    <circle cx="755" cy="125" r="6" fill="#4db8a8" stroke="#00796b" stroke-width="2"/>
+    <line x1="735" y1="140" x2="750" y2="148" stroke="#00796b" stroke-width="2"/>
+    <line x1="735" y1="135" x2="750" y2="127" stroke="#00796b" stroke-width="2"/>
+    
+    <!-- Label -->
+    <rect x="715" y="170" width="160" height="80" fill="#ffffff" stroke="#00796b" stroke-width="1.5" rx="6"/>
+    <text x="795" y="190" text-anchor="middle" class="label-bold">GRAPH</text>
+    <text x="795" y="207" text-anchor="middle" class="label-text">Nodes &amp; Edges</text>
+    <text x="795" y="220" text-anchor="middle" class="label-text">Relationships</text>
+    <text x="795" y="233" text-anchor="middle" class="label-text">Neo4j, Neptune</text>
+  </g>
+
+  <!-- Time Series -->
+  <g>
+    <!-- Icon: Timeline -->
+    <line x1="920" y1="125" x2="920" y2="125" stroke="#f57f17" stroke-width="2"/>
+    <circle cx="925" cy="135" r="4" fill="#f57f17"/>
+    <circle cx="935" cy="130" r="4" fill="#f57f17"/>
+    <circle cx="945" cy="125" r="4" fill="#f57f17"/>
+    
+    <!-- Label -->
+    <rect x="910" y="170" width="160" height="80" fill="#ffffff" stroke="#f9a825" stroke-width="1.5" rx="6"/>
+    <text x="995" y="190" text-anchor="middle" class="label-bold">TIME SERIES</text>
+    <text x="995" y="207" text-anchor="middle" class="label-text">Timestamps</text>
+    <text x="995" y="220" text-anchor="middle" class="label-text">Metrics, Monitoring</text>
+    <text x="995" y="233" text-anchor="middle" class="label-text">InfluxDB, TimescaleDB</text>
+  </g>
+
+  <!-- Row 2: Specialized Types (centered under Row 1) -->
+  <!-- Columnar -->
+  <g>
+    <!-- Icon: Columns -->
+    <rect x="200" y="300" width="8" height="40" fill="#a5d6a7" stroke="#388e3c" stroke-width="1.5"/>
+    <rect x="212" y="295" width="8" height="45" fill="#a5d6a7" stroke="#388e3c" stroke-width="1.5"/>
+    <rect x="224" y="305" width="8" height="35" fill="#a5d6a7" stroke="#388e3c" stroke-width="1.5"/>
+    
+    <!-- Label -->
+    <rect x="200" y="350" width="160" height="80" fill="#ffffff" stroke="#388e3c" stroke-width="1.5" rx="6"/>
+    <text x="280" y="370" text-anchor="middle" class="label-bold">COLUMNAR</text>
+    <text x="280" y="387" text-anchor="middle" class="label-text">Column-Oriented</text>
+    <text x="280" y="400" text-anchor="middle" class="label-text">Analytics, BI, OLAP</text>
+    <text x="280" y="413" text-anchor="middle" class="label-text">ClickHouse, BigQuery</text>
+  </g>
+
+  <!-- Wide-Column -->
+  <g>
+    <!-- Icon: Grid -->
+    <rect x="425" y="300" width="30" height="30" fill="#ffccbc" stroke="#d84315" stroke-width="1.5"/>
+    <line x1="440" y1="300" x2="440" y2="330" stroke="#d84315" stroke-width="1"/>
+    <line x1="425" y1="315" x2="455" y2="315" stroke="#d84315" stroke-width="1"/>
+    
+    <!-- Label -->
+    <rect x="410" y="350" width="160" height="80" fill="#ffffff" stroke="#d84315" stroke-width="1.5" rx="6"/>
+    <text x="490" y="370" text-anchor="middle" class="label-bold">WIDE-COLUMN</text>
+    <text x="490" y="387" text-anchor="middle" class="label-text">Flexible Columns</text>
+    <text x="490" y="400" text-anchor="middle" class="label-text">Distributed, High Write</text>
+    <text x="490" y="413" text-anchor="middle" class="label-text">Cassandra, HBase</text>
+  </g>
+
+  <!-- In-Memory -->
+  <g>
+    <!-- Icon: RAM Chip -->
+    <rect x="630" y="305" width="30" height="30" fill="#b2dfdb" stroke="#00695c" stroke-width="1.5" rx="2"/>
+    <circle cx="635" cy="313" r="2" fill="#00695c"/>
+    <circle cx="653" cy="313" r="2" fill="#00695c"/>
+    <circle cx="645" cy="313" r="2" fill="#00695c"/>
+    <circle cx="635" cy="321" r="2" fill="#00695c"/>
+    <circle cx="653" cy="321" r="2" fill="#00695c"/>
+    <circle cx="645" cy="321" r="2" fill="#00695c"/>
+    
+    <!-- Label -->
+    <rect x="620" y="350" width="160" height="80" fill="#ffffff" stroke="#00695c" stroke-width="1.5" rx="6"/>
+    <text x="700" y="370" text-anchor="middle" class="label-bold">IN-MEMORY</text>
+    <text x="700" y="387" text-anchor="middle" class="label-text">RAM Storage</text>
+    <text x="700" y="400" text-anchor="middle" class="label-text">Ultra-Low Latency</text>
+    <text x="700" y="413" text-anchor="middle" class="label-text">Redis, Memcached</text>
+  </g>
+
+  <!-- Search -->
+  <g>
+    <!-- Icon: Search Index -->
+    <circle cx="840" cy="318" r="10" fill="none" stroke="#5e35b1" stroke-width="2"/>
+    <line x1="850" y1="325" x2="870" y2="335" stroke="#5e35b1" stroke-width="2"/>
+    
+    <!-- Label -->
+    <rect x="820" y="350" width="160" height="80" fill="#ffffff" stroke="#5e35b1" stroke-width="1.5" rx="6"/>
+    <text x="900" y="370" text-anchor="middle" class="label-bold">SEARCH</text>
+    <text x="900" y="387" text-anchor="middle" class="label-text">Full-Text Index</text>
+    <text x="900" y="400" text-anchor="middle" class="label-text">Fast Text Search</text>
+    <text x="900" y="413" text-anchor="middle" class="label-text">Elasticsearch, Solr</text>
+  </g>
+
+  <!-- Bottom section: Characteristics -->
+  <g>
+    <text x="320" y="490" font-size="12" font-weight="bold" fill="#1a237e">Key Dimensions:</text>
+    
+    <text x="320" y="515" font-size="11" fill="#424242">
+      <tspan>• Data Model: Structured (SQL) vs Flexible (NoSQL) vs Specialized</tspan>
+    </text>
+    
+    <text x="320" y="540" font-size="11" fill="#424242">
+      <tspan>• Consistency: ACID (strict) vs BASE (eventual)</tspan>
+    </text>
+    
+    <text x="320" y="565" font-size="11" fill="#424242">
+      <tspan>• Scalability: Vertical (single server) vs Horizontal (distributed)</tspan>
+    </text>
+    
+    <text x="720" y="515" font-size="11" fill="#424242">
+      <tspan>• Query Type: Transactional (OLTP) vs Analytical (OLAP)</tspan>
+    </text>
+  </g>
+
+</svg>

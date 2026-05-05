@@ -1,10 +1,22 @@
-# Lesson 1.2: Different Types of Databases
+---
+title: "Types of Databases Explained: Relational, NoSQL, Key-Value and More"
+description: "Learn the main database types — relational, key-value, document, wide-column, graph, time-series, and columnar — with use cases, differences, and real-world examples."
+keywords: ["types of databases", "relational vs NoSQL", "database types comparison", "relational database", "NoSQL database types", "how to choose a database"]
+---
 
-In the previous lesson, we introduced the general idea of a database and a DBMS. In practice, however, not all databases are built the same way. Different database types are optimized for different kinds of data, query patterns, scalability requirements, and consistency needs.
+_Lesson 1.2 · Reading time: ~15 min_
 
-In this lesson, we will look at the most common database types, their key differences, typical use cases, and real-world examples. We will also take a closer look at **relational databases**, because they will remain our main focus throughout this course.
+There are many **types of databases**, each optimized for a specific kind of data, query pattern, or scalability requirement. In this lesson you'll learn the main database models — relational, key-value, document, wide-column, graph, time-series, and columnar — with their key differences, typical use cases, and examples of real systems.
 
-## Why Are There Different Database Types?
+# Types of Databases: Relational, NoSQL and Beyond
+
+In the previous lesson, we introduced the general idea of a database and a DBMS. In practice, not all databases are built the same way. Different database types are optimized for different kinds of data, query patterns, scalability requirements, and consistency needs.
+
+We will also take a closer look at **relational databases**, because they will remain our main focus throughout this course.
+
+<img src="/images/lessons/lesson1_2-database-types.svg" alt="Diagram showing the main database types, including relational, key-value, document, graph, time-series, columnar, wide-column, in-memory, and search databases" width="100%">
+
+## Why Are There Different Types of Databases?
 
 No single database design is perfect for every application.
 
@@ -17,7 +29,7 @@ For example:
 
 Because different systems solve different problems, several database models have emerged over time.
 
-## Main Database Types at a Glance
+## Main Types of Databases: Comparison Table
 
 Here is a quick comparison before we examine each type in more detail:
 
@@ -286,7 +298,9 @@ Some in-memory databases are used only as temporary caches, while others can als
 * **Memcached**
 * **SAP HANA**
 
-## Choosing the Right Database Type
+---
+
+## How to Choose the Right Database Type
 
 When selecting a database, ask questions like these:
 
@@ -307,7 +321,7 @@ In many real systems, organizations use more than one database type. For example
 
 This is often called **polyglot persistence**.
 
-## Key Differences Summary
+## Summary: Key Differences Between Database Types
 
 The main differences between database types usually involve:
 
@@ -317,7 +331,9 @@ The main differences between database types usually involve:
 * **consistency model** — strong transactional guarantees versus scalability-focused trade-offs
 * **performance profile** — optimized for transactions, analytics, relationships, or ultra-fast access
 
-## Key Takeaways from this Lesson
+---
+
+**Key Takeaways:**
 
 * Different database types exist because different applications have different technical and business requirements.
 * **Relational databases** are best known for structured schemas, SQL, relationships, integrity constraints, and ACID transactions.
@@ -327,6 +343,19 @@ The main differences between database types usually involve:
 * **Columnar analytical databases** are optimized for reporting and large-scale analytics.
 * **Graph databases** are ideal for relationship-heavy data.
 * **Time-series databases** specialize in time-based metrics and events.
-* Many modern systems use multiple database types together.
+* Many modern systems use multiple database types together (**polyglot persistence**).
 
-In the next lesson, we will go deeper into the internal structure of **relational databases**, including tables, rows, columns, keys, and integrity.
+---
+
+## Frequently Asked Questions
+
+### What is the difference between relational and NoSQL databases?
+**Relational databases** use a fixed table-based schema, enforce ACID transactions, and are queried with SQL. **NoSQL databases** is an umbrella term covering key-value, document, wide-column, and graph models — they trade some consistency guarantees for schema flexibility or horizontal scalability. Neither is universally better; the right choice depends on your data and workload.
+
+### When should I use a document database instead of a relational database?
+Use a **document database** when your data has a naturally nested, variable structure (e.g. product catalogs with different attributes per product) and you rarely need to join across collections. Use a **relational database** when data is structured, entities are interrelated, and you need reliable transactions and complex multi-table queries.
+
+### Can a single application use multiple database types?
+Yes — this is called **polyglot persistence**. It is common in production systems: for example, PostgreSQL for transactional data, Redis for caching, and ClickHouse for analytics. Each database type is used where it performs best.
+
+→ [Lesson 1.3: Relational Database Structure — Tables, Rows, Columns and Keys](lesson1_3.en.md)
