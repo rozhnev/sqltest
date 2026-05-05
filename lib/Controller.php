@@ -958,7 +958,33 @@ class Controller
         }
     }
 
-    public function lesson(array $params): void 
+    private function parseFrontmatter(string &$content): array
+    {
+        $meta = [];
+        if (!preg_match('/^\s*---\r?\n(.*?)\r?\n---\r?\n/s', $content, $matches)) {
+            return $meta;
+        }
+        $content = substr($content, strlen($matches[0]));
+        foreach (explode("\n", $matches[1]) as $line) {
+            if (!preg_match('/^(\w+)\s*:\s*(.+)$/', trim($line), $kv)) {
+                continue;
+            }
+            $key = $kv[1];
+            $val = trim($kv[2], '"\'');
+            if (str_starts_with($val, '[')) {
+                preg_match_all('/"([^"]+)"|\'([^\']+)\'|([^,\[\]\s]+)/', $val, $items);
+                $meta[$key] = array_values(array_filter(array_map(
+                    fn($a, $b, $c) => $a ?: $b ?: $c,
+                    $items[1], $items[2], $items[3]
+                )));
+            } else {
+                $meta[$key] = $val;
+            }
+        }
+        return $meta;
+    }
+
+    public function lesson(array $params): void
     {
         $slug = $params['lesson'] ?? 'introduction-to-databases';
         try {
@@ -971,17 +997,22 @@ class Controller
         }
         $parser = new \cebe\markdown\GithubMarkdown();
         $lessonData = $lesson->get($this->lang);
+        $meta = $this->parseFrontmatter($lessonData['content']);
         $lessonData['content'] = $parser->parse($lessonData['content']);
+
+        $pageTitle       = $meta['title']       ?? (Localizer::translateString('lessons_page_title') . ' ' . $lessonData['title']);
+        $pageDescription = $meta['description'] ?? $lessonData['description'];
+        $pageKeywords    = isset($meta['keywords']) ? implode(', ', (array) $meta['keywords']) : null;
 
         $this->assignVariables([
             'Action'            => 'lesson',
-            'PageTitle'         => Localizer::translateString('lessons_page_title') . ' ' .$lessonData['title'],
-            'PageDescription'   => Localizer::translateString('lessons_page_description'),
+            'PageTitle'         => $pageTitle,
             'SitePromo'         => Localizer::translateString('site_promo'),
-            'SiteDescription'   => $lessonData['description'],
-            'PageDescription'   => $lessonData['description'],
-            'PageOGTitle'       => Localizer::translateString('lessons_og_title'),
-            'PageOGDescription' => $lessonData['description'],
+            'SiteDescription'   => $pageDescription,
+            'PageDescription'   => $pageDescription,
+            'PageOGTitle'       => $pageTitle,
+            'PageOGDescription' => $pageDescription,
+            'PageKeywords'      => $pageKeywords,
             'Lessons'           => $lesson->getList($this->lang),
             'Lesson'            => $lesson,
             'LessonData'        => $lessonData
