@@ -199,6 +199,9 @@ class Controller
             'QuestionsCount'        => $questionnire->getQuestionsCount(),
             'Favorites'             => $this->user->getFavorites($this->lang)
         ]);
+        
+        $this->setHreflangLinks($params['path'], $this->lang);
+
         $this->engine->display($this->isMobileView() ? "m.welcome.tpl" : "welcome.tpl");
     }
     /**
