@@ -318,7 +318,20 @@ about: ["Entity 1", "Entity 2", "Entity 3"]
 ```
 
 - `title` — используется в `<title>` страницы; должен содержать главный поисковый запрос темы.
-- `description` — используется в `<meta description>`; должен начинаться с прямого ответа, а не с маркетинговой фразы.
+- `description` — **обязательное поле**. Используется в `<meta description>` и в `LearningResource.description` schema.org. Правила написания:
+  - длина: **120–155 символов** (оптимально для отображения в выдаче);
+  - начинается с **прямого ответа** на вопрос темы, а не с маркетинговой фразы;
+  - содержит 1–2 ключевых слова темы урока;
+  - отвечает на вопрос «что я узнаю и зачем»;
+  - не повторяет дословно заголовок `title`;
+  - не начинается с «В этом уроке...» / «In this lesson...» — описание должно сразу давать ответ.
+
+  Плохо:
+  > "In this lesson you will learn what a database is."
+
+  Хорошо:
+  > "A database is an organized collection of structured data managed by a DBMS. Learn types of databases, core DBMS functions, and why SQL is the universal data language."
+
 - `keywords` — вспомогательный массив для внутренней разметки; не влияет напрямую на Google, но помогает внутренней системе тегирования курса.
 - `teaches` — список учебных результатов для `LearningResource.teaches` в schema.org (что именно изучит читатель).
 - `about` — список ключевых сущностей темы для `LearningResource.about` в schema.org (будет преобразован в массив `Thing`).
