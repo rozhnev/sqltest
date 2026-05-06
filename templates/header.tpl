@@ -66,5 +66,8 @@
                     githubClientId: '{$GITHUB_CLIENT_ID|escape:"javascript"}'
                 });
             </script>
+        {if $SchemaJsonLd}
+            <script type="application/ld+json">{$SchemaJsonLd nofilter}</script>
+        {/if}
         </head>
 

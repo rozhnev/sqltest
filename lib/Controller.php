@@ -96,6 +96,13 @@ class Controller
         ]);
     }
 
+    private function assignSchemaJsonLd(array $schema): void
+    {
+        $this->assignVariables([
+            'SchemaJsonLd' => json_encode($schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT)
+        ]);
+    }
+
     public function setHreflangLinks(string $path, string $currentLang): void
     {
         $langCodes   = array_keys($this->languages);
@@ -449,6 +456,19 @@ class Controller
             'Favorites'             => $this->user->getFavorites($this->lang)
         ]);
         $this->setHreflangLinks($params['path'], $this->lang);
+        $schemaType = $questionData['have_answers'] ? 'Quiz' : 'LearningResource';
+        
+        $this->assignSchemaJsonLd([
+            '@context'            => 'https://schema.org',
+            '@type'               => $schemaType,
+            'name'                => $questionData['title'],
+            'description'         => sprintf("%s: «%s»", $pageDescription, $questionData['title']),
+            'url'                 => "{$this->host}/{$this->lang}/question/{$questionData['category_sef']}/{$questionData['question_sef']}",
+            'inLanguage'          => $this->lang,
+            'learningResourceType'=> $questionData['have_answers'] ? 'Quiz' : 'Exercise',
+            'about'               => ['@type' => 'Thing', 'name' => strtoupper((string)($questionData['dbms'] ?? 'SQL'))],
+            'provider'            => ['@type' => 'Organization', 'name' => 'SQLtest.online', 'url' => 'https://sqltest.online'],
+        ]);
         $this->engine->display($this->isMobileView() ? "m.index.tpl" : "index.tpl");
     }
 
@@ -1038,6 +1058,18 @@ class Controller
             'LessonData'        => $lessonData
         ]);
         $this->setHreflangLinks($params['path'], $this->lang);
+
+        $this->assignSchemaJsonLd([
+            '@context'            => 'https://schema.org',
+            '@type'               => 'LearningResource',
+            'name'                => $pageTitle,
+            'description'         => $pageDescription,
+            'url'                 => "{$this->host}/{$this->lang}/lesson/{$lesson->moduleSlug()}/{$lesson->slug()}",
+            'inLanguage'          => $this->lang,
+            'learningResourceType'=> 'Lesson',
+            'about'               => ['@type' => 'Thing', 'name' => 'SQL'],
+            'provider'            => ['@type' => 'Organization', 'name' => 'SQLtest.online', 'url' => 'https://sqltest.online'],
+        ]);
         $this->engine->display($this->isMobileView() ? "m.lesson.tpl" : "lesson.tpl");
     }
 
