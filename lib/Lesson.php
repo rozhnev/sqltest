@@ -64,6 +64,7 @@ class Lesson
             ) select 
                 lessons_localization.title,
                 lessons_localization.content,
+                lessons_localization.updated_at,
                 lessons.* 
             from lessons 
             join lessons_localization on lessons_localization.lesson_id = lessons.id AND lessons_localization.language = :lang

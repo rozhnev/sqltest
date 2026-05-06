@@ -1027,7 +1027,7 @@ class Controller
         $lessonData['content'] = $parser->parse($lessonData['content']);
 
         $pageTitle       = $meta['title']       ?? (Localizer::translateString('lessons_page_title') . ' ' . $lessonData['title']);
-        $pageDescription = $meta['description'] ?? $lessonData['description'];
+        $pageDescription = $meta['description'] ?? '';
         $pageKeywords    = isset($meta['keywords']) ? implode(', ', (array) $meta['keywords']) : null;
         $schemaTeaches   = $meta['teaches'];
         $schemaAbout     = $meta['about'];
@@ -1051,7 +1051,10 @@ class Controller
         ]);
         $this->setHreflangLinks($params['path'], $this->lang);
 
-        $this->assignSchemaJsonLd([
+        $updatedAt      = $lessonData['updated_at'] ?? null;
+        $dateModified   = $updatedAt ? (new DateTimeImmutable($updatedAt))->format(DateTimeInterface::ATOM) : null;
+
+        $schema = [
             '@context'            => 'https://schema.org',
             '@type'               => 'LearningResource',
             'name'                => $pageTitle,
@@ -1069,7 +1072,12 @@ class Controller
             ],
             'about'               => $schemaAboutEntities,
             'provider'            => ['@type' => 'Organization', 'name' => 'SQLtest.online', 'url' => 'https://sqltest.online'],
-        ]);
+        ];
+        if ($dateModified) {
+            $schema['dateModified']   = $dateModified;
+            $schema['datePublished']  = $dateModified; // fallback until created_at is tracked separately
+        }
+        $this->assignSchemaJsonLd($schema);
         $this->engine->display($this->isMobileView() ? "m.lesson.tpl" : "lesson.tpl");
     }
 
