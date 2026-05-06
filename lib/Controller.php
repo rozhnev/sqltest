@@ -427,6 +427,10 @@ class Controller
         }
 
         $this->registerModifiers(['floor', 'in_array']);
+
+        $dbmsLabel     = $questionData['dbms'] ?? 'SQL';
+        $categoryTitle = $questionData['category_title'] ?? $params['questionCategory'];
+
         if (isset($questionData['answers'])) {
             $pageTitle = Localizer::translateString('page_question_title');
             $pageDescription = Localizer::translateString('page_question_description');
@@ -438,10 +442,11 @@ class Controller
             $sitePromo = Localizer::translateString('site_promo');
             $siteDescription = Localizer::translateString('site_description_question_task');
         }
+        $richDescription = sprintf("%s: «%s» — %s. %s.", $pageDescription, $questionData['title'], $categoryTitle, $dbmsLabel);
         $this->assignVariables([
             'PageTitle'             => sprintf("%s: %s", $pageTitle, $questionData['title']),
             'PageOGTitle'           => sprintf("%s: %s", $pageTitle, $questionData['title']),
-            'PageDescription'       => sprintf("%s: «%s»", $pageDescription, $questionData['title']),
+            'PageDescription'       => $richDescription,
             'SitePromo'             => $sitePromo,
             'SiteDescription'       => $siteDescription,
             'QuestionID'            => $questionID,
@@ -465,11 +470,11 @@ class Controller
             '@context'            => 'https://schema.org',
             '@type'               => $schemaType,
             'name'                => $questionData['title'],
-            'description'         => sprintf("%s: «%s»", $pageDescription, $questionData['title']),
+            'description'         => $richDescription,
             'url'                 => "{$this->host}/{$this->lang}/question/{$questionData['category_sef']}/{$questionData['question_sef']}",
             'inLanguage'          => $this->lang,
             'learningResourceType'=> $questionData['have_answers'] ? 'Quiz' : 'Exercise',
-            'about'               => ['@type' => 'Thing', 'name' => strtoupper((string)($questionData['dbms'] ?? 'SQL'))],
+            'about'               => ['@type' => 'Thing', 'name' => $dbmsLabel],
             'provider'            => ['@type' => 'Organization', 'name' => 'SQLtest.online', 'url' => 'https://sqltest.online'],
         ]);
         $this->engine->display($this->isMobileView() ? "m.index.tpl" : "index.tpl");
