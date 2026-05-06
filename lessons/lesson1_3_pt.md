@@ -1,10 +1,22 @@
-# Lição 1.3: Conceitos de Bases de Dados Relacionais
+---
+title: "Conceitos de Bases de Dados Relacionais: Tabelas, Chaves e ACID"
+description: "Aprenda os componentes essenciais das bases de dados relacionais — tabelas, colunas, linhas, chaves primárias, estrangeiras e únicas, e propriedades ACID — com exemplos práticos."
+keywords: ["conceitos bases de dados relacionais", "chave primária", "chave estrangeira", "propriedades ACID", "tabelas base de dados", "SQL base relacional"]
+teaches: ["O que são tabelas, colunas e linhas numa base de dados relacional", "Como a chave primária identifica cada linha de forma única", "Como as chaves estrangeiras ligam tabelas", "O que garante uma chave única", "O que são restrições SQL e como NOT NULL e CHECK funcionam", "O que as propriedades ACID asseguram nas transações"]
+about: ["Base de dados relacional", "Chave primária", "Chave estrangeira", "Restrição SQL", "ACID", "Transação de base de dados", "SQL"]
+---
 
-Na lição anterior, introduzimos o conceito de bases de dados. Agora, vamos aprofundar os componentes centrais das **Bases de Dados Relacionais**, que são fundamentais para compreender como os dados são organizados e acedidos utilizando SQL.
+_Lição 1.3 · Tempo de leitura: ~10 min_
 
-<img src="/images/lessons/lesson1_2-rdb.jpg" alt="DBMS overview" width="100%">
+Uma **base de dados relacional** organiza os dados em tabelas ligadas por chaves. Nesta lição, aprenderá os componentes fundamentais — tabelas, colunas, linhas, chaves primárias, estrangeiras e únicas — e descobrirá como o modelo ACID garante a fiabilidade das transações mesmo em caso de falha ou acesso concorrente.
 
-##   Tabelas, Colunas e Linhas
+# Conceitos de Bases de Dados Relacionais: Tabelas, Chaves e ACID
+
+Na lição anterior, introduzimos o conceito de bases de dados e analisámos os principais tipos de BDs. Agora, vamos aprofundar os componentes centrais das **bases de dados relacionais**, que são fundamentais para compreender como os dados são organizados e acedidos utilizando SQL.
+
+<img src="/images/lessons/lesson1_2-rdb.jpg" alt="Diagrama de uma base de dados relacional mostrando duas tabelas ligadas por uma chave primária e uma chave estrangeira" width="100%">
+
+## O Que São Tabelas, Colunas e Linhas?
 
 As bases de dados relacionais organizam os dados em estruturas chamadas **tabelas**. Pense numa tabela como uma folha de cálculo:
 
@@ -26,7 +38,7 @@ Vamos visualizar uma tabela "Clientes" simples:
 * "CustomerID", "FirstName", "LastName" e "Email" são as **colunas**.
 * Cada linha (por exemplo, "1 | John | Doe | john.doe@example.com") é uma **linha**.
 
-##   Chaves: Garantindo a Integridade dos Dados
+## O Que São Chaves de Base de Dados? Primária, Estrangeira e Única
 
 As **chaves** são um conceito crítico nas bases de dados relacionais. São utilizadas para estabelecer relações entre tabelas e impor a integridade dos dados. Aqui estão os principais tipos de chaves:
 
@@ -52,7 +64,32 @@ As **chaves** são um conceito crítico nas bases de dados relacionais. São uti
     * As colunas de chave única *podem* permitir valores NULL (embora as implementações variem ligeiramente).
 * Na nossa tabela "Clientes", "Email" pode ser uma chave única, garantindo que cada cliente tem um endereço de email único.
 
-##   ACID: Transações Fiáveis em Bases de Dados
+## O Que São Restrições SQL?
+
+Uma **restrição (constraint)** é uma regra aplicada a uma coluna ou tabela que o motor da base de dados aplica automaticamente. As chaves (primária, estrangeira, única) são um tipo de restrição. Existem outras restrições importantes que usará no dia a dia em SQL:
+
+| Restrição | Objetivo |
+| :--------- | :------- |
+| `NOT NULL` | A coluna deve ter sempre um valor; NULL não é permitido. |
+| `UNIQUE` | Todos os valores na coluna devem ser distintos. |
+| `PRIMARY KEY` | Combina NOT NULL + UNIQUE; identifica cada linha de forma única. |
+| `FOREIGN KEY` | O valor deve corresponder a um valor existente noutra tabela. |
+| `CHECK` | O valor deve satisfazer uma condição, p. ex. `age >= 0`. |
+
+Por exemplo, uma tabela `customers` pode definir várias restrições em simultneo:
+
+```sql
+CREATE TABLE customers (
+    customer_id  SERIAL        PRIMARY KEY,
+    email        VARCHAR(255)  NOT NULL UNIQUE,
+    age          INTEGER       CHECK (age >= 0),
+    country      VARCHAR(100)  DEFAULT 'Unknown'
+);
+```
+
+O motor da base de dados rejeitará automaticamente qualquer `INSERT` ou `UPDATE` que viole estas regras, mantendo os dados consistentes sem lógica adicional na aplicação.
+
+## O Que É ACID? Segurança de Transações em Bases Relacionais
 
 Ao trabalhar com bases de dados relacionais, outro conceito fundamental é o modelo **ACID**. O ACID define as propriedades que tornam as transações de base de dados seguras e fiáveis.
 
@@ -72,13 +109,41 @@ Ambos os passos devem ser concluídos em conjunto, ou então nenhum deve ser apl
 
 Estas propriedades são essenciais em sistemas reais como banca, comércio eletrónico e gestão de inventário, onde atualizações incorretas ou parciais podem causar problemas graves.
 
-##   Importância Destes Conceitos
+---
 
-Compreender tabelas, colunas, linhas e chaves é fundamental para trabalhar com bases de dados relacionais.
+**Principais conclusões desta lição:**
 
-* Definem como os dados são estruturados e organizados.
-* Permitem-nos consultar e recuperar informações específicas de forma eficiente.
-* As chaves garantem a integridade dos dados e estabelecem relações entre diferentes conjuntos de dados.
-* As propriedades ACID garantem que as alterações aos dados permanecem corretas e fiáveis, mesmo com falhas ou acesso concorrente.
+* Uma base de dados relacional armazena dados em **tabelas** compostas por colunas e linhas.
+* Uma **chave primária** identifica cada linha de forma única; deve ser única e não nula.
+* Uma **chave estrangeira** liga uma linha de uma tabela a uma linha de outra, garantindo a integridade referencial.
+* Uma **chave única** garante a unicidade dos valores numa coluna; uma tabela pode ter várias chaves únicas.
+* As **restrições** (`NOT NULL`, `CHECK`, `DEFAULT`) são aplicadas automaticamente pelo motor da base de dados.
+* O modelo **ACID** (Atomicidade, Consistência, Isolamento, Durabilidade) assegura a fiabilidade das transações mesmo em caso de falha ou acesso concorrente.
 
-Nas lições seguintes, vamos construir sobre estes conceitos à medida que aprendemos a usar SQL para interagir com bases de dados relacionais.
+Na próxima lição, vamos analisar os tipos de dados básicos usados nas bases de dados relacionais e como escolher o tipo certo para cada coluna.
+
+---
+
+## Perguntas Frequentes
+
+### Qual é a diferença entre uma chave primária e uma chave única?
+Uma **chave primária** identifica cada linha de forma única e não pode ser NULL. Uma tabela só pode ter uma chave primária. Uma **chave única** também garante a unicidade, mas pode permitir valores NULL, e uma tabela pode ter várias chaves únicas. Use a chave primária como identificador principal da linha; use chaves únicas para impor unicidade noutras colunas, como `email`.
+
+### Uma chave estrangeira pode referenciar uma chave única em vez de uma chave primária?
+Sim. Uma chave estrangeira pode referenciar qualquer coluna (ou conjunto de colunas) com uma restrição de unicidade, não apenas a chave primária. No entanto, referenciar a chave primária é a prática mais comum e recomendada.
+
+### O que acontece se uma transação ACID falhar a meio?
+**A atomicidade** garante que toda a transação é revertida (rollback), deixando a base de dados no estado em que se encontrava antes do início da transação. Nenhuma alteração parcial é guardada.
+
+## Questões de Entrevista
+
+### Como explicaria uma chave primária numa entrevista?
+Uma **chave primária** é uma coluna ou combinação de colunas que identifica de forma única cada linha numa tabela. Deve ser única, não pode conter valores NULL e só pode existir uma por tabela. Serve como ponto de ancoragem para referências de chaves estrangeiras de outras tabelas.
+
+### O que é integridade referencial e como as chaves estrangeiras a garantem?
+**Integridade referencial** significa que o valor de uma chave estrangeira numa tabela deve sempre corresponder a um valor de chave primária existente na tabela referenciada, ou ser NULL. O motor da base de dados aplica isto automaticamente — tentativas de inserir uma chave estrangeira órfã ou eliminar uma linha referenciada serão rejeitadas, a menos que uma regra de cascata esteja definida.
+
+### O que significa ACID e por que é importante?
+**ACID** significa Atomicidade, Consistência, Isolamento e Durabilidade. Define as garantias que tornam as transações fiáveis. Sem ACID, escritas concorrentes poderiam corromper dados, falhas parciais deixariam a base num estado inválido e alterações confirmadas poderiam perder-se após uma falha. É por isso que as bases de dados relacionais são utilizadas em sistemas financeiros, médicos e outras aplicações críticas.
+
+→ [Lição 1.4: Tipos de Dados Básicos](/pt/lesson/getting-started/basic-data-types)

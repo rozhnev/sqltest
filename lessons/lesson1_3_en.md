@@ -1,10 +1,22 @@
-# Lesson 1.3: Relational Database Concepts
+---
+title: "Relational Database Concepts: Tables, Keys, and ACID"
+description: "Learn the core building blocks of relational databases — tables, columns, rows, primary and foreign keys, and ACID transaction properties — with practical examples."
+keywords: ["relational database concepts", "primary key", "foreign key", "ACID properties", "database tables", "SQL relational database"]
+teaches: ["What tables, columns, and rows are in a relational database", "How primary keys uniquely identify rows", "How foreign keys link tables together", "What unique keys enforce", "What SQL constraints are and how NOT NULL and CHECK work", "What ACID properties guarantee in transactions"]
+about: ["Relational database", "Primary key", "Foreign key", "SQL constraint", "ACID", "Database transaction", "SQL"]
+---
 
-In the previous lessons, we introduced the concept of databases and looked at the main database types. Now, we'll dive deeper into the core components of **Relational Databases**, which are fundamental to understanding how data is organized and accessed using SQL.
+_Lesson 1.3 · Reading time: ~10 min_
 
-<img src="/images/lessons/lesson1_2-rdb.jpg" alt="DBMS overview" width="100%">
+A **relational database** organizes data into tables connected by keys. In this lesson you will learn the core building blocks — tables, columns, rows, primary keys, foreign keys, unique keys, and constraints — and discover how the ACID model keeps transactions safe and reliable even under concurrent access or system failure.
 
-##   Tables, Columns, and Rows
+# Relational Database Concepts: Tables, Keys, and ACID
+
+In the previous lessons, we introduced the concept of databases and looked at the main database types. Now we'll dive deeper into the core components of **relational databases**, which are fundamental to understanding how data is organized and accessed using SQL.
+
+<img src="/images/lessons/lesson1_2-rdb.jpg" alt="Diagram showing a relational database structure with two tables linked by a primary key and foreign key reference" width="100%">
+
+## What Are Tables, Columns, and Rows?
 
 Relational databases organize data into structures called **tables**. Think of a table as a spreadsheet:
 
@@ -26,7 +38,7 @@ Let's visualize a simple "Customers" table:
 * "CustomerID," "FirstName," "LastName," and "Email" are the **columns**.
 * Each line (e.g., "1 | John | Doe | john.doe@example.com") is a **row**.
 
-##   Keys: Ensuring Data Integrity
+## What Are Database Keys? Primary, Foreign, and Unique
 
 **Keys** are a critical concept in relational databases. They are used to establish relationships between tables and enforce data integrity. Here are the main types of keys:
 
@@ -52,7 +64,30 @@ Let's visualize a simple "Customers" table:
     * Unique key columns *can* allow NULL values (though implementations vary slightly).
 * In our "Customers" table, "Email" could be a unique key, ensuring that each customer has a unique email address.
 
-##   ACID: Reliable Transactions in Databases
+## What Are SQL Constraints?
+
+A **constraint** is a rule applied to a column or table that the database engine enforces automatically. Keys (primary, foreign, unique) are a type of constraint. There are several other important constraints you will use in everyday SQL:
+
+| Constraint | Purpose |
+| :--------- | :------ |
+| `NOT NULL` | The column must always have a value; NULL is not allowed. |
+| `UNIQUE` | All values in the column must be distinct across rows. |
+| `PRIMARY KEY` | Combines NOT NULL + UNIQUE; uniquely identifies each row. |
+| `FOREIGN KEY` | Value must match an existing value in another table's column. |
+| `CHECK` | Value must satisfy a specified condition, e.g. `age >= 0`. |
+
+For example, a `customers` table might define several constraints at once:
+
+```sql
+CREATE TABLE customers (
+    customer_id  SERIAL        PRIMARY KEY,
+    email        VARCHAR(255)  NOT NULL UNIQUE,
+    age          INTEGER       CHECK (age >= 0),
+    country      VARCHAR(100)  DEFAULT 'Unknown'
+);
+```
+
+The database will automatically reject any `INSERT` or `UPDATE` that violates these rules, keeping your data consistent without extra application-level checks. Transaction Safety in Relational Databases
 
 When working with relational databases, another core concept is the **ACID** model. ACID defines the properties that make database transactions safe and reliable.
 
@@ -72,13 +107,41 @@ Both steps must succeed together, or neither should be applied.
 
 These properties are essential in real-world systems such as banking, e-commerce, and inventory management, where incorrect or partial updates can cause serious problems.
 
-##   Importance of These Concepts
+---
 
-Understanding tables, columns, rows, and keys is fundamental to working with relational databases.
+**Key takeaways from this lesson:**
 
-* They define how data is structured and organized.
-* They allow us to query and retrieve specific information efficiently.
-* Keys ensure data integrity and establish relationships between different sets of data.
-* ACID properties ensure that data changes remain correct and reliable, even under failures or concurrent access.
+* A relational database stores data in **tables** made up of columns and rows.
+* A **primary key** uniquely identifies each row; it must be unique and non-null.
+* A **foreign key** links a row in one table to a row in another, enforcing referential integrity.
+* A **unique key** guarantees uniqueness in a column but allows multiple unique keys per table.
+* **Constraints** (`NOT NULL`, `CHECK`) enforce data rules at the database level automatically.
+* The **ACID** model (Atomicity, Consistency, Isolation, Durability) ensures that transactions are reliable even under failure or concurrent access.
 
-In the following lessons, we will build upon these concepts as we learn to use SQL to interact with relational databases.
+In the next lesson, we will look at the basic data types used in relational databases and how to choose the right type for each column.
+
+---
+
+## Frequently Asked Questions
+
+### What is the difference between a primary key and a unique key?
+A **primary key** uniquely identifies each row and cannot be NULL. A table can have only one primary key. A **unique key** also enforces uniqueness but can allow NULL values, and a table can have multiple unique keys. Use a primary key as the main row identifier; use unique keys to enforce uniqueness on other columns such as `email`.
+
+### Can a foreign key reference a unique key instead of a primary key?
+Yes. A foreign key can reference any column (or set of columns) that has a unique constraint, not just the primary key. However, referencing the primary key is the most common and recommended practice.
+
+### What happens if an ACID transaction fails halfway through?
+**Atomicity** ensures the entire transaction is rolled back, leaving the database in the state it was before the transaction started. No partial changes are saved.
+
+## Interview Questions
+
+### How would you explain a primary key in an interview?
+A **primary key** is a column or combination of columns that uniquely identifies every row in a table. It must be unique, cannot contain NULL values, and there can be only one per table. It is used as the anchor for foreign key references from other tables.
+
+### What is referential integrity and how do foreign keys enforce it?
+**Referential integrity** means that a foreign key value in one table must always match an existing primary key value in the referenced table, or be NULL. The database engine enforces this automatically — attempts to insert an orphaned foreign key value or delete a referenced row will be rejected unless a cascade rule is defined.
+
+### What does ACID stand for and why does it matter?
+**ACID** stands for Atomicity, Consistency, Isolation, and Durability. It defines the guarantees that make database transactions reliable. Without ACID, concurrent writes could corrupt data, partial failures could leave the database in an invalid state, and committed changes could be lost after a crash. ACID is why relational databases are trusted for financial, medical, and other critical systems.
+
+→ [Lesson 1.4: Basic Data Types](/en/lesson/getting-started/basic-data-types)
