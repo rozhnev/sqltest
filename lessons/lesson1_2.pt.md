@@ -2,6 +2,8 @@
 title: "Tipos de Bases de Dados: Relacional, NoSQL, Chave-Valor e Mais"
 description: "Conheça os principais tipos de bases de dados — relacionais, chave-valor, documentais, grafo, séries temporais e colunares — com diferenças, casos de uso e exemplos reais."
 keywords: ["tipos de bases de dados", "base de dados relacional vs NoSQL", "comparação tipos de BDs", "base de dados relacional", "tipos NoSQL", "como escolher uma base de dados"]
+teaches: ["Principais tipos de bases de dados e as suas diferenças", "Quando usar bases de dados relacionais vs NoSQL", "Modelos chave-valor, documental, grafo e colunar", "Como as bases de dados relacionais se distinguem de outros tipos", "Como escolher o tipo certo de base de dados para cada tarefa"]
+about: ["Base de dados relacional", "NoSQL", "Chave-valor", "Base de dados documental", "Base de dados grafo", "Séries temporais", "Base de dados colunar"]
 ---
 
 _Lição 1.2 · Tempo de leitura: ~15 min_

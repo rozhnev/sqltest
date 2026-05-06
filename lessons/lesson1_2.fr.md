@@ -2,6 +2,8 @@
 title: "Types de bases de données : relationnelle, NoSQL, clé-valeur et plus"
 description: "Découvrez les principaux types de bases de données — relationnelles, clé-valeur, documentaires, graphes, séries temporelles et colonnaires — avec leurs différences et cas d'usage."
 keywords: ["types de bases de données", "base de données relationnelle vs NoSQL", "comparaison types BDD", "base de données relationnelle", "types NoSQL", "choisir une base de données"]
+teaches: ["Les principaux types de bases de données et leurs différences", "Quand utiliser une BDD relationnelle plutôt que NoSQL", "Les modèles clé-valeur, documentaire, graphe et colonnaire", "Comment les BDD relationnelles se distinguent des autres types", "Comment choisir le bon type de BDD pour une tâche"]
+about: ["Base de données relationnelle", "NoSQL", "Clé-valeur", "Base de données documentaire", "Base de données graphe", "Séries temporelles", "Base de données colonnaire"]
 ---
 
 _Leçon 1.2 · Temps de lecture : ~15 min_

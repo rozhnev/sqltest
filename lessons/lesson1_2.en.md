@@ -2,6 +2,8 @@
 title: "Types of Databases Explained: Relational, NoSQL, Key-Value and More"
 description: "Learn the main database types — relational, key-value, document, wide-column, graph, time-series, and columnar — with use cases, differences, and real-world examples."
 keywords: ["types of databases", "relational vs NoSQL", "database types comparison", "relational database", "NoSQL database types", "how to choose a database"]
+teaches: ["Types of databases and their key differences", "When to use relational vs NoSQL databases", "Key-value, document, graph, and columnar database models", "How relational databases differ from other types", "How to choose the right database for a task"]
+about: ["Relational database", "NoSQL", "Key-value store", "Document database", "Graph database", "Time-series database", "Columnar database"]
 ---
 
 _Lesson 1.2 · Reading time: ~15 min_
