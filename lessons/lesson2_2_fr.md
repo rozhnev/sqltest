@@ -1,12 +1,20 @@
-Cette leçon SQL se concentre sur le filtrage des lignes à l'aide de la clause WHERE. Apprenez à utiliser les opérateurs de comparaison, les filtres de plage avec BETWEEN, la correspondance de liste avec IN et la recherche de motifs avec LIKE. La leçon couvre également la distinction cruciale de la gestion des valeurs NULL avec IS NULL et IS NOT NULL. Maîtrisez les techniques de filtrage des données pour extraire des informations précises et optimiser vos requêtes de base de données pour une analyse efficace.
+---
+title: "Clause SQL WHERE : filtrer les données avec BETWEEN, IN, LIKE et NULL"
+description: "La clause SQL WHERE filtre les lignes par condition. Apprenez les opérateurs de comparaison, BETWEEN, IN, la recherche LIKE et la gestion correcte des valeurs NULL."
+keywords: ["clause SQL WHERE", "filtrer données SQL", "BETWEEN IN LIKE SQL", "IS NULL SQL", "opérateurs de comparaison SQL", "tutoriel WHERE SQL"]
+---
 
-# Leçon 2.2 Filtrage des données avec la clause WHERE
+_Leçon 2.2 · Temps de lecture : ~6 min_
 
-L'instruction `SELECT` seule renvoie toutes les lignes d'une table. Cependant, dans des scénarios réels, vous n'avez généralement besoin que d'un sous-ensemble de données répondant à des critères spécifiques. C'est là qu'intervient la clause `WHERE`.
+La **clause SQL WHERE** filtre les lignes d'une table en évaluant une condition pour chaque enregistrement — seules les lignes où la condition est vraie sont retournées. Dans cette leçon, vous apprendrez les opérateurs de comparaison, `BETWEEN`, `IN`, la recherche de motifs avec `LIKE` et la bonne façon de gérer les valeurs `NULL`.
 
-## Qu'est-ce que la clause WHERE ?
+# Clause SQL WHERE : filtrer les données dans les requêtes SELECT
 
-La clause `WHERE` est utilisée pour filtrer les enregistrements. Elle garantit que seules les lignes satisfaisant à une condition spécifiée sont incluses dans l'ensemble de résultats.
+L'instruction `SELECT` seule renvoie toutes les lignes d'une table. En pratique, vous n'avez généralement besoin que d'un sous-ensemble de données répondant à des critères précis — c'est exactement à cela que sert la clause `WHERE`.
+
+## Qu'est-ce que la clause SQL WHERE ?
+
+La clause `WHERE` filtre les enregistrements avant qu'ils soient inclus dans le résultat. Seules les lignes satisfaisant la condition spécifiée sont retournées.
 
 ### Syntaxe de base
 
@@ -16,13 +24,13 @@ FROM nom_table
 WHERE condition;
 ```
 
-La condition est une expression qui s'évalue à vrai (true), faux (false) ou inconnu (si des valeurs `NULL` sont impliquées). Seules les lignes où la condition s'évalue à **vrai** sont renvoyées.
+La condition est une expression qui s'évalue à vrai (true), faux (false) ou inconnu (si des valeurs `NULL` sont impliquées). Seules les lignes où la condition est **vraie** sont retournées.
 
 ---
 
-## Opérateurs de comparaison
+## Opérateurs de comparaison SQL dans WHERE
 
-SQL propose une variété d'opérateurs pour comparer les valeurs dans la clause `WHERE` :
+SQL propose un ensemble d'opérateurs pour comparer les valeurs dans la clause `WHERE` :
 
 | Opérateur | Description | Exemple |
 | :--- | :--- | :--- |
@@ -33,56 +41,57 @@ SQL propose une variété d'opérateurs pour comparer les valeurs dans la clause
 | `>=` | Supérieur ou égal à | `WHERE replacement_cost >= 20.00` |
 | `<=` | Inférieur ou égal à | `WHERE amount <= 5.00` |
 
-### Exemple (Base de données Sakila)
-
-Pour trouver les films avec un tarif de location (rental rate) de 4,99 $ dans la table `film` :
-
 ```sql
 SELECT title, rental_rate, replacement_cost
 FROM film
 WHERE rental_rate = 4.99;
 ```
 
+*Résultat : tous les films dont le tarif de location est exactement 4,99 $.*
+
 ---
 
-## Opérateurs de filtrage spéciaux
+## Opérateurs SQL BETWEEN, IN et LIKE
 
-SQL inclut des opérateurs puissants pour les plages, les ensembles et la recherche de motifs.
+SQL inclut des opérateurs puissants pour filtrer par plage, par liste et par motif.
 
-### 1. BETWEEN
-Filtre les valeurs dans une certaine plage (inclusive).
+### BETWEEN — filtre par plage
+
+Filtre les valeurs dans un intervalle donné (bornes incluses).
 
 ```sql
--- Trouver les paiements entre 5,00 et 10,00 $
 SELECT payment_id, amount, payment_date
 FROM payment
 WHERE amount BETWEEN 5.00 AND 10.00;
 ```
 
-### 2. IN
-Correspond à n'importe quelle valeur dans une liste spécifiée.
+*Résultat : paiements de 5,00 $ à 10,00 $ inclus.*
+
+### IN — correspondance avec une liste
+
+Vérifie si une valeur appartient à une liste spécifiée. Alternative concise à plusieurs conditions `OR`.
 
 ```sql
--- Trouver les clients de magasins spécifiques
 SELECT first_name, last_name, store_id
 FROM customer
 WHERE store_id IN (1, 2);
 ```
 
-### 3. LIKE
-Recherche un motif spécifié dans une colonne à l'aide de caractères génériques :
-- `%` représente zéro, un ou plusieurs caractères.
-- `_` représente un seul caractère.
+*Résultat : clients appartenant au magasin 1 ou 2.*
 
-### Exemple (Base de données Sakila)
+### LIKE — recherche par motif
+
+Recherche un motif dans une colonne de texte à l'aide de caractères génériques :
+- `%` — zéro, un ou plusieurs caractères quelconques.
+- `_` — exactement un caractère.
 
 ```sql
--- Trouver les films commençant par 'A'
+-- Films dont le titre commence par 'A'
 SELECT title
 FROM film
 WHERE title LIKE 'A%';
 
--- Trouver les films dont la deuxième lettre est 'I'
+-- Films dont la deuxième lettre du titre est 'I'
 SELECT title
 FROM film
 WHERE title LIKE '_I%';
@@ -90,14 +99,12 @@ WHERE title LIKE '_I%';
 
 ---
 
-## Le piège : Filtrage des valeurs NULL
+## Comment filtrer les valeurs NULL en SQL
 
-Comme nous l'avons appris dans la leçon sur les NULL, vous ne pouvez pas utiliser `=` ou `<>` pour vérifier `NULL`. Vous devez utiliser `IS NULL` ou `IS NOT NULL`.
-
-### Exemple (Base de données Sakila)
+Il est impossible d'utiliser `=` ou `<>` pour vérifier `NULL` — ces comparaisons retournent toujours inconnu, jamais vrai. Utilisez `IS NULL` ou `IS NOT NULL`.
 
 ```sql
--- Incorrect
+-- Incorrect : ne renvoie aucune ligne
 -- WHERE return_date = NULL
 
 -- Correct
@@ -106,14 +113,30 @@ FROM rental
 WHERE return_date IS NULL;
 ```
 
+*Résultat : toutes les locations qui n'ont pas encore été retournées.*
+
 ---
 
-**Points clés de cette leçon :**
+**Points clés :**
 
-*   La clause `WHERE` filtre les lignes **avant** qu'elles ne soient renvoyées dans l'ensemble de résultats.
-*   Les valeurs de chaîne (string) et de date doivent être entourées de guillemets simples (ex : `'SMITH'`).
-*   Les valeurs numériques ne nécessitent pas de guillemets.
-*   Utilisez `LIKE` pour la recherche de motifs et `IN` pour la correspondance par rapport à des listes.
-*   **N'utilisez jamais** `=` avec `NULL`; utilisez toujours `IS NULL`.
+* La clause `WHERE` filtre les lignes **avant** qu'elles ne soient retournées dans le résultat.
+* Les chaînes et les dates doivent être entourées de guillemets simples (`'SMITH'`) ; les nombres n'en ont pas besoin.
+* `BETWEEN` est inclusif : `BETWEEN 5 AND 10` inclut 5 et 10.
+* `IN` est une alternative concise à plusieurs conditions `OR`.
+* `LIKE` utilise `%` (séquence quelconque) et `_` (un seul caractère).
+* **N'utilisez jamais** `=` avec `NULL` — utilisez toujours `IS NULL` ou `IS NOT NULL`.
 
-Dans la leçon suivante, nous explorerons comment **combiner plusieurs conditions** pour créer des filtres encore plus puissants.
+---
+
+## Questions fréquentes
+
+### Quelle est la différence entre WHERE et HAVING en SQL ?
+`WHERE` filtre les lignes **avant** le regroupement et l'agrégation. `HAVING` filtre **après** — il travaille sur les résultats de `GROUP BY`. Utilisez `WHERE` pour filtrer des lignes individuelles, `HAVING` pour filtrer des groupes agrégés.
+
+### Peut-on utiliser plusieurs conditions dans WHERE ?
+Oui. Combinez les conditions avec `AND` (les deux doivent être vraies), `OR` (au moins une doit être vraie) ou `NOT` (négation). Utilisez des parenthèses pour contrôler l'ordre d'évaluation.
+
+### Pourquoi `WHERE colonne = NULL` ne retourne-t-il aucun résultat ?
+Parce que `NULL` représente une valeur inconnue — comparer quoi que ce soit à `NULL` avec `=` retourne toujours inconnu, jamais vrai ou faux. SQL exige `IS NULL` ou `IS NOT NULL` pour vérifier l'absence de valeur.
+
+→ [Leçon 2.3 : Combiner plusieurs conditions avec AND, OR et NOT](lesson2_3_fr.md)

@@ -185,4 +185,15 @@ Utilisez une **base documentaire** quand les données ont une structure imbriqu�
 ### Une application peut-elle utiliser plusieurs types de bases de données ?
 Oui — c'est la **persistance polyglotte**. C'est courant en production : PostgreSQL pour les données transactionnelles, Redis pour le cache, ClickHouse pour l'analytique. Chaque type est utilisé là où il excelle.
 
-→ [Leçon 1.3 : Structure d'une base relationnelle — tables, lignes, colonnes et clés](lesson1_3.fr.md)
+## Questions d'entretien
+
+### Quel type de base de données choisiriez-vous pour un cas d'usage donné, et pourquoi ?
+Partez de la charge et des contraintes : structure des données, besoins de cohérence, type de requêtes, objectifs de latence et échelle. Par exemple, choisissez une **base relationnelle** pour des transactions ACID, une **base documentaire** pour des enregistrements JSON flexibles, et une **base de séries temporelles** pour des métriques horodatées.
+
+### Quels sont les avantages et les inconvénients d'un type de base de données par rapport à un autre ?
+Chaque modèle implique des compromis. Les **bases relationnelles** offrent une forte cohérence, les jointures et un écosystème SQL mature, mais les changements de schéma peuvent être plus contraignants à grande échelle. Les modèles **NoSQL** apportent souvent plus de flexibilité ou de scalabilité horizontale, mais peuvent limiter les jointures ou demander une conception plus fine de la cohérence.
+
+### Peut-on utiliser plusieurs types de bases de données dans une même application ?
+Oui. C'est la **persistance polyglotte** : utiliser plusieurs bases, chacune pour la charge qu'elle gère le mieux. Un schéma fréquent est **PostgreSQL** pour les transactions, **Redis** pour le cache et **ClickHouse** (ou un autre système colonnaire) pour l'analytique.
+
+→ [Leçon 1.3 : Concepts des bases relationnelles](/fr/lesson/getting-started/relational-database-concepts)

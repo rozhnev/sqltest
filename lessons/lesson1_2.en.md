@@ -358,4 +358,15 @@ Use a **document database** when your data has a naturally nested, variable stru
 ### Can a single application use multiple database types?
 Yes — this is called **polyglot persistence**. It is common in production systems: for example, PostgreSQL for transactional data, Redis for caching, and ClickHouse for analytics. Each database type is used where it performs best.
 
-→ [Lesson 1.3: Relational Database Structure — Tables, Rows, Columns and Keys](lesson1_3.en.md)
+## Interview Questions
+
+### What database type would you choose for a given use case, and why?
+Start from the workload and constraints: data structure, consistency needs, query patterns, latency targets, and scale. For example, choose a **relational database** for ACID-heavy transactional systems, a **document database** for flexible JSON-like records, and a **time-series database** for timestamped metrics with retention policies.
+
+### What are the pros and cons of one database type compared to another?
+Every model is a trade-off. **Relational databases** provide strong consistency, joins, and mature SQL tooling, but schema changes can be stricter at scale. **NoSQL models** often provide better flexibility or horizontal scaling, but they may limit joins or require careful consistency design.
+
+### Can you use different database types in one application?
+Yes. This is **polyglot persistence**: using multiple databases, each for the workload it handles best. A common pattern is **PostgreSQL** for core transactions, **Redis** for caching, and **ClickHouse** (or another columnar system) for analytics.
+
+→ [Lesson 1.3: Relational Database Concepts](/en/lesson/getting-started/relational-database-concepts)

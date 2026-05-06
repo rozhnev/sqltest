@@ -1,12 +1,20 @@
-This SQL lesson focuses on row filtration using the WHERE clause. Learn how to use comparison operators, range filters with BETWEEN, list matching with IN, and pattern matching with LIKE. The lesson also covers the critical distinction of handling NULL values with IS NULL and IS NOT NULL. Master data filtering techniques to retrieve precise information and optimize your database queries for efficient analysis.
+---
+title: "SQL WHERE Clause: Filter Data with BETWEEN, IN, LIKE and NULL"
+description: "The SQL WHERE clause filters rows by condition. Learn comparison operators, BETWEEN ranges, IN lists, LIKE pattern matching, and how to handle NULL values correctly."
+keywords: ["SQL WHERE clause", "SQL filter rows", "BETWEEN IN LIKE SQL", "SQL IS NULL", "SQL comparison operators", "WHERE clause tutorial"]
+---
 
-# Lesson 2.2 Filtering Data with the WHERE Clause
+_Lesson 2.2 · Reading time: ~6 min_
 
-The `SELECT` statement by itself returns all rows from a table. However, in real-world scenarios, you usually only need a subset of data that meets specific criteria. This is where the `WHERE` clause comes in.
+The **SQL WHERE clause** filters table rows by evaluating a condition for each record — only rows where the condition is true are returned. In this lesson you'll learn comparison operators, `BETWEEN`, `IN`, `LIKE` pattern matching, and the correct way to handle `NULL` values.
 
-## What is the WHERE Clause?
+# SQL WHERE Clause: Filtering Data in SQL Queries
 
-The `WHERE` clause is used to filter records. It ensures that only those rows that satisfy a specified condition are included in the result set.
+The `SELECT` statement by itself returns all rows from a table. In real-world scenarios you usually need only a subset of data that meets specific criteria — and the `WHERE` clause is exactly how you express those criteria.
+
+## What Is the SQL WHERE Clause?
+
+The `WHERE` clause filters records before they are returned in the result set. It ensures that only rows satisfying a specified condition are included.
 
 ### Basic Syntax
 
@@ -16,13 +24,13 @@ FROM table_name
 WHERE condition;
 ```
 
-The condition is an expression that evaluates to true, false, or unknown (if `NULL` values are involves). Only rows where the condition evaluates to **true** are returned.
+The condition is an expression that evaluates to true, false, or unknown (when `NULL` values are involved). Only rows where the condition is **true** are returned.
 
 ---
 
-## Comparison Operators
+## SQL Comparison Operators in WHERE
 
-SQL provides a variety of operators to compare values in the `WHERE` clause:
+SQL provides a set of operators to compare column values in the `WHERE` clause:
 
 | Operator | Description | Example |
 | :--- | :--- | :--- |
@@ -33,56 +41,57 @@ SQL provides a variety of operators to compare values in the `WHERE` clause:
 | `>=` | Greater than or equal to | `WHERE replacement_cost >= 20.00` |
 | `<=` | Less than or equal to | `WHERE amount <= 5.00` |
 
-### Example (Sakila Database)
-
-To find films with a rental rate of $4.99 from the `film` table:
-
 ```sql
 SELECT title, rental_rate, replacement_cost
 FROM film
 WHERE rental_rate = 4.99;
 ```
 
+*Result: all films whose rental rate is exactly $4.99.*
+
 ---
 
-## Special Filtering Operators
+## SQL BETWEEN, IN, and LIKE Operators
 
-SQL includes powerful operators for range, set, and pattern matching.
+SQL includes powerful operators for range, set, and pattern filtering.
 
-### 1. BETWEEN
-Filters values within a certain range (inclusive).
+### BETWEEN — Range Filter
+
+Filters values within a range (inclusive on both ends).
 
 ```sql
--- Find payments between $5.00 and $10.00
 SELECT payment_id, amount, payment_date
 FROM payment
 WHERE amount BETWEEN 5.00 AND 10.00;
 ```
 
-### 2. IN
-Matches any value in a specified list.
+*Result: payments from $5.00 to $10.00 inclusive.*
+
+### IN — List Match
+
+Matches any value from a specified list. Cleaner than multiple `OR` conditions.
 
 ```sql
--- Find customers from specific stores
 SELECT first_name, last_name, store_id
 FROM customer
 WHERE store_id IN (1, 2);
 ```
 
-### 3. LIKE
-Searches for a specified pattern in a column using wildcards:
-- `%` represents zero, one, or multiple characters.
-- `_` represents a single character.
+*Result: customers who belong to store 1 or store 2.*
 
-### Example (Sakila Database)
+### LIKE — Pattern Matching
+
+Searches for a pattern in a text column using wildcards:
+- `%` — zero, one, or more characters.
+- `_` — exactly one character.
 
 ```sql
--- Find films starting with 'A'
+-- Films whose title starts with 'A'
 SELECT title
 FROM film
 WHERE title LIKE 'A%';
 
--- Find films where the second letter is 'I'
+-- Films where the second letter is 'I'
 SELECT title
 FROM film
 WHERE title LIKE '_I%';
@@ -90,14 +99,12 @@ WHERE title LIKE '_I%';
 
 ---
 
-## The Trap: Filtering NULL values
+## How to Filter NULL Values in SQL
 
-As we learned in the lesson on NULLs, you cannot use `=` or `<>` to check for `NULL`. You must use `IS NULL` or `IS NOT NULL`.
-
-### Example (Sakila Database)
+You cannot use `=` or `<>` to check for `NULL` — those comparisons always return unknown, never true. You must use `IS NULL` or `IS NOT NULL`.
 
 ```sql
--- Incorrect
+-- Wrong: this returns no rows
 -- WHERE return_date = NULL
 
 -- Correct
@@ -106,14 +113,30 @@ FROM rental
 WHERE return_date IS NULL;
 ```
 
+*Result: all rentals that have not yet been returned.*
+
 ---
 
-**Key Takeaways from this Lesson:**
+**Key Takeaways:**
 
-*   The `WHERE` clause filters rows **before** they are returned to the result set.
-*   String and date values must be enclosed in single quotes (e.g., `'SMITH'`).
-*   Numeric values do not require quotes.
-*   Use `LIKE` for pattern matching and `IN` for matching against lists.
-*   **Never** use `=` with `NULL`; always use `IS NULL`.
+* The `WHERE` clause filters rows **before** they are returned to the result set.
+* String and date values must be enclosed in single quotes (e.g., `'SMITH'`); numeric values do not require quotes.
+* `BETWEEN` is inclusive — `BETWEEN 5 AND 10` includes 5 and 10.
+* `IN` is a concise alternative to multiple `OR` conditions.
+* Use `LIKE` for pattern matching with `%` (any sequence) and `_` (single character).
+* **Never** use `=` with `NULL` — always use `IS NULL` or `IS NOT NULL`.
 
-In the next lesson, we will explore how to **Combine Multiple Conditions** to create even more powerful filters.
+---
+
+## Frequently Asked Questions
+
+### What is the difference between WHERE and HAVING in SQL?
+`WHERE` filters rows **before** grouping and aggregation. `HAVING` filters **after** — it works on the results of `GROUP BY`. Use `WHERE` to filter individual rows, `HAVING` to filter aggregated groups.
+
+### Can you use multiple conditions in a WHERE clause?
+Yes. Combine conditions with `AND` (both must be true), `OR` (either must be true), or `NOT` (negation). You can also use parentheses to control evaluation order.
+
+### Why does `WHERE column = NULL` return no results?
+Because `NULL` represents an unknown value — comparing anything to `NULL` with `=` always returns unknown, not true or false. SQL requires `IS NULL` or `IS NOT NULL` to check for the absence of a value.
+
+→ [Lesson 2.3: Combining Multiple Conditions with AND, OR, and NOT](lesson2_3_en.md)

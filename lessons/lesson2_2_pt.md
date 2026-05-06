@@ -1,28 +1,36 @@
-Esta lição de SQL foca na filtragem de linhas usando a cláusula WHERE. Aprenda a usar operadores de comparação, filtros de intervalo com BETWEEN, correspondência de listas com IN e correspondência de padrões com LIKE. A lição também aborda a distinção crítica do tratamento de valores NULL com IS NULL e IS NOT NULL. Domine as técnicas de filtragem de dados para recuperar informações precisas e otimizar suas consultas de banco de dados para uma análise eficiente.
+---
+title: "Cláusula SQL WHERE: Filtrar Dados com BETWEEN, IN, LIKE e NULL"
+description: "A cláusula SQL WHERE filtra linhas por condição. Aprenda operadores de comparação, BETWEEN, IN, correspondência de padrões com LIKE e como tratar valores NULL corretamente."
+keywords: ["cláusula SQL WHERE", "filtrar dados SQL", "BETWEEN IN LIKE SQL", "IS NULL SQL", "operadores de comparação SQL", "tutorial WHERE SQL"]
+---
 
-# Lição 2.2 Filtragem de Dados com a Cláusula WHERE
+_Lição 2.2 · Tempo de leitura: ~6 min_
 
-A instrução `SELECT`, por si só, retorna todas as linhas de uma tabela. No entanto, em cenários do mundo real, você geralmente precisa apenas de um subconjunto de dados que atenda a critérios específicos. É aqui que entra a cláusula `WHERE`.
+A **cláusula SQL WHERE** filtra as linhas de uma tabela avaliando uma condição para cada registo — apenas as linhas onde a condição é verdadeira são retornadas. Nesta lição, aprenderá os operadores de comparação, `BETWEEN`, `IN`, correspondência de padrões com `LIKE` e a forma correta de lidar com valores `NULL`.
 
-## O que é a Cláusula WHERE?
+# Cláusula SQL WHERE: Filtrar Dados em Consultas SELECT
 
-A cláusula `WHERE` é usada para filtrar registros. Ela garante que apenas as linhas que satisfazem uma condição especificada sejam incluídas no conjunto de resultados.
+A instrução `SELECT` por si só retorna todas as linhas de uma tabela. Em cenários reais, geralmente precisa apenas de um subconjunto de dados que satisfaça critérios específicos — e é exatamente para isso que serve a cláusula `WHERE`.
+
+## O Que É a Cláusula SQL WHERE?
+
+A cláusula `WHERE` filtra registos antes de serem incluídos no resultado. Apenas as linhas que satisfazem a condição especificada são retornadas.
 
 ### Sintaxe Básica
 
 ```sql
 SELECT coluna1, coluna2, ...
-FROM nome_da_tabela
+FROM nome_tabela
 WHERE condicao;
 ```
 
-A condição é uma expressão que avalia para verdadeiro (true), falso (false) ou desconhecido (unknown, se valores `NULL` estiverem envolvidos). Apenas as linhas onde a condição avalia como **verdadeiro** são retornadas.
+A condição é uma expressão que avalia para verdadeiro (true), falso (false) ou desconhecido (se valores `NULL` estiverem envolvidos). Apenas as linhas onde a condição é **verdadeira** são retornadas.
 
 ---
 
-## Operadores de Comparação
+## Operadores de Comparação SQL no WHERE
 
-O SQL fornece uma variedade de operadores para comparar valores na cláusula `WHERE`:
+O SQL fornece um conjunto de operadores para comparar valores na cláusula `WHERE`:
 
 | Operador | Descrição | Exemplo |
 | :--- | :--- | :--- |
@@ -33,56 +41,57 @@ O SQL fornece uma variedade de operadores para comparar valores na cláusula `WH
 | `>=` | Maior ou igual a | `WHERE replacement_cost >= 20.00` |
 | `<=` | Menor ou igual a | `WHERE amount <= 5.00` |
 
-### Exemplo (Banco de Dados Sakila)
-
-Para encontrar filmes com uma taxa de aluguel de $4.99 na tabela `film`:
-
 ```sql
 SELECT title, rental_rate, replacement_cost
 FROM film
 WHERE rental_rate = 4.99;
 ```
 
+*Resultado: todos os filmes com taxa de aluguer exatamente $4.99.*
+
 ---
 
-## Operadores Especiais de Filtragem
+## Operadores SQL BETWEEN, IN e LIKE
 
-O SQL inclui operadores poderosos para intervalos, conjuntos e correspondência de padrões.
+O SQL inclui operadores poderosos para filtragem por intervalo, lista e padrão.
 
-### 1. BETWEEN (ENTRE)
-Filtra valores dentro de um determinado intervalo (inclusive).
+### BETWEEN — Filtro por Intervalo
+
+Filtra valores dentro de um intervalo (inclusive em ambas as extremidades).
 
 ```sql
--- Encontrar pagamentos entre $5.00 e $10.00
 SELECT payment_id, amount, payment_date
 FROM payment
 WHERE amount BETWEEN 5.00 AND 10.00;
 ```
 
-### 2. IN (EM)
-Corresponde a qualquer valor em uma lista especificada.
+*Resultado: pagamentos de $5.00 a $10.00, inclusive.*
+
+### IN — Correspondência com Lista
+
+Verifica se um valor pertence a uma lista especificada. Alternativa concisa a múltiplas condições `OR`.
 
 ```sql
--- Encontrar clientes de lojas específicas
 SELECT first_name, last_name, store_id
 FROM customer
 WHERE store_id IN (1, 2);
 ```
 
-### 3. LIKE (COMO)
-Pesquisa por um padrão especificado em uma coluna usando curingas:
-- `%` representa zero, um ou vários caracteres.
-- `_` representa um único caractere.
+*Resultado: clientes pertencentes à loja 1 ou 2.*
 
-### Exemplo (Banco de Dados Sakila)
+### LIKE — Pesquisa por Padrão
+
+Pesquisa um padrão numa coluna de texto usando carateres especiais:
+- `%` — zero, um ou vários carateres quaisquer.
+- `_` — exatamente um caráter.
 
 ```sql
--- Encontrar filmes que começam com 'A'
+-- Filmes cujo título começa com 'A'
 SELECT title
 FROM film
 WHERE title LIKE 'A%';
 
--- Encontrar filmes onde a segunda letra é 'I'
+-- Filmes onde a segunda letra do título é 'I'
 SELECT title
 FROM film
 WHERE title LIKE '_I%';
@@ -90,14 +99,12 @@ WHERE title LIKE '_I%';
 
 ---
 
-## A Armadilha: Filtrando valores NULL
+## Como Filtrar Valores NULL em SQL
 
-Como aprendemos na lição sobre NULLs, você não pode usar `=` ou `<>` para verificar `NULL`. Você deve usar `IS NULL` ou `IS NOT NULL`.
-
-### Exemplo (Banco de Dados Sakila)
+Não é possível usar `=` ou `<>` para verificar `NULL` — essas comparações retornam sempre desconhecido, nunca verdadeiro. Use `IS NULL` ou `IS NOT NULL`.
 
 ```sql
--- Incorreto
+-- Errado: não retorna nenhuma linha
 -- WHERE return_date = NULL
 
 -- Correto
@@ -106,14 +113,30 @@ FROM rental
 WHERE return_date IS NULL;
 ```
 
+*Resultado: todos os alugueres que ainda não foram devolvidos.*
+
 ---
 
-**Principais conclusões desta lição:**
+**Principais conclusões:**
 
-*   A cláusula `WHERE` filtra as linhas **antes** que elas sejam retornadas ao conjunto de resultados.
-*   Valores de string e data devem ser colocados entre aspas simples (ex: 'SMITH').
-*   Valores numéricos não requerem aspas.
-*   Use `LIKE` para correspondência de padrões e `IN` para correspondência com listas.
-*   **Nunca** use `=` com `NULL`; use sempre `IS NULL`.
+* A cláusula `WHERE` filtra as linhas **antes** de serem retornadas no resultado.
+* Strings e datas devem ser colocadas entre aspas simples (`'SMITH'`); valores numéricos não precisam de aspas.
+* `BETWEEN` é inclusivo: `BETWEEN 5 AND 10` inclui 5 e 10.
+* `IN` é uma alternativa concisa a múltiplas condições `OR`.
+* `LIKE` usa `%` (sequência qualquer) e `_` (um único caráter).
+* **Nunca** use `=` com `NULL` — use sempre `IS NULL` ou `IS NOT NULL`.
 
-Na próxima lição, exploraremos como **combinar múltiplas condições** para criar filtros ainda mais poderosos.
+---
+
+## Perguntas Frequentes
+
+### Qual é a diferença entre WHERE e HAVING em SQL?
+`WHERE` filtra linhas **antes** do agrupamento e agregação. `HAVING` filtra **depois** — trabalha com os resultados de `GROUP BY`. Use `WHERE` para filtrar linhas individuais, `HAVING` para filtrar grupos agregados.
+
+### É possível usar múltiplas condições no WHERE?
+Sim. Combine condições com `AND` (ambas devem ser verdadeiras), `OR` (pelo menos uma deve ser verdadeira) ou `NOT` (negação). Use parênteses para controlar a ordem de avaliação.
+
+### Por que `WHERE coluna = NULL` não retorna resultados?
+Porque `NULL` representa um valor desconhecido — comparar qualquer coisa com `NULL` usando `=` retorna sempre desconhecido, nunca verdadeiro ou falso. O SQL exige `IS NULL` ou `IS NOT NULL` para verificar a ausência de valor.
+
+→ [Lição 2.3: Combinar Múltiplas Condições com AND, OR e NOT](lesson2_3_pt.md)

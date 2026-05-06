@@ -185,4 +185,16 @@ Use uma **base documental** quando os dados têm estrutura aninhada variável e 
 ### Uma aplicação pode usar vários tipos de bases de dados?
 Sim — isso chama-se **persistência poliglota**. É comum em produção: PostgreSQL para dados transacionais, Redis para cache, ClickHouse para análise. Cada tipo é usado onde tem melhor desempenho.
 
-→ [Lição 1.3: Estrutura de uma Base Relacional — Tabelas, Linhas, Colunas e Chaves](lesson1_3.pt.md)
+## Perguntas de Entrevista
+
+### Que tipo de base de dados escolheria para um caso de uso específico, e porquê?
+Comece pela carga e pelas restrições: estrutura dos dados, requisitos de consistência, padrão de consultas, objetivos de latência e escala. Por exemplo, escolha uma **base relacional** para transações ACID, uma **base documental** para registos JSON flexíveis e uma **base de séries temporais** para métricas com marca temporal.
+
+### Quais são os prós e os contras de um tipo de base de dados face a outro?
+Cada modelo envolve compromissos. As **bases relacionais** oferecem forte consistência, joins e um ecossistema SQL maduro, mas alterações de esquema podem ser mais rígidas em grande escala. Os modelos **NoSQL** costumam oferecer mais flexibilidade ou escalabilidade horizontal, mas podem limitar joins ou exigir mais cuidado no desenho da consistência.
+
+### É possível usar diferentes tipos de bases de dados na mesma aplicação?
+Sim. Isso é **persistência poliglota**: usar várias bases, cada uma para a carga que trata melhor. Um padrão comum é **PostgreSQL** para transações, **Redis** para cache e **ClickHouse** (ou outro sistema colunar) para análise.
+
+→ [Lição 1.3: Conceitos de Bases de Dados Relacionais
+](/pt/lesson/getting-started/relational-database-concepts)
