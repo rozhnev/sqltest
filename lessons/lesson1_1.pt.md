@@ -2,6 +2,8 @@
 title: "O Que É uma Base de Dados? Introdução a BDs e SGBD"
 description: "Uma base de dados é um conjunto organizado de dados estruturados gerido por um SGBD. Conheça os tipos de BD, as funções de um SGBD e por que o SQL é a linguagem universal dos dados."
 keywords: ["o que é uma base de dados", "SGBD", "sistema de gestão de bases de dados", "base de dados relacional", "SQL para iniciantes", "tipos de bases de dados"]
+teaches: ["O que é uma base de dados", "Como funciona um SGBD", "Funções principais de um SGBD", "Diferença entre SGBD e ferramentas GUI", "Porque SQL é fundamental"]
+about: ["Base de dados", "SGBD", "SQL", "Base de dados relacional"]
 ---
 
 _Lição 1.1 · Tempo de leitura: ~8 min_

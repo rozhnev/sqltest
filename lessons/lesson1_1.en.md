@@ -2,6 +2,8 @@
 title: "What Is a Database? Introduction to Databases and DBMS"
 description: "A database is an organized collection of structured data managed by a DBMS. Learn types of databases, core DBMS functions, and why SQL is the universal data language."
 keywords: ["what is a database", "DBMS", "database management system", "relational database", "SQL for beginners", "types of databases"]
+teaches: ["What a database is", "How a DBMS works", "Core DBMS functions", "Difference between DBMS and GUI tools", "Why SQL is foundational"]
+about: ["Database", "DBMS", "SQL", "Relational database"]
 ---
 
 _Lesson 1.1 · Reading time: ~8 min_
