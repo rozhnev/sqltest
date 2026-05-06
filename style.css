@@ -380,6 +380,7 @@ header .divider {
 }
 .site-name  {
     font-size: clamp(24px, 1.5vw, 32px);
+    font-weight: bold;
 }
 .mobile-container .site-name  {
     font-size: 1.5em !important;
@@ -782,6 +783,10 @@ input:checked + .slider:before {
 .question-wrapper h1 {
     line-height: normal;
 }
+.question-heading {
+    margin: 0 0.5em;
+    font-size: larger;
+}
 .question-wrapper table {
     border-collapse: collapse;
     border: 1px solid var(--text-block-border-color);
@@ -884,7 +889,8 @@ input:checked + .slider:before {
     vertical-align: bottom;
     border-radius: 50%;
     background-color: gray;
-    margin-right: 5px;
+    margin-right: 0.5em;
+    margin-top: 0.15em;
 }
 .question-rate-panel {
     border: 1px solid #1B9843;
