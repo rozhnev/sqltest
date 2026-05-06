@@ -921,7 +921,6 @@ input:checked + .slider:before {
     background-color: #990000;
 }
 .question-title .question-star {
-    padding: 0 0 0 6px;
     font-size: small;
     cursor: pointer;
 }
