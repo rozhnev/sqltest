@@ -312,12 +312,16 @@ FROM table_name;
 title: "Keyword-rich Page Title — up to 60 characters"
 description: "Direct answer to the user's question in 120–155 characters. What they will learn and why it matters."
 keywords: ["primary keyword", "secondary keyword", "long-tail variant"]
+teaches: ["learning outcome 1", "learning outcome 2", "learning outcome 3"]
+about: ["Entity 1", "Entity 2", "Entity 3"]
 ---
 ```
 
 - `title` — используется в `<title>` страницы; должен содержать главный поисковый запрос темы.
 - `description` — используется в `<meta description>`; должен начинаться с прямого ответа, а не с маркетинговой фразы.
 - `keywords` — вспомогательный массив для внутренней разметки; не влияет напрямую на Google, но помогает внутренней системе тегирования курса.
+- `teaches` — список учебных результатов для `LearningResource.teaches` в schema.org (что именно изучит читатель).
+- `about` — список ключевых сущностей темы для `LearningResource.about` в schema.org (будет преобразован в массив `Thing`).
 
 ### Заголовок H1
 
@@ -476,6 +480,8 @@ _Reading time: ~6 min_
 title: "Keyword-rich Page Title — Primary Keyword | SQL Course"
 description: "Direct answer in 120–155 chars. What the reader learns and why it matters."
 keywords: ["primary keyword", "secondary keyword", "long-tail variant"]
+teaches: ["learning outcome 1", "learning outcome 2", "learning outcome 3"]
+about: ["Database", "DBMS", "SQL", "Relational database"]
 ---
 
 _Reading time: ~N min_
