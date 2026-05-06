@@ -256,6 +256,26 @@ Use bold emphasis sparingly for:
 - warnings;
 - takeaway headers.
 
+## Lesson Frontmatter For SEO/GEO
+
+When authoring or updating lesson files, include YAML frontmatter fields used by page metadata and schema:
+
+```md
+---
+title: "Keyword-rich page title"
+description: "Direct answer and learning value in 120-155 characters"
+keywords: ["primary keyword", "secondary keyword"]
+teaches: ["learning outcome 1", "learning outcome 2", "learning outcome 3"]
+about: ["Database", "DBMS", "SQL", "Relational database"]
+---
+```
+
+Rules:
+
+- `teaches` should be a short list of concrete outcomes the learner gets from this lesson.
+- `about` should list topic entities for schema.org (it is converted to `Thing` entities automatically).
+- Keep `teaches` and `about` aligned with the lesson language and actual content.
+
 ## Illustration Style
 
 New lesson SVG covers should follow the current picture style already used in section 9 lessons.
