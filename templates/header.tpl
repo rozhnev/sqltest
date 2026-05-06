@@ -30,7 +30,7 @@
             <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
             <link rel="icon" type="image/png" href="/favicons/favicon-32x32.png" sizes="32x32">
             <link rel="icon" type="image/png" href="/favicons/favicon-16x16.png" sizes="16x16">
-            {if $HreflangUrls}
+            {if isset($HreflangUrls)}
                 {foreach $HreflangUrls as $hrefLang => $hrefUrl}
             <link rel="alternate" hreflang="{$hrefLang|escape:'html'}" href="{$hrefUrl|escape:'html'}" />
                 {/foreach}
@@ -66,7 +66,7 @@
                     githubClientId: '{$GITHUB_CLIENT_ID|escape:"javascript"}'
                 });
             </script>
-        {if $SchemaJsonLd}
+        {if isset($SchemaJsonLd)}
             <script type="application/ld+json">{$SchemaJsonLd nofilter}</script>
         {/if}
         </head>

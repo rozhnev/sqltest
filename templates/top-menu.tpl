@@ -6,12 +6,12 @@
 {/if}
 <div class="top-menu-left">
     {* <a href="/{$Lang}/" target="_self" style="display: flex;"> *}
-        <h1 class="site-name-wrapper">
+        <p class="site-name-wrapper">
             <a href="/{$Lang}/" target="_self">
                 <span class="site-name">SQLtest.online</span>
             </a>
             {* <span class="site-promo">{$SitePromo}</span> *}
-        </h1>
+        </p>
         <h2>
             <a class="practice-list" href="/{$Lang}/" target="_self" style="display: flex; align-items: center; gap: 4px; font-size: 0.75em;">
                 {translate}practice{/translate}

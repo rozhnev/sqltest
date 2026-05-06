@@ -2,7 +2,9 @@
     <button class="button" id="mobileMenuToggle" style="padding: 0; display: flex; align-items: center; justify-content: center; margin-right: 0.5rem;" onclick="toggleMobileMenu()">
         <div style="width: 100%; padding: 5px;">☰</div>
     </button>
-    <a href="/{$Lang}/" target="_self"><h1 class="site-name">SQLtest.online</h1></a>
+    <a href="/{$Lang}/" target="_self">
+        <p class="site-name">SQLtest.online</p>
+    </a>
     <div id="achievements-popup" class="achievements-popup hidden"></div>
 </div>
 <div class="mobile-menu-dropdown hidden" id="mobileMenuDropdown">
