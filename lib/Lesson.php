@@ -131,4 +131,50 @@ class Lesson
         $stmt->execute();
         return  $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function parseMedadata(string &$content): array
+    {
+        $meta = [
+            'teaches' => [
+                'What a database is',
+                'What a DBMS does',
+                'Core SQL concepts',
+                'Relational database fundamentals',
+            ],
+            'about' => ['Database', 'DBMS', 'SQL', 'Relational database'],
+        ];
+
+        if (!preg_match('/^\s*---\r?\n(.*?)\r?\n---\r?\n/s', $content, $matches)) {
+            return $meta;
+        }
+        $content = substr($content, strlen($matches[0]));
+        foreach (explode("\n", $matches[1]) as $line) {
+            if (!preg_match('/^(\w+)\s*:\s*(.+)$/', trim($line), $kv)) {
+                continue;
+            }
+            $key = $kv[1];
+            $val = trim($kv[2], '"\'');
+            if (str_starts_with($val, '[')) {
+                preg_match_all('/"([^"]+)"|\'([^\']+)\'|([^,\[\]\s]+)/', $val, $items);
+                $meta[$key] = array_values(array_filter(array_map(
+                    fn($a, $b, $c) => $a ?: $b ?: $c,
+                    $items[1], $items[2], $items[3]
+                )));
+            } else {
+                $meta[$key] = $val;
+            }
+        }
+
+        if (!is_array($meta['teaches'])) {
+            $meta['teaches'] = [$meta['teaches']];
+        }
+        if (!is_array($meta['about'])) {
+            $meta['about'] = [$meta['about']];
+        }
+
+        $meta['teaches'] = array_values(array_filter(array_map('strval', $meta['teaches']), static fn($v) => trim($v) !== ''));
+        $meta['about']   = array_values(array_filter(array_map('strval', $meta['about']),   static fn($v) => trim($v) !== ''));
+
+        return $meta;
+    }
 }
