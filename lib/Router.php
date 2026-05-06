@@ -35,6 +35,7 @@ class Router
             'playground_run'    => "@(?<lang>{$this->langPattern})/(?<class>playground)/(?<database>mysql80|mariadb118|psql17|sqlite3|mssql2022|oracle23|firebird4|soqol)/(?<action>query-run)@i",
             'playground'        => "@(?<lang>{$this->langPattern})/(?<action>playground)/@i",
             'embed'             => "@(?<lang>{$this->langPattern})/(?<action>embed)@i",
+            'embed-sql'         => "@(?<action>embed)-sql@i",
             'sitemap'           => "@(?<action>sitemap)\.xml@i",
         ];
     }
