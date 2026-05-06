@@ -299,6 +299,151 @@ FROM table_name;
 
 ---
 
+## SEO-оптимизация уроков
+
+Следующие правила применяются прежде всего к английской версии (`.en.md`), но желательно соблюдать их и в других языковых версиях.
+
+### Frontmatter с мета-тегами
+
+Каждый урок должен начинаться с YAML-блока frontmatter:
+
+```md
+---
+title: "Keyword-rich Page Title — up to 60 characters"
+description: "Direct answer to the user's question in 120–155 characters. What they will learn and why it matters."
+keywords: ["primary keyword", "secondary keyword", "long-tail variant"]
+---
+```
+
+- `title` — используется в `<title>` страницы; должен содержать главный поисковый запрос темы.
+- `description` — используется в `<meta description>`; должен начинаться с прямого ответа, а не с маркетинговой фразы.
+- `keywords` — вспомогательный массив для внутренней разметки; не влияет напрямую на Google, но помогает внутренней системе тегирования курса.
+
+### Заголовок H1
+
+Заголовок `#` не должен начинаться с `Lesson X.Y:` как единственного содержания — это «навигационный мусор» для поисковика.
+
+Рекомендуемый формат: ключевой вопрос или утверждение + уточняющий подзаголовок:
+
+```md
+# What Is a Window Function? SQL Analytics Explained
+```
+
+Если нумерация урока важна для навигации, её можно вынести в frontmatter (`lesson: "1.1"`) или оставить как подпись, но не как первое слово H1.
+
+### Заголовки H2 и H3
+
+Поисковые системы читают `##` как структуру страницы. Хороший H2:
+
+- отвечает на конкретный вопрос: `What Is a CTE in SQL?` лучше, чем `Definition`;
+- содержит целевое ключевое слово или его вариацию;
+- не превышает 60–70 символов.
+
+Плохие примеры:
+
+```
+## Introduction
+## Definition
+## Why important?
+```
+
+Хорошие примеры:
+
+```
+## What Is a CTE (Common Table Expression)?
+## Why Use CTEs Instead of Subqueries?
+## CTE Syntax in PostgreSQL, MariaDB, and MySQL
+```
+
+### Вводный абзац (первые 150 символов = фактический snippet)
+
+Google часто показывает первые строки страницы как описание в выдаче, если `<meta description>` не задан или признан нерелевантным.
+
+Правило: **первый абзац урока должен прямо отвечать на вопрос**, а не «приветствовать читателя».
+
+Нежелательно:
+> "Welcome to an exciting journey into databases! In this lesson we'll lay the groundwork..."
+
+Желательно:
+> "A **CTE (Common Table Expression)** is a named temporary result set defined with `WITH` that makes complex queries easier to read and reuse. In this lesson you'll learn the syntax, key use cases, and how CTEs compare to subqueries."
+
+### Alt-текст изображений
+
+Шаблонный alt `"Lesson illustration"` не несёт смысла для поисковика. Alt должен описывать **содержание** иллюстрации:
+
+```md
+<!-- плохо -->
+<img src="/images/lessons/lesson9_4-sql-view.svg" alt="Lesson illustration" width="100%">
+
+<!-- хорошо -->
+<img src="/images/lessons/lesson9_4-sql-view.svg" alt="Diagram showing how a SQL VIEW wraps a SELECT query and exposes it as a virtual table" width="100%">
+```
+
+### Внутренние ссылки
+
+В конце каждого урока обязательно должна быть ссылка на следующий. Google использует внутренние ссылки для понимания структуры сайта и распределения веса:
+
+```md
+→ [Lesson 9.5: Updatable Views and INSTEAD OF Triggers](lesson9_5.en.md)
+```
+
+Если тема тесно связана с другим уроком курса — ссылайтесь на него по месту в тексте, не только в конце.
+
+### FAQ-блок для featured snippets
+
+Google активно показывает FAQ (блок «People Also Ask») в расширенных сниппетах. Добавьте блок в конце урока с 2–3 концептуальными вопросами:
+
+```md
+## Frequently Asked Questions
+
+### What is the difference between a VIEW and a CTE?
+A **VIEW** is stored in the database and reusable across sessions. A **CTE** exists only within a single query. Use a VIEW when the logic is shared across multiple queries; use a CTE for one-time query clarity.
+
+### Can you nest CTEs?
+Yes. You can define multiple CTEs in a single `WITH` clause and reference earlier ones from later ones in the same block.
+```
+
+В русской версии: `## Часто задаваемые вопросы`.
+
+### Interview Questions — блок для поискового трафика
+
+Запросы вида "SQL interview questions" или "database interview questions" имеют очень высокий объём поиска. Добавьте отдельный блок после FAQ с 3–5 вопросами в стиле технического собеседования:
+
+```md
+## Interview Questions
+
+### How would you define a database in an interview?
+A **database** is an organized, persistent collection of structured data managed by a DBMS. It allows multiple users and applications to store, retrieve, and manipulate data reliably and efficiently.
+
+### What are the core responsibilities of a DBMS?
+A DBMS handles data definition (schema), data manipulation (CRUD via SQL), transaction management (ACID), concurrency control, access security, backup/recovery, and data integrity constraints.
+```
+
+Правила для Interview Questions:
+- Вопросы должны быть сформулированы так, как их задают на реальных собеседованиях.
+- Ответы — сжатые, конкретные, с ключевыми терминами выделенными **жирным**.
+- Ориентировочно 3–5 вопросов по теме урока.
+- В русской версии: `## Вопросы для собеседования`.
+- Размещать после FAQ, перед ссылкой на следующий урок.
+
+### Время чтения
+
+Добавьте строку с ориентировочным временем чтения сразу после frontmatter или в конце вводного абзаца:
+
+```md
+_Reading time: ~6 min_
+```
+
+Это пользовательский сигнал (снижает отказы) и хороший визуальный якорь.
+
+### Ключевые слова в тексте
+
+- Целевой ключевой запрос урока должен появиться в **первых 100 словах** текста.
+- Используйте вариации: `CTE`, `common table expression`, `WITH clause` — а не только аббревиатуру.
+- Не форсируйте вхождения: одно упоминание на 150–200 слов достаточно.
+
+---
+
 ## Рекомендации для перевода на другие языки
 
 При переводе уроков на English, Français и Português важно сохранять:
@@ -327,13 +472,21 @@ FROM table_name;
 ## Рекомендуемый шаблон нового урока
 
 ```md
-Короткий вводный абзац: что это за тема, что изучит читатель, зачем это нужно.
+---
+title: "Keyword-rich Page Title — Primary Keyword | SQL Course"
+description: "Direct answer in 120–155 chars. What the reader learns and why it matters."
+keywords: ["primary keyword", "secondary keyword", "long-tail variant"]
+---
 
-# Урок X.Y: Название темы
+_Reading time: ~N min_
+
+Короткий вводный абзац: прямой ответ на вопрос темы, что изучит читатель, зачем это нужно.
+
+# Keyword-Rich Heading: Lesson Topic Explained
 
 Контекстный ввод: связь с предыдущим уроком и место темы в SQL.
 
-<img src="/images/lessons/lessonX_Y-topic.svg" alt="Lesson illustration" width="100%">
+<img src="/images/lessons/lessonX_Y-topic.svg" alt="Diagram showing [specific content of the illustration]" width="100%">
 
 ## Что это такое
 
@@ -394,7 +547,23 @@ FROM table_name;
 *   Вывод 3.
 *   Вывод 4.
 
-В следующем уроке мы рассмотрим ...
+## Frequently Asked Questions
+
+### [Question directly matching a "People Also Ask" search query]?
+Short, direct answer in 2–4 sentences.
+
+### [Second common question about this topic]?
+Short, direct answer in 2–4 sentences.
+
+## Interview Questions
+
+### [Question phrased as a real technical interview question]?
+Concise answer with key terms in **bold**. 2–4 sentences.
+
+### [Second interview-style question on the same topic]?
+Concise answer with key terms in **bold**. 2–4 sentences.
+
+→ [Lesson X.(Y+1): Next Topic Title](lessonX_Y+1.en.md)
 ```
 
 ---
