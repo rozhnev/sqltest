@@ -96,6 +96,25 @@ class Controller
         ]);
     }
 
+    public function setHreflangLinks(string $path, string $currentLang): void
+    {
+        $langCodes   = array_keys($this->languages);
+        $langPattern = implode('|', array_map('preg_quote', $langCodes));
+        $urls        = [];
+
+        foreach ($langCodes as $code) {
+            $localPath  = preg_replace("@^/(?:{$langPattern})(?=/|$)@i", "/{$code}", $path);
+            $urls[$code] = "{$this->host}{$localPath}";
+        }
+
+        // x-default points to the English version when available, otherwise first language
+        $defaultLang = in_array('en', $langCodes, true) ? 'en' : $langCodes[0];
+        $defaultPath = preg_replace("@^/(?:{$langPattern})(?=/|$)@i", "/{$defaultLang}", $path);
+        $urls['x-default'] = "{$this->host}{$defaultPath}";
+
+        $this->assignVariables(['HreflangUrls' => $urls]);
+    }
+
     /**
      * Show books page
      * @param array $params
@@ -429,6 +448,7 @@ class Controller
             'Book'                  => Helper::getBook($this->dbh, $this->lang, $questionData['dbms']),
             'Favorites'             => $this->user->getFavorites($this->lang)
         ]);
+        $this->setHreflangLinks($params['path'], $this->lang);
         $this->engine->display($this->isMobileView() ? "m.index.tpl" : "index.tpl");
     }
 
@@ -1017,6 +1037,7 @@ class Controller
             'Lesson'            => $lesson,
             'LessonData'        => $lessonData
         ]);
+        $this->setHreflangLinks($params['path'], $this->lang);
         $this->engine->display($this->isMobileView() ? "m.lesson.tpl" : "lesson.tpl");
     }
 
