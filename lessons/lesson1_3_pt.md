@@ -76,18 +76,13 @@ Uma **restrição (constraint)** é uma regra aplicada a uma coluna ou tabela qu
 | `FOREIGN KEY` | O valor deve corresponder a um valor existente noutra tabela. |
 | `CHECK` | O valor deve satisfazer uma condição, p. ex. `age >= 0`. |
 
-Por exemplo, uma tabela `customers` pode definir várias restrições em simultneo:
+Por exemplo, numa tabela `customers` pode pensar nestas restrições:
 
-```sql
-CREATE TABLE customers (
-    customer_id  SERIAL        PRIMARY KEY,
-    email        VARCHAR(255)  NOT NULL UNIQUE,
-    age          INTEGER       CHECK (age >= 0),
-    country      VARCHAR(100)  DEFAULT 'Unknown'
-);
-```
+* `customer_id` pode funcionar como `PRIMARY KEY`, identificando cada cliente de forma única.
+* `email` pode ter uma restrição `UNIQUE`, impedindo que dois clientes usem o mesmo endereço.
+* `age` pode seguir uma regra `CHECK`, por exemplo `age >= 0`, para evitar valores negativos.
 
-O motor da base de dados rejeitará automaticamente qualquer `INSERT` ou `UPDATE` que viole estas regras, mantendo os dados consistentes sem lógica adicional na aplicação.
+O motor da base de dados aplica automaticamente estas regras e rejeita alterações inválidas, mantendo os dados consistentes sem lógica adicional na aplicação.
 
 ## O Que É ACID? Segurança de Transações em Bases Relacionais
 
@@ -117,7 +112,7 @@ Estas propriedades são essenciais em sistemas reais como banca, comércio eletr
 * Uma **chave primária** identifica cada linha de forma única; deve ser única e não nula.
 * Uma **chave estrangeira** liga uma linha de uma tabela a uma linha de outra, garantindo a integridade referencial.
 * Uma **chave única** garante a unicidade dos valores numa coluna; uma tabela pode ter várias chaves únicas.
-* As **restrições** (`NOT NULL`, `CHECK`, `DEFAULT`) são aplicadas automaticamente pelo motor da base de dados.
+* As **restrições** (`NOT NULL`, `CHECK`) são aplicadas automaticamente pelo motor da base de dados.
 * O modelo **ACID** (Atomicidade, Consistência, Isolamento, Durabilidade) assegura a fiabilidade das transações mesmo em caso de falha ou acesso concorrente.
 
 Na próxima lição, vamos analisar os tipos de dados básicos usados nas bases de dados relacionais e como escolher o tipo certo para cada coluna.

@@ -76,18 +76,15 @@ A **constraint** is a rule applied to a column or table that the database engine
 | `FOREIGN KEY` | Value must match an existing value in another table's column. |
 | `CHECK` | Value must satisfy a specified condition, e.g. `age >= 0`. |
 
-For example, a `customers` table might define several constraints at once:
+For example, in a `customers` table:
 
-```sql
-CREATE TABLE customers (
-    customer_id  SERIAL        PRIMARY KEY,
-    email        VARCHAR(255)  NOT NULL UNIQUE,
-    age          INTEGER       CHECK (age >= 0),
-    country      VARCHAR(100)  DEFAULT 'Unknown'
-);
-```
+* `customer_id` can act as a `PRIMARY KEY`, so each customer has a unique identifier.
+* `email` can be marked as `UNIQUE`, so two customers cannot share the same email address.
+* `age` can use a `CHECK` rule such as `age >= 0`, so negative ages are rejected.
 
-The database will automatically reject any `INSERT` or `UPDATE` that violates these rules, keeping your data consistent without extra application-level checks. Transaction Safety in Relational Databases
+The database automatically enforces these rules and rejects invalid changes, which helps keep data consistent without extra application-level checks.
+
+## What Is ACID? Transaction Safety in Relational Databases
 
 When working with relational databases, another core concept is the **ACID** model. ACID defines the properties that make database transactions safe and reliable.
 

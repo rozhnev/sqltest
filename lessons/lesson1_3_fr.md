@@ -72,18 +72,13 @@ Une **contrainte** est une règle appliquée à une colonne ou à une table que 
 | `FOREIGN KEY` | La valeur doit correspondre à une valeur existante dans une autre table. |
 | `CHECK` | La valeur doit satisfaire une condition, p. ex. `age >= 0`. |
 
-Par exemple, une table `customers` peut définir plusieurs contraintes à la fois :
+Par exemple, dans une table `customers` :
 
-```sql
-CREATE TABLE customers (
-    customer_id  SERIAL        PRIMARY KEY,
-    email        VARCHAR(255)  NOT NULL UNIQUE,
-    age          INTEGER       CHECK (age >= 0),
-    country      VARCHAR(100)  DEFAULT 'Unknown'
-);
-```
+* `customer_id` peut jouer le rôle de `PRIMARY KEY`, ce qui identifie chaque client de façon unique.
+* `email` peut recevoir une contrainte `UNIQUE`, afin que deux clients ne partagent pas la même adresse.
+* `age` peut suivre une règle `CHECK`, par exemple `age >= 0`, pour empêcher les valeurs négatives.
 
-Le moteur de base de données rejettera automatiquement tout `INSERT` ou `UPDATE` qui viole ces règles, assurant la cohérence des données sans logique supplémentaire côté application.
+Le moteur de base de données applique automatiquement ces règles et rejette les modifications invalides, ce qui aide à conserver des données cohérentes sans logique supplémentaire côté application.
 
 ## Qu'est-ce qu'ACID ? La sécurité des transactions en base relationnelle
 
