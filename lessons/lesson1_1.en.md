@@ -10,6 +10,8 @@ _Lesson 1.1 · Reading time: ~8 min_
 
 A **database** is an organized collection of structured data stored electronically and managed by software called a **DBMS (Database Management System)**. In this lesson you'll learn what a database is, how a DBMS works, which types of databases exist, and why SQL remains the universal language for working with them.
 
+**SQL** is the standard language used to work with relational databases. We will cover it in more detail in a separate lesson later.
+
 # Introduction to Databases: What Is a Database and DBMS?
 
 Modern applications — from e-commerce platforms to analytics dashboards — all rely on databases to store and process data. Understanding how databases and DBMS work is the essential starting point for learning SQL and working with data in real-world projects.

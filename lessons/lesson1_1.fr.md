@@ -10,6 +10,8 @@ _Leçon 1.1 · Temps de lecture : ~8 min_
 
 Une **base de données** est un ensemble organisé de données structurées, stockées électroniquement et gérées par un logiciel appelé **SGBD (Système de Gestion de Bases de Données)**. Dans cette leçon, vous apprendrez ce qu'est une base de données, comment fonctionne un SGBD, quels types de bases de données existent et pourquoi SQL reste le langage universel pour travailler avec les données.
 
+**SQL** est le langage standard utilisé pour travailler avec les bases de données relationnelles. Nous l'étudierons plus en détail dans une leçon séparée un peu plus loin.
+
 # Introduction aux bases de données : qu'est-ce qu'une BDD et un SGBD ?
 
 Les applications modernes — des boutiques en ligne aux tableaux de bord analytiques — s'appuient toutes sur des bases de données pour stocker et traiter les données. Comprendre le fonctionnement des bases de données et des SGBD est le point de départ indispensable pour apprendre SQL et travailler avec des données dans des projets réels.
