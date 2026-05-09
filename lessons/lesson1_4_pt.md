@@ -1,110 +1,160 @@
-# Lição 1.4: Tipos de Dados Básicos
+---
+title: "Tipos de Dados SQL Explicados: INTEGER, VARCHAR, DATE e Mais"
+description: "Os tipos de dados SQL definem quais valores uma coluna pode guardar. Aprenda tipos numéricos, texto, data/hora e regras práticas para escolher corretamente."
+keywords: ["tipos de dados SQL", "INTEGER VARCHAR DECIMAL", "tipos de data SQL", "CHAR vs VARCHAR", "escolher tipo de dados SQL", "tipos de coluna SQL"]
+teaches: ["Quais são os tipos numéricos em SQL e quando usar INTEGER, DECIMAL e FLOAT", "A diferença entre CHAR, VARCHAR e TEXT", "O que armazenam DATE, TIME e TIMESTAMP", "Quando usar BOOLEAN, BLOB e JSON", "Como escolher o tipo de dados certo para cada coluna"]
+about: ["Tipos de dados SQL", "INTEGER", "VARCHAR", "DECIMAL", "DATE", "TIMESTAMP", "BOOLEAN"]
+---
 
-Em bases de dados relacionais, os tipos de dados especificam o tipo de dados que podem ser armazenados numa coluna. Escolher o tipo de dados correto é crucial para a integridade dos dados, eficiência de armazenamento e desempenho das consultas. Esta lição aborda os tipos de dados comuns e os seus subtipos usados em bases de dados relacionais, juntamente com os seus intervalos de valores.
+_Lição 1.4 · Tempo de leitura: ~8 min_
 
-<img src="/images/lessons/lesson1_3-datatypes.jpg" alt="Data Types" width="100%">
+Os tipos de dados definem que tipo de valor cada coluna pode armazenar numa base de dados relacional. Nesta lição, vai aprender os tipos SQL mais comuns, quando usar cada um e como escolhas corretas melhoram a qualidade dos dados, o armazenamento e o desempenho das consultas.
 
-## Tipos de Dados Numéricos
+# Tipos de Dados SQL Explicados: INTEGER, VARCHAR, DATE e Mais
 
-Os tipos de dados numéricos são usados para armazenar valores numéricos.
+Na lição anterior, vimos tabelas, chaves, restrições e ACID. Agora vamos para uma decisão prática de modelação: escolher o tipo de dados certo para cada coluna.
 
-### INTEGER
-*   Armazena números inteiros.
-*   Subtipos:
-    *   `INT` ou `INTEGER`: Tipicamente um inteiro de 4 bytes.
-    *   `SMALLINT`: Tipicamente um inteiro de 2 bytes.
-    *   `BIGINT`: Tipicamente um inteiro de 8 bytes.
-    *   `TINYINT`: Tipicamente um inteiro de 1 byte.
-*   Intervalos (aproximados, podem variar de acordo com o sistema de banco de dados):
-    *   `TINYINT`: -128 a 127 (com sinal) ou 0 a 255 (sem sinal)
-    *   `SMALLINT`: -32.768 a 32.767
-    *   `INT`: -2.147.483.648 a 2.147.483.647
-    *   `BIGINT`: -9.223.372.036.854.775.808 a 9.223.372.036.854.775.807
+<img src="/images/lessons/lesson1_3-datatypes.jpg" alt="Comparação entre tipos SQL numéricos, de texto e de data/hora para definir colunas de tabelas" width="100%">
+
+Antes de entrar nos subtipos, veja os principais grupos de tipos de dados em SQL:
+
+* **Tipos numéricos**: `TINYINT`, `INT`, `BIGINT`, `DECIMAL`, `FLOAT`
+* **Tipos de texto**: `CHAR`, `VARCHAR`, `TEXT`
+* **Tipos de data e hora**: `DATE`, `TIME`, `DATETIME`, `TIMESTAMP`
+* **Tipos especializados**: `BOOLEAN`, `BLOB`, `JSON`
+
+## Quais são os tipos numéricos em SQL?
+
+Os tipos numéricos armazenam números, mas cada grupo resolve um problema diferente:
+
+* inteiros para valores sem casas decimais,
+* decimais exatos para finanças,
+* ponto flutuante para cálculos aproximados.
+
+### Família INTEGER
+
+Tipos inteiros armazenam apenas números sem parte decimal.
+
+| Tipo | Tamanho típico | Intervalo assinado aproximado |
+| :--- | :------------- | :---------------------------- |
+| `TINYINT` | 1 byte | -128 a 127 |
+| `SMALLINT` | 2 bytes | -32.768 a 32.767 |
+| `INTEGER` / `INT` | 4 bytes | -2.147.483.648 a 2.147.483.647 |
+| `BIGINT` | 8 bytes | -9.223.372.036.854.775.808 a 9.223.372.036.854.775.807 |
+
+Os limites exatos podem variar consoante o SGBD e o suporte a signed/unsigned.
 
 ### DECIMAL / NUMERIC
-*   Armazena valores numéricos exatos com uma precisão e escala especificadas.
-*   Precisão: O número total de dígitos.
-*   Escala: O número de dígitos à direita do ponto decimal.
-*   Exemplo: `DECIMAL(10, 2)` pode armazenar números com 10 dígitos totais, 2 dos quais estão após o ponto decimal.
-*   Intervalo: Depende da precisão e escala.
 
-### FLOAT / REAL
-*   Armazena valores numéricos aproximados com precisão de ponto flutuante.
-*   Subtipos:
-    *   `FLOAT`: Número de ponto flutuante de precisão simples.
-    *   `DOUBLE` / `DOUBLE PRECISION`: Número de ponto flutuante de precisão dupla.
-    *   `REAL`: Um sinônimo para `FLOAT` em alguns bancos de dados.
-*   Intervalo: Varia dependendo da implementação específica, mas geralmente cobre uma ampla gama de valores com precisão limitada.
+`DECIMAL` guarda valores exatos com precisão fixa.
 
-## Tipos de Dados de Caractere / String
+* `DECIMAL(p, s)` significa:
+  * `p` = total de dígitos,
+  * `s` = dígitos após a vírgula.
+* Exemplo: `DECIMAL(10, 2)` permite valores até 99.999.999,99.
+* É o tipo recomendado para preços, impostos, saldos e faturação.
 
-Os tipos de dados de caractere são usados para armazenar texto.
+### FLOAT / REAL / DOUBLE
+
+Tipos de ponto flutuante armazenam valores aproximados.
+
+* Úteis em cálculos científicos e medições.
+* Não são ideais para dinheiro devido a possíveis diferenças de arredondamento.
+* `DOUBLE` costuma oferecer mais precisão que `FLOAT`.
+
+## Quais são os tipos de texto em SQL?
+
+Os tipos de texto diferem principalmente no comportamento de comprimento e armazenamento.
 
 ### CHAR
-*   Armazena strings de caracteres de comprimento fixo.
-*   Você especifica o comprimento ao definir a coluna.
-*   Exemplo: `CHAR(10)` armazena strings de exatamente 10 caracteres.
-*   Se a string armazenada for menor que o comprimento especificado, ela será preenchida com espaços.
+
+* Cadeia de comprimento fixo.
+* `CHAR(10)` reserva sempre 10 caracteres.
+* Se o valor for menor, muitos SGBDs completam com espaços.
+* Bom para códigos de tamanho fixo.
 
 ### VARCHAR
-*   Armazena strings de caracteres de comprimento variável.
-*   Você especifica o comprimento máximo ao definir a coluna.
-*   Exemplo: `VARCHAR(255)` armazena strings de até 255 caracteres.
-*   Usa apenas o espaço necessário para armazenar a string real.
+
+* Cadeia de comprimento variável com limite máximo.
+* `VARCHAR(255)` armazena apenas os caracteres necessários.
+* Boa escolha padrão para nomes, emails e títulos.
 
 ### TEXT
-*   Armazena strings de caracteres de comprimento variável grandes.
-*   Frequentemente usado para armazenar documentos, artigos ou outros dados de texto grandes.
-*   O comprimento máximo é normalmente muito maior que `VARCHAR`.
 
-## Tipos de Dados de Data e Hora
+* Texto longo de comprimento variável.
+* Indicado para descrições extensas, comentários e conteúdo editorial.
+* Regras de indexação podem mudar conforme o SGBD.
 
-Os tipos de dados de data e hora são usados para armazenar valores temporais.
+## Quais são os tipos de data e hora?
+
+Tipos temporais devem ser usados sempre que a coluna representa data, hora ou instante de evento.
 
 ### DATE
-*   Armazena uma data (ano, mês, dia).
-*   Formato: Varia dependendo do sistema de banco de dados (por exemplo, AAAA-MM-DD, MM/DD/AAAA).
+
+Armazena apenas a data (ano, mês e dia).
 
 ### TIME
-*   Armazena uma hora (hora, minuto, segundo).
-*   Formato: Varia dependendo do sistema de banco de dados (por exemplo, HH:MM:SS).
+
+Armazena apenas a hora (hora, minuto e segundo).
 
 ### DATETIME / TIMESTAMP
-*   Armazena data e hora.
-*   Formato: Varia dependendo do sistema de banco de dados (por exemplo, AAAA-MM-DD HH:MM:SS).
-*   `TIMESTAMP` geralmente tem um comportamento especial relacionado a fusos horários e atualizações automáticas.
 
-## Tipo de Dados Booleano
+Armazena data e hora em conjunto.
 
-### BOOLEAN
-*   Armazena valores verdadeiro/falso.
-*   Alguns bancos de dados podem representar valores booleanos como inteiros (por exemplo, 0 para falso, 1 para verdadeiro).
+Dependendo do SGBD, `TIMESTAMP` pode ter comportamento relacionado com fuso horário, enquanto `DATETIME` costuma ser neutro. Confirme esse detalhe antes de modelar tabelas de auditoria e eventos.
 
-## Outros Tipos de Dados
+## Que outros tipos de dados convém conhecer?
 
-### BLOB (Binary Large Object)
-*   Armazena dados binários, como imagens, arquivos de áudio ou vídeo.
+Muitas bases relacionais também oferecem tipos especializados:
 
-### JSON
-*   Armazena dados JSON (JavaScript Object Notation).
-*   Permite armazenar dados semiestruturados em uma coluna de banco de dados.
+* `BOOLEAN`: valores verdadeiro/falso.
+* `BLOB`: dados binários, como imagens e ficheiros.
+* `JSON`: documentos JSON semiestruturados.
 
-## Escolhendo o Tipo de Dados Certo
+## Como escolher o tipo de dados certo?
 
-*   Considere o tipo de dados que você precisa armazenar (numérico, texto, data/hora, etc.).
-*   Escolha o menor tipo de dados que possa acomodar o intervalo de valores que você espera.
-*   Use `VARCHAR` em vez de `CHAR`, a menos que precise de strings de comprimento fixo.
-*   Use `DECIMAL` para valores numéricos exatos, especialmente ao lidar com moeda.
-*   Esteja ciente dos tipos de dados específicos e seu comportamento em seu sistema de banco de dados.
+Checklist prático:
 
-Ao entender os tipos de dados disponíveis e suas características, você pode projetar bancos de dados que sejam eficientes, confiáveis e fáceis de manter.
+* Escolha o menor tipo que cubra com segurança os valores esperados.
+* Use `DECIMAL` para finanças e evite `FLOAT` para dinheiro.
+* Prefira `VARCHAR` para texto variável; use `CHAR` apenas para formatos fixos.
+* Use tipos temporais próprios em vez de texto para datas e horas.
+* Verifique detalhes do seu SGBD: timezone, defaults, indexação e suporte a JSON.
 
-**Principais Conclusões desta Lição:**
+Escolher bem os tipos na modelação inicial reduz migrações futuras, erros de aplicação e regressões de desempenho.
 
-*   **Tipos de Dados Importam:** Selecionar o tipo de dados apropriado é crucial para a integridade dos dados, eficiência de armazenamento e desempenho da consulta.
-*   **Tipos Numéricos:** `INTEGER`, `DECIMAL` e `FLOAT` são usados para armazenar dados numéricos, cada um com diferentes características em relação à precisão e intervalo.
-*   **Tipos de String:** `CHAR`, `VARCHAR` e `TEXT` são usados para armazenar dados de texto, com diferentes restrições de comprimento e implicações de armazenamento.
-*   **Tipos de Data/Hora:** `DATE`, `TIME` e `DATETIME` são usados para armazenar dados temporais, com formatos específicos que variam entre os sistemas de banco de dados.
-*   **Outros Tipos:** `BOOLEAN`, `BLOB` e `JSON` fornecem suporte para armazenar valores booleanos, dados binários e dados semiestruturados, respectivamente.
-*   **Valores NULL:** `NULL` representa um valor ausente ou desconhecido e não é um tipo de dados em si. É crucial lidar com valores `NULL` corretamente em consultas.
-*   **Escolhendo Sabiamente:** Considere a natureza dos dados, a precisão necessária e as implicações de armazenamento ao selecionar um tipo de dados para uma coluna.
+---
+
+**Principais conclusões desta lição:**
+
+* Os tipos de dados definem os valores permitidos numa coluna e impactam diretamente a qualidade dos dados.
+* Tipos numéricos servem objetivos diferentes: inteiros, valores exatos e valores aproximados.
+* `CHAR`, `VARCHAR` e `TEXT` devem ser escolhidos com base no tamanho esperado e no comportamento de armazenamento.
+* Campos temporais devem usar `DATE`, `TIME` e `TIMESTAMP`, não texto simples.
+* Escolher bem os tipos desde o início evita erros, retrabalho e problemas de desempenho.
+
+---
+
+## Perguntas Frequentes
+
+### Qual é a diferença entre DECIMAL e FLOAT?
+`DECIMAL` guarda valores exatos e é indicado para dinheiro. `FLOAT` guarda valores aproximados e pode introduzir diferenças de arredondamento.
+
+### Devo usar CHAR ou VARCHAR para nomes e emails?
+Na maioria dos casos, use `VARCHAR`, porque nomes e emails têm tamanho variável. `CHAR` faz mais sentido para campos de tamanho fixo.
+
+### NULL é um tipo de dados?
+Não. `NULL` representa um valor ausente ou desconhecido. É um marcador especial, não um tipo de dados.
+
+## Questões de Entrevista
+
+### Como escolher entre SMALLINT, INTEGER e BIGINT?
+A escolha deve considerar o intervalo de valores esperado. Use o menor tipo que cubra esse intervalo sem risco de overflow.
+
+### Porque DECIMAL é preferido para valores monetários?
+Porque `DECIMAL` preserva precisão exata e evita erros de arredondamento típicos de tipos de ponto flutuante.
+
+### Que problemas podem surgir ao escolher tipos de dados errados?
+Problemas comuns incluem conversões incorretas, ordenação/filtragem erradas, desperdício de armazenamento, consultas mais lentas e lógica de aplicação mais complexa.
+
+→ [Lição 1.5: Entendendo os Valores NULL no SQL](/pt/lesson/getting-started/null-values)

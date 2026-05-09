@@ -1,111 +1,160 @@
-# Leçon 1.4 : Types de données de base
+---
+title: "Types de données SQL expliqués : INTEGER, VARCHAR, DATE et plus"
+description: "Les types de données SQL définissent les valeurs qu'une colonne peut stocker. Découvrez les types numériques, texte, date/heure et les bonnes pratiques pour bien choisir."
+keywords: ["types de données SQL", "INTEGER VARCHAR DECIMAL", "types date SQL", "CHAR vs VARCHAR", "choisir type de données SQL", "types de colonnes SQL"]
+teaches: ["Quels sont les types numériques SQL et quand utiliser INTEGER, DECIMAL et FLOAT", "La différence entre CHAR, VARCHAR et TEXT", "Ce que stockent DATE, TIME et TIMESTAMP", "Quand utiliser BOOLEAN, BLOB et JSON", "Comment choisir le bon type de données pour une colonne"]
+about: ["Types de données SQL", "INTEGER", "VARCHAR", "DECIMAL", "DATE", "TIMESTAMP", "BOOLEAN"]
+---
 
-Dans les bases de données relationnelles, les types de données spécifient le genre de données qui peuvent être stockées dans une colonne. Choisir le bon type de données est crucial pour l'intégrité des données, l'efficacité du stockage et les performances des requêtes. Cette leçon couvre les types de données courants et leurs sous-types utilisés dans les bases de données relationnelles, ainsi que leurs plages de valeurs.
+_Leçon 1.4 · Temps de lecture : ~8 min_
 
-<img src="/images/lessons/lesson1_3-datatypes.jpg" alt="Data Types" width="100%">
+Les types de données définissent les valeurs qu'une colonne peut contenir dans une base relationnelle. Dans cette leçon, vous allez apprendre les types SQL les plus courants, comprendre quand utiliser chacun d'eux, et voir comment un bon choix améliore la qualité des données, le stockage et les performances des requêtes.
 
-## Types de données numériques
+# Types de données SQL expliqués : INTEGER, VARCHAR, DATE et plus
 
-Les types de données numériques sont utilisés pour stocker des valeurs numériques.
+Dans la leçon précédente, nous avons vu les tables, les clés, les contraintes et ACID. Nous passons maintenant à une décision de conception essentielle: choisir le bon type de données pour chaque colonne.
 
-### INTEGER (Entier)
-*   Stocke des nombres entiers.
-*   Sous-types :
-    *   `INT` ou `INTEGER` : Généralement un entier de 4 octets.
-    *   `SMALLINT` : Généralement un entier de 2 octets.
-    *   `BIGINT` : Généralement un entier de 8 octets.
-    *   `TINYINT` : Généralement un entier de 1 octet.
-*   Plages (approximatives, peuvent varier selon le système de base de données) :
-    *   `TINYINT` : -128 à 127 (signé) ou 0 à 255 (non signé)
-    *   `SMALLINT` : -32 768 à 32 767
-    *   `INT` : -2 147 483 648 à 2 147 483 647
-    *   `BIGINT` : -9 223 372 036 854 775 808 à 9 223 372 036 854 775 807
+<img src="/images/lessons/lesson1_3-datatypes.jpg" alt="Comparaison des types SQL numériques, texte et date/heure pour concevoir les colonnes d'une table" width="100%">
+
+Avant d'entrer dans les sous-types, voici les grandes familles de types SQL:
+
+* **Types numériques**: `TINYINT`, `INT`, `BIGINT`, `DECIMAL`, `FLOAT`
+* **Types texte**: `CHAR`, `VARCHAR`, `TEXT`
+* **Types date/heure**: `DATE`, `TIME`, `DATETIME`, `TIMESTAMP`
+* **Types spécialisés**: `BOOLEAN`, `BLOB`, `JSON`
+
+## Quels sont les types numériques en SQL ?
+
+Les types numériques stockent des nombres, mais chaque famille répond à un besoin différent:
+
+* entiers pour les valeurs sans décimales,
+* décimaux exacts pour la finance,
+* flottants pour les calculs approximatifs.
+
+### Famille INTEGER
+
+Les types entiers stockent des valeurs sans partie décimale.
+
+| Type | Taille typique | Plage signée approximative |
+| :--- | :------------- | :------------------------- |
+| `TINYINT` | 1 octet | -128 à 127 |
+| `SMALLINT` | 2 octets | -32 768 à 32 767 |
+| `INTEGER` / `INT` | 4 octets | -2 147 483 648 à 2 147 483 647 |
+| `BIGINT` | 8 octets | -9 223 372 036 854 775 808 à 9 223 372 036 854 775 807 |
+
+Les bornes exactes varient selon le SGBD et le support signed/unsigned.
 
 ### DECIMAL / NUMERIC
-*   Stocke des valeurs numériques exactes avec une précision et une échelle spécifiées.
-*   Précision : Le nombre total de chiffres.
-*   Échelle : Le nombre de chiffres à droite de la virgule décimale.
-*   Exemple : `DECIMAL(10, 2)` peut stocker des nombres avec 10 chiffres au total, dont 2 après la virgule.
-*   Plage : Dépend de la précision et de l'échelle.
 
-### FLOAT / REAL (Flottant / Réel)
-*   Stocke des valeurs numériques approximatives avec une précision à virgule flottante.
-*   Sous-types :
-    *   `FLOAT` : Nombre à virgule flottante en simple précision.
-    *   `DOUBLE` / `DOUBLE PRECISION` : Nombre à virgule flottante en double précision.
-    *   `REAL` : Un synonyme de `FLOAT` dans certaines bases de données.
-*   Plage : Varie selon l'implémentation spécifique, mais couvre généralement une large gamme de valeurs avec une précision limitée.
+`DECIMAL` stocke des valeurs exactes avec une précision fixe.
 
-## Types de données de caractères / chaînes de caractères
+* `DECIMAL(p, s)`:
+  * `p` = nombre total de chiffres,
+  * `s` = nombre de chiffres après la virgule.
+* Exemple: `DECIMAL(10, 2)` permet des valeurs jusqu'à 99 999 999,99.
+* Recommandé pour les prix, factures, taxes et montants financiers.
 
-Les types de données de caractères sont utilisés pour stocker du texte.
+### FLOAT / REAL / DOUBLE
+
+Les types flottants stockent des valeurs approximatives.
+
+* Utiles pour calculs scientifiques et mesures.
+* À éviter pour l'argent, car de petites erreurs d'arrondi peuvent apparaître.
+* `DOUBLE` offre généralement plus de précision que `FLOAT`.
+
+## Quels sont les types de texte en SQL ?
+
+Les types texte diffèrent surtout par leur stratégie de longueur et de stockage.
 
 ### CHAR
-*   Stocke des chaînes de caractères de longueur fixe.
-*   Vous spécifiez la longueur lors de la définition de la colonne.
-*   Exemple : `CHAR(10)` stocke des chaînes d'exactement 10 caractères.
-*   Si la chaîne stockée est plus courte que la longueur spécifiée, elle est complétée par des espaces.
+
+* Chaîne à longueur fixe.
+* `CHAR(10)` réserve toujours 10 caractères.
+* Si la valeur est plus courte, de nombreux SGBD ajoutent des espaces de remplissage.
+* Pratique pour des codes de taille stable (pays, état, etc.).
 
 ### VARCHAR
-*   Stocke des chaînes de caractères de longueur variable.
-*   Vous spécifiez la longueur maximale lors de la définition de la colonne.
-*   Exemple : `VARCHAR(255)` stocke des chaînes allant jusqu'à 255 caractères.
-*   N'utilise que l'espace nécessaire pour stocker la chaîne réelle.
+
+* Chaîne à longueur variable avec limite maximale.
+* `VARCHAR(255)` stocke uniquement les caractères réellement saisis.
+* Bon choix par défaut pour noms, emails et libellés.
 
 ### TEXT
-*   Stocke de grandes chaînes de caractères de longueur variable.
-*   Souvent utilisé pour stocker des documents, des articles ou d'autres données textuelles volumineuses.
-*   La longueur maximale est généralement beaucoup plus grande que celle de `VARCHAR`.
 
-## Types de données de date et d'heure
+* Texte long à longueur variable.
+* Adapté aux descriptions longues, commentaires et contenus éditoriaux.
+* Les limites d'indexation peuvent varier selon le SGBD.
 
-Les types de données de date et d'heure sont utilisés pour stocker des valeurs temporelles.
+## Quels sont les types date et heure ?
+
+Les types temporels doivent être utilisés dès qu'une colonne représente une date, une heure ou un instant d'événement.
 
 ### DATE
-*   Stocke une date (année, mois, jour).
-*   Format : Varie selon le système de base de données (ex : AAAA-MM-JJ, MM/JJ/AAAA).
 
-### TIME (Heure)
-*   Stocke une heure (heure, minute, seconde).
-*   Format : Varie selon le système de base de données (ex : HH:MM:SS).
+Stocke uniquement la date (année, mois, jour).
+
+### TIME
+
+Stocke uniquement l'heure (heure, minute, seconde).
 
 ### DATETIME / TIMESTAMP
-*   Stocke à la fois la date et l'heure.
-*   Format : Varie selon le système de base de données (ex : AAAA-MM-JJ HH:MM:SS).
-*   `TIMESTAMP` a souvent un comportement spécial lié aux fuseaux horaires et aux mises à jour automatiques.
 
-## Type de données booléen
+Stocke date et heure ensemble.
 
-### BOOLEAN
-*   Stocke des valeurs vrai/faux (true/false).
-*   Certaines bases de données peuvent représenter les valeurs booléennes par des entiers (ex : 0 pour faux, 1 pour vrai).
+Selon le SGBD, `TIMESTAMP` peut être lié au fuseau horaire alors que `DATETIME` reste souvent neutre. Vérifiez ce comportement avant de concevoir des tables d'audit et d'événements.
 
-## Autres types de données
+## Quels autres types de données faut-il connaître ?
 
-### BLOB (Binary Large Object)
-*   Stocke des données binaires, telles que des images, des fichiers audio ou vidéo.
+La plupart des bases relationnelles proposent aussi des types spécialisés:
 
-### JSON
-*   Stocke des données au format JSON (JavaScript Object Notation).
-*   Permet de stocker des données semi-structurées dans une colonne de base de données.
+* `BOOLEAN`: valeurs vrai/faux.
+* `BLOB`: contenu binaire (images, fichiers).
+* `JSON`: documents semi-structurés JSON.
 
+## Comment choisir le bon type de données ?
 
-## Choisir le bon type de données
+Checklist pratique:
 
-*   Considérez le type de données que vous devez stocker (numérique, texte, date/heure, etc.).
-*   Choisissez le plus petit type de données capable d'accueillir la plage de valeurs attendue.
-*   Utilisez `VARCHAR` au lieu de `CHAR` à moins que vous n'ayez besoin de chaînes de longueur fixe.
-*   Utilisez `DECIMAL` pour les valeurs numériques exactes, en particulier pour les devises.
-*   Soyez conscient des types de données spécifiques et de leur comportement dans votre système de base de données.
+* Prenez le plus petit type qui couvre vos valeurs attendues sans risque.
+* Utilisez `DECIMAL` pour les montants financiers, pas `FLOAT`.
+* Préférez `VARCHAR` pour le texte variable et `CHAR` pour les formats fixes.
+* Utilisez des types temporels dédiés, pas des chaînes de texte pour les dates/heures.
+* Vérifiez les spécificités du SGBD: fuseaux horaires, valeurs par défaut, index, support JSON.
 
-En comprenant les types de données disponibles et leurs caractéristiques, vous pouvez concevoir des bases de données efficaces, fiables et faciles à entretenir.
+Un bon choix de type au départ réduit les migrations futures, les erreurs applicatives et les régressions de performance.
+
+---
 
 **Points clés de cette leçon :**
 
-*   **L'importance des types de données :** Choisir le type de données approprié est crucial pour l'intégrité des données, l'efficacité du stockage et les performances des requêtes.
-*   **Types numériques :** `INTEGER`, `DECIMAL` et `FLOAT` sont utilisés pour stocker des données numériques, chacun avec des caractéristiques différentes en matière de précision et de plage.
-*   **Types de chaînes :** `CHAR`, `VARCHAR` et `TEXT` sont utilisés pour stocker des données textuelles, avec des contraintes de longueur et des implications de stockage variables.
-*   **Types de date/heure :** `DATE`, `TIME` et `DATETIME` sont utilisés pour stocker des données temporelles, avec des formats spécifiques qui varient selon les systèmes de base de données.
-*   **Autres types :** `BOOLEAN`, `BLOB` et `JSON` permettent de stocker respectivement des valeurs booléennes, des données binaires et des données semi-structured.
-*   **Valeurs NULL :** `NULL` représente une valeur manquante ou inconnue et n'est pas un type de données en soi. Il est crucial de gérer correctement les valeurs `NULL` dans les requêtes.
-*   **Choisir judicieusement :** Tenez compte de la nature des données, de la précision requise et des implications de stockage lors du choix d'un type de données pour une colonne.
+* Les types de données déterminent les valeurs autorisées et influencent directement la qualité des données.
+* Les types numériques répondent à des besoins différents: entiers, valeurs exactes et calculs approximatifs.
+* `CHAR`, `VARCHAR` et `TEXT` se choisissent selon la longueur attendue et le comportement de stockage.
+* Les colonnes temporelles doivent utiliser `DATE`, `TIME` ou `TIMESTAMP` plutôt que du texte.
+* Un bon choix de type dès le départ évite des erreurs, des migrations et des problèmes de performance.
+
+---
+
+## Foire aux questions
+
+### Quelle est la différence entre DECIMAL et FLOAT ?
+`DECIMAL` stocke des valeurs exactes et convient aux montants financiers. `FLOAT` stocke des valeurs approximatives et peut introduire des écarts d'arrondi.
+
+### Faut-il utiliser CHAR ou VARCHAR pour les noms et emails ?
+Dans la plupart des cas, utilisez `VARCHAR`, car la longueur est variable. `CHAR` est plus adapté aux champs de longueur fixe, comme certains codes.
+
+### NULL est-il un type de données ?
+Non. `NULL` représente une valeur absente ou inconnue. C'est un marqueur spécial, pas un type de données.
+
+## Questions d'entretien
+
+### Comment choisir entre SMALLINT, INTEGER et BIGINT ?
+Évaluez la plage de valeurs attendue et choisissez le plus petit type qui la couvre sans risque. Cela réduit l'espace utilisé et évite les dépassements.
+
+### Pourquoi DECIMAL est-il recommandé pour les montants d'argent ?
+Parce que `DECIMAL` conserve une précision exacte et évite les erreurs d'arrondi des types en virgule flottante.
+
+### Quels problèmes peut causer un mauvais choix de type de données ?
+Vous pouvez rencontrer des erreurs de conversion, des tris/filtres incorrects, un stockage inutilement lourd, des requêtes plus lentes et une logique applicative plus fragile.
+
+→ [Leçon 1.5 : Comprendre les valeurs NULL en SQL](/fr/lesson/getting-started/null-values)

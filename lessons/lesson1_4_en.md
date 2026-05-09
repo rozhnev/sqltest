@@ -1,110 +1,160 @@
-# Lesson 1.4: Basic Data Types
+---
+title: "SQL Data Types Explained: INTEGER, VARCHAR, DATE and More"
+description: "SQL data types define what values a column can store. Learn numeric, string, date/time, boolean, and other types with practical examples and selection tips."
+keywords: ["SQL data types", "INTEGER VARCHAR DECIMAL", "SQL date types", "CHAR vs VARCHAR", "choosing SQL data types", "SQL column types"]
+teaches: ["What numeric data types are and when to use INTEGER, DECIMAL, and FLOAT", "The difference between CHAR, VARCHAR, and TEXT", "What DATE, TIME, and TIMESTAMP store", "When to use BOOLEAN, BLOB, and JSON", "How to choose the right data type for each column"]
+about: ["SQL data types", "INTEGER", "VARCHAR", "DECIMAL", "DATE", "TIMESTAMP", "BOOLEAN"]
+---
 
-In relational databases, data types specify the kind of data that can be stored within a column. Choosing the correct data type is crucial for data integrity, storage efficiency, and query performance. This lesson covers common data types and their subtypes used in relational databases, along with their value ranges.
+_Lesson 1.4 · Reading time: ~8 min_
 
-<img src="/images/lessons/lesson1_3-datatypes.jpg" alt="Data Types" width="100%">
+Data types define what kind of values each column can store in a relational database. In this lesson, you will learn the most common SQL data types, when to use each of them, and how correct type choices improve data quality, storage efficiency, and query performance.
 
-## Numeric Data Types
+# SQL Data Types Explained: INTEGER, VARCHAR, DATE and More
 
-Numeric data types are used to store numerical values.
+In the previous lesson, we covered tables, keys, constraints, and ACID. Now we move to a practical design decision you make for every table: choosing the right data type for each column.
 
-### INTEGER
-*   Stores whole numbers (integers).
-*   Subtypes:
-    *   `INT` or `INTEGER`: Typically a 4-byte integer.
-    *   `SMALLINT`: Typically a 2-byte integer.
-    *   `BIGINT`: Typically an 8-byte integer.
-    *   `TINYINT`: Typically a 1-byte integer.
-*   Ranges (approximate, may vary by database system):
-    *   `TINYINT`: -128 to 127 (signed) or 0 to 255 (unsigned)
-    *   `SMALLINT`: -32,768 to 32,767
-    *   `INT`: -2,147,483,648 to 2,147,483,647
-    *   `BIGINT`: -9,223,372,036,854,775,808 to 9,223,372,036,854,775,807
+<img src="/images/lessons/lesson1_3-datatypes.jpg" alt="Comparison of SQL numeric, text, and date/time data types used when designing table columns" width="100%">
+
+Before diving into subtypes, here are the main SQL data type groups:
+
+* **Numeric types**: `TINYINT`, `INT`, `BIGINT`, `DECIMAL`, `FLOAT`
+* **String types**: `CHAR`, `VARCHAR`, `TEXT`
+* **Date/time types**: `DATE`, `TIME`, `DATETIME`, `TIMESTAMP`
+* **Specialized types**: `BOOLEAN`, `BLOB`, `JSON`
+
+## What Are Numeric Data Types in SQL?
+
+Numeric data types store numbers, but not all numbers should be stored the same way. In practice, you choose between:
+
+* integer types for whole numbers,
+* exact decimal types for financial values,
+* floating-point types for approximate scientific values.
+
+### INTEGER Family
+
+Integer types store whole numbers without decimal places.
+
+| Type | Typical size | Approximate signed range |
+| :--- | :----------- | :----------------------- |
+| `TINYINT` | 1 byte | -128 to 127 |
+| `SMALLINT` | 2 bytes | -32,768 to 32,767 |
+| `INTEGER` / `INT` | 4 bytes | -2,147,483,648 to 2,147,483,647 |
+| `BIGINT` | 8 bytes | -9,223,372,036,854,775,808 to 9,223,372,036,854,775,807 |
+
+The exact ranges can vary slightly by database and by signed/unsigned support.
 
 ### DECIMAL / NUMERIC
-*   Stores exact numeric values with a specified precision and scale.
-*   Precision: The total number of digits.
-*   Scale: The number of digits to the right of the decimal point.
-*   Example: `DECIMAL(10, 2)` can store numbers with 10 total digits, 2 of which are after the decimal point.
-*   Range: Depends on the precision and scale.
 
-### FLOAT / REAL
-*   Stores approximate numeric values with floating-point precision.
-*   Subtypes:
-    *   `FLOAT`: Single-precision floating-point number.
-    *   `DOUBLE` / `DOUBLE PRECISION`: Double-precision floating-point number.
-    *   `REAL`: A synonym for `FLOAT` in some databases.
-*   Range: Varies depending on the specific implementation, but generally covers a wide range of values with limited precision.
+`DECIMAL` stores exact values with fixed precision.
 
-## Character / String Data Types
+* `DECIMAL(p, s)` means:
+  * `p` = total number of digits,
+  * `s` = digits after the decimal point.
+* Example: `DECIMAL(10, 2)` supports values up to 99,999,999.99.
+* Best for prices, invoices, taxes, and any value where accuracy is mandatory.
 
-Character data types are used to store text.
+### FLOAT / REAL / DOUBLE
+
+Floating-point types store approximate values.
+
+* Good for scientific calculations and telemetry data.
+* Not ideal for currency because binary floating-point can introduce small rounding differences.
+* `DOUBLE` generally offers higher precision than `FLOAT`.
+
+## What Are String Data Types in SQL?
+
+Text types differ mainly by length behavior and storage strategy.
 
 ### CHAR
-*   Stores fixed-length character strings.
-*   You specify the length when defining the column.
-*   Example: `CHAR(10)` stores strings of exactly 10 characters.
-*   If the stored string is shorter than the specified length, it's padded with spaces.
+
+* Fixed-length text.
+* `CHAR(10)` always reserves space for 10 characters.
+* If the value is shorter, many databases pad it with spaces.
+* Useful for fixed-size data like ISO country codes.
 
 ### VARCHAR
-*   Stores variable-length character strings.
-*   You specify the maximum length when defining the column.
-*   Example: `VARCHAR(255)` stores strings up to 255 characters long.
-*   Only uses the space needed to store the actual string.
+
+* Variable-length text with an upper limit.
+* `VARCHAR(255)` stores up to 255 characters but uses only the needed space.
+* Good default choice for names, emails, titles, and labels.
 
 ### TEXT
-*   Stores large variable-length character strings.
-*   Often used for storing documents, articles, or other large text data.
-*   The maximum length is typically much larger than `VARCHAR`.
 
-## Date and Time Data Types
+* Large variable-length text.
+* Useful for long descriptions, article bodies, comments, or logs.
+* Behavior and indexing limits can differ by database system.
 
-Date and time data types are used to store temporal values.
+## What Are Date and Time Data Types?
+
+Temporal types should be used for any value representing a date, a time, or an event timestamp.
 
 ### DATE
-*   Stores a date (year, month, day).
-*   Format: Varies depending on the database system (e.g., YYYY-MM-DD, MM/DD/YYYY).
+
+Stores only year-month-day.
 
 ### TIME
-*   Stores a time (hour, minute, second).
-*   Format: Varies depending on the database system (e.g., HH:MM:SS).
+
+Stores only hour-minute-second.
 
 ### DATETIME / TIMESTAMP
-*   Stores both date and time.
-*   Format: Varies depending on the database system (e.g., YYYY-MM-DD HH:MM:SS).
-*   `TIMESTAMP` often has special behavior related to time zones and automatic updates.
 
-## Boolean Data Type
+Stores both date and time.
 
-### BOOLEAN
-*   Stores true/false values.
-*   Some databases may represent boolean values as integers (e.g., 0 for false, 1 for true).
+`TIMESTAMP` may have timezone-aware behavior in some systems, while `DATETIME` is often timezone-neutral. Always verify your DBMS behavior before designing audit or event tables.
 
-## Other Data Types
+## What Other Data Types Should You Know?
 
-### BLOB (Binary Large Object)
-*   Stores binary data, such as images, audio, or video files.
+Many relational databases also support useful specialized types:
 
-### JSON
-*   Stores JSON (JavaScript Object Notation) data.
-*   Allows storing semi-structured data within a database column.
+* `BOOLEAN`: stores true/false values.
+* `BLOB`: stores binary content such as images or files.
+* `JSON`: stores semi-structured JSON documents and often supports JSON functions/indexes.
 
-## Choosing the Right Data Type
+## How to Choose the Right Data Type?
 
-*   Consider the type of data you need to store (numeric, text, date/time, etc.).
-*   Choose the smallest data type that can accommodate the range of values you expect.
-*   Use `VARCHAR` instead of `CHAR` unless you need fixed-length strings.
-*   Use `DECIMAL` for exact numeric values, especially when dealing with currency.
-*   Be aware of the specific data types and their behavior in your database system.
+Use this practical checklist:
 
-By understanding the available data types and their characteristics, you can design databases that are efficient, reliable, and easy to maintain.
+* Choose the smallest type that safely covers expected values.
+* Use `DECIMAL` for money; avoid `FLOAT` for financial amounts.
+* Prefer `VARCHAR` over `CHAR` unless data length is truly fixed.
+* Store dates and times with temporal types, not strings.
+* Check DB-specific behavior for defaults, timezone handling, and indexing.
 
-**Key Takeaways from this Lesson:**
+Choosing data types carefully at design time reduces future data migration work, application bugs, and performance regressions.
 
-*   **Data Types Matter:** Selecting the appropriate data type is crucial for data integrity, storage efficiency, and query performance.
-*   **Numeric Types:** `INTEGER`, `DECIMAL`, and `FLOAT` are used for storing numerical data, each with different characteristics regarding precision and range.
-*   **String Types:** `CHAR`, `VARCHAR`, and `TEXT` are used for storing text data, with varying length constraints and storage implications.
-*   **Date/Time Types:** `DATE`, `TIME`, and `DATETIME` are used for storing temporal data, with specific formats that vary across database systems.
-*   **Other Types:** `BOOLEAN`, `BLOB`, and `JSON` provide support for storing boolean values, binary data, and semi-structured data, respectively.
-*   **NULL Values:** `NULL` represents a missing or unknown value and is not a data type itself. It's crucial to handle `NULL` values properly in queries.
-*   **Choosing Wisely:** Consider the nature of the data, the required precision, and the storage implications when selecting a data type for a column.
+---
+
+**Key takeaways from this lesson:**
+
+* Data types define what values a column can store and strongly affect data quality.
+* Numeric types serve different goals: whole numbers, exact decimals, and approximate floating-point values.
+* `CHAR`, `VARCHAR`, and `TEXT` should be chosen based on expected text length and storage behavior.
+* Date/time fields should use `DATE`, `TIME`, or `TIMESTAMP` instead of plain text.
+* Picking the correct type early helps avoid bugs, data cleanup, and performance issues later.
+
+---
+
+## Frequently Asked Questions
+
+### What is the difference between DECIMAL and FLOAT?
+`DECIMAL` stores exact values and is best for money. `FLOAT` stores approximate values and may introduce rounding differences, so it is better for scientific-style calculations.
+
+### Should I use CHAR or VARCHAR for names and emails?
+In most cases, use `VARCHAR` because names and emails have variable length. `CHAR` is better for fixed-length values like country codes.
+
+### Is NULL a data type?
+No. `NULL` means a missing or unknown value. It is not a separate data type but a special marker that can appear in columns, depending on constraints.
+
+## Interview Questions
+
+### How do you choose between INTEGER, BIGINT, and SMALLINT?
+Estimate the expected value range and pick the smallest type that safely fits it. This improves storage efficiency while preventing overflow.
+
+### Why is DECIMAL preferred for currency values?
+Because `DECIMAL` stores exact precision and avoids floating-point rounding errors that can cause financial inaccuracies.
+
+### What problems happen when data types are chosen poorly?
+Typical issues include incorrect sorting/filtering, conversion errors, wasted storage, slower queries, and inconsistent application logic.
+
+→ [Lesson 1.5: Understanding NULL Values in SQL](/en/lesson/getting-started/null-values)
