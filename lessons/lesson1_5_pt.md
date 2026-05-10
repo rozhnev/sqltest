@@ -1,57 +1,113 @@
-Aprenda sobre os valores NULL no SQL, entendendo que o NULL representa dados ausentes ou desconhecidos. Esta lição aborda como o NULL difere de zero ou de uma string vazia, a importância dos operadores IS NULL e IS NOT NULL e como o NULL afeta as operações e a lógica do banco de dados.
+---
+title: "Valores NULL em Bases de Dados Relacionais: Significado, IS NULL e Lógica"
+description: "Saiba o que NULL significa em bases de dados relacionais, como difere de 0 e de uma string vazia, e como funcionam IS NULL, IS NOT NULL e os cálculos."
+keywords: ["NULL bases de dados relacionais", "IS NULL", "IS NOT NULL", "NULL e string vazia", "NULL lógica SQL", "dados ausentes"]
+teaches: ["O que NULL significa numa base de dados relacional", "Como NULL difere de 0, string vazia e false", "Porque as bases de dados usam NULL", "Como funcionam IS NULL e IS NOT NULL", "Como NULL se comporta em cálculos e comparações"]
+about: ["NULL", "IS NULL", "IS NOT NULL", "Base de dados relacional", "Dados ausentes", "Lógica ternária"]
+---
 
-# Lição 1.5: Entendendo os Valores NULL no SQL
+_Lição 1.5 · Tempo de leitura: ~7 min_
 
-No mundo dos bancos de dados, você encontrará frequentemente situações em que os dados estão ausentes, são desconhecidos ou não se aplicam. O SQL usa um marcador especial chamado **NULL** para representar esses casos. Entender o NULL é fundamental porque ele se comporta de maneira diferente de qualquer outro valor.
+NULL é o marcador especial que uma base de dados relacional usa quando um valor está ausente, é desconhecido ou não se aplica. Nesta lição, vai perceber o que NULL realmente significa, como se distingue dos valores normais e como trabalhar com ele com segurança em testes e consultas simples.
 
-## O que é NULL?
+# Valores NULL em Bases de Dados Relacionais: Significado, IS NULL e Lógica
 
-**NULL** não é um valor; é um **estado** ou um espaço reservado indicando que um valor de dado *não existe* no banco de dados.
+Nas lições anteriores, vimos conceitos relacionais e tipos de dados. Agora é importante entender o que acontece quando uma coluna não tem um valor útil armazenado.
 
-É importante lembrar o que o NULL **NÃO** é:
-*   **NULL não é 0:** Zero é um número. NULL é a ausência de um número.
-*   **NULL não é uma string vazia (' '):** Uma string vazia é um pedaço de texto com zero caracteres. NULL é a ausência de texto.
-*   **NULL não é "falso":** Na lógica SQL, o NULL permanece como "desconhecido".
+<img src="/images/lessons/lesson1_5-sql.jpg" alt="Ilustração mostrando NULL como valor ausente ou desconhecido em colunas de uma base de dados relacional" width="100%">
 
-## Por que usamos NULL?
-*   **Informação desconhecida:** Por exemplo, podemos ainda não saber o nome do meio de um cliente.
-*   **Não aplicável:** Uma coluna "CNPJ da Empresa" seria NULL para uma pessoa física.
-*   **Dados ausentes:** Dados que foram esquecidos durante a entrada.
+## O que significa NULL numa base de dados relacional?
 
-## Trabalhando com NULL: IS NULL e IS NOT NULL
+**NULL** não é um valor normal. É um marcador especial que informa a base de dados de que o valor está ausente, é desconhecido ou não se aplica.
 
-Como o NULL representa um estado desconhecido, você não pode usar operadores de comparação padrão como `=` ou `<>` com ele. Qualquer comparação com NULL (ex: `valor = NULL`) resultará em "desconhecido", não em "verdadeiro" ou "falso".
+Isto é importante porque NULL não se comporta como texto, número ou valor booleano. Ele segue regras próprias em comparações, filtros e cálculos.
 
-Para verificar valores NULL, você deve usar operadores específicos:
+## O que NULL não é?
 
-### 1. IS NULL
-Usado para encontrar registros onde uma coluna não tem valor.
+Para evitar confusão, lembre-se de que NULL **não é**:
+
+* **NULL não é 0**: zero é um valor numérico real.
+* **NULL não é uma string vazia**: `''` continua a ser texto, mesmo sem caracteres.
+* **NULL não é false**: na lógica das bases de dados, NULL normalmente significa **desconhecido**.
+
+## Porque é que as bases de dados usam NULL?
+
+As bases de dados usam NULL quando um valor não pode ser preenchido normalmente.
+
+Casos típicos:
+
+* **Informação desconhecida**: por exemplo, ainda não sabemos o nome do meio de um cliente.
+* **Não aplicável**: o NIF de empresa não se aplica a uma pessoa singular.
+* **Dados em falta**: alguma informação foi omitida durante a introdução.
+
+## Como funcionam IS NULL e IS NOT NULL?
+
+Como NULL representa um estado desconhecido, operadores de comparação padrão como `=` e `<>` não funcionam corretamente com ele.
+
+Por exemplo, `valor = NULL` não devolve verdadeiro. Para testar NULL corretamente, deve usar operadores específicos.
+
+### IS NULL
+
+`IS NULL` é usado para encontrar linhas onde uma coluna não contém valor:
+
 ```sql
 SELECT *
 FROM address
 WHERE address2 IS NULL;
 ```
 
-### 2. IS NOT NULL
-Usado para encontrar registros onde uma coluna contém *qualquer* dado.
+### IS NOT NULL
+
+`IS NOT NULL` é usado para encontrar linhas onde uma coluna contém algum valor:
+
 ```sql
 SELECT *
 FROM address
 WHERE address2 IS NOT NULL;
 ```
 
-## NULL em Cálculos
+## Como é que NULL se comporta em cálculos e lógica?
 
-Uma das coisas mais importantes a lembrar é que o **NULL se propaga**. Se você realizar uma operação matemática com um valor NULL, o resultado será sempre NULL.
+Uma das regras mais importantes é que **NULL propaga-se frequentemente**. Se NULL participa num cálculo, o resultado costuma ser NULL.
 
-*   `10 + NULL = NULL`
-*   `5 * NULL = NULL`
-*   `'Olá ' + NULL = NULL`
+* `10 + NULL = NULL`
+* `5 * NULL = NULL`
+* `'Olá ' + NULL = NULL`
 
-## Principais Conclusões desta Lição
+A mesma ideia afeta comparações. Como NULL significa "desconhecido", muitas expressões com NULL não devolvem verdadeiro nem falso, mas um resultado desconhecido.
 
-*   **NULL** representa dados ausentes, desconhecidos ou não aplicáveis.
-*   É **diferente** de zero, strings vazias ou espaços em branco.
-*   Comparações padrão (`=` ou `<>`) **não funcionam** com NULL.
-*   Use **IS NULL** e **IS NOT NULL** para filtrar dados ausentes.
-*   A maioria das operações matemáticas envolvendo NULL resultará em **NULL**.
+---
+
+**Principais conclusões desta lição:**
+
+* `NULL` representa dados ausentes, desconhecidos ou não aplicáveis.
+* `NULL` é diferente de zero, string vazia e false.
+* Comparações padrão como `=` e `<>` não servem para testar NULL.
+* Use `IS NULL` e `IS NOT NULL` para verificar NULL corretamente.
+* Cálculos com NULL muitas vezes devolvem NULL como resultado.
+
+---
+
+## Perguntas Frequentes
+
+### NULL é o mesmo que uma string vazia?
+Não. Uma string vazia continua a ser um valor de texto com comprimento zero. `NULL` significa que não existe um valor conhecido armazenado.
+
+### Porque `valor = NULL` não funciona?
+Porque NULL representa um estado desconhecido, e os operadores de comparação normais não foram feitos para testar esse estado. Para isso, usa-se `IS NULL`.
+
+### NULL pode aparecer numa coluna numérica?
+Sim. NULL não pertence a um único tipo de dados. Uma coluna numérica, de texto ou de data pode conter NULL, desde que uma restrição não o impeça.
+
+## Questões de Entrevista
+
+### Como explicaria NULL numa entrevista?
+NULL é um marcador especial que representa dados ausentes, desconhecidos ou não aplicáveis. Não é o mesmo que zero, false ou string vazia, e segue regras próprias em comparações e cálculos.
+
+### Porque se usa IS NULL em vez de = NULL?
+Porque NULL representa um estado desconhecido. Os operadores `=` e `<>` funcionam com valores normais, enquanto SQL fornece `IS NULL` e `IS NOT NULL` para testar NULL corretamente.
+
+### Qual é um erro comum ao trabalhar com NULL?
+Um erro comum é tratar NULL como um valor normal em filtros, condições ou cálculos. Isso costuma gerar resultados inesperados em consultas.
+
+Na próxima lição, vamos introduzir o próprio SQL e ver a estrutura básica de uma consulta.
