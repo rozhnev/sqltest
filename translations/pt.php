@@ -26,7 +26,7 @@ $translations = [
     'tasks_solved_count' => 'Tarefas resolvidas',
     'show_all_tasks' => 'Mostrar todas as tarefas',
     'hide_hide_solved_tasks' => 'Ocultar tarefas resolvidas',
-    'error_message' => 'Ops! Algo deu errado, mas não se preocupe, temos muitas outras tarefas <a href="/pt/" target="_self">aqui</a>',
+    'error_message' => 'Ops! Algo deu errado, mas não se preocupe: temos muitas outras tarefas <a href="/pt/" target="_self">aqui</a>',
     'footer_about' => 'Sobre',
     'footer_ask_in_chat' => 'Pergunte no nosso chat!',
     'footer_ask_in_telegram' => 'Pergunte no nosso chat do Telegram!',
