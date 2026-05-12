@@ -4,12 +4,11 @@
             min-width: 10rem;
         }
     </style>
-    <h2>Employee Database (Firebird)</h2>
-    <p>
-        Employee is a sample database that comes with the Firebird cross-platform database management system.
-        You can use this database to explore Firebird SQL and other DBMS features.
-    </p>
-    <h3>Below is a list of this DB tables:</h3>
+    <h1>Employee Database: table structure and overview</h1>
+    <p>The Employee database (Firebird) is a sample dataset used to learn SQL and explore Firebird DBMS capabilities.</p>
+    <p>This page describes table structure, key columns, and relationships for practical SQL querying.</p>
+    <p>The Employee database contains 9 main tables.</p>
+    <h2>List of tables</h2>
 
     <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span><span class='sql'>COUNTRY</span> - countries table.</span>
@@ -20,16 +19,13 @@
             <li><span class='sql'>CURRENCY</span>Currency used in the country</li>
         </ul>
         <div class="table-wrapper">
-            <table>
-                <tr>
-                    <th>COUNTRY</th>
-                    <th>CURRENCY</th>
-                </tr>
-                <tr>
+            <table><thead><tr>
+                    <th scope="col">COUNTRY</th>
+                    <th scope="col">CURRENCY</th>
+                </tr></thead><tbody><tr>
                     <td>USA</td>
                     <td>Dollar</td>
-                </tr>
-            </table>
+                </tr></tbody></table>
         </div>
     </div>
     <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
@@ -47,18 +43,16 @@
             <li><span class='sql'>LANGUAGE_REQ</span>Language requirements</li>
         </ul>
         <div class="table-wrapper">
-            <table>
-                <tr>
-                    <th>JOB_CODE</th>
-                    <th>JOB_GRADE</th>
-                    <th>JOB_COUNTRY</th>
-                    <th>JOB_TITLE</th>
-                    <th>MIN_SALARY</th>
-                    <th>MAX_SALARY</th>
-                    <th>JOB_REQUIREMENT</th>
-                    <th>LANGUAGE_REQ</th>
-                </tr>
-                <tr>
+            <table><thead><tr>
+                    <th scope="col">JOB_CODE</th>
+                    <th scope="col">JOB_GRADE</th>
+                    <th scope="col">JOB_COUNTRY</th>
+                    <th scope="col">JOB_TITLE</th>
+                    <th scope="col">MIN_SALARY</th>
+                    <th scope="col">MAX_SALARY</th>
+                    <th scope="col">JOB_REQUIREMENT</th>
+                    <th scope="col">LANGUAGE_REQ</th>
+                </tr></thead><tbody><tr>
                     <td>CEO</td>
                     <td>1</td>
                     <td>USA</td>
@@ -67,8 +61,7 @@
                     <td>250000.00</td>
                     <td>No specific requirements.</td>
                     <td>[null]</td>
-                </tr>
-            </table>
+                </tr></tbody></table>
         </div>    
     </div>
     <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
@@ -85,17 +78,15 @@
             <li><span class='sql'>PHONE_NO</span>Phone number for the department</li>
         </ul>
         <div class="table-wrapper">
-            <table>
-                <tr>
-                    <th>DEPT_NO</th>
-                    <th>DEPARTMENT</th>
-                    <th>HEAD_DEPT</th>
-                    <th>MNGR_NO</th>
-                    <th>BUDGET</th>
-                    <th>LOCATION</th>
-                    <th>PHONE_NO</th>
-                </tr>
-                <tr>
+            <table><thead><tr>
+                    <th scope="col">DEPT_NO</th>
+                    <th scope="col">DEPARTMENT</th>
+                    <th scope="col">HEAD_DEPT</th>
+                    <th scope="col">MNGR_NO</th>
+                    <th scope="col">BUDGET</th>
+                    <th scope="col">LOCATION</th>
+                    <th scope="col">PHONE_NO</th>
+                </tr></thead><tbody><tr>
                     <td>000</td>
                     <td>Corporate Office</td>
                     <td>[null]</td>
@@ -103,8 +94,7 @@
                     <td>1000000.00</td>
                     <td>Monterey</td>
                     <td>(408) 555-1234</td>
-                </tr>
-            </table>
+                </tr></tbody></table>
         </div>
     </div>
     <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
@@ -125,21 +115,19 @@
             <li><span class='sql'>FULL_NAME</span>Full name of the employee</li>
         </ul>
         <div class="table-wrapper">
-            <table>
-                <tr>
-                    <th>EMP_NO</th>
-                    <th>FIRST_NAME</th>
-                    <th>LAST_NAME</th>
-                    <th>PHONE_EXT</th>
-                    <th>HIRE_DATE</th>
-                    <th>DEPT_NO</th>
-                    <th>JOB_CODE</th>
-                    <th>JOB_GRADE</th>
-                    <th>JOB_COUNTRY</th>
-                    <th>SALARY</th>
-                    <th>FULL_NAME</th>
-                </tr>
-                <tr>
+            <table><thead><tr>
+                    <th scope="col">EMP_NO</th>
+                    <th scope="col">FIRST_NAME</th>
+                    <th scope="col">LAST_NAME</th>
+                    <th scope="col">PHONE_EXT</th>
+                    <th scope="col">HIRE_DATE</th>
+                    <th scope="col">DEPT_NO</th>
+                    <th scope="col">JOB_CODE</th>
+                    <th scope="col">JOB_GRADE</th>
+                    <th scope="col">JOB_COUNTRY</th>
+                    <th scope="col">SALARY</th>
+                    <th scope="col">FULL_NAME</th>
+                </tr></thead><tbody><tr>
                     <td>2</td>
                     <td>Robert</td>
                     <td>Nelson</td>
@@ -151,8 +139,7 @@
                     <td>USA</td>
                     <td>105900.00</td>
                     <td>Nelson, Robert</td>
-                </tr>
-            </table>
+                </tr></tbody></table>
         </div>    
     </div>
     <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
@@ -167,22 +154,19 @@
             <li><span class='sql'>PRODUCT</span>Product associated with the project</li>
         </ul>
         <div class="table-wrapper">
-            <table>
-                <tr>
-                    <th>PROJ_ID</th>
-                    <th>PROJ_NAME</th>
-                    <th>PROJ_DESC</th>
-                    <th>TEAM_LEADER</th>
-                    <th>PRODUCT</th>
-                </tr>
-                <tr>
+            <table><thead><tr>
+                    <th scope="col">PROJ_ID</th>
+                    <th scope="col">PROJ_NAME</th>
+                    <th scope="col">PROJ_DESC</th>
+                    <th scope="col">TEAM_LEADER</th>
+                    <th scope="col">PRODUCT</th>
+                </tr></thead><tbody><tr>
                     <td>VBASE</td>
                     <td>Video Database</td>
                     <td>Development of a video database management system for managing video distribution on demand.</td>
                     <td>45</td>
                     <td>software</td>
-                </tr>
-            </table>
+                </tr></tbody></table>
         </div>
     </div>
     <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
@@ -194,16 +178,13 @@
             <li><span class='sql'>PROJ_ID</span>Project ID</li>
         </ul>
         <div class="table-wrapper">
-            <table>
-                <tr>
-                    <th>EMP_NO</th>
-                    <th>PROJ_ID</th>
-                </tr>
-                <tr>
+            <table><thead><tr>
+                    <th scope="col">EMP_NO</th>
+                    <th scope="col">PROJ_ID</th>
+                </tr></thead><tbody><tr>
                     <td>144</td>
                     <td>DGPII</td>
-                </tr>
-            </table>
+                </tr></tbody></table>
         </div>
     </div>
     <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
@@ -218,22 +199,19 @@
             <li><span class='sql'>PROJECTED_BUDGET</span>Projected budget for the fiscal year</li>
         </ul>
         <div class="table-wrapper">
-            <table>
-                <tr>
-                    <th>FISCAL_YEAR</th>
-                    <th>PROJ_ID</th>
-                    <th>DEPT_NO</th>
-                    <th>QUART_HEAD_CNT</th>
-                    <th>PROJECTED_BUDGET</th>
-                </tr>
-                <tr>
+            <table><thead><tr>
+                    <th scope="col">FISCAL_YEAR</th>
+                    <th scope="col">PROJ_ID</th>
+                    <th scope="col">DEPT_NO</th>
+                    <th scope="col">QUART_HEAD_CNT</th>
+                    <th scope="col">PROJECTED_BUDGET</th>
+                </tr></thead><tbody><tr>
                     <td>1994</td>
                     <td>GUIDE</td>
                     <td>100</td>
                     <td>[null]</td>
                     <td>200000.00</td>
-                </tr>
-            </table>
+                </tr></tbody></table>
         </div>
     </div>
     <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
@@ -249,24 +227,21 @@
             <li><span class='sql'>NEW_SALARY</span>New salary after the change</li>
         </ul>
         <div class="table-wrapper">
-            <table>
-                <tr>
-                    <th>EMP_NO</th>
-                    <th>CHANGE_DATE</th>
-                    <th>UPDATER_ID</th>
-                    <th>OLD_SALARY</th>
-                    <th>PERCENT_CHANGE</th>
-                    <th>NEW_SALARY</th>
-                </tr>
-                <tr>
+            <table><thead><tr>
+                    <th scope="col">EMP_NO</th>
+                    <th scope="col">CHANGE_DATE</th>
+                    <th scope="col">UPDATER_ID</th>
+                    <th scope="col">OLD_SALARY</th>
+                    <th scope="col">PERCENT_CHANGE</th>
+                    <th scope="col">NEW_SALARY</th>
+                </tr></thead><tbody><tr>
                     <td>28</td>
                     <td>1992-12-15 00:00:00</td>
                     <td>admin2</td>
                     <td>20000.00</td>
                     <td>10.000000</td>
                     <td>22000.000000</td>
-                </tr>
-            </table>
+                </tr></tbody></table>
         </div>
     </div>
     <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
@@ -288,22 +263,20 @@
             <li><span class='sql'>ON_HOLD</span>On hold status (can be null)</li>
         </ul>
         <div class="table-wrapper">
-            <table>
-                <tr>
-                    <th>CUST_NO</th>
-                    <th>CUSTOMER</th>
-                    <th>CONTACT_FIRST</th>
-                    <th>CONTACT_LAST</th>
-                    <th>PHONE_NO</th>
-                    <th>ADDRESS_LINE1</th>
-                    <th>ADDRESS_LINE2</th>
-                    <th>CITY</th>
-                    <th>STATE_PROVINCE</th>
-                    <th>COUNTRY</th>
-                    <th>POSTAL_CODE</th>
-                    <th>ON_HOLD</th>
-                </tr>
-                <tr>
+            <table><thead><tr>
+                    <th scope="col">CUST_NO</th>
+                    <th scope="col">CUSTOMER</th>
+                    <th scope="col">CONTACT_FIRST</th>
+                    <th scope="col">CONTACT_LAST</th>
+                    <th scope="col">PHONE_NO</th>
+                    <th scope="col">ADDRESS_LINE1</th>
+                    <th scope="col">ADDRESS_LINE2</th>
+                    <th scope="col">CITY</th>
+                    <th scope="col">STATE_PROVINCE</th>
+                    <th scope="col">COUNTRY</th>
+                    <th scope="col">POSTAL_CODE</th>
+                    <th scope="col">ON_HOLD</th>
+                </tr></thead><tbody><tr>
                     <td>1001</td>
                     <td>Signature Design</td>
                     <td>Dale J.</td>
@@ -316,8 +289,7 @@
                     <td>USA</td>
                     <td>92121</td>
                     <td>[null]</td>
-                </tr>
-            </table>
+                </tr></tbody></table>
         </div>    
     </div>
     <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
@@ -340,23 +312,21 @@
             <li><span class='sql'>AGED</span>Aged value</li>
         </ul>
         <div class="table-wrapper">
-            <table>
-                <tr>
-                    <th>PO_NUMBER</th>
-                    <th>CUST_NO</th>
-                    <th>SALES_REP</th>
-                    <th>ORDER_STATUS</th>
-                    <th>ORDER_DATE</th>
-                    <th>SHIP_DATE</th>
-                    <th>DATE_NEEDED</th>
-                    <th>PAID</th>
-                    <th>QTY_ORDERED</th>
-                    <th>TOTAL_VALUE</th>
-                    <th>DISCOUNT</th>
-                    <th>ITEM_TYPE</th>
-                    <th>AGED</th>
-                </tr>
-                <tr>
+            <table><thead><tr>
+                    <th scope="col">PO_NUMBER</th>
+                    <th scope="col">CUST_NO</th>
+                    <th scope="col">SALES_REP</th>
+                    <th scope="col">ORDER_STATUS</th>
+                    <th scope="col">ORDER_DATE</th>
+                    <th scope="col">SHIP_DATE</th>
+                    <th scope="col">DATE_NEEDED</th>
+                    <th scope="col">PAID</th>
+                    <th scope="col">QTY_ORDERED</th>
+                    <th scope="col">TOTAL_VALUE</th>
+                    <th scope="col">DISCOUNT</th>
+                    <th scope="col">ITEM_TYPE</th>
+                    <th scope="col">AGED</th>
+                </tr></thead><tbody><tr>
                     <td>V91E0210</td>
                     <td>1004</td>
                     <td>11</td>
@@ -370,8 +340,7 @@
                     <td>0.100000</td>
                     <td>hardware</td>
                     <td>1.000000000</td>
-                </tr>
-            </table>
+                </tr></tbody></table>
         </div>
     </div>
     <h3>Below is a list of this DB views:</h3>
@@ -388,24 +357,21 @@
             <li><span class='sql'>PHONE_NO</span>Department phone number</li>
         </ul>
         <div class="table-wrapper">
-            <table>
-                <tr>
-                    <th>EMP_NO</th>
-                    <th>FIRST_NAME</th>
-                    <th>LAST_NAME</th>
-                    <th>PHONE_EXT</th>
-                    <th>LOCATION</th>
-                    <th>PHONE_NO</th>
-                </tr>
-                <tr>
+            <table><thead><tr>
+                    <th scope="col">EMP_NO</th>
+                    <th scope="col">FIRST_NAME</th>
+                    <th scope="col">LAST_NAME</th>
+                    <th scope="col">PHONE_EXT</th>
+                    <th scope="col">LOCATION</th>
+                    <th scope="col">PHONE_NO</th>
+                </tr></thead><tbody><tr>
                     <td>2</td>
                     <td>Robert</td>
                     <td>Nelson</td>
                     <td>250</td>
                     <td>Monterey</td>
                     <td>(408) 555-1234</td>
-                </tr>
-            </table>
+                </tr></tbody></table>
         </div>
     </div>
     {if $User->showAd()}

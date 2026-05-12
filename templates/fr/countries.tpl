@@ -4,11 +4,11 @@
             min-width: 7rem;
         }
     </style>
-    <h2>Base de données Countries (PostGIS)</h2>
-    <p>
-        La base de données Countries est une base de données d'exemple PostGIS conçue pour l'analyse de données géographiques et géospatiales. Elle comprend des informations spatiales sur les pays, les capitales et des données sur la ville de New York telles que les blocs de recensement, les homicides, les quartiers, les rues et les stations de métro, adaptées aux applications SIG et aux requêtes spatiales.
-    </p>
-    <h3>Liste des tables :</h3>
+    <h1>Base de données Countries : structure des tables et vue géospatiale</h1>
+    <p>La base Countries (PostGIS) est un jeu de données d'exemple pour l'analyse géographique et géospatiale avec SQL.</p>
+    <p>Elle contient des données spatiales sur les pays et les capitales, ainsi que des couches de New York : blocs de recensement, homicides, quartiers, rues et stations de métro.</p>
+    <p>La base de données Countries contient 7 tables principales.</p>
+    <h2>Liste des tables</h2>
     <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
         <span><span class='sql'>countries</span> - liste des pays avec géométrie.</span>
     </div>
@@ -19,18 +19,15 @@
             <li><span class='sql'>border</span>géométrie du pays (MultiPolygon, SRID 4326)</li>
         </ul>
         <div class="table-wrapper">
-            <table>
-                <tr>
-                    <th>id</th>
-                    <th>name</th>
-                    <th>border</th>
-                </tr>
-                <tr>
+            <table><thead><tr>
+                    <th scope="col">id</th>
+                    <th scope="col">name</th>
+                    <th scope="col">border</th>
+                </tr></thead><tbody><tr>
                     <td>1</td>
                     <td>France</td>
                     <td>MultiPolygon(...) [SRID=4326]</td>
-                </tr>
-            </table>
+                </tr></tbody></table>
         </div>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (id)</li>
@@ -47,20 +44,17 @@
             <li><span class='sql'>location</span>emplacement de la capitale (Point, SRID 4326)</li>
         </ul>
         <div class="table-wrapper">
-            <table>
-                <tr>
-                    <th>id</th>
-                    <th>name</th>
-                    <th>country_id</th>
-                    <th>location</th>
-                </tr>
-                <tr>
+            <table><thead><tr>
+                    <th scope="col">id</th>
+                    <th scope="col">name</th>
+                    <th scope="col">country_id</th>
+                    <th scope="col">location</th>
+                </tr></thead><tbody><tr>
                     <td>1</td>
                     <td>Paris</td>
                     <td>1</td>
                     <td>Point(...) [SRID=4326]</td>
-                </tr>
-            </table>
+                </tr></tbody></table>
         </div>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (id)</li>
@@ -84,20 +78,18 @@
             <li><span class='sql'>geom</span>géométrie du bloc de recensement (MultiPolygon, SRID 4326)</li>
         </ul>
         <div class="table-wrapper">
-            <table>
-                <tr>
-                    <th>gid</th>
-                    <th>blkid</th>
-                    <th>popn_total</th>
-                    <th>popn_white</th>
-                    <th>popn_black</th>
-                    <th>popn_nativ</th>
-                    <th>popn_asian</th>
-                    <th>popn_other</th>
-                    <th>boroname</th>
-                    <th>geom</th>
-                </tr>
-                <tr>
+            <table><thead><tr>
+                    <th scope="col">gid</th>
+                    <th scope="col">blkid</th>
+                    <th scope="col">popn_total</th>
+                    <th scope="col">popn_white</th>
+                    <th scope="col">popn_black</th>
+                    <th scope="col">popn_nativ</th>
+                    <th scope="col">popn_asian</th>
+                    <th scope="col">popn_other</th>
+                    <th scope="col">boroname</th>
+                    <th scope="col">geom</th>
+                </tr></thead><tbody><tr>
                     <td>1</td>
                     <td>360050001001000</td>
                     <td>1000</td>
@@ -108,8 +100,7 @@
                     <td>100</td>
                     <td>Manhattan</td>
                     <td>MultiPolygon(...) [SRID=4326]</td>
-                </tr>
-            </table>
+                </tr></tbody></table>
         </div>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (gid)</li>
@@ -132,20 +123,18 @@
             <li><span class='sql'>geom</span>emplacement de l'incident (Point, SRID 4326)</li>
         </ul>
         <div class="table-wrapper">
-            <table>
-                <tr>
-                    <th>gid</th>
-                    <th>incident_d</th>
-                    <th>boroname</th>
-                    <th>num_victim</th>
-                    <th>primary_mo</th>
-                    <th>id</th>
-                    <th>weapon</th>
-                    <th>light_dark</th>
-                    <th>year</th>
-                    <th>geom</th>
-                </tr>
-                <tr>
+            <table><thead><tr>
+                    <th scope="col">gid</th>
+                    <th scope="col">incident_d</th>
+                    <th scope="col">boroname</th>
+                    <th scope="col">num_victim</th>
+                    <th scope="col">primary_mo</th>
+                    <th scope="col">id</th>
+                    <th scope="col">weapon</th>
+                    <th scope="col">light_dark</th>
+                    <th scope="col">year</th>
+                    <th scope="col">geom</th>
+                </tr></thead><tbody><tr>
                     <td>1</td>
                     <td>2003-01-01</td>
                     <td>Manhattan</td>
@@ -156,8 +145,7 @@
                     <td>D</td>
                     <td>2003</td>
                     <td>Point(...) [SRID=4326]</td>
-                </tr>
-            </table>
+                </tr></tbody></table>
         </div>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (gid)</li>
@@ -174,20 +162,17 @@
             <li><span class='sql'>geom</span>géométrie du quartier (MultiPolygon, SRID 4326)</li>
         </ul>
         <div class="table-wrapper">
-            <table>
-                <tr>
-                    <th>gid</th>
-                    <th>boroname</th>
-                    <th>name</th>
-                    <th>geom</th>
-                </tr>
-                <tr>
+            <table><thead><tr>
+                    <th scope="col">gid</th>
+                    <th scope="col">boroname</th>
+                    <th scope="col">name</th>
+                    <th scope="col">geom</th>
+                </tr></thead><tbody><tr>
                     <td>1</td>
                     <td>Manhattan</td>
                     <td>Financial District</td>
                     <td>MultiPolygon(...) [SRID=4326]</td>
-                </tr>
-            </table>
+                </tr></tbody></table>
         </div>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (gid)</li>
@@ -206,24 +191,21 @@
             <li><span class='sql'>geom</span>géométrie de la rue (LineString, SRID 4326)</li>
         </ul>
         <div class="table-wrapper">
-            <table>
-                <tr>
-                    <th>gid</th>
-                    <th>id</th>
-                    <th>name</th>
-                    <th>oneway</th>
-                    <th>type</th>
-                    <th>geom</th>
-                </tr>
-                <tr>
+            <table><thead><tr>
+                    <th scope="col">gid</th>
+                    <th scope="col">id</th>
+                    <th scope="col">name</th>
+                    <th scope="col">oneway</th>
+                    <th scope="col">type</th>
+                    <th scope="col">geom</th>
+                </tr></thead><tbody><tr>
                     <td>1</td>
                     <td>1</td>
                     <td>Broadway</td>
                     <td>NO</td>
                     <td>avenue</td>
                     <td>LineString(...) [SRID=4326]</td>
-                </tr>
-            </table>
+                </tr></tbody></table>
         </div>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (gid)</li>
@@ -252,26 +234,24 @@
             <li><span class='sql'>geom</span>emplacement de la station (Point, SRID 4326)</li>
         </ul>
         <div class="table-wrapper">
-            <table>
-                <tr>
-                    <th>gid</th>
-                    <th>objectid</th>
-                    <th>id</th>
-                    <th>name</th>
-                    <th>alt_name</th>
-                    <th>cross_st</th>
-                    <th>long_name</th>
-                    <th>label</th>
-                    <th>borough</th>
-                    <th>nghbhd</th>
-                    <th>routes</th>
-                    <th>transfers</th>
-                    <th>color</th>
-                    <th>express</th>
-                    <th>closed</th>
-                    <th>geom</th>
-                </tr>
-                <tr>
+            <table><thead><tr>
+                    <th scope="col">gid</th>
+                    <th scope="col">objectid</th>
+                    <th scope="col">id</th>
+                    <th scope="col">name</th>
+                    <th scope="col">alt_name</th>
+                    <th scope="col">cross_st</th>
+                    <th scope="col">long_name</th>
+                    <th scope="col">label</th>
+                    <th scope="col">borough</th>
+                    <th scope="col">nghbhd</th>
+                    <th scope="col">routes</th>
+                    <th scope="col">transfers</th>
+                    <th scope="col">color</th>
+                    <th scope="col">express</th>
+                    <th scope="col">closed</th>
+                    <th scope="col">geom</th>
+                </tr></thead><tbody><tr>
                     <td>1</td>
                     <td>1</td>
                     <td>1</td>
@@ -288,8 +268,7 @@
                     <td>Oui</td>
                     <td>Non</td>
                     <td>Point(...) [SRID=4326]</td>
-                </tr>
-            </table>
+                </tr></tbody></table>
         </div>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (gid)</li>
