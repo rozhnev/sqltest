@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 {assign var="Db" value=$Params.db}
+{assign var="Theme" value=$Params.theme|default:'ligth'}
+{assign var="ErdBase" value="/images/`$Db|lower`_`$Theme`"}
 <html xmlns="http://www.w3.org/1999/xhtml" lang="{$Lang}" data-theme="{$Params.theme|default:'ligth'}">
     <head>
         <title>{translate}erd_diagram{/translate}</title>
@@ -30,7 +32,9 @@
             <div style="justify-items: center; margin-top: 5em;">
                 <h2 style="text-align: center;">{translate}erd_diagram{/translate}</h2>
                 <div style="margin-top: 1em; max-width:100%;">
-                    <img src="/images/{$Params.db|lower}_{$Params.theme|default:'ligth'}.png" title="" style="max-width:100%;"/>
+                    <object data="{$ErdBase}.svg" type="image/svg+xml" style="max-width:100%;">
+                        <img src="{$ErdBase}.jpg" title="" style="max-width:100%;" onerror="this.onerror=null;this.src='{$ErdBase}.png';"/>
+                    </object>
                 </div>
             </div>
         </div>
