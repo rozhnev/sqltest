@@ -1,48 +1,45 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1700" height="1050" viewBox="0 0 1700 1050" role="img" aria-labelledby="title desc">
-  <title id="title">Employee Database ERD</title>
-  <desc id="desc">Entity relationship diagram for Employee DB, laid out to minimize connector crossings with equal-width table blocks.</desc>
+  <title id="title">Employee Database ERD (Dark Theme)</title>
+  <desc id="desc">Entity relationship diagram for Employee DB, laid out to minimize connector crossings with equal-width table blocks. Dark theme variant.</desc>
 
   <defs>
     <style>
-      .bg { fill: #f3f6fb; }
-      .grid { stroke: #e5eaf2; stroke-width: 1; }
-      .panel { fill: #ffffff; stroke: #25364a; stroke-width: 1.5; }
-      .header { fill: #0f4aa3; }
-      .title { fill: #ffffff; font: 700 15px 'Segoe UI', Arial, sans-serif; }
-      .col { fill: #1f2d3d; font: 12px 'Segoe UI', Arial, sans-serif; }
-      .pk { fill: #0f766e; font: 700 11px 'Segoe UI', Arial, sans-serif; }
-      .fk { fill: #7e22ce; font: 700 11px 'Segoe UI', Arial, sans-serif; }
-      .edge { stroke: #334155; stroke-width: 2; fill: none; }
-      .edge-soft { stroke: #64748b; stroke-width: 1.6; fill: none; stroke-dasharray: 5 4; }
-      .label { fill: #0f172a; font: 11px 'Segoe UI', Arial, sans-serif; }
-      .main { fill: #0b1220; font: 700 26px 'Segoe UI', Arial, sans-serif; }
-      .sub { fill: #334155; font: 13px 'Segoe UI', Arial, sans-serif; }
-      .legend-box { fill: #ffffff; stroke: #334155; stroke-width: 1.2; }
+      .bg { fill: #171B23; }
+      .grid { stroke: #263E74; stroke-width: 1; }
+      .panel { fill: #21262E; stroke: #79C0FF; stroke-width: 1.5; }
+      .header { fill: #1A3B7E; }
+      .title { fill: #F0F6FC; font: 700 15px 'Segoe UI', Arial, sans-serif; }
+      .col { fill: #B0BFD4; font: 12px 'Segoe UI', Arial, sans-serif; }
+      .pk { fill: #5BBED4; font: 700 11px 'Segoe UI', Arial, sans-serif; }
+      .fk { fill: #C084FC; font: 700 11px 'Segoe UI', Arial, sans-serif; }
+      .edge { stroke: #79C0FF; stroke-width: 2; fill: none; }
+      .edge-soft { stroke: #4DA3FF; stroke-width: 1.6; fill: none; stroke-dasharray: 5 4; }
+      .label { fill: #D0D8E0; font: 11px 'Segoe UI', Arial, sans-serif; }
+      .main { fill: #F0F6FC; font: 700 26px 'Segoe UI', Arial, sans-serif; }
+      .sub { fill: #B0BFD4; font: 13px 'Segoe UI', Arial, sans-serif; }
+      .legend-box { fill: #21262E; stroke: #79C0FF; stroke-width: 1.2; }
     </style>
     <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" viewBox="0 0 10 10">
-      <path d="M0,0 L10,5 L0,10 z" fill="#334155"/>
+      <path d="M0,0 L10,5 L0,10 z" fill="#79C0FF"/>
     </marker>
     <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="1.2" stdDeviation="1.2" flood-color="#9aa8bd" flood-opacity="0.45"/>
+      <feDropShadow dx="0" dy="1.2" stdDeviation="1.2" flood-color="#000000" flood-opacity="0.6"/>
     </filter>
   </defs>
 
-  <rect class="bg" x="0" y="0" width="1700" height="1050"/>
+  <rect class="bg" x="0" y="0" width="1500" height="900"/>
 
   <!-- soft alignment grid -->
   <g opacity="0.55">
-    <line class="grid" x1="80" y1="70" x2="80" y2="980"/>
-    <line class="grid" x1="420" y1="70" x2="420" y2="980"/>
-    <line class="grid" x1="760" y1="70" x2="760" y2="980"/>
-    <line class="grid" x1="1100" y1="70" x2="1100" y2="980"/>
-    <line class="grid" x1="1440" y1="70" x2="1440" y2="980"/>
-    <line class="grid" x1="80" y1="120" x2="1600" y2="120"/>
-    <line class="grid" x1="80" y1="360" x2="1600" y2="360"/>
-    <line class="grid" x1="80" y1="620" x2="1600" y2="620"/>
+    <line class="grid" x1="80" y1="70" x2="80" y2="900"/>
+    <line class="grid" x1="420" y1="70" x2="420" y2="900"/>
+    <line class="grid" x1="760" y1="70" x2="760" y2="900"/>
+    <line class="grid" x1="1100" y1="70" x2="1100" y2="900"/>
+    <line class="grid" x1="1440" y1="70" x2="1440" y2="900"/>
+    <line class="grid" x1="80" y1="120" x2="1500" y2="120"/>
+    <line class="grid" x1="80" y1="360" x2="1500" y2="360"/>
+    <line class="grid" x1="80" y1="620" x2="1500" y2="620"/>
   </g>
-
-  <text class="main" x="850" y="44" text-anchor="middle">Employee Database ERD</text>
-  <text class="sub" x="850" y="68" text-anchor="middle">Generated from FOREIGN KEY blocks in templates/en/employee.tpl</text>
 
   <!-- Equal width for all tables: 300 -->
 
@@ -214,13 +211,11 @@
   <!-- Legend -->
   <g transform="translate(1100,120)">
     <rect class="legend-box" x="0" y="0" width="300" height="132" rx="8" ry="8"/>
-    <text x="14" y="24" style="font:700 14px 'Segoe UI', Arial, sans-serif; fill:#0f172a;">Legend</text>
+    <text x="14" y="24" style="font:700 14px 'Segoe UI', Arial, sans-serif; fill:#F0F6FC;">Legend</text>
     <text class="pk" x="14" y="50">PK</text><text class="col" x="44" y="50">Primary key</text>
     <text class="fk" x="14" y="72">FK</text><text class="col" x="44" y="72">Foreign key</text>
     <line class="edge" x1="14" y1="92" x2="84" y2="92" marker-end="url(#arrow)"/>
     <text class="col" x="94" y="96">Child table points to parent table</text>
     <text class="col" x="14" y="118">All table blocks are equal width (300 px)</text>
   </g>
-
-  <text class="sub" x="80" y="1018">Note: PHONE_LIST is a view and is intentionally excluded from the ERD.</text>
 </svg>
