@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1700" height="1050" viewBox="0 0 1700 1050" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="900" viewBox="0 0 1500 900" role="img" aria-labelledby="title desc">
   <title id="title">Employee Database ERD</title>
   <desc id="desc">Entity relationship diagram for Employee DB, laid out to minimize connector crossings with equal-width table blocks.</desc>
 

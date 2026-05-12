@@ -1,11 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1700" height="1050" viewBox="0 0 1700 1050" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="900" viewBox="0 0 1500 900" role="img" aria-labelledby="title desc">
   <title id="title">Employee Database ERD (Dark Theme)</title>
   <desc id="desc">Entity relationship diagram for Employee DB, laid out to minimize connector crossings with equal-width table blocks. Dark theme variant.</desc>
 
   <defs>
     <style>
       .bg { fill: #171B23; }
-      .grid { stroke: #263E74; stroke-width: 1; }
+      .grid { stroke: rgb(23, 27, 35); stroke-width: 1; }
       .panel { fill: #21262E; stroke: #79C0FF; stroke-width: 1.5; }
       .header { fill: #1A3B7E; }
       .title { fill: #F0F6FC; font: 700 15px 'Segoe UI', Arial, sans-serif; }
