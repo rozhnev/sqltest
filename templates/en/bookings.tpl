@@ -4,15 +4,17 @@
             min-width: 10rem;
         }
     </style>
-    <h2>Bookings Database (PostgreSQL)</h2>
-    The subject area of this database is airline flights through various airports. The Bookings Database contains 8 tables.
+    <h1>Bookings Database: table structure and schema overview</h1>
+    <p>The Bookings database (PostgreSQL) models airline flights across multiple airports and is widely used for SQL practice.</p>
+    <p>This page shows the table structure, key columns, and constraints used in typical analytical and transactional SQL queries.</p>
+    <p>The Bookings database contains 8 main tables.</p>
     <p>
-        <a href="/{$Lang}/erd/Bookings" target="ERDWindow" style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
-            <img src="/images/erd_small_light.jpg" alt="ER diagram of the Bookings database" style="width: 90%;">
+        <a href="/{$Lang}/erd/Bookings" target="ERDWindow" rel="noopener noreferrer" style="display: flex; flex-direction: column; align-items: center; gap: 4px;" aria-label="Open Bookings database ER diagram in a new window">
+            <img src="/images/erd_small_light.jpg" alt="ER diagram of the Bookings database showing table relationships" style="width: 90%;" loading="lazy" decoding="async">
             ER diagram of the Bookings database
         </a>
     </p>
-    <h3>The list of tables:</h3>
+    <h2>The list of tables</h2>
     {literal}
     <div class="accordion active">
         <span><span class='sql'>aircrafts_data</span> - table of aircrafts.</span>
@@ -28,10 +30,7 @@
         </ul>
         <div class="table-wrapper">
             <table class="">
-                <tbody>
-                    <tr><th></th><th>aircraft_code</th><th>model</th><th>range</th></tr>
-                    <tr><td>1</td><td>773</td><td>{"en": "Boeing 777-300", "ru": "Боинг 777-300"}</td><td>11100</td></tr>
-                </tbody>
+                <thead><tr><th scope="col"></th><th scope="col">aircraft_code</th><th scope="col">model</th><th scope="col">range</th></tr></thead><tbody><tr><td>1</td><td>773</td><td>{"en": "Boeing 777-300", "ru": "Боинг 777-300"}</td><td>11100</td></tr></tbody>
             </table>
         </div>
     </div>
@@ -51,10 +50,7 @@
         </ul>
         <div class="table-wrapper">
             <table class="">
-                <tbody>
-                    <tr><th></th><th>airport_code</th><th>airport_name</th><th>city</th><th>coordinates</th><th>timezone</th></tr>
-                    <tr><td>1</td><td>YKS</td><td>{"en": "Yakutsk Airport", "ru": "Якутск"}</td><td>{"en": "Yakutsk", "ru": "Якутск"}</td><td>(129.77099609375,62.0932998657227)</td><td>Asia/Yakutsk</td></tr>
-                </tbody>
+                <thead><tr><th scope="col"></th><th scope="col">airport_code</th><th scope="col">airport_name</th><th scope="col">city</th><th scope="col">coordinates</th><th scope="col">timezone</th></tr></thead><tbody><tr><td>1</td><td>YKS</td><td>{"en": "Yakutsk Airport", "ru": "Якутск"}</td><td>{"en": "Yakutsk", "ru": "Якутск"}</td><td>(129.77099609375,62.0932998657227)</td><td>Asia/Yakutsk</td></tr></tbody>
             </table>
         </div>
     </div>
@@ -78,10 +74,7 @@
         </ul>        
         <div class="table-wrapper">
             <table class="">
-                <tbody>
-                    <tr><th></th><th>ticket_no</th><th>flight_id</th><th>boarding_no</th><th>seat_no</th></tr>
-                    <tr><td>1</td><td>0005435212351</td><td>30625</td><td>1</td><td>2D</td></tr>
-                </tbody>
+                <thead><tr><th scope="col"></th><th scope="col">ticket_no</th><th scope="col">flight_id</th><th scope="col">boarding_no</th><th scope="col">seat_no</th></tr></thead><tbody><tr><td>1</td><td>0005435212351</td><td>30625</td><td>1</td><td>2D</td></tr></tbody>
             </table>
         </div>
     </div>
@@ -98,7 +91,7 @@
             <li>PRIMARY KEY, btree (book_ref)</li>
         </ul>
         <div class="table-wrapper">
-            <table class=""><tbody><tr><th></th><th>book_ref</th><th>book_date</th><th>total_amount</th></tr><tr><td>1</td><td>00000F</td><td>2017-07-05 00:12:00+00</td><td>265700.00</td></tr></tbody></table>
+            <table class=""><thead><tr><th scope="col"></th><th scope="col">book_ref</th><th scope="col">book_date</th><th scope="col">total_amount</th></tr></thead><tbody><tr><td>1</td><td>00000F</td><td>2017-07-05 00:12:00+00</td><td>265700.00</td></tr></tbody></table>
         </div>
     </div>
     <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
@@ -122,19 +115,18 @@
             <li>UNIQUE CONSTRAINT, btree (flight_no, scheduled_departure)</li>
         </ul>    
         <div class="table-wrapper">
-            <table class=""><tbody>
-                <tr><th></th>
-                    <th>flight_id</th>
-                    <th>flight_no</th>
-                    <th>scheduled_departure</th>
-                    <th>scheduled_arrival</th>
-                    <th>departure_airport</th>
-                    <th>arrival_airport</th>
-                    <th>status</th>
-                    <th>aircraft_code</th>
-                    <th>actual_departure</th>
-                    <th>actual_arrival</th>
-                </tr><tr><td>1</td><td>1185</td><td>PG0134</td><td>2017-09-10 06:50:00+00</td><td>2017-09-10 11:55:00+00</td><td>DME</td><td>BTK</td><td>Scheduled</td><td>319</td><td></td><td></td></tr></tbody></table>
+            <table class=""><thead><tr><th scope="col"></th>
+                    <th scope="col">flight_id</th>
+                    <th scope="col">flight_no</th>
+                    <th scope="col">scheduled_departure</th>
+                    <th scope="col">scheduled_arrival</th>
+                    <th scope="col">departure_airport</th>
+                    <th scope="col">arrival_airport</th>
+                    <th scope="col">status</th>
+                    <th scope="col">aircraft_code</th>
+                    <th scope="col">actual_departure</th>
+                    <th scope="col">actual_arrival</th>
+                </tr></thead><tbody><tr><td>1</td><td>1185</td><td>PG0134</td><td>2017-09-10 06:50:00+00</td><td>2017-09-10 11:55:00+00</td><td>DME</td><td>BTK</td><td>Scheduled</td><td>319</td><td></td><td></td></tr></tbody></table>
         </div>
     </div>
     <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
@@ -153,11 +145,10 @@
             <li>FOREIGN KEY (aircraft_code) REFERENCES aircrafts(aircraft_code) ON DELETE CASCADE</li>
         </ul>
         <div class="table-wrapper">
-            <table class=""><tbody><tr>
-                <th></th>
-                <th>aircraft_code</th><th>seat_no</th><th>fare_conditions</th>
-            </tr>
-            <tr><td>1</td><td>319</td><td>2A</td><td>Business</td></tr></tbody></table>
+            <table class=""><thead><tr>
+                <th scope="col"></th>
+                <th scope="col">aircraft_code</th><th scope="col">seat_no</th><th scope="col">fare_conditions</th>
+            </tr></thead><tbody><tr><td>1</td><td>319</td><td>2A</td><td>Business</td></tr></tbody></table>
         </div>
     </div>
     <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
@@ -178,13 +169,13 @@
             <li>FOREIGN KEY (ticket_no) REFERENCES tickets(ticket_no)</li>
         </ul>
         <div class="table-wrapper">
-            <table class=""><tbody><tr>
-                <th></th>
-                <th>ticket_no</th>
-                <th>flight_id</th>
-                <th>fare_conditions</th>
-                <th>amount</th>
-            </tr><tr><td>1</td><td>0005432159776</td><td>30625</td><td>Business</td><td>42100.00</td></tr></tbody></table>
+            <table class=""><thead><tr>
+                <th scope="col"></th>
+                <th scope="col">ticket_no</th>
+                <th scope="col">flight_id</th>
+                <th scope="col">fare_conditions</th>
+                <th scope="col">amount</th>
+            </tr></thead><tbody><tr><td>1</td><td>0005432159776</td><td>30625</td><td>Business</td><td>42100.00</td></tr></tbody></table>
         </div>
     </div>
     <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
@@ -199,14 +190,13 @@
             <li> <span class='sql'>contact_data</span>Passenger contact information</li>
         </ul>
         <div class="table-wrapper">
-            <table class=""><tbody><tr>
-                <th></th>
-                <th>ticket_no</th>
-                <th>book_ref</th>
-                <th>passenger_id</th>
-                <th>passenger_name</th>
-                <th>contact_data</th></tr>
-                <tr><td>1</td><td>0005432000987</td><td>06B046</td><td>8149 604011</td><td>VALERIY TIKHONOV</td><td>{"phone": "+70127117011"}</td></tr></tbody></table>
+            <table class=""><thead><tr>
+                <th scope="col"></th>
+                <th scope="col">ticket_no</th>
+                <th scope="col">book_ref</th>
+                <th scope="col">passenger_id</th>
+                <th scope="col">passenger_name</th>
+                <th scope="col">contact_data</th></tr></thead><tbody><tr><td>1</td><td>0005432000987</td><td>06B046</td><td>8149 604011</td><td>VALERIY TIKHONOV</td><td>{"phone": "+70127117011"}</td></tr></tbody></table>
         </div>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (ticket_no)</li>
