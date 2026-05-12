@@ -62,7 +62,10 @@
                     <td>No specific requirements.</td>
                     <td>[null]</td>
                 </tr></tbody></table>
-        </div>    
+        </div>
+        <ul class="table-columns">
+            <li>FOREIGN KEY (JOB_COUNTRY) REFERENCES COUNTRY(COUNTRY)</li>
+        </ul>
     </div>
     <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span><span class='sql'>DEPARTMENT</span> - company divisions.</span>
@@ -96,6 +99,9 @@
                     <td>(408) 555-1234</td>
                 </tr></tbody></table>
         </div>
+        <ul class="table-columns">
+            <li>FOREIGN KEY (HEAD_DEPT) REFERENCES DEPARTMENT(DEPT_NO)</li>
+        </ul>
     </div>
     <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span><span class='sql'>EMPLOYEE</span> - list of employees.</span>
@@ -140,7 +146,11 @@
                     <td>105900.00</td>
                     <td>Nelson, Robert</td>
                 </tr></tbody></table>
-        </div>    
+        </div>
+        <ul class="table-columns">
+            <li>FOREIGN KEY (DEPT_NO) REFERENCES DEPARTMENT(DEPT_NO)</li>
+            <li>FOREIGN KEY (JOB_CODE) REFERENCES JOB(JOB_CODE)</li>
+        </ul>
     </div>
     <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span><span class='sql'>PROJECT</span> - list of projects.</span>
@@ -168,6 +178,9 @@
                     <td>software</td>
                 </tr></tbody></table>
         </div>
+        <ul class="table-columns">
+            <li>FOREIGN KEY (TEAM_LEADER) REFERENCES EMPLOYEE(EMP_NO)</li>
+        </ul>
     </div>
     <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span><span class='sql'>EMPLOYEE_PROJECT</span> - employee-project mapping.</span>
@@ -186,6 +199,10 @@
                     <td>DGPII</td>
                 </tr></tbody></table>
         </div>
+        <ul class="table-columns">
+            <li>FOREIGN KEY (EMP_NO) REFERENCES EMPLOYEE(EMP_NO)</li>
+            <li>FOREIGN KEY (PROJ_ID) REFERENCES PROJECT(PROJ_ID)</li>
+        </ul>
     </div>
     <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span><span class='sql'>PROJ_DEPT_BUDGET</span> - project budgets.</span>
@@ -213,6 +230,10 @@
                     <td>200000.00</td>
                 </tr></tbody></table>
         </div>
+        <ul class="table-columns">
+            <li>FOREIGN KEY (PROJ_ID) REFERENCES PROJECT(PROJ_ID)</li>
+            <li>FOREIGN KEY (DEPT_NO) REFERENCES DEPARTMENT(DEPT_NO)</li>
+        </ul>
     </div>
     <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span><span class='sql'>SALARY_HISTORY</span> - history of employee salary changes.</span>
@@ -243,6 +264,9 @@
                     <td>22000.000000</td>
                 </tr></tbody></table>
         </div>
+        <ul class="table-columns">
+            <li>FOREIGN KEY (EMP_NO) REFERENCES EMPLOYEE(EMP_NO)</li>
+        </ul>
     </div>
     <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span><span class='sql'>CUSTOMER</span> - company clients.</span>
@@ -290,7 +314,10 @@
                     <td>92121</td>
                     <td>[null]</td>
                 </tr></tbody></table>
-        </div>    
+        </div>
+        <ul class="table-columns">
+            <li>FOREIGN KEY (COUNTRY) REFERENCES COUNTRY(COUNTRY)</li>
+        </ul>
     </div>
     <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
     <span><span class='sql'>SALES</span> - list of sales.</span>
@@ -342,6 +369,10 @@
                     <td>1.000000000</td>
                 </tr></tbody></table>
         </div>
+        <ul class="table-columns">
+            <li>FOREIGN KEY (CUST_NO) REFERENCES CUSTOMER(CUST_NO)</li>
+            <li>FOREIGN KEY (SALES_REP) REFERENCES EMPLOYEE(EMP_NO)</li>
+        </ul>
     </div>
     <h3>Below is a list of this DB views:</h3>
     <div class="accordion" title="Click to expand, double-click to paste view name into the editor">

@@ -63,6 +63,9 @@
                     <td>[null]</td>
                 </tr></tbody></table>
         </div>    
+        <ul class="table-columns">
+            <li>FOREIGN KEY (JOB_COUNTRY) REFERENCES COUNTRY(COUNTRY)</li>
+        </ul>
     </div>
     <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
         <span><span class='sql'>DEPARTMENT</span> - divisions de l'entreprise.</span>
@@ -96,6 +99,9 @@
                     <td>(408) 555-1234</td>
                 </tr></tbody></table>
         </div>
+        <ul class="table-columns">
+            <li>FOREIGN KEY (HEAD_DEPT) REFERENCES DEPARTMENT(DEPT_NO)</li>
+        </ul>
     </div>
     <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
         <span><span class='sql'>EMPLOYEE</span> - liste des employés.</span>
@@ -141,6 +147,10 @@
                     <td>Nelson, Robert</td>
                 </tr></tbody></table>
         </div>    
+        <ul class="table-columns">
+            <li>FOREIGN KEY (DEPT_NO) REFERENCES DEPARTMENT(DEPT_NO)</li>
+            <li>FOREIGN KEY (JOB_CODE) REFERENCES JOB(JOB_CODE)</li>
+        </ul>
     </div>
     <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
         <span><span class='sql'>PROJECT</span> - liste des projets.</span>
@@ -168,6 +178,9 @@
                     <td>software</td>
                 </tr></tbody></table>
         </div>
+        <ul class="table-columns">
+            <li>FOREIGN KEY (TEAM_LEADER) REFERENCES EMPLOYEE(EMP_NO)</li>
+        </ul>
     </div>
     <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
         <span><span class='sql'>EMPLOYEE_PROJECT</span> - affectation des employés aux projets.</span>
@@ -186,6 +199,10 @@
                     <td>DGPII</td>
                 </tr></tbody></table>
         </div>
+        <ul class="table-columns">
+            <li>FOREIGN KEY (EMP_NO) REFERENCES EMPLOYEE(EMP_NO)</li>
+            <li>FOREIGN KEY (PROJ_ID) REFERENCES PROJECT(PROJ_ID)</li>
+        </ul>
     </div>
     <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
         <span><span class='sql'>PROJ_DEPT_BUDGET</span> - budgets des projets.</span>
@@ -213,6 +230,10 @@
                     <td>200000.00</td>
                 </tr></tbody></table>
         </div>
+        <ul class="table-columns">
+            <li>FOREIGN KEY (PROJ_ID) REFERENCES PROJECT(PROJ_ID)</li>
+            <li>FOREIGN KEY (DEPT_NO) REFERENCES DEPARTMENT(DEPT_NO)</li>
+        </ul>
     </div>
     <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
         <span><span class='sql'>SALARY_HISTORY</span> - historique des changements de salaire des employés.</span>
@@ -243,6 +264,9 @@
                     <td>22000.000000</td>
                 </tr></tbody></table>
         </div>
+        <ul class="table-columns">
+            <li>FOREIGN KEY (EMP_NO) REFERENCES EMPLOYEE(EMP_NO)</li>
+        </ul>
     </div>
     <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
         <span><span class='sql'>CUSTOMER</span> - clients de l'entreprise.</span>
@@ -291,6 +315,9 @@
                     <td>[null]</td>
                 </tr></tbody></table>
         </div>    
+        <ul class="table-columns">
+            <li>FOREIGN KEY (COUNTRY) REFERENCES COUNTRY(COUNTRY)</li>
+        </ul>
     </div>
     <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
     <span><span class='sql'>SALES</span> - liste des ventes.</span>
@@ -342,6 +369,10 @@
                     <td>1.000000000</td>
                 </tr></tbody></table>
         </div>
+        <ul class="table-columns">
+            <li>FOREIGN KEY (CUST_NO) REFERENCES CUSTOMER(CUST_NO)</li>
+            <li>FOREIGN KEY (SALES_REP) REFERENCES EMPLOYEE(EMP_NO)</li>
+        </ul>
     </div>
     <h3>Voici la liste des vues de cette base de données :</h3>
     <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la vue dans l'éditeur">

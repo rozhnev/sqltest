@@ -64,6 +64,9 @@
                     <td>[null]</td>
                 </tr></tbody></table>
         </div>    
+        <ul class="table-columns">
+            <li>FOREIGN KEY (JOB_COUNTRY) REFERENCES COUNTRY(COUNTRY)</li>
+        </ul>
     </div>
     <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span><span class='sql'>DEPARTMENT</span> - подразделения компании.</span>
@@ -97,6 +100,9 @@
                     <td>(408) 555-1234</td>
                 </tr></tbody></table>
         </div>
+        <ul class="table-columns">
+            <li>FOREIGN KEY (HEAD_DEPT) REFERENCES DEPARTMENT(DEPT_NO)</li>
+        </ul>
     </div>
     <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span><span class='sql'>EMPLOYEE</span> - список сотрудников.</span>
@@ -142,6 +148,10 @@
                     <td>Nelson, Robert</td>
                 </tr></tbody></table>
         </div>    
+        <ul class="table-columns">
+            <li>FOREIGN KEY (DEPT_NO) REFERENCES DEPARTMENT(DEPT_NO)</li>
+            <li>FOREIGN KEY (JOB_CODE) REFERENCES JOB(JOB_CODE)</li>
+        </ul>
     </div>
     <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span><span class='sql'>PROJECT</span> - список проектов.</span>
@@ -169,6 +179,9 @@
                     <td>software</td>
                 </tr></tbody></table>
         </div>
+        <ul class="table-columns">
+            <li>FOREIGN KEY (TEAM_LEADER) REFERENCES EMPLOYEE(EMP_NO)</li>
+        </ul>
     </div>
     <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span><span class='sql'>EMPLOYEE_PROJECT</span> - сотрудники по проектам.</span>
@@ -187,6 +200,10 @@
                     <td>DGPII</td>
                 </tr></tbody></table>
         </div>
+        <ul class="table-columns">
+            <li>FOREIGN KEY (EMP_NO) REFERENCES EMPLOYEE(EMP_NO)</li>
+            <li>FOREIGN KEY (PROJ_ID) REFERENCES PROJECT(PROJ_ID)</li>
+        </ul>
     </div>
     <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span><span class='sql'>PROJ_DEPT_BUDGET</span> - бюджет проектов.</span>
@@ -214,6 +231,10 @@
                     <td>200000.00</td>
                 </tr></tbody></table>
         </div>
+        <ul class="table-columns">
+            <li>FOREIGN KEY (PROJ_ID) REFERENCES PROJECT(PROJ_ID)</li>
+            <li>FOREIGN KEY (DEPT_NO) REFERENCES DEPARTMENT(DEPT_NO)</li>
+        </ul>
     </div>
     <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span><span class='sql'>SALARY_HISTORY</span> - изменения зарплаты.</span>
@@ -244,6 +265,9 @@
                     <td>22000.000000</td>
                 </tr></tbody></table>
         </div>
+        <ul class="table-columns">
+            <li>FOREIGN KEY (EMP_NO) REFERENCES EMPLOYEE(EMP_NO)</li>
+        </ul>
     </div>
     <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span><span class='sql'>CUSTOMER</span> - клиенты компании.</span>
@@ -292,6 +316,9 @@
                     <td>[null]</td>
                 </tr></tbody></table>
         </div>    
+        <ul class="table-columns">
+            <li>FOREIGN KEY (COUNTRY) REFERENCES COUNTRY(COUNTRY)</li>
+        </ul>
     </div>
     <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span><span class='sql'>SALES</span> - таблица продаж.</span>
@@ -343,6 +370,10 @@
                     <td>1.000000000</td>
                 </tr></tbody></table>
         </div>
+        <ul class="table-columns">
+            <li>FOREIGN KEY (CUST_NO) REFERENCES CUSTOMER(CUST_NO)</li>
+            <li>FOREIGN KEY (SALES_REP) REFERENCES EMPLOYEE(EMP_NO)</li>
+        </ul>
     </div>
     <h3>Ниже приведен список представлений этой БД:</h3>
     <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки имени представления в редактор">
