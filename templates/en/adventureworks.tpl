@@ -4,19 +4,17 @@
             min-width: 10rem;
         }
     </style>
-    <h2>AdventureWorks Database (SQL Server)</h2>
+    <h1>AdventureWorks Database: table structure and schema overview</h1>
+    <p>The AdventureWorks database (SQL Server) is a sample dataset that models business processes of a fictional manufacturing company.</p>
+    <p>This page presents table structure, key columns, and relationships used for practical SQL learning and query practice.</p>
+    <p>The AdventureWorks database contains 10 main tables.</p>
     <p>
-        The AdventureWorks Database is a sample database that demonstrates the capabilities of SQL Server. It includes data
-        about fictional manufacturing company.
-    </p>
-    <p>
-        <a href="/{$Lang}/erd/AdventureWorks" target="ERDWindow" style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
-            <img src="/images/erd_small_light.jpg" alt="ER diagram of the AdventureWorks database" style="width: 90%;">
+        <a href="/{$Lang}/erd/AdventureWorks" target="ERDWindow" rel="noopener noreferrer" style="display: flex; flex-direction: column; align-items: center; gap: 4px;" aria-label="Open the AdventureWorks ER diagram in a new window">
+            <img src="/images/erd_small_light.jpg" alt="ER diagram of the AdventureWorks database showing table relationships" style="width: 90%;" loading="lazy" decoding="async">
             AdventureWorks DB ER diagram
         </a>
     </p>
-    <h3>The list of tables:</h3>
-    <h3>The following is a list of DB tables:</h3>
+    <h2>List of tables</h2>
     <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span><span class='sql'>Address</span> - table of addresses.</span>
     </div>
@@ -36,19 +34,17 @@
             <li>PRIMARY KEY, btree (AddressID)</li>
         </ul>
         <div class="table-wrapper">
-            <table>
-                <tr>
-                    <th>AddressID</th>
-                    <th>AddressLine1</th>
-                    <th>AddressLine2</th>
-                    <th>City</th>
-                    <th>StateProvince</th>
-                    <th>CountryRegion</th>
-                    <th>PostalCode</th>
-                    <th>rowguid</th>
-                    <th>ModifiedDate</th>
-                </tr>
-                <tr>
+            <table><thead><tr>
+                    <th scope="col">AddressID</th>
+                    <th scope="col">AddressLine1</th>
+                    <th scope="col">AddressLine2</th>
+                    <th scope="col">City</th>
+                    <th scope="col">StateProvince</th>
+                    <th scope="col">CountryRegion</th>
+                    <th scope="col">PostalCode</th>
+                    <th scope="col">rowguid</th>
+                    <th scope="col">ModifiedDate</th>
+                </tr></thead><tbody><tr>
                     <td>9</td>
                     <td>8713 Yosemite Ct.</td>
                     <td>null</td>
@@ -58,8 +54,7 @@
                     <td>98011</td>
                     <td>268AF621-76D7-4C78-9441-144FD139821A</td>
                     <td>2006-07-01 00:00:00.000</td>
-                </tr>
-            </table>
+                </tr></tbody></table>
         </div>
     </div>
     <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
@@ -87,25 +82,23 @@
             <li>PRIMARY KEY, btree (CustomerID)</li>
         </ul>
         <div class="table-wrapper">
-            <table>
-                <tr>
-                  <th>CustomerID</th>
-                  <th>NameStyle</th>
-                  <th>Title</th>
-                  <th>FirstName</th>
-                  <th>MiddleName</th>
-                  <th>LastName</th>
-                  <th>Suffix</th>
-                  <th>CompanyName</th>
-                  <th>SalesPerson</th>
-                  <th>EmailAddress</th>
-                  <th>Phone</th>
-                  <th>PasswordHash</th>
-                  <th>PasswordSalt</th>
-                  <th>rowguid</th>
-                  <th>ModifiedDate</th>
-                </tr>
-                <tr>
+            <table><thead><tr>
+                  <th scope="col">CustomerID</th>
+                  <th scope="col">NameStyle</th>
+                  <th scope="col">Title</th>
+                  <th scope="col">FirstName</th>
+                  <th scope="col">MiddleName</th>
+                  <th scope="col">LastName</th>
+                  <th scope="col">Suffix</th>
+                  <th scope="col">CompanyName</th>
+                  <th scope="col">SalesPerson</th>
+                  <th scope="col">EmailAddress</th>
+                  <th scope="col">Phone</th>
+                  <th scope="col">PasswordHash</th>
+                  <th scope="col">PasswordSalt</th>
+                  <th scope="col">rowguid</th>
+                  <th scope="col">ModifiedDate</th>
+                </tr></thead><tbody><tr>
                   <td>1</td>
                   <td>0</td>
                   <td>Mr.</td>
@@ -121,8 +114,7 @@
                   <td>1KjXYs4=</td>
                   <td>3F5AE95E-B87D-4AED-95B4-C3797AFCB74F</td>
                   <td>2005-08-01 00:00:00.000</td>
-                </tr>
-            </table>
+                </tr></tbody></table>
         </div>
     </div>
     <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
@@ -140,22 +132,19 @@
             <li>PRIMARY KEY, btree (CustomerID, AddressID)</li>
         </ul>
         <div class="table-wrapper">
-            <table>
-                <tr>
-                    <th>CustomerID</th>
-                    <th>AddressID</th>
-                    <th>AddressType</th>
-                    <th>rowguid</th>
-                    <th>ModifiedDate</th>
-                </tr>
-                <tr>
+            <table><thead><tr>
+                    <th scope="col">CustomerID</th>
+                    <th scope="col">AddressID</th>
+                    <th scope="col">AddressType</th>
+                    <th scope="col">rowguid</th>
+                    <th scope="col">ModifiedDate</th>
+                </tr></thead><tbody><tr>
                     <td>29485</td>
                     <td>1086</td>
                     <td>Main Office</td>
                     <td>16765338-DBE4-4421-B5E9-3836B9278E63</td>
                     <td>2007-09-01 00:00:00.000</td>
-                </tr>
-            </table>
+                </tr></tbody></table>
         </div>
     </div>
     <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
@@ -185,27 +174,25 @@
             <li>PRIMARY KEY, btree (ProductID, ProductCategoryID, ProductModelID)</li>
         </ul>
         <div class="table-wrapper">
-            <table>
-                <tr>
-                  <th>ProductID</th>
-                  <th>Name</th>
-                  <th>ProductNumber</th>
-                  <th>Color</th>
-                  <th>StandardCost</th>
-                  <th>ListPrice</th>
-                  <th>Size</th>
-                  <th>Weight</th>
-                  <th>ProductCategoryID</th>
-                  <th>ProductModelID</th>
-                  <th>SellStartDate</th>
-                  <th>SellEndDate</th>
-                  <th>DiscontinuedDate</th>
-                  <th>ThumbNailPhoto</th>
-                  <th>ThumbnailPhotoFileName</th>
-                  <th>rowguid</th>
-                  <th>ModifiedDate</th>
-                </tr>
-                <tr>
+            <table><thead><tr>
+                  <th scope="col">ProductID</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">ProductNumber</th>
+                  <th scope="col">Color</th>
+                  <th scope="col">StandardCost</th>
+                  <th scope="col">ListPrice</th>
+                  <th scope="col">Size</th>
+                  <th scope="col">Weight</th>
+                  <th scope="col">ProductCategoryID</th>
+                  <th scope="col">ProductModelID</th>
+                  <th scope="col">SellStartDate</th>
+                  <th scope="col">SellEndDate</th>
+                  <th scope="col">DiscontinuedDate</th>
+                  <th scope="col">ThumbNailPhoto</th>
+                  <th scope="col">ThumbnailPhotoFileName</th>
+                  <th scope="col">rowguid</th>
+                  <th scope="col">ModifiedDate</th>
+                </tr></thead><tbody><tr>
                   <td>680</td>
                   <td>HL Road Frame - Black, 58</td>
                   <td>FR-R92B-58</td>
@@ -223,8 +210,7 @@
                   <td>no_image_available_small.gif</td>
                   <td>43DD68D6-14A4-461F-9069-55309D90EA7E</td>
                   <td>2008-03-11 10:01:36.827</td>
-                </tr>
-            </table>
+                </tr></tbody></table>
         </div>
     </div>
     <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
@@ -242,22 +228,19 @@
             <li>PRIMARY KEY, btree (ProductCategoryID)</li>
         </ul>
         <div class="table-wrapper">
-            <table>
-                <tr>
-                    <th>ProductCategoryID</th>
-                    <th>ParentProductCategoryID</th>
-                    <th>Name</th>
-                    <th>rowguid</th>
-                    <th>ModifiedDate</th>
-                </tr>
-                <tr>
+            <table><thead><tr>
+                    <th scope="col">ProductCategoryID</th>
+                    <th scope="col">ParentProductCategoryID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">rowguid</th>
+                    <th scope="col">ModifiedDate</th>
+                </tr></thead><tbody><tr>
                     <td>1</td>
                     <td>[null]</td>
                     <td>Bikes</td>
                     <td>CFBDA25C-DF71-47A7-B81B-64EE161AA37C</td>
                     <td>2002-06-01 00:00:00.000</td>
-                </tr>
-            </table>
+                </tr></tbody></table>
         </div>
     </div>
     <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
@@ -274,20 +257,17 @@
             <li>PRIMARY KEY, btree (ProductDescriptionID)</li>
         </ul>
         <div class="table-wrapper">
-            <table>
-                <tr>
-                    <th>ProductDescriptionID</th>
-                    <th>Description</th>
-                    <th>rowguid</th>
-                    <th>ModifiedDate</th>
-                </tr>
-                <tr>
+            <table><thead><tr>
+                    <th scope="col">ProductDescriptionID</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">rowguid</th>
+                    <th scope="col">ModifiedDate</th>
+                </tr></thead><tbody><tr>
                     <td>4</td>
                     <td>Aluminum alloy cups; large diameter spindle.</td>
                     <td>DFEBA528-DA11-4650-9D86-CAFDA7294EB0</td>
                     <td>2007-06-01 00:00:00.000</td>
-                </tr>
-            </table>
+                </tr></tbody></table>
         </div>
     </div>
     <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
@@ -305,22 +285,19 @@
             <li>PRIMARY KEY, btree (ProductModelID)</li>
         </ul>
         <div class="table-wrapper">
-            <table>
-                <tr>
-                    <th>ProductModelID</th>
-                    <th>Name</th>
-                    <th>CatalogDescription</th>
-                    <th>rowguid</th>
-                    <th>ModifiedDate</th>
-                </tr>
-                <tr>
+            <table><thead><tr>
+                    <th scope="col">ProductModelID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">CatalogDescription</th>
+                    <th scope="col">rowguid</th>
+                    <th scope="col">ModifiedDate</th>
+                </tr></thead><tbody><tr>
                     <td>1</td>
                     <td>Classic Vest</td>
                     <td>[null]</td>
                     <td>29321D47-1E4C-4AAC-887C-19634328C25E</td>
                     <td>2007-06-01 00:00:00.000</td>
-                </tr>
-            </table>
+                </tr></tbody></table>
         </div>
     </div>
     <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
@@ -338,22 +315,19 @@
             <li>PRIMARY KEY, btree (ProductModelID, ProductDescriptionID)</li>
         </ul>
         <div class="table-wrapper">
-            <table>
-                <tr>
-                    <th>ProductModelID</th>
-                    <th>ProductDescriptionID</th>
-                    <th>Culture</th>
-                    <th>rowguid</th>
-                    <th>ModifiedDate</th>
-                </tr>
-                <tr>
+            <table><thead><tr>
+                    <th scope="col">ProductModelID</th>
+                    <th scope="col">ProductDescriptionID</th>
+                    <th scope="col">Culture</th>
+                    <th scope="col">rowguid</th>
+                    <th scope="col">ModifiedDate</th>
+                </tr></thead><tbody><tr>
                     <td>1</td>
                     <td>1199</td>
                     <td>en</td>
                     <td>4D00B649-027A-4F99-A380-F22A46EC8638</td>
                     <td>2007-06-01 00:00:00.000</td>
-                </tr>
-            </table>
+                </tr></tbody></table>
         </div>
     </div>
     <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
@@ -375,19 +349,17 @@
             <li>PRIMARY KEY, btree (SalesOrderID, SalesOrderDetailID, ProductID)</li>
         </ul>
         <div class="table-wrapper">
-          <table>
-              <tr>
-                  <th>SalesOrderID</th>
-                  <th>SalesOrderDetailID</th>
-                  <th>OrderQty</th>
-                  <th>ProductID</th>
-                  <th>UnitPrice</th>
-                  <th>UnitPriceDiscount</th>
-                  <th>LineTotal</th>
-                  <th>rowguid</th>
-                  <th>ModifiedDate</th>
-              </tr>
-              <tr>
+          <table><thead><tr>
+                  <th scope="col">SalesOrderID</th>
+                  <th scope="col">SalesOrderDetailID</th>
+                  <th scope="col">OrderQty</th>
+                  <th scope="col">ProductID</th>
+                  <th scope="col">UnitPrice</th>
+                  <th scope="col">UnitPriceDiscount</th>
+                  <th scope="col">LineTotal</th>
+                  <th scope="col">rowguid</th>
+                  <th scope="col">ModifiedDate</th>
+              </tr></thead><tbody><tr>
                   <td>71774</td>
                   <td>110562</td>
                   <td>1</td>
@@ -397,8 +369,7 @@
                   <td>356.898000</td>
                   <td>E3A1994C-7A68-4CE8-96A3-77FDD3BBD730</td>
                   <td>2008-06-01 00:00:00.000</td>
-              </tr>
-          </table>
+              </tr></tbody></table>
         </div>
     </div>
     <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
@@ -433,32 +404,30 @@
             <li>PRIMARY KEY, btree (SalesOrderID, CustomerID, ShipToAddressID, BillToAddressID)</li>
         </ul>
         <div class="table-wrapper">
-            <table>
-                <tr>
-                    <th>SalesOrderID</th>
-                    <th>RevisionNumber</th>
-                    <th>OrderDate</th>
-                    <th>DueDate</th>
-                    <th>ShipDate</th>
-                    <th>Status</th>
-                    <th>OnlineOrderFlag</th>
-                    <th>SalesOrderNumber</th>
-                    <th>PurchaseOrderNumber</th>
-                    <th>AccountNumber</th>
-                    <th>CustomerID</th>
-                    <th>ShipToAddressID</th>
-                    <th>BillToAddressID</th>
-                    <th>ShipMethod</th>
-                    <th>CreditCardApprovalCode</th>
-                    <th>SubTotal</th>
-                    <th>TaxAmt</th>
-                    <th>Freight</th>
-                    <th>TotalDue</th>
-                    <th>Comment</th>
-                    <th>rowguid</th>
-                    <th>ModifiedDate</th>
-                </tr>
-                <tr>
+            <table><thead><tr>
+                    <th scope="col">SalesOrderID</th>
+                    <th scope="col">RevisionNumber</th>
+                    <th scope="col">OrderDate</th>
+                    <th scope="col">DueDate</th>
+                    <th scope="col">ShipDate</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">OnlineOrderFlag</th>
+                    <th scope="col">SalesOrderNumber</th>
+                    <th scope="col">PurchaseOrderNumber</th>
+                    <th scope="col">AccountNumber</th>
+                    <th scope="col">CustomerID</th>
+                    <th scope="col">ShipToAddressID</th>
+                    <th scope="col">BillToAddressID</th>
+                    <th scope="col">ShipMethod</th>
+                    <th scope="col">CreditCardApprovalCode</th>
+                    <th scope="col">SubTotal</th>
+                    <th scope="col">TaxAmt</th>
+                    <th scope="col">Freight</th>
+                    <th scope="col">TotalDue</th>
+                    <th scope="col">Comment</th>
+                    <th scope="col">rowguid</th>
+                    <th scope="col">ModifiedDate</th>
+                </tr></thead><tbody><tr>
                     <td>71774</td>
                     <td>2</td>
                     <td>2008-06-01 00:00:00.000</td>
@@ -481,8 +450,7 @@
                     <td>[null]</td>
                     <td>89E42CDC-8506-48A2-B89B-EB3E64E3554E</td>
                     <td>2008-06-08 00:00:00.000</td>
-                </tr>
-            </table>
+                </tr></tbody></table>
         </div>
     </div>
 

@@ -4,12 +4,11 @@
             min-width: 10rem;
         }
     </style>
-    <h2>Base de données Employee (Firebird)</h2>
-    <p>
-        Employee est une base de données d'exemple fournie avec le système de gestion de base de données multiplateforme Firebird.
-        Vous pouvez utiliser cette base de données pour explorer le SQL Firebird et d'autres fonctionnalités du SGBD.
-    </p>
-    <h3>Tables de la base de données :</h3>
+    <h1>Base de données Employee : structure des tables et vue d'ensemble</h1>
+    <p>La base Employee (Firebird) est un jeu de données d'exemple utilisé pour apprendre SQL et explorer les fonctionnalités du SGBD Firebird.</p>
+    <p>Cette page décrit la structure des tables, les colonnes clés et les relations utiles pour des requêtes SQL pratiques.</p>
+    <p>La base de données Employee contient 9 tables principales.</p>
+    <h2>Liste des tables</h2>
 
     <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
         <span><span class='sql'>COUNTRY</span> - table des pays.</span>
@@ -20,16 +19,13 @@
             <li><span class='sql'>CURRENCY</span>Devise utilisée dans le pays</li>
         </ul>
         <div class="table-wrapper">
-            <table>
-                <tr>
-                    <th>COUNTRY</th>
-                    <th>CURRENCY</th>
-                </tr>
-                <tr>
+            <table><thead><tr>
+                    <th scope="col">COUNTRY</th>
+                    <th scope="col">CURRENCY</th>
+                </tr></thead><tbody><tr>
                     <td>USA</td>
                     <td>Dollar</td>
-                </tr>
-            </table>
+                </tr></tbody></table>
         </div>
     </div>
     <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
@@ -47,18 +43,16 @@
             <li><span class='sql'>LANGUAGE_REQ</span>Exigences linguistiques</li>
         </ul>
         <div class="table-wrapper">
-            <table>
-                <tr>
-                    <th>JOB_CODE</th>
-                    <th>JOB_GRADE</th>
-                    <th>JOB_COUNTRY</th>
-                    <th>JOB_TITLE</th>
-                    <th>MIN_SALARY</th>
-                    <th>MAX_SALARY</th>
-                    <th>JOB_REQUIREMENT</th>
-                    <th>LANGUAGE_REQ</th>
-                </tr>
-                <tr>
+            <table><thead><tr>
+                    <th scope="col">JOB_CODE</th>
+                    <th scope="col">JOB_GRADE</th>
+                    <th scope="col">JOB_COUNTRY</th>
+                    <th scope="col">JOB_TITLE</th>
+                    <th scope="col">MIN_SALARY</th>
+                    <th scope="col">MAX_SALARY</th>
+                    <th scope="col">JOB_REQUIREMENT</th>
+                    <th scope="col">LANGUAGE_REQ</th>
+                </tr></thead><tbody><tr>
                     <td>CEO</td>
                     <td>1</td>
                     <td>USA</td>
@@ -67,8 +61,7 @@
                     <td>250000.00</td>
                     <td>Pas d'exigences spécifiques.</td>
                     <td>[null]</td>
-                </tr>
-            </table>
+                </tr></tbody></table>
         </div>    
     </div>
     <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
@@ -85,17 +78,15 @@
             <li><span class='sql'>PHONE_NO</span>Numéro de téléphone du département</li>
         </ul>
         <div class="table-wrapper">
-            <table>
-                <tr>
-                    <th>DEPT_NO</th>
-                    <th>DEPARTMENT</th>
-                    <th>HEAD_DEPT</th>
-                    <th>MNGR_NO</th>
-                    <th>BUDGET</th>
-                    <th>LOCATION</th>
-                    <th>PHONE_NO</th>
-                </tr>
-                <tr>
+            <table><thead><tr>
+                    <th scope="col">DEPT_NO</th>
+                    <th scope="col">DEPARTMENT</th>
+                    <th scope="col">HEAD_DEPT</th>
+                    <th scope="col">MNGR_NO</th>
+                    <th scope="col">BUDGET</th>
+                    <th scope="col">LOCATION</th>
+                    <th scope="col">PHONE_NO</th>
+                </tr></thead><tbody><tr>
                     <td>000</td>
                     <td>Corporate Office</td>
                     <td>[null]</td>
@@ -103,8 +94,7 @@
                     <td>1000000.00</td>
                     <td>Monterey</td>
                     <td>(408) 555-1234</td>
-                </tr>
-            </table>
+                </tr></tbody></table>
         </div>
     </div>
     <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
@@ -125,21 +115,19 @@
             <li><span class='sql'>FULL_NAME</span>Nom complet de l'employé</li>
         </ul>
         <div class="table-wrapper">
-            <table>
-                <tr>
-                    <th>EMP_NO</th>
-                    <th>FIRST_NAME</th>
-                    <th>LAST_NAME</th>
-                    <th>PHONE_EXT</th>
-                    <th>HIRE_DATE</th>
-                    <th>DEPT_NO</th>
-                    <th>JOB_CODE</th>
-                    <th>JOB_GRADE</th>
-                    <th>JOB_COUNTRY</th>
-                    <th>SALARY</th>
-                    <th>FULL_NAME</th>
-                </tr>
-                <tr>
+            <table><thead><tr>
+                    <th scope="col">EMP_NO</th>
+                    <th scope="col">FIRST_NAME</th>
+                    <th scope="col">LAST_NAME</th>
+                    <th scope="col">PHONE_EXT</th>
+                    <th scope="col">HIRE_DATE</th>
+                    <th scope="col">DEPT_NO</th>
+                    <th scope="col">JOB_CODE</th>
+                    <th scope="col">JOB_GRADE</th>
+                    <th scope="col">JOB_COUNTRY</th>
+                    <th scope="col">SALARY</th>
+                    <th scope="col">FULL_NAME</th>
+                </tr></thead><tbody><tr>
                     <td>2</td>
                     <td>Robert</td>
                     <td>Nelson</td>
@@ -151,8 +139,7 @@
                     <td>USA</td>
                     <td>105900.00</td>
                     <td>Nelson, Robert</td>
-                </tr>
-            </table>
+                </tr></tbody></table>
         </div>    
     </div>
     <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
@@ -167,22 +154,19 @@
             <li><span class='sql'>PRODUCT</span>Produit associé au projet</li>
         </ul>
         <div class="table-wrapper">
-            <table>
-                <tr>
-                    <th>PROJ_ID</th>
-                    <th>PROJ_NAME</th>
-                    <th>PROJ_DESC</th>
-                    <th>TEAM_LEADER</th>
-                    <th>PRODUCT</th>
-                </tr>
-                <tr>
+            <table><thead><tr>
+                    <th scope="col">PROJ_ID</th>
+                    <th scope="col">PROJ_NAME</th>
+                    <th scope="col">PROJ_DESC</th>
+                    <th scope="col">TEAM_LEADER</th>
+                    <th scope="col">PRODUCT</th>
+                </tr></thead><tbody><tr>
                     <td>VBASE</td>
                     <td>Video Database</td>
                     <td>Développement d'un système de gestion de base de données vidéo pour gérer la distribution vidéo à la demande.</td>
                     <td>45</td>
                     <td>software</td>
-                </tr>
-            </table>
+                </tr></tbody></table>
         </div>
     </div>
     <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
@@ -194,16 +178,13 @@
             <li><span class='sql'>PROJ_ID</span>ID du projet</li>
         </ul>
         <div class="table-wrapper">
-            <table>
-                <tr>
-                    <th>EMP_NO</th>
-                    <th>PROJ_ID</th>
-                </tr>
-                <tr>
+            <table><thead><tr>
+                    <th scope="col">EMP_NO</th>
+                    <th scope="col">PROJ_ID</th>
+                </tr></thead><tbody><tr>
                     <td>144</td>
                     <td>DGPII</td>
-                </tr>
-            </table>
+                </tr></tbody></table>
         </div>
     </div>
     <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
@@ -218,22 +199,19 @@
             <li><span class='sql'>PROJECTED_BUDGET</span>Budget prévisionnel pour l'année fiscale</li>
         </ul>
         <div class="table-wrapper">
-            <table>
-                <tr>
-                    <th>FISCAL_YEAR</th>
-                    <th>PROJ_ID</th>
-                    <th>DEPT_NO</th>
-                    <th>QUART_HEAD_CNT</th>
-                    <th>PROJECTED_BUDGET</th>
-                </tr>
-                <tr>
+            <table><thead><tr>
+                    <th scope="col">FISCAL_YEAR</th>
+                    <th scope="col">PROJ_ID</th>
+                    <th scope="col">DEPT_NO</th>
+                    <th scope="col">QUART_HEAD_CNT</th>
+                    <th scope="col">PROJECTED_BUDGET</th>
+                </tr></thead><tbody><tr>
                     <td>1994</td>
                     <td>GUIDE</td>
                     <td>100</td>
                     <td>[null]</td>
                     <td>200000.00</td>
-                </tr>
-            </table>
+                </tr></tbody></table>
         </div>
     </div>
     <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
@@ -249,24 +227,21 @@
             <li><span class='sql'>NEW_SALARY</span>Nouveau salaire après le changement</li>
         </ul>
         <div class="table-wrapper">
-            <table>
-                <tr>
-                    <th>EMP_NO</th>
-                    <th>CHANGE_DATE</th>
-                    <th>UPDATER_ID</th>
-                    <th>OLD_SALARY</th>
-                    <th>PERCENT_CHANGE</th>
-                    <th>NEW_SALARY</th>
-                </tr>
-                <tr>
+            <table><thead><tr>
+                    <th scope="col">EMP_NO</th>
+                    <th scope="col">CHANGE_DATE</th>
+                    <th scope="col">UPDATER_ID</th>
+                    <th scope="col">OLD_SALARY</th>
+                    <th scope="col">PERCENT_CHANGE</th>
+                    <th scope="col">NEW_SALARY</th>
+                </tr></thead><tbody><tr>
                     <td>28</td>
                     <td>1992-12-15 00:00:00</td>
                     <td>admin2</td>
                     <td>20000.00</td>
                     <td>10.000000</td>
                     <td>22000.000000</td>
-                </tr>
-            </table>
+                </tr></tbody></table>
         </div>
     </div>
     <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
@@ -288,22 +263,20 @@
             <li><span class='sql'>ON_HOLD</span>Statut "en attente" (peut être null)</li>
         </ul>
         <div class="table-wrapper">
-            <table>
-                <tr>
-                    <th>CUST_NO</th>
-                    <th>CUSTOMER</th>
-                    <th>CONTACT_FIRST</th>
-                    <th>CONTACT_LAST</th>
-                    <th>PHONE_NO</th>
-                    <th>ADDRESS_LINE1</th>
-                    <th>ADDRESS_LINE2</th>
-                    <th>CITY</th>
-                    <th>STATE_PROVINCE</th>
-                    <th>COUNTRY</th>
-                    <th>POSTAL_CODE</th>
-                    <th>ON_HOLD</th>
-                </tr>
-                <tr>
+            <table><thead><tr>
+                    <th scope="col">CUST_NO</th>
+                    <th scope="col">CUSTOMER</th>
+                    <th scope="col">CONTACT_FIRST</th>
+                    <th scope="col">CONTACT_LAST</th>
+                    <th scope="col">PHONE_NO</th>
+                    <th scope="col">ADDRESS_LINE1</th>
+                    <th scope="col">ADDRESS_LINE2</th>
+                    <th scope="col">CITY</th>
+                    <th scope="col">STATE_PROVINCE</th>
+                    <th scope="col">COUNTRY</th>
+                    <th scope="col">POSTAL_CODE</th>
+                    <th scope="col">ON_HOLD</th>
+                </tr></thead><tbody><tr>
                     <td>1001</td>
                     <td>Signature Design</td>
                     <td>Dale J.</td>
@@ -316,8 +289,7 @@
                     <td>USA</td>
                     <td>92121</td>
                     <td>[null]</td>
-                </tr>
-            </table>
+                </tr></tbody></table>
         </div>    
     </div>
     <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
@@ -340,23 +312,21 @@
             <li><span class='sql'>AGED</span>Valeur d'ancienneté</li>
         </ul>
         <div class="table-wrapper">
-            <table>
-                <tr>
-                    <th>PO_NUMBER</th>
-                    <th>CUST_NO</th>
-                    <th>SALES_REP</th>
-                    <th>ORDER_STATUS</th>
-                    <th>ORDER_DATE</th>
-                    <th>SHIP_DATE</th>
-                    <th>DATE_NEEDED</th>
-                    <th>PAID</th>
-                    <th>QTY_ORDERED</th>
-                    <th>TOTAL_VALUE</th>
-                    <th>DISCOUNT</th>
-                    <th>ITEM_TYPE</th>
-                    <th>AGED</th>
-                </tr>
-                <tr>
+            <table><thead><tr>
+                    <th scope="col">PO_NUMBER</th>
+                    <th scope="col">CUST_NO</th>
+                    <th scope="col">SALES_REP</th>
+                    <th scope="col">ORDER_STATUS</th>
+                    <th scope="col">ORDER_DATE</th>
+                    <th scope="col">SHIP_DATE</th>
+                    <th scope="col">DATE_NEEDED</th>
+                    <th scope="col">PAID</th>
+                    <th scope="col">QTY_ORDERED</th>
+                    <th scope="col">TOTAL_VALUE</th>
+                    <th scope="col">DISCOUNT</th>
+                    <th scope="col">ITEM_TYPE</th>
+                    <th scope="col">AGED</th>
+                </tr></thead><tbody><tr>
                     <td>V91E0210</td>
                     <td>1004</td>
                     <td>11</td>
@@ -370,8 +340,7 @@
                     <td>0.100000</td>
                     <td>hardware</td>
                     <td>1.000000000</td>
-                </tr>
-            </table>
+                </tr></tbody></table>
         </div>
     </div>
     <h3>Voici la liste des vues de cette base de données :</h3>
@@ -388,24 +357,21 @@
             <li><span class='sql'>PHONE_NO</span>Numéro de téléphone du département</li>
         </ul>
         <div class="table-wrapper">
-            <table>
-                <tr>
-                    <th>EMP_NO</th>
-                    <th>FIRST_NAME</th>
-                    <th>LAST_NAME</th>
-                    <th>PHONE_EXT</th>
-                    <th>LOCATION</th>
-                    <th>PHONE_NO</th>
-                </tr>
-                <tr>
+            <table><thead><tr>
+                    <th scope="col">EMP_NO</th>
+                    <th scope="col">FIRST_NAME</th>
+                    <th scope="col">LAST_NAME</th>
+                    <th scope="col">PHONE_EXT</th>
+                    <th scope="col">LOCATION</th>
+                    <th scope="col">PHONE_NO</th>
+                </tr></thead><tbody><tr>
                     <td>2</td>
                     <td>Robert</td>
                     <td>Nelson</td>
                     <td>250</td>
                     <td>Monterey</td>
                     <td>(408) 555-1234</td>
-                </tr>
-            </table>
+                </tr></tbody></table>
         </div>
     </div>
     {if $User->showAd()}

@@ -4,9 +4,11 @@
             min-width: 9rem;
         }
     </style>
-    <h2>Querynomicon (SQLite)</h2>
-    A compact database for learning the basics of SQL.
-    <h3>The Querynomicon database tables:</h3>
+    <h1>Querynomicon Database: table structure and overview</h1>
+    <p>Querynomicon (SQLite) is a compact training database for learning SQL fundamentals with clear and simple examples.</p>
+    <p>This page presents the tables, key columns, and sample rows for hands-on SQL practice.</p>
+    <p>The Querynomicon database contains 5 main tables.</p>
+    <h2>List of tables</h2>
     <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span><span class='sql'>department</span> - table of departments.</span>
     </div>
@@ -17,18 +19,15 @@
             <li> <span class='sql'>building</span>Building name</li>
         </ul>
         <div class="table-wrapper">
-            <table class=""><tbody>
-                <tr>
-                    <th>ident</th>
-                    <th>name</th>
-                    <th>building</th>
-                </tr>
-                <tr>
+            <table class=""><thead><tr>
+                    <th scope="col">ident</th>
+                    <th scope="col">name</th>
+                    <th scope="col">building</th>
+                </tr></thead><tbody><tr>
                     <td>gen</td>
                     <td>Genetics</td>
                     <td>Chesson</td>
-                </tr>
-            </tbody></table>
+                </tr></tbody></table>
         </div>
     </div>
     <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
@@ -45,17 +44,15 @@
             <li> <span class='sql' style="min-width: 12rem;">sex</span>Sex</li>
         </ul>
         <div class="table-wrapper">
-            <table class=""><tbody>
-                <tr>
-                    <th>species</th>
-                    <th>island</th>
-                    <th>bill_length_mm</th>
-                    <th>bill_depth_mm</th>
-                    <th>flipper_length_mm</th>
-                    <th>body_mass_g</th>
-                    <th>sex</th>
-                </tr>
-                <tr>
+            <table class=""><thead><tr>
+                    <th scope="col">species</th>
+                    <th scope="col">island</th>
+                    <th scope="col">bill_length_mm</th>
+                    <th scope="col">bill_depth_mm</th>
+                    <th scope="col">flipper_length_mm</th>
+                    <th scope="col">body_mass_g</th>
+                    <th scope="col">sex</th>
+                </tr></thead><tbody><tr>
                     <td>Gentoo</td>
                     <td>Biscoe</td>
                     <td>52.1</td>
@@ -63,8 +60,7 @@
                     <td>230</td>
                     <td>5550</td>
                     <td>MALE</td>
-                </tr>
-            </tbody></table>
+                </tr></tbody></table>
         </div>
     </div>
     <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
@@ -81,17 +77,15 @@
             <li> <span class='sql' style="min-width: 12rem;">sex</span>Sex</li>
         </ul>
         <div class="table-wrapper">
-            <table class=""><tbody>
-                <tr>
-                    <th>species</th>
-                    <th>island</th>
-                    <th>bill_length_mm</th>
-                    <th>bill_depth_mm</th>
-                    <th>flipper_length_mm</th>
-                    <th>body_mass_g</th>
-                    <th>sex</th>
-                </tr>
-                <tr>
+            <table class=""><thead><tr>
+                    <th scope="col">species</th>
+                    <th scope="col">island</th>
+                    <th scope="col">bill_length_mm</th>
+                    <th scope="col">bill_depth_mm</th>
+                    <th scope="col">flipper_length_mm</th>
+                    <th scope="col">body_mass_g</th>
+                    <th scope="col">sex</th>
+                </tr></thead><tbody><tr>
                     <td>Gentoo</td>
                     <td>Biscoe</td>
                     <td>52.1</td>
@@ -99,8 +93,7 @@
                     <td>230</td>
                     <td>5550</td>
                     <td>MALE</td>
-                </tr>
-            </tbody></table>
+                </tr></tbody></table>
         </div>
     </div>    
     <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
@@ -115,22 +108,19 @@
             <li> <span class='sql'>age</span>Age</li>
         </ul>
         <div class="table-wrapper">
-            <table class=""><tbody>
-                <tr>
-                    <th>ident</th>
-                    <th>personal</th>
-                    <th>family</th>
-                    <th>dept</th>
-                    <th>age</th>
-                </tr>
-                <tr>
+            <table class=""><thead><tr>
+                    <th scope="col">ident</th>
+                    <th scope="col">personal</th>
+                    <th scope="col">family</th>
+                    <th scope="col">dept</th>
+                    <th scope="col">age</th>
+                </tr></thead><tbody><tr>
                     <td>7</td>
                     <td>Abram</td>
                     <td>Chokshi</td>
                     <td>gen</td>
                     <td>23</td>
-                </tr>
-            </tbody></table>
+                </tr></tbody></table>
         </div>
     </div>
     <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
@@ -144,28 +134,23 @@
         </ul>
         <div class="table-wrapper">
             {literal}
-            <table class=""><tbody>
-                <tr>
-                    <th>ident</th>
-                    <th>name</th>
-                    <th>details</th>
-                </tr>
-                <tr>
+            <table class=""><thead><tr>
+                    <th scope="col">ident</th>
+                    <th scope="col">name</th>
+                    <th scope="col">details</th>
+                </tr></thead><tbody><tr>
                     <td>1</td>
                     <td>WY401</td>
                     <td>{"acquired": "2023-05-01"}</td>
-                </tr>
-                <tr>
+                </tr><tr>
                     <td>2</td>
                     <td>Inphormex</td>
                     <td>{"acquired": "2021-07-15", "refurbished": "2023-10-22"}</td>
-                </tr>
-                <tr>
+                </tr><tr>
                     <td>3</td>
                     <td>AutoPlate 9000</td>
                     <td>{"note": "needs software update"}</td>
-                </tr>
-            </tbody></table>
+                </tr></tbody></table>
             {/literal}
         </div>
     </div>
