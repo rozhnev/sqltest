@@ -1,188 +1,147 @@
-<svg viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Database Types Overview</title>
+  <desc id="desc">Infographic showing relational, key-value, document, and graph databases in a playful lesson card style.</desc>
+
   <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f7fbff"/>
+      <stop offset="100%" stop-color="#eef4ff"/>
+    </linearGradient>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#8aa2c7" flood-opacity="0.25"/>
+    </filter>
     <style>
-      .title-main { font-size: 32px; font-weight: bold; fill: #1a237e; }
-      .label-bold { font-size: 12px; font-weight: bold; fill: #1a237e; }
-      .label-text { font-size: 11px; fill: #424242; }
+      .stroke { stroke: #223156; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+      .title { font: 800 56px 'Trebuchet MS', 'Segoe UI', sans-serif; fill: #1f2d52; letter-spacing: 1px; }
+      .subtitle { font: 700 24px 'Trebuchet MS', 'Segoe UI', sans-serif; fill: #253867; }
+      .cardTitle { font: 800 34px 'Trebuchet MS', 'Segoe UI', sans-serif; fill: #1f2d52; }
+      .cardText { font: 600 20px 'Trebuchet MS', 'Segoe UI', sans-serif; fill: #1f2d52; }
+      .small { font: 700 18px 'Trebuchet MS', 'Segoe UI', sans-serif; fill: #2d3f6c; }
+      .mono { font: 700 16px 'Trebuchet MS', 'Segoe UI', sans-serif; fill: #344b78; }
     </style>
   </defs>
 
-  <!-- Background -->
-  <rect width="1200" height="630" fill="#f5f7fa"/>
+  <rect width="1200" height="630" fill="url(#bg)"/>
 
-  <!-- Decorative elements -->
-  <circle cx="100" cy="100" r="80" fill="#1976d2" opacity="0.06"/>
-  <circle cx="1100" cy="550" r="90" fill="#00897b" opacity="0.06"/>
+  <!-- Decorative dots -->
+  <g opacity="0.55">
+    <circle cx="80" cy="80" r="5" fill="#78bde8"/>
+    <circle cx="98" cy="80" r="5" fill="#87d2ac"/>
+    <circle cx="116" cy="80" r="5" fill="#f4c86b"/>
+    <circle cx="80" cy="98" r="5" fill="#9c89f4"/>
+    <circle cx="98" cy="98" r="5" fill="#78bde8"/>
+    <circle cx="116" cy="98" r="5" fill="#87d2ac"/>
 
-  <!-- Main Title -->
-  <text x="600" y="45" text-anchor="middle" class="title-main">DATABASE TYPES &amp; MODELS</text>
-
-  <!-- Central rounded box -->
-  <rect x="100" y="80" width="1000" height="520" fill="#d4e8f7" rx="20" stroke="#1976d2" stroke-width="2"/>
-
-  <!-- Row 1: Core Types -->
-  <!-- Relational -->
-  <g>
-    <!-- Icon: Tables -->
-    <rect x="125" y="120" width="40" height="40" fill="#bbdefb" stroke="#1976d2" stroke-width="2" rx="4"/>
-    <rect x="132" y="128" width="8" height="8" fill="#1976d2"/>
-    <rect x="145" y="128" width="8" height="8" fill="#1976d2"/>
-    <rect x="132" y="140" width="8" height="8" fill="#1976d2"/>
-    <rect x="145" y="140" width="8" height="8" fill="#1976d2"/>
-    
-    <!-- Label -->
-    <rect x="120" y="170" width="160" height="80" fill="#ffffff" stroke="#1976d2" stroke-width="1.5" rx="6"/>
-    <text x="200" y="190" text-anchor="middle" class="label-bold">RELATIONAL</text>
-    <text x="200" y="207" text-anchor="middle" class="label-text">SQL Tables</text>
-    <text x="200" y="220" text-anchor="middle" class="label-text">ACID, Joins</text>
-    <text x="200" y="233" text-anchor="middle" class="label-text">PostgreSQL, MySQL</text>
+    <circle cx="1090" cy="540" r="5" fill="#78bde8"/>
+    <circle cx="1108" cy="540" r="5" fill="#87d2ac"/>
+    <circle cx="1126" cy="540" r="5" fill="#f4c86b"/>
+    <circle cx="1090" cy="558" r="5" fill="#9c89f4"/>
+    <circle cx="1108" cy="558" r="5" fill="#78bde8"/>
+    <circle cx="1126" cy="558" r="5" fill="#87d2ac"/>
   </g>
 
-  <!-- Key-Value -->
-  <g>
-    <!-- Icon: Key & Value -->
-    <circle cx="335" cy="140" r="10" fill="#e1bee7" stroke="#7b1fa2" stroke-width="2"/>
-    <line x1="345" y1="140" x2="380" y2="140" stroke="#7b1fa2" stroke-width="2"/>
-    <rect x="380" y="140" width="15" height="10" fill="#7b1fa2"/>
-    
-    <!-- Label -->
-    <rect x="315" y="170" width="160" height="80" fill="#ffffff" stroke="#7b1fa2" stroke-width="1.5" rx="6"/>
-    <text x="395" y="190" text-anchor="middle" class="label-bold">KEY-VALUE</text>
-    <text x="395" y="207" text-anchor="middle" class="label-text">Fast Lookup</text>
-    <text x="395" y="220" text-anchor="middle" class="label-text">Caching</text>
-    <text x="395" y="233" text-anchor="middle" class="label-text">Redis, DynamoDB</text>
+  <text x="600" y="68" text-anchor="middle" class="title">DATABASE TYPES</text>
+  <text x="600" y="102" text-anchor="middle" class="subtitle">RELATIONAL, NOSQL, AND WHEN TO USE EACH MODEL</text>
+
+  <!-- Center panel -->
+  <g filter="url(#softShadow)">
+    <rect x="455" y="165" width="290" height="300" rx="28" fill="#ffffff" class="stroke"/>
+    <text x="600" y="208" text-anchor="middle" class="cardTitle">SQL vs</text>
+    <text x="600" y="248" text-anchor="middle" class="cardTitle">NoSQL</text>
+
+    <!-- Database icon -->
+    <ellipse cx="600" cy="300" rx="72" ry="22" fill="#8ac8f2" class="stroke"/>
+    <rect x="528" y="300" width="144" height="88" fill="#9bd4f7" class="stroke"/>
+    <ellipse cx="600" cy="388" rx="72" ry="22" fill="#7cbbe9" class="stroke"/>
+    <line x1="528" y1="335" x2="672" y2="335" class="stroke"/>
+    <line x1="528" y1="360" x2="672" y2="360" class="stroke"/>
+
+    <rect x="500" y="414" width="200" height="36" rx="18" fill="#e9f0ff" class="stroke"/>
+    <text x="600" y="438" text-anchor="middle" class="small">Data model + query pattern</text>
   </g>
 
-  <!-- Document -->
-  <g>
-    <!-- Icon: JSON Document -->
-    <rect x="525" y="120" width="40" height="40" fill="#ffe0b2" stroke="#f57c00" stroke-width="2" rx="4"/>
-    <text x="545" y="147" text-anchor="middle" font-size="24" fill="#f57c00">{}</text>
-    
-    <!-- Label -->
-    <rect x="515" y="170" width="160" height="80" fill="#ffffff" stroke="#f57c00" stroke-width="1.5" rx="6"/>
-    <text x="595" y="190" text-anchor="middle" class="label-bold">DOCUMENT</text>
-    <text x="595" y="207" text-anchor="middle" class="label-text">JSON Format</text>
-    <text x="595" y="220" text-anchor="middle" class="label-text">Flexible Schema</text>
-    <text x="595" y="233" text-anchor="middle" class="label-text">MongoDB, Firebase</text>
+  <!-- Relational card -->
+  <g filter="url(#softShadow)">
+    <rect x="55" y="150" width="340" height="195" rx="24" fill="#d7eeff" class="stroke"/>
+    <text x="225" y="192" text-anchor="middle" class="cardTitle">RELATIONAL</text>
+
+    <rect x="95" y="212" width="130" height="95" rx="10" fill="#ffffff" class="stroke"/>
+    <line x1="95" y1="244" x2="225" y2="244" class="stroke"/>
+    <line x1="95" y1="276" x2="225" y2="276" class="stroke"/>
+    <line x1="138" y1="212" x2="138" y2="307" class="stroke"/>
+    <line x1="182" y1="212" x2="182" y2="307" class="stroke"/>
+
+    <text x="248" y="236" class="cardText">SQL tables</text>
+    <text x="248" y="264" class="cardText">ACID</text>
+    <text x="248" y="292" class="cardText">JOINs</text>
+    <text x="248" y="320" class="mono">PostgreSQL, MySQL</text>
   </g>
 
-  <!-- Graph -->
-  <g>
-    <!-- Icon: Graph Nodes -->
-    <circle cx="730" cy="137" r="6" fill="#4db8a8" stroke="#00796b" stroke-width="2"/>
-    <circle cx="755" cy="150" r="6" fill="#4db8a8" stroke="#00796b" stroke-width="2"/>
-    <circle cx="755" cy="125" r="6" fill="#4db8a8" stroke="#00796b" stroke-width="2"/>
-    <line x1="735" y1="140" x2="750" y2="148" stroke="#00796b" stroke-width="2"/>
-    <line x1="735" y1="135" x2="750" y2="127" stroke="#00796b" stroke-width="2"/>
-    
-    <!-- Label -->
-    <rect x="715" y="170" width="160" height="80" fill="#ffffff" stroke="#00796b" stroke-width="1.5" rx="6"/>
-    <text x="795" y="190" text-anchor="middle" class="label-bold">GRAPH</text>
-    <text x="795" y="207" text-anchor="middle" class="label-text">Nodes &amp; Edges</text>
-    <text x="795" y="220" text-anchor="middle" class="label-text">Relationships</text>
-    <text x="795" y="233" text-anchor="middle" class="label-text">Neo4j, Neptune</text>
+  <!-- Key-Value card -->
+  <g filter="url(#softShadow)">
+    <rect x="805" y="150" width="340" height="195" rx="24" fill="#dcf6de" class="stroke"/>
+    <text x="975" y="192" text-anchor="middle" class="cardTitle">KEY-VALUE</text>
+
+    <circle cx="880" cy="248" r="24" fill="#ffffff" class="stroke"/>
+    <rect x="900" y="240" width="65" height="16" rx="8" fill="#ffffff" class="stroke"/>
+    <rect x="965" y="236" width="38" height="24" rx="5" fill="#ffffff" class="stroke"/>
+
+    <text x="840" y="286" class="cardText">Fast lookup</text>
+    <text x="840" y="314" class="cardText">Simple scaling</text>
+    <text x="840" y="340" class="mono">Redis, DynamoDB</text>
   </g>
 
-  <!-- Time Series -->
-  <g>
-    <!-- Icon: Timeline -->
-    <line x1="920" y1="125" x2="920" y2="125" stroke="#f57f17" stroke-width="2"/>
-    <circle cx="925" cy="135" r="4" fill="#f57f17"/>
-    <circle cx="935" cy="130" r="4" fill="#f57f17"/>
-    <circle cx="945" cy="125" r="4" fill="#f57f17"/>
-    
-    <!-- Label -->
-    <rect x="910" y="170" width="160" height="80" fill="#ffffff" stroke="#f9a825" stroke-width="1.5" rx="6"/>
-    <text x="995" y="190" text-anchor="middle" class="label-bold">TIME SERIES</text>
-    <text x="995" y="207" text-anchor="middle" class="label-text">Timestamps</text>
-    <text x="995" y="220" text-anchor="middle" class="label-text">Metrics, Monitoring</text>
-    <text x="995" y="233" text-anchor="middle" class="label-text">InfluxDB, TimescaleDB</text>
+  <!-- Document card -->
+  <g filter="url(#softShadow)">
+    <rect x="55" y="380" width="340" height="195" rx="24" fill="#ffe8cf" class="stroke"/>
+    <text x="225" y="422" text-anchor="middle" class="cardTitle">DOCUMENT</text>
+
+    <path d="M100 447 h110 l22 22 v83 h-132 z" fill="#ffffff" class="stroke"/>
+    <path d="M210 447 v22 h22" fill="none" class="stroke"/>
+    <text x="166" y="505" text-anchor="middle" class="subtitle">{ JSON }</text>
+
+    <text x="248" y="478" class="cardText">Flexible schema</text>
+    <text x="248" y="506" class="cardText">Nested data</text>
+    <text x="248" y="534" class="mono">MongoDB, Firestore</text>
   </g>
 
-  <!-- Row 2: Specialized Types (centered under Row 1) -->
-  <!-- Columnar -->
-  <g>
-    <!-- Icon: Columns -->
-    <rect x="200" y="300" width="8" height="40" fill="#a5d6a7" stroke="#388e3c" stroke-width="1.5"/>
-    <rect x="212" y="295" width="8" height="45" fill="#a5d6a7" stroke="#388e3c" stroke-width="1.5"/>
-    <rect x="224" y="305" width="8" height="35" fill="#a5d6a7" stroke="#388e3c" stroke-width="1.5"/>
-    
-    <!-- Label -->
-    <rect x="200" y="350" width="160" height="80" fill="#ffffff" stroke="#388e3c" stroke-width="1.5" rx="6"/>
-    <text x="280" y="370" text-anchor="middle" class="label-bold">COLUMNAR</text>
-    <text x="280" y="387" text-anchor="middle" class="label-text">Column-Oriented</text>
-    <text x="280" y="400" text-anchor="middle" class="label-text">Analytics, BI, OLAP</text>
-    <text x="280" y="413" text-anchor="middle" class="label-text">ClickHouse, BigQuery</text>
+  <!-- Graph card -->
+  <g filter="url(#softShadow)">
+    <rect x="805" y="380" width="340" height="195" rx="24" fill="#ebddff" class="stroke"/>
+    <text x="975" y="422" text-anchor="middle" class="cardTitle">GRAPH</text>
+
+    <circle cx="870" cy="500" r="13" fill="#ffffff" class="stroke"/>
+    <circle cx="915" cy="470" r="13" fill="#ffffff" class="stroke"/>
+    <circle cx="936" cy="525" r="13" fill="#ffffff" class="stroke"/>
+    <circle cx="975" cy="490" r="13" fill="#ffffff" class="stroke"/>
+    <line x1="883" y1="494" x2="902" y2="478" class="stroke"/>
+    <line x1="928" y1="481" x2="964" y2="488" class="stroke"/>
+    <line x1="925" y1="480" x2="936" y2="513" class="stroke"/>
+    <line x1="948" y1="517" x2="966" y2="500" class="stroke"/>
+
+    <text x="1000" y="486" class="cardText">Relationships</text>
+    <text x="1000" y="514" class="cardText">Connected data</text>
+    <text x="1000" y="542" class="mono">Neo4j, Neptune</text>
   </g>
 
-  <!-- Wide-Column -->
-  <g>
-    <!-- Icon: Grid -->
-    <rect x="425" y="300" width="30" height="30" fill="#ffccbc" stroke="#d84315" stroke-width="1.5"/>
-    <line x1="440" y1="300" x2="440" y2="330" stroke="#d84315" stroke-width="1"/>
-    <line x1="425" y1="315" x2="455" y2="315" stroke="#d84315" stroke-width="1"/>
-    
-    <!-- Label -->
-    <rect x="410" y="350" width="160" height="80" fill="#ffffff" stroke="#d84315" stroke-width="1.5" rx="6"/>
-    <text x="490" y="370" text-anchor="middle" class="label-bold">WIDE-COLUMN</text>
-    <text x="490" y="387" text-anchor="middle" class="label-text">Flexible Columns</text>
-    <text x="490" y="400" text-anchor="middle" class="label-text">Distributed, High Write</text>
-    <text x="490" y="413" text-anchor="middle" class="label-text">Cassandra, HBase</text>
+  <!-- Connecting arrows -->
+  <g fill="none" class="stroke">
+    <path d="M395 250 C430 250, 440 250, 455 250"/>
+    <path d="M805 250 C770 250, 760 250, 745 250"/>
+    <path d="M395 480 C430 480, 440 430, 455 410"/>
+    <path d="M805 480 C770 480, 760 430, 745 410"/>
   </g>
 
-  <!-- In-Memory -->
-  <g>
-    <!-- Icon: RAM Chip -->
-    <rect x="630" y="305" width="30" height="30" fill="#b2dfdb" stroke="#00695c" stroke-width="1.5" rx="2"/>
-    <circle cx="635" cy="313" r="2" fill="#00695c"/>
-    <circle cx="653" cy="313" r="2" fill="#00695c"/>
-    <circle cx="645" cy="313" r="2" fill="#00695c"/>
-    <circle cx="635" cy="321" r="2" fill="#00695c"/>
-    <circle cx="653" cy="321" r="2" fill="#00695c"/>
-    <circle cx="645" cy="321" r="2" fill="#00695c"/>
-    
-    <!-- Label -->
-    <rect x="620" y="350" width="160" height="80" fill="#ffffff" stroke="#00695c" stroke-width="1.5" rx="6"/>
-    <text x="700" y="370" text-anchor="middle" class="label-bold">IN-MEMORY</text>
-    <text x="700" y="387" text-anchor="middle" class="label-text">RAM Storage</text>
-    <text x="700" y="400" text-anchor="middle" class="label-text">Ultra-Low Latency</text>
-    <text x="700" y="413" text-anchor="middle" class="label-text">Redis, Memcached</text>
+  <g fill="#223156">
+    <polygon points="455,250 442,242 442,258"/>
+    <polygon points="745,250 758,242 758,258"/>
+    <polygon points="455,410 442,402 442,418"/>
+    <polygon points="745,410 758,402 758,418"/>
   </g>
 
-  <!-- Search -->
-  <g>
-    <!-- Icon: Search Index -->
-    <circle cx="840" cy="318" r="10" fill="none" stroke="#5e35b1" stroke-width="2"/>
-    <line x1="850" y1="325" x2="870" y2="335" stroke="#5e35b1" stroke-width="2"/>
-    
-    <!-- Label -->
-    <rect x="820" y="350" width="160" height="80" fill="#ffffff" stroke="#5e35b1" stroke-width="1.5" rx="6"/>
-    <text x="900" y="370" text-anchor="middle" class="label-bold">SEARCH</text>
-    <text x="900" y="387" text-anchor="middle" class="label-text">Full-Text Index</text>
-    <text x="900" y="400" text-anchor="middle" class="label-text">Fast Text Search</text>
-    <text x="900" y="413" text-anchor="middle" class="label-text">Elasticsearch, Solr</text>
+  <!-- Bottom ribbon -->
+  <g filter="url(#softShadow)">
+    <rect x="300" y="585" width="600" height="36" rx="18" fill="#e2edff" class="stroke"/>
+    <text x="600" y="609" text-anchor="middle" class="small">Choose by consistency, scale, and query style</text>
   </g>
-
-  <!-- Bottom section: Characteristics -->
-  <g>
-    <text x="320" y="490" font-size="12" font-weight="bold" fill="#1a237e">Key Dimensions:</text>
-    
-    <text x="320" y="515" font-size="11" fill="#424242">
-      <tspan>• Data Model: Structured (SQL) vs Flexible (NoSQL) vs Specialized</tspan>
-    </text>
-    
-    <text x="320" y="540" font-size="11" fill="#424242">
-      <tspan>• Consistency: ACID (strict) vs BASE (eventual)</tspan>
-    </text>
-    
-    <text x="320" y="565" font-size="11" fill="#424242">
-      <tspan>• Scalability: Vertical (single server) vs Horizontal (distributed)</tspan>
-    </text>
-    
-    <text x="720" y="515" font-size="11" fill="#424242">
-      <tspan>• Query Type: Transactional (OLTP) vs Analytical (OLAP)</tspan>
-    </text>
-  </g>
-
 </svg>
