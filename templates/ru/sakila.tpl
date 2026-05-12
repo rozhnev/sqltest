@@ -5,16 +5,17 @@
         display: inline-block;
     }
   </style>
-  <h2>База данных Sakila</h2>
-  Sakila - это пример базы данных, разработанный компанией MySQL, специально созданный для обучения и демонстрации возможностей систем управления базами данных (СУБД) на основе реляционной модели.
+    <h1>База данных Sakila: описание таблиц и структуры</h1>
+    <p>Sakila - это пример реляционной базы данных, разработанный компанией MySQL для обучения и демонстрации возможностей SQL и систем управления базами данных (СУБД).</p>
+    <p>На этой странице собрана структура таблиц Sakila, основные поля и ключи, которые используются в учебных SQL-запросах.</p>
   <p>База данных Sakila содержит 15 основных таблиц, описывающих различные аспекты компании по прокату DVD-дисков.</p>
     <p>
-        <a href="/{$Lang}/erd/Sakila" target="ERDWindow" style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
-            <img src="/images/erd_small_light.jpg" alt="ER диаграмма базы данных Sakila" style="width: 90%;">
+                <a href="/{$Lang}/erd/Sakila" target="ERDWindow" rel="noopener noreferrer" style="display: flex; flex-direction: column; align-items: center; gap: 4px;" aria-label="Открыть ER-диаграмму базы данных Sakila в новом окне">
+                        <img src="/images/erd_small_light.jpg" alt="ER-диаграмма базы данных Sakila со связями между таблицами" style="width: 90%;" loading="lazy" decoding="async">
             ER диаграмма базы данных Sakila
         </a>
     </p>
-  <h3>Список таблиц:</h3>
+    <h2>Список таблиц</h2>
   <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
       <span><span class='sql'>actor</span> - таблица актеров</span>
   </div>
@@ -25,22 +26,27 @@
           <li> <span class='sql'>last_name</span> фамилия актера.</li>
           <li> <span class='sql'>last_update</span> дата и время последнего изменения.</li> 
       </ul>
-      <div class="table-wrapper">
-          <table>
-            <tr>
-              <th>actor_id</th>
-              <th>first_name</th>
-              <th>last_name</th>
-              <th>last_update</th>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>John</td>
-              <td>Doe</td>
-              <td>2023-01-01 12:00:00</td>
-            </tr>
-          </table>
-      </div>
+            <div class="table-wrapper">
+                    <table>
+                        <caption>Пример структуры таблицы actor</caption>
+                        <thead>
+                            <tr>
+                                <th scope="col">actor_id</th>
+                                <th scope="col">first_name</th>
+                                <th scope="col">last_name</th>
+                                <th scope="col">last_update</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>John</td>
+                                <td>Doe</td>
+                                <td>2023-01-01 12:00:00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+            </div>
       <ul class="table-columns">
           <li>PRIMARY KEY, btree (actor_id)</li>
       </ul>

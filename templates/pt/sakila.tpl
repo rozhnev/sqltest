@@ -5,16 +5,17 @@
             display: inline-block;
         }
     </style>
-    <h2>Banco de Dados Sakila</h2>
-    Sakila é um banco de dados de exemplo projetado pelo MySQL, criado especificamente para aprendizado e demonstração das capacidades dos sistemas de gerenciamento de banco de dados relacionais (RDBMS).
+    <h1>Banco de Dados Sakila: estrutura e descrição das tabelas</h1>
+    <p>Sakila é um banco de dados relacional de exemplo projetado pelo MySQL para aprendizado e demonstração dos recursos de SQL e dos sistemas de gerenciamento de banco de dados (SGBD).</p>
+    <p>Esta página apresenta a estrutura das tabelas Sakila, as colunas principais e as chaves usadas em consultas SQL didáticas.</p>
     <p>O banco de dados Sakila contém 15 tabelas principais descrevendo vários aspectos de uma empresa de locação de DVDs.</p>
     <p>
-        <a href="/{$Lang}/erd/Sakila" target="ERDWindow" style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
-            <img src="/images/erd_small_light.jpg" alt="Diagrama ER do banco de dados Sakila" style="width: 90%;">
+        <a href="/{$Lang}/erd/Sakila" target="ERDWindow" rel="noopener noreferrer" style="display: flex; flex-direction: column; align-items: center; gap: 4px;" aria-label="Abrir o diagrama ER do banco de dados Sakila em uma nova janela">
+            <img src="/images/erd_small_light.jpg" alt="Diagrama ER do banco de dados Sakila com relacionamentos entre tabelas" style="width: 90%;" loading="lazy" decoding="async">
             Diagrama ER do banco de dados Sakila
         </a>
     </p>
-    <h3>Lista de Tabelas:</h3>
+    <h2>Lista de Tabelas</h2>
     <div class="accordion" title="Clique para expandir, duplo clique para colar nome da tabela">
         <span><span class='sql'>actor</span> - tabela de atores.</span>
     </div>
@@ -25,22 +26,27 @@
             <li> <span class='sql'>last_name</span>sobrenome do ator</li>
             <li> <span class='sql'>last_update</span>data e hora da última atualização</li> 
         </ul>
-        <div class="table-wrapper">
-            <table>
-              <tr>
-                <th>actor_id</th>
-                <th>first_name</th>
-                <th>last_name</th>
-                <th>last_update</th>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>2023-01-01 12:00:00</td>
-              </tr>
-            </table>
-        </div>
+                <div class="table-wrapper">
+                        <table>
+                                <caption>Exemplo de estrutura da tabela actor</caption>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">actor_id</th>
+                                        <th scope="col">first_name</th>
+                                        <th scope="col">last_name</th>
+                                        <th scope="col">last_update</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>John</td>
+                                        <td>Doe</td>
+                                        <td>2023-01-01 12:00:00</td>
+                                    </tr>
+                                </tbody>
+                        </table>
+                </div>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (actor_id)</li>
         </ul>
@@ -61,17 +67,20 @@
         </ul>
         <div class="table-wrapper">
             <table>
-              <tr>
-                <th>address_id</th>
-                <th>address</th>
-                <th>address2</th>
-                <th>district</th>
-                <th>city_id</th>
-                <th>postal_code</th>
-                <th>phone</th>
-                <th>last_update</th>
+                <thead>
+                    <tr>
+                <th scope="col">address_id</th>
+                <th scope="col">address</th>
+                <th scope="col">address2</th>
+                <th scope="col">district</th>
+                <th scope="col">city_id</th>
+                <th scope="col">postal_code</th>
+                <th scope="col">phone</th>
+                <th scope="col">last_update</th>
               </tr>
-              <tr>
+                </thead>
+                <tbody>
+                    <tr>
                 <td>1</td>
                 <td>123 Main St</td>
                 <td>[null]</td>
@@ -81,6 +90,7 @@
                 <td>+1234567890</td>
                 <td>2023-01-01 12:00:00</td>
               </tr>
+                </tbody>
             </table>
         </div>
         <ul class="table-columns">
@@ -98,16 +108,20 @@
         </ul>
         <div class="table-wrapper">
             <table>
-              <tr>
-                <th>category_id</th>
-                <th>name</th>
-                <th>last_update</th>
+                <thead>
+                    <tr>
+                <th scope="col">category_id</th>
+                <th scope="col">name</th>
+                <th scope="col">last_update</th>
               </tr>
-              <tr>
+                </thead>
+                <tbody>
+                    <tr>
                 <td>1</td>
                 <td>Action</td>
                 <td>2023-01-01 12:00:00</td>
               </tr>
+                </tbody>
             </table>
         </div>
         <ul class="table-columns">
@@ -126,18 +140,22 @@
         </ul>
         <div class="table-wrapper">
             <table>
-              <tr>
-                <th>city_id</th>
-                <th>city</th>
-                <th>country_id</th>
-                <th>last_update</th>
+                <thead>
+                    <tr>
+                <th scope="col">city_id</th>
+                <th scope="col">city</th>
+                <th scope="col">country_id</th>
+                <th scope="col">last_update</th>
               </tr>
-              <tr>
+                </thead>
+                <tbody>
+                    <tr>
                 <td>1</td>
                 <td>Metropolis</td>
                 <td>1</td>
                 <td>2023-01-01 12:00:00</td>
               </tr>
+                </tbody>
             </table>
         </div>
         <ul class="table-columns">
@@ -155,16 +173,20 @@
         </ul>
         <div class="table-wrapper">
             <table>
-              <tr>
-                <th>country_id</th>
-                <th>country</th>
-                <th>last_update</th>
+                <thead>
+                    <tr>
+                <th scope="col">country_id</th>
+                <th scope="col">country</th>
+                <th scope="col">last_update</th>
               </tr>
-              <tr>
+                </thead>
+                <tbody>
+                    <tr>
                 <td>1</td>
                 <td>United States</td>
                 <td>2023-01-01 12:00:00</td>
               </tr>
+                </tbody>
             </table>
         </div>
         <ul class="table-columns">
@@ -188,18 +210,21 @@
         </ul>
         <div class="table-wrapper">
             <table>
-              <tr>
-                <th>customer_id</th>
-                <th>store_id</th>
-                <th>first_name</th>
-                <th>last_name</th>
-                <th>email</th>
-                <th>address_id</th>
-                <th>active</th>
-                <th>create_date</th>
-                <th>last_update</th>
+                <thead>
+                    <tr>
+                <th scope="col">customer_id</th>
+                <th scope="col">store_id</th>
+                <th scope="col">first_name</th>
+                <th scope="col">last_name</th>
+                <th scope="col">email</th>
+                <th scope="col">address_id</th>
+                <th scope="col">active</th>
+                <th scope="col">create_date</th>
+                <th scope="col">last_update</th>
               </tr>
-              <tr>
+                </thead>
+                <tbody>
+                    <tr>
                 <td>1</td>
                 <td>1</td>
                 <td>John</td>
@@ -210,6 +235,7 @@
                 <td>2023-01-01 12:00:00</td>
                 <td>2023-01-01 12:00:00</td>
               </tr>
+                </tbody>
             </table>
           </div>
         <ul class="table-columns">
@@ -237,22 +263,25 @@
         </ul>
         <div class="table-wrapper">
             <table>
-              <tr>
-                <th>film_id</th>
-                <th>title</th>
-                <th>description</th>
-                <th>release_year</th>
-                <th>language_id</th>
-                <th>original_language_id</th>
-                <th>rental_duration</th>
-                <th>rental_rate</th>
-                <th>length</th>
-                <th>replacement_cost</th>
-                <th>rating</th>
-                <th>special_features</th>
-                <th>last_update</th>
+                <thead>
+                    <tr>
+                <th scope="col">film_id</th>
+                <th scope="col">title</th>
+                <th scope="col">description</th>
+                <th scope="col">release_year</th>
+                <th scope="col">language_id</th>
+                <th scope="col">original_language_id</th>
+                <th scope="col">rental_duration</th>
+                <th scope="col">rental_rate</th>
+                <th scope="col">length</th>
+                <th scope="col">replacement_cost</th>
+                <th scope="col">rating</th>
+                <th scope="col">special_features</th>
+                <th scope="col">last_update</th>
               </tr>
-              <tr>
+                </thead>
+                <tbody>
+                    <tr>
                 <td>1</td>
                 <td>Film Title</td>
                 <td>A brief description of the film.</td>
@@ -267,6 +296,7 @@
                 <td>Trailers, Commentaries</td>
                 <td>2023-01-01 12:00:00</td>
               </tr>
+                </tbody>
             </table>
         </div>
         <ul class="table-columns">
@@ -284,16 +314,20 @@
         </ul>
         <div class="table-wrapper">
             <table>
-                <tr>
-                    <th>actor_id</th>
-                    <th>film_id</th>
-                    <th>last_update</th>
+                <thead>
+                    <tr>
+                    <th scope="col">actor_id</th>
+                    <th scope="col">film_id</th>
+                    <th scope="col">last_update</th>
                 </tr>
-                <tr>
+                </thead>
+                <tbody>
+                    <tr>
                     <td>1</td>
                     <td>1</td>
                     <td>2023-01-01 12:00:00</td>
                 </tr>
+                </tbody>
             </table>
         </div>
         <ul class="table-columns">
@@ -311,16 +345,20 @@
           </ul>
           <div class="table-wrapper">
             <table>
-              <tr>
-                <th>film_id</th>
-                <th>category_id</th>
-                <th>last_update</th>
+                <thead>
+                    <tr>
+                <th scope="col">film_id</th>
+                <th scope="col">category_id</th>
+                <th scope="col">last_update</th>
               </tr>
-              <tr>
+                </thead>
+                <tbody>
+                    <tr>
                 <td>1</td>
                 <td>1</td>
                 <td>2023-01-01 12:00:00</td>
               </tr>
+                </tbody>
             </table>
           </div>
           <ul class="table-columns">
@@ -339,18 +377,22 @@
         </ul>
         <div class="table-wrapper">
             <table>
-                <tr>
-                    <th>inventory_id</th>
-                    <th>film_id</th>
-                    <th>store_id</th>
-                    <th>last_update</th>
+                <thead>
+                    <tr>
+                    <th scope="col">inventory_id</th>
+                    <th scope="col">film_id</th>
+                    <th scope="col">store_id</th>
+                    <th scope="col">last_update</th>
                 </tr>
-                <tr>
+                </thead>
+                <tbody>
+                    <tr>
                     <td>1</td>
                     <td>23</td>
                     <td>2</td>
                     <td>2023-01-01 12:00:00</td>
                 </tr>
+                </tbody>
             </table>
         </div>
         <ul class="table-columns">
@@ -368,16 +410,20 @@
         </ul>
         <div class="table-wrapper">
             <table>
-                <tr>
-                    <th>language_id</th>
-                    <th>name</th>
-                    <th>last_update</th>
+                <thead>
+                    <tr>
+                    <th scope="col">language_id</th>
+                    <th scope="col">name</th>
+                    <th scope="col">last_update</th>
                 </tr>
-                <tr>
+                </thead>
+                <tbody>
+                    <tr>
                     <td>1</td>
                     <td>English</td>
                     <td>2023-01-01 12:00:00</td>
                 </tr>
+                </tbody>
             </table>
         </div>
         <ul class="table-columns">
@@ -399,16 +445,19 @@
         </ul>
         <div class="table-wrapper">
         <table>
-            <tr>
-                <th>payment_id</th>
-                <th>customer_id</th>
-                <th>staff_id</th>
-                <th>rental_id</th>
-                <th>amount</th>
-                <th>payment_date</th>
-                <th>last_update</th>
+                <thead>
+                    <tr>
+                <th scope="col">payment_id</th>
+                <th scope="col">customer_id</th>
+                <th scope="col">staff_id</th>
+                <th scope="col">rental_id</th>
+                <th scope="col">amount</th>
+                <th scope="col">payment_date</th>
+                <th scope="col">last_update</th>
             </tr>
-            <tr>
+                </thead>
+                <tbody>
+                    <tr>
                 <td>1</td>
                 <td>1</td>
                 <td>1</td>
@@ -417,7 +466,8 @@
                 <td>2023-01-01 12:13:14</td>
                 <td>2023-01-01 12:14:15</td>
             </tr>
-        </table>
+                </tbody>
+            </table>
         </div>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (payment_id)</li>
@@ -438,16 +488,19 @@
         </ul>
         <div class="table-wrapper">
         <table>
-            <tr>
-                <th>rental_id</th>
-                <th>rental_date</th>
-                <th>inventory_id</th>
-                <th>customer_id</th>
-                <th>return_date</th>
-                <th>staff_id</th>
-                <th>last_update</th>
+                <thead>
+                    <tr>
+                <th scope="col">rental_id</th>
+                <th scope="col">rental_date</th>
+                <th scope="col">inventory_id</th>
+                <th scope="col">customer_id</th>
+                <th scope="col">return_date</th>
+                <th scope="col">staff_id</th>
+                <th scope="col">last_update</th>
             </tr>
-            <tr>
+                </thead>
+                <tbody>
+                    <tr>
                 <td>1</td>
                 <td>2023-01-01 16:15:21</td>
                 <td>1</td>
@@ -456,7 +509,8 @@
                 <td>1</td>
                 <td>2023-01-01 12:00:00</td>
             </tr>
-        </table>
+                </tbody>
+            </table>
         </div>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (rental_id)</li>
@@ -481,20 +535,23 @@
         </ul>
         <div class="table-wrapper">
         <table>
-            <tr>
-                <th>staff_id</th>
-                <th>first_name</th>
-                <th>last_name</th>
-                <th>address_id</th>
-                <th>picture</th>
-                <th>email</th>
-                <th>store_id</th>
-                <th>active</th>
-                <th>username</th>
-                <th>password</th>
-                <th>last_update</th>
+                <thead>
+                    <tr>
+                <th scope="col">staff_id</th>
+                <th scope="col">first_name</th>
+                <th scope="col">last_name</th>
+                <th scope="col">address_id</th>
+                <th scope="col">picture</th>
+                <th scope="col">email</th>
+                <th scope="col">store_id</th>
+                <th scope="col">active</th>
+                <th scope="col">username</th>
+                <th scope="col">password</th>
+                <th scope="col">last_update</th>
             </tr>
-            <tr>
+                </thead>
+                <tbody>
+                    <tr>
                 <td>1</td>
                 <td>John</td>
                 <td>Doe</td>
@@ -507,7 +564,8 @@
                 <td>********</td>
                 <td>2023-01-01 12:00:00</td>
             </tr>
-        </table>
+                </tbody>
+            </table>
         </div>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (staff_id)</li>
@@ -525,18 +583,22 @@
         </ul>
         <div class="table-wrapper">
             <table>
-              <tr>
-                  <th>store_id</th>
-                  <th>manager_staff_id</th>
-                  <th>address_id</th>
-                  <th>last_update</th>
+                <thead>
+                    <tr>
+                  <th scope="col">store_id</th>
+                  <th scope="col">manager_staff_id</th>
+                  <th scope="col">address_id</th>
+                  <th scope="col">last_update</th>
               </tr>
-              <tr>
+                </thead>
+                <tbody>
+                    <tr>
                   <td>1</td>
                   <td>1</td>
                   <td>1</td>
                   <td>2023-01-01 12:00:00</td>
               </tr>
+                </tbody>
             </table>
         </div>
         <ul class="table-columns">
