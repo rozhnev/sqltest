@@ -96,6 +96,9 @@
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (address_id)</li>
         </ul>
+        <ul class="table-columns">
+            <li>FOREIGN KEY (city_id) REFERENCES city(city_id)</li>
+        </ul>
     </div>
     <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
         <span class='sql'>category</span> - catégories de films.
@@ -160,6 +163,9 @@
         </div>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (city_id)</li>
+        </ul>
+        <ul class="table-columns">
+            <li>FOREIGN KEY (country_id) REFERENCES country(country_id)</li>
         </ul>
     </div>    
     <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
@@ -241,6 +247,10 @@
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (customer_id)</li>
         </ul>
+        <ul class="table-columns">
+            <li>FOREIGN KEY (store_id) REFERENCES store(store_id)</li>
+            <li>FOREIGN KEY (address_id) REFERENCES address(address_id)</li>
+        </ul>
     </div>
     <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
         <span class='sql'>film</span> - liste des films dans la base de données.
@@ -302,6 +312,10 @@
           <ul class="table-columns">
             <li>PRIMARY KEY, btree (film_id)</li>
           </ul>
+                    <ul class="table-columns">
+                        <li>FOREIGN KEY (language_id) REFERENCES language(language_id)</li>
+                        <li>FOREIGN KEY (original_language_id) REFERENCES language(language_id)</li>
+                    </ul>
     </div>
     <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
         <span class='sql'>film_actor</span> - relation entre acteurs et films.
@@ -332,7 +346,11 @@
           </div>
           <ul class="table-columns">
             <li>PRIMARY KEY, btree (actor_id, film_id)</li>
-          </ul>      
+                    </ul>
+                    <ul class="table-columns">
+                        <li>FOREIGN KEY (actor_id) REFERENCES actor(actor_id)</li>
+                        <li>FOREIGN KEY (film_id) REFERENCES film(film_id)</li>
+                    </ul>
     </div>
     <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
         <span class='sql'>film_category</span> - relation entre films et catégories.
@@ -363,7 +381,11 @@
           </div>
           <ul class="table-columns">
               <li>PRIMARY KEY, btree (film_id, category_id)</li>
-          </ul>    
+          </ul>
+          <ul class="table-columns">
+              <li>FOREIGN KEY (film_id) REFERENCES film(film_id)</li>
+              <li>FOREIGN KEY (category_id) REFERENCES category(category_id)</li>
+          </ul>
     </div>
     <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
         <span class='sql'>inventory</span> - exemplaires (stocks) dans la base de données.
@@ -397,7 +419,11 @@
         </div>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (inventory_id)</li>
-        </ul>        
+        </ul>
+        <ul class="table-columns">
+            <li>FOREIGN KEY (film_id) REFERENCES film(film_id)</li>
+            <li>FOREIGN KEY (store_id) REFERENCES store(store_id)</li>
+        </ul>
     </div>
     <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
         <span class='sql'>language</span> - langues des films.
@@ -471,7 +497,12 @@
         </div>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (payment_id)</li>
-        </ul>      
+        </ul>
+        <ul class="table-columns">
+            <li>FOREIGN KEY (customer_id) REFERENCES customer(customer_id)</li>
+            <li>FOREIGN KEY (staff_id) REFERENCES staff(staff_id)</li>
+            <li>FOREIGN KEY (rental_id) REFERENCES rental(rental_id)</li>
+        </ul>
     </div>
     <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
         <span class='sql'>rental</span> - locations des clients.
@@ -514,7 +545,12 @@
         </div>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (rental_id)</li>
-        </ul>    
+        </ul>
+        <ul class="table-columns">
+            <li>FOREIGN KEY (inventory_id) REFERENCES inventory(inventory_id)</li>
+            <li>FOREIGN KEY (customer_id) REFERENCES customer(customer_id)</li>
+            <li>FOREIGN KEY (staff_id) REFERENCES staff(staff_id)</li>
+        </ul>
     </div>
     <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
         <span class='sql'>staff</span> - personnel de l'entreprise.
@@ -569,7 +605,11 @@
         </div>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (staff_id)</li>
-        </ul>        
+        </ul>
+        <ul class="table-columns">
+            <li>FOREIGN KEY (address_id) REFERENCES address(address_id)</li>
+            <li>FOREIGN KEY (store_id) REFERENCES store(store_id)</li>
+        </ul>
     </div>
     <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
         <span class='sql'>store</span> - magasins de l'entreprise.
@@ -603,6 +643,10 @@
         </div>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (store_id)</li>
+        </ul>
+        <ul class="table-columns">
+            <li>FOREIGN KEY (manager_staff_id) REFERENCES staff(staff_id)</li>
+            <li>FOREIGN KEY (address_id) REFERENCES address(address_id)</li>
         </ul>
     </div>
     {if $User->showAd()}

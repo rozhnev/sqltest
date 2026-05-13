@@ -92,6 +92,9 @@
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (address_id)</li>
         </ul>
+        <ul class="table-columns">
+            <li>FOREIGN KEY (city_id) REFERENCES city(city_id)</li>
+        </ul>
     </div>
     <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span class='sql'>category</span> - категории фильмов
@@ -148,6 +151,9 @@
         </div>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (city_id)</li>
+        </ul>
+        <ul class="table-columns">
+            <li>FOREIGN KEY (country_id) REFERENCES country(country_id)</li>
         </ul>
     </div>    
     <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
@@ -221,6 +227,10 @@
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (customer_id)</li>
         </ul>
+        <ul class="table-columns">
+            <li>FOREIGN KEY (store_id) REFERENCES store(store_id)</li>
+            <li>FOREIGN KEY (address_id) REFERENCES address(address_id)</li>
+        </ul>
     </div>
     <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span class='sql'>film</span> - таблица фильмов
@@ -278,6 +288,10 @@
         <ul class="table-columns">
              <li>PRIMARY KEY, btree (film_id)</li>
         </ul>
+        <ul class="table-columns">
+            <li>FOREIGN KEY (language_id) REFERENCES language(language_id)</li>
+            <li>FOREIGN KEY (original_language_id) REFERENCES language(language_id)</li>
+        </ul>
     </div>
     <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span class='sql'>film_actor</span> - отношение актеров и фильмов
@@ -305,6 +319,10 @@
         <ul class="table-columns">
            <li>PRIMARY KEY, btree (actor_id, film_id)</li>
         </ul>
+        <ul class="table-columns">
+            <li>FOREIGN KEY (actor_id) REFERENCES actor(actor_id)</li>
+            <li>FOREIGN KEY (film_id) REFERENCES film(film_id)</li>
+        </ul>
     </div>
     <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span class='sql'>film_category</span> - отношение фильмов к категориям
@@ -331,6 +349,10 @@
         </div>
         <ul class="table-columns">
            <li>PRIMARY KEY, btree (film_id, category_id)</li>
+        </ul>
+        <ul class="table-columns">
+            <li>FOREIGN KEY (film_id) REFERENCES film(film_id)</li>
+            <li>FOREIGN KEY (category_id) REFERENCES category(category_id)</li>
         </ul>
     </div>
     <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
@@ -361,6 +383,10 @@
         </div>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (inventory_id)</li>
+        </ul>
+        <ul class="table-columns">
+            <li>FOREIGN KEY (film_id) REFERENCES film(film_id)</li>
+            <li>FOREIGN KEY (store_id) REFERENCES store(store_id)</li>
         </ul>
     </div>
     <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
@@ -428,6 +454,11 @@
         <ul class="table-columns">
            <li>PRIMARY KEY, btree (payment_id)</li>
         </ul>
+        <ul class="table-columns">
+            <li>FOREIGN KEY (customer_id) REFERENCES customer(customer_id)</li>
+            <li>FOREIGN KEY (staff_id) REFERENCES staff(staff_id)</li>
+            <li>FOREIGN KEY (rental_id) REFERENCES rental(rental_id)</li>
+        </ul>
     </div>
     <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span class='sql'>rental</span> - таблица аренды дисков
@@ -466,6 +497,11 @@
         </div>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (rental_id)</li>
+        </ul>
+        <ul class="table-columns">
+            <li>FOREIGN KEY (inventory_id) REFERENCES inventory(inventory_id)</li>
+            <li>FOREIGN KEY (customer_id) REFERENCES customer(customer_id)</li>
+            <li>FOREIGN KEY (staff_id) REFERENCES staff(staff_id)</li>
         </ul>
     </div>
     <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
@@ -518,6 +554,10 @@
         <ul class="table-columns">
           <li>PRIMARY KEY, btree (staff_id)</li>
         </ul>
+                <ul class="table-columns">
+                        <li>FOREIGN KEY (address_id) REFERENCES address(address_id)</li>
+                        <li>FOREIGN KEY (store_id) REFERENCES store(store_id)</li>
+                </ul>
     </div>
     <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span class='sql'>store</span> - филиалы компании
@@ -547,6 +587,10 @@
         </div>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (store_id)</li>
+        </ul>
+        <ul class="table-columns">
+            <li>FOREIGN KEY (manager_staff_id) REFERENCES staff(staff_id)</li>
+            <li>FOREIGN KEY (address_id) REFERENCES address(address_id)</li>
         </ul>
     </div>              
 
