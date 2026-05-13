@@ -131,6 +131,10 @@
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (CustomerID, AddressID)</li>
         </ul>
+        <ul class="table-columns">
+            <li>FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID)</li>
+            <li>FOREIGN KEY (AddressID) REFERENCES Address(AddressID)</li>
+        </ul>
         <div class="table-wrapper">
             <table><thead><tr>
                     <th scope="col">CustomerID</th>
@@ -172,6 +176,10 @@
         </ul>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (ProductID, ProductCategoryID, ProductModelID)</li>
+        </ul>
+        <ul class="table-columns">
+            <li>FOREIGN KEY (ProductCategoryID) REFERENCES ProductCategory(ProductCategoryID)</li>
+            <li>FOREIGN KEY (ProductModelID) REFERENCES ProductModel(ProductModelID)</li>
         </ul>
         <div class="table-wrapper">
             <table><thead><tr>
@@ -226,6 +234,9 @@
         </ul>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (ProductCategoryID)</li>
+        </ul>
+        <ul class="table-columns">
+            <li>FOREIGN KEY (ParentProductCategoryID) REFERENCES ProductCategory(ProductCategoryID)</li>
         </ul>
         <div class="table-wrapper">
             <table><thead><tr>
@@ -314,6 +325,10 @@
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (ProductModelID, ProductDescriptionID)</li>
         </ul>
+        <ul class="table-columns">
+            <li>FOREIGN KEY (ProductModelID) REFERENCES ProductModel(ProductModelID)</li>
+            <li>FOREIGN KEY (ProductDescriptionID) REFERENCES ProductDescription(ProductDescriptionID)</li>
+        </ul>
         <div class="table-wrapper">
             <table><thead><tr>
                     <th scope="col">ProductModelID</th>
@@ -347,6 +362,10 @@
         </ul>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (SalesOrderID, SalesOrderDetailID, ProductID)</li>
+        </ul>
+        <ul class="table-columns">
+            <li>FOREIGN KEY (SalesOrderID) REFERENCES SalesOrderHeader(SalesOrderID)</li>
+            <li>FOREIGN KEY (ProductID) REFERENCES Product(ProductID)</li>
         </ul>
         <div class="table-wrapper">
           <table><thead><tr>
@@ -402,6 +421,11 @@
         </ul>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (SalesOrderID, CustomerID, ShipToAddressID, BillToAddressID)</li>
+        </ul>
+        <ul class="table-columns">
+            <li>FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID)</li>
+            <li>FOREIGN KEY (ShipToAddressID) REFERENCES Address(AddressID)</li>
+            <li>FOREIGN KEY (BillToAddressID) REFERENCES Address(AddressID)</li>
         </ul>
         <div class="table-wrapper">
             <table><thead><tr>
