@@ -27,6 +27,7 @@
         <link rel="icon" type="image/png" href="/favicons/favicon-32x32.png" sizes="32x32">
         <link rel="icon" type="image/png" href="/favicons/favicon-16x16.png" sizes="16x16">
         <link rel="stylesheet" type="text/css" href="/style.min.css?{$VERSION}" media="all">
+        <link rel="stylesheet" type="text/css" href="/css/erd.css?{$VERSION}" media="all">
         <!-- Yandex.RTB -->
         <script>window.yaContextCb=window.yaContextCb||[]</script>
         <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -64,8 +65,8 @@
                     This ER diagram shows the main entities and foreign key relationships for the {$Db} database.
                 </p>
                 <div style="margin-top: 1em; max-width:100%;">
-                {if file_exists("../images/erd_`$DbKey`.svg")}
-                    {include file="../images/erd_`$DbKey`.svg"}
+                {if file_exists("images/erd_{$DbKey}.svg")}
+                    {include file="images/erd_{$DbKey}.svg"}
                 {/if}
                 </div>
             </div>
