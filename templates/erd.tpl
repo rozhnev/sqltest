@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 {assign var="Db" value=$Params.db}
 {assign var="DbKey" value=$Db|lower}
-{assign var="PageTitle" value="`$Db` ER Diagram | SQLtest.online"}
-{assign var="PageDescription" value="Entity relationship diagram for the `$Db` sample database with table-level foreign key relationships and downloadable SVG image."}
+{assign var="PageTitle" value="`$Db` ER Diagram — Database Schema Visualization | SQLtest.online"}
+{assign var="PageDescription" value="Interactive ER diagram for the `$Db` database. Explore table structure, primary/foreign key relationships, and download the schema as SVG. Perfect for SQL learning and database design."}
 {assign var="PageOGTitle" value=$PageTitle}
 {assign var="PageOGDescription" value=$PageDescription}
 {assign var="PageOGImage" value="https://sqltest.online`$ErdBase`.svg"}

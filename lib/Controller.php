@@ -442,10 +442,12 @@ class Controller
             $sitePromo = Localizer::translateString('site_promo');
             $siteDescription = Localizer::translateString('site_description_question_task');
         }
-        $richDescription = sprintf("%s: «%s» — %s. %s.", $pageDescription, $questionData['title'], $categoryTitle, $dbmsLabel);
+        $totalQuestions = $questionnire->getQuestionsCount();
+        $questionNumber = $questionData['number'] ?? '?';
+        $richDescription = sprintf("%s: «%s» (#%s of %s). Database: %s (%s). Improve SQL skills with this practical, real-world database exercise.", $pageDescription, $questionData['title'], $questionNumber, $totalQuestions, $categoryTitle, $dbmsLabel);
         $this->assignVariables([
-            'PageTitle'             => sprintf("%s: %s", $pageTitle, $questionData['title']),
-            'PageOGTitle'           => sprintf("%s: %s", $pageTitle, $questionData['title']),
+            'PageTitle'             => sprintf("%s #%s: %s", $pageTitle, $questionNumber, $questionData['title']),
+            'PageOGTitle'           => sprintf("%s #%s: %s", $pageTitle, $questionNumber, $questionData['title']),
             'PageDescription'       => $richDescription,
             'SitePromo'             => $sitePromo,
             'SiteDescription'       => $siteDescription,
@@ -458,7 +460,7 @@ class Controller
             'DB'                    => $questionData['db_template'],
             'DBMS'                  => $questionData['dbms'],
             'Action'                => 'question',
-            'QuestionsCount'        => $questionnire->getQuestionsCount(),
+            'QuestionsCount'        => $totalQuestions,
             'SolvedQuestionsCount'  => $this->user->getSolvedQuestionsCount(),
             'Book'                  => Helper::getBook($this->dbh, $this->lang, $questionData['dbms']),
             'Favorites'             => $this->user->getFavorites($this->lang)
