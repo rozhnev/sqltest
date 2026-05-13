@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 {assign var="Db" value=$Params.db}
-{assign var="Theme" value=$Params.theme|default:'light'}
-{assign var="ErdBase" value="/images/`$Db|lower`_`$Theme`"}
+{assign var="DbKey" value=$Db|lower}
+{assign var="ErdBase" value="/images/erd_`$DbKey`"}
 {assign var="PageTitle" value="`$Db` ER Diagram | SQLtest.online"}
 {assign var="PageDescription" value="Entity relationship diagram for the `$Db` sample database with table-level foreign key relationships and downloadable SVG image."}
 {assign var="PageOGTitle" value=$PageTitle}
 {assign var="PageOGDescription" value=$PageDescription}
-{assign var="PageOGImage" value="https://sqltest.online`$ErdBase`.jpg"}
+{assign var="PageOGImage" value="https://sqltest.online`$ErdBase`.svg"}
 {assign var="PageOGImageAlt" value="ER diagram for `$Db` database"}
 {assign var="PageOGImageWidth" value="1600"}
 {assign var="PageOGImageHeight" value="1200"}
@@ -56,26 +56,6 @@
                 {rdelim}
             {rdelim}
         </script>
-        <style>
-            .erd-helper-text {
-                text-align: center;
-                color: var(--question-text);
-            }
-            .erd-lead {
-                margin: 0 auto;
-                max-width: 980px;
-                text-align: center;
-                color: var(--question-text);
-                line-height: 1.5;
-            }
-            .erd-actions {
-                margin-top: 0.75em;
-                text-align: center;
-            }
-            .erd-actions a {
-                margin: 0 0.5em;
-            }
-        </style>
     </head>
     <body>
         <div class="full-container">
