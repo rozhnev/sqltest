@@ -80,10 +80,9 @@
     <body>
         <div class="full-container">
             <div style="justify-items: center; margin-top: 5em;">
-                <h1 class="erd-helper-text">{$Db} {translate}erd_diagram{/translate}</h1>
+                <h1 class="erd-helper-text">{translate}erd_diagram{/translate}</h1>
                 <p class="erd-lead">
                     This ER diagram shows the main entities and foreign key relationships for the {$Db} database.
-                    Use the SVG view for zooming and the fallback image when SVG is not supported.
                 </p>
                 <p class="erd-actions">
                     <a href="{$ErdBase}.svg" download>{$Db} ERD SVG</a>
