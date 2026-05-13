@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 {assign var="Db" value=$Params.db}
 {assign var="DbKey" value=$Db|lower}
-{assign var="ErdBase" value="/images/erd_`$DbKey`"}
 {assign var="PageTitle" value="`$Db` ER Diagram | SQLtest.online"}
 {assign var="PageDescription" value="Entity relationship diagram for the `$Db` sample database with table-level foreign key relationships and downloadable SVG image."}
 {assign var="PageOGTitle" value=$PageTitle}
@@ -64,11 +63,10 @@
                 <p class="erd-lead">
                     This ER diagram shows the main entities and foreign key relationships for the {$Db} database.
                 </p>
-                <p class="erd-actions">
-                    <a href="{$ErdBase}.svg" download>{$Db} ERD SVG</a>
-                </p>
                 <div style="margin-top: 1em; max-width:100%;">
-                    <object data="{$ErdBase}.svg" type="image/svg+xml" style="max-width:100%;" aria-label="{$Db} entity relationship diagram" role="img"></object>
+                {if file_exists("../images/erd_`$DbKey`.svg")}
+                    {include file="../images/erd_`$DbKey`.svg"}
+                {/if}
                 </div>
             </div>
         </div>
