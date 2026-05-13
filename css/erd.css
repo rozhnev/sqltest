@@ -80,3 +80,18 @@ html[data-theme='dark'] {
 .erd-actions a {
     margin: 0 0.5em;
 }
+
+.erd-page-wrap {
+  justify-items: center;
+  margin-top: 5em;
+}
+
+.erd-figure-wrap {
+  margin-top: 1em;
+  max-width: 100%;
+}
+
+.erd-figure-wrap svg {
+  max-width: 100%;
+  height: auto;
+}

@@ -59,12 +59,12 @@
     </head>
     <body>
         <div class="full-container">
-            <div style="justify-items: center; margin-top: 5em;">
+            <div class="erd-page-wrap">
                 <h1 class="erd-helper-text">{translate}erd_diagram{/translate}</h1>
                 <p class="erd-lead">
                     This ER diagram shows the main entities and foreign key relationships for the {$Db} database.
                 </p>
-                <div style="margin-top: 1em; max-width:100%;">
+                <div class="erd-figure-wrap">
                 {if file_exists("images/erd_{$DbKey}.svg")}
                     {include file="images/erd_{$DbKey}.svg"}
                 {/if}
