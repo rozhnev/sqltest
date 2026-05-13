@@ -1,0 +1,88 @@
+:root {
+  --erd-bg: #f3f6fb;
+  --erd-grid: #e5eaf2;
+  --erd-panel-bg: #ffffff;
+  --erd-panel-stroke: #25364a;
+  --erd-header-bg: #0f4aa3;
+  --erd-title: #ffffff;
+  --erd-col: #1f2d3d;
+  --erd-pk: #0f766e;
+  --erd-fk: #7e22ce;
+  --erd-edge: #334155;
+  --erd-edge-soft: #64748b;
+  --erd-label: #0f172a;
+  --erd-main: #0b1220;
+  --erd-sub: #334155;
+  --erd-legend-bg: #ffffff;
+  --erd-legend-stroke: #334155;
+  --erd-legend-title: #0f172a;
+  --erd-shadow-color: #9aa8bd;
+  --erd-shadow-opacity: 0.45;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --erd-bg: #171b23;
+    --erd-grid: #1f2836;
+    --erd-panel-bg: #21262e;
+    --erd-panel-stroke: #79c0ff;
+    --erd-header-bg: #1a3b7e;
+    --erd-title: #f0f6fc;
+    --erd-col: #b0bfd4;
+    --erd-pk: #5bbed4;
+    --erd-fk: #c084fc;
+    --erd-edge: #79c0ff;
+    --erd-edge-soft: #4da3ff;
+    --erd-label: #d0d8e0;
+    --erd-main: #f0f6fc;
+    --erd-sub: #b0bfd4;
+    --erd-legend-bg: #21262e;
+    --erd-legend-stroke: #79c0ff;
+    --erd-legend-title: #f0f6fc;
+    --erd-shadow-color: #000000;
+    --erd-shadow-opacity: 0.6;
+  }
+
+  .erd-employee {
+    --erd-grid: #171b23;
+  }
+}
+
+.bg { fill: var(--erd-bg); }
+.grid { stroke: var(--erd-grid); stroke-width: 1; }
+.panel { fill: var(--erd-panel-bg); stroke: var(--erd-panel-stroke); stroke-width: 1.5; }
+.header { fill: var(--erd-header-bg); }
+.title { fill: var(--erd-title); font: 700 15px 'Segoe UI', Arial, sans-serif; }
+.col { fill: var(--erd-col); font: 12px 'Segoe UI', Arial, sans-serif; }
+.pk { fill: var(--erd-pk); font: 700 11px 'Segoe UI', Arial, sans-serif; }
+.fk { fill: var(--erd-fk); font: 700 11px 'Segoe UI', Arial, sans-serif; }
+.edge { stroke: var(--erd-edge); stroke-width: 2; fill: none; }
+.edge-soft { stroke: var(--erd-edge-soft); stroke-width: 1.6; fill: none; stroke-dasharray: 5 4; }
+.label { fill: var(--erd-label); font: 11px 'Segoe UI', Arial, sans-serif; }
+.main { fill: var(--erd-main); font: 700 26px 'Segoe UI', Arial, sans-serif; }
+.sub { fill: var(--erd-sub); font: 13px 'Segoe UI', Arial, sans-serif; }
+.legend-box { fill: var(--erd-legend-bg); stroke: var(--erd-legend-stroke); stroke-width: 1.2; }
+.legend-title { fill: var(--erd-legend-title); font: 700 14px 'Segoe UI', Arial, sans-serif; }
+
+.erd-sakila .title {
+  font-size: 14px;
+}
+
+.erd-helper-text {
+    text-align: center;
+    color: var(--question-text);
+}
+.erd-lead {
+    margin: 0 auto;
+    max-width: 980px;
+    text-align: center;
+    color: var(--question-text);
+    line-height: 1.5;
+}
+.erd-actions {
+    margin-top: 0.75em;
+    text-align: center;
+}
+.erd-actions a {
+    margin: 0 0.5em;
+}

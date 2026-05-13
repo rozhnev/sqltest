@@ -1,28 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="920" viewBox="0 0 1500 920" role="img" aria-labelledby="title desc">
-  <title id="title">AdventureWorks Database ERD (Dark Theme)</title>
-  <desc id="desc">Entity relationship diagram for the simplified AdventureWorks schema used in SQLTest, with ten tables and explicit foreign keys. Dark theme variant.</desc>
+<?xml-stylesheet type="text/css" href="/css/erd.css"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="920" viewBox="0 0 1500 920" role="img" aria-labelledby="title desc" class="erd erd-adventureworks">
+  <title id="title">AdventureWorks Database ERD</title>
+  <desc id="desc">Entity relationship diagram for the simplified AdventureWorks schema used in SQLTest, with ten tables and explicit foreign keys.</desc>
 
   <defs>
-    <style>
-      .bg { fill: #171b23; }
-      .grid { stroke: #1f2836; stroke-width: 1; }
-      .panel { fill: #21262e; stroke: #79c0ff; stroke-width: 1.5; }
-      .header { fill: #1a3b7e; }
-      .title { fill: #f0f6fc; font: 700 15px 'Segoe UI', Arial, sans-serif; }
-      .col { fill: #b0bfd4; font: 12px 'Segoe UI', Arial, sans-serif; }
-      .pk { fill: #5bbed4; font: 700 11px 'Segoe UI', Arial, sans-serif; }
-      .fk { fill: #c084fc; font: 700 11px 'Segoe UI', Arial, sans-serif; }
-      .edge { stroke: #79c0ff; stroke-width: 2; fill: none; }
-      .edge-soft { stroke: #4da3ff; stroke-width: 1.6; fill: none; stroke-dasharray: 5 4; }
-      .label { fill: #d0d8e0; font: 11px 'Segoe UI', Arial, sans-serif; }
-      .legend-box { fill: #21262e; stroke: #79c0ff; stroke-width: 1.2; }
-      .legend-title { fill: #f0f6fc; font: 700 14px 'Segoe UI', Arial, sans-serif; }
-    </style>
     <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" viewBox="0 0 10 10">
-      <path d="M0,0 L10,5 L0,10 z" fill="#79c0ff"/>
+      <path d="M0,0 L10,5 L0,10 z" fill="var(--erd-edge)"/>
     </marker>
     <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="1.2" stdDeviation="1.2" flood-color="#000000" flood-opacity="0.6"/>
+      <feDropShadow dx="0" dy="1.2" stdDeviation="1.2" flood-color="var(--erd-shadow-color)" flood-opacity="var(--erd-shadow-opacity)"/>
     </filter>
   </defs>
 

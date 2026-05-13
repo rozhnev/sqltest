@@ -1,28 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="920" viewBox="0 0 1500 920" role="img" aria-labelledby="title desc">
+<?xml-stylesheet type="text/css" href="/css/erd.css"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="920" viewBox="0 0 1500 920" role="img" aria-labelledby="title desc" class="erd erd-bookings">
   <title id="title">Bookings Database ERD</title>
   <desc id="desc">Entity relationship diagram for the Bookings database with 8 main tables and key foreign key relationships.</desc>
 
   <defs>
-    <style>
-      .bg { fill: #f3f6fb; }
-      .grid { stroke: #e5eaf2; stroke-width: 1; }
-      .panel { fill: #ffffff; stroke: #25364a; stroke-width: 1.5; }
-      .header { fill: #0f4aa3; }
-      .title { fill: #ffffff; font: 700 15px 'Segoe UI', Arial, sans-serif; }
-      .col { fill: #1f2d3d; font: 12px 'Segoe UI', Arial, sans-serif; }
-      .pk { fill: #0f766e; font: 700 11px 'Segoe UI', Arial, sans-serif; }
-      .fk { fill: #7e22ce; font: 700 11px 'Segoe UI', Arial, sans-serif; }
-      .edge { stroke: #334155; stroke-width: 2; fill: none; }
-      .edge-soft { stroke: #64748b; stroke-width: 1.6; fill: none; stroke-dasharray: 5 4; }
-      .label { fill: #0f172a; font: 11px 'Segoe UI', Arial, sans-serif; }
-      .legend-box { fill: #ffffff; stroke: #334155; stroke-width: 1.2; }
-      .legend-title { fill: #0f172a; font: 700 14px 'Segoe UI', Arial, sans-serif; }
-    </style>
     <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" viewBox="0 0 10 10">
-      <path d="M0,0 L10,5 L0,10 z" fill="#334155"/>
+      <path d="M0,0 L10,5 L0,10 z" fill="var(--erd-edge)"/>
     </marker>
     <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="1.2" stdDeviation="1.2" flood-color="#9aa8bd" flood-opacity="0.45"/>
+      <feDropShadow dx="0" dy="1.2" stdDeviation="1.2" flood-color="var(--erd-shadow-color)" flood-opacity="var(--erd-shadow-opacity)"/>
     </filter>
   </defs>
 
