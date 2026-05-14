@@ -89,9 +89,23 @@ html[data-theme='dark'] {
 .erd-figure-wrap {
   margin-top: 1em;
   max-width: 100%;
+  /* Small screens: allow scrolling */
+  overflow: auto;
+  /* Limit height on small screens to enable scroll */
+  max-height: 70vh;
 }
 
 .erd-figure-wrap svg {
   max-width: 100%;
   height: auto;
+  display: block;
+}
+
+/* Large screens: prevent scroll, let SVG fit naturally */
+@media (min-width: 1200px) {
+  .erd-figure-wrap {
+    overflow: visible;
+    max-height: none;
+    height: auto;
+  }
 }
