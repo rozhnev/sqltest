@@ -18,6 +18,13 @@
   --erd-legend-title: #0f172a;
   --erd-shadow-color: #9aa8bd;
   --erd-shadow-opacity: 0.45;
+  --erd-title-size: clamp(14px, 0.45vw + 12px, 18px);
+  --erd-col-size: clamp(11px, 0.35vw + 10px, 14px);
+  --erd-key-size: clamp(10px, 0.3vw + 9px, 13px);
+  --erd-label-size: clamp(10px, 0.3vw + 9px, 13px);
+  --erd-main-size: clamp(20px, 1vw + 16px, 30px);
+  --erd-sub-size: clamp(12px, 0.35vw + 11px, 15px);
+  --erd-legend-title-size: clamp(13px, 0.35vw + 11px, 16px);
 }
 
 html[data-theme='dark'] {
@@ -46,21 +53,17 @@ html[data-theme='dark'] {
 .grid { stroke: var(--erd-grid); stroke-width: 1; }
 .panel { fill: var(--erd-panel-bg); stroke: var(--erd-panel-stroke); stroke-width: 1.5; }
 .header { fill: var(--erd-header-bg); }
-.title { fill: var(--erd-title); font: 700 15px 'Segoe UI', Arial, sans-serif; }
-.col { fill: var(--erd-col); font: 12px 'Segoe UI', Arial, sans-serif; }
-.pk { fill: var(--erd-pk); font: 700 11px 'Segoe UI', Arial, sans-serif; }
-.fk { fill: var(--erd-fk); font: 700 11px 'Segoe UI', Arial, sans-serif; }
+.title { fill: var(--erd-title); font: 700 var(--erd-title-size) 'Segoe UI', Arial, sans-serif; }
+.col { fill: var(--erd-col); font: var(--erd-col-size) 'Segoe UI', Arial, sans-serif; }
+.pk { fill: var(--erd-pk); font: 700 var(--erd-key-size) 'Segoe UI', Arial, sans-serif; }
+.fk { fill: var(--erd-fk); font: 700 var(--erd-key-size) 'Segoe UI', Arial, sans-serif; }
 .edge { stroke: var(--erd-edge); stroke-width: 2; fill: none; }
 .edge-soft { stroke: var(--erd-edge-soft); stroke-width: 1.6; fill: none; stroke-dasharray: 5 4; }
-.label { fill: var(--erd-label); font: 11px 'Segoe UI', Arial, sans-serif; }
-.main { fill: var(--erd-main); font: 700 26px 'Segoe UI', Arial, sans-serif; }
-.sub { fill: var(--erd-sub); font: 13px 'Segoe UI', Arial, sans-serif; }
+.label { fill: var(--erd-label); font: var(--erd-label-size) 'Segoe UI', Arial, sans-serif; }
+.main { fill: var(--erd-main); font: 700 var(--erd-main-size) 'Segoe UI', Arial, sans-serif; }
+.sub { fill: var(--erd-sub); font: var(--erd-sub-size) 'Segoe UI', Arial, sans-serif; }
 .legend-box { fill: var(--erd-legend-bg); stroke: var(--erd-legend-stroke); stroke-width: 1.2; }
-.legend-title { fill: var(--erd-legend-title); font: 700 14px 'Segoe UI', Arial, sans-serif; }
-
-.erd-sakila .title {
-  font-size: 14px;
-}
+.legend-title { fill: var(--erd-legend-title); font: 700 var(--erd-legend-title-size) 'Segoe UI', Arial, sans-serif; }
 
 .erd-helper-text {
     text-align: center;
