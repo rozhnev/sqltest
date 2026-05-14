@@ -102,10 +102,11 @@ html[data-theme='dark'] {
 }
 
 /* Large screens: prevent scroll, let SVG fit naturally */
-@media (min-width: 1200px) {
+@media (max-width: 1024px) {
   .erd-figure-wrap {
+    max-width: none;
+    min-width: 1024px !important;
     overflow: visible;
-    max-height: none;
     height: auto;
   }
 }
