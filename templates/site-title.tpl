@@ -40,6 +40,13 @@
 <meta property="og:image:width" content="{$PageOGImageWidth}" />
 <meta property="og:image:height" content="{$PageOGImageHeight}" />
 <meta property="og:image:type" content="image/png" />
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{$PageOGTitle}" />
+<meta name="twitter:description" content="{$PageOGDescription}" />
+<meta name="twitter:image" content="{$PageOGImage}" />
+{if isset($CanonicalLink) && $CanonicalLink}
+<meta name="twitter:url" content="{$CanonicalLink}" />
+{/if}
 {if isset($PageOGModifiedTime) && $PageOGModifiedTime}
     <meta property="article:modified_time" content="{$PageOGModifiedTime|escape}" />
     <meta property="og:updated_time" content="{$PageOGModifiedTime|escape}" />

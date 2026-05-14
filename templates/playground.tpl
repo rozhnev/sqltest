@@ -126,6 +126,14 @@
                         <h1>{translate}playground_content_title{/translate}</h1>
                         <p>{translate}playground_content_intro{/translate}</p>
 
+                        <h2>{translate}playground_content_summary_title{/translate}</h2>
+                        <ul>
+                            <li>{translate}playground_content_summary_1{/translate}</li>
+                            <li>{translate}playground_content_summary_2{/translate}</li>
+                            <li>{translate}playground_content_summary_3{/translate}</li>
+                            <li>{translate}playground_content_summary_4{/translate}</li>
+                        </ul>
+
                         <h2>{translate}playground_content_features_title{/translate}</h2>
                         <ul>
                             <li>{translate}playground_content_feature_1{/translate}</li>
@@ -138,6 +146,14 @@
 
                         <h2>{translate}playground_content_use_cases_title{/translate}</h2>
                         <p>{translate}playground_content_use_cases_text{/translate}</p>
+
+                        <h2>{translate}playground_content_faq_title{/translate}</h2>
+                        <h3>{translate}playground_content_faq_q1{/translate}</h3>
+                        <p>{translate}playground_content_faq_a1{/translate}</p>
+                        <h3>{translate}playground_content_faq_q2{/translate}</h3>
+                        <p>{translate}playground_content_faq_a2{/translate}</p>
+                        <h3>{translate}playground_content_faq_q3{/translate}</h3>
+                        <p>{translate}playground_content_faq_a3{/translate}</p>
                     </div>
                 </section>
             </div>
