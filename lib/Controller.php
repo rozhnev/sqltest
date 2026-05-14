@@ -1085,17 +1085,89 @@ class Controller
 
     public function playground(array $params): void 
     {
+        if (!$this->user->logged() && ($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'GET') {
+            header('Cache-Control: public, max-age=300, s-maxage=900, stale-while-revalidate=60');
+        }
+
+        $pageTitle = Localizer::translateString('playground_page_title');
+        $pageDescription = Localizer::translateString('playground_page_description');
+
         $this->assignVariables([
             'Action'            => 'playground',
-            'PageTitle'         => Localizer::translateString('playground_page_title'),
-            'PageDescription'   => Localizer::translateString('playground_page_description'),
+            'PageTitle'         => $pageTitle,
+            'PageDescription'   => $pageDescription,
             'SitePromo'         => Localizer::translateString('site_promo'),
             'SiteDescription'   => Localizer::translateString('site_description_playground'),
+            'PageKeywords'      => Localizer::translateString('playground_page_keywords'),
             'PageOGTitle'       => Localizer::translateString('playground_og_title'),
             'PageOGDescription' => Localizer::translateString('playground_og_description'),
             'QuestionID'            => 1,
             'DB'                    => '',
         ]);
+
+        $this->setHreflangLinks($params['path'], $this->lang);
+
+        $schema = [
+            '@context' => 'https://schema.org',
+            '@graph' => [
+                [
+                    '@type' => 'WebApplication',
+                    'name' => $pageTitle,
+                    'description' => $pageDescription,
+                    'url' => "{$this->host}/{$this->lang}/playground/",
+                    'inLanguage' => $this->lang,
+                    'applicationCategory' => 'DeveloperApplication',
+                    'operatingSystem' => 'Web',
+                    'isAccessibleForFree' => true,
+                    'offers' => [
+                        '@type' => 'Offer',
+                        'price' => '0',
+                        'priceCurrency' => 'USD'
+                    ],
+                    'featureList' => [
+                        Localizer::translateString('playground_content_feature_1'),
+                        Localizer::translateString('playground_content_feature_2'),
+                        Localizer::translateString('playground_content_feature_3'),
+                    ],
+                    'provider' => [
+                        '@type' => 'Organization',
+                        'name' => 'SQLtest.online',
+                        'url' => 'https://sqltest.online'
+                    ]
+                ],
+                [
+                    '@type' => 'FAQPage',
+                    'mainEntity' => [
+                        [
+                            '@type' => 'Question',
+                            'name' => Localizer::translateString('playground_content_faq_q1'),
+                            'acceptedAnswer' => [
+                                '@type' => 'Answer',
+                                'text' => Localizer::translateString('playground_content_faq_a1')
+                            ]
+                        ],
+                        [
+                            '@type' => 'Question',
+                            'name' => Localizer::translateString('playground_content_faq_q2'),
+                            'acceptedAnswer' => [
+                                '@type' => 'Answer',
+                                'text' => Localizer::translateString('playground_content_faq_a2')
+                            ]
+                        ],
+                        [
+                            '@type' => 'Question',
+                            'name' => Localizer::translateString('playground_content_faq_q3'),
+                            'acceptedAnswer' => [
+                                '@type' => 'Answer',
+                                'text' => Localizer::translateString('playground_content_faq_a3')
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ];
+
+        $this->assignSchemaJsonLd($schema);
         $this->engine->display($this->isMobileView() ? "m.playground.tpl" : "playground.tpl");
     }
 
