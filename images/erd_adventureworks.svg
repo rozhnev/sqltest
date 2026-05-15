@@ -209,7 +209,7 @@
 
   <!-- CustomerAddress.AddressID -> Address.AddressID -->
   <path class="edge" d="M 230 275 L 230 520" marker-end="url(#arrow)"/>
-  <text class="label" x="238" y="320">N:1</text>
+  <text class="label" x="240" y="420">N:1</text>
 
   <!-- Product.ProductCategoryID -> ProductCategory.ProductCategoryID -->
   <path class="edge" d="M 860 190 L 980 190" marker-end="url(#arrow)"/>
@@ -237,18 +237,18 @@
 
   <!-- SalesOrderDetail.ProductID -> Product.ProductID -->
   <path class="edge" d="M 860 1000 L 900 1000 L 900 420 L 860 420" marker-end="url(#arrow)"/>
-  <text class="label" x="900" y="700">N:1</text>
+  <text class="label" x="920" y="700">N:1</text>
 
   <!-- SalesOrderHeader.CustomerID -> Customer.CustomerID -->
-  <path class="edge" d="M 230 920 L 230 830 L 500 830" marker-end="url(#arrow)"/>
-  <text class="label" x="610" y="890">N:1</text>
+  <path class="edge" d="M 230 915 L 230 830 L 500 830" marker-end="url(#arrow)"/>
+  <text class="label" x="350" y="815">N:1</text>
 
   <!-- SalesOrderHeader.ShipToAddressID -> Address.AddressID -->
   <path class="edge" d="M 140 920 L 140 760" marker-end="url(#arrow)"/>
-  <text class="label" x="44" y="826">N:1</text>
+  <text class="label" x="115" y="856">N:1</text>
 
   <!-- SalesOrderHeader.BillToAddressID -> Address.AddressID -->
   <path class="edge" d="M 164 920 L 164 760" marker-end="url(#arrow)"/>
-  <text class="label" x="60" y="856">N:1</text>
+  <text class="label" x="175" y="856">N:1</text>
 
 </svg>
