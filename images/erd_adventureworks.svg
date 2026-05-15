@@ -1,5 +1,11 @@
 <?xml-stylesheet type="text/css" href="/css/erd.css"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="920" viewBox="0 0 1500 920" role="img" aria-labelledby="title desc" class="erd erd-adventureworks">
+<!--
+  Table column X positions: 80, 480, 1080, 1480 (1st-2nd: 400px, 2nd-3rd: 600px, 3rd-4th: 400px)
+  Table row Y positions: 120, 520, 920 (400px gap)
+  SVG width: 1780px
+  SVG height: 1420px
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="1380" height="1420" viewBox="0 0 1380 1420" role="img" aria-labelledby="title desc" class="erd erd-adventureworks">
   <title id="title">AdventureWorks Database ERD</title>
   <desc id="desc">Entity relationship diagram for the simplified AdventureWorks schema used in SQLTest, with ten tables and explicit foreign keys.</desc>
 
@@ -12,47 +18,58 @@
     </filter>
   </defs>
 
-  <rect class="bg" x="0" y="0" width="1500" height="920"/>
+  <rect class="bg" x="0" y="0" width="1780" height="1420"/>
 
   <g opacity="0.55">
-    <line class="grid" x1="80" y1="70" x2="80" y2="920"/>
-    <line class="grid" x1="420" y1="70" x2="420" y2="920"/>
-    <line class="grid" x1="760" y1="70" x2="760" y2="920"/>
-    <line class="grid" x1="1100" y1="70" x2="1100" y2="920"/>
-    <line class="grid" x1="1440" y1="70" x2="1440" y2="920"/>
-    <line class="grid" x1="80" y1="120" x2="1500" y2="120"/>
-    <line class="grid" x1="80" y1="360" x2="1500" y2="360"/>
-    <line class="grid" x1="80" y1="620" x2="1500" y2="620"/>
+    <line class="grid" x1="80" y1="70" x2="80" y2="1420"/>
+    <line class="grid" x1="480" y1="70" x2="480" y2="1420"/>
+    <line class="grid" x1="1080" y1="70" x2="1080" y2="1420"/>
+    <line class="grid" x1="1480" y1="70" x2="1480" y2="1420"/>
+    <line class="grid" x1="1680" y1="70" x2="1680" y2="1420"/>
+    <line class="grid" x1="80" y1="120" x2="1780" y2="120"/>
+    <line class="grid" x1="80" y1="520" x2="1780" y2="520"/>
+    <line class="grid" x1="80" y1="920" x2="1780" y2="920"/>
   </g>
 
   <!-- ADDRESS -->
-  <g transform="translate(80,120)" filter="url(#shadow)">
-    <rect class="panel" width="300" height="152" rx="10" ry="10"/>
+  <g transform="translate(80,520)" filter="url(#shadow)">
+    <rect class="panel" width="300" height="240" rx="10" ry="10"/>
     <rect class="header" width="300" height="32" rx="10" ry="10"/>
     <text class="title" x="14" y="21">Address</text>
     <text class="pk" x="14" y="53">PK</text><text class="col" x="44" y="53">AddressID</text>
-    <text class="col" x="44" y="75">AddressLine1, AddressLine2</text>
-    <text class="col" x="44" y="97">City, StateProvince</text>
-    <text class="col" x="44" y="119">CountryRegion, PostalCode</text>
-    <text class="col" x="44" y="141">rowguid, ModifiedDate</text>
+    <text class="col" x="44" y="75">AddressLine1</text>
+    <text class="col" x="44" y="97">AddressLine2</text>
+    <text class="col" x="44" y="119">City</text>
+    <text class="col" x="44" y="141">StateProvince</text>
+    <text class="col" x="44" y="163">CountryRegion</text>
+    <text class="col" x="44" y="185">PostalCode</text>
+    <text class="col" x="44" y="207">rowguid</text>
+    <text class="col" x="44" y="229">ModifiedDate</text>
   </g>
 
   <!-- CUSTOMER -->
-  <g transform="translate(420,120)" filter="url(#shadow)">
-    <rect class="panel" width="300" height="196" rx="10" ry="10"/>
-    <rect class="header" width="300" height="32" rx="10" ry="10"/>
+  <g transform="translate(500,520)" filter="url(#shadow)">
+    <rect class="panel" width="360" height="350" rx="10" ry="10"/>
+    <rect class="header" width="360" height="32" rx="10" ry="10"/>
     <text class="title" x="14" y="21">Customer</text>
     <text class="pk" x="14" y="53">PK</text><text class="col" x="44" y="53">CustomerID</text>
-    <text class="col" x="44" y="75">NameStyle, Title</text>
-    <text class="col" x="44" y="97">FirstName, MiddleName, LastName</text>
-    <text class="col" x="44" y="119">CompanyName, SalesPerson</text>
-    <text class="col" x="44" y="141">EmailAddress, Phone</text>
-    <text class="col" x="44" y="163">PasswordHash, PasswordSalt</text>
-    <text class="col" x="44" y="185">rowguid, ModifiedDate</text>
+    <text class="col" x="44" y="75">NameStyle</text>
+    <text class="col" x="44" y="97">Title</text>
+    <text class="col" x="44" y="119">FirstName</text>
+    <text class="col" x="44" y="141">MiddleName</text>
+    <text class="col" x="44" y="163">LastName</text>
+    <text class="col" x="44" y="185">CompanyName</text>
+    <text class="col" x="44" y="207">SalesPerson</text>
+    <text class="col" x="44" y="229">EmailAddress</text>
+    <text class="col" x="44" y="251">Phone</text>
+    <text class="col" x="44" y="273">PasswordHash</text>
+    <text class="col" x="44" y="295">PasswordSalt</text>
+    <text class="col" x="44" y="317">rowguid</text>
+    <text class="col" x="44" y="339">ModifiedDate</text>
   </g>
 
   <!-- PRODUCTCATEGORY -->
-  <g transform="translate(760,120)" filter="url(#shadow)">
+  <g transform="translate(980,120)" filter="url(#shadow)">
     <rect class="panel" width="300" height="152" rx="10" ry="10"/>
     <rect class="header" width="300" height="32" rx="10" ry="10"/>
     <text class="title" x="14" y="21">ProductCategory</text>
@@ -64,94 +81,114 @@
   </g>
 
   <!-- PRODUCTMODEL -->
-  <g transform="translate(1100,120)" filter="url(#shadow)">
-    <rect class="panel" width="300" height="130" rx="10" ry="10"/>
+  <g transform="translate(980,300)" filter="url(#shadow)">
+    <rect class="panel" width="300" height="152" rx="10" ry="10"/>
     <rect class="header" width="300" height="32" rx="10" ry="10"/>
     <text class="title" x="14" y="21">ProductModel</text>
     <text class="pk" x="14" y="53">PK</text><text class="col" x="44" y="53">ProductModelID</text>
     <text class="col" x="44" y="75">Name</text>
     <text class="col" x="44" y="97">CatalogDescription</text>
-    <text class="col" x="44" y="119">rowguid, ModifiedDate</text>
+    <text class="col" x="44" y="119">rowguid</text>
+    <text class="col" x="44" y="141">ModifiedDate</text>
   </g>
 
   <!-- PRODUCTDESCRIPTION -->
-  <g transform="translate(760,360)" filter="url(#shadow)">
-    <rect class="panel" width="300" height="108" rx="10" ry="10"/>
+  <g transform="translate(980,920)" filter="url(#shadow)">
+    <rect class="panel" width="300" height="130" rx="10" ry="10"/>
     <rect class="header" width="300" height="32" rx="10" ry="10"/>
     <text class="title" x="14" y="21">ProductDescription</text>
     <text class="pk" x="14" y="53">PK</text><text class="col" x="44" y="53">ProductDescriptionID</text>
     <text class="col" x="44" y="75">Description</text>
-    <text class="col" x="44" y="97">rowguid, ModifiedDate</text>
+    <text class="col" x="44" y="97">rowguid</text>
+    <text class="col" x="44" y="119">ModifiedDate</text>
   </g>
 
   <!-- PRODUCT -->
-  <g transform="translate(420,360)" filter="url(#shadow)">
-    <rect class="panel" width="300" height="218" rx="10" ry="10"/>
-    <rect class="header" width="300" height="32" rx="10" ry="10"/>
+  <g transform="translate(500,120)" filter="url(#shadow)">
+    <rect class="panel" width="360" height="350" rx="10" ry="10"/>
+    <rect class="header" width="360" height="32" rx="10" ry="10"/>
     <text class="title" x="14" y="21">Product</text>
     <text class="pk" x="14" y="53">PK</text><text class="col" x="44" y="53">ProductID</text>
     <text class="fk" x="14" y="75">FK</text><text class="col" x="44" y="75">ProductCategoryID -&gt; ProductCategory</text>
     <text class="fk" x="14" y="97">FK</text><text class="col" x="44" y="97">ProductModelID -&gt; ProductModel</text>
-    <text class="col" x="44" y="119">Name, ProductNumber, Color</text>
-    <text class="col" x="44" y="141">StandardCost, ListPrice</text>
-    <text class="col" x="44" y="163">Size, Weight</text>
-    <text class="col" x="44" y="185">SellStartDate, SellEndDate</text>
-    <text class="col" x="44" y="207">DiscontinuedDate, ModifiedDate</text>
+    <text class="col" x="44" y="119">Name</text>
+    <text class="col" x="44" y="141">ProductNumber</text>
+    <text class="col" x="44" y="163">Color</text>
+    <text class="col" x="44" y="185">StandardCost</text>
+    <text class="col" x="44" y="207">ListPrice</text>
+    <text class="col" x="44" y="229">Size</text>
+    <text class="col" x="44" y="251">Weight</text>
+    <text class="col" x="44" y="273">SellStartDate</text>
+    <text class="col" x="44" y="295">SellEndDate</text>
+    <text class="col" x="44" y="317">DiscontinuedDate</text>
+    <text class="col" x="44" y="339">ModifiedDate</text>
   </g>
 
   <!-- CUSTOMERADDRESS -->
-  <g transform="translate(80,360)" filter="url(#shadow)">
-    <rect class="panel" width="300" height="130" rx="10" ry="10"/>
+  <g transform="translate(80,120)" filter="url(#shadow)">
+    <rect class="panel" width="300" height="152" rx="10" ry="10"/>
     <rect class="header" width="300" height="32" rx="10" ry="10"/>
     <text class="title" x="14" y="21">CustomerAddress</text>
     <text class="pk" x="14" y="53">PK</text><text class="fk" x="44" y="53">FK</text><text class="col" x="78" y="53">CustomerID -&gt; Customer</text>
     <text class="pk" x="14" y="75">PK</text><text class="fk" x="44" y="75">FK</text><text class="col" x="78" y="75">AddressID -&gt; Address</text>
     <text class="col" x="44" y="97">AddressType</text>
-    <text class="col" x="44" y="119">rowguid, ModifiedDate</text>
+    <text class="col" x="44" y="119">rowguid</text>
+    <text class="col" x="44" y="141">ModifiedDate</text>
   </g>
 
   <!-- PRODUCTMODELPRODUCTDESCRIPTION -->
-  <g transform="translate(1100,360)" filter="url(#shadow)">
-    <rect class="panel" width="300" height="130" rx="10" ry="10"/>
+  <g transform="translate(980,520)" filter="url(#shadow)">
+    <rect class="panel" width="300" height="152" rx="10" ry="10"/>
     <rect class="header" width="300" height="32" rx="10" ry="10"/>
     <text class="title" x="14" y="21">ProductModelProductDescription</text>
     <text class="pk" x="14" y="53">PK</text><text class="fk" x="44" y="53">FK</text><text class="col" x="78" y="53">ProductModelID</text>
     <text class="pk" x="14" y="75">PK</text><text class="fk" x="44" y="75">FK</text><text class="col" x="78" y="75">ProductDescriptionID</text>
     <text class="col" x="44" y="97">Culture</text>
-    <text class="col" x="44" y="119">rowguid, ModifiedDate</text>
+    <text class="col" x="44" y="119">rowguid</text>
+    <text class="col" x="44" y="141">ModifiedDate</text>
   </g>
 
   <!-- SALESORDERHEADER -->
-  <g transform="translate(80,620)" filter="url(#shadow)">
-    <rect class="panel" width="300" height="218" rx="10" ry="10"/>
+  <g transform="translate(80,920)" filter="url(#shadow)">
+    <rect class="panel" width="300" height="372" rx="10" ry="10"/>
     <rect class="header" width="300" height="32" rx="10" ry="10"/>
     <text class="title" x="14" y="21">SalesOrderHeader</text>
     <text class="pk" x="14" y="53">PK</text><text class="col" x="44" y="53">SalesOrderID</text>
     <text class="fk" x="14" y="75">FK</text><text class="col" x="44" y="75">CustomerID -&gt; Customer</text>
     <text class="fk" x="14" y="97">FK</text><text class="col" x="44" y="97">ShipToAddressID -&gt; Address</text>
     <text class="fk" x="14" y="119">FK</text><text class="col" x="44" y="119">BillToAddressID -&gt; Address</text>
-    <text class="col" x="44" y="141">OrderDate, DueDate, ShipDate</text>
-    <text class="col" x="44" y="163">Status, SalesOrderNumber</text>
-    <text class="col" x="44" y="185">SubTotal, TaxAmt, Freight</text>
-    <text class="col" x="44" y="207">TotalDue, rowguid, ModifiedDate</text>
+    <text class="col" x="44" y="141">OrderDate</text>
+    <text class="col" x="44" y="163">DueDate</text>
+    <text class="col" x="44" y="185">ShipDate</text>
+    <text class="col" x="44" y="207">Status</text>
+    <text class="col" x="44" y="229">SalesOrderNumber</text>
+    <text class="col" x="44" y="251">SubTotal</text>
+    <text class="col" x="44" y="273">TaxAmt</text>
+    <text class="col" x="44" y="295">Freight</text>
+    <text class="col" x="44" y="317">TotalDue</text>
+    <text class="col" x="44" y="339">rowguid</text>
+    <text class="col" x="44" y="361">ModifiedDate</text>
   </g>
 
   <!-- SALESORDERDETAIL -->
-  <g transform="translate(420,620)" filter="url(#shadow)">
-    <rect class="panel" width="300" height="174" rx="10" ry="10"/>
-    <rect class="header" width="300" height="32" rx="10" ry="10"/>
+  <g transform="translate(500,920)" filter="url(#shadow)">
+    <rect class="panel" width="360" height="240" rx="10" ry="10"/>
+    <rect class="header" width="360" height="32" rx="10" ry="10"/>
     <text class="title" x="14" y="21">SalesOrderDetail</text>
     <text class="pk" x="14" y="53">PK</text><text class="fk" x="44" y="53">FK</text><text class="col" x="78" y="53">SalesOrderID -&gt; SalesOrderHeader</text>
     <text class="pk" x="14" y="75">PK</text><text class="col" x="78" y="75">SalesOrderDetailID</text>
     <text class="pk" x="14" y="97">PK</text><text class="fk" x="44" y="97">FK</text><text class="col" x="78" y="97">ProductID -&gt; Product</text>
-    <text class="col" x="44" y="119">OrderQty, UnitPrice</text>
-    <text class="col" x="44" y="141">UnitPriceDiscount, LineTotal</text>
-    <text class="col" x="44" y="163">rowguid, ModifiedDate</text>
+    <text class="col" x="44" y="119">OrderQty</text>
+    <text class="col" x="44" y="141">UnitPrice</text>
+    <text class="col" x="44" y="163">UnitPriceDiscount</text>
+    <text class="col" x="44" y="185">LineTotal</text>
+    <text class="col" x="44" y="207">rowguid</text>
+    <text class="col" x="44" y="229">ModifiedDate</text>
   </g>
 
   <!-- Legend -->
-  <g transform="translate(1100,620)">
-    <rect class="legend-box" x="0" y="0" width="300" height="182" rx="8" ry="8"/>
+  <g transform="translate(980,1100)">
+    <rect class="legend-box" x="0" y="0" width="380" height="206" rx="8" ry="8"/>
     <text class="legend-title" x="14" y="24">Legend</text>
     <text class="pk" x="14" y="50">PK</text><text class="col" x="44" y="50">Primary key</text>
     <text class="fk" x="14" y="72">FK</text><text class="col" x="44" y="72">Foreign key</text>
@@ -160,55 +197,58 @@
     <text class="col" x="14" y="124">Diagram reflects simplified schema</text>
     <text class="col" x="14" y="146">used in this SQLTest AdventureWorks page</text>
     <text class="col" x="14" y="168">including explicit FK list sections</text>
+    <text class="col" x="14" y="190">Columns are listed one per row</text>
   </g>
+
 
   <!-- Relationship edges -->
 
-  <!-- CUSTOMERADDRESS -> CUSTOMER -->
-  <path class="edge" d="M 380 425 L 400 425 L 400 338 L 560 338 L 560 316" marker-end="url(#arrow)"/>
-  <text class="label" x="470" y="330">N:1</text>
+  <!-- CustomerAddress.CustomerID -> Customer.CustomerID -->
+  <path class="edge" d="M 380 196 L 500 196" marker-end="url(#arrow)"/>
+  <text class="label" x="440" y="186">N:1</text>
 
-  <!-- CUSTOMERADDRESS -> ADDRESS -->
-  <path class="edge" d="M 230 360 L 230 272" marker-end="url(#arrow)"/>
-  <text class="label" x="238" y="318">N:1</text>
+  <!-- CustomerAddress.AddressID -> Address.AddressID -->
+  <path class="edge" d="M 230 275 L 230 520" marker-end="url(#arrow)"/>
+  <text class="label" x="238" y="320">N:1</text>
 
-  <!-- PRODUCT -> PRODUCTCATEGORY -->
-  <path class="edge" d="M 640 360 L 640 342 L 910 342 L 910 272" marker-end="url(#arrow)"/>
-  <text class="label" x="770" y="334">N:1</text>
+  <!-- Product.ProductCategoryID -> ProductCategory.ProductCategoryID -->
+  <path class="edge" d="M 860 190 L 980 190" marker-end="url(#arrow)"/>
+  <text class="label" x="920" y="180">N:1</text>
 
-  <!-- PRODUCT -> PRODUCTMODEL -->
-  <path class="edge" d="M 720 470 L 740 470 L 740 598 L 1080 598 L 1080 185 L 1100 185" marker-end="url(#arrow)"/>
-  <text class="label" x="900" y="590">N:1</text>
+  <!-- Product.ProductModelID -> ProductModel.ProductModelID -->
+  <path class="edge" d="M 860 360 L 980 360" marker-end="url(#arrow)"/>
+  <text class="label" x="920" y="350">N:1</text>
 
-  <!-- PRODUCTCATEGORY self-loop -->
-  <path class="edge-soft" d="M 1060 182 L 1086 182 L 1086 108 L 905 108 L 905 120" marker-end="url(#arrow)"/>
-  <text class="label" x="978" y="101">N:1</text>
+  <!-- ProductCategory.ParentProductCategoryID -> ProductCategory.ProductCategoryID (self-loop) -->
+  <path class="edge-soft" d="M 1280 182 L 1306 182 L 1306 108 L 1095 108 L 1095 120" marker-end="url(#arrow)"/>
+  <text class="label" x="1198" y="101">N:1</text>
 
-  <!-- PRODUCTMODELPRODUCTDESCRIPTION -> PRODUCTMODEL -->
-  <path class="edge" d="M 1250 360 L 1250 250" marker-end="url(#arrow)"/>
-  <text class="label" x="1258" y="305">N:1</text>
+  <!-- ProductModelProductDescription.ProductModelID -> ProductModel.ProductModelID -->
+  <path class="edge" d="M 1130 520 L 1130 453" marker-end="url(#arrow)"/>
+  <text class="label" x="1140" y="500">N:1</text>
 
-  <!-- PRODUCTMODELPRODUCTDESCRIPTION -> PRODUCTDESCRIPTION -->
-  <path class="edge" d="M 1100 414 L 1060 414" marker-end="url(#arrow)"/>
-  <text class="label" x="1070" y="404">N:1</text>
+  <!-- ProductModelProductDescription.ProductDescriptionID -> ProductDescription.ProductDescriptionID -->
+  <path class="edge" d="M 1130 672 L 1130 920" marker-end="url(#arrow)"/>
+  <text class="label" x="1140" y="800">N:1</text>
 
-  <!-- SALESORDERDETAIL -> SALESORDERHEADER -->
-  <path class="edge" d="M 420 700 L 380 700" marker-end="url(#arrow)"/>
-  <text class="label" x="388" y="690">N:1</text>
+  <!-- SalesOrderDetail.SalesOrderID -> SalesOrderHeader.SalesOrderID -->
+  <path class="edge" d="M 500 1040 L 380 1040" marker-end="url(#arrow)"/>
+  <text class="label" x="440" y="1030">N:1</text>
 
-  <!-- SALESORDERDETAIL -> PRODUCT -->
-  <path class="edge" d="M 560 620 L 560 578" marker-end="url(#arrow)"/>
-  <text class="label" x="568" y="598">N:1</text>
+  <!-- SalesOrderDetail.ProductID -> Product.ProductID -->
+  <path class="edge" d="M 860 1000 L 900 1000 L 900 420 L 860 420" marker-end="url(#arrow)"/>
+  <text class="label" x="900" y="700">N:1</text>
 
-  <!-- SALESORDERHEADER -> CUSTOMER -->
-  <path class="edge" d="M 230 620 L 230 598 L 400 598 L 400 338 L 560 338 L 560 316" marker-end="url(#arrow)"/>
-  <text class="label" x="410" y="590">N:1</text>
+  <!-- SalesOrderHeader.CustomerID -> Customer.CustomerID -->
+  <path class="edge" d="M 230 920 L 230 830 L 500 830" marker-end="url(#arrow)"/>
+  <text class="label" x="610" y="890">N:1</text>
 
-  <!-- SALESORDERHEADER -> ADDRESS (ShipToAddressID) -->
-  <path class="edge" d="M 140 620 L 140 598 L 40 598 L 40 196 L 80 196" marker-end="url(#arrow)"/>
-  <text class="label" x="44" y="404">N:1</text>
+  <!-- SalesOrderHeader.ShipToAddressID -> Address.AddressID -->
+  <path class="edge" d="M 140 920 L 140 760" marker-end="url(#arrow)"/>
+  <text class="label" x="44" y="826">N:1</text>
 
-  <!-- SALESORDERHEADER -> ADDRESS (BillToAddressID) -->
-  <path class="edge" d="M 164 620 L 164 604 L 56 604 L 56 208 L 80 208" marker-end="url(#arrow)"/>
-  <text class="label" x="60" y="432">N:1</text>
+  <!-- SalesOrderHeader.BillToAddressID -> Address.AddressID -->
+  <path class="edge" d="M 164 920 L 164 760" marker-end="url(#arrow)"/>
+  <text class="label" x="60" y="856">N:1</text>
+
 </svg>
