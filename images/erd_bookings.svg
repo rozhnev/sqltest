@@ -21,8 +21,8 @@
     <line class="grid" x1="1100" y1="70" x2="1100" y2="920"/>
     <line class="grid" x1="1440" y1="70" x2="1440" y2="920"/>
     <line class="grid" x1="80" y1="120" x2="1500" y2="120"/>
-    <line class="grid" x1="80" y1="420" x2="1500" y2="420"/>
-    <line class="grid" x1="80" y1="650" x2="1500" y2="650"/>
+    <line class="grid" x1="80" y1="500" x2="1500" y2="500"/>
+    <line class="grid" x1="80" y1="730" x2="1500" y2="730"/>
   </g>
 
   <!-- aircrafts_data -->
@@ -50,17 +50,19 @@
 
   <!-- flights -->
   <g transform="translate(420,120)" filter="url(#shadow)">
-    <rect class="panel" width="300" height="218" rx="10" ry="10"/>
+    <rect class="panel" width="300" height="262" rx="10" ry="10"/>
     <rect class="header" width="300" height="32" rx="10" ry="10"/>
     <text class="title" x="14" y="21">flights</text>
     <text class="pk" x="14" y="53">PK</text><text class="col" x="44" y="53">flight_id</text>
     <text class="col" x="44" y="75">flight_no</text>
-    <text class="col" x="44" y="97">scheduled_departure, scheduled_arrival</text>
-    <text class="fk" x="14" y="119">FK</text><text class="col" x="44" y="119">departure_airport -&gt; airports_data</text>
-    <text class="fk" x="14" y="141">FK</text><text class="col" x="44" y="141">arrival_airport -&gt; airports_data</text>
-    <text class="fk" x="14" y="163">FK</text><text class="col" x="44" y="163">aircraft_code -&gt; aircrafts_data</text>
-    <text class="col" x="44" y="185">status</text>
-    <text class="col" x="44" y="207">actual_departure, actual_arrival</text>
+    <text class="col" x="44" y="97">scheduled_departure</text>
+    <text class="col" x="44" y="119">scheduled_arrival</text>
+    <text class="fk" x="14" y="141">FK</text><text class="col" x="44" y="141">departure_airport -&gt; airports_data</text>
+    <text class="fk" x="14" y="163">FK</text><text class="col" x="44" y="163">arrival_airport -&gt; airports_data</text>
+    <text class="fk" x="14" y="185">FK</text><text class="col" x="44" y="185">aircraft_code -&gt; aircrafts_data</text>
+    <text class="col" x="44" y="207">status</text>
+    <text class="col" x="44" y="229">actual_departure</text>
+    <text class="col" x="44" y="251">actual_arrival</text>
   </g>
 
   <!-- bookings -->
@@ -74,7 +76,7 @@
   </g>
 
   <!-- seats -->
-  <g transform="translate(80,420)" filter="url(#shadow)">
+  <g transform="translate(80,500)" filter="url(#shadow)">
     <rect class="panel" width="300" height="108" rx="10" ry="10"/>
     <rect class="header" width="300" height="32" rx="10" ry="10"/>
     <text class="title" x="14" y="21">seats</text>
@@ -84,7 +86,7 @@
   </g>
 
   <!-- ticket_flights -->
-  <g transform="translate(760,420)" filter="url(#shadow)">
+  <g transform="translate(760,500)" filter="url(#shadow)">
     <rect class="panel" width="300" height="152" rx="10" ry="10"/>
     <rect class="header" width="300" height="32" rx="10" ry="10"/>
     <text class="title" x="14" y="21">ticket_flights</text>
@@ -96,30 +98,32 @@
   </g>
 
   <!-- boarding_passes -->
-  <g transform="translate(420,420)" filter="url(#shadow)">
-    <rect class="panel" width="300" height="130" rx="10" ry="10"/>
+  <g transform="translate(420,500)" filter="url(#shadow)">
+    <rect class="panel" width="300" height="152" rx="10" ry="10"/>
     <rect class="header" width="300" height="32" rx="10" ry="10"/>
     <text class="title" x="14" y="21">boarding_passes</text>
-    <text class="pk" x="14" y="53">PK</text><text class="fk" x="44" y="53">FK</text><text class="col" x="78" y="53">ticket_no, flight_id</text>
-    <text class="col" x="44" y="75">boarding_no</text>
-    <text class="col" x="44" y="97">seat_no</text>
-    <text class="col" x="44" y="119">check-in data</text>
+    <text class="pk" x="14" y="53">PK</text><text class="fk" x="44" y="53">FK</text><text class="col" x="78" y="53">ticket_no</text>
+    <text class="pk" x="14" y="75">PK</text><text class="fk" x="44" y="75">FK</text><text class="col" x="78" y="75">flight_id</text>
+    <text class="col" x="44" y="97">boarding_no</text>
+    <text class="col" x="44" y="119">seat_no</text>
+    <text class="col" x="44" y="141">check-in data</text>
   </g>
 
   <!-- tickets -->
-  <g transform="translate(1100,420)" filter="url(#shadow)">
-    <rect class="panel" width="300" height="130" rx="10" ry="10"/>
+  <g transform="translate(1100,500)" filter="url(#shadow)">
+    <rect class="panel" width="300" height="152" rx="10" ry="10"/>
     <rect class="header" width="300" height="32" rx="10" ry="10"/>
     <text class="title" x="14" y="21">tickets</text>
     <text class="pk" x="14" y="53">PK</text><text class="col" x="44" y="53">ticket_no</text>
     <text class="fk" x="14" y="75">FK</text><text class="col" x="44" y="75">book_ref -&gt; bookings</text>
-    <text class="col" x="44" y="97">passenger_id, passenger_name</text>
-    <text class="col" x="44" y="119">contact_data</text>
+    <text class="col" x="44" y="97">passenger_id</text>
+    <text class="col" x="44" y="119">passenger_name</text>
+    <text class="col" x="44" y="141">contact_data</text>
   </g>
 
   <!-- Legend -->
-  <g transform="translate(1100,650)">
-    <rect class="legend-box" x="0" y="0" width="300" height="170" rx="8" ry="8"/>
+  <g transform="translate(1100,730)">
+    <rect class="legend-box" x="0" y="0" width="380" height="170" rx="8" ry="8"/>
     <text class="legend-title" x="14" y="24">Legend</text>
     <text class="pk" x="14" y="50">PK</text><text class="col" x="44" y="50">Primary key</text>
     <text class="fk" x="14" y="72">FK</text><text class="col" x="44" y="72">Foreign key</text>
@@ -132,34 +136,34 @@
   <!-- Relationships -->
 
   <!-- seats -> aircrafts_data -->
-  <path class="edge" d="M 230 420 L 230 250" marker-end="url(#arrow)"/>
+  <path class="edge" d="M 230 500 L 230 250" marker-end="url(#arrow)"/>
   <text class="label" x="238" y="338">N:1</text>
 
   <!-- flights -> aircrafts_data (aircraft_code) -->
-  <path class="edge" d="M 420 210 L 400 210 L 400 170 L 380 170" marker-end="url(#arrow)"/>
-  <text class="label" x="388" y="162">N:1</text>
+  <path class="edge" d="M 420 186 L 380 186" marker-end="url(#arrow)"/>
+  <text class="label" x="388" y="176">N:1</text>
 
   <!-- flights -> airports_data (departure_airport) -->
-  <path class="edge" d="M 720 190 L 740 190 L 740 176 L 760 176" marker-end="url(#arrow)"/>
-  <text class="label" x="726" y="168">N:1</text>
+  <path class="edge" d="M 720 176 L 760 176" marker-end="url(#arrow)"/>
+  <text class="label" x="726" y="166">N:1</text>
 
   <!-- flights -> airports_data (arrival_airport) -->
-  <path class="edge" d="M 720 214 L 740 214 L 740 198 L 760 198" marker-end="url(#arrow)"/>
+  <path class="edge" d="M 720 198 L 760 198" marker-end="url(#arrow)"/>
   <text class="label" x="726" y="208">N:1</text>
 
   <!-- ticket_flights -> flights -->
-  <path class="edge" d="M 900 420 L 900 380 L 560 380 L 560 338" marker-end="url(#arrow)"/>
-  <text class="label" x="726" y="372">N:1</text>
+  <path class="edge" d="M 900 500 L 900 472 L 560 472 L 560 382" marker-end="url(#arrow)"/>
+  <text class="label" x="726" y="464">N:1</text>
 
   <!-- boarding_passes -> ticket_flights -->
-  <path class="edge" d="M 720 485 L 760 485" marker-end="url(#arrow)"/>
-  <text class="label" x="728" y="475">N:1</text>
+  <path class="edge" d="M 720 576 L 760 576" marker-end="url(#arrow)"/>
+  <text class="label" x="728" y="566">N:1</text>
 
   <!-- ticket_flights -> tickets -->
-  <path class="edge" d="M 1060 470 L 1100 470" marker-end="url(#arrow)"/>
-  <text class="label" x="1070" y="460">N:1</text>
+  <path class="edge" d="M 1060 550 L 1100 550" marker-end="url(#arrow)"/>
+  <text class="label" x="1070" y="540">N:1</text>
 
   <!-- tickets -> bookings -->
-  <path class="edge" d="M 1250 420 L 1250 228" marker-end="url(#arrow)"/>
-  <text class="label" x="1258" y="328">N:1</text>
+  <path class="edge" d="M 1250 500 L 1250 228" marker-end="url(#arrow)"/>
+  <text class="label" x="1258" y="408">N:1</text>
 </svg>
