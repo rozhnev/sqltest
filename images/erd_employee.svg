@@ -1,5 +1,5 @@
 <?xml-stylesheet type="text/css" href="/css/erd.css"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="900" viewBox="0 0 1500 900" role="img" aria-labelledby="title desc" class="erd erd-employee">
+<svg xmlns="http://www.w3.org/2000/svg" width="1820" height="1320" viewBox="0 0 1820 1320" role="img" aria-labelledby="title desc" class="erd erd-employee">
   <title id="title">Employee Database ERD</title>
   <desc id="desc">Entity relationship diagram for Employee DB, laid out to minimize connector crossings with equal-width table blocks.</desc>
 
@@ -12,18 +12,18 @@
     </filter>
   </defs>
 
-  <rect class="bg" x="0" y="0" width="1500" height="900"/>
+  <rect class="bg" x="0" y="0" width="1820" height="1320"/>
 
   <!-- soft alignment grid -->
   <g opacity="0.55">
-    <line class="grid" x1="80" y1="70" x2="80" y2="900"/>
-    <line class="grid" x1="420" y1="70" x2="420" y2="900"/>
-    <line class="grid" x1="760" y1="70" x2="760" y2="900"/>
-    <line class="grid" x1="1100" y1="70" x2="1100" y2="900"/>
-    <line class="grid" x1="1440" y1="70" x2="1440" y2="900"/>
-    <line class="grid" x1="80" y1="120" x2="1500" y2="120"/>
-    <line class="grid" x1="80" y1="360" x2="1500" y2="360"/>
-    <line class="grid" x1="80" y1="620" x2="1500" y2="620"/>
+    <line class="grid" x1="80" y1="70" x2="80" y2="1320"/>
+    <line class="grid" x1="480" y1="70" x2="480" y2="1320"/>
+    <line class="grid" x1="880" y1="70" x2="880" y2="1320"/>
+    <line class="grid" x1="1280" y1="70" x2="1280" y2="1320"/>
+    <line class="grid" x1="1680" y1="70" x2="1680" y2="1320"/>
+    <line class="grid" x1="80" y1="120" x2="1820" y2="120"/>
+    <line class="grid" x1="80" y1="400" x2="1820" y2="400"/>
+    <line class="grid" x1="80" y1="820" x2="1820" y2="820"/>
   </g>
 
   <!-- Equal width for all tables: 300 -->
@@ -38,90 +38,118 @@
   </g>
 
   <!-- JOB -->
-  <g transform="translate(420,120)" filter="url(#shadow)">
-    <rect class="panel" width="300" height="152" rx="10" ry="10"/>
+  <g transform="translate(480,120)" filter="url(#shadow)">
+    <rect class="panel" width="300" height="218" rx="10" ry="10"/>
     <rect class="header" width="300" height="32" rx="10" ry="10"/>
     <text class="title" x="14" y="21">JOB</text>
     <text class="pk" x="14" y="53">PK</text><text class="col" x="44" y="53">JOB_CODE</text>
     <text class="col" x="44" y="75">JOB_GRADE</text>
     <text class="fk" x="14" y="97">FK</text><text class="col" x="44" y="97">JOB_COUNTRY -> COUNTRY</text>
     <text class="col" x="44" y="119">JOB_TITLE</text>
-    <text class="col" x="44" y="141">MIN_SALARY, MAX_SALARY...</text>
+    <text class="col" x="44" y="141">MIN_SALARY</text>
+    <text class="col" x="44" y="163">MAX_SALARY</text>
+    <text class="col" x="44" y="185">JOB_REQUIREMENT</text>
+    <text class="col" x="44" y="207">LANGUAGE_REQ</text>
   </g>
 
   <!-- DEPARTMENT -->
-  <g transform="translate(760,120)" filter="url(#shadow)">
-    <rect class="panel" width="300" height="152" rx="10" ry="10"/>
+  <g transform="translate(880,120)" filter="url(#shadow)">
+    <rect class="panel" width="300" height="196" rx="10" ry="10"/>
     <rect class="header" width="300" height="32" rx="10" ry="10"/>
     <text class="title" x="14" y="21">DEPARTMENT</text>
     <text class="pk" x="14" y="53">PK</text><text class="col" x="44" y="53">DEPT_NO</text>
     <text class="fk" x="14" y="75">FK</text><text class="col" x="44" y="75">HEAD_DEPT -> DEPARTMENT</text>
-    <text class="col" x="44" y="97">DEPARTMENT, BUDGET</text>
-    <text class="col" x="44" y="119">LOCATION, PHONE_NO</text>
-    <text class="col" x="44" y="141">MNGR_NO (no FK in template)</text>
+    <text class="col" x="44" y="97">DEPARTMENT</text>
+    <text class="col" x="44" y="119">BUDGET</text>
+    <text class="col" x="44" y="141">LOCATION</text>
+    <text class="col" x="44" y="163">PHONE_NO</text>
+    <text class="col" x="44" y="185">MNGR_NO (no FK in template)</text>
   </g>
 
   <!-- CUSTOMER -->
-  <g transform="translate(80,360)" filter="url(#shadow)">
-    <rect class="panel" width="300" height="174" rx="10" ry="10"/>
+  <g transform="translate(80,400)" filter="url(#shadow)">
+    <rect class="panel" width="300" height="306" rx="10" ry="10"/>
     <rect class="header" width="300" height="32" rx="10" ry="10"/>
     <text class="title" x="14" y="21">CUSTOMER</text>
     <text class="pk" x="14" y="53">PK</text><text class="col" x="44" y="53">CUST_NO</text>
     <text class="fk" x="14" y="75">FK</text><text class="col" x="44" y="75">COUNTRY -> COUNTRY</text>
-    <text class="col" x="44" y="97">CUSTOMER, CONTACT_FIRST/LAST</text>
-    <text class="col" x="44" y="119">PHONE_NO, ADDRESS_LINE1/2</text>
-    <text class="col" x="44" y="141">CITY, STATE_PROVINCE, POSTAL_CODE</text>
-    <text class="col" x="44" y="163">ON_HOLD</text>
+    <text class="col" x="44" y="97">CUSTOMER</text>
+    <text class="col" x="44" y="119">CONTACT_FIRST</text>
+    <text class="col" x="44" y="141">CONTACT_LAST</text>
+    <text class="col" x="44" y="163">PHONE_NO</text>
+    <text class="col" x="44" y="185">ADDRESS_LINE1</text>
+    <text class="col" x="44" y="207">ADDRESS_LINE2</text>
+    <text class="col" x="44" y="229">CITY</text>
+    <text class="col" x="44" y="251">STATE_PROVINCE</text>
+    <text class="col" x="44" y="273">POSTAL_CODE</text>
+    <text class="col" x="44" y="295">ON_HOLD</text>
   </g>
 
   <!-- EMPLOYEE -->
-  <g transform="translate(420,360)" filter="url(#shadow)">
-    <rect class="panel" width="300" height="196" rx="10" ry="10"/>
+  <g transform="translate(480,400)" filter="url(#shadow)">
+    <rect class="panel" width="300" height="284" rx="10" ry="10"/>
     <rect class="header" width="300" height="32" rx="10" ry="10"/>
     <text class="title" x="14" y="21">EMPLOYEE</text>
     <text class="pk" x="14" y="53">PK</text><text class="col" x="44" y="53">EMP_NO</text>
     <text class="fk" x="14" y="75">FK</text><text class="col" x="44" y="75">DEPT_NO -> DEPARTMENT</text>
     <text class="fk" x="14" y="97">FK</text><text class="col" x="44" y="97">JOB_CODE -> JOB</text>
-    <text class="col" x="44" y="119">FIRST_NAME, LAST_NAME</text>
-    <text class="col" x="44" y="141">PHONE_EXT, HIRE_DATE</text>
-    <text class="col" x="44" y="163">JOB_GRADE, JOB_COUNTRY</text>
-    <text class="col" x="44" y="185">SALARY, FULL_NAME</text>
+    <text class="col" x="44" y="119">FIRST_NAME</text>
+    <text class="col" x="44" y="141">PHONE_EXT</text>
+    <text class="col" x="44" y="163">LAST_NAME</text>
+    <text class="col" x="44" y="185">HIRE_DATE</text>
+    <text class="col" x="44" y="207">JOB_GRADE</text>
+    <text class="col" x="44" y="229">JOB_COUNTRY</text>
+    <text class="col" x="44" y="251">SALARY</text>
+    <text class="col" x="44" y="273">FULL_NAME</text>
   </g>
 
   <!-- PROJECT -->
-  <g transform="translate(760,360)" filter="url(#shadow)">
-    <rect class="panel" width="300" height="130" rx="10" ry="10"/>
+  <g transform="translate(880,400)" filter="url(#shadow)">
+    <rect class="panel" width="300" height="152" rx="10" ry="10"/>
     <rect class="header" width="300" height="32" rx="10" ry="10"/>
     <text class="title" x="14" y="21">PROJECT</text>
     <text class="pk" x="14" y="53">PK</text><text class="col" x="44" y="53">PROJ_ID</text>
     <text class="fk" x="14" y="75">FK</text><text class="col" x="44" y="75">TEAM_LEADER -> EMPLOYEE</text>
-    <text class="col" x="44" y="97">PROJ_NAME, PROJ_DESC, PRODUCT</text>
+    <text class="col" x="44" y="97">PROJ_NAME</text>
+    <text class="col" x="44" y="119">PROJ_DESC</text>
+    <text class="col" x="44" y="141">PRODUCT</text>
   </g>
 
   <!-- SALES -->
-  <g transform="translate(80,620)" filter="url(#shadow)">
-    <rect class="panel" width="300" height="152" rx="10" ry="10"/>
+  <g transform="translate(80,820)" filter="url(#shadow)">
+    <rect class="panel" width="300" height="328" rx="10" ry="10"/>
     <rect class="header" width="300" height="32" rx="10" ry="10"/>
     <text class="title" x="14" y="21">SALES</text>
     <text class="pk" x="14" y="53">PK</text><text class="col" x="44" y="53">PO_NUMBER</text>
     <text class="fk" x="14" y="75">FK</text><text class="col" x="44" y="75">CUST_NO -> CUSTOMER</text>
     <text class="fk" x="14" y="97">FK</text><text class="col" x="44" y="97">SALES_REP -> EMPLOYEE</text>
-    <text class="col" x="44" y="119">ORDER_DATE, SHIP_DATE, STATUS</text>
-    <text class="col" x="44" y="141">QTY_ORDERED, TOTAL_VALUE...</text>
+    <text class="col" x="44" y="119">ORDER_STATUS</text>
+    <text class="col" x="44" y="141">ORDER_DATE</text>
+    <text class="col" x="44" y="163">SHIP_DATE</text>
+    <text class="col" x="44" y="185">DATE_NEEDED</text>
+    <text class="col" x="44" y="207">PAID</text>
+    <text class="col" x="44" y="229">QTY_ORDERED</text>
+    <text class="col" x="44" y="251">TOTAL_VALUE</text>
+    <text class="col" x="44" y="273">DISCOUNT</text>
+    <text class="col" x="44" y="295">ITEM_TYPE</text>
+    <text class="col" x="44" y="317">AGED</text>
   </g>
 
   <!-- SALARY_HISTORY -->
-  <g transform="translate(420,620)" filter="url(#shadow)">
-    <rect class="panel" width="300" height="124" rx="10" ry="10"/>
+  <g transform="translate(480,820)" filter="url(#shadow)">
+    <rect class="panel" width="300" height="174" rx="10" ry="10"/>
     <rect class="header" width="300" height="32" rx="10" ry="10"/>
     <text class="title" x="14" y="21">SALARY_HISTORY</text>
-    <text class="pk" x="14" y="53">PK</text><text class="col" x="44" y="53">EMP_NO, CHANGE_DATE</text>
-    <text class="fk" x="14" y="75">FK</text><text class="col" x="44" y="75">EMP_NO -> EMPLOYEE</text>
-    <text class="col" x="44" y="97">OLD_SALARY, NEW_SALARY...</text>
+    <text class="pk" x="14" y="53">PK</text><text class="fk" x="44" y="53">FK</text><text class="col" x="78" y="53">EMP_NO -> EMPLOYEE</text>
+    <text class="pk" x="14" y="75">PK</text><text class="col" x="44" y="75">CHANGE_DATE</text>
+    <text class="col" x="44" y="97">UPDATER_ID</text>
+    <text class="col" x="44" y="119">OLD_SALARY</text>
+    <text class="col" x="44" y="141">PERCENT_CHANGE</text>
+    <text class="col" x="44" y="163">NEW_SALARY</text>
   </g>
 
   <!-- EMPLOYEE_PROJECT -->
-  <g transform="translate(760,620)" filter="url(#shadow)">
+  <g transform="translate(880,820)" filter="url(#shadow)">
     <rect class="panel" width="300" height="124" rx="10" ry="10"/>
     <rect class="header" width="300" height="32" rx="10" ry="10"/>
     <text class="title" x="14" y="21">EMPLOYEE_PROJECT</text>
@@ -130,77 +158,80 @@
   </g>
 
   <!-- PROJ_DEPT_BUDGET -->
-  <g transform="translate(1100,620)" filter="url(#shadow)">
-    <rect class="panel" width="300" height="124" rx="10" ry="10"/>
+  <g transform="translate(1280,820)" filter="url(#shadow)">
+    <rect class="panel" width="300" height="152" rx="10" ry="10"/>
     <rect class="header" width="300" height="32" rx="10" ry="10"/>
     <text class="title" x="14" y="21">PROJ_DEPT_BUDGET</text>
-    <text class="pk" x="14" y="53">PK</text><text class="col" x="44" y="53">FISCAL_YEAR, PROJ_ID, DEPT_NO</text>
-    <text class="fk" x="14" y="75">FK</text><text class="col" x="44" y="75">PROJ_ID -> PROJECT</text>
-    <text class="fk" x="14" y="97">FK</text><text class="col" x="44" y="97">DEPT_NO -> DEPARTMENT</text>
+    <text class="pk" x="14" y="53">PK</text><text class="col" x="44" y="53">FISCAL_YEAR</text>
+    <text class="pk" x="14" y="75">PK</text><text class="fk" x="44" y="75">FK</text><text class="col" x="78" y="75">PROJ_ID -> PROJECT</text>
+    <text class="pk" x="14" y="97">PK</text><text class="fk" x="44" y="97">FK</text><text class="col" x="78" y="97">DEPT_NO -> DEPARTMENT</text>
+    <text class="col" x="44" y="119">QUART_HEAD_CNT</text>
+    <text class="col" x="44" y="141">PROJECTED_BUDGET</text>
   </g>
 
   <!-- Edges routed in separate lanes to reduce crossings -->
 
   <!-- JOB -> COUNTRY -->
-  <path class="edge" d="M 420 210 L 390 210 L 390 174" marker-end="url(#arrow)"/>
-  <text class="label" x="394" y="200">N:1</text>
+  <path class="edge" d="M 480 210 L 380 210" marker-end="url(#arrow)"/>
+  <text class="label" x="430" y="200">N:1</text>
 
   <!-- CUSTOMER -> COUNTRY -->
-  <path class="edge" d="M 230 360 L 230 228" marker-end="url(#arrow)"/>
+  <path class="edge" d="M 230 400 L 230 228" marker-end="url(#arrow)"/>
   <text class="label" x="238" y="292">N:1</text>
 
   <!-- EMPLOYEE -> JOB (vertical lane) -->
-  <path class="edge" d="M 560 360 L 560 272" marker-end="url(#arrow)"/>
-  <text class="label" x="568" y="318">N:1</text>
+  <path class="edge" d="M 620 400 L 620 338" marker-end="url(#arrow)"/>
+  <text class="label" x="628" y="318">N:1</text>
 
   <!-- EMPLOYEE -> DEPARTMENT (upper channel, no crossing) -->
-  <path class="edge" d="M 640 360 L 640 292 L 910 292 L 910 272" marker-end="url(#arrow)"/>
-  <text class="label" x="770" y="284">N:1</text>
+  <path class="edge" d="M 700 400 L 700 360 L 1030 360 L 1030 316" marker-end="url(#arrow)"/>
+  <text class="label" x="860" y="350">N:1</text>
 
   <!-- DEPARTMENT self-loop (HEAD_DEPT) -->
-  <path class="edge-soft" d="M 1030 182 L 1085 182 L 1085 108 L 905 108 L 905 120" marker-end="url(#arrow)"/>
-  <text class="label" x="980" y="101">N:1</text>
+  <path class="edge-soft" d="M 1150 182 L 1205 182 L 1205 108 L 1025 108 L 1025 120" marker-end="url(#arrow)"/>
+  <text class="label" x="1100" y="101">N:1</text>
 
   <!-- PROJECT -> EMPLOYEE -->
-  <path class="edge" d="M 760 425 L 720 425" marker-end="url(#arrow)"/>
-  <text class="label" x="730" y="415">N:1</text>
+  <path class="edge" d="M 880 476 L 780 476" marker-end="url(#arrow)"/>
+  <text class="label" x="840" y="466">N:1</text>
 
   <!-- SALES -> CUSTOMER -->
-  <path class="edge" d="M 230 620 L 230 534" marker-end="url(#arrow)"/>
-  <text class="label" x="238" y="580">N:1</text>
+  <path class="edge" d="M 230 820 L 230 706" marker-end="url(#arrow)"/>
+  <text class="label" x="238" y="684">N:1</text>
 
   <!-- SALES -> EMPLOYEE (left side lane) -->
-  <path class="edge" d="M 380 700 L 400 700 L 400 458 L 420 458" marker-end="url(#arrow)"/>
-  <text class="label" x="408" y="586">N:1</text>
+  <path class="edge" d="M 380 984 L 400 984 L 400 542 L 480 542" marker-end="url(#arrow)"/>
+  <text class="label" x="408" y="748">N:1</text>
 
   <!-- SALARY_HISTORY -> EMPLOYEE -->
-  <path class="edge" d="M 560 620 L 560 556" marker-end="url(#arrow)"/>
-  <text class="label" x="568" y="590">N:1</text>
+  <path class="edge" d="M 620 820 L 620 684" marker-end="url(#arrow)"/>
+  <text class="label" x="628" y="748">N:1</text>
 
   <!-- EMPLOYEE_PROJECT -> EMPLOYEE -->
-  <path class="edge" d="M 880 620 L 880 576 L 690 576 L 690 556" marker-end="url(#arrow)"/>
-  <text class="label" x="785" y="568">N:1</text>
+  <path class="edge" d="M 1000 820 L 1000 780 L 750 780 L 750 684" marker-end="url(#arrow)"/>
+  <text class="label" x="880" y="770">N:1</text>
 
   <!-- EMPLOYEE_PROJECT -> PROJECT -->
-  <path class="edge" d="M 940 620 L 940 490" marker-end="url(#arrow)"/>
-  <text class="label" x="948" y="560">N:1</text>
+  <path class="edge" d="M 1060 820 L 1060 552" marker-end="url(#arrow)"/>
+  <text class="label" x="1068" y="704">N:1</text>
 
   <!-- PROJ_DEPT_BUDGET -> PROJECT -->
-  <path class="edge" d="M 1240 620 L 1240 510 L 1060 510" marker-end="url(#arrow)"/>
-  <text class="label" x="1150" y="500">N:1</text>
+  <path class="edge" d="M 1420 820 L 1420 500 L 1180 500" marker-end="url(#arrow)"/>
+  <text class="label" x="1300" y="490">N:1</text>
 
   <!-- PROJ_DEPT_BUDGET -> DEPARTMENT (right lane up) -->
-  <path class="edge" d="M 1330 620 L 1330 300 L 1060 300" marker-end="url(#arrow)"/>
-  <text class="label" x="1196" y="290">N:1</text>
+  <path class="edge" d="M 1510 820 L 1510 250 L 1180 250" marker-end="url(#arrow)"/>
+  <text class="label" x="1346" y="240">N:1</text>
 
   <!-- Legend -->
-  <g transform="translate(1100,120)">
-    <rect class="legend-box" x="0" y="0" width="300" height="132" rx="8" ry="8"/>
+  <g transform="translate(1280,1000)">
+    <rect class="legend-box" x="0" y="0" width="380" height="170" rx="8" ry="8"/>
     <text x="14" y="24" style="font:700 14px 'Segoe UI', Arial, sans-serif; fill:#0f172a;">Legend</text>
     <text class="pk" x="14" y="50">PK</text><text class="col" x="44" y="50">Primary key</text>
     <text class="fk" x="14" y="72">FK</text><text class="col" x="44" y="72">Foreign key</text>
     <line class="edge" x1="14" y1="92" x2="84" y2="92" marker-end="url(#arrow)"/>
     <text class="col" x="94" y="96">Child table points to parent table</text>
-    <text class="col" x="14" y="118">All table blocks are equal width (300 px)</text>
+    <text class="col" x="14" y="124">All table blocks are equal width (300 px)</text>
+    <text class="col" x="14" y="146">Columns shown one per row</text>
   </g>
 </svg>
