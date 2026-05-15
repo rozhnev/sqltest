@@ -1108,7 +1108,7 @@ class User
     {
             // Fetch questions data
             $stmt = $this->dbh->prepare("
-            SELECT DISTINCT
+            SELECT DISTINCT ON (q.id)
                 q.id,
                 ql.title,
                 q.dbms,
