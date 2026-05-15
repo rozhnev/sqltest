@@ -1108,11 +1108,10 @@ class User
     {
             // Fetch questions data
             $stmt = $this->dbh->prepare("
-            SELECT 
+            SELECT DISTINCT
                 q.id,
                 ql.title,
                 q.dbms,
-                -- q.rate,
                 qrl.rate rate,
                 c.title_sef as category,
                 q.title_sef slug,
@@ -1122,11 +1121,11 @@ class User
             JOIN questions q ON q.id = uq.question_id
             JOIN questions_localization ql ON q.id = ql.question_id AND ql.language = :lang
             JOIN question_categories qc ON qc.question_id = q.id
-            JOIN categories c ON qc.category_id = c.id AND c.questionnire_id = 3
+            JOIN categories c ON qc.category_id = c.id
             LEFT JOIN question_rates qr ON q.rate = qr.id
             LEFT JOIN favorites f ON q.id = f.question_id AND f.user_id = :user_id
             LEFT JOIN question_rates_localization qrl ON q.rate = qrl.id AND qrl.language = :lang
-            WHERE uq.user_id = :user_id AND q.deleted = false
+            WHERE uq.user_id = :user_id AND q.deleted = false AND uq.solved_at IS NOT NULL
             ORDER BY q.id
         ");
         
