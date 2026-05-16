@@ -331,44 +331,6 @@
     padding: 8px 2px;
 }
 
-/* Fixed table height */
-#questions-table,
-#tests-table {
-    min-height: 450px;
-    height: 450px;
-}
-
-#questions-table .tabulator,
-#tests-table .tabulator {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-#questions-table .tabulator-header,
-#tests-table .tabulator-header {
-    flex-shrink: 0;
-}
-
-#questions-table .tabulator-table,
-#tests-table .tabulator-table {
-    flex: 1;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-}
-
-#questions-table .tabulator-table-body,
-#tests-table .tabulator-table-body {
-    flex: 1;
-    overflow-y: auto;
-}
-
-#questions-table .tabulator-footer,
-#tests-table .tabulator-footer {
-    flex-shrink: 0;
-}
-
 </style>
 
 <script>
