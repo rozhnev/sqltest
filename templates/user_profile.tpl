@@ -116,8 +116,7 @@
                     </div>
                     <div class="section colored" style="height: 100%;">
                         <div style="width: 100%;">
-                            <h2>{translate}tasks{/translate}</h2>
-                            <div id="tasks-total-count" style="margin-bottom: 10px; font-size: 0.95em; color: var(--regular-text-color);"></div>
+                            <h2>{translate}tasks{/translate} <span id="tasks-total-count"></span></h2>
                         </div>
                         <div id="questions-table"></div>
                     </div>
@@ -541,7 +540,7 @@ const dbmsFilter = tasksTableData.reduce((acc,el)=>{acc[el.dbms] = el.dbms; retu
 const rateFilter = tasksTableData.reduce((acc,el)=>{acc[el.rate] = el.rate; return acc;}, {})
 
 // Display total tasks count
-document.getElementById('tasks-total-count').textContent = 'Total: ' + tasksTableData.length + ' {/literal}{translate}tasks{/translate}{literal}';
+document.getElementById('tasks-total-count').textContent = ' (' + tasksTableData.length + ' )';
 
 let tasksTable = new Tabulator("#questions-table", {
     data: tasksTableData, // Use preloaded data
