@@ -540,7 +540,7 @@ const dbmsFilter = tasksTableData.reduce((acc,el)=>{acc[el.dbms] = el.dbms; retu
 const rateFilter = tasksTableData.reduce((acc,el)=>{acc[el.rate] = el.rate; return acc;}, {})
 
 // Display total tasks count
-document.getElementById('tasks-total-count').textContent = ' (' + tasksTableData.length + ' )';
+document.getElementById('tasks-total-count').textContent = ' ( ' + tasksTableData.length + ' )';
 
 let tasksTable = new Tabulator("#questions-table", {
     data: tasksTableData, // Use preloaded data
