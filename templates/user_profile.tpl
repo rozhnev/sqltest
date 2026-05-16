@@ -289,7 +289,14 @@
     background-color: var(--menu-button-background-color);
     color: white;
 }
-
+.tabulator-tableholder {
+    min-height: 333px;
+}
+.tabulator-row {
+    min-height: 32px;
+    height: 32px;
+    padding: 3px;
+}
 .profile-achievements {
     display: flex;
     flex-direction: column;
