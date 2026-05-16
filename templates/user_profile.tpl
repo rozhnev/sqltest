@@ -117,6 +117,7 @@
                     <div class="section colored" style="height: 100%;">
                         <div style="width: 100%;">
                             <h2>{translate}tasks{/translate}</h2>
+                            <div id="tasks-total-count" style="margin-bottom: 10px; font-size: 0.95em; color: var(--regular-text-color);"></div>
                         </div>
                         <div id="questions-table"></div>
                     </div>
@@ -538,12 +539,19 @@ function savePasswordOnly() {
 const tasksTableData = {/literal}{$Questions|json_encode nofilter}{literal};
 const dbmsFilter = tasksTableData.reduce((acc,el)=>{acc[el.dbms] = el.dbms; return acc;}, {});
 const rateFilter = tasksTableData.reduce((acc,el)=>{acc[el.rate] = el.rate; return acc;}, {})
+
+// Display total tasks count
+document.getElementById('tasks-total-count').textContent = 'Total: ' + tasksTableData.length + ' {/literal}{translate}tasks{/translate}{literal}';
+
 let tasksTable = new Tabulator("#questions-table", {
     data: tasksTableData, // Use preloaded data
     layout: "fitColumns",
     pagination: true,
+    paginationMode: "local",
     paginationSize: 10,
-    selectable: false, // Enable row selection to ensure rowClick works
+    paginationInitialPage: 1,
+    paginationButtonCount: 5,
+    selectable: false,
     columns: [
         {title: "{/literal}{translate}question_title{/translate}{literal}", field: "title", sorter: "string", widthGrow: 4, headerFilter: "input"},
         {title: "{/literal}{translate}dbms{/translate}{literal}", field: "dbms", sorter: "string", headerFilter: "select", 
@@ -566,7 +574,10 @@ let tasksTable = new Tabulator("#questions-table", {
     ]
 });
 tasksTable.on("rowClick", function(e, row){
-    window.location.href = "/{/literal}{$Lang}{literal}/question/" + row.getData().category + "/" + row.getData().slug;
+    const data = row.getData();
+    if (data && data.category && data.slug) {
+        window.location.href = "/{/literal}{$Lang}{literal}/question/" + data.category + "/" + data.slug;
+    }
 });
 const testsTableData = {/literal}{$Tests|json_encode nofilter}{literal};
 
