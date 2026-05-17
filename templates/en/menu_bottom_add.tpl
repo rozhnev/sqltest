@@ -77,39 +77,6 @@
                                     <a href="https://www.reddit.com/r/webdev/" target="_blank" style="color: var(--menu-link-color);">r/webdev</a></li>
                                 <li>🔵 On <strong>Facebook</strong> or anywhere your developer community hangs out</li>
                             </ul>
-
-                            <p><strong>Recommended learning paths:</strong></p>
-                            <ul style="padding-left: 1.2em;">
-                                <li><strong>SQL analytics core</strong>
-                                    <ul>
-                                        <li>Master SQL for Data Analysis</li>
-                                        <li>SQL Window Functions for Data</li>
-                                        <li>Mastering Advanced SQL Queries</li>
-                                        <li>Optimize SQL Queries: Uncover Performance Bottlenecks</li>
-                                    </ul>
-                                </li>
-                                <li><strong>BI and dashboarding</strong>
-                                    <ul>
-                                        <li>Data Analysis and Visualization with Power BI</li>
-                                        <li>Data Storytelling with Power BI</li>
-                                        <li>Data Analysis and Dashboard Design with Tableau</li>
-                                        <li>Tableau for Data-Driven Decision Making</li>
-                                    </ul>
-                                </li>
-                                <li><strong>Cloud analytics / warehouse</strong>
-                                    <ul>
-                                        <li>BigQuery for Data Analysts</li>
-                                        <li>How to Build a BI Dashboard Using Google Looker Studio and BigQuery</li>
-                                    </ul>
-                                </li>
-                                <li><strong>Broader analyst skill expansion</strong>
-                                    <ul>
-                                        <li>Introduction to Data Analysis Using Excel</li>
-                                        <li>Financial Data Analysis with Excel, Python and Power BI</li>
-                                    </ul>
-                                </li>
-                            </ul>
-
                             <p>
                                 And if you do post, please send me the link at
                                 <a href="mailto:rozhnev@gmail.com" style="color: var(--menu-link-color);">✉️&nbsp;rozhnev@gmail.com</a>.
