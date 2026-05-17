@@ -123,127 +123,90 @@
                         </div>
                     </div>
                 {else}
+                    {math equation="floor(x / 3600) % 4" x=$smarty.now assign="coursera_slot"}
                     <div style="margin-top: 1rem;">
                         <div style="font-weight: 700; font-size: 0.95rem; color: var(--question-text); margin-bottom: 0.75rem;">
-                            Recommended Coursera courses for sqltest.online readers
+                            🚀 Level up your data skills — top Coursera picks
                         </div>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.75rem;">
 
-                        <div style="display: flex; flex-direction: column; gap: 1rem;">
-                            <section>
-                                <div style="font-weight: 700; margin: 0 0 0.5rem 0; color: var(--menu-button-background-color);">SQL analytics core</div>
-                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.75rem;">
-                                    <a href="https://imp.i384100.net/c/5622383/1242836/14726?prodsku=crse%3ATTNdJzwFEfCvexL6Zx2PNQ&amp;u=https%3A%2F%2Fwww.coursera.org%2Flearn%2Fpackt-master-sql-for-data-analysis-creek&amp;intsrc=CATF_9419" target="_blank" rel="noopener noreferrer" style="display: block; background: var(--accordion-panel-bg-color); border: 1px solid var(--text-block-border-color); border-radius: 10px; overflow: hidden; color: var(--question-text); text-decoration: none;">
-                                        <img src="https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://coursera-course-photos.s3.amazonaws.com/a2/f1324ef4744fc2b8a26fbdba293e9c/V19683.jpg?auto=format%2Ccompress&amp;dpr=1&amp;w=300&amp;h=300&amp;fit=crop" alt="Master SQL for Data Analysis" style="width: 100%; height: auto; display: block;">
-                                        <div style="padding: 0.75rem; line-height: 1.4;">
-                                            <div style="font-weight: 700; margin-bottom: 0.25rem;">Master SQL for Data Analysis</div>
-                                            <div style="font-size: 0.85rem; opacity: 0.9;">Strong foundation for data analysis, filtering, joins, subqueries, and window functions.</div>
-                                        </div>
-                                    </a>
+                            {if $coursera_slot == 0}
+                                {* Pair 0: Meta + IBM — SQL for data science *}
+                                <a href="https://imp.i384100.net/c/5622383/1242836/14726?prodsku=crse%3AzzCuAEa2Ee6WbA6Rm9OQgw&amp;u=https%3A%2F%2Fwww.coursera.org%2Flearn%2Fdata-analysis-with-spreadsheets-and-sql&amp;intsrc=CATF_9419" target="_blank" rel="noopener noreferrer" style="display: block; background: var(--accordion-panel-bg-color); border: 1px solid var(--text-block-border-color); border-radius: 10px; overflow: hidden; color: var(--question-text); text-decoration: none;">
+                                    <img src="https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://coursera-course-photos.s3.amazonaws.com/76/bd563a41474d8e91932a98f56de86c/Logo_5.png?auto=format%2Ccompress&amp;dpr=1&amp;w=300&amp;h=300&amp;fit=crop" alt="Data Analysis with Spreadsheets and SQL" style="width: 100%; height: auto; display: block;">
+                                    <div style="padding: 0.75rem; line-height: 1.4;">
+                                        <div style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--menu-link-color); margin-bottom: 0.3rem;">Meta</div>
+                                        <div style="font-weight: 700; margin-bottom: 0.25rem;">Data Analysis with Spreadsheets and SQL</div>
+                                        <div style="font-size: 0.85rem; opacity: 0.9;">Meta-certified skills. Master the SQL + spreadsheet combo that powers data teams at top tech companies.</div>
+                                    </div>
+                                </a>
+                                <a href="https://imp.i384100.net/c/5622383/1242836/14726?prodsku=crse%3AGDQMSxDWEeitFhJL4G-A_g&amp;u=https%3A%2F%2Fwww.coursera.org%2Flearn%2Fsql-data-science&amp;intsrc=CATF_9419" target="_blank" rel="noopener noreferrer" style="display: block; background: var(--accordion-panel-bg-color); border: 1px solid var(--text-block-border-color); border-radius: 10px; overflow: hidden; color: var(--question-text); text-decoration: none;">
+                                    <img src="https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://coursera-course-photos.s3.amazonaws.com/bb/f59850318b11e88de79f6e54d6a7e2/184x184-SQL-for-DataScience.png?auto=format%2Ccompress&amp;dpr=1&amp;w=300&amp;h=300&amp;fit=crop" alt="Databases and SQL for Data Science with Python" style="width: 100%; height: auto; display: block;">
+                                    <div style="padding: 0.75rem; line-height: 1.4;">
+                                        <div style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--menu-link-color); margin-bottom: 0.3rem;">IBM</div>
+                                        <div style="font-weight: 700; margin-bottom: 0.25rem;">Databases and SQL for Data Science with Python</div>
+                                        <div style="font-size: 0.85rem; opacity: 0.9;">IBM-certified SQL + Python — the most in-demand skill pair for data analysts and data scientists.</div>
+                                    </div>
+                                </a>
 
-                                    <a href="https://imp.i384100.net/c/5622383/1242836/14726?prodsku=crse%3AX7Cr9MqfEfCGDQr_wTYZuQ&amp;u=https%3A%2F%2Fwww.coursera.org%2Flearn%2Fsql-window-functions-for-data&amp;intsrc=CATF_9419" target="_blank" rel="noopener noreferrer" style="display: block; background: var(--accordion-panel-bg-color); border: 1px solid var(--text-block-border-color); border-radius: 10px; overflow: hidden; color: var(--question-text); text-decoration: none;">
-                                        <img src="https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://coursera-course-photos.s3.amazonaws.com/a8/eb588bef744204ac629fc6e2c814d2/Logo-Image-1200-X-1200.png?auto=format%2Ccompress&amp;dpr=1&amp;w=300&amp;h=300&amp;fit=crop" alt="SQL Window Functions for Data" style="width: 100%; height: auto; display: block;">
-                                        <div style="padding: 0.75rem; line-height: 1.4;">
-                                            <div style="font-weight: 700; margin-bottom: 0.25rem;">SQL Window Functions for Data</div>
-                                            <div style="font-size: 0.85rem; opacity: 0.9;">Ranking, rolling metrics, and row-level analytics for advanced SQL work.</div>
-                                        </div>
-                                    </a>
+                            {elseif $coursera_slot == 1}
+                                {* Pair 1: IBM + Knowledge Accelerators — BI & warehousing *}
+                                <a href="https://imp.i384100.net/c/5622383/1242836/14726?prodsku=spzn%3Al-LwwzNdEeyJAQoAQNSzoQ&amp;u=https%3A%2F%2Fwww.coursera.org%2Fspecializations%2Fbi-foundations-sql-etl-data-warehouse&amp;intsrc=CATF_9419" target="_blank" rel="noopener noreferrer" style="display: block; background: var(--accordion-panel-bg-color); border: 1px solid var(--text-block-border-color); border-radius: 10px; overflow: hidden; color: var(--question-text); text-decoration: none;">
+                                    <img src="https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://d15cw65ipctsrr.cloudfront.net/27/a156f51493441cb45d0a9ec83b22f9/ETL-Specialization-1200x1200.jpg?auto=format%2Ccompress&amp;dpr=1&amp;w=300&amp;h=300&amp;fit=crop" alt="BI Foundations with SQL, ETL and Data Warehousing" style="width: 100%; height: auto; display: block;">
+                                    <div style="padding: 0.75rem; line-height: 1.4;">
+                                        <div style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--menu-link-color); margin-bottom: 0.3rem;">IBM · Specialization</div>
+                                        <div style="font-weight: 700; margin-bottom: 0.25rem;">BI Foundations with SQL, ETL and Data Warehousing</div>
+                                        <div style="font-size: 0.85rem; opacity: 0.9;">IBM Specialization. Build ETL and data warehouse skills used in enterprise BI at banks and tech firms.</div>
+                                    </div>
+                                </a>
+                                <a href="https://imp.i384100.net/c/5622383/1242836/14726?prodsku=spzn%3AhZGfXW7VQ1egTUNFhYCxMA&amp;u=https%3A%2F%2Fwww.coursera.org%2Fspecializations%2Fxlpbi&amp;intsrc=CATF_9419" target="_blank" rel="noopener noreferrer" style="display: block; background: var(--accordion-panel-bg-color); border: 1px solid var(--text-block-border-color); border-radius: 10px; overflow: hidden; color: var(--question-text); text-decoration: none;">
+                                    <img src="https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://d15cw65ipctsrr.cloudfront.net/9f/af2dc8a18548fea5a5ba7efe1a2fd6/Excel-PBI-Specialization.png?auto=format%2Ccompress&amp;dpr=1&amp;w=300&amp;h=300&amp;fit=crop" alt="Excel to Power BI: Data Analysis &amp; Business Intelligence" style="width: 100%; height: auto; display: block;">
+                                    <div style="padding: 0.75rem; line-height: 1.4;">
+                                        <div style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--menu-link-color); margin-bottom: 0.3rem;">Knowledge Accelerators · Specialization</div>
+                                        <div style="font-weight: 700; margin-bottom: 0.25rem;">Excel to Power BI: Data Analysis &amp; Business Intelligence</div>
+                                        <div style="font-size: 0.85rem; opacity: 0.9;">Excel → Power BI in one Specialization. Listed in 80%+ of analyst job postings — start or level up your BI career.</div>
+                                    </div>
+                                </a>
 
-                                    <a href="https://imp.i384100.net/c/5622383/1242836/14726?prodsku=crse%3A7eBsnGDPEfCy5w726iKh0Q&amp;u=https%3A%2F%2Fwww.coursera.org%2Flearn%2Fmastering-advanced-sql-queries&amp;intsrc=CATF_9419" target="_blank" rel="noopener noreferrer" style="display: block; background: var(--accordion-panel-bg-color); border: 1px solid var(--text-block-border-color); border-radius: 10px; overflow: hidden; color: var(--question-text); text-decoration: none;">
-                                        <img src="https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://coursera-course-photos.s3.amazonaws.com/a9/3398ca166547c4a1b0ac8e90e8d8a9/BC-4650_Coursera-Originals_-Data-Science-Essentials-Toolkit_CourseCard-1.png?auto=format%2Ccompress&amp;dpr=1&amp;w=300&amp;h=300&amp;fit=crop" alt="Mastering Advanced SQL Queries" style="width: 100%; height: auto; display: block;">
-                                        <div style="padding: 0.75rem; line-height: 1.4;">
-                                            <div style="font-weight: 700; margin-bottom: 0.25rem;">Mastering Advanced SQL Queries</div>
-                                            <div style="font-size: 0.85rem; opacity: 0.9;">Nested queries, CTEs, and AI-assisted optimization for harder problems.</div>
-                                        </div>
-                                    </a>
+                            {elseif $coursera_slot == 2}
+                                {* Pair 2: Finance & cloud SQL *}
+                                <a href="https://imp.i384100.net/c/5622383/1242836/14726?prodsku=crse%3AXffgwxJHEfGQ2w5GCXwtVw&amp;u=https%3A%2F%2Fwww.coursera.org%2Flearn%2Ffinancial-data-analysis-with-excel-python-and-power-bi&amp;intsrc=CATF_9419" target="_blank" rel="noopener noreferrer" style="display: block; background: var(--accordion-panel-bg-color); border: 1px solid var(--text-block-border-color); border-radius: 10px; overflow: hidden; color: var(--question-text); text-decoration: none;">
+                                    <img src="https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://coursera-course-photos.s3.amazonaws.com/49/c0ec79434641fca5e2e157dfd6fc6c/Financial-Data-Transformation-and-Visualization.png?auto=format%2Ccompress&amp;dpr=1&amp;w=300&amp;h=300&amp;fit=crop" alt="Financial Data Analysis with Excel, Python and Power BI" style="width: 100%; height: auto; display: block;">
+                                    <div style="padding: 0.75rem; line-height: 1.4;">
+                                        <div style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--menu-link-color); margin-bottom: 0.3rem;">Coursera</div>
+                                        <div style="font-weight: 700; margin-bottom: 0.25rem;">Financial Data Analysis with Excel, Python and Power BI</div>
+                                        <div style="font-size: 0.85rem; opacity: 0.9;">The toolchain of financial analysts — Excel, Python, and Power BI. Turn raw data into business decisions.</div>
+                                    </div>
+                                </a>
+                                <a href="https://imp.i384100.net/c/5622383/1242836/14726?prodsku=crse%3AYjKUTEBtEfCO_gr_yN6pEQ&amp;u=https%3A%2F%2Fwww.coursera.org%2Flearn%2Fazure-data-engineering-cosmos-db-sql--analytics&amp;intsrc=CATF_9419" target="_blank" rel="noopener noreferrer" style="display: block; background: var(--accordion-panel-bg-color); border: 1px solid var(--text-block-border-color); border-radius: 10px; overflow: hidden; color: var(--question-text); text-decoration: none;">
+                                    <img src="https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://coursera-course-photos.s3.amazonaws.com/a2/4419b6570e4201b74c4b8cecf28934/Thumbnail-1200-x-1200-px-1-.png?auto=format%2Ccompress&amp;dpr=1&amp;w=300&amp;h=300&amp;fit=crop" alt="Azure Data Engineering: Cosmos DB, SQL &amp; Analytics" style="width: 100%; height: auto; display: block;">
+                                    <div style="padding: 0.75rem; line-height: 1.4;">
+                                        <div style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--menu-link-color); margin-bottom: 0.3rem;">Coursera · Microsoft Azure</div>
+                                        <div style="font-weight: 700; margin-bottom: 0.25rem;">Azure Data Engineering: Cosmos DB, SQL &amp; Analytics</div>
+                                        <div style="font-size: 0.85rem; opacity: 0.9;">SQL on Microsoft Azure. Architect cloud-scale analytics with Cosmos DB, Azure SQL, and Synapse.</div>
+                                    </div>
+                                </a>
 
-                                    <a href="https://imp.i384100.net/c/5622383/1242836/14726?prodsku=crse%3AUGyqldprEfCyZQ5rlh45lQ&amp;u=https%3A%2F%2Fwww.coursera.org%2Flearn%2Foptimize-sql-queries-uncover-performance-bottlenecks&amp;intsrc=CATF_9419" target="_blank" rel="noopener noreferrer" style="display: block; background: var(--accordion-panel-bg-color); border: 1px solid var(--text-block-border-color); border-radius: 10px; overflow: hidden; color: var(--question-text); text-decoration: none;">
-                                        <img src="https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://coursera-course-photos.s3.amazonaws.com/6c/cdf01ff2d64d0ca72bd2f5ad766266/Logo-Image-1200-X-1200.png?auto=format%2Ccompress&amp;dpr=1&amp;w=300&amp;h=300&amp;fit=crop" alt="Optimize SQL Queries: Uncover Performance Bottlenecks" style="width: 100%; height: auto; display: block;">
-                                        <div style="padding: 0.75rem; line-height: 1.4;">
-                                            <div style="font-weight: 700; margin-bottom: 0.25rem;">Optimize SQL Queries</div>
-                                            <div style="font-size: 0.85rem; opacity: 0.9;">Performance tuning and execution-plan thinking for analytical systems.</div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </section>
+                            {else}
+                                {* Pair 3: Advanced data engineering & AI *}
+                                <a href="https://imp.i384100.net/c/5622383/1242836/14726?prodsku=spzn%3Akob9UAMxRBiXTUwUzylLhA&amp;u=https%3A%2F%2Fwww.coursera.org%2Fspecializations%2Fbuilding-smarter-data-pipelines-sql-spark-kafka-and-genai&amp;intsrc=CATF_9419" target="_blank" rel="noopener noreferrer" style="display: block; background: var(--accordion-panel-bg-color); border: 1px solid var(--text-block-border-color); border-radius: 10px; overflow: hidden; color: var(--question-text); text-decoration: none;">
+                                    <img src="https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://d15cw65ipctsrr.cloudfront.net/f3/f60373551243b292fb8ed9402ea64f/pexels-thisisengineering-3861951.jpg?auto=format%2Ccompress&amp;dpr=1&amp;w=300&amp;h=300&amp;fit=crop" alt="Building Smarter Data Pipelines: SQL, Spark, Kafka &amp; GenAI" style="width: 100%; height: auto; display: block;">
+                                    <div style="padding: 0.75rem; line-height: 1.4;">
+                                        <div style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--menu-link-color); margin-bottom: 0.3rem;">Coursera · Specialization</div>
+                                        <div style="font-weight: 700; margin-bottom: 0.25rem;">Building Smarter Data Pipelines: SQL, Spark, Kafka &amp; GenAI</div>
+                                        <div style="font-size: 0.85rem; opacity: 0.9;">The modern data engineering stack — SQL to Spark to GenAI. Build production pipelines that process millions of records.</div>
+                                    </div>
+                                </a>
+                                <a href="https://imp.i384100.net/c/5622383/1242836/14726?prodsku=crse%3AfyQ8ooAeEe-SQQ53QcJlAw&amp;u=https%3A%2F%2Fwww.coursera.org%2Flearn%2Fdatabase-to-ai-practical-data-analytics-integration&amp;intsrc=CATF_9419" target="_blank" rel="noopener noreferrer" style="display: block; background: var(--accordion-panel-bg-color); border: 1px solid var(--text-block-border-color); border-radius: 10px; overflow: hidden; color: var(--question-text); text-decoration: none;">
+                                    <img src="https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://coursera-course-photos.s3.amazonaws.com/83/e4fb2ebb1a4474878db8d29e0dcdcd/MSIS-Coursera-Course-Card-1-.png?auto=format%2Ccompress&amp;dpr=1&amp;w=300&amp;h=300&amp;fit=crop" alt="Database to AI: Practical Data Analytics Integration" style="width: 100%; height: auto; display: block;">
+                                    <div style="padding: 0.75rem; line-height: 1.4;">
+                                        <div style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--menu-link-color); margin-bottom: 0.3rem;">Northeastern University</div>
+                                        <div style="font-weight: 700; margin-bottom: 0.25rem;">Database to AI: Practical Data Analytics Integration</div>
+                                        <div style="font-size: 0.85rem; opacity: 0.9;">Northeastern University. Bridge your SQL skills into AI-powered analytics — the career path that's reshaping data roles.</div>
+                                    </div>
+                                </a>
+                            {/if}
 
-                            <section>
-                                <div style="font-weight: 700; margin: 0 0 0.5rem 0; color: var(--menu-button-background-color);">BI and dashboarding</div>
-                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.75rem;">
-                                    <a href="https://imp.i384100.net/c/5622383/1242836/14726?prodsku=crse%3A2K-pi_e3Ee2VmA6uZNJ63w&amp;u=https%3A%2F%2Fwww.coursera.org%2Flearn%2Fdata-analysis-and-visualization-with-power-bi&amp;intsrc=CATF_9419" target="_blank" rel="noopener noreferrer" style="display: block; background: var(--accordion-panel-bg-color); border: 1px solid var(--text-block-border-color); border-radius: 10px; overflow: hidden; color: var(--question-text); text-decoration: none;">
-                                        <img src="https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://coursera-course-photos.s3.amazonaws.com/09/dfca8912e2441eb1795911a0e67d5e/Course-5.png?auto=format%2Ccompress&amp;dpr=1&amp;w=300&amp;h=300&amp;fit=crop" alt="Data Analysis and Visualization with Power BI" style="width: 100%; height: auto; display: block;">
-                                        <div style="padding: 0.75rem; line-height: 1.4;">
-                                            <div style="font-weight: 700; margin-bottom: 0.25rem;">Data Analysis and Visualization with Power BI</div>
-                                            <div style="font-size: 0.85rem; opacity: 0.9;">Reports, dashboards, and visual storytelling in Microsoft Power BI.</div>
-                                        </div>
-                                    </a>
-
-                                    <a href="https://imp.i384100.net/c/5622383/1242836/14726?prodsku=crse%3AeZslrldoEe6rZAooU_uugw&amp;u=https%3A%2F%2Fwww.coursera.org%2Flearn%2Fdata-storytelling-with-power-bi&amp;intsrc=CATF_9419" target="_blank" rel="noopener noreferrer" style="display: block; background: var(--accordion-panel-bg-color); border: 1px solid var(--text-block-border-color); border-radius: 10px; overflow: hidden; color: var(--question-text); text-decoration: none;">
-                                        <img src="https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://coursera-course-photos.s3.amazonaws.com/36/b062715c75482a9e50303ad8c7a7e7/Logo_Data-Storytelling-with-PBI--course-part-of-the-PBI-s12n--.jpg?auto=format%2Ccompress&amp;dpr=1&amp;w=300&amp;h=300&amp;fit=crop" alt="Data Storytelling with Power BI" style="width: 100%; height: auto; display: block;">
-                                        <div style="padding: 0.75rem; line-height: 1.4;">
-                                            <div style="font-weight: 700; margin-bottom: 0.25rem;">Data Storytelling with Power BI</div>
-                                            <div style="font-size: 0.85rem; opacity: 0.9;">Turn structured data into clear stories, reports, and dashboards.</div>
-                                        </div>
-                                    </a>
-
-                                    <a href="https://imp.i384100.net/c/5622383/1242836/14726?prodsku=crse%3A2_ZBfh3eEfG_GxIrFgVrjQ&amp;u=https%3A%2F%2Fwww.coursera.org%2Flearn%2Fdata-analysis-dashboard-design-tableau&amp;intsrc=CATF_9419" target="_blank" rel="noopener noreferrer" style="display: block; background: var(--accordion-panel-bg-color); border: 1px solid var(--text-block-border-color); border-radius: 10px; overflow: hidden; color: var(--question-text); text-decoration: none;">
-                                        <img src="https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://coursera-course-photos.s3.amazonaws.com/25/a888988a514601b12c7226f57076cb/Data-Analysis-and-Dashboard-Design-with-Tableau-100.jpg?auto=format%2Ccompress&amp;dpr=1&amp;w=300&amp;h=300&amp;fit=crop" alt="Data Analysis and Dashboard Design with Tableau" style="width: 100%; height: auto; display: block;">
-                                        <div style="padding: 0.75rem; line-height: 1.4;">
-                                            <div style="font-weight: 700; margin-bottom: 0.25rem;">Data Analysis and Dashboard Design with Tableau</div>
-                                            <div style="font-size: 0.85rem; opacity: 0.9;">Advanced Tableau analysis and scalable dashboard design.</div>
-                                        </div>
-                                    </a>
-
-                                    <a href="https://imp.i384100.net/c/5622383/1242836/14726?prodsku=crse%3A_FTqKB3cEfGV9wr_z2Fh3w&amp;u=https%3A%2F%2Fwww.coursera.org%2Flearn%2Ftableau-data-driven-decision-making&amp;intsrc=CATF_9419" target="_blank" rel="noopener noreferrer" style="display: block; background: var(--accordion-panel-bg-color); border: 1px solid var(--text-block-border-color); border-radius: 10px; overflow: hidden; color: var(--question-text); text-decoration: none;">
-                                        <img src="https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://coursera-course-photos.s3.amazonaws.com/2d/927b05b7a3438eaaf415eb468d77c2/Tableau-for-Data-Driven-Decision-Making-100.jpg?auto=format%2Ccompress&amp;dpr=1&amp;w=300&amp;h=300&amp;fit=crop" alt="Tableau for Data-Driven Decision Making" style="width: 100%; height: auto; display: block;">
-                                        <div style="padding: 0.75rem; line-height: 1.4;">
-                                            <div style="font-weight: 700; margin-bottom: 0.25rem;">Tableau for Data-Driven Decision Making</div>
-                                            <div style="font-size: 0.85rem; opacity: 0.9;">BI foundations, data prep, and interactive visual analytics with Tableau.</div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </section>
-
-                            <section>
-                                <div style="font-weight: 700; margin: 0 0 0.5rem 0; color: var(--menu-button-background-color);">Cloud analytics / warehouse</div>
-                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.75rem;">
-                                    <a href="https://imp.i384100.net/c/5622383/1242836/14726?prodsku=crse%3Almx4OGjjEe6vIRJJdXRzxQ&amp;u=https%3A%2F%2Fwww.coursera.org%2Flearn%2Fbigquery-for-data-analysts&amp;intsrc=CATF_9419" target="_blank" rel="noopener noreferrer" style="display: block; background: var(--accordion-panel-bg-color); border: 1px solid var(--text-block-border-color); border-radius: 10px; overflow: hidden; color: var(--question-text); text-decoration: none;">
-                                        <img src="https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://coursera-course-photos.s3.amazonaws.com/d2/02da6886ed454a997f4b42d6437dc5/Logo-Image_GC-Projects-1-1-copy.png?auto=format%2Ccompress&amp;dpr=1&amp;w=300&amp;h=300&amp;fit=crop" alt="BigQuery for Data Analysts" style="width: 100%; height: auto; display: block;">
-                                        <div style="padding: 0.75rem; line-height: 1.4;">
-                                            <div style="font-weight: 700; margin-bottom: 0.25rem;">BigQuery for Data Analysts</div>
-                                            <div style="font-size: 0.85rem; opacity: 0.9;">Learn to ingest, transform, and query warehouse data in BigQuery.</div>
-                                        </div>
-                                    </a>
-
-                                    <a href="https://imp.i384100.net/c/5622383/1242836/14726?prodsku=crse%3A2n0mLKktEeyxDg4ukgkVlw&amp;u=https%3A%2F%2Fwww.coursera.org%2Flearn%2Fgooglecloud-how-to-build-a-bi-dashboard-using-google-data-studio-and-bigqu-cfi1a&amp;intsrc=CATF_9419" target="_blank" rel="noopener noreferrer" style="display: block; background: var(--accordion-panel-bg-color); border: 1px solid var(--text-block-border-color); border-radius: 10px; overflow: hidden; color: var(--question-text); text-decoration: none;">
-                                        <img src="https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://coursera-course-photos.s3.amazonaws.com/40/35b51041a04b58ac739cf8e9e767f6/Logo-Image_GC-Projects.png?auto=format%2Ccompress&amp;dpr=1&amp;w=300&amp;h=300&amp;fit=crop" alt="How to Build a BI Dashboard Using Google Looker Studio and BigQuery" style="width: 100%; height: auto; display: block;">
-                                        <div style="padding: 0.75rem; line-height: 1.4;">
-                                            <div style="font-weight: 700; margin-bottom: 0.25rem;">Google Looker Studio + BigQuery</div>
-                                            <div style="font-size: 0.85rem; opacity: 0.9;">A low-ticket entry point for BI dashboards on Google Cloud.</div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </section>
-
-                            <section>
-                                <div style="font-weight: 700; margin: 0 0 0.5rem 0; color: var(--menu-button-background-color);">Broader analyst skill expansion</div>
-                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.75rem;">
-                                    <a href="https://imp.i384100.net/c/5622383/1242836/14726?prodsku=crse%3AOUTGOrvTEeWuCAqiwoZfSw&amp;u=https%3A%2F%2Fwww.coursera.org%2Flearn%2Fexcel-data-analysis&amp;intsrc=CATF_9419" target="_blank" rel="noopener noreferrer" style="display: block; background: var(--accordion-panel-bg-color); border: 1px solid var(--text-block-border-color); border-radius: 10px; overflow: hidden; color: var(--question-text); text-decoration: none;">
-                                        <img src="https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://coursera-course-photos.s3.amazonaws.com/60/d819005f0c11e6bc2b7945d34f43c3/ChartsGraphsTabletThumb.jpg?auto=format%2Ccompress&amp;dpr=1&amp;w=300&amp;h=300&amp;fit=crop" alt="Introduction to Data Analysis Using Excel" style="width: 100%; height: auto; display: block;">
-                                        <div style="padding: 0.75rem; line-height: 1.4;">
-                                            <div style="font-weight: 700; margin-bottom: 0.25rem;">Introduction to Data Analysis Using Excel</div>
-                                            <div style="font-size: 0.85rem; opacity: 0.9;">Useful spreadsheet skills for analysts who work across tools and teams.</div>
-                                        </div>
-                                    </a>
-
-                                    <a href="https://imp.i384100.net/c/5622383/1242836/14726?prodsku=crse%3AXffgwxJHEfGQ2w5GCXwtVw&amp;u=https%3A%2F%2Fwww.coursera.org%2Flearn%2Ffinancial-data-analysis-with-excel-python-and-power-bi&amp;intsrc=CATF_9419" target="_blank" rel="noopener noreferrer" style="display: block; background: var(--accordion-panel-bg-color); border: 1px solid var(--text-block-border-color); border-radius: 10px; overflow: hidden; color: var(--question-text); text-decoration: none;">
-                                        <img src="https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://coursera-course-photos.s3.amazonaws.com/49/c0ec79434641fca5e2e157dfd6fc6c/Financial-Data-Transformation-and-Visualization.png?auto=format%2Ccompress&amp;dpr=1&amp;w=300&amp;h=300&amp;fit=crop" alt="Financial Data Analysis with Excel, Python and Power BI" style="width: 100%; height: auto; display: block;">
-                                        <div style="padding: 0.75rem; line-height: 1.4;">
-                                            <div style="font-weight: 700; margin-bottom: 0.25rem;">Financial Data Analysis with Excel, Python and Power BI</div>
-                                            <div style="font-size: 0.85rem; opacity: 0.9;">A cross-tool workflow for financial analysis, modeling, and dashboarding.</div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </section>
                         </div>
                     </div>
                 {/if}
