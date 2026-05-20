@@ -80,7 +80,7 @@
     *   Creating and Using Temporary Tables
     *   Differences Between Views, Temporary Tables, and CTEs
     *   Use Cases and Best Practices
-10. **Best Practices for SQL Coding**
+10. **SQL Code Quality and Performance**
     *   [Best Practices for Code Readability and Maintainability](lessons/lesson10_1_ru.md)
     *   [Writing Efficient SQL Queries](lessons/lesson10_2_ru.md)
     *   [Understanding Query Optimization Techniques](lessons/lesson10_3_ru.md)
