@@ -17,10 +17,12 @@
             <div class="column">
                 {include file="{$Lang}/adblock_banner.tpl"}
                 {if $User->logged() && $NewAchievement}
-                    <div class="user-solutions-count" id="new-achievement" style="padding: 12px 16px; margin-bottom: 16px; border-radius: 4px; display: flex; flex-direction: column; gap: 12px;">
-                        <div style="display: flex; align-items: center; gap: 12px;">
+                    {assign var="AchievementViewUrl" value="/{$Lang}/achievement/{$NewAchievement.user_achievement_id}"}
+                    <div class="user-solutions-count" id="new-achievement" style="position: relative; padding: 12px 16px; margin-bottom: 16px; border-radius: 4px; display: flex; flex-direction: column; gap: 12px;">
+                        <button type="button" id="close-new-achievement" aria-label="Close" title="Close" style="position: absolute; top: 8px; right: 8px; width: 32px; height: 32px; border: none; border-radius: 4px; background: #d93025; color: #fff; font-size: 20px; line-height: 1; cursor: pointer; display: inline-flex; align-items: center; justify-content: center;">×</button>
+                        <div style="display: flex; align-items: flex-start; gap: 12px; position: relative;" data-achievement-view-url="{$AchievementViewUrl|escape}">
                             <div style="font-size: 20px;">🏆</div>
-                            <div>
+                            <div style="padding-right: 44px;">
                                 {translate}new_achievement_unlocked{/translate}!&nbsp;
                                 <a href="/{$Lang}/achievement/{$NewAchievement.user_achievement_id}" style="color: #00CED1; text-decoration: underline;">
                                     <strong>{$NewAchievement.title}</strong>
@@ -33,6 +35,46 @@
                             {include file="{$Lang}/achievement_share_buttons.tpl" AchievementShareUrl=$AchievementShareUrl}
                         </div>
                     </div>
+                    <script>
+                        (function () {
+                            const achievementBlock = document.getElementById('new-achievement');
+                            if (!achievementBlock) {
+                                return;
+                            }
+
+                            const header = achievementBlock.querySelector('[data-achievement-view-url]');
+                            const achievementViewUrl = header ? header.getAttribute('data-achievement-view-url') : '';
+                            let isMarkedViewed = false;
+
+                            const markAchievementViewed = function () {
+                                if (isMarkedViewed || !achievementViewUrl) {
+                                    return;
+                                }
+
+                                isMarkedViewed = true;
+                                fetch(achievementViewUrl, {
+                                    method: 'GET',
+                                    credentials: 'same-origin',
+                                    keepalive: true
+                                }).catch(function () {
+                                    // Ignore failures; this is best-effort telemetry/action.
+                                });
+                            };
+
+                            achievementBlock.addEventListener('click', function (event) {
+                                const shareLink = event.target.closest('a[data-mark-achievement-viewed="1"]');
+                                if (shareLink) {
+                                    markAchievementViewed();
+                                    return;
+                                }
+
+                                if (event.target.id === 'close-new-achievement') {
+                                    markAchievementViewed();
+                                    achievementBlock.remove();
+                                }
+                            });
+                        })();
+                    </script>
                 {/if}
                 <div class="question-wrapper">
                     <div class="question-title-bar" style="display: flex;">
