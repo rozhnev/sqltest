@@ -82,44 +82,13 @@
                     </p>
                 </div>
             {/if}
-                <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; justify-content: center;">
-                    {if isset($LinkedinShareUrl) && $LinkedinShareUrl}
-                        <a class="button blue" target="_blank" rel="noopener noreferrer"
-                           href="{$LinkedinShareUrl}">
-                            <span class="share-button-label">
-                                <span class="share-button-icon" aria-hidden="true">
-                                    <svg viewBox="0 0 24 24" role="img" aria-label="LinkedIn logo">
-                                        <path d="M5.5 7.5h-3V18.5h3V7.5zM4 5.5C3.17 5.5 2.5 6.2 2.5 7c0 .81.67 1.5 1.5 1.5S5.5 7.81 5.5 7c0-.81-.67-1.5-1.5-1.5zM9.5 18.5h3V13c0-.81.06-1.84 1.25-1.84 1.21 0 1.23 1.05 1.23 1.9v5.44h3V12c0-3.07-1.63-4.25-3.26-4.25-1.5 0-2.18.78-2.56 1.33h.04V7.5h-3c.04 1.06 0 11 0 11z" />
-                                    </svg>
-                                </span>
-                                <span>{translate}share_to_linkedin{/translate}</span>
-                            </span>
-                        </a>
-                    {/if}
-
-                    {if isset($FacebookShareUrl) && $FacebookShareUrl}
-                        <a class="button" target="_blank" rel="noopener noreferrer"
-                           style="background:#1877F2; border-color:#1877F2;"
-                           href="{$FacebookShareUrl}">
-                            <span class="share-button-label">
-                                <span class="share-button-icon" aria-hidden="true">
-                                    <svg viewBox="0 0 24 24" role="img" aria-label="Facebook logo">
-                                        <path d="M19 2.5H5C3.62 2.5 2.5 3.62 2.5 5v14c0 1.38 1.12 2.5 2.5 2.5h7V14.5h-2v-3h2V9c0-2 1.2-3 3-3 0.86 0 1.14.06 1.34.09v2.52h-1.5c-1.17 0-1.4.56-1.4 1.38v1.78h2.8l-.37 3h-2.43V22h4.77c1.38 0 2.5-1.12 2.5-2.5V5C21.5 3.62 20.38 2.5 19 2.5Z" />
-                                    </svg>
-                                </span>
-                                <span>{translate}share_to_facebook{/translate}</span>
-                            </span>
-                        </a>
-                    {/if}
-
-                    {* {if isset($VKShareUrl) && $VKShareUrl}
-                        <a class="button" target="_blank" rel="noopener noreferrer"
-                           style="background:#0077FF; border-color:#0077FF;"
-                           href="{$VKShareUrl}">
-                            <span>{translate}share_to_vk{/translate}</span>
-                        </a>
-                    {/if} *}
+            <div class="user-solutions-count" style="max-width: 1200px; margin: 16px auto; width: 1200px;">
+                {assign var="AchievementShareUrl" value=$SharePageUrl}
+                <div style="padding-top: 12px; border-top: 1px solid var(--text-block-border-color);">
+                    <div style="font-weight: 700; margin-bottom: 10px;">{translate}share_your_achievement{/translate}</div>
+                    {include file="{$Lang}/achievement_share_buttons.tpl" AchievementShareUrl=$AchievementShareUrl}
                 </div>
+            </div>
         </main>
         <footer>
             {if $MobileView}

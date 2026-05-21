@@ -17,13 +17,20 @@
             <div class="column">
                 {include file="{$Lang}/adblock_banner.tpl"}
                 {if $User->logged() && $NewAchievement}
-                    <div class="user-solutions-count" id="new-achievement" style="padding: 12px 16px; margin-bottom: 16px; border-radius: 4px; display: flex; align-items: center; gap: 12px;">
-                        <div style="font-size: 20px;">🏆</div>
-                        <div>
-                            {translate}new_achievement_unlocked{/translate}!&nbsp;
-                            <a href="/{$Lang}/achievement/{$NewAchievement.user_achievement_id}" style="color: #00CED1; text-decoration: underline;">
-                                <strong>{$NewAchievement.title}</strong>
-                            </a>
+                    <div class="user-solutions-count" id="new-achievement" style="padding: 12px 16px; margin-bottom: 16px; border-radius: 4px; display: flex; flex-direction: column; gap: 12px;">
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <div style="font-size: 20px;">🏆</div>
+                            <div>
+                                {translate}new_achievement_unlocked{/translate}!&nbsp;
+                                <a href="/{$Lang}/achievement/{$NewAchievement.user_achievement_id}" style="color: #00CED1; text-decoration: underline;">
+                                    <strong>{$NewAchievement.title}</strong>
+                                </a>
+                            </div>
+                        </div>
+                        {assign var="AchievementShareUrl" value="https://sqltest.online/{$Lang}/achievement/{$NewAchievement.user_achievement_id}"}
+                        <div style="padding-top: 12px; border-top: 1px solid var(--text-block-border-color);">
+                            <div style="font-weight: 700; margin-bottom: 10px;">{translate}share_your_achievement{/translate}</div>
+                            {include file="{$Lang}/achievement_share_buttons.tpl" AchievementShareUrl=$AchievementShareUrl}
                         </div>
                     </div>
                 {/if}
