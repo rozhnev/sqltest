@@ -10,7 +10,7 @@
     <p>O Banco de Dados AdventureWorks contém 10 tabelas principais.</p>
     <p>
         <a href="/{$Lang}/erd/AdventureWorks" target="ERDWindow" rel="noopener noreferrer" style="display: flex; flex-direction: column; align-items: center; gap: 4px;" aria-label="Abrir o diagrama ER do banco AdventureWorks em uma nova janela">
-            <img src="/images/erd_small_light.jpg" alt="Diagrama ER do banco AdventureWorks mostrando relacionamentos entre tabelas" style="width: 90%;" loading="lazy" decoding="async">
+            <img src="/images/erd_small_light.svg" alt="Diagrama ER do banco AdventureWorks mostrando relacionamentos entre tabelas" style="width: 90%;" loading="lazy" decoding="async">
             Diagrama ER - AdventureWorks
         </a>
     </p>

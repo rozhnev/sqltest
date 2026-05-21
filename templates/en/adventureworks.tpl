@@ -10,7 +10,7 @@
     <p>The AdventureWorks database contains 10 main tables.</p>
     <p>
         <a href="/{$Lang}/erd/AdventureWorks" target="ERDWindow" rel="noopener noreferrer" style="display: flex; flex-direction: column; align-items: center; gap: 4px;" aria-label="Open the AdventureWorks ER diagram in a new window">
-            <img src="/images/erd_small_light.jpg" alt="ER diagram of the AdventureWorks database showing table relationships" style="width: 90%;" loading="lazy" decoding="async">
+            <img src="/images/erd_small_light.svg" alt="ER diagram of the AdventureWorks database showing table relationships" style="width: 90%;" loading="lazy" decoding="async">
             AdventureWorks DB ER diagram
         </a>
     </p>

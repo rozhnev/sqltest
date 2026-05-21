@@ -11,7 +11,7 @@
     <p>La base de données Sakila contient 15 tables principales décrivant divers aspects d'une entreprise de location de DVD.</p>
     <p>
         <a href="/{$Lang}/erd/Sakila" target="ERDWindow" rel="noopener noreferrer" style="display: flex; flex-direction: column; align-items: center; gap: 4px;" aria-label="Ouvrir le schéma ER de la base de données Sakila dans une nouvelle fenêtre">
-            <img src="/images/erd_small_light.jpg" alt="Schéma ER de la base de données Sakila avec les relations entre les tables" style="width: 90%;" loading="lazy" decoding="async">
+            <img src="/images/erd_small_light.svg" alt="Schéma ER de la base de données Sakila avec les relations entre les tables" style="width: 90%;" loading="lazy" decoding="async">
             Schéma ER de la base de données Sakila
         </a>
     </p>

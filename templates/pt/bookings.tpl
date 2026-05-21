@@ -10,7 +10,7 @@
     <p>O Banco de Dados Bookings contém 8 tabelas principais.</p>
     <p>
         <a href="/{$Lang}/erd/Bookings" target="ERDWindow" rel="noopener noreferrer" style="display: flex; flex-direction: column; align-items: center; gap: 4px;" aria-label="Abrir o diagrama ER do banco Bookings em uma nova janela">
-            <img src="/images/erd_small_light.jpg" alt="Diagrama ER do banco Bookings mostrando relacionamentos entre tabelas" style="width: 90%;" loading="lazy" decoding="async">
+            <img src="/images/erd_small_light.svg" alt="Diagrama ER do banco Bookings mostrando relacionamentos entre tabelas" style="width: 90%;" loading="lazy" decoding="async">
             Diagrama ER do banco de dados Bookings
         </a>
     </p>

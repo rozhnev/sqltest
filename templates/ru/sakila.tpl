@@ -11,7 +11,7 @@
   <p>База данных Sakila содержит 15 основных таблиц, описывающих различные аспекты компании по прокату DVD-дисков.</p>
     <p>
                 <a href="/{$Lang}/erd/Sakila" target="ERDWindow" rel="noopener noreferrer" style="display: flex; flex-direction: column; align-items: center; gap: 4px;" aria-label="Открыть ER-диаграмму базы данных Sakila в новом окне">
-                        <img src="/images/erd_small_light.jpg" alt="ER-диаграмма базы данных Sakila со связями между таблицами" style="width: 90%;" loading="lazy" decoding="async">
+                        <img src="/images/erd_small_light.svg" alt="ER-диаграмма базы данных Sakila со связями между таблицами" style="width: 90%;" loading="lazy" decoding="async">
             ER диаграмма базы данных Sakila
         </a>
     </p>

@@ -10,7 +10,7 @@
     <p>База данных AdventureWorks содержит 10 основных таблиц.</p>
     <p>
         <a href="/{$Lang}/erd/AdventureWorks" target="ERDWindow" rel="noopener noreferrer" style="display: flex; flex-direction: column; align-items: center; gap: 4px;" aria-label="Открыть ER-диаграмму базы AdventureWorks в новом окне">
-            <img src="/images/erd_small_light.jpg" alt="ER-диаграмма базы AdventureWorks со связями между таблицами" style="width: 90%;" loading="lazy" decoding="async">
+                        <img src="/images/erd_small_light.svg" alt="ER-диаграмма базы AdventureWorks со связями между таблицами" style="width: 90%;" loading="lazy" decoding="async">
             ER диаграмма базы данных AdventureWorks
         </a>
     </p>

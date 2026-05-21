@@ -9,6 +9,12 @@
     <p>База Employee (Firebird) - это учебный набор данных, который используется для изучения SQL и возможностей СУБД Firebird.</p>
     <p>На этой странице описаны структура таблиц, ключевые поля и связи, полезные для практических SQL-запросов.</p>
     <p>База данных Employee содержит 9 основных таблиц.</p>
+    <p>
+        <a href="/{$Lang}/erd/Employee" target="ERDWindow" rel="noopener noreferrer" style="display: flex; flex-direction: column; align-items: center; gap: 4px;" aria-label="Открыть ER-диаграмму базы Employee в новом окне">
+            <img src="/images/erd_small_light.svg" alt="ER-диаграмма базы Employee со связями между таблицами" style="width: 90%;" loading="lazy" decoding="async">
+            ER-диаграмма базы Employee
+        </a>
+    </p>
     <h2>Список таблиц</h2>
 
     <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 360" role="img" aria-labelledby="title desc">
+  <title id="title">AdventureWorks ERD preview</title>
+  <desc id="desc">Compact preview diagram showing a subset of AdventureWorks tables and relationships.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fbfdff"/>
+      <stop offset="1" stop-color="#f2f7fb"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-color="#223046" flood-opacity="0.14"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#8fb4cf"/>
+    </marker>
+    <style>
+      .card { fill: #ffffff; stroke: #c8d6e3; stroke-width: 1.2; rx: 10; filter: url(#shadow); }
+      .head { fill: #20364d; rx: 10; }
+      .title { fill: #ffffff; font: 700 16px/1.2 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      .col { fill: #4e6479; font: 12px/1.2 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      .key { fill: #2980b9; font: 700 11px/1.2 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      .edge { fill: none; stroke: #93b5cf; stroke-width: 2; marker-end: url(#arrow); }
+      .note { fill: #9ab0c1; font: 11px/1.2 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    </style>
+  </defs>
+
+  <rect width="1080" height="360" fill="url(#bg)"/>
+  <g opacity="0.35">
+    <path d="M40 40H1040" stroke="#d9e6ef"/>
+    <path d="M40 110H1040" stroke="#d9e6ef"/>
+    <path d="M40 180H1040" stroke="#d9e6ef"/>
+    <path d="M40 250H1040" stroke="#d9e6ef"/>
+    <path d="M40 320H1040" stroke="#d9e6ef"/>
+  </g>
+
+  <path class="edge" d="M210 92 C280 92, 300 92, 350 120"/>
+  <path class="edge" d="M540 92 C600 92, 620 92, 690 92"/>
+  <path class="edge" d="M540 220 C610 220, 620 220, 690 220"/>
+  <path class="edge" d="M840 126 C840 150, 840 156, 840 180"/>
+  <path class="edge" d="M540 220 C700 220, 730 128, 820 128"/>
+
+  <g transform="translate(40,26)">
+    <rect class="card" width="180" height="130"/>
+    <rect class="head" width="180" height="28" rx="10"/>
+    <text class="title" x="12" y="19">ProductCategory</text>
+    <text class="key" x="12" y="52">PK</text><text class="col" x="38" y="52">ProductCategoryID</text>
+    <text class="col" x="38" y="74">Name</text>
+    <text class="col" x="38" y="96">rowguid</text>
+    <text class="col" x="38" y="118">ModifiedDate</text>
+  </g>
+
+  <g transform="translate(40,182)">
+    <rect class="card" width="180" height="122"/>
+    <rect class="head" width="180" height="28" rx="10"/>
+    <text class="title" x="12" y="19">ProductModel</text>
+    <text class="key" x="12" y="52">PK</text><text class="col" x="38" y="52">ProductModelID</text>
+    <text class="col" x="38" y="74">Name</text>
+    <text class="col" x="38" y="96">CatalogDescription</text>
+    <text class="col" x="38" y="118">ModifiedDate</text>
+  </g>
+
+  <g transform="translate(260,162)">
+    <rect class="card" width="180" height="142"/>
+    <rect class="head" width="180" height="28" rx="10"/>
+    <text class="title" x="12" y="19">ProductDescription</text>
+    <text class="key" x="12" y="52">PK</text><text class="col" x="38" y="52">ProductDescriptionID</text>
+    <text class="col" x="38" y="74">Description</text>
+    <text class="col" x="38" y="96">rowguid</text>
+    <text class="col" x="38" y="118">ModifiedDate</text>
+    <text class="note" x="12" y="136">text catalog content</text>
+  </g>
+
+  <g transform="translate(470,28)">
+    <rect class="card" width="160" height="116"/>
+    <rect class="head" width="160" height="28" rx="10"/>
+    <text class="title" x="12" y="19">Comment</text>
+    <text class="key" x="12" y="52">PK</text><text class="col" x="38" y="52">CommentID</text>
+    <text class="col" x="38" y="74">ProductID</text>
+    <text class="col" x="38" y="96">CommentText</text>
+  </g>
+
+  <g transform="translate(470,170)">
+    <rect class="card" width="160" height="130"/>
+    <rect class="head" width="160" height="28" rx="10"/>
+    <text class="title" x="12" y="19">CustomerAddress</text>
+    <text class="key" x="12" y="52">PK</text><text class="col" x="38" y="52">CustomerID</text>
+    <text class="key" x="12" y="74">PK</text><text class="col" x="38" y="74">AddressID</text>
+    <text class="col" x="38" y="96">AddressType</text>
+    <text class="col" x="38" y="118">ModifiedDate</text>
+  </g>
+
+  <g transform="translate(670,170)">
+    <rect class="card" width="170" height="130"/>
+    <rect class="head" width="170" height="28" rx="10"/>
+    <text class="title" x="12" y="19">Address</text>
+    <text class="key" x="12" y="52">PK</text><text class="col" x="38" y="52">AddressID</text>
+    <text class="col" x="38" y="74">AddressLine1</text>
+    <text class="col" x="38" y="96">City</text>
+    <text class="col" x="38" y="118">PostalCode</text>
+  </g>
+
+  <g transform="translate(840,28)">
+    <rect class="card" width="200" height="130"/>
+    <rect class="head" width="200" height="28" rx="10"/>
+    <text class="title" x="12" y="19">SalesOrderHeader</text>
+    <text class="key" x="12" y="52">PK</text><text class="col" x="38" y="52">SalesOrderID</text>
+    <text class="key" x="12" y="74">FK</text><text class="col" x="38" y="74">CustomerID</text>
+    <text class="col" x="38" y="96">OrderDate</text>
+    <text class="col" x="38" y="118">TotalDue</text>
+  </g>
+
+  <g transform="translate(840,180)">
+    <rect class="card" width="200" height="122"/>
+    <rect class="head" width="200" height="28" rx="10"/>
+    <text class="title" x="12" y="19">SalesOrderDetail</text>
+    <text class="key" x="12" y="52">PK</text><text class="col" x="38" y="52">SalesOrderDetailID</text>
+    <text class="key" x="12" y="74">FK</text><text class="col" x="38" y="74">SalesOrderID</text>
+    <text class="col" x="38" y="96">OrderQty</text>
+    <text class="col" x="38" y="118">UnitPrice</text>
+  </g>
+</svg>

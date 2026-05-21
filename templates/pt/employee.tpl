@@ -8,6 +8,12 @@
     <p>O banco Employee (Firebird) é um conjunto de dados de exemplo usado para estudar SQL e explorar recursos do SGBD Firebird.</p>
     <p>Esta página descreve a estrutura das tabelas, colunas-chave e relacionamentos úteis em consultas SQL práticas.</p>
     <p>O Banco de Dados Employee contém 9 tabelas principais.</p>
+    <p>
+        <a href="/{$Lang}/erd/Employee" target="ERDWindow" rel="noopener noreferrer" style="display: flex; flex-direction: column; align-items: center; gap: 4px;" aria-label="Abrir o diagrama ER do banco Employee em uma nova janela">
+            <img src="/images/erd_small_light.svg" alt="Diagrama ER do banco Employee mostrando relacionamentos entre tabelas" style="width: 90%;" loading="lazy" decoding="async">
+            Diagrama ER do banco Employee
+        </a>
+    </p>
     <h2>Lista de tabelas</h2>
     <div class="accordion" title="Clique para expandir, duplo clique para colar nome da tabela">
         <span><span class='sql'>COUNTRY</span> - tabela de países.</span>
