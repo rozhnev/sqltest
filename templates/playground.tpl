@@ -183,6 +183,7 @@
             </div>
             <div class="column db-description" id="right-panel">            
                 {if $User->showAd()}
+                    {include file="{$Lang}/donation_goal_widget.tpl"}
                 {/if} 
             </div>
         </main3>

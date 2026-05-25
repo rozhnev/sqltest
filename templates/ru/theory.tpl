@@ -1,5 +1,6 @@
 <div id="db-description" class="db-description">
     {if $User->showAd()}
+        {include file='ru/donation_goal_widget.tpl'}
         {if $Book}        
             <div class="referal-add-block">
                 <div class="book-card">

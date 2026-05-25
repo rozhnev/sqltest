@@ -47,7 +47,7 @@
                     </div>
                 </div>
                 {if $User->showAd()}
-                    {* {include file="{$Lang}/menu_bottom_add.tpl"} *}
+                    {include file='en/donation_goal_widget.tpl'}
                 {/if}
             </div>
             </div>
@@ -82,6 +82,7 @@
             </div>
             <div class="column db-description" id="right-panel">            
                 {if $User->showAd()}
+                    {include file="{$Lang}/donation_goal_widget.tpl"}
                 {/if} 
             </div>
         </main3>

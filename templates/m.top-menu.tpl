@@ -35,11 +35,6 @@
     <div class="mobile-menu-item">
         {include file='lang-switcher.tpl'}
     </div>
-    <div class="mobile-menu-item">
-        <a href="/{$Lang}/donate" target="_self" id="donate-btn">
-            <button class="button green"><span>{translate}mobile_menu_donate{/translate}</span></button>    
-        </a>
-    </div>
 </div>
 <div class="top-menu-buttons mobile">
     {if $User->logged()}

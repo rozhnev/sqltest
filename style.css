@@ -353,7 +353,8 @@ header .button {
     max-height: 2.4em;
     font-size: large;
 }
-header .button .currency {
+header .button .currency,
+.donation-goal-widget .button .currency {
     background-color: gold;
     border-radius: 50%;
     padding: 1px 6px;

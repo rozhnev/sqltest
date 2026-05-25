@@ -36,9 +36,6 @@
 <div class="top-menu-buttons" style="min-width: 16rem;">
     {include file='theme-switcher.tpl'}
     {include file='lang-switcher.tpl'}
-    <a href="/{$Lang}/donate" target="_self" id="donate-btn">
-        <button class="button green"><span>{translate}top_menu_donate{/translate}</span></button>    
-    </a>
     {if $User->logged()}
         <div style="position: relative;" onclick="toggleAchievements('{$Lang}');">
             {$GradeColors = [''=>null,'Intern'=>'#3F3F3F','Junior'=>'#00FF00','Middle'=>'#0000FF','Senior'=>'#FF0000']}
