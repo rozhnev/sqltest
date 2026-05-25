@@ -18,9 +18,7 @@
     </div>
     {if $User->showAd()&& !$MobileView}
         <div style="height: 5em;">
-            <div id="yandex_rtb_R-A-4716552-4">
-                {translate}menu_small_add_placeholder{/translate}
-            </div>
+            {translate}menu_small_add_placeholder{/translate}
         </div>
     {/if}
     <div class="question-wrapper">

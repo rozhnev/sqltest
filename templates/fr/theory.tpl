@@ -1,14 +1,6 @@
 <div id="db-description" class="db-description">
     {if $User->showAd()}
         <div class="referal-add-block">
-        {if $Lang == 'ru'}
-            {* <div class="referal-add-block">
-                <div id="yandex_rtb_R-A-4716552-7"></div>
-            </div> *}
-            <a href="https://redirect.appmetrica.yandex.com/serve/606193546294247668?clid=14743932&appmetrica_js_redirect=0" target="_blank" rel="nofollow">
-                <img src="/images/banner_240x400.jpg" alt="Яндекс — с Алисой АI">
-            </a>
-        {/if}
             {if $Book}
                 <div class="book-card">
                     <a href="{{$Book.referral_link}}" target="_blank" style="text-decoration: none; color: var(--question-color);">

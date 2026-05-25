@@ -1,13 +1,5 @@
 <div id="db-description" class="db-description">
     {if $User->showAd()}
-        {if $Lang == 'ru'}
-            <div class="referal-add-block">
-                <a href="https://redirect.appmetrica.yandex.com/serve/606193546294247668?clid=14743932&appmetrica_js_redirect=0" target="_blank" rel="nofollow">
-                    <img src="/images/banner_240x400.jpg" alt="Яндекс — с Алисой АI">
-                    <p style="font-size: x-small;">ERID: 5jtCeReNx12oajxTXb1tjxc</p>
-                </a>
-            </div>
-        {/if}
         {if $Book}        
             <div class="referal-add-block">
                 <div class="book-card">

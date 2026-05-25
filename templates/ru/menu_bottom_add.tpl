@@ -7,7 +7,6 @@
             }
         </style>
         <div class="menu-ad">
-            <div id="yandex_rtb_R-A-4716552-2">
                 <div style="
                 margin: 0.5em 0 0 0; 
                 background-color: var(--accordion-panel-bg-color);
@@ -42,5 +41,4 @@
                         </p>
                     </div>
                 </div>
-            </div>
         </div>

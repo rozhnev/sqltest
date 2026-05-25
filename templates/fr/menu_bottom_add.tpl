@@ -1,43 +1,4 @@
             <div class="menu-ad">
-                {* <div id="yandex_rtb_R-A-4716552-2">
-                    <div style="
-                    margin: 0.5em 0 0 0;
-                    background-color: var(--accordion-panel-bg-color);
-                    border: 1px solid var(--text-block-border-color);
-                    color: var(--question-text);
-                    border-radius: 0 6px 0 0;">
-                        <div style="
-                            background-color: var(--menu-button-background-color);
-                            border-radius: 0 6px 0 0;
-                            padding: 0.5em;
-                            color: white;">Aidez-nous à rendre SQLtest.online encore meilleur !</div>
-                        <div style="font-size:small; padding: 0.5em;">
-                            <p>Salutations, passionnés de SQL !</p>
-
-                            <p>Je vous écris aujourd'hui car j'ai besoin de votre aide.</p>
-
-                            SQLtest.online est une plateforme gratuite conçue pour aider les personnes de tous niveaux à maîtriser le SQL.<br>
-                            Nous proposons une large gamme de tests interactifs, de problèmes et de supports de formation pour vous aider à améliorer vos compétences SQL.<br>
-                            La plateforme a déjà aidé beaucoup de monde, mais nous voulons la rendre encore meilleure. Et c'est là que vous pouvez nous aider !
-
-                            <p>Comment vous pouvez nous aider :
-                                <ul>
-                                    <li>Invitez vos amis et collègues à rejoindre SQLtest.online !</li>
-                                    <li>Parlez de SQLtest.online autour de vous. Partagez un lien vers notre site sur les réseaux sociaux, par e-mail ou en personne.</li>
-                                    <li>Écrivez un article ou un billet de blog sur SQLtest.online. Partagez votre expérience sur la plateforme.</li>
-                                    <li>Ensemble, nous pouvons faire de SQLtest.online la meilleure ressource pour apprendre le SQL !</li>
-                                </ul>
-                            </p>
-                            <p>
-                                Plus il y aura de personnes utilisant la plateforme, meilleure elle deviendra. Nous pourrons ajouter plus de contenu, améliorer les fonctionnalités et créer une meilleure communauté pour les enthousiastes du SQL.
-                            </p>
-                            <p>
-                                Merci pour votre aide !<br>
-                                L'équipe de <a href='https://sqltest.online/fr'>SQLtest.online</a>
-                            </p>
-                        </div>
-                    </div>
-                </div> *}
                 {math equation="x % 2" x=$smarty.now assign="show_appeal"}
                 {if !$User->showAd() || $show_appeal}
                     <div style="

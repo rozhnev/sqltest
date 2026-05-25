@@ -52,7 +52,6 @@
                     {/if}
                 </div>
                 <div class="menu-ad">
-                    {* <div id="yandex_rtb_R-A-4716552-2"></div> *}
                 </div>
             </div>
         </div>

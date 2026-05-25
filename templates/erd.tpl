@@ -28,19 +28,6 @@
         <link rel="icon" type="image/png" href="/favicons/favicon-16x16.png" sizes="16x16">
         <link rel="stylesheet" type="text/css" href="/style.min.css?{$VERSION}" media="all">
         <link rel="stylesheet" type="text/css" href="/css/erd.css?{$VERSION}" media="all">
-        <!-- Yandex.RTB -->
-        <script>window.yaContextCb=window.yaContextCb||[]</script>
-        <script src="https://yandex.ru/ads/system/context.js" async></script>
-        <!-- Yandex.RTB R-A-4716552-6 -->
-        <script>
-            window.yaContextCb.push(() => {ldelim}
-                Ya.Context.AdvManager.render({ldelim}
-                    "blockId": "R-A-4716552-6",
-                    "type": "topAd",
-                    darkTheme: '{$Params.theme|default:'light'}' === 'dark'
-                {rdelim})
-            {rdelim})
-        </script>
         <script type="application/ld+json">
             {ldelim}
                 "@context": "https://schema.org",

@@ -52,10 +52,6 @@
             <script defer src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/theme-xcode.min.js"></script>
             <script defer src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/theme-github_dark.min.js"></script>
             <script defer src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/ext-language_tools.js"></script>
-            <!-- Yandex.RTB -->
-            <script>window.yaContextCb=window.yaContextCb||[]</script>
-            <script src="https://yandex.ru/ads/system/context.js" async></script>
-            <!-- Yandex.RTB -->
             <script type="text/javascript" src="/script.min.js?{$VERSION}" defer></script>
             <script>
                 var lang = '{$Lang|default:"en"}',

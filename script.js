@@ -81,29 +81,6 @@ function switchTheme(e) {
     document.documentElement.setAttribute('data-theme', currentTheme);
     window.UIConfig.theme = currentTheme;
     saveUIConfig();
-    if (document.getElementById('yandex_rtb_R-A-4716552-2')) {
-        Ya.Context.AdvManager.render({
-            "blockId": "R-A-4716552-2",
-            "renderTo": "yandex_rtb_R-A-4716552-2",
-            darkTheme: window.UIConfig.theme === 'dark'
-        });
-    }
-    if (document.getElementById('yandex_rtb_R-A-4716552-4')) {
-        Ya.Context.AdvManager.render({
-            "blockId": "R-A-4716552-4",
-            "renderTo": "yandex_rtb_R-A-4716552-4",
-            darkTheme: window.UIConfig.theme === 'dark'
-        });
-    }
-    if (document.getElementById('yandex_rtb_R-A-4716552-7')) {
-        window.yaContextCb.push(() => {
-            Ya.Context.AdvManager.render({
-                "blockId": "R-A-4716552-7",
-                "renderTo": "yandex_rtb_R-A-4716552-7",
-                "darkTheme": window.UIConfig.theme === 'dark'
-            })
-        })
-    }
 }
 
 function getAceTheme(theme) {
@@ -860,9 +837,6 @@ window.onload = function() {
         }
     });
 
-    if (!Ya || !Ya.Context) {
-        document.getElementById('userInfo').style.display = 'block';
-    }
     if (document.getElementById('yandexLogin') && window.YaAuthSuggest) {
         window.YaAuthSuggest.init(
         {

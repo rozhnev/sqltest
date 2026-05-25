@@ -22,9 +22,7 @@
                 <div class="menu" id="menu">
                 {if $User->showAd()}
                     <div style="height: 5em;">
-                        <div id="yandex_rtb_R-A-4716552-4">
-                            {translate}menu_small_add_placeholder{/translate}
-                        </div>
+                        {translate}menu_small_add_placeholder{/translate}
                     </div>
                 {/if}
                 <div class="question-wrapper">
@@ -84,17 +82,6 @@
             </div>
             <div class="column db-description" id="right-panel">            
                 {if $User->showAd()}
-                    {if $Lang == 'ru'}
-                        <div class="referal-add-block">
-                            <a href="https://redirect.appmetrica.yandex.com/serve/606193546294247668?clid=14743932&appmetrica_js_redirect=0" target="_blank" rel="nofollow">
-                                <img src="/images/banner_240x400.jpg" alt="Яндекс — с Алисой АI">
-                                <p style="font-size: x-small;">ERID: 5jtCeReNx12oajxTXb1tjxc</p>
-                            </a>
-                        </div>
-                    {/if}
-                    <div class="referal-add-block">
-                        <div id="yandex_rtb_R-A-4716552-7"></div>
-                    </div>
                 {/if} 
             </div>
         </main3>
