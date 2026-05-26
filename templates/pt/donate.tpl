@@ -36,6 +36,36 @@
                     </iframe>
                 </div>
             </div>
+
+            <h2 style="color: var(--ligth-h2-color); margin-top: 2rem;">Últimas doações</h2>
+            <div class="donation-method donations-history">
+                {if $LatestDonations|@count > 0}
+                    <table class="donations-history-table">
+                        <thead>
+                            <tr>
+                                <th>Usuário</th>
+                                <th>Data</th>
+                                <th class="align-right">Valor</th>
+                                <th class="align-right">USD</th>
+                                <th>Observação</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {foreach from=$LatestDonations item=donation}
+                                <tr>
+                                    <td>{$donation.donor_name|escape}</td>
+                                    <td>{$donation.donated_at|escape}</td>
+                                    <td class="align-right">{$donation.amount|escape} {$donation.currency|escape}</td>
+                                    <td class="align-right">$ {$donation.amount_usd|escape}</td>
+                                    <td>{$donation.notes|default:'-'|escape}</td>
+                                </tr>
+                            {/foreach}
+                        </tbody>
+                    </table>
+                {else}
+                    <p class="donations-history-empty">Ainda não há doações para exibir.</p>
+                {/if}
+            </div>
         </div>
     </div>
     <div class="section bottom colored">

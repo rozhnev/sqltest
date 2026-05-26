@@ -53,34 +53,34 @@
             </div>
 
             <h2 style="color: var(--ligth-h2-color); margin-top: 2rem;">Последние пожертвования</h2>
-            <div class="donation-method" style="max-width: 100%; min-width: 20rem; text-align: left;">
+            <div class="donation-method donations-history">
                 {if $LatestDonations|@count > 0}
-                    <table style="width: 100%; border-collapse: collapse;">
+                    <table class="donations-history-table">
                         <thead>
                             <tr>
-                                <th style="text-align: left; padding: 0.5rem; border-bottom: 1px solid #ccc;">Пользователь</th>
-                                <th style="text-align: left; padding: 0.5rem; border-bottom: 1px solid #ccc;">Дата</th>
-                                <th style="text-align: right; padding: 0.5rem; border-bottom: 1px solid #ccc;">Сумма</th>
-                                <th style="text-align: right; padding: 0.5rem; border-bottom: 1px solid #ccc;">USD</th>
-                                <th style="text-align: left; padding: 0.5rem; border-bottom: 1px solid #ccc;">Примечание</th>
+                                <th>Пользователь</th>
+                                <th>Дата</th>
+                                <th class="align-right">Сумма</th>
+                                <th class="align-right">USD</th>
+                                <th>Примечание</th>
                             </tr>
                         </thead>
                         <tbody>
                             {foreach from=$LatestDonations item=donation}
                                 <tr>
-                                    <td style="padding: 0.5rem; border-bottom: 1px solid #eee;">{$donation.donor_name|escape}</td>
-                                    <td style="padding: 0.5rem; border-bottom: 1px solid #eee;">{$donation.donated_at|escape}</td>
-                                    <td style="text-align: right; padding: 0.5rem; border-bottom: 1px solid #eee;">
+                                    <td>{$donation.donor_name|escape}</td>
+                                    <td>{$donation.donated_at|escape}</td>
+                                    <td class="align-right">
                                         {$donation.amount|escape} {$donation.currency|escape}
                                     </td>
-                                    <td style="text-align: right; padding: 0.5rem; border-bottom: 1px solid #eee;">$ {$donation.amount_usd|escape}</td>
-                                    <td style="padding: 0.5rem; border-bottom: 1px solid #eee;">{$donation.notes|default:'-'|escape}</td>
+                                    <td class="align-right">$ {$donation.amount_usd|escape}</td>
+                                    <td>{$donation.notes|default:'-'|escape}</td>
                                 </tr>
                             {/foreach}
                         </tbody>
                     </table>
                 {else}
-                    <p style="margin: 0;">Пока нет донатов для отображения.</p>
+                    <p class="donations-history-empty">Пока нет донатов для отображения.</p>
                 {/if}
             </div>
         </div>
