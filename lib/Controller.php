@@ -179,6 +179,30 @@ class Controller
      */
     public function donate(array $params): void
     {
+        $latestDonations = [];
+
+        try {
+            $stmt = $this->dbh->prepare(
+                "SELECT
+                    d.donated_at,
+                    d.amount,
+                    d.currency,
+                    d.amount_usd,
+                    d.notes,
+                    COALESCE(NULLIF(TRIM(u.nickname), ''), 'Anonymous') AS donor_name
+                 FROM donations d
+                 LEFT JOIN users u ON u.id = d.user_id
+                  ORDER BY d.donated_at DESC NULLS LAST, d.id DESC
+                 LIMIT 5"
+            );
+            $stmt->execute();
+            $latestDonations = $stmt->fetchAll(PDO::FETCH_ASSOC) ?: [];
+        } catch (Throwable $e) {
+            // Donations table may be unavailable in some environments.
+            $latestDonations = [];
+        }
+
+        $this->engine->assign('LatestDonations', $latestDonations);
         $this->engine->assign('Action', 'donate');
         $this->engine->display("donate.tpl");
     }
