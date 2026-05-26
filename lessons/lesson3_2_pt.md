@@ -10,7 +10,7 @@ _Aula 3.2 · Tempo de leitura: ~8 min_
 
 Nesta aula, você aprenderá funções de string em SQL que ajudam a limpar e transformar dados de texto diretamente nas consultas. Vamos ver quando usar `UPPER`, `LOWER`, `TRIM`, `SUBSTRING`, `CONCAT` e outras funções, além de analisar exemplos práticos. Ao final da aula, você conseguirá tratar campos de texto com confiança em situações reais.
 
-# Aula 3.2: Funções Essenciais de String no SQL
+# Funções Essenciais de String no SQL
 
 Na aula anterior, você conheceu as funções embutidas de SQL de forma geral. Agora, vamos focar nas funções de string, pois campos de texto frequentemente exigem processamento extra: normalização de caixa, remoção de caracteres indesejados, concatenação de valores e extração de trechos.
 

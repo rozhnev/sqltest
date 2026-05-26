@@ -10,7 +10,7 @@ _Leçon 3.2 · Temps de lecture : ~8 min_
 
 Dans cette leçon, vous allez apprendre les fonctions de chaîne SQL qui permettent de nettoyer et de transformer du texte directement dans les requêtes. Nous verrons quand utiliser `UPPER`, `LOWER`, `TRIM`, `SUBSTRING`, `CONCAT` et d'autres fonctions, puis nous passerons à des exemples pratiques. À la fin de la leçon, vous pourrez traiter des champs texte avec assurance dans des cas réels.
 
-# Leçon 3.2 : Fonctions de chaîne essentielles en SQL
+# Fonctions de chaîne essentielles en SQL
 
 Dans la leçon précédente, vous avez découvert les fonctions intégrées SQL dans leur ensemble. Nous allons maintenant nous concentrer sur les fonctions de chaîne, car les champs texte nécessitent souvent un traitement supplémentaire : normalisation de casse, suppression de caractères inutiles, concaténation de valeurs et extraction de fragments.
 

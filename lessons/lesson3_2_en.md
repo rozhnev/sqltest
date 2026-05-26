@@ -10,7 +10,7 @@ _Lesson 3.2 · Reading time: ~8 min_
 
 In this lesson, you will learn SQL string functions that help clean and transform text directly in queries. We will cover when to use `UPPER`, `LOWER`, `TRIM`, `SUBSTRING`, `CONCAT`, and other functions, and walk through practical examples. By the end of the lesson, you will be able to process text fields confidently in real tasks.
 
-# Lesson 3.2: Core String Functions in SQL
+# Core String Functions in SQL
 
 In the previous lesson, you were introduced to SQL built-in functions as a whole. Now we will focus on string functions because text fields often need extra processing: case normalization, removing unwanted characters, combining values, and extracting fragments.
 
