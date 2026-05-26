@@ -52,7 +52,7 @@
                 </div>
             </div>
 
-            <h2 style="color: var(--ligth-h2-color); margin-top: 2rem;">Последние 5 донатов</h2>
+            <h2 style="color: var(--ligth-h2-color); margin-top: 2rem;">Последние пожертвования</h2>
             <div class="donation-method" style="max-width: 100%; min-width: 20rem; text-align: left;">
                 {if $LatestDonations|@count > 0}
                     <table style="width: 100%; border-collapse: collapse;">
@@ -60,8 +60,8 @@
                             <tr>
                                 <th style="text-align: left; padding: 0.5rem; border-bottom: 1px solid #ccc;">Пользователь</th>
                                 <th style="text-align: left; padding: 0.5rem; border-bottom: 1px solid #ccc;">Дата</th>
-                                <th style="text-align: left; padding: 0.5rem; border-bottom: 1px solid #ccc;">Сумма</th>
-                                <th style="text-align: left; padding: 0.5rem; border-bottom: 1px solid #ccc;">USD</th>
+                                <th style="text-align: right; padding: 0.5rem; border-bottom: 1px solid #ccc;">Сумма</th>
+                                <th style="text-align: right; padding: 0.5rem; border-bottom: 1px solid #ccc;">USD</th>
                                 <th style="text-align: left; padding: 0.5rem; border-bottom: 1px solid #ccc;">Примечание</th>
                             </tr>
                         </thead>
@@ -70,10 +70,10 @@
                                 <tr>
                                     <td style="padding: 0.5rem; border-bottom: 1px solid #eee;">{$donation.donor_name|escape}</td>
                                     <td style="padding: 0.5rem; border-bottom: 1px solid #eee;">{$donation.donated_at|escape}</td>
-                                    <td style="padding: 0.5rem; border-bottom: 1px solid #eee;">
+                                    <td style="text-align: right; padding: 0.5rem; border-bottom: 1px solid #eee;">
                                         {$donation.amount|escape} {$donation.currency|escape}
                                     </td>
-                                    <td style="padding: 0.5rem; border-bottom: 1px solid #eee;">{$donation.amount_usd|escape}</td>
+                                    <td style="text-align: right; padding: 0.5rem; border-bottom: 1px solid #eee;">$ {$donation.amount_usd|escape}</td>
                                     <td style="padding: 0.5rem; border-bottom: 1px solid #eee;">{$donation.notes|default:'-'|escape}</td>
                                 </tr>
                             {/foreach}
