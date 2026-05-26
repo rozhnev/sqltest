@@ -276,7 +276,7 @@ $translations = [
     'avaliable_databases' => 'Доступные базы данных',
     'dont_show_this_page_again' => 'Не показывать эту страницу снова',
     'start_practicing' => 'Приступить к практике',
-    'welcome_page_title' => 'Добро пожаловать на SQLTest.online: Учитесь и практикуйтесь в SQL',
+    'welcome_page_title' => 'SQLTest.online — бесплатный тренажёр для изучения SQL',
     'welcome_page_description' => 'Начните свое путешествие в SQL с интерактивными заданиями и обратной связью в реальном времени на SQLTest.online. Повышайте свои навыки с помощью практических упражнений и станьте уверенным пользователем SQL.',
     'update_profile_full_name' => 'Обновите свой <a class="button small green" href="/ru/user/profile">профиль</a> указав полное имя, чтобы ваши достижения выглядели более персонально.',
     'view_achievement' => 'Посмотреть достижение',
