@@ -1,200 +1,190 @@
-# Aula 3.2: Funções Comuns de String no SQL
+---
+title: "Funções de String em SQL: UPPER, LOWER, TRIM, SUBSTRING e CONCAT"
+description: "Aprenda as principais funções de string em SQL com exemplos do Sakila: como limpar, combinar e extrair dados de texto em consultas práticas."
+keywords: ["funções de string SQL", "UPPER LOWER SQL", "TRIM SQL", "SUBSTRING SQL", "CONCAT SQL", "SQL Sakila"]
+teaches: ["Como aplicar funções principais de string em consultas SQL", "Como lidar com segurança com tamanho de strings e valores NULL", "Como limpar e formatar campos de texto em cenários práticos", "Como extrair partes de strings para análise"]
+about: ["SQL", "Funções de string", "Processamento de texto", "Banco de dados Sakila", "Banco de dados relacional"]
+---
 
-As funções de string no SQL são usadas para manipular e transformar dados de texto. Essas funções são essenciais para limpar, formatar e extrair informações de colunas de texto em um banco de dados. Esta aula aborda algumas das funções de string mais utilizadas e fornece exemplos práticos.
+_Aula 3.2 · Tempo de leitura: ~8 min_
 
-## Funções Comuns de String
+Nesta aula, você aprenderá funções de string em SQL que ajudam a limpar e transformar dados de texto diretamente nas consultas. Vamos ver quando usar `UPPER`, `LOWER`, `TRIM`, `SUBSTRING`, `CONCAT` e outras funções, além de analisar exemplos práticos. Ao final da aula, você conseguirá tratar campos de texto com confiança em situações reais.
 
-### `UPPER()` - Converte uma string para maiúsculas.
+# Aula 3.2: Funções Essenciais de String no SQL
 
-**Sintaxe:**
+Na aula anterior, você conheceu as funções embutidas de SQL de forma geral. Agora, vamos focar nas funções de string, pois campos de texto frequentemente exigem processamento extra: normalização de caixa, remoção de caracteres indesejados, concatenação de valores e extração de trechos.
+
+Essas operações aparecem o tempo todo em análise de dados, relatórios e preparação de dados. Quanto melhor você dominar funções de string, menos pós-processamento manual será necessário fora do SQL.
+
+---
+
+## O que são funções de string
+
+Funções de string trabalham com texto e retornam uma string, um número ou a posição de uma substring. Elas são úteis quando você precisa:
+
+- padronizar o formato do texto;
+- limpar valores com ruído;
+- extrair parte de uma string (por exemplo, o domínio de um e-mail);
+- montar uma saída textual mais legível para relatórios.
+
+---
+
+## Sintaxe básica
+
 ```sql
-UPPER(string)
+FUNCTION_NAME(string_expression, ...)
 ```
 
-**Exemplo:**
+Normalmente, o argumento é uma coluna da tabela, um literal de texto ou o resultado de outra função.
+
+---
+
+## Funções essenciais de string
+
+### `UPPER()` e `LOWER()`
+
+São usadas para normalizar a caixa do texto.
+
 ```sql
-SELECT UPPER(first_name) AS uppercase_name
-FROM employees;
-```
-**Resultado:** Converte todos os valores de `first_name` para maiúsculas.
-
-### `LOWER()` - Converte uma string para minúsculas.
-
-**Sintaxe:**
-```sql
-LOWER(string)
-```
-
-**Exemplo:**
-```sql
-SELECT LOWER(last_name) AS lowercase_name
-FROM employees;
-```
-**Resultado:** Converte todos os valores de `last_name` para minúsculas.
-
-### `LENGTH()`, `CHAR_LENGTH()` ou `LEN()` - Retorna o comprimento de uma string (em caracteres ou bytes, dependendo do SGBD).
-
-**Sintaxe:**
-```sql
-CHAR_LENGTH(string) -- Número de caracteres (por exemplo, no MySQL)
-LENGTH(string)      -- No MySQL: comprimento em bytes
-LEN(string)         -- No SQL Server: comprimento em caracteres
+SELECT
+   customer_id,
+   UPPER(last_name) AS last_name_upper,
+   LOWER(first_name) AS first_name_lower
+FROM customer
+LIMIT 5;
 ```
 
-Importante: em diferentes SGBDs, “comprimento da string” pode significar coisas diferentes. Algumas funções retornam o comprimento em caracteres, enquanto outras retornam em bytes. Sempre verifique em qual unidade uma função trabalha no seu SGBD.
+*Resultado: o sobrenome é exibido em maiúsculas e o nome em minúsculas.*
 
-**Quando `LENGTH()` e `CHAR_LENGTH()` podem ser diferentes (por exemplo, no MySQL):**
-- Para strings com apenas letras latinas e dígitos, os valores costumam coincidir.
-- Para strings com caracteres multibyte (cirílico, emoji, ideogramas), `LENGTH()` geralmente é maior que `CHAR_LENGTH()`, porque conta bytes.
+### `CHAR_LENGTH()` e `LENGTH()`
 
-**Exemplo curto:**
-- `'SQL'`: `LENGTH` = 3, `CHAR_LENGTH` = 3
-- `'Привет'`: `LENGTH` = 12, `CHAR_LENGTH` = 6
+As duas funções medem o tamanho da string, mas nem sempre da mesma forma:
 
-**Exemplo:**
+- `CHAR_LENGTH()` normalmente retorna quantidade de caracteres;
+- `LENGTH()` no MySQL retorna quantidade de bytes.
+
 ```sql
-SELECT CHAR_LENGTH(product_name) AS name_length
-FROM products;
-```
-**Resultado:** Retorna o número de caracteres em cada `product_name`.
-
-### `SUBSTRING()` ou `SUBSTR()` - Extrai uma parte de uma string.
-
-**Sintaxe:**
-```sql
-SUBSTRING(string, start_position, length) -- Para a maioria dos bancos de dados
-SUBSTR(string, start_position, length)    -- Para Oracle e outros
+SELECT
+   title,
+   CHAR_LENGTH(title) AS title_chars,
+   LENGTH(title) AS title_bytes
+FROM film
+LIMIT 5;
 ```
 
-**Exemplo:**
+*Observação: para caracteres multibyte, a contagem em bytes pode ser maior que a contagem em caracteres.*
+
+### `SUBSTRING()`, `LEFT()`, `RIGHT()`
+
+Essas funções extraem parte de uma string.
+
 ```sql
-SELECT SUBSTRING(email, 1, 5) AS email_prefix
-FROM users;
-```
-**Resultado:** Extrai os primeiros 5 caracteres da coluna `email`.
-
-### `CONCAT()` - Concatena duas ou mais strings em uma única.
-
-**Sintaxe:**
-```sql
-CONCAT(string1, string2, ...)
-```
-
-**Exemplo:**
-```sql
-SELECT CONCAT(first_name, ' ', last_name) AS full_name
-FROM employees;
-```
-**Resultado:** Combina `first_name` e `last_name` em um único `full_name`.
-
-**Importante:** o comportamento de `CONCAT()` com `NULL` depende do SGBD. Por exemplo, no MySQL e no MariaDB, se pelo menos um argumento for `NULL`, o resultado de `CONCAT()` também será `NULL`.
-
-### `CONCAT_WS()` - Concatena strings, inserindo um separador entre elas e ignorando valores `NULL`.
-
-**Sintaxe:**
-```sql
-CONCAT_WS(separator, string1, string2, ...)
+SELECT
+   email,
+   SUBSTRING(email, 1, 5) AS email_start,
+   LEFT(email, 3) AS first_3,
+   RIGHT(email, 10) AS last_10
+FROM customer
+LIMIT 5;
 ```
 
-**Exemplo:**
+*Resultado: diferentes trechos do e-mail são extraídos para análise e validação de formato.*
+
+### `CONCAT()` e `CONCAT_WS()`
+
+Essas funções combinam vários valores em uma única string:
+
+- `CONCAT()` concatena os argumentos diretamente;
+- `CONCAT_WS(separator, ...)` adiciona separador e costuma ser mais prática em relatórios.
+
 ```sql
-SELECT CONCAT_WS(' ', first_name, last_name) AS full_name
-FROM employees;
-```
-**Resultado:** Combina `first_name` e `last_name` com um espaço, ignorando valores `NULL` nos argumentos.
-
-Se você precisar de uma concatenação NULL-safe sem separador, pode usar `CONCAT_WS('', string1, string2, ...)`.
-
-### `TRIM()` - Remove caracteres no início e no final de uma string, geralmente espaços.
-
-**Sintaxe:**
-```sql
-TRIM(string)
-TRIM([characters FROM] string)
-```
-
-**Exemplo:**
-```sql
-SELECT TRIM('   SQL Basics   ') AS trimmed_string;
-```
-**Resultado:** Retorna `'SQL Basics'` sem os espaços em branco no início ou no final.
-
-No caso mais simples, `TRIM()` remove espaços nas extremidades da string. Em alguns SGBDs, a função também permite informar explicitamente quais caracteres devem ser removidos.
-
-### `REPLACE()` - Substitui ocorrências de uma substring dentro de uma string.
-
-**Sintaxe:**
-```sql
-REPLACE(string, old_substring, new_substring)
+SELECT
+   customer_id,
+   CONCAT(first_name, ' ', last_name) AS full_name,
+   CONCAT_WS(' | ', first_name, last_name, email) AS customer_label
+FROM customer
+LIMIT 5;
 ```
 
-**Exemplo:**
+*Observação: o comportamento com `NULL` depende do SGBD, então verifique a documentação do seu sistema.*
+
+### `TRIM()` e `REPLACE()`
+
+São úteis para limpeza de dados textuais.
+
 ```sql
-SELECT REPLACE(phone_number, '-', '') AS cleaned_phone
-FROM contacts;
-```
-**Resultado:** Remove os traços de `phone_number`.
-
-### `INSTR()` ou `CHARINDEX()` - Encontra a posição de uma substring dentro de uma string.
-
-**Sintaxe:**
-```sql
-INSTR(string, substring)       -- Para a maioria dos bancos de dados
-CHARINDEX(substring, string)   -- Para SQL Server
-```
-
-**Exemplo:**
-```sql
-SELECT INSTR(email, '@') AS at_position
-FROM users;
-```
-**Resultado:** Retorna a posição do símbolo `@` na coluna `email`.
-
-### `LEFT()` e `RIGHT()` - Extrai um número especificado de caracteres do início ou do final de uma string.
-
-**Sintaxe:**
-```sql
-LEFT(string, number_of_characters)
-RIGHT(string, number_of_characters)
+SELECT
+   address,
+   TRIM(address) AS address_trimmed,
+   REPLACE(address, 'Street', 'St.') AS address_short
+FROM address
+LIMIT 5;
 ```
 
-**Exemplo:**
-```sql
-SELECT LEFT(product_code, 3) AS product_prefix,
-       RIGHT(product_code, 4) AS product_suffix
-FROM products;
-```
-**Resultado:** Extrai os primeiros 3 caracteres e os últimos 4 caracteres de `product_code`.
+*Resultado: espaços extras são removidos e padrões de texto repetitivos são substituídos.*
 
-### `FORMAT()` ou `TO_CHAR()` - Formata uma string ou número em um formato específico.
+### Busca de substring: `POSITION()` / `INSTR()` / `CHARINDEX()`
 
-**Sintaxe:**
+O nome da função muda conforme o SGBD, mas a ideia é a mesma: encontrar a posição de uma substring dentro da string.
+
 ```sql
-FORMAT(value, format)       -- Para SQL Server
-TO_CHAR(value, format)      -- Para Oracle
+SELECT
+   email,
+   INSTR(email, '@') AS at_pos
+FROM customer
+LIMIT 5;
 ```
 
-**Exemplo:**
+*Resultado: retorna a posição de `@`, útil para validação de e-mail.*
+
+---
+
+## Pontos de atenção
+
+- Verifique diferenças entre SGBDs: nomes e comportamentos das funções podem variar.
+- Considere `NULL`: ele frequentemente altera o resultado de expressões de string.
+- Para texto com cirílico e emoji, escolha conscientemente a função de tamanho (caracteres vs bytes).
+- Evite empilhar funções demais em uma única consulta; prefira quebrar a lógica em etapas.
+
+---
+
+## Exemplo prático: preparação de dados de clientes para envio de e-mail
+
+A consulta abaixo prepara uma lista de clientes limpa: normaliza nome, normaliza e-mail e extrai domínio.
+
 ```sql
-SELECT FORMAT(salary, 'C') AS formatted_salary
-FROM employees;
+SELECT
+   c.customer_id,
+   TRIM(CONCAT_WS(' ', c.first_name, c.last_name)) AS full_name,
+   LOWER(TRIM(c.email)) AS email_normalized,
+   SUBSTRING_INDEX(LOWER(TRIM(c.email)), '@', -1) AS email_domain
+FROM customer AS c
+WHERE c.email IS NOT NULL
+ORDER BY c.customer_id
+LIMIT 20;
 ```
-**Resultado:** Formata a coluna `salary` como moeda.
 
-## Casos Práticos de Uso
+*Resultado: você obtém um conjunto limpo e consistente de campos textuais, pronto para análise ou exportação.*
 
-1. **Limpeza de Dados:**
-   Use `TRIM()` e `REPLACE()` para limpar dados desorganizados, como remover espaços extras ou caracteres indesejados.
+---
 
-2. **Formatação de Saída:**
-   Use `UPPER()`, `LOWER()`, `CONCAT()` e `CONCAT_WS()` para padronizar e formatar texto para relatórios.
+**Principais conclusões desta aula:**
 
-3. **Extração de Informações:**
-   Use `SUBSTRING()`, `LEFT()` e `RIGHT()` para extrair partes específicas de uma string, como prefixos ou nomes de domínio.
+- Funções de string em SQL ajudam a limpar, normalizar e formatar texto diretamente nas consultas.
+- `UPPER`, `LOWER`, `TRIM`, `REPLACE`, `SUBSTRING`, `LEFT`, `RIGHT` e `CONCAT` cobrem a maioria dos casos comuns.
+- Para tamanho de string, é importante diferenciar caracteres de bytes.
+- Ao combinar strings, considere o comportamento de `NULL` no seu SGBD.
+- O valor prático das funções de string aparece claramente em cenários reais de preparação de dados.
 
-4. **Validação de Dados:**
-   Use funções que contam caracteres (por exemplo, `CHAR_LENGTH()` ou `LEN()`) e `INSTR()` para validar a estrutura de strings, como verificar o comprimento de números de telefone ou a presença de um símbolo `@` em endereços de e-mail.
+## Perguntas de entrevista
 
-**Principais Conclusões desta Aula:**
+### Qual é a diferença entre `CHAR_LENGTH()` e `LENGTH()`, e por que isso importa?
+`CHAR_LENGTH()` normalmente retorna o número de **caracteres**, enquanto `LENGTH()` no MySQL retorna o número de **bytes**. Para cirílico e outros caracteres multibyte, os resultados podem ser diferentes. Isso é importante para validação de tamanho de campos e aplicação de regras de negócio.
 
-As funções de string são ferramentas essenciais para trabalhar com dados de texto no SQL. Ao dominar essas funções, você pode limpar, formatar e extrair informações valiosas de seus dados. Pratique o uso dessas funções em cenários do mundo real para aprimorar suas habilidades em SQL.
+### Como montar um nome completo com segurança se um dos campos pode ser `NULL`?
+`CONCAT_WS()` costuma ser preferida, pois é prática para concatenar strings com separador. Também é comum tratar valores vazios explicitamente com **`COALESCE()`** para obter saída previsível em diferentes cenários.
+
+### Quais funções de string você usaria para limpar e-mail antes de análise?
+Uma abordagem comum é usar **`TRIM()`** + **`LOWER()`** para remover espaços extras e normalizar caixa. Para validar a estrutura, você também pode verificar a posição de `@` com `INSTR()` ou equivalente no seu SGBD.
+
+Na próxima aula, vamos passar para funções matemáticas em SQL e ver como fazer cálculos numéricos em consultas.

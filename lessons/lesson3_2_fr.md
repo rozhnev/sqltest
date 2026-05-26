@@ -1,200 +1,190 @@
-# Leçon 3.2 : Fonctions de chaîne courantes en SQL
+---
+title: "Fonctions de chaîne SQL : UPPER, LOWER, TRIM, SUBSTRING et CONCAT"
+description: "Apprenez les principales fonctions de chaîne SQL avec des exemples Sakila : nettoyer, combiner et extraire des données textuelles dans des requêtes pratiques."
+keywords: ["fonctions de chaîne SQL", "UPPER LOWER SQL", "TRIM SQL", "SUBSTRING SQL", "CONCAT SQL", "SQL Sakila"]
+teaches: ["Comment utiliser les fonctions de chaîne principales dans des requêtes SQL", "Comment gérer correctement la longueur des chaînes et les valeurs NULL", "Comment nettoyer et formater des champs texte dans des cas pratiques", "Comment extraire des parties de chaîne pour l'analyse"]
+about: ["SQL", "Fonctions de chaîne", "Traitement de texte", "Base de données Sakila", "Base de données relationnelle"]
+---
 
-Les fonctions de chaîne en SQL sont utilisées pour manipuler et transformer des données textuelles. Elles sont essentielles pour nettoyer, formater et extraire des informations à partir de colonnes de texte dans une base de données. Cette leçon présente certaines des fonctions de chaîne les plus courantes et propose des exemples pratiques.
+_Leçon 3.2 · Temps de lecture : ~8 min_
 
-## Fonctions de chaîne courantes
+Dans cette leçon, vous allez apprendre les fonctions de chaîne SQL qui permettent de nettoyer et de transformer du texte directement dans les requêtes. Nous verrons quand utiliser `UPPER`, `LOWER`, `TRIM`, `SUBSTRING`, `CONCAT` et d'autres fonctions, puis nous passerons à des exemples pratiques. À la fin de la leçon, vous pourrez traiter des champs texte avec assurance dans des cas réels.
 
-### `UPPER()` - Convertit une chaîne en majuscules.
+# Leçon 3.2 : Fonctions de chaîne essentielles en SQL
 
-**Syntaxe :**
+Dans la leçon précédente, vous avez découvert les fonctions intégrées SQL dans leur ensemble. Nous allons maintenant nous concentrer sur les fonctions de chaîne, car les champs texte nécessitent souvent un traitement supplémentaire : normalisation de casse, suppression de caractères inutiles, concaténation de valeurs et extraction de fragments.
+
+Ces opérations sont fréquentes en analytique, en reporting et en préparation de données. Plus vous maîtrisez les fonctions de chaîne, moins vous aurez de traitement manuel à faire hors SQL.
+
+---
+
+## Que sont les fonctions de chaîne
+
+Les fonctions de chaîne travaillent sur du texte et renvoient une chaîne, un nombre ou la position d'une sous-chaîne. Elles sont utiles lorsque vous devez :
+
+- uniformiser le format du texte ;
+- nettoyer des valeurs bruitées ;
+- extraire une partie d'une chaîne (par exemple un domaine d'e-mail) ;
+- produire un rendu texte lisible pour des rapports.
+
+---
+
+## Syntaxe de base
+
 ```sql
-UPPER(string)
+FUNCTION_NAME(string_expression, ...)
 ```
 
-**Exemple :**
+Le plus souvent, l'argument est une colonne de table, un littéral texte ou le résultat d'une autre fonction.
+
+---
+
+## Fonctions de chaîne essentielles
+
+### `UPPER()` et `LOWER()`
+
+Utilisées pour normaliser la casse du texte.
+
 ```sql
-SELECT UPPER(first_name) AS uppercase_name
-FROM employees;
-```
-**Résultat :** Convertit toutes les valeurs de `first_name` en majuscules.
-
-### `LOWER()` - Convertit une chaîne en minuscules.
-
-**Syntaxe :**
-```sql
-LOWER(string)
-```
-
-**Exemple :**
-```sql
-SELECT LOWER(last_name) AS lowercase_name
-FROM employees;
-```
-**Résultat :** Convertit toutes les valeurs de `last_name` en minuscules.
-
-### `LENGTH()`, `CHAR_LENGTH()` ou `LEN()` - Renvoie la longueur d'une chaîne (en caractères ou en octets, selon le SGBD).
-
-**Syntaxe :**
-```sql
-CHAR_LENGTH(string) -- Nombre de caractères (par exemple, dans MySQL)
-LENGTH(string)      -- Dans MySQL : longueur en octets
-LEN(string)         -- Dans SQL Server : longueur en caractères
+SELECT
+   customer_id,
+   UPPER(last_name) AS last_name_upper,
+   LOWER(first_name) AS first_name_lower
+FROM customer
+LIMIT 5;
 ```
 
-Important : selon le SGBD, la « longueur d'une chaîne » peut désigner des choses différentes. Certaines fonctions renvoient une longueur en caractères, d'autres en octets. Vérifiez donc toujours l'unité utilisée par la fonction dans votre SGBD.
+*Résultat : le nom de famille est affiché en majuscules et le prénom en minuscules.*
 
-**Quand `LENGTH()` et `CHAR_LENGTH()` peuvent différer (par exemple, dans MySQL) :**
-- Pour des chaînes composées uniquement de lettres latines et de chiffres, les valeurs coïncident souvent.
-- Pour des chaînes contenant des caractères multioctets (cyrillique, emoji, idéogrammes), `LENGTH()` est généralement supérieur à `CHAR_LENGTH()`, car il compte les octets.
+### `CHAR_LENGTH()` et `LENGTH()`
 
-**Exemple rapide :**
-- `'SQL'` : `LENGTH` = 3, `CHAR_LENGTH` = 3
-- `'Привет'` : `LENGTH` = 12, `CHAR_LENGTH` = 6
+Ces deux fonctions mesurent la longueur d'une chaîne, mais pas toujours de la même manière :
 
-**Exemple :**
+- `CHAR_LENGTH()` renvoie généralement le nombre de caractères ;
+- `LENGTH()` dans MySQL renvoie le nombre d'octets.
+
 ```sql
-SELECT CHAR_LENGTH(product_name) AS name_length
-FROM products;
-```
-**Résultat :** Renvoie le nombre de caractères dans chaque valeur de `product_name`.
-
-### `SUBSTRING()` ou `SUBSTR()` - Extrait une partie d'une chaîne.
-
-**Syntaxe :**
-```sql
-SUBSTRING(string, start_position, length) -- Pour la plupart des bases de données
-SUBSTR(string, start_position, length)    -- Pour Oracle et d'autres
+SELECT
+   title,
+   CHAR_LENGTH(title) AS title_chars,
+   LENGTH(title) AS title_bytes
+FROM film
+LIMIT 5;
 ```
 
-**Exemple :**
+*Remarque : pour les caractères multioctets, le nombre d'octets peut être supérieur au nombre de caractères.*
+
+### `SUBSTRING()`, `LEFT()`, `RIGHT()`
+
+Ces fonctions extraient une partie d'une chaîne.
+
 ```sql
-SELECT SUBSTRING(email, 1, 5) AS email_prefix
-FROM users;
-```
-**Résultat :** Extrait les 5 premiers caractères de la colonne `email`.
-
-### `CONCAT()` - Concatène deux chaînes ou plus en une seule.
-
-**Syntaxe :**
-```sql
-CONCAT(string1, string2, ...)
-```
-
-**Exemple :**
-```sql
-SELECT CONCAT(first_name, ' ', last_name) AS full_name
-FROM employees;
-```
-**Résultat :** Combine `first_name` et `last_name` en une seule valeur `full_name`.
-
-**Important :** le comportement de `CONCAT()` face à `NULL` dépend du SGBD. Par exemple, dans MySQL et MariaDB, si au moins un argument vaut `NULL`, le résultat de `CONCAT()` est également `NULL`.
-
-### `CONCAT_WS()` - Concatène des chaînes en insérant un séparateur entre elles et en ignorant les valeurs `NULL`.
-
-**Syntaxe :**
-```sql
-CONCAT_WS(separator, string1, string2, ...)
+SELECT
+   email,
+   SUBSTRING(email, 1, 5) AS email_start,
+   LEFT(email, 3) AS first_3,
+   RIGHT(email, 10) AS last_10
+FROM customer
+LIMIT 5;
 ```
 
-**Exemple :**
+*Résultat : différents fragments d'e-mail sont extraits pour l'analyse et la vérification du format.*
+
+### `CONCAT()` et `CONCAT_WS()`
+
+Ces fonctions combinent plusieurs valeurs dans une seule chaîne :
+
+- `CONCAT()` concatène les arguments directement ;
+- `CONCAT_WS(separator, ...)` ajoute un séparateur et est souvent plus pratique dans les rapports.
+
 ```sql
-SELECT CONCAT_WS(' ', first_name, last_name) AS full_name
-FROM employees;
-```
-**Résultat :** Combine `first_name` et `last_name` avec un espace, en ignorant les valeurs `NULL` dans les arguments.
-
-Si vous avez besoin d'une concaténation NULL-safe sans séparateur, vous pouvez utiliser `CONCAT_WS('', string1, string2, ...)`.
-
-### `TRIM()` - Supprime les caractères au début et à la fin d'une chaîne, le plus souvent des espaces.
-
-**Syntaxe :**
-```sql
-TRIM(string)
-TRIM([characters FROM] string)
-```
-
-**Exemple :**
-```sql
-SELECT TRIM('   SQL Basics   ') AS trimmed_string;
-```
-**Résultat :** Renvoie `'SQL Basics'` sans espaces au début ni à la fin.
-
-Dans le cas le plus simple, `TRIM()` supprime les espaces aux deux extrémités de la chaîne. Dans certains SGBD, la fonction permet aussi d'indiquer explicitement quels caractères doivent être supprimés.
-
-### `REPLACE()` - Remplace les occurrences d'une sous-chaîne dans une chaîne.
-
-**Syntaxe :**
-```sql
-REPLACE(string, old_substring, new_substring)
+SELECT
+   customer_id,
+   CONCAT(first_name, ' ', last_name) AS full_name,
+   CONCAT_WS(' | ', first_name, last_name, email) AS customer_label
+FROM customer
+LIMIT 5;
 ```
 
-**Exemple :**
+*Remarque : le comportement avec `NULL` dépend du SGBD, consultez donc la documentation de votre système.*
+
+### `TRIM()` et `REPLACE()`
+
+Utile pour nettoyer des valeurs textuelles.
+
 ```sql
-SELECT REPLACE(phone_number, '-', '') AS cleaned_phone
-FROM contacts;
-```
-**Résultat :** Supprime les tirets des valeurs `phone_number`.
-
-### `INSTR()` ou `CHARINDEX()` - Trouve la position d'une sous-chaîne dans une chaîne.
-
-**Syntaxe :**
-```sql
-INSTR(string, substring)       -- Pour la plupart des bases de données
-CHARINDEX(substring, string)   -- Pour SQL Server
-```
-
-**Exemple :**
-```sql
-SELECT INSTR(email, '@') AS at_position
-FROM users;
-```
-**Résultat :** Renvoie la position du symbole `@` dans la colonne `email`.
-
-### `LEFT()` et `RIGHT()` - Extraient un nombre spécifié de caractères depuis le début ou la fin d'une chaîne.
-
-**Syntaxe :**
-```sql
-LEFT(string, number_of_characters)
-RIGHT(string, number_of_characters)
+SELECT
+   address,
+   TRIM(address) AS address_trimmed,
+   REPLACE(address, 'Street', 'St.') AS address_short
+FROM address
+LIMIT 5;
 ```
 
-**Exemple :**
-```sql
-SELECT LEFT(product_code, 3) AS product_prefix,
-       RIGHT(product_code, 4) AS product_suffix
-FROM products;
-```
-**Résultat :** Extrait les 3 premiers caractères et les 4 derniers caractères de `product_code`.
+*Résultat : les espaces superflus sont supprimés et des motifs textuels répétitifs sont remplacés.*
 
-### `FORMAT()` ou `TO_CHAR()` - Formate une chaîne ou un nombre dans un format spécifique.
+### Recherche de sous-chaîne : `POSITION()` / `INSTR()` / `CHARINDEX()`
 
-**Syntaxe :**
+Le nom de la fonction varie selon le SGBD, mais l'idée est la même : trouver la position d'une sous-chaîne dans une chaîne.
+
 ```sql
-FORMAT(value, format)       -- Pour SQL Server
-TO_CHAR(value, format)      -- Pour Oracle
+SELECT
+   email,
+   INSTR(email, '@') AS at_pos
+FROM customer
+LIMIT 5;
 ```
 
-**Exemple :**
+*Résultat : renvoie la position de `@`, utile pour valider un e-mail.*
+
+---
+
+## Points d'attention
+
+- Vérifiez les différences entre SGBD : les noms de fonctions et leurs comportements peuvent varier.
+- Attention à `NULL` : il modifie souvent le résultat des expressions de chaîne.
+- Pour le cyrillique et les emoji, choisissez la fonction de longueur en connaissance de cause (caractères vs octets).
+- Évitez d'imbriquer trop de fonctions dans une seule requête ; découpez la logique en étapes si nécessaire.
+
+---
+
+## Exemple pratique : préparer des données clients pour un envoi d'e-mails
+
+La requête suivante prépare une liste client propre : elle normalise le nom, normalise l'e-mail et extrait le domaine.
+
 ```sql
-SELECT FORMAT(salary, 'C') AS formatted_salary
-FROM employees;
+SELECT
+   c.customer_id,
+   TRIM(CONCAT_WS(' ', c.first_name, c.last_name)) AS full_name,
+   LOWER(TRIM(c.email)) AS email_normalized,
+   SUBSTRING_INDEX(LOWER(TRIM(c.email)), '@', -1) AS email_domain
+FROM customer AS c
+WHERE c.email IS NOT NULL
+ORDER BY c.customer_id
+LIMIT 20;
 ```
-**Résultat :** Formate la colonne `salary` comme une devise.
 
-## Cas d'utilisation pratiques
+*Résultat : vous obtenez un ensemble de champs texte propre et homogène, prêt pour l'analyse ou l'export.*
 
-1. **Nettoyage des données :**
-   Utilisez `TRIM()` et `REPLACE()` pour nettoyer des données désordonnées, par exemple pour supprimer des espaces superflus ou des caractères indésirables.
-
-2. **Mise en forme du résultat :**
-   Utilisez `UPPER()`, `LOWER()`, `CONCAT()` et `CONCAT_WS()` pour standardiser et formater du texte dans des rapports.
-
-3. **Extraction d'informations :**
-   Utilisez `SUBSTRING()`, `LEFT()` et `RIGHT()` pour extraire des parties précises d'une chaîne, comme des préfixes ou des noms de domaine.
-
-4. **Validation des données :**
-   Utilisez des fonctions qui comptent les caractères (par exemple `CHAR_LENGTH()` ou `LEN()`) ainsi que `INSTR()` pour valider la structure des chaînes, par exemple la longueur des numéros de téléphone ou la présence du symbole `@` dans les adresses e-mail.
+---
 
 **Points clés de cette leçon :**
 
-Les fonctions de chaîne sont des outils essentiels pour travailler avec des données textuelles en SQL. En les maîtrisant, vous pourrez nettoyer, formater et extraire des informations utiles à partir de vos données. Entraînez-vous à les utiliser dans des scénarios réels afin d'améliorer vos compétences en SQL.
+- Les fonctions de chaîne SQL permettent de nettoyer, normaliser et formater du texte directement dans les requêtes.
+- `UPPER`, `LOWER`, `TRIM`, `REPLACE`, `SUBSTRING`, `LEFT`, `RIGHT` et `CONCAT` couvrent la plupart des besoins courants.
+- Pour la longueur des chaînes, il faut distinguer caractères et octets.
+- Lors de la concaténation, tenez compte du comportement de `NULL` dans votre SGBD.
+- La valeur pratique des fonctions de chaîne apparaît surtout dans les scénarios réels de préparation de données.
+
+## Questions d'entretien
+
+### Quelle est la différence entre `CHAR_LENGTH()` et `LENGTH()`, et pourquoi est-ce important ?
+`CHAR_LENGTH()` renvoie généralement le nombre de **caractères**, tandis que `LENGTH()` dans MySQL renvoie le nombre d'**octets**. Pour le cyrillique et d'autres caractères multioctets, les résultats peuvent différer. C'est essentiel pour valider la longueur des champs et appliquer des règles métier.
+
+### Comment composer un nom complet de façon sûre si un champ peut être `NULL` ?
+`CONCAT_WS()` est souvent privilégiée, car elle est pratique pour concaténer avec un séparateur. Il est aussi utile de gérer explicitement les valeurs vides avec **`COALESCE()`** afin d'obtenir un résultat prévisible selon les scénarios.
+
+### Quelles fonctions de chaîne utiliser pour nettoyer les e-mails avant analyse ?
+Une approche courante est **`TRIM()`** + **`LOWER()`** pour supprimer les espaces superflus et normaliser la casse. Pour valider la structure, vous pouvez aussi vérifier la présence de `@` avec `INSTR()` ou son équivalent dans votre SGBD.
+
+Dans la prochaine leçon, nous passerons aux fonctions mathématiques SQL et verrons comment effectuer des calculs numériques dans les requêtes.
