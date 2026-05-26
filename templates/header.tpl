@@ -43,7 +43,9 @@
             <link rel="canonical" href="{$CanonicalLink}">
         {/if}
             <link rel="stylesheet" type="text/css" href="/style.min.css?{$VERSION}" media="all">
-            <link rel="stylesheet" type="text/css" href="/css/cead.css?{$VERSION}" media="all">
+            <link rel="preload" href="/css/cead.css?{$VERSION}" as="style">
+            <link rel="stylesheet" href="/css/cead.css?{$VERSION}" media="print" onload="this.media='all'">
+            <noscript><link rel="stylesheet" href="/css/cead.css?{$VERSION}"></noscript>
             <link rel="preconnect" href="https://cdnjs.cloudflare.com">
             {if isset($UseAce) && $UseAce}
                 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/ace.min.js"></script>
