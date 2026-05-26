@@ -46,9 +46,6 @@
                         {/foreach}
                     </div>
                 </div>
-                {if $User->showAd()}
-                    {include file='en/donation_goal_widget.tpl'}
-                {/if}
             </div>
             </div>
             <div class="column">
