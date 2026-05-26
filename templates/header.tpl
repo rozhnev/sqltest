@@ -45,13 +45,15 @@
             <link rel="stylesheet" type="text/css" href="/style.min.css?{$VERSION}" media="all">
             <link rel="stylesheet" type="text/css" href="/css/cead.css?{$VERSION}" media="all">
             <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-            <script defer src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/ace.min.js"></script>
-            <script defer src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/ext-beautify.js"></script>
-            <script defer src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/mode-sql.min.js"></script>
-            <script defer src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/mode-mysql.min.js"></script>
-            <script defer src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/theme-xcode.min.js"></script>
-            <script defer src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/theme-github_dark.min.js"></script>
-            <script defer src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/ext-language_tools.js"></script>
+            {if isset($UseAce) && $UseAce}
+                <script defer src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/ace.min.js"></script>
+                <script defer src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/ext-beautify.js"></script>
+                <script defer src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/mode-sql.min.js"></script>
+                <script defer src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/mode-mysql.min.js"></script>
+                <script defer src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/theme-xcode.min.js"></script>
+                <script defer src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/theme-github_dark.min.js"></script>
+                <script defer src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/ext-language_tools.js"></script>
+            {/if}
             <script type="text/javascript" src="/script.min.js?{$VERSION}" defer></script>
             <script>
                 var lang = '{$Lang|default:"en"}',
