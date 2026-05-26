@@ -219,7 +219,7 @@ class User
     {
         // Exchange the authorization code for an access token
         $ch = curl_init('https://www.googleapis.com/oauth2/v4/token');
-        $baseURL = 'https://' . $_SERVER['SERVER_NAME'] . $_SERVER['PHP_SELF'];
+        $baseURL = 'https://' . $_SERVER['SERVER_NAME'] .'/login/google/';
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([
             'grant_type'    => 'authorization_code',
