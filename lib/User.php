@@ -1146,7 +1146,7 @@ class User
                 g.title_en grade
             FROM tests
             JOIN test_questions tq ON tests.id = tq.test_id
-            LEFT JOIN grades g ON tests.rate = g.id
+            LEFT JOIN grades g ON tests.grade = g.id
             WHERE tests.user_id = :user_id
             GROUP BY tests.id, created_at, closed_at, g.title_en
             ORDER BY created_at
