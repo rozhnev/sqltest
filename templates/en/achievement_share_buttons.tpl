@@ -5,6 +5,12 @@
             <span>{translate}share_to_linkedin{/translate}</span>
         </span>
     </a>
+    <a class="button" target="_blank" rel="noopener noreferrer" style="background:#000000; border-color:#000000;" href="https://twitter.com/intent/tweet?url={$AchievementShareUrl|escape:'url'}">
+        <span style="display: inline-flex; align-items: center; gap: 6px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="M18.9 2H22l-6.95 7.94L23.2 22h-6.9l-5.4-6.63L4.5 22H1.4l7.44-8.5L.8 2h7.06l4.9 6.02L18.9 2Zm-1.2 18h1.72L7.14 3.97H5.3L17.7 20Z"/></svg>
+            <span>{translate}share_to_x{/translate}</span>
+        </span>
+    </a>
     <a class="button" target="_blank" rel="noopener noreferrer" style="background:#1877F2; border-color:#1877F2;" href="https://www.facebook.com/sharer/sharer.php?u={$AchievementShareUrl|escape:'url'}">
         <span style="display: inline-flex; align-items: center; gap: 6px;">
             <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="M19 2.5H5C3.62 2.5 2.5 3.62 2.5 5v14c0 1.38 1.12 2.5 2.5 2.5h7V14.5h-2v-3h2V9c0-2 1.2-3 3-3 .86 0 1.14.06 1.34.09v2.52h-1.5c-1.17 0-1.4.56-1.4 1.38v1.78h2.8l-.37 3h-2.43V22h4.77c1.38 0 2.5-1.12 2.5-2.5V5C21.5 3.62 20.38 2.5 19 2.5Z"/></svg>

@@ -163,6 +163,7 @@ $translations = [
     'recomended_achievement' => 'Prochain accomplissement recommandé',
     'share_your_achievement' => 'Partagez votre accomplissement',
     'share_to_linkedin' => 'Partager sur LinkedIn',
+    'share_to_x' => 'Partager sur X',
     'share_to_facebook' => 'Partager sur Facebook',
     'share_to_telegram' => 'Partager sur Telegram',
     'share_to_whatsapp' => 'Partager sur WhatsApp',

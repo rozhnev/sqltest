@@ -164,6 +164,7 @@ $translations = [
     'recomended_achievement' => 'Next recommended achievement',
     'share_your_achievement' => 'Share your achievement',
     'share_to_linkedin' => 'Share to LinkedIn',
+    'share_to_x' => 'Share on X',
     'share_to_facebook' => 'Share on Facebook',
     'share_to_telegram' => 'Share on Telegram',
     'share_to_whatsapp' => 'Share on WhatsApp',
