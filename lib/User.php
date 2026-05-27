@@ -1148,16 +1148,16 @@ class User
                 (closed_at is not null and closed_at <= current_timestamp) closed,
                 COUNT(tq.question_id) tasks_count,
                 COUNT(tq.solved_at) tasks_solved_count,
-                g.title_en grade
+                gl.title grade
             FROM tests
             JOIN test_questions tq ON tests.id = tq.test_id
-            LEFT JOIN grades g ON tests.grade = g.id
+            LEFT JOIN grades_localization gl ON tests.grade = gl.grade_id AND gl.language = :lang
             WHERE tests.user_id = :user_id
-            GROUP BY tests.id, created_at, closed_at, g.title_en
+            GROUP BY tests.id, created_at, closed_at, gl.title
             ORDER BY created_at
         ");
         
-        $stmt->execute([':user_id' => $this->id]);
+        $stmt->execute([':lang' => $lang, ':user_id' => $this->id]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
