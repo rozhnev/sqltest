@@ -772,7 +772,12 @@ class User
     public function getLastTest(): ?array
     {
         $stmt = $this->dbh->prepare("
-            SELECT id, created_at, closed_at, (closed_at is not null and closed_at <= current_timestamp) closed, rate 
+            SELECT 
+                id, 
+                created_at, 
+                closed_at, 
+                (closed_at is not null and closed_at <= current_timestamp) closed, 
+                grade 
             FROM tests 
             WHERE user_id = :user_id order by created_at desc limit 1;
         ");
