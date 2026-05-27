@@ -737,8 +737,9 @@ class Controller
         }
         $testResult = $test->calculateResult();
         if ($testResult['ok']) {
+            $test->saveGrade($testResult['grade']);
             $this->user->saveGrade($testResult['grade']);
-            $achievements = [1=>'get_intern_grade', 2=>'get_junior_grade', 2=>'get_middle_grade', 4=>'get_senior_grade'];
+            $achievements = [1=>'get_intern_grade', 2=>'get_junior_grade', 3=>'get_middle_grade', 4=>'get_senior_grade'];
             $this->user->saveAchievement($achievements[$testResult['grade']]);
         }
         $this->engine->assign('TestResult', $testResult);

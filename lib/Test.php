@@ -451,4 +451,14 @@ class Test
         } 
         return $testResult;
     }
+
+    public function saveGrade(int $grade): void
+    {
+        $stmt = $this->dbh->prepare("UPDATE tests
+            SET grade = :grade
+            WHERE id = :test_id;"
+        );
+
+        $stmt->execute([':grade' => $grade, ':test_id' => $this->id]);
+    }
 }
