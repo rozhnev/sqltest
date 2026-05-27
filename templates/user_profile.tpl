@@ -599,19 +599,13 @@ let testsTable = new Tabulator("#tests-table", {
             field: "created_at", 
             formatter: "date",
         },
-        {
-            title: "{/literal}{translate}question_solved_at{/translate}{literal}", 
-            field: "solved_at", 
-            formatter: "date",
-        },
         {title: "{/literal}{translate}tasks_count{/translate}{literal}", field: "tasks_count", formatter: "number", widthGrow: 1},
         {title: "{/literal}{translate}tasks_solved_count{/translate}{literal}", field: "tasks_solved_count", formatter: "number", widthGrow: 1},
         {title: "{/literal}{translate}test_result{/translate}{literal}", field: "grade"},
     ],
     // Add initial sort
     initialSort: [
-        {column: "created_at", dir: "desc"},
-        {column: "solved_at", dir: "desc"}
+        {column: "created_at", dir: "desc"}
     ]
 });
 tasksTable.on("rowClick", function(e, row){
