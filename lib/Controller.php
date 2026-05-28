@@ -1061,12 +1061,13 @@ class Controller
         $pageTitle       = $meta['title']       ?? (Localizer::translateString('lessons_page_title') . ' ' . $lessonData['title']);
         $pageDescription = $meta['description'] ?? '';
         $pageKeywords    = isset($meta['keywords']) ? implode(', ', (array) $meta['keywords']) : null;
-        $schemaTeaches   = $meta['teaches'];
-        $schemaAbout     = $meta['about'];
+        $schemaTeaches   = $meta['teaches'] ?? [];
+        $schemaAbout     = $meta['about'] ?? [];
         $schemaAboutEntities = array_map(
             static fn($topic) => ['@type' => 'Thing', 'name' => $topic],
             $schemaAbout
         );
+        $lessonsList = $lesson->getList($this->lang);
 
         $this->assignVariables([
             'Action'            => 'lesson',
@@ -1077,7 +1078,7 @@ class Controller
             'PageOGTitle'       => $pageTitle,
             'PageOGDescription' => $pageDescription,
             'PageKeywords'      => $pageKeywords,
-            'Lessons'           => $lesson->getList($this->lang),
+            'Lessons'           => $lessonsList,
             'Lesson'            => $lesson,
             'LessonData'        => $lessonData
         ]);
@@ -1086,12 +1087,21 @@ class Controller
         $updatedAt      = $lessonData['updated_at'] ?? null;
         $dateModified   = $updatedAt ? (new DateTimeImmutable($updatedAt))->format(DateTimeInterface::ATOM) : null;
 
-        $schema = [
-            '@context'            => 'https://schema.org',
+        $lessonUrl = "{$this->host}/{$this->lang}/lesson/{$lesson->moduleSlug()}/{$lesson->slug()}";
+        $moduleUrl = "{$this->host}/{$this->lang}/lesson/{$lesson->moduleSlug()}";
+        $lessonsUrl = "{$this->host}/{$this->lang}/lesson";
+        $homeUrl = "{$this->host}/{$this->lang}/";
+        $courseId = "{$lessonsUrl}#course";
+        $breadcrumbId = "{$lessonUrl}#breadcrumb";
+        $learningResourceId = "{$lessonUrl}#learning-resource";
+        $moduleTitle = $lessonsList[$lesson->moduleSlug()]['title'] ?? Localizer::translateString('lessons');
+
+        $learningResource = [
             '@type'               => 'LearningResource',
+            '@id'                 => $learningResourceId,
             'name'                => $pageTitle,
             'description'         => $pageDescription,
-            'url'                 => "{$this->host}/{$this->lang}/lesson/{$lesson->moduleSlug()}/{$lesson->slug()}",
+            'url'                 => $lessonUrl,
             'inLanguage'          => $this->lang,
             'educationalLevel'    => 'Beginner',
             'learningResourceType'=> 'Lesson',
@@ -1099,16 +1109,55 @@ class Controller
             'teaches'             => $schemaTeaches,
             'isPartOf'            => [
                 '@type' => 'Course',
+                '@id'   => $courseId,
                 'name'  => 'SQL Lessons',
-                'url'   => "{$this->host}/{$this->lang}/lesson"
+                'url'   => $lessonsUrl,
             ],
             'about'               => $schemaAboutEntities,
             'provider'            => ['@type' => 'Organization', 'name' => 'SQLtest.online', 'url' => 'https://sqltest.online'],
         ];
+
         if ($dateModified) {
-            $schema['dateModified']   = $dateModified;
-            $schema['datePublished']  = $dateModified; // fallback until created_at is tracked separately
+            $learningResource['dateModified']  = $dateModified;
+            $learningResource['datePublished'] = $dateModified; // fallback until created_at is tracked separately
         }
+
+        $schema = [
+            '@context' => 'https://schema.org',
+            '@graph' => [
+                [
+                    '@type' => 'BreadcrumbList',
+                    '@id' => $breadcrumbId,
+                    'itemListElement' => [
+                        [
+                            '@type' => 'ListItem',
+                            'position' => 1,
+                            'name' => 'SQLtest.online',
+                            'item' => $homeUrl,
+                        ],
+                        [
+                            '@type' => 'ListItem',
+                            'position' => 2,
+                            'name' => Localizer::translateString('lessons'),
+                            'item' => $lessonsUrl,
+                        ],
+                        [
+                            '@type' => 'ListItem',
+                            'position' => 3,
+                            'name' => $moduleTitle,
+                            'item' => $moduleUrl,
+                        ],
+                        [
+                            '@type' => 'ListItem',
+                            'position' => 4,
+                            'name' => $lessonData['title'],
+                            'item' => $lessonUrl,
+                        ],
+                    ],
+                ],
+                $learningResource,
+            ],
+        ];
         $this->assignSchemaJsonLd($schema);
         $this->engine->display($this->isMobileView() ? "m.lesson.tpl" : "lesson.tpl");
     }
