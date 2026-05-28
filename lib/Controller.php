@@ -912,7 +912,7 @@ class Controller
             'Action' => 'share-achievement',
             'User' => $this->user,
             'AchievementID' => $params['achievementID'],
-            'AchievementUserID' => $params['user_id'],
+            'AchievementUserID' => $achievementData['user_id'],
             'ShareUserName' => $achievementData['share_user_name'],
             'EarnedAt' => $achievementData['earned_at'],
             'AchievementTitle' => $achievementData['achievement_title'],
