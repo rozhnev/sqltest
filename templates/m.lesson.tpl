@@ -18,8 +18,8 @@
             {include file='m.top-menu.tpl' path="/lesson/{$Lesson->moduleSlug()}/{$Lesson->slug()}"}
         </header>
 
-        <div class="main" style="padding: 6px;">
-            <div class="question-wrapper">
+        <main class="main" style="padding: 6px;" id="main-content">
+            <nav class="question-wrapper" aria-label="Lesson navigation">
                 <div class="menu">
                 <div id="menu-content" class="menu-content">
                     {foreach $Lessons as $moduleSlug => $module}
@@ -41,10 +41,10 @@
                     {/foreach}
                 </div>
                 </div>
-            </div>
-            <div class="lesson-wrapper" id="lesson-wrapper">
+            </nav>
+            <article class="lesson-wrapper" id="lesson-wrapper">
                 {$LessonData.content}
-            </div>
+            </article>
             <div class="question-wrapper">
                 <div class="code-buttons" style="justify-content: space-between !important; gap: 8px; flex-wrap: wrap;">
                     <div id="prevTaskBtn">
@@ -69,7 +69,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </main>
 
         <footer>
             {include file='m.footer.tpl'}

@@ -18,7 +18,7 @@
         {/if}
         </header>
         <main3 id="main3">
-            <div class="column">
+            <nav class="column" aria-label="Lesson navigation">
                 <div class="menu" id="menu">
                 {if $User->showAd()}
                     <div style="height: 5em;">
@@ -47,8 +47,8 @@
                     </div>
                 </div>
             </div>
-            </div>
-            <div class="column">
+            </nav>
+            <main class="column" id="main-content">
                 <article class="lesson-wrapper">
                     {$LessonData.content}
                 </article>
@@ -76,12 +76,12 @@
                         {/if}
                     </div>
                 </div>
-            </div>
-            <div class="column db-description" id="right-panel">            
+            </main>
+            <aside class="column db-description" id="right-panel" aria-label="Additional lesson information">            
                 {if $User->showAd()}
                     {include file="{$Lang}/donation_goal_widget.tpl"}
                 {/if} 
-            </div>
+            </aside>
         </main3>
         <footer>
             {include file='footer.tpl'}
