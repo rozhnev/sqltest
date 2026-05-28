@@ -144,18 +144,11 @@ main3 {
     padding-top: 0.7rem;
 }
 
-.column:nth-child(1) {
-    /* padding-right: 0.5em; */
-}
-
 .column:nth-child(2) {
     padding: 0.7rem 1rem 0 1rem;
+    overflow-y: visible
 }
 
-.column:nth-child(3) {
-    /* padding-left: 0.5em; */
-    /* overflow-y: hidden; */
-}
 main {
     display: grid;
     overflow-y: auto;
