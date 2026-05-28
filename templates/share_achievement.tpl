@@ -82,13 +82,15 @@
                     </p>
                 </div>
             {/if}
-            <div class="user-solutions-count" style="max-width: 1200px; margin: 16px auto; width: 1200px;">
-                {assign var="AchievementShareUrl" value=$SharePageUrl}
-                <div style="padding-top: 12px; border-top: 1px solid var(--text-block-border-color);">
-                    <div style="font-weight: 700; margin-bottom: 10px;">{translate}share_your_achievement{/translate}</div>
-                    {include file="{$Lang}/achievement_share_buttons.tpl" AchievementShareUrl=$AchievementShareUrl}
+            {if $User->logged() && $AchievementUserID == $User->getId()}
+                <div class="user-solutions-count" style="max-width: 1200px; margin: 16px auto; width: 1200px;">
+                    {assign var="AchievementShareUrl" value=$SharePageUrl}
+                    <div style="padding-top: 12px; border-top: 1px solid var(--text-block-border-color);">
+                        <div style="font-weight: 700; margin-bottom: 10px;">{translate}share_your_achievement{/translate}</div>
+                        {include file="{$Lang}/achievement_share_buttons.tpl" AchievementShareUrl=$AchievementShareUrl}
+                    </div>
                 </div>
-            </div>
+            {/if}
         </main>
         <footer>
             {if $MobileView}
