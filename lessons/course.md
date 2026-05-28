@@ -93,8 +93,8 @@
     *   Generating Reports with SQL Queries
     *   Best Practices for Data Exploration and Analysis    
 12. **Data Transformation and Manipulation**
-    *   [Practical String Processing in SQL](lessons/lesson11_1_ru.md)
-    *   Data Transformation Techniques for Analysis
+    *   [Practical String Processing in SQL](lessons/lesson12_1_ru.md)
+    *   [Practical Use of Date and Time Functions for Data Analysis](lessons/lesson12_2_ru.md)
     *   Using CASE Statements for Conditional Logic
     *   String Manipulation and Formatting
     *   Date and Time Functions for Data Analysis
