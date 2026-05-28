@@ -49,9 +49,9 @@
             </div>
             </div>
             <div class="column">
-                <div class="lesson-wrapper">
+                <article class="lesson-wrapper">
                     {$LessonData.content}
-                </div>
+                </article>
                 <div class="code-buttons" style="justify-content: space-between !important;">
                     <div id="prevTaskBtn">
                         {if $LessonData.prev_lesson_slug}
