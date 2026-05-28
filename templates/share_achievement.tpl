@@ -42,9 +42,10 @@
     }
 
     .share-achievement-media img {
-        width: 100%;
-        max-width: 1200px;
+        width: auto;
+        max-width: min(1200px, 100%);
         height: auto;
+        display: block;
         border-radius: 8px;
     }
 
