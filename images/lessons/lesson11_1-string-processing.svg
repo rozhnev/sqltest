@@ -1,0 +1,47 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f5f1ea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ebe3d7;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="2" dy="4" stdDeviation="4" flood-color="#000000" flood-opacity="0.12"/>
+    </filter>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#23313a" />
+    </marker>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bgGradient)" />
+
+  <circle cx="1080" cy="90" r="72" fill="#d4c3aa" opacity="0.35" />
+  <circle cx="1010" cy="535" r="118" fill="#c9d8d0" opacity="0.28" />
+  <circle cx="130" cy="70" r="58" fill="#c7b89f" opacity="0.18" />
+
+  <rect x="0" y="0" width="455" height="630" fill="#23313a" />
+  <text x="52" y="248" font-family="Arial, sans-serif" font-size="46" font-weight="700" fill="#ffffff">PRACTICAL</text>
+  <text x="52" y="305" font-family="Arial, sans-serif" font-size="46" font-weight="700" fill="#ffffff">STRING</text>
+  <text x="52" y="362" font-family="Arial, sans-serif" font-size="46" font-weight="700" fill="#ffffff">PROCESSING</text>
+  <rect x="52" y="392" width="124" height="8" rx="4" fill="#e59f71" />
+  <text x="52" y="438" font-family="Arial, sans-serif" font-size="24" fill="#c9d3d8">Clean, Extract, Validate</text>
+
+  <rect x="500" y="58" width="630" height="150" rx="18" fill="#ffffff" filter="url(#shadow)" />
+  <text x="532" y="104" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#23313a">Normalize Text</text>
+  <text x="532" y="145" font-family="Courier New, monospace" font-size="18" fill="#5a6770">LOWER(TRIM(email))</text>
+  <rect x="900" y="118" width="170" height="44" rx="10" fill="#dcebe4" />
+  <text x="928" y="146" font-family="Arial, sans-serif" font-size="17" fill="#23313a">clean output</text>
+
+  <rect x="500" y="238" width="630" height="160" rx="18" fill="#ffffff" filter="url(#shadow)" />
+  <text x="532" y="283" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#23313a">Extract Domain</text>
+  <text x="532" y="326" font-family="Courier New, monospace" font-size="17" fill="#5a6770">customer@company.com</text>
+  <path d="M760 318 L835 318" stroke="#23313a" stroke-width="2.5" marker-end="url(#arrowhead)" />
+  <text x="855" y="324" font-family="Courier New, monospace" font-size="17" fill="#b8683a">company.com</text>
+  <text x="532" y="364" font-family="Courier New, monospace" font-size="17" fill="#5a6770">SUBSTRING_INDEX(email, '@', -1)</text>
+
+  <rect x="500" y="428" width="630" height="150" rx="18" fill="#ffffff" filter="url(#shadow)" />
+  <text x="532" y="474" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#23313a">Validate and Group</text>
+  <text x="532" y="516" font-family="Courier New, monospace" font-size="17" fill="#5a6770">INSTR(email, '@') &gt; 0</text>
+  <text x="532" y="548" font-family="Courier New, monospace" font-size="17" fill="#5a6770">GROUP BY email_domain</text>
+  <rect x="930" y="484" width="138" height="52" rx="12" fill="#f4d7c1" />
+  <text x="957" y="516" font-family="Arial, sans-serif" font-size="17" fill="#23313a">analytics</text>
+</svg>
