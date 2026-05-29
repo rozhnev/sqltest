@@ -13,7 +13,7 @@
             <div class="column">
                 {include file='menu.tpl'}
             </div>
-            <div class="column">
+            <main class="column">
                 {* {include file="{$Lang}/adblock_banner.tpl"} *}
                 {if $User->logged() && $NewAchievement}
                     {assign var="AchievementViewUrl" value="/{$Lang}/achievement/{$NewAchievement.user_achievement_id}"}
@@ -208,8 +208,8 @@
                         </div>
                     </div>
                 {/if}
-            </div>
-            <div class="column" id="right-panel">
+            </main>
+            <aside class="column" id="right-panel">
                 {* {if $User->logged() &&  $User->getAuthProvider() === 'vk' && !$User->getEmail()}
                     <div style="background:#fff3cd;color:#856404;border-left:6px solid #ffc107;padding:12px 16px;margin-bottom:16px;border-radius:4px;display:flex;gap:12px;align-items:flex-start;font-size:14px;line-height:1.4;">
                         <div style="font-size:20px;line-height:1;margin-top:2px;">⚠️</div>
@@ -225,10 +225,10 @@
                         {include file="my_progress.tpl"}
                     </div>
                 {/if}
-                <aside class="question-wrapper" style="margin-right: 6px;">
+                <div class="question-wrapper" style="margin-right: 6px;">
                 {include file="{$Lang}/{$DB}.tpl"}
-                </aside>
-            </div>
+                </div>
+            </aside>
         </main3>
         {include file="{$Lang}/consent_banner.tpl"}
         <footer>
