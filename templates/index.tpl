@@ -75,7 +75,7 @@
                         })();
                     </script>
                 {/if}
-                <div class="question-wrapper">
+                <section class="question-wrapper">
                     <div class="question-title-bar" style="display: flex;">
                         <div class="question-title">
                             <div class="question-level rate{$Question.rate}" title="{$Question.question_rate|default:'Not rated yet'}"></div>
@@ -132,7 +132,7 @@
                             <span class="question-action">{translate}question_action_write_your_request{/translate}</span>
                         {/if}
                     {/if}
-                </div>
+                </section>
                 <div class="question-wrapper">
                     <div class="code-actions-upper" id="code-actions">
                         <div>
