@@ -493,18 +493,48 @@ class Controller
             'Favorites'             => $this->user->getFavorites($this->lang)
         ]);
         $this->setHreflangLinks($params['path'], $this->lang);
-        $schemaType = $questionData['have_answers'] ? 'Quiz' : 'LearningResource';
-        
+        $schemaType  = $questionData['have_answers'] ? 'Quiz' : 'LearningResource';
+        $questionUrl = "{$this->host}/{$this->lang}/question/{$questionData['category_sef']}/{$questionData['question_sef']}";
+        $categoryUrl = "{$this->host}/{$this->lang}/question/{$questionData['category_sef']}";
+        $homeUrl     = "{$this->host}/{$this->lang}";
+
         $this->assignSchemaJsonLd([
-            '@context'            => 'https://schema.org',
-            '@type'               => $schemaType,
-            'name'                => $questionData['title'],
-            'description'         => $richDescription,
-            'url'                 => "{$this->host}/{$this->lang}/question/{$questionData['category_sef']}/{$questionData['question_sef']}",
-            'inLanguage'          => $this->lang,
-            'learningResourceType'=> $questionData['have_answers'] ? 'Quiz' : 'Exercise',
-            'about'               => ['@type' => 'Thing', 'name' => $dbmsLabel],
-            'provider'            => ['@type' => 'Organization', 'name' => 'SQLtest.online', 'url' => 'https://sqltest.online'],
+            '@context' => 'https://schema.org',
+            '@graph'   => [
+                [
+                    '@type'           => 'BreadcrumbList',
+                    'itemListElement' => [
+                        [
+                            '@type'    => 'ListItem',
+                            'position' => 1,
+                            'name'     => 'SQLtest.online',
+                            'item'     => $homeUrl,
+                        ],
+                        [
+                            '@type'    => 'ListItem',
+                            'position' => 2,
+                            'name'     => $categoryTitle,
+                            'item'     => $categoryUrl,
+                        ],
+                        [
+                            '@type'    => 'ListItem',
+                            'position' => 3,
+                            'name'     => $questionData['title'],
+                            'item'     => $questionUrl,
+                        ],
+                    ],
+                ],
+                [
+                    '@type'               => $schemaType,
+                    'name'                => $questionData['title'],
+                    'description'         => $richDescription,
+                    'url'                 => $questionUrl,
+                    'inLanguage'          => $this->lang,
+                    'learningResourceType'=> $questionData['have_answers'] ? 'Quiz' : 'Exercise',
+                    'about'               => ['@type' => 'Thing', 'name' => $dbmsLabel],
+                    'provider'            => ['@type' => 'Organization', 'name' => 'SQLtest.online', 'url' => 'https://sqltest.online'],
+                ],
+            ],
         ]);
         $this->engine->display($this->isMobileView() ? "m.index.tpl" : "index.tpl");
     }
