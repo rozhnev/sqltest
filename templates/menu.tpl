@@ -1,4 +1,4 @@
-<div class="menu" id="menu">
+<nav class="menu" id="menu">
     <div class="question-wrapper selector">
         <div style="white-space: nowrap; padding-left: 0.7em; font-weight: bold;">{translate}menu_groups{/translate}:</div>
         <div class="selector-options">
@@ -77,4 +77,4 @@
     {if $User->showAd() && !$MobileView}
         {include file="{$Lang}/menu_bottom_add.tpl"}
     {/if}
-</div>
+</nav>
