@@ -4,11 +4,11 @@
             min-width: 7rem;
         }
     </style>
-    <h1>Countries Database: table structure and geospatial overview</h1>
+    <h2>Countries Database: table structure and geospatial overview</h2>
     <p>The Countries database (PostGIS) is a sample dataset for geographic and geospatial analysis with SQL.</p>
     <p>It includes spatial data for countries and capitals, plus New York City layers such as census blocks, homicides, neighborhoods, streets, and subway stations.</p>
     <p>The Countries database contains 7 main tables.</p>
-    <h2>List of tables</h2>
+    <h3>List of tables</h3>
     <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span><span class='sql'>countries</span> - list of countries with geometry.</span>
     </div>

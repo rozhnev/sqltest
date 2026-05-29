@@ -4,7 +4,7 @@
             min-width: 10rem;
         }
     </style>
-    <h1>Base de données Bookings : structure des tables et vue du schéma</h1>
+    <h2>Base de données Bookings : structure des tables et vue du schéma</h2>
     <p>La base Bookings (PostgreSQL) modélise les vols de compagnies aériennes entre différents aéroports et sert souvent de dataset d'entraînement SQL.</p>
     <p>Cette page présente la structure des tables, les colonnes clés et les contraintes utilisées dans des requêtes SQL analytiques et transactionnelles.</p>
     <p>La base de données Bookings contient 8 tables principales.</p>
@@ -14,7 +14,7 @@
             Schéma ER de la base de données Bookings
         </a>
     </p>
-    <h2>Liste des tables</h2>
+    <h3>Liste des tables</h3>
     {literal}
     <div class="accordion active">
         <span><span class='sql'>aircrafts_data</span> - table des avions.</span>

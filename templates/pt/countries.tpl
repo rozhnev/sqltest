@@ -4,11 +4,11 @@
             min-width: 7rem;
         }
     </style>
-    <h1>Banco de Dados Countries: estrutura das tabelas e visão geoespacial</h1>
+    <h2>Banco de Dados Countries: estrutura das tabelas e visão geoespacial</h2>
     <p>O banco Countries (PostGIS) é um conjunto de dados de exemplo para análise geográfica e geoespacial com SQL.</p>
     <p>Ele inclui dados espaciais de países e capitais, além de camadas de Nova York: blocos censitários, homicídios, bairros, ruas e estações de metrô.</p>
     <p>O Banco de Dados Countries contém 7 tabelas principais.</p>
-    <h2>Lista de tabelas</h2>
+    <h3>Lista de tabelas</h3>
     <div class="accordion" title="Clique para expandir, duplo clique para colar nome da tabela">
         <span><span class='sql'>countries</span> - lista de países com geometria.</span>
     </div>

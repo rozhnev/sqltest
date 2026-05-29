@@ -4,7 +4,7 @@
             min-width: 10rem;
         }
     </style>
-    <h1>Base de données Employee : structure des tables et vue d'ensemble</h1>
+    <h2>Base de données Employee : structure des tables et vue d'ensemble</h2>
     <p>La base Employee (Firebird) est un jeu de données d'exemple utilisé pour apprendre SQL et explorer les fonctionnalités du SGBD Firebird.</p>
     <p>Cette page décrit la structure des tables, les colonnes clés et les relations utiles pour des requêtes SQL pratiques.</p>
     <p>La base de données Employee contient 9 tables principales.</p>
@@ -14,7 +14,7 @@
             Schéma ER de la base Employee
         </a>
     </p>
-    <h2>Liste des tables</h2>
+    <h3>Liste des tables</h3>
 
     <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
         <span><span class='sql'>COUNTRY</span> - table des pays.</span>

@@ -4,7 +4,7 @@
             min-width: 10rem;
         }
     </style>
-    <h1>Bookings Database: table structure and schema overview</h1>
+    <h2>Bookings Database: table structure and schema overview</h2>
     <p>The Bookings database (PostgreSQL) models airline flights across multiple airports and is widely used for SQL practice.</p>
     <p>This page shows the table structure, key columns, and constraints used in typical analytical and transactional SQL queries.</p>
     <p>The Bookings database contains 8 main tables.</p>
@@ -14,7 +14,7 @@
             ER diagram of the Bookings database
         </a>
     </p>
-    <h2>The list of tables</h2>
+    <h3>The list of tables</h3>
     {literal}
     <div class="accordion active">
         <span><span class='sql'>aircrafts_data</span> - table of aircrafts.</span>

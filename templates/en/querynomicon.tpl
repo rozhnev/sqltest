@@ -4,11 +4,11 @@
             min-width: 9rem;
         }
     </style>
-    <h1>Querynomicon Database: table structure and overview</h1>
+    <h2>Querynomicon Database: table structure and overview</h2>
     <p>Querynomicon (SQLite) is a compact training database for learning SQL fundamentals with clear and simple examples.</p>
     <p>This page presents the tables, key columns, and sample rows for hands-on SQL practice.</p>
     <p>The Querynomicon database contains 5 main tables.</p>
-    <h2>List of tables</h2>
+    <h3>List of tables</h3>
     <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span><span class='sql'>department</span> - table of departments.</span>
     </div>

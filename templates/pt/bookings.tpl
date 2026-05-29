@@ -4,7 +4,7 @@
             min-width: 10rem;
         }
     </style>
-    <h1>Banco de Dados Bookings: estrutura das tabelas e visão do esquema</h1>
+    <h2>Banco de Dados Bookings: estrutura das tabelas e visão do esquema</h2>
     <p>O banco Bookings (PostgreSQL) modela voos de companhias aéreas entre diferentes aeroportos e é amplamente usado para prática de SQL.</p>
     <p>Esta página apresenta a estrutura das tabelas, colunas-chave e restrições usadas em consultas SQL analíticas e transacionais.</p>
     <p>O Banco de Dados Bookings contém 8 tabelas principais.</p>
@@ -14,7 +14,7 @@
             Diagrama ER do banco de dados Bookings
         </a>
     </p>
-    <h2>Lista de tabelas</h2>
+    <h3>Lista de tabelas</h3>
     {literal}
     <div class="accordion active">
         <span><span class='sql'>aircrafts_data</span> - tabela de aeronaves.</span>

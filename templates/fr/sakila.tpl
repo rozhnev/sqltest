@@ -5,7 +5,7 @@
             display: inline-block;
         }
     </style>
-    <h1>Base de données Sakila : structure et description des tables</h1>
+    <h2>Base de données Sakila : structure et description des tables</h2>
     <p>Sakila est une base de données relationnelle d'exemple conçue par MySQL pour l'apprentissage et la démonstration des capacités SQL et des systèmes de gestion de bases de données (SGBDR).</p>
     <p>Cette page présente la structure des tables Sakila, les colonnes principales et les clés utilisées dans les requêtes SQL pédagogiques.</p>
     <p>La base de données Sakila contient 15 tables principales décrivant divers aspects d'une entreprise de location de DVD.</p>
@@ -15,7 +15,7 @@
             Schéma ER de la base de données Sakila
         </a>
     </p>
-    <h2>Liste des tables</h2>
+    <h3>Liste des tables</h3>
     <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
         <span><span class='sql'>actor</span> - table des acteurs.</span>
     </div>

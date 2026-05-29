@@ -5,7 +5,7 @@
             display: inline-block;
         }
     </style>
-    <h1>Banco de Dados Sakila: estrutura e descrição das tabelas</h1>
+    <h2>Banco de Dados Sakila: estrutura e descrição das tabelas</h2>
     <p>Sakila é um banco de dados relacional de exemplo projetado pelo MySQL para aprendizado e demonstração dos recursos de SQL e dos sistemas de gerenciamento de banco de dados (SGBD).</p>
     <p>Esta página apresenta a estrutura das tabelas Sakila, as colunas principais e as chaves usadas em consultas SQL didáticas.</p>
     <p>O banco de dados Sakila contém 15 tabelas principais descrevendo vários aspectos de uma empresa de locação de DVDs.</p>
@@ -15,7 +15,7 @@
             Diagrama ER do banco de dados Sakila
         </a>
     </p>
-    <h2>Lista de Tabelas</h2>
+    <h3>Lista de Tabelas</h3>
     <div class="accordion" title="Clique para expandir, duplo clique para colar nome da tabela">
         <span><span class='sql'>actor</span> - tabela de atores.</span>
     </div>

@@ -4,7 +4,7 @@
             min-width: 10rem;
         }
     </style>
-    <h1>Banco de Dados AdventureWorks: estrutura das tabelas e visão do esquema</h1>
+    <h2>Banco de Dados AdventureWorks: estrutura das tabelas e visão do esquema</h2>
     <p>O banco AdventureWorks (SQL Server) é um conjunto de dados de exemplo que modela processos de negócio de uma empresa de manufatura fictícia.</p>
     <p>Esta página apresenta a estrutura das tabelas, colunas-chave e relacionamentos usados para estudar e praticar SQL.</p>
     <p>O Banco de Dados AdventureWorks contém 10 tabelas principais.</p>
@@ -14,7 +14,7 @@
             Diagrama ER - AdventureWorks
         </a>
     </p>
-    <h2>Lista de tabelas</h2>
+    <h3>Lista de tabelas</h3>
     <div class="accordion" title="Clique para expandir, duplo clique para colar nome da tabela">
         <span><span class='sql table-name-icon'>Address</span> - Tabela de endereços.</span>
     </div>

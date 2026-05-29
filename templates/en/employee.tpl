@@ -4,7 +4,7 @@
             min-width: 10rem;
         }
     </style>
-    <h1>Employee Database: table structure and overview</h1>
+    <h2>Employee Database: table structure and overview</h2>
     <p>The Employee database (Firebird) is a sample dataset used to learn SQL and explore Firebird DBMS capabilities.</p>
     <p>This page describes table structure, key columns, and relationships for practical SQL querying.</p>
     <p>The Employee database contains 9 main tables.</p>
@@ -14,7 +14,7 @@
             ER diagram of the Employee database
         </a>
     </p>
-    <h2>List of tables</h2>
+    <h3>List of tables</h3>
 
     <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span><span class='sql'>COUNTRY</span> - countries table.</span>

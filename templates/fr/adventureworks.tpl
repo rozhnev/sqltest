@@ -4,7 +4,7 @@
             min-width: 10rem;
         }
     </style>
-    <h1>Base de données AdventureWorks : structure des tables et vue du schéma</h1>
+    <h2>Base de données AdventureWorks : structure des tables et vue du schéma</h2>
     <p>La base AdventureWorks (SQL Server) est un jeu de données d'exemple qui modélise les processus métier d'une entreprise manufacturière fictive.</p>
     <p>Cette page présente la structure des tables, les colonnes clés et les relations utiles pour apprendre et pratiquer SQL.</p>
     <p>La base de données AdventureWorks contient 10 tables principales.</p>
@@ -14,7 +14,7 @@
             Schéma ER AdventureWorks
         </a>
     </p>
-    <h2>Liste des tables</h2>
+    <h3>Liste des tables</h3>
 
     <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
         <span><span class='sql'>Address</span> - table des adresses.</span>

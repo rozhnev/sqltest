@@ -4,11 +4,11 @@
             min-width: 7rem;
         }
     </style>
-    <h1>Base de données Countries : structure des tables et vue géospatiale</h1>
+    <h2>Base de données Countries : structure des tables et vue géospatiale</h2>
     <p>La base Countries (PostGIS) est un jeu de données d'exemple pour l'analyse géographique et géospatiale avec SQL.</p>
     <p>Elle contient des données spatiales sur les pays et les capitales, ainsi que des couches de New York : blocs de recensement, homicides, quartiers, rues et stations de métro.</p>
     <p>La base de données Countries contient 7 tables principales.</p>
-    <h2>Liste des tables</h2>
+    <h3>Liste des tables</h3>
     <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
         <span><span class='sql'>countries</span> - liste des pays avec géométrie.</span>
     </div>

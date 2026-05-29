@@ -4,11 +4,11 @@
             min-width: 9rem;
         }
     </style>
-    <h1>Base de données Querynomicon : structure des tables et vue d'ensemble</h1>
+    <h2>Base de données Querynomicon : structure des tables et vue d'ensemble</h2>
     <p>Querynomicon (SQLite) est une base compacte conçue pour apprendre les fondamentaux SQL sur des exemples simples et lisibles.</p>
     <p>Cette page présente les tables, leurs colonnes principales et des exemples de lignes pour la pratique des requêtes.</p>
     <p>La base de données Querynomicon contient 5 tables principales.</p>
-    <h2>Liste des tables</h2>
+    <h3>Liste des tables</h3>
     <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">
         <span><span class='sql'>department</span> - table des départements.</span>
     </div>

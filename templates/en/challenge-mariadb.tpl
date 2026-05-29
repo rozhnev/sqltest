@@ -1,6 +1,6 @@
 <section class="mariadb-hero">
     <p class="hero-eyebrow">MariaDB Day Brussels · FOSDEM</p>
-    <h1>MariaDB SQL Challenge</h1>
+    <h2>MariaDB SQL Challenge</h2>
     <p class="hero-subtitle">
         <a href="https://mariadb.org/events/mariadb-day-brussels/" target="_blank" rel="noreferrer">Sunday, February 1, 2026</a>
         · Silversquare delta, Avenue Arnaud Fraiteur 15-23, 1050 Brussels
@@ -21,7 +21,7 @@
 </section>
 <section class="mariadb-highlight">
     <div>
-        <h2>MariaDB Day Brussels highlights</h2>
+        <h3>MariaDB Day Brussels highlights</h3>
         <p>
             MariaDB Day Brussels is a full-day community gathering that brings maintainers, contributors, partners, and users together to show the present and future of MariaDB. 
             It is the perfect warm-up for the MariaDB track inside FOSDEM.
@@ -34,7 +34,7 @@
         </ul>
     </div>
     <div class="floating-card">
-        <h3>Speakers and focus</h3>
+        <h4>Speakers and focus</h4>
         <p>
             Michael Widenius, Nikita Malyavin, Steve Shaw, Jan Lindström, Paul Clevett, Nick Denning, Alejandro Duarte, 
             Dirk Hillbrecht, Andrija Vučinić, Carl Schwan, Roman Agabekov, and more.
@@ -48,7 +48,7 @@
 </section>
 <section class="mariadb-grid">
     {* <article>
-        <h3>Quiz format</h3>
+        <h4>Quiz format</h4>
         <p>
             Ten curated questions that mirror the MariaDB Day agenda: a mix of theoretical insights about the platform's 
             roadmap and practical exercises that exercise query writing, migrations, and automation.
@@ -60,7 +60,7 @@
         </ul>
     </article> *}
     <article>
-        <h3>How to participate</h3>
+        <h4>How to participate</h4>
         <ol class="mariadb-list">
             <li>Get the quiz link at the MariaDB stand (FOSDEM).
                 K level 1 (group B) https://fosdem.org/2026/stands/
@@ -91,18 +91,18 @@
     </article>
 </section>
 {* <section class="mariadb-prizes">
-    <h2>Prizes for the first 10 winners</h2>
+    <h3>Prizes for the first 10 winners</h3>
     <div class="prize-grid">
         <div class="prize-card">
-            <h4>1st–3rd place</h4>
+            <h5>1st–3rd place</h5>
             <p>Exclusive MariaDB hardware, signed books from the architects, and a training voucher for the next release.</p>
         </div>
         <div class="prize-card">
-            <h4>4th–7th place</h4>
+            <h5>4th–7th place</h5>
             <p>Priority invites to MariaDB labs, premium swag bundles, and backstage conversations with engineers.</p>
         </div>
         <div class="prize-card">
-            <h4>8th–10th place</h4>
+            <h5>8th–10th place</h5>
             <p>MariaDB swag pack, digital credits for tooling, and a shout-out during the closing session.</p>
         </div>
     </div>

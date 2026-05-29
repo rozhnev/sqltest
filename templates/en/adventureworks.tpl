@@ -4,7 +4,7 @@
             min-width: 10rem;
         }
     </style>
-    <h1>AdventureWorks Database: table structure and schema overview</h1>
+    <h2>AdventureWorks Database: table structure and schema overview</h2>
     <p>The AdventureWorks database (SQL Server) is a sample dataset that models business processes of a fictional manufacturing company.</p>
     <p>This page presents table structure, key columns, and relationships used for practical SQL learning and query practice.</p>
     <p>The AdventureWorks database contains 10 main tables.</p>
@@ -14,7 +14,7 @@
             AdventureWorks DB ER diagram
         </a>
     </p>
-    <h2>List of tables</h2>
+    <h3>List of tables</h3>
     <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span><span class='sql'>Address</span> - table of addresses.</span>
     </div>
