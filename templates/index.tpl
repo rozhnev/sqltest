@@ -225,9 +225,9 @@
                         {include file="my_progress.tpl"}
                     </div>
                 {/if}
-                <div class="question-wrapper" style="margin-right: 6px;">
+                <aside class="question-wrapper" style="margin-right: 6px;">
                 {include file="{$Lang}/{$DB}.tpl"}
-                </div>
+                </aside>
             </div>
         </main3>
         {include file="{$Lang}/consent_banner.tpl"}
