@@ -1,6 +1,5 @@
 {include file='header.tpl'}
 <body>
-    {include file="{$Lang}/consent_banner.tpl"}
     <div class="container">
         {include file='popups.tpl'}
         <header>
@@ -209,35 +208,6 @@
                         </div>
                     </div>
                 {/if}
-                {* <div class="text-block user-solutions-count">
-                    {assign var="QuestionsCountRounded" value="{floor(($QuestionsCount - 1)/10) * 10}"}
-                    {if $User->logged()}
-                        <span>
-                            {if $SolvedQuestionsCount < ($QuestionsCount/2)}
-                                {assign var="YouHaveSolved" value="{translate}you_have_solved{/translate}"}
-                            {else}
-                                {assign var="YouHaveSolved" value="{translate}you_have_already_solved{/translate}"}
-                            {/if}
-                            
-                            {translate}user_solutions_count_logged{/translate}
-                            {if $SolvedQuestionsCount < $QuestionsCount}
-                                {translate}keep_going{/translate}
-                            {/if}
-                        </span>
-
-                        <button class="button-small green" onClick="location.href = '/{$Lang}/test/start';">
-                            {if !$User->grade()}
-                                {translate}check_your_skills{/translate}
-                            {elseif $User->grade() == 'Senior'}
-                                {$User->grade()}, {translate}confirm_you_grade{/translate}
-                            {else}
-                                {$User->grade()}, {translate}level_up{/translate}
-                            {/if}
-                        </button>
-                    {else}
-                        <span>{translate}user_solutions_count{/translate}</span>
-                    {/if}
-                </div> *}
             </div>
             <div class="column" id="right-panel">
                 {* {if $User->logged() &&  $User->getAuthProvider() === 'vk' && !$User->getEmail()}
@@ -260,6 +230,7 @@
                 </div>
             </div>
         </main3>
+        {include file="{$Lang}/consent_banner.tpl"}
         <footer>
             {include file='footer.tpl'}
         </footer>

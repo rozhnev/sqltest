@@ -1,6 +1,5 @@
 {include file='header.tpl'}
 <body>
-    {include file="{$Lang}/consent_banner.tpl"}
     <div class="container">
         {include file='popups.tpl'}
         <header>
@@ -107,6 +106,7 @@
                 </div>
             </div>
         </main2>
+        {include file="{$Lang}/consent_banner.tpl"}
         <footer>
             {include file='footer.tpl'}
         </footer>
