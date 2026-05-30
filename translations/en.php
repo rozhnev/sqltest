@@ -272,7 +272,7 @@ $translations = [
     'avaliable_databases' => 'Available databases',
     'dont_show_this_page_again' => 'Do not show this page again',
     'start_practicing' => 'Start practicing',
-    'welcome_page_title' => 'Welcome to SQLTest.online: Learn and Practice SQL',
+    'welcome_page_title' => 'SQLTest.online: Learn and Practice SQL for Free',
     'welcome_page_description' => 'Start your SQL journey with interactive challenges and real-time feedback at SQLTest.online. Enhance your skills through practical exercises and become a confident SQL user.',
     'update_profile_full_name' => 'Update your <a class="button small green" href="/en/user/profile">profile</a> with your full name to make your achievement shares more personal.',
     'view_achievement' => 'View achievement',

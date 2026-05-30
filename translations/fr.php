@@ -271,7 +271,7 @@ $translations = [
     'avaliable_databases' => 'Bases de données disponibles',
     'dont_show_this_page_again' => 'Ne plus afficher cette page',
     'start_practicing' => 'Commencer à pratiquer',
-    'welcome_page_title' => 'Bienvenue sur SQLTest.online : Apprenez et pratiquez le SQL',
+    'welcome_page_title' => 'SQLTest.online: Apprenez et pratiquez le SQL gratuitement',
     'welcome_page_description' => 'Commencez votre voyage SQL avec des défis interactifs et un retour en temps réel sur SQLTest.online. Améliorez vos compétences grâce à des exercices pratiques et devenez un utilisateur SQL confiant.',
     'update_profile_full_name' => 'Mettez à jour votre <a class="button small green" href="/fr/user/profile">profil</a> avec votre nom complet pour rendre vos partages d\'accomplissements plus personnels.',
     'view_achievement' => 'Voir l\'accomplissement',
