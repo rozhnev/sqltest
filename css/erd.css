@@ -53,8 +53,8 @@ html[data-theme='dark'] {
 .grid { stroke: var(--erd-grid); stroke-width: 1; }
 .panel { fill: var(--erd-panel-bg); stroke: var(--erd-panel-stroke); stroke-width: 1.5; }
 .header { fill: var(--erd-header-bg); }
-.title { fill: var(--erd-title); font: 700 var(--erd-title-size) 'Segoe UI', Arial, sans-serif; }
-.col { fill: var(--erd-col); font: var(--erd-col-size) 'Segoe UI', Arial, sans-serif; }
+.title { fill: var(--erd-title); font: 700 var(--erd-title-size) 'Segoe UI', Arial, sans-serif; font-size: large;}
+.col { fill: var(--erd-col); font: var(--erd-col-size) 'Segoe UI', Arial, sans-serif; font-size: large;}
 .pk { fill: var(--erd-pk); font: 700 var(--erd-key-size) 'Segoe UI', Arial, sans-serif; }
 .fk { fill: var(--erd-fk); font: 700 var(--erd-key-size) 'Segoe UI', Arial, sans-serif; }
 .edge { stroke: var(--erd-edge); stroke-width: 2; fill: none; }
@@ -108,7 +108,7 @@ html[data-theme='dark'] {
 @media (max-width: 1024px) {
   .erd-figure-wrap {
     max-width: none;
-    min-width: 1024px !important;
+    min-width: 1280px !important;
     overflow: visible;
     height: auto;
   }
