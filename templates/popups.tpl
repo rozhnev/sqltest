@@ -1,3 +1,6 @@
+{if $SHOW_URGENT_BANNER}
+    {include file='urgent_banner.tpl'}
+{/if}
 <div class="toast" id="toast">{translate}toast_sql_copied_to_buffer{/translate}</div>
 
 <!-- Email Login/Register Popup -->
