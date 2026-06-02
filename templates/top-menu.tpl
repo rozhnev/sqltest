@@ -5,30 +5,39 @@
     {assign var="SiteDescription" value="{translate}site_description{/translate}"}
 {/if}
 <div class="top-menu-left">
-    {* <a href="/{$Lang}/" target="_self" style="display: flex;"> *}
-        <p class="site-name-wrapper">
-            <a href="/{$Lang}/" target="_self">
-                <span class="site-name">SQLtest.online</span>
-            </a>
-            {* <span class="site-promo">{$SitePromo}</span> *}
-        </p>
-        <h2>
-            <a class="practice-list" href="/{$Lang}/" target="_self" style="display: flex; align-items: center; gap: 4px; font-size: 0.75em;">
-                {translate}practice{/translate}
-            </a>
-        </h2>
-        <h2>
-            <a class="lessons-list" href="/{$Lang}/lesson/getting-started/introduction-to-databases" target="_self" style="display: flex; align-items: center; gap: 4px; font-size: 0.75em;">
-                {translate}lessons{/translate}
-            </a>
-        </h2>
-        <h2>
-            <a class="tests-list" href="/{$Lang}/test/start" target="_self" style="display: flex; align-items: center; gap: 4px; font-size: 0.75em;">
-                {translate}test{/translate}
-            </a>
-        </h2>
-    {* </a> *}
-    {* <div class="divider"></div> *}
+    <p class="site-name-wrapper">
+        <a href="/{$Lang}/" target="_self">
+            <span class="site-name">SQLtest.online</span>
+        </a>
+    </p>
+    <h2>
+        <a class="practice-list" href="/{$Lang}/" target="_self" style="display: flex; align-items: center; gap: 4px; font-size: 0.75em;">
+            {translate}practice{/translate}
+        </a>
+    </h2>
+    <h2>
+        <a class="lessons-list" href="/{$Lang}/lesson/getting-started/introduction-to-databases" target="_self" style="display: flex; align-items: center; gap: 4px; font-size: 0.75em;">
+            {translate}lessons{/translate}
+        </a>
+    </h2>
+    <h2>
+        <a class="playground-list" href="/{$Lang}/playground/" target="_self" style="display: flex; align-items: center; gap: 4px; font-size: 0.75em;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <path d="M8 3H5a2 2 0 0 0-2 2v3"/>
+                <path d="M16 3h3a2 2 0 0 1 2 2v3"/>
+                <path d="M8 21H5a2 2 0 0 1-2-2v-3"/>
+                <path d="M16 21h3a2 2 0 0 0 2-2v-3"/>
+                <path d="m9 9 6 6"/>
+                <path d="m15 9-6 6"/>
+            </svg>
+            {translate}playground{/translate}
+        </a>
+    </h2>
+    <h2>
+        <a class="tests-list" href="/{$Lang}/test/start" target="_self" style="display: flex; align-items: center; gap: 4px; font-size: 0.75em;">
+            {translate}test{/translate}
+        </a>
+    </h2>
 </div>
 {* <div class="top-menu-center">
     <span  class="site-description">{$SiteDescription}</span>
