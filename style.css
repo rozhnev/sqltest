@@ -354,12 +354,6 @@ header .button .currency,
     color: chocolate;
     margin: 0 8px 0 0;
 }
-header .divider {
-    border-right: 1px solid silver; 
-    display: block; 
-    height: 85%; 
-    margin-top: 0.5em;
-}
 .top-menu-left {
     min-width: 12.5vw; 
     display: flex; 
