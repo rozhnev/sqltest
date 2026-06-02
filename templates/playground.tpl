@@ -63,6 +63,10 @@
         margin-bottom: 0.5rem;
         line-height: 1.55;
     }
+    .column {
+        overflow-y: visible;
+    }
+
 </style>
 <body>
     <div class="container">
@@ -75,7 +79,7 @@
         {/if}
         </header>
         <main3 id="main3">
-            <div class="column">
+            <main class="column">
                 <div class="menu" id="menu">
                     <div class="question-wrapper" style="margin-right: 6px;">
                         <div id="menu-content" class="menu-content">    
@@ -101,42 +105,44 @@
                         </div>
                     </div>
                 </div>
-                <section class="playground-content">
-                    <div class="question-wrapper playground-text-section">
-                        <h1>{translate}playground_content_title{/translate}</h1>
-                        <p>{translate}playground_content_intro{/translate}</p>
+                <article>
+                    <section class="playground-content">
+                        <div class="question-wrapper playground-text-section">
+                            <h1>{translate}playground_content_title{/translate}</h1>
+                            <p>{translate}playground_content_intro{/translate}</p>
 
-                        <h2>{translate}playground_content_summary_title{/translate}</h2>
-                        <ul>
-                            <li>{translate}playground_content_summary_1{/translate}</li>
-                            <li>{translate}playground_content_summary_2{/translate}</li>
-                            <li>{translate}playground_content_summary_3{/translate}</li>
-                            <li>{translate}playground_content_summary_4{/translate}</li>
-                        </ul>
+                            <h2>{translate}playground_content_summary_title{/translate}</h2>
+                            <ul>
+                                <li>{translate}playground_content_summary_1{/translate}</li>
+                                <li>{translate}playground_content_summary_2{/translate}</li>
+                                <li>{translate}playground_content_summary_3{/translate}</li>
+                                <li>{translate}playground_content_summary_4{/translate}</li>
+                            </ul>
 
-                        <h2>{translate}playground_content_features_title{/translate}</h2>
-                        <ul>
-                            <li>{translate}playground_content_feature_1{/translate}</li>
-                            <li>{translate}playground_content_feature_2{/translate}</li>
-                            <li>{translate}playground_content_feature_3{/translate}</li>
-                        </ul>
+                            <h2>{translate}playground_content_features_title{/translate}</h2>
+                            <ul>
+                                <li>{translate}playground_content_feature_1{/translate}</li>
+                                <li>{translate}playground_content_feature_2{/translate}</li>
+                                <li>{translate}playground_content_feature_3{/translate}</li>
+                            </ul>
 
-                        <h2>{translate}playground_content_supported_title{/translate}</h2>
-                        <p>{translate}playground_content_supported_text{/translate}</p>
+                            <h2>{translate}playground_content_supported_title{/translate}</h2>
+                            <p>{translate}playground_content_supported_text{/translate}</p>
 
-                        <h2>{translate}playground_content_use_cases_title{/translate}</h2>
-                        <p>{translate}playground_content_use_cases_text{/translate}</p>
+                            <h2>{translate}playground_content_use_cases_title{/translate}</h2>
+                            <p>{translate}playground_content_use_cases_text{/translate}</p>
 
-                        <h2>{translate}playground_content_faq_title{/translate}</h2>
-                        <h3>{translate}playground_content_faq_q1{/translate}</h3>
-                        <p>{translate}playground_content_faq_a1{/translate}</p>
-                        <h3>{translate}playground_content_faq_q2{/translate}</h3>
-                        <p>{translate}playground_content_faq_a2{/translate}</p>
-                        <h3>{translate}playground_content_faq_q3{/translate}</h3>
-                        <p>{translate}playground_content_faq_a3{/translate}</p>
-                    </div>
-                </section>
-            </div>
+                            <h2>{translate}playground_content_faq_title{/translate}</h2>
+                            <h3>{translate}playground_content_faq_q1{/translate}</h3>
+                            <p>{translate}playground_content_faq_a1{/translate}</p>
+                            <h3>{translate}playground_content_faq_q2{/translate}</h3>
+                            <p>{translate}playground_content_faq_a2{/translate}</p>
+                            <h3>{translate}playground_content_faq_q3{/translate}</h3>
+                            <p>{translate}playground_content_faq_a3{/translate}</p>
+                        </div>
+                    </section>
+                </article>
+            </main>
             <div class="column">
                 <div class="question-wrapper" style="margin-right: 6px;">
                     <div class="code-actions-upper" id="code-actions">
@@ -161,11 +167,11 @@
                     <div class="code-result ace-xcode" id="code-result"></div>
                 </div>
             </div>
-            <div class="column db-description" id="right-panel">            
+            <aside class="column db-description" id="right-panel">            
                 {if $User->showAd()}
                     {include file="{$Lang}/donation_goal_widget.tpl"}
                 {/if} 
-            </div>
+            </aside>
         </main3>
         <footer>
             {include file='footer.tpl'}
