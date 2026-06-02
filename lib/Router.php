@@ -32,7 +32,7 @@ class Router
             'achievement'       => "@(?<lang>{$this->langPattern})/(?<action>achievement)/(?<achievementID>[a-z0-9-]+)@i",
             // Accepts with both module and lesson
             'lessons'           => "@(?<lang>{$this->langPattern})/(?<action>lesson)(?:/(?<module>[a-z-]+))?(?:/(?<lesson>[a-z-]+))?@i",
-            'playground_run'    => "@(?<lang>{$this->langPattern})/(?<class>playground)/(?<database>mysql80|mariadb118|psql17|sqlite3|mssql2022|oracle23|firebird4|soqol)/(?<action>query-run)@i",
+            'playground_run'    => "@(?<lang>{$this->langPattern})/(?<class>playground)/(?<database>[a-z0-9_]+)/(?<action>query-run)@i",
             'playground'        => "@(?<lang>{$this->langPattern})/(?<action>playground)/@i",
             'embed'             => "@(?<lang>{$this->langPattern})/(?<action>embed)@i",
             'embed-sql'         => "@(?<action>embed)-sql@i",

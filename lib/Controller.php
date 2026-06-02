@@ -9,6 +9,7 @@ class Controller
     private $host;
     private $lang;
     private array $languages;
+    private array $playgroundConfig;
 
     private function registerModifiers(array $mods): void
     {
@@ -32,6 +33,7 @@ class Controller
         $this->env          = $env;
         $this->domain       = $config['domain'] ?? 'localhost';
         $this->languages    = $config['languages'] ?? [];
+        $this->playgroundConfig = $config['playground'] ?? [];
 
         // Build absolute domain safely (works with proxies)
         $host = (string)($_SERVER['HTTP_HOST'] ?? $this->domain);
@@ -104,6 +106,58 @@ class Controller
         $this->assignVariables([
             'SchemaJsonLd' => json_encode($schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT)
         ]);
+    }
+
+    private function getPlaygroundDatabasesData(): array
+    {
+        $configuredDatabases = $this->playgroundConfig['databases'] ?? [];
+        $configuredDefaultVersion = (string)($this->playgroundConfig['default_version'] ?? '');
+
+        $databases = [];
+        $allowedVersions = [];
+        $defaultDatabaseId = '';
+        $defaultVersion = '';
+
+        foreach ($configuredDatabases as $databaseId => $databaseConfig) {
+            $versionsMap = $databaseConfig['versions'] ?? [];
+            if (!is_array($versionsMap) || empty($versionsMap)) {
+                continue;
+            }
+
+            $versions = [];
+            foreach ($versionsMap as $versionId => $versionLabel) {
+                $versionId = (string)$versionId;
+                $versionLabel = (string)$versionLabel;
+                $versions[] = [
+                    'id' => $versionId,
+                    'label' => $versionLabel,
+                ];
+                $allowedVersions[] = $versionId;
+
+                if ($configuredDefaultVersion !== '' && $versionId === $configuredDefaultVersion) {
+                    $defaultDatabaseId = (string)$databaseId;
+                    $defaultVersion = $versionId;
+                }
+            }
+
+            $databases[] = [
+                'id' => (string)$databaseId,
+                'label' => (string)($databaseConfig['name'] ?? $databaseId),
+                'versions' => $versions,
+            ];
+        }
+
+        if ($defaultVersion === '' && !empty($databases)) {
+            $defaultDatabaseId = $databases[0]['id'];
+            $defaultVersion = $databases[0]['versions'][0]['id'];
+        }
+
+        return [
+            'databases' => $databases,
+            'default_database' => $defaultDatabaseId,
+            'default_version' => $defaultVersion,
+            'allowed_versions' => $allowedVersions,
+        ];
     }
 
     public function setHreflangLinks(string $path, string $currentLang): void
@@ -1202,6 +1256,8 @@ class Controller
         $pageTitle = Localizer::translateString('playground_page_title');
         $pageDescription = Localizer::translateString('playground_page_description');
 
+        $playgroundData = $this->getPlaygroundDatabasesData();
+
         $this->assignVariables([
             'Action'            => 'playground',
             'PageTitle'         => $pageTitle,
@@ -1214,6 +1270,9 @@ class Controller
             'UseAce'            => true,
             'QuestionID'            => 1,
             'DB'                    => '',
+            'PlaygroundDatabases' => $playgroundData['databases'],
+            'PlaygroundDefaultDatabase' => $playgroundData['default_database'],
+            'PlaygroundDefaultVersion' => $playgroundData['default_version'],
         ]);
 
         $this->setHreflangLinks($params['path'], $this->lang);
@@ -1284,6 +1343,14 @@ class Controller
 
     public function playground_query_run(array $params): void 
     {
+        $playgroundData = $this->getPlaygroundDatabasesData();
+        if (!in_array($params['database'], $playgroundData['allowed_versions'], true)) {
+            http_response_code(400);
+            $this->engine->assign('QueryResult', json_encode([['error' => 'Unsupported database version']]));
+            $this->engine->display("query_result.tpl");
+            return;
+        }
+
         $sql = $_POST["query"] ?? '';
         if (!empty($sql)) {
             $query = new Query($sql);
