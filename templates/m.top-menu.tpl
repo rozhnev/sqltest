@@ -30,6 +30,21 @@
         </h2>
     </div>
     <div class="mobile-menu-item">
+        <h2>
+            <a class="playground-list" href="/{$Lang}/playground/" target="_self" style="display: flex; align-items: center; gap: 4px; font-size: 0.75em;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                    <path d="M8 3H5a2 2 0 0 0-2 2v3"/>
+                    <path d="M16 3h3a2 2 0 0 1 2 2v3"/>
+                    <path d="M8 21H5a2 2 0 0 1-2-2v-3"/>
+                    <path d="M16 21h3a2 2 0 0 0 2-2v-3"/>
+                    <path d="m9 9 6 6"/>
+                    <path d="m15 9-6 6"/>
+                </svg>
+                {translate}playground{/translate}
+            </a>
+        </h2>
+    </div>
+    <div class="mobile-menu-item">
         {include file='theme-switcher.tpl'}
     </div>
     <div class="mobile-menu-item">

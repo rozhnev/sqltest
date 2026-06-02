@@ -24,6 +24,22 @@
     .menu-panel .db-label input{
         margin: 0 6px 0 0;
     }
+    .menu-panel .version-select-wrap {
+        padding: 0.5rem;
+    }
+    .menu-panel .version-select-wrap label {
+        display: block;
+        color: var(--menu-link-color);
+        margin-bottom: 0.35rem;
+    }
+    .menu-panel .version-select-wrap select {
+        width: 100%;
+        border: 1px solid silver;
+        border-radius: 4px;
+        padding: 0.35rem;
+        background: #fff;
+        color: #111;
+    }
     .playground-content {
         margin: 12px 6px 0;
         font-size: small;
@@ -68,54 +84,18 @@
                             </button>
                             <div class="menu-panel active">
                                 <ul>
-                                    <li>
-                                        <label class="db-label">
-                                            <input type="radio" name="database" value="mariadb118" checked>
-                                            MariaDB
-                                        </label>
+                                    {foreach from=$PlaygroundDatabases item=db}
+                                        <li>
+                                            <label class="db-label">
+                                                <input type="radio" name="database" value="{$db.id|escape:'html'}" {if $db.id == $PlaygroundDefaultDatabase}checked{/if}>
+                                                {$db.label|escape:'html'}
+                                            </label>
+                                        </li>
+                                    {/foreach}
+                                    <li class="version-select-wrap">
+                                        <label for="databaseVersion">Version</label>
+                                        <select id="databaseVersion" name="databaseVersion"></select>
                                     </li>
-                                    <li>
-                                        <label class="db-label">
-                                            <input type="radio" name="database" value="mysql80">
-                                            MySQL
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="db-label">
-                                            <input type="radio" name="database" value="psql17">
-                                            PostgreSQL
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="db-label">
-                                            <input type="radio" name="database" value="sqlite3">
-                                            SQLite
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="db-label">
-                                            <input type="radio" name="database" value="mssql2022">
-                                            MS SQL Server
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="db-label">
-                                            <input type="radio" name="database" value="oracle23">
-                                            Oracle
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="db-label">
-                                            <input type="radio" name="database" value="firebird4">
-                                            Firebird
-                                        </label>
-                                    </li>
-                                    {* <li>
-                                        <label class="db-label">
-                                            <input type="radio" name="database" value="soqol">
-                                            SoQoL
-                                        </label>
-                                    </li> *}
                                 </ul>
                             </div>
                         </div>
@@ -195,12 +175,54 @@
     </body>
     <script>
         {literal}
+        const playgroundDatabases = {/literal}{$PlaygroundDatabases|json_encode nofilter}{literal};
+        const defaultPlaygroundVersion = {/literal}{$PlaygroundDefaultVersion|json_encode nofilter}{literal};
+
+        function updateVersionOptions(databaseId, preferredVersion = null) {
+            const versionSelect = document.getElementById('databaseVersion');
+            if (!versionSelect) {
+                return;
+            }
+
+            const selectedDatabase = playgroundDatabases.find((db) => db.id === databaseId);
+            const versions = selectedDatabase ? selectedDatabase.versions : [];
+
+            versionSelect.innerHTML = '';
+            versions.forEach((version) => {
+                const option = document.createElement('option');
+                option.value = version.id;
+                option.textContent = version.label;
+                versionSelect.appendChild(option);
+            });
+
+            if (versions.length === 0) {
+                return;
+            }
+
+            const requestedVersion = preferredVersion || defaultPlaygroundVersion;
+            const hasRequestedVersion = versions.some((version) => version.id === requestedVersion);
+            versionSelect.value = hasRequestedVersion ? requestedVersion : versions[0].id;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const checkedDatabase = document.querySelector('input[name="database"]:checked');
+            if (checkedDatabase) {
+                updateVersionOptions(checkedDatabase.value, defaultPlaygroundVersion);
+            }
+
+            document.querySelectorAll('input[name="database"]').forEach((radio) => {
+                radio.addEventListener('change', (event) => {
+                    updateVersionOptions(event.target.value);
+                });
+            });
+        });
+
         function executeQuery() {
             setLoader('code-result');
             let formData = new FormData();
-            const database = document.querySelector('input[name="database"]:checked').value;
+            const databaseVersion = document.getElementById('databaseVersion').value;
             formData.append('query', window.sql_editor.getValue());
-            fetch(`/${lang}/playground/${database}/query-run`, {
+            fetch(`/${lang}/playground/${databaseVersion}/query-run`, {
                 method: "POST",
                 mode: "cors",
                 cache: "default",
