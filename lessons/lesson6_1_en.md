@@ -16,6 +16,8 @@ In previous lessons, you already learned how to fetch data and combine tables wi
 
 That is exactly what subqueries are for: they make SQL logic step-by-step and easier to reason about.
 
+<img src="/images/lessons/lesson6_1-subqueries-intro.svg" alt="SQL subquery diagram showing inner query execution first, then outer query, and usage in SELECT, WHERE, and FROM" width="100%">
+
 ## What Is a Subquery
 
 A **subquery** is a `SELECT` statement nested inside another SQL query. The query that contains it is called the **outer query**.

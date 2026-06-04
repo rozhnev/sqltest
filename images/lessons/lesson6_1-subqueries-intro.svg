@@ -1,0 +1,65 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F7FBFF"/>
+      <stop offset="1" stop-color="#E8F1FF"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="40" y1="40" x2="460" y2="590" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#102A43"/>
+      <stop offset="1" stop-color="#1F3F69"/>
+    </linearGradient>
+    <filter id="softShadow" x="0" y="0" width="1200" height="630" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#6B7A90" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="630" rx="24" fill="url(#bg)"/>
+
+  <circle cx="1135" cy="85" r="120" fill="#DCEBFF"/>
+  <circle cx="1045" cy="565" r="165" fill="#D8E7FF"/>
+  <circle cx="540" cy="40" r="26" fill="#CFE1FF"/>
+
+  <rect x="40" y="40" width="420" height="550" rx="28" fill="url(#panel)" filter="url(#softShadow)"/>
+
+  <text x="76" y="132" fill="#9FC5FF" font-family="Verdana, Geneva, sans-serif" font-size="20" font-weight="700" letter-spacing="1.2">SQL COURSE</text>
+  <text x="76" y="210" fill="#FFFFFF" font-family="Verdana, Geneva, sans-serif" font-size="40" font-weight="800">SQL Subqueries</text>
+  <text x="76" y="266" fill="#CFE1FF" font-family="Verdana, Geneva, sans-serif" font-size="34" font-weight="700">Basics</text>
+
+  <rect x="76" y="360" width="348" height="164" rx="18" fill="#17385C"/>
+  <text x="98" y="402" fill="#9FC5FF" font-family="Verdana, Geneva, sans-serif" font-size="18" font-weight="700">Core idea</text>
+  <text x="98" y="440" fill="#FFFFFF" font-family="Verdana, Geneva, sans-serif" font-size="24" font-weight="700">SELECT inside SELECT</text>
+  <text x="98" y="476" fill="#D8E7FF" font-family="Verdana, Geneva, sans-serif" font-size="18">Inner query runs first,</text>
+  <text x="98" y="504" fill="#D8E7FF" font-family="Verdana, Geneva, sans-serif" font-size="18">outer query uses result.</text>
+
+  <rect x="505" y="70" width="655" height="160" rx="22" fill="#FFFFFF" filter="url(#softShadow)"/>
+  <text x="536" y="114" fill="#2D4159" font-family="Verdana, Geneva, sans-serif" font-size="24" font-weight="700">Execution Flow</text>
+
+  <rect x="536" y="128" width="250" height="78" rx="14" fill="#E9F2FF"/>
+  <text x="557" y="161" fill="#375A7A" font-family="Verdana, Geneva, sans-serif" font-size="16" font-weight="700">Inner Query</text>
+  <text x="557" y="187" fill="#1F3F69" font-family="Verdana, Geneva, sans-serif" font-size="15">SELECT AVG(...) FROM ...</text>
+
+  <path d="M805 167H875" stroke="#6E8FB5" stroke-width="4" stroke-linecap="round"/>
+  <path d="M869 159L881 167L869 175" stroke="#6E8FB5" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="889" y="128" width="242" height="78" rx="14" fill="#EAFBF2"/>
+  <text x="910" y="161" fill="#2B6B4F" font-family="Verdana, Geneva, sans-serif" font-size="16" font-weight="700">Outer Query</text>
+  <text x="910" y="187" fill="#20543F" font-family="Verdana, Geneva, sans-serif" font-size="15">WHERE value &gt; (subquery)</text>
+
+  <rect x="505" y="252" width="318" height="155" rx="20" fill="#FFFFFF" filter="url(#softShadow)"/>
+  <text x="534" y="294" fill="#2D4159" font-family="Verdana, Geneva, sans-serif" font-size="22" font-weight="700">Subquery in SELECT</text>
+  <text x="534" y="326" fill="#556B84" font-family="Verdana, Geneva, sans-serif" font-size="17">Add per-row metrics</text>
+  <rect x="534" y="344" width="258" height="40" rx="10" fill="#F2F7FF"/>
+  <text x="548" y="370" fill="#2F4D72" font-family="Verdana, Geneva, sans-serif" font-size="15">(SELECT ... WHERE id = c.id)</text>
+
+  <rect x="842" y="252" width="318" height="155" rx="20" fill="#FFFFFF" filter="url(#softShadow)"/>
+  <text x="871" y="294" fill="#2D4159" font-family="Verdana, Geneva, sans-serif" font-size="22" font-weight="700">Subquery in WHERE</text>
+  <text x="871" y="326" fill="#556B84" font-family="Verdana, Geneva, sans-serif" font-size="17">Dynamic filtering</text>
+  <rect x="871" y="344" width="258" height="40" rx="10" fill="#F2F7FF"/>
+  <text x="885" y="370" fill="#2F4D72" font-family="Verdana, Geneva, sans-serif" font-size="15">WHERE x &gt; (SELECT AVG(...))</text>
+
+  <rect x="505" y="430" width="655" height="160" rx="22" fill="#FFFFFF" filter="url(#softShadow)"/>
+  <text x="536" y="472" fill="#2D4159" font-family="Verdana, Geneva, sans-serif" font-size="22" font-weight="700">Inline View (Subquery in FROM)</text>
+  <rect x="536" y="492" width="592" height="66" rx="12" fill="#F2F7FF"/>
+  <text x="553" y="520" fill="#2F4D72" font-family="Verdana, Geneva, sans-serif" font-size="15">FROM (SELECT customer_id FROM customer WHERE active = 1) AS actives</text>
+  <text x="553" y="545" fill="#2F4D72" font-family="Verdana, Geneva, sans-serif" font-size="15">JOIN payment p ON active_cust.customer_id = p.customer_id</text>
+</svg>

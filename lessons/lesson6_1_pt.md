@@ -16,6 +16,8 @@ Nas lições anteriores, você aprendeu a recuperar dados e combinar tabelas com
 
 É exatamente para isso que servem as subconsultas: elas deixam a lógica SQL mais sequencial e mais fácil de entender.
 
+<img src="/images/lessons/lesson6_1-subqueries-intro.svg" alt="Diagrama de subconsultas SQL mostrando a execução primeiro da consulta interna, depois da externa, e o uso em SELECT, WHERE e FROM" width="100%">
+
 ## O que é uma subconsulta
 
 Uma **subconsulta** é uma instrução `SELECT` aninhada dentro de outra consulta SQL. A consulta que contém a subconsulta é chamada de consulta **externa**.

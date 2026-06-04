@@ -16,6 +16,8 @@ Dans les leçons précédentes, vous avez appris à récupérer des données et 
 
 C'est exactement le rôle des sous-requêtes : elles permettent une logique par étapes, plus claire et plus flexible.
 
+<img src="/images/lessons/lesson6_1-subqueries-intro.svg" alt="Schéma de sous-requêtes SQL montrant l'exécution d'abord de la requête interne, puis de la requête externe, et l'usage en SELECT, WHERE et FROM" width="100%">
+
 ## Qu'est-ce qu'une sous-requête
 
 Une **sous-requête** (Subquery) est une instruction `SELECT` imbriquée dans une autre requête SQL. La requête qui contient la sous-requête s'appelle la requête **externe**.
