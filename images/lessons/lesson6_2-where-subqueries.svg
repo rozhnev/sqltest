@@ -1,0 +1,76 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F8FBFF"/>
+      <stop offset="1" stop-color="#E6F0FF"/>
+    </linearGradient>
+    <linearGradient id="leftPanel" x1="40" y1="40" x2="460" y2="590" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0F2740"/>
+      <stop offset="1" stop-color="#1A3D63"/>
+    </linearGradient>
+    <filter id="shadow" x="0" y="0" width="1200" height="630" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#5E738E" flood-opacity="0.22"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="630" rx="24" fill="url(#bg)"/>
+
+  <circle cx="1110" cy="110" r="130" fill="#D8E8FF"/>
+  <circle cx="1030" cy="560" r="160" fill="#D2E3FF"/>
+  <circle cx="530" cy="42" r="24" fill="#D5E6FF"/>
+
+  <rect x="40" y="40" width="420" height="550" rx="28" fill="url(#leftPanel)" filter="url(#shadow)"/>
+
+  <text x="78" y="132" fill="#9EC3F9" font-family="Verdana, Geneva, sans-serif" font-size="20" font-weight="700" letter-spacing="1.2">SQL COURSE</text>
+  <text x="78" y="212" fill="#FFFFFF" font-family="Verdana, Geneva, sans-serif" font-size="48" font-weight="800">Subqueries</text>
+  <text x="78" y="268" fill="#CFE2FF" font-family="Verdana, Geneva, sans-serif" font-size="36" font-weight="700">in WHERE</text>
+
+  <rect x="78" y="348" width="344" height="176" rx="18" fill="#173858"/>
+  <text x="98" y="392" fill="#9FC5FF" font-family="Verdana, Geneva, sans-serif" font-size="18" font-weight="700">Key question</text>
+  <text x="98" y="430" fill="#FFFFFF" font-family="Verdana, Geneva, sans-serif" font-size="24" font-weight="700">Which operator</text>
+  <text x="98" y="462" fill="#FFFFFF" font-family="Verdana, Geneva, sans-serif" font-size="24" font-weight="700">fits this subquery?</text>
+  <text x="98" y="500" fill="#D8E7FF" font-family="Verdana, Geneva, sans-serif" font-size="17">IN / EXISTS / ANY / ALL</text>
+
+  <rect x="505" y="70" width="655" height="150" rx="22" fill="#FFFFFF" filter="url(#shadow)"/>
+  <text x="536" y="112" fill="#2C415A" font-family="Verdana, Geneva, sans-serif" font-size="24" font-weight="700">Decision Path for WHERE Subqueries</text>
+
+  <rect x="536" y="126" width="194" height="72" rx="12" fill="#EDF4FF"/>
+  <text x="554" y="155" fill="#335776" font-family="Verdana, Geneva, sans-serif" font-size="15" font-weight="700">One value?</text>
+  <text x="554" y="180" fill="#2F4D72" font-family="Verdana, Geneva, sans-serif" font-size="14">Use =, &gt;, &lt;, ...</text>
+
+  <path d="M735 162H770" stroke="#7B93B2" stroke-width="3" stroke-linecap="round"/>
+  <path d="M764 154L776 162L764 170" stroke="#7B93B2" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="782" y="126" width="182" height="72" rx="12" fill="#EEF9F2"/>
+  <text x="800" y="155" fill="#2B6C4E" font-family="Verdana, Geneva, sans-serif" font-size="15" font-weight="700">Many values?</text>
+  <text x="800" y="180" fill="#245841" font-family="Verdana, Geneva, sans-serif" font-size="14">Use IN or EXISTS</text>
+
+  <path d="M969 162H1003" stroke="#7B93B2" stroke-width="3" stroke-linecap="round"/>
+  <path d="M997 154L1009 162L997 170" stroke="#7B93B2" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="1015" y="126" width="125" height="72" rx="12" fill="#FFF6E8"/>
+  <text x="1031" y="155" fill="#875D19" font-family="Verdana, Geneva, sans-serif" font-size="15" font-weight="700">Set compare</text>
+  <text x="1031" y="180" fill="#6D4C1F" font-family="Verdana, Geneva, sans-serif" font-size="14">ANY / ALL</text>
+
+  <rect x="505" y="245" width="318" height="162" rx="20" fill="#FFFFFF" filter="url(#shadow)"/>
+  <text x="533" y="285" fill="#2C415A" font-family="Verdana, Geneva, sans-serif" font-size="22" font-weight="700">IN vs NOT IN</text>
+  <rect x="533" y="300" width="260" height="34" rx="8" fill="#F3F8FF"/>
+  <text x="544" y="322" fill="#2F4D72" font-family="Verdana, Geneva, sans-serif" font-size="14">film_id IN (SELECT ...)</text>
+  <text x="533" y="354" fill="#556B84" font-family="Verdana, Geneva, sans-serif" font-size="16">Watch out for NULL with NOT IN.</text>
+
+  <rect x="842" y="245" width="318" height="162" rx="20" fill="#FFFFFF" filter="url(#shadow)"/>
+  <text x="870" y="285" fill="#2C415A" font-family="Verdana, Geneva, sans-serif" font-size="22" font-weight="700">EXISTS Pattern</text>
+  <rect x="870" y="300" width="260" height="34" rx="8" fill="#F3F8FF"/>
+  <text x="881" y="322" fill="#2F4D72" font-family="Verdana, Geneva, sans-serif" font-size="14">WHERE EXISTS (SELECT 1 ...)</text>
+  <text x="870" y="354" fill="#556B84" font-family="Verdana, Geneva, sans-serif" font-size="16">Stops at first match.</text>
+
+  <rect x="505" y="430" width="655" height="160" rx="22" fill="#FFFFFF" filter="url(#shadow)"/>
+  <text x="536" y="472" fill="#2C415A" font-family="Verdana, Geneva, sans-serif" font-size="22" font-weight="700">ANY and ALL in Practice</text>
+  <rect x="536" y="490" width="292" height="74" rx="12" fill="#F3F8FF"/>
+  <text x="554" y="520" fill="#2F4D72" font-family="Verdana, Geneva, sans-serif" font-size="15">length &gt; ANY (subquery)</text>
+  <text x="554" y="545" fill="#586E87" font-family="Verdana, Geneva, sans-serif" font-size="14">Longer than at least one value.</text>
+
+  <rect x="849" y="490" width="292" height="74" rx="12" fill="#F3F8FF"/>
+  <text x="867" y="520" fill="#2F4D72" font-family="Verdana, Geneva, sans-serif" font-size="15">length &gt; ALL (subquery)</text>
+  <text x="867" y="545" fill="#586E87" font-family="Verdana, Geneva, sans-serif" font-size="14">Longer than every value.</text>
+</svg>
