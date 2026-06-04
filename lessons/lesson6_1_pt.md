@@ -1,41 +1,113 @@
-Aprenda os fundamentos das subconsultas SQL, também conhecidas como consultas aninhadas ou consultas internas. Esta lição apresenta o conceito de colocar uma consulta dentro de outra, explica a diferença entre subconsultas escalares e de múltiplas linhas e apresenta as "Inline Views". Aprenda a usar subconsultas para realizar a recuperação de dados em várias etapas no banco de dados Sakila.
+---
+title: "O que é uma subconsulta em SQL: fundamentos, tipos e Inline View"
+description: "Uma subconsulta é um SELECT dentro de outra consulta. Veja tipos de subconsulta, fluxo de execução e Inline View com exemplos práticos em Sakila."
+keywords: ["SQL subquery", "subconsulta", "Inline View", "consulta aninhada", "WHERE", "FROM"]
+teaches: ["Entender o fluxo de execução entre consulta interna e externa", "Diferenciar subconsultas escalares, de múltiplas linhas e tabulares", "Usar Inline View na cláusula FROM"]
+about: ["SQL", "Subquery", "Inline View", "Sakila"]
+---
 
-# Lição 6.1: Introdução às Subconsultas — Consultas Aninhadas e Inline Views
+_Tempo de leitura: ~7 min_
 
-Nos módulos anteriores, aprendemos como recuperar dados de tabelas e uni-los. No entanto, às vezes uma única consulta não é suficiente para obter a resposta de que você precisa. Você pode precisar encontrar um valor primeiro (como uma média ou um ID específico) e depois usar esse valor em outra consulta. É aqui que entram as **Subconsultas**.
+Uma subconsulta em SQL permite dividir um problema em várias etapas dentro de uma única instrução. Nesta lição, você vai entender a ideia central de subconsultas, os principais tipos e como usá-las em `SELECT`, `WHERE` e `FROM` com exemplos da base Sakila.
 
-## O que é uma Subconsulta?
+# Introdução às Subconsultas: consultas aninhadas e Inline View
 
-Uma **Subconsulta** (ou Consulta Interna) é uma instrução `SELECT` aninhada dentro de outra instrução SQL. A consulta que contém a subconsulta é chamada de **Consulta Externa** (ou Consulta Principal).
+Nas lições anteriores, você aprendeu a recuperar dados e combinar tabelas com `JOIN`. Mas em tarefas reais, muitas vezes é preciso calcular um resultado intermediário primeiro e só depois usá-lo na consulta principal.
 
-As subconsultas são sempre colocadas entre parênteses `()`.
+É exatamente para isso que servem as subconsultas: elas deixam a lógica SQL mais sequencial e mais fácil de entender.
 
-## Lógica Central: Como elas funcionam
-Normalmente, o banco de dados executa a **Consulta Interna** primeiro. O resultado dessa consulta interna é então passado para a **Consulta Externa**, que o utiliza para completar sua própria execução.
+## O que é uma subconsulta
+
+Uma **subconsulta** é uma instrução `SELECT` aninhada dentro de outra consulta SQL. A consulta que contém a subconsulta é chamada de consulta **externa**.
+
+A subconsulta é sempre escrita entre parênteses `()`.
+
+## Como a subconsulta é executada
+
+Na maioria dos casos, o SGBD executa primeiro a consulta interna. Em seguida, o resultado é passado para a consulta externa, que conclui o filtro ou monta o conjunto final de dados.
 
 ```sql
--- Exemplo Conceitual
+-- Exemplo conceitual
 SELECT column_name
 FROM table_name
 WHERE column_name = (SELECT value FROM another_table);
-                    ^------- Isso executa primeiro -------^
 ```
 
-## Categorias de Subconsultas
-
-As subconsultas são frequentemente categorizadas pelo tipo de dados que retornam:
-
-1.  **Subconsulta Escalar:** Retorna exatamente um valor (uma linha e uma coluna).
-2.  **Subconsulta de Múltiplas Linhas:** Retorna uma lista de valores (uma coluna, várias linhas).
-3.  **Subconsulta de Tabela (Inline View):** Retorna um conjunto de resultados inteiro (várias colunas e linhas) e é usada na cláusula `FROM` como se fosse uma tabela temporária.
+*Nota: a expressão entre parênteses é calculada primeiro e depois a condição do `WHERE` externo é aplicada.*
 
 ---
 
-## 1. Subconsultas Aninhadas (Dentro de WHERE)
+## Tipos principais de subconsultas
 
-O uso mais comum de uma subconsulta é na cláusula `WHERE` para filtrar dados com base em um valor dinâmico.
+- **Subconsulta escalar**: retorna um valor (uma linha, uma coluna).
+- **Subconsulta de múltiplas linhas**: retorna uma lista de valores (uma coluna, várias linhas).
+- **Subconsulta tabular (Inline View)**: retorna um conjunto de linhas e colunas usado como tabela temporária.
 
-**Cenário:** Encontrar filmes que tenham um custo de substituição superior à média do custo de substituição de todos os filmes.
+---
+
+## Subconsulta em SELECT
+
+Você pode colocar subconsultas diretamente na lista `SELECT` quando precisa exibir uma métrica adicional ao lado das colunas principais sem mudar a granularidade do resultado. Isso é especialmente útil quando um `JOIN` poderia duplicar linhas ou exigir agregações mais pesadas.
+
+**Cenário 1:** mostrar o último pagamento de cada cliente (data e valor).
+
+```sql
+SELECT
+    c.customer_id,
+    c.first_name,
+    c.last_name,
+    (
+        SELECT p.payment_date
+        FROM payment AS p
+        WHERE p.customer_id = c.customer_id
+        ORDER BY p.payment_date DESC
+        LIMIT 1
+    ) AS last_payment_date,
+    (
+        SELECT p.amount
+        FROM payment AS p
+        WHERE p.customer_id = c.customer_id
+        ORDER BY p.payment_date DESC
+        LIMIT 1
+    ) AS last_payment_amount
+FROM
+    customer AS c
+LIMIT 10;
+```
+
+*Resultado: para cada cliente, você obtém exatamente um pagamento "mais recente". Com `JOIN`, isso costuma ser mais complexo: primeiro calcula-se a data máxima, depois faz-se nova junção e tratamento de empates.*
+
+**Cenário 2:** mostrar cada pagamento e seu desvio em relação à média de pagamentos do cliente.
+
+```sql
+SELECT
+    p.payment_id,
+    p.customer_id,
+    p.amount,
+    (
+        SELECT AVG(p2.amount)
+        FROM payment AS p2
+        WHERE p2.customer_id = p.customer_id
+    ) AS customer_avg_amount,
+    p.amount - (
+        SELECT AVG(p3.amount)
+        FROM payment AS p3
+        WHERE p3.customer_id = p.customer_id
+    ) AS delta_from_customer_avg
+FROM
+    payment AS p
+LIMIT 15;
+```
+
+*Resultado: cada linha de pagamento mantém a granularidade original e recebe um benchmark por cliente. Com `JOIN`, seria preciso criar uma tabela agregada separada e depois fazer uma junção extra.*
+
+---
+
+## Subconsulta em WHERE
+
+O caso mais comum é a subconsulta dentro de `WHERE`, quando o filtro depende de um valor calculado dinamicamente.
+
+**Cenário:** encontrar filmes com `replacement_cost` acima da média de todos os filmes.
 
 ```sql
 SELECT
@@ -44,44 +116,82 @@ SELECT
 FROM
     film
 WHERE
-    replacement_cost > (SELECT AVG(replacement_cost) FROM film);
+    replacement_cost > (
+        SELECT AVG(replacement_cost)
+        FROM film
+    );
 ```
-- **Consulta Interna:** Calcula o custo médio (US$ 19,98, por exemplo).
-- **Consulta Externa:** Encontra todos os filmes onde o custo é superior aos US$ 19,98 calculados.
+
+*Resultado: a consulta interna calcula a média e a consulta externa retorna os filmes acima desse valor.*
 
 ---
 
-## 2. Inline Views (Dentro de FROM)
+## Subconsulta em FROM (Inline View)
 
-Quando você coloca uma subconsulta na cláusula `FROM`, ela é chamada de **Inline View**. Você está essencialmente criando uma tabela temporária "na hora" que existe apenas durante a execução dessa consulta.
+Quando a subconsulta é colocada em `FROM`, ela funciona como uma tabela temporária dentro da consulta atual. Esse padrão é chamado **Inline View**.
 
-**Nota:** Você **deve** dar um alias (apelido) a uma inline view.
+Importante: toda Inline View precisa de alias.
 
-**Cenário:** Obter uma lista de clientes ativos e uni-la aos seus dados de pagamento.
+**Cenário:** obter clientes ativos e seus pagamentos.
 
 ```sql
 SELECT
     active_cust.first_name,
     p.amount
 FROM
-    (SELECT * FROM customer WHERE active = 1) AS active_cust
+    (
+        SELECT
+            customer_id,
+            first_name
+        FROM
+            customer
+        WHERE
+            active = 1
+    ) AS active_cust
 INNER JOIN
     payment AS p ON active_cust.customer_id = p.customer_id;
 ```
-*Nesse caso, a consulta externa une o resultado da subconsulta (`active_cust`) com a tabela `payment`.*
+
+*Resultado: a consulta externa junta o resultado da subconsulta `active_cust` com `payment`.*
 
 ---
 
-## Por que usar Subconsultas em vez de JOINs?
+## Quando a subconsulta é mais prática que JOIN
 
-- **Legibilidade:** Às vezes, uma subconsulta é mais fácil de entender do que um join complexo.
-- **Agregação:** As subconsultas são ótimas quando você precisa usar um valor agregado (como `AVG` ou `MAX`) para filtrar linhas individuais.
-- **Lógica:** Certas lógicas (como "Encontrar todos os X que NÃO existem em Y") podem ser expressas de forma muito limpa com subconsultas usando `NOT IN` ou `NOT EXISTS`.
+- Para lógica por etapas, quando você precisa primeiro de um valor intermediário.
+- Para filtrar por agregados (`AVG`, `MAX`, `MIN`) sem complicar a consulta principal.
+- Para cenários de ausência de relacionamento, em que `NOT IN` ou `NOT EXISTS` costumam ser opções naturais.
 
-## Principais Conclusões desta Lição
+---
 
-- Uma **Subconsulta** é uma instrução `SELECT` dentro de outra consulta.
-- **Subconsultas aninhadas** são geralmente encontradas nas cláusulas `WHERE` или `SELECT`.
-- **Inline Views** são subconsultas usadas na cláusula `FROM` e requerem um **alias**.
-- A **Consulta Interna** geralmente executa primeiro, fornecendo dados para a **Consulta Externa**.
-- As subconsultas são sempre envolvidas em **parênteses**.
+**Principais conclusões desta lição:**
+
+- Uma subconsulta é um `SELECT` dentro de outra consulta SQL.
+- A consulta interna geralmente executa antes da consulta externa.
+- A subconsulta pode retornar um valor, uma lista de valores ou um conjunto tabular completo.
+- A subconsulta em `FROM` é chamada Inline View e exige alias.
+- Subconsultas ajudam a escrever SQL mais claro e flexível.
+
+## Perguntas frequentes
+
+### Qual é a diferença entre subconsulta em WHERE e em FROM?
+Subconsulta em `WHERE` normalmente serve para filtrar linhas da consulta externa. Subconsulta em `FROM` cria um conjunto temporário (Inline View) que pode ser unido e processado depois.
+
+### Preciso sempre dar alias para subconsulta em FROM?
+Sim. Na maioria dos SGBDs, a subconsulta em `FROM` precisa obrigatoriamente de alias. Sem isso, a consulta falha.
+
+### Quando NOT EXISTS é melhor que NOT IN?
+Se a subconsulta puder retornar `NULL`, `NOT IN` pode gerar resultados inesperados. Nesses casos, `NOT EXISTS` costuma ser mais seguro.
+
+## Perguntas de entrevista
+
+### O que é uma subconsulta e como ela executa?
+Uma **subconsulta** é um `SELECT` aninhado dentro de uma consulta SQL externa. Em geral, a consulta interna executa primeiro e a externa usa esse resultado para filtrar ou montar o resultado final.
+
+### Qual é a diferença entre subconsulta escalar e subconsulta de múltiplas linhas?
+Uma **subconsulta escalar** retorna um valor e normalmente trabalha com `=` ou `>`. Uma **subconsulta de múltiplas linhas** retorna um conjunto de valores e é usada com `IN`, `ANY` ou `ALL`.
+
+### O que é Inline View em SQL?
+Uma **Inline View** é uma subconsulta em `FROM` que se comporta como tabela temporária dentro de uma única consulta. Ela precisa de alias para que suas colunas possam ser referenciadas.
+
+Na próxima lição, vamos aprofundar subconsultas em `WHERE` e estudar os operadores `IN`, `EXISTS`, `ANY` e `ALL`.
