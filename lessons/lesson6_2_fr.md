@@ -16,6 +16,8 @@ Dans la lecon precedente, nous avons vu l'idee generale des sous-requetes. Ici, 
 
 En pratique, c'est utile partout: de la recherche de clients sans paiements jusqu'a la comparaison d'une ligne avec un ensemble de resultats.
 
+<img src="/images/lessons/lesson6_2-where-subqueries.svg" alt="Schema de sous-requetes dans WHERE avec les operateurs IN, EXISTS, ANY et ALL" width="100%">
+
 ## Sous-requetes scalaires et operateurs de comparaison
 
 Si une sous-requete retourne exactement une valeur, on parle de sous-requete scalaire. Dans ce cas, vous pouvez utiliser les operateurs classiques `=`, `<>`, `>`, `>=`, `<`, `<=`.

@@ -16,6 +16,8 @@ In the previous lesson, we covered the general idea of subqueries. Now we focus 
 
 In real work, this is used constantly: from finding customers with no payments to comparing a row against a result set.
 
+<img src="/images/lessons/lesson6_2-where-subqueries.svg" alt="Diagram of WHERE subqueries with IN, EXISTS, ANY, and ALL operators" width="100%">
+
 ## Scalar Subqueries and Comparison Operators
 
 If a subquery returns exactly one value, it is called a scalar subquery. In that case, you can use standard operators `=`, `<>`, `>`, `>=`, `<`, `<=`.

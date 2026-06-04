@@ -16,6 +16,8 @@ Na lição anterior, vimos a ideia geral de subconsultas. Agora vamos focar no c
 
 Na prática, isso é usado o tempo todo: desde encontrar clientes sem pagamentos até comparar uma linha com um conjunto de resultados.
 
+<img src="/images/lessons/lesson6_2-where-subqueries.svg" alt="Diagrama de subconsultas em WHERE com os operadores IN, EXISTS, ANY e ALL" width="100%">
+
 ## Subconsultas Escalares e Operadores de Comparação
 
 Se uma subconsulta retorna exatamente um valor, ela é chamada de subconsulta escalar. Nesse caso, você pode usar os operadores padrão `=`, `<>`, `>`, `>=`, `<`, `<=`.
