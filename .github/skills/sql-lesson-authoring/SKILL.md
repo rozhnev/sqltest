@@ -95,6 +95,8 @@ The illustration should support the lesson content rather than act as generic de
 
 Split lessons into clear `##` sections.
 
+Do not number section headers. Use `## Topic Name`, not forms like `## 1. Topic Name`.
+
 Useful section types include:
 
 - definition or core idea;
@@ -113,6 +115,8 @@ Use `###` when a section contains several distinct subtopics, especially for:
 - step-by-step breakdowns;
 - separate rules or caveats;
 - usage scenarios.
+
+Do not number subsection headers. Use `### Subtopic`, not forms like `### 3.1. Subtopic`.
 
 ### 7. Final takeaway block
 
@@ -348,6 +352,7 @@ Before finishing, verify that the lesson:
 - has context paragraphs after the H1;
 - contains the lesson SVG image in the correct place for new lessons;
 - uses logical `##` sections;
+- uses non-numbered `##` and `###` headings;
 - includes practical SQL examples;
 - contains short explanatory notes after important examples;
 - ends with key takeaways;
