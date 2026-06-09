@@ -3,17 +3,15 @@ User-agent: *
 Disallow: /en/donate
 Disallow: /ru/donate
 Disallow: /pt/donate
+Disallow: /fr/donate
 
 Disallow: /en/test
 Disallow: /ru/test
 Disallow: /pt/test
+Disallow: /fr/test
 
-Disallow: /admin
+Disallow: /admin/
 
-User-agent: Yandex
-Disallow:
 Clean-param: path
-
-Allow: /
 
 Sitemap: https://sqltest.online/sitemap.xml
