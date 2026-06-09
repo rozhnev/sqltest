@@ -1,125 +1,164 @@
-# Leçon 3.1 : Fonctions SQL intégrées
+---
+title: "Fonctions SQL intégrées : syntaxe, catégories et exemples pratiques"
+description: "Découvrez comment utiliser les fonctions SQL intégrées dans SELECT et WHERE, avec des exemples concrets basés sur la base Sakila."
+keywords: ["fonctions sql", "fonctions SQL intégrées", "exemples de fonctions SQL", "fonctions dans SELECT", "fonctions dans WHERE", "SQL Sakila"]
+teaches: ["Comprendre ce que sont les fonctions SQL intégrées", "Utiliser les fonctions SQL dans SELECT et WHERE", "Choisir le bon type de fonction pour le texte, les nombres et les dates", "Éviter les erreurs fréquentes lors de l'utilisation des fonctions SQL"]
+about: ["SQL", "Fonctions intégrées", "Traitement des données", "Base de données Sakila", "Base de données relationnelle"]
+---
 
-## Que sont les fonctions SQL ?
+_Leçon 3.1 · Temps de lecture : ~8 min_
 
-Une fonction SQL est une opération prédéfinie qui accepte des valeurs d'entrée (arguments) et renvoie un résultat. Les fonctions peuvent être intégrées (fournies par le SGBD) ou définies par l'utilisateur (créées par les développeurs), mais dans cette leçon nous nous concentrons uniquement sur les fonctions intégrées.
+Dans cette leçon, vous étudierez le thème « fonctions sql » et verrez comment les fonctions intégrées permettent de transformer les données directement dans une requête. Nous allons couvrir la syntaxe de base, les principales catégories de fonctions et des exemples pratiques sur Sakila. À la fin, vous saurez utiliser les fonctions SQL avec assurance dans des cas réels d'analyse.
 
-Les fonctions SQL intégrées permettent de traiter les données directement dans la requête : transformer des valeurs, effectuer des calculs et travailler avec du texte, des dates et des nombres. Cela permet d'obtenir des résultats plus informatifs sans traitement supplémentaire côté application.
+# Fonctions SQL intégrées
 
-## Syntaxe courante
+Dans les leçons précédentes, vous avez appris à sélectionner, filtrer et trier des lignes. L'étape suivante consiste à calculer et transformer des valeurs dans la requête, sans traitement supplémentaire côté application.
 
-La syntaxe générale pour utiliser une fonction en SQL est :
+Les fonctions SQL intégrées sont idéales pour cela : elles rendent les requêtes plus expressives, réduisent la logique répétitive et accélèrent la préparation des rapports.
+
+<img src="/images/lessons/lesson3_1-built-in-functions.svg" alt="Fonctions SQL intégrées" width="100%">
+
+---
+
+## Qu'est-ce qu'une fonction SQL intégrée
+
+Une fonction SQL intégrée est une opération prédéfinie fournie par le SGBD. Elle reçoit des arguments et retourne une nouvelle valeur : texte, nombre, date ou résultat booléen.
+
+On utilise des fonctions quand il faut :
+
+- normaliser des valeurs textuelles ;
+- effectuer des calculs directement en SQL ;
+- extraire une partie d'une chaîne ou d'une date ;
+- convertir des valeurs d'un type vers un autre.
+
+---
+
+## Syntaxe de base
 
 ```sql
-NOM_FONCTION(argument1, argument2, ...);
+FUNCTION_NAME(argument1, argument2, ...)
 ```
 
-- **`NOM_FONCTION`** : Le nom de la fonction que vous souhaitez utiliser.
-- **`argument1, argument2, ...`** : Les valeurs d'entrée (arguments) requises par la fonction. Il peut s'agir de noms de colonnes, de valeurs littérales ou même d'autres fonctions.
+Où :
 
----
+- `FUNCTION_NAME` est le nom de la fonction ;
+- `argument1, argument2, ...` sont des colonnes, des littéraux ou des résultats d'autres fonctions.
 
-## Utilisation des fonctions dans la clause SELECT
-
-Les fonctions dans la clause `SELECT` vous permettent de transformer ou de calculer des valeurs pour le résultat final.
-
-### Exemple 1 : Fonction de chaîne (`UPPER`)
-La fonction `UPPER()` convertit une chaîne en majuscules.
+Exemple d'appel simple de fonction :
 
 ```sql
-SELECT UPPER(first_name) AS uppercase_name
-FROM employees;
+SELECT
+	UPPER(first_name) AS upper_name
+FROM customer
+LIMIT 5;
 ```
 
-Cette requête récupère la colonne `first_name` de la table `employees` et convertit chaque nom en majuscules, en donnant au résultat l'alias `uppercase_name`.
+*Résultat : chaque valeur de `first_name` est convertie en majuscules.*
 
----
+Vous pouvez aussi utiliser des appels imbriqués, où le résultat d'une fonction est passé en argument à une autre.
 
-### Exemple 2 : Fonction mathématique (`ROUND`)
-La fonction `ROUND()` arrondit un nombre à un nombre spécifié de décimales.
+Exemple d'appel imbriqué :
 
 ```sql
-SELECT ROUND(salary, 0) AS rounded_salary
-FROM employees;
+SELECT
+	UPPER(TRIM(first_name)) AS normalized_name
+FROM customer
+LIMIT 5;
 ```
 
-Cette requête récupère la colonne `salary` de la table `employees` et arrondit chaque salaire au nombre entier le plus proche, avec l'alias `rounded_salary`.
+*Résultat : les espaces en début/fin sont supprimés, puis le nom est converti en majuscules.*
 
 ---
 
-### Exemple 3 : Fonction de date (`NOW`)
-La fonction `NOW()` ne prend pas d'arguments et renvoie la date et l'heure actuelles.
+## Où les fonctions sont le plus utilisées
+
+### Fonctions dans SELECT
+
+Dans `SELECT`, les fonctions servent à façonner la sortie.
 
 ```sql
-SELECT NOW() AS current_datetime;
+SELECT
+	customer_id,
+	CONCAT(first_name, ' ', last_name) AS full_name,
+	UPPER(email) AS email_upper
+FROM customer
+LIMIT 10;
 ```
 
-Cette requête renvoie la date et l'heure actuelles.
+*Remarque : cet exemple utilise une seule table et montre comment les fonctions formatent les colonnes de sortie directement dans `SELECT`.*
 
----
+### Fonctions dans WHERE
 
-## Utilisation des fonctions dans la clause WHERE
-
-Les fonctions dans la clause `WHERE` vous permettent de filtrer les données en fonction de valeurs calculées ou transformées.
-
-### Exemple 1 : Fonction de chaîne (`LENGTH`)
-La fonction `LENGTH()` (ou `LEN()` selon le SGBD) renvoie la longueur d'une chaîne.
+Dans `WHERE`, les fonctions aident à filtrer selon des conditions calculées.
 
 ```sql
-SELECT *
-FROM products
-WHERE LENGTH(product_name) > 20;
+SELECT
+	title,
+	rental_duration
+FROM film
+WHERE LENGTH(title) >= 15
+  AND ABS(rental_duration - 5) <= 2
+ORDER BY title;
 ```
 
-Cette requête récupère toutes les colonnes de la table `products` où la longueur du `product_name` est supérieure à 20 caractères.
+*Résultat : renvoie les films avec des titres plus longs et une durée de location proche de 5 jours.*
 
 ---
 
-### Exemple 2 : Fonction de date (`YEAR`)
-La fonction `YEAR()` extrait l'année d'une date.
+## Principaux types de fonctions SQL
 
-```sql
-SELECT *
-FROM orders
-WHERE YEAR(order_date) = 2023;
-```
+### Fonctions de chaîne
 
-Cette requête récupère toutes les colonnes de la table `orders` où l'année de `order_date` est 2023.
+Exemples : `UPPER`, `LOWER`, `TRIM`, `SUBSTRING`, `CONCAT`.
 
----
+Utilisées pour nettoyer et formater le texte.
 
-### Exemple 3 : Fonction mathématique (`ABS`)
-La fonction `ABS()` renvoie la valeur absolue d'un nombre.
+### Fonctions mathématiques
 
-```sql
-SELECT *
-FROM transactions
-WHERE ABS(amount) > 100;
-```
+Exemples : `ROUND`, `ABS`, `CEILING`, `FLOOR`, `MOD`.
 
-Cette requête récupère toutes les colonnes de la table `transactions` où la valeur absolue du montant (`amount`) est supérieure à 100.
+Utilisées pour les calculs, les arrondis et le contrôle numérique.
 
----
+### Fonctions de date et d'heure
 
-## Types courants de fonctions SQL intégrées
+Exemples : `NOW`, `CURRENT_DATE`, `YEAR`, `MONTH`, `DATE_ADD`, `DATEDIFF`.
 
-Les fonctions SQL peuvent être globalement classées dans les types suivants :
+Utilisées pour l'analyse temporelle et les intervalles.
 
-1. **Fonctions de chaîne (String Functions)** : Utilisées pour manipuler des chaînes de caractères (ex : `UPPER`, `LOWER`, `SUBSTRING`, `LENGTH`, `TRIM`).
-2. **Fonctions mathématiques (Mathematical Functions)** : Utilisées pour effectuer des calculs mathématiques (ex : `ROUND`, `ABS`, `SQRT`, `MOD`).
-3. **Fonctions de date et d'heure (Date and Time Functions)** : Utilisées pour travailler avec les dates et les heures (ex : `NOW`, `YEAR`, `MONTH`, `DAY`, `DATE_ADD`, `DATE_SUB`).
-4. **Fonctions d'agrégation (Aggregate Functions)** : Utilisées pour résumer les données (ex : `COUNT`, `SUM`, `AVG`, `MIN`, `MAX`). (Abordées dans une leçon ultérieure)
-5. **Fonctions de conversion (Conversion Functions)** : Utilisées pour convertir des données d'un type à un autre (ex : `CAST`, `CONVERT`).
+### Fonctions de conversion de type
+
+Exemples : `CAST`, `CONVERT`.
+
+Utilisées quand un cast explicite est nécessaire.
 
 ---
 
-## Bonnes pratiques
+## Recommandations pratiques
 
-1. **Comprendre le comportement de la fonction** : Soyez conscient du comportement spécifique et des limites de chaque fonction que vous utilisez.
-2. **Utiliser des alias** : Utilisez des alias (`AS`) pour donner des noms significatifs aux colonnes calculées.
-3. **Vérifier les types de données** : Assurez-vous que les valeurs d'entrée (arguments) sont du bon type de données pour la fonction.
-4. **Se référer à la documentation** : Consultez la documentation de votre système de base de données spécifique pour obtenir une liste complète des fonctions disponibles et de leur syntaxe.
+- Vérifiez toujours le comportement des fonctions dans votre SGBD : la syntaxe et les détails peuvent varier.
+- Utilisez des alias `AS` pour rendre les colonnes calculées plus lisibles.
+- Tenez compte des `NULL`, car le résultat d'une fonction peut devenir `NULL`.
+- Évitez les requêtes avec des fonctions trop imbriquées ; découpez la logique en étapes.
+
+---
 
 **Points clés de cette leçon :**
 
-En maîtrisant l'utilisation des fonctions intégrées dans les requêtes SQL, vous pouvez effectuer des manipulations et des analyses de données puissantes, extrayant ainsi des informations précieuses de vos données.
+- Les fonctions SQL intégrées permettent de traiter les données directement dans les requêtes.
+- Les fonctions dans `SELECT` structurent la sortie, celles dans `WHERE` rendent le filtrage plus précis.
+- Les fonctions de chaîne, mathématiques, temporelles et de conversion couvrent la majorité des besoins de base.
+- Une bonne gestion des types de données et des `NULL` est indispensable pour des résultats prévisibles.
+- Bien utilisées, les fonctions rendent les requêtes SQL plus courtes, plus claires et plus utiles en analytique.
+
+## Questions d'entretien
+
+### Qu'est-ce qu'une fonction SQL intégrée et pourquoi est-elle utile ?
+Une fonction SQL intégrée est une opération prédéfinie fournie par le SGBD. Elle est utile car elle permet de transformer, calculer et formater les données directement dans une requête.
+
+### Pourquoi utilise-t-on souvent des fonctions SQL dans `SELECT` et dans `WHERE` ?
+Dans `SELECT`, les fonctions servent à formater ou calculer les valeurs de sortie. Dans `WHERE`, elles servent à filtrer les lignes avec des conditions calculées.
+
+### Qu'est-ce qu'un appel de fonction imbriqué et quand l'utiliser ?
+Un appel imbriqué consiste à passer le résultat d'une fonction à une autre. C'est utile quand les données doivent être transformées en plusieurs étapes, par exemple `UPPER(TRIM(first_name))`.
+
+Dans la prochaine leçon, nous étudierons en détail les fonctions de chaîne SQL pour nettoyer et transformer efficacement les données textuelles.

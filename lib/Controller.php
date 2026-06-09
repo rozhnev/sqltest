@@ -1258,6 +1258,31 @@ class Controller
 
         $playgroundData = $this->getPlaygroundDatabasesData();
 
+        $selectedDatabaseId = (string)$playgroundData['default_database'];
+        $selectedVersion = (string)$playgroundData['default_version'];
+
+        $requestedVersion = strtolower((string)($params['database'] ?? ''));
+        if ($requestedVersion !== '' && in_array($requestedVersion, $playgroundData['allowed_versions'], true)) {
+            $selectedVersion = $requestedVersion;
+
+            foreach ($playgroundData['databases'] as $database) {
+                $versions = $database['versions'] ?? [];
+                foreach ($versions as $version) {
+                    if ((string)($version['id'] ?? '') === $selectedVersion) {
+                        $selectedDatabaseId = (string)($database['id'] ?? $selectedDatabaseId);
+                        break 2;
+                    }
+                }
+            }
+        }
+
+        $snippetHash = strtolower((string)($params['snippetHash'] ?? ''));
+        if (!preg_match('/^[a-f0-9]{32}$/', $snippetHash)) {
+            $snippetHash = '';
+        }
+
+        $initialQuery = $snippetHash !== '' ? (new Query())->load($snippetHash) : '';
+
         $this->assignVariables([
             'Action'            => 'playground',
             'PageTitle'         => $pageTitle,
@@ -1273,6 +1298,10 @@ class Controller
             'PlaygroundDatabases' => $playgroundData['databases'],
             'PlaygroundDefaultDatabase' => $playgroundData['default_database'],
             'PlaygroundDefaultVersion' => $playgroundData['default_version'],
+            'PlaygroundSelectedDatabase' => $selectedDatabaseId,
+            'PlaygroundSelectedVersion' => $selectedVersion,
+            'PlaygroundInitialSnippetHash' => $snippetHash,
+            'PlaygroundInitialQuery' => $initialQuery,
         ]);
 
         $this->setHreflangLinks($params['path'], $this->lang);

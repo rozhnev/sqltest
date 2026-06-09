@@ -1,126 +1,165 @@
-# Lesson 3.1: Built-in SQL Functions
+---
+title: "Built-in SQL Functions: syntax, categories, and practical examples"
+description: "Learn how built-in SQL functions work in SELECT and WHERE clauses, and apply them to real Sakila-based data analysis scenarios."
+keywords: ["sql functions", "built-in SQL functions", "SQL function examples", "functions in SELECT", "functions in WHERE", "SQL Sakila"]
+teaches: ["What built-in SQL functions are and why they matter", "How to use SQL functions in SELECT and WHERE", "How to choose function types for text, numeric, and date data", "How to avoid common mistakes when using SQL functions"]
+about: ["SQL", "Built-in functions", "Data processing", "Sakila database", "Relational database"]
+---
 
-## What are SQL Functions?
+_Lesson 3.1 · Reading time: ~8 min_
 
-A SQL function is a predefined operation that accepts input values (arguments) and returns a result. Functions can be built-in (provided by the database system) or user-defined (created by developers), but in this lesson we focus only on built-in functions.
+In this lesson, you will explore the topic of sql functions and learn how built-in functions transform data directly inside a query. We will cover core syntax, function categories, and practical Sakila-based examples. By the end, you will be able to apply SQL functions confidently in real analysis workflows.
 
-Built-in SQL functions help process data directly in a query: transform values, perform calculations, and work with text, dates, and numbers. This lets you get more informative results without additional processing in the application layer.
+# Built-in SQL Functions
 
-## Common Syntax
+In previous lessons, you learned how to select, filter, and sort rows. The next step is to calculate and transform values inside the query without extra application-side processing.
 
-The general syntax for using a function in SQL is:
+This is exactly where built-in SQL functions are most useful: they make queries more expressive, reduce repetitive logic, and speed up report preparation.
+
+<img src="/images/lessons/lesson3_1-built-in-functions.svg" alt="Built-in SQL Functions" width="100%">
+
+---
+
+## What Built-in SQL Functions Are
+
+A built-in SQL function is a predefined operation provided by the DBMS. It accepts arguments and returns a new value such as text, a number, a date, or a boolean result.
+
+Functions are used when you need to:
+
+- normalize text values;
+- perform calculations in SQL;
+- extract parts of strings or dates;
+- convert values between data types.
+
+---
+
+## Basic Syntax
 
 ```sql
-FUNCTION_NAME(argument1, argument2, ...);
+FUNCTION_NAME(argument1, argument2, ...)
 ```
 
-- **`FUNCTION_NAME`**: The name of the function you want to use.
-- **`argument1, argument2, ...`**: The input values (arguments) that the function requires. These can be column names, literal values, or even other functions.
+Where:
 
----
+- `FUNCTION_NAME` is the function name;
+- `argument1, argument2, ...` are columns, literals, or results of other functions.
 
-## Using Functions in the SELECT Clause
-
-Functions in the `SELECT` clause allow you to transform or calculate values for the output.
-
-### Example 1: String Function (`UPPER`)
-The `UPPER()` function converts a string to uppercase.
+Simple function call example:
 
 ```sql
-SELECT UPPER(first_name) AS uppercase_name
-FROM employees;
+SELECT
+	UPPER(first_name) AS upper_name
+FROM customer
+LIMIT 5;
 ```
 
-This query retrieves the `first_name` column from the `employees` table and converts each name to uppercase, aliasing the result as `uppercase_name`.
+*Result: each `first_name` value is converted to uppercase.*
 
----
+You can also use nested function calls, where one function is passed as an argument to another.
 
-### Example 2: Mathematical Function (`ROUND`)
-The `ROUND()` function rounds a number to a specified number of decimal places.
+Nested function call example:
 
 ```sql
-SELECT ROUND(salary, 0) AS rounded_salary
-FROM employees;
+SELECT
+	UPPER(TRIM(first_name)) AS normalized_name
+FROM customer
+LIMIT 5;
 ```
 
-This query retrieves the `salary` column from the `employees` table and rounds each salary to the nearest whole number, aliasing the result as `rounded_salary`.
+*Result: leading and trailing spaces are removed, then the name is converted to uppercase.*
 
 ---
 
-### Example 3: Date Function (`NOW`)
-The `NOW()` function takes no arguments and returns the current date and time.
+## Where Functions Are Commonly Used
+
+### Functions in SELECT
+
+In `SELECT`, functions help shape the output.
 
 ```sql
-SELECT NOW() AS current_datetime;
+SELECT
+	customer_id,
+	CONCAT(first_name, ' ', last_name) AS full_name,
+	UPPER(email) AS email_upper
+FROM customer
+LIMIT 10;
 ```
 
-This query returns the current date and time.
+*Note: this example uses only one table and shows how functions can format output columns directly in `SELECT`.*
 
----
+### Functions in WHERE
 
-## Using Functions in the WHERE Clause
-
-Functions in the `WHERE` clause allow you to filter data based on calculated or transformed values.
-
-### Example 1: String Function (`LENGTH`)
-The `LENGTH()` function returns the length of a string.
+In `WHERE`, functions support filtering based on computed conditions.
 
 ```sql
-SELECT *
-FROM products
-WHERE LENGTH(product_name) > 20;
+SELECT
+	title,
+	rental_duration
+FROM film
+WHERE LENGTH(title) >= 15
+  AND ABS(rental_duration - 5) <= 2
+ORDER BY title;
 ```
 
-This query retrieves all columns from the `products` table where the length of the `product_name` is greater than 20 characters.
+*Result: returns films with longer titles and rental durations close to 5 days.*
 
 ---
 
-### Example 2: Date Function (`YEAR`)
-The `YEAR()` function extracts the year from a date.
+## Main Types of SQL Functions
 
-```sql
-SELECT *
-FROM orders
-WHERE YEAR(order_date) = 2023;
-```
+### String functions
 
-This query retrieves all columns from the `orders` table where the year of the `order_date` is 2023.
+Examples: `UPPER`, `LOWER`, `TRIM`, `SUBSTRING`, `CONCAT`.
 
----
+Used to clean and format text fields.
 
-### Example 3: Mathematical Function (`ABS`)
-The `ABS()` function returns the absolute value of a number.
+### Mathematical functions
 
-```sql
-SELECT *
-FROM transactions
-WHERE ABS(amount) > 100;
-```
+Examples: `ROUND`, `ABS`, `CEILING`, `FLOOR`, `MOD`.
 
-This query retrieves all columns from the `transactions` table where the absolute value of the `amount` is greater than 100.
+Used for calculations, rounding, and numeric control.
 
----
+### Date and time functions
 
-## Common Types of Built-in SQL Functions
+Examples: `NOW`, `CURRENT_DATE`, `YEAR`, `MONTH`, `DATE_ADD`, `DATEDIFF`.
 
-SQL functions can be broadly categorized into the following types:
+Used for time-based analysis and interval calculations.
 
-1. **String Functions**: Used for manipulating strings (e.g., `UPPER`, `LOWER`, `SUBSTRING`, `LENGTH`, `TRIM`).
-2. **Mathematical Functions**: Used for performing mathematical calculations (e.g., `ROUND`, `ABS`, `SQRT`, `MOD`).
-3. **Date and Time Functions**: Used for working with dates and times (e.g., `NOW`, `YEAR`, `MONTH`, `DAY`, `DATE_ADD`, `DATE_SUB`).
-4. **Aggregate Functions**: Used for summarizing data (e.g., `COUNT`, `SUM`, `AVG`, `MIN`, `MAX`). (Covered in a later lesson)
-5. **Conversion Functions**: Used for converting data from one type to another (e.g., `CAST`, `CONVERT`).
+### Type conversion functions
+
+Examples: `CAST`, `CONVERT`.
+
+Used when values must be explicitly converted to the correct type.
 
 ---
 
-## Best Practices
+## Practical Recommendations
 
-1. **Understand Function Behavior**: Be aware of the specific behavior and limitations of each function you use.
-2. **Use Aliases**: Use aliases (`AS`) to give meaningful names to calculated columns.
-3. **Check Data Types**: Ensure that the input values (arguments) are of the correct data type for the function.
-4. **Refer to Documentation**: Consult the documentation for your specific database system for a complete list of available functions and their syntax.
+- Always verify function behavior in your DBMS: syntax and details can differ.
+- Use `AS` aliases to make calculated columns easier to read.
+- Account for `NULL` values, because function results can become `NULL`.
+- Avoid deeply nested functions in one query; split complex logic into steps.
 
-**Key Takeaways from this Lesson:**
+---
 
-By mastering the use of built-in functions in SQL queries, you can perform powerful data manipulation and analysis, extracting valuable insights from your data.
+**Key takeaways from this lesson:**
+
+- Built-in SQL functions let you process data directly in queries.
+- Functions in `SELECT` shape output, while functions in `WHERE` improve filtering precision.
+- String, mathematical, date/time, and conversion functions cover most core needs.
+- Correct handling of data types and `NULL` is essential for predictable results.
+- Well-used functions make SQL queries shorter, clearer, and more useful for analytics.
+
+## Interview Questions
+
+### What is a built-in SQL function, and why is it useful?
+A built-in SQL function is a predefined operation provided by the DBMS. It is useful because it lets you transform, calculate, and format data directly in a query.
+
+### Why are SQL functions commonly used in both `SELECT` and `WHERE`?
+In `SELECT`, functions help format or compute output values. In `WHERE`, they help filter rows using calculated conditions.
+
+### What is a nested function call, and when should you use it?
+A nested function call means passing the result of one function into another function. Use it when data needs multiple transformation steps, for example `UPPER(TRIM(first_name))`.
+
+In the next lesson, we will focus on SQL string functions and learn how to clean and transform text data effectively.
 

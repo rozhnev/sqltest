@@ -1,0 +1,42 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f4efe6" />
+      <stop offset="100%" stop-color="#e7dfd0" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="2" dy="4" stdDeviation="4" flood-color="#000000" flood-opacity="0.14" />
+    </filter>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)" />
+
+  <circle cx="1120" cy="88" r="86" fill="#c7b49a" opacity="0.34" />
+  <circle cx="980" cy="560" r="130" fill="#c3d3ca" opacity="0.26" />
+  <circle cx="105" cy="80" r="56" fill="#d9ccb8" opacity="0.22" />
+
+  <rect x="0" y="0" width="450" height="630" fill="#1f2f38" />
+  <text x="52" y="246" font-family="Arial, sans-serif" font-size="46" font-weight="700" fill="#ffffff">BUILT-IN</text>
+  <text x="52" y="302" font-family="Arial, sans-serif" font-size="46" font-weight="700" fill="#ffffff">SQL</text>
+  <text x="52" y="358" font-family="Arial, sans-serif" font-size="46" font-weight="700" fill="#ffffff">FUNCTIONS</text>
+  <rect x="52" y="390" width="140" height="8" rx="4" fill="#de9463" />
+  <text x="52" y="436" font-family="Arial, sans-serif" font-size="23" fill="#c9d4da">Syntax, Types, Practice</text>
+
+  <rect x="500" y="64" width="630" height="148" rx="18" fill="#ffffff" filter="url(#shadow)" />
+  <text x="534" y="108" font-family="Arial, sans-serif" font-size="23" font-weight="700" fill="#1f2f38">Simple Function Call</text>
+  <text x="534" y="144" font-family="Courier New, monospace" font-size="17" fill="#4f5f68">SELECT UPPER(first_name) AS upper_name</text>
+  <text x="534" y="168" font-family="Courier New, monospace" font-size="17" fill="#4f5f68">FROM customer;</text>
+  <text x="534" y="196" font-family="Arial, sans-serif" font-size="16" fill="#6d7c84">The UPPER function formats the output to uppercase.</text>
+
+  <rect x="500" y="242" width="630" height="170" rx="18" fill="#ffffff" filter="url(#shadow)" />
+  <text x="534" y="278" font-family="Arial, sans-serif" font-size="23" font-weight="700" fill="#1f2f38">Nested Function Call</text>
+  <text x="534" y="314" font-family="Courier New, monospace" font-size="17" fill="#4f5f68">SELECT UPPER(TRIM(first_name))</text>
+  <text x="534" y="338" font-family="Courier New, monospace" font-size="17" fill="#4f5f68">FROM customer;</text>
+  <text x="534" y="384" font-family="Arial, sans-serif" font-size="16" fill="#6d7c84">TRIM removes spaces, then UPPER formats the output.</text>
+
+  <rect x="500" y="438" width="630" height="146" rx="18" fill="#ffffff" filter="url(#shadow)" />
+  <text x="534" y="474" font-family="Arial, sans-serif" font-size="23" font-weight="700" fill="#1f2f38">Where Functions Are Used</text>
+  <text x="534" y="510" font-family="Courier New, monospace" font-size="17" fill="#4f5f68">SELECT ... UPPER(email)</text>
+  <text x="534" y="534" font-family="Courier New, monospace" font-size="17" fill="#4f5f68">WHERE LENGTH(title) &gt;= 15</text>
+  <text x="534" y="566" font-family="Arial, sans-serif" font-size="16" fill="#6d7c84">Functions can be used in SELECT and WHERE clauses.</text>
+</svg>

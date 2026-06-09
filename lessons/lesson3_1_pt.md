@@ -1,125 +1,164 @@
-# Lição 3.1: Funções SQL Integradas
+---
+title: "Funções SQL integradas: sintaxe, categorias e exemplos práticos"
+description: "Aprenda como usar funções SQL integradas em SELECT e WHERE, com exemplos práticos baseados no banco Sakila."
+keywords: ["funcoes sql", "funções SQL integradas", "exemplos de funções SQL", "funções no SELECT", "funções no WHERE", "SQL Sakila"]
+teaches: ["O que são funções SQL integradas e por que são importantes", "Como usar funções SQL em SELECT e WHERE", "Como escolher funções para texto, números e datas", "Como evitar erros comuns ao usar funções SQL"]
+about: ["SQL", "Funções integradas", "Processamento de dados", "Banco de dados Sakila", "Banco de dados relacional"]
+---
 
-## O que são Funções SQL?
+_Lição 3.1 · Tempo de leitura: ~8 min_
 
-Uma função SQL é uma operação predefinida que aceita valores de entrada (argumentos) e retorna um resultado. As funções podem ser integradas (fornecidas pelo SGBD) ou definidas pelo usuário (criadas por desenvolvedores), mas nesta lição focamos apenas nas funções integradas.
+Nesta lição, você vai estudar o tema "funcoes sql" e entender como funções integradas transformam dados diretamente na consulta. Vamos cobrir a sintaxe básica, as principais categorias de funções e exemplos práticos com Sakila. Ao final, você conseguirá aplicar funções SQL com segurança em cenários reais de análise.
 
-As funções SQL integradas ajudam a processar dados diretamente na consulta: transformar valores, realizar cálculos e trabalhar com texto, datas e números. Isso permite obter resultados mais informativos sem processamento adicional na camada da aplicação.
+# Funções SQL Integradas
 
-## Sintaxe Comum
+Nas lições anteriores, você aprendeu a selecionar, filtrar e ordenar linhas. O próximo passo é calcular e transformar valores dentro da própria consulta, sem processamento extra na aplicação.
 
-A sintaxe geral para usar uma função em SQL é:
+É nesse ponto que as funções SQL integradas se destacam: elas tornam as consultas mais expressivas, reduzem lógica repetitiva e aceleram a preparação de relatórios.
+
+<img src="/images/lessons/lesson3_1-built-in-functions.svg" alt="Funções SQL integradas" width="100%">
+
+---
+
+## O que são funções SQL integradas
+
+Uma função SQL integrada é uma operação predefinida oferecida pelo SGBD. Ela recebe argumentos e retorna um novo valor, como texto, número, data ou resultado booleano.
+
+As funções são usadas quando você precisa:
+
+- padronizar valores de texto;
+- realizar cálculos diretamente no SQL;
+- extrair partes de strings ou datas;
+- converter valores entre tipos de dados.
+
+---
+
+## Sintaxe básica
 
 ```sql
-FUNCTION_NAME(argument1, argument2, ...);
+FUNCTION_NAME(argument1, argument2, ...)
 ```
 
-- **`FUNCTION_NAME`**: O nome da função que você deseja usar.
-- **`argument1, argument2, ...`**: Os valores de entrada (argumentos) que a função requer. Estes podem ser nomes de colunas, valores literais ou até mesmo outras funções.
+Onde:
 
----
+- `FUNCTION_NAME` é o nome da função;
+- `argument1, argument2, ...` são colunas, literais ou resultados de outras funções.
 
-## Usando Funções na Cláusula SELECT
-
-As funções na cláusula `SELECT` permitem transformar ou calcular valores para a saída.
-
-### Exemplo 1: Função de String (`UPPER`)
-A função `UPPER()` converte uma string para letras maiúsculas.
+Exemplo de chamada simples de função:
 
 ```sql
-SELECT UPPER(first_name) AS uppercase_name
-FROM employees;
+SELECT
+	UPPER(first_name) AS upper_name
+FROM customer
+LIMIT 5;
 ```
 
-Esta consulta recupera a coluna `first_name` da tabela `employees` e converte cada nome para letras maiúsculas, atribuindo o resultado ao alias `uppercase_name`.
+*Resultado: cada valor de `first_name` é convertido para maiúsculas.*
 
----
+Você também pode usar chamadas aninhadas, quando o resultado de uma função é passado como argumento para outra.
 
-### Exemplo 2: Função Matemática (`ROUND`)
-A função `ROUND()` arredonda um número para um número especificado de casas decimais.
+Exemplo de chamada aninhada:
 
 ```sql
-SELECT ROUND(salary, 0) AS rounded_salary
-FROM employees;
+SELECT
+	UPPER(TRIM(first_name)) AS normalized_name
+FROM customer
+LIMIT 5;
 ```
 
-Esta consulta recupera a coluna `salary` da tabela `employees` e arredonda cada salário para o número inteiro mais próximo, atribuindo o resultado ao alias `rounded_salary`.
+*Resultado: remove espaços no início e no fim, depois converte o nome para maiúsculas.*
 
 ---
 
-### Exemplo 3: Função de Data (`NOW`)
-A função `NOW()` não aceita argumentos e retorna a data e hora atuais.
+## Onde as funções são mais usadas
+
+### Funções no SELECT
+
+No `SELECT`, as funções ajudam a modelar a saída.
 
 ```sql
-SELECT NOW() AS current_datetime;
+SELECT
+	customer_id,
+	CONCAT(first_name, ' ', last_name) AS full_name,
+	UPPER(email) AS email_upper
+FROM customer
+LIMIT 10;
 ```
 
-Esta consulta retorna a data e hora atuais.
+*Observação: este exemplo usa apenas uma tabela e mostra como funções podem formatar colunas de saída diretamente no `SELECT`.*
 
----
+### Funções no WHERE
 
-## Usando Funções na Cláusula WHERE
-
-As funções na cláusula `WHERE` permitem filtrar dados com base em valores calculados ou transformados.
-
-### Exemplo 1: Função de String (`LENGTH`)
-A função `LENGTH()` retorna o comprimento de uma string.
+No `WHERE`, as funções permitem filtrar com base em condições calculadas.
 
 ```sql
-SELECT *
-FROM products
-WHERE LENGTH(product_name) > 20;
+SELECT
+	title,
+	rental_duration
+FROM film
+WHERE LENGTH(title) >= 15
+  AND ABS(rental_duration - 5) <= 2
+ORDER BY title;
 ```
 
-Esta consulta recupera todas as colunas da tabela `products` onde o comprimento de `product_name` é maior que 20 caracteres.
+*Resultado: retorna filmes com títulos mais longos e duração de locação próxima de 5 dias.*
 
 ---
 
-### Exemplo 2: Função de Data (`YEAR`)
-A função `YEAR()` extrai o ano de uma data.
+## Principais tipos de funções SQL
 
-```sql
-SELECT *
-FROM orders
-WHERE YEAR(order_date) = 2023;
-```
+### Funções de string
 
-Esta consulta recupera todas as colunas da tabela `orders` onde o ano de `order_date` é 2023.
+Exemplos: `UPPER`, `LOWER`, `TRIM`, `SUBSTRING`, `CONCAT`.
 
----
+Usadas para limpar e formatar campos de texto.
 
-### Exemplo 3: Função Matemática (`ABS`)
-A função `ABS()` retorna o valor absoluto de um número.
+### Funções matemáticas
 
-```sql
-SELECT *
-FROM transactions
-WHERE ABS(amount) > 100;
-```
+Exemplos: `ROUND`, `ABS`, `CEILING`, `FLOOR`, `MOD`.
 
-Esta consulta recupera todas as colunas da tabela `transactions` onde o valor absoluto de `amount` é maior que 100.
+Usadas para cálculos, arredondamentos e controle de valores numéricos.
 
----
+### Funções de data e hora
 
-## Tipos Comuns de Funções SQL Integradas
+Exemplos: `NOW`, `CURRENT_DATE`, `YEAR`, `MONTH`, `DATE_ADD`, `DATEDIFF`.
 
-As funções SQL podem ser amplamente categorizadas nos seguintes tipos:
+Usadas para análise temporal e cálculo de intervalos.
 
-1. **Funções de String**: Usadas para manipular strings (por exemplo, `UPPER`, `LOWER`, `SUBSTRING`, `LENGTH`, `TRIM`).
-2. **Funções Matemáticas**: Usadas para realizar cálculos matemáticos (por exemplo, `ROUND`, `ABS`, `SQRT`, `MOD`).
-3. **Funções de Data e Hora**: Usadas para trabalhar com datas e horas (por exemplo, `NOW`, `YEAR`, `MONTH`, `DAY`, `DATE_ADD`, `DATE_SUB`).
-4. **Funções Agregadas**: Usadas para resumir dados (por exemplo, `COUNT`, `SUM`, `AVG`, `MIN`, `MAX`). (Abordadas em uma lição posterior)
-5. **Funções de Conversão**: Usadas para converter dados de um tipo para outro (por exemplo, `CAST`, `CONVERT`).
+### Funções de conversão de tipo
+
+Exemplos: `CAST`, `CONVERT`.
+
+Usadas quando é necessário converter valores explicitamente para o tipo correto.
 
 ---
 
-## Melhores Práticas
+## Recomendações práticas
 
-1. **Entenda o Comportamento das Funções**: Esteja ciente do comportamento específico e das limitações de cada função que você usa.
-2. **Use Aliases**: Use aliases (`AS`) para dar nomes significativos às colunas calculadas.
-3. **Verifique os Tipos de Dados**: Certifique-se de que os valores de entrada (argumentos) têm o tipo de dados correto para a função.
-4. **Consulte a Documentação**: Consulte a documentação do seu sistema de banco de dados para obter uma lista completa das funções disponíveis e sua sintaxe.
+- Sempre confirme o comportamento da função no seu SGBD: sintaxe e detalhes podem variar.
+- Use aliases com `AS` para tornar colunas calculadas mais legíveis.
+- Considere valores `NULL`, pois o resultado da função pode virar `NULL`.
+- Evite empilhar muitas funções em uma única consulta; divida a lógica em etapas.
 
-**Principais Conclusões desta Lição:**
+---
 
-Ao dominar o uso de funções integradas em consultas SQL, você poderá realizar manipulações e análises poderosas de dados, extraindo insights valiosos de suas informações.
+**Principais conclusões desta lição:**
+
+- Funções SQL integradas permitem processar dados diretamente nas consultas.
+- Funções no `SELECT` modelam a saída, e funções no `WHERE` deixam o filtro mais preciso.
+- Funções de string, matemáticas, temporais e de conversão cobrem a maioria dos cenários básicos.
+- O tratamento correto de tipos de dados e `NULL` é essencial para resultados previsíveis.
+- Funções bem aplicadas deixam as consultas SQL mais curtas, claras e úteis para análise.
+
+## Perguntas de entrevista
+
+### O que é uma função SQL integrada e por que ela é útil?
+Uma função SQL integrada é uma operação predefinida fornecida pelo SGBD. Ela é útil porque permite transformar, calcular e formatar dados diretamente na consulta.
+
+### Por que funções SQL são usadas com frequência em `SELECT` e em `WHERE`?
+No `SELECT`, funções ajudam a formatar ou calcular valores de saída. No `WHERE`, elas ajudam a filtrar linhas com base em condições calculadas.
+
+### O que é uma chamada de função aninhada e quando usá-la?
+Uma chamada aninhada significa passar o resultado de uma função para outra. Use quando os dados precisarem de várias etapas de transformação, por exemplo `UPPER(TRIM(first_name))`.
+
+Na próxima lição, vamos aprofundar as funções de string em SQL para limpar e transformar dados textuais com eficiência.
