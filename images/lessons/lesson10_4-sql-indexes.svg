@@ -1,0 +1,49 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f3f1ea" />
+      <stop offset="100%" stop-color="#e7e2d6" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="2" dy="4" stdDeviation="4" flood-color="#000000" flood-opacity="0.12" />
+    </filter>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#23313a" />
+    </marker>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)" />
+
+  <circle cx="1110" cy="90" r="78" fill="#c9bca6" opacity="0.34" />
+  <circle cx="1000" cy="548" r="126" fill="#c6d6cd" opacity="0.26" />
+  <circle cx="118" cy="74" r="54" fill="#d8cfbe" opacity="0.2" />
+
+  <rect x="0" y="0" width="452" height="630" fill="#23313a" />
+  <text x="52" y="238" font-family="Arial, sans-serif" font-size="45" font-weight="700" fill="#ffffff">SQL INDEXES</text>
+  <text x="52" y="294" font-family="Arial, sans-serif" font-size="45" font-weight="700" fill="#ffffff">FOR QUERY</text>
+  <text x="52" y="350" font-family="Arial, sans-serif" font-size="45" font-weight="700" fill="#ffffff">PERFORMANCE</text>
+  <rect x="52" y="382" width="136" height="8" rx="4" fill="#df9e72" />
+  <text x="52" y="428" font-family="Arial, sans-serif" font-size="24" fill="#c8d4d9">Read Faster, Filter Smarter</text>
+
+  <rect x="498" y="62" width="632" height="154" rx="18" fill="#ffffff" filter="url(#shadow)" />
+  <text x="532" y="108" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#23313a">Without Index vs With Index</text>
+  <text x="532" y="147" font-family="Courier New, monospace" font-size="17" fill="#8b3d3d">type: ALL, key: NULL</text>
+  <path d="M770 143 L854 143" stroke="#23313a" stroke-width="2.5" marker-end="url(#arrow)" />
+  <text x="876" y="147" font-family="Courier New, monospace" font-size="17" fill="#35634b">type: ref, key: idx_...</text>
+  <text x="532" y="182" font-family="Arial, sans-serif" font-size="16" fill="#5e6d75">EXPLAIN shows whether the optimizer is using your index.</text>
+
+  <rect x="498" y="238" width="632" height="164" rx="18" fill="#ffffff" filter="url(#shadow)" />
+  <text x="532" y="283" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#23313a">Create Index</text>
+  <text x="532" y="322" font-family="Courier New, monospace" font-size="17" fill="#4f5f68">CREATE INDEX idx_customer_last_name</text>
+  <text x="532" y="349" font-family="Courier New, monospace" font-size="17" fill="#4f5f68">ON customer(last_name);</text>
+  <rect x="930" y="300" width="166" height="46" rx="10" fill="#dbe9e1" />
+  <text x="964" y="329" font-family="Arial, sans-serif" font-size="16" fill="#23313a">single column</text>
+  <text x="532" y="382" font-family="Courier New, monospace" font-size="17" fill="#4f5f68">CREATE INDEX idx_payment_customer_date</text>
+
+  <rect x="498" y="426" width="632" height="154" rx="18" fill="#ffffff" filter="url(#shadow)" />
+  <text x="532" y="472" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#23313a">Trade-off</text>
+  <text x="532" y="511" font-family="Courier New, monospace" font-size="17" fill="#35634b">SELECT: faster lookups</text>
+  <text x="532" y="539" font-family="Courier New, monospace" font-size="17" fill="#8b3d3d">INSERT/UPDATE/DELETE: more work</text>
+  <rect x="950" y="492" width="146" height="52" rx="12" fill="#f2d7c2" />
+  <text x="982" y="523" font-family="Arial, sans-serif" font-size="16" fill="#23313a">balance</text>
+</svg>

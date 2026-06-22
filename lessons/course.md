@@ -84,7 +84,7 @@
     *   [Best Practices for Code Readability and Maintainability](lessons/lesson10_1_ru.md)
     *   [Writing Efficient SQL Queries](lessons/lesson10_2_ru.md)
     *   [Understanding Query Optimization Techniques](lessons/lesson10_3_ru.md)
-    *   Using Indexes for Performance Improvement
+    *   [Introducing SQL Indexes](lessons/lesson10_4_ru.md)
     *   Error Handling and Debugging Techniques
     *   Version Control for SQL Scripts    
 11. **Data Exploration and Analysis Techniques**
