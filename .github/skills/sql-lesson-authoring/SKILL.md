@@ -54,14 +54,16 @@ Typical pattern:
 Use this format:
 
 ```md
-# Lesson X.Y: Topic Name
+# Topic Name
 ```
 
 In Russian lessons:
 
 ```md
-# Урок X.Y: Название темы
+# Название темы
 ```
+
+Do not include the lesson number (e.g., "Lesson X.Y" or "Урок X.Y") in the H1 heading. The lesson number appears in the metadata (YAML frontmatter) and intro line, so it is redundant in the H1.
 
 The title should be short, precise, and match the lesson topic.
 
@@ -142,6 +144,15 @@ Typical forms:
 
 - "In the next lesson, we will look at ..."
 - "Next, we will learn ..."
+
+### 9. Course link policy
+
+Do not add a footer link to `course.md` in lesson files.
+
+Rules:
+
+- do not append lines like "Course contents", "Sommaire du cours", "Оглавление курса", or similar links to `course.md`;
+- end the lesson with the transition sentence to the next lesson topic.
 
 ## Tone and Writing Style
 
@@ -292,6 +303,7 @@ Preferred characteristics:
 - large dark left-side panel with the core topic;
 - right side built from 2-4 light cards or small diagrams;
 - limited text inside the image;
+- do not include lesson numbers in image text (for example, avoid labels like "Lesson 6.1");
 - accent color for the main SQL concept;
 - modern technical visual language, not overly decorative.
 

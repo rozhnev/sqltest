@@ -188,5 +188,3 @@ For reads, an index helps locate rows faster. For writes, the DBMS must update b
 Run `EXPLAIN` for the query and inspect the execution plan: access type, selected index, and estimated row count.
 
 In the next lesson, we will cover error handling and SQL debugging techniques used in day-to-day work.
-
-→ [Course contents](course.md)

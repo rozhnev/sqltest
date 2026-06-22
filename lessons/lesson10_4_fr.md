@@ -188,5 +188,3 @@ En lecture, l'index permet de localiser plus vite les lignes. En ecriture, le SG
 Executez `EXPLAIN` sur la requete et analysez le plan : type d'acces, index choisi et estimation du nombre de lignes.
 
 Dans la prochaine lecon, nous verrons la gestion des erreurs et les techniques de debug SQL au quotidien.
-
-→ [Sommaire du cours](course.md)

@@ -188,5 +188,3 @@ Em leitura, o indice ajuda a localizar linhas rapidamente. Em escrita, o SGBD pr
 Execute `EXPLAIN` na consulta e analise o plano: tipo de acesso, indice escolhido e estimativa de linhas.
 
 Na proxima licao, veremos tratamento de erros e tecnicas de depuracao SQL para o trabalho do dia a dia.
-
-→ [Conteudo do curso](course.md)

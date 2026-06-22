@@ -1,0 +1,66 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f5efe6" />
+      <stop offset="100%" stop-color="#e6ded0" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="2" dy="4" stdDeviation="4" flood-color="#000" flood-opacity="0.12" />
+    </filter>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#23313a" />
+    </marker>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)" />
+
+  <circle cx="1110" cy="90" r="78" fill="#c8b79e" opacity="0.34" />
+  <circle cx="990" cy="550" r="126" fill="#c7d7ce" opacity="0.25" />
+  <circle cx="120" cy="80" r="58" fill="#d8cbb6" opacity="0.2" />
+
+  <rect x="0" y="0" width="450" height="630" fill="#23313a" />
+  <text x="52" y="238" font-family="Arial, sans-serif" font-size="46" font-weight="700" fill="#ffffff">HOW B-TREE</text>
+  <text x="52" y="294" font-family="Arial, sans-serif" font-size="46" font-weight="700" fill="#ffffff">INDEX</text>
+  <text x="52" y="350" font-family="Arial, sans-serif" font-size="46" font-weight="700" fill="#ffffff">WORKS</text>
+  <rect x="52" y="382" width="132" height="8" rx="4" fill="#df9b6b" />
+  <text x="52" y="430" font-family="Arial, sans-serif" font-size="23" fill="#c9d4da">Root, Nodes, Leaves</text>
+
+  <rect x="500" y="54" width="630" height="250" rx="18" fill="#ffffff" filter="url(#shadow)" />
+  <text x="532" y="95" font-family="Arial, sans-serif" font-size="23" font-weight="700" fill="#23313a">B-tree Traversal</text>
+
+  <rect x="748" y="112" width="132" height="40" rx="10" fill="#dce9e2" />
+  <text x="790" y="137" text-anchor="middle" font-family="Courier New, monospace" font-size="16" fill="#23313a">ROOT</text>
+
+  <rect x="620" y="176" width="132" height="40" rx="10" fill="#eef3f0" />
+  <rect x="876" y="176" width="132" height="40" rx="10" fill="#eef3f0" />
+  <text x="686" y="201" text-anchor="middle" font-family="Courier New, monospace" font-size="15" fill="#23313a">NODE A</text>
+  <text x="942" y="201" text-anchor="middle" font-family="Courier New, monospace" font-size="15" fill="#23313a">NODE B</text>
+
+  <rect x="560" y="242" width="112" height="38" rx="9" fill="#f7f7f7" />
+  <rect x="696" y="242" width="112" height="38" rx="9" fill="#f7f7f7" />
+  <rect x="832" y="242" width="112" height="38" rx="9" fill="#f7f7f7" />
+  <rect x="968" y="242" width="112" height="38" rx="9" fill="#f7f7f7" />
+  <text x="616" y="266" text-anchor="middle" font-family="Courier New, monospace" font-size="14" fill="#23313a">LEAF</text>
+  <text x="752" y="266" text-anchor="middle" font-family="Courier New, monospace" font-size="14" fill="#23313a">LEAF</text>
+  <text x="888" y="266" text-anchor="middle" font-family="Courier New, monospace" font-size="14" fill="#23313a">LEAF</text>
+  <text x="1024" y="266" text-anchor="middle" font-family="Courier New, monospace" font-size="14" fill="#23313a">LEAF</text>
+
+  <path d="M814 152 L686 176" stroke="#23313a" stroke-width="2.2" marker-end="url(#arrow)" />
+  <path d="M814 152 L942 176" stroke="#23313a" stroke-width="2.2" marker-end="url(#arrow)" />
+  <path d="M686 216 L616 242" stroke="#23313a" stroke-width="1.8" marker-end="url(#arrow)" />
+  <path d="M686 216 L752 242" stroke="#23313a" stroke-width="1.8" marker-end="url(#arrow)" />
+  <path d="M942 216 L888 242" stroke="#23313a" stroke-width="1.8" marker-end="url(#arrow)" />
+  <path d="M942 216 L1024 242" stroke="#23313a" stroke-width="1.8" marker-end="url(#arrow)" />
+
+  <rect x="500" y="332" width="630" height="244" rx="18" fill="#ffffff" filter="url(#shadow)" />
+  <text x="532" y="375" font-family="Arial, sans-serif" font-size="23" font-weight="700" fill="#23313a">Index-Friendly Access</text>
+  <text x="532" y="414" font-family="Courier New, monospace" font-size="17" fill="#4f5f68">WHERE customer_id = 10</text>
+  <text x="532" y="442" font-family="Courier New, monospace" font-size="17" fill="#4f5f68">AND payment_date &gt;= '2005-07-01'</text>
+  <text x="532" y="470" font-family="Courier New, monospace" font-size="17" fill="#4f5f68">ORDER BY payment_date</text>
+  <rect x="912" y="398" width="186" height="44" rx="10" fill="#dbe9e1" />
+  <text x="1005" y="425" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#23313a">range + order</text>
+
+  <text x="532" y="518" font-family="Courier New, monospace" font-size="17" fill="#8c3e3e">WHERE YEAR(payment_date) = 2005</text>
+  <rect x="912" y="495" width="186" height="44" rx="10" fill="#f1d5c3" />
+  <text x="1005" y="522" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#23313a">often no index</text>
+</svg>
