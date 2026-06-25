@@ -652,8 +652,10 @@ class Controller
 
         if ($this->user->showAd()) {
             $referralLink = Helper::getReferralLink($this->dbh, $this->lang, $this->isMobileView() ? 'mobile' : 'desktop');
-            Helper::updateReferralLinkStats($this->dbh, $referralLink['id']);
-            $this->engine->assign('ReferralLink', $referralLink);
+            if (isset($referralLink)) {
+                Helper::updateReferralLinkStats($this->dbh, $referralLink['id']);
+                $this->engine->assign('ReferralLink', $referralLink);
+            }
         }
 
         $this->engine->display($this->lang . "/query_test_result.tpl");
@@ -679,7 +681,7 @@ class Controller
         if (!$answerResult['ok']) header( 'HTTP/1.1 418 BAD REQUEST' );
         if ($this->user->showAd()) {
             $referralLink = Helper::getReferralLink($this->dbh, $this->lang, $this->isMobileView() ? 'mobile' : 'desktop');
-            if ($referralLink) {
+            if (isset($referralLink)) {
                 Helper::updateReferralLinkStats($this->dbh, $referralLink['id']);
                 $this->engine->assign('ReferralLink', $referralLink);
             }
