@@ -91,7 +91,7 @@
                                     {foreach from=$PlaygroundDatabases item=db}
                                         <li>
                                             <label class="db-label">
-                                                <input type="radio" name="database" value="{$db.id|escape:'html'}" {if $db.id == $PlaygroundDefaultDatabase}checked{/if}>
+                                                <input type="radio" name="database" value="{$db.id|escape:'html'}" {if $db.id == $PlaygroundSelectedDatabase}checked{/if}>
                                                 {$db.label|escape:'html'}
                                             </label>
                                         </li>
@@ -183,6 +183,9 @@
         {literal}
         const playgroundDatabases = {/literal}{$PlaygroundDatabases|json_encode nofilter}{literal};
         const defaultPlaygroundVersion = {/literal}{$PlaygroundDefaultVersion|json_encode nofilter}{literal};
+        const selectedPlaygroundVersion = {/literal}{$PlaygroundSelectedVersion|json_encode nofilter}{literal};
+        const initialSnippetHash = {/literal}{$PlaygroundInitialSnippetHash|json_encode nofilter}{literal};
+        const initialSnippetQuery = {/literal}{$PlaygroundInitialQuery|json_encode nofilter}{literal};
 
         function updateVersionOptions(databaseId, preferredVersion = null) {
             const versionSelect = document.getElementById('databaseVersion');
@@ -213,7 +216,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             const checkedDatabase = document.querySelector('input[name="database"]:checked');
             if (checkedDatabase) {
-                updateVersionOptions(checkedDatabase.value, defaultPlaygroundVersion);
+                updateVersionOptions(checkedDatabase.value, selectedPlaygroundVersion || defaultPlaygroundVersion);
             }
 
             document.querySelectorAll('input[name="database"]').forEach((radio) => {
@@ -221,6 +224,23 @@
                     updateVersionOptions(event.target.value);
                 });
             });
+
+            const applySnippetToEditor = () => {
+                if (!initialSnippetHash || !initialSnippetQuery) {
+                    return;
+                }
+                if (!window.sql_editor || typeof window.sql_editor.setValue !== 'function') {
+                    return;
+                }
+
+                window.sql_editor.setValue(initialSnippetQuery, -1);
+                window.sql_editor.focus();
+                window.sql_editor.session.selection.clearSelection();
+            };
+
+            // Try immediate apply on DOM ready and one deferred retry for slow editor init.
+            applySnippetToEditor();
+            setTimeout(applySnippetToEditor, 150);
         });
 
         function executeQuery() {

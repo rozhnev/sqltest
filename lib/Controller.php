@@ -1259,7 +1259,10 @@ class Controller
         if (!$this->user->logged() && ($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'GET') {
             header('Cache-Control: public, max-age=300, s-maxage=900, stale-while-revalidate=60');
         }
-
+        if ($this->user->logged()) {
+            $this->user->setPath($params['path']);
+            $this->user->save();
+        }
         $pageTitle = Localizer::translateString('playground_page_title');
         $pageDescription = Localizer::translateString('playground_page_description');
 
