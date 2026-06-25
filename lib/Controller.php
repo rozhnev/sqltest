@@ -700,6 +700,8 @@ class Controller
     {
         if ($this->user->logged()) {
             $this->engine->assign('LastTest', $this->user->getLastTest());
+            $this->user->setPath($params['path']);
+            $this->user->save();
         }
         $this->assignVariables([
             'SitePromo' => Localizer::translateString('site_promo'),
@@ -1168,6 +1170,11 @@ class Controller
             'LessonData'        => $lessonData
         ]);
         $this->setHreflangLinks($params['path'], $this->lang);
+
+        if ($this->user->logged()) {
+            $this->user->setPath($params['path']);
+            $this->user->save();
+        }
 
         $updatedAt      = $lessonData['updated_at'] ?? null;
         $dateModified   = $updatedAt ? (new DateTimeImmutable($updatedAt))->format(DateTimeInterface::ATOM) : null;
