@@ -215,7 +215,7 @@
                         <td>3</td>
                         <td>Professor</td>
                         <td>2010-08-15</td>
-                        <td>[{"day":"Mon","start":"10:00","end":"12:00"},{"day":"Wed","start":"14:00","end":"16:00"}]</td>
+                        <td>[{ldelim}"day":"Mon","start":"10:00","end":"12:00"{rdelim},{ldelim}"day":"Wed","start":"14:00","end":"16:00"{rdelim}]</td>
                         <td>Expert in distributed systems and cloud computing.</td>
                     </tr>
                 </tbody>
@@ -375,7 +375,7 @@
             <li><span class='sql'>capacity</span>maximum enrollment (SMALLINT)</li>
             <li><span class='sql'>enrolled_count</span>current number of enrolled students (SMALLINT)</li>
             <li><span class='sql'>status</span>section status: Open, Closed, or Cancelled (ENUM)</li>
-            <li><span class='sql'>schedule</span>weekly meeting times as JSON — e.g. <code>[{"day":"Mon","start":"09:00","end":"10:30"}]</code></li>
+            <li><span class='sql'>schedule</span>weekly meeting times as JSON — e.g. <code>[{ldelim}"day":"Mon","start":"09:00","end":"10:30"{rdelim}]</code></li>
         </ul>
         <div class="table-wrapper">
             <table>
@@ -402,7 +402,7 @@
                         <td>30</td>
                         <td>28</td>
                         <td>Open</td>
-                        <td>[{"day":"Mon","start":"09:00","end":"10:30"},{"day":"Wed","start":"09:00","end":"10:30"}]</td>
+                        <td>[{ldelim}"day":"Mon","start":"09:00","end":"10:30"{rdelim},{ldelim}"day":"Wed","start":"09:00","end":"10:30"{rdelim}]</td>
                     </tr>
                 </tbody>
             </table>
@@ -514,7 +514,7 @@
             <li><span class='sql'>status</span>project status: Proposed, Active, Completed, or Cancelled (ENUM)</li>
             <li><span class='sql'>start_date</span>project start date</li>
             <li><span class='sql'>end_date</span>project end date (nullable)</li>
-            <li><span class='sql'>funding</span>funding sources as JSON — e.g. <code>[{"source":"NSF","amount":150000}]</code></li>
+            <li><span class='sql'>funding</span>funding sources as JSON — e.g. <code>[{ldelim}"source":"NSF","amount":150000{rdelim}]</code></li>
         </ul>
         <div class="table-wrapper">
             <table>
@@ -539,7 +539,7 @@
                         <td>Active</td>
                         <td>2023-01-15</td>
                         <td>[null]</td>
-                        <td>[{"source":"NSF","amount":150000,"grant_id":"NSF-2023-042"}]</td>
+                        <td>[{ldelim}"source":"NSF","amount":150000,"grant_id":"NSF-2023-042"{rdelim}]</td>
                     </tr>
                 </tbody>
             </table>
@@ -729,8 +729,8 @@
                         <td>1</td>
                         <td>UPDATE</td>
                         <td>2024-12-21 09:05:33</td>
-                        <td>{"status":"Enrolled","final_score":null}</td>
-                        <td>{"status":"Completed","final_score":93.50}</td>
+                        <td>[{ldelim}"status":"Enrolled","final_score":null{rdelim}]</td>
+                        <td>[{ldelim}"status":"Completed","final_score":93.50{rdelim}]</td>
                     </tr>
                 </tbody>
             </table>
