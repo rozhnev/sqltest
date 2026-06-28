@@ -108,7 +108,7 @@
             <li><span class='sql'>name</span>название стипендии</li>
             <li><span class='sql'>amount</span>размер выплаты (DECIMAL)</li>
             <li><span class='sql'>type</span>тип стипендии: Merit, Need-Based, Athletic или Research (ENUM)</li>
-            <li><span class='sql' style="min-width: 10rem;">eligibility</span>критерии допуска в формате JSON — например, <code>{"min_gpa": 3.5, "need_based": true}</code></li>
+            <li><span class='sql' style="min-width: 10rem;">eligibility</span>критерии допуска в формате JSON — например, <code>{ldelim}"min_gpa": 3.5, "need_based": true{rdelim}</code></li>
         </ul>
         <div class="table-wrapper">
             <table>

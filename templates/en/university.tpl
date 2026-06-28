@@ -108,7 +108,7 @@
             <li><span class='sql'>name</span>scholarship name</li>
             <li><span class='sql'>amount</span>award amount (DECIMAL)</li>
             <li><span class='sql'>type</span>scholarship type: Merit, Need-Based, Athletic, or Research (ENUM)</li>
-            <li><span class='sql' style="min-width: 10rem;">eligibility</span>eligibility criteria as JSON — e.g. <code>{"min_gpa": 3.5, "need_based": true}</code></li>
+            <li><span class='sql' style="min-width: 10rem;">eligibility</span>eligibility criteria as JSON — e.g. <code>{ldelim}"min_gpa": 3.5, "need_based": true{rdelim}</code></li>
         </ul>
         <div class="table-wrapper">
             <table>
@@ -127,7 +127,7 @@
                         <td>Dean's Excellence Award</td>
                         <td>5000.00</td>
                         <td>Merit</td>
-                        <td>{"min_gpa": 3.8, "need_based": false, "majors": ["CS","Math"]}</td>
+                        <td>{ldelim}"min_gpa": 3.8, "need_based": false, "majors": ["CS","Math"]{rdelim}</td>
                     </tr>
                 </tbody>
             </table>

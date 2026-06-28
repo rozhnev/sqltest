@@ -108,7 +108,7 @@
             <li><span class='sql'>name</span>nome da bolsa de estudo</li>
             <li><span class='sql'>amount</span>valor da bolsa (DECIMAL)</li>
             <li><span class='sql'>type</span>tipo de bolsa: Merit, Need-Based, Athletic ou Research (ENUM)</li>
-            <li><span class='sql' style="min-width: 10rem;">eligibility</span>critérios de elegibilidade em JSON — ex.: <code>{"min_gpa": 3.5, "need_based": true}</code></li>
+            <li><span class='sql' style="min-width: 10rem;">eligibility</span>critérios de elegibilidade em JSON — ex.: <code>{ldelim}"min_gpa": 3.5, "need_based": true{rdelim}</code></li>
         </ul>
         <div class="table-wrapper">
             <table>
@@ -127,7 +127,7 @@
                         <td>Dean's Excellence Award</td>
                         <td>5000.00</td>
                         <td>Merit</td>
-                        <td>{"min_gpa": 3.8, "need_based": false, "majors": ["CS","Math"]}</td>
+                        <td>{ldelim}"min_gpa": 3.8, "need_based": false, "majors": ["CS","Math"]{rdelim}</td>
                     </tr>
                 </tbody>
             </table>
