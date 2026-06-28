@@ -33,7 +33,7 @@
         <h2 id="features"><a href="#features" style="color: inherit; text-decoration: none;">Ключевые особенности</a></h2>
 <ul>
     <li><strong>Поддержка нескольких движков</strong>: Поддерживает MySQL (8.0, 9.3), PostgreSQL (14-18), MS SQL Server, MariaDB (11.4, 11.8), SQLite, Oracle, Firebird, ClickHouse и другие.</li>
-    <li><strong>Готовые наборы данных</strong>: Доступ к предустановленным базам данных, таким как Sakila, OpenFlights и Bookings.</li>
+    <li><strong>Готовые наборы данных</strong>: Доступ к предустановленным базам данных, таким как Sakila, UniversityDB и Bookings.</li>
     <li><strong>Адаптивный дизайн</strong>: Работает на компьютерах и мобильных устройствах.</li>
     <li><strong>Динамическая инициализация</strong>: Автоматически обнаруживает новые редакторы, добавленные на страницу через AJAX или бесконечную прокрутку.</li>
     <li><strong>На базе Ace Editor</strong>: Качественная подсветка кода и удобство редактирования.</li>
@@ -144,7 +144,7 @@ SELECT * FROM sakila.actor LIMIT 5;
         <tr><td><code>clickhouse</code></td><td>ClickHouse</td></tr>
     </tbody>
 </table>
-<p><em>Примечание: также доступны предустановленные наборы данных, такие как <code>mysql97_sakila</code>, <code>psql17postgis</code>, <code>mssql2022aw</code>, <code>mysql80_sakila</code>, <code>mariadb118_openflights</code> и <code>psql10demo</code>.</em></p>
+<p><em>Примечание: также доступны предустановленные наборы данных, такие как <code>mysql97_sakila</code>, <code>psql17postgis</code>, <code>mssql2022aw</code>, <code>mysql80_sakila</code>, <code>mariadb118_university</code> и <code>psql10demo</code>.</em></p>
 
 <hr>
 

@@ -32,7 +32,7 @@
         <h2 id="features"><a href="#features" style="color: inherit; text-decoration: none;">Key Features</a></h2>
 <ul>
     <li><strong>Multi-Engine Support</strong>: Supports MySQL (8.0, 9.3), PostgreSQL (14-18), MS SQL Server, MariaDB (11.4, 11.8), SQLite, Oracle, Firebird, ClickHouse, and more.</li>
-    <li><strong>Ready-to-Use Datasets</strong>: Access preloaded databases like Sakila, OpenFlights, and Bookings.</li>
+    <li><strong>Ready-to-Use Datasets</strong>: Access preloaded databases like Sakila, UniversityDB, and Bookings.</li>
     <li><strong>Responsive Design</strong>: Works on desktops and mobile devices.</li>
     <li><strong>Dynamic Initialization</strong>: Automatically detects new editors added to the page via AJAX or infinite scroll.</li>
     <li><strong>Ace Editor Powered</strong>: High-quality code highlighting and editing experience.</li>
@@ -143,7 +143,7 @@ SELECT * FROM sakila.actor LIMIT 5;
         <tr><td><code>clickhouse</code></td><td>ClickHouse</td></tr>
     </tbody>
 </table>
-<p><em>Note: Preloaded datasets like <code>mysql97_sakila</code>, <code>psql17postgis</code>, <code>mssql2022aw</code>, <code>mysql80_sakila</code>, <code>mariadb118_openflights</code>, and <code>psql10demo</code> are also available.</em></p>
+<p><em>Note: Preloaded datasets like <code>mysql97_sakila</code>, <code>psql17postgis</code>, <code>mssql2022aw</code>, <code>mysql80_sakila</code>, <code>mariadb118_university</code>, and <code>psql10demo</code> are also available.</em></p>
 
 <hr>
 
