@@ -188,7 +188,7 @@
             <li><span class='sql'>department_id</span>department identifier (FK)</li>
             <li><span class='sql'>title</span>academic rank: Professor, Associate Professor, Assistant Professor, Lecturer, or Instructor (ENUM)</li>
             <li><span class='sql'>hire_date</span>date of hire</li>
-            <li><span class='sql'>office_hours</span>weekly office hours as JSON array — e.g. <code>[{"day":"Mon","start":"10:00","end":"12:00"}]</code></li>
+            <li><span class='sql'>office_hours</span>weekly office hours as JSON array — e.g. <code>[{ldelim}"day":"Mon","start":"10:00","end":"12:00"{rdelim}]</code></li>
             <li><span class='sql'>bio</span>biographical text (TEXT)</li>
         </ul>
         <div class="table-wrapper">

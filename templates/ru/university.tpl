@@ -188,7 +188,7 @@
             <li><span class='sql'>department_id</span>идентификатор кафедры (ВК)</li>
             <li><span class='sql'>title</span>учёное звание: Professor, Associate Professor, Assistant Professor, Lecturer или Instructor (ENUM)</li>
             <li><span class='sql'>hire_date</span>дата приёма на работу</li>
-            <li><span class='sql'>office_hours</span>еженедельные часы приёма в формате JSON-массива — например, <code>[{"day":"Mon","start":"10:00","end":"12:00"}]</code></li>
+            <li><span class='sql'>office_hours</span>еженедельные часы приёма в формате JSON-массива — например, <code>[{ldelim}"day":"Mon","start":"10:00","end":"12:00"{rdelim}]</code></li>
             <li><span class='sql'>bio</span>биографический текст (TEXT)</li>
         </ul>
         <div class="table-wrapper">

@@ -188,7 +188,7 @@
             <li><span class='sql'>department_id</span>identifiant du département (FK)</li>
             <li><span class='sql'>title</span>rang académique : Professor, Associate Professor, Assistant Professor, Lecturer ou Instructor (ENUM)</li>
             <li><span class='sql'>hire_date</span>date d'embauche</li>
-            <li><span class='sql'>office_hours</span>heures de permanence hebdomadaires au format tableau JSON — ex. <code>[{"day":"Mon","start":"10:00","end":"12:00"}]</code></li>
+            <li><span class='sql'>office_hours</span>heures de permanence hebdomadaires au format tableau JSON — ex. <code>[{ldelim}"day":"Mon","start":"10:00","end":"12:00"{rdelim}]</code></li>
             <li><span class='sql'>bio</span>texte biographique (TEXT)</li>
         </ul>
         <div class="table-wrapper">
