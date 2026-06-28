@@ -271,7 +271,7 @@
                         <td>2021-09-01</td>
                         <td>Active</td>
                         <td>3.72</td>
-                        <td>{"emergency":{"name":"Susan Miller","phone":"+15551234567"}}</td>
+                        <td>[{ldelim}"emergency":{"name":"Susan Miller","phone":"+15551234567"{rdelim}]</td>
                     </tr>
                 </tbody>
             </table>
