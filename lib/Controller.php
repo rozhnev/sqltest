@@ -63,7 +63,7 @@ class Controller
             'GITHUB_CLIENT_ID' => $env['GITHUB_CLIENT_ID'] ?? '',
             'DONATION_MONTHLY_GOAL' => (float)($env['DONATION_MONTHLY_GOAL'] ?? 50),
             'DONATION_RECEIVED_CURRENT_MONTH' => (float)($env['DONATION_RECEIVED_CURRENT_MONTH'] ?? 0),
-            'SHOW_URGENT_BANNER' => filter_var($env['SHOW_URGENT_BANNER'] ?? false, FILTER_VALIDATE_BOOLEAN),
+            'SHOW_URGENT_BANNER' => $env['SHOW_URGENT_BANNER'] ?? false,
             'MobileView'    => $this->isMobileView(),
             'Languages'     => $this->languages,
             'User'          => $this->user,
