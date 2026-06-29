@@ -85,6 +85,7 @@
     *   [Writing Efficient SQL Queries](lessons/lesson10_2_ru.md)
     *   [Understanding Query Optimization Techniques](lessons/lesson10_3_ru.md)
     *   [Introducing SQL Indexes](lessons/lesson10_4_ru.md)
+    *   [How B-tree Indexes Work](lessons/lesson10_5_ru.md) | [English](lessons/lesson10_5_en.md) | [Français](lessons/lesson10_5_fr.md) | [Português](lessons/lesson10_5_pt.md)
     *   Error Handling and Debugging Techniques
     *   Version Control for SQL Scripts    
 11. **Data Exploration and Analysis Techniques**
