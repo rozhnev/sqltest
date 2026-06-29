@@ -21,12 +21,13 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li><span class='sql'>semester_id</span>identificador único do registro (PK)</li>
-            <li><span class='sql'>name</span>nome do semestre (ex.: 'Fall 2024')</li>
-            <li><span class='sql'>academic_year</span>ano letivo (tipo YEAR)</li>
+            <li><span class='sql'>semester_id</span>identificador único do registro (PK, TINYINT)</li>
             <li><span class='sql'>term</span>tipo de período: Fall, Spring ou Summer (ENUM)</li>
+            <li><span class='sql'>academic_year</span>ano letivo (tipo YEAR)</li>
+            <li><span class='sql'>name</span>nome do semestre (ex.: 'Fall 2024')</li>
             <li><span class='sql'>start_date</span>primeiro dia do semestre</li>
             <li><span class='sql'>end_date</span>último dia do semestre</li>
+            <li><span class='sql'>enroll_deadline</span>último dia para matrícula de estudantes</li>
             <li><span class='sql'>is_active</span>indica se o semestre está ativo no momento (BOOLEAN)</li>
         </ul>
         <div class="table-wrapper">
@@ -34,22 +35,24 @@
                 <thead>
                     <tr>
                         <th scope="col">semester_id</th>
-                        <th scope="col">name</th>
-                        <th scope="col">academic_year</th>
                         <th scope="col">term</th>
+                        <th scope="col">academic_year</th>
+                        <th scope="col">name</th>
                         <th scope="col">start_date</th>
                         <th scope="col">end_date</th>
+                        <th scope="col">enroll_deadline</th>
                         <th scope="col">is_active</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>1</td>
-                        <td>Fall 2024</td>
-                        <td>2024</td>
                         <td>Fall</td>
+                        <td>2024</td>
+                        <td>Fall 2024</td>
                         <td>2024-09-02</td>
                         <td>2024-12-20</td>
+                        <td>2024-09-13</td>
                         <td>1</td>
                     </tr>
                 </tbody>
@@ -57,6 +60,7 @@
         </div>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (semester_id)</li>
+            <li>UNIQUE KEY (term, academic_year)</li>
         </ul>
     </div>
     <div class="accordion" title="Clique para expandir, duplo clique para colar nome da tabela">
@@ -64,12 +68,13 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li><span class='sql'>room_id</span>identificador único do registro (PK)</li>
+            <li><span class='sql'>room_id</span>identificador único do registro (PK, SMALLINT)</li>
             <li><span class='sql'>building</span>nome do edifício</li>
             <li><span class='sql'>room_number</span>número ou identificação da sala</li>
             <li><span class='sql'>capacity</span>número máximo de lugares (SMALLINT)</li>
-            <li><span class='sql'>type</span>tipo de sala: Lecture, Lab, Seminar ou Conference (ENUM)</li>
+            <li><span class='sql'>room_type</span>tipo de sala: lecture, seminar, lab, computer_lab ou online (ENUM)</li>
             <li><span class='sql'>has_projector</span>indica se a sala possui projetor (BOOLEAN)</li>
+            <li><span class='sql'>has_video</span>indica se a sala possui equipamento de videoconferência (BOOLEAN)</li>
         </ul>
         <div class="table-wrapper">
             <table>
@@ -79,8 +84,9 @@
                         <th scope="col">building</th>
                         <th scope="col">room_number</th>
                         <th scope="col">capacity</th>
-                        <th scope="col">type</th>
+                        <th scope="col">room_type</th>
                         <th scope="col">has_projector</th>
+                        <th scope="col">has_video</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -89,14 +95,16 @@
                         <td>Science Hall</td>
                         <td>101</td>
                         <td>120</td>
-                        <td>Lecture</td>
+                        <td>lecture</td>
                         <td>1</td>
+                        <td>0</td>
                     </tr>
                 </tbody>
             </table>
         </div>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (room_id)</li>
+            <li>UNIQUE KEY (building, room_number)</li>
         </ul>
     </div>
     <div class="accordion" title="Clique para expandir, duplo clique para colar nome da tabela">
@@ -104,11 +112,12 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li><span class='sql'>scholarship_id</span>identificador único do registro (PK)</li>
+            <li><span class='sql'>scholarship_id</span>identificador único do registro (PK, SMALLINT)</li>
             <li><span class='sql'>name</span>nome da bolsa de estudo</li>
             <li><span class='sql'>amount</span>valor da bolsa (DECIMAL)</li>
-            <li><span class='sql'>type</span>tipo de bolsa: Merit, Need-Based, Athletic ou Research (ENUM)</li>
+            <li><span class='sql'>frequency</span>frequência de concessão: one-time, annual ou per-semester (ENUM)</li>
             <li><span class='sql' style="min-width: 10rem;">eligibility</span>critérios de elegibilidade em JSON — ex.: <code>{ldelim}"min_gpa": 3.5, "need_based": true{rdelim}</code></li>
+            <li><span class='sql'>is_active</span>indica se a bolsa está sendo oferecida no momento (BOOLEAN)</li>
         </ul>
         <div class="table-wrapper">
             <table>
@@ -117,8 +126,9 @@
                         <th scope="col">scholarship_id</th>
                         <th scope="col">name</th>
                         <th scope="col">amount</th>
-                        <th scope="col">type</th>
+                        <th scope="col">frequency</th>
                         <th scope="col">eligibility</th>
+                        <th scope="col">is_active</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -126,8 +136,9 @@
                         <td>1</td>
                         <td>Dean's Excellence Award</td>
                         <td>5000.00</td>
-                        <td>Merit</td>
+                        <td>annual</td>
                         <td>{ldelim}"min_gpa": 3.8, "need_based": false, "majors": ["CS","Math"]{rdelim}</td>
+                        <td>1</td>
                     </tr>
                 </tbody>
             </table>
@@ -141,39 +152,47 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li><span class='sql'>department_id</span>identificador único do registro (PK)</li>
-            <li><span class='sql'>name</span>nome do departamento</li>
-            <li><span class='sql'>code</span>código abreviado do departamento</li>
+            <li><span class='sql'>department_id</span>identificador único do registro (PK, TINYINT)</li>
             <li><span class='sql'>parent_id</span>identificador do departamento pai — FK autorreferenciada (nulável)</li>
+            <li><span class='sql'>code</span>código abreviado do departamento (CHAR)</li>
+            <li><span class='sql'>name</span>nome do departamento</li>
             <li><span class='sql'>level</span>nível hierárquico: 1 = Faculdade, 2 = Departamento, 3 = Subdepartamento (TINYINT)</li>
+            <li><span class='sql'>head_faculty_id</span>identificador do chefe do departamento (FK, nulável)</li>
+            <li><span class='sql'>established</span>ano de fundação do departamento (YEAR, nulável)</li>
         </ul>
         <div class="table-wrapper">
             <table>
                 <thead>
                     <tr>
                         <th scope="col">department_id</th>
-                        <th scope="col">name</th>
-                        <th scope="col">code</th>
                         <th scope="col">parent_id</th>
+                        <th scope="col">code</th>
+                        <th scope="col">name</th>
                         <th scope="col">level</th>
+                        <th scope="col">head_faculty_id</th>
+                        <th scope="col">established</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>1</td>
-                        <td>Faculty of Engineering</td>
-                        <td>ENG</td>
                         <td>[null]</td>
+                        <td>ENG</td>
+                        <td>Faculty of Engineering</td>
                         <td>1</td>
+                        <td>1</td>
+                        <td>1965</td>
                     </tr>
                 </tbody>
             </table>
         </div>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (department_id)</li>
+            <li>UNIQUE KEY (code)</li>
         </ul>
         <ul class="table-columns">
             <li>FOREIGN KEY (parent_id) REFERENCES departments(department_id)</li>
+            <li>FOREIGN KEY (head_faculty_id) REFERENCES faculty(faculty_id)</li>
         </ul>
     </div>
     <div class="accordion" title="Clique para expandir, duplo clique para colar nome da tabela">
@@ -181,48 +200,58 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li><span class='sql'>faculty_id</span>identificador único do registro (PK)</li>
+            <li><span class='sql'>faculty_id</span>identificador único do registro (PK, SMALLINT)</li>
+            <li><span class='sql'>department_id</span>identificador do departamento (FK)</li>
             <li><span class='sql'>first_name</span>primeiro nome do docente</li>
             <li><span class='sql'>last_name</span>sobrenome do docente</li>
             <li><span class='sql'>email</span>endereço de e-mail institucional</li>
-            <li><span class='sql'>department_id</span>identificador do departamento (FK)</li>
-            <li><span class='sql'>title</span>cargo acadêmico: Professor, Associate Professor, Assistant Professor, Lecturer ou Instructor (ENUM)</li>
+            <li><span class='sql'>phone</span>número de telefone do escritório (nulável)</li>
+            <li><span class='sql'>rank</span>cargo acadêmico: Instructor, Assistant Professor, Associate Professor, Professor ou Emeritus (ENUM)</li>
             <li><span class='sql'>hire_date</span>data de contratação</li>
+            <li><span class='sql'>office</span>número ou localização da sala do docente (nulável)</li>
             <li><span class='sql'>office_hours</span>horários de atendimento semanais em JSON — ex.: <code>[{ldelim}"day":"Mon","start":"10:00","end":"12:00"{rdelim}]</code></li>
-            <li><span class='sql'>bio</span>texto biográfico (TEXT)</li>
+            <li><span class='sql'>bio</span>texto biográfico (TEXT, nulável)</li>
+            <li><span class='sql'>is_active</span>indica se o docente está ativo no momento (BOOLEAN)</li>
         </ul>
         <div class="table-wrapper">
             <table>
                 <thead>
                     <tr>
                         <th scope="col">faculty_id</th>
+                        <th scope="col">department_id</th>
                         <th scope="col">first_name</th>
                         <th scope="col">last_name</th>
                         <th scope="col">email</th>
-                        <th scope="col">department_id</th>
-                        <th scope="col">title</th>
+                        <th scope="col">phone</th>
+                        <th scope="col">rank</th>
                         <th scope="col">hire_date</th>
+                        <th scope="col">office</th>
                         <th scope="col">office_hours</th>
                         <th scope="col">bio</th>
+                        <th scope="col">is_active</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>1</td>
+                        <td>3</td>
                         <td>Alice</td>
                         <td>Carter</td>
                         <td>a.carter@university.edu</td>
-                        <td>3</td>
+                        <td>+15550100</td>
                         <td>Professor</td>
                         <td>2010-08-15</td>
-                        <td>[{"day":"Mon","start":"10:00","end":"12:00"},{"day":"Wed","start":"14:00","end":"16:00"}]</td>
-                        <td>Expert in distributed systems and cloud computing.</td>
+                        <td>ENG-204</td>
+                        <td>[{ldelim}"day":"Mon","start":"10:00","end":"12:00"{rdelim}]</td>
+                        <td>Expert in distributed systems.</td>
+                        <td>1</td>
                     </tr>
                 </tbody>
             </table>
         </div>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (faculty_id)</li>
+            <li>UNIQUE KEY (email)</li>
         </ul>
         <ul class="table-columns">
             <li>FOREIGN KEY (department_id) REFERENCES departments(department_id)</li>
@@ -233,28 +262,34 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li><span class='sql'>student_id</span>identificador único do registro (PK)</li>
-            <li><span class='sql'>student_number</span>número de matrícula único do estudante (CHAR)</li>
+            <li><span class='sql'>student_id</span>identificador único do registro (PK, INT)</li>
+            <li><span class='sql'>department_id</span>identificador do departamento de origem (FK)</li>
+            <li><span class='sql'>student_number</span>número de matrícula único do estudante (CHAR, ex.: 'S000123')</li>
             <li><span class='sql'>first_name</span>primeiro nome do estudante</li>
             <li><span class='sql'>last_name</span>sobrenome do estudante</li>
             <li><span class='sql'>email</span>endereço de e-mail do estudante</li>
             <li><span class='sql'>date_of_birth</span>data de nascimento do estudante</li>
+            <li><span class='sql'>gender</span>gênero: M, F, NB, Other ou Prefer not to say (ENUM, nulável)</li>
             <li><span class='sql'>enrollment_date</span>data da primeira matrícula do estudante</li>
-            <li><span class='sql'>status</span>situação acadêmica: Active, Inactive, Graduated ou Suspended (ENUM)</li>
-            <li><span class='sql'>gpa</span>coeficiente de rendimento acumulado atual (DECIMAL)</li>
-            <li><span class='sql'>contacts</span>contato de emergência e endereço em JSON</li>
+            <li><span class='sql'>expected_grad</span>ano previsto de formatura (YEAR, nulável)</li>
+            <li><span class='sql'>status</span>situação acadêmica: active, inactive, graduated, suspended ou withdrawn (ENUM)</li>
+            <li><span class='sql'>gpa</span>coeficiente de rendimento acumulado 0.000–4.000, mantido por trigger (DECIMAL, nulável)</li>
+            <li><span class='sql'>contacts</span>contato de emergência e endereço em JSON — ex.: <code>{ldelim}"emergency":{ldelim}"name":"Jane Doe","phone":"+1-555-0100"{rdelim}{rdelim}</code></li>
         </ul>
         <div class="table-wrapper">
             <table>
                 <thead>
                     <tr>
                         <th scope="col">student_id</th>
+                        <th scope="col">department_id</th>
                         <th scope="col">student_number</th>
                         <th scope="col">first_name</th>
                         <th scope="col">last_name</th>
                         <th scope="col">email</th>
                         <th scope="col">date_of_birth</th>
+                        <th scope="col">gender</th>
                         <th scope="col">enrollment_date</th>
+                        <th scope="col">expected_grad</th>
                         <th scope="col">status</th>
                         <th scope="col">gpa</th>
                         <th scope="col">contacts</th>
@@ -263,21 +298,29 @@
                 <tbody>
                     <tr>
                         <td>1</td>
-                        <td>S2021001</td>
+                        <td>3</td>
+                        <td>S000123</td>
                         <td>James</td>
                         <td>Miller</td>
                         <td>j.miller@student.edu</td>
                         <td>2002-04-23</td>
+                        <td>M</td>
                         <td>2021-09-01</td>
-                        <td>Active</td>
-                        <td>3.72</td>
-                        <td>{"emergency":{"name":"Susan Miller","phone":"+15551234567"}}</td>
+                        <td>2025</td>
+                        <td>active</td>
+                        <td>3.720</td>
+                        <td>{ldelim}"emergency":{ldelim}"name":"Susan Miller","phone":"+1-555-0100"{rdelim}{rdelim}</td>
                     </tr>
                 </tbody>
             </table>
         </div>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (student_id)</li>
+            <li>UNIQUE KEY (student_number)</li>
+            <li>UNIQUE KEY (email)</li>
+        </ul>
+        <ul class="table-columns">
+            <li>FOREIGN KEY (department_id) REFERENCES departments(department_id)</li>
         </ul>
     </div>
     <div class="accordion" title="Clique para expandir, duplo clique para colar nome da tabela">
@@ -285,25 +328,27 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li><span class='sql'>course_id</span>identificador único do registro (PK)</li>
-            <li><span class='sql'>code</span>código da disciplina (ex.: CS301)</li>
+            <li><span class='sql'>course_id</span>identificador único do registro (PK, SMALLINT)</li>
+            <li><span class='sql'>department_id</span>identificador do departamento responsável (FK)</li>
+            <li><span class='sql'>code</span>código da disciplina (ex.: 'CS101') (CHAR)</li>
             <li><span class='sql'>title</span>título da disciplina</li>
-            <li><span class='sql'>description</span>descrição detalhada da disciplina (TEXT, índice FULLTEXT)</li>
             <li><span class='sql'>credits</span>número de créditos (TINYINT)</li>
-            <li><span class='sql'>department_id</span>identificador do departamento (FK)</li>
+            <li><span class='sql'>level</span>nível acadêmico: undergraduate, graduate ou doctoral (ENUM)</li>
+            <li><span class='sql'>description</span>descrição detalhada da disciplina (TEXT, índice FULLTEXT com title)</li>
             <li><span class='sql'>is_active</span>indica se a disciplina está sendo oferecida no momento (BOOLEAN)</li>
-            <li><span class='sql'>embedding</span>embedding semântico de 1536 dimensões para busca por similaridade vetorial (VECTOR(1536))</li>
+            <li><span class='sql'>embedding</span>embedding semântico de 1536 dimensões para busca por similaridade vetorial (VECTOR(1536), nulável)</li>
         </ul>
         <div class="table-wrapper">
             <table>
                 <thead>
                     <tr>
                         <th scope="col">course_id</th>
+                        <th scope="col">department_id</th>
                         <th scope="col">code</th>
                         <th scope="col">title</th>
-                        <th scope="col">description</th>
                         <th scope="col">credits</th>
-                        <th scope="col">department_id</th>
+                        <th scope="col">level</th>
+                        <th scope="col">description</th>
                         <th scope="col">is_active</th>
                         <th scope="col">embedding</th>
                     </tr>
@@ -311,11 +356,12 @@
                 <tbody>
                     <tr>
                         <td>1</td>
+                        <td>3</td>
                         <td>CS301</td>
                         <td>Database Systems</td>
+                        <td>3</td>
+                        <td>undergraduate</td>
                         <td>Introduction to relational databases, SQL, and data modeling.</td>
-                        <td>3</td>
-                        <td>3</td>
                         <td>1</td>
                         <td>[0.023, -0.011, ...]</td>
                     </tr>
@@ -324,7 +370,8 @@
         </div>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (course_id)</li>
-            <li>FULLTEXT (description)</li>
+            <li>UNIQUE KEY (code)</li>
+            <li>FULLTEXT (title, description)</li>
         </ul>
         <ul class="table-columns">
             <li>FOREIGN KEY (department_id) REFERENCES departments(department_id)</li>
@@ -337,6 +384,7 @@
         <ul class="table-columns">
             <li><span class='sql'>course_id</span>identificador da disciplina (FK)</li>
             <li><span class='sql'>prerequisite_id</span>identificador da disciplina pré-requisito (FK)</li>
+            <li><span class='sql'>is_mandatory</span>indica se o pré-requisito é obrigatório ou recomendado (BOOLEAN)</li>
         </ul>
         <div class="table-wrapper">
             <table>
@@ -344,11 +392,13 @@
                     <tr>
                         <th scope="col">course_id</th>
                         <th scope="col">prerequisite_id</th>
+                        <th scope="col">is_mandatory</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>5</td>
+                        <td>1</td>
                         <td>1</td>
                     </tr>
                 </tbody>
@@ -367,15 +417,16 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li><span class='sql'>section_id</span>identificador único do registro (PK)</li>
+            <li><span class='sql'>section_id</span>identificador único do registro (PK, INT)</li>
             <li><span class='sql'>course_id</span>identificador da disciplina (FK)</li>
             <li><span class='sql'>semester_id</span>identificador do semestre (FK)</li>
             <li><span class='sql'>faculty_id</span>identificador do professor responsável (FK)</li>
-            <li><span class='sql'>room_id</span>identificador da sala alocada (FK)</li>
-            <li><span class='sql'>capacity</span>número máximo de vagas (SMALLINT)</li>
-            <li><span class='sql'>enrolled_count</span>número atual de estudantes matriculados (SMALLINT)</li>
-            <li><span class='sql'>status</span>situação da turma: Open, Closed ou Cancelled (ENUM)</li>
-            <li><span class='sql'>schedule</span>horários semanais das aulas em JSON — ex.: <code>[{"day":"Mon","start":"09:00","end":"10:30"}]</code></li>
+            <li><span class='sql'>room_id</span>identificador da sala alocada (FK, nulável — NULL para turmas totalmente online)</li>
+            <li><span class='sql'>section_number</span>número da turma dentro da disciplina/semestre (TINYINT)</li>
+            <li><span class='sql'>delivery</span>modalidade de ensino: in-person, online ou hybrid (ENUM)</li>
+            <li><span class='sql'>max_capacity</span>número máximo de vagas (SMALLINT)</li>
+            <li><span class='sql'>status</span>situação da turma: open, closed, cancelled ou completed (ENUM)</li>
+            <li><span class='sql'>schedule</span>horários semanais das aulas em JSON — ex.: <code>[{ldelim}"day":"Mon","start":"09:00","end":"10:30"{rdelim}]</code></li>
         </ul>
         <div class="table-wrapper">
             <table>
@@ -386,8 +437,9 @@
                         <th scope="col">semester_id</th>
                         <th scope="col">faculty_id</th>
                         <th scope="col">room_id</th>
-                        <th scope="col">capacity</th>
-                        <th scope="col">enrolled_count</th>
+                        <th scope="col">section_number</th>
+                        <th scope="col">delivery</th>
+                        <th scope="col">max_capacity</th>
                         <th scope="col">status</th>
                         <th scope="col">schedule</th>
                     </tr>
@@ -399,16 +451,18 @@
                         <td>1</td>
                         <td>1</td>
                         <td>1</td>
+                        <td>1</td>
+                        <td>in-person</td>
                         <td>30</td>
-                        <td>28</td>
-                        <td>Open</td>
-                        <td>[{"day":"Mon","start":"09:00","end":"10:30"},{"day":"Wed","start":"09:00","end":"10:30"}]</td>
+                        <td>open</td>
+                        <td>[{ldelim}"day":"Mon","start":"09:00","end":"10:30"{rdelim},{ldelim}"day":"Wed","start":"09:00","end":"10:30"{rdelim}]</td>
                     </tr>
                 </tbody>
             </table>
         </div>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (section_id)</li>
+            <li>UNIQUE KEY (course_id, semester_id, section_number)</li>
         </ul>
         <ul class="table-columns">
             <li>FOREIGN KEY (course_id) REFERENCES courses(course_id)</li>
@@ -422,13 +476,13 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li><span class='sql'>enrollment_id</span>identificador único do registro (PK)</li>
+            <li><span class='sql'>enrollment_id</span>identificador único do registro (PK, INT)</li>
             <li><span class='sql'>student_id</span>identificador do estudante (FK)</li>
             <li><span class='sql'>section_id</span>identificador da turma (FK)</li>
             <li><span class='sql'>enrolled_at</span>data e hora da matrícula (TIMESTAMP)</li>
-            <li><span class='sql'>status</span>situação da matrícula: Enrolled, Dropped, Completed ou Withdrawn (ENUM)</li>
-            <li><span class='sql'>grade</span>conceito final em letra (CHAR)</li>
-            <li><span class='sql'>final_score</span>pontuação numérica calculada (DECIMAL)</li>
+            <li><span class='sql'>status</span>situação da matrícula: enrolled, dropped, completed, failed ou incomplete (ENUM)</li>
+            <li><span class='sql'>final_grade</span>conceito final em letra, ex.: 'A', 'B+' (CHAR, nulável)</li>
+            <li><span class='sql'>final_score</span>pontuação numérica final 0.00–100.00 (DECIMAL, nulável)</li>
         </ul>
         <div class="table-wrapper">
             <table>
@@ -439,7 +493,7 @@
                         <th scope="col">section_id</th>
                         <th scope="col">enrolled_at</th>
                         <th scope="col">status</th>
-                        <th scope="col">grade</th>
+                        <th scope="col">final_grade</th>
                         <th scope="col">final_score</th>
                     </tr>
                 </thead>
@@ -449,7 +503,7 @@
                         <td>1</td>
                         <td>1</td>
                         <td>2024-08-25 10:34:02</td>
-                        <td>Completed</td>
+                        <td>completed</td>
                         <td>A</td>
                         <td>93.50</td>
                     </tr>
@@ -458,6 +512,7 @@
         </div>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (enrollment_id)</li>
+            <li>UNIQUE KEY (student_id, section_id)</li>
         </ul>
         <ul class="table-columns">
             <li>FOREIGN KEY (student_id) REFERENCES students(student_id)</li>
@@ -469,33 +524,42 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
+            <li><span class='sql'>award_id</span>identificador único do registro (PK, INT)</li>
             <li><span class='sql'>student_id</span>identificador do estudante (FK)</li>
             <li><span class='sql'>scholarship_id</span>identificador da bolsa de estudo (FK)</li>
             <li><span class='sql'>awarded_date</span>data em que a bolsa foi concedida</li>
-            <li><span class='sql'>amount</span>valor efetivamente concedido, podendo diferir do valor base da bolsa (DECIMAL)</li>
+            <li><span class='sql'>expires_date</span>data de expiração do prêmio (nulável)</li>
+            <li><span class='sql'>amount_awarded</span>valor efetivamente concedido (DECIMAL)</li>
+            <li><span class='sql'>notes</span>observações adicionais sobre o prêmio (TEXT, nulável)</li>
         </ul>
         <div class="table-wrapper">
             <table>
                 <thead>
                     <tr>
+                        <th scope="col">award_id</th>
                         <th scope="col">student_id</th>
                         <th scope="col">scholarship_id</th>
                         <th scope="col">awarded_date</th>
-                        <th scope="col">amount</th>
+                        <th scope="col">expires_date</th>
+                        <th scope="col">amount_awarded</th>
+                        <th scope="col">notes</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>1</td>
                         <td>1</td>
+                        <td>1</td>
                         <td>2024-09-01</td>
+                        <td>2025-08-31</td>
                         <td>5000.00</td>
+                        <td>[null]</td>
                     </tr>
                 </tbody>
             </table>
         </div>
         <ul class="table-columns">
-            <li>PRIMARY KEY, btree (student_id, scholarship_id)</li>
+            <li>PRIMARY KEY, btree (award_id)</li>
         </ul>
         <ul class="table-columns">
             <li>FOREIGN KEY (student_id) REFERENCES students(student_id)</li>
@@ -507,39 +571,42 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li><span class='sql'>project_id</span>identificador único do registro (PK)</li>
-            <li><span class='sql'>title</span>título do projeto</li>
-            <li><span class='sql'>description</span>descrição do projeto (TEXT)</li>
+            <li><span class='sql'>project_id</span>identificador único do registro (PK, SMALLINT)</li>
             <li><span class='sql'>department_id</span>identificador do departamento (FK)</li>
-            <li><span class='sql'>status</span>situação do projeto: Proposed, Active, Completed ou Cancelled (ENUM)</li>
+            <li><span class='sql'>lead_faculty_id</span>investigador principal do projeto (FK)</li>
+            <li><span class='sql'>title</span>título do projeto</li>
+            <li><span class='sql'>abstract</span>descrição do projeto (TEXT, nulável)</li>
             <li><span class='sql'>start_date</span>data de início do projeto</li>
             <li><span class='sql'>end_date</span>data de encerramento do projeto (nulável)</li>
-            <li><span class='sql'>funding</span>fontes de financiamento em JSON — ex.: <code>[{"source":"NSF","amount":150000}]</code></li>
+            <li><span class='sql'>status</span>situação do projeto: proposed, active, completed ou cancelled (ENUM)</li>
+            <li><span class='sql'>funding</span>fontes de financiamento em JSON — ex.: <code>[{ldelim}"source":"NSF","amount":150000,"grant_id":"NSF-2024-001"{rdelim}]</code></li>
         </ul>
         <div class="table-wrapper">
             <table>
                 <thead>
                     <tr>
                         <th scope="col">project_id</th>
-                        <th scope="col">title</th>
-                        <th scope="col">description</th>
                         <th scope="col">department_id</th>
-                        <th scope="col">status</th>
+                        <th scope="col">lead_faculty_id</th>
+                        <th scope="col">title</th>
+                        <th scope="col">abstract</th>
                         <th scope="col">start_date</th>
                         <th scope="col">end_date</th>
+                        <th scope="col">status</th>
                         <th scope="col">funding</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>1</td>
-                        <td>AI-Assisted Drug Discovery</td>
-                        <td>Using machine learning models to identify candidate molecules.</td>
                         <td>5</td>
-                        <td>Active</td>
+                        <td>1</td>
+                        <td>AI-Assisted Drug Discovery</td>
+                        <td>Using machine learning to identify candidate molecules.</td>
                         <td>2023-01-15</td>
                         <td>[null]</td>
-                        <td>[{"source":"NSF","amount":150000,"grant_id":"NSF-2023-042"}]</td>
+                        <td>active</td>
+                        <td>[{ldelim}"source":"NSF","amount":150000,"grant_id":"NSF-2023-042"{rdelim}]</td>
                     </tr>
                 </tbody>
             </table>
@@ -549,6 +616,7 @@
         </ul>
         <ul class="table-columns">
             <li>FOREIGN KEY (department_id) REFERENCES departments(department_id)</li>
+            <li>FOREIGN KEY (lead_faculty_id) REFERENCES faculty(faculty_id)</li>
         </ul>
     </div>
     <div class="accordion" title="Clique para expandir, duplo clique para colar nome da tabela">
@@ -556,46 +624,50 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li><span class='sql'>publication_id</span>identificador único do registro (PK)</li>
+            <li><span class='sql'>publication_id</span>identificador único do registro (PK, INT)</li>
+            <li><span class='sql'>project_id</span>projeto de pesquisa associado (FK, nulável)</li>
             <li><span class='sql'>title</span>título da publicação</li>
-            <li><span class='sql'>abstract</span>resumo da publicação (MEDIUMTEXT, índice FULLTEXT)</li>
-            <li><span class='sql'>journal</span>nome do periódico ou conferência</li>
-            <li><span class='sql'>publication_year</span>ano de publicação (YEAR)</li>
-            <li><span class='sql'>doi</span>Identificador de Objeto Digital (DOI)</li>
-            <li><span class='sql' style="min-width: 11rem;">contribution_type</span>tipo de contribuição — um ou mais entre: Theoretical, Experimental, Review, Applied (SET)</li>
-            <li><span class='sql'>project_id</span>identificador do projeto de pesquisa associado (FK, nulável)</li>
+            <li><span class='sql'>abstract</span>resumo da publicação (MEDIUMTEXT, índice FULLTEXT com title)</li>
+            <li><span class='sql'>pub_year</span>ano de publicação (YEAR)</li>
+            <li><span class='sql'>venue</span>nome do periódico ou conferência (nulável)</li>
+            <li><span class='sql'>doi</span>Identificador de Objeto Digital (DOI, nulável)</li>
+            <li><span class='sql' style="min-width: 9rem;">keywords</span>palavras-chave — uma ou mais entre: AI, ML, Data Science, Networking, Security, Algorithms, Databases, HCI, Theory, Bioinformatics, Systems, Mathematics, Physics, Chemistry, Biology (SET)</li>
+            <li><span class='sql'>citation_count</span>número de citações recebidas (INT)</li>
         </ul>
         <div class="table-wrapper">
             <table>
                 <thead>
                     <tr>
                         <th scope="col">publication_id</th>
+                        <th scope="col">project_id</th>
                         <th scope="col">title</th>
                         <th scope="col">abstract</th>
-                        <th scope="col">journal</th>
-                        <th scope="col">publication_year</th>
+                        <th scope="col">pub_year</th>
+                        <th scope="col">venue</th>
                         <th scope="col">doi</th>
-                        <th scope="col">contribution_type</th>
-                        <th scope="col">project_id</th>
+                        <th scope="col">keywords</th>
+                        <th scope="col">citation_count</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>1</td>
-                        <td>Deep Learning for Molecular Screening</td>
-                        <td>We present a transformer-based architecture for high-throughput virtual screening...</td>
-                        <td>Nature Machine Intelligence</td>
-                        <td>2024</td>
-                        <td>10.1038/s42256-024-00001-1</td>
-                        <td>Theoretical,Experimental</td>
                         <td>1</td>
+                        <td>Deep Learning for Molecular Screening</td>
+                        <td>We present a transformer-based architecture for virtual screening...</td>
+                        <td>2024</td>
+                        <td>Nature Machine Intelligence</td>
+                        <td>10.1038/s42256-024-00001-1</td>
+                        <td>AI,ML,Bioinformatics</td>
+                        <td>12</td>
                     </tr>
                 </tbody>
             </table>
         </div>
         <ul class="table-columns">
             <li>PRIMARY KEY, btree (publication_id)</li>
-            <li>FULLTEXT (abstract)</li>
+            <li>UNIQUE KEY (doi)</li>
+            <li>FULLTEXT (title, abstract)</li>
         </ul>
         <ul class="table-columns">
             <li>FOREIGN KEY (project_id) REFERENCES research_projects(project_id)</li>
@@ -606,36 +678,42 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
+            <li><span class='sql'>member_id</span>identificador único do registro (PK, INT)</li>
             <li><span class='sql'>project_id</span>identificador do projeto de pesquisa (FK)</li>
             <li><span class='sql'>faculty_id</span>identificador do docente (FK, nulável)</li>
             <li><span class='sql'>student_id</span>identificador do estudante (FK, nulável)</li>
-            <li><span class='sql'>role</span>papel do membro: PI, Co-PI, Researcher ou Assistant (ENUM)</li>
-            <li><span class='sql'>join_date</span>data de ingresso no projeto</li>
+            <li><span class='sql'>role</span>papel do membro: Principal Investigator, Co-Investigator, Research Assistant, Graduate Student ou Undergraduate Student (ENUM)</li>
+            <li><span class='sql'>joined_date</span>data de ingresso no projeto</li>
+            <li><span class='sql'>left_date</span>data de saída do projeto (nulável)</li>
         </ul>
         <div class="table-wrapper">
             <table>
                 <thead>
                     <tr>
+                        <th scope="col">member_id</th>
                         <th scope="col">project_id</th>
                         <th scope="col">faculty_id</th>
                         <th scope="col">student_id</th>
                         <th scope="col">role</th>
-                        <th scope="col">join_date</th>
+                        <th scope="col">joined_date</th>
+                        <th scope="col">left_date</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>1</td>
                         <td>1</td>
+                        <td>1</td>
                         <td>[null]</td>
-                        <td>PI</td>
+                        <td>Principal Investigator</td>
                         <td>2023-01-15</td>
+                        <td>[null]</td>
                     </tr>
                 </tbody>
             </table>
         </div>
         <ul class="table-columns">
-            <li>PRIMARY KEY, btree (project_id, faculty_id, student_id)</li>
+            <li>PRIMARY KEY, btree (member_id)</li>
         </ul>
         <ul class="table-columns">
             <li>FOREIGN KEY (project_id) REFERENCES research_projects(project_id)</li>
@@ -648,15 +726,16 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li><span class='sql'>event_id</span>identificador único do registro (BIGINT PK)</li>
+            <li><span class='sql'>event_id</span>identificador único do registro (PK, BIGINT)</li>
             <li><span class='sql'>enrollment_id</span>identificador da matrícula (FK)</li>
-            <li><span class='sql'>item_name</span>nome do item avaliado (ex.: 'Midterm Exam')</li>
-            <li><span class='sql'>item_type</span>tipo de item: Homework, Quiz, Midterm, Final, Project ou Lab (ENUM)</li>
+            <li><span class='sql'>item_name</span>nome do item avaliado (ex.: 'Assignment 1', 'Midterm Exam')</li>
+            <li><span class='sql'>item_type</span>tipo de item: assignment, quiz, midterm, final, project, participation ou lab (ENUM)</li>
             <li><span class='sql'>score</span>pontuação obtida (DECIMAL)</li>
-            <li><span class='sql'>max_score</span>pontuação máxima possível (DECIMAL)</li>
-            <li><span class='sql'>weight</span>peso percentual na nota final (DECIMAL)</li>
-            <li><span class='sql'>grader_id</span>docente responsável pela correção (FK)</li>
-            <li><span class='sql'>created_at</span>data e hora do registro da nota (DATETIME)</li>
+            <li><span class='sql'>max_score</span>pontuação máxima possível, padrão 100.00 (DECIMAL)</li>
+            <li><span class='sql'>weight</span>fração da nota final, ex.: 0.1500 para 15% (DECIMAL)</li>
+            <li><span class='sql'>graded_at</span>data e hora do registro da nota (DATETIME)</li>
+            <li><span class='sql'>grader_id</span>docente responsável pela correção (FK, nulável)</li>
+            <li><span class='sql'>feedback</span>texto de feedback do avaliador (TEXT, nulável)</li>
         </ul>
         <div class="table-wrapper">
             <table>
@@ -669,8 +748,9 @@
                         <th scope="col">score</th>
                         <th scope="col">max_score</th>
                         <th scope="col">weight</th>
+                        <th scope="col">graded_at</th>
                         <th scope="col">grader_id</th>
-                        <th scope="col">created_at</th>
+                        <th scope="col">feedback</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -678,12 +758,13 @@
                         <td>1</td>
                         <td>1</td>
                         <td>Midterm Exam</td>
-                        <td>Midterm</td>
+                        <td>midterm</td>
                         <td>87.00</td>
                         <td>100.00</td>
-                        <td>30.00</td>
-                        <td>1</td>
+                        <td>0.3000</td>
                         <td>2024-10-18 14:22:00</td>
+                        <td>1</td>
+                        <td>Boa análise, revisar a seção 3.</td>
                     </tr>
                 </tbody>
             </table>
@@ -701,11 +782,12 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li><span class='sql'>log_id</span>identificador único do registro (BIGINT PK)</li>
+            <li><span class='sql'>log_id</span>identificador único do registro (PK, BIGINT)</li>
             <li><span class='sql'>table_name</span>nome da tabela modificada</li>
             <li><span class='sql'>record_id</span>chave primária do registro modificado (BIGINT)</li>
             <li><span class='sql'>action</span>tipo de alteração: INSERT, UPDATE ou DELETE (ENUM)</li>
             <li><span class='sql'>changed_at</span>data e hora da alteração (TIMESTAMP)</li>
+            <li><span class='sql'>changed_by</span>usuário do banco de dados ou contexto da aplicação (nulável)</li>
             <li><span class='sql'>old_values</span>valores anteriores das colunas em JSON (null para INSERT)</li>
             <li><span class='sql'>new_values</span>novos valores das colunas em JSON (null para DELETE)</li>
         </ul>
@@ -718,6 +800,7 @@
                         <th scope="col">record_id</th>
                         <th scope="col">action</th>
                         <th scope="col">changed_at</th>
+                        <th scope="col">changed_by</th>
                         <th scope="col">old_values</th>
                         <th scope="col">new_values</th>
                     </tr>
@@ -729,8 +812,9 @@
                         <td>1</td>
                         <td>UPDATE</td>
                         <td>2024-12-21 09:05:33</td>
-                        <td>{"status":"Enrolled","final_score":null}</td>
-                        <td>{"status":"Completed","final_score":93.50}</td>
+                        <td>app_user</td>
+                        <td>{ldelim}"status":"enrolled","final_score":null{rdelim}</td>
+                        <td>{ldelim}"status":"completed","final_score":93.50{rdelim}</td>
                     </tr>
                 </tbody>
             </table>
@@ -771,7 +855,7 @@
                 <tbody>
                     <tr>
                         <td>1</td>
-                        <td>S2021001</td>
+                        <td>S000123</td>
                         <td>James</td>
                         <td>Miller</td>
                         <td>1</td>
@@ -822,11 +906,11 @@
                         <td>Database Systems</td>
                         <td>Fall 2024</td>
                         <td>1</td>
-                        <td>S2021001</td>
+                        <td>S000123</td>
                         <td>James</td>
                         <td>Miller</td>
                         <td>j.miller@student.edu</td>
-                        <td>Enrolled</td>
+                        <td>enrolled</td>
                     </tr>
                 </tbody>
             </table>
@@ -935,7 +1019,7 @@
             <li><span class='sql'>first_name</span>primeiro nome do estudante</li>
             <li><span class='sql'>last_name</span>sobrenome do estudante</li>
             <li><span class='sql'>total_scholarships</span>número de bolsas concedidas</li>
-            <li><span class='sql'>total_amount</span>valor total de bolsas recebidas</li>
+            <li><span class='sql'>total_amount</span>valor total de amount_awarded em todas as bolsas</li>
         </ul>
         <div class="table-wrapper">
             <table>
@@ -954,7 +1038,7 @@
                     <tr>
                         <td>1</td>
                         <td>1</td>
-                        <td>S2021001</td>
+                        <td>S000123</td>
                         <td>James</td>
                         <td>Miller</td>
                         <td>2</td>
@@ -965,15 +1049,15 @@
         </div>
     </div>
     <div class="accordion" title="Clique para expandir, duplo clique para colar nome da visão">
-        <span><span class='sql'>v_publication_stats</span> - contagem de artigos por departamento por ano.</span>
+        <span><span class='sql'>v_publication_stats</span> - contagem de artigos e citações por departamento por ano.</span>
     </div>
     <div class="panel">
         <ul class="table-columns">
             <li><span class='sql'>department_id</span>identificador do departamento</li>
             <li><span class='sql'>department_name</span>nome do departamento</li>
-            <li><span class='sql'>publication_year</span>ano de publicação</li>
+            <li><span class='sql'>pub_year</span>ano de publicação</li>
             <li><span class='sql'>paper_count</span>número de artigos publicados</li>
-            <li><span class='sql'>journal_count</span>número de periódicos distintos</li>
+            <li><span class='sql'>total_citations</span>total de citações de todos os artigos</li>
         </ul>
         <div class="table-wrapper">
             <table>
@@ -981,9 +1065,9 @@
                     <tr>
                         <th scope="col">department_id</th>
                         <th scope="col">department_name</th>
-                        <th scope="col">publication_year</th>
+                        <th scope="col">pub_year</th>
                         <th scope="col">paper_count</th>
-                        <th scope="col">journal_count</th>
+                        <th scope="col">total_citations</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -992,7 +1076,7 @@
                         <td>Computer Science</td>
                         <td>2024</td>
                         <td>12</td>
-                        <td>8</td>
+                        <td>87</td>
                     </tr>
                 </tbody>
             </table>
@@ -1009,6 +1093,7 @@
             <li><span class='sql'>prerequisite_id</span>identificador da disciplina pré-requisito</li>
             <li><span class='sql'>prerequisite_code</span>código da disciplina pré-requisito</li>
             <li><span class='sql'>prerequisite_title</span>título da disciplina pré-requisito</li>
+            <li><span class='sql'>is_mandatory</span>indica se o pré-requisito é obrigatório ou recomendado</li>
         </ul>
         <div class="table-wrapper">
             <table>
@@ -1020,6 +1105,7 @@
                         <th scope="col">prerequisite_id</th>
                         <th scope="col">prerequisite_code</th>
                         <th scope="col">prerequisite_title</th>
+                        <th scope="col">is_mandatory</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -1030,6 +1116,7 @@
                         <td>1</td>
                         <td>CS301</td>
                         <td>Database Systems</td>
+                        <td>1</td>
                     </tr>
                 </tbody>
             </table>
