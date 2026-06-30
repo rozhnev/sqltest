@@ -66,7 +66,9 @@
     .column {
         overflow-y: visible;
     }
-
+    .result-table {
+        margin-bottom: 1em;
+    }
 </style>
 <body>
     <div class="container">
@@ -260,14 +262,16 @@
                 return await response.text();
             }))
             .then(JSON.parse)
-            .then((JSONmessage)=>{
-                let html = '✓ (Done)';
-                if (JSONmessage && JSONmessage[0]) {
-                    const jsonObject = JSONmessage[0];
-                    html = jsonObject.error 
-                        ? errorToTable(jsonObject) 
-                        : jsonToTable(jsonObject);
-                }
+            .then((JSONResult)=>{
+                let html = '';
+                JSONResult.forEach((jsonObject)=>{
+                    if (jsonObject.error) {
+                        html += errorToTable(jsonObject) ;
+                    } else {
+                        html += jsonToTable(jsonObject);
+                    }
+                });
+                if (html === '') html = '✓ (Done)';
                 document.getElementById('code-result').innerHTML = html;
             })
             .catch(err=>{
