@@ -11,7 +11,8 @@ on:
       - 'style.css'
       - 'admin/style.css'
       - '!**.min.css'
-
+      - 'css/playground.css'
+      - '!css/playground.min.css'
 jobs:
   minify:
     runs-on: ubuntu-latest

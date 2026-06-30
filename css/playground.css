@@ -1,0 +1,69 @@
+.menu-panel {
+    padding: 0;
+    background-color: var(--accordion-panel-bg-color);
+    color: #0071DB;
+    transition: max-height 0.2s ease-out;
+    text-align: left;
+    overflow-y: hidden;
+    max-height: 100%;
+}
+.menu-panel ul {
+    list-style-type: none;
+    padding: 0;
+}
+.menu-panel .db-label {
+    color: var(--menu-link-color);
+    display: flex;
+    margin: 7px 0;
+    text-decoration: none;
+    border-bottom: 1px solid silver;
+    padding: 0.5rem;
+}
+.menu-panel .db-label input{
+    margin: 0 6px 0 0;
+}
+.menu-panel .version-select-wrap {
+    padding: 0.5rem;
+}
+.menu-panel .version-select-wrap label {
+    display: block;
+    color: var(--menu-link-color);
+    margin-bottom: 0.35rem;
+}
+.menu-panel .version-select-wrap select {
+    width: 100%;
+    border: 1px solid silver;
+    border-radius: 4px;
+    padding: 0.35rem;
+    background: #fff;
+    color: #111;
+}
+.playground-content {
+    margin: 12px 6px 0;
+    font-size: small;
+}
+.playground-text-section {
+    padding: 1.5rem;
+}
+.playground-text-section h1,
+.playground-text-section h2 {
+    margin: 0 0 0.75rem;
+}
+.playground-text-section p {
+    margin: 0 0 1rem;
+    line-height: 1.65;
+}
+.playground-text-section ul {
+    margin: 0 0 1.25rem;
+    padding-left: 1.25rem;
+}
+.playground-text-section li {
+    margin-bottom: 0.5rem;
+    line-height: 1.55;
+}
+.column {
+    overflow-y: visible;
+}
+.result-table {
+    margin-bottom: 2em;
+}
