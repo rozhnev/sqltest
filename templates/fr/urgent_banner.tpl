@@ -1,2 +1,2 @@
-<span>⏳ <strong>Plus que deux jours pour financer le mois prochain !</strong> Aidez à maintenir le service gratuit pour tous — chaque contribution compte.</span>
+<span>🙏 <strong>Merci à toutes celles et ceux qui soutiennent ce projet.</strong> Votre aide permet de maintenir le service en ligne. Le mois dernier, les dons ont atteint 32 $, ce qui couvre les coûts des serveurs mais pas le développement, donc nous ne pouvons pas ajouter de nouvelles leçons ni de nouvelles fonctionnalités ce mois-ci. Si vous le pouvez, faites un don pour soutenir le mois prochain.</span>
 <a href="/fr/donate" style="color:#fff; text-decoration:underline; font-weight:bold; white-space:nowrap;">Faire un don →</a>

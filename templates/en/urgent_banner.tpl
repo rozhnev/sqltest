@@ -1,2 +1,2 @@
-<span>⏳ <strong>Only two days left to fund next month!</strong> Help keep the service free for everyone — every contribution counts.</span>
+<span>🙏 <strong>Thank you to everyone who supports this project.</strong> Your help keeps the service online. Last month, donations reached $32, which covers server costs but not new development, so we cannot add new lessons or features this month. If you can, please donate to support next month.</span>
 <a href="/en/donate" style="color:#fff; text-decoration:underline; font-weight:bold; white-space:nowrap;">Support now →</a>
