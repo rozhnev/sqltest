@@ -240,6 +240,7 @@ $translations = [
     'lessons_meta_description' => 'Apprenez le SQL en ligne avec notre cours gratuit ! Maîtrisez les requêtes de base de données SQL, les commandes et la gestion. Parfait pour les débutants. Commencez votre voyage SQL maintenant !',
     'lessons_meta_keywords' => 'SQL, tutoriel SQL, SQL pour débutants, apprendre le SQL, SQL en ligne, base de données, cours SQL, requêtes SQL, commandes SQL',
     'lesson_relevant_tasks' => 'Exercices lies',
+    'lesson_relevant_tasks_intro' => 'Essayez de resoudre les exercices suivants pour consolider ce que vous avez appris dans cette lecon.',
     'next_lesson' => 'Leçon suivante',
     'previous_lesson' => 'Leçon précédente',
     'playground' => 'Playground',

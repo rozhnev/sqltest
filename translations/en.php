@@ -241,6 +241,7 @@ $translations = [
     'lessons_meta_description' => 'Learn SQL online with our free course! Master SQL database queries, commands, and management. Perfect for beginners. Start your SQL journey now!',
     'lessons_meta_keywords' => 'SQL, SQL tutorial, SQL for beginners, learn SQL, SQL online, database, SQL course, SQL queries, SQL commands',
     'lesson_relevant_tasks' => 'Relevant tasks',
+    'lesson_relevant_tasks_intro' => 'Try solving the following tasks to reinforce what you learned in this lesson.',
     'next_lesson' =>    'Next lesson',
     'previous_lesson' => 'Previous lesson',
     'playground' => 'Playground',

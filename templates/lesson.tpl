@@ -17,6 +17,11 @@
     color: var(--question-text);
 }
 
+.lesson-relevant-tasks-text {
+    margin: 0 0 0.6rem;
+    color: var(--question-text);
+}
+
 .lesson-relevant-tasks-list {
     margin: 0;
     padding-left: 1.25rem;
@@ -74,6 +79,7 @@
                 {if $RelevantTasks}
                 <section class="lesson-relevant-tasks question-wrapper" aria-label="Relevant lesson tasks">
                     <h3 class="lesson-relevant-tasks-title">{translate}lesson_relevant_tasks{/translate}</h3>
+                    <p class="lesson-relevant-tasks-text">{translate}lesson_relevant_tasks_intro{/translate}</p>
                     <ol class="lesson-relevant-tasks-list">
                         {foreach $RelevantTasks as $task}
                         <li>
