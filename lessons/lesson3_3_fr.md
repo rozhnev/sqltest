@@ -1,8 +1,22 @@
-# Leçon 3.3 : Fonctions mathematiques essentielles en SQL
+---
+title: "Fonctions mathematiques SQL : ABS, ROUND, POWER, MOD et autres"
+description: "Apprenez les fonctions mathematiques SQL essentielles avec des exemples Sakila : arrondi, modulo, puissance, racine et cas pratiques de calcul."
+keywords: ["fonctions mathematiques SQL", "ABS SQL", "ROUND SQL", "POWER SQL", "MOD SQL", "SQL Sakila"]
+teaches: ["Comment appliquer les fonctions mathematiques de base dans des requetes SQL", "Comment prendre en compte les types de donnees dans les calculs", "Comment utiliser l'arrondi et le modulo dans des cas pratiques", "Comment utiliser GREATEST et LEAST avec les particularites des SGBD"]
+about: ["SQL", "Fonctions mathematiques", "Calculs", "Sakila", "Base de donnees relationnelle"]
+---
+
+_Leçon 3.3 · Temps de lecture : ~8 min_
+
+Dans cette leçon, vous allez apprendre les fonctions mathematiques SQL essentielles qui permettent d'effectuer des calculs et de transformer des donnees numeriques directement dans les requetes. Nous verrons l'arrondi, le modulo, les puissances, les racines et la comparaison de valeurs, avec des exemples pratiques sur Sakila. A la fin de la leçon, vous pourrez appliquer ces fonctions avec confiance dans des cas analytiques et metier.
+
+# Fonctions mathematiques essentielles en SQL
 
 Les fonctions mathematiques en SQL sont utilisees pour effectuer differents calculs sur des donnees numeriques. Elles permettent d'arrondir des valeurs, de trouver des minimums et des maximums, de calculer des restes de division, et bien plus encore. Cette lecon presente les fonctions mathematiques les plus courantes, avec des exemples bases sur la base Sakila.
 
 Important : les donnees numeriques en SQL peuvent avoir des types differents (`INTEGER`, `REAL`/`FLOAT`, `DECIMAL`/`NUMERIC`). Une meme formule peut produire des resultats differents selon le type de donnee (par exemple a cause de la division entiere, de l'arrondi et de la precision de stockage). Si le type n'est pas pris en compte, le resultat peut etre different de celui attendu.
+
+<img src="/images/lessons/lesson3_3-math-functions.svg" alt="Fonctions mathematiques SQL essentielles" width="100%">
 
 ## Fonctions mathematiques courantes
 
@@ -97,6 +111,19 @@ FROM payment
 LIMIT 3;
 ```
 **Resultat :** Renvoie la racine carree de `amount`.
+
+### `PI()` - Renvoie la constante mathematique pi.
+
+**Syntaxe :**
+```sql
+PI()
+```
+
+**Exemple :**
+```sql
+SELECT PI() AS pi_value;
+```
+**Resultat :** Renvoie la valeur de pi (environ `3.141592653589793`).
 
 ### `MOD()` - Renvoie le reste d'une division.
 
@@ -205,6 +232,42 @@ Si vous avez absolument besoin de valeurs differentes par ligne, verifiez le com
 5. **Controler le type de donnees :**
    Si la precision est importante, convertissez explicitement vers le type souhaite (par exemple `CAST(value AS DECIMAL(10,2))`) afin d'eviter les surprises liees aux calculs entiers et a l'arrondi.
 
-## Points cles de cette lecon
+## FAQ
 
-Les fonctions mathematiques SQL permettent de calculer, d'analyser et de transformer des donnees numeriques. Maitrisez ces fonctions pour travailler efficacement avec des nombres dans vos requetes SQL. Entrainez-vous avec des exemples bases sur Sakila pour consolider vos competences.
+### Quelle est la difference entre `ROUND()`, `CEIL()` et `FLOOR()` ?
+`ROUND()` arrondit a la valeur la plus proche (ou au nombre de decimales indique), `CEIL()` arrondit toujours vers le haut, et `FLOOR()` toujours vers le bas.
+
+### Pourquoi des formules proches peuvent-elles donner des resultats differents ?
+La raison principale est le type de donnees. Les types entiers et decimaux gerent differemment la division, l'arrondi et la precision.
+
+### Quand vaut-il mieux utiliser `MOD()` ?
+`MOD()` est utile pour des controles periodiques, par exemple pour separer des enregistrements en groupes ou filtrer des identifiants pairs/impairs.
+
+### Pourquoi faut-il tenir compte des differences SGBD pour `GREATEST()` et `LEAST()` ?
+Parce que la gestion de `NULL` peut differer entre MySQL/MariaDB et PostgreSQL. Pour un comportement previsible, on utilise souvent `COALESCE()`.
+
+## Questions d'entretien
+
+### Comment choisir la bonne fonction d'arrondi pour une regle metier ?
+On definit d'abord la regle : arrondi classique (`ROUND`), toujours vers le haut (`CEIL`) ou toujours vers le bas (`FLOOR`). Ensuite, on verifie l'impact sur les indicateurs des rapports.
+
+### Quels sont les risques des calculs sans conversion explicite de type ?
+On peut obtenir des resultats inattendus a cause de la division entiere ou d'une perte de precision. Dans les calculs critiques, des conversions explicites comme `CAST(... AS DECIMAL(...))` sont plus sures.
+
+### Que fait `SIGN()` et dans quels cas est-ce utile ?
+`SIGN()` renvoie `-1`, `0` ou `1` selon le signe de la valeur. C'est pratique pour classer rapidement des ecarts en negatif, nul ou positif.
+
+### Pourquoi utiliser `RAND()` avec prudence dans des requetes analytiques ?
+Selon le SGBD et le plan d'execution, la valeur aleatoire peut ne pas etre recalculee ligne par ligne comme attendu. Il faut valider ce comportement sur votre moteur.
+
+---
+
+**Points cles de cette lecon :**
+
+- Les fonctions mathematiques SQL permettent d'effectuer des calculs et des transformations directement dans la requete.
+- `ROUND`, `CEIL` et `FLOOR` repondent a des besoins d'arrondi differents selon la regle metier.
+- `MOD`, `POWER` et `SQRT` sont utiles pour l'analyse et les controles de donnees.
+- Les types de donnees influencent fortement la precision et le resultat final des calculs.
+- Pour les requetes multi-SGBD, il faut prendre en compte les differences de comportement avec `NULL`.
+
+Dans la prochaine leçon, nous passerons aux fonctions de date et d'heure pour manipuler les valeurs temporelles en SQL.

@@ -1,0 +1,102 @@
+<svg width="1200" height="760" viewBox="0 0 1200 760" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">SQL mathematical functions overview</title>
+  <desc id="desc">Diagram of common SQL math functions: ABS, ROUND, CEIL, FLOOR, POWER, SQRT, MOD, and SIGN with sample input and output.</desc>
+
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f8fbff"/>
+      <stop offset="100%" stop-color="#f3fbf6"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#2e5877"/>
+    </marker>
+    <style>
+      .h1 { font: 700 34px Arial, sans-serif; fill: #1a2f42; }
+      .h2 { font: 700 21px Arial, sans-serif; fill: #20384c; }
+      .txt { font: 500 15px Arial, sans-serif; fill: #25445b; }
+      .code { font: 600 16px 'Courier New', monospace; fill: #143348; }
+      .small { font: 500 13px Arial, sans-serif; fill: #50667c; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="760" fill="url(#bg)"/>
+
+  <text x="600" y="56" text-anchor="middle" class="h1">SQL Math Functions</text>
+  <text x="600" y="84" text-anchor="middle" class="txt">Practical calculations directly in queries</text>
+
+  <rect x="40" y="120" width="300" height="600" rx="16" fill="#ffffff" stroke="#c8d9e8"/>
+  <text x="190" y="154" text-anchor="middle" class="h2">Input values</text>
+
+  <rect x="68" y="178" width="244" height="210" rx="10" fill="#f2f8ff" stroke="#d8e6f3"/>
+  <text x="82" y="205" class="code">amount = -3.75</text>
+  <text x="82" y="232" class="code">payment_id = 17</text>
+  <text x="82" y="259" class="code">x = 2.4</text>
+  <text x="82" y="286" class="code">y = 5</text>
+  <text x="82" y="313" class="code">z = 0</text>
+
+  <rect x="68" y="410" width="244" height="280" rx="10" fill="#f7fcf8" stroke="#d9ecdd"/>
+  <text x="82" y="438" class="txt">Tips:</text>
+  <text x="82" y="465" class="small">- Watch data types (INT vs DECIMAL)</text>
+  <text x="82" y="490" class="small">- Check rounding rules carefully</text>
+  <text x="82" y="515" class="small">- Handle NULLs explicitly</text>
+  <text x="82" y="540" class="small">- Validate random behavior in DB</text>
+
+  <rect x="380" y="120" width="410" height="600" rx="16" fill="#ffffff" stroke="#c8d9e8"/>
+  <text x="585" y="154" text-anchor="middle" class="h2">SQL functions</text>
+
+  <rect x="408" y="178" width="354" height="60" rx="10" fill="#eef6fd" stroke="#d7e7f4"/>
+  <text x="422" y="213" class="code">SELECT ABS(-3.75);</text>
+  <text x="680" y="213" class="small">3.75</text>
+
+  <rect x="408" y="246" width="354" height="60" rx="10" fill="#eef6fd" stroke="#d7e7f4"/>
+  <text x="422" y="281" class="code">SELECT ROUND(2.46, 1);</text>
+  <text x="680" y="281" class="small">2.5</text>
+
+  <rect x="408" y="314" width="354" height="60" rx="10" fill="#eef6fd" stroke="#d7e7f4"/>
+  <text x="422" y="349" class="code">SELECT CEIL(2.1), FLOOR(2.9);</text>
+  <text x="680" y="349" class="small">3, 2</text>
+
+  <rect x="408" y="382" width="354" height="60" rx="10" fill="#eef6fd" stroke="#d7e7f4"/>
+  <text x="422" y="417" class="code">SELECT POWER(5, 2), SQRT(25);</text>
+  <text x="680" y="417" class="small">25, 5</text>
+
+  <rect x="408" y="450" width="354" height="60" rx="10" fill="#eef6fd" stroke="#d7e7f4"/>
+  <text x="422" y="485" class="code">SELECT MOD(17, 5);</text>
+  <text x="680" y="485" class="small">2</text>
+
+  <rect x="408" y="518" width="354" height="60" rx="10" fill="#eef6fd" stroke="#d7e7f4"/>
+  <text x="422" y="553" class="code">SELECT SIGN(-3.75), SIGN(0);</text>
+  <text x="680" y="553" class="small">-1, 0</text>
+
+  <rect x="408" y="586" width="354" height="104" rx="10" fill="#fdf7ee" stroke="#f1e0c8"/>
+  <text x="422" y="615" class="txt">GREATEST / LEAST can differ by DB</text>
+  <text x="422" y="641" class="small">MySQL/MariaDB and PostgreSQL handle NULLs differently.</text>
+  <text x="422" y="666" class="small">Use COALESCE for predictable cross-DB behavior.</text>
+
+  <rect x="830" y="120" width="330" height="600" rx="16" fill="#ffffff" stroke="#c8d9e8"/>
+  <text x="995" y="154" text-anchor="middle" class="h2">Practical outcomes</text>
+
+  <rect x="858" y="178" width="274" height="90" rx="10" fill="#f4faf4" stroke="#dbeadf"/>
+  <text x="872" y="208" class="txt">Data cleanup:</text>
+  <text x="872" y="233" class="small">Normalize and round values for reports.</text>
+
+  <rect x="858" y="282" width="274" height="90" rx="10" fill="#f4faf4" stroke="#dbeadf"/>
+  <text x="872" y="312" class="txt">Checks:</text>
+  <text x="872" y="337" class="small">Use MOD/SIGN for rule-based validation.</text>
+
+  <rect x="858" y="386" width="274" height="90" rx="10" fill="#f4faf4" stroke="#dbeadf"/>
+  <text x="872" y="416" class="txt">Analytics:</text>
+  <text x="872" y="441" class="small">Apply POWER/SQRT in derived metrics.</text>
+
+  <rect x="858" y="490" width="274" height="180" rx="10" fill="#fffaf3" stroke="#f3e5d0"/>
+  <text x="872" y="520" class="txt">Accuracy first:</text>
+  <text x="872" y="546" class="small">- cast to DECIMAL when precision matters</text>
+  <text x="872" y="571" class="small">- verify behavior on your SQL engine</text>
+  <text x="872" y="596" class="small">- document rounding and NULL policy</text>
+
+  <line x1="340" y1="260" x2="380" y2="260" stroke="#2e5877" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="790" y1="260" x2="830" y2="260" stroke="#2e5877" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <line x1="340" y1="500" x2="380" y2="500" stroke="#2e5877" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="790" y1="500" x2="830" y2="500" stroke="#2e5877" stroke-width="3" marker-end="url(#arrow)"/>
+</svg>
