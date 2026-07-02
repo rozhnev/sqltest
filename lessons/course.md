@@ -48,6 +48,7 @@
     *   Using Aliases for Tables
     *   Working with Self-Joins
     *   Using Aggregate Functions with Joins
+    *   [Dataset operations: UNION, INTERSECT and EXCEPT](lessons/lesson5_10_en.md) | [Русский](lessons/lesson5_10_ru.md) | [Français](lessons/lesson5_10_fr.md) | [Português](lessons/lesson5_10_pt.md)
 6.  **Subqueries and Common Table Expressions (CTEs)**
     *   Understanding Subqueries: Inline Views and Nested Queries
     *   Using Subqueries in SELECT, FROM, and WHERE Clauses

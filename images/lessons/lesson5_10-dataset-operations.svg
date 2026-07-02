@@ -1,0 +1,79 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="90" y1="42" x2="1110" y2="596" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F5F7FB"/>
+      <stop offset="0.52" stop-color="#E9F2FF"/>
+      <stop offset="1" stop-color="#FFF2E2"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#152E4D"/>
+      <stop offset="1" stop-color="#0F4C5C"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#F59E0B"/>
+      <stop offset="1" stop-color="#EA580C"/>
+    </linearGradient>
+    <linearGradient id="unionGlow" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#DBEAFE"/>
+      <stop offset="1" stop-color="#D1FAE5"/>
+    </linearGradient>
+    <filter id="shadow" x="0" y="0" width="1200" height="630" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="12" stdDeviation="18" flood-color="#0F172A" flood-opacity="0.14"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="630" rx="28" fill="url(#bg)"/>
+  <circle cx="146" cy="126" r="84" fill="#DDEBF7"/>
+  <circle cx="1038" cy="100" r="72" fill="#FDE9C5"/>
+  <circle cx="1022" cy="552" r="104" fill="#D9F0E7"/>
+  <circle cx="290" cy="548" r="62" fill="#FFF1D7"/>
+
+  <rect x="64" y="58" width="504" height="514" rx="28" fill="url(#panel)" filter="url(#shadow)"/>
+  <text x="104" y="132" fill="#F8FAFC" font-family="Segoe UI, Arial, sans-serif" font-size="54" font-weight="700">DATASET</text>
+  <text x="104" y="176" fill="#C9E7E1" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="500">Combine, compare, and</text>
+  <text x="104" y="206" fill="#C9E7E1" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="500">subtract result sets</text>
+
+  <rect x="104" y="228" width="424" height="148" rx="20" fill="#0F2E3A" stroke="#2F7A87" stroke-width="2"/>
+  <text x="132" y="262" fill="#F59E0B" font-family="Consolas, Monaco, monospace" font-size="18">SELECT city FROM customer</text>
+  <text x="132" y="290" fill="#E2E8F0" font-family="Consolas, Monaco, monospace" font-size="18">UNION / INTERSECT / EXCEPT</text>
+  <text x="132" y="318" fill="#E2E8F0" font-family="Consolas, Monaco, monospace" font-size="18">SELECT city FROM staff</text>
+  <text x="132" y="346" fill="#E2E8F0" font-family="Consolas, Monaco, monospace" font-size="18">ORDER BY city;</text>
+
+  <rect x="104" y="398" width="424" height="134" rx="20" fill="#F8FAFC"/>
+  <rect x="130" y="424" width="378" height="24" rx="8" fill="#D9EEF8"/>
+  <rect x="130" y="462" width="378" height="18" rx="6" fill="#E5E7EB"/>
+  <rect x="130" y="490" width="378" height="18" rx="6" fill="#E5E7EB"/>
+  <text x="146" y="441" fill="#123B4A" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="700">city</text>
+  <text x="350" y="441" fill="#123B4A" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="700">source</text>
+  <text x="146" y="475" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="16">London</text>
+  <text x="350" y="475" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="16">customer</text>
+  <text x="146" y="503" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="16">London</text>
+  <text x="350" y="503" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="16">staff</text>
+
+  <rect x="620" y="96" width="480" height="118" rx="24" fill="#FFFFFF" stroke="#BCD3DE" stroke-width="2" filter="url(#shadow)"/>
+  <text x="648" y="138" fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="29" font-weight="700">Result sets, not rows</text>
+  <text x="648" y="172" fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="29" font-weight="700">One query can feed another</text>
+  <text x="648" y="202" fill="#475569" font-family="Segoe UI, Arial, sans-serif" font-size="18">Use the operator that matches the analytical question</text>
+
+  <rect x="620" y="252" width="146" height="184" rx="24" fill="#FFFFFF" stroke="#BCD3DE" stroke-width="2"/>
+  <circle cx="670" cy="326" r="34" fill="url(#unionGlow)" stroke="#7DD3FC" stroke-width="2"/>
+  <circle cx="704" cy="326" r="34" fill="url(#unionGlow)" stroke="#A7F3D0" stroke-width="2"/>
+  <path d="M646 326H728" stroke="#2F7A87" stroke-width="4" stroke-linecap="round"/>
+  <text x="660" y="394" fill="#123B4A" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">UNION</text>
+
+  <rect x="788" y="252" width="146" height="184" rx="24" fill="#FFFFFF" stroke="#BCD3DE" stroke-width="2"/>
+  <circle cx="838" cy="326" r="34" fill="#DBEAFE" stroke="#7DD3FC" stroke-width="2"/>
+  <circle cx="872" cy="326" r="34" fill="#DBEAFE" stroke="#A7F3D0" stroke-width="2"/>
+  <circle cx="855" cy="326" r="16" fill="#60A5FA"/>
+  <text x="812" y="394" fill="#123B4A" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">INTERSECT</text>
+
+  <rect x="956" y="252" width="146" height="184" rx="24" fill="#FFFFFF" stroke="#BCD3DE" stroke-width="2"/>
+  <circle cx="1006" cy="326" r="34" fill="#DBEAFE" stroke="#7DD3FC" stroke-width="2"/>
+  <circle cx="1040" cy="326" r="34" fill="#E2E8F0" stroke="#CBD5E1" stroke-width="2"/>
+  <path d="M1020 326H1048" stroke="#EA580C" stroke-width="5" stroke-linecap="round"/>
+  <text x="998" y="394" fill="#123B4A" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">EXCEPT</text>
+
+  <rect x="620" y="476" width="480" height="86" rx="22" fill="#0F172A"/>
+  <text x="650" y="514" fill="#F8FAFC" font-family="Segoe UI, Arial, sans-serif" font-size="21" font-weight="600">Compare lists, keep overlap,</text>
+  <text x="650" y="544" fill="#F8FAFC" font-family="Segoe UI, Arial, sans-serif" font-size="21" font-weight="600">or remove values already seen</text>
+</svg>
