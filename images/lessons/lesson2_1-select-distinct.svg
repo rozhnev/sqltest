@@ -1,0 +1,126 @@
+<svg width="1200" height="760" viewBox="0 0 1200 760" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">SQL SELECT and DISTINCT visual guide</title>
+  <desc id="desc">Diagram showing SELECT star, selecting specific columns, DISTINCT unique values, and column order in SQL.</desc>
+
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f7fbff"/>
+      <stop offset="100%" stop-color="#eef7f2"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#2c5a7b"/>
+    </marker>
+    <style>
+      .title { font: 700 34px Arial, sans-serif; fill: #1d2a39; }
+      .subtitle { font: 500 18px Arial, sans-serif; fill: #3d5368; }
+      .box-title { font: 700 22px Arial, sans-serif; fill: #1f3346; }
+      .code { font: 600 16px 'Courier New', monospace; fill: #16364a; }
+      .cell-h { font: 700 15px Arial, sans-serif; fill: #ffffff; }
+      .cell { font: 500 14px Arial, sans-serif; fill: #1a2d3f; }
+      .note { font: 500 14px Arial, sans-serif; fill: #24455f; }
+      .small { font: 500 13px Arial, sans-serif; fill: #506b82; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="1200" height="760" fill="url(#bg)"/>
+
+  <text x="600" y="58" text-anchor="middle" class="title">SQL SELECT Basics</text>
+  <text x="600" y="86" text-anchor="middle" class="subtitle">All columns, specific columns, DISTINCT, and output order</text>
+
+  <rect x="40" y="120" width="340" height="560" rx="16" fill="#ffffff" stroke="#c5d7e6"/>
+  <text x="210" y="154" text-anchor="middle" class="box-title">Source table: actor</text>
+
+  <rect x="65" y="176" width="290" height="36" rx="8" fill="#2f5f83"/>
+  <text x="95" y="199" class="cell-h">actor_id</text>
+  <text x="185" y="199" class="cell-h">first_name</text>
+  <text x="285" y="199" class="cell-h">last_name</text>
+
+  <rect x="65" y="216" width="290" height="34" fill="#edf4fb"/>
+  <text x="95" y="238" class="cell">1</text>
+  <text x="175" y="238" class="cell">PENELOPE</text>
+  <text x="290" y="238" class="cell">GUINESS</text>
+
+  <rect x="65" y="250" width="290" height="34" fill="#ffffff"/>
+  <text x="95" y="272" class="cell">2</text>
+  <text x="175" y="272" class="cell">NICK</text>
+  <text x="290" y="272" class="cell">WAHLBERG</text>
+
+  <rect x="65" y="284" width="290" height="34" fill="#edf4fb"/>
+  <text x="95" y="306" class="cell">3</text>
+  <text x="175" y="306" class="cell">ED</text>
+  <text x="290" y="306" class="cell">CHASE</text>
+
+  <rect x="65" y="342" width="290" height="36" rx="8" fill="#3d7f60"/>
+  <text x="210" y="365" text-anchor="middle" class="cell-h">film.rating (sample values)</text>
+
+  <rect x="65" y="382" width="290" height="34" fill="#edf8f1"/>
+  <text x="95" y="404" class="cell">PG</text>
+  <text x="145" y="404" class="cell">PG</text>
+  <text x="195" y="404" class="cell">R</text>
+  <text x="225" y="404" class="cell">G</text>
+  <text x="255" y="404" class="cell">R</text>
+
+  <rect x="65" y="426" width="290" height="220" rx="10" fill="#f7fbff" stroke="#d6e5f2"/>
+  <text x="82" y="452" class="note">Use SELECT * for quick exploration.</text>
+  <text x="82" y="478" class="note">Prefer explicit columns in production.</text>
+  <text x="82" y="504" class="note">Use DISTINCT to remove duplicates.</text>
+  <text x="82" y="530" class="note">Order in SELECT controls output order.</text>
+
+  <rect x="430" y="120" width="340" height="560" rx="16" fill="#ffffff" stroke="#c5d7e6"/>
+  <text x="600" y="154" text-anchor="middle" class="box-title">Queries</text>
+
+  <rect x="455" y="180" width="290" height="82" rx="10" fill="#eef5fb" stroke="#d5e5f2"/>
+  <text x="470" y="206" class="code">SELECT *</text>
+  <text x="470" y="228" class="code">FROM actor;</text>
+  <text x="470" y="250" class="small">All columns returned.</text>
+
+  <rect x="455" y="278" width="290" height="94" rx="10" fill="#eef5fb" stroke="#d5e5f2"/>
+  <text x="470" y="304" class="code">SELECT first_name, last_name</text>
+  <text x="470" y="326" class="code">FROM actor;</text>
+  <text x="470" y="348" class="small">Only needed columns.</text>
+
+  <rect x="455" y="388" width="290" height="94" rx="10" fill="#edf8f1" stroke="#d3ead9"/>
+  <text x="470" y="414" class="code">SELECT DISTINCT rating</text>
+  <text x="470" y="436" class="code">FROM film;</text>
+  <text x="470" y="458" class="small">Unique values only.</text>
+
+  <rect x="455" y="498" width="290" height="126" rx="10" fill="#fff6ec" stroke="#f0dcc2"/>
+  <text x="470" y="524" class="code">SELECT last_name, first_name</text>
+  <text x="470" y="546" class="code">FROM actor;</text>
+  <text x="470" y="568" class="small">Output columns are swapped.</text>
+  <text x="470" y="590" class="small">Table structure is unchanged.</text>
+
+  <rect x="820" y="120" width="340" height="560" rx="16" fill="#ffffff" stroke="#c5d7e6"/>
+  <text x="990" y="154" text-anchor="middle" class="box-title">Results</text>
+
+  <rect x="845" y="180" width="290" height="96" rx="10" fill="#f8fbfe" stroke="#d8e7f3"/>
+  <text x="860" y="206" class="small">SELECT * result</text>
+  <text x="860" y="230" class="cell">actor_id | first_name | last_name</text>
+  <text x="860" y="252" class="cell">1        | PENELOPE   | GUINESS</text>
+
+  <rect x="845" y="292" width="290" height="96" rx="10" fill="#f8fbfe" stroke="#d8e7f3"/>
+  <text x="860" y="318" class="small">Specific columns</text>
+  <text x="860" y="342" class="cell">first_name | last_name</text>
+  <text x="860" y="364" class="cell">PENELOPE   | GUINESS</text>
+
+  <rect x="845" y="404" width="290" height="96" rx="10" fill="#f2fbf5" stroke="#d7ebdf"/>
+  <text x="860" y="430" class="small">DISTINCT rating</text>
+  <text x="860" y="454" class="cell">G, PG, R</text>
+  <text x="860" y="476" class="cell">Duplicates removed.</text>
+
+  <rect x="845" y="516" width="290" height="108" rx="10" fill="#fff9f2" stroke="#f2e2cb"/>
+  <text x="860" y="542" class="small">Swapped order output</text>
+  <text x="860" y="566" class="cell">last_name | first_name</text>
+  <text x="860" y="588" class="cell">GUINESS   | PENELOPE</text>
+  <text x="860" y="610" class="cell">Data same, order changed.</text>
+
+  <line x1="380" y1="222" x2="430" y2="222" stroke="#2c5a7b" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="380" y1="325" x2="430" y2="325" stroke="#2c5a7b" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="380" y1="430" x2="430" y2="430" stroke="#2c5a7b" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="380" y1="560" x2="430" y2="560" stroke="#2c5a7b" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <line x1="770" y1="222" x2="820" y2="222" stroke="#2c5a7b" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="770" y1="325" x2="820" y2="325" stroke="#2c5a7b" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="770" y1="430" x2="820" y2="430" stroke="#2c5a7b" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="770" y1="560" x2="820" y2="560" stroke="#2c5a7b" stroke-width="3" marker-end="url(#arrow)"/>
+</svg>
