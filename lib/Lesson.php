@@ -132,6 +132,59 @@ class Lesson
         return  $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getRelevantTasks(string $lang, ?string $userId, int $limit = 5): array
+    {
+        $tutorialLink = "/{$lang}/lesson/{$this->moduleSlug}/{$this->slug}";
+
+        $stmt = $this->dbh->prepare("WITH primary_category AS (
+                SELECT
+                    question_categories.question_id,
+                    categories.title_sef AS category_sef,
+                    categories.sequence_position AS category_order,
+                    question_categories.sequence_position AS question_order,
+                    ROW_NUMBER() OVER (
+                        PARTITION BY question_categories.question_id
+                        ORDER BY categories.sequence_position, question_categories.sequence_position
+                    ) AS row_num
+                FROM question_categories
+                JOIN categories ON categories.id = question_categories.category_id
+                WHERE NOT categories.deleted
+            )
+            SELECT
+                questions.id,
+                questions.title_sef AS question_sef,
+                questions.rate,
+                questions_localization.title,
+                primary_category.category_sef,
+                (user_questions.solved_at IS NOT NULL) AS solved
+            FROM questions
+            JOIN questions_localization ON questions_localization.question_id = questions.id
+                AND questions_localization.language = :lang
+            JOIN primary_category ON primary_category.question_id = questions.id
+                AND primary_category.row_num = 1
+            LEFT JOIN user_questions ON user_questions.question_id = questions.id
+                AND user_questions.user_id = :user_id
+            WHERE NOT questions.deleted
+                AND questions_localization.tutorial_link = :tutorial_link
+            ORDER BY
+                CASE WHEN (:prefer_unsolved = 1 AND user_questions.solved_at IS NOT NULL) THEN 1 ELSE 0 END,
+                questions.rate ASC,
+                primary_category.category_order ASC,
+                primary_category.question_order ASC,
+                questions.id ASC
+            LIMIT :limit
+        ");
+
+        $stmt->bindValue(':lang', $lang, PDO::PARAM_STR);
+        $stmt->bindValue(':tutorial_link', $tutorialLink, PDO::PARAM_STR);
+        $stmt->bindValue(':user_id', $userId, $userId === null ? PDO::PARAM_NULL : PDO::PARAM_STR);
+        $stmt->bindValue(':prefer_unsolved', $userId === null ? 0 : 1, PDO::PARAM_INT);
+        $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC) ?: [];
+    }
+
     public function parseMedadata(string &$content): array
     {
         $meta = [

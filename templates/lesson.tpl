@@ -6,6 +6,25 @@
     line-height: 1.5rem;
     margin: 0.75rem 0;
 }
+
+.lesson-relevant-tasks {
+    margin-top: 1rem;
+}
+
+.lesson-relevant-tasks-title {
+    font-size: 1.1rem;
+    margin: 0 0 0.6rem;
+    color: var(--question-text);
+}
+
+.lesson-relevant-tasks-list {
+    margin: 0;
+    padding-left: 1.25rem;
+}
+
+.lesson-relevant-tasks-list li {
+    margin: 0.5rem 0;
+}
 </style>
 <body>
     <div class="container">
@@ -52,6 +71,20 @@
                 <article class="lesson-wrapper">
                     {$LessonData.content}
                 </article>
+                {if $RelevantTasks}
+                <section class="lesson-relevant-tasks question-wrapper" aria-label="Relevant lesson tasks">
+                    <h3 class="lesson-relevant-tasks-title">{translate}lesson_relevant_tasks{/translate}</h3>
+                    <ol class="lesson-relevant-tasks-list">
+                        {foreach $RelevantTasks as $task}
+                        <li>
+                            <a class="question-link {if $task.solved}solved{/if}" href="/{$Lang}/question/{$task.category_sef}/{$task.question_sef}">
+                                {$task.title}
+                            </a>
+                        </li>
+                        {/foreach}
+                    </ol>
+                </section>
+                {/if}
                 <div class="code-buttons" style="justify-content: space-between !important;">
                     <div>
                         {if $LessonData.prev_lesson_slug}

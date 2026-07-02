@@ -240,6 +240,7 @@ $translations = [
     'lessons_page_description' => 'Start learning SQL with our free, comprehensive course for beginners. Master SQL concepts, database management, and practice with interactive exercises. Become an SQL expert today!',
     'lessons_meta_description' => 'Learn SQL online with our free course! Master SQL database queries, commands, and management. Perfect for beginners. Start your SQL journey now!',
     'lessons_meta_keywords' => 'SQL, SQL tutorial, SQL for beginners, learn SQL, SQL online, database, SQL course, SQL queries, SQL commands',
+    'lesson_relevant_tasks' => 'Relevant tasks',
     'next_lesson' =>    'Next lesson',
     'previous_lesson' => 'Previous lesson',
     'playground' => 'Playground',

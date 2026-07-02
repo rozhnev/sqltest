@@ -10,6 +10,25 @@
 .lesson-wrapper {
     overflow-x: auto;
 }
+
+.lesson-relevant-tasks {
+    margin-top: 0.9rem;
+}
+
+.lesson-relevant-tasks-title {
+    font-size: 1rem;
+    margin: 0 0 0.55rem;
+    color: var(--question-text);
+}
+
+.lesson-relevant-tasks-list {
+    margin: 0;
+    padding-left: 1.2rem;
+}
+
+.lesson-relevant-tasks-list li {
+    margin: 0.45rem 0;
+}
 </style>
 <body>
     <div class="mobile-container">
@@ -45,6 +64,20 @@
             <article class="lesson-wrapper" id="lesson-wrapper">
                 {$LessonData.content}
             </article>
+            {if $RelevantTasks}
+            <section class="lesson-relevant-tasks question-wrapper" aria-label="Relevant lesson tasks">
+                <h3 class="lesson-relevant-tasks-title">{translate}lesson_relevant_tasks{/translate}</h3>
+                <ol class="lesson-relevant-tasks-list">
+                    {foreach $RelevantTasks as $task}
+                    <li>
+                        <a class="question-link {if $task.solved}solved{/if}" href="/{$Lang}/question/{$task.category_sef}/{$task.question_sef}#question-wrapper">
+                            {$task.title}
+                        </a>
+                    </li>
+                    {/foreach}
+                </ol>
+            </section>
+            {/if}
             <div class="question-wrapper">
                 <div class="code-buttons" style="justify-content: space-between !important; gap: 8px; flex-wrap: wrap;">
                     <div id="prevTaskBtn">

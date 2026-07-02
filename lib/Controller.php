@@ -1157,6 +1157,7 @@ class Controller
             $schemaAbout
         );
         $lessonsList = $lesson->getList($this->lang);
+        $relevantTasks = $lesson->getRelevantTasks($this->lang, $this->user->getId(), 5);
 
         $this->assignVariables([
             'Action'            => 'lesson',
@@ -1169,7 +1170,8 @@ class Controller
             'PageKeywords'      => $pageKeywords,
             'Lessons'           => $lessonsList,
             'Lesson'            => $lesson,
-            'LessonData'        => $lessonData
+            'LessonData'        => $lessonData,
+            'RelevantTasks'     => $relevantTasks
         ]);
         $this->setHreflangLinks($params['path'], $this->lang);
 
