@@ -30,6 +30,15 @@
 .lesson-relevant-tasks-list li {
     margin: 0.5rem 0;
 }
+
+.lesson-relevant-tasks-list a,
+.lesson-relevant-tasks-list a:visited {
+    color: var(--question-text);
+}
+
+.lesson-relevant-tasks-list a:hover {
+    color: var(--accordion-hover);
+}
 </style>
 <body>
     <div class="container">
@@ -79,7 +88,6 @@
                 {if $RelevantTasks}
                 <section class="lesson-relevant-tasks question-wrapper" aria-label="Relevant lesson tasks">
                     <h3 class="lesson-relevant-tasks-title">{translate}lesson_relevant_tasks{/translate}</h3>
-                    <p class="lesson-relevant-tasks-text">{translate}lesson_relevant_tasks_intro{/translate}</p>
                     <ol class="lesson-relevant-tasks-list">
                         {foreach $RelevantTasks as $task}
                         <li>

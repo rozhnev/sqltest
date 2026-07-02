@@ -34,6 +34,15 @@
 .lesson-relevant-tasks-list li {
     margin: 0.45rem 0;
 }
+
+.lesson-relevant-tasks-list a,
+.lesson-relevant-tasks-list a:visited {
+    color: var(--question-text);
+}
+
+.lesson-relevant-tasks-list a:hover {
+    color: var(--accordion-hover);
+}
 </style>
 <body>
     <div class="mobile-container">
