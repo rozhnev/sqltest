@@ -9,7 +9,7 @@
     <div class="section">
         <div>
             <div class="color-block" style="background-color: #E5F7EB;">
-                <img src="/images/about-for-students.png" style="width: 90%;">
+                <img src="/images/about-for-students.png" alt="Обучение SQL для студентов на SQLTest.online" style="width: 90%;">
                 <div>
                     <div>
                         <b>Хотите освоить язык структурированных запросов,</b><br>чтобы уверенно работать с данными?
@@ -20,7 +20,7 @@
                 </div>
             </div>
             <div class="color-block" style="background-color: #FEF5F5;">
-                <img src="/images/about-for-devs.png" style="width: 90%;">
+                <img src="/images/about-for-devs.png" alt="Практика SQL для разработчиков и аналитиков" style="width: 90%;">
                 <div>
                     <div>
                         <b>Или, может быть, вы уже опытный разработчик,</b><br>желающий расширить свои знания и подготовиться к сложным техническим собеседованиям?
@@ -59,21 +59,21 @@
         <div>
             <div style="display: flex; flex-flow: row wrap; justify-content: space-between; gap: 1rem;">
                 <div class="section-column colored column30">
-                    <img src="/images/graduation-cap.png" style="height: 64px;">
+                    <img src="/images/graduation-cap.png" alt="Значок выпускника, символ завершения курса SQL" style="height: 64px;">
                     <div>
                         <div class="bold">Студенты</div>
                         <div style="font-size: small; margin-top: 0.5rem;">Изучайте SQL в рамках учебной программы или для самостоятельного обучения.</div>
                     </div>
                 </div>
                 <div class="section-column colored column30">
-                    <img src="/images/technologist.png" style="height: 64px;">
+                    <img src="/images/technologist.png" alt="Иконка разработчика, символ профессионального роста" style="height: 64px;">
                     <div>
                         <div class="bold">Разработчики</div>
                         <div style="font-size: small; margin-top: 0.5rem;">Улучшайте свои навыки для работы с базами данных в проектах.</div>
                     </div>                
                 </div>
                 <div class="section-column colored column30">
-                    <img src="/images/bar-chart.png" style="height: 64px;">
+                    <img src="/images/bar-chart.png" alt="Иконка аналитики данных, символ работы с SQL" style="height: 64px;">
                     <div>
                         <div class="bold">Аналитики данных</div>
                         <div style="font-size: small; margin-top: 0.5rem;">Получайте практический опыт работы с SQL для анализа данных.</div>
@@ -87,21 +87,21 @@
         <div>
             <div style="display: flex; flex-flow: row wrap; justify-content: space-between; gap: 1rem;">
                 <div class="section-column column30">
-                    <img src="/images/start1.png" style="height: 150px;">
+                    <img src="/images/start1.png" alt="Шаг 1: перейти в раздел задач на SQLTest.online" style="height: 150px;">
                     <div>
                         <div class="bold"><span style="color: var(--ligth-h1-color);">1.&nbsp;</span>Зайдите на сайт</div>
                         <div style="font-size: small; margin-top: 0.5rem;">Перейдите на SQLTest.online и выберите раздел "Задачи"</div>
                     </div>
                 </div>
                 <div class="section-column column30">
-                    <img src="/images/start2.png" style="height: 150px;">
+                    <img src="/images/start2.png" alt="Шаг 2: выбрать категорию SQL-задач" style="height: 150px;">
                     <div>
                         <div class="bold"><span style="color: var(--ligth-h1-color);">2.&nbsp;</span>Выберите категорию</div>
                         <div style="font-size: small; margin-top: 0.5rem;">Выберите интересующую вас тему или уровень сложности</div>
                     </div>                
                 </div>
                 <div class="section-column column30">
-                    <img src="/images/start3.png" style="height: 150px;">
+                    <img src="/images/start3.png" alt="Шаг 3: решать SQL-задачи в тренажере" style="height: 150px;">
                     <div>
                         <div class="bold"><span style="color: var(--ligth-h1-color);">3.&nbsp;</span>Решайте задачи</div>
                         <div style="font-size: small; margin-top: 0.5rem;">Применяйте свои знания SQL для решения предложенных задач</div>
@@ -149,6 +149,35 @@
             </div>
         </div>
     </div>
+    <div class="section not-colored">
+        <div>
+            <div class="section-column" style="padding: 0 0 0 2rem; white-space: nowrap;">
+                <b>Часто задаваемые вопросы</b>
+            </div>
+            <div class="section-column" style="max-width: 50rem;">
+                <div style="margin-bottom: 1.25rem;">
+                    <div class="bold" style="margin-bottom: 0.35rem;">Что такое SQLTest.online и кто развивает платформу?</div>
+                    <div>SQLTest.online это интерактивная платформа для изучения и практики SQL. Проект развивают специалисты с практическим опытом в обучении SQL, backend-разработке и работе с данными.</div>
+                </div>
+                <div style="margin-bottom: 1.25rem;">
+                    <div class="bold" style="margin-bottom: 0.35rem;">Как практиковать SQL онлайн на реальных СУБД?</div>
+                    <div>Вы решаете SQL-задачи прямо в браузере, а решения проверяются на реальных движках, включая MySQL, PostgreSQL, MS SQL Server и Firebird.</div>
+                </div>
+                <div style="margin-bottom: 1.25rem;">
+                    <div class="bold" style="margin-bottom: 0.35rem;">Сколько SQL-заданий доступно для начинающих и продолжающих?</div>
+                    <div>Сейчас на платформе более 398 практических SQL-заданий по темам и уровням сложности: от базового синтаксиса до продвинутых шаблонов запросов.</div>
+                </div>
+                <div style="margin-bottom: 1.25rem;">
+                    <div class="bold" style="margin-bottom: 0.35rem;">Подходит ли SQLTest.online для подготовки к SQL-собеседованию?</div>
+                    <div>Да. В подборках есть JOIN, агрегаты, подзапросы, оконные функции и другие темы, которые часто встречаются на технических интервью.</div>
+                </div>
+                <div style="margin-bottom: 1.25rem;">
+                    <div class="bold" style="margin-bottom: 0.35rem;">Где проверить, что SQLTest.online это реальный проект?</div>
+                    <div>Идентичность проекта можно подтвердить по публичным профилям в LinkedIn и GitHub, а также по сообществу в Telegram.</div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="section colored">
         <div class="blue-block"> 
             <h4>Все, кто интересуется программированием</h4>
@@ -167,13 +196,13 @@
             <div class="section-column column30" style="display: flex; flex-flow: row wrap; justify-content: space-around;">
                 <a href="https://t.me/sqlize" target="_blank"class="social-media-link">
                     <div>
-                        <img src="/images/telegram_logo.png">
+                        <img src="/images/telegram_logo.png" alt="Логотип Telegram">
                         Telegram
                     </div>
                 </a>
                 <a href="https://www.linkedin.com/company/sqltest/" target="_blank"class="social-media-link">
                     <div>
-                        <img src="/images/linkedin_logo.png">
+                        <img src="/images/linkedin_logo.png" alt="Логотип LinkedIn">
                         Linkedin
                     </div>
                 </a>

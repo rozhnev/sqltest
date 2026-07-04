@@ -9,7 +9,7 @@
     <div class="section">
         <div>
             <div class="color-block" style="background-color: #E5F7EB;">
-                <img src="/images/about-for-students.png" style="width: 90%;">
+                <img src="/images/about-for-students.png" alt="Apprentissage SQL pour les etudiants sur SQLTest.online" style="width: 90%;">
                 <div>
                     <div>
                         <b>Vous voulez apprendre le Langage de Requête Structuré (SQL)</b><br>pour travailler avec assurance sur les données ?
@@ -20,7 +20,7 @@
                 </div>
             </div>
             <div class="color-block" style="background-color: #FEF5F5;">
-                <img src="/images/about-for-devs.png" style="width: 90%;">
+                <img src="/images/about-for-devs.png" alt="Pratique SQL pour les developpeurs et analystes" style="width: 90%;">
                 <div>
                     <div>
                         <b>Ou peut-être êtes-vous un développeur expérimenté</b><br>souhaitant approfondir ses connaissances et se préparer à des entretiens techniques exigeants ?
@@ -59,21 +59,21 @@
         <div>
             <div style="display: flex; flex-flow: row wrap; justify-content: space-between; gap: 1rem;">
                 <div class="section-column colored column30">
-                    <img src="/images/graduation-cap.png" style="height: 64px;">
+                    <img src="/images/graduation-cap.png" alt="Icone de chapeau de diplome, symbole de fin de formation SQL" style="height: 64px;">
                     <div>
                         <div class="bold">Étudiants</div>
                         <div style="font-size: small; margin-top: 0.5rem;">Apprenez le SQL dans le cadre de votre cursus ou en autodidacte.</div>
                     </div>
                 </div>
                 <div class="section-column colored column30">
-                    <img src="/images/technologist.png" style="height: 64px;">
+                    <img src="/images/technologist.png" alt="Icone de developpeur, symbole de progression professionnelle" style="height: 64px;">
                     <div>
                         <div class="bold">Développeurs</div>
                         <div style="font-size: small; margin-top: 0.5rem;">Améliorez vos compétences pour travailler avec des bases de données dans vos projets.</div>
                     </div>                
                 </div>
                 <div class="section-column colored column30">
-                    <img src="/images/bar-chart.png" style="height: 64px;">
+                    <img src="/images/bar-chart.png" alt="Icone d'analyse de donnees, symbole du travail avec SQL" style="height: 64px;">
                     <div>
                         <div class="bold">Analystes de données</div>
                         <div style="font-size: small; margin-top: 0.5rem;">Acquérez une expérience pratique du SQL pour l'analyse de données.</div>
@@ -87,21 +87,21 @@
             <div>
                 <div style="display: flex; flex-flow: row wrap; justify-content: space-between; gap: 1rem;">
                     <div class="section-column column30">
-                        <img src="/images/start1.png" style="height: 150px;">
+                        <img src="/images/start1.png" alt="Etape 1 : ouvrir la section des exercices sur SQLTest.online" style="height: 150px;">
                         <div>
                         <div class="bold"><span style="color: var(--ligth-h1-color);">1.&nbsp;</span>Visitez le site</div>
                         <div style="font-size: small; margin-top: 0.5rem;">Rendez-vous sur SQLTest.online et sélectionnez la section "Tâches"</div>
                     </div>
                     </div>
                     <div class="section-column column30">
-                        <img src="/images/start2.png" style="height: 150px;">
+                        <img src="/images/start2.png" alt="Etape 2 : choisir une categorie d'exercices SQL" style="height: 150px;">
                     <div>
                         <div class="bold"><span style="color: var(--ligth-h1-color);">2.&nbsp;</span>Sélectionnez une catégorie</div>
                         <div style="font-size: small; margin-top: 0.5rem;">Choisissez le sujet ou le niveau de difficulté qui vous intéresse</div>
                     </div>                
                 </div>
                     <div class="section-column column30">
-                        <img src="/images/start3.png" style="height: 150px;">
+                        <img src="/images/start3.png" alt="Etape 3 : resoudre des exercices SQL dans le simulateur" style="height: 150px;">
                     <div>
                         <div class="bold"><span style="color: var(--ligth-h1-color);">3.&nbsp;</span>Résolvez des tâches</div>
                         <div style="font-size: small; margin-top: 0.5rem;">Appliquez vos connaissances SQL pour résoudre les tâches proposées</div>
@@ -149,6 +149,35 @@
             </div>
         </div>
     </div>
+    <div class="section not-colored">
+        <div>
+            <div class="section-column" style="padding: 0 0 0 2rem; white-space: nowrap;">
+                <b>Questions frequentes</b>
+            </div>
+            <div class="section-column" style="max-width: 50rem;">
+                <div style="margin-bottom: 1.25rem;">
+                    <div class="bold" style="margin-bottom: 0.35rem;">Qu est-ce que SQLTest.online et qui construit la plateforme ?</div>
+                    <div>SQLTest.online est une plateforme interactive pour apprendre et pratiquer SQL. Elle est developpee par des contributeurs avec une experience pratique en formation SQL, developpement backend et workflows data.</div>
+                </div>
+                <div style="margin-bottom: 1.25rem;">
+                    <div class="bold" style="margin-bottom: 0.35rem;">Comment pratiquer SQL en ligne sur de vrais moteurs de base de donnees ?</div>
+                    <div>Vous resolvez des exercices SQL directement dans le navigateur. Les requetes sont validees sur des moteurs reels comme MySQL, PostgreSQL, MS SQL Server et Firebird.</div>
+                </div>
+                <div style="margin-bottom: 1.25rem;">
+                    <div class="bold" style="margin-bottom: 0.35rem;">Combien d exercices SQL sont proposes pour debutants et intermediaires ?</div>
+                    <div>La plateforme propose plus de 398 exercices SQL pratiques, structures par theme et niveau, des bases aux modeles de requetes avances.</div>
+                </div>
+                <div style="margin-bottom: 1.25rem;">
+                    <div class="bold" style="margin-bottom: 0.35rem;">SQLTest.online aide-t-il a preparer les entretiens SQL ?</div>
+                    <div>Oui. Les parcours couvrent jointures, agregations, sous-requetes, fonctions de fenetre et autres sujets frequents dans les entretiens techniques SQL.</div>
+                </div>
+                <div style="margin-bottom: 1.25rem;">
+                    <div class="bold" style="margin-bottom: 0.35rem;">Ou verifier que SQLTest.online est un projet reel ?</div>
+                    <div>Vous pouvez verifier l identite du projet via ses profils publics LinkedIn et GitHub, ainsi que sa presence communautaire sur Telegram.</div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="section colored">
         <div class="blue-block"> 
             <h4>Pour tous les passionnés de programmation</h4>
@@ -167,13 +196,13 @@
             <div class="section-column column30" style="display: flex; flex-flow: row wrap; justify-content: space-around;">
                 <a href="https://t.me/sqlize" target="_blank"class="social-media-link">
                     <div>
-                        <img src="/images/telegram_logo.png">
+                        <img src="/images/telegram_logo.png" alt="Logo Telegram">
                         Telegram
                     </div>
                 </a>
                 <a href="https://www.linkedin.com/company/sqltest/" target="_blank"class="social-media-link">
                     <div>
-                        <img src="/images/linkedin_logo.png">
+                        <img src="/images/linkedin_logo.png" alt="Logo LinkedIn">
                         Linkedin
                     </div>
                 </a>

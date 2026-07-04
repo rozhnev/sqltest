@@ -216,6 +216,25 @@ class Controller
      */
     public function about(array $params): void
     {
+        $langPrefix = strtolower($this->lang) === 'en' ? '/en' : '/' . $this->lang;
+        $aboutUrl = $this->host . $langPrefix . '/about';
+
+        $organizationSchema = [
+            '@context' => 'https://schema.org',
+            '@type' => 'Organization',
+            'name' => 'SQLTest.online',
+            'url' => $aboutUrl,
+            'logo' => $this->host . '/favicons/android-chrome-512x512.png',
+            'description' => 'Interactive SQL learning platform with practical tasks and real database engines.',
+            'sameAs' => [
+                'https://www.linkedin.com/company/sqltest/',
+                'https://github.com/rozhnev/sqltest',
+                'https://t.me/sqlize'
+            ]
+        ];
+
+        $this->assignSchemaJsonLd($organizationSchema);
+
         $this->assignVariables(['Action' => 'about']);
         $this->engine->display("about.tpl");
     }
