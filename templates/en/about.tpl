@@ -6,6 +6,29 @@
             <h2>Your personal lab for learning and mastering SQL!</h2>
         </div>
     </div>
+    <div class="section not-colored">
+        <div>
+            <div class="section-column" style="padding: 0 0 0 2rem; white-space: nowrap;">
+                <b>About the team and our quality standards</b>
+            </div>
+            <div class="section-column" style="max-width: 50rem;">
+                <p><strong>SQLTest.online is a free online trainer for learning and practicing SQL.</strong> The platform provides interactive tasks on real databases, helps you track learning progress, and prepare for technical interviews. The site is built by specialists who work with data every day: SQL trainers, data analysts, and backend developers with hands-on experience in query optimization and database schema design.</p>
+                <p>We created the platform to make practical SQL training accessible, realistic, and measurable. Today, the library contains <strong>398+ practice tasks</strong> designed to help learners move from syntax basics to production-style problem solving.</p>
+                <p><strong>How we build each task:</strong></p>
+                <ul>
+                    <li><strong>Real-world framing</strong><br>Scenarios are inspired by analytics, reporting, and application development workflows.</li>
+                    <li><strong>Multi-engine validation</strong><br>Queries are verified against real database engines used in industry (for example MySQL, PostgreSQL, MS SQL Server, and Firebird).</li>
+                    <li><strong>Progressive difficulty</strong><br>Task sets are structured from fundamentals to advanced topics such as joins, window functions, and performance-aware querying.</li>
+                    <li><strong>Continuous review loop</strong><br>We monitor user feedback and update tasks, expected answers, and explanations to keep content accurate.</li>
+                </ul>
+                <p><strong>Public profiles and project identity:</strong></p>
+                <ul>
+                    <li><strong>LinkedIn</strong>: <a href="https://www.linkedin.com/company/sqltest/" target="_blank" rel="noopener">SQLTest on LinkedIn</a></li>
+                    <li><strong>GitHub</strong>: <a href="https://github.com/rozhnev/sqltest" target="_blank" rel="noopener">SQLTest source repository</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
     <div class="section">
         <div>
             <div class="color-block" style="background-color: #E5F7EB;">
@@ -130,29 +153,6 @@
                     <li><strong>Constant updates</strong><br>We regularly add new tasks so you always find interesting challenges.</li>
                     <li><strong>Detailed statistics</strong><br>Track your progress, analyze mistakes, and improve your results.</li>
                     <li><strong>Community</strong><br>Interact with other users, share experiences, and get help.</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="section not-colored">
-        <div>
-            <div class="section-column" style="padding: 0 0 0 2rem; white-space: nowrap;">
-                <b>About the team and our quality standards</b>
-            </div>
-            <div class="section-column" style="max-width: 50rem;">
-                <p><strong>SQLTest.online is built by engineers who work with data and databases every day.</strong> Our core contributors include SQL trainers, data specialists, and backend developers with hands-on experience in query optimization, schema design, analytics workloads, and interview preparation.</p>
-                <p>We created the platform to make practical SQL training accessible, realistic, and measurable. Today, the library contains <strong>398+ practice tasks</strong> designed to help learners move from syntax basics to production-style problem solving.</p>
-                <p><strong>How we build each task:</strong></p>
-                <ul>
-                    <li><strong>Real-world framing</strong><br>Scenarios are inspired by analytics, reporting, and application development workflows.</li>
-                    <li><strong>Multi-engine validation</strong><br>Queries are verified against real database engines used in industry (for example MySQL, PostgreSQL, MS SQL Server, and Firebird).</li>
-                    <li><strong>Progressive difficulty</strong><br>Task sets are structured from fundamentals to advanced topics such as joins, window functions, and performance-aware querying.</li>
-                    <li><strong>Continuous review loop</strong><br>We monitor user feedback and update tasks, expected answers, and explanations to keep content accurate.</li>
-                </ul>
-                <p><strong>Public profiles and project identity:</strong></p>
-                <ul>
-                    <li><strong>LinkedIn</strong>: <a href="https://www.linkedin.com/company/sqltest/" target="_blank" rel="noopener">SQLTest on LinkedIn</a></li>
-                    <li><strong>GitHub</strong>: <a href="https://github.com/rozhnev/sqltest" target="_blank" rel="noopener">SQLTest source repository</a></li>
                 </ul>
             </div>
         </div>

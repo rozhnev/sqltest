@@ -6,6 +6,29 @@
             <h2>Seu laboratório pessoal para aprender e dominar SQL!</h2>
         </div>
     </div>
+    <div class="section not-colored">
+        <div>
+            <div class="section-column" style="padding: 0 0 0 2rem; white-space: nowrap;">
+                <b>Sobre a equipe e nossos padroes de qualidade</b>
+            </div>
+            <div class="section-column" style="max-width: 50rem;">
+                <p><strong>SQLTest.online e um treinador online gratuito para aprender e praticar SQL.</strong> A plataforma oferece tarefas interativas em bancos de dados reais, permite acompanhar o progresso de aprendizado e se preparar para entrevistas tecnicas. O site e criado por especialistas que trabalham diariamente com dados: instrutores de SQL, analistas de dados e desenvolvedores backend com experiencia em otimizacao de consultas e modelagem de esquemas de banco de dados.</p>
+                <p>Criamos a plataforma para tornar o treinamento pratico em SQL acessivel, realista e mensuravel. Hoje, a biblioteca inclui <strong>398+ tarefas praticas</strong> para ajudar alunos a evoluir da sintaxe basica para resolucao de problemas em cenarios de producao.</p>
+                <p><strong>Como construimos cada tarefa:</strong></p>
+                <ul>
+                    <li><strong>Contexto do mundo real</strong><br>Os cenarios sao inspirados em fluxos reais de analise, relatorios e desenvolvimento de aplicacoes.</li>
+                    <li><strong>Validacao em multiplos mecanismos</strong><br>As consultas sao verificadas em motores reais usados na industria (por exemplo MySQL, PostgreSQL, MS SQL Server e Firebird).</li>
+                    <li><strong>Dificuldade progressiva</strong><br>As trilhas evoluem dos fundamentos para topicos avancados, como joins, window functions e escrita de consultas com foco em performance.</li>
+                    <li><strong>Ciclo continuo de revisao</strong><br>Monitoramos feedback dos usuarios e atualizamos tarefas, respostas esperadas e explicacoes para manter o conteudo correto.</li>
+                </ul>
+                <p><strong>Perfis publicos e identidade do projeto:</strong></p>
+                <ul>
+                    <li><strong>LinkedIn</strong>: <a href="https://www.linkedin.com/company/sqltest/" target="_blank" rel="noopener">SQLTest no LinkedIn</a></li>
+                    <li><strong>GitHub</strong>: <a href="https://github.com/rozhnev/sqltest" target="_blank" rel="noopener">Repositorio de codigo do SQLTest</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
     <div class="section">
         <div>
             <div class="color-block" style="background-color: #E5F7EB;">
@@ -35,7 +58,7 @@
     <div class="section colored">
         <div class="blue-block"> 
             <h2>SQLTest.online é o lugar perfeito para você!</h2>
-            <a href="/en/" class="button white">
+            <a href="/pt/" class="button white">
                 Comece a treinar&nbsp;→
             </a>
         </div>
@@ -133,29 +156,6 @@
                 </ul>
             </div>
         </div>  
-    </div>
-    <div class="section not-colored">
-        <div>
-            <div class="section-column" style="padding: 0 0 0 2rem; white-space: nowrap;">
-                <b>Sobre a equipe e nossos padroes de qualidade</b>
-            </div>
-            <div class="section-column" style="max-width: 50rem;">
-                <p><strong>O SQLTest.online e desenvolvido por especialistas que trabalham com dados e bancos de dados todos os dias.</strong> Nosso time principal inclui instrutores de SQL, especialistas em dados e desenvolvedores backend com experiencia pratica em otimizacao de consultas, modelagem de esquemas, cargas analiticas e preparacao para entrevistas tecnicas.</p>
-                <p>Criamos a plataforma para tornar o treinamento pratico em SQL acessivel, realista e mensuravel. Hoje, a biblioteca inclui <strong>398+ tarefas praticas</strong> para ajudar alunos a evoluir da sintaxe basica para resolucao de problemas em cenarios de producao.</p>
-                <p><strong>Como construimos cada tarefa:</strong></p>
-                <ul>
-                    <li><strong>Contexto do mundo real</strong><br>Os cenarios sao inspirados em fluxos reais de analise, relatorios e desenvolvimento de aplicacoes.</li>
-                    <li><strong>Validacao em multiplos mecanismos</strong><br>As consultas sao verificadas em motores reais usados na industria (por exemplo MySQL, PostgreSQL, MS SQL Server e Firebird).</li>
-                    <li><strong>Dificuldade progressiva</strong><br>As trilhas evoluem dos fundamentos para topicos avancados, como joins, window functions e escrita de consultas com foco em performance.</li>
-                    <li><strong>Ciclo continuo de revisao</strong><br>Monitoramos feedback dos usuarios e atualizamos tarefas, respostas esperadas e explicacoes para manter o conteudo correto.</li>
-                </ul>
-                <p><strong>Perfis publicos e identidade do projeto:</strong></p>
-                <ul>
-                    <li><strong>LinkedIn</strong>: <a href="https://www.linkedin.com/company/sqltest/" target="_blank" rel="noopener">SQLTest no LinkedIn</a></li>
-                    <li><strong>GitHub</strong>: <a href="https://github.com/rozhnev/sqltest" target="_blank" rel="noopener">Repositorio de codigo do SQLTest</a></li>
-                </ul>
-            </div>
-        </div>
     </div>
     <div class="section not-colored">
         <div>

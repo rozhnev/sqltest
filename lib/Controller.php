@@ -216,6 +216,10 @@ class Controller
      */
     public function about(array $params): void
     {
+        if (!empty($params['path'])) {
+            $this->setHreflangLinks((string)$params['path'], $this->lang);
+        }
+
         $langPrefix = strtolower($this->lang) === 'en' ? '/en' : '/' . $this->lang;
         $aboutUrl = $this->host . $langPrefix . '/about';
 
@@ -233,7 +237,133 @@ class Controller
             ]
         ];
 
-        $this->assignSchemaJsonLd($organizationSchema);
+        $faqByLang = [
+            'ru' => [
+                [
+                    'question' => 'Что такое SQLTest.online и кто развивает платформу?',
+                    'answer' => 'SQLTest.online это интерактивная платформа для изучения и практики SQL. Проект развивают специалисты с практическим опытом в обучении SQL, backend-разработке и работе с данными.'
+                ],
+                [
+                    'question' => 'Как практиковать SQL онлайн на реальных СУБД?',
+                    'answer' => 'Вы решаете SQL-задачи прямо в браузере, а решения проверяются на реальных движках, включая MySQL, PostgreSQL, MS SQL Server и Firebird.'
+                ],
+                [
+                    'question' => 'Сколько SQL-заданий доступно для начинающих и продолжающих?',
+                    'answer' => 'Сейчас на платформе более 398 практических SQL-заданий по темам и уровням сложности: от базового синтаксиса до продвинутых шаблонов запросов.'
+                ],
+                [
+                    'question' => 'Подходит ли SQLTest.online для подготовки к SQL-собеседованию?',
+                    'answer' => 'Да. В подборках есть JOIN, агрегаты, подзапросы, оконные функции и другие темы, которые часто встречаются на технических интервью.'
+                ],
+                [
+                    'question' => 'Где проверить, что SQLTest.online это реальный проект?',
+                    'answer' => 'Идентичность проекта можно подтвердить по публичным профилям в LinkedIn и GitHub, а также по сообществу в Telegram.'
+                ]
+            ],
+            'en' => [
+                [
+                    'question' => 'What is SQLTest.online and who builds it?',
+                    'answer' => 'SQLTest.online is an interactive platform for learning and practicing SQL. It is built by contributors with practical experience in SQL training, backend engineering, and data workflows.'
+                ],
+                [
+                    'question' => 'How can I practice SQL online with real database engines?',
+                    'answer' => 'You can solve SQL tasks directly in the browser. Exercises are validated on real engines such as MySQL, PostgreSQL, MS SQL Server, and Firebird.'
+                ],
+                [
+                    'question' => 'How many SQL exercises are available for beginners and intermediate learners?',
+                    'answer' => 'The platform currently offers 398+ practical SQL exercises organized by topic and difficulty, from fundamentals to advanced query patterns.'
+                ],
+                [
+                    'question' => 'Can SQLTest.online help with SQL interview preparation?',
+                    'answer' => 'Yes. Task sets cover joins, aggregations, subqueries, window functions, and other topics commonly asked in SQL technical interviews.'
+                ],
+                [
+                    'question' => 'Where can I verify that SQLTest.online is a real project?',
+                    'answer' => 'You can verify project identity through public profiles on LinkedIn and GitHub, with additional community presence in Telegram.'
+                ]
+            ],
+            'fr' => [
+                [
+                    'question' => 'Qu est-ce que SQLTest.online et qui construit la plateforme ?',
+                    'answer' => 'SQLTest.online est une plateforme interactive pour apprendre et pratiquer SQL. Elle est developpee par des contributeurs avec une experience pratique en formation SQL, developpement backend et workflows data.'
+                ],
+                [
+                    'question' => 'Comment pratiquer SQL en ligne sur de vrais moteurs de base de donnees ?',
+                    'answer' => 'Vous resolvez des exercices SQL directement dans le navigateur. Les requetes sont validees sur des moteurs reels comme MySQL, PostgreSQL, MS SQL Server et Firebird.'
+                ],
+                [
+                    'question' => 'Combien d exercices SQL sont proposes pour debutants et intermediaires ?',
+                    'answer' => 'La plateforme propose plus de 398 exercices SQL pratiques, structures par theme et niveau, des bases aux modeles de requetes avances.'
+                ],
+                [
+                    'question' => 'SQLTest.online aide-t-il a preparer les entretiens SQL ?',
+                    'answer' => 'Oui. Les parcours couvrent jointures, agregations, sous-requetes, fonctions de fenetre et autres sujets frequents dans les entretiens techniques SQL.'
+                ],
+                [
+                    'question' => 'Ou verifier que SQLTest.online est un projet reel ?',
+                    'answer' => 'Vous pouvez verifier l identite du projet via ses profils publics LinkedIn et GitHub, ainsi que sa presence communautaire sur Telegram.'
+                ]
+            ],
+            'pt' => [
+                [
+                    'question' => 'O que e o SQLTest.online e quem desenvolve a plataforma?',
+                    'answer' => 'SQLTest.online e uma plataforma interativa para aprender e praticar SQL. O projeto e desenvolvido por contribuidores com experiencia pratica em ensino de SQL, desenvolvimento backend e fluxos de dados.'
+                ],
+                [
+                    'question' => 'Como praticar SQL online com motores de banco de dados reais?',
+                    'answer' => 'Voce resolve tarefas SQL diretamente no navegador. As consultas sao validadas em motores reais, como MySQL, PostgreSQL, MS SQL Server e Firebird.'
+                ],
+                [
+                    'question' => 'Quantos exercicios de SQL existem para iniciantes e nivel intermediario?',
+                    'answer' => 'A plataforma oferece mais de 398 exercicios praticos de SQL, organizados por tema e dificuldade, dos fundamentos a padroes avancados de consulta.'
+                ],
+                [
+                    'question' => 'O SQLTest.online ajuda na preparacao para entrevistas de SQL?',
+                    'answer' => 'Sim. As trilhas cobrem joins, agregacoes, subconsultas, window functions e outros topicos comuns em entrevistas tecnicas de SQL.'
+                ],
+                [
+                    'question' => 'Onde posso verificar que o SQLTest.online e um projeto real?',
+                    'answer' => 'Voce pode verificar a identidade do projeto pelos perfis publicos no LinkedIn e no GitHub, alem da presenca da comunidade no Telegram.'
+                ]
+            ]
+        ];
+
+        $schema = $organizationSchema;
+        if (isset($faqByLang[$this->lang])) {
+            $faqEntities = array_map(
+                static function (array $faq): array {
+                    return [
+                        '@type' => 'Question',
+                        'name' => $faq['question'],
+                        'acceptedAnswer' => [
+                            '@type' => 'Answer',
+                            'text' => $faq['answer']
+                        ]
+                    ];
+                },
+                $faqByLang[$this->lang]
+            );
+
+            $schema = [
+                '@context' => 'https://schema.org',
+                '@graph' => [
+                    $organizationSchema,
+                    [
+                        '@type' => 'FAQPage',
+                        'mainEntity' => $faqEntities
+                    ]
+                ]
+            ];
+        }
+
+        $this->assignSchemaJsonLd($schema);
+
+        $aboutTemplatePath = __DIR__ . "/../templates/{$this->lang}/about.tpl";
+        if (is_file($aboutTemplatePath)) {
+            $this->assignVariables([
+                'PageOGModifiedTime' => gmdate('c', (int)filemtime($aboutTemplatePath))
+            ]);
+        }
 
         $this->assignVariables(['Action' => 'about']);
         $this->engine->display("about.tpl");
