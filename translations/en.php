@@ -1,7 +1,9 @@
 <?php
 $translations = [
-    'about_page_title' => 'SQLTest.online: your personal SQL trainer',
-    'about_page_description' => 'Want to learn how to write effective SQL queries? With SQLTest.online it\'s easy! Solve various practical problems, track your progress and become a real expert in SQL.',
+    'about_page_title' => 'Online SQL Trainer: query practice and interview prep',
+    'about_page_description' => 'Free SQL trainer with interactive tasks. Practice on real databases, track your progress, and prepare for SQL interviews. Built for students and developers.',
+    'about_og_title' => 'Online SQL Trainer: query practice and interview prep',
+    'about_og_description' => 'Free SQL trainer with interactive tasks and real database practice. Prepare for SQL interviews and track your progress in one place.',
     'books_title' => 'Best SQL Books for Beginners, Analysts, and Developers',
     'books_description' => 'Explore a curated collection of SQL books to learn query writing, database design, optimization, and practical problem solving. The list includes approachable titles for beginners and deeper resources for experienced developers.',
     'books_support' => 'Support our project!<br>By purchasing books via our links, you will not only expand your library, but also help develop the <a href="/##Lang##/">sqltest.online</a> project ❤️',

@@ -1,7 +1,9 @@
 <?php
 $translations = [
-    'about_page_title' => 'SQLTest.online: o seu formador pessoal de SQL',
-    'about_page_description' => 'Quer aprender a escrever consultas SQL eficazes? Com o SQLTest.online é fácil! Resolva diversos problemas práticos, acompanhe o seu progresso e torne-se um verdadeiro especialista em SQL.',
+    'about_page_title' => 'Treinador SQL online: pratica de consultas e preparacao para entrevistas',
+    'about_page_description' => 'Treinador SQL gratuito com tarefas interativas. Pratique em bases de dados reais, acompanhe seu progresso e prepare-se para entrevistas de SQL. Feito para estudantes e desenvolvedores.',
+    'about_og_title' => 'Treinador SQL online: pratica de consultas e preparacao para entrevistas',
+    'about_og_description' => 'Treinador SQL gratuito com tarefas interativas e pratica em bases de dados reais. Prepare-se para entrevistas de SQL e acompanhe seu progresso.',
     'books_title' => 'Melhores livros de SQL para iniciantes, analistas e desenvolvedores',
     'books_description' => 'Explore uma seleção de livros de SQL para aprender escrita de consultas, modelagem de banco de dados, otimização e resolução prática de problemas. A lista inclui títulos acessíveis para iniciantes e materiais mais profundos para profissionais experientes.',
     'books_support' => 'Apoie o nosso projeto!<br>Ao adquirir livros através dos nossos links, você não só vai expandir a sua biblioteca, mas também vai ajudar a desenvolver o projeto <a href="/##Lang##/">sqltest.online</a> ❤️',

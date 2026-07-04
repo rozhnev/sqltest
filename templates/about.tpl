@@ -1,5 +1,7 @@
     {assign var="PageTitle" value="{translate}about_page_title{/translate}"}
     {assign var="PageDescription" value="{translate}about_page_description{/translate}"}
+    {assign var="PageOGTitle" value="{translate}about_og_title{/translate}"}
+    {assign var="PageOGDescription" value="{translate}about_og_description{/translate}"}
     {include file='short-header.tpl'}
     <body>
         {if $MobileView}

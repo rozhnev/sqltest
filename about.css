@@ -44,6 +44,25 @@
 .about .section .button.white {
   border-color: white;
 }
+.about .section .about-cta-inline {
+  margin-top: 0.75rem;
+  display: inline-block;
+}
+.about .section .about-cta-center {
+  margin-top: 1rem;
+  text-align: center;
+  width: 100%;
+}
+.about .section .about-cta-bottom {
+  display: inline-block;
+  margin-top: 0.5rem;
+}
+.about .section .about-faq-item {
+  margin-bottom: 1.25rem;
+}
+.about .section .about-faq-question {
+  margin-bottom: 0.35rem;
+}
 .about .section .color-block {
   color: #333333;
   display: flex;

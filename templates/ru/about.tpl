@@ -1,5 +1,5 @@
 <link rel="stylesheet" type="text/css" href="/about.css?{$VERSION}" media="all">
-<div class="about">
+<article class="about">
     <div class="section top colored">
         <div>
             <h1>Добро пожаловать на SQLTest.online</h1>
@@ -51,6 +51,9 @@
                     <li><b>Практические навыки</b><br> Приобретете опыт работы с реальными данными.</li>
                     <li><b>Уверенность в себе</b><br> Успешно решая задачи, вы повысите свою самооценку и будете готовы к любым SQL-вызовам.</li>
                 </ul>
+                <a href="/ru/playground/" class="button green about-cta-inline">
+                    Попробовать SQL Playground&nbsp;→
+                </a>
             </div>
         </div>  
     </div>
@@ -108,6 +111,11 @@
                     </div>                    
                 </div>
             </div>
+            <div class="about-cta-center">
+                <a href="/ru/" class="button green">
+                    Перейти к задачам&nbsp;→
+                </a>
+            </div>
         </div>
     </div>
     <div class="section not-colored">
@@ -155,26 +163,29 @@
                 <b>Часто задаваемые вопросы</b>
             </div>
             <div class="section-column" style="max-width: 50rem;">
-                <div style="margin-bottom: 1.25rem;">
-                    <div class="bold" style="margin-bottom: 0.35rem;">Что такое SQLTest.online и кто развивает платформу?</div>
+                <div class="about-faq-item">
+                    <div class="bold about-faq-question">Что такое SQLTest.online и кто развивает платформу?</div>
                     <div>SQLTest.online это интерактивная платформа для изучения и практики SQL. Проект развивают специалисты с практическим опытом в обучении SQL, backend-разработке и работе с данными.</div>
                 </div>
-                <div style="margin-bottom: 1.25rem;">
-                    <div class="bold" style="margin-bottom: 0.35rem;">Как практиковать SQL онлайн на реальных СУБД?</div>
+                <div class="about-faq-item">
+                    <div class="bold about-faq-question">Как практиковать SQL онлайн на реальных СУБД?</div>
                     <div>Вы решаете SQL-задачи прямо в браузере, а решения проверяются на реальных движках, включая MySQL, PostgreSQL, MS SQL Server и Firebird.</div>
                 </div>
-                <div style="margin-bottom: 1.25rem;">
-                    <div class="bold" style="margin-bottom: 0.35rem;">Сколько SQL-заданий доступно для начинающих и продолжающих?</div>
+                <div class="about-faq-item">
+                    <div class="bold about-faq-question">Сколько SQL-заданий доступно для начинающих и продолжающих?</div>
                     <div>Сейчас на платформе более 398 практических SQL-заданий по темам и уровням сложности: от базового синтаксиса до продвинутых шаблонов запросов.</div>
                 </div>
-                <div style="margin-bottom: 1.25rem;">
-                    <div class="bold" style="margin-bottom: 0.35rem;">Подходит ли SQLTest.online для подготовки к SQL-собеседованию?</div>
+                <div class="about-faq-item">
+                    <div class="bold about-faq-question">Подходит ли SQLTest.online для подготовки к SQL-собеседованию?</div>
                     <div>Да. В подборках есть JOIN, агрегаты, подзапросы, оконные функции и другие темы, которые часто встречаются на технических интервью.</div>
                 </div>
-                <div style="margin-bottom: 1.25rem;">
-                    <div class="bold" style="margin-bottom: 0.35rem;">Где проверить, что SQLTest.online это реальный проект?</div>
+                <div class="about-faq-item">
+                    <div class="bold about-faq-question">Где проверить, что SQLTest.online это реальный проект?</div>
                     <div>Идентичность проекта можно подтвердить по публичным профилям в LinkedIn и GitHub, а также по сообществу в Telegram.</div>
                 </div>
+                <a href="/ru/test/start" class="button green about-cta-bottom">
+                    Пройти SQL-тест&nbsp;→
+                </a>
             </div>
         </div>
     </div>
@@ -229,4 +240,4 @@
             </div>
         </div>
     </div> 
-</div>
+</article>

@@ -1,5 +1,5 @@
 <link rel="stylesheet" type="text/css" href="/about.css?{$VERSION}" media="all">
-<div class="about">
+<article class="about">
     <div class="section top colored">
         <div>
             <h1>Bienvenue sur SQLTest.online</h1>
@@ -51,6 +51,9 @@
                     <li><b>Des compétences pratiques</b><br> Acquérez de l'expérience en travaillant avec de vraies données.</li>
                     <li><b>De la confiance</b><br> Résoudre des tâches avec succès boostera votre estime de soi et vous préparera à relever tous les défis SQL.</li>
                 </ul>
+                <a href="/fr/playground/" class="button green about-cta-inline">
+                    Essayer SQL Playground&nbsp;→
+                </a>
             </div>
         </div>
     </div>
@@ -108,6 +111,11 @@
                     </div>                    
                 </div>
             </div>
+            <div class="about-cta-center">
+                <a href="/fr/" class="button green">
+                    Aller aux exercices&nbsp;→
+                </a>
+            </div>
         </div>
     </div>
     <div class="section not-colored">
@@ -155,26 +163,29 @@
                 <b>Questions frequentes</b>
             </div>
             <div class="section-column" style="max-width: 50rem;">
-                <div style="margin-bottom: 1.25rem;">
-                    <div class="bold" style="margin-bottom: 0.35rem;">Qu est-ce que SQLTest.online et qui construit la plateforme ?</div>
+                <div class="about-faq-item">
+                    <div class="bold about-faq-question">Qu est-ce que SQLTest.online et qui construit la plateforme ?</div>
                     <div>SQLTest.online est une plateforme interactive pour apprendre et pratiquer SQL. Elle est developpee par des contributeurs avec une experience pratique en formation SQL, developpement backend et workflows data.</div>
                 </div>
-                <div style="margin-bottom: 1.25rem;">
-                    <div class="bold" style="margin-bottom: 0.35rem;">Comment pratiquer SQL en ligne sur de vrais moteurs de base de donnees ?</div>
+                <div class="about-faq-item">
+                    <div class="bold about-faq-question">Comment pratiquer SQL en ligne sur de vrais moteurs de base de donnees ?</div>
                     <div>Vous resolvez des exercices SQL directement dans le navigateur. Les requetes sont validees sur des moteurs reels comme MySQL, PostgreSQL, MS SQL Server et Firebird.</div>
                 </div>
-                <div style="margin-bottom: 1.25rem;">
-                    <div class="bold" style="margin-bottom: 0.35rem;">Combien d exercices SQL sont proposes pour debutants et intermediaires ?</div>
+                <div class="about-faq-item">
+                    <div class="bold about-faq-question">Combien d exercices SQL sont proposes pour debutants et intermediaires ?</div>
                     <div>La plateforme propose plus de 398 exercices SQL pratiques, structures par theme et niveau, des bases aux modeles de requetes avances.</div>
                 </div>
-                <div style="margin-bottom: 1.25rem;">
-                    <div class="bold" style="margin-bottom: 0.35rem;">SQLTest.online aide-t-il a preparer les entretiens SQL ?</div>
+                <div class="about-faq-item">
+                    <div class="bold about-faq-question">SQLTest.online aide-t-il a preparer les entretiens SQL ?</div>
                     <div>Oui. Les parcours couvrent jointures, agregations, sous-requetes, fonctions de fenetre et autres sujets frequents dans les entretiens techniques SQL.</div>
                 </div>
-                <div style="margin-bottom: 1.25rem;">
-                    <div class="bold" style="margin-bottom: 0.35rem;">Ou verifier que SQLTest.online est un projet reel ?</div>
+                <div class="about-faq-item">
+                    <div class="bold about-faq-question">Ou verifier que SQLTest.online est un projet reel ?</div>
                     <div>Vous pouvez verifier l identite du projet via ses profils publics LinkedIn et GitHub, ainsi que sa presence communautaire sur Telegram.</div>
                 </div>
+                <a href="/fr/test/start" class="button green about-cta-bottom">
+                    Passer un test SQL&nbsp;→
+                </a>
             </div>
         </div>
     </div>
@@ -229,4 +240,4 @@
             </div>
         </div>
     </div>
-</div>
+</article>

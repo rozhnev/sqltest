@@ -1,5 +1,5 @@
 <link rel="stylesheet" type="text/css" href="/about.css?{$VERSION}" media="all">
-<div class="about">
+<article class="about">
     <div class="section top colored">
         <div>
             <h1>Bem-vindo ao SQLTest.online</h1>
@@ -51,6 +51,9 @@
                     <li><b>Habilidades práticas</b><br> Ganhe experiência trabalhando com dados reais.</li>
                     <li><b>Confiança</b><br> Resolver tarefas com sucesso aumentará sua autoestima e o preparará para qualquer desafio em SQL.</li>
                 </ul>
+                <a href="/pt/playground/" class="button green about-cta-inline">
+                    Experimentar SQL Playground&nbsp;→
+                </a>
             </div>
         </div>
     </div>
@@ -108,6 +111,11 @@
                     </div>
                 </div>
             </div>
+            <div class="about-cta-center">
+                <a href="/pt/" class="button green">
+                    Ir para as tarefas&nbsp;→
+                </a>
+            </div>
         </div>
     </div>
     <div class="section not-colored">
@@ -155,26 +163,29 @@
                 <b>Perguntas frequentes</b>
             </div>
             <div class="section-column" style="max-width: 50rem;">
-                <div style="margin-bottom: 1.25rem;">
-                    <div class="bold" style="margin-bottom: 0.35rem;">O que e o SQLTest.online e quem desenvolve a plataforma?</div>
+                <div class="about-faq-item">
+                    <div class="bold about-faq-question">O que e o SQLTest.online e quem desenvolve a plataforma?</div>
                     <div>SQLTest.online e uma plataforma interativa para aprender e praticar SQL. O projeto e desenvolvido por contribuidores com experiencia pratica em ensino de SQL, desenvolvimento backend e fluxos de dados.</div>
                 </div>
-                <div style="margin-bottom: 1.25rem;">
-                    <div class="bold" style="margin-bottom: 0.35rem;">Como praticar SQL online com motores de banco de dados reais?</div>
+                <div class="about-faq-item">
+                    <div class="bold about-faq-question">Como praticar SQL online com motores de banco de dados reais?</div>
                     <div>Voce resolve tarefas SQL diretamente no navegador. As consultas sao validadas em motores reais, como MySQL, PostgreSQL, MS SQL Server e Firebird.</div>
                 </div>
-                <div style="margin-bottom: 1.25rem;">
-                    <div class="bold" style="margin-bottom: 0.35rem;">Quantos exercicios de SQL existem para iniciantes e nivel intermediario?</div>
+                <div class="about-faq-item">
+                    <div class="bold about-faq-question">Quantos exercicios de SQL existem para iniciantes e nivel intermediario?</div>
                     <div>A plataforma oferece mais de 398 exercicios praticos de SQL, organizados por tema e dificuldade, dos fundamentos a padroes avancados de consulta.</div>
                 </div>
-                <div style="margin-bottom: 1.25rem;">
-                    <div class="bold" style="margin-bottom: 0.35rem;">O SQLTest.online ajuda na preparacao para entrevistas de SQL?</div>
+                <div class="about-faq-item">
+                    <div class="bold about-faq-question">O SQLTest.online ajuda na preparacao para entrevistas de SQL?</div>
                     <div>Sim. As trilhas cobrem joins, agregacoes, subconsultas, window functions e outros topicos comuns em entrevistas tecnicas de SQL.</div>
                 </div>
-                <div style="margin-bottom: 1.25rem;">
-                    <div class="bold" style="margin-bottom: 0.35rem;">Onde posso verificar que o SQLTest.online e um projeto real?</div>
+                <div class="about-faq-item">
+                    <div class="bold about-faq-question">Onde posso verificar que o SQLTest.online e um projeto real?</div>
                     <div>Voce pode verificar a identidade do projeto pelos perfis publicos no LinkedIn e no GitHub, alem da presenca da comunidade no Telegram.</div>
                 </div>
+                <a href="/pt/test/start" class="button green about-cta-bottom">
+                    Fazer teste SQL&nbsp;→
+                </a>
             </div>
         </div>
     </div>
@@ -229,4 +240,4 @@
             </div>
         </div>
     </div>
-</div>
+</article>

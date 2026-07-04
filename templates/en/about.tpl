@@ -1,5 +1,5 @@
 <link rel="stylesheet" type="text/css" href="/about.css?{$VERSION}" media="all">
-<div class="about">
+<article class="about">
     <div class="section top colored">
         <div>
             <h1>Welcome to SQLTest.online</h1>
@@ -51,6 +51,9 @@
                     <li><b>Practical skills</b><br> Gain experience working with real data.</li>
                     <li><b>Confidence</b><br> Successfully solving tasks will boost your self-esteem and prepare you for any SQL challenges.</li>
                 </ul>
+                <a href="/en/playground/" class="button green about-cta-inline">
+                    Try SQL Playground&nbsp;→
+                </a>
             </div>
         </div>
     </div>
@@ -108,6 +111,11 @@
                     </div>                    
                 </div>
             </div>
+            <div class="about-cta-center">
+                <a href="/en/" class="button green">
+                    Go to tasks&nbsp;→
+                </a>
+            </div>
         </div>
     </div>
     <div class="section not-colored">
@@ -155,26 +163,29 @@
                 <b>Frequently asked questions</b>
             </div>
             <div class="section-column" style="max-width: 50rem;">
-                <div style="margin-bottom: 1.25rem;">
-                    <div class="bold" style="margin-bottom: 0.35rem;">What is SQLTest.online and who builds it?</div>
+                <div class="about-faq-item">
+                    <div class="bold about-faq-question">What is SQLTest.online and who builds it?</div>
                     <div>SQLTest.online is an interactive platform for learning and practicing SQL. It is built by contributors with practical experience in SQL training, backend engineering, and data workflows.</div>
                 </div>
-                <div style="margin-bottom: 1.25rem;">
-                    <div class="bold" style="margin-bottom: 0.35rem;">How can I practice SQL online with real database engines?</div>
+                <div class="about-faq-item">
+                    <div class="bold about-faq-question">How can I practice SQL online with real database engines?</div>
                     <div>You can solve SQL tasks directly in the browser. Exercises are validated on real engines such as MySQL, PostgreSQL, MS SQL Server, and Firebird.</div>
                 </div>
-                <div style="margin-bottom: 1.25rem;">
-                    <div class="bold" style="margin-bottom: 0.35rem;">How many SQL exercises are available for beginners and intermediate learners?</div>
+                <div class="about-faq-item">
+                    <div class="bold about-faq-question">How many SQL exercises are available for beginners and intermediate learners?</div>
                     <div>The platform currently offers 398+ practical SQL exercises organized by topic and difficulty, from fundamentals to advanced query patterns.</div>
                 </div>
-                <div style="margin-bottom: 1.25rem;">
-                    <div class="bold" style="margin-bottom: 0.35rem;">Can SQLTest.online help with SQL interview preparation?</div>
+                <div class="about-faq-item">
+                    <div class="bold about-faq-question">Can SQLTest.online help with SQL interview preparation?</div>
                     <div>Yes. Task sets cover joins, aggregations, subqueries, window functions, and other topics commonly asked in SQL technical interviews.</div>
                 </div>
-                <div style="margin-bottom: 1.25rem;">
-                    <div class="bold" style="margin-bottom: 0.35rem;">Where can I verify that SQLTest.online is a real project?</div>
+                <div class="about-faq-item">
+                    <div class="bold about-faq-question">Where can I verify that SQLTest.online is a real project?</div>
                     <div>You can verify project identity through public profiles on LinkedIn and GitHub, with additional community presence in Telegram.</div>
                 </div>
+                <a href="/en/test/start" class="button green about-cta-bottom">
+                    Take SQL test&nbsp;→
+                </a>
             </div>
         </div>
     </div>
@@ -229,4 +240,4 @@
             </div>
         </div>
     </div>
-</div>
+</article>

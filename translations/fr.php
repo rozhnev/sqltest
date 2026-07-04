@@ -1,7 +1,9 @@
 <?php
 $translations = [
-    'about_page_title' => 'SQLTest.online : votre entraîneur SQL personnel',
-    'about_page_description' => 'Vous voulez apprendre à écrire des requêtes SQL efficaces ? Avec SQLTest.online, c\'est facile ! Résolvez divers problèmes pratiques, suivez vos progrès et devenez un véritable expert en SQL.',
+    'about_page_title' => 'Entraineur SQL en ligne : pratique des requetes et preparation aux entretiens',
+    'about_page_description' => 'Entraineur SQL gratuit avec exercices interactifs. Pratiquez sur des bases de donnees reelles, suivez vos progres et preparez vos entretiens SQL. Concu pour etudiants et developpeurs.',
+    'about_og_title' => 'Entraineur SQL en ligne : pratique des requetes et preparation aux entretiens',
+    'about_og_description' => 'Entraineur SQL gratuit avec exercices interactifs et pratique sur des bases de donnees reelles. Preparez vos entretiens SQL et suivez vos progres.',
     'books_title' => 'Les meilleurs livres SQL pour débutants, analystes et développeurs',
     'books_description' => 'Découvrez une sélection de livres SQL pour apprendre l\'écriture de requêtes, la modélisation de bases de données, l\'optimisation et la résolution pratique de problèmes. La liste couvre à la fois les besoins des débutants et ceux des profils plus expérimentés.',
     'books_support' => 'Soutenez notre projet !<br>En achetant des livres via nos liens, vous n\'enrichirez pas seulement votre bibliothèque, mais vous aiderez également au développement du projet <a href="/##Lang##/">sqltest.online</a> ❤️',
