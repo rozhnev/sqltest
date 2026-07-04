@@ -126,6 +126,29 @@
             </div>
         </div>
     </div>
+    <div class="section not-colored">
+        <div>
+            <div class="section-column" style="padding: 0 0 0 2rem; white-space: nowrap;">
+                <b>About the team and our quality standards</b>
+            </div>
+            <div class="section-column" style="max-width: 50rem;">
+                <p><strong>SQLTest.online is built by engineers who work with data and databases every day.</strong> Our core contributors include SQL trainers, data specialists, and backend developers with hands-on experience in query optimization, schema design, analytics workloads, and interview preparation.</p>
+                <p>We created the platform to make practical SQL training accessible, realistic, and measurable. Today, the library contains <strong>398+ practice tasks</strong> designed to help learners move from syntax basics to production-style problem solving.</p>
+                <p><strong>How we build each task:</strong></p>
+                <ul>
+                    <li><strong>Real-world framing</strong><br>Scenarios are inspired by analytics, reporting, and application development workflows.</li>
+                    <li><strong>Multi-engine validation</strong><br>Queries are verified against real database engines used in industry (for example MySQL, PostgreSQL, MS SQL Server, and Firebird).</li>
+                    <li><strong>Progressive difficulty</strong><br>Task sets are structured from fundamentals to advanced topics such as joins, window functions, and performance-aware querying.</li>
+                    <li><strong>Continuous review loop</strong><br>We monitor user feedback and update tasks, expected answers, and explanations to keep content accurate.</li>
+                </ul>
+                <p><strong>Public profiles and project identity:</strong></p>
+                <ul>
+                    <li><strong>LinkedIn</strong>: <a href="https://www.linkedin.com/company/sqltest/" target="_blank" rel="noopener">SQLTest on LinkedIn</a></li>
+                    <li><strong>GitHub</strong>: <a href="https://github.com/rozhnev/sqltest" target="_blank" rel="noopener">SQLTest source repository</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
     <div class="section colored">
         <div class="blue-block"> 
             <h4>Everyone interested in programming</h4>

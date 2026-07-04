@@ -126,6 +126,29 @@
             </div>
         </div>
     </div>
+    <div class="section not-colored">
+        <div>
+            <div class="section-column" style="padding: 0 0 0 2rem; white-space: nowrap;">
+                <b>A propos de l'equipe et de nos standards qualite</b>
+            </div>
+            <div class="section-column" style="max-width: 50rem;">
+                <p><strong>SQLTest.online est developpe par des experts qui travaillent avec les donnees et les bases de donnees au quotidien.</strong> Notre equipe regroupe des formateurs SQL, des specialistes data et des developpeurs backend ayant une experience pratique en optimisation de requetes, conception de schemas, charges analytiques et preparation aux entretiens techniques.</p>
+                <p>Nous avons cree la plateforme pour rendre l'apprentissage pratique de SQL accessible, realiste et mesurable. Aujourd'hui, la bibliotheque contient <strong>398+ exercices pratiques</strong> pour aider les apprenants a progresser des bases de la syntaxe jusqu'a la resolution de problemes proches de la production.</p>
+                <p><strong>Comment nous concevons chaque exercice :</strong></p>
+                <ul>
+                    <li><strong>Contexte reel</strong><br>Les scenarios sont inspires de cas d'usage en analyse, reporting et developpement applicatif.</li>
+                    <li><strong>Validation multi-moteurs</strong><br>Les requetes sont verifiees sur de vrais moteurs de base de donnees utilises en entreprise (par exemple MySQL, PostgreSQL, MS SQL Server et Firebird).</li>
+                    <li><strong>Difficulte progressive</strong><br>Les parcours vont des fondamentaux vers des sujets avances comme les jointures, les fonctions de fenetre et l'ecriture de requetes performantes.</li>
+                    <li><strong>Boucle d'amelioration continue</strong><br>Nous suivons les retours des utilisateurs et mettons a jour les exercices, reponses attendues et explications pour garantir leur exactitude.</li>
+                </ul>
+                <p><strong>Profils publics et identite du projet :</strong></p>
+                <ul>
+                    <li><strong>LinkedIn</strong> : <a href="https://www.linkedin.com/company/sqltest/" target="_blank" rel="noopener">SQLTest sur LinkedIn</a></li>
+                    <li><strong>GitHub</strong> : <a href="https://github.com/rozhnev/sqltest" target="_blank" rel="noopener">Depot source SQLTest</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
     <div class="section colored">
         <div class="blue-block"> 
             <h4>Pour tous les passionnés de programmation</h4>
