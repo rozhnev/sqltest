@@ -1,6 +1,16 @@
-This lesson introduces views (`VIEW`), SQL objects that let you save a query under a name and then use it as if it were a regular table. You will learn what views are, how to create them, how they differ from tables and temporary tables, and in which tasks they are especially useful. By the end of this lesson, you will be able to confidently use views to simplify complex queries and reuse logic.
+---
+title: "SQL Views (VIEW): how to create and use them in practical tasks"
+description: "Learn SQL views: CREATE VIEW syntax, differences from regular and temporary tables, updatability, and practical Sakila examples."
+keywords: ["SQL VIEW", "database view", "CREATE VIEW", "virtual table", "Sakila"]
+teaches: ["Create and query views with CREATE VIEW", "Explain differences between VIEW, regular tables, and temporary tables", "Use views to simplify and reuse SQL logic"]
+about: ["SQL", "VIEW", "Database design", "Sakila"]
+---
 
-# Lesson 9.4: Views (`VIEW`)
+_Reading time: ~8 minutes_
+
+This lesson introduces views (`VIEW`), SQL objects that let you save a query under a name and then use it as if it were a regular table. You will learn how to create views, how they differ from tables and temporary tables, and in which tasks they are especially useful. By the end of this lesson, you will be able to confidently use views to simplify complex queries and reuse logic.
+
+# Views (`VIEW`) in SQL
 
 In the previous lesson, we talked about temporary tables, which help store intermediate results during a session. Now let’s look at another important SQL tool: **views**. They also help simplify work with complex queries, but they do so in a different way.
 
@@ -40,6 +50,14 @@ FROM view_name;
 ```
 
 It is important to understand that a regular view stores the query logic, not a separate copy of the result.
+
+If a view is no longer needed, you can remove it with `DROP VIEW`:
+
+```sql
+DROP VIEW view_name;
+```
+
+In many DBMSs, a safer option is `DROP VIEW IF EXISTS view_name;`, which removes the object only when it exists and helps avoid errors in deployment scripts.
 
 ## Example: Creating a View
 
@@ -208,6 +226,32 @@ ORDER BY film_count DESC;
 ```
 
 This approach is convenient because the complex table relationship is defined once. After that, analysts, reports, and applications can use a ready-made logical layer without constantly repeating the same `JOIN` logic.
+
+---
+
+## Frequently Asked Questions
+
+### Does a view store data or only the query?
+In a standard implementation, a `VIEW` stores only the SQL definition, not a separate copy of rows. When queried, the DBMS builds the result from the underlying tables.
+
+### When should I choose a view instead of a temporary table?
+A `VIEW` is better when you need to reuse the same reading logic many times. A temporary table is better when you need to physically persist an intermediate result across several processing steps.
+
+### Can views improve performance by themselves?
+Not automatically. Performance depends on the query inside the `VIEW`, indexing on source tables, and the execution plan.
+
+---
+
+## Interview Questions
+
+### What is a SQL view and how does it work?
+A view is a named SQL query saved as a schema object. When you run `SELECT` against it, the DBMS executes the stored definition and returns a virtual table result.
+
+### How is a view different from a regular table?
+A regular table stores data physically. A view usually stores only query logic and is used to simplify access and reuse complex query patterns.
+
+### When can a view be updatable?
+Usually when it is a simple view over a single table without `GROUP BY`, aggregates, `DISTINCT`, or complex joins. Exact rules depend on the DBMS.
 
 ---
 

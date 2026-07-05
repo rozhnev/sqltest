@@ -1,6 +1,16 @@
-Cette leçon présente les vues (`VIEW`), des objets SQL qui permettent d’enregistrer une requête sous un nom puis de l’utiliser comme s’il s’agissait d’une table classique. Vous découvrirez ce que sont les vues, comment les créer, en quoi elles diffèrent des tables et des tables temporaires, ainsi que dans quels cas elles sont particulièrement utiles. À la fin de cette leçon, vous saurez utiliser les vues avec assurance pour simplifier des requêtes complexes et réutiliser une même logique.
+---
+title: "Vues SQL (VIEW) : creation, utilisation et cas pratiques"
+description: "Apprenez les vues SQL : syntaxe CREATE VIEW, differences avec les tables classiques et temporaires, mises a jour et exemples pratiques avec Sakila."
+keywords: ["SQL VIEW", "vue SQL", "CREATE VIEW", "table virtuelle", "Sakila"]
+teaches: ["Creer et interroger des vues avec CREATE VIEW", "Distinguer VIEW, table classique et table temporaire", "Reutiliser une logique SQL complexe via des vues"]
+about: ["SQL", "VIEW", "Database design", "Sakila"]
+---
 
-# Leçon 9.4 : Vues (`VIEW`)
+_Temps de lecture : ~8 minutes_
+
+Cette leçon présente les vues (`VIEW`), des objets SQL qui permettent d’enregistrer une requête sous un nom puis de l’utiliser comme s’il s’agissait d’une table classique. Vous découvrirez comment créer des vues, en quoi elles diffèrent des tables et des tables temporaires, et dans quels cas elles sont particulièrement utiles. À la fin de cette leçon, vous saurez utiliser les vues avec assurance pour simplifier des requêtes complexes et réutiliser une même logique.
+
+# Vues (`VIEW`) en SQL
 
 Dans la leçon précédente, nous avons parlé des tables temporaires, qui aident à conserver des résultats intermédiaires pendant une session. Examinons maintenant un autre outil important de SQL : les **vues**. Elles aussi simplifient le travail avec des requêtes complexes, mais d’une autre manière.
 
@@ -40,6 +50,14 @@ FROM view_name;
 ```
 
 Il est important de comprendre qu’une vue classique stocke la logique de la requête, et non une copie distincte du résultat.
+
+Si une vue n’est plus nécessaire, vous pouvez la supprimer avec `DROP VIEW` :
+
+```sql
+DROP VIEW view_name;
+```
+
+Dans de nombreux SGBD, vous pouvez utiliser `DROP VIEW IF EXISTS view_name;` pour supprimer l’objet uniquement s’il existe et éviter des erreurs dans les scripts de deploiement.
 
 ## Exemple de création d’une vue
 
@@ -208,6 +226,32 @@ ORDER BY film_count DESC;
 ```
 
 Cette approche est pratique, car la relation complexe entre les tables est définie une seule fois. Ensuite, les analystes, les rapports et les applications peuvent utiliser une couche logique prête à l’emploi sans répéter en permanence la même logique de `JOIN`.
+
+---
+
+## Questions frequentes
+
+### Une vue stocke-t-elle les donnees ou seulement la requete ?
+Dans le cas standard, une `VIEW` stocke seulement la definition SQL et non une copie separee des lignes. Au moment de l execution, le SGBD calcule le resultat a partir des tables sources.
+
+### Quand choisir une vue plutot qu une table temporaire ?
+Une `VIEW` convient mieux quand vous devez reutiliser la meme logique de lecture plusieurs fois. Une table temporaire convient mieux quand vous devez conserver physiquement un resultat intermediaire sur plusieurs etapes.
+
+### Une vue ameliore-t-elle automatiquement les performances ?
+Pas automatiquement. Les performances dependent de la requete definie dans la `VIEW`, des index des tables sources et du plan d execution.
+
+---
+
+## Questions d entretien
+
+### Qu est-ce qu une vue SQL et comment fonctionne-t-elle ?
+Une vue est une requete SQL nommee enregistree comme objet du schema. Quand vous executez un `SELECT` dessus, le SGBD evalue sa definition et renvoie un resultat de type table virtuelle.
+
+### Quelle est la difference entre une vue et une table classique ?
+Une table classique stocke les donnees physiquement. Une vue stocke en general la logique de requete et sert a simplifier l acces et la reutilisation des requetes complexes.
+
+### Dans quels cas une vue peut-elle etre modifiable ?
+En general, lorsqu elle repose sur une seule table sans `GROUP BY`, agregats, `DISTINCT` ni jointures complexes. Les regles exactes dependent du SGBD.
 
 ---
 

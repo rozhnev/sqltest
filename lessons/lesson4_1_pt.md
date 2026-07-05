@@ -1,148 +1,140 @@
-# Aula 4.1: Funções Básicas de Agregação em SQL
+---
+title: "Funcoes de agregacao SQL: COUNT, SUM, AVG, MIN e MAX"
+description: "Aprenda as principais funcoes de agregacao SQL com exemplos Sakila: COUNT, SUM, AVG, MIN, MAX e diferencas entre COUNT(*), COUNT(column) e COUNT(DISTINCT ...)."
+keywords: ["funcoes de agregacao SQL", "COUNT", "SUM", "AVG", "MIN", "MAX", "COUNT DISTINCT"]
+teaches: ["Aplicar funcoes de agregacao basicas em consultas SELECT", "Entender diferencas entre COUNT(*), COUNT(column) e COUNT(DISTINCT ...)", "Lidar corretamente com NULL em contagens, somas e medias"]
+about: ["SQL", "Aggregation", "COUNT DISTINCT", "Sakila"]
+---
 
-As funções de agregação em SQL são usadas para realizar cálculos em várias linhas de uma coluna de tabela e retornar um único valor. Essas funções são essenciais para resumir dados, gerar relatórios e realizar análises estatísticas. Esta lição aborda as funções de agregação mais comuns com exemplos práticos baseados no banco de dados Sakila.
+_Tempo de leitura: ~8 minutos_
 
-## Funções de Agregação Comuns
+As funcoes de agregacao em SQL transformam conjuntos de linhas em metricas de resumo: quantidade, soma, media, minimo e maximo. Nesta aula, voce vai praticar os agregados mais usados com exemplos da base Sakila e aprender a escolher o tipo correto de contagem para cada cenario. Ao final, voce conseguira usar `COUNT`, `SUM`, `AVG`, `MIN` e `MAX` com seguranca em consultas analiticas.
 
-### `COUNT()` — Conta o número de linhas
+# Funcoes basicas de agregacao em SQL
 
-**Sintaxe:**
+Nas aulas anteriores, o foco foi selecionar linhas detalhadas. Agora avancamos para um passo essencial: gerar valores de resumo a partir dos dados.
+
+As funcoes de agregacao sao fundamentais em relatorios e analise, porque respondem rapidamente perguntas como "quantos?", "qual o total?" e "qual a media?".
+
+## Principais funcoes de agregacao
+
+### COUNT() - conta linhas
+
+Sintaxe basica:
+
 ```sql
-COUNT(expressão)
+COUNT(expressao)
 ```
 
-**Exemplo:**
+Exemplo:
+
 ```sql
 SELECT COUNT(*) AS total_payments
 FROM payment;
 ```
-**Resultado:** Retorna o número total de linhas na tabela `payment`.
 
-### `COUNT(column)` vs `COUNT(*)`
+*Resultado: a consulta retorna o total de linhas da tabela payment.*
 
-Essas duas formas são parecidas, mas não são iguais:
+### COUNT(column) e COUNT(*)
 
-- `COUNT(*)` conta **todas as linhas** do conjunto de resultados;
-- `COUNT(column)` conta apenas as linhas em que `column` é **NOT NULL**.
+As duas formas parecem similares, mas funcionam de modo diferente:
 
-Por isso, se a coluna tiver valores `NULL`, `COUNT(column)` pode retornar um número menor que `COUNT(*)`.
+- `COUNT(*)` conta todas as linhas do resultado.
+- `COUNT(column)` conta apenas as linhas em que `column` nao e `NULL`.
 
-**Exemplo (Sakila):**
+Se a coluna tiver `NULL`, `COUNT(column)` pode ser menor que `COUNT(*)`.
+
 ```sql
 SELECT
-   COUNT(*) AS total_rentals,
-   COUNT(return_date) AS returned_rentals
+    COUNT(*) AS total_rentals,
+    COUNT(return_date) AS returned_rentals
 FROM rental;
 ```
 
-**Explicação:**
+*Explicacao: total_rentals conta todos os alugueis, enquanto returned_rentals conta apenas os que possuem return_date preenchida.*
 
-- `total_rentals` conta todas as linhas da tabela `rental`;
-- `returned_rentals` conta apenas as linhas em que `return_date` possui valor;
-- aluguéis ainda não devolvidos têm `return_date = NULL`, então ficam fora de `COUNT(return_date)`.
+### COUNT(DISTINCT ...) - conta valores unicos
 
-### `SUM()` — Calcula a soma dos valores
+Quando voce precisa contar valores unicos, e nao o total de linhas, use `COUNT(DISTINCT column)`.
 
-**Sintaxe:**
 ```sql
-SUM(expressão)
+SELECT COUNT(DISTINCT customer_id) AS unique_customers
+FROM payment;
 ```
 
-**Exemplo:**
+*Resultado: a consulta retorna quantos clientes diferentes realizaram pagamentos, mesmo que um cliente tenha varias linhas em payment.*
+
+Na pratica, isso e essencial para perguntas como "quantos clientes diferentes compraram", em que `COUNT(*)` superestima por causa de repeticoes.
+
+### SUM() - calcula a soma
+
 ```sql
 SELECT SUM(amount) AS total_amount
 FROM payment;
 ```
-**Resultado:** Retorna a soma total da coluna `amount`.
 
-**Comentário:** a função `SUM(amount)` ignora `NULL`. Se todos os valores do conjunto forem `NULL`, o resultado será `NULL`.
+*Resultado: retorna a soma da coluna amount.*
 
-### `AVG()` — Calcula o valor médio
+`SUM(amount)` ignora `NULL`. Se todos os valores forem `NULL`, o resultado sera `NULL`.
 
-**Sintaxe:**
-```sql
-AVG(expressão)
-```
+### AVG() - calcula a media
 
-**Exemplo:**
 ```sql
 SELECT AVG(amount) AS average_amount
 FROM payment;
 ```
-**Resultado:** Retorna o valor médio da coluna `amount`.
 
-**Comentário:** a função `AVG(amount)` considera no cálculo apenas as linhas em que `amount` não é `NULL`.
+*Resultado: retorna a media de amount considerando apenas linhas nao-NULL.*
 
-Se você precisar incluir as linhas com `NULL` na quantidade de linhas (denominador), use uma das opções abaixo:
+Se voce precisar que linhas com `NULL` influenciem o denominador, use uma destas abordagens:
 
 ```sql
 SELECT
-   AVG(amount) AS avg_ignore_null,
-   AVG(COALESCE(amount, 0)) AS avg_include_null_as_zero,
-   SUM(amount) / COUNT(*) AS avg_sum_div_all_rows
+    AVG(amount) AS avg_ignore_null,
+    AVG(COALESCE(amount, 0)) AS avg_include_null_as_zero,
+    SUM(amount) / COUNT(*) AS avg_sum_div_all_rows
 FROM payment;
 ```
 
-**Explicação:**
+### MAX() - encontra o valor maximo
 
-- `avg_ignore_null` é o comportamento padrão de `AVG`, em que `NULL` é ignorado;
-- `avg_include_null_as_zero` substitui `NULL` por `0`, então todas as linhas entram no cálculo;
-- `avg_sum_div_all_rows` divide a soma pelo total de linhas (`COUNT(*)`), o que também inclui as linhas com `NULL` no denominador.
-
-### `MAX()` — Encontra o valor máximo
-
-**Sintaxe:**
-```sql
-MAX(expressão)
-```
-
-**Exemplo:**
 ```sql
 SELECT MAX(amount) AS max_amount
 FROM payment;
 ```
-**Resultado:** Retorna o maior valor na coluna `amount`.
 
-**Comentário:** a função `MAX(amount)` ignora `NULL`. Se todos os valores forem `NULL`, o resultado será `NULL`.
+*Resultado: retorna o maior valor em amount.*
 
-### `MIN()` — Encontra o valor mínimo
+### MIN() - encontra o valor minimo
 
-**Sintaxe:**
-```sql
-MIN(expressão)
-```
-
-**Exemplo:**
 ```sql
 SELECT MIN(amount) AS min_amount
 FROM payment;
 ```
-**Resultado:** Retorna o menor valor na coluna `amount`.
 
-**Comentário:** a função `MIN(amount)` ignora `NULL`. Se todos os valores forem `NULL`, o resultado será `NULL`.
+*Resultado: retorna o menor valor em amount.*
 
-#### `MIN(column)` e `ORDER BY column LIMIT 1` — o resultado é sempre igual?
+`MIN()` e `MAX()` ignoram `NULL`. Se todos os valores forem `NULL`, o resultado sera `NULL`.
 
-Nem sempre.
+### MIN(column) e ORDER BY ... LIMIT 1
 
-Compare:
+Nem sempre essas abordagens sao equivalentes.
 
 ```sql
-SELECT MIN(column_name) FROM table_name;
-SELECT column_name FROM table_name ORDER BY column_name LIMIT 1;
+SELECT MIN(column_name)
+FROM table_name;
+
+SELECT column_name
+FROM table_name
+ORDER BY column_name
+LIMIT 1;
 ```
 
-- `MIN(column_name)` ignora `NULL` e procura o menor valor entre os não `NULL`;
-- `ORDER BY column_name LIMIT 1` retorna a primeira linha após a ordenação;
-- se `NULL` for ordenado primeiro no seu SGBD (por exemplo, MySQL/MariaDB em `ASC`), a segunda consulta pode retornar `NULL`, enquanto `MIN()` retorna o menor valor não `NULL`.
+- `MIN(column_name)` busca o menor valor entre os nao-`NULL`.
+- `ORDER BY ... LIMIT 1` retorna a primeira linha apos a ordenacao.
+- Se o SGBD ordenar `NULL` primeiro, a segunda consulta pode retornar `NULL`, enquanto `MIN()` retorna o menor valor nao-`NULL`.
 
-Elas coincidem quando:
-
-- não há `NULL` na coluna;
-- ou `NULL` é ordenado por último;
-- ou você exclui explicitamente os `NULL`.
-
-**Versão confiável, equivalente a `MIN()`:**
+Versao confiavel equivalente a `MIN()`:
 
 ```sql
 SELECT column_name
@@ -152,29 +144,78 @@ ORDER BY column_name
 LIMIT 1;
 ```
 
-## Aplicações Práticas
+---
 
-1. **Contando o número de clientes:**
-   Use `COUNT(*)` para descobrir quantos clientes existem no banco de dados.
-   ```sql
-   SELECT COUNT(*) AS total_customers
-   FROM customer;
-   ```
-2. **Calculando o total de vendas por funcionário:**
-   Use `SUM(amount)` com `GROUP BY staff_id` para ver as vendas de cada funcionário.
-   ```sql
-   SELECT staff_id, SUM(amount) AS staff_total
-   FROM payment
-   GROUP BY staff_id;
-   ```
-3. **Encontrando o pagamento médio por cliente:**
-   Use `AVG(amount)` com `GROUP BY customer_id`.
-   ```sql
-   SELECT customer_id, AVG(amount) AS avg_payment
-   FROM payment
-   GROUP BY customer_id;
-   ```
+## Aplicacoes praticas
 
-## Principais Conclusões desta Lição
+### Contar clientes
 
-As funções de agregação do SQL são ferramentas poderosas para resumir e analisar dados. Dominar `COUNT`, `SUM`, `AVG`, `MIN` e `MAX` ajudará você a gerar relatórios e insights valiosos do seu banco de dados. Pratique essas funções com o banco de dados Sakila para fortalecer suas habilidades em SQL.
+```sql
+SELECT COUNT(*) AS total_customers
+FROM customer;
+```
+
+### Soma de vendas por funcionario
+
+```sql
+SELECT
+    staff_id,
+    SUM(amount) AS staff_total
+FROM payment
+GROUP BY staff_id;
+```
+
+### Pagamento medio por cliente
+
+```sql
+SELECT
+    customer_id,
+    AVG(amount) AS avg_payment
+FROM payment
+GROUP BY customer_id;
+```
+
+### Contar clientes pagantes unicos
+
+```sql
+SELECT COUNT(DISTINCT customer_id) AS paying_customers
+FROM payment;
+```
+
+---
+
+## Perguntas frequentes
+
+### Qual e a diferenca entre COUNT(*) e COUNT(column)?
+`COUNT(*)` conta todas as linhas. `COUNT(column)` conta apenas as linhas em que a coluna especificada nao e `NULL`.
+
+### Quando usar COUNT(DISTINCT ...)?
+Quando voce precisa do numero de valores unicos, por exemplo clientes diferentes, e nao do total de linhas.
+
+### Por que AVG pode retornar um valor inesperado?
+Porque `AVG(column)` ignora `NULL`. Se voce quiser incluir essas linhas no denominador, use `COALESCE` ou `SUM(column) / COUNT(*)`.
+
+---
+
+## Perguntas de entrevista
+
+### O que sao funcoes de agregacao em SQL?
+Sao funcoes que calculam um resumo sobre varias linhas, como quantidade (`COUNT`), soma (`SUM`) e media (`AVG`). Elas retornam um valor por grupo ou para o conjunto inteiro.
+
+### Qual e a diferenca entre COUNT(*), COUNT(column) e COUNT(DISTINCT column)?
+`COUNT(*)` conta todas as linhas, `COUNT(column)` conta valores nao-`NULL` da coluna, e `COUNT(DISTINCT column)` conta valores unicos nao-`NULL`.
+
+### Como MIN e ORDER BY ... LIMIT 1 podem retornar resultados diferentes?
+Se a coluna tiver `NULL` e o SGBD ordenar `NULL` primeiro, `ORDER BY ... LIMIT 1` pode retornar `NULL`, enquanto `MIN()` retorna o menor valor nao-`NULL`.
+
+---
+
+**Principais conclusoes desta aula:**
+
+- Funcoes de agregacao geram metricas de resumo rapidamente.
+- `COUNT(*)`, `COUNT(column)` e `COUNT(DISTINCT ...)` atendem necessidades de contagem diferentes.
+- `SUM`, `AVG`, `MIN` e `MAX` geralmente ignoram `NULL`, o que impacta a analise.
+- `COUNT(DISTINCT ...)` e essencial para contar entidades unicas, nao apenas linhas.
+- Tratar `NULL` corretamente e decisivo para a confiabilidade dos relatorios.
+
+Na proxima aula, estudaremos `GROUP BY` para criar agregacoes por categorias.

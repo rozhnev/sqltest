@@ -1,6 +1,16 @@
-Esta lição apresenta as views (`VIEW`), objetos SQL que permitem salvar uma consulta com um nome e depois usá-la como se fosse uma tabela comum. Você vai aprender o que são views, como criá-las, em que elas diferem de tabelas e de tabelas temporárias, e em quais tarefas elas são especialmente úteis. Ao final da lição, você conseguirá usar views com confiança para simplificar consultas complexas e reutilizar lógica.
+---
+title: "Views SQL (VIEW): como criar e usar em cenarios praticos"
+description: "Aprenda views SQL: sintaxe CREATE VIEW, diferencas entre tabelas comuns e temporarias, atualizacao de dados e exemplos práticos com Sakila."
+keywords: ["SQL VIEW", "view SQL", "CREATE VIEW", "tabela virtual", "Sakila"]
+teaches: ["Criar e consultar views com CREATE VIEW", "Explicar diferencas entre VIEW, tabela comum e tabela temporaria", "Reutilizar logica SQL complexa com views"]
+about: ["SQL", "VIEW", "Database design", "Sakila"]
+---
 
-# Lição 9.4: Views (`VIEW`)
+_Tempo de leitura: ~8 minutos_
+
+Esta lição apresenta as views (`VIEW`), objetos SQL que permitem salvar uma consulta com um nome e depois usá-la como se fosse uma tabela comum. Você vai aprender como criar views, em que elas diferem de tabelas e de tabelas temporárias, e em quais tarefas elas são especialmente úteis. Ao final da lição, você conseguirá usar views com confiança para simplificar consultas complexas e reutilizar lógica.
+
+# Views (`VIEW`) em SQL
 
 Na lição anterior, falamos sobre tabelas temporárias, que ajudam a armazenar resultados intermediários durante uma sessão. Agora vamos analisar outra ferramenta importante do SQL: as **views**. Elas também ajudam a simplificar o trabalho com consultas complexas, mas fazem isso de outra forma.
 
@@ -40,6 +50,14 @@ FROM view_name;
 ```
 
 É importante entender que uma view comum armazena a lógica da consulta, e não uma cópia separada do resultado.
+
+Se a view não for mais necessária, você pode removê-la com `DROP VIEW`:
+
+```sql
+DROP VIEW view_name;
+```
+
+Em muitos SGBDs, uma alternativa mais segura é `DROP VIEW IF EXISTS view_name;`, que remove o objeto apenas se ele existir e evita erros em scripts de implantação.
 
 ## Exemplo de criação de uma view
 
@@ -208,6 +226,32 @@ ORDER BY film_count DESC;
 ```
 
 Essa abordagem é conveniente porque a relação complexa entre as tabelas é definida uma única vez. Depois disso, analistas, relatórios e aplicações podem usar uma camada lógica pronta sem repetir constantemente a mesma lógica de `JOIN`.
+
+---
+
+## Perguntas frequentes
+
+### Uma view armazena dados ou apenas a consulta?
+No caso padrão, a `VIEW` armazena apenas a definição SQL, e não uma cópia separada das linhas. Quando consultada, o SGBD calcula o resultado a partir das tabelas de origem.
+
+### Quando devo usar view em vez de tabela temporária?
+A `VIEW` é melhor quando você precisa reutilizar a mesma lógica de leitura várias vezes. A tabela temporária é melhor quando você precisa persistir fisicamente um resultado intermediário em várias etapas.
+
+### Uma view melhora desempenho automaticamente?
+Não automaticamente. O desempenho depende da consulta dentro da `VIEW`, dos índices nas tabelas de origem e do plano de execução.
+
+---
+
+## Perguntas de entrevista
+
+### O que é uma view SQL e como ela funciona?
+Uma view é uma consulta SQL nomeada, salva como objeto de esquema. Quando você executa `SELECT` nela, o SGBD processa sua definição e retorna um resultado de tabela virtual.
+
+### Qual é a diferença entre view e tabela comum?
+Uma tabela comum armazena dados fisicamente. A view normalmente armazena apenas a lógica da consulta e é usada para simplificar acesso e reutilização de consultas complexas.
+
+### Quando uma view pode ser atualizável?
+Geralmente quando é uma view simples sobre uma única tabela, sem `GROUP BY`, agregações, `DISTINCT` ou junções complexas. As regras exatas dependem do SGBD.
 
 ---
 

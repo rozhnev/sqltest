@@ -1,89 +1,163 @@
-# Lesson 4.2: Grouping Data with GROUP BY in SQL
+---
+title: "Grouping Data in SQL with GROUP BY and Aggregates"
+description: "Learn GROUP BY: syntax, rules, single and multi-column grouping, practical Sakila examples."
+keywords: ["GROUP BY SQL", "data grouping", "aggregate functions", "HAVING", "Sakila"]
+teaches: ["Use GROUP BY to group and aggregate data", "Understand the rule: all SELECT columns either in GROUP BY or in a function", "Group by one or multiple columns"]
+about: ["SQL", "GROUP BY", "Aggregation", "Sakila"]
+---
 
-Grouping data is a key tool for analysis and summarization in SQL. The `GROUP BY` clause allows you to combine rows with the same values in specified columns and apply aggregation functions to each group. In this lesson, you'll learn how to use `GROUP BY` for reporting and data analysis with examples from the Sakila database.
+_Reading time: ~7 minutes_
 
-## Basics of Using GROUP BY
+Grouping transforms individual rows into categorized metrics. `GROUP BY` is essential for reports where you need totals per category, date, or any other dimension. In this lesson, you'll learn GROUP BY syntax, the core rule, and practical examples on Sakila. By the end, you'll confidently build analytical queries with grouping.
 
-### Syntax
+# Grouping Data with GROUP BY
+
+In the previous lesson, you learned about aggregate functions. Now we take the next step: applying those functions to different data categories.
+
+`GROUP BY` does this by dividing data into groups and calculating metrics for each group separately.
+
+## GROUP BY Syntax
+
+Basic structure:
+
 ```sql
 SELECT column1, AGG_FUNCTION(column2)
 FROM table
 GROUP BY column1;
 ```
 
-### Important Rule
+## The Core Rule
 
-When using `GROUP BY`, every selected column in `SELECT` must:
+When using `GROUP BY`, **every column in SELECT must**:
 
-- either be included in the `GROUP BY` clause;
-- or be wrapped in an aggregation function (`SUM`, `COUNT`, `AVG`, `MIN`, `MAX`, etc.).
+- either be in the `GROUP BY` list;
+- or be wrapped in an aggregate function (`SUM`, `COUNT`, `AVG`, `MIN`, `MAX`).
 
-### Example: Total payments per customer
+This rule prevents ambiguity: SQL needs to know which value to return when a group has multiple rows.
+
+## Grouping by One Column
+
+### Total payments per customer
+
 ```sql
 SELECT customer_id, SUM(amount) AS total_paid
 FROM payment
 GROUP BY customer_id;
 ```
-**Result:** Returns the customer identifier and the total amount of payments for each customer.
 
-### Example: Number of payments per staff
+*Result: one row per customer with their total payment sum.*
+
+### Number of payments per staff member
+
 ```sql
 SELECT staff_id, COUNT(*) AS payments_count
 FROM payment
 GROUP BY staff_id;
 ```
-**Result:** Returns the staff identifier and the number of payments processed by each staff member.
 
-### Example: Average payment by date
+*Result: for each staff member, the count of payments they processed.*
+
+### Average payment by date
+
 ```sql
 SELECT DATE(payment_date) AS pay_date, AVG(amount) AS avg_payment
 FROM payment
 GROUP BY DATE(payment_date);
 ```
-**Result:** Returns the average payment amount for each date.
 
-### Variant: GROUP BY using alias
+*Result: for each date, the average payment amount.*
+
+### Variant: GROUP BY with alias
+
 ```sql
 SELECT DATE(payment_date) AS pay_date, AVG(amount) AS avg_payment
 FROM payment
 GROUP BY pay_date;
 ```
 
-This variant works in MySQL/MariaDB, where using an alias in `GROUP BY` is allowed.
-However, this behavior is not universal across all DBMSs and is not considered portable standard SQL.
-For cross-DB queries, it is safer to use the full form `GROUP BY DATE(payment_date)`.
+*Note: this works in MySQL/MariaDB but not all DBMSs. For cross-DB compatibility, write `GROUP BY DATE(payment_date)` in full.*
 
-## Using GROUP BY with Multiple Columns
+---
 
-You can group data by several columns at once for more detailed analysis.
+## Grouping by Multiple Columns
 
-### Example: Total payments by staff and customer
+You can group by multiple fields at once for more detailed analysis.
+
+### Total payments by staff and customer
+
 ```sql
 SELECT staff_id, customer_id, SUM(amount) AS total_paid
 FROM payment
 GROUP BY staff_id, customer_id;
 ```
-**Result:** Returns the staff identifier, customer identifier, and total amount of payments for each staff-customer pair.
 
-## Practical Usage
+*Result: one row per staff-customer pair with their total payment.*
 
-At this stage, it is best to practice `GROUP BY` on a single table. In the following lessons, you will learn how to use aggregation in queries that combine data from multiple tables.
+---
 
-1. **Daily revenue report:**
-   ```sql
-   SELECT DATE(payment_date) AS pay_date, SUM(amount) AS total_sales
-   FROM payment
-   GROUP BY DATE(payment_date)
-   ORDER BY pay_date;
-   ```
-2. **Most active customers by number of rentals:**
-   ```sql
-   SELECT customer_id, COUNT(*) AS rentals_count
-   FROM rental
-   GROUP BY customer_id
-   ORDER BY rentals_count DESC;
-   ```
+## Practical Examples
 
-## Key Takeaways from This Lesson
+### Daily revenue report
 
-The `GROUP BY` clause lets you group data and apply aggregation functions to each group. It's a powerful tool for reporting and data analysis in SQL. Practice using `GROUP BY` with examples from the Sakila database to quickly get summary data and build analytical queries.
+```sql
+SELECT DATE(payment_date) AS pay_date, SUM(amount) AS total_sales
+FROM payment
+GROUP BY DATE(payment_date)
+ORDER BY pay_date;
+```
+
+### Most active customers by rental count
+
+```sql
+SELECT customer_id, COUNT(*) AS rentals_count
+FROM rental
+GROUP BY customer_id
+ORDER BY rentals_count DESC;
+```
+
+### Average rental rate by film category
+
+```sql
+SELECT category_id, AVG(rental_rate) AS avg_rental_rate
+FROM film f
+JOIN film_category fc ON f.film_id = fc.film_id
+GROUP BY category_id;
+```
+
+---
+
+## Frequently Asked Questions
+
+### Why can't every column be in SELECT if I use GROUP BY?
+Because aggregate functions (`SUM`, `COUNT`, `AVG`) already tell SQL how to handle all rows in the group. If a column isn't aggregated, it must be in GROUP BY so SQL knows which value to pick.
+
+### Can I group by an expression instead of a column?
+Yes, for example `GROUP BY DATE(payment_date)` or `GROUP BY YEAR(payment_date)`. The expression must match in SELECT and GROUP BY.
+
+### What if GROUP BY is empty?
+That's a syntax error. GROUP BY always needs at least one column or expression.
+
+---
+
+## Interview Questions
+
+### What is GROUP BY and why do we need it?
+GROUP BY combines rows where selected columns have identical values into a single group. You can then apply aggregate functions to each group to get summary statistics.
+
+### Why can't I arbitrarily select a column when using GROUP BY?
+Because a group may contain multiple rows with different values in that column. SQL needs to know which value to return, otherwise the result is ambiguous. So the column must either be in GROUP BY or inside an aggregate function.
+
+### What's the difference between WHERE and HAVING?
+`WHERE` filters rows BEFORE grouping, while `HAVING` filters groups AFTER grouping. For example, `WHERE amount > 10` excludes rows before grouping, while `HAVING SUM(amount) > 100` excludes groups whose sum is less than 100.
+
+---
+
+**Key takeaways from this lesson:**
+
+- `GROUP BY` divides data into groups and applies aggregates to each.
+- Core rule: all SELECT columns either in GROUP BY or in an aggregate function.
+- You can group by one or multiple columns simultaneously.
+- You can group by expressions, like `GROUP BY DATE(payment_date)`.
+- `GROUP BY` powers reports, analytics, and category-based summaries.
+
+In the next lesson, we will explore filtering groups with the `HAVING` operator.
