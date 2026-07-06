@@ -100,7 +100,7 @@
         <script src="/js/sql-highlighter.min.js?{$VERSION}"></script>
         <script>
             SQLHighlighter.extend({
-                functions: ['AGGREGATION_FUNCTION'],
+                functions: ['AGGREGATION_FUNCTION', 'FUNCTION_NAME'],
             });
             SQLHighlighter.highlightCodeBlocks();
         </script>
