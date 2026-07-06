@@ -1,49 +1,5 @@
 {include file='header.tpl'}
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/xcode.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
-<style>
-.question-wrapper li {
-    line-height: 1.5rem;
-    margin: 0.75rem 0;
-}
-
-.lesson-wrapper {
-    overflow-x: auto;
-}
-
-.lesson-relevant-tasks {
-    margin-top: 0.9rem;
-}
-
-.lesson-relevant-tasks-title {
-    font-size: 1rem;
-    margin: 0 0 0.55rem;
-    color: var(--question-text);
-}
-
-.lesson-relevant-tasks-text {
-    margin: 0 0 0.55rem;
-    color: var(--question-text);
-}
-
-.lesson-relevant-tasks-list {
-    margin: 0;
-    padding-left: 1.2rem;
-}
-
-.lesson-relevant-tasks-list li {
-    margin: 0.45rem 0;
-}
-
-.lesson-relevant-tasks-list a,
-.lesson-relevant-tasks-list a:visited {
-    color: var(--question-text);
-}
-
-.lesson-relevant-tasks-list a:hover {
-    color: var(--accordion-hover);
-}
-</style>
+<link rel="stylesheet" href="/css/lesson.min.css?{$VERSION}" media="all">
 <body>
     <div class="mobile-container">
         {include file='popups.tpl'}
@@ -124,6 +80,12 @@
         </footer>
     </div>
     {include file='counters.tpl'}
-    <script>hljs.highlightAll();</script>
+    <script src="/js/sql-highlighter.min.js?{$VERSION}"></script>
+    <script>
+        SQLHighlighter.extend({
+            functions: ['AGGREGATION_FUNCTION', 'FUNCTION_NAME'],
+        });
+        SQLHighlighter.highlightCodeBlocks();
+    </script>
 </body>
 </html>
