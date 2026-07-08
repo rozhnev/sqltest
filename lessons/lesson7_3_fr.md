@@ -2,11 +2,17 @@
 title: "Fenêtres SQL : ROWS, RANGE, GROUPS, BETWEEN, UNBOUNDED — Guide Complet"
 description: "Maîtrisez les options de fenêtre SQL : modes ROWS, RANGE, GROUPS, limites BETWEEN, UNBOUNDED PRECEDING/FOLLOWING, CURRENT ROW et fenêtres nommées. Exemples pratiques : totaux cumulés, moyennes mobiles et analyse cumulative."
 keywords: "fenêtre SQL, ROWS BETWEEN, RANGE BETWEEN, UNBOUNDED PRECEDING, CURRENT ROW, limites fonctions fenêtre, SQL OVER, moyenne mobile SQL, total cumulé SQL, tutoriel fonctions fenêtre"
+teaches: ["Comprendre comment un cadre détermine les lignes utilisées par une fonction de fenêtre", "Choisir entre ROWS, RANGE et GROUPS pour les tâches analytiques", "Construire des totaux cumulés et des moyennes mobiles avec des limites de cadre correctes"]
+about: ["SQL", "Fonctions de fenêtre", "Cadres", "ROWS", "RANGE", "Sakila"]
 lang: "fr"
 region: "FR, BE, CH, CA"
 ---
 
-# Leçon 7.3 : Fenêtres de calcul — Contrôler les limites de la fenêtre
+_Temps de lecture : ~9 minutes_
+
+Cette leçon se concentre sur les cadres de fenêtre, le mécanisme qui définit quelles lignes participent au calcul d'une fonction de fenêtre par rapport à la ligne courante. Vous explorerez les modes `ROWS`, `RANGE` et `GROUPS`, verrez les limites courantes et étudierez des cas pratiques sur les données Sakila. À la fin de la leçon, vous saurez choisir les limites de cadre avec intention et éviter les erreurs fréquentes.
+
+# Fenêtres de calcul — Contrôler les limites de la fenêtre
 
 Dans les leçons précédentes, nous avons utilisé les fonctions de fenêtre avec `PARTITION BY` et `ORDER BY`. Mais la clause `OVER` offre un troisième composant tout aussi puissant : le **cadre de fenêtre** (window frame). Un cadre de fenêtre permet de définir précisément *quelles lignes* autour de la ligne courante sont incluses dans le calcul — permettant les totaux cumulés, les moyennes mobiles et bien d'autres patterns de séries temporelles.
 
@@ -331,6 +337,32 @@ ORDER BY
 | Fenêtre de lissage symétrique | `ROWS BETWEEN N PRECEDING AND N FOLLOWING` |
 | Agrégation par plage de valeurs (traiter les égalités en groupe) | `RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW` |
 | Réutiliser le même cadre pour plusieurs fonctions | Clause `WINDOW` nommée |
+
+---
+
+## Questions fréquentes
+
+### Quel cadre est utilisé par défaut ?
+Dans beaucoup de SGBD, si `ORDER BY` est présent, le défaut est `RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW`. Comme cela peut surprendre, il vaut mieux expliciter le cadre.
+
+### Quand choisir ROWS et quand choisir RANGE ?
+Utilisez `ROWS` pour un contrôle exact ligne par ligne. Utilisez `RANGE` lorsque vous devez travailler avec des plages de valeurs et traiter ensemble les valeurs `ORDER BY` égales.
+
+### Pourquoi ai-je besoin de UNBOUNDED FOLLOWING ?
+Cette borne étend le cadre jusqu'à la fin de la partition. C'est important lorsqu'une fonction doit voir non seulement les lignes jusqu'à la ligne courante, mais aussi toutes les lignes suivantes.
+
+---
+
+## Questions d'entretien
+
+### Qu'est-ce qu'un cadre de fenêtre et en quoi diffère-t-il de PARTITION BY ?
+`PARTITION BY` définit les sections de données, tandis que le cadre définit l'ensemble précis de lignes à l'intérieur de chaque section pour la ligne courante.
+
+### Pourquoi SUM(...) OVER (ORDER BY ...) peut-il se comporter de manière inattendue ?
+Parce qu'en l'absence d'un cadre explicite, le comportement par défaut est souvent `RANGE`, ce qui peut regrouper les lignes ayant la même valeur de tri.
+
+### Comment calculer une moyenne mobile sur les N dernières lignes ?
+Utilisez `ROWS BETWEEN N-1 PRECEDING AND CURRENT ROW` avec `AVG(...) OVER (...)`.
 
 ---
 

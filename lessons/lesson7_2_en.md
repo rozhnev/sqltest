@@ -2,11 +2,17 @@
 title: "SQL Ranking Functions: ROW_NUMBER vs RANK vs DENSE_RANK vs NTILE Tutorial"
 description: "Master SQL ranking functions: ROW_NUMBER, RANK, DENSE_RANK, NTILE. Learn the differences and when to use each function with practical MySQL examples. Complete guide for data analysis."
 keywords: "SQL ranking functions, ROW_NUMBER, RANK, DENSE_RANK, NTILE, window functions SQL, SQL tutorial, data ranking, analytical SQL, MySQL ranking"
+teaches: ["Choose the right ranking function for the task", "Understand how ties are handled by different ranking functions", "Use ranking for top-N queries and data segmentation"]
+about: ["SQL", "Window functions", "Ranking", "ROW_NUMBER", "Sakila"]
 lang: "en"
 region: "US, GB, CA, AU"
 ---
 
-# Lesson 7.2: Using ROW_NUMBER, RANK, DENSE_RANK, and NTILE
+_Reading time: ~9 minutes_
+
+This lesson focuses on the ranking functions `ROW_NUMBER`, `RANK`, `DENSE_RANK`, and `NTILE`. You will learn how each function behaves when values are tied and when to use it in practice. By the end of the lesson, you will be able to build accurate rankings for reports, top-N lists, and customer segmentation.
+
+# Using ROW_NUMBER, RANK, DENSE_RANK, and NTILE
 
 In the previous lesson, we introduced window functions and explored `ROW_NUMBER()`. Now we'll dive deeper into the family of ranking functions that SQL offers: `ROW_NUMBER`, `RANK`, `DENSE_RANK`, and `NTILE`. Each has a distinct purpose and understanding when to use each one is crucial for effective data analysis.
 
@@ -331,6 +337,32 @@ ORDER BY
 | `RANK` | Need to identify position but account for ties; gaps are OK | Yes (with gaps) |
 | `DENSE_RANK` | Need tier identification without position gaps | Yes (no gaps) |
 | `NTILE` | Need percentile/quartile/bucket analysis | Distributes into groups |
+
+## Frequently Asked Questions
+
+### When should I choose RANK instead of DENSE_RANK?
+Use `RANK` when gaps are acceptable and you want competition-style ranking. Use `DENSE_RANK` when you need compact levels without gaps.
+
+### Can I use ROW_NUMBER without PARTITION BY?
+Yes. In that case, numbering runs across the full result set as one partition.
+
+### Why do I need NTILE if I already have ranking functions?
+`NTILE` solves a different problem: it divides the rows into a fixed number of buckets, such as quartiles or deciles.
+
+---
+
+## Interview Questions
+
+### What is the difference between ROW_NUMBER and RANK?
+`ROW_NUMBER` always assigns a unique number to each row, while `RANK` gives the same rank to equal values and may skip numbers.
+
+### How does NTILE(4) work?
+It sorts rows inside the window and distributes them into four roughly equal groups, assigning each row a quartile number from 1 to 4.
+
+### How do you get top-N rows within each group?
+Use `ROW_NUMBER() OVER (PARTITION BY ... ORDER BY ...)` in a subquery and filter with `WHERE rn <= N`.
+
+---
 
 ## Key Takeaways
 

@@ -2,11 +2,17 @@
 title: "Tutoriel Fonctions Fenêtre SQL : Maîtriser l'Analyse Avancée avec ROW_NUMBER & PARTITION BY"
 description: "Apprenez les fonctions de fenêtre SQL pour l'analyse avancée. Maîtrisez ROW_NUMBER(), RANK(), PARTITION BY et la clause OVER avec des exemples MySQL pratiques. Guide complet pour analystes de données."
 keywords: "fonctions fenêtre SQL, ROW_NUMBER SQL, PARTITION BY, clause OVER, analytique SQL, tutoriel SQL avancé, analyse données SQL, MySQL fonctions fenêtre, PostgreSQL analytique, fonctions classement SQL"
+teaches: ["Comprendre le fonctionnement des fonctions de fenêtre et leur différence avec GROUP BY", "Utiliser OVER, PARTITION BY et ORDER BY dans les requêtes analytiques", "Appliquer ROW_NUMBER pour le numérotage et la recherche des dernières lignes"]
+about: ["SQL", "Fonctions de fenêtre", "OVER", "PARTITION BY", "ROW_NUMBER", "Sakila"]
 lang: "fr"
 region: "FR, BE, CH, CA"
 ---
 
-# Leçon 7.1 : Fonctions de fenêtre pour l'analyse avancée des données
+_Temps de lecture : ~8 minutes_
+
+Cette leçon présente les fonctions de fenêtre SQL et montre comment elles conservent le détail des lignes tout en ajoutant un contexte analytique. Vous verrez comment `OVER`, `PARTITION BY` et `ORDER BY` fonctionnent ensemble, et à la fin vous saurez construire des requêtes de base sur Sakila.
+
+# Fonctions de fenêtre pour l'analyse avancée des données
 
 Les fonctions de fenêtre sont l'une des fonctionnalités les plus puissantes de SQL pour effectuer des calculs analytiques complexes. Contrairement aux fonctions d'agrégation qui regroupent plusieurs lignes en un seul résultat, les fonctions de fenêtre vous permettent d'effectuer des calculs sur un ensemble de lignes liées à la ligne actuelle—tout en préservant les lignes individuelles dans votre ensemble de résultats.
 
@@ -198,6 +204,32 @@ FROM
     payment;
 ```
 Résultat : Chaque ligne de paiement préservée, avec des valeurs agrégées ajoutées comme colonnes supplémentaires
+
+## Questions fréquentes
+
+### Pourquoi utiliser les fonctions de fenêtre au lieu de GROUP BY ?
+`GROUP BY` est utile pour les tableaux récapitulatifs, mais il masque le détail ligne par ligne. Les fonctions de fenêtre gardent chaque ligne et ajoutent le contexte agrégé à côté.
+
+### PARTITION BY est-il obligatoire ?
+Non. Si vous l'omettez, tout le jeu de résultats devient une seule partition. C'est utile pour le classement ou les mesures sur l'ensemble des lignes.
+
+### Peut-on combiner les fonctions de fenêtre avec WHERE ?
+Oui. `WHERE` filtre les lignes avant le calcul de la fenêtre, vous sélectionnez donc d'abord les données pertinentes puis vous calculez la fenêtre.
+
+---
+
+## Questions d'entretien
+
+### Quelle est la principale différence entre une fonction de fenêtre et une fonction d'agrégation ?
+Une agrégation avec `GROUP BY` réduit le nombre de lignes, alors qu'une fonction de fenêtre renvoie une valeur pour chaque ligne et préserve le détail.
+
+### Que fait PARTITION BY dans une fenêtre ?
+Il découpe l'ensemble de résultats en sections indépendantes, et la fonction de fenêtre est évaluée séparément dans chaque section.
+
+### Quand utiliser ROW_NUMBER ?
+Utilisez-la lorsque vous avez besoin d'une numérotation à l'intérieur d'un groupe, de récupérer la première ou la dernière ligne, ou de sélectionner le top-N dans chaque catégorie.
+
+---
 
 ## Points clés à retenir
 

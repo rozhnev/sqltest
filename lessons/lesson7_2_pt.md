@@ -2,11 +2,17 @@
 title: "Funções de Classificação SQL: Tutorial ROW_NUMBER vs RANK vs DENSE_RANK vs NTILE"
 description: "Domine funções de classificação SQL: ROW_NUMBER, RANK, DENSE_RANK, NTILE. Aprenda as diferenças e quando usar cada função com exemplos práticos MySQL. Guia completo para análise de dados."
 keywords: "funções classificação SQL, ROW_NUMBER, RANK, DENSE_RANK, NTILE, funções janela SQL, tutorial SQL, classificação dados, SQL analítico, classificação MySQL"
+teaches: ["Escolher a função de classificação certa para a tarefa", "Entender como cada função trata empates", "Usar classificação para consultas top-N e segmentação de dados"]
+about: ["SQL", "Funções de janela", "Classificação", "ROW_NUMBER", "Sakila"]
 lang: "pt"
 region: "BR, PT, AO, MZ"
 ---
 
-# Lição 7.2: Usar ROW_NUMBER, RANK, DENSE_RANK e NTILE
+_Tempo de leitura: ~9 minutos_
+
+Esta lição foca nas funções de classificação `ROW_NUMBER`, `RANK`, `DENSE_RANK` e `NTILE`. Você aprenderá como cada função se comporta quando há empates e quando usar cada uma na prática. Ao final da lição, você conseguirá montar classificações precisas para relatórios, listas top-N e segmentação de clientes.
+
+# Usar ROW_NUMBER, RANK, DENSE_RANK e NTILE
 
 Na lição anterior, apresentamos funções de janela e exploramos `ROW_NUMBER()`. Agora vamos aprofundar a família de funções de classificação que SQL oferece: `ROW_NUMBER`, `RANK`, `DENSE_RANK` e `NTILE`. Cada uma tem um propósito distinto e entender quando usar cada uma é crucial para análise de dados eficaz.
 
@@ -331,6 +337,32 @@ ORDER BY
 | `RANK` | Precisa identificar posição mas levar em conta empates; lacunas são OK | Sim (com lacunas) |
 | `DENSE_RANK` | Precisa de identificação de nível sem lacunas de posição | Sim (sem lacunas) |
 | `NTILE` | Precisa de análise de percentil/quartil/grupo | Distribui em grupos |
+
+## Perguntas Frequentes
+
+### Quando devo escolher RANK em vez de DENSE_RANK?
+Use `RANK` quando lacunas forem aceitáveis e você quiser uma classificação estilo competição. Use `DENSE_RANK` quando precisar de níveis compactos sem lacunas.
+
+### Posso usar ROW_NUMBER sem PARTITION BY?
+Sim. Nesse caso, a numeração vale para todo o conjunto de resultados como uma única partição.
+
+### Por que eu precisaria de NTILE se já tenho funções de classificação?
+`NTILE` resolve outro problema: ele divide as linhas em um número fixo de grupos, como quartis ou decis.
+
+---
+
+## Perguntas de Entrevista
+
+### Qual é a diferença entre ROW_NUMBER e RANK?
+`ROW_NUMBER` sempre atribui um número único a cada linha, enquanto `RANK` dá a mesma classificação para valores iguais e pode pular números.
+
+### Como funciona NTILE(4)?
+Ele ordena as linhas dentro da janela e as distribui em quatro grupos aproximadamente iguais, atribuindo a cada linha um número de quartil de 1 a 4.
+
+### Como obter as N primeiras linhas de cada grupo?
+Use `ROW_NUMBER() OVER (PARTITION BY ... ORDER BY ...)` em uma subconsulta e filtre com `WHERE rn <= N`.
+
+---
 
 ## Pontos-Chave a Lembrar
 

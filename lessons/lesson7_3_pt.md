@@ -2,11 +2,17 @@
 title: "Frames de Janela SQL: ROWS, RANGE, GROUPS, BETWEEN, UNBOUNDED — Guia Completo"
 description: "Domine as opções de frame de janela SQL: modos ROWS, RANGE, GROUPS, limites BETWEEN, UNBOUNDED PRECEDING/FOLLOWING, CURRENT ROW e janelas nomeadas. Exemplos práticos: totais acumulados, médias móveis e análise cumulativa."
 keywords: "frame janela SQL, ROWS BETWEEN, RANGE BETWEEN, UNBOUNDED PRECEDING, CURRENT ROW, limites funções janela, SQL OVER, média móvel SQL, total acumulado SQL, tutorial funções janela"
+teaches: ["Entender como um frame determina as linhas usadas por uma função de janela", "Escolher entre ROWS, RANGE e GROUPS para tarefas analíticas", "Construir totais acumulados e médias móveis com limites corretos de frame"]
+about: ["SQL", "Funções de janela", "Frames", "ROWS", "RANGE", "Sakila"]
 lang: "pt"
 region: "BR, PT, AO, MZ"
 ---
 
-# Lição 7.3: Frames de Janela — Controlando os Limites da Janela
+_Tempo de leitura: ~9 minutos_
+
+Esta lição foca nos frames de janela, o mecanismo que define quais linhas participam do cálculo de uma função de janela em relação à linha atual. Você explorará os modos `ROWS`, `RANGE` e `GROUPS`, verá limites comuns e analisará cenários práticos com dados Sakila. Ao final da lição, você conseguirá escolher os limites de frame de forma intencional e evitar erros comuns.
+
+# Frames de Janela — Controlando os Limites da Janela
 
 Nas lições anteriores, usámos funções de janela com `PARTITION BY` e `ORDER BY`. Mas a cláusula `OVER` oferece um terceiro componente igualmente poderoso: o **frame de janela**. Um frame de janela permite definir precisamente *quais linhas* ao redor da linha atual são incluídas no cálculo — habilitando totais acumulados, médias móveis e muitos outros padrões de séries temporais.
 
@@ -331,6 +337,32 @@ ORDER BY
 | Janela de suavização simétrica | `ROWS BETWEEN N PRECEDING AND N FOLLOWING` |
 | Agregação por intervalo de valores (tratar empates como grupo) | `RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW` |
 | Reutilizar o mesmo frame em múltiplas funções | Cláusula `WINDOW` nomeada |
+
+---
+
+## Perguntas Frequentes
+
+### Qual frame é usado por padrão?
+Em muitos SGBDs, se `ORDER BY` estiver presente, o padrão é `RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW`. Como isso pode surpreender, é melhor especificar o frame explicitamente.
+
+### Quando devo escolher ROWS e quando devo escolher RANGE?
+Use `ROWS` para controle exato linha a linha. Use `RANGE` quando precisar trabalhar com intervalos de valores e tratar `ORDER BY` iguais em conjunto.
+
+### Por que eu precisaria de UNBOUNDED FOLLOWING?
+Ele estende o frame até o fim da partição. Isso importa quando uma função precisa ver não só as linhas até a atual, mas também todas as linhas seguintes.
+
+---
+
+## Perguntas de Entrevista
+
+### O que é um frame de janela e como ele difere de PARTITION BY?
+`PARTITION BY` define as seções de dados, enquanto o frame define o intervalo exato de linhas dentro de cada seção para a linha atual.
+
+### Por que SUM(...) OVER (ORDER BY ...) pode se comportar de forma inesperada?
+Porque sem um frame explícito, o comportamento padrão costuma ser `RANGE`, que pode agrupar linhas com o mesmo valor de ordenação.
+
+### Como calcular uma média móvel sobre as últimas N linhas?
+Use `ROWS BETWEEN N-1 PRECEDING AND CURRENT ROW` com `AVG(...) OVER (...)`.
 
 ---
 

@@ -2,11 +2,17 @@
 title: "SQL Window Frame: ROWS, RANGE, GROUPS, BETWEEN, UNBOUNDED – Complete Guide"
 description: "Master SQL window frame options: ROWS, RANGE, GROUPS modes, BETWEEN boundaries, UNBOUNDED PRECEDING/FOLLOWING, CURRENT ROW, and named windows. Practical examples with running totals, moving averages, and cumulative analysis."
 keywords: "SQL window frame, ROWS BETWEEN, RANGE BETWEEN, UNBOUNDED PRECEDING, CURRENT ROW, window function boundaries, SQL OVER clause, moving average SQL, running total SQL, window functions tutorial"
+teaches: ["Understand how a frame determines the rows used by a window function", "Choose between ROWS, RANGE, and GROUPS for analytical tasks", "Build running totals and moving averages with correct frame boundaries"]
+about: ["SQL", "Window functions", "Frames", "ROWS", "RANGE", "Sakila"]
 lang: "en"
 region: "US, GB, CA, AU"
 ---
 
-# Lesson 7.3: Window Frames — Controlling the Window Boundaries
+_Reading time: ~9 minutes_
+
+This lesson focuses on window frames, the mechanism that defines which rows participate in a window function calculation relative to the current row. You will explore the `ROWS`, `RANGE`, and `GROUPS` modes, review common boundaries, and see practical scenarios on Sakila data. By the end of the lesson, you will be able to choose frame boundaries deliberately and avoid common mistakes.
+
+# Window Frames and Boundaries
 
 In the previous lessons, we used window functions with `PARTITION BY` and `ORDER BY`. But the `OVER` clause offers a third, equally powerful component: the **window frame**. A window frame lets you precisely define *which rows* around the current row are included in the calculation — enabling running totals, moving averages, and many other time-series patterns.
 
@@ -331,6 +337,32 @@ ORDER BY
 | Symmetric smoothing window | `ROWS BETWEEN N PRECEDING AND N FOLLOWING` |
 | Value-based range aggregation (handle ties as a group) | `RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW` |
 | Reuse the same frame across multiple functions | Named `WINDOW` clause |
+
+---
+
+## Frequently Asked Questions
+
+### Which frame is used by default?
+In many DBMSs, if `ORDER BY` is present, the default is `RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW`. Because this can be surprising, it is best to specify the frame explicitly.
+
+### When should I choose ROWS and when should I choose RANGE?
+Use `ROWS` for exact row-by-row control. Use `RANGE` when you need to work with value ranges and treat equal `ORDER BY` values together.
+
+### Why do I need UNBOUNDED FOLLOWING?
+It extends the frame to the end of the partition. That matters when a function needs to see not only rows up to the current row, but also all following rows.
+
+---
+
+## Interview Questions
+
+### What is a window frame and how is it different from PARTITION BY?
+`PARTITION BY` defines the data sections, while the frame defines the specific range of rows inside each section for the current row.
+
+### Why can SUM(...) OVER (ORDER BY ...) behave unexpectedly?
+Because without an explicit frame, the default behavior is often `RANGE`, which may group rows with the same sort value together.
+
+### How do you calculate a moving average over the last N rows?
+Use `ROWS BETWEEN N-1 PRECEDING AND CURRENT ROW` with `AVG(...) OVER (...)`.
 
 ---
 

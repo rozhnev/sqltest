@@ -2,11 +2,17 @@
 title: "Tutorial Funções de Janela SQL: Domine Análise Avançada com ROW_NUMBER & PARTITION BY"
 description: "Aprenda funções de janela SQL para análise avançada. Domine ROW_NUMBER(), RANK(), PARTITION BY e cláusula OVER com exemplos práticos MySQL. Guia completo para analistas de dados e desenvolvedores SQL."
 keywords: "funções janela SQL, ROW_NUMBER SQL, PARTITION BY, cláusula OVER, análise SQL, tutorial SQL avançado, análise dados SQL, MySQL funções janela, PostgreSQL análise, funções classificação SQL"
+teaches: ["Compreender como as funções de janela funcionam e como diferem do GROUP BY", "Usar OVER, PARTITION BY e ORDER BY em consultas analíticas", "Aplicar ROW_NUMBER para numeração e identificação de registros mais recentes"]
+about: ["SQL", "Funções de janela", "OVER", "PARTITION BY", "ROW_NUMBER", "Sakila"]
 lang: "pt"
 region: "BR, PT, AO, MZ"
 ---
 
-# Lição 7.1: Funções de Janela para Análise Avançada de Dados
+_Tempo de leitura: ~8 minutos_
+
+Esta lição apresenta as funções de janela SQL e mostra como elas mantêm os detalhes de cada linha enquanto adicionam contexto analítico. Você verá como `OVER`, `PARTITION BY` e `ORDER BY` trabalham juntos, e ao final conseguirá montar consultas básicas de janela com Sakila.
+
+# Funções de Janela para Análise Avançada de Dados
 
 As funções de janela são um dos recursos mais poderosos do SQL para realizar cálculos analíticos complexos. Ao contrário das funções de agregação que consolidam várias linhas em um único resultado, as funções de janela permitem realizar cálculos em um conjunto de linhas relacionadas à linha atual—mantendo todas as linhas individuais no conjunto de resultados.
 
@@ -198,6 +204,32 @@ FROM
     payment;
 ```
 Resultado: Cada linha de pagamento preservada, com valores agregados adicionados como colunas adicionais
+
+## Perguntas Frequentes
+
+### Por que usar funções de janela em vez de GROUP BY?
+`GROUP BY` é útil para tabelas resumidas, mas esconde o detalhe de cada linha. As funções de janela mantêm cada linha e adicionam o contexto agregado ao lado.
+
+### PARTITION BY é obrigatório?
+Não. Se você omitir, todo o conjunto de resultados vira uma única partição. Isso é útil quando você quer ranking ou métricas sobre todas as linhas.
+
+### Posso combinar funções de janela com WHERE?
+Sim. `WHERE` filtra as linhas antes do cálculo da janela, então você primeiro seleciona os dados relevantes e depois calcula a janela.
+
+---
+
+## Perguntas de Entrevista
+
+### Qual é a principal diferença entre uma função de janela e uma função de agregação?
+Uma agregação com `GROUP BY` reduz as linhas, enquanto uma função de janela retorna um valor para cada linha e preserva o detalhe.
+
+### O que PARTITION BY faz em uma janela?
+Ele divide o conjunto de resultados em seções independentes, e a função de janela é avaliada separadamente em cada seção.
+
+### Quando você usaria ROW_NUMBER?
+Use-a quando precisar de numeração dentro de um grupo, da primeira ou última linha, ou da seleção top-N em cada categoria.
+
+---
 
 ## Pontos-Chave
 

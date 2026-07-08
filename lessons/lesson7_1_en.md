@@ -2,11 +2,17 @@
 title: "SQL Window Functions Tutorial: Master Advanced Data Analysis with ROW_NUMBER & PARTITION BY"
 description: "Learn SQL window functions for advanced analytics. Master ROW_NUMBER(), RANK(), PARTITION BY, and OVER clause with practical MySQL examples. Complete guide for data analysts and SQL developers."
 keywords: "SQL window functions, ROW_NUMBER SQL, PARTITION BY, OVER clause, SQL analytics, advanced SQL tutorial, SQL data analysis, MySQL window functions, PostgreSQL analytics, SQL ranking functions"
+teaches: ["Understand how window functions work and how they differ from GROUP BY", "Use OVER, PARTITION BY, and ORDER BY in analytical queries", "Apply ROW_NUMBER to numbering and finding latest records"]
+about: ["SQL", "Window functions", "OVER", "PARTITION BY", "ROW_NUMBER", "Sakila"]
 lang: "en"
 region: "US, GB, CA, AU"
 ---
 
-# Lesson 7.1: Window Functions for Advanced Data Analysis
+_Reading time: ~8 minutes_
+
+This lesson introduces SQL window functions and shows how they keep row-level detail while adding analytical context. You will learn how `OVER`, `PARTITION BY`, and `ORDER BY` work together, and by the end you will be able to build basic window queries on Sakila.
+
+# Window Functions for Advanced Data Analysis
 
 Window functions are one of the most powerful features in SQL for performing complex analytical calculations. Unlike aggregate functions that collapse multiple rows into a single result, window functions allow you to perform calculations across a set of rows that are related to the current row—all while preserving the individual rows in your result set.
 
@@ -198,6 +204,32 @@ FROM
     payment;
 ```
 Result: Every payment row preserved, with aggregate values added as additional columns
+
+## Frequently Asked Questions
+
+### Why use window functions instead of GROUP BY?
+`GROUP BY` is useful for summary tables, but it hides row-level detail. Window functions let you keep every row and add aggregated context alongside it.
+
+### Is PARTITION BY required?
+No. If you omit it, the whole result set becomes one partition. That is useful when you want ranking or metrics across all rows.
+
+### Can window functions be combined with WHERE?
+Yes. `WHERE` filters rows before the window calculation runs, so you first select the relevant data and then compute the window.
+
+---
+
+## Interview Questions
+
+### What is the main difference between a window function and an aggregate function?
+An aggregate with `GROUP BY` reduces rows, while a window function returns a value for each row and preserves detail.
+
+### What does PARTITION BY do in a window?
+It splits the result set into independent sections, and the window function is evaluated separately within each section.
+
+### When would you use ROW_NUMBER?
+Use it when you need row numbering inside a group, the latest or first row, or top-N selection within each category.
+
+---
 
 ## Key Takeaways
 

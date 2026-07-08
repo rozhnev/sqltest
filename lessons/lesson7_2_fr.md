@@ -2,11 +2,17 @@
 title: "Fonctions de Classement SQL : Tutoriel ROW_NUMBER vs RANK vs DENSE_RANK vs NTILE"
 description: "Maîtrisez les fonctions de classement SQL : ROW_NUMBER, RANK, DENSE_RANK, NTILE. Apprenez les différences et quand utiliser chaque fonction avec des exemples MySQL pratiques. Guide complet pour l'analyse de données."
 keywords: "fonctions classement SQL, ROW_NUMBER, RANK, DENSE_RANK, NTILE, fonctions fenêtre SQL, tutoriel SQL, classement données, SQL analytique, classement MySQL"
+teaches: ["Choisir la bonne fonction de classement selon la tâche", "Comprendre la gestion des égalités par les différentes fonctions de classement", "Utiliser le classement pour les requêtes top-N et la segmentation des données"]
+about: ["SQL", "Fonctions de fenêtre", "Classement", "ROW_NUMBER", "Sakila"]
 lang: "fr"
 region: "FR, BE, CH, CA"
 ---
 
-# Leçon 7.2 : Utiliser ROW_NUMBER, RANK, DENSE_RANK et NTILE
+_Temps de lecture : ~9 minutes_
+
+Cette leçon se concentre sur les fonctions de classement `ROW_NUMBER`, `RANK`, `DENSE_RANK` et `NTILE`. Vous apprendrez comment chaque fonction réagit en cas d'égalité et quand l'utiliser en pratique. À la fin de la leçon, vous saurez construire des classements précis pour les rapports, les listes top-N et la segmentation des clients.
+
+# Utiliser ROW_NUMBER, RANK, DENSE_RANK et NTILE
 
 Dans la leçon précédente, nous avons introduit les fonctions de fenêtre et exploré `ROW_NUMBER()`. Maintenant, nous allons approfondir la famille des fonctions de classement qu'offre SQL : `ROW_NUMBER`, `RANK`, `DENSE_RANK` et `NTILE`. Chacune a un but distinct et comprendre quand utiliser chacune est crucial pour une analyse de données efficace.
 
@@ -331,6 +337,32 @@ ORDER BY
 | `RANK` | Besoin d'identifier la position mais tenir compte des égalités; les espaces sont OK | Oui (avec espaces) |
 | `DENSE_RANK` | Besoin d'identification de niveaux sans espaces de position | Oui (sans espaces) |
 | `NTILE` | Besoin d'analyse de centiles/quartiles/groupes | Distribue en groupes |
+
+## Questions fréquentes
+
+### Quand choisir RANK plutôt que DENSE_RANK ?
+Utilisez `RANK` lorsque les trous de classement sont acceptables et que vous voulez un classement de type compétition. Utilisez `DENSE_RANK` lorsque vous avez besoin de niveaux compacts sans trous.
+
+### Peut-on utiliser ROW_NUMBER sans PARTITION BY ?
+Oui. Dans ce cas, la numérotation s'applique à tout le jeu de résultats comme une seule partition.
+
+### Pourquoi ai-je besoin de NTILE si j'ai déjà des fonctions de classement ?
+`NTILE` répond à un autre besoin : il divise les lignes en un nombre fixe de groupes, comme des quartiles ou des déciles.
+
+---
+
+## Questions d'entretien
+
+### Quelle est la différence entre ROW_NUMBER et RANK ?
+`ROW_NUMBER` attribue toujours un numéro unique à chaque ligne, tandis que `RANK` donne le même rang aux valeurs égales et peut sauter des numéros.
+
+### Comment fonctionne NTILE(4) ?
+Il trie les lignes dans la fenêtre et les répartit en quatre groupes à peu près égaux, en attribuant à chaque ligne un numéro de quartile de 1 à 4.
+
+### Comment obtenir les N premières lignes de chaque groupe ?
+Utilisez `ROW_NUMBER() OVER (PARTITION BY ... ORDER BY ...)` dans une sous-requête puis filtrez avec `WHERE rn <= N`.
+
+---
 
 ## Points clés à retenir
 
