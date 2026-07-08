@@ -1,0 +1,78 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="86" y1="40" x2="1128" y2="590" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F5F7FB"/>
+      <stop offset="0.52" stop-color="#E7F4FF"/>
+      <stop offset="1" stop-color="#FFF4DE"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#15354A"/>
+      <stop offset="1" stop-color="#1E5E76"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#F59E0B"/>
+      <stop offset="1" stop-color="#EA580C"/>
+    </linearGradient>
+    <filter id="shadow" x="0" y="0" width="1200" height="630" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="12" stdDeviation="18" flood-color="#0F172A" flood-opacity="0.14"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="630" rx="28" fill="url(#bg)"/>
+  <circle cx="146" cy="118" r="78" fill="#D9EEF8"/>
+  <circle cx="1046" cy="88" r="72" fill="#FDE9C5"/>
+  <circle cx="1044" cy="546" r="96" fill="#D8F0E6"/>
+
+  <rect x="64" y="58" width="504" height="514" rx="28" fill="url(#panel)" filter="url(#shadow)"/>
+  <text x="104" y="128" fill="#F8FAFC" font-family="Segoe UI, Arial, sans-serif" font-size="48" font-weight="700">Window Offsets</text>
+  <text x="104" y="170" fill="#C9E7E1" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="500">Compare current row with previous, next,</text>
+  <text x="104" y="200" fill="#C9E7E1" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="500">first and last values inside one window.</text>
+
+  <rect x="102" y="228" width="428" height="146" rx="20" fill="#0F2E3A" stroke="#2F7A87" stroke-width="2"/>
+  <text x="128" y="262" fill="#E2E8F0" font-family="Consolas, Monaco, monospace" font-size="16">SELECT payment_date, amount,</text>
+  <text x="128" y="289" fill="#E2E8F0" font-family="Consolas, Monaco, monospace" font-size="16">LAG(amount) OVER w  AS prev_amt,</text>
+  <text x="128" y="316" fill="#E2E8F0" font-family="Consolas, Monaco, monospace" font-size="16">LEAD(amount) OVER w AS next_amt,</text>
+  <text x="128" y="343" fill="#E2E8F0" font-family="Consolas, Monaco, monospace" font-size="16">LAST_VALUE(amount) OVER w AS last_amt</text>
+
+  <rect x="102" y="396" width="428" height="136" rx="20" fill="#F8FAFC"/>
+  <rect x="126" y="420" width="382" height="24" rx="8" fill="#D9EEF8"/>
+  <text x="144" y="437" fill="#123B4A" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="700">customer_id = 1, ordered by payment_date</text>
+
+  <rect x="126" y="462" width="84" height="22" rx="8" fill="#D8F0E6"/>
+  <rect x="224" y="462" width="84" height="22" rx="8" fill="#FDE9C5"/>
+  <rect x="322" y="462" width="84" height="22" rx="8" fill="#F59E0B"/>
+  <rect x="420" y="462" width="84" height="22" rx="8" fill="#D9EEF8"/>
+  <text x="155" y="478" fill="#14532D" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="700">LAG</text>
+  <text x="230" y="478" fill="#9A3412" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="700">CURRENT</text>
+  <text x="345" y="478" fill="#FFF7ED" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="700">LEAD</text>
+  <text x="445" y="478" fill="#123B4A" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="700">LAST</text>
+
+  <path d="M212 473H224" stroke="#94A3B8" stroke-width="3" stroke-linecap="round"/>
+  <path d="M308 473H322" stroke="#94A3B8" stroke-width="3" stroke-linecap="round"/>
+  <path d="M406 473H420" stroke="#94A3B8" stroke-width="3" stroke-linecap="round"/>
+
+  <rect x="620" y="86" width="484" height="118" rx="24" fill="#FFFFFF" stroke="#BCD3DE" stroke-width="2" filter="url(#shadow)"/>
+  <text x="650" y="132" fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">LAG / LEAD / FIRST_VALUE / LAST_VALUE</text>
+  <text x="650" y="170" fill="#475569" font-family="Segoe UI, Arial, sans-serif" font-size="18">Read nearby rows and window edges without self joins</text>
+
+  <rect x="620" y="244" width="484" height="218" rx="24" fill="#FFFFFF" stroke="#BCD3DE" stroke-width="2"/>
+  <text x="650" y="286" fill="#123B4A" font-family="Segoe UI, Arial, sans-serif" font-size="23" font-weight="700">How the row can look around itself</text>
+
+  <line x1="692" y1="360" x2="1028" y2="360" stroke="#94A3B8" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="732" cy="360" r="18" fill="#D8F0E6"/>
+  <circle cx="828" cy="360" r="18" fill="#FDE9C5"/>
+  <circle cx="924" cy="360" r="18" fill="#F59E0B"/>
+  <circle cx="1020" cy="360" r="18" fill="#D9EEF8"/>
+
+  <text x="708" y="392" fill="#14532D" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="700">FIRST</text>
+  <text x="812" y="392" fill="#9A3412" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="700">LAG</text>
+  <text x="904" y="392" fill="#C2410C" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="700">ROW</text>
+  <text x="1000" y="392" fill="#123B4A" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="700">LEAD</text>
+
+  <path d="M750 330C776 306 796 302 814 320" stroke="#2F7A87" stroke-width="4" stroke-linecap="round"/>
+  <path d="M942 330C966 308 990 304 1010 322" stroke="#EA580C" stroke-width="4" stroke-linecap="round"/>
+
+  <rect x="620" y="488" width="484" height="74" rx="22" fill="#0F172A"/>
+  <text x="648" y="520" fill="#F8FAFC" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="600">Tip: LAST_VALUE often needs</text>
+  <text x="648" y="548" fill="#F8FAFC" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="600">UNBOUNDED FOLLOWING to see the real last row</text>
+</svg>
