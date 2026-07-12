@@ -85,21 +85,21 @@
         <div>
             <div style="display: flex; flex-flow: row wrap; justify-content: space-between; gap: 1rem;">
                 <div class="section-column colored column30">
-                    <img src="/images/graduation-cap.png" alt="Значок выпускника, символ завершения курса SQL" style="height: 64px;">
+                    <img src="/images/graduation-cap.png" alt="Значок выпускника, символ завершения курса SQL" width="64" height="64" style="height: 64px;">
                     <div>
                         <div class="bold">Студенты</div>
                         <div style="font-size: small; margin-top: 0.5rem;">Изучайте SQL в рамках учебной программы или для самостоятельного обучения.</div>
                     </div>
                 </div>
                 <div class="section-column colored column30">
-                    <img src="/images/technologist.png" alt="Иконка разработчика, символ профессионального роста" style="height: 64px;">
+                    <img src="/images/technologist.png" alt="Иконка разработчика, символ профессионального роста" width="65" height="64" style="height: 64px;">
                     <div>
                         <div class="bold">Разработчики</div>
                         <div style="font-size: small; margin-top: 0.5rem;">Улучшайте свои навыки для работы с базами данных в проектах.</div>
-                    </div>                
+                    </div>
                 </div>
                 <div class="section-column colored column30">
-                    <img src="/images/bar-chart.png" alt="Иконка аналитики данных, символ работы с SQL" style="height: 64px;">
+                    <img src="/images/bar-chart.png" alt="Иконка аналитики данных, символ работы с SQL" width="65" height="64" style="height: 64px;">
                     <div>
                         <div class="bold">Аналитики данных</div>
                         <div style="font-size: small; margin-top: 0.5rem;">Получайте практический опыт работы с SQL для анализа данных.</div>
@@ -113,21 +113,21 @@
         <div>
             <div style="display: flex; flex-flow: row wrap; justify-content: space-between; gap: 1rem;">
                 <div class="section-column column30">
-                    <img src="/images/start1.png" alt="Шаг 1: перейти в раздел задач на SQLTest.online" style="height: 150px;">
+                    <img src="/images/start1.png" alt="Шаг 1: перейти в раздел задач на SQLTest.online" width="281" height="150" style="height: 150px;">
                     <div>
                         <div class="bold"><span style="color: var(--ligth-h1-color);">1.&nbsp;</span>Зайдите на сайт</div>
                         <div style="font-size: small; margin-top: 0.5rem;">Перейдите на SQLTest.online и выберите раздел "Задачи"</div>
                     </div>
                 </div>
                 <div class="section-column column30">
-                    <img src="/images/start2.png" alt="Шаг 2: выбрать категорию SQL-задач" style="height: 150px;">
+                    <img src="/images/start2.png" alt="Шаг 2: выбрать категорию SQL-задач" width="281" height="150" style="height: 150px;">
                     <div>
                         <div class="bold"><span style="color: var(--ligth-h1-color);">2.&nbsp;</span>Выберите категорию</div>
                         <div style="font-size: small; margin-top: 0.5rem;">Выберите интересующую вас тему или уровень сложности</div>
-                    </div>                
+                    </div>
                 </div>
                 <div class="section-column column30">
-                    <img src="/images/start3.png" alt="Шаг 3: решать SQL-задачи в тренажере" style="height: 150px;">
+                    <img src="/images/start3.png" alt="Шаг 3: решать SQL-задачи в тренажере" width="268" height="150" style="height: 150px;">
                     <div>
                         <div class="bold"><span style="color: var(--ligth-h1-color);">3.&nbsp;</span>Решайте задачи</div>
                         <div style="font-size: small; margin-top: 0.5rem;">Применяйте свои знания SQL для решения предложенных задач</div>

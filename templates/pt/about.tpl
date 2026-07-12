@@ -85,21 +85,21 @@
         <div>
             <div style="display: flex; flex-flow: row wrap; justify-content: space-between; gap: 1rem;">
                 <div class="section-column colored column30">
-                    <img src="/images/graduation-cap.png" alt="Icone de capelo, simbolo de conclusao do curso de SQL" style="height: 64px;">
+                    <img src="/images/graduation-cap.png" alt="Icone de capelo, simbolo de conclusao do curso de SQL" width="64" height="64" style="height: 64px;">
                     <div>
                     <div class="bold">Estudantes</div>
                     <div style="font-size: small; margin-top: 0.5rem;">Aprenda SQL como parte do seu currículo ou para autoestudo.</div>
                     </div>
                 </div>
                 <div class="section-column colored column30">
-                    <img src="/images/technologist.png" alt="Icone de desenvolvedor, simbolo de crescimento profissional" style="height: 64px;">
+                    <img src="/images/technologist.png" alt="Icone de desenvolvedor, simbolo de crescimento profissional" width="65" height="64" style="height: 64px;">
                     <div>
                     <div class="bold">Desenvolvedores</div>
                     <div style="font-size: small; margin-top: 0.5rem;">Melhore suas habilidades para trabalhar com bancos de dados em projetos.</div>
                     </div>                
                 </div>
                 <div class="section-column colored column30">
-                    <img src="/images/bar-chart.png" alt="Icone de analise de dados, simbolo de trabalho com SQL" style="height: 64px;">
+                    <img src="/images/bar-chart.png" alt="Icone de analise de dados, simbolo de trabalho com SQL" width="65" height="64" style="height: 64px;">
                     <div>
                     <div class="bold">Analistas de Dados</div>
                     <div style="font-size: small; margin-top: 0.5rem;">Ganhe experiência prática trabalhando com SQL para análise de dados.</div>
@@ -113,21 +113,21 @@
         <div>
             <div style="display: flex; flex-flow: row wrap; justify-content: space-between; gap: 1rem;">
                 <div class="section-column column30">
-                    <img src="/images/start1.png" alt="Passo 1: abrir a secao de tarefas no SQLTest.online" style="height: 150px;">
+                    <img src="/images/start1.png" alt="Passo 1: abrir a secao de tarefas no SQLTest.online" width="281" height="150" style="height: 150px;">
                     <div>
                     <div class="bold"><span style="color: var(--ligth-h1-color);">1.&nbsp;</span>Visite o site</div>
                     <div style="font-size: small; margin-top: 0.5rem;">Vá para SQLTest.online e selecione a seção "Tarefas"</div>
                 </div>
                 </div>
                 <div class="section-column column30">
-                    <img src="/images/start2.png" alt="Passo 2: escolher uma categoria de tarefas SQL" style="height: 150px;">
+                    <img src="/images/start2.png" alt="Passo 2: escolher uma categoria de tarefas SQL" width="281" height="150" style="height: 150px;">
                 <div>
                     <div class="bold"><span style="color: var(--ligth-h1-color);">2.&nbsp;</span>Selecione uma categoria</div>
                     <div style="font-size: small; margin-top: 0.5rem;">Escolha o tópico ou nível de dificuldade que lhe interessa</div>
                 </div>                
             </div>
                 <div class="section-column column30">
-                    <img src="/images/start3.png" alt="Passo 3: resolver tarefas SQL no simulador" style="height: 150px;">
+                    <img src="/images/start3.png" alt="Passo 3: resolver tarefas SQL no simulador" width="268" height="150" style="height: 150px;">
                         <div>
                     <div class="bold"><span style="color: var(--ligth-h1-color);">3.&nbsp;</span>Resolva tarefas</div>
                     <div style="font-size: small; margin-top: 0.5rem;">Aplique seu conhecimento de SQL para resolver as tarefas dadas</div>

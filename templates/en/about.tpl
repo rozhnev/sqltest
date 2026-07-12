@@ -85,21 +85,21 @@
         <div>
             <div style="display: flex; flex-flow: row wrap; justify-content: space-between; gap: 1rem;">
                 <div class="section-column colored column30">
-                    <img src="/images/graduation-cap.png" alt="Graduation cap icon, symbol of completing an SQL course" style="height: 64px;">
+                    <img src="/images/graduation-cap.png" alt="Graduation cap icon, symbol of completing an SQL course" width="64" height="64" style="height: 64px;">
                     <div>
                         <div class="bold">Students</div>
                         <div style="font-size: small; margin-top: 0.5rem;">Learn SQL as part of your curriculum or for self-study.</div>
                     </div>
                 </div>
                 <div class="section-column colored column30">
-                    <img src="/images/technologist.png" alt="Developer icon, symbol of professional growth" style="height: 64px;">
+                    <img src="/images/technologist.png" alt="Developer icon, symbol of professional growth" width="65" height="64" style="height: 64px;">
                     <div>
                         <div class="bold">Developers</div>
                         <div style="font-size: small; margin-top: 0.5rem;">Improve your skills for working with databases in projects.</div>
-                    </div>                
+                    </div>
                 </div>
                 <div class="section-column colored column30">
-                    <img src="/images/bar-chart.png" alt="Data analytics icon, symbol of working with SQL" style="height: 64px;">
+                    <img src="/images/bar-chart.png" alt="Data analytics icon, symbol of working with SQL" width="65" height="64" style="height: 64px;">
                     <div>
                         <div class="bold">Data Analysts</div>
                         <div style="font-size: small; margin-top: 0.5rem;">Gain practical experience working with SQL for data analysis.</div>
@@ -113,21 +113,21 @@
             <div>
                 <div style="display: flex; flex-flow: row wrap; justify-content: space-between; gap: 1rem;">
                     <div class="section-column column30">
-                        <img src="/images/start1.png" alt="Step 1: open SQLTest.online tasks section" style="height: 150px;">
+                        <img src="/images/start1.png" alt="Step 1: open SQLTest.online tasks section" width="281" height="150" style="height: 150px;">
                         <div>
                         <div class="bold"><span style="color: var(--ligth-h1-color);">1.&nbsp;</span>Visit the website</div>
                         <div style="font-size: small; margin-top: 0.5rem;">Go to SQLTest.online and select the "Tasks" section</div>
                     </div>
                     </div>
                     <div class="section-column column30">
-                        <img src="/images/start2.png" alt="Step 2: choose an SQL task category" style="height: 150px;">
+                        <img src="/images/start2.png" alt="Step 2: choose an SQL task category" width="281" height="150" style="height: 150px;">
                     <div>
                         <div class="bold"><span style="color: var(--ligth-h1-color);">2.&nbsp;</span>Select a category</div>
                         <div style="font-size: small; margin-top: 0.5rem;">Choose the topic or difficulty level that interests you</div>
                     </div>                
                 </div>
                     <div class="section-column column30">
-                        <img src="/images/start3.png" alt="Step 3: solve SQL tasks in the trainer" style="height: 150px;">
+                        <img src="/images/start3.png" alt="Step 3: solve SQL tasks in the trainer" width="268" height="150" style="height: 150px;">
                     <div>
                         <div class="bold"><span style="color: var(--ligth-h1-color);">3.&nbsp;</span>Solve tasks</div>
                         <div style="font-size: small; margin-top: 0.5rem;">Apply your SQL knowledge to solve the given tasks</div>
