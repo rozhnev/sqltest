@@ -43,7 +43,7 @@
             <link rel="canonical" href="{$CanonicalLink}">
         {/if}
             <link rel="stylesheet" type="text/css" href="/style.min.css?{$VERSION}" media="all">
-            <style>.cead{display:none;position:fixed}</style>
+            <style>.cead{ldelim}display:none;position:fixed{rdelim}</style>
             <link rel="preload" href="/css/cead.css?{$VERSION}" as="style">
             <link rel="stylesheet" href="/css/cead.css?{$VERSION}" media="print" onload="this.media='all'">
             <noscript><link rel="stylesheet" href="/css/cead.css?{$VERSION}"></noscript>
