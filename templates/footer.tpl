@@ -20,7 +20,9 @@
         </address>
     </div>
     <!-- ShareThis BEGIN -->
-    <div class="sharethis-inline-share-buttons"></div>
+    <div class="sharethis-inline-share-buttons-wrapper" style="min-width: 200px; max-width: 200px;">
+        <div class="sharethis-inline-share-buttons"></div>
+    </div>
     <!-- ShareThis END -->
     {* <div>
         <script src="https://yastatic.net/share2/share.js"></script>
