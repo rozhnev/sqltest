@@ -63,7 +63,7 @@ $translations = [
     'add_to_favorites' => 'Click to add to favorites',
     'menu_small_add_placeholder' => '<div style="color: var(--regular-text-color); display: flex; gap: 0.5rem; flex-direction: column; align-items: center;">
         Support the project. <a href="https://ko-fi.com/D1D76X1T1" target="_blank">
-            <img height="36" style="border:0px;height:36px;" src="https://storage.ko-fi.com/cdn/kofi6.png?v=6" border="0" alt="Buy Me a Coffee at ko-fi.com" />
+            <img height="36" width="145" style="border:0px; height:36px; width:145px;" src="https://storage.ko-fi.com/cdn/kofi6.png?v=6" border="0" alt="Buy Me a Coffee at ko-fi.com" />
         </a></div>',    
     'toast_sql_copied_to_buffer' => 'SQL code copied to buffer',
     'login_popup_footer' => 'Login on the site is only required to save your progress. You can continue testing without logging into the site.',
