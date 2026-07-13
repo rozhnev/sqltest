@@ -105,6 +105,6 @@
 
     <section>
         <h3>Suporte</h3>
-        <p>Se precisar de ajuda, tiver sugestões ou quiser reportar um problema, entre em contato pelo e-mail <a style="color: #FFA500;" href="mailto:support@sqltest.online">support@sqltest.online</a>.</p>
+        <p>Se precisar de ajuda, tiver sugestões ou quiser reportar um problema, entre em contato pelo e-mail <a style="color: #8A5000;" href="mailto:support@sqltest.online">support@sqltest.online</a>.</p>
     </section>
 </div>

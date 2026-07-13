@@ -72,7 +72,7 @@
                     .community-text a {
                         /* Keep the display: inline-flex for alignment of icon/text within the link */
                         display: inline-flex !important; 
-                        color: #FFA500; column-gap: 5px; align-items: anchor-center;
+                        color: #8A5000; column-gap: 5px; align-items: anchor-center;
                         vertical-align: bottom;
                     }
                 </style>
