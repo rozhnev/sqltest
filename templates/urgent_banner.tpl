@@ -1,4 +1,4 @@
-<div id="urgent-banner" style="background:linear-gradient(90deg, color-mix(in srgb, var(--block-background-color) 90%, blue 10%), color-mix(in srgb, var(--block-background-color) 92%, #000 8%)); color:#fff; padding:0.75rem 1.5rem; text-align:center; display:flex; align-items:center; justify-content:center; gap:0.75rem; flex-wrap:wrap;">
+<div id="urgent-banner" style="background:linear-gradient(90deg, #7f1d1d 0%, #991b1b 45%, #b91c1c 100%); color:#fff; padding:0.75rem 1.5rem; text-align:center; display:flex; align-items:center; justify-content:center; gap:0.75rem; flex-wrap:wrap;">
     {include file="{$Lang}/urgent_banner.tpl"}
     <button onclick="document.getElementById('urgent-banner').style.display='none'; localStorage.setItem('urgent-banner-closed','{$SHOW_URGENT_BANNER}');" style="background:transparent; border:1px solid rgba(255,255,255,0.5); color:#fff; border-radius:4px; padding:0.15rem 0.6rem; cursor:pointer; font-size:0.9em;">✕</button>
 </div>
