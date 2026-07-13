@@ -11,7 +11,7 @@
     <p>O banco de dados University contém 16 tabelas principais descrevendo a estrutura acadêmica de uma universidade — departamentos, corpo docente, estudantes, disciplinas, matrículas, projetos de pesquisa e muito mais.</p>
     <p>
         <a href="/{$Lang}/erd/University" target="ERDWindow" rel="noopener noreferrer" style="display: flex; flex-direction: column; align-items: center; gap: 4px;" aria-label="Abrir o diagrama ER do banco de dados University em uma nova janela">
-            <img src="/images/erd_small_light.svg" alt="Diagrama ER do banco de dados University com relacionamentos entre tabelas" style="width: 90%;" loading="lazy" decoding="async">
+            <img src="/images/erd_small_light.svg" alt="Diagrama ER do banco de dados University com relacionamentos entre tabelas" width="1080" height="360" style="width: 90%; height: auto;" loading="lazy" decoding="async">
             Diagrama ER do banco de dados University
         </a>
     </p>

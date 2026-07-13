@@ -10,7 +10,7 @@
     <p>The Employee database contains 9 main tables.</p>
     <p>
         <a href="/{$Lang}/erd/Employee" target="ERDWindow" rel="noopener noreferrer" style="display: flex; flex-direction: column; align-items: center; gap: 4px;" aria-label="Open Employee database ER diagram in a new window">
-            <img src="/images/erd_small_light.svg" alt="ER diagram of the Employee database showing table relationships" style="width: 90%;" loading="lazy" decoding="async">
+            <img src="/images/erd_small_light.svg" alt="ER diagram of the Employee database showing table relationships" width="1080" height="360" style="width: 90%; height: auto;" loading="lazy" decoding="async">
             ER diagram of the Employee database
         </a>
     </p>

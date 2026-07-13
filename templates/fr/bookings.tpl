@@ -10,7 +10,7 @@
     <p>La base de données Bookings contient 8 tables principales.</p>
     <p>
         <a href="/{$Lang}/erd/Bookings" target="ERDWindow" rel="noopener noreferrer" style="display: flex; flex-direction: column; align-items: center; gap: 4px;" aria-label="Ouvrir le schéma ER de la base Bookings dans une nouvelle fenêtre">
-            <img src="/images/erd_small_light.svg" alt="Schéma ER de la base Bookings montrant les relations entre les tables" style="width: 90%;" loading="lazy" decoding="async">
+            <img src="/images/erd_small_light.svg" alt="Schéma ER de la base Bookings montrant les relations entre les tables" width="1080" height="360" style="width: 90%; height: auto;" loading="lazy" decoding="async">
             Schéma ER de la base de données Bookings
         </a>
     </p>

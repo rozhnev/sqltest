@@ -10,7 +10,7 @@
     <p>База данных Bookings содержит 8 основных таблиц.</p>
     <p>
         <a href="/{$Lang}/erd/Bookings" target="ERDWindow" rel="noopener noreferrer" style="display: flex; flex-direction: column; align-items: center; gap: 4px;" aria-label="Открыть ER-диаграмму базы Bookings в новом окне">
-            <img src="/images/erd_small_light.svg" alt="ER-диаграмма базы Bookings со связями между таблицами" style="width: 90%;" loading="lazy" decoding="async">
+            <img src="/images/erd_small_light.svg" alt="ER-диаграмма базы Bookings со связями между таблицами" width="1080" height="360" style="width: 90%; height: auto;" loading="lazy" decoding="async">
             ER диаграмма базы данных Bookings
         </a>
     </p>

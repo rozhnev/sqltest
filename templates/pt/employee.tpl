@@ -10,7 +10,7 @@
     <p>O Banco de Dados Employee contém 9 tabelas principais.</p>
     <p>
         <a href="/{$Lang}/erd/Employee" target="ERDWindow" rel="noopener noreferrer" style="display: flex; flex-direction: column; align-items: center; gap: 4px;" aria-label="Abrir o diagrama ER do banco Employee em uma nova janela">
-            <img src="/images/erd_small_light.svg" alt="Diagrama ER do banco Employee mostrando relacionamentos entre tabelas" style="width: 90%;" loading="lazy" decoding="async">
+            <img src="/images/erd_small_light.svg" alt="Diagrama ER do banco Employee mostrando relacionamentos entre tabelas" width="1080" height="360" style="width: 90%; height: auto;" loading="lazy" decoding="async">
             Diagrama ER do banco Employee
         </a>
     </p>

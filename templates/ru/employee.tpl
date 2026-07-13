@@ -11,7 +11,7 @@
     <p>База данных Employee содержит 9 основных таблиц.</p>
     <p>
         <a href="/{$Lang}/erd/Employee" target="ERDWindow" rel="noopener noreferrer" style="display: flex; flex-direction: column; align-items: center; gap: 4px;" aria-label="Открыть ER-диаграмму базы Employee в новом окне">
-            <img src="/images/erd_small_light.svg" alt="ER-диаграмма базы Employee со связями между таблицами" style="width: 90%;" loading="lazy" decoding="async">
+            <img src="/images/erd_small_light.svg" alt="ER-диаграмма базы Employee со связями между таблицами" width="1080" height="360" style="width: 90%; height: auto;" loading="lazy" decoding="async">
             ER-диаграмма базы Employee
         </a>
     </p>

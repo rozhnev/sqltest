@@ -11,7 +11,7 @@
     <p>La base de données University contient 16 tables principales décrivant la structure académique d'une université : départements, corps enseignant, étudiants, cours, inscriptions, projets de recherche, et bien plus encore.</p>
     <p>
         <a href="/{$Lang}/erd/University" target="ERDWindow" rel="noopener noreferrer" style="display: flex; flex-direction: column; align-items: center; gap: 4px;" aria-label="Ouvrir le schéma ER de la base de données University dans une nouvelle fenêtre">
-            <img src="/images/erd_small_light.svg" alt="Schéma ER de la base de données University avec les relations entre les tables" style="width: 90%;" loading="lazy" decoding="async">
+            <img src="/images/erd_small_light.svg" alt="Schéma ER de la base de données University avec les relations entre les tables" width="1080" height="360" style="width: 90%; height: auto;" loading="lazy" decoding="async">
             Schéma ER de la base de données University
         </a>
     </p>

@@ -11,7 +11,7 @@
     <p>The University database contains 16 main tables describing a university's academic structure — departments, faculty, students, courses, enrollments, research projects, and more.</p>
     <p>
         <a href="/{$Lang}/erd/University" target="ERDWindow" rel="noopener noreferrer" style="display: flex; flex-direction: column; align-items: center; gap: 4px;" aria-label="Open University database ER diagram in a new window">
-            <img src="/images/erd_small_light.svg" alt="ER diagram of the University database showing table relationships" style="width: 90%;" loading="lazy" decoding="async">
+            <img src="/images/erd_small_light.svg" alt="ER diagram of the University database showing table relationships" width="1080" height="360" style="width: 90%; height: auto;" loading="lazy" decoding="async">
             ER diagram of the University database
         </a>
     </p>
