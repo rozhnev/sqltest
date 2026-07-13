@@ -5,7 +5,7 @@
         <header>
             {include file='m.top-menu.tpl' path="/"}
         </header>
-        <div class="main" id="welcome-page-column">
+        <main class="main" id="welcome-page-column">
             <style>
                 #welcome-page-column ol, 
                 #welcome-page-column ul {
@@ -106,7 +106,7 @@
                     </a>
                 </div>
             </div>
-        </div>
+        </main>
         <footer>
             <div class="footer-links">
                 <div>

@@ -13,7 +13,7 @@
             <div class="column">
                 {include file='menu.tpl'}
             </div>
-            <div class="column" id="welcome-page-column">
+            <main class="column" id="welcome-page-column">
                 <style>
                     #welcome-page-column ol, 
                     #welcome-page-column ul {
@@ -104,7 +104,7 @@
                         </a>
                     </div>
                 </div>
-            </div>
+            </main>
         </main2>
         {include file="{$Lang}/consent_banner.tpl"}
         <footer>
