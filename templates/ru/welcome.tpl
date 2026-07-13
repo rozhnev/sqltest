@@ -107,6 +107,6 @@
 
     <section>
         <h3>Поддержка</h3>
-        <p>Если нужна помощь, есть предложения или вы хотите сообщить о проблеме, напишите нам на <a style="color: #8A5000;" href="mailto:support@sqltest.online">support@sqltest.online</a>.</p>
+        <p>Если нужна помощь, есть предложения или вы хотите сообщить о проблеме, напишите нам на <a style="color: #8A5000; text-decoration: underline;" href="mailto:support@sqltest.online">support@sqltest.online</a>.</p>
     </section>
 </div>
