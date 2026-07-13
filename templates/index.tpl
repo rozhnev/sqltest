@@ -173,7 +173,7 @@
                         </div>
                     </div>
                     {if !isset($Question.answers)}
-                        <div class="code-wrapper" id="sql-code" name="sql-code">{$Question.last_query|escape:"html"}</div>
+                        <div class="code-wrapper" id="sql-code" label="sql-code" name="sql-code">{$Question.last_query|escape:"html"}</div>
                     {/if}
                     <div class="code-buttons">
                         {if !isset($Question.answers)}
