@@ -46,6 +46,5 @@
                 {/if}
             </footer>
         </div>
-        {include file='counters.tpl'}
     </body>
 </html>

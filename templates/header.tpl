@@ -58,13 +58,16 @@
                 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/ext-language_tools.js"></script>
             {/if}
             <script type="text/javascript" src="/script.min.js?{$VERSION}" defer></script>
+            <script type="text/javascript" src="/js/analytics.js?{$VERSION}" defer></script>
             <script>
                 var lang = '{$Lang|default:"en"}',
                 db   = '{$DB|default:"null"}',
                 questionId = '{$QuestionID|default:"null"}';
                 window.AppConfig = Object.assign({}, window.AppConfig, {
                     googleClientId: '{$GOOGLE_CLIENT_ID|escape:"javascript"}',
-                    githubClientId: '{$GITHUB_CLIENT_ID|escape:"javascript"}'
+                    githubClientId: '{$GITHUB_CLIENT_ID|escape:"javascript"}',
+                    googleTagManagerId: '{$GOOGLE_TAG_MANAGER_ID|escape:"javascript"}',
+                    yandexMetrikaId: '{$YANDEX_METRIKA_ID|escape:"javascript"}'
                 });
             </script>
         {if isset($SchemaJsonLd)}

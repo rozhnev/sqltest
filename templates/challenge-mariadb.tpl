@@ -474,7 +474,6 @@
                 </div>
             </footer>
     </div>
-    {include file='counters.tpl'}
     <script>
         (function () {
             const registerBtn = document.querySelector('.mariadb-register-btn');

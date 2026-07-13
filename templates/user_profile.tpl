@@ -133,7 +133,6 @@
             </footer>
         </div>
     {/if}
-    {include file='counters.tpl'}
 </body>
 </html>
 {literal}
