@@ -76,6 +76,7 @@
             </p>
             <p>
                 To keep the project running next month, we need to collect at least this amount by the end of this month.
+                Anything above it goes to new lessons, exercises, and features.
             </p>
 
             <div class="donation-stats">

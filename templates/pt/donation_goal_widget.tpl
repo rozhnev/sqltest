@@ -76,6 +76,7 @@
             </p>
             <p>
                 Para manter o projeto no próximo mês, precisamos arrecadar pelo menos esse valor até o fim deste mês.
+                Tudo o que passar disso será usado em novas lições, exercícios e recursos.
             </p>
 
             <div class="donation-stats">

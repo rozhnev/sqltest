@@ -76,6 +76,7 @@
             </p>
             <p>
                 Pour maintenir le projet le mois prochain, nous devons recevoir au moins cette somme avant la fin du mois en cours.
+                Tout ce qui dépasse ce montant sera consacré à de nouvelles leçons, à de nouveaux exercices et à de nouvelles fonctionnalités.
             </p>
 
             <div class="donation-stats">

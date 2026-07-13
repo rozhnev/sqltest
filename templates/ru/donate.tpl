@@ -14,6 +14,15 @@
                 Ваша поддержка помогает нам поддерживать бесплатный доступ к платформе, обеспечивать стабильную работу серверов, 
                 разрабатывать новые обучающие материалы и создавать больше интерактивных упражнений по SQL.
             </p>
+            <p class="donation-helper donation-intro">
+                Сейчас поддержка особенно важна: если вы пользуетесь SQLtest.online и хотите видеть новые уроки и функции,
+                донат сегодня напрямую поможет проекту продолжить развитие в следующем месяце.
+            </p>
+            <ul class="donation-suggested">
+                <li>$3-5 помогают покрыть часть серверных расходов.</li>
+                <li>$10-15 поддерживают выпуск новых уроков и задач.</li>
+                <li>$25+ заметно ускоряют развитие проекта.</li>
+            </ul>
         </div>
     </div>
     <div class="section" style="height: 100%;">
@@ -33,22 +42,26 @@
                             border-radius: 7px;">
                         </a>
                     </p>
+                    <p class="donation-fallback">Если виджет не открылся, используйте прямую ссылку: <a href="https://pay.cloudtips.ru/p/60214a3d" target="_blank" rel="noopener noreferrer">CloudTips</a>.</p>
                 </div>
                 
                 <div class="donation-method">
-                    <h3>Купить кофе за евро</h3>
-                    <p>Удобный платёж через платформу Ko-fi:</p>
+                    <h3>Поддержать картой через Ko-fi</h3>
+                    <p>Удобный платёж через Ko-fi. Во многих странах сервис принимает банковские карты и PayPal:</p>
                     <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
                     <script type='text/javascript'>
                         kofiwidget2.init('Поддержать на Ko-fi', 'revert-layer', 'D1D76X1T1');
                         kofiwidget2.draw();
                     </script>
+                    <p class="donation-fallback">Если виджет не загрузился, откройте прямую ссылку: <a href="https://ko-fi.com/D1D76X1T1" target="_blank" rel="noopener noreferrer">ko-fi.com/D1D76X1T1</a>.</p>
                 </div>
                 <div class="donation-method">
                     <h3>Помочь в криптовалюте</h3>
+                    <p>Если вам удобнее донатить в криптовалюте, используйте виджет ниже:</p>
                     <iframe src="https://nowpayments.io/embeds/donation-widget?api_key=8881e1d0-aaef-46c4-9a60-298bb6f26c3b" width="346" height="623" frameborder="0" scrolling="no" style="overflow-y: hidden;">
                         Can't load widget
                     </iframe>
+                    <p class="donation-fallback">Если виджет блокируется браузером, попробуйте отключить блокировщик контента или воспользуйтесь Ko-fi выше.</p>
                 </div>
             </div>
 
