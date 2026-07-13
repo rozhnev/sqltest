@@ -30,8 +30,8 @@
             <h2 style="color: var(--ligth-h2-color);">Formas de Apoiar:</h2>
             <div class="donation-methods">
                 <div class="donation-method">
-                    <h3>Apoie com cartão via Ko-fi</h3>
-                    <p>Pagamento simples e seguro via Ko-fi. Em muitos países, o serviço aceita cartões bancários e PayPal:</p>
+                    <h3>Apoie via Ko-fi</h3>
+                    <p>Pagamento simples e seguro via Ko-fi. Em muitos países, o serviço aceita <span class="payment-badge"><span aria-hidden="true">💳</span>Cartões bancários</span> e <span class="payment-badge"><span aria-hidden="true">🅿️</span>PayPal</span></p>
                     <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
                     <script type='text/javascript'>
                         kofiwidget2.init('Apoie-nos no Ko-fi', 'revert-layer', 'D1D76X1T1');

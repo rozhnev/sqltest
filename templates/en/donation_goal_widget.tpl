@@ -34,13 +34,23 @@
             font-size: 0.92rem;
             line-height: 1.45;
         }
+        .donation-goal-widget .donation-body p {
+            margin: 0 0 0.7em;
+        }
+        .donation-goal-widget .donation-body p:last-of-type {
+            margin-bottom: 0;
+        }
         .donation-goal-widget .donation-stats {
             margin-top: 0.6em;
             display: flex;
             justify-content: space-between;
             gap: 0.6em;
+            flex-wrap: wrap;
             font-size: 0.9rem;
             font-weight: 600;
+        }
+        .donation-goal-widget .donation-stats span {
+            flex: 1 1 8rem;
         }
         .donation-goal-widget .donation-progress {
             margin-top: 0.45em;
@@ -62,8 +72,24 @@
         .donation-goal-widget .donation-action {
             margin-top: 0.65em;
         }
+        .donation-goal-widget .donation-action a {
+            display: block;
+        }
         .donation-goal-widget .donation-action .button {
             width: 100%;
+            background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+            border-color: #166534;
+            box-shadow: 0 6px 14px rgba(21, 128, 61, 0.28);
+            transition: transform 0.16s ease, box-shadow 0.16s ease, filter 0.16s ease;
+        }
+        .donation-goal-widget .donation-action .button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 18px rgba(21, 128, 61, 0.34);
+            filter: brightness(1.04);
+        }
+        .donation-goal-widget .donation-action .button:focus-visible {
+            outline: 2px solid #22c55e;
+            outline-offset: 2px;
         }
     </style>
 

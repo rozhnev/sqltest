@@ -32,6 +32,9 @@
                 <div class="donation-method">
                     <h3>Поддержать в рублях</h3>
                     <p>Быстрый и безопасный платёж через CloudTips:</p>
+                    <div class="payment-method-hints" aria-label="Поддерживаемые способы оплаты в CloudTips">
+                        <span class="hint-label">Доступна карта <span class="payment-badge mir"><span class="mir-logo" aria-hidden="true">МИР</span></span></span>
+                    </div>
                     <p>
                         <a href="https://pay.cloudtips.ru/p/60214a3d" target="_blank">
                         <img src="https://static.tildacdn.com/tild3431-6231-4938-b464-663831306266/Horiz.svg" 
@@ -46,8 +49,8 @@
                 </div>
                 
                 <div class="donation-method">
-                    <h3>Поддержать картой через Ko-fi</h3>
-                    <p>Удобный платёж через Ko-fi. Во многих странах сервис принимает банковские карты и PayPal:</p>
+                    <h3>Поддержать через Ko-fi</h3>
+                    <p>Удобный платёж через Ko-fi. Во многих странах сервис принимает <span class="payment-badge"><span aria-hidden="true">💳</span>Карта</span> и <span class="payment-badge"><span aria-hidden="true">🅿️</span>PayPal</span></p>
                     <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
                     <script type='text/javascript'>
                         kofiwidget2.init('Поддержать на Ko-fi', 'revert-layer', 'D1D76X1T1');
