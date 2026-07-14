@@ -17,7 +17,7 @@
             <span>{translate}share_to_facebook{/translate}</span>
         </span>
     </a>
-    <a class="button" target="_blank" rel="noopener noreferrer" style="background:#2AABEE; border-color:#2AABEE;" href="https://t.me/share/url?url={$AchievementShareUrl|escape:'url'}">
+    <a class="button" target="_blank" rel="noopener noreferrer" style="background:#2AABEE; border-color:#2AABEE;" href="https://telegram.me/share/url?url={$AchievementShareUrl|escape:'url'}">
         <span style="display: inline-flex; align-items: center; gap: 6px;">
             <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="M9.04 15.88 8.9 19.9c.58 0 .83-.25 1.14-.56l2.77-2.65 5.75 4.2c1.05.58 1.79.28 2.07-.97L24 2.1h.01c.34-1.55-.56-2.16-1.58-1.8L1.2 9.94c-1.5.59-1.48 1.43-.25 1.82l5.86 1.83L19.4 4.5c.55-.37 1.05-.17.64.2L9.04 15.88Z"/></svg>
             <span>{translate}share_to_telegram{/translate}</span>

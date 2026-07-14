@@ -89,11 +89,11 @@
         <h3>Сообщество</h3>
         <p class="community-text">
             Присоединяйтесь к нашему сообществу! Для общения на русском языке вступайте в 
-            <a href="https://t.me/sqlize" target="_blank">
+            <a href="https://telegram.me/sqlize" target="_blank">
             <span class="tg-icon"><span class=""></span></span> русскоязычную группу в Telegram
             </a>.
             Для международного общения на английском языке присоединяйтесь к 
-            <a href="https://t.me/sqltest_online" target="_blank">
+            <a href="https://telegram.me/sqltest_online" target="_blank">
             <span class="tg-icon"><span class=""></span></span> Telegram International group
             </a> или 
             <a href="https://chat.whatsapp.com/GJ8IGw4Jh9R8zqzyW2lpCx" target="_blank">

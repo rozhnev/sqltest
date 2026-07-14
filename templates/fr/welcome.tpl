@@ -90,7 +90,7 @@
         <h3>Communauté</h3>
         <p class="community-text">
             Rejoignez la communauté SQLTest. Tous les utilisateurs sont les bienvenus pour participer à nos chats en anglais sur 
-            <a href="https://t.me/sqltest_online" target="_blank" >
+            <a href="https://telegram.me/sqltest_online" target="_blank" >
             <span class="tg-icon">
                 <span class=""> </span>
             </span>

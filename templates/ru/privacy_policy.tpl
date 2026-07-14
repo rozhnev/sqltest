@@ -59,7 +59,7 @@
             
             <ol>
                 <li><strong>Вопросы</strong>. Если у вас есть какие-либо вопросы или сомнения относительно нашей Политики конфиденциальности, свяжитесь с нами.
-                    нас в <a href="https://t.me/sqlize"> нашем чате Telegram</a>.</li>
+                    нас в <a href="https://telegram.me/sqlize"> нашем чате Telegram</a>.</li>
             </ol>
     
         </div>

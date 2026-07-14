@@ -193,7 +193,7 @@
         <div class="blue-block"> 
             <h4>Everyone interested in programming</h4>
             <h2>Expand your horizons and learn a new language.</h2>
-            <a href="https://t.me/sqlize" target="_blank" class="button white">
+            <a href="https://telegram.me/sqlize" target="_blank" class="button white">
                 Join our community!&nbsp;→
             </a>
         </div>
@@ -205,7 +205,7 @@
                 <h4>and subscribe to our newsletter to stay updated with the latest news.</h4>
             </div>
             <div class="section-column column30" style="display: flex; flex-flow: row wrap; justify-content: space-around;">
-                <a href="https://t.me/sqlize" target="_blank"class="social-media-link">
+                <a href="https://telegram.me/sqlize" target="_blank"class="social-media-link">
                     <div>
                         <img src="/images/telegram_logo.png" alt="Telegram logo">
                         Telegram
@@ -231,9 +231,9 @@
                     </a>
                 </div>
                 <div>
-                    <a style="background: #EFFAB2; color: #79A01F; rotate: -3deg;" href ="https://t.me/artembuenas" target="_blank">Artem Latyshev</a>
-                    <a style="background: #BFFDC9; color: #37B679; rotate: 2deg;" href ="https://t.me/alexgureev25" target="_blank">Alexander Gureev</a>
-                    <a style="background: #FFE8A5; color: #D18328; rotate: -2deg;" href ="https://t.me/basanogijoe" target="_blank">Georgy Grigorchuk</a>
+                    <a style="background: #EFFAB2; color: #79A01F; rotate: -3deg;" href ="https://telegram.me/artembuenas" target="_blank">Artem Latyshev</a>
+                    <a style="background: #BFFDC9; color: #37B679; rotate: 2deg;" href ="https://telegram.me/alexgureev25" target="_blank">Alexander Gureev</a>
+                    <a style="background: #FFE8A5; color: #D18328; rotate: -2deg;" href ="https://telegram.me/basanogijoe" target="_blank">Georgy Grigorchuk</a>
                     <a style="background: deepskyblue; color: whitesmoke;rotate: 4deg;" href="mailto:evilenapol@gmail.com" target="_blank">Elena Selsky</a>
                     <a style="background: #069adf; color: #300e95; rotate: -1deg;" href ="" target="_blank">Vladimir Revyakin</a>
                 </div>

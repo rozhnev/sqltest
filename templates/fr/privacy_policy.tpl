@@ -85,7 +85,7 @@
 
             <ol>
                 <li><strong>Questions :</strong> Si vous avez des questions ou des préoccupations concernant notre Politique de confidentialité, veuillez nous contacter sur
-                    <a href="https://t.me/sqlize"> notre chat Telegram</a>.</li>
+                    <a href="https://telegram.me/sqlize"> notre chat Telegram</a>.</li>
             </ol>
         </div>
     </div>

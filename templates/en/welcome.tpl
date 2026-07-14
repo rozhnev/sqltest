@@ -90,7 +90,7 @@
         <h3>Community</h3>
         <p class="community-text">
             Join the SQLTest learning community. All users are welcome to participate in our English-speaking chats on 
-            <a href="https://t.me/sqltest_online" target="_blank" >
+            <a href="https://telegram.me/sqltest_online" target="_blank" >
             <span class="tg-icon">
                 <span class=""> </span>
             </span>

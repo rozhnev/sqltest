@@ -34,7 +34,7 @@
         ['Essayons encore une fois. Vous y êtes presque !']
     ]}
     {$phrases[$phrase_id][0]}
-    <p>Erreur dans la tâche ? <a target="_blank" href="https://t.me/sqlize">Signalez-le ! Nous corrigerons cela 😊</a></p>
+    <p>Erreur dans la tâche ? <a target="_blank" href="https://telegram.me/sqlize">Signalez-le ! Nous corrigerons cela 😊</a></p>
 {/if}
 {if isset($ReferralLink)}
     <a id="referral-link" target="_blank" href="{$ReferralLink.link}">

@@ -85,7 +85,7 @@
 
             <ol>
                 <li><strong>Questions:</strong> If you have any questions or concerns about our Privacy Policy, please contact
-                    us at <a href="https://t.me/sqlize"> our telegram chat</a>.</li>
+                    us at <a href="https://telegram.me/sqlize"> our telegram chat</a>.</li>
             </ol>
         </div>
     </div>

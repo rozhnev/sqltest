@@ -117,7 +117,7 @@
     {/if}
     <div style="display: flex; column-gap: 6px; align-items: center;">
         Попробуйте ещё раз. Нашли ошибку в задании - 
-        <a style="display: flex; column-gap: 6px; justify-content: center; align-items: center;" target="_blank" href="https://t.me/sqlize" class=""> 
+        <a style="display: flex; column-gap: 6px; justify-content: center; align-items: center;" target="_blank" href="https://telegram.me/sqlize" class=""> 
             <span class="tg-icon">
                 <span class=""> </span>
             </span>

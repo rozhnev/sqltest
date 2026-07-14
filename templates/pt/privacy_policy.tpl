@@ -44,7 +44,7 @@
             <h3>6. Entre em Contato:</h3>
 
             <ol>
-                <li><strong>Dúvidas:</strong> Se você tiver alguma dúvida ou preocupação sobre nossa Política de Privacidade, entre em contato conosco através do <a href="https://t.me/sqlize">nosso chat no Telegram</a>.</li>
+                <li><strong>Dúvidas:</strong> Se você tiver alguma dúvida ou preocupação sobre nossa Política de Privacidade, entre em contato conosco através do <a href="https://telegram.me/sqlize">nosso chat no Telegram</a>.</li>
             </ol>
 
         </div>

@@ -91,7 +91,7 @@
         <h3>Comunidade</h3>
         <p class="community-text">
         Junte-se à comunidade SQLTest para compartilhar ideias e tirar dúvidas. Usuários que falam inglês podem entrar em nosso 
-            <a href="https://t.me/sqltest_online" target="_blank">
+            <a href="https://telegram.me/sqltest_online" target="_blank">
                 <span class="tg-icon"><span class=""></span></span> grupo no Telegram
                 </a> ou 
                 <a href="https://chat.whatsapp.com/GJ8IGw4Jh9R8zqzyW2lpCx" target="_blank">

@@ -14,7 +14,6 @@
                 {include file='menu.tpl'}
             </div>
             <main class="column">
-                {* {include file="{$Lang}/adblock_banner.tpl"} *}
                 {if $User->logged() && $NewAchievement}
                     {assign var="AchievementViewUrl" value="/{$Lang}/achievement/{$NewAchievement.user_achievement_id}"}
                     <div class="user-solutions-count" id="new-achievement" style="position: relative; padding: 12px 16px; margin-bottom: 16px; border-radius: 4px; display: flex; flex-direction: column; gap: 12px;">

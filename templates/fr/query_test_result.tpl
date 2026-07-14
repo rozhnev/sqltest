@@ -118,7 +118,7 @@
      {/if}
      <div style="display: flex; column-gap: 6px; align-items: center;">
         Réessayez. Une erreur trouvée dans la tâche ? 
-        <a style="display: flex; column-gap: 6px; justify-content: center; align-items: center;" target="_blank" href="https://t.me/sqltest_online" class=""> 
+        <a style="display: flex; column-gap: 6px; justify-content: center; align-items: center;" target="_blank" href="https://telegram.me/sqltest_online" class=""> 
             <span class="tg-icon">
                 <span class=""> </span>
             </span>
