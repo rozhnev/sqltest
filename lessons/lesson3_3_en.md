@@ -140,6 +140,15 @@ LIMIT 3;
 ```
 **Result:** Returns the remainder of `payment_id` divided by 5.
 
+**Example of using a function in `WHERE` (find even values):**
+```sql
+SELECT payment_id, amount
+FROM payment
+WHERE MOD(payment_id, 2) = 0
+LIMIT 10;
+```
+**Result:** Returns only rows with even `payment_id` values.
+
 ### `SIGN()` - Returns the sign of a number (-1, 0, or 1).
 
 **Syntax:**
@@ -221,7 +230,7 @@ If distinct row-level random values are critical, verify behavior on your DBMS a
    Use `ROUND(amount, 0)` to round values to whole numbers.
 
 2. **Finding records by remainder:**
-   Use `MOD(payment_id, 2)` to separate even and odd payment IDs.
+   Use `MOD(payment_id, 2)` in `WHERE` (for example, `MOD(payment_id, 2) = 0`) to find even payment IDs.
 
 3. **Computing square roots:**
    Use `SQRT(amount)` to analyze payment distributions.

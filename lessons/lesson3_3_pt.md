@@ -140,6 +140,15 @@ LIMIT 3;
 ```
 **Resultado:** Retorna o resto da divisão de `payment_id` por 5.
 
+**Exemplo de uso de função no `WHERE` (encontrar valores pares):**
+```sql
+SELECT payment_id, amount
+FROM payment
+WHERE MOD(payment_id, 2) = 0
+LIMIT 10;
+```
+**Resultado:** Retorna apenas linhas com `payment_id` par.
+
 ### `SIGN()` - Retorna o sinal de um número (-1, 0 ou 1).
 
 **Sintaxe:**
@@ -221,7 +230,7 @@ Se você precisa de valores aleatórios diferentes por linha, valide o comportam
    Use `ROUND(amount, 0)` para arredondar valores para inteiros.
 
 2. **Encontrar registros por resto da divisão:**
-   Use `MOD(payment_id, 2)` para separar IDs de pagamento pares e ímpares.
+   Use `MOD(payment_id, 2)` no `WHERE` (por exemplo, `MOD(payment_id, 2) = 0`) para encontrar IDs de pagamento pares.
 
 3. **Calcular raiz quadrada:**
    Use `SQRT(amount)` para analisar a distribuição dos pagamentos.

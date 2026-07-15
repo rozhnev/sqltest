@@ -140,6 +140,15 @@ LIMIT 3;
 ```
 **Resultat :** Renvoie le reste de la division de `payment_id` par 5.
 
+**Exemple d'utilisation d'une fonction dans `WHERE` (trouver les valeurs paires) :**
+```sql
+SELECT payment_id, amount
+FROM payment
+WHERE MOD(payment_id, 2) = 0
+LIMIT 10;
+```
+**Resultat :** Renvoie uniquement les lignes avec un `payment_id` pair.
+
 ### `SIGN()` - Renvoie le signe d'un nombre (-1, 0 ou 1).
 
 **Syntaxe :**
@@ -221,7 +230,7 @@ Si vous avez absolument besoin de valeurs differentes par ligne, verifiez le com
    Utilisez `ROUND(amount, 0)` pour arrondir les montants a l'entier.
 
 2. **Trouver des enregistrements via un reste de division :**
-   Utilisez `MOD(payment_id, 2)` pour distinguer les identifiants pairs et impairs.
+   Utilisez `MOD(payment_id, 2)` dans `WHERE` (par exemple `MOD(payment_id, 2) = 0`) pour trouver les identifiants pairs.
 
 3. **Calculer une racine carree :**
    Utilisez `SQRT(amount)` pour analyser la distribution des paiements.
