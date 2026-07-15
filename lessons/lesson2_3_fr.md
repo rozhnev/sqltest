@@ -1,16 +1,26 @@
+---
+title: "SQL AND, OR et NOT dans WHERE : combiner plusieurs conditions"
+description: "Apprenez les opérateurs logiques AND, OR et NOT dans SQL WHERE, la priorité d'évaluation, les parenthèses et des exemples NOT IN et NOT LIKE."
+keywords: ["SQL AND OR NOT", "opérateurs logiques SQL", "NOT IN SQL", "NOT LIKE SQL", "clause WHERE SQL", "priorité des opérateurs SQL"]
+teaches: ["Combiner des conditions dans WHERE", "Utiliser AND, OR et NOT", "Appliquer NOT IN et NOT LIKE", "Contrôler la priorité avec des parenthèses", "Éviter les erreurs logiques"]
+about: ["SQL", "WHERE", "Opérateurs logiques", "Filtrage des données"]
+---
+
+_Leçon 2.3 · Temps de lecture : ~7 min_
+
 Cette leçon SQL explique comment combiner plusieurs conditions dans une clause WHERE à l'aide des opérateurs logiques : AND, OR et NOT. Vous apprendrez à créer des filtres de base de données avancés pour extraire des sous-ensembles de données spécifiques en connectant plusieurs expressions. La leçon explique la priorité des opérateurs et l'importance d'utiliser des parenthèses pour contrôler l'ordre d'évaluation et garantir la précision des requêtes. Maîtrisez les techniques complexes de filtrage de données pour améliorer vos compétences en requêtes SQL pour une analyse de données et un reporting plus efficaces.
 
-# Leçon 2.3 Combiner plusieurs conditions
+# Combiner plusieurs conditions dans WHERE
 
 ## Combinaison de plusieurs critères en SQL
 
 Dans la leçon précédente, nous avons appris à utiliser la clause `WHERE` avec des opérateurs de comparaison simples. Cependant, l'analyse de données en conditions réelles nécessite souvent un filtrage par plusieurs critères simultanément. Pour ce faire, nous utilisons les opérateurs logiques : `AND`, `OR` et `NOT`.
 
-## Opérateurs logiques
+## Opérateurs logiques en SQL
 
 Les opérateurs logiques vous permettent de connecter plusieurs expressions dans une clause `WHERE` pour créer des filtres plus sophistiqués.
 
-### 1. L'opérateur AND
+### L'opérateur AND
 L'opérateur `AND` (ET) ne renvoie les lignes que si **toutes** les conditions séparées par `AND` sont vraies. Il est utilisé pour affiner vos résultats.
 
 **Exemple (Base de données Sakila)**
@@ -22,7 +32,9 @@ FROM film
 WHERE length < 80 AND rating = 'G';
 ```
 
-### 2. L'opérateur OR
+*Résultat : uniquement les films qui respectent les deux conditions en même temps.*
+
+### L'opérateur OR
 L'opérateur `OR` (OU) renvoie les lignes si **l'une** des conditions séparées par `OR` est vraie. Il est utilisé pour élargir vos résultats.
 
 **Exemple (Base de données Sakila)**
@@ -34,10 +46,13 @@ FROM actor
 WHERE first_name = 'NICK' OR first_name = 'ED';
 ```
 
-### 3. L'opérateur NOT
-L'opérateur `NOT` (NON) affiche un enregistrement si la ou les conditions **ne sont PAS** vraies. Il inverse efficacement la logique d'une condition.
+*Résultat : les lignes dont le prénom correspond à au moins une valeur.*
 
-**Exemple (Base de données Sakila)**
+### L'opérateur NOT
+L'opérateur `NOT` (NON) renvoie une ligne lorsque la condition **n'est pas** vraie. En pratique, il est souvent utilisé avec `IN` et `LIKE` quand il faut exclure une liste de valeurs ou un motif textuel.
+
+**Exemple 1 : exclure une seule classification**
+
 Pour trouver tous les films sauf ceux classés 'R' :
 
 ```sql
@@ -46,7 +61,33 @@ FROM film
 WHERE NOT rating = 'R';
 ```
 
-### 4. L'opérateur XOR (OU exclusif, rarement utilisé)
+*Résultat : tous les films dont la classification n'est pas 'R'.*
+
+**Exemple 2 : utiliser NOT IN pour exclure plusieurs valeurs**
+
+Si vous voulez exclure plusieurs classifications d'un coup, `NOT IN` est plus pratique :
+
+```sql
+SELECT title, rating
+FROM film
+WHERE rating NOT IN ('R', 'NC-17');
+```
+
+*Résultat : les films dont la classification n'appartient pas à la liste 'R' et 'NC-17'.*
+
+**Exemple 3 : utiliser NOT LIKE pour nier un motif**
+
+Si vous voulez exclure les titres qui commencent par la lettre A :
+
+```sql
+SELECT title
+FROM film
+WHERE title NOT LIKE 'A%';
+```
+
+*Résultat : les films dont le titre ne commence pas par A.*
+
+### L'opérateur XOR (OU exclusif, rarement utilisé)
 L'opérateur `XOR` renvoie vrai uniquement lorsque **une seule** des deux conditions est vraie. En pratique, il est rarement utilisé, car il n'est pas pris en charge par tous les SGBD et peut réduire la lisibilité des requêtes.
 
 **Exemple (Base de données Sakila)**
@@ -66,17 +107,17 @@ Pour une meilleure portabilité entre différents SGBD, cette logique est géné
 
 Lorsque vous combinez plusieurs opérateurs dans une seule requête (ex : en utilisant à la fois `AND` et `OR`), SQL suit un ordre d'opération spécifique (priorité).
 
-1.  `NOT` est évalué en premier.
-2.  `AND` est évalué en deuxième.
-3.  `XOR` (si pris en charge par votre dialecte SQL) est généralement évalué après `AND`.
-4.  `OR` est évalué en dernier.
+1. `NOT` est évalué en premier.
+2. `AND` est évalué en deuxième.
+3. `XOR` (si pris en charge par votre dialecte SQL) est généralement évalué après `AND`.
+4. `OR` est évalué en dernier.
 
 **La puissance des parenthèses :**
 Tout comme en mathématiques, vous devez utiliser des parenthèses `()` pour contrôler l'ordre d'évaluation et rendre vos requêtes plus lisibles. Sans elles, SQL applique silencieusement sa priorité par défaut — et le résultat peut ne pas correspondre à ce que vous attendiez.
 
 ---
 
-### Exemple 1 : Trouver les films 'G' et 'PG' de moins de 60 minutes
+### Trouver les films 'G' et 'PG' de moins de 60 minutes
 
 **Requête incorrecte — parenthèses manquantes :**
 
@@ -101,9 +142,11 @@ FROM film
 WHERE (rating = 'G' OR rating = 'PG') AND length < 60;
 ```
 
+*Résultat : uniquement les films classés 'G' ou 'PG' et d'une durée inférieure à 60 minutes.*
+
 ---
 
-### Exemple 2 : Exclure les films classés 'R' et 'NC-17'
+### Exclure les films classés 'R' et 'NC-17'
 
 **Requête incorrecte — NOT ne nie que la première condition :**
 
@@ -140,12 +183,39 @@ Les deux options retournent le même résultat. L'option B est généralement pr
 
 ---
 
+## Questions fréquentes
+
+### Quand faut-il utiliser AND plutôt que OR ?
+Utilisez `AND` lorsqu'une ligne doit satisfaire **toutes** les conditions en même temps. Utilisez `OR` lorsqu'il suffit qu'**une seule** des conditions soit vraie. Si les deux opérateurs apparaissent dans la même requête, les parenthèses sont presque toujours utiles.
+
+### En quoi NOT IN est-il différent de plusieurs conditions AND ?
+`NOT IN` est une façon compacte d'exclure plusieurs valeurs d'une même colonne. C'est plus lisible et plus facile à faire évoluer qu'une longue suite de comparaisons niées reliées par `AND`.
+
+### Quand utiliser NOT LIKE ?
+Utilisez `NOT LIKE` quand vous voulez exclure des lignes qui correspondent à un motif textuel. C'est utile pour filtrer négativement par préfixe, suffixe ou sous-chaîne.
+
+---
+
+## Questions d'entretien
+
+### Comment expliquer la priorité des opérateurs SQL lors d'un entretien ?
+En SQL, `NOT` est évalué en premier, puis `AND`, et enfin `OR`. Quand une requête mélange plusieurs opérateurs, les parenthèses rendent la logique explicite et évitent des résultats accidentels.
+
+### Quand utiliseriez-vous NOT IN plutôt que NOT = ?
+Utilisez `NOT IN` lorsque vous devez exclure plusieurs valeurs d'une même colonne. C'est une option plus lisible et plus évolutive que de répéter plusieurs comparaisons avec `AND`.
+
+### Comment fonctionne NOT LIKE ?
+`NOT LIKE` renvoie les lignes qui ne correspondent pas au motif indiqué. Par exemple, `title NOT LIKE 'A%'` exclut tous les titres qui commencent par A.
+
+### Pourquoi les parenthèses sont-elles importantes dans des clauses WHERE complexes ?
+Les parenthèses contrôlent l'ordre d'évaluation et lèvent l'ambiguïté entre `AND` et `OR`. Elles permettent d'écrire exactement la logique voulue au lieu de dépendre de la priorité par défaut.
+
 **Points clés de cette leçon :**
 
-*   Utilisez `AND` pour vous assurer que toutes les conditions sont remplies.
-*   Utilisez `OR` pour trouver des correspondances parmi plusieurs conditions.
-*   Utilisez `NOT` pour exclure des données spécifiques.
-*   Utilisez `XOR` avec précaution : il peut être utile, mais n'est pas pris en charge par tous les dialectes SQL.
-*   Utilisez toujours des parenthèses `()` lorsque vous mélangez `AND` et `OR` afin d'éviter les erreurs logiques et d'améliorer la clarté.
+* Utilisez `AND` pour vous assurer que toutes les conditions sont remplies.
+* Utilisez `OR` pour trouver des correspondances parmi plusieurs conditions.
+* Utilisez `NOT`, `NOT IN` et `NOT LIKE` pour exclure des données.
+* Utilisez `XOR` avec précaution : il peut être utile, mais n'est pas pris en charge par tous les dialectes SQL.
+* Utilisez toujours des parenthèses `()` lorsque vous mélangez `AND` et `OR` afin d'éviter les erreurs logiques et d'améliorer la clarté.
 
 Dans la leçon suivante, nous apprendrons comment **trier et limiter** les résultats pour organiser vos données plus efficacement.
