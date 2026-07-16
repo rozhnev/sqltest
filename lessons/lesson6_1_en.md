@@ -6,7 +6,7 @@ teaches: ["Understand execution flow between inner and outer queries", "Distingu
 about: ["SQL", "Subquery", "Inline View", "Sakila"]
 ---
 
-_Reading time: ~7 min_
+_Lesson 6.1 · Reading time: ~7 min_
 
 A SQL subquery helps you split one problem into multiple steps inside a single statement. In this lesson, you will learn the core idea of subqueries, their main types, and how to use them in `SELECT`, `WHERE`, and `FROM` with Sakila examples.
 
@@ -181,9 +181,6 @@ A subquery in `WHERE` is usually used to filter rows of the outer query. A subqu
 
 ### Do I always need an alias for a subquery in FROM?
 Yes. In most DBMSs, a subquery in `FROM` must have an alias. Without it, the query fails.
-
-### When is NOT EXISTS better than NOT IN?
-If the subquery can return `NULL`, `NOT IN` may produce unexpected results. In such cases, `NOT EXISTS` is usually safer.
 
 ## Interview Questions
 

@@ -6,7 +6,7 @@ teaches: ["Comprendre la logique d'exécution entre requête interne et externe"
 about: ["SQL", "Subquery", "Inline View", "Sakila"]
 ---
 
-_Temps de lecture : ~7 minutes_
+_Leçon 6.1 · Temps de lecture : ~7 minutes_
 
 Une sous-requête SQL permet de découper un problème en plusieurs étapes à l'intérieur d'une seule instruction. Dans cette leçon, vous verrez l'idée de base des sous-requêtes, leurs types, et comment les utiliser dans `WHERE` et `FROM` avec des exemples de la base Sakila.
 
@@ -181,9 +181,6 @@ La sous-requête dans `WHERE` sert généralement à filtrer les lignes de la re
 
 ### Faut-il toujours donner un alias à une sous-requête dans FROM ?
 Oui. Dans la plupart des SGBD, une sous-requête dans `FROM` doit obligatoirement avoir un alias. Sans alias, la requête échoue.
-
-### Quand vaut-il mieux utiliser NOT EXISTS plutôt que NOT IN ?
-Si la sous-requête peut retourner `NULL`, `NOT IN` peut produire un résultat inattendu. Dans ce cas, `NOT EXISTS` est généralement plus fiable.
 
 ## Questions d'entretien
 

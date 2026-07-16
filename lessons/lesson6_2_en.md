@@ -6,7 +6,7 @@ teaches: ["Choose the right operator for each subquery result type", "Apply EXIS
 about: ["SQL", "Subquery", "WHERE clause", "Sakila"]
 ---
 
-_Reading time: ~8 min_
+_Lesson 6.2 · Reading time: ~8 min_
 
 A subquery in `WHERE` lets you filter rows based on the intermediate result of another query. In this lesson, you will learn when to use comparison operators, `IN`, `NOT IN`, `EXISTS`, `NOT EXISTS`, `ANY`, and `ALL`, and how to choose the safest option for practical tasks.
 

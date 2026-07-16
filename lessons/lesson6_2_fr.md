@@ -6,7 +6,7 @@ teaches: ["Choisir l'operateur selon le type de resultat de sous-requete", "Util
 about: ["SQL", "Subquery", "WHERE clause", "Sakila"]
 ---
 
-_Temps de lecture: ~8 minutes_
+_Leçon 6.2 · Temps de lecture: ~8 minutes_
 
 Une sous-requete dans `WHERE` permet de filtrer les lignes en s'appuyant sur le resultat intermediaire d'une autre requete. Dans cette lecon, vous verrez quand utiliser les operateurs de comparaison, `IN`, `NOT IN`, `EXISTS`, `NOT EXISTS`, `ANY` et `ALL`, et comment choisir l'option la plus sure en pratique.
 

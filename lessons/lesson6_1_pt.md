@@ -6,7 +6,7 @@ teaches: ["Entender o fluxo de execução entre consulta interna e externa", "Di
 about: ["SQL", "Subquery", "Inline View", "Sakila"]
 ---
 
-_Tempo de leitura: ~7 min_
+_Lição 6.1 · Tempo de leitura: ~7 min_
 
 Uma subconsulta em SQL permite dividir um problema em várias etapas dentro de uma única instrução. Nesta lição, você vai entender a ideia central de subconsultas, os principais tipos e como usá-las em `SELECT`, `WHERE` e `FROM` com exemplos da base Sakila.
 
@@ -181,9 +181,6 @@ Subconsulta em `WHERE` normalmente serve para filtrar linhas da consulta externa
 
 ### Preciso sempre dar alias para subconsulta em FROM?
 Sim. Na maioria dos SGBDs, a subconsulta em `FROM` precisa obrigatoriamente de alias. Sem isso, a consulta falha.
-
-### Quando NOT EXISTS é melhor que NOT IN?
-Se a subconsulta puder retornar `NULL`, `NOT IN` pode gerar resultados inesperados. Nesses casos, `NOT EXISTS` costuma ser mais seguro.
 
 ## Perguntas de entrevista
 

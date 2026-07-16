@@ -6,7 +6,7 @@ teaches: ["Escolher o operador correto para cada tipo de resultado de subconsult
 about: ["SQL", "Subquery", "WHERE clause", "Sakila"]
 ---
 
-_Tempo de leitura: ~8 min_
+_Lição 6.2 · Tempo de leitura: ~8 min_
 
 Uma subconsulta no `WHERE` permite filtrar linhas com base no resultado intermediário de outra consulta. Nesta lição, você vai aprender quando usar operadores de comparação, `IN`, `NOT IN`, `EXISTS`, `NOT EXISTS`, `ANY` e `ALL`, e como escolher a opção mais segura em cenários práticos.
 
