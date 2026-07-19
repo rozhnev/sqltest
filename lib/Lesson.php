@@ -54,6 +54,8 @@ class Lesson
             with lessons as (
                 select 
                     lessons.id,
+                    dense_rank() over (order by modules.sequence_position) module_num,
+                    row_number() over (partition by modules.sequence_position order by lessons.sequence_position) lesson_num,
                     lag(modules.slug) over(order by modules.sequence_position, lessons.sequence_position) prev_module_slug,
                     lag(lessons.slug) over(order by modules.sequence_position, lessons.sequence_position) prev_lesson_slug,
                     lead(modules.slug) over(order by modules.sequence_position, lessons.sequence_position) next_module_slug,

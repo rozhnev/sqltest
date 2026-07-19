@@ -233,7 +233,7 @@ class Controller
             'sameAs' => [
                 'https://www.linkedin.com/company/sqltest/',
                 'https://github.com/rozhnev/sqltest',
-                'https://t.me/sqlize'
+                'https://telegram.me/sqltest_online'
             ]
         ];
 
