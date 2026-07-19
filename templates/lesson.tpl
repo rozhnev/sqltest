@@ -46,7 +46,9 @@
             </nav>
             <main class="column" id="main-content">
                 <article class="lesson-wrapper">
-                    {$LessonData.content}
+                    {$ModuleNum = $LessonData.module_num}
+                    {$LessonNum = $LessonData.lesson_num}
+                    {eval var=$LessonData.content}
                 </article>
                 {if $RelevantTasks}
                 <section class="lesson-relevant-tasks question-wrapper" aria-label="Relevant lesson tasks">
