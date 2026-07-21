@@ -64,6 +64,7 @@ class Controller
             'DONATION_MONTHLY_GOAL' => (float)($env['DONATION_MONTHLY_GOAL'] ?? 50),
             'DONATION_RECEIVED_CURRENT_MONTH' => (float)($env['DONATION_RECEIVED_CURRENT_MONTH'] ?? 0),
             'SHOW_URGENT_BANNER' => $env['SHOW_URGENT_BANNER'] ?? false,
+            'Domain'        => $this->domain,
             'MobileView'    => $this->isMobileView(),
             'Languages'     => $this->languages,
             'User'          => $this->user,
@@ -1575,7 +1576,6 @@ class Controller
         $lessons = new Lesson($this->dbh, 'introduction-to-databases');
 
         $this->assignVariables([
-            'Domain' => $this->domain,
             'Questionnire' => $questionnire->getMap(),
             'Lessons' => $lessons->getMap(),
             'Today' => date('Y-m-d'),
