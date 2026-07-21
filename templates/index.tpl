@@ -207,16 +207,21 @@
                 {/if}
             </main>
             <aside class="column" id="right-panel">
-                {* {if $User->logged() &&  $User->getAuthProvider() === 'vk' && !$User->getEmail()}
+                {if 
+                    $Domain !== 'sqltest.online' && 
+                    $Lang === 'ru' &&
+                    ($User->logged() &&  in_array($User->getAuthProvider(), ['google', 'linkedin', 'github'])) && 
+                    !$User->getEmail()
+                }
                     <div style="background:#fff3cd;color:#856404;border-left:6px solid #ffc107;padding:12px 16px;margin-bottom:16px;border-radius:4px;display:flex;gap:12px;align-items:flex-start;font-size:14px;line-height:1.4;">
                         <div style="font-size:20px;line-height:1;margin-top:2px;">⚠️</div>
                         <div>
                             <strong style="display:block;margin-bottom:6px;">Внимание!</strong>
-                            <div>После 28 февраля 2026 года вход через ВКонтакте может стать недоступен. Чтобы не потерять доступ к аккаунту, пожалуйста, <a href="/{$Lang}/user/profile"><b style="color:#856404;">зайдите в профиль</b></a> и укажите адрес электронной почты и пароль — они понадобятся для авторизации, если вход через ВКонтакте будет отключён.</div>
-                            <div style="margin-top:8px;font-weight:600;">Мы прилагаем все усилия, чтобы предотвратить возможные неудобства и сохранить ваш доступ к сервису.</div>
+                            <div>В соответствии с требованиями законодательства РФ вход через сторонние сервисы (Google, Github, Linkedin) будет отключён с 31 июля. Чтобы не потерять доступ к аккаунту, пожалуйста, <a href="/{$Lang}/user/profile"><b style="color:#856404;">зайдите в профиль</b></a> и укажите актуальный адрес электронной почты и пароль. Они понадобятся для обычной авторизации.</div>
+                            <div style="margin-top:8px;font-weight:600;">Пожалуйста, обновите данные заранее, чтобы сохранить бесперебойный доступ к сервису.</div>
                         </div>
                     </div>
-                {/if} *}
+                {/if}
                 {if $User->logged()}
                     <div style="padding-right: 6px;">
                         {include file="my_progress.tpl"}
