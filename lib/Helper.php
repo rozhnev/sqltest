@@ -114,4 +114,32 @@ class Helper
         $stmt->execute([':lang' => $lang, ':dbms' => $dbms]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+    public static function getDonations(PDO $dbh, int $limit = 5): array
+    {
+        $stmt = $dbh->prepare(
+            "SELECT SUM(amount_usd) AS monthly_amount_usd 
+            FROM donations 
+            WHERE donated_at >= date_trunc('month', CURRENT_DATE);"
+        );
+        
+        $monthly_amount_usd = $stmt->execute() ? (float) $stmt->fetchColumn() : 0.0;
+
+        $stmt = $dbh->prepare(
+            "SELECT
+                d.donated_at,
+                d.amount,
+                d.currency,
+                d.amount_usd,
+                d.notes,
+                COALESCE(NULLIF(TRIM(u.nickname), ''), 'Anonymous') AS donor_name
+                FROM donations d
+                LEFT JOIN users u ON u.id = d.user_id
+                ORDER BY d.donated_at DESC NULLS LAST, d.id DESC
+                LIMIT :limit"
+        );
+        $stmt->execute([':limit' => $limit]);
+        $donations = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return ['monthly_amount_usd' => $monthly_amount_usd, 'donations' => $donations];
+    }
 }
