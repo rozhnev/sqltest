@@ -1,5 +1,5 @@
 {assign var="goal" value=$DONATION_MONTHLY_GOAL|default:50}
-{assign var="received" value=$$DONATIONS.monthly_amount_usd|default:0}
+{assign var="received" value=$DONATIONS.monthly_amount_usd|default:0}
 {if $goal > 0}
     {math equation="(x / y) * 100" x=$received y=$goal assign="progressRaw"}
 {else}
