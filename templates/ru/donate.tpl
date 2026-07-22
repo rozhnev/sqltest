@@ -31,11 +31,7 @@
             <div class="donation-methods">
                 <div class="donation-method">
                     <h3>Поддержать в рублях</h3>
-                    <p>Быстрый и безопасный платёж через CloudTips:</p>
-                    <div class="payment-method-hints" aria-label="Поддерживаемые способы оплаты в CloudTips">
-                        <span class="hint-label">Доступна карта <span class="payment-badge mir"><span class="mir-logo" aria-hidden="true">МИР</span></span></span>
-                    </div>
-                    <p>
+                    <p style="margin: 0.5rem 0;">
                         <a href="https://pay.cloudtips.ru/p/60214a3d" target="_blank">
                         <img src="https://static.tildacdn.com/tild3431-6231-4938-b464-663831306266/Horiz.svg" 
                             alt="Оплата через CloudTips"
@@ -45,17 +41,24 @@
                             border-radius: 7px;">
                         </a>
                     </p>
+                    <p>Быстрый и безопасный платёж через CloudTips:</p>
+                    <div class="payment-method-hints" aria-label="Поддерживаемые способы оплаты в CloudTips">
+                        <span class="hint-label">Доступна карта <span class="payment-badge mir"><span class="mir-logo" aria-hidden="true">МИР</span></span></span>
+                    </div>
                     <p class="donation-fallback">Если виджет не открылся, используйте прямую ссылку: <a href="https://pay.cloudtips.ru/p/60214a3d" target="_blank" rel="noopener noreferrer">CloudTips</a>.</p>
                 </div>
                 
                 <div class="donation-method">
-                    <h3>Поддержать через Ko-fi</h3>
+                    <h3>Поддержать в EUR</h3>
+                    <p style="margin: 0.5rem 0;">
+                        <script type='text/javascript'>
+                            kofiwidget2.init('Поддержать на Ko-fi', 'revert-layer', 'D1D76X1T1');
+                            kofiwidget2.draw();
+                        </script>
+                    </p>
                     <p>Удобный платёж через Ko-fi. Во многих странах сервис принимает <span class="payment-badge"><span aria-hidden="true">💳</span>Карта</span> и <span class="payment-badge"><span aria-hidden="true">🅿️</span>PayPal</span></p>
                     <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
-                    <script type='text/javascript'>
-                        kofiwidget2.init('Поддержать на Ko-fi', 'revert-layer', 'D1D76X1T1');
-                        kofiwidget2.draw();
-                    </script>
+
                     <p class="donation-fallback">Если виджет не загрузился, откройте прямую ссылку: <a href="https://ko-fi.com/D1D76X1T1" target="_blank" rel="noopener noreferrer">ko-fi.com/D1D76X1T1</a>.</p>
                 </div>
                 <div class="donation-method">
