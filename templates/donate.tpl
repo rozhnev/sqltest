@@ -171,6 +171,9 @@
                 font-size: 0.85rem;
             }
         }
+        .btn-container {
+            margin: 1.5rem;
+        }
     </style>
     <body>
         {if $MobileView}

@@ -51,12 +51,10 @@
                 
                 <div class="donation-method">
                     <h3>Поддержать в EUR</h3>
-                    <p style="margin: 1.5rem 0;">
-                        <script type='text/javascript'>
-                            kofiwidget2.init('Поддержать на Ko-fi', 'revert-layer', 'D1D76X1T1');
-                            kofiwidget2.draw();
-                        </script>
-                    </p>
+                    <script type='text/javascript'>
+                        kofiwidget2.init('Поддержать на Ko-fi', 'revert-layer', 'D1D76X1T1');
+                        kofiwidget2.draw();
+                    </script>
                     <p>Удобный платёж через Ko-fi. Во многих странах сервис принимает <span class="payment-badge"><span aria-hidden="true">💳</span>Карта</span> и <span class="payment-badge"><span aria-hidden="true">🅿️</span>PayPal</span></p>
                     <p class="donation-fallback">Если виджет не загрузился, откройте прямую ссылку: <a href="https://ko-fi.com/D1D76X1T1" target="_blank" rel="noopener noreferrer">ko-fi.com/D1D76X1T1</a>.</p>
                 </div>
