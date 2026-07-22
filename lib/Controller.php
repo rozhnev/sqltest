@@ -55,6 +55,7 @@ class Controller
 
         $this->registerModifiers(["array_key_exists", "mt_rand", "array_rand"]);
         $this->engine->registerPlugin('block', 'translate', array('Localizer', 'translate'), true);
+
         $this->assignVariables([
             'VERSION'       => $env['VERSION'] ?? 0,
             'YANDEX_METRIKA_ID' => $env['YANDEX_METRIKA_ID'] ?? '',
@@ -62,7 +63,7 @@ class Controller
             'GOOGLE_CLIENT_ID' => $env['GOOGLE_CLIENT_ID'] ?? '',
             'GITHUB_CLIENT_ID' => $env['GITHUB_CLIENT_ID'] ?? '',
             'DONATION_MONTHLY_GOAL' => (float)($env['DONATION_MONTHLY_GOAL'] ?? 50),
-            'DONATION_RECEIVED_CURRENT_MONTH' => (float)($env['DONATION_RECEIVED_CURRENT_MONTH'] ?? 0),
+            'DONATIONS' => Helper::getDonations($this->dbh, 5),
             'SHOW_URGENT_BANNER' => $env['SHOW_URGENT_BANNER'] ?? false,
             'Domain'        => $this->domain,
             'MobileView'    => $this->isMobileView(),
