@@ -31,7 +31,7 @@
             <h2 style="color: var(--ligth-h2-color);">Способы поддержки:</h2>
             <div class="donation-methods">
                 <div class="donation-method">
-                    <h3>Поддержать в рублях</h3>
+                    <h3>В рублях:</h3>
                     <p style="margin: 1.5rem 0;">
                         <a href="https://pay.cloudtips.ru/p/60214a3d" target="_blank">
                         <img src="https://static.tildacdn.com/tild3431-6231-4938-b464-663831306266/Horiz.svg" 
@@ -50,7 +50,7 @@
                 </div>
                 
                 <div class="donation-method">
-                    <h3>Поддержать в EUR</h3>
+                    <h3>В USD/EUR:</h3>
                     <script type='text/javascript'>
                         kofiwidget2.init('Поддержать на Ko-fi', 'revert-layer', 'D1D76X1T1');
                         kofiwidget2.draw();
@@ -59,7 +59,7 @@
                     <p class="donation-fallback">Если виджет не загрузился, откройте прямую ссылку: <a href="https://ko-fi.com/D1D76X1T1" target="_blank" rel="noopener noreferrer">ko-fi.com/D1D76X1T1</a>.</p>
                 </div>
                 <div class="donation-method">
-                    <h3>Помочь в криптовалюте</h3>
+                    <h3>В криптовалюте</h3>
                     <p>Если вам удобнее донатить в криптовалюте, используйте виджет ниже:</p>
                     <iframe src="https://nowpayments.io/embeds/donation-widget?api_key=8881e1d0-aaef-46c4-9a60-298bb6f26c3b" width="346" height="623" frameborder="0" scrolling="no" style="overflow-y: hidden;">
                         Can't load widget
