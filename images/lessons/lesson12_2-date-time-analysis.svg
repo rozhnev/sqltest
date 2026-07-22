@@ -1,5 +1,5 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
-  <title id="title">Lesson 12.2 Date and Time Functions in SQL</title>
+  <title id="title">Date and Time Functions in SQL</title>
   <desc id="desc">Illustration for practical date and time analysis in SQL.</desc>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
@@ -22,7 +22,6 @@
 
   <rect x="56" y="56" width="510" height="518" rx="24" fill="url(#panel)" filter="url(#shadow)"/>
 
-  <text x="90" y="138" fill="#7fb5ff" font-family="Arial, sans-serif" font-size="26" font-weight="700">Lesson 12.2</text>
   <text x="90" y="192" fill="#ffffff" font-family="Arial, sans-serif" font-size="44" font-weight="700">Date and Time</text>
   <text x="90" y="244" fill="#ffffff" font-family="Arial, sans-serif" font-size="44" font-weight="700">Functions in SQL</text>
   <text x="90" y="300" fill="#d8e7ff" font-family="Arial, sans-serif" font-size="25">Practical analysis by</text>
