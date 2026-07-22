@@ -1,1 +1,0 @@
-{include file='en/donation_goal_widget.tpl'}

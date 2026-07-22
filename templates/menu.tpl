@@ -16,11 +16,11 @@
             </div>
         </div>
     </div>
-    {if $User->showAd()&& !$MobileView}
+    {* {if $User->showAd()&& !$MobileView}
         <div style="height: 5em;">
             {translate}menu_small_add_placeholder{/translate}
         </div>
-    {/if}
+    {/if} *}
     <div class="question-wrapper">
         <div id="menu-content" class="menu-content">
             {if $User->logged()}
@@ -74,7 +74,7 @@
             {/foreach}
         </div>  
     </div>
-    {if $User->showAd() && !$MobileView}
-        {include file="{$Lang}/menu_bottom_add.tpl"}
+    {if !$MobileView}
+        {include file="{$Lang}/donation_goal_widget.tpl"}
     {/if}
 </nav>
