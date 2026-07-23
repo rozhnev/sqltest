@@ -45,8 +45,12 @@ class LLM {
     public function parseMarkdown(string $markdown): string {
         $parser = new \cebe\markdown\GithubMarkdown();
         $parsed = $parser->parse($markdown);
-        $parsed = str_replace("<span class='sql'>", htmlspecialchars("<span class='sql'>", ENT_QUOTES | ENT_HTML5), $parsed);
-        $parsed = str_replace("</span>", htmlspecialchars("</span>", ENT_QUOTES | ENT_HTML5), $parsed);
+        $parsed = preg_replace('#</?(ul|ol)>#i', '', $parsed);
+        $parsed = preg_replace('#<li>#i', '- ', $parsed);
+        $parsed = preg_replace('#</li>#i', "\n", $parsed);
+        foreach (["<span class='sql'>", '</span>', '<b>', '</b>'] as $tag) {
+            $parsed = str_replace($tag, htmlspecialchars($tag, ENT_QUOTES | ENT_HTML5), $parsed);
+        }
         return $parsed;
     }
 
