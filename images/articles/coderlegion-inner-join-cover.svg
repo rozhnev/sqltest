@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="420" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0b162b"/>
+      <stop offset="100%" stop-color="#10233e"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#122746"/>
+      <stop offset="100%" stop-color="#0f1f37"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <circle cx="1300" cy="-80" r="300" fill="none" stroke="#2f5f9b" stroke-width="2" opacity="0.5"/>
+  <circle cx="1300" cy="-80" r="210" fill="none" stroke="#3d79bf" stroke-width="2" opacity="0.4"/>
+  <circle cx="-80" cy="920" r="320" fill="none" stroke="#2e6aa5" stroke-width="2" opacity="0.4"/>
+
+  <rect x="90" y="120" width="1420" height="660" rx="24" fill="url(#panel)" stroke="#2f4f7e" stroke-width="3"/>
+  <line x1="800" y1="180" x2="800" y2="730" stroke="#365a8f" stroke-width="2"/>
+
+  <text x="140" y="250" fill="#8ed8ff" font-size="82" font-family="Menlo, Monaco, monospace" font-weight="700">INNER JOIN</text>
+  <text x="140" y="320" fill="#c6d7f1" font-size="38" font-family="Menlo, Monaco, monospace">vs</text>
+  <text x="140" y="405" fill="#ffd594" font-size="72" font-family="Menlo, Monaco, monospace" font-weight="700">CORRELATED</text>
+  <text x="140" y="485" fill="#ffd594" font-size="72" font-family="Menlo, Monaco, monospace" font-weight="700">SUBQUERY</text>
+  <text x="140" y="560" fill="#dce8ff" font-size="32" font-family="Menlo, Monaco, monospace">SQL Performance:</text>
+  <text x="140" y="600" fill="#dce8ff" font-size="32" font-family="Menlo, Monaco, monospace">Benchmark Across 4 Engines</text>
+
+  <text x="860" y="220" fill="#a6dcff" font-size="34" font-family="Menlo, Monaco, monospace" font-weight="700">Query A</text>
+  <text x="860" y="270" fill="#e1eeff" font-size="25" font-family="Menlo, Monaco, monospace">SELECT c.customer_id, COUNT(o.order_id)</text>
+  <text x="860" y="310" fill="#e1eeff" font-size="25" font-family="Menlo, Monaco, monospace">FROM customers c</text>
+  <text x="860" y="350" fill="#e1eeff" font-size="25" font-family="Menlo, Monaco, monospace">INNER JOIN orders o</text>
+  <text x="906" y="390" fill="#e1eeff" font-size="25" font-family="Menlo, Monaco, monospace">ON o.customer_id = c.customer_id</text>
+  <text x="860" y="430" fill="#e1eeff" font-size="25" font-family="Menlo, Monaco, monospace">GROUP BY c.customer_id;</text>
+
+  <text x="860" y="500" fill="#ffdba5" font-size="34" font-family="Menlo, Monaco, monospace" font-weight="700">Query B</text>
+  <text x="860" y="550" fill="#fff0d8" font-size="25" font-family="Menlo, Monaco, monospace">SELECT c.customer_id,</text>
+  <text x="860" y="590" fill="#fff0d8" font-size="25" font-family="Menlo, Monaco, monospace">       (SELECT COUNT(*) FROM orders o</text>
+  <text x="860" y="630" fill="#fff0d8" font-size="25" font-family="Menlo, Monaco, monospace">        WHERE o.customer_id = c.customer_id)</text>
+  <text x="860" y="670" fill="#fff0d8" font-size="25" font-family="Menlo, Monaco, monospace">FROM customers c;</text>
+
+  <rect x="120" y="700" width="270" height="58" rx="12" fill="#2b6fb1"/>
+  <text x="138" y="739" fill="#ffffff" font-size="28" font-family="Menlo, Monaco, monospace">MySQL | Oracle</text>
+
+  <rect x="400" y="700" width="215" height="58" rx="12" fill="#3a7f68"/>
+  <text x="420" y="739" fill="#ffffff" font-size="28" font-family="Menlo, Monaco, monospace">PostgreSQL</text>
+
+  <rect x="630" y="700" width="160" height="58" rx="12" fill="#655c9a"/>
+  <text x="660" y="739" fill="#ffffff" font-size="28" font-family="Menlo, Monaco, monospace">SQLite</text>
+
+  <text x="1240" y="815" fill="#9dd7ff" font-size="42" font-family="Menlo, Monaco, monospace">sqltest.online</text>
+</svg>
