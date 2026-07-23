@@ -7,20 +7,7 @@
         <div style="display: block; text-align: left;">
             <p>
                 SQLtest.online is a free SQL learning platform used by students, developers, and professionals preparing for technical interviews.
-                Your support keeps the project alive — covering server costs, funding new lessons, and helping us build more interactive SQL exercises.
-            </p>
-            <p class="donation-helper donation-intro">
-
-                If SQLtest.online has helped you learn or practice SQL, your donation today directly increases the chance of new lessons and features next month.
-            </p>
-            <h3>🎯 How Your Support Helps</h3>
-            <ul class="donation-suggested">
-                <li>$3-5 helps cover part of the monthly server bill.</li>
-                <li>$10-15 helps fund new lessons and exercises.</li>
-                <li>$25+ meaningfully speeds up new development.</li>
-            </ul>
-            <p class="donation-helper">
-                Every contribution, no matter the size, is greatly appreciated. Thank you for helping us make SQLtest.online even better!
+                Your support keeps the project alive - covering server costs, funding new lessons, and helping us build more interactive SQL exercises.
             </p>
         </div>
     </div>
@@ -49,7 +36,17 @@
                     <p class="donation-fallback">If it’s blocked by your browser, try disabling content blockers or use Ko‑fi instead.</p>
                 </div>
             </div>
-
+            <div class="donation-method donations-history">
+                        <h3>🎯 How Your Support Helps</h3>
+            <ul class="donation-suggested">
+                <li>$3-5 helps cover part of the monthly server bill.</li>
+                <li>$10-15 helps fund new lessons and exercises.</li>
+                <li>$25+ meaningfully speeds up new development.</li>
+            </ul>
+            <p class="donation-helper">
+                Every contribution, no matter the size, is greatly appreciated. Thank you for helping us make SQLtest.online even better!
+            </p>
+            </div>
             <h2 style="color: var(--ligth-h2-color); margin-top: 2rem;">💬 Recent Support</h2>
             <div class="donation-method donations-history">
                 {if $LatestDonations|@count > 0}
@@ -85,8 +82,9 @@
         <div>
             <h3>🙏 Thank You</h3>
             <h4>
-                Thank you for being an amazing part of the SQLtest.online community.
-                Your support truly makes a difference — together we’re making SQL learning accessible and enjoyable for everyone. ❤️
+                Hi, I’m Slava — I created SQLtest.online to help people learn SQL for free.
+                I build and maintain this project myself, and your support directly helps me keep servers running, publish new lessons, and develop more interactive exercises.
+                Thank you for helping SQL learning stay accessible to everyone.
             </h4>
         </div>
     </div>
