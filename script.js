@@ -344,6 +344,31 @@ function toggleFavorites(lang, questionId) {
         showToast('error', 'Something went wrong. Please ask admin for help.');
     });
 }
+function moveQuestionPosition(questionId, categoryId, direction) {
+    fetch(`/admin/question-category-position`, {
+        method: "POST",
+        mode: "cors",
+        cache: "default",
+        credentials: "same-origin",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            question_id: questionId,
+            category_id: categoryId,
+            direction: direction
+        }),
+    })
+    .then((async response=>{
+        const data = await response.json();
+        if (response.ok && data.ok) {
+            loadMenu(window.UIConfig.questionnire);
+        } else {
+            showToast('error', data.error || 'Something went wrong.');
+        }
+    }))
+    .catch(err=>{
+        showToast('error', 'Something went wrong. Please ask admin for help.');
+    });
+}
 function checkSolution(url) {
     setLoader('code-result');
     let formData = new FormData();
