@@ -47,7 +47,7 @@
                 Every contribution, no matter the size, is greatly appreciated. Thank you for helping us make SQLtest.online even better!
             </p>
             </div>
-            <h2 style="color: var(--ligth-h2-color); margin-top: 2rem;">💬 Recent Support</h2>
+            <h3 style="color: var(--ligth-h2-color); margin-top: 2rem;">💬 Recent Support</h3>
             <div class="donation-method donations-history">
                 {if $LatestDonations|@count > 0}
                     <table class="donations-history-table">
