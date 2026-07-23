@@ -1,5 +1,56 @@
 <?php
 $config = [
     'domain' => 'localhost',
-    'languages' => ['ru' => 'Русский', 'en' => 'English', 'pt' => 'Português', 'fr' => 'Français']
+    'languages' => ['ru' => 'Русский', 'en' => 'English', 'pt' => 'Português', 'fr' => 'Français'],
+    'api' => [
+        'base_url' => 'https://api.sqlize.online',
+        'request_timeout' => 3,
+    ],
+    'playground' => [
+        'default_version' => 'mariadb118',
+        'databases' => [
+            'mariadb' => [
+                'name' => 'MariaDB',
+                'versions' => [
+                    'mariadb118' => 'MariaDB 11.8',
+                ],
+            ],
+            'mysql' => [
+                'name' => 'MySQL',
+                'versions' => [
+                    'mysql80' => 'MySQL 8.0',
+                ],
+            ],
+            'postgresql' => [
+                'name' => 'PostgreSQL',
+                'versions' => [
+                    'psql17' => 'PostgreSQL 17',
+                ],
+            ],
+            'sqlite' => [
+                'name' => 'SQLite',
+                'versions' => [
+                    'sqlite3' => 'SQLite 3',
+                ],
+            ],
+            'mssql' => [
+                'name' => 'MS SQL Server',
+                'versions' => [
+                    'mssql2022' => 'MS SQL Server 2022',
+                ],
+            ],
+            'oracle' => [
+                'name' => 'Oracle',
+                'versions' => [
+                    'oracle23' => 'Oracle Database 26ai',
+                ],
+            ],
+            'firebird' => [
+                'name' => 'Firebird',
+                'versions' => [
+                    'firebird4' => 'Firebird 4.0',
+                ],
+            ],
+        ],
+    ],
 ];    
