@@ -2,54 +2,55 @@
 <div class="about">
     <div class="section top colored">
         <div>
-            <h2>Support SQLtest.online</h2>
+            <h2>❤️ Support SQLtest.online</h2>
         </div>
         <div style="display: block; text-align: left;">
             <p>
-                SQLtest.online is a free SQL learning platform that helps students, developers, and anyone
-                to master the structured query language and prepare for technical interviews.
-            </p>
-            <p>
-                We strive to make learning SQL fun and accessible to everyone.
-                Your support helps us maintain free access to the platform, ensure stable server operation,
-                develop new training materials, and create more interactive SQL exercises.
+                SQLtest.online is a free SQL learning platform used by students, developers, and professionals preparing for technical interviews.
+                Your support keeps the project alive — covering server costs, funding new lessons, and helping us build more interactive SQL exercises.
             </p>
             <p class="donation-helper donation-intro">
-                Support is especially important right now. If SQLtest.online has helped you, a donation today
-                directly increases the chance of new lessons and features next month.
+
+                If SQLtest.online has helped you learn or practice SQL, your donation today directly increases the chance of new lessons and features next month.
             </p>
+            <h3>🎯 How Your Support Helps</h3>
             <ul class="donation-suggested">
                 <li>$3-5 helps cover part of the monthly server bill.</li>
                 <li>$10-15 helps fund new lessons and exercises.</li>
                 <li>$25+ meaningfully speeds up new development.</li>
             </ul>
+            <p class="donation-helper">
+                Every contribution, no matter the size, is greatly appreciated. Thank you for helping us make SQLtest.online even better!
+            </p>
         </div>
     </div>
     <div class="section" style="height: 100%;">
         <div style="display: block;">      
-            <h2 style="color: var(--ligth-h2-color);">Ways to Support:</h2>
+            <h2 style="color: var(--ligth-h2-color);">💳 Choose How to Support</h2>
             <div class="donation-methods">
                 <div class="donation-method">
-                    <h3>Support via Ko-fi</h3>
-                    <p>Simple and secure payment through Ko-fi. In many regions it supports <span class="payment-badge"><span aria-hidden="true">💳</span> Bank Card</span> and <span class="payment-badge"><span aria-hidden="true">🅿️</span>PayPal</span>:</p>
+                    <h3>Ko‑fi (Bank Card / PayPal)</h3>
+                    <p style="margin: 1.5rem 0;">
                     <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
                     <script type='text/javascript'>
                         kofiwidget2.init('Support us on Ko-fi', 'revert-layer', 'D1D76X1T1');
                         kofiwidget2.draw();
                     </script>
+                    </p>
+                    <p>Simple and secure payments available in most regions.</p>
                     <p class="donation-fallback">If the widget does not load, use the direct link: <a href="https://ko-fi.com/D1D76X1T1" target="_blank" rel="noopener noreferrer">ko-fi.com/D1D76X1T1</a>.</p>
                 </div>
                 <div class="donation-method">
-                    <h3>Support in Crypto</h3>
-                    <p>If crypto is easier for you, use the donation widget below:</p>
+                    <h3>Crypto Donations</h3>
+                    <p>Prefer crypto? Use the widget below.:</p>
                     <iframe src="https://nowpayments.io/embeds/donation-widget?api_key=8881e1d0-aaef-46c4-9a60-298bb6f26c3b" width="346" height="623" frameborder="0" scrolling="no" style="overflow-y: hidden;">
                         Can't load widget
                     </iframe>
-                    <p class="donation-fallback">If the widget is blocked by your browser, try disabling content blockers or use Ko-fi above.</p>
+                    <p class="donation-fallback">If it’s blocked by your browser, try disabling content blockers or use Ko‑fi instead.</p>
                 </div>
             </div>
 
-            <h2 style="color: var(--ligth-h2-color); margin-top: 2rem;">Latest Donations</h2>
+            <h2 style="color: var(--ligth-h2-color); margin-top: 2rem;">💬 Recent Support</h2>
             <div class="donation-method donations-history">
                 {if $LatestDonations|@count > 0}
                     <table class="donations-history-table">
@@ -82,9 +83,10 @@
     </div>
     <div class="section bottom colored">
         <div>
+            <h3>🙏 Thank You</h3>
             <h4>
-                Thank you for being an amazing part of the SQLtest.online community! Your support makes a real difference. ❤️ 
-                Together, we're making SQL learning more accessible and enjoyable for everyone.
+                Thank you for being an amazing part of the SQLtest.online community.
+                Your support truly makes a difference — together we’re making SQL learning accessible and enjoyable for everyone. ❤️
             </h4>
         </div>
     </div>
