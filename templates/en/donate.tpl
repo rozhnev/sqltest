@@ -36,8 +36,8 @@
                     <p class="donation-fallback">If it’s blocked by your browser, try disabling content blockers or use Ko‑fi instead.</p>
                 </div>
             </div>
+            <h3>🎯 How Your Support Helps</h3>
             <div class="donation-method donations-history">
-                        <h3>🎯 How Your Support Helps</h3>
             <ul class="donation-suggested">
                 <li>$3-5 helps cover part of the monthly server bill.</li>
                 <li>$10-15 helps fund new lessons and exercises.</li>
