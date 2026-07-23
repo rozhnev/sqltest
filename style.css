@@ -605,11 +605,34 @@ input:checked + .slider:before {
     text-align: right;
 }
 .menu .panel a {
-    color: var(--menu-link-color); 
+    color: var(--menu-link-color);
     display: flex;
     margin: 7px 0;
     text-decoration: none;
     padding-bottom: 6px;
+    flex: 1;
+    min-width: 0;
+}
+.menu .panel .question-row {
+    display: flex;
+    align-items: center;
+}
+.menu .panel .question-reorder {
+    display: inline-flex;
+    flex-direction: column;
+    flex-shrink: 0;
+}
+.menu .panel .question-reorder__btn {
+    background: none;
+    border: none;
+    color: var(--menu-link-color);
+    cursor: pointer;
+    font-size: 0.6em;
+    line-height: 1;
+    padding: 1px 4px;
+}
+.menu .panel .question-reorder__btn:hover {
+    color: var(--question-text);
 }
 .menu .panel a:hover {
     border-bottom: 1px solid  var(--question-text);;
