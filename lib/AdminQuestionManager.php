@@ -391,10 +391,19 @@ class AdminQuestionManager extends AdminContentManager
                 ':question_id' => $questionId,
                 ':language' => $language,
                 ':title' => $fields['title'],
-                ':task' => $fields['task'],
+                ':task' => $this->wrapTaskInPre($fields['task']),
                 ':hint' => $fields['hint']
             ]);
         }
+    }
+
+    private function wrapTaskInPre(string $task): string
+    {
+        $trimmed = trim($task);
+        if (preg_match('/^<pre[^>]*>.*<\/pre>$/is', $trimmed)) {
+            return $task;
+        }
+        return '<pre>' . $task . '</pre>';
     }
 
     private function getLocalizations(int $questionId): array
