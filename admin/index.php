@@ -343,6 +343,7 @@ function doQuestionReview(LLM $llm, array $payload): string
 - Wrap important specific values (e.g., names, dates, amounts) in <b>...</b> tags, e.g. \"Generate a monthly billing report for customer <b>Dorothy Taylor</b> for <b>August 2005</b>.\"
 - If the task or hint lists more than 3 fields/columns/values, format them as a list (one item per line starting with \"- \"), each with its own short description, instead of one long comma-separated sentence.
 - The hint must nudge toward the approach and must never reveal or contain the SQL solution.
+- Write hints as direct, imperative calls to action, not passive suggestions; never use hedging phrases like \"Рассмотрите возможность\" (\"consider the possibility of\").
 - Keep the original meaning and technical content intact; use an imperative, concise tone.
 - If a part is already fine, say so explicitly instead of inventing changes.
 - When a change is needed, always give the complete replacement text in full — never a partial phrase, a diff, or \"...\" — so it can be copied directly into the field.
