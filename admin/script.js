@@ -326,25 +326,30 @@ async function questionReview(language) {
         return;
     }
 
-    const question = {
-        language: normalizedLanguage,
-        title: document.getElementById(`questionTitle${normalizedLanguage}`).value.trim(),
-        task: document.getElementById(`questionTask${normalizedLanguage}`).value.trim(),
-        hint: document.getElementById(`questionHint${normalizedLanguage}`).value.trim(),
-        questionSolution: document.getElementById('questionSolution').value.trim(),
-    };
-    const input = `Review this question:
+    const title = document.getElementById(`questionTitle${normalizedLanguage}`).value.trim();
+    const task = document.getElementById(`questionTask${normalizedLanguage}`).value.trim();
+    const hint = document.getElementById(`questionHint${normalizedLanguage}`).value.trim();
+    const solution = document.getElementById('questionSolution').value.trim();
 
-        Title: ${question.title}
-        Task: ${question.task}
-        Hint: ${question.hint}
-        Solution query:  ${question.questionSolution}
-        
-        Return answer in language ${LANGUAGE_LABELS[normalizedLanguage] || normalizedLanguage}
-        `;
-    response = await runLLM('question-review', input, LANGUAGE_LABELS[normalizedLanguage]);
-    document.getElementById(`questionLLMResult${normalizedLanguage}`).innerHTML = response;   
-    // showStatus('Review completed', 'success');
+    if (!title && !task && !hint) {
+        showStatus('Provide at least a title, task, or hint before requesting a review', 'info');
+        return;
+    }
+
+    try {
+        const { result } = await safeFetch('/admin/llm', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                task: 'question-review',
+                language: LANGUAGE_LABELS[normalizedLanguage] || normalizedLanguage,
+                context: { title, question: task, hint, solution }
+            })
+        });
+        document.getElementById(`questionLLMResult${normalizedLanguage}`).innerHTML = result || 'No response';
+    } catch (error) {
+        console.error(error);
+    }
 }
 
 async function questionTranslateTo(sourceLanguage) {

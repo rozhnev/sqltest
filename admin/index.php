@@ -311,10 +311,20 @@ function doQuestionReview(LLM $llm, array $payload): string
     }
 
     $messages = [
-        ['role' => 'system', 'content' => 'You act as a senior SQL instructor who proofreads questions for clarity, fairness, and accuracy.'],
-        ['role' => 'user', 'content' => "Review the following SQL question in {$language}. Provide short feedback on clarity, correctness, and polish. The title must be short as possible. Use bullet points if possible. Use <span class='sql'><</span> for wrap reserved keywords and database objects names in task and hint."],
+        ['role' => 'system', 'content' => 'You act as a senior SQL instructor who proofreads questions for clarity, correctness, and polish.'],
+        ['role' => 'user', 'content' => "Review the following SQL question in {$language}. Follow these rules strictly:
+- Give short, actionable feedback on clarity, correctness, and polish, using bullet points where useful.
+- Keep the title as short as possible; avoid generic verbs like \"Find\", \"Select\", or \"Get\".
+- Wrap SQL keywords and database object/column names in <span class='sql'>...</span> tags within the task and hint.
+- The hint must nudge toward the approach and must never reveal or contain the SQL solution.
+- Keep the original meaning and technical content intact; use an imperative, concise tone.
+- If a part is already fine, say so explicitly instead of inventing changes.
+
+Return the result in exactly this format:
+Title: [feedback, plus an improved title if needed]
+Task: [feedback, plus improved wording if needed]
+Hint: [feedback, plus improved wording if needed]"],
         ['role' => 'user', 'content' => implode("\n\n", $sections)],
-        ['role' => 'user', 'content' => 'Provide improved versions of the title, question, and hint if applicable, but keep the original meaning and technical content intact. Use imperative tone and be concise. If the original content is good, just say it is fine.']
     ];
     return $llm->parseMarkdown($llm->ask($messages));
 }
@@ -350,40 +360,44 @@ function doGenerateTask(LLM $llm, array $payload): string
 
     $messages = [
         ['role' => 'system', 'content' => 'You are an experienced SQL instructor who creates clear, educational task descriptions for SQL exercises.'],
-        ['role' => 'user', 'content' => "Based on the following SQL query, generate a clear and concise exercise in {$language}."],
-        ['role' => 'user', 'content' => "SQL Query:\n{$query}"],
-        ['role' => 'user', 'content' => '
-        The task should describe what the student needs to accomplish without revealing the exact solution. 
-        Use an imperative, professional, and clear tone.
-        Specify which tables and columns should be used.
-        Clearly define the required output format: list ALL exact column names (including calculated/aliased ones) and specify the sort order.
-        Focus on the main SQL concept used in the query (e.g., window functions, aggregations, bucketing) as the primary goal of the task.
-        
-        Formatting rules:
-        - Wrap SQL keywords (e.g., <span class="sql">SELECT</span>), database objects (e.g., <span class="sql">customer</span>), and ALL column names (e.g., <span class="sql">customer_id</span>, <span class="sql">bucket</span>) in <span class="sql"></span> tags.
-        - Use <b></b> tags for key requirements or important constraints.
-        
-        The response must contain three parts:
-        1. Title: A very short (2-4 words) descriptive title.
-        2. Task: A clear description (1-3 sentences) of the goal, including output requirements.
-        3. Hint: A helpful, brief nudge (focus on the "how" or a specific SQL concept) without giving the code.
+        ['role' => 'user', 'content' => "Based on the following SQL query, generate a clear and concise exercise in {$language}.
 
-        Format the response exactly like this:
-            Title: [Title text]
-            Task: [Task text]
-            Hint: [Hint text]
-        ']
+SQL Query:
+{$query}
+
+Follow these rules strictly:
+- Describe what the student needs to accomplish without revealing the exact solution.
+- Use an imperative, professional, and clear tone.
+- Specify which tables and columns should be used.
+- Clearly define the required output format: list ALL exact column names (including calculated/aliased ones) and specify the sort order.
+- Focus on the main SQL concept used in the query (e.g., window functions, aggregations, bucketing) as the primary goal of the task.
+- Wrap SQL keywords (e.g., <span class='sql'>SELECT</span>), database objects (e.g., <span class='sql'>customer</span>), and ALL column names (e.g., <span class='sql'>customer_id</span>) in <span class='sql'></span> tags.
+- Use <b></b> tags for key requirements or important constraints.
+
+Format the response exactly like this:
+Title: [a very short (2-4 words) descriptive title]
+Task: [a clear description (1-3 sentences) of the goal, including output requirements]
+Hint: [a helpful, brief nudge focused on the \"how\" or a specific SQL concept, without giving the code]"],
     ];
 
-    return $llm->cleanupResult($llm->ask($messages));
+    return $llm->parseMarkdown($llm->ask($messages));
 }
 
 function contextSections(array $context): array
 {
+    $labels = [
+        'title' => 'Title',
+        'question' => 'Question',
+        'hint' => 'Hint',
+        'match' => 'Match',
+        'not_match' => 'Not_match',
+        'result' => 'Result',
+        'solution' => 'Solution query',
+    ];
     $sections = [];
-    foreach (['title', 'question', 'hint', 'match', 'not_match', 'result'] as $field) {
+    foreach ($labels as $field => $label) {
         if (!empty($context[$field])) {
-            $sections[] = ucfirst($field) . ": " . $context[$field];
+            $sections[] = $label . ": " . $context[$field];
         }
     }
     return $sections;
