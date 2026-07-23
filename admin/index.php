@@ -316,14 +316,16 @@ function doQuestionReview(LLM $llm, array $payload): string
 - Give short, actionable feedback on clarity, correctness, and polish, using bullet points where useful.
 - Keep the title as short as possible; avoid generic verbs like \"Find\", \"Select\", or \"Get\".
 - Wrap SQL keywords and database object/column names in <span class='sql'>...</span> tags within the task and hint.
+- Wrap important specific values (e.g., names, dates, amounts) in <b>...</b> tags, e.g. \"Generate a monthly billing report for customer <b>Dorothy Taylor</b> for <b>August 2005</b>.\"
 - The hint must nudge toward the approach and must never reveal or contain the SQL solution.
 - Keep the original meaning and technical content intact; use an imperative, concise tone.
 - If a part is already fine, say so explicitly instead of inventing changes.
+- When a change is needed, always give the complete replacement text in full — never a partial phrase, a diff, or \"...\" — so it can be copied directly into the field.
 
 Return the result in exactly this format:
-Title: [feedback, plus an improved title if needed]
-Task: [feedback, plus improved wording if needed]
-Hint: [feedback, plus improved wording if needed]"],
+Title: [feedback; if changed, the complete improved title in full]
+Task: [feedback; if changed, the complete improved task text in full]
+Hint: [feedback; if changed, the complete improved hint text in full]"],
         ['role' => 'user', 'content' => implode("\n\n", $sections)],
     ];
     return $llm->parseMarkdown($llm->ask($messages));
@@ -372,7 +374,7 @@ Follow these rules strictly:
 - Clearly define the required output format: list ALL exact column names (including calculated/aliased ones) and specify the sort order.
 - Focus on the main SQL concept used in the query (e.g., window functions, aggregations, bucketing) as the primary goal of the task.
 - Wrap SQL keywords (e.g., <span class='sql'>SELECT</span>), database objects (e.g., <span class='sql'>customer</span>), and ALL column names (e.g., <span class='sql'>customer_id</span>) in <span class='sql'></span> tags.
-- Use <b></b> tags for key requirements or important constraints.
+- Wrap important specific values (e.g., names, dates, amounts) in <b>...</b> tags, e.g. \"Generate a monthly billing report for customer <b>Dorothy Taylor</b> for <b>August 2005</b>.\"
 
 Format the response exactly like this:
 Title: [a very short (2-4 words) descriptive title]
