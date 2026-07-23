@@ -258,6 +258,72 @@ class AdminQuestionManager extends AdminContentManager
         }
     }
 
+    public function moveQuestionCategoryPosition(int $questionId, int $categoryId, string $direction): bool
+    {
+        if ($questionId <= 0 || $categoryId <= 0) {
+            throw new Exception('Question and category identifiers are required');
+        }
+        $direction = strtolower($direction);
+        if (!in_array($direction, ['up', 'down'], true)) {
+            throw new Exception('Invalid move direction');
+        }
+
+        $this->dbh->beginTransaction();
+        try {
+            $stmtCurrent = $this->dbh->prepare('
+                SELECT sequence_position FROM question_categories
+                WHERE category_id = :category_id AND question_id = :question_id
+            ');
+            $stmtCurrent->execute([':category_id' => $categoryId, ':question_id' => $questionId]);
+            $currentPosition = $stmtCurrent->fetchColumn();
+
+            if ($currentPosition === false || $currentPosition === null) {
+                $this->dbh->rollBack();
+                return false;
+            }
+
+            $operator = $direction === 'up' ? '<' : '>';
+            $order = $direction === 'up' ? 'DESC' : 'ASC';
+
+            $stmtNeighbor = $this->dbh->prepare("
+                SELECT question_id, sequence_position FROM question_categories
+                WHERE category_id = :category_id AND sequence_position $operator :current_position
+                ORDER BY sequence_position $order
+                LIMIT 1
+            ");
+            $stmtNeighbor->execute([':category_id' => $categoryId, ':current_position' => $currentPosition]);
+            $neighbor = $stmtNeighbor->fetch(PDO::FETCH_ASSOC);
+
+            if (!$neighbor) {
+                $this->dbh->rollBack();
+                return false;
+            }
+
+            $stmtSwap = $this->dbh->prepare('
+                UPDATE question_categories SET sequence_position = :position
+                WHERE category_id = :category_id AND question_id = :question_id
+            ');
+            $stmtSwap->execute([
+                ':position' => $neighbor['sequence_position'],
+                ':category_id' => $categoryId,
+                ':question_id' => $questionId
+            ]);
+            $stmtSwap->execute([
+                ':position' => $currentPosition,
+                ':category_id' => $categoryId,
+                ':question_id' => $neighbor['question_id']
+            ]);
+
+            $this->dbh->commit();
+            return true;
+        } catch (Exception $e) {
+            if ($this->dbh->inTransaction()) {
+                $this->dbh->rollBack();
+            }
+            throw $e;
+        }
+    }
+
     public function delete(int $questionId): bool
     {
         if ($questionId <= 0) {

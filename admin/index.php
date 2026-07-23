@@ -51,6 +51,9 @@ switch ($resource) {
     case 'question-categories':
         handleQuestionCategories($questionManager, $method);
         break;
+    case 'question-category-position':
+        handleQuestionCategoryPosition($questionManager, $method);
+        break;
     case 'lessons':
         handleLessons($lessonManager, $_GET, $method);
         break;
@@ -205,6 +208,28 @@ function handleQuestionCategories(AdminQuestionManager $manager, string $method)
     try {
         $manager->saveQuestionCategories($questionId, $categories);
         respondJson(['ok' => true, 'categories' => $manager->getQueryCategories($questionId)]);
+    } catch (Exception $error) {
+        respondJson(['error' => $error->getMessage()], 400);
+    }
+}
+
+function handleQuestionCategoryPosition(AdminQuestionManager $manager, string $method): void
+{
+    if ($method !== 'POST') {
+        respondMethodNotAllowed();
+    }
+    $payload = parseJsonBody();
+    $questionId = isset($payload['question_id']) ? (int)$payload['question_id'] : 0;
+    $categoryId = isset($payload['category_id']) ? (int)$payload['category_id'] : 0;
+    $direction = $payload['direction'] ?? '';
+
+    if ($questionId <= 0 || $categoryId <= 0) {
+        respondJson(['error' => 'Question and category identifiers are required'], 400);
+    }
+
+    try {
+        $moved = $manager->moveQuestionCategoryPosition($questionId, $categoryId, $direction);
+        respondJson(['ok' => $moved]);
     } catch (Exception $error) {
         respondJson(['error' => $error->getMessage()], 400);
     }
