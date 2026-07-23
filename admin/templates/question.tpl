@@ -179,7 +179,7 @@
                                 </div>
                             </div>
                             <div class="panel__actions">
-                                <button type="button" class="button-primary" id="saveQuestionBtn">Save question</button>
+                                <button type="button" class="button-primary" id="saveQuestionCategoriesBtn" onClick="questionCategoriesSave({$QuestionID})">Save question categories</button>
                             </div>
                         </form>
                     </section>
