@@ -36,7 +36,7 @@
                     <p class="donation-fallback">If it’s blocked by your browser, try disabling content blockers or use Ko‑fi instead.</p>
                 </div>
             </div>
-            <h3>🎯 How Your Support Helps</h3>
+            <h3 style="color: var(--ligth-h2-color);">🎯 How Your Support Helps</h3>
             <div class="donation-method donations-history">
             <ul class="donation-suggested">
                 <li>$3-5 helps cover part of the monthly server bill.</li>
