@@ -213,6 +213,51 @@ class AdminQuestionManager extends AdminContentManager
         }
     }
 
+    public function saveQuestionCategories(int $questionId, array $categoryIds): void
+    {
+        if ($questionId <= 0) {
+            throw new Exception('Question identifier is required');
+        }
+
+        $categoryIds = array_values(array_unique(array_map('intval', $categoryIds)));
+
+        if (empty($categoryIds)) {
+            throw new Exception('At least one category is required');
+        }
+
+        $this->dbh->beginTransaction();
+        try {
+            $placeholders = implode(',', array_fill(0, count($categoryIds), '?'));
+            $stmtDelete = $this->dbh->prepare("DELETE FROM question_categories WHERE question_id = ? AND category_id NOT IN ($placeholders)");
+            $stmtDelete->execute(array_merge([$questionId], $categoryIds));
+
+            $stmtInsert = $this->dbh->prepare('
+                INSERT INTO question_categories (question_id, category_id, sequence_position)
+                VALUES (:question_id, :category_id, (
+                    SELECT COALESCE(MAX(sequence_position), 0) + 1
+                    FROM question_categories
+                    WHERE category_id = :category_id_pos
+                ))
+                ON CONFLICT (question_id, category_id) DO NOTHING
+            ');
+
+            foreach ($categoryIds as $categoryId) {
+                $stmtInsert->execute([
+                    ':question_id' => $questionId,
+                    ':category_id' => $categoryId,
+                    ':category_id_pos' => $categoryId
+                ]);
+            }
+
+            $this->dbh->commit();
+        } catch (Exception $e) {
+            if ($this->dbh->inTransaction()) {
+                $this->dbh->rollBack();
+            }
+            throw $e;
+        }
+    }
+
     public function delete(int $questionId): bool
     {
         if ($questionId <= 0) {

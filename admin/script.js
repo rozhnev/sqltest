@@ -498,6 +498,47 @@ async function questionChecksSave(questionId) {
     }
 }
 
+function collectQuestionCategoryStates() {
+    const categories = [];
+    document.querySelectorAll('[data-question-category-row]').forEach((row) => {
+        const checkbox = row.querySelector('input[type="checkbox"]');
+        const id = row.dataset.categoryId;
+        if (!checkbox || !id || !checkbox.checked) {
+            return;
+        }
+        categories.push(parseInt(id, 10));
+    });
+    return categories;
+}
+
+async function questionCategoriesSave(questionId) {
+    const id = parseInt(questionId, 10);
+    if (!id) {
+        showStatus('Save the question before toggling categories.', 'info');
+        return;
+    }
+    const categories = collectQuestionCategoryStates();
+
+    try {
+        const response = await safeFetch('/admin/question-categories', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                question_id: id,
+                categories
+            })
+        });
+        if (response.ok) {
+            showStatus('Question categories saved', 'success');
+        } else {
+            console.error('Failed to save question categories', response);
+            showStatus('Failed to save question categories', 'error');
+        }
+    } catch (error) {
+        console.error(error);
+    }
+}
+
 async function runLLM(task, input, language = 'English') {
     const payload = { task, language };
     console.log(`Running LLM task: ${task} with input:`, input);
