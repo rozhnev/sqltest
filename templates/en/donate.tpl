@@ -78,13 +78,19 @@
             </div>
         </div>
     </div>
+        <h3 style="color: var(--ligth-h2-color);">🙏 Thank You</h3>
+        <div class="donation-method donations-history">
+            Hi, I’m Slava — I created SQLtest.online to help people learn SQL for free.
+            I build and maintain this project myself, and your support directly helps me
+            keep servers running, publish new lessons, and develop more interactive exercises.
+            Thank you for helping SQL learning stay accessible to everyone.
+        </div>
     <div class="section bottom colored">
         <div>
-            <h3>🙏 Thank You</h3>
             <h4>
-                Hi, I’m Slava — I created SQLtest.online to help people learn SQL for free.
-                I build and maintain this project myself, and your support directly helps me keep servers running, publish new lessons, and develop more interactive exercises.
-                Thank you for helping SQL learning stay accessible to everyone.
+                Thank you for being an amazing part of the SQLtest.online community!
+                Your support makes a real difference. ❤️
+                Together, we're making SQL learning more accessible and enjoyable for everyone.
             </h4>
         </div>
     </div>
