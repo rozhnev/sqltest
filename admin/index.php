@@ -48,6 +48,9 @@ switch ($resource) {
     case 'question-checks':
         handleQuestionChecks($questionManager, $method);
         break;
+    case 'question-categories':
+        handleQuestionCategories($questionManager, $method);
+        break;
     case 'lessons':
         handleLessons($lessonManager, $_GET, $method);
         break;
@@ -181,6 +184,27 @@ function handleQuestionChecks(AdminQuestionManager $manager, string $method): vo
     try {
         $result = $manager->saveQueryChecks($questionId, $checks);
         respondJson(['checks' => $result]);
+    } catch (Exception $error) {
+        respondJson(['error' => $error->getMessage()], 400);
+    }
+}
+
+function handleQuestionCategories(AdminQuestionManager $manager, string $method): void
+{
+    if ($method !== 'POST') {
+        respondMethodNotAllowed();
+    }
+    $payload = parseJsonBody();
+    $questionId = isset($payload['question_id']) ? (int)$payload['question_id'] : 0;
+    $categories = isset($payload['categories']) && is_array($payload['categories']) ? $payload['categories'] : [];
+
+    if ($questionId <= 0) {
+        respondJson(['error' => 'Question identifier is required'], 400);
+    }
+
+    try {
+        $manager->saveQuestionCategories($questionId, $categories);
+        respondJson(['ok' => true, 'categories' => $manager->getQueryCategories($questionId)]);
     } catch (Exception $error) {
         respondJson(['error' => $error->getMessage()], 400);
     }
