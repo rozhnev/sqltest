@@ -77,7 +77,6 @@
                 {/if}
             </div>
         </div>
-    </div>
         <h3 style="color: var(--ligth-h2-color);">🙏 Thank You</h3>
         <div class="donation-method donations-history">
             Hi, I’m Slava — I created SQLtest.online to help people learn SQL for free.
@@ -85,6 +84,7 @@
             keep servers running, publish new lessons, and develop more interactive exercises.
             Thank you for helping SQL learning stay accessible to everyone.
         </div>
+    </div>
     <div class="section bottom colored">
         <div>
             <h4>
