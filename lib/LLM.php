@@ -43,6 +43,7 @@ class LLM {
     }
 
     public function parseMarkdown(string $markdown): string {
+        $markdown = str_replace('—', '-', $markdown);
         $parser = new \cebe\markdown\GithubMarkdown();
         $parsed = $parser->parse($markdown);
         $parsed = preg_replace('#</?(ul|ol)>#i', '', $parsed);

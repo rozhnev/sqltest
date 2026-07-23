@@ -317,6 +317,7 @@ function doQuestionReview(LLM $llm, array $payload): string
 - Keep the title as short as possible; avoid generic verbs like \"Find\", \"Select\", or \"Get\".
 - Wrap SQL keywords and database object/column names in <span class='sql'>...</span> tags within the task and hint.
 - Wrap important specific values (e.g., names, dates, amounts) in <b>...</b> tags, e.g. \"Generate a monthly billing report for customer <b>Dorothy Taylor</b> for <b>August 2005</b>.\"
+- If the task or hint lists more than 3 fields/columns/values, format them as a list (one item per line starting with \"- \"), each with its own short description, instead of one long comma-separated sentence.
 - The hint must nudge toward the approach and must never reveal or contain the SQL solution.
 - Keep the original meaning and technical content intact; use an imperative, concise tone.
 - If a part is already fine, say so explicitly instead of inventing changes.
@@ -375,6 +376,7 @@ Follow these rules strictly:
 - Focus on the main SQL concept used in the query (e.g., window functions, aggregations, bucketing) as the primary goal of the task.
 - Wrap SQL keywords (e.g., <span class='sql'>SELECT</span>), database objects (e.g., <span class='sql'>customer</span>), and ALL column names (e.g., <span class='sql'>customer_id</span>) in <span class='sql'></span> tags.
 - Wrap important specific values (e.g., names, dates, amounts) in <b>...</b> tags, e.g. \"Generate a monthly billing report for customer <b>Dorothy Taylor</b> for <b>August 2005</b>.\"
+- If the task lists more than 3 fields/columns/values, format them as a list (one item per line starting with \"- \"), each with its own short description, instead of one long comma-separated sentence.
 
 Format the response exactly like this:
 Title: [a very short (2-4 words) descriptive title]
