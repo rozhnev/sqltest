@@ -1,8 +1,6 @@
 {include file='header.tpl'}
 <link rel="stylesheet" href="/css/lesson.min.css?{$VERSION}" media="all">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rozhnev/sql-highlighter@v1.0.0/sql-highlighter.min.css" media="all">
-{* <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/xcode.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script> *}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rozhnev/sql-highlighter@v1.0.1/sql-highlighter.min.css" media="all">
 <body>
     <div class="container">
         {include file='popups.tpl'}
