@@ -98,7 +98,6 @@
         </footer>
         </div>
         {include file='counters.tpl'}
-        <script src="https://cdn.jsdelivr.net/gh/rozhnev/sql-highlighter@v1.0.0/sql-highlighter.min.js"></script>
         <script>
             SQLHighlighter.extend({
                 functions: ['AGGREGATION_FUNCTION', 'FUNCTION_NAME'],
