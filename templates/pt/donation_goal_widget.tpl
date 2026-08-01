@@ -101,6 +101,12 @@
                 O custo mensal de manutenção é <strong>${$goal|string_format:"%.0f"}</strong>.
             </p>
             <p>
+                No mês passado, adicionei um novo banco de dados MariaDB com um banco University DB pré-carregado, 9 novas questões e refatorei muitas questões e lições.
+            </p>
+            <p>
+                Com o seu apoio, planeio continuar este trabalho: escrever novas lições e tarefas e melhorar as lições existentes.
+            </p>
+            <p>
                 Para manter o projeto no próximo mês, precisamos arrecadar pelo menos esse valor até o fim deste mês.
                 Tudo o que passar disso será usado em novas lições, exercícios e recursos.
             </p>

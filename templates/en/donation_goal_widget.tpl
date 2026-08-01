@@ -101,6 +101,12 @@
                 The monthly maintenance cost is <strong>${$goal|string_format:"%.0f"}</strong>.
             </p>
             <p>
+                Last month I added a new MariaDB database with a preloaded University DB, 9 new questions, and refactored many questions and lessons.
+            </p>
+            <p>
+                With your support, I plan to continue this work: write new lessons and tasks, and improve existing lessons.
+            </p>
+            <p>
                 To keep the project running next month, we need to collect at least this amount by the end of this month.
                 Anything above it goes to new lessons, exercises, and features.
             </p>

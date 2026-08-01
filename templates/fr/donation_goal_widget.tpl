@@ -101,6 +101,12 @@
                 Le coût de maintenance mensuel est de <strong>${$goal|string_format:"%.0f"}</strong>.
             </p>
             <p>
+                Le mois dernier, j'ai ajouté une nouvelle base de données MariaDB avec une base University DB préchargée, 9 nouvelles questions, et j'ai refactoré de nombreuses questions et leçons.
+            </p>
+            <p>
+                Avec votre soutien, je prévois de poursuivre ce travail : écrire de nouvelles leçons et tâches, et améliorer les leçons existantes.
+            </p>
+            <p>
                 Pour maintenir le projet le mois prochain, nous devons recevoir au moins cette somme avant la fin du mois en cours.
                 Tout ce qui dépasse ce montant sera consacré à de nouvelles leçons, à de nouveaux exercices et à de nouvelles fonctionnalités.
             </p>
