@@ -32,6 +32,7 @@ class User
     private $show_ad = true;
     private $admin = false;
     private $nickname;
+    private $authProvider;
 
     private $grades = [ 1 => 'Intern', 2 => 'Junior', 3 => 'Middle', 4 => 'Senior'];
     /**
@@ -79,17 +80,19 @@ class User
     {
         if (($session && isset($session['user_id']))) {
             $stmt = $this->dbh->prepare("SELECT 
-                    id, grade, graded_at, (hide_ad_till is null or hide_ad_till < current_date) show_ad, admin, nickname
+                    id, login, grade, graded_at, (hide_ad_till is null or hide_ad_till < current_date) show_ad, admin, nickname
                 FROM users WHERE id = :user_id;");
             $stmt->execute([':user_id' => $session['user_id']]);
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
             if ($user) {
                 $this->id = $user['id'];
+                $this->login = $user['login'];
                 $this->grade = $user['grade'];
                 $this->graded_at = $user['graded_at'];
                 $this->show_ad = $user['show_ad'];
                 $this->admin = $user['admin'];
                 $this->nickname = $user['nickname'];
+                $this->authProvider = $this->resolveAuthProviderFromLogin($user['login']);
                 return true;
             }
         }
@@ -118,6 +121,7 @@ class User
         $this->show_ad = $user['show_ad'];
         $this->admin = $user['admin'];
         $this->nickname = $user['nickname'];
+        $this->authProvider = 'password';
 
         $update = $this->dbh->prepare("UPDATE users SET last_login_at = CURRENT_TIMESTAMP WHERE id = :id");
         $update->execute([':id' => $this->id]);
@@ -164,6 +168,7 @@ class User
             if (!$info['email'])  return false;
 
             $this->login = $info['email'] . '@linkedin';
+            $this->authProvider = 'linkedin';
             $this->upsert();
             return true;
         }
@@ -202,6 +207,7 @@ class User
                 if (!$info['response']['user_id'])  return false;
 
                 $this->login = $info['response']['user_id'] . '@vk';
+                $this->authProvider = 'vk';
                 $this->upsert();
                 return true;
             }
@@ -245,6 +251,7 @@ class User
                 $info = json_decode($info, true);
     
                 $this->login = $info['email'] . '@google';
+                $this->authProvider = 'google';
                 $this->upsert();
                 return true;
             }
@@ -300,6 +307,7 @@ class User
                     $info = json_decode($info, true);
         
                     $this->login = $info['login'] . '@github';
+                    $this->authProvider = 'github';
                     $this->upsert();
                     return true;
                 }
@@ -353,6 +361,7 @@ class User
                     $info = json_decode($info, true);
         
                     $this->login = $info['login'] . '@yandex';
+                    $this->authProvider = 'yandex';
                     $this->upsert();
                     return true;
                 }
@@ -1043,14 +1052,29 @@ class User
             return '';
         }
 
+        if (!empty($this->authProvider)) {
+            return $this->authProvider;
+        }
+
+        if (!empty($this->login)) {
+            $this->authProvider = $this->resolveAuthProviderFromLogin($this->login);
+            return $this->authProvider;
+        }
+
         $stmt = $this->dbh->prepare("SELECT login FROM users WHERE id = ?");
         $stmt->execute([$this->id]);
         $login = $stmt->fetchColumn() ?: '';
-        if (preg_match('/@(github|google|yandex|vk|linkedin)$/', $login, $m)) {
+        $this->authProvider = $this->resolveAuthProviderFromLogin($login);
+        return $this->authProvider;
+    }
+
+    private function resolveAuthProviderFromLogin(string $login): string
+    {
+        if (preg_match('/@(github|google|yandex|vk|linkedin|password)$/', $login, $m)) {
             return $m[1];
-        } else {
-            return 'unknown';
         }
+
+        return 'unknown';
     }
 
     public function getEmail(): string
