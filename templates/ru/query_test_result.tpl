@@ -75,7 +75,7 @@
             <a class="button" target="_blank" rel="noopener noreferrer" href="https://vk.com/share.php?url=https%3A%2F%2Fsqltest.online%2F" style="margin-top: 0.75rem; display: inline-flex; align-items: center; gap: 8px; background: #0077FF; border-color: #0077FF; color: #fff !important;">
                 <span style="display: inline-flex; align-items: center; gap: 6px;">
                     <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="M12.06 2C6.53 2 2 6.53 2 12.06c0 5.52 4.53 10.06 10.06 10.06 5.52 0 10.06-4.54 10.06-10.06C22.12 6.53 17.58 2 12.06 2Zm4.76 14.34h-1.84c-.56 0-.74-.45-1.76-1.47-.89-.84-1.28-1.03-1.5-1.03-.31 0-.4.08-.4.5v1.34c0 .36-.12.58-1.08.58-1.58 0-3.33-.96-4.56-2.74-.92-1.26-1.61-2.92-1.61-3.27 0-.2.07-.39.45-.39h1.84c.34 0 .47.15.6.48.66 1.66 1.76 3.12 2.2 3.12.17 0 .25-.08.25-.55v-2.28c-.06-1-.58-1.08-.58-1.43 0-.18.14-.36.36-.36h2.9c.28 0 .38.15.38.53v3.1c0 .34.15.46.24.46.17 0 .33-.12.66-.45 1.03-1.15 1.76-2.9 1.76-2.9.1-.23.24-.44.58-.44h1.84c.56 0 .68.29.56.68-.2.92-2.16 3.67-2.16 3.67-.17.27-.23.4 0 .69.17.23.71.69 1.06 1.06.64.64 1.13 1.19 1.27 1.57.14.39-.08.59-.63.59Z"/></svg>
-                    <span>Поделиться с группой во VK</span>
+                    <span>Поделиться ссылкой с друзьями</span>
                 </span>
             </a>
         </div>
