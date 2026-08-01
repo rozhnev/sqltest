@@ -1,5 +1,5 @@
-<span style="color:#ffffff;">🙏 <strong style="color:#ffe082;">Ajude este projeto a continuar.</strong> No mês passado, arrecadamos apenas <strong style="color:#ff8a80;">US$ 32</strong> - isso cobre só os servidores. Sem seu apoio, não haverá novas lições nem novos recursos.</span>
-<a href="/pt/donate" style="color:#ffd54f; text-decoration:underline; font-weight:bold; white-space:nowrap;">Apoiar agora →</a>
+<span style="color:#ffffff;">🙏 <strong style="color:#ffe082;">Obrigado pelo seu apoio!</strong> Já arrecadamos <strong style="color:#ff8a80;">US$ 65</strong> em julho — isso é suficiente para continuar trabalhando até o próximo mês. Ajude-nos a manter o ritmo e apoiar o projeto ainda mais.</span>
+<a href="/pt/donate" style="color:#ffd54f; text-decoration:underline; font-weight:bold; white-space:nowrap;">Apoiar o projeto →</a>
 
 {* Variante 1 (suave) *}
 {* <span style="color:#ffffff;">🙏 <strong style="color:#ffe082;">Este projeto existe por sua causa.</strong> No mês passado, arrecadamos só <strong style="color:#ff8a80;">US$ 32</strong>. Ajude-nos a continuar publicando novas lições.</span> *}
