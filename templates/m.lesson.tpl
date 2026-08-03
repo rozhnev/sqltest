@@ -32,7 +32,9 @@
                 </div>
             </nav>
             <article class="lesson-wrapper" id="lesson-wrapper">
-                {$LessonData.content}
+                {$ModuleNum = $LessonData.module_num}
+                {$LessonNum = $LessonData.lesson_num}
+                {eval var=$LessonData.content}
             </article>
             {if $RelevantTasks}
             <section class="lesson-relevant-tasks question-wrapper" aria-label="Relevant lesson tasks">
