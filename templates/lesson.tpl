@@ -43,7 +43,18 @@
             </div>
             </nav>
             <main class="column" id="main-content">
-                <article class="lesson-wrapper">
+                {if $User->isAdmin()}
+                <div class="lesson-admin-bar">
+                    <button type="button" class="button" id="lesson-edit-trigger">{translate}lesson_edit_content{/translate}</button>
+                </div>
+                {/if}
+                <article class="lesson-wrapper" id="lesson-content"
+                    {if $User->isAdmin()}
+                    data-lesson-id="{$LessonData.id}"
+                    data-module-id="{$LessonData.module_id}"
+                    data-lesson-slug="{$Lesson->slug()}"
+                    data-lang="{$Lang}"
+                    {/if}>
                     {$ModuleNum = $LessonData.module_num}
                     {$LessonNum = $LessonData.lesson_num}
                     {eval var=$LessonData.content}
@@ -105,5 +116,8 @@
             });
             SQLHighlighter.highlightCodeBlocks();
         </script>
+        {if $User->isAdmin()}
+        <script src="/js/lesson-inline-editor.min.js?{$VERSION}" defer></script>
+        {/if}
     </body>
 </html>

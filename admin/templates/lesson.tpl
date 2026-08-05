@@ -16,6 +16,7 @@
             };
         </script>
         <script src="/admin/script.js?{$VERSION}" defer></script>
+        <script src="/admin/lesson-editor.min.js?{$VERSION}" defer></script>
     </head>
     <body>
         <div class="admin-shell">

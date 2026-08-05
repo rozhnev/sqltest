@@ -241,6 +241,7 @@ $translations = [
     'lessons_page_title' => 'Curso de SQL para Iniciantes.',
     'lessons_page_description' => 'Aprenda SQL com nosso curso gratuito e completo para iniciantes. Domine conceitos SQL, gerenciamento de banco de dados e pratique com exercícios interativos. Torne-se um especialista em SQL hoje mesmo!',
     'lesson_relevant_tasks' => 'Tente resolver as tarefas a seguir para reforcar o que voce aprendeu nesta licao.',
+    'lesson_edit_content' => 'Editar conteúdo',
     'next_lesson' =>    'Próxima lição',
     'previous_lesson' => 'Lição anterior',
     'playground' => 'Playground',

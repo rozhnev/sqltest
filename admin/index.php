@@ -253,8 +253,11 @@ function handleLesson(AdminLessonManager $manager, int $lessonId, string $method
             if ($lessonId <= 0) {
                 respondJson(['error' => 'Lesson identifier is required'], 400);
             }
-            $smarty = new Smarty();
             $lesson = $manager->get($lessonId);
+            if (isApiRequest()) {
+                respondJson(['lesson' => $lesson]);
+            }
+            $smarty = new Smarty();
             $smarty->assign('Lang', 'en');
             $smarty->assign('DB', $env['DB_NAME'] ?? 'sakila');
             $smarty->assign('VERSION', $env['APP_VERSION'] ?? time());
