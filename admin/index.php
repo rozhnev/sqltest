@@ -280,6 +280,21 @@ function handleLesson(AdminLessonManager $manager, int $lessonId, string $method
             $payload['id'] = $lessonId;
             respondJson(['lesson' => $manager->save($payload)]);
             break;
+        case 'PATCH':
+            if ($lessonId <= 0) {
+                respondJson(['error' => 'Lesson identifier is required'], 400);
+            }
+            $payload = parseJsonBody();
+            $language = $payload['language'] ?? '';
+            if ($language === '') {
+                respondJson(['error' => 'Language is required'], 400);
+            }
+            try {
+                respondJson(['lesson' => $manager->updateContent($lessonId, $language, $payload['content'] ?? '')]);
+            } catch (Exception $error) {
+                respondJson(['error' => $error->getMessage()], 400);
+            }
+            break;
         case 'DELETE':
             if ($lessonId <= 0) {
                 respondJson(['error' => 'Lesson identifier is required'], 400);
