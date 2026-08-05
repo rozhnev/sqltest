@@ -111,14 +111,13 @@ class AdminLessonManager extends AdminContentManager
 
     private function getLocalizations(int $lessonId): array
     {
-        $stmt = $this->dbh->prepare('SELECT language, title, content, description FROM lessons_localization WHERE lesson_id = :id');
+        $stmt = $this->dbh->prepare('SELECT language, title, content FROM lessons_localization WHERE lesson_id = :id');
         $stmt->execute([':id' => $lessonId]);
         $localizations = [];
         foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row) {
             $localizations[$row['language']] = [
                 'title' => $row['title'],
-                'content' => $row['content'],
-                'description' => $row['description']
+                'content' => $row['content']
             ];
         }
         return $localizations;
