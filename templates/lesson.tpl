@@ -51,8 +51,6 @@
                 <article class="lesson-wrapper" id="lesson-content"
                     {if $User->isAdmin()}
                     data-lesson-id="{$LessonData.id}"
-                    data-module-id="{$LessonData.module_id}"
-                    data-lesson-slug="{$Lesson->slug()}"
                     data-lang="{$Lang}"
                     {/if}>
                     {$ModuleNum = $LessonData.module_num}

@@ -6,13 +6,9 @@
     }
 
     var lessonId = article.getAttribute('data-lesson-id');
-    var moduleId = article.getAttribute('data-module-id');
-    var slug = article.getAttribute('data-lesson-slug');
     var lang = article.getAttribute('data-lang');
 
     var originalHtml = null;
-    var fetchedTitle = '';
-    var fetchedDescription = '';
 
     trigger.addEventListener('click', function () {
         if (originalHtml !== null) {
@@ -32,8 +28,6 @@
             })
             .then(function (data) {
                 var localization = (data.lesson && data.lesson.localizations && data.lesson.localizations[lang]) || {};
-                fetchedTitle = localization.title || '';
-                fetchedDescription = localization.description || '';
                 openEditor(localization.content || '');
             })
             .catch(function (error) {
@@ -91,18 +85,12 @@
             saveBtn.textContent = 'Saving…';
 
             var payload = {
-                module_id: moduleId ? parseInt(moduleId, 10) : 0,
-                slug: slug,
-                localizations: {}
-            };
-            payload.localizations[lang] = {
-                title: fetchedTitle,
-                description: fetchedDescription,
+                language: lang,
                 content: textarea.value
             };
 
             fetch('/admin/lesson/' + lessonId, {
-                method: 'PUT',
+                method: 'PATCH',
                 headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
                 body: JSON.stringify(payload)
             })

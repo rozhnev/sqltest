@@ -418,7 +418,7 @@ class AdminQuestionManager extends AdminContentManager
 
     private function slugify(string $value): string
     {
-        $value = mb_strtolower($value, 'UTF-8');
+        $value = function_exists('mb_strtolower') ? mb_strtolower($value, 'UTF-8') : strtolower($value);
         $value = preg_replace('/[^\p{L}\p{Nd}]+/u', '-', $value);
         $value = trim($value, '-');
         return $value !== '' ? $value : uniqid('question-');

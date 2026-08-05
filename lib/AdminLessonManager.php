@@ -50,6 +50,30 @@ class AdminLessonManager extends AdminContentManager
         return $stmt->execute([':id' => $lessonId]);
     }
 
+    /**
+     * Update only lessons_localization.content for a single language.
+     * Used by the inline editor on the public lesson page, which must not
+     * touch slug/module_id/title.
+     */
+    public function updateContent(int $lessonId, string $language, string $content): array
+    {
+        if (!in_array($language, $this->supportedLanguages, true)) {
+            throw new Exception('Unsupported language');
+        }
+        $stmt = $this->dbh->prepare('UPDATE lessons_localization
+            SET content = :content
+            WHERE lesson_id = :lesson_id AND language = :language');
+        $stmt->execute([
+            ':content' => $content,
+            ':lesson_id' => $lessonId,
+            ':language' => $language
+        ]);
+        if ($stmt->rowCount() === 0) {
+            throw new Exception('Lesson localization not found');
+        }
+        return $this->get($lessonId);
+    }
+
     private function fetchModules(string $lang): array
     {
         $stmt = $this->dbh->prepare('SELECT m.id, m.slug, ml.title FROM modules m
@@ -175,7 +199,7 @@ class AdminLessonManager extends AdminContentManager
 
     private function slugify(string $value): string
     {
-        $value = mb_strtolower($value, 'UTF-8');
+        $value = function_exists('mb_strtolower') ? mb_strtolower($value, 'UTF-8') : strtolower($value);
         $value = preg_replace('/[^\p{L}\p{Nd}]+/u', '-', $value);
         $value = trim($value, '-');
         return $value !== '' ? $value : uniqid('lesson-');
@@ -183,12 +207,13 @@ class AdminLessonManager extends AdminContentManager
 
     private function upsertLocalizations(int $lessonId, array $localizations): void
     {
-        $stmt = $this->dbh->prepare('INSERT INTO lessons_localization (lesson_id, language, title, content, description)
-            VALUES (:lesson_id, :language, :title, :content, :description)
+        $stmt = $this->dbh->prepare('
+            INSERT INTO lessons_localization (lesson_id, language, title, content)
+            VALUES (:lesson_id, :language, :title, :content)
             ON CONFLICT (lesson_id, language) DO UPDATE SET
                 title = EXCLUDED.title,
-                content = EXCLUDED.content,
-                description = EXCLUDED.description');
+                content = EXCLUDED.content
+        ');
 
         foreach ($localizations as $language => $fields) {
             if (!is_array($fields) || !in_array($language, $this->supportedLanguages, true)) {
@@ -198,8 +223,7 @@ class AdminLessonManager extends AdminContentManager
                 ':lesson_id' => $lessonId,
                 ':language' => $language,
                 ':title' => $fields['title'] ?? '',
-                ':content' => $fields['content'] ?? '',
-                ':description' => $fields['description'] ?? ''
+                ':content' => $fields['content'] ?? ''
             ]);
         }
     }
