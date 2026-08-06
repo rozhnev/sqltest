@@ -48,6 +48,11 @@ class Lesson
         return $this->moduleSlug;
     }
 
+    public function id(): int
+    {
+        return (int)$this->id;
+    }
+
     public function get(string $lang): array
     {
         $stmt = $this->dbh->prepare("
@@ -64,12 +69,13 @@ class Lesson
                 join modules on modules.id = lessons.module_id
                 where not lessons.deleted and not modules.deleted
             ) select 
-                lessons_localization.title,
-                lessons_localization.content,
-                lessons_localization.updated_at,
+                COALESCE(ll_lang.title, ll_en.title) title,
+                COALESCE(ll_lang.content, ll_en.content) content,
+                COALESCE(ll_lang.updated_at, ll_en.updated_at) updated_at,
                 lessons.* 
             from lessons 
-            join lessons_localization on lessons_localization.lesson_id = lessons.id AND lessons_localization.language = :lang
+            left join lessons_localization ll_lang on ll_lang.lesson_id = lessons.id AND ll_lang.language = :lang
+            left join lessons_localization ll_en on ll_en.lesson_id = lessons.id AND ll_en.language = 'en'
             where lessons.id = :id;
         ");
         $stmt->execute([':id' => $this->id, ':lang' => $lang]);
@@ -81,17 +87,18 @@ class Lesson
         $stmt = $this->dbh->prepare("SELECT
                 modules.id,
                 modules.slug AS module_slug,
-                modules_localization.title AS module_title,
+                COALESCE(ml_lang.title, ml_en.title, modules.slug) AS module_title,
                 lessons.id AS lesson_id,
                 lessons.slug AS lesson_slug,
-                ll.title lesson_title,
+                COALESCE(ll_lang.title, ll_en.title, lessons.slug) lesson_title,
                 ROW_NUMBER() OVER (PARTITION BY modules.id ORDER BY lessons.sequence_position) AS lesson_number
             FROM modules
-            JOIN modules_localization ON modules.id = modules_localization.module_id and modules_localization.language =  :lang
+            LEFT JOIN modules_localization ml_lang ON modules.id = ml_lang.module_id and ml_lang.language = :lang
+            LEFT JOIN modules_localization ml_en ON modules.id = ml_en.module_id and ml_en.language = 'en'
             join lessons on lessons.module_id = modules.id
-            join lessons_localization ll on ll.lesson_id = lessons.id and ll.language  = :lang
-            WHERE modules_localization.language = :lang
-                and not modules.deleted 
+            LEFT JOIN lessons_localization ll_lang on ll_lang.lesson_id = lessons.id and ll_lang.language = :lang
+            LEFT JOIN lessons_localization ll_en on ll_en.lesson_id = lessons.id and ll_en.language = 'en'
+            WHERE not modules.deleted 
                 and not lessons.deleted
             ORDER BY modules.sequence_position, lessons.sequence_position;
         ");
@@ -156,18 +163,20 @@ class Lesson
                 questions.id,
                 questions.title_sef AS question_sef,
                 questions.rate,
-                questions_localization.title,
+                COALESCE(ql_lang.title, ql_en.title, questions.title_sef) title,
                 primary_category.category_sef,
                 (user_questions.solved_at IS NOT NULL) AS solved
             FROM questions
-            JOIN questions_localization ON questions_localization.question_id = questions.id
-                AND questions_localization.language = :lang
+            LEFT JOIN questions_localization ql_lang ON ql_lang.question_id = questions.id
+                AND ql_lang.language = :lang
+            LEFT JOIN questions_localization ql_en ON ql_en.question_id = questions.id
+                AND ql_en.language = 'en'
             JOIN primary_category ON primary_category.question_id = questions.id
                 AND primary_category.row_num = 1
             LEFT JOIN user_questions ON user_questions.question_id = questions.id
                 AND user_questions.user_id = :user_id
             WHERE NOT questions.deleted
-                AND questions_localization.tutorial_link = :tutorial_link
+                AND COALESCE(ql_lang.tutorial_link, ql_en.tutorial_link) = :tutorial_link
             ORDER BY
                 CASE WHEN (:prefer_unsolved = 1 AND user_questions.solved_at IS NOT NULL) THEN 1 ELSE 0 END,
                 questions.rate ASC,

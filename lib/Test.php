@@ -109,20 +109,22 @@ class Test
         $stmt = $this->dbh->prepare("SELECT 
                 categories.id,
                 categories.title_sef sef,
-                categories_localization.title questions_category,
+                COALESCE(cl_lang.title, cl_en.title, categories.title_sef) questions_category,
                 questions.id question_id,
                 questions.title_sef question_sef,
                 questions.db_template,
-                questions_localization.title question_title,
+                COALESCE(ql_lang.title, ql_en.title, questions.title_sef) question_title,
                 (test_questions.solved_at IS NOT NULL) solved,
                 ROW_NUMBER() OVER (PARTITION BY categories.id ORDER BY test_questions.question_id) question_order
             FROM tests 
             JOIN test_questions ON test_questions.test_id = tests.id 
             JOIN questions on questions.id = test_questions.question_id
-            JOIN questions_localization on questions_localization.question_id = questions.id AND questions_localization.language = :lang
+            LEFT JOIN questions_localization ql_lang on ql_lang.question_id = questions.id AND ql_lang.language = :lang
+            LEFT JOIN questions_localization ql_en on ql_en.question_id = questions.id AND ql_en.language = 'en'
             JOIN question_categories ON question_categories.question_id = questions.id
             JOIN categories ON categories.id = question_categories.category_id and categories.questionnire_id = tests.questionnire_id
-            JOIN categories_localization ON categories_localization.category_id = categories.id AND categories_localization.language =  :lang
+            LEFT JOIN categories_localization cl_lang ON cl_lang.category_id = categories.id AND cl_lang.language =  :lang
+            LEFT JOIN categories_localization cl_en ON cl_en.category_id = categories.id AND cl_en.language = 'en'
             WHERE tests.id = :test_id
             ORDER BY categories.sequence_position, question_categories.sequence_position
         ");
@@ -216,9 +218,9 @@ class Test
                 test_id,
                 questions.id question_id,
                 questions.rate,
-                question_rates_localization.rate question_rate,
-                questions_localization.task task,
-                categories_localization.title title,
+                COALESCE(qrl_lang.rate, qrl_en.rate, '') question_rate,
+                COALESCE(ql_lang.task, ql_en.task, '') task,
+                COALESCE(cl_lang.title, cl_en.title, categories.title_sef) title,
                 dbms,
                 db_template,
                 ROW_NUMBER() OVER (PARTITION BY question_categories.category_id ORDER BY question_categories.sequence_position) number,
@@ -233,12 +235,15 @@ class Test
             FROM questions
             JOIN test_questions ON test_questions.question_id = questions.id AND test_id = :test_id
             JOIN tests ON tests.id = test_questions.test_id
-            JOIN questions_localization on questions_localization.question_id = questions.id AND questions_localization.language = :lang
+            LEFT JOIN questions_localization ql_lang on ql_lang.question_id = questions.id AND ql_lang.language = :lang
+            LEFT JOIN questions_localization ql_en on ql_en.question_id = questions.id AND ql_en.language = 'en'
             JOIN question_rates ON question_rates.id = questions.rate
-            JOIN question_rates_localization ON question_rates_localization.id = question_rates.id AND question_rates_localization.language =  :lang
+            LEFT JOIN question_rates_localization qrl_lang ON qrl_lang.id = question_rates.id AND qrl_lang.language = :lang
+            LEFT JOIN question_rates_localization qrl_en ON qrl_en.id = question_rates.id AND qrl_en.language = 'en'
             JOIN question_categories ON questions.id = question_categories.question_id
             JOIN categories on categories.id = category_id AND categories.questionnire_id = tests.questionnire_id
-            JOIN categories_localization ON categories_localization.category_id = categories.id AND categories_localization.language =  :lang
+            LEFT JOIN categories_localization cl_lang ON cl_lang.category_id = categories.id AND cl_lang.language = :lang
+            LEFT JOIN categories_localization cl_en ON cl_en.category_id = categories.id AND cl_en.language = 'en'
             ) SELECT 
                 question_data.*,
                 to_char(tests.closed_at, 'YYYY-MM-DD HH24:MI:SSOF') closed_at,

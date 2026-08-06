@@ -55,28 +55,31 @@ class Question
             SELECT 
                 question_categories.category_id,
                 COALESCE(categories.title_sef, 'favorites') category_sef,
-                COALESCE(categories_localization.title, categories.title_sef) category_title,
+                COALESCE(cl_lang.title, cl_en.title, categories.title_sef) category_title,
                 questions.title_sef question_sef,
                 question_categories.sequence_position number, 
-                questions_localization.title title,
-                questions_localization.task task,
-                questions_localization.tutorial_link,
+                COALESCE(ql_lang.title, ql_en.title, questions.title_sef) title,
+                COALESCE(ql_lang.task, ql_en.task, '') task,
+                COALESCE(ql_lang.tutorial_link, ql_en.tutorial_link, '') tutorial_link,
                 dbms,
                 db_template,
                 last_attempt_at::date last_attempt_date, 
                 solved_at::date solved_date, 
                 last_query,
                 questions.rate,
-                question_rates_localization.rate question_rate,
+                COALESCE(qrl_lang.rate, qrl_en.rate, '') question_rate,
                 (exists (select true from answers where question_id = questions.id)) have_answers,
                 (favorites.question_id is not null) favored
             FROM questions 
-            JOIN questions_localization on questions_localization.question_id = questions.id AND questions_localization.language =  :lang
+            LEFT JOIN questions_localization ql_lang on ql_lang.question_id = questions.id AND ql_lang.language = :lang
+            LEFT JOIN questions_localization ql_en on ql_en.question_id = questions.id AND ql_en.language = 'en'
             LEFT JOIN question_categories ON question_categories.question_id = questions.id AND question_categories.category_id = :category_id
             LEFT JOIN categories on categories.id = question_categories.category_id
-            LEFT JOIN categories_localization ON categories_localization.category_id = categories.id AND categories_localization.language = :lang
+            LEFT JOIN categories_localization cl_lang ON cl_lang.category_id = categories.id AND cl_lang.language = :lang
+            LEFT JOIN categories_localization cl_en ON cl_en.category_id = categories.id AND cl_en.language = 'en'
             LEFT JOIN user_questions ON user_questions.question_id = questions.id AND user_questions.user_id = :user_id
-            LEFT JOIN question_rates_localization ON questions.rate = question_rates_localization.id AND question_rates_localization.language = :lang
+            LEFT JOIN question_rates_localization qrl_lang ON questions.rate = qrl_lang.id AND qrl_lang.language = :lang
+            LEFT JOIN question_rates_localization qrl_en ON questions.rate = qrl_en.id AND qrl_en.language = 'en'
             LEFT JOIN favorites ON favorites.question_id = questions.id AND favorites.user_id = :user_id
             WHERE questions.id = :id");
         $stmt->execute([':category_id' => $questionCategoryID, ':user_id' => $userId, ':id' => $this->id, ':lang' => $lang]);
@@ -95,7 +98,12 @@ class Question
      */
     public function getHint(string $lang): string 
     {
-        $stmt = $this->dbh->prepare("SELECT hint FROM questions_localization WHERE question_id = :id and language = :lang");
+        $stmt = $this->dbh->prepare("SELECT COALESCE(
+            (SELECT hint FROM questions_localization WHERE question_id = :id AND language = :lang),
+            (SELECT hint FROM questions_localization WHERE question_id = :id AND language = 'en'),
+            (SELECT hint FROM questions_localization WHERE question_id = :id AND language = 'ru'),
+            ''
+            )");
         $stmt->execute([':id' => $this->id, ':lang' => $lang]);
         return (string)$stmt->fetchColumn();
     }
@@ -108,9 +116,11 @@ class Question
     public function getAnswers(int $questionCategoryID, string $lang, ?string $userId): array 
     {
         $stmt = $this->dbh->prepare("
-            SELECT id, title AS answer 
+            SELECT answers.id, COALESCE(al_lang.title, al_en.title, al_ru.title, '') AS answer 
             FROM answers 
-            JOIN answers_localization ON answers_localization.answer_id = answers.id and answers_localization.language = :lang
+            LEFT JOIN answers_localization al_lang ON al_lang.answer_id = answers.id and al_lang.language = :lang
+            LEFT JOIN answers_localization al_en ON al_en.answer_id = answers.id and al_en.language = 'en'
+            LEFT JOIN answers_localization al_ru ON al_ru.answer_id = answers.id and al_ru.language = 'ru'
             WHERE question_id = :id ");
         $stmt->execute([':id' => $this->id, ':lang' => $lang]);
         $answers = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -138,7 +148,12 @@ class Question
      */
     public function getQueryHint(int $queryCheckID, string $lang): string
     {
-        $stmt = $this->dbh->prepare("SELECT hint FROM query_checks_localization WHERE query_check_id = :queryCheckID AND language = :lang");
+        $stmt = $this->dbh->prepare("SELECT COALESCE(
+            (SELECT hint FROM query_checks_localization WHERE query_check_id = :queryCheckID AND language = :lang),
+            (SELECT hint FROM query_checks_localization WHERE query_check_id = :queryCheckID AND language = 'en'),
+            (SELECT hint FROM query_checks_localization WHERE query_check_id = :queryCheckID AND language = 'ru'),
+            ''
+        )");
         $stmt->execute([':queryCheckID' => $queryCheckID, ':lang' => $lang]);
         return (string)$stmt->fetchColumn();
     }

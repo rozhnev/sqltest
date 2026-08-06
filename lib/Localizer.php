@@ -4,12 +4,27 @@ class Localizer {
     private static $translations = array();
 
     public static function init($locale) {
-        $translation_file = realpath(".") . "/translations/$locale.php";
+        $basePath = realpath(".") . "/translations";
+        $baseTranslationFile = $basePath . "/en.php";
+        $translation_file = $basePath . "/$locale.php";
+
+        if (!file_exists($baseTranslationFile)) {
+            throw new Exception("Base locale file missing: en");
+        }
+
+        $translations = [];
+        require $baseTranslationFile;
+        $baseTranslations = is_array($translations) ? $translations : [];
+
         if (!file_exists($translation_file)) {
             throw new Exception("Not supported locale: $locale");
         }
-        require_once $translation_file;
-        self::$translations = $translations;
+
+        $translations = [];
+        require $translation_file;
+        $localeTranslations = is_array($translations) ? $translations : [];
+
+        self::$translations = array_merge($baseTranslations, $localeTranslations);
     }
 
     public static function translate($params, $name, $smarty) {

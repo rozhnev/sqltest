@@ -941,17 +941,18 @@ class User
         if (!$this->logged()) return [];
         $stmt = $this->dbh->prepare("
             SELECT 
-                questions_localization.title, 
-                questions_localization.question_id, 
+                COALESCE(ql_lang.title, ql_en.title, questions.title_sef) title, 
+                questions.id question_id, 
                 null as solved_at, 
                 questions.title_sef, 
                 true as favored,
-                ROW_NUMBER() OVER (ORDER BY questions_localization.title) question_number
+                ROW_NUMBER() OVER (ORDER BY COALESCE(ql_lang.title, ql_en.title, questions.title_sef)) question_number
             FROM favorites 
             JOIN questions ON favorites.question_id = questions.id 
-            JOIN questions_localization ON questions.id = questions_localization.question_id AND questions_localization.language = :lang
+            LEFT JOIN questions_localization ql_lang ON questions.id = ql_lang.question_id AND ql_lang.language = :lang
+            LEFT JOIN questions_localization ql_en ON questions.id = ql_en.question_id AND ql_en.language = 'en'
             WHERE user_id = :user_id
-            ORDER BY questions_localization.title;
+            ORDER BY COALESCE(ql_lang.title, ql_en.title, questions.title_sef);
         ");
         $stmt->execute([':lang' => $lang, ':user_id' => $this->id]);
         // var_dump( $stmt->fetchAll(PDO::FETCH_NUM));
@@ -1139,21 +1140,23 @@ class User
             $stmt = $this->dbh->prepare("
             SELECT DISTINCT ON (q.id)
                 q.id,
-                ql.title,
+                COALESCE(ql_lang.title, ql_en.title, q.title_sef) title,
                 q.dbms,
-                qrl.rate rate,
+                COALESCE(qrl_lang.rate, qrl_en.rate, '') rate,
                 c.title_sef as category,
                 q.title_sef slug,
                 uq.solved_at::date solved_at,
                 (f.question_id IS NOT NULL) as favorite
             FROM user_questions uq
             JOIN questions q ON q.id = uq.question_id
-            JOIN questions_localization ql ON q.id = ql.question_id AND ql.language = :lang
+            LEFT JOIN questions_localization ql_lang ON q.id = ql_lang.question_id AND ql_lang.language = :lang
+            LEFT JOIN questions_localization ql_en ON q.id = ql_en.question_id AND ql_en.language = 'en'
             JOIN question_categories qc ON qc.question_id = q.id
             JOIN categories c ON qc.category_id = c.id
             LEFT JOIN question_rates qr ON q.rate = qr.id
             LEFT JOIN favorites f ON q.id = f.question_id AND f.user_id = :user_id
-            LEFT JOIN question_rates_localization qrl ON q.rate = qrl.id AND qrl.language = :lang
+            LEFT JOIN question_rates_localization qrl_lang ON q.rate = qrl_lang.id AND qrl_lang.language = :lang
+            LEFT JOIN question_rates_localization qrl_en ON q.rate = qrl_en.id AND qrl_en.language = 'en'
             WHERE uq.user_id = :user_id AND q.deleted = false AND uq.solved_at IS NOT NULL
             ORDER BY q.id
         ");
@@ -1172,12 +1175,13 @@ class User
                 (closed_at is not null and closed_at <= current_timestamp) closed,
                 COUNT(tq.question_id) tasks_count,
                 COUNT(tq.solved_at) tasks_solved_count,
-                gl.title grade
+                COALESCE(gl_lang.title, gl_en.title, '') grade
             FROM tests
             JOIN test_questions tq ON tests.id = tq.test_id
-            LEFT JOIN grades_localization gl ON tests.grade = gl.grade_id AND gl.language = :lang
+            LEFT JOIN grades_localization gl_lang ON tests.grade = gl_lang.grade_id AND gl_lang.language = :lang
+            LEFT JOIN grades_localization gl_en ON tests.grade = gl_en.grade_id AND gl_en.language = 'en'
             WHERE tests.user_id = :user_id
-            GROUP BY tests.id, created_at, closed_at, gl.title
+            GROUP BY tests.id, created_at, closed_at, COALESCE(gl_lang.title, gl_en.title, '')
             ORDER BY created_at
         ");
         

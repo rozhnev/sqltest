@@ -13,7 +13,7 @@ class Questionnire
      *
      * @var array<string>
      */
-    private $supportedlanguages = ['en', 'ru', 'pt', 'fr'];
+    private $supportedlanguages = ['en', 'ru', 'pt', 'fr', 'zh'];
 
     /**
      * Questionnire language
@@ -44,19 +44,21 @@ class Questionnire
                 ROW_NUMBER() OVER (PARTITION BY categories.id ORDER BY question_categories.sequence_position) question_number,
                 categories.id,
                 categories.title_sef sef,
-                categories_localization.title questions_category,
+                COALESCE(cl_lang.title, cl_en.title, categories.title_sef) questions_category,
                 questions.id question_id,
                 questions.title_sef question_sef,
                 questions.db_template,
-                questions_localization.title question_title,
+                COALESCE(ql_lang.title, ql_en.title, questions.title_sef) question_title,
                 (solved_at IS NOT NULL) solved,
                 (favorites.question_id is not null) favored
             FROM categories
-            JOIN categories_localization ON categories_localization.category_id = categories.id AND categories_localization.language =  :lang
+            LEFT JOIN categories_localization cl_lang ON cl_lang.category_id = categories.id AND cl_lang.language = :lang
+            LEFT JOIN categories_localization cl_en ON cl_en.category_id = categories.id AND cl_en.language = 'en'
             JOIN questionnires ON questionnires.id = categories.questionnire_id
             JOIN question_categories ON question_categories.category_id = categories.id
             JOIN questions ON question_categories.question_id = questions.id
-            JOIN questions_localization on questions_localization.question_id = questions.id AND questions_localization.language = :lang
+            LEFT JOIN questions_localization ql_lang on ql_lang.question_id = questions.id AND ql_lang.language = :lang
+            LEFT JOIN questions_localization ql_en on ql_en.question_id = questions.id AND ql_en.language = 'en'
             LEFT JOIN user_questions ON user_questions.question_id = questions.id AND user_questions.user_id = :userId
             LEFT JOIN favorites ON favorites.question_id = questions.id AND favorites.user_id = :userId
             WHERE not categories.deleted AND not questions.deleted AND

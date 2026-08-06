@@ -12,7 +12,8 @@ const LANGUAGE_LABELS = {
     EN: 'English',
     RU: 'Russian',
     PT: 'Portuguese',
-    FR: 'French'
+    FR: 'French',
+    ZH: 'Chinese'
 };
 
 function populateQuestionForm(question) {

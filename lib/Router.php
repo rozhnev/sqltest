@@ -60,6 +60,47 @@ class Router
         return DEFAULT_LANGUAGE;
     }
 
+    private function getLanguageFromCookie(): ?string
+    {
+        $cookieLang = strtolower(trim((string)($_COOKIE['Lang'] ?? '')));
+        if ($cookieLang !== '' && in_array($cookieLang, $this->supportedLangs, true)) {
+            return $cookieLang;
+        }
+        return null;
+    }
+
+    private function detectCountryCode(): ?string
+    {
+        $candidates = [
+            $_SERVER['HTTP_CF_IPCOUNTRY'] ?? null,
+            $_SERVER['HTTP_X_COUNTRY_CODE'] ?? null,
+        ];
+
+        foreach ($candidates as $candidate) {
+            $code = strtoupper(trim((string)$candidate));
+            if (preg_match('/^[A-Z]{2}$/', $code)) {
+                return $code;
+            }
+        }
+
+        return null;
+    }
+
+    private function resolveDefaultLanguage(): string
+    {
+        $cookieLang = $this->getLanguageFromCookie();
+        if ($cookieLang !== null) {
+            return $cookieLang;
+        }
+
+        $country = $this->detectCountryCode();
+        if ($country === 'SG' && in_array('zh', $this->supportedLangs, true)) {
+            return 'zh';
+        }
+
+        return (string)($this->parseAcceptLanguageHeader() ?? DEFAULT_LANGUAGE);
+    }
+
     public function route(string $url)
     {
         $path = parse_url($url, PHP_URL_PATH) ?: '/';
@@ -83,7 +124,7 @@ class Router
                 $action = str_replace('-', '_', strtolower($params['action']));
                 $method = isset($params['class']) ? $params['class'] . '_' . $action : $action;
                 // echo "Method: $method\n";
-                $this->controller->setLanguge($params['lang'] ?? $this->parseAcceptLanguageHeader());
+                $this->controller->setLanguge($params['lang'] ?? $this->resolveDefaultLanguage());
 
                 return $this->controller->{$method}($params);
 
@@ -99,9 +140,16 @@ class Router
             return $this->controller->redirect($params);
         }
         if (preg_match("@(?<lang>{$this->langPattern})/@i", $path, $params)) {
-            $this->controller->setLanguge($params['lang'] ?? $this->parseAcceptLanguageHeader());
+            $this->controller->setLanguge($params['lang'] ?? $this->resolveDefaultLanguage());
         } else {
-            $this->controller->setLanguge($this->parseAcceptLanguageHeader());
+            $this->controller->setLanguge($this->resolveDefaultLanguage());
+
+            // Geo/language default redirect is applied only at root path.
+            if ($path === '/' || $path === '') {
+                $targetLang = $this->resolveDefaultLanguage();
+                header('Location: /' . $targetLang . '/', true, 302);
+                exit();
+            }
         }
 
         // Show welcome page by default unless user previously chose to hide it (HideWelcome cookie)

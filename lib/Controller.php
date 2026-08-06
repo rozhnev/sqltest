@@ -11,6 +11,16 @@ class Controller
     private array $languages;
     private array $playgroundConfig;
 
+    private function getAutoTranslator(): LocalizationAutoTranslator
+    {
+        require_once __DIR__ . '/LocalizationAutoTranslator.php';
+        return new LocalizationAutoTranslator(
+            $this->dbh,
+            (string)($this->env['OPENAI_API_KEY'] ?? ''),
+            (string)($this->env['LLM_TRANSLATION_MODEL'] ?? 'gpt-4o-mini')
+        );
+    }
+
     private function registerModifiers(array $mods): void
     {
         foreach ($mods as $mod) {
@@ -91,9 +101,29 @@ class Controller
 
     public function setLanguge(string $lang='en'): void
     {
-        $this->lang = $lang;
-        $this->assignVariables(['Lang' => $lang]);
-        Localizer::init($lang);
+        $langCode = strtolower(trim($lang));
+        if (!array_key_exists($langCode, $this->languages)) {
+            $langCode = DEFAULT_LANGUAGE;
+        }
+
+        $isSecure = false;
+        if (!empty($_SERVER['HTTP_X_FORWARDED_PROTO'])) {
+            $isSecure = strtolower(trim(explode(',', (string)$_SERVER['HTTP_X_FORWARDED_PROTO'])[0])) === 'https';
+        } elseif (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') {
+            $isSecure = true;
+        }
+
+        setcookie('Lang', $langCode, [
+            'expires' => time() + 86400 * 365,
+            'path' => '/',
+            'secure' => $isSecure,
+            'httponly' => false,
+            'samesite' => 'Lax',
+        ]);
+
+        $this->lang = $langCode;
+        $this->assignVariables(['Lang' => $langCode]);
+        Localizer::init($langCode);
     }
 
     public function setCanonicalLink(string $path): void
@@ -617,6 +647,10 @@ class Controller
         $questionCategoryID = $params['questionCategoryID'] ?? $questionnire->getCategoryId($params['questionCategory']);
         $questionnireName   = $questionnire->getNameByCategory($params['questionCategory']);
 
+        if ($this->lang === 'zh') {
+            $this->getAutoTranslator()->ensureQuestionLocalized((int)$questionID, $this->lang);
+        }
+
         $question = new Question($this->dbh, $questionID);
         try {
             $questionData = $question->get($questionCategoryID, $this->lang, $this->user->getId());
@@ -856,6 +890,10 @@ class Controller
             'pt' => [
                 'title'       => 'SQLTest.online: Quiz SQL do MariaDB Day Bruxelas',
                 'description' => 'Dez questões teóricas e práticas alinhadas ao MariaDB Day Bruxelas e prémios no FOSDEM.'
+            ],
+            'zh' => [
+                'title'       => 'SQLTest.online: MariaDB Day 布鲁塞尔 SQL 挑战',
+                'description' => '面向 MariaDB Day Brussels 的十道理论与实战 SQL 题目，并在 FOSDEM 现场设置奖项。'
             ]
         ];
 
@@ -982,6 +1020,10 @@ class Controller
         }
         $questionID = $params['questionID'] ?? $test->getFirstUnsolvedQuestionId();
 
+        if ($this->lang === 'zh' && $questionID) {
+            $this->getAutoTranslator()->ensureQuestionLocalized((int)$questionID, $this->lang);
+        }
+
         $question = new Question($this->dbh, $questionID);
         try {
             $questionData = $test->getQuestionData($questionID);
@@ -1049,7 +1091,7 @@ class Controller
 
         if (isset($_POST["query"])) {
             $sql = $_POST["query"] ?? '';
-            $checkResult = $question->checkQuery($sql);
+            $checkResult = $question->checkQuery($sql, $this->lang);
             $this->engine->assign('QueryTestResult', $checkResult);
             if ($checkResult['ok']) {
                 $preparedQuery = $question->prepareQuery($sql);
@@ -1268,6 +1310,11 @@ class Controller
             $this->engine->display("error.tpl");
             exit();
         }
+
+        if ($this->lang === 'zh') {
+            $this->getAutoTranslator()->ensureLessonLocalized($lesson->id(), $this->lang);
+        }
+
         $parser = new \cebe\markdown\GithubMarkdown();
         $lessonData = $lesson->get($this->lang);
         $meta = $lesson->parseMedadata($lessonData['content']);
