@@ -911,6 +911,56 @@ function initAnswerEditor() {
         });
     }
 
+    const translateToEmptyButton = document.getElementById('questionTranslateToEmptyBtn');
+    if (translateToEmptyButton) {
+        translateToEmptyButton.addEventListener('click', async function () {
+            const selected = state.answerDraft[state.selectedAnswerIndex];
+            if (!selected) {
+                showStatus('Select an answer first', 'info');
+                return;
+            }
+
+            const sourceLanguage = state.activeAnswerLanguage;
+            const sourceText = (selected.localizations[sourceLanguage]?.title || '').trim();
+            if (!sourceText) {
+                showStatus('Source language text is empty', 'info');
+                return;
+            }
+
+            const targets = SUPPORTED_LANGUAGES.filter((language) => {
+                if (language === sourceLanguage) {
+                    return false;
+                }
+                return !(selected.localizations[language]?.title || '').trim();
+            });
+
+            if (targets.length === 0) {
+                showStatus('No empty languages to translate', 'info');
+                return;
+            }
+
+            translateToEmptyButton.disabled = true;
+            const originalLabel = translateToEmptyButton.textContent;
+            translateToEmptyButton.textContent = 'Translating...';
+
+            try {
+                const fromLabel = getLanguageLabel(sourceLanguage);
+                await Promise.all(targets.map(async (targetLanguage) => {
+                    const toLabel = getLanguageLabel(targetLanguage);
+                    const translated = await translateField(sourceText, fromLabel, toLabel);
+                    selected.localizations[targetLanguage].title = (translated || '').trim();
+                }));
+                renderAnswersWorkspace();
+                showStatus('Translated empty languages', 'success');
+            } catch (error) {
+                console.error(error);
+            } finally {
+                translateToEmptyButton.disabled = false;
+                translateToEmptyButton.textContent = originalLabel;
+            }
+        });
+    }
+
     const nextIncompleteButton = document.getElementById('questionNextIncompleteBtn');
     if (nextIncompleteButton) {
         nextIncompleteButton.addEventListener('click', function () {

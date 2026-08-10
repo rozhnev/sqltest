@@ -278,6 +278,7 @@
                                             </div>
                                             <div class="panel__actions">
                                                 <button type="button" class="button" id="questionCopyEnToEmptyBtn">Copy EN to empty languages</button>
+                                                <button type="button" class="button" id="questionTranslateToEmptyBtn">Translate to empty languages</button>
                                                 <button type="button" class="button" id="questionNextIncompleteBtn">Next incomplete</button>
                                             </div>
                                         </div>
