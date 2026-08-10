@@ -290,7 +290,12 @@ function handleLesson(AdminLessonManager $manager, int $lessonId, string $method
                 respondJson(['error' => 'Language is required'], 400);
             }
             try {
-                respondJson(['lesson' => $manager->updateContent($lessonId, $language, $payload['content'] ?? '')]);
+                respondJson(['lesson' => $manager->updateContent(
+                    $lessonId,
+                    $language,
+                    $payload['title'] ?? '',
+                    $payload['content'] ?? ''
+                )]);
             } catch (Exception $error) {
                 respondJson(['error' => $error->getMessage()], 400);
             }
