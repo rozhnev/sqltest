@@ -243,7 +243,7 @@ class AdminQuestionManager extends AdminContentManager
                 if ($answerId > 0 && isset($existing[$answerId])) {
                     $updateAnswerStmt->execute([
                         ':sequence_position' => $index + 1,
-                        ':is_valid' => $answer['is_valid'],
+                        ':is_valid' => $answer['is_valid'] ? 'true' : 'false',
                         ':id' => $answerId,
                         ':question_id' => $questionId
                     ]);
@@ -251,7 +251,7 @@ class AdminQuestionManager extends AdminContentManager
                     $insertAnswerStmt->execute([
                         ':question_id' => $questionId,
                         ':sequence_position' => $index + 1,
-                        ':is_valid' => $answer['is_valid']
+                        ':is_valid' => $answer['is_valid'] ? 'true' : 'false'
                     ]);
                     $answerId = (int)$insertAnswerStmt->fetchColumn();
                 }
