@@ -60,7 +60,7 @@ class Question
                 question_categories.sequence_position number, 
                 COALESCE(ql_lang.title, ql_en.title, questions.title_sef) title,
                 COALESCE(ql_lang.task, ql_en.task, '') task,
-                COALESCE(ql_lang.tutorial_link, ql_en.tutorial_link, '') tutorial_link,
+                ql_lang.tutorial_link tutorial_link,
                 dbms,
                 db_template,
                 last_attempt_at::date last_attempt_date, 
