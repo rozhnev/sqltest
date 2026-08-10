@@ -51,19 +51,25 @@ class AdminLessonManager extends AdminContentManager
     }
 
     /**
-     * Update only lessons_localization.content for a single language.
+     * Update lessons_localization.title and content for a single language.
      * Used by the inline editor on the public lesson page, which must not
-     * touch slug/module_id/title.
+     * touch slug or module_id.
      */
-    public function updateContent(int $lessonId, string $language, string $content): array
+    public function updateContent(int $lessonId, string $language, string $title, string $content): array
     {
         if (!in_array($language, $this->supportedLanguages, true)) {
             throw new Exception('Unsupported language');
         }
+        $title = trim($title);
+        if ($title === '') {
+            throw new Exception('Lesson title is required');
+        }
         $stmt = $this->dbh->prepare('UPDATE lessons_localization
-            SET content = :content
+            SET title = :title,
+                content = :content
             WHERE lesson_id = :lesson_id AND language = :language');
         $stmt->execute([
+            ':title' => $title,
             ':content' => $content,
             ':lesson_id' => $lessonId,
             ':language' => $language
