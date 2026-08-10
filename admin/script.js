@@ -4,6 +4,9 @@ const state = {
     modules: [],
     selectedQuestion: null,
     currentQuestionHasAnswers: false,
+    answerDraft: [],
+    selectedAnswerIndex: -1,
+    activeAnswerLanguage: 'en',
     selectedLessonId: null,
     statusTimer: null,
     initialLessonId: parseInt(window.ADMIN_CONFIG.lessonId ?? 0, 10) || 0
@@ -35,6 +38,15 @@ function getFieldValue(id) {
     return field.value.trim();
 }
 
+function escapeHtml(value) {
+    return String(value || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
+
 function populateQuestionForm(question) {
     setFieldValue('questionDb', question.db || 'sakila');
     setFieldValue('questionDbTemplate', question.db_template || 'sakila');
@@ -59,7 +71,7 @@ function populateQuestionForm(question) {
         hiddenQuestionId.value = question.id || '';
     }
     state.currentQuestionHasAnswers = Boolean(question.have_answers);
-    renderAnswerRows(question.answers || []);
+    setAnswersDraft(question.answers || []);
     updateQuestionModeUI();
 
     const checkStates = {};
@@ -105,7 +117,7 @@ function clearQuestionForm() {
     document.querySelectorAll('[data-question-category-row] input[type="checkbox"]').forEach((checkbox) => {
         checkbox.checked = false;
     });
-    clearAnswerRows();
+    setAnswersDraft([]);
     updateQuestionModeUI();
 }
 
@@ -508,110 +520,192 @@ function getCurrentQuestionId() {
     return 0;
 }
 
-function clearAnswerRows() {
-    const body = document.getElementById('questionAnswersTableBody');
-    if (body) {
-        body.innerHTML = '';
-    }
+function getLanguageLabel(language) {
+    return LANGUAGE_LABELS[language.toUpperCase()] || language.toUpperCase();
 }
 
-function renderAnswerRows(answers) {
-    const body = document.getElementById('questionAnswersTableBody');
-    if (!body) {
-        return;
-    }
-
-    body.innerHTML = '';
-    answers.forEach((answer) => {
-        appendAnswerRow(answer || {});
-    });
-
-    updateAnswerRowNumbers();
-}
-
-function appendAnswerRow(answer = {}) {
-    const body = document.getElementById('questionAnswersTableBody');
-    if (!body) {
-        return;
-    }
-
-    const row = document.createElement('tr');
-    row.setAttribute('data-answer-row', '1');
-    if (answer.id) {
-        row.dataset.answerId = String(answer.id);
-    }
-
-    const numberCell = document.createElement('td');
-    numberCell.setAttribute('data-answer-row-number', '1');
-    row.appendChild(numberCell);
-
-    const validCell = document.createElement('td');
-    const validCheckbox = document.createElement('input');
-    validCheckbox.type = 'checkbox';
-    validCheckbox.checked = Boolean(answer.is_valid);
-    validCheckbox.setAttribute('data-answer-valid', '1');
-    validCell.appendChild(validCheckbox);
-    row.appendChild(validCell);
-
+function makeEmptyAnswer() {
+    const localizations = {};
     SUPPORTED_LANGUAGES.forEach((language) => {
-        const languageCell = document.createElement('td');
-        const input = document.createElement('input');
-        input.type = 'text';
-        input.setAttribute('data-answer-title', '1');
-        input.setAttribute('data-lang', language);
-        input.style.width = '100%';
-        input.value = answer.localizations?.[language]?.title || '';
-        languageCell.appendChild(input);
-        row.appendChild(languageCell);
+        localizations[language] = { title: '' };
     });
-
-    const removeCell = document.createElement('td');
-    const removeBtn = document.createElement('button');
-    removeBtn.type = 'button';
-    removeBtn.className = 'button red';
-    removeBtn.textContent = 'Remove';
-    removeBtn.setAttribute('data-remove-answer', '1');
-    removeCell.appendChild(removeBtn);
-    row.appendChild(removeCell);
-
-    body.appendChild(row);
+    return {
+        id: 0,
+        is_valid: false,
+        localizations
+    };
 }
 
-function updateAnswerRowNumbers() {
-    const rows = document.querySelectorAll('[data-answer-row]');
-    rows.forEach((row, index) => {
-        const numberCell = row.querySelector('[data-answer-row-number]');
-        if (numberCell) {
-            numberCell.textContent = String(index + 1);
+function cloneAnswer(answer = {}) {
+    const localizations = {};
+    SUPPORTED_LANGUAGES.forEach((language) => {
+        localizations[language] = {
+            title: (answer.localizations?.[language]?.title || '').trim()
+        };
+    });
+    return {
+        id: parseInt(answer.id || '0', 10) || 0,
+        is_valid: Boolean(answer.is_valid),
+        localizations
+    };
+}
+
+function getMissingAnswerLanguages(answer) {
+    const missing = [];
+    SUPPORTED_LANGUAGES.forEach((language) => {
+        if (!answer.localizations?.[language]?.title) {
+            missing.push(language.toUpperCase());
         }
     });
+    return missing;
+}
+
+function loadInitialAnswersFromDom() {
+    const container = document.getElementById('questionInitialAnswers');
+    if (!container) {
+        return [];
+    }
+
+    const initial = [];
+    container.querySelectorAll('[data-initial-answer]').forEach((row) => {
+        const answer = makeEmptyAnswer();
+        answer.id = parseInt(row.dataset.answerId || '0', 10) || 0;
+        answer.is_valid = row.dataset.answerValid === '1';
+        row.querySelectorAll('[data-initial-lang]').forEach((cell) => {
+            const language = cell.dataset.initialLang;
+            if (!language || !SUPPORTED_LANGUAGES.includes(language)) {
+                return;
+            }
+            answer.localizations[language].title = (cell.textContent || '').trim();
+        });
+        initial.push(answer);
+    });
+
+    return initial;
+}
+
+function setAnswersDraft(answers) {
+    state.answerDraft = Array.isArray(answers) ? answers.map((answer) => cloneAnswer(answer)) : [];
+    if (state.answerDraft.length === 0) {
+        state.selectedAnswerIndex = -1;
+    } else if (state.selectedAnswerIndex < 0 || state.selectedAnswerIndex >= state.answerDraft.length) {
+        state.selectedAnswerIndex = 0;
+    }
+    if (!SUPPORTED_LANGUAGES.includes(state.activeAnswerLanguage)) {
+        state.activeAnswerLanguage = 'en';
+    }
+    renderAnswersWorkspace();
+}
+
+function renderAnswersWorkspace() {
+    renderAnswerList();
+    renderAnswerEditor();
+    updateQuestionModeUI();
+}
+
+function renderAnswerList() {
+    const list = document.getElementById('questionAnswerList');
+    const stats = document.getElementById('questionAnswerStats');
+    if (!list) {
+        return;
+    }
+
+    list.innerHTML = '';
+    let incompleteCount = 0;
+    state.answerDraft.forEach((answer, index) => {
+        const missing = getMissingAnswerLanguages(answer);
+        if (missing.length > 0) {
+            incompleteCount += 1;
+        }
+
+        const item = document.createElement('button');
+        item.type = 'button';
+        item.className = 'answer-list-item' + (index === state.selectedAnswerIndex ? ' active' : '');
+        item.dataset.answerSelect = String(index);
+
+        const preview = (answer.localizations.en.title || '').trim();
+        const previewText = preview ? preview.slice(0, 48) : '(no EN text yet)';
+        const statusText = missing.length === 0 ? 'Complete' : 'Missing: ' + missing.join(', ');
+        const correctText = answer.is_valid ? 'Correct' : 'Incorrect';
+
+        item.innerHTML = '<span class="answer-list-item__index">#' + (index + 1) + '</span>' +
+            '<span class="answer-list-item__meta">' +
+            '<strong>' + escapeHtml(previewText) + '</strong>' +
+            '<small>' + correctText + ' • ' + statusText + '</small>' +
+            '</span>';
+        list.appendChild(item);
+    });
+
+    if (stats) {
+        stats.textContent = state.answerDraft.length + ' answers • ' + incompleteCount + ' incomplete';
+    }
+}
+
+function renderAnswerEditor() {
+    const panel = document.getElementById('questionAnswerEditorPanel');
+    const empty = document.getElementById('questionAnswerEditorEmpty');
+    const input = document.getElementById('questionAnswerTitleInput');
+    const correctToggle = document.getElementById('questionAnswerCorrectToggle');
+    const tabs = document.getElementById('questionAnswerLanguageTabs');
+    const title = document.getElementById('questionAnswerEditorTitle');
+    const missing = document.getElementById('questionAnswerMissingHint');
+
+    const selected = state.answerDraft[state.selectedAnswerIndex];
+    if (!selected) {
+        if (panel) {
+            panel.style.display = 'none';
+        }
+        if (empty) {
+            empty.style.display = '';
+        }
+        return;
+    }
+
+    if (panel) {
+        panel.style.display = '';
+    }
+    if (empty) {
+        empty.style.display = 'none';
+    }
+
+    if (title) {
+        title.textContent = 'Answer #' + (state.selectedAnswerIndex + 1);
+    }
+    if (correctToggle) {
+        correctToggle.checked = Boolean(selected.is_valid);
+    }
+    if (input) {
+        input.value = selected.localizations[state.activeAnswerLanguage]?.title || '';
+    }
+    if (missing) {
+        const missingLanguages = getMissingAnswerLanguages(selected);
+        missing.textContent = missingLanguages.length === 0
+            ? 'All languages filled.'
+            : 'Missing: ' + missingLanguages.join(', ');
+    }
+
+    if (tabs) {
+        Array.from(tabs.querySelectorAll('[data-answer-language]')).forEach((tab) => {
+            const language = tab.dataset.answerLanguage;
+            if (!language) {
+                return;
+            }
+            const isActive = language === state.activeAnswerLanguage;
+            tab.classList.toggle('active', isActive);
+
+            const languageMissing = !selected.localizations[language]?.title;
+            tab.classList.toggle('missing', languageMissing);
+            tab.textContent = language.toUpperCase() + (languageMissing ? ' *' : '');
+        });
+    }
 }
 
 function collectAnswerPayload() {
-    const rows = Array.from(document.querySelectorAll('[data-answer-row]'));
-    return rows.map((row) => {
-        const answerId = parseInt(row.dataset.answerId || '0', 10) || 0;
-        const isValid = Boolean(row.querySelector('[data-answer-valid]')?.checked);
-        const localizations = {};
-
-        SUPPORTED_LANGUAGES.forEach((language) => {
-            const field = row.querySelector(`[data-answer-title][data-lang="${language}"]`);
-            localizations[language] = {
-                title: (field?.value || '').trim()
-            };
-        });
-
-        return {
-            id: answerId,
-            is_valid: isValid,
-            localizations
-        };
-    });
+    return state.answerDraft.map((answer) => cloneAnswer(answer));
 }
 
 function isTheoryMode() {
-    const rows = document.querySelectorAll('[data-answer-row]');
-    return rows.length > 0;
+    return state.answerDraft.length > 0;
 }
 
 function updateQuestionModeUI() {
@@ -676,8 +770,7 @@ async function questionAnswersSave(questionId) {
             })
         });
         state.currentQuestionHasAnswers = Boolean(response.have_answers);
-        renderAnswerRows(response.answers || []);
-        updateQuestionModeUI();
+        setAnswersDraft(response.answers || []);
         showStatus('Answers saved', 'success');
     } catch (error) {
         console.error(error);
@@ -686,45 +779,161 @@ async function questionAnswersSave(questionId) {
 
 function initAnswerEditor() {
     const answersSection = document.getElementById('questionAnswersSection');
-    if (!answersSection) {
+    const answerList = document.getElementById('questionAnswerList');
+    const input = document.getElementById('questionAnswerTitleInput');
+    const correctToggle = document.getElementById('questionAnswerCorrectToggle');
+    const languageTabs = document.getElementById('questionAnswerLanguageTabs');
+
+    if (!answersSection || !answerList || !input || !correctToggle || !languageTabs) {
         return;
     }
 
     const addButton = document.getElementById('questionAddAnswerBtn');
     if (addButton) {
         addButton.addEventListener('click', function () {
-            appendAnswerRow({});
-            updateAnswerRowNumbers();
-            updateQuestionModeUI();
+            state.answerDraft.push(makeEmptyAnswer());
+            state.selectedAnswerIndex = state.answerDraft.length - 1;
+            state.activeAnswerLanguage = 'en';
+            renderAnswersWorkspace();
+        });
+    }
+
+    const duplicateButton = document.getElementById('questionDuplicateAnswerBtn');
+    if (duplicateButton) {
+        duplicateButton.addEventListener('click', function () {
+            const selected = state.answerDraft[state.selectedAnswerIndex];
+            if (!selected) {
+                showStatus('Select an answer to duplicate', 'info');
+                return;
+            }
+            const duplicated = cloneAnswer(selected);
+            duplicated.id = 0;
+            duplicated.is_valid = false;
+            state.answerDraft.splice(state.selectedAnswerIndex + 1, 0, duplicated);
+            state.selectedAnswerIndex += 1;
+            renderAnswersWorkspace();
+        });
+    }
+
+    const deleteButton = document.getElementById('questionDeleteAnswerBtn');
+    if (deleteButton) {
+        deleteButton.addEventListener('click', function () {
+            if (state.selectedAnswerIndex < 0 || state.selectedAnswerIndex >= state.answerDraft.length) {
+                showStatus('Select an answer to delete', 'info');
+                return;
+            }
+            state.answerDraft.splice(state.selectedAnswerIndex, 1);
+            if (state.answerDraft.length === 0) {
+                state.selectedAnswerIndex = -1;
+            } else if (state.selectedAnswerIndex >= state.answerDraft.length) {
+                state.selectedAnswerIndex = state.answerDraft.length - 1;
+            }
+            renderAnswersWorkspace();
         });
     }
 
     const startTheoryBtn = document.getElementById('questionStartTheoryBtn');
     if (startTheoryBtn) {
         startTheoryBtn.addEventListener('click', function () {
-            appendAnswerRow({});
-            appendAnswerRow({});
-            updateAnswerRowNumbers();
-            updateQuestionModeUI();
+            state.answerDraft = [makeEmptyAnswer(), makeEmptyAnswer()];
+            state.selectedAnswerIndex = 0;
+            state.activeAnswerLanguage = 'en';
+            renderAnswersWorkspace();
         });
     }
 
-    answersSection.addEventListener('click', function (event) {
-        const removeButton = event.target.closest('[data-remove-answer]');
-        if (!removeButton) {
+    answerList.addEventListener('click', function (event) {
+        const target = event.target.closest('[data-answer-select]');
+        if (!target) {
             return;
         }
-        const row = removeButton.closest('[data-answer-row]');
-        if (!row) {
+        const index = parseInt(target.dataset.answerSelect || '-1', 10);
+        if (Number.isNaN(index) || index < 0 || index >= state.answerDraft.length) {
             return;
         }
-        row.remove();
-        updateAnswerRowNumbers();
-        updateQuestionModeUI();
+        state.selectedAnswerIndex = index;
+        renderAnswersWorkspace();
     });
 
-    updateAnswerRowNumbers();
-    updateQuestionModeUI();
+    correctToggle.addEventListener('change', function () {
+        const selected = state.answerDraft[state.selectedAnswerIndex];
+        if (!selected) {
+            return;
+        }
+        selected.is_valid = Boolean(correctToggle.checked);
+        renderAnswerList();
+    });
+
+    input.addEventListener('input', function () {
+        const selected = state.answerDraft[state.selectedAnswerIndex];
+        if (!selected) {
+            return;
+        }
+        selected.localizations[state.activeAnswerLanguage].title = input.value.trim();
+        renderAnswerList();
+        renderAnswerEditor();
+    });
+
+    languageTabs.addEventListener('click', function (event) {
+        const tab = event.target.closest('[data-answer-language]');
+        if (!tab) {
+            return;
+        }
+        const language = tab.dataset.answerLanguage;
+        if (!language || !SUPPORTED_LANGUAGES.includes(language)) {
+            return;
+        }
+        state.activeAnswerLanguage = language;
+        renderAnswerEditor();
+    });
+
+    const copyEnButton = document.getElementById('questionCopyEnToEmptyBtn');
+    if (copyEnButton) {
+        copyEnButton.addEventListener('click', function () {
+            const selected = state.answerDraft[state.selectedAnswerIndex];
+            if (!selected) {
+                return;
+            }
+            const enText = (selected.localizations.en.title || '').trim();
+            if (!enText) {
+                showStatus('EN text is empty', 'info');
+                return;
+            }
+            SUPPORTED_LANGUAGES.forEach((language) => {
+                if (language === 'en') {
+                    return;
+                }
+                if (!selected.localizations[language].title) {
+                    selected.localizations[language].title = enText;
+                }
+            });
+            renderAnswersWorkspace();
+        });
+    }
+
+    const nextIncompleteButton = document.getElementById('questionNextIncompleteBtn');
+    if (nextIncompleteButton) {
+        nextIncompleteButton.addEventListener('click', function () {
+            for (let i = 0; i < state.answerDraft.length; i += 1) {
+                const missing = getMissingAnswerLanguages(state.answerDraft[i]);
+                if (missing.length > 0) {
+                    state.selectedAnswerIndex = i;
+                    state.activeAnswerLanguage = missing[0].toLowerCase();
+                    renderAnswersWorkspace();
+                    return;
+                }
+            }
+            showStatus('All answers are complete', 'success');
+        });
+    }
+
+    const initialAnswers = loadInitialAnswersFromDom();
+    if (state.answerDraft.length === 0 && initialAnswers.length > 0) {
+        setAnswersDraft(initialAnswers);
+        return;
+    }
+
+    renderAnswersWorkspace();
 }
 
 function collectQuestionCheckStates() {

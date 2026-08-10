@@ -7,6 +7,102 @@
         <title>SQLtest.online — Question editor</title>
         <link rel="stylesheet" href="/style.min.css?{$VERSION}" media="all" />
         <link rel="stylesheet" href="/admin/style.min.css?{$VERSION}" media="all" />
+        <style>
+            .answer-workspace {
+                display: grid;
+                grid-template-columns: minmax(260px, 340px) 1fr;
+                gap: 14px;
+                align-items: start;
+            }
+
+            .answer-workspace__list,
+            .answer-workspace__editor {
+                border: 1px solid var(--border, #d6d6d6);
+                border-radius: 8px;
+                padding: 10px;
+                background: rgba(255, 255, 255, 0.02);
+            }
+
+            .answer-workspace__list-header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 8px;
+            }
+
+            .answer-list {
+                display: flex;
+                flex-direction: column;
+                gap: 6px;
+                max-height: 360px;
+                overflow-y: auto;
+                margin-bottom: 10px;
+            }
+
+            .answer-list-item {
+                display: flex;
+                gap: 8px;
+                align-items: flex-start;
+                border: 1px solid var(--border, #d6d6d6);
+                border-radius: 8px;
+                background: transparent;
+                color: inherit;
+                padding: 8px;
+                text-align: left;
+                cursor: pointer;
+            }
+
+            .answer-list-item.active {
+                border-color: #2c7be5;
+                background: rgba(44, 123, 229, 0.08);
+            }
+
+            .answer-list-item__index {
+                min-width: 26px;
+                font-weight: 700;
+            }
+
+            .answer-list-item__meta {
+                display: flex;
+                flex-direction: column;
+                gap: 2px;
+                width: 100%;
+            }
+
+            .answer-editor-empty {
+                color: #777;
+            }
+
+            .answer-editor__header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 10px;
+                margin-bottom: 8px;
+            }
+
+            .answer-editor__tabs {
+                display: flex;
+                gap: 6px;
+                flex-wrap: wrap;
+                margin-bottom: 8px;
+            }
+
+            .answer-editor__tabs .button.active {
+                border-color: #2c7be5;
+                color: #2c7be5;
+            }
+
+            .answer-editor__tabs .button.missing {
+                border-color: #d97904;
+            }
+
+            @media (max-width: 980px) {
+                .answer-workspace {
+                    grid-template-columns: 1fr;
+                }
+            }
+        </style>
         <script>
             window.ADMIN_CONFIG = {
                 lang: '{$Lang|escape:'javascript'}',
@@ -134,54 +230,60 @@
                                 <textarea id="questionCheck" name="question[query_check]" rows="3">{$Question.query_check|default:''|escape:'html'}</textarea>
                             </div>
                             <div class="field-row" id="questionAnswersSection" style="{if !$Question.have_answers}display:none;{/if}">
+                                <div id="questionInitialAnswers" style="display:none;">
+                                    {foreach from=$Question.answers|default:[] item=answer}
+                                        <div data-initial-answer data-answer-id="{$answer.id}" data-answer-valid="{if $answer.is_valid}1{else}0{/if}">
+                                            {foreach from=$Languages item=lang}
+                                                <span data-initial-lang="{$lang|escape:'html'}">{$answer.localizations[$lang].title|default:''|escape:'html'}</span>
+                                            {/foreach}
+                                        </div>
+                                    {/foreach}
+                                </div>
                                 <div>
                                     <span class="form-label">Answer options (theoretical mode)</span>
                                     <small class="field-note">Rules: at least 2 answers, at least 1 correct answer, and text in EN/RU/PT/FR/ZH for every answer.</small>
                                 </div>
-                                <div class="checks-table-wrapper">
-                                    <div class="checks-table-scroll" style="max-height: 320px; overflow-y: auto;">
-                                        <table class="checks-table" id="questionAnswersTable">
-                                            <thead>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>Correct</th>
-                                                    {foreach from=$Languages item=lang}
-                                                        <th>{$lang|upper}</th>
-                                                    {/foreach}
-                                                    <th>Remove</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="questionAnswersTableBody">
-                                                {foreach from=$Question.answers|default:[] item=answer}
-                                                    <tr data-answer-row="1" data-answer-id="{$answer.id}">
-                                                        <td data-answer-row-number="1"></td>
-                                                        <td>
-                                                            <label class="checkbox">
-                                                                <input type="checkbox" data-answer-valid="1"{if $answer.is_valid} checked{/if} />
-                                                            </label>
-                                                        </td>
-                                                        {foreach from=$Languages item=lang}
-                                                            <td>
-                                                                <input
-                                                                    type="text"
-                                                                    data-answer-title="1"
-                                                                    data-lang="{$lang|escape:'html'}"
-                                                                    value="{$answer.localizations[$lang].title|default:''|escape:'html'}"
-                                                                    style="width:100%;"
-                                                                />
-                                                            </td>
-                                                        {/foreach}
-                                                        <td>
-                                                            <button type="button" class="button red" data-remove-answer="1">Remove</button>
-                                                        </td>
-                                                    </tr>
+                                <div class="answer-workspace">
+                                    <div class="answer-workspace__list">
+                                        <div class="answer-workspace__list-header">
+                                            <strong>Answers</strong>
+                                            <small id="questionAnswerStats">0 answers</small>
+                                        </div>
+                                        <div class="answer-list" id="questionAnswerList"></div>
+                                        <div class="panel__actions">
+                                            <button type="button" class="button" id="questionAddAnswerBtn">Add answer</button>
+                                            <button type="button" class="button" id="questionDuplicateAnswerBtn">Duplicate</button>
+                                            <button type="button" class="button red" id="questionDeleteAnswerBtn">Delete</button>
+                                        </div>
+                                    </div>
+                                    <div class="answer-workspace__editor">
+                                        <div id="questionAnswerEditorEmpty" class="answer-editor-empty">Select or add an answer to edit details.</div>
+                                        <div id="questionAnswerEditorPanel" style="display:none;">
+                                            <div class="answer-editor__header">
+                                                <strong id="questionAnswerEditorTitle">Answer</strong>
+                                                <label class="checkbox" style="display:flex; align-items:center; gap:8px;">
+                                                    <input type="checkbox" id="questionAnswerCorrectToggle" />
+                                                    <span>Correct answer</span>
+                                                </label>
+                                            </div>
+                                            <div class="answer-editor__tabs" id="questionAnswerLanguageTabs">
+                                                {foreach from=$Languages item=lang}
+                                                    <button type="button" class="button" data-answer-language="{$lang|escape:'html'}">{$lang|upper}</button>
                                                 {/foreach}
-                                            </tbody>
-                                        </table>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="questionAnswerTitleInput">Answer text</label>
+                                                <textarea id="questionAnswerTitleInput" rows="4"></textarea>
+                                                <small class="field-note" id="questionAnswerMissingHint"></small>
+                                            </div>
+                                            <div class="panel__actions">
+                                                <button type="button" class="button" id="questionCopyEnToEmptyBtn">Copy EN to empty languages</button>
+                                                <button type="button" class="button" id="questionNextIncompleteBtn">Next incomplete</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="panel__actions">
-                                    <button type="button" class="button" id="questionAddAnswerBtn">Add answer</button>
                                     <button type="button" class="button green" id="questionSaveAnswersBtn" onClick="questionAnswersSave({$QuestionID})">Save answers</button>
                                 </div>
                             </div>
