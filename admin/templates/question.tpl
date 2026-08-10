@@ -39,6 +39,10 @@
                             <div>
                                 <h2>Question #{if $QuestionID}{$QuestionID}{else}New{/if}</h2>
                                 <p class="panel__sub">{if $QuestionID}Editing question {$QuestionID}{else}Create a new question{/if}</p>
+                                <p class="panel__sub" id="questionModeBadge">Mode: {if $Question.have_answers}Theoretical (answers){else}SQL query{/if}</p>
+                                <div class="panel__actions">
+                                    <button type="button" class="button" id="questionStartTheoryBtn">Switch to theoretical mode</button>
+                                </div>
                             </div>
                         </div>
                         <form id="questionForm" class="editor-form" data-question-id="{$QuestionID|default:0}" autocomplete="off">
@@ -68,7 +72,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="field-row">
+                            <div class="field-row" data-query-fields>
                                 <label for="questionSolution">Solution query</label>
                                 <textarea id="questionSolution" name="question[solution_query]" rows="4">{$Question.solution_query|default:''|escape:'html'}</textarea>
                                 <div class="panel__actions">
@@ -84,7 +88,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="field-row">
+                            <div class="field-row" data-query-fields>
                                 <span class="form-label">Query checks</span>
                                 <div class="checks-table-wrapper">
                                     <div class="checks-table-scroll" style="max-height: 250px; overflow-y: auto;">
@@ -117,17 +121,69 @@
                                     <button type="button" class="button green" id="questionChecksSaveBtn" onClick="questionChecksSave({$QuestionID})">Save query checks</button>
                                 </div>
                             </div>
-                            <div class="field-row">
+                            <div class="field-row" data-query-fields>
                                 <label for="questionResult">Valid result</label>
                                 <textarea id="questionResult" name="question[query_valid_result]" rows="3">{$Question.query_valid_result|default:''|escape:'html'}</textarea>
                             </div>
-                            <div class="field-row">
+                            <div class="field-row" data-query-fields>
                                 <label for="questionPreCheck">Pre-check query</label>
                                 <textarea id="questionPreCheck" name="question[query_pre_check]" rows="3">{$Question.query_pre_check|default:''|escape:'html'}</textarea>
                             </div>
-                            <div class="field-row">
+                            <div class="field-row" data-query-fields>
                                 <label for="questionCheck">Check query</label>
                                 <textarea id="questionCheck" name="question[query_check]" rows="3">{$Question.query_check|default:''|escape:'html'}</textarea>
+                            </div>
+                            <div class="field-row" id="questionAnswersSection" style="{if !$Question.have_answers}display:none;{/if}">
+                                <div>
+                                    <span class="form-label">Answer options (theoretical mode)</span>
+                                    <small class="field-note">Rules: at least 2 answers, at least 1 correct answer, and text in EN/RU/PT/FR/ZH for every answer.</small>
+                                </div>
+                                <div class="checks-table-wrapper">
+                                    <div class="checks-table-scroll" style="max-height: 320px; overflow-y: auto;">
+                                        <table class="checks-table" id="questionAnswersTable">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Correct</th>
+                                                    {foreach from=$Languages item=lang}
+                                                        <th>{$lang|upper}</th>
+                                                    {/foreach}
+                                                    <th>Remove</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="questionAnswersTableBody">
+                                                {foreach from=$Question.answers|default:[] item=answer}
+                                                    <tr data-answer-row="1" data-answer-id="{$answer.id}">
+                                                        <td data-answer-row-number="1"></td>
+                                                        <td>
+                                                            <label class="checkbox">
+                                                                <input type="checkbox" data-answer-valid="1"{if $answer.is_valid} checked{/if} />
+                                                            </label>
+                                                        </td>
+                                                        {foreach from=$Languages item=lang}
+                                                            <td>
+                                                                <input
+                                                                    type="text"
+                                                                    data-answer-title="1"
+                                                                    data-lang="{$lang|escape:'html'}"
+                                                                    value="{$answer.localizations[$lang].title|default:''|escape:'html'}"
+                                                                    style="width:100%;"
+                                                                />
+                                                            </td>
+                                                        {/foreach}
+                                                        <td>
+                                                            <button type="button" class="button red" data-remove-answer="1">Remove</button>
+                                                        </td>
+                                                    </tr>
+                                                {/foreach}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="panel__actions">
+                                    <button type="button" class="button" id="questionAddAnswerBtn">Add answer</button>
+                                    <button type="button" class="button green" id="questionSaveAnswersBtn" onClick="questionAnswersSave({$QuestionID})">Save answers</button>
+                                </div>
                             </div>
                             <div class="locale-grid">
                                 {foreach from=$Languages item=lang}

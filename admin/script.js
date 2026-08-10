@@ -3,6 +3,7 @@ const state = {
     lessons: [],
     modules: [],
     selectedQuestion: null,
+    currentQuestionHasAnswers: false,
     selectedLessonId: null,
     statusTimer: null,
     initialLessonId: parseInt(window.ADMIN_CONFIG.lessonId ?? 0, 10) || 0
@@ -16,25 +17,50 @@ const LANGUAGE_LABELS = {
     ZH: 'Chinese'
 };
 
+const SUPPORTED_LANGUAGES = ['en', 'ru', 'pt', 'fr', 'zh'];
+
+function setFieldValue(id, value) {
+    const field = document.getElementById(id);
+    if (!field) {
+        return;
+    }
+    field.value = value || '';
+}
+
+function getFieldValue(id) {
+    const field = document.getElementById(id);
+    if (!field) {
+        return '';
+    }
+    return field.value.trim();
+}
+
 function populateQuestionForm(question) {
-    document.getElementById('questionDb').value = question.db || 'sakila';
-    document.getElementById('questionDbTemplate').value = question.db_template || 'sakila';
-    document.getElementById('questionSolution').value = question.solution_query || '';
-    document.getElementById('questionMatch').value = question.query_match || '';
-    document.getElementById('questionNotMatch').value = question.query_not_match || '';
-    document.getElementById('questionResult').value = question.query_valid_result || '';
+    setFieldValue('questionDb', question.db || 'sakila');
+    setFieldValue('questionDbTemplate', question.db_template || 'sakila');
+    setFieldValue('questionSolution', question.solution_query || '');
+    setFieldValue('questionMatch', question.query_match || '');
+    setFieldValue('questionNotMatch', question.query_not_match || '');
+    setFieldValue('questionResult', question.query_valid_result || '');
+    setFieldValue('questionPreCheck', question.query_pre_check || '');
+    setFieldValue('questionCheck', question.query_check || '');
 
     const localizations = question.localizations || {};
-    const en = localizations.en || {};
-    const ru = localizations.ru || {};
+    SUPPORTED_LANGUAGES.forEach((language) => {
+        const languageUpper = language.toUpperCase();
+        const localization = localizations[language] || {};
+        setFieldValue(`questionTitle${languageUpper}`, localization.title || '');
+        setFieldValue(`questionTask${languageUpper}`, localization.task || '');
+        setFieldValue(`questionHint${languageUpper}`, localization.hint || '');
+    });
 
-    document.getElementById('questionTitleEn').value = en.title || '';
-    document.getElementById('questionTaskEn').value = en.task || '';
-    document.getElementById('questionHintEn').value = en.hint || '';
-
-    document.getElementById('questionTitleRu').value = ru.title || '';
-    document.getElementById('questionTaskRu').value = ru.task || '';
-    document.getElementById('questionHintRu').value = ru.hint || '';
+    const hiddenQuestionId = document.querySelector('input[name="question[id]"]');
+    if (hiddenQuestionId) {
+        hiddenQuestionId.value = question.id || '';
+    }
+    state.currentQuestionHasAnswers = Boolean(question.have_answers);
+    renderAnswerRows(question.answers || []);
+    updateQuestionModeUI();
 
     const checkStates = {};
     (question.query_checks || []).forEach((check) => {
@@ -67,14 +93,20 @@ function populateQuestionForm(question) {
 }
 
 function clearQuestionForm() {
-    document.getElementById('questionForm').reset();
+    const form = document.getElementById('questionForm');
+    if (form) {
+        form.reset();
+    }
     state.selectedQuestion = null;
+    state.currentQuestionHasAnswers = false;
     document.querySelectorAll('[data-query-check-row] input[type="checkbox"]').forEach((checkbox) => {
         checkbox.checked = false;
     });
     document.querySelectorAll('[data-question-category-row] input[type="checkbox"]').forEach((checkbox) => {
         checkbox.checked = false;
     });
+    clearAnswerRows();
+    updateQuestionModeUI();
 }
 
 function gatherQuestionPayload() {
@@ -94,29 +126,28 @@ function gatherQuestionPayload() {
         }
         questionCategories[row.dataset.categoryId] = checkbox.checked;
     });
+    const localizations = {};
+    SUPPORTED_LANGUAGES.forEach((language) => {
+        const languageUpper = language.toUpperCase();
+        localizations[language] = {
+            title: getFieldValue(`questionTitle${languageUpper}`),
+            task: getFieldValue(`questionTask${languageUpper}`),
+            hint: getFieldValue(`questionHint${languageUpper}`)
+        };
+    });
+
     return {
-        db: document.getElementById('questionDb').value.trim() || 'sakila',
-        db_template: document.getElementById('questionDbTemplate').value.trim() || 'sakila',
-        solution_query: document.getElementById('questionSolution').value.trim(),
+        db: getFieldValue('questionDb') || 'sakila',
+        db_template: getFieldValue('questionDbTemplate') || 'sakila',
+        solution_query: getFieldValue('questionSolution'),
         query_checks: queryChecks,
         categories: questionCategories,
-        query_match: document.getElementById('questionMatch').value.trim(),
-        query_not_match: document.getElementById('questionNotMatch').value.trim(),
-        query_valid_result: document.getElementById('questionResult').value.trim(),
-        query_pre_check: document.getElementById('questionPreCheck').value.trim(),
-        query_check: document.getElementById('questionCheck').value.trim(),
-        localizations: {
-            en: {
-                title: document.getElementById('questionTitleEn').value.trim(),
-                task: document.getElementById('questionTaskEn').value.trim(),
-                hint: document.getElementById('questionHintEn').value.trim()
-            },
-            ru: {
-                title: document.getElementById('questionTitleRu').value.trim(),
-                task: document.getElementById('questionTaskRu').value.trim(),
-                hint: document.getElementById('questionHintRu').value.trim()
-            }
-        }
+        query_match: getFieldValue('questionMatch'),
+        query_not_match: getFieldValue('questionNotMatch'),
+        query_valid_result: getFieldValue('questionResult'),
+        query_pre_check: getFieldValue('questionPreCheck'),
+        query_check: getFieldValue('questionCheck'),
+        localizations
     };
 }
 
@@ -424,9 +455,14 @@ async function questionLocalizationSave(questionId, language) {
     const title = document.getElementById(`questionTitle${normalizedLanguage}`)?.value.trim();
     const task  = document.getElementById(`questionTask${normalizedLanguage}`)?.value.trim();
     const hint  = document.getElementById(`questionHint${normalizedLanguage}`)?.value.trim();
+    const theoryMode = isTheoryMode();
 
-    if (!title || !task || title === '' || task === '' ) {
-        showStatus('Title and task fields are required', 'error');
+    if (!title || title === '') {
+        showStatus('Title is required', 'error');
+        return;
+    }
+    if (!theoryMode && (!task || task === '')) {
+        showStatus('Task is required for SQL query questions', 'error');
         return;
     }
     const payload = {
@@ -455,6 +491,240 @@ async function questionLocalizationSave(questionId, language) {
     } catch (error) {
         console.error(error);
     }
+}
+
+function getCurrentQuestionId() {
+    if (state.selectedQuestion && state.selectedQuestion.id) {
+        return parseInt(state.selectedQuestion.id, 10) || 0;
+    }
+    const hidden = document.querySelector('input[name="question[id]"]');
+    if (hidden && hidden.value) {
+        return parseInt(hidden.value, 10) || 0;
+    }
+    const form = document.getElementById('questionForm');
+    if (form && form.dataset.questionId) {
+        return parseInt(form.dataset.questionId, 10) || 0;
+    }
+    return 0;
+}
+
+function clearAnswerRows() {
+    const body = document.getElementById('questionAnswersTableBody');
+    if (body) {
+        body.innerHTML = '';
+    }
+}
+
+function renderAnswerRows(answers) {
+    const body = document.getElementById('questionAnswersTableBody');
+    if (!body) {
+        return;
+    }
+
+    body.innerHTML = '';
+    answers.forEach((answer) => {
+        appendAnswerRow(answer || {});
+    });
+
+    updateAnswerRowNumbers();
+}
+
+function appendAnswerRow(answer = {}) {
+    const body = document.getElementById('questionAnswersTableBody');
+    if (!body) {
+        return;
+    }
+
+    const row = document.createElement('tr');
+    row.setAttribute('data-answer-row', '1');
+    if (answer.id) {
+        row.dataset.answerId = String(answer.id);
+    }
+
+    const numberCell = document.createElement('td');
+    numberCell.setAttribute('data-answer-row-number', '1');
+    row.appendChild(numberCell);
+
+    const validCell = document.createElement('td');
+    const validCheckbox = document.createElement('input');
+    validCheckbox.type = 'checkbox';
+    validCheckbox.checked = Boolean(answer.is_valid);
+    validCheckbox.setAttribute('data-answer-valid', '1');
+    validCell.appendChild(validCheckbox);
+    row.appendChild(validCell);
+
+    SUPPORTED_LANGUAGES.forEach((language) => {
+        const languageCell = document.createElement('td');
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.setAttribute('data-answer-title', '1');
+        input.setAttribute('data-lang', language);
+        input.style.width = '100%';
+        input.value = answer.localizations?.[language]?.title || '';
+        languageCell.appendChild(input);
+        row.appendChild(languageCell);
+    });
+
+    const removeCell = document.createElement('td');
+    const removeBtn = document.createElement('button');
+    removeBtn.type = 'button';
+    removeBtn.className = 'button red';
+    removeBtn.textContent = 'Remove';
+    removeBtn.setAttribute('data-remove-answer', '1');
+    removeCell.appendChild(removeBtn);
+    row.appendChild(removeCell);
+
+    body.appendChild(row);
+}
+
+function updateAnswerRowNumbers() {
+    const rows = document.querySelectorAll('[data-answer-row]');
+    rows.forEach((row, index) => {
+        const numberCell = row.querySelector('[data-answer-row-number]');
+        if (numberCell) {
+            numberCell.textContent = String(index + 1);
+        }
+    });
+}
+
+function collectAnswerPayload() {
+    const rows = Array.from(document.querySelectorAll('[data-answer-row]'));
+    return rows.map((row) => {
+        const answerId = parseInt(row.dataset.answerId || '0', 10) || 0;
+        const isValid = Boolean(row.querySelector('[data-answer-valid]')?.checked);
+        const localizations = {};
+
+        SUPPORTED_LANGUAGES.forEach((language) => {
+            const field = row.querySelector(`[data-answer-title][data-lang="${language}"]`);
+            localizations[language] = {
+                title: (field?.value || '').trim()
+            };
+        });
+
+        return {
+            id: answerId,
+            is_valid: isValid,
+            localizations
+        };
+    });
+}
+
+function isTheoryMode() {
+    const rows = document.querySelectorAll('[data-answer-row]');
+    return rows.length > 0;
+}
+
+function updateQuestionModeUI() {
+    const theoryMode = isTheoryMode();
+    const sqlFields = document.querySelectorAll('[data-query-fields]');
+    sqlFields.forEach((section) => {
+        section.style.display = theoryMode ? 'none' : '';
+    });
+
+    const answersSection = document.getElementById('questionAnswersSection');
+    if (answersSection) {
+        answersSection.style.display = theoryMode ? '' : 'none';
+    }
+
+    const modeBadge = document.getElementById('questionModeBadge');
+    if (modeBadge) {
+        modeBadge.textContent = theoryMode ? 'Mode: Theoretical (answers)' : 'Mode: SQL query';
+    }
+
+    const startTheoryBtn = document.getElementById('questionStartTheoryBtn');
+    if (startTheoryBtn) {
+        startTheoryBtn.style.display = theoryMode ? 'none' : '';
+    }
+}
+
+async function questionAnswersSave(questionId) {
+    const id = parseInt(questionId, 10) || getCurrentQuestionId();
+    if (!id) {
+        showStatus('Save the question before saving answers.', 'info');
+        return;
+    }
+
+    const answers = collectAnswerPayload();
+    if (answers.length > 0) {
+        if (answers.length < 2) {
+            showStatus('At least 2 answers are required', 'error');
+            return;
+        }
+        if (!answers.some((answer) => answer.is_valid)) {
+            showStatus('Mark at least 1 answer as correct', 'error');
+            return;
+        }
+        for (let i = 0; i < answers.length; i += 1) {
+            const answer = answers[i];
+            for (let j = 0; j < SUPPORTED_LANGUAGES.length; j += 1) {
+                const language = SUPPORTED_LANGUAGES[j];
+                if (!answer.localizations[language].title) {
+                    showStatus(`Answer #${i + 1}: ${language.toUpperCase()} text is required`, 'error');
+                    return;
+                }
+            }
+        }
+    }
+
+    try {
+        const response = await safeFetch('/admin/question-answers', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                question_id: id,
+                answers
+            })
+        });
+        state.currentQuestionHasAnswers = Boolean(response.have_answers);
+        renderAnswerRows(response.answers || []);
+        updateQuestionModeUI();
+        showStatus('Answers saved', 'success');
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+function initAnswerEditor() {
+    const answersSection = document.getElementById('questionAnswersSection');
+    if (!answersSection) {
+        return;
+    }
+
+    const addButton = document.getElementById('questionAddAnswerBtn');
+    if (addButton) {
+        addButton.addEventListener('click', function () {
+            appendAnswerRow({});
+            updateAnswerRowNumbers();
+            updateQuestionModeUI();
+        });
+    }
+
+    const startTheoryBtn = document.getElementById('questionStartTheoryBtn');
+    if (startTheoryBtn) {
+        startTheoryBtn.addEventListener('click', function () {
+            appendAnswerRow({});
+            appendAnswerRow({});
+            updateAnswerRowNumbers();
+            updateQuestionModeUI();
+        });
+    }
+
+    answersSection.addEventListener('click', function (event) {
+        const removeButton = event.target.closest('[data-remove-answer]');
+        if (!removeButton) {
+            return;
+        }
+        const row = removeButton.closest('[data-answer-row]');
+        if (!row) {
+            return;
+        }
+        row.remove();
+        updateAnswerRowNumbers();
+        updateQuestionModeUI();
+    });
+
+    updateAnswerRowNumbers();
+    updateQuestionModeUI();
 }
 
 function collectQuestionCheckStates() {
@@ -599,3 +869,7 @@ function showStatus(message, state = 'info') {
     }
     ), showTime)
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    initAnswerEditor();
+});

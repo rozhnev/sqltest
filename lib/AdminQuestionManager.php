@@ -144,6 +144,8 @@ class AdminQuestionManager extends AdminContentManager
         $question['id'] = (int)$question['id'];
         $question['deleted'] = (bool)$question['deleted'];
         $question['localizations'] = $this->getLocalizations($question['id']);
+        $question['answers'] = $this->getAnswers($question['id']);
+        $question['have_answers'] = count($question['answers']) > 0;
         $question['query_checks'] =  $this->getQueryChecks($question['id']);
         $question['categories'] =  $this->getQueryCategories($question['id']);
         return $question;
@@ -167,6 +169,19 @@ class AdminQuestionManager extends AdminContentManager
         if (!in_array($language, $this->supportedLanguages, true)) {
             throw new Exception('Unsupported localization language');
         }
+
+        $title = trim((string)($fields['title'] ?? ''));
+        $task = trim((string)($fields['task'] ?? ''));
+        $hint = trim((string)($fields['hint'] ?? ''));
+        if ($title === '') {
+            throw new Exception('Title is required');
+        }
+
+        $hasAnswers = $this->hasAnswers($questionId);
+        if (!$hasAnswers && $task === '') {
+            throw new Exception('Task is required for SQL query questions');
+        }
+
         $this->upsertLocalizations($questionId, [$language => $fields]);
         $localizations = $this->getLocalizations($questionId);
         $saved = $localizations[$language] ?? [];
@@ -176,6 +191,111 @@ class AdminQuestionManager extends AdminContentManager
             'task' => $saved['task'] ?? ($fields['task'] ?? ''),
             'hint' => $saved['hint'] ?? ($fields['hint'] ?? '')
         ];
+    }
+
+    public function saveAnswers(int $questionId, array $answers): array
+    {
+        if ($questionId <= 0) {
+            throw new Exception('Question identifier is required');
+        }
+
+        $normalized = $this->normalizeAnswersPayload($answers);
+        if (count($normalized) > 0) {
+            if (count($normalized) < 2) {
+                throw new Exception('At least 2 answers are required for a theoretical question');
+            }
+            $hasCorrect = false;
+            foreach ($normalized as $answer) {
+                if ($answer['is_valid']) {
+                    $hasCorrect = true;
+                    break;
+                }
+            }
+            if (!$hasCorrect) {
+                throw new Exception('At least 1 correct answer is required');
+            }
+        }
+
+        $this->dbh->beginTransaction();
+        try {
+            $existingStmt = $this->dbh->prepare('SELECT id FROM answers WHERE question_id = :question_id');
+            $existingStmt->execute([':question_id' => $questionId]);
+            $existing = [];
+            foreach ($existingStmt->fetchAll(PDO::FETCH_ASSOC) as $row) {
+                $existing[(int)$row['id']] = true;
+            }
+
+            $insertAnswerStmt = $this->dbh->prepare('INSERT INTO answers (question_id, sequence_position, is_valid, deleted)
+                VALUES (:question_id, :sequence_position, :is_valid, false)
+                RETURNING id');
+            $updateAnswerStmt = $this->dbh->prepare('UPDATE answers
+                SET sequence_position = :sequence_position,
+                    is_valid = :is_valid,
+                    deleted = false
+                WHERE id = :id AND question_id = :question_id');
+            $upsertLocalizationStmt = $this->dbh->prepare('INSERT INTO answers_localization (answer_id, language, title)
+                VALUES (:answer_id, :language, :title)
+                ON CONFLICT (answer_id, language) DO UPDATE SET title = EXCLUDED.title');
+
+            $keepIds = [];
+            foreach ($normalized as $index => $answer) {
+                $answerId = (int)$answer['id'];
+                if ($answerId > 0 && isset($existing[$answerId])) {
+                    $updateAnswerStmt->execute([
+                        ':sequence_position' => $index + 1,
+                        ':is_valid' => $answer['is_valid'],
+                        ':id' => $answerId,
+                        ':question_id' => $questionId
+                    ]);
+                } else {
+                    $insertAnswerStmt->execute([
+                        ':question_id' => $questionId,
+                        ':sequence_position' => $index + 1,
+                        ':is_valid' => $answer['is_valid']
+                    ]);
+                    $answerId = (int)$insertAnswerStmt->fetchColumn();
+                }
+
+                $keepIds[] = $answerId;
+                foreach ($this->supportedLanguages as $language) {
+                    $upsertLocalizationStmt->execute([
+                        ':answer_id' => $answerId,
+                        ':language' => $language,
+                        ':title' => $answer['localizations'][$language]['title']
+                    ]);
+                }
+            }
+
+            if (count($keepIds) > 0) {
+                $placeholders = implode(',', array_fill(0, count($keepIds), '?'));
+                $stmtDeleteAnswers = $this->dbh->prepare("UPDATE answers SET deleted = true WHERE question_id = ? AND id NOT IN ($placeholders)");
+                $stmtDeleteAnswers->execute(array_merge([$questionId], $keepIds));
+
+                $stmtCleanup = $this->dbh->prepare('DELETE FROM answers_localization
+                    WHERE answer_id IN (
+                        SELECT id FROM answers WHERE question_id = :question_id AND deleted = true
+                    )');
+                $stmtCleanup->execute([':question_id' => $questionId]);
+            } else {
+                $stmtDeleteAnswers = $this->dbh->prepare('UPDATE answers SET deleted = true WHERE question_id = :question_id');
+                $stmtDeleteAnswers->execute([':question_id' => $questionId]);
+
+                $stmtCleanup = $this->dbh->prepare('DELETE FROM answers_localization
+                    WHERE answer_id IN (
+                        SELECT id FROM answers WHERE question_id = :question_id
+                    )');
+                $stmtCleanup->execute([':question_id' => $questionId]);
+            }
+
+            $this->dbh->commit();
+        } catch (Exception $e) {
+            if ($this->dbh->inTransaction()) {
+                $this->dbh->rollBack();
+            }
+            throw $e;
+        }
+
+        return $this->getAnswers($questionId);
     }
     
     public function saveQueryChecks(int $questionId, array $states): void
@@ -450,15 +570,18 @@ class AdminQuestionManager extends AdminContentManager
             if (!in_array($language, $this->supportedLanguages, true)) {
                 continue;
             }
-            if (empty($fields['title']) || empty($fields['task']) || empty($fields['hint'])) {
+            $title = trim((string)($fields['title'] ?? ''));
+            if ($title === '') {
                 continue;
             }
+            $task = trim((string)($fields['task'] ?? ''));
+            $hint = trim((string)($fields['hint'] ?? ''));
             $stmt->execute([
                 ':question_id' => $questionId,
                 ':language' => $language,
-                ':title' => $fields['title'],
-                ':task' => $this->wrapTaskInPre($fields['task']),
-                ':hint' => $fields['hint']
+                ':title' => $title,
+                ':task' => $this->wrapTaskInPre($task),
+                ':hint' => $hint
             ]);
         }
     }
@@ -466,10 +589,106 @@ class AdminQuestionManager extends AdminContentManager
     private function wrapTaskInPre(string $task): string
     {
         $trimmed = trim($task);
+        if ($trimmed === '') {
+            return '';
+        }
         if (preg_match('/^<pre[^>]*>.*<\/pre>$/is', $trimmed)) {
             return $task;
         }
         return '<pre>' . $task . '</pre>';
+    }
+
+    private function getAnswers(int $questionId): array
+    {
+        $stmt = $this->dbh->prepare('SELECT
+                a.id,
+                a.sequence_position,
+                a.is_valid,
+                a.deleted,
+                al.language,
+                al.title
+            FROM answers a
+            LEFT JOIN answers_localization al ON al.answer_id = a.id
+            WHERE a.question_id = :question_id
+            ORDER BY a.sequence_position, a.id');
+        $stmt->execute([':question_id' => $questionId]);
+
+        $answers = [];
+        foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row) {
+            if ((bool)$row['deleted']) {
+                continue;
+            }
+            $answerId = (int)$row['id'];
+            if (!isset($answers[$answerId])) {
+                $answers[$answerId] = [
+                    'id' => $answerId,
+                    'sequence_position' => (int)$row['sequence_position'],
+                    'is_valid' => (bool)$row['is_valid'],
+                    'localizations' => []
+                ];
+                foreach ($this->supportedLanguages as $language) {
+                    $answers[$answerId]['localizations'][$language] = ['title' => ''];
+                }
+            }
+
+            $language = trim((string)($row['language'] ?? ''));
+            if ($language !== '' && in_array($language, $this->supportedLanguages, true)) {
+                $answers[$answerId]['localizations'][$language] = [
+                    'title' => (string)($row['title'] ?? '')
+                ];
+            }
+        }
+
+        usort($answers, function (array $a, array $b) {
+            return $a['sequence_position'] <=> $b['sequence_position'];
+        });
+        return $answers;
+    }
+
+    private function hasAnswers(int $questionId): bool
+    {
+        $stmt = $this->dbh->prepare('SELECT EXISTS(
+            SELECT 1 FROM answers WHERE question_id = :question_id AND NOT deleted
+        )');
+        $stmt->execute([':question_id' => $questionId]);
+        return (bool)$stmt->fetchColumn();
+    }
+
+    private function normalizeAnswersPayload(array $answers): array
+    {
+        $normalized = [];
+        foreach ($answers as $index => $row) {
+            if (!is_array($row)) {
+                continue;
+            }
+
+            $answerId = isset($row['id']) ? (int)$row['id'] : 0;
+            $isValid = !empty($row['is_valid']);
+            $localizations = is_array($row['localizations'] ?? null) ? $row['localizations'] : [];
+            $normalizedLocalizations = [];
+
+            foreach ($this->supportedLanguages as $language) {
+                $languagePayload = $localizations[$language] ?? [];
+                $title = '';
+                if (is_array($languagePayload)) {
+                    $title = trim((string)($languagePayload['title'] ?? ''));
+                } else {
+                    $title = trim((string)$languagePayload);
+                }
+                if ($title === '') {
+                    throw new Exception('Answer #' . ($index + 1) . ' is missing text for language: ' . strtoupper($language));
+                }
+                $normalizedLocalizations[$language] = ['title' => $title];
+            }
+
+            $normalized[] = [
+                'id' => $answerId,
+                'is_valid' => $isValid,
+                'localizations' => $normalizedLocalizations
+            ];
+        }
+
+        return $normalized;
     }
 
     private function getLocalizations(int $questionId): array

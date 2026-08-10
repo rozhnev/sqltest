@@ -45,6 +45,9 @@ switch ($resource) {
     case 'question-localization':
         handleQuestionLocalization($questionManager, $method);
         break;
+    case 'question-answers':
+        handleQuestionAnswers($questionManager, $method);
+        break;
     case 'question-checks':
         handleQuestionChecks($questionManager, $method);
         break;
@@ -166,6 +169,31 @@ function handleQuestionLocalization(AdminQuestionManager $manager, string $metho
     try {
         $localization = $manager->saveLocalization($questionId, $language, $fields);
         respondJson(['localization' => $localization]);
+    } catch (Exception $error) {
+        respondJson(['error' => $error->getMessage()], 400);
+    }
+}
+
+function handleQuestionAnswers(AdminQuestionManager $manager, string $method): void
+{
+    if ($method !== 'POST') {
+        respondMethodNotAllowed();
+    }
+    $payload = parseJsonBody();
+    $questionId = isset($payload['question_id']) ? (int)$payload['question_id'] : 0;
+    $answers = isset($payload['answers']) && is_array($payload['answers']) ? $payload['answers'] : [];
+
+    if ($questionId <= 0) {
+        respondJson(['error' => 'Question identifier is required'], 400);
+    }
+
+    try {
+        $savedAnswers = $manager->saveAnswers($questionId, $answers);
+        respondJson([
+            'ok' => true,
+            'answers' => $savedAnswers,
+            'have_answers' => count($savedAnswers) > 0
+        ]);
     } catch (Exception $error) {
         respondJson(['error' => $error->getMessage()], 400);
     }
