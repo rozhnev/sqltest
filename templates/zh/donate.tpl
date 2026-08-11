@@ -15,7 +15,7 @@
         <div style="display: block;">      
             <h2 style="color: var(--ligth-h2-color);">💳 选择支持方式</h2>
             <div class="donation-methods">
-                <div class="donation-method">
+                {* <div class="donation-method">
                     <h3>Ko‑fi（银行卡 / PayPal）</h3>
                     <p style="margin: 1.5rem 0;">
                     <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
@@ -26,7 +26,7 @@
                     </p>
                     <p>大多数地区提供简单安全的支付方式。</p>
                     <p class="donation-fallback">如果小部件未加载，请使用直接链接：<a href="https://ko-fi.com/D1D76X1T1" target="_blank" rel="noopener noreferrer">ko-fi.com/D1D76X1T1</a>。</p>
-                </div>
+                </div> *}
                 <div class="donation-method">
                     <h3>加密货币捐赠</h3>
                     <p>喜欢加密货币？请使用下面的小部件：</p>
