@@ -1,5 +1,5 @@
-<span style="color:#ffffff;">🙏 <strong style="color:#ffe082;">Thank you for your support!</strong> We have already raised <strong style="color:#ff8a80;">$65</strong> in July — that is enough to keep working until next month. Please help us keep up the pace and support the project further.</span>
-<a href="/en/donate" style="color:#ffd54f; text-decoration:underline; font-weight:bold; white-space:nowrap;">Support the project →</a>
+<span style="color:#ffffff;">🙏 <strong style="color:#ffe082;">We really need your support.</strong> We need funding to continue our mission: publishing new lessons and improving the platform. If you can, please support the project with a donation.</span>
+<a href="/en/donate" style="color:#ffd54f; text-decoration:underline; font-weight:bold; white-space:nowrap;">Help the project now →</a>
 
 {* Variant 1 (soft) *}
 {* <span style="color:#ffffff;">🙏 <strong style="color:#ffe082;">This project exists because of you.</strong> Last month we collected only <strong style="color:#ff8a80;">$32</strong>. Please help us keep publishing new lessons.</span> *}
