@@ -30,9 +30,19 @@
                 <div class="donation-method">
                     <h3>加密货币捐赠</h3>
                     <p>喜欢加密货币？请使用下面的小部件：</p>
-                    <iframe src="https://nowpayments.io/embeds/donation-widget?api_key=8881e1d0-aaef-46c4-9a60-298bb6f26c3b" width="346" height="623" frameborder="0" scrolling="no" style="overflow-y: hidden;">
+                    <iframe
+                    src="https://nowpayments.io/embeds/payment-widget?iid=4471785527"
+                    width="410"
+                    height="696"
+                    frameborder="0"
+                    scrolling="no"
+                    style="overflow-y: hidden;"
+                    >
                         无法加载小部件
                     </iframe>
+                    {* <iframe src="https://nowpayments.io/embeds/donation-widget?api_key=8881e1d0-aaef-46c4-9a60-298bb6f26c3b" width="346" height="623" frameborder="0" scrolling="no" style="overflow-y: hidden;">
+                        无法加载小部件
+                    </iframe> *}
                     <p class="donation-fallback">如果被浏览器阻止，请尝试禁用内容拦截器或使用 Ko‑fi。</p>
                 </div>
             </div>
