@@ -201,8 +201,14 @@ class Question
             ];
         }
         // Guard against excessively long submissions before sending them to the LLM.
-        if (mb_strlen($answer) > 4000) {
-            $answer = mb_substr($answer, 0, 4000);
+        // Truncate to at most 4000 Unicode characters using PCRE's /u modifier (part of
+        // PHP core) rather than mb_substr(), since the optional mbstring extension may
+        // not be installed on every server.
+        if (preg_match('/^.{0,4000}/us', $answer, $truncated)) {
+            $answer = $truncated[0];
+        } else {
+            // Malformed UTF-8 or no PCRE unicode support — fall back to a generous byte cap.
+            $answer = substr($answer, 0, 16000);
         }
 
         $stmt = $this->dbh->prepare("
