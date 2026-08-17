@@ -120,6 +120,7 @@ $translations = [
     'question_action_check_free_answer' => 'Verificar resposta',
     'question_action_voice_input' => 'Entrada de voz',
     'question_action_voice_input_stop' => 'Parar gravação',
+    'question_action_clear_answer' => 'Limpar resposta',
     'free_answer_empty_error' => 'Por favor, escreva uma resposta antes de verificar.',
     'free_answer_llm_unavailable' => 'Não foi possível verificar sua resposta agora. Por favor, tente novamente em breve.',
     'free_answer_rate_limited' => 'Você atingiu o limite diário de verificações de respostas. Cada verificação usa um serviço de IA pago, então esse limite nos ajuda a continuar disponíveis para todos — tente novamente amanhã, ou <a href="/pt/donate">faça uma doação</a> para nos ajudar a aumentar o limite para todos.',

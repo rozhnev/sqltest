@@ -121,6 +121,7 @@ $translations = [
     'question_action_check_free_answer' => 'Check answer',
     'question_action_voice_input' => 'Voice input',
     'question_action_voice_input_stop' => 'Stop listening',
+    'question_action_clear_answer' => 'Clear answer',
     'free_answer_empty_error' => 'Please write an answer before checking.',
     'free_answer_llm_unavailable' => 'We could not check your answer right now. Please try again in a moment.',
     'free_answer_rate_limited' => 'You have reached the daily limit of answer checks. Each check uses a paid AI service, so this limit helps us keep it available to everyone — please try again tomorrow, or <a href="/en/donate">make a donation</a> to help us raise the limit for everyone.',

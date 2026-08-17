@@ -197,6 +197,7 @@ $translations = [
     'question_action_check_free_answer' => '检查答案',
     'question_action_voice_input' => '语音输入',
     'question_action_voice_input_stop' => '停止录音',
+    'question_action_clear_answer' => '清除答案',
     'free_answer_empty_error' => '请在检查之前写下答案。',
     'free_answer_llm_unavailable' => '目前无法检查您的答案。请稍后再试。',
     'free_answer_rate_limited' => '您已达到每日答案检查次数上限。每次检查都会使用付费的AI服务，此限制帮助我们保持对所有人的可用性——请明天再试，或<a href="/zh/donate">捐款支持我们</a>，帮助我们为所有人提高这个上限。',

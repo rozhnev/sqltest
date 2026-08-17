@@ -173,6 +173,10 @@
                                     <span class="voice-label-idle">{translate}question_action_voice_input{/translate}</span>
                                     <span class="voice-label-listening">{translate}question_action_voice_input_stop{/translate}</span>
                                 </span>
+                                <span class="text-button red" onClick="clearFreeAnswer()">
+                                    <i class="icon-trash"></i>
+                                    <span>{translate}question_action_clear_answer{/translate}</span>
+                                </span>
                             {elseif !isset($Question.answers)}
                                 <span class="text-button blue" onClick="copyCode(`{translate}toast_sql_copied_to_buffer{/translate}`)">
                                     <i class="icon-copy"></i>

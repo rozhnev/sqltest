@@ -146,6 +146,14 @@ function clearEditor() {
     editor.session.selection.clearSelection();
 }
 
+function clearFreeAnswer() {
+    stopVoiceInput();
+    const textarea = document.getElementById('free-answer-input');
+    if (!textarea) return;
+    textarea.value = '';
+    textarea.focus();
+}
+
 function toggleLoginWindow() {
     const popup = document.getElementById('login-menu');
     popup.classList.toggle("hidden");
