@@ -365,38 +365,47 @@ function startVoiceInput(SpeechRecognitionClass, lang) {
 
     voiceRecognition = new SpeechRecognitionClass();
     voiceRecognition.lang = VOICE_INPUT_LANG_MAP[lang] || 'en-US';
-    voiceRecognition.continuous = true;
+    // continuous:true is unreliable on mobile Chrome — it can re-emit already-finalized
+    // results, duplicating whatever was just spoken. Instead we recognize one utterance
+    // at a time and auto-restart in onend, which behaves consistently on desktop and mobile.
+    voiceRecognition.continuous = false;
     voiceRecognition.interimResults = true;
 
     // Recognized speech is appended after whatever was already in the textarea
-    // (typed text or a previously saved answer) rather than overwriting it.
-    let finalizedValue = textarea.value;
+    // (typed text or a previously saved answer) rather than overwriting it. Each
+    // finished utterance gets folded into this once it's final, before the next
+    // utterance's (fresh, zero-indexed) results start arriving.
+    let baseValue = textarea.value;
 
     voiceRecognition.onresult = function(event) {
-        let interim = '';
-        for (let i = event.resultIndex; i < event.results.length; i++) {
-            const transcript = event.results[i][0].transcript;
-            if (event.results[i].isFinal) {
-                finalizedValue = (finalizedValue + ' ' + transcript).trim();
-            } else {
-                interim += transcript;
-            }
+        let transcript = '';
+        for (let i = 0; i < event.results.length; i++) {
+            transcript += event.results[i][0].transcript;
         }
-        textarea.value = (finalizedValue + ' ' + interim).trim();
+        textarea.value = (baseValue + ' ' + transcript).trim();
+        if (event.results[event.results.length - 1].isFinal) {
+            baseValue = textarea.value;
+        }
     };
 
     voiceRecognition.onerror = function(event) {
-        if (event.error !== 'no-speech' && event.error !== 'aborted') {
-            showToast('error', 'Voice input error: ' + event.error);
+        if (event.error === 'no-speech' || event.error === 'aborted') {
+            // Not fatal — onend fires right after and restarts listening if still active.
+            return;
         }
+        showToast('error', 'Voice input error: ' + event.error);
         stopVoiceInput();
     };
 
     voiceRecognition.onend = function() {
-        // Some browsers end recognition on their own after a pause in speech;
-        // only reset the UI here if the user hasn't already clicked stop.
+        // Each utterance ends the recognizer on its own (continuous is off), so keep
+        // dictation going by restarting — unless the user already clicked stop.
         if (voiceInputActive) {
-            stopVoiceInput();
+            try {
+                voiceRecognition.start();
+            } catch (e) {
+                stopVoiceInput();
+            }
         }
     };
 
