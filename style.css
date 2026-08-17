@@ -1035,6 +1035,37 @@ input:checked + .slider:before {
     background-color: var(--text-block-background-color);
     font-size: inherit;
 }
+#voiceInputBtn .voice-label-listening {
+    display: none;
+}
+#voiceInputBtn.listening .voice-label-idle {
+    display: none;
+}
+#voiceInputBtn.listening .voice-label-listening {
+    display: inline;
+}
+#voiceInputBtn.listening svg rect,
+#voiceInputBtn.listening svg path {
+    fill: var(--danger-text-color);
+}
+#voiceInputBtn.listening {
+    color: var(--danger-text-color);
+    animation: voice-input-pulse 1.2s ease-in-out infinite;
+}
+@keyframes voice-input-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.55; }
+}
+.free-answer-textarea {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: 1.5;
+    color: var(--question-text);
+}
 .code-buttons {
     justify-content: right;
     display: flex;

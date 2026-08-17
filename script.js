@@ -284,6 +284,133 @@ function checkAnswers(lang, questionId) {
         document.getElementById('code-result').innerHTML = 'Something went wrong. Please review your query and try again or contact us by email: <a href="mailto:support@sqltest.online">support@sqltest.online</a>.';
     });
 }
+function checkFreeAnswer(lang, questionId) {
+    setLoader('code-result');
+    let formData = new FormData();
+    formData.append('answer', document.getElementById('free-answer-input').value);
+    fetch(`/${lang}/question/${questionId}/check-free-answer`, {
+        method: "POST",
+        mode: "cors",
+        cache: "default",
+        credentials: "same-origin",
+        body: formData,
+    })
+    .then((async response=>{
+        if (response.ok && document.getElementById("nextTaskBtn")) {
+            document.getElementById("nextTaskBtn").classList.toggle("hidden");
+            setTimeout(()=>{
+                if (document.getElementById("main3")) {
+                    document.getElementById("main3").scrollTo({
+                        top: document.getElementById("nextTaskBtn").offsetTop,
+                        behavior: "smooth"
+                    })
+                } else {
+                    window.scrollTo({
+                        top: document.getElementById("db-description").offsetTop - window.outerHeight,
+                        behavior: "smooth"
+                    })
+                }
+            }, 300)
+        }
+        return await response.text();
+    }))
+    .then((message)=>{
+        document.getElementById('code-result').innerHTML = message;
+    })
+    .catch(err=>{
+        document.getElementById('code-result').innerHTML = 'Something went wrong. Please review your answer and try again or contact us by email: <a href="mailto:support@sqltest.online">support@sqltest.online</a>.';
+    });
+}
+// Maps site interface language codes to BCP-47 locale tags the Web Speech API expects.
+const VOICE_INPUT_LANG_MAP = {
+    en: 'en-US',
+    ru: 'ru-RU',
+    pt: 'pt-BR',
+    fr: 'fr-FR',
+    zh: 'zh-CN',
+};
+
+let voiceRecognition = null;
+let voiceInputActive = false;
+
+function getSpeechRecognitionClass() {
+    return window.SpeechRecognition || window.webkitSpeechRecognition || null;
+}
+
+function toggleVoiceInput(lang) {
+    if (voiceInputActive) {
+        stopVoiceInput();
+        return;
+    }
+    const SpeechRecognitionClass = getSpeechRecognitionClass();
+    if (!SpeechRecognitionClass) {
+        showToast('error', 'Voice input is not supported in this browser.');
+        return;
+    }
+    startVoiceInput(SpeechRecognitionClass, lang);
+}
+
+function startVoiceInput(SpeechRecognitionClass, lang) {
+    const textarea = document.getElementById('free-answer-input');
+    const btn = document.getElementById('voiceInputBtn');
+    if (!textarea) return;
+
+    voiceRecognition = new SpeechRecognitionClass();
+    voiceRecognition.lang = VOICE_INPUT_LANG_MAP[lang] || 'en-US';
+    voiceRecognition.continuous = true;
+    voiceRecognition.interimResults = true;
+
+    // Recognized speech is appended after whatever was already in the textarea
+    // (typed text or a previously saved answer) rather than overwriting it.
+    let finalizedValue = textarea.value;
+
+    voiceRecognition.onresult = function(event) {
+        let interim = '';
+        for (let i = event.resultIndex; i < event.results.length; i++) {
+            const transcript = event.results[i][0].transcript;
+            if (event.results[i].isFinal) {
+                finalizedValue = (finalizedValue + ' ' + transcript).trim();
+            } else {
+                interim += transcript;
+            }
+        }
+        textarea.value = (finalizedValue + ' ' + interim).trim();
+    };
+
+    voiceRecognition.onerror = function(event) {
+        if (event.error !== 'no-speech' && event.error !== 'aborted') {
+            showToast('error', 'Voice input error: ' + event.error);
+        }
+        stopVoiceInput();
+    };
+
+    voiceRecognition.onend = function() {
+        // Some browsers end recognition on their own after a pause in speech;
+        // only reset the UI here if the user hasn't already clicked stop.
+        if (voiceInputActive) {
+            stopVoiceInput();
+        }
+    };
+
+    voiceInputActive = true;
+    if (btn) btn.classList.add('listening');
+    voiceRecognition.start();
+}
+
+function stopVoiceInput() {
+    voiceInputActive = false;
+    const btn = document.getElementById('voiceInputBtn');
+    if (btn) btn.classList.remove('listening');
+    if (voiceRecognition) {
+        const recognitionToStop = voiceRecognition;
+        voiceRecognition = null;
+        recognitionToStop.onend = null;
+        recognitionToStop.onresult = null;
+        recognitionToStop.onerror = null;
+        recognitionToStop.stop();
+    }
+}
+
 function testQuery(lang, questionId) {
     setLoader('code-result');
     let formData = new FormData();
@@ -841,8 +968,11 @@ if (document.getElementById("sql-code")) {
 
 window.onload = function() {
     scrollQuestionPanel();
+    if (!getSpeechRecognitionClass() && document.getElementById('voiceInputBtn')) {
+        document.getElementById('voiceInputBtn').classList.add('hidden');
+    }
     document.addEventListener('keydown', function(event) {
-        if (event.ctrlKey && event.key === 'Enter') {
+        if (event.ctrlKey && event.key === 'Enter' && window.sql_editor) {
             runQuery(lang, questionId);
         }
         // if (event.altKey && event.key === 'Enter') {

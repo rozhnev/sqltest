@@ -42,6 +42,72 @@ class LLM {
         return nl2br($answer);
     }
 
+    /**
+     * Ask the model for a strict JSON object and return it decoded, or null on any failure
+     * (network error, timeout, API error, or unparsable response).
+     *
+     * @param array $dialog Chat messages, same shape as ask().
+     * @param int $timeoutSeconds Hard curl timeout so a hanging request can't hang the page.
+     * @return array|null
+     */
+    public function askJson(array $dialog, int $timeoutSeconds = 20): ?array {
+        $data = [
+            'model'             => $this->model,
+            'messages'          => $dialog,
+            'temperature'       => 0.3,
+            'max_tokens'        => 500,
+            'response_format'   => ['type' => 'json_object'],
+        ];
+
+        $crl = curl_init('https://api.openai.com/v1/chat/completions');
+        curl_setopt($crl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($crl, CURLOPT_POST, true);
+        curl_setopt($crl, CURLOPT_POSTFIELDS, json_encode($data));
+        curl_setopt($crl, CURLOPT_HTTPHEADER, ["Content-Type: application/json", "Authorization: Bearer " . $this->key]);
+        curl_setopt($crl, CURLOPT_TIMEOUT, $timeoutSeconds);
+        curl_setopt($crl, CURLOPT_CONNECTTIMEOUT, 5);
+
+        $result = curl_exec($crl);
+        $errno = curl_errno($crl);
+        curl_close($crl);
+
+        if ($result === false || $errno !== 0) {
+            return null;
+        }
+
+        $response = json_decode($result, true);
+        if (!is_array($response) || !empty($response['error']['message'])) {
+            return null;
+        }
+
+        $content = trim((string)($response['choices'][0]['message']['content'] ?? ''));
+        if ($content === '') {
+            return null;
+        }
+
+        $json = $this->extractJsonObject($content);
+        if ($json === null) {
+            return null;
+        }
+
+        $decoded = json_decode($json, true);
+        return is_array($decoded) ? $decoded : null;
+    }
+
+    private function extractJsonObject(string $raw): ?string {
+        $raw = trim($raw);
+        if ($raw === '') {
+            return null;
+        }
+        if ($raw[0] === '{' && str_ends_with($raw, '}')) {
+            return $raw;
+        }
+        if (preg_match('/\{.*\}/s', $raw, $match)) {
+            return $match[0];
+        }
+        return null;
+    }
+
     public function parseMarkdown(string $markdown): string {
         $markdown = str_replace('—', '-', $markdown);
         $parser = new \cebe\markdown\GithubMarkdown();

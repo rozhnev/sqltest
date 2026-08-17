@@ -53,6 +53,8 @@
                     {/foreach}
                     </div>
                     <p class="question-action">{translate}question_action_mark_all_answers{/translate}</p>
+                {elseif $Question.question_type == 'free_answer'}
+                    <p class="question-action">{translate}question_action_write_free_answer{/translate}</p>
                 {else}
                     <p class="question-action">{translate}question_action_write_your_request{/translate}</p>
                     <p class="question-action">{translate}question_action_use_syntax{/translate} {translate}question_action_see_definitions_mobile{/translate}</p></p>
@@ -67,19 +69,36 @@
                             </svg>
                             <span>{translate}question_action_get_hint{/translate}</span>
                         </span>
-                        <span class="text-button blue" onClick="copyCode(`{translate}toast_sql_copied_to_buffer{/translate}`)">
-                            <i class="icon-copy"></i>
-                            <span>{translate}question_action_copy_code{/translate}</span>
-                        </span>
-                        <span class="text-button red" onClick="clearEditor()">
-                            <i class="icon-trash"></i>
-                            <span>{translate}question_action_clear_editor{/translate}</span>
-                        </span>
+                        {if $Question.question_type == 'free_answer'}
+                            <span class="text-button blue" id="voiceInputBtn" onClick="toggleVoiceInput('{$Lang}')">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="9" y="2" width="6" height="12" rx="3" fill="#0069E6"/>
+                                    <path d="M5 11a1 1 0 1 0-2 0 9 9 0 0 0 8 8.94V22a1 1 0 1 0 2 0v-2.06A9 9 0 0 0 21 11a1 1 0 1 0-2 0 7 7 0 0 1-14 0Z" fill="#0069E6"/>
+                                </svg>
+                                <span class="voice-label-idle">{translate}question_action_voice_input{/translate}</span>
+                                <span class="voice-label-listening">{translate}question_action_voice_input_stop{/translate}</span>
+                            </span>
+                        {else}
+                            <span class="text-button blue" onClick="copyCode(`{translate}toast_sql_copied_to_buffer{/translate}`)">
+                                <i class="icon-copy"></i>
+                                <span>{translate}question_action_copy_code{/translate}</span>
+                            </span>
+                            <span class="text-button red" onClick="clearEditor()">
+                                <i class="icon-trash"></i>
+                                <span>{translate}question_action_clear_editor{/translate}</span>
+                            </span>
+                        {/if}
                     </div>
-                    <div class="code-wrapper" id="sql-code" name="sql-code">{$Question.last_query}</div>
+                    {if $Question.question_type == 'free_answer'}
+                        <textarea class="code-wrapper free-answer-textarea" id="free-answer-input" name="free-answer-input" placeholder="{translate}free_answer_placeholder{/translate}">{$Question.last_query|escape:"html"}</textarea>
+                    {else}
+                        <div class="code-wrapper" id="sql-code" name="sql-code">{$Question.last_query}</div>
+                    {/if}
                 {/if}
                 <div class="code-buttons">
-                    {if !isset($Question.answers)}
+                    {if $Question.question_type == 'free_answer'}
+                        <button class="button green" id="checkFreeAnswerBtn" onClick="checkFreeAnswer('{$Lang}', {$QuestionID})">{translate}question_action_check_free_answer{/translate}</button>
+                    {elseif !isset($Question.answers)}
                         <button class="button" id="runQueryBtn" onClick="runQuery('{$Lang}', {$QuestionID})" title="Ctrl+Enter">
                             <i class="run-query-icon"></i>
                             <span>{translate}question_action_run_query{/translate}</span>

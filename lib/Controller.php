@@ -99,6 +99,43 @@ class Controller
         );
     }
 
+    private function getClientIp(): string
+    {
+        // Prefer the CDN/proxy-supplied real client IP over REMOTE_ADDR, which would
+        // otherwise just be the proxy's own address.
+        $candidate = $_SERVER['HTTP_CF_CONNECTING_IP']
+            ?? explode(',', (string)($_SERVER['HTTP_X_FORWARDED_FOR'] ?? ''))[0]
+            ?? $_SERVER['REMOTE_ADDR']
+            ?? '';
+        $candidate = trim((string)$candidate);
+        return $candidate !== '' ? $candidate : (string)($_SERVER['REMOTE_ADDR'] ?? 'unknown');
+    }
+
+    /**
+     * Record one hit for the free-answer LLM check and report whether the identifier
+     * (logged-in user, or IP address for anonymous users) is still within its daily quota.
+     * Always increments first, so the counter itself can't be skipped by retrying.
+     */
+    private function hitFreeAnswerRateLimit(): bool
+    {
+        $identifier = $this->user->logged()
+            ? "user:{$this->user->getId()}"
+            : "ip:{$this->getClientIp()}";
+        $dailyLimit = (int)($this->env['FREE_ANSWER_DAILY_LIMIT'] ?? 20);
+
+        $stmt = $this->dbh->prepare("
+            INSERT INTO free_answer_rate_limit (identifier, window_start, request_count)
+            VALUES (:identifier, CURRENT_DATE, 1)
+            ON CONFLICT (identifier, window_start)
+                DO UPDATE SET request_count = free_answer_rate_limit.request_count + 1
+            RETURNING request_count
+        ");
+        $stmt->execute([':identifier' => $identifier]);
+        $requestsToday = (int)$stmt->fetchColumn();
+
+        return $requestsToday <= $dailyLimit;
+    }
+
     public function setLanguge(string $lang='en'): void
     {
         $langCode = strtolower(trim($lang));
@@ -664,6 +701,8 @@ class Controller
             $questionData['answers'] = $question->getAnswers($questionCategoryID, $this->lang, $this->user->getId());
             $questionData['last_query'] = json_decode($questionData['last_query']??'[]', true);
         }
+        // free_answer stores raw text in last_query (like `query`), so it is passed through unchanged
+        // to prefill the textarea; only the quiz (`answer`) mode decodes it as a JSON array of ids above.
 
         if ($this->user->logged()) {
             $this->user->setPath($params['path']);
@@ -853,7 +892,49 @@ class Controller
         $this->engine->display($this->lang . "/check_answer_result.tpl");
     }
 
-    public function rate(array $params): void 
+    public function check_free_answer(array $params): void
+    {
+        $answer = (string)($_POST['answer'] ?? '');
+        $questionID = $params['questionID'];
+
+        // Guard the paid LLM call against abusive/high-volume use before spending anything on it.
+        if (!$this->hitFreeAnswerRateLimit()) {
+            $this->assignVariables([
+                'QuestionID'        => $questionID,
+                'FreeAnswerResult'  => [
+                    'ok'            => false,
+                    'cost'          => 0,
+                    'rate_limited'  => true,
+                    'comment'       => Localizer::translateString('free_answer_rate_limited'),
+                ]
+            ]);
+            header('HTTP/1.1 429 Too Many Requests');
+            $this->engine->display($this->lang . "/check_free_answer_result.tpl");
+            return;
+        }
+
+        $question = new Question($this->dbh, $questionID);
+        $freeAnswerResult = $question->checkFreeAnswer($answer, $this->lang, (string)($this->env['OPENAI_API_KEY'] ?? ''));
+        $this->assignVariables([
+            'QuestionID'        => $questionID,
+            'FreeAnswerResult'  => $freeAnswerResult
+        ]);
+        // Do not overwrite a previously saved answer with an empty submission.
+        if ($this->user->logged() && trim($answer) !== '') {
+            $this->user->saveQuestionAttempt($questionID, $freeAnswerResult, trim($answer));
+        }
+        if (!$freeAnswerResult['ok']) header( 'HTTP/1.1 418 BAD REQUEST' );
+        if ($this->user->showAd()) {
+            $referralLink = Helper::getReferralLink($this->dbh, $this->lang, $this->isMobileView() ? 'mobile' : 'desktop');
+            if (isset($referralLink)) {
+                Helper::updateReferralLinkStats($this->dbh, $referralLink['id']);
+                $this->engine->assign('ReferralLink', $referralLink);
+            }
+        }
+        $this->engine->display($this->lang . "/check_free_answer_result.tpl");
+    }
+
+    public function rate(array $params): void
     {
         if ($this->user->logged()) {
             $rate = intval($_REQUEST['rate']);

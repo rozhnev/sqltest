@@ -14,7 +14,7 @@ class Router
 
         $this->routes = [
             'question'          => "@(?<lang>{$this->langPattern})/(?<action>question)/(?<questionCategory>[a-z-]+)/(?<question>[a-z-]+)@i",
-            'question-action'   => "@(?<lang>{$this->langPattern})/question/(?<questionID>\d+)/(?<action>query-help|query-run|query-test|rate|check-answers)@i",
+            'question-action'   => "@(?<lang>{$this->langPattern})/question/(?<questionID>\d+)/(?<action>query-help|query-run|query-test|rate|check-answers|check-free-answer)@i",
             'static-page'       => "@(?<lang>{$this->langPattern})/(?<action>privacy-policy|logout|about|menu|books|courses|donate)/?@i",
             'register'          => "@(?<lang>{$this->langPattern})/(?<action>register)/?@i",
             'login'             => "@^/(?<action>login)/(?<loginProvider>[a-z]+)/?$@i",
