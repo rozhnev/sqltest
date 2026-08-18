@@ -118,13 +118,15 @@
      {/if}
      <div style="display: flex; column-gap: 6px; align-items: center;">
         Try again.<br>
-        Found a mistake in the task?&nbsp;
-        <a style="display: flex; column-gap: 6px; justify-content: center; align-items: center;" target="_blank" href="https://telegram.me/sqltest_online" class=""> 
-            <span class="tg-icon">
-                <span class=""> </span>
-            </span>
-            let us know!
-        </a>
+        <p>
+            Found a mistake in the task?&nbsp;
+            <a style="display: flex; column-gap: 6px; justify-content: center; align-items: center;" target="_blank" href="https://telegram.me/sqltest_online" class=""> 
+                <span class="tg-icon">
+                    <span class=""> </span>
+                </span>
+                let us know!
+            </a>
+        </p>
     </div>
     {if isset($ReferralLink)}
         <a id="referral-link" target="_blank" href="{$ReferralLink.link}">
