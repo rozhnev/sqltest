@@ -30,7 +30,6 @@ if (!$user->isAdmin()) {
 
 $questionManager = new AdminQuestionManager($dbh);
 $lessonManager   = new AdminLessonManager($dbh);
-$openAiKey       = $env['OPENAI_API_KEY'] ?? '';
 
 switch ($resource) {
     case '':
@@ -64,7 +63,7 @@ switch ($resource) {
         handleLesson($lessonManager, $resourceId, $method);
         break;
     case 'llm':
-        handleLLM($openAiKey, $method);
+        handleLLM($method);
         break;
     default:
         respondJson(['error' => 'Resource not found'], 404);
@@ -340,14 +339,12 @@ function handleLesson(AdminLessonManager $manager, int $lessonId, string $method
     }
 }
 
-function handleLLM(string $openAiKey, string $method): void
+function handleLLM(string $method): void
 {
     if ($method !== 'POST') {
         respondMethodNotAllowed();
     }
-    if (empty($openAiKey)) {
-        respondJson(['error' => 'OpenAI API key is not configured'], 500);
-    }
+
     $payload = parseJsonBody();
 
     if (isset($payload['task']) && !empty($payload['task'])) {
@@ -356,9 +353,9 @@ function handleLLM(string $openAiKey, string $method): void
         respondJson(['error' => 'LLM task is required'], 400);
     }
 
-    $llm = new LLM($openAiKey);
-
     try {
+        $llmProfileName = (string)($env['ADMIN_LLM_PROFILE'] ?? 'openai-gpt-4o-mini');
+        $llm = new LLM($llmProfileName);
         switch ($task) {
             case 'question-review':
                 respondJson(['result' => doQuestionReview($llm, $payload)]);

@@ -187,10 +187,13 @@ class Question
      *
      * @param string $answer The raw text submitted by the user.
      * @param string $lang Language of the question task, used to build the prompt.
-     * @param string $apiKey OpenAI API key. Pass '' to force the "unavailable" fallback.
+     * @param string $llm Name of an LLM profile from config.php's llm_profiles (e.g.
+     *                     'openai-gpt-4o-mini', 'groq-gpt-oss-20b'), or a raw model id to
+     *                     use OpenAI directly. LLM resolves the provider, request shape,
+     *                     and API key from this on its own — nothing else to pass in here.
      * @return array{ok: bool, cost: float, comment: string, score?: int}
      */
-    public function checkFreeAnswer(string $answer, string $lang, string $apiKey): array
+    public function checkFreeAnswer(string $answer, string $lang, string $llm): array
     {
         $answer = trim($answer);
         if ($answer === '') {
@@ -221,7 +224,7 @@ class Question
         $stmt->execute([':id' => $this->id, ':lang' => $lang]);
         $task = trim(strip_tags((string)$stmt->fetchColumn()));
 
-        if ($apiKey === '' || $task === '') {
+        if ($task === '') {
             return [
                 'ok'      => false,
                 'cost'    => 0,
@@ -238,7 +241,17 @@ class Question
         ];
         $commentLanguage = $languageNames[$lang] ?? $lang;
 
-        $llm = new LLM($apiKey);
+        try {
+            $llmClient = new LLM($llm);
+        } catch (Exception $e) {
+            // Misconfigured/missing API key for the selected profile — same friendly
+            // fallback as any other "can't reach the LLM" failure.
+            return [
+                'ok'      => false,
+                'cost'    => 0,
+                'comment' => Localizer::translateString('free_answer_llm_unavailable'),
+            ];
+        }
         $messages = [
             [
                 'role'    => 'system',
@@ -255,7 +268,7 @@ class Question
             ],
         ];
 
-        $parsed = $llm->askJson($messages);
+        $parsed = $llmClient->askJson($messages);
         if (!is_array($parsed) || !array_key_exists('ok', $parsed)) {
             return [
                 'ok'      => false,

@@ -1,30 +1,85 @@
 <?php
 class LLM {
-    private $model = 'gpt-4o-mini';
+    private $model;
     private $key;
+    private $baseUrl;
+    private $tokenParam;
+    private $reasoningEffort; // null = send normal sampling params instead
+    private $maxTokens;       // budget used by ask()
+    private $maxTokensJson;   // budget used by askJson()
 
-    public function __construct(string $key)
+    /**
+     * @param string $llm Name of an entry in config.php's llm_profiles (e.g.
+     *                     'openai-gpt-4o-mini', 'groq-gpt-oss-20b'). There is no fallback
+     *                     for an unrecognized name — every model/provider wiring (base
+     *                     URL, token param name, reasoning params, API key) must come
+     *                     from a real profile.
+     * @throws Exception If $llm doesn't match any entry in config.php's llm_profiles,
+     *                    or if that profile's API key is missing/empty in .env.
+     */
+    public function __construct(string $llm)
     {
-        $this->key = $key;
+        $profile = $this->loadLlmProfiles()[$llm] ?? null;
+        if ($profile === null) {
+            throw new Exception("LLM: unknown profile '{$llm}'.");
+        }
+
+        $apiKeyEnv = $profile['api_key_env'] ?? 'OPENAI_API_KEY';
+        $this->key = $this->loadEnv()[$apiKeyEnv] ?? '';
+        if ($this->key === '') {
+            throw new Exception("LLM: no API key configured for '{$llm}'.");
+        }
+
+        $this->model           = $profile['model'];
+        $this->baseUrl         = $profile['base_url'];
+        $this->tokenParam      = $profile['token_param'];
+        $this->reasoningEffort = $profile['reasoning_effort'] ?? null;
+        $this->maxTokens       = $profile['max_tokens'] ?? 2000;
+        $this->maxTokensJson   = $profile['max_tokens_json'] ?? 500;
     }
 
-    public function setModel(string $model) {
-        $this->model = $model;
+    private function loadEnv(): array
+    {
+        static $env = null;
+        if ($env === null) {
+            $path = dirname(__DIR__) . '/.env';
+            $env = is_readable($path) ? (parse_ini_string(file_get_contents($path), 1) ?: []) : [];
+        }
+        return $env;
+    }
+
+    private function loadLlmProfiles(): array
+    {
+        static $profiles = null;
+        if ($profiles === null) {
+            // config.php just assigns $config = [...] without returning it, so require()-ing
+            // it here (inside a method) populates $config in this local scope instead.
+            $config = ['llm_profiles' => []];
+            $path = dirname(__DIR__) . '/config.php';
+            if (is_readable($path)) {
+                require $path;
+            }
+            $profiles = $config['llm_profiles'] ?? [];
+        }
+        return $profiles;
     }
 
     public function ask(array $dialog) {
         $data = [
-            'model'         => $this->model,
-            "messages"      => $dialog, 
-            "temperature"   => 0.5,
-            "max_tokens"    => 2000,
-            "top_p"         => 1.0,
-            "frequency_penalty" => 0.0,
-            "presence_penalty" => 0.0,
-            // "stop" => ["#", ";"]
+            'model'            => $this->model,
+            "messages"         => $dialog,
+            $this->tokenParam  => $this->maxTokens,
         ];
-        
-        $crl = curl_init('https://api.openai.com/v1/chat/completions');
+        if ($this->reasoningEffort !== null) {
+            $data['reasoning_effort'] = $this->reasoningEffort;
+        } else {
+            $data['temperature']       = 0.5;
+            $data['top_p']             = 1.0;
+            $data['frequency_penalty'] = 0.0;
+            $data['presence_penalty']  = 0.0;
+        }
+
+        $crl = curl_init($this->baseUrl);
         curl_setopt($crl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($crl, CURLINFO_HEADER_OUT, true);
         curl_setopt($crl, CURLOPT_POST, true);
@@ -34,7 +89,7 @@ class LLM {
         $result = curl_exec($crl);
         $response = json_decode($result);
         curl_close($crl);
-    
+
         if (property_exists($response, 'error')) {
             return $response->error->message;
         }
@@ -52,14 +107,18 @@ class LLM {
      */
     public function askJson(array $dialog, int $timeoutSeconds = 20): ?array {
         $data = [
-            'model'             => $this->model,
-            'messages'          => $dialog,
-            'temperature'       => 0.3,
-            'max_tokens'        => 500,
-            'response_format'   => ['type' => 'json_object'],
+            'model'            => $this->model,
+            'messages'         => $dialog,
+            $this->tokenParam  => $this->maxTokensJson,
+            'response_format'  => ['type' => 'json_object'],
         ];
+        if ($this->reasoningEffort !== null) {
+            $data['reasoning_effort'] = $this->reasoningEffort;
+        } else {
+            $data['temperature'] = 0.3;
+        }
 
-        $crl = curl_init('https://api.openai.com/v1/chat/completions');
+        $crl = curl_init($this->baseUrl);
         curl_setopt($crl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($crl, CURLOPT_POST, true);
         curl_setopt($crl, CURLOPT_POSTFIELDS, json_encode($data));
@@ -70,7 +129,6 @@ class LLM {
         $result = curl_exec($crl);
         $errno = curl_errno($crl);
         curl_close($crl);
-
         if ($result === false || $errno !== 0) {
             return null;
         }
