@@ -116,9 +116,9 @@
             <p>Hint: your query is empty.</p>
         {/if}
      {/if}
-     <div style="display: flex; column-gap: 6px; align-items: center;">
+     <div style="display: flex; flex-direction: column; align-items: flex-start; font-style: italic; font-size: smaller; margin-top: 10px;">
         Try again.<br>
-        <p>
+        <p style="display: flex; margin-top: 2em; column-gap: 6px;">
             Found a mistake in the task?&nbsp;
             <a style="display: flex; column-gap: 6px; justify-content: center; align-items: center;" target="_blank" href="https://telegram.me/sqltest_online" class=""> 
                 <span class="tg-icon">
