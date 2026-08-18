@@ -116,14 +116,17 @@
             <p>提示：你的查询为空。</p>
         {/if}
      {/if}
-     <div style="display: flex; column-gap: 6px; align-items: center;">
-        再试一次。发现题目有问题？
-        <a style="display: flex; column-gap: 6px; justify-content: center; align-items: center;" target="_blank" href="https://telegram.me/sqltest_online" class=""> 
-            <span class="tg-icon">
-                <span class=""> </span>
-            </span>
-            告诉我们！
-        </a>
+    <div style="display: flex; flex-direction: column; align-items: flex-start; margin-top: 10px;">
+        再试一次。<br>
+        <p style="display: flex; margin-top: 2em; column-gap: 6px; font-style: italic;">
+            发现题目有问题？&nbsp;
+            <a style="display: flex; column-gap: 6px; justify-content: center; align-items: center;" target="_blank" href="https://telegram.me/sqltest_online" class="">
+                <span class="tg-icon">
+                    <span class=""> </span>
+                </span>
+                告诉我们！
+            </a>
+        </p>
     </div>
     {if isset($ReferralLink)}
         <a id="referral-link" target="_blank" href="{$ReferralLink.link}">

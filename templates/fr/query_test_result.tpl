@@ -116,14 +116,17 @@
             <p>Indice : votre requête est vide.</p>
         {/if}
      {/if}
-     <div style="display: flex; column-gap: 6px; align-items: center;">
-        Réessayez. Une erreur trouvée dans la tâche ? 
-        <a style="display: flex; column-gap: 6px; justify-content: center; align-items: center;" target="_blank" href="https://telegram.me/sqltest_online" class=""> 
-            <span class="tg-icon">
-                <span class=""> </span>
-            </span>
-            faites-le nous savoir !
-        </a>
+    <div style="display: flex; flex-direction: column; align-items: flex-start; margin-top: 10px;">
+        Réessayez.<br>
+        <p style="display: flex; margin-top: 2em; column-gap: 6px; font-style: italic;">
+            Une erreur trouvée dans la tâche ?&nbsp;
+            <a style="display: flex; column-gap: 6px; justify-content: center; align-items: center;" target="_blank" href="https://telegram.me/sqltest_online" class="">
+                <span class="tg-icon">
+                    <span class=""> </span>
+                </span>
+                faites-le nous savoir !
+            </a>
+        </p>
     </div>
     {if isset($ReferralLink)}
         <a id="referral-link" target="_blank" href="{$ReferralLink.link}">

@@ -51,7 +51,7 @@
         </p>
     {else}
         <div class="question-rate-panel">
-            <div style="min-width:280px; flex: 2 1; margin-bottom: 9px;">Antes de prosseguir, classifique a dificuldade desta tarefa:</div>
+            <div style="min-width:280px;">Antes de prosseguir, classifique a dificuldade desta tarefa:</div>
             <div class="buttons">
                 <input type="radio" id="rate1" name="question_rate" value="Muito fácil" onChange="rateQuestion({$QuestionID}, 1)"><label for="rate1">Muito fácil</label>
                 <input type="radio" id="rate2" name="question_rate" value="Simples" onChange="rateQuestion({$QuestionID}, 2)"><label for="rate2">Simples</label>
@@ -116,14 +116,17 @@
             <p>Dica: sua consulta está vazia.</p>
         {/if}
      {/if}
-    <div style="display: flex; column-gap: 6px; align-items: center;">
-        Tente novamente. Encontrou um erro na tarefa - 
-        <a style="display: flex; column-gap: 6px; justify-content: center; align-items: center;" target="_blank" href="https://telegram.me/sqltest_online" class=""> 
-            <span class="tg-icon">
-                <span class=""> </span>
-            </span>
-            avise-nos!
-        </a>
+    <div style="display: flex; flex-direction: column; align-items: flex-start; margin-top: 10px;">
+        Tente novamente.<br>
+        <p style="display: flex; margin-top: 2em; column-gap: 6px; font-style: italic;">
+            Encontrou um erro na tarefa?&nbsp;
+            <a style="display: flex; column-gap: 6px; justify-content: center; align-items: center;" target="_blank" href="https://telegram.me/sqltest_online" class="">
+                <span class="tg-icon">
+                    <span class=""> </span>
+                </span>
+                avise-nos!
+            </a>
+        </p>
     </div>
     {if isset($ReferralLink)}
         <a id="referral-link" target="_blank" href="{$ReferralLink.link}">

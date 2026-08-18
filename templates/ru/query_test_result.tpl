@@ -50,7 +50,7 @@
         </p>
     {else}
         <div class="question-rate-panel">
-            <div style="min-width:280px; flex: 2 1; margin-bottom: 9px;">Прежде чем двигаться дальше, пожалуйста оцените сложность этого задания:</div>
+            <div style="min-width:280px;">Прежде чем двигаться дальше, пожалуйста оцените сложность этого задания:</div>
             <div class="buttons">
                 <input type="radio" id="rate1" name="question_rate" value="Совсем легко" onChange="rateQuestion({$QuestionID}, 1)"><label for="rate1">Совсем легко</label>
                 <input type="radio" id="rate2" name="question_rate" value="Просто" onChange="rateQuestion({$QuestionID}, 2)"><label for="rate2">Просто</label>
@@ -128,14 +128,17 @@
             <p>Подсказка: ваш запрос пуст.</p>
         {/if}
     {/if}
-    <div style="display: flex; column-gap: 6px; align-items: center;">
-        Попробуйте ещё раз. Нашли ошибку в задании - 
-        <a style="display: flex; column-gap: 6px; justify-content: center; align-items: center;" target="_blank" href="https://telegram.me/sqlize" class=""> 
-            <span class="tg-icon">
-                <span class=""> </span>
-            </span>
-            сообщите!
-        </a>
+    <div style="display: flex; flex-direction: column; align-items: flex-start; margin-top: 10px;">
+        Попробуйте ещё раз.<br>
+        <p style="display: flex; margin-top: 2em; column-gap: 6px; font-style: italic;">
+            Нашли ошибку в задании?&nbsp;
+            <a style="display: flex; column-gap: 6px; justify-content: center; align-items: center;" target="_blank" href="https://telegram.me/sqltest_online" class="">
+                <span class="tg-icon">
+                    <span class=""> </span>
+                </span>
+                сообщите!
+            </a>
+        </p>
     </div>
     {* {if isset($ReferralLink)}
         <a id="referral-link" target="_blank" href="{$ReferralLink.link}">
