@@ -6,6 +6,15 @@ class LocalizationAutoTranslator
     private string $apiKey;
     private string $model;
 
+    // Target languages this translator knows how to name in a prompt. 'en' is
+    // deliberately absent — it's always the source language, never a translation target.
+    private const LANGUAGE_NAMES = [
+        'ru' => 'Russian',
+        'pt' => 'Portuguese',
+        'fr' => 'French',
+        'zh' => 'Simplified Chinese',
+    ];
+
     public function __construct(PDO $dbh, string $apiKey, string $model = 'gpt-4o-mini')
     {
         $this->dbh = $dbh;
@@ -28,8 +37,9 @@ class LocalizationAutoTranslator
             return;
         }
 
+        $languageName = self::LANGUAGE_NAMES[$lang] ?? $lang;
         $translated = $this->translateStructured(
-            "Translate SQL exercise fields to Simplified Chinese.",
+            "Translate SQL exercise fields to {$languageName}.",
             [
                 'title' => (string)$source['title'],
                 'task' => (string)$source['task'],
@@ -79,8 +89,9 @@ class LocalizationAutoTranslator
             return;
         }
 
+        $languageName = self::LANGUAGE_NAMES[$lang] ?? $lang;
         $translated = $this->translateStructured(
-            "Translate SQL lesson content to Simplified Chinese.",
+            "Translate SQL lesson content to {$languageName}.",
             [
                 'title' => (string)$source['title'],
                 'content' => (string)$source['content'],
@@ -152,7 +163,7 @@ class LocalizationAutoTranslator
             if (!empty($row['localized_title']) || empty($row['source_title'])) {
                 continue;
             }
-            $translated = $this->translateText((string)$row['source_title']);
+            $translated = $this->translateText((string)$row['source_title'], $lang);
             if ($translated === '') {
                 continue;
             }
@@ -186,7 +197,7 @@ class LocalizationAutoTranslator
             if (!empty($row['localized_title']) || empty($row['source_title'])) {
                 continue;
             }
-            $translated = $this->translateText((string)$row['source_title']);
+            $translated = $this->translateText((string)$row['source_title'], $lang);
             if ($translated === '') {
                 continue;
             }
@@ -215,7 +226,7 @@ class LocalizationAutoTranslator
             return;
         }
 
-        $translated = $this->translateText((string)$row['source_rate']);
+        $translated = $this->translateText((string)$row['source_rate'], $lang);
         if ($translated === '') {
             return;
         }
@@ -252,7 +263,7 @@ class LocalizationAutoTranslator
             if (!empty($row['localized_hint']) || empty($row['source_hint'])) {
                 continue;
             }
-            $translated = $this->translateText((string)$row['source_hint']);
+            $translated = $this->translateText((string)$row['source_hint'], $lang);
             if ($translated === '') {
                 continue;
             }
@@ -282,7 +293,7 @@ class LocalizationAutoTranslator
             return;
         }
 
-        $translated = $this->translateText((string)$row['source_title']);
+        $translated = $this->translateText((string)$row['source_title'], $lang);
         if ($translated === '') {
             return;
         }
@@ -332,11 +343,12 @@ class LocalizationAutoTranslator
         return $decoded;
     }
 
-    private function translateText(string $text): string
+    private function translateText(string $text, string $lang): string
     {
+        $languageName = self::LANGUAGE_NAMES[$lang] ?? $lang;
         $messages = [
-            ['role' => 'system', 'content' => 'You are a technical translator from English/Russian to Simplified Chinese.'],
-            ['role' => 'user', 'content' => 'Translate to Simplified Chinese. Keep SQL identifiers and placeholders unchanged. Return only the translated text.'],
+            ['role' => 'system', 'content' => "You are a technical translator from English/Russian to {$languageName}."],
+            ['role' => 'user', 'content' => "Translate to {$languageName}. Keep SQL identifiers and placeholders unchanged. Return only the translated text."],
             ['role' => 'user', 'content' => $text],
         ];
         return trim($this->chat($messages));

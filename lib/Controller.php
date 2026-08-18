@@ -684,7 +684,7 @@ class Controller
         $questionCategoryID = $params['questionCategoryID'] ?? $questionnire->getCategoryId($params['questionCategory']);
         $questionnireName   = $questionnire->getNameByCategory($params['questionCategory']);
 
-        if ($this->lang === 'zh') {
+        if ($this->lang !== 'en') {
             $this->getAutoTranslator()->ensureQuestionLocalized((int)$questionID, $this->lang);
         }
 
@@ -916,7 +916,7 @@ class Controller
         // Which named config in config.php's llm_profiles to grade with — LLM resolves the
         // provider/model/API-key wiring on its own. Switch by changing this env var, no
         // code change or deploy needed.
-        $llmProfileName = (string)($this->env['FREE_ANSWER_LLM_PROFILE'] ?? 'openai-gpt-4o-mini');
+        $llmProfileName = (string)($this->env['USER_ANSWER_LLM_PROFILE'] ?? 'openai-gpt-4o-mini');
 
         $question = new Question($this->dbh, $questionID);
         $freeAnswerResult = $question->checkFreeAnswer($answer, $this->lang, $llmProfileName);
@@ -1106,7 +1106,7 @@ class Controller
         }
         $questionID = $params['questionID'] ?? $test->getFirstUnsolvedQuestionId();
 
-        if ($this->lang === 'zh' && $questionID) {
+        if ($this->lang !== 'en' && $questionID) {
             $this->getAutoTranslator()->ensureQuestionLocalized((int)$questionID, $this->lang);
         }
 
@@ -1397,7 +1397,7 @@ class Controller
             exit();
         }
 
-        if ($this->lang === 'zh') {
+        if ($this->lang !== 'en') {
             $this->getAutoTranslator()->ensureLessonLocalized($lesson->id(), $this->lang);
         }
 
