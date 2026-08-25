@@ -650,9 +650,17 @@
     </div>
     {if $User->showAd()}
         <div class="referal-add-block">
-            {if $Book}
-                {include file='book_card.tpl'}
-            {/if}
+            <div style="box-sizing: border-box; width: 100%; max-width: 760px; padding: 1.25rem 1.5rem; border: 1px solid #f0c36a; border-radius: 8px; background: linear-gradient(135deg, #fff8e7 0%, #fffdf8 58%, #eaf6f3 100%); color: #243238; text-align: center;">
+                <a href="https://www.pythonforbeginners.org/" target="_blank" rel="noopener noreferrer" style="display: block; color: #243238; text-decoration: none;">
+                    <span style="display: block; margin-bottom: 0.35rem; color: #b35c12; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;">Learn to code</span>
+                    <strong style="display: block; font-size: clamp(1.15rem, 3vw, 1.55rem); line-height: 1.2;">Python for Beginners</strong>
+                    <span style="display: block; margin-top: 0.45rem; font-size: 0.98rem; line-height: 1.45;">Master Python one line at a time with interactive lessons, instant feedback, and real-world projects.</span>
+                </a>
+                <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 0.7rem; margin-top: 1rem;">
+                    <a href="https://www.pythonforbeginners.org/" target="_blank" rel="noopener noreferrer" style="display: inline-block; padding: 0.6rem 1rem; border-radius: 5px; background: #176b5d; color: #fff; font-weight: 700; text-decoration: none;">Start learning</a>
+                    <a href="https://www.amazon.com/dp/B0HC46YNP6" target="_blank" rel="noopener noreferrer" style="display: inline-block; padding: 0.6rem 1rem; border: 1px solid #176b5d; border-radius: 5px; color: #176b5d; font-weight: 700; text-decoration: none;">Get the book</a>
+                </div>
+            </div>
         </div>
     {/if}
 </div>
