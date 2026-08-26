@@ -1,0 +1,202 @@
+{include file='header.tpl'}
+<link rel="stylesheet" type="text/css" href="/css/playground.min.css?{$VERSION}" media="all">
+<body>
+    <div class="mobile-container">
+        {include file='popups.tpl'}
+        <header>
+            {include file='m.top-menu.tpl' path="/playground/"}
+        </header>
+
+        <main class="main playground-mobile" id="main-content">
+            <section class="question-wrapper playground-database-selector" aria-label="Available databases">
+                <div class="menu" id="menu">
+                    <div id="menu-content" class="menu-content">
+                        <button class="accordion active">
+                            <span class="accordion-title">{translate}avaliable_databases{/translate}</span>
+                        </button>
+                        <div class="panel active">
+                            <ul>
+                                {foreach from=$PlaygroundDatabases item=db}
+                                    <li>
+                                        <label class="db-label">
+                                            <input type="radio" name="database" value="{$db.id|escape:'html'}" {if $db.id == $PlaygroundSelectedDatabase}checked{/if}>
+                                            {$db.label|escape:'html'}
+                                        </label>
+                                    </li>
+                                {/foreach}
+                                <li class="version-select-wrap">
+                                    <label for="databaseVersion">Version</label>
+                                    <select id="databaseVersion" name="databaseVersion"></select>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="playground-editor question-wrapper">
+                <div class="code-actions-upper" id="code-actions">
+                    <span class="text-button blue" onClick="copyCode(`{translate}toast_sql_copied_to_buffer{/translate}`)">
+                        <i class="icon-copy"></i>
+                        <span>{translate}question_action_copy_code{/translate}</span>
+                    </span>
+                    <span class="text-button red" onClick="clearEditor()">
+                        <i class="icon-trash"></i>
+                        <span>{translate}question_action_clear_editor{/translate}</span>
+                    </span>
+                </div>
+                <div class="code-wrapper" id="sql-code" name="sql-code"></div>
+                <div class="code-buttons">
+                    <button class="button green" id="runQueryBtn" onClick="executeQuery()" title="Ctrl+Enter">
+                        <span>{translate}question_action_run_query{/translate}</span>
+                        <i class="run-icon"></i>
+                    </button>
+                </div>
+            </section>
+
+            <section class="question-wrapper playground-result">
+                <div class="code-result ace-xcode" id="code-result"></div>
+            </section>
+
+            <article class="playground-content">
+                <div class="question-wrapper playground-text-section">
+                    <h1>{translate}playground_content_title{/translate}</h1>
+                    <p>{translate}playground_content_intro{/translate}</p>
+
+                    <h2>{translate}playground_content_summary_title{/translate}</h2>
+                    <ul>
+                        <li>{translate}playground_content_summary_1{/translate}</li>
+                        <li>{translate}playground_content_summary_2{/translate}</li>
+                        <li>{translate}playground_content_summary_3{/translate}</li>
+                        <li>{translate}playground_content_summary_4{/translate}</li>
+                    </ul>
+
+                    <h2>{translate}playground_content_features_title{/translate}</h2>
+                    <ul>
+                        <li>{translate}playground_content_feature_1{/translate}</li>
+                        <li>{translate}playground_content_feature_2{/translate}</li>
+                        <li>{translate}playground_content_feature_3{/translate}</li>
+                    </ul>
+
+                    <h2>{translate}playground_content_supported_title{/translate}</h2>
+                    <p>{translate}playground_content_supported_text{/translate}</p>
+
+                    <h2>{translate}playground_content_use_cases_title{/translate}</h2>
+                    <p>{translate}playground_content_use_cases_text{/translate}</p>
+
+                    <h2>{translate}playground_content_faq_title{/translate}</h2>
+                    <h3>{translate}playground_content_faq_q1{/translate}</h3>
+                    <p>{translate}playground_content_faq_a1{/translate}</p>
+                    <h3>{translate}playground_content_faq_q2{/translate}</h3>
+                    <p>{translate}playground_content_faq_a2{/translate}</p>
+                    <h3>{translate}playground_content_faq_q3{/translate}</h3>
+                    <p>{translate}playground_content_faq_a3{/translate}</p>
+                </div>
+            </article>
+        </main>
+
+        <footer>
+            {include file='m.footer.tpl'}
+        </footer>
+    </div>
+    {include file='counters.tpl'}
+    <script>
+        {literal}
+        const playgroundDatabases = {/literal}{$PlaygroundDatabases|json_encode nofilter}{literal};
+        const defaultPlaygroundVersion = {/literal}{$PlaygroundDefaultVersion|json_encode nofilter}{literal};
+        const selectedPlaygroundVersion = {/literal}{$PlaygroundSelectedVersion|json_encode nofilter}{literal};
+        const initialSnippetHash = {/literal}{$PlaygroundInitialSnippetHash|json_encode nofilter}{literal};
+        const initialSnippetQuery = {/literal}{$PlaygroundInitialQuery|json_encode nofilter}{literal};
+
+        function updateVersionOptions(databaseId, preferredVersion = null) {
+            const versionSelect = document.getElementById('databaseVersion');
+            if (!versionSelect) {
+                return;
+            }
+
+            const selectedDatabase = playgroundDatabases.find((db) => db.id === databaseId);
+            const versions = selectedDatabase ? selectedDatabase.versions : [];
+
+            versionSelect.innerHTML = '';
+            versions.forEach((version) => {
+                const option = document.createElement('option');
+                option.value = version.id;
+                option.textContent = version.label;
+                versionSelect.appendChild(option);
+            });
+
+            if (versions.length === 0) {
+                return;
+            }
+
+            const requestedVersion = preferredVersion || defaultPlaygroundVersion;
+            const hasRequestedVersion = versions.some((version) => version.id === requestedVersion);
+            versionSelect.value = hasRequestedVersion ? requestedVersion : versions[0].id;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const checkedDatabase = document.querySelector('input[name="database"]:checked');
+            if (checkedDatabase) {
+                updateVersionOptions(checkedDatabase.value, selectedPlaygroundVersion || defaultPlaygroundVersion);
+            }
+
+            document.querySelectorAll('input[name="database"]').forEach((radio) => {
+                radio.addEventListener('change', (event) => {
+                    updateVersionOptions(event.target.value);
+                });
+            });
+
+            const applySnippetToEditor = () => {
+                if (!initialSnippetHash || !initialSnippetQuery) {
+                    return;
+                }
+                if (!window.sql_editor || typeof window.sql_editor.setValue !== 'function') {
+                    return;
+                }
+
+                window.sql_editor.setValue(initialSnippetQuery, -1);
+                window.sql_editor.focus();
+                window.sql_editor.session.selection.clearSelection();
+            };
+
+            applySnippetToEditor();
+            setTimeout(applySnippetToEditor, 150);
+        });
+
+        function executeQuery() {
+            setLoader('code-result');
+            let formData = new FormData();
+            const databaseVersion = document.getElementById('databaseVersion').value;
+            formData.append('query', window.sql_editor.getValue());
+            fetch(`/${lang}/playground/${databaseVersion}/query-run`, {
+                method: "POST",
+                mode: "cors",
+                cache: "default",
+                credentials: "same-origin",
+                body: formData,
+            })
+            .then((async response=>{
+                if (!response.ok) throw Error('Something went wrong.');
+                return await response.text();
+            }))
+            .then(JSON.parse)
+            .then((JSONResult)=>{
+                let html = '';
+                JSONResult.forEach((jsonObject)=>{
+                    if (jsonObject.error) {
+                        html += errorToTable(jsonObject);
+                    } else {
+                        html += jsonToTable(jsonObject);
+                    }
+                });
+                if (html === '') html = '✓ (Done)';
+                document.getElementById('code-result').innerHTML = html;
+            })
+            .catch(err=>{
+                document.getElementById('code-result').innerHTML = 'Something went wrong. Please review your query and try again.';
+            });
+        }
+        {/literal}
+    </script>
+</body>
+</html>
