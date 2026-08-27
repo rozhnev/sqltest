@@ -1,0 +1,129 @@
+{assign var="goal" value=$DONATION_MONTHLY_GOAL|default:50}
+{assign var="received" value=$DONATIONS.monthly_amount_usd|default:0}
+{if $goal > 0}
+    {math equation="(x / y) * 100" x=$received y=$goal assign="progressRaw"}
+{else}
+    {assign var="progressRaw" value=0}
+{/if}
+{if $progressRaw < 0}
+    {assign var="progress" value=0}
+{elseif $progressRaw > 100}
+    {assign var="progress" value=100}
+{else}
+    {assign var="progress" value=$progressRaw}
+{/if}
+
+<div class="menu-ad donation-goal-widget">
+    <style>
+        .donation-goal-widget .donation-card {
+            margin: 0.5em 0 0 0;
+            background-color: var(--accordion-panel-bg-color);
+            border: 1px solid var(--text-block-border-color);
+            color: var(--question-text);
+            border-radius: 0 6px 0 0;
+            overflow: hidden;
+        }
+        .donation-goal-widget .donation-title {
+            background-color: var(--menu-button-background-color);
+            padding: 0.6em 0.7em;
+            color: #fff;
+            font-weight: 700;
+        }
+        .donation-goal-widget .donation-body {
+            padding: 0.7em;
+            font-size: 0.92rem;
+            line-height: 1.45;
+        }
+        .donation-goal-widget .donation-body p {
+            margin: 0 0 0.7em;
+        }
+        .donation-goal-widget .donation-body p:last-of-type {
+            margin-bottom: 0;
+        }
+        .donation-goal-widget .donation-stats {
+            margin-top: 0.6em;
+            display: flex;
+            justify-content: space-between;
+            gap: 0.6em;
+            flex-wrap: wrap;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        .donation-goal-widget .donation-stats span {
+            flex: 1 1 8rem;
+        }
+        .donation-goal-widget .donation-progress {
+            margin-top: 0.45em;
+            background: var(--text-block-border-color);
+            border-radius: 999px;
+            overflow: hidden;
+            height: 10px;
+        }
+        .donation-goal-widget .donation-progress-fill {
+            height: 10px;
+            width: {$progress|string_format:"%.2f"}%;
+            background: linear-gradient(90deg, #22c55e, #10b981);
+        }
+        .donation-goal-widget .donation-percent {
+            margin-top: 0.35em;
+            font-size: 0.82rem;
+            opacity: 0.85;
+        }
+        .donation-goal-widget .donation-action {
+            margin-top: 0.65em;
+        }
+        .donation-goal-widget .donation-action a {
+            display: block;
+        }
+        .donation-goal-widget .donation-action .button {
+            width: 100%;
+            background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+            border-color: #166534;
+            box-shadow: 0 6px 14px rgba(21, 128, 61, 0.28);
+            transition: transform 0.16s ease, box-shadow 0.16s ease, filter 0.16s ease;
+        }
+        .donation-goal-widget .donation-action .button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 18px rgba(21, 128, 61, 0.34);
+            filter: brightness(1.04);
+        }
+        .donation-goal-widget .donation-action .button:focus-visible {
+            outline: 2px solid #22c55e;
+            outline-offset: 2px;
+        }
+    </style>
+
+    <div class="donation-card">
+        <div class="donation-title">Apoyar a SQLtest.online</div>
+        <div class="donation-body">
+            <p>
+                Este proyecto tiene una única fuente de financiación: tus donaciones.
+                El costo de mantenimiento mensual es de <strong>${$goal|string_format:"%.0f"}</strong>.
+            </p>
+            <p>
+                El mes pasado añadí una nueva base de datos MariaDB con una base de datos universitaria precargada, 9 nuevas preguntas y refactoricé muchas preguntas y lecciones.
+            </p>
+            <p>
+                Con tu apoyo, planeo continuar este trabajo: escribir nuevas lecciones y tareas, y mejorar las lecciones existentes.
+            </p>
+            <p>
+                Para mantener el proyecto en funcionamiento el próximo mes, necesitamos recaudar al menos esta cantidad para fin de mes.
+                Cualquier monto adicional se destinará a nuevas lecciones, ejercicios y características.
+            </p>
+
+            <div class="donation-stats">
+                <span>Recibido: ${$received|string_format:"%.2f"}</span>
+                <span>Meta: ${$goal|string_format:"%.2f"}</span>
+            </div>
+            <div class="donation-progress">
+                <div class="donation-progress-fill"></div>
+            </div>
+            <div class="donation-percent">Progreso: {$progress|string_format:"%.0f"}%</div>
+            <div class="donation-action">
+                <a href="/{$Lang}/donate" target="_self">
+                    <button class="button green"><span>{translate}top_menu_donate{/translate}</span></button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

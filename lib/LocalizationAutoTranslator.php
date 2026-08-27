@@ -13,6 +13,7 @@ class LocalizationAutoTranslator
         'pt' => 'Portuguese',
         'fr' => 'French',
         'zh' => 'Simplified Chinese',
+        'es' => 'neutral professional Spanish for Argentina',
     ];
 
     public function __construct(PDO $dbh, string $apiKey, string $model = 'gpt-4o-mini')
@@ -360,7 +361,7 @@ class LocalizationAutoTranslator
             'model' => $this->model,
             'messages' => $messages,
             'temperature' => 0.2,
-            'max_tokens' => 3000,
+            'max_tokens' => 12000,
         ];
 
         $crl = curl_init('https://api.openai.com/v1/chat/completions');

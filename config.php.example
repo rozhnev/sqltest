@@ -1,7 +1,7 @@
 <?php
 $config = [
     'domain' => 'localhost',
-    'languages' => ['ru' => 'Русский', 'en' => 'English', 'pt' => 'Português', 'fr' => 'Français'],
+    'languages' => ['ru' => 'Русский', 'en' => 'English', 'pt' => 'Português', 'fr' => 'Français', 'es' => 'Español'],
     'api' => [
         'base_url' => 'https://api.sqlize.online',
         'request_timeout' => 3,

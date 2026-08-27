@@ -4,7 +4,7 @@
         return;
     }
 
-    var LANGUAGES = ['en', 'ru', 'pt', 'fr', 'zh'];
+    var LANGUAGES = ['en', 'ru', 'pt', 'fr', 'zh', 'es'];
     var statusBar = document.getElementById('statusBar');
 
     function showStatus(message, isError) {

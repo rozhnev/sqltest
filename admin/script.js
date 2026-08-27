@@ -17,10 +17,11 @@ const LANGUAGE_LABELS = {
     RU: 'Russian',
     PT: 'Portuguese',
     FR: 'French',
-    ZH: 'Chinese'
+    ZH: 'Chinese',
+    ES: 'Spanish'
 };
 
-const SUPPORTED_LANGUAGES = ['en', 'ru', 'pt', 'fr', 'zh'];
+const SUPPORTED_LANGUAGES = ['en', 'ru', 'pt', 'fr', 'zh', 'es'];
 
 function setFieldValue(id, value) {
     const field = document.getElementById(id);

@@ -3,14 +3,15 @@
 abstract class AdminContentManager
 {
     protected PDO $dbh;
-    protected array $supportedLanguages = ['en', 'ru', 'pt', 'fr', 'zh'];
+    protected array $supportedLanguages = ['en', 'ru', 'pt', 'fr', 'zh', 'es'];
 
     private const LANGUAGE_LABELS = [
         'en' => 'English',
         'ru' => 'Russian',
         'pt' => 'Portuguese',
         'fr' => 'French',
-        'zh' => 'Chinese'
+        'zh' => 'Chinese',
+        'es' => 'Spanish'
     ];
 
     public function __construct(PDO $dbh)
