@@ -303,6 +303,13 @@ class Test
         }
     }
 
+    public function getClosedAt(): ?string
+    {
+        $stmt = $this->dbh->prepare("SELECT closed_at FROM tests WHERE id = :test_id LIMIT 1;");
+        $stmt->execute([':test_id' => $this->id]);
+        return $stmt->fetchColumn(0) ?: null;
+    }
+
     public function belongsToUser(user $user): bool
     {
         $stmt = $this->dbh->prepare("SELECT true

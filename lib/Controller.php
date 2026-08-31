@@ -1166,6 +1166,13 @@ class Controller
         }
         $template = $this->lang . "/check_test_solution.tpl";
 
+        $closedAt = $test->getClosedAt();
+        if ($closedAt !== null && new DateTime($closedAt) <= new DateTime()) {
+            $this->engine->assign('QueryTestResult', ['ok' => false, 'hints' => ['timeOut' => true]]);
+            $this->engine->display($template);
+            return;
+        }
+
         $attemptStatus = $test->getQuestionAttemptStatus($params['questionID']);
         if (!$attemptStatus['ok']) {
             $this->engine->assign('QueryTestResult', $attemptStatus);
