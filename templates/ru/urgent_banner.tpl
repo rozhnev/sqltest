@@ -1,7 +1,10 @@
-<span style="color:#ffffff;">🙏 <strong style="color:#ffe082;">Нам очень нужна ваша поддержка.</strong>
+{* <span style="color:#ffffff;">🙏 <strong style="color:#ffe082;">Нам очень нужна ваша поддержка.</strong>
 Нам нужно финансирование, чтобы продолжать нашу миссию: выпускать новые уроки и развивать платформу. Если у вас есть возможность, пожалуйста, поддержите проект донатом.
 </span>
-<a href="/ru/donate" style="color:#ffd54f; text-decoration:underline; font-weight:bold; white-space:nowrap;">Помочь проекту сейчас →</a>
+<a href="/ru/donate" style="color:#ffd54f; text-decoration:underline; font-weight:bold; white-space:nowrap;">Помочь проекту сейчас →</a> *}
+
+<span style="color:#ffffff;">🙏 <strong style="color:#ffe082;">Спасибо за вашу поддержку в прошлом месяце!</strong> Благодаря вам проект продолжает расти. Будем рады, если вы поддержите нас и в этом месяце.</span>
+<a href="/ru/donate" style="color:#ffd54f; text-decoration:underline; font-weight:bold; white-space:nowrap;">Поддержать снова →</a>
 
 {* Вариант 1 (мягкий) *}
 {* <span style="color:#ffffff;">🙏 <strong style="color:#ffe082;">Проект держится благодаря вам.</strong> В прошлом месяце мы собрали только <strong style="color:#ff8a80;">$32</strong>. Помогите нам продолжать выпускать новые уроки.</span> *}
