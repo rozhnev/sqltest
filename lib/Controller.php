@@ -1299,6 +1299,20 @@ class Controller
             $test->saveQuestionAttempt($params['questionID'], $checkResult, $answers);
         }
 
+        if (isset($_POST["free-answer"])) {
+            $freeAnswer = $_POST["free-answer"] ?? '';
+
+            // $checkResult = $question->checkFreeAnswer($freeAnswer);
+            $checkResult = [
+                'ok' => true, 
+                'cost' => 0,
+                'answerResult' => 'Free answer submitted successfully.'
+            ]; // For now, we assume the free answer is always correct. Implement actual checking logic as needed.
+
+            $this->engine->assign('QueryTestResult', $checkResult);
+            $test->saveQuestionAttempt($params['questionID'], $checkResult, $freeAnswer);
+        }
+
         if (!$checkResult['ok']) header( 'HTTP/1.1 418 BAD REQUEST' );
         $this->engine->display($template);   
     }
