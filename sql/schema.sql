@@ -898,6 +898,18 @@ CREATE TABLE public.mailinglists (
     CONSTRAINT mailinglists_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id) ON DELETE CASCADE
 );
 
+CREATE TABLE public.user_prize_claims (
+    user_id uuid NOT NULL,
+    test_id uuid NOT NULL,
+    identifier text NOT NULL,
+    qr_code_url text,
+    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    PRIMARY KEY (user_id, test_id),
+    UNIQUE (identifier),
+    CONSTRAINT user_prize_claims_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id) ON DELETE CASCADE,
+    CONSTRAINT user_prize_claims_test_id_fkey FOREIGN KEY (test_id) REFERENCES public.tests(id) ON DELETE CASCADE
+);
+
 ALTER TABLE public.users OWNER TO dba;
 ALTER TABLE public.mailinglists OWNER TO dba;
 
