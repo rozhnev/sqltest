@@ -232,7 +232,8 @@ class Test
                 categories.title_sef category_sef,
                 last_answer last_query,
                 (max_attempts - attempts) possible_attempts,
-                question_categories.category_id 
+                question_categories.category_id,
+                questions.question_type
             FROM questions
             JOIN test_questions ON test_questions.question_id = questions.id AND test_id = :test_id
             JOIN tests ON tests.id = test_questions.test_id
