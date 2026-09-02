@@ -127,16 +127,11 @@
                 {/if}
             
                 <div class="code-buttons">
-                    {if $Question.question_type == 'free_answer'}
-                        <button class="button green" id="checkFreeAnswerBtn" onClick="checkFreeAnswer('{$Lang}', {$QuestionID})">
-                            <i class="run-icon"></i>
-                            <span>{translate}question_action_check_free_answer{/translate}</span>
-                        </button>
-                    {elseif !isset($Question.answers)}
+                    {if $Question.question_type == 'query'}
                         <button class="button" id="runQueryBtn" onClick="runQuery('{$Lang}', {$QuestionID})" title="Ctrl+Enter">
-                        <i class="run-query-icon"></i>
-                        <span>{translate}question_action_run_query{/translate}</span>
-                    </button>
+                            <i class="run-query-icon"></i>
+                            <span>{translate}question_action_run_query{/translate}</span>
+                        </button>
                     {/if}
                     {if isset($TestData.timeout) && $TestData.timeout}
                         {* <button class="button red">
