@@ -1059,14 +1059,100 @@ class Controller
         $testData['next_test_in'] = $testEnd->diff(new DateTime())->days;
 
         $testResult = $test->calculateResult();
+        $isMariaDBChallenge = (($testData['questionnire_id'] ?? null) === 999);
+        $isPrizeEligible = $isMariaDBChallenge && $test->isMariaDBChallengePrizeEligible();
         $this->assignVariables([
             'SitePromo' => Localizer::translateString('site_promo'),
             'SiteDescription'       => Localizer::translateString('site_description_test'),
             'TestData'      => $testData,
-            'TestResult'    => $testResult
+            'TestResult'    => $testResult,
+            'IsMariaDBChallenge' => $isMariaDBChallenge,
+            'IsPrizeEligible' => $isPrizeEligible,
         ]);
 
         $this->engine->display("test_result.tpl");
+    }
+
+    public function test_claim(array $params): void
+    {
+        if (!$this->user->logged() || !isset($params['testId'])) {
+            header("Location: /" . $this->lang . "/test/start");
+            exit();
+        }
+
+        $test = new Test($this->dbh, $this->lang, $this->user);
+        $test->setId($params['testId']);
+
+        if (!$test->belongsToUser($this->user)) {
+            header("HTTP/1.1 404 Not Found");
+            $this->engine->assign('ErrorMessage', Localizer::translateString('action_not_permitted'));
+            $this->engine->display("error.tpl");
+            exit();
+        }
+
+        $testData = $test->getData();
+        if (($testData['questionnire_id'] ?? null) !== 999) {
+            header("Location: /" . $this->lang . "/test/{$params['testId']}/result");
+            exit();
+        }
+
+        $alreadyClaimed = $this->user->getPrizeClaimForTest($params['testId']);
+        $isUserSubscribed = $this->user->isSubscribedToList('mariadb_newsletter');
+        $canClaim = $test->isMariaDBChallengePrizeEligible();
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if (!$canClaim) {
+                header("Location: /" . $this->lang . "/test/{$params['testId']}/claim");
+                exit();
+            }
+
+            if (!$isUserSubscribed && !empty($_POST['newsletter_opt_in'])) {
+                $this->user->subscribeToList((string)$_POST['newsletter_opt_in']);
+                $isUserSubscribed = true;
+            }
+
+            $identifier = $this->user->getId() . ':' . $params['testId'];
+            $qrCodeUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=' . urlencode($identifier);
+
+            $this->user->createPrizeClaim($params['testId'], $identifier, $qrCodeUrl);
+            $this->sendPrizeClaimEmail($this->user->getEmail(), $identifier, $qrCodeUrl);
+
+            header("Location: /" . $this->lang . "/test/{$params['testId']}/claim?done=1");
+            exit();
+        }
+
+        $this->assignVariables([
+            'SitePromo' => Localizer::translateString('site_promo'),
+            'SiteDescription' => Localizer::translateString('site_description_test'),
+            'TestData' => $testData,
+            'CanClaim' => $canClaim,
+            'AlreadyClaimed' => $alreadyClaimed,
+            'UserSubscribed' => $isUserSubscribed,
+            'ClaimDone' => isset($_GET['done']) && $_GET['done'] === '1',
+            'ClaimIdentifier' => $alreadyClaimed['identifier'] ?? null,
+            'ClaimQrCodeUrl' => $alreadyClaimed['qr_code_url'] ?? null,
+        ]);
+
+        $this->engine->display('test_claim.tpl');
+    }
+
+    protected function sendPrizeClaimEmail(string $email, string $identifier, string $qrCodeUrl): bool
+    {
+        if ($email === '') {
+            return false;
+        }
+
+        $subject = 'MariaDB challenge prize code';
+        $message = "Your MariaDB prize identifier: {$identifier}\n\nQR code: {$qrCodeUrl}\n";
+        $headers = [
+            'From: no-reply@sqltest.online',
+            'Reply-To: no-reply@sqltest.online',
+            'X-Mailer: SQLTest.online',
+            'MIME-Version: 1.0',
+            'Content-Type: text/plain; charset=UTF-8',
+        ];
+
+        return mail($email, $subject, $message, implode("\r\n", $headers));
     }
 
     public function test_grade(array $params): void 
@@ -1315,6 +1401,7 @@ class Controller
 
         $questions = $this->user->getQuestions($this->lang);
         $tests = $this->user->getTests($this->lang);
+        $prizeClaims = $this->user->getPrizeClaims();
 
         $this->assignVariables([
             'Action' => 'profile',
@@ -1322,6 +1409,7 @@ class Controller
             'User'  => $this->user,
             'Questions'     => $this->user->getQuestions($this->lang),
             'Tests'         => $this->user->getTests($this->lang),
+            'PrizeClaims'   => $prizeClaims,
 
             'Achievements'  => $this->user->achievements($this->lang),
             'UserEmail'     => $this->user->getEmail(),

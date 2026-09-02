@@ -535,6 +535,64 @@ class User
         ]);
     }
 
+    public function isSubscribedToList(string $listName): bool
+    {
+        if (!$this->logged()) {
+            return false;
+        }
+
+        $stmt = $this->dbh->prepare("SELECT 1 FROM mailinglists WHERE user_id = :user_id AND list_name = :list_name AND deleted_at IS NULL LIMIT 1");
+        $stmt->execute([
+            ':user_id' => $this->id,
+            ':list_name' => $listName,
+        ]);
+
+        return (bool)$stmt->fetchColumn();
+    }
+
+    public function getPrizeClaims(): array
+    {
+        if (!$this->logged()) {
+            return [];
+        }
+
+        $stmt = $this->dbh->prepare("SELECT identifier, qr_code_url, created_at FROM user_prize_claims WHERE user_id = :user_id ORDER BY created_at DESC");
+        $stmt->execute([':user_id' => $this->id]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getPrizeClaimForTest(string $testId): ?array
+    {
+        if (!$this->logged()) {
+            return null;
+        }
+
+        $stmt = $this->dbh->prepare("SELECT identifier, qr_code_url, created_at FROM user_prize_claims WHERE user_id = :user_id AND test_id = :test_id LIMIT 1");
+        $stmt->execute([
+            ':user_id' => $this->id,
+            ':test_id' => $testId,
+        ]);
+
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row ?: null;
+    }
+
+    public function createPrizeClaim(string $testId, string $identifier, string $qrCodeUrl): void
+    {
+        $stmt = $this->dbh->prepare("INSERT INTO user_prize_claims (user_id, test_id, identifier, qr_code_url, created_at)
+            VALUES (:user_id, :test_id, :identifier, :qr_code_url, CURRENT_TIMESTAMP)
+            ON CONFLICT (user_id, test_id) DO UPDATE SET
+                identifier = EXCLUDED.identifier,
+                qr_code_url = EXCLUDED.qr_code_url,
+                created_at = CURRENT_TIMESTAMP");
+        $stmt->execute([
+            ':user_id' => $this->id,
+            ':test_id' => $testId,
+            ':identifier' => $identifier,
+            ':qr_code_url' => $qrCodeUrl,
+        ]);
+    }
+
     /**
      * Set User's current path
      *

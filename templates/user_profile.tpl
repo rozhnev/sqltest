@@ -125,6 +125,24 @@
                             <h2>{translate}tests{/translate}</h2>
                         </div>
                         <div id="tests-table"></div>
+                            {if $PrizeClaims|@count > 0}
+                                <div class="section colored" style="height: 100%;">
+                                    <div style="width: 100%;">
+                                        <h2>{translate}mariadb_prize_qr_code{/translate}</h2>
+                                    </div>
+                                    <div class="profile-achievements">
+                                        {foreach $PrizeClaims as $claim}
+                                            <div class="profile-achievement">
+                                                <span class="pa-date">{$claim.created_at}</span>
+                                                <div>
+                                                    <img src="{$claim.qr_code_url}" alt="QR code" style="max-width: 180px; display: block; margin-bottom: 0.75rem;">
+                                                    <code>{$claim.identifier}</code>
+                                                </div>
+                                            </div>
+                                        {/foreach}
+                                    </div>
+                                </div>
+                            {/if}
                     </div>
                 </div>
             </main>

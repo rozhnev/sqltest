@@ -17,7 +17,7 @@
                     </div>
                 </div>
                 <div class="section not-colored" style="height: 100%;">
-                    <div>
+                    <div style="display: flex; justify-content: center;">
                         <p>
                             {if $TestResult.ok}
                                 {$grades = ['Intern','Junior','Middle','Senior']}
@@ -49,7 +49,7 @@
                     </div>
                 </div>
                 <div class="section bottom colored">
-                    <div>
+                    <div style="display: flex; justify-content: center;">
                     {if $TestResult.ok}
                         {$grades = ['Intern','Junior','Middle','Senior']}
                         {assign var="Grade" value="{$grades[$TestResult.grade-1]}"}
@@ -61,7 +61,15 @@
                             </div>
                         {/if}
                         <div style="text-align: center;">
-                            <a style="display:inline-block;width:240px; color: white;" href="/{$Lang}/test/{$TestData.id}/grade" title="{translate}save_my_grade{/translate}" class="button blue">{translate}save_my_grade{/translate}</a>
+                            {if $IsMariaDBChallenge}
+                                {if $IsPrizeEligible}
+                                    <a style="display:inline-block;width:240px; color: white;" href="/{$Lang}/test/{$TestData.id}/claim" title="{translate}claim_my_prize{/translate}" class="button blue">{translate}claim_my_prize{/translate}</a>
+                                {else}
+                                    <div style="margin-top: 1rem; color: var(--regular-text-color);">{translate}mariadb_prize_claim_requires_three{/translate}</div>
+                                {/if}
+                            {else}
+                                <a style="display:inline-block;width:240px; color: white;" href="/{$Lang}/test/{$TestData.id}/grade" title="{translate}save_my_grade{/translate}" class="button blue">{translate}save_my_grade{/translate}</a>
+                            {/if}
                         </div>
                     {else}
                         {if $TestData.timeout}
