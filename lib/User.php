@@ -601,15 +601,37 @@ class User
 
         $subject = 'MariaDB challenge prize code';
         $message = "Your MariaDB prize identifier: {$identifier}\n\nQR code: {$qrCodeUrl}\n";
-        $headers = [
-            'From: no-reply@sqltest.online',
-            'Reply-To: no-reply@sqltest.online',
-            'X-Mailer: SQLTest.online',
-            'MIME-Version: 1.0',
-            'Content-Type: text/plain; charset=UTF-8',
-        ];
 
-        return mail($email, $subject, $message, implode("\r\n", $headers));
+        try {
+            $mail = new \PHPMailer\PHPMailer\PHPMailer(true);
+            $mail->isSMTP();
+            $mail->Host = $this->env['SMTP_HOST'] ?? 'localhost';
+            $mail->Username = $this->env['SMTP_USER'] ?? '';
+            $mail->Password = $this->env['SMTP_PASS'] ?? '';
+            $mail->SMTPAuth = $mail->Username !== '' || $mail->Password !== '';
+            $mail->Port = (int)($this->env['SMTP_PORT'] ?? 587);
+
+            if ($mail->Port === 587) {
+                $mail->SMTPSecure = \PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS;
+            } elseif ($mail->Port === 465) {
+                $mail->SMTPSecure = \PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_SMTPS;
+            }
+
+            $mail->setFrom(
+                $this->env['SMTP_FROM'] ?? 'support@sqltest.online',
+                $this->env['SMTP_FROM_NAME'] ?? 'SQLTest.online'
+            );
+            $mail->addAddress($email);
+            $mail->isHTML(false);
+            $mail->CharSet = 'UTF-8';
+            $mail->Subject = $subject;
+            $mail->Body = $message;
+
+            return $mail->send();
+        } catch (\Throwable $e) {
+            error_log('Prize claim email failed: ' . $e->getMessage());
+            return false;
+        }
     }
 
     /**
