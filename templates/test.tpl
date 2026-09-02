@@ -93,13 +93,26 @@
                     {/foreach}
                     </div>
                     <p class="question-action">{translate}question_action_mark_all_answers{/translate}</p>
+                {elseif $Question.question_type == 'free_answer'}
+                    <p class="question-action">{translate}question_action_write_free_answer{/translate}</p>
+                    {if $Question.solved_date}
+                        <span class="question-action" style="display: flex; align-items: center; font-weight: bold; color: #2EA043 !important;">{translate}you_already_solved_this_task{/translate}</span>
+                    {/if}
                 {else}
                     <p class="question-action">{translate}question_action_write_your_request{/translate}</p>
                     <p class="question-action">{translate}question_action_use_syntax{/translate} {translate}question_action_see_definitions{/translate}</p>
                 {/if}
             </div>
             <div class="question-wrapper">
-                {if !isset($Question.answers)}
+                {if $Question.question_type == 'free_answer'}
+                    <div class="code-actions-upper" id="code-actions">
+                        <span class="text-button red" onClick="clearFreeAnswer()">
+                            <i class="icon-trash"></i>
+                            <span>{translate}question_action_clear_answer{/translate}</span>
+                        </span>
+                    </div>
+                    <textarea class="code-wrapper free-answer-textarea" id="free-answer-input" name="free-answer-input" placeholder="{translate}free_answer_placeholder{/translate}">{$Question.last_query|escape:"html"}</textarea>
+                {elseif !isset($Question.answers)}
                     <div class="code-actions-upper" id="code-actions">
                         <span class="text-button blue" onClick="copyCode(`{translate}toast_sql_copied_to_buffer{/translate}`)">
                             <i class="icon-copy"></i>
@@ -114,7 +127,12 @@
                 {/if}
             
                 <div class="code-buttons">
-                    {if !isset($Question.answers)}
+                    {if $Question.question_type == 'free_answer'}
+                        <button class="button green" id="checkFreeAnswerBtn" onClick="checkFreeAnswer('{$Lang}', {$QuestionID})">
+                            <i class="run-icon"></i>
+                            <span>{translate}question_action_check_free_answer{/translate}</span>
+                        </button>
+                    {elseif !isset($Question.answers)}
                         <button class="button" id="runQueryBtn" onClick="runQuery('{$Lang}', {$QuestionID})" title="Ctrl+Enter">
                         <i class="run-query-icon"></i>
                         <span>{translate}question_action_run_query{/translate}</span>
@@ -124,15 +142,36 @@
                         {* <button class="button red">
                             {translate}test_time_out{/translate}
                         </button> *}
+                    {elseif isset($Question.answers) || $Question.question_type == 'free_answer'}
+                        {if $Question.possible_attempts > 0}
+                            {if $Question.question_type == 'free_answer'}
+                                <button class="button green" id="checkFreeAnswerBtn2" onClick="checkFreeAnswer('{$Lang}', {$QuestionID})">
+                                    <i class="run-icon"></i>
+                                    <span>{translate}question_action_check_free_answer{/translate}</span>
+                                </button>
+                            {else}
+                                <button class="button green" id="checkSolutionBtn" onClick="checkSolution('/{$Lang}/test/{$TestId}/check/{$QuestionID}')">
+                                    <i class="run-icon"></i>
+                                    <span>
+                                        {translate}question_action_check_answers{/translate}
+                                        (<span id="attemptsCount">{$Question.possible_attempts}</span>)
+                                    </span>
+                                </button>
+                            {/if}
+                        {else}
+                            <button class="button gray" disabled>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="12" cy="12" r="10" stroke="#E60000" stroke-width="2"/>
+                                    <path d="M11 7H13V13H11V7ZM11 15V17H13V15H11Z" fill="#E60000"/>
+                                </svg>
+                                <span>{translate}question_maximum_attempts_used{/translate}</span>
+                            </button>
+                        {/if}
                     {elseif {$Question.possible_attempts} > 0}
                         <button class="button green" id="checkSolutionBtn" onClick="checkSolution('/{$Lang}/test/{$TestId}/check/{$QuestionID}')">
                             <i class="run-icon"></i>
                             <span>
-                            {if isset($Question.answers)}
-                                {translate}question_action_check_answers{/translate}
-                            {else}
-                                {translate}question_action_test_query{/translate}
-                            {/if} 
+                            {translate}question_action_test_query{/translate}
                             (<span id="attemptsCount">{$Question.possible_attempts}</span>)
                             </span>
                         </button>
