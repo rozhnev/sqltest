@@ -528,6 +528,11 @@ function checkSolution(url) {
         .toSorted();
         formData.append('answers', JSON.stringify(answers));
     }
+    if (document.getElementById('free-answer-input')) {
+        const freeAnswer = document.getElementById('free-answer-input').value;
+        formData.append('free-answer', freeAnswer);
+        console.log('Free answer:', freeAnswer);
+    }
     fetch(url, {
         method: "POST",
         mode: "cors",
