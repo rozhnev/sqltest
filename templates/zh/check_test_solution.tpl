@@ -149,6 +149,9 @@
             {/if}
             </div>
         {/if}
+        {if array_key_exists('answerResult', $QueryTestResult)}
+            <p>提交的答案将由评审团进行评估。</p>
+        {/if}
     </div>
 {elseif array_key_exists('hints', $QueryTestResult) && array_key_exists('maxAttemptsReached', $QueryTestResult.hints)}
     {assign var="NextQuestion" value="{$QueryTestResult.nextQuestion}"}

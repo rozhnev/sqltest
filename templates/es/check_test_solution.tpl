@@ -149,6 +149,9 @@
             {/if}
             </div>
         {/if}
+        {if array_key_exists('answerResult', $QueryTestResult)}
+            <p>La respuesta enviada será evaluada por el jurado.</p>
+        {/if}
     </div>
 {elseif array_key_exists('hints', $QueryTestResult) && array_key_exists('maxAttemptsReached', $QueryTestResult.hints)}
     {assign var="NextQuestion" value="{$QueryTestResult.nextQuestion}"}
