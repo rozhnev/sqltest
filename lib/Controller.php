@@ -533,6 +533,12 @@ class Controller
             $fullName = trim((string)($_POST['full_name'] ?? ''));
 
             if ($this->user->register($email, $password, $fullName)) {
+                if (
+                    isset($_POST['newsletter_opt_in']) && 
+                    in_array($_POST['newsletter_opt_in'], ['mariadb_newsletter', 'sqltest_newsletter'])
+                ) {
+                    $this->user->subscribeToList($_POST['newsletter_opt_in']);
+                }
                 $_SESSION["user_id"] = $this->user->getId();
                 $_SESSION["admin"] = $this->user->isAdmin();
                 echo json_encode(['status' => 'ok']);
@@ -966,20 +972,20 @@ class Controller
     {
         $meta = [
             'en' => [
-                'title'       => 'SQLTest.online: MariaDB Day Brussels SQL Quiz',
-                'description' => 'Ten theoretical and practical questions for MariaDB Day Brussels with prizes on the FOSDEM stage.'
+                'title'       => 'SQLTest.online: MariaDB Foundation Challenge at Percona Live Amsterdam',
+                'description' => 'Take the MariaDB Foundation and SQLTest.online challenge at Percona Live Amsterdam, test your MariaDB knowledge, and compete for prizes.'
             ],
             'ru' => [
-                'title'       => 'SQLTest.online: SQL-челлендж MariaDB Day Брюссель',
-                'description' => 'Десять теоретических и практических заданий, связанные с MariaDB Day Brussels и призами на FOSDEM.'
+                'title'       => 'SQLTest.online: Челлендж MariaDB Foundation и SQLTest.online на Percona Live Amsterdam',
+                'description' => 'Пройдите челлендж MariaDB Foundation и SQLTest.online на Percona Live Amsterdam, проверьте знания MariaDB и участвуйте в розыгрыше призов.'
             ],
             'pt' => [
-                'title'       => 'SQLTest.online: Quiz SQL do MariaDB Day Bruxelas',
-                'description' => 'Dez questões teóricas e práticas alinhadas ao MariaDB Day Bruxelas e prémios no FOSDEM.'
+                'title'       => 'SQLTest.online: Desafio MariaDB Foundation e SQLTest.online em Percona Live Amsterdam',
+                'description' => 'Participe do desafio MariaDB Foundation e SQLTest.online em Percona Live Amsterdam, teste seus conhecimentos em MariaDB e concorra a prêmios.'
             ],
             'zh' => [
-                'title'       => 'SQLTest.online: MariaDB Day 布鲁塞尔 SQL 挑战',
-                'description' => '面向 MariaDB Day Brussels 的十道理论与实战 SQL 题目，并在 FOSDEM 现场设置奖项。'
+                'title'       => 'SQLTest.online: MariaDB Foundation 与 SQLTest.online 在 Percona Live Amsterdam 的挑战赛',
+                'description' => '参加 MariaDB Foundation 与 SQLTest.online 在 Percona Live Amsterdam 的挑战赛，测试 MariaDB 知识并参与奖品抽奖。'
             ]
         ];
 

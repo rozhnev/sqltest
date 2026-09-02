@@ -1,14 +1,14 @@
 <section class="mariadb-hero">
-    <p class="hero-eyebrow">MariaDB Day Brussels · FOSDEM</p>
-    <h2>MariaDB SQL Challenge</h2>
+    <p class="hero-eyebrow">MariaDB Foundation × SQLTest.online · Percona Live Amsterdam</p>
+    <h1>MariaDB Foundation Challenge<br>and SQLTest.online</h1>
     <p class="hero-subtitle">
-        <a href="https://mariadb.org/events/mariadb-day-brussels/" target="_blank" rel="noreferrer">Sunday, February 1, 2026</a>
-        · Silversquare delta, Avenue Arnaud Fraiteur 15-23, 1050 Brussels
+        <a href="https://perconalive.com/2026-amsterdam/" target="_blank" rel="noreferrer">9–11 September 2026</a>
+        · Percona Live, Amsterdam · MariaDB Foundation booth
     </p>
     <div class="hero-cta">
         {if $User->logged() === false}
-            <button type="button" class="mariadb-button mariadb-register-btn">Registration</button>
-            <button type="button" class="mariadb-button mariadb-login-btn">Login</button>
+            <button type="button" class="mariadb-button mariadb-register-btn">Register</button>
+            <button type="button" class="mariadb-button mariadb-login-btn">Log in</button>
         {else}
             {if !$LastTest || $LastTest.closed}
                 <a class="mariadb-button" href="/{$Lang}/challenge-mariadb/start">Start quiz</a>
@@ -16,116 +16,87 @@
                 <a class="mariadb-button" href="/{$Lang}/test/{$LastTest.id}/question/">Continue quiz</a>
             {/if}
         {/if}
-        <span class="hero-note">10 theoretical &amp; practical questions · prizes for the first 10 finishers at FOSDEM</span>
+        <span class="hero-note">MariaDB quiz + SQL tasks · winners notified by email · daily prize draw</span>
     </div>
 </section>
+
 <section class="mariadb-highlight">
     <div>
-        <h3>MariaDB Day Brussels highlights</h3>
+        <h2>Think you know MariaDB? Prove it.</h2>
         <p>
-            MariaDB Day Brussels is a full-day community gathering that brings maintainers, contributors, partners, and users together to show the present and future of MariaDB. 
-            It is the perfect warm-up for the MariaDB track inside FOSDEM.
+            A short quiz on MariaDB facts, capabilities, and real-world use cases, plus three practical SQL tasks that you solve right here and get checked instantly.
+            Everyone who takes part gets something. The best performers get even more.
         </p>
         <ul class="mariadb-list">
-            <li>Latest updates directly from MariaDB Foundation maintainers and contributors.</li>
-            <li>Sessions on core development, Enterprise Server 11.8 throughput, and the 12.3 LTS roadmap.</li>
-            <li>Technical deep dives into plugin APIs, RAG, AI integration, automation, and Vector DB scenarios.</li>
-            <li>Community and partner perspectives plus in-person conversations with the people who build MariaDB.</li>
+            <li>Test your knowledge of MariaDB features, history, and practical use cases.</li>
+            <li>Solve SQL tasks at the booth and get instant feedback.</li>
+            <li>Earn a sticker by completing the quiz and enter the daily prize draw by solving the SQL tasks.</li>
+            <li>Play at any time during the conference and return later if you need to pause.</li>
         </ul>
     </div>
     <div class="floating-card">
-        <h4>Speakers and focus</h4>
+        <h3>Hands-on challenge</h3>
         <p>
-            Michael Widenius, Nikita Malyavin, Steve Shaw, Jan Lindström, Paul Clevett, Nick Denning, Alejandro Duarte, 
-            Dirk Hillbrecht, Andrija Vučinić, Carl Schwan, Roman Agabekov, and more.
+            The quiz combines MariaDB knowledge checks with real SQL exercises. It suits both curious visitors and experienced database professionals.
         </p>
         <p>
-            Topics include Meet 12.3 LTS, OLTP throughput in Enterprise Server 11.8, MariaDB is the Future of MySQL, 
-            extending MariaDB with the plugin API, deploying RAG without the plumbing, architectural AI advantages, safer automation, 
-            and (almost) no downtime upgrades.
+            Register once, continue later during the event, and finish the challenge at your own pace while visiting the conference.
         </p>
     </div>
 </section>
+
 <section class="mariadb-grid">
-    {* <article>
-        <h4>Quiz format</h4>
-        <p>
-            Ten curated questions that mirror the MariaDB Day agenda: a mix of theoretical insights about the platform's 
-            roadmap and practical exercises that exercise query writing, migrations, and automation.
-        </p>
-        <ul class="mariadb-list">
-            <li>Five theory checks on architecture, release decisions, and community strategy.</li>
-            <li>Five hands-on tasks that run against MariaDB syntax, optimizer hints, and real-world data shapes.</li>
-            <li>A 3-hour window to submit answers, letting you digest the conference talks and then prove mastery.</li>
-        </ul>
-    </article> *}
     <article>
-        <h4>How to participate</h4>
+        <h3>How to participate</h3>
         <ol class="mariadb-list">
-            <li>Get the quiz link at the MariaDB stand (FOSDEM).
-                K level 1 (group B) https://fosdem.org/2026/stands/
-                Scan the QR code on our flyer.
-            </li>
-            <li>Answer the quiz any time on Saturday (31 January 2026).
-                You can complete it in one go or come back later that day.
-            </li>
-            <li>Submit your answers before the end of Saturday.
-                Only fully submitted entries count.
-            </li>
-            <li>Get all questions correct to enter the prize draw.
-                Everyone with a perfect score is entered into the lottery.
-            </li>
-            <li><a href="https://mariadb.org/events/mariadb-day-brussels/" target="_blank" rel="noreferrer">Live draw on Sunday at 12:30 (MariaDB Day Brussels).</a>
-                We’ll announce the winner during MariaDB Day on 1 February 2026.
-                Address: Silversquare delta, Avenue Arnaud Fraiteur 15-23, 1050 Brussels – Belgium
-            </li>
+            <li>Scan the QR code at the MariaDB Foundation booth or open this page on your device.</li>
+            <li>Register and complete the quiz any time during the conference. You can pause and continue later.</li>
+            <li>Finish the quiz and show your result at the booth to receive a sticker.</li>
+            <li>Solve the SQL tasks correctly to qualify for the daily prize draw.</li>
+            <li>The draw takes place at the booth at 17:00 each day. Prize: a MariaDB certification voucher. Winners are also notified by email.</li>
         </ol>
-        {* <p>
-            The quiz runs on our MariaDB Day booth near the FOSDEM hall, giving you time to compare notes with speakers
-            while you wait for results. You can pause on your laptop, check the scoreboard, and start a fresh question set
-            before the keynote breaks.
-        </p>
-        <p>
-            Everyone who finishes gets a snapshot of how they stack up against the community and a link to the quiz report.
-        </p> *}
     </article>
 </section>
-{* <section class="mariadb-prizes">
-    <h3>Prizes for the first 10 winners</h3>
+
+<section class="mariadb-prizes">
+    <h2>Prizes</h2>
     <div class="prize-grid">
         <div class="prize-card">
-            <h5>1st–3rd place</h5>
-            <p>Exclusive MariaDB hardware, signed books from the architects, and a training voucher for the next release.</p>
+            <h4>Quiz completed</h4>
+            <p>MariaDB sticker at the booth.</p>
         </div>
         <div class="prize-card">
-            <h5>4th–7th place</h5>
-            <p>Priority invites to MariaDB labs, premium swag bundles, and backstage conversations with engineers.</p>
+            <h4>Feature round completed</h4>
+            <p>Premium sticker.</p>
         </div>
         <div class="prize-card">
-            <h5>8th–10th place</h5>
-            <p>MariaDB swag pack, digital credits for tooling, and a shout-out during the closing session.</p>
+            <h4>All SQL tasks solved correctly</h4>
+            <p>Entry into the daily MariaDB certification voucher draw.</p>
         </div>
     </div>
     <p class="prize-note">
-        Winners will be announced on stage and notified via the quiz dashboard before the day closes.
+        Everyone who takes part gets something. The best performers get more, and winners may also be contacted by email if they are not present at the booth.
     </p>
-</section> *}
+</section>
+
 <section class="mariadb-final">
     <p>
-        Bring your curiosity, your laptop, and your appetite for MariaDB. {*The quiz mirrors the talks from the agenda you
-        just explored, giving you a chance to win prizes while celebrating the community at FOSDEM.*}
-        <a class="external-link" href="https://mariadb.org/events/mariadb-day-brussels/" target="_blank" rel="noreferrer">
-            Learn more about MariaDB Day Brussels
+        If you are visiting Percona Live Amsterdam, stop by the MariaDB Foundation booth, take the quiz, and test your MariaDB skills in person.
+        <a class="external-link" href="https://perconalive.com/2026-amsterdam/" target="_blank" rel="noreferrer">
+            Learn more about Percona Live Amsterdam
         </a>
     </p>
-        {if $User->logged() === false}
-            <button type="button" class="mariadb-button mariadb-register-btn">Registration</button>
-            <button type="button" class="mariadb-button mariadb-login-btn">Login</button>
+    <p class="hero-note">
+        Your email is used to notify prize winners. It is shared with the MariaDB Foundation for its newsletter only if you tick the box above. See the privacy policy for details.
+    </p>
+    {if $User->logged() === false}
+        <button type="button" class="mariadb-button mariadb-register-btn">Register</button>
+        <button type="button" class="mariadb-button mariadb-login-btn">Log in</button>
+    {else}
+        {if !$LastTest || $LastTest.closed}
+            <a class="mariadb-button" href="/{$Lang}/challenge-mariadb/start">Start quiz</a>
         {else}
-            {if !$LastTest || $LastTest.closed}
-                <a class="mariadb-button" href="/{$Lang}/challenge-mariadb/start">Start quiz</a>
-            {else}
-                <a class="mariadb-button" href="/{$Lang}/test/{$LastTest.id}/question/">Continue quiz</a>
-            {/if}
+            <a class="mariadb-button" href="/{$Lang}/test/{$LastTest.id}/question/">Continue quiz</a>
         {/if}
+    {/if}
 </section>

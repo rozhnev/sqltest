@@ -516,7 +516,23 @@ class User
             throw new Exception(Localizer::translateString('something_went_wrong'));
         }
 
+        $this->id = $userId;
         return $this->loginPassword($email, $password);
+    }
+
+    public function subscribeToList(string $listName): void
+    {
+        if ($this->id === null || $this->id === '') {
+            return;
+        }
+
+        $stmt = $this->dbh->prepare("INSERT INTO mailinglists (user_id, list_name, created_at)
+            VALUES (:user_id, :list_name, CURRENT_TIMESTAMP)
+            ON CONFLICT (user_id, list_name) DO UPDATE SET deleted_at = NULL;");
+        $stmt->execute([
+            ':user_id' => $this->id,
+            ':list_name' => $listName,
+        ]);
     }
 
     /**

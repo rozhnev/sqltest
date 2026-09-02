@@ -1,13 +1,13 @@
 <section class="mariadb-hero">
-    <p class="hero-eyebrow">MariaDB Day Bruxelas · FOSDEM</p>
-    <h2>Desafio SQL MariaDB</h2>
+    <p class="hero-eyebrow">MariaDB Foundation × SQLTest.online · Percona Live Amsterdam</p>
+    <h1>Desafio MariaDB Foundation<br>e SQLTest.online</h1>
     <p class="hero-subtitle">
-        <a href="https://mariadb.org/events/mariadb-day-brussels/" target="_blank" rel="noreferrer">Domingo, 1º de fevereiro de 2026</a>
-        · Silversquare delta, Avenue Arnaud Fraiteur 15-23, 1050 Bruxelas
+        <a href="https://perconalive.com/2026-amsterdam/" target="_blank" rel="noreferrer">9–11 de setembro de 2026</a>
+        · Percona Live, Amsterdã · estande da MariaDB Foundation
     </p>
     <div class="hero-cta">
         {if $User->logged() === false}
-            <button type="button" class="mariadb-button mariadb-register-btn">Inscrição</button>
+            <button type="button" class="mariadb-button mariadb-register-btn">Registar</button>
             <button type="button" class="mariadb-button mariadb-login-btn">Entrar</button>
         {else}
             {if !$LastTest || $LastTest.closed}
@@ -16,91 +16,88 @@
                 <a class="mariadb-button" href="/{$Lang}/test/{$LastTest.id}/question/">Continuar quiz</a>
             {/if}
         {/if}
-        <span class="hero-note">10 questões teóricas e práticas · prémios para os primeiros 10 classificados no FOSDEM</span>
+        <span class="hero-note">Quiz MariaDB + tarefas SQL · vencedores notificados por email · sorteio diário de prémios</span>
     </div>
 </section>
+
 <section class="mariadb-highlight">
     <div>
-        <h3>O que esperar do MariaDB Day Brussels</h3>
+        <h2>Acha que conhece MariaDB? Prove.</h2>
         <p>
-            MariaDB Day Bruxelas é um encontro comunitário de um dia que reúne mantenedores, parceiros e utilizadores
-            para partilhar o presente e o futuro da MariaDB. Serve como uma introdução ao palco MariaDB dentro do FOSDEM.
+            Um pequeno quiz sobre factos, capacidades e casos de uso reais do MariaDB, além de três tarefas práticas de SQL que resolve aqui mesmo e valida imediatamente.
+            Todos os participantes recebem algo. Os melhores recebem ainda mais.
         </p>
         <ul class="mariadb-list">
-            <li>Atualizações diretas da MariaDB Foundation e dos mantenedores mais ativos.</li>
-            <li>Sessões sobre o núcleo do servidor, o desempenho do Enterprise Server 11.8 e o roteiro 12.3 LTS.</li>
-            <li>Debates técnicos sobre Plugin API, RAG, integração com IA, automação e cenários com bases vetoriais.</li>
-            <li>Perspetivas da comunidade e dos parceiros, com espaço para conversas presenciais.</li>
+            <li>Teste o seu conhecimento sobre funcionalidades, história e casos de uso reais do MariaDB.</li>
+            <li>Resolva tarefas SQL no estande e receba feedback imediato.</li>
+            <li>Ganhe um autocolante ao concluir o quiz e participe no sorteio diário resolvendo as tarefas SQL.</li>
+            <li>Jogue a qualquer momento durante a conferência e volte mais tarde se precisar de fazer uma pausa.</li>
         </ul>
     </div>
     <div class="floating-card">
-        <h4>Palestrantes e temas</h4>
+        <h3>Desafio prático</h3>
         <p>
-            Anna Widenius, Sergei Golubchik, Steve Shaw, Jan Lindström, Paul Clevett, Nick Denning, Alejandro Duarte,
-            Dirk Hillbrecht, Andrija Vučinić, Carl Schwan, Roman Agabekov e outros.
+            O quiz combina testes de conhecimento sobre MariaDB com exercícios reais de SQL. Serve tanto para visitantes curiosos como para profissionais experientes em bases de dados.
         </p>
         <p>
-            Os temas incluem Meet 12.3 LTS, OLTP throughput no Enterprise Server 11.8, MariaDB is the Future of MySQL,
-            extensão via Plugin API, deploy de RAG sem complicações, vantagens arquiteturais com IA, automação segura
-            e upgrades quase sem downtime.
+            Registe-se uma vez, continue mais tarde durante o evento e termine o desafio ao seu ritmo enquanto visita a conferência.
         </p>
     </div>
 </section>
+
 <section class="mariadb-grid">
     <article>
-        <h4>Formato do quiz</h4>
-        <p>
-            Dez questões escolhidas refletem a agenda do MariaDB Day: um equilíbrio entre teoria sobre a plataforma e tarefas
-            práticas que testam código SQL, otimização e migração.
-        </p>
-        <ul class="mariadb-list">
-            <li>Cinco questões teóricas sobre arquitetura, decisões de lançamento e estratégia comunitária.</li>
-            <li>Cinco desafios práticos com sintaxe MariaDB, hints de otimização e estruturas reais de dados.</li>
-            <li>Janela de 3 horas para responder, o que permite digerir os talks e entrar no quiz logo a seguir.</li>
-        </ul>
-    </article>
-    <article>
-        <h4>Porque participar no FOSDEM</h4>
-        <p>
-            O quiz funciona no nosso stand MariaDB Day junto ao FOSDEM, dando tempo para comparar resultados,
-            ver o placar em tempo real e retomar uma nova ronda antes do próximo keynote.
-        </p>
-        <p>
-            Todos recebem um relatório instantâneo e um link para partilhar o desempenho com toda a comunidade.
-        </p>
+        <h3>Como participar</h3>
+        <ol class="mariadb-list">
+            <li>Digitalize o código QR no estande da MariaDB Foundation ou abra esta página no seu dispositivo.</li>
+            <li>Registe-se e complete o quiz em qualquer momento durante a conferência. Pode pausar e continuar mais tarde.</li>
+            <li>Conclua o quiz e mostre o resultado no estande para receber um autocolante.</li>
+            <li>Responda corretamente às tarefas SQL para participar no sorteio diário.</li>
+            <li>O sorteio acontece no estande às 17:00 todos os dias. Prémio: vale de certificação MariaDB. Os vencedores também são notificados por email.</li>
+        </ol>
     </article>
 </section>
+
 <section class="mariadb-prizes">
-    <h3>Prémios para os primeiros 10 classificados</h3>
+    <h2>Prémios</h2>
     <div class="prize-grid">
         <div class="prize-card">
-            <h5>1.º ao 3.º lugar</h5>
-            <p>Hardware exclusivo MariaDB, livros assinados pelos arquitetos e um voucher de formação no próximo release.</p>
+            <h4>Quiz concluído</h4>
+            <p>Autocolante MariaDB no estande.</p>
         </div>
         <div class="prize-card">
-            <h5>4.º ao 7.º lugar</h5>
-            <p>Convites para as MariaDB labs, kits premium de merchandising e conversa direta com os engenheiros.</p>
+            <h4>Ronda de funcionalidades concluída</h4>
+            <p>Autocolante premium.</p>
         </div>
         <div class="prize-card">
-            <h5>8.º ao 10.º lugar</h5>
-            <p>Kit de swag MariaDB, créditos digitais para ferramentas e menção no encerramento oficial.</p>
+            <h4>Todas as tarefas SQL resolvidas corretamente</h4>
+            <p>Entrada no sorteio diário de vales de certificação MariaDB.</p>
         </div>
     </div>
     <p class="prize-note">
-        Os vencedores serão anunciados em palco e avisados pelo painel do quiz antes do final do dia.
+        Todos os participantes recebem algo. Os melhores obtêm mais, e os vencedores podem também ser contactados por email se não estiverem presentes no estande.
     </p>
 </section>
+
 <section class="mariadb-final">
     <p>
-        Traga o portátil e a curiosidade para uma experiência que segue de perto os talks do MariaDB Day e abre portas
-        aos prémios durante o FOSDEM.
-    </p>
-    <p>
-        <a class="external-link" href="https://mariadb.org/events/mariadb-day-brussels/" target="_blank" rel="noreferrer">
-            Saiba mais sobre o MariaDB Day Brussels
+        Se estiver a visitar o Percona Live Amsterdam, passe pelo estande da MariaDB Foundation, faça o quiz e teste os seus conhecimentos de MariaDB em pessoa.
+        <a class="external-link" href="https://perconalive.com/2026-amsterdam/" target="_blank" rel="noreferrer">
+            Saiba mais sobre o Percona Live Amsterdam
         </a>
     </p>
+    <p class="hero-note">
+        O seu email é usado para notificar os vencedores. Só é partilhado com a MariaDB Foundation para a sua newsletter se marcar a caixa acima. Consulte a política de privacidade para mais detalhes.
+    </p>
     {if $User->logged() === false}
-    <a class="mariadb-button" href="/{$Lang}/test/start">Inscrição</a>
+        <button type="button" class="mariadb-button mariadb-register-btn">Registar</button>
+        <button type="button" class="mariadb-button mariadb-login-btn">Entrar</button>
+    {else}
+        {if !$LastTest || $LastTest.closed}
+            <a class="mariadb-button" href="/{$Lang}/challenge-mariadb/start">Começar quiz</a>
+        {else}
+            <a class="mariadb-button" href="/{$Lang}/test/{$LastTest.id}/question/">Continuar quiz</a>
+        {/if}
     {/if}
 </section>
+
