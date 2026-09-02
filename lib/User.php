@@ -593,6 +593,25 @@ class User
         ]);
     }
 
+    public function sendPrizeClaimEmail(string $email, string $identifier, string $qrCodeUrl): bool
+    {
+        if ($email === '') {
+            return false;
+        }
+
+        $subject = 'MariaDB challenge prize code';
+        $message = "Your MariaDB prize identifier: {$identifier}\n\nQR code: {$qrCodeUrl}\n";
+        $headers = [
+            'From: no-reply@sqltest.online',
+            'Reply-To: no-reply@sqltest.online',
+            'X-Mailer: SQLTest.online',
+            'MIME-Version: 1.0',
+            'Content-Type: text/plain; charset=UTF-8',
+        ];
+
+        return mail($email, $subject, $message, implode("\r\n", $headers));
+    }
+
     /**
      * Set User's current path
      *
