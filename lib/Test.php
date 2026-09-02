@@ -84,15 +84,19 @@ class Test
         $stmt->execute([$this->id, $this->user->getId()]);
 
         $stmt = $this->dbh->prepare("INSERT INTO test_questions (test_id, question_id, max_attempts) VALUES
-            (:test_id, 20, 5),
-            (:test_id, 21, 5),
-            (:test_id, 69, 5),
-            (:test_id, 80, 5),
-            (:test_id, 111, 5),
-            (:test_id, 387, 3),
-            (:test_id, 388, 3),
-            (:test_id, 389, 3),
-            (:test_id, 390, 3);"
+            (:test_id, 461, 3),
+            (:test_id, 462, 3),
+            (:test_id, 463, 3),
+            (:test_id, 464, 3),
+            (:test_id, 465, 3),
+            (:test_id, 466, 3),
+            (:test_id, 464, 3),
+            (:test_id, 465, 3),
+            (:test_id, 466, 3),
+            (:test_id, 417, 3),
+            (:test_id, 419, 3),
+            (:test_id, 420, 3),
+            (:test_id, 467, 1);"
          );
         $stmt->execute([':test_id' => $this->id]);
         $this->dbh->commit();
