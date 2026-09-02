@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 360" role="img" aria-labelledby="title desc">
+  <title id="title">MariaDB University ERD preview</title>
+  <desc id="desc">Compact preview of the MariaDB University database showing departments, faculty, students, courses, sections, and enrollments.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fbfdff"/>
+      <stop offset="1" stop-color="#f2f7fb"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-color="#223046" flood-opacity="0.14"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#93b5cf"/>
+    </marker>
+    <style>
+      .card { fill: #ffffff; stroke: #c8d6e3; stroke-width: 1.2; filter: url(#shadow); }
+      .head { fill: #20364d; }
+      .title { fill: #ffffff; font: 700 16px 'Segoe UI', Arial, sans-serif; }
+      .col { fill: #4e6479; font: 12px 'Segoe UI', Arial, sans-serif; }
+      .key { fill: #2980b9; font: 700 11px 'Segoe UI', Arial, sans-serif; }
+      .edge { fill: none; stroke: #93b5cf; stroke-width: 2; marker-end: url(#arrow); }
+      .note { fill: #9ab0c1; font: 11px 'Segoe UI', Arial, sans-serif; }
+    </style>
+  </defs>
+
+  <rect width="1080" height="360" fill="url(#bg)"/>
+  <g opacity="0.35">
+    <path d="M40 40H1040" stroke="#d9e6ef"/>
+    <path d="M40 110H1040" stroke="#d9e6ef"/>
+    <path d="M40 180H1040" stroke="#d9e6ef"/>
+    <path d="M40 250H1040" stroke="#d9e6ef"/>
+    <path d="M40 320H1040" stroke="#d9e6ef"/>
+  </g>
+
+  <path class="edge" d="M220 92 C270 92, 290 92, 340 92"/>
+  <path class="edge" d="M220 246 C270 246, 290 246, 340 246"/>
+  <path class="edge" d="M520 92 C570 92, 600 92, 650 92"/>
+  <path class="edge" d="M520 246 C570 246, 600 246, 650 246"/>
+  <path class="edge" d="M830 126 C830 150, 830 170, 830 192"/>
+  <path class="edge" d="M740 144 C700 170, 700 216, 740 228"/>
+
+  <g transform="translate(40,26)">
+    <rect class="card" width="180" height="130" rx="10"/>
+    <rect class="head" width="180" height="28" rx="10"/>
+    <text class="title" x="12" y="19">departments</text>
+    <text class="key" x="12" y="52">PK</text><text class="col" x="38" y="52">department_id</text>
+    <text class="col" x="38" y="74">parent_id</text>
+    <text class="col" x="38" y="96">name</text>
+    <text class="col" x="38" y="118">code</text>
+  </g>
+
+  <g transform="translate(40,182)">
+    <rect class="card" width="180" height="122" rx="10"/>
+    <rect class="head" width="180" height="28" rx="10"/>
+    <text class="title" x="12" y="19">students</text>
+    <text class="key" x="12" y="52">PK</text><text class="col" x="38" y="52">student_id</text>
+    <text class="key" x="12" y="74">FK</text><text class="col" x="38" y="74">department_id</text>
+    <text class="col" x="38" y="96">first_name</text>
+    <text class="col" x="38" y="118">last_name</text>
+  </g>
+
+  <g transform="translate(340,26)">
+    <rect class="card" width="180" height="130" rx="10"/>
+    <rect class="head" width="180" height="28" rx="10"/>
+    <text class="title" x="12" y="19">faculty</text>
+    <text class="key" x="12" y="52">PK</text><text class="col" x="38" y="52">faculty_id</text>
+    <text class="key" x="12" y="74">FK</text><text class="col" x="38" y="74">department_id</text>
+    <text class="col" x="38" y="96">first_name</text>
+    <text class="col" x="38" y="118">last_name</text>
+  </g>
+
+  <g transform="translate(340,182)">
+    <rect class="card" width="180" height="122" rx="10"/>
+    <rect class="head" width="180" height="28" rx="10"/>
+    <text class="title" x="12" y="19">courses</text>
+    <text class="key" x="12" y="52">PK</text><text class="col" x="38" y="52">course_id</text>
+    <text class="key" x="12" y="74">FK</text><text class="col" x="38" y="74">department_id</text>
+    <text class="col" x="38" y="96">course_code</text>
+    <text class="col" x="38" y="118">course_name</text>
+  </g>
+
+  <g transform="translate(650,26)">
+    <rect class="card" width="180" height="130" rx="10"/>
+    <rect class="head" width="180" height="28" rx="10"/>
+    <text class="title" x="12" y="19">sections</text>
+    <text class="key" x="12" y="52">PK</text><text class="col" x="38" y="52">section_id</text>
+    <text class="key" x="12" y="74">FK</text><text class="col" x="38" y="74">course_id</text>
+    <text class="key" x="12" y="96">FK</text><text class="col" x="38" y="96">faculty_id</text>
+    <text class="col" x="38" y="118">section_number</text>
+  </g>
+
+  <g transform="translate(650,192)">
+    <rect class="card" width="180" height="112" rx="10"/>
+    <rect class="head" width="180" height="28" rx="10"/>
+    <text class="title" x="12" y="19">enrollments</text>
+    <text class="key" x="12" y="52">PK</text><text class="col" x="38" y="52">enrollment_id</text>
+    <text class="key" x="12" y="74">FK</text><text class="col" x="38" y="74">student_id</text>
+    <text class="key" x="12" y="96">FK</text><text class="col" x="38" y="96">section_id</text>
+  </g>
+
+  <g transform="translate(890,74)">
+    <rect class="card" width="150" height="178" rx="10"/>
+    <rect class="head" width="150" height="28" rx="10"/>
+    <text class="title" x="12" y="19">University DB</text>
+    <text class="note" x="12" y="58">MariaDB 11.7+</text>
+    <text class="note" x="12" y="82">academic schema</text>
+    <text class="note" x="12" y="116">16 base tables</text>
+    <text class="note" x="12" y="140">3NF design</text>
+    <text class="note" x="12" y="164">SQL practice data</text>
+  </g>
+</svg>

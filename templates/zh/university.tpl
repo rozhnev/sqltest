@@ -11,7 +11,7 @@
     <p>大学数据库包含 16 个主要表，描述大学的学术结构 — 系、教职员工、学生、课程、注册、研究项目等。</p>
     <p>
         <a href="/{$Lang}/erd/University" target="ERDWindow" rel="noopener noreferrer" style="display: flex; flex-direction: column; align-items: center; gap: 4px;" aria-label="在新窗口中打开大学数据库 ER 图">
-            <img src="/images/erd_small_light.svg" alt="大学数据库的 ER 图显示表关系" width="1080" height="360" style="width: 90%; height: auto;" loading="lazy" decoding="async">
+            <img src="/images/erd_university_small.svg" alt="显示大学数据库表关系的紧凑 ER 图" width="1080" height="360" style="width: 90%; height: auto;" loading="lazy" decoding="async">
             大学数据库的 ER 图
         </a>
     </p>

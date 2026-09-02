@@ -11,7 +11,7 @@
     <p>La base de datos universitaria contiene 16 tablas principales que describen la estructura académica de una universidad — departamentos, facultades, estudiantes, cursos, inscripciones, proyectos de investigación, y más.</p>
     <p>
         <a href="/{$Lang}/erd/University" target="ERDWindow" rel="noopener noreferrer" style="display: flex; flex-direction: column; align-items: center; gap: 4px;" aria-label="Abrir diagrama ER de la base de datos universitaria en una nueva ventana">
-            <img src="/images/erd_small_light.svg" alt="Diagrama ER de la base de datos universitaria mostrando relaciones entre tablas" width="1080" height="360" style="width: 90%; height: auto;" loading="lazy" decoding="async">
+            <img src="/images/erd_university_small.svg" alt="Diagrama ER compacto de la base de datos universitaria mostrando relaciones entre tablas" width="1080" height="360" style="width: 90%; height: auto;" loading="lazy" decoding="async">
             Diagrama ER de la base de datos universitaria
         </a>
     </p>

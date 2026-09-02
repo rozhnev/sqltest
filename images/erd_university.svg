@@ -1,0 +1,282 @@
+<?xml-stylesheet type="text/css" href="/css/erd.css"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1900" height="1500" viewBox="0 0 1900 1500" role="img" aria-labelledby="title desc" class="erd erd-university">
+  <title id="title">MariaDB University Database ERD</title>
+  <desc id="desc">Entity relationship diagram for the MariaDB University database, showing sixteen base tables and their foreign key relationships.</desc>
+
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" viewBox="0 0 10 10">
+      <path d="M0,0 L10,5 L0,10 z" fill="var(--erd-edge, #334155)"/>
+    </marker>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="1.2" stdDeviation="1.2" flood-color="var(--erd-shadow-color, #9aa8bd)" flood-opacity="var(--erd-shadow-opacity, 0.45)"/>
+    </filter>
+      <style>
+        .bg { fill: var(--erd-bg, #f3f6fb); }
+        .grid { stroke: var(--erd-grid, #e5eaf2); stroke-width: 1; }
+        .panel { fill: var(--erd-panel-bg, #ffffff); stroke: var(--erd-panel-stroke, #25364a); stroke-width: 1.5; }
+        .header { fill: var(--erd-header-bg, #0f4aa3); }
+        .title { fill: var(--erd-title, #ffffff); font: 700 var(--erd-title-size, 16px) 'Segoe UI', Arial, sans-serif; }
+        .col { fill: var(--erd-col, #1f2d3d); font: var(--erd-col-size, 13px) 'Segoe UI', Arial, sans-serif; }
+        .pk { fill: var(--erd-pk, #0f766e); font: 700 var(--erd-key-size, 12px) 'Segoe UI', Arial, sans-serif; }
+        .fk { fill: var(--erd-fk, #7e22ce); font: 700 var(--erd-key-size, 12px) 'Segoe UI', Arial, sans-serif; }
+        .edge { stroke: var(--erd-edge, #334155); stroke-width: 2; fill: none; }
+        .label { fill: var(--erd-label, #0f172a); font: var(--erd-label-size, 12px) 'Segoe UI', Arial, sans-serif; }
+        .legend-box { fill: var(--erd-legend-bg, #ffffff); stroke: var(--erd-legend-stroke, #334155); stroke-width: 1.2; }
+        .legend-title { fill: var(--erd-legend-title, #0f172a); font: 700 var(--erd-legend-title-size, 15px) 'Segoe UI', Arial, sans-serif; }
+      </style>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1900" height="1500"/>
+
+  <g opacity="0.55">
+    <line class="grid" x1="70" y1="70" x2="70" y2="1450"/>
+    <line class="grid" x1="410" y1="70" x2="410" y2="1450"/>
+    <line class="grid" x1="750" y1="70" x2="750" y2="1450"/>
+    <line class="grid" x1="1090" y1="70" x2="1090" y2="1450"/>
+    <line class="grid" x1="1430" y1="70" x2="1430" y2="1450"/>
+    <line class="grid" x1="1770" y1="70" x2="1770" y2="1450"/>
+    <line class="grid" x1="70" y1="100" x2="1830" y2="100"/>
+    <line class="grid" x1="70" y1="410" x2="1830" y2="410"/>
+    <line class="grid" x1="70" y1="770" x2="1830" y2="770"/>
+    <line class="grid" x1="70" y1="1130" x2="1830" y2="1130"/>
+  </g>
+
+  <!-- Reference tables -->
+  <g transform="translate(70,100)" filter="url(#shadow)">
+    <rect class="panel" width="300" height="196" rx="10" ry="10"/>
+    <rect class="header" width="300" height="32" rx="10" ry="10"/>
+    <text class="title" x="14" y="21">departments</text>
+    <text class="pk" x="14" y="55">PK</text><text class="col" x="44" y="55">department_id</text>
+    <text class="fk" x="14" y="77">FK</text><text class="col" x="44" y="77">parent_id -&gt; departments</text>
+    <text class="fk" x="14" y="99">FK</text><text class="col" x="44" y="99">head_faculty_id -&gt; faculty</text>
+    <text class="col" x="44" y="121">name</text>
+    <text class="col" x="44" y="143">code</text>
+    <text class="col" x="44" y="165">level</text>
+    <text class="col" x="44" y="187">description</text>
+  </g>
+
+  <g transform="translate(410,100)" filter="url(#shadow)">
+    <rect class="panel" width="300" height="174" rx="10" ry="10"/>
+    <rect class="header" width="300" height="32" rx="10" ry="10"/>
+    <text class="title" x="14" y="21">faculty</text>
+    <text class="pk" x="14" y="55">PK</text><text class="col" x="44" y="55">faculty_id</text>
+    <text class="fk" x="14" y="77">FK</text><text class="col" x="44" y="77">department_id -&gt; departments</text>
+    <text class="col" x="44" y="99">first_name</text>
+    <text class="col" x="44" y="121">last_name</text>
+    <text class="col" x="44" y="143">email</text>
+    <text class="col" x="44" y="165">title</text>
+  </g>
+
+  <g transform="translate(750,100)" filter="url(#shadow)">
+    <rect class="panel" width="300" height="174" rx="10" ry="10"/>
+    <rect class="header" width="300" height="32" rx="10" ry="10"/>
+    <text class="title" x="14" y="21">students</text>
+    <text class="pk" x="14" y="55">PK</text><text class="col" x="44" y="55">student_id</text>
+    <text class="fk" x="14" y="77">FK</text><text class="col" x="44" y="77">department_id -&gt; departments</text>
+    <text class="col" x="44" y="99">first_name</text>
+    <text class="col" x="44" y="121">last_name</text>
+    <text class="col" x="44" y="143">email</text>
+    <text class="col" x="44" y="165">enrollment_date</text>
+  </g>
+
+  <g transform="translate(1090,100)" filter="url(#shadow)">
+    <rect class="panel" width="300" height="174" rx="10" ry="10"/>
+    <rect class="header" width="300" height="32" rx="10" ry="10"/>
+    <text class="title" x="14" y="21">courses</text>
+    <text class="pk" x="14" y="55">PK</text><text class="col" x="44" y="55">course_id</text>
+    <text class="fk" x="14" y="77">FK</text><text class="col" x="44" y="77">department_id -&gt; departments</text>
+    <text class="col" x="44" y="99">course_code</text>
+    <text class="col" x="44" y="121">course_name</text>
+    <text class="col" x="44" y="143">credits</text>
+    <text class="col" x="44" y="165">description</text>
+  </g>
+
+  <g transform="translate(1430,100)" filter="url(#shadow)">
+    <rect class="panel" width="300" height="152" rx="10" ry="10"/>
+    <rect class="header" width="300" height="32" rx="10" ry="10"/>
+    <text class="title" x="14" y="21">semesters</text>
+    <text class="pk" x="14" y="55">PK</text><text class="col" x="44" y="55">semester_id</text>
+    <text class="col" x="44" y="77">term</text>
+    <text class="col" x="44" y="99">academic_year</text>
+    <text class="col" x="44" y="121">start_date</text>
+    <text class="col" x="44" y="143">end_date</text>
+  </g>
+
+  <!-- Campus and course structure -->
+  <g transform="translate(70,410)" filter="url(#shadow)">
+    <rect class="panel" width="300" height="152" rx="10" ry="10"/>
+    <rect class="header" width="300" height="32" rx="10" ry="10"/>
+    <text class="title" x="14" y="21">rooms</text>
+    <text class="pk" x="14" y="55">PK</text><text class="col" x="44" y="55">room_id</text>
+    <text class="col" x="44" y="77">building</text>
+    <text class="col" x="44" y="99">room_number</text>
+    <text class="col" x="44" y="121">capacity</text>
+    <text class="col" x="44" y="143">room_type</text>
+  </g>
+
+  <g transform="translate(410,410)" filter="url(#shadow)">
+    <rect class="panel" width="300" height="130" rx="10" ry="10"/>
+    <rect class="header" width="300" height="32" rx="10" ry="10"/>
+    <text class="title" x="14" y="21">course_prerequisites</text>
+    <text class="pk" x="14" y="55">PK</text><text class="fk" x="44" y="55">FK</text><text class="col" x="78" y="55">course_id -&gt; courses</text>
+    <text class="pk" x="14" y="77">PK</text><text class="fk" x="44" y="77">FK</text><text class="col" x="78" y="77">prerequisite_id -&gt; courses</text>
+    <text class="col" x="44" y="99">minimum_grade</text>
+    <text class="col" x="44" y="121">notes</text>
+  </g>
+
+  <g transform="translate(750,410)" filter="url(#shadow)">
+    <rect class="panel" width="300" height="196" rx="10" ry="10"/>
+    <rect class="header" width="300" height="32" rx="10" ry="10"/>
+    <text class="title" x="14" y="21">sections</text>
+    <text class="pk" x="14" y="55">PK</text><text class="col" x="44" y="55">section_id</text>
+    <text class="fk" x="14" y="77">FK</text><text class="col" x="44" y="77">course_id -&gt; courses</text>
+    <text class="fk" x="14" y="99">FK</text><text class="col" x="44" y="99">faculty_id -&gt; faculty</text>
+    <text class="fk" x="14" y="121">FK</text><text class="col" x="44" y="121">semester_id -&gt; semesters</text>
+    <text class="fk" x="14" y="143">FK</text><text class="col" x="44" y="143">room_id -&gt; rooms</text>
+    <text class="col" x="44" y="165">section_number</text>
+    <text class="col" x="44" y="187">schedule</text>
+  </g>
+
+  <g transform="translate(1090,410)" filter="url(#shadow)">
+    <rect class="panel" width="300" height="174" rx="10" ry="10"/>
+    <rect class="header" width="300" height="32" rx="10" ry="10"/>
+    <text class="title" x="14" y="21">enrollments</text>
+    <text class="pk" x="14" y="55">PK</text><text class="fk" x="44" y="55">FK</text><text class="col" x="78" y="55">student_id -&gt; students</text>
+    <text class="pk" x="14" y="77">PK</text><text class="fk" x="44" y="77">FK</text><text class="col" x="78" y="77">section_id -&gt; sections</text>
+    <text class="col" x="44" y="99">enrolled_at</text>
+    <text class="col" x="44" y="121">status</text>
+    <text class="col" x="44" y="143">final_grade</text>
+    <text class="col" x="44" y="165">completed_at</text>
+  </g>
+
+  <g transform="translate(1430,410)" filter="url(#shadow)">
+    <rect class="panel" width="300" height="152" rx="10" ry="10"/>
+    <rect class="header" width="300" height="32" rx="10" ry="10"/>
+    <text class="title" x="14" y="21">scholarships</text>
+    <text class="pk" x="14" y="55">PK</text><text class="col" x="44" y="55">scholarship_id</text>
+    <text class="col" x="44" y="77">name</text>
+    <text class="col" x="44" y="99">provider</text>
+    <text class="col" x="44" y="121">amount</text>
+    <text class="col" x="44" y="143">criteria</text>
+  </g>
+
+  <!-- Research and student support -->
+  <g transform="translate(70,770)" filter="url(#shadow)">
+    <rect class="panel" width="300" height="152" rx="10" ry="10"/>
+    <rect class="header" width="300" height="32" rx="10" ry="10"/>
+    <text class="title" x="14" y="21">student_scholarships</text>
+    <text class="pk" x="14" y="55">PK</text><text class="fk" x="44" y="55">FK</text><text class="col" x="78" y="55">student_id -&gt; students</text>
+    <text class="pk" x="14" y="77">PK</text><text class="fk" x="44" y="77">FK</text><text class="col" x="78" y="77">scholarship_id -&gt; scholarships</text>
+    <text class="col" x="44" y="99">awarded_at</text>
+    <text class="col" x="44" y="121">amount_awarded</text>
+    <text class="col" x="44" y="143">academic_year</text>
+  </g>
+
+  <g transform="translate(410,770)" filter="url(#shadow)">
+    <rect class="panel" width="300" height="174" rx="10" ry="10"/>
+    <rect class="header" width="300" height="32" rx="10" ry="10"/>
+    <text class="title" x="14" y="21">research_projects</text>
+    <text class="pk" x="14" y="55">PK</text><text class="col" x="44" y="55">project_id</text>
+    <text class="fk" x="14" y="77">FK</text><text class="col" x="44" y="77">department_id -&gt; departments</text>
+    <text class="fk" x="14" y="99">FK</text><text class="col" x="44" y="99">lead_faculty_id -&gt; faculty</text>
+    <text class="col" x="44" y="121">title</text>
+    <text class="col" x="44" y="143">start_date</text>
+    <text class="col" x="44" y="165">end_date</text>
+  </g>
+
+  <g transform="translate(750,770)" filter="url(#shadow)">
+    <rect class="panel" width="300" height="152" rx="10" ry="10"/>
+    <rect class="header" width="300" height="32" rx="10" ry="10"/>
+    <text class="title" x="14" y="21">publications</text>
+    <text class="pk" x="14" y="55">PK</text><text class="fk" x="44" y="55">FK</text><text class="col" x="78" y="55">project_id -&gt; research_projects</text>
+    <text class="col" x="44" y="77">title</text>
+    <text class="col" x="44" y="99">publication_year</text>
+    <text class="col" x="44" y="121">doi</text>
+    <text class="col" x="44" y="143">citation_count</text>
+  </g>
+
+  <g transform="translate(1090,770)" filter="url(#shadow)">
+    <rect class="panel" width="300" height="174" rx="10" ry="10"/>
+    <rect class="header" width="300" height="32" rx="10" ry="10"/>
+    <text class="title" x="14" y="21">project_members</text>
+    <text class="pk" x="14" y="55">PK</text><text class="fk" x="44" y="55">FK</text><text class="col" x="78" y="55">project_id -&gt; research_projects</text>
+    <text class="pk" x="14" y="77">PK</text><text class="fk" x="44" y="77">FK</text><text class="col" x="78" y="77">faculty_id -&gt; faculty</text>
+    <text class="fk" x="14" y="99">FK</text><text class="col" x="44" y="99">student_id -&gt; students</text>
+    <text class="col" x="44" y="121">role</text>
+    <text class="col" x="44" y="143">joined_at</text>
+    <text class="col" x="44" y="165">left_at</text>
+  </g>
+
+  <g transform="translate(1430,770)" filter="url(#shadow)">
+    <rect class="panel" width="300" height="152" rx="10" ry="10"/>
+    <rect class="header" width="300" height="32" rx="10" ry="10"/>
+    <text class="title" x="14" y="21">grade_events</text>
+    <text class="pk" x="14" y="55">PK</text><text class="fk" x="44" y="55">FK</text><text class="col" x="78" y="55">enrollment_id -&gt; enrollments</text>
+    <text class="fk" x="14" y="77">FK</text><text class="col" x="44" y="77">grader_id -&gt; faculty</text>
+    <text class="col" x="44" y="99">event_type</text>
+    <text class="col" x="44" y="121">score</text>
+    <text class="col" x="44" y="143">graded_at</text>
+  </g>
+
+  <g transform="translate(70,1130)" filter="url(#shadow)">
+    <rect class="panel" width="300" height="130" rx="10" ry="10"/>
+    <rect class="header" width="300" height="32" rx="10" ry="10"/>
+    <text class="title" x="14" y="21">audit_log</text>
+    <text class="pk" x="14" y="55">PK</text><text class="col" x="44" y="55">audit_id</text>
+    <text class="col" x="44" y="77">table_name</text>
+    <text class="col" x="44" y="99">record_id</text>
+    <text class="col" x="44" y="121">operation</text>
+  </g>
+
+  <!-- Legend -->
+  <g transform="translate(410,1130)">
+    <rect class="legend-box" x="0" y="0" width="450" height="190" rx="8" ry="8"/>
+    <text class="legend-title" x="14" y="27">MariaDB University ERD</text>
+    <text class="pk" x="14" y="57">PK</text><text class="col" x="44" y="57">Primary key</text>
+    <text class="fk" x="14" y="81">FK</text><text class="col" x="44" y="81">Foreign key</text>
+    <line class="edge" x1="14" y1="109" x2="84" y2="109" marker-end="url(#arrow)"/>
+    <text class="col" x="94" y="113">Child table points to parent</text>
+    <text class="col" x="14" y="145">One connector lane per foreign key</text>
+    <text class="col" x="14" y="169">Views are omitted from this base-table ERD</text>
+  </g>
+
+  <!-- Relationships: every FK has its own connector lane. -->
+  <path class="edge" d="M 370 199 L 390 199 L 390 320 L 730 320 L 730 185 L 710 185" marker-end="url(#arrow)"/>
+  <text class="label" x="490" y="311">head_faculty_id</text>
+  <path class="edge" d="M 370 198 L 410 198" marker-end="url(#arrow)"/>
+  <text class="label" x="375" y="188">department_id</text>
+  <path class="edge" d="M 750 198 L 710 198" marker-end="url(#arrow)"/>
+  <text class="label" x="714" y="188">department_id</text>
+  <path class="edge" d="M 1090 198 L 1050 198" marker-end="url(#arrow)"/>
+  <text class="label" x="1052" y="188">department_id</text>
+  <path class="edge" d="M 710 465 L 730 465 L 730 300 L 1070 300 L 1070 180 L 1090 180" marker-end="url(#arrow)"/>
+  <text class="label" x="840" y="291">course_id</text>
+  <path class="edge" d="M 750 487 L 730 487 L 730 300 L 600 300 L 600 274" marker-end="url(#arrow)"/>
+  <text class="label" x="650" y="291">faculty_id</text>
+  <path class="edge" d="M 900 410 L 900 300 L 1580 300 L 1580 252" marker-end="url(#arrow)"/>
+  <text class="label" x="1220" y="291">semester_id</text>
+  <path class="edge" d="M 1050 520 L 1080 520 L 1080 630 L 390 630 L 390 486 L 370 486" marker-end="url(#arrow)"/>
+  <text class="label" x="760" y="621">room_id</text>
+  <path class="edge" d="M 1090 454 L 1070 454 L 1070 320 L 900 320 L 900 274" marker-end="url(#arrow)"/>
+  <text class="label" x="1010" y="311">student_id</text>
+  <path class="edge" d="M 1390 520 L 1430 520" marker-end="url(#arrow)"/>
+  <text class="label" x="1394" y="510">scholarship_id</text>
+  <path class="edge" d="M 220 770 L 180 770 L 180 320 L 900 320 L 900 274" marker-end="url(#arrow)"/>
+  <text class="label" x="500" y="311">student_id</text>
+  <path class="edge" d="M 370 814 L 410 814" marker-end="url(#arrow)"/>
+  <text class="label" x="374" y="804">department_id</text>
+  <path class="edge" d="M 710 836 L 750 836" marker-end="url(#arrow)"/>
+  <text class="label" x="714" y="826">project_id</text>
+  <path class="edge" d="M 1090 836 L 1050 836" marker-end="url(#arrow)"/>
+  <text class="label" x="1052" y="826">project_id</text>
+  <path class="edge" d="M 1090 858 L 1020 858 L 1020 220 L 710 220" marker-end="url(#arrow)"/>
+  <text class="label" x="1030" y="700">faculty_id</text>
+  <path class="edge" d="M 1090 880 L 1060 880 L 1060 300 L 1000 300 L 1000 274" marker-end="url(#arrow)"/>
+  <text class="label" x="1068" y="700">student_id</text>
+  <path class="edge" d="M 1390 858 L 1408 858 L 1408 584 L 1390 584" marker-end="url(#arrow)"/>
+  <text class="label" x="1408" y="730">enrollment_id</text>
+  <path class="edge" d="M 1430 836 L 1380 836 L 1380 320 L 730 320 L 730 185 L 710 185" marker-end="url(#arrow)"/>
+  <text class="label" x="1180" y="311">grader_id</text>
+  <path class="edge" d="M 220 100 L 220 70 L 40 70 L 40 320 L 220 320 L 220 296" marker-end="url(#arrow)"/>
+  <text class="label" x="48" y="308">parent_id</text>
+</svg>
