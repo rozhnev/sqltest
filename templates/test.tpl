@@ -140,7 +140,7 @@
                     {elseif isset($Question.answers) || $Question.question_type == 'free_answer'}
                         {if $Question.possible_attempts > 0}
                             {if $Question.question_type == 'free_answer'}
-                                <button class="button green" id="checkFreeAnswerBtn2" onClick="checkFreeAnswer('{$Lang}', {$QuestionID})">
+                                <button class="button green" id="checkFreeAnswerBtn2" onClick="checkSolution('/{$Lang}/test/{$TestId}/check/{$QuestionID}')">
                                     <i class="run-icon"></i>
                                     <span>{translate}question_action_check_free_answer{/translate}</span>
                                 </button>
