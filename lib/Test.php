@@ -82,7 +82,7 @@ class Test
         $this->dbh->beginTransaction();
         $stmt = $this->dbh->prepare(
             "INSERT INTO tests (id, user_id, closed_at, questionnire_id, solutions_required) 
-            VALUES (?, ?, CURRENT_DATE + INTERVAL '17 hour', 999, 3)");
+            VALUES (?, ?, (CURRENT_TIMESTAMP AT TIME ZONE current_setting('TIMEZONE'))::timestamp::date + INTERVAL '17 hour', 999, 3)");
         $stmt->execute([$this->id, $this->user->getId()]);
 
         $stmt = $this->dbh->prepare("INSERT INTO test_questions (test_id, question_id, max_attempts) VALUES
@@ -169,8 +169,10 @@ class Test
         $stmt = $this->dbh->prepare("
             SELECT 
                 *, 
-                (tests.closed_at <= CURRENT_TIMESTAMP) timeout, 
-                extract(epoch from (tests.closed_at - CURRENT_TIMESTAMP))::int/60 time_to_end,
+                (tests.closed_at <= (CURRENT_TIMESTAMP AT TIME ZONE current_setting('TIMEZONE'))::timestamp) timeout,
+                GREATEST(0, FLOOR(EXTRACT(EPOCH FROM (
+                    tests.closed_at - (CURRENT_TIMESTAMP AT TIME ZONE current_setting('TIMEZONE'))::timestamp
+                )) / 60))::int time_to_end,
                 test_questions.questions_count,
                 test_questions.solved_questions_count
             FROM tests

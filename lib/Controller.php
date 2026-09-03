@@ -1069,9 +1069,13 @@ class Controller
         ]);
         if ($isMariaDBChallenge) {
             // print_r($testResult);
+            // print_r($testData);
             // die();
+            $alreadyClaimed = $this->user->getPrizeClaimForTest($params['testId']);
             $this->assignVariables([
                 'IsMariaDBChallenge' => $isMariaDBChallenge,
+                'AlreadyClaimed'      => $alreadyClaimed,
+                'UserSubscribed' => $this->user->isSubscribedToList('mariadb_newsletter'),
             ]);
             $this->engine->display("mariadb_challenge_result.tpl");
         } else {

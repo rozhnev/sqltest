@@ -174,6 +174,7 @@ $translations = [
     'return_to_test' => 'Продолжить тест',
     'save_my_grade' => 'Сохранить оценку',
     'claim_my_prize' => 'Получить приз',
+    'mariadb_prize_prize_draw' => 'Вы можете участвовать в сегодняшнем розыгрыше приза. Ваш приз — ##Prize##.',
     'mariadb_prize_claim_requires_three' => 'Решите хотя бы 3 из первых вопросов челленджа, чтобы получить приз.',
     'mariadb_prize_qr_code' => 'QR-код с кодом приза',
     'prize_claim_success' => 'Ваш код приза создан и отправлен на вашу почту.',
