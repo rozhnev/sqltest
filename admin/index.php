@@ -129,7 +129,8 @@ function handleMariaDBResults(PDO $dbh, array $env, array $query, string $method
             COUNT(*) FILTER (WHERE tq.solved_at IS NOT NULL AND qc.category_id = 801) AS tier1_solved_questions,
             COUNT(*) FILTER (WHERE tq.solved_at IS NOT NULL AND qc.category_id = 802) AS tier2_solved_questions,
             COUNT(*) FILTER (WHERE tq.solved_at IS NOT NULL AND qc.category_id = 803) AS tier3_solved_questions,
-            COUNT(*) FILTER (WHERE tq.solved_at IS NOT NULL AND qc.category_id = 804) AS free_answer
+            COUNT(*) FILTER (WHERE tq.solved_at IS NOT NULL AND qc.category_id = 804) AS free_answer_count,
+            STRING_AGG(tq.solution, ',') FILTER (WHERE tq.solved_at IS NOT NULL AND qc.category_id = 804) AS free_answer
         FROM tests t
         JOIN users u ON u.id = t.user_id
         JOIN test_questions tq ON tq.test_id = t.id

@@ -65,6 +65,7 @@
                                         <td class="results-number">{$result.tier1_solved_questions}</td>
                                         <td class="results-number">{$result.tier2_solved_questions}</td>
                                         <td class="results-number">{$result.tier3_solved_questions}</td>
+                                        {* <td class="results-number">{$result.free_answer_count}</td> *}
                                         <td class="results-number">{$result.free_answer}</td>
                                     </tr>
                                 {/foreach}
