@@ -74,15 +74,15 @@
         {if $User->logged()}
             {if isset($LastTest)}
                 {if $LastTest.closed}
-                    {if $LastTest.rate eq 1}
+                    {if $LastTest.grade eq 1}
                         <h2>Отличное начало! По результатам теста ваш уровень — Intern.</h2>Это говорит о вашем потенциале. Хотите развиваться дальше и перейти на новый уровень?
-                    {elseif $LastTest.rate eq 2}
+                    {elseif $LastTest.grade eq 2}
                         <h2>Вы на правильном пути! Ваш текущий уровень — Junior.</h2>
                         <h4>Это замечательный результат. Готовы ли вы расширить свои знания и навыки?</h4>
-                    {elseif $LastTest.rate eq 3}
+                    {elseif $LastTest.grade eq 3}
                         <h2>Вы достигли уровня Middle!</h2>
                         <h4>Это замечательно! Но ведь всегда есть к чему стремиться, верно? Готовы бросить вызов себе и улучшить свои результаты?</h4>
-                    {elseif $LastTest.rate eq 4}
+                    {elseif $LastTest.grade eq 4}
                         <h2>Поздравляем! Ваш уровень - Senior!</h2>
                         <h4>Готовы подтвердить свой статус?</h4>
                     {else}
