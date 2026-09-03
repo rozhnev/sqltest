@@ -1068,8 +1068,8 @@ class Controller
             'TestResult'    => $testResult,
         ]);
         if ($isMariaDBChallenge) {
-            print_r($testResult);
-            die();
+            // print_r($testResult);
+            // die();
             $this->assignVariables([
                 'IsMariaDBChallenge' => $isMariaDBChallenge,
             ]);
