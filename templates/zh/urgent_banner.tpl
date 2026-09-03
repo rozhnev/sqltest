@@ -1,5 +1,8 @@
-<span style="color:#ffffff;">🙏 <strong style="color:#ffe082;">我们非常需要您的支持。</strong> 我们需要资金来继续我们的使命：发布新课程并持续改进平台。如果您愿意，请通过捐助支持这个项目。</span>
-<a href="/{$Lang}/donate" style="color:#ffd54f; text-decoration:underline; font-weight:bold; white-space:nowrap;">现在帮助这个项目 →</a>
+{* <span style="color:#ffffff;">🙏 <strong style="color:#ffe082;">我们非常需要您的支持。</strong> 我们需要资金来继续我们的使命：发布新课程并持续改进平台。如果您愿意，请通过捐助支持这个项目。</span>
+<a href="/{$Lang}/donate" style="color:#ffd54f; text-decoration:underline; font-weight:bold; white-space:nowrap;">现在帮助这个项目 →</a> *}
+
+<span style="color:#ffffff;">🙏 <strong style="color:#ffe082;">感谢您上个月的支持！</strong> 因为有您，这个项目得以持续发展。希望本月也能继续得到您的支持。</span>
+<a href="/{$Lang}/donate" style="color:#ffd54f; text-decoration:underline; font-weight:bold; white-space:nowrap;">再次支持 →</a>
 
 {* Variant 1 (soft) *}
 {* <span style="color:#ffffff;">🙏 <strong style="color:#ffe082;">这个项目因您而存在。</strong> 上个月我们只筹集了 <strong style="color:#ff8a80;">$32</strong>。请帮助我们继续发布新课程。</span> *}

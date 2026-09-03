@@ -168,7 +168,7 @@ PROMPT;
         'model' => $model,
         'messages' => $messages,
         'temperature' => 0.2,
-        'max_tokens' => 4000,
+        'max_tokens' => 12000,
     ];
 
     $ch = curl_init('https://api.openai.com/v1/chat/completions');
