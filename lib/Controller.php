@@ -1058,19 +1058,25 @@ class Controller
         $testEnd -> add(new DateInterval('P1M0D'));
         $testData['next_test_in'] = $testEnd->diff(new DateTime())->days;
 
-        $testResult = $test->calculateResult();
         $isMariaDBChallenge = (($testData['questionnire_id'] ?? null) === 999);
-        $isPrizeEligible = $isMariaDBChallenge && $test->isMariaDBChallengePrizeEligible();
+
+        $testResult = $isMariaDBChallenge ? $test->calculateChallengeResult() : $test->calculateResult();
         $this->assignVariables([
             'SitePromo' => Localizer::translateString('site_promo'),
             'SiteDescription'       => Localizer::translateString('site_description_test'),
             'TestData'      => $testData,
             'TestResult'    => $testResult,
-            'IsMariaDBChallenge' => $isMariaDBChallenge,
-            'IsPrizeEligible' => $isPrizeEligible,
         ]);
-
-        $this->engine->display("test_result.tpl");
+        if ($isMariaDBChallenge) {
+            print_r($testResult);
+            die();
+            $this->assignVariables([
+                'IsMariaDBChallenge' => $isMariaDBChallenge,
+            ]);
+            $this->engine->display("mariadb_challenge_result.tpl");
+        } else {
+            $this->engine->display("test_result.tpl");
+        }
     }
 
     public function test_claim(array $params): void

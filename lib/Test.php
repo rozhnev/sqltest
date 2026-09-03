@@ -80,7 +80,9 @@ class Test
         $this->id = vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex(random_bytes(16)), 4));
 
         $this->dbh->beginTransaction();
-        $stmt = $this->dbh->prepare("INSERT INTO tests (id, user_id, closed_at, questionnire_id, solutions_required) VALUES (?, ?, CURRENT_TIMESTAMP + INTERVAL '3 hour', 999, 3)");
+        $stmt = $this->dbh->prepare(
+            "INSERT INTO tests (id, user_id, closed_at, questionnire_id, solutions_required) 
+            VALUES (?, ?, CURRENT_DATE + INTERVAL '17 hour', 999, 3)");
         $stmt->execute([$this->id, $this->user->getId()]);
 
         $stmt = $this->dbh->prepare("INSERT INTO test_questions (test_id, question_id, max_attempts) VALUES
@@ -312,17 +314,6 @@ class Test
         return $stmt->fetchColumn(0) ?: null;
     }
 
-    public function isMariaDBChallengePrizeEligible(): bool
-    {
-        $stmt = $this->dbh->prepare("SELECT COUNT(*)
-            FROM test_questions
-            WHERE test_id = :test_id AND solved_at IS NOT NULL
-              AND question_id IN (461, 462, 463, 464, 465, 466)");
-        $stmt->execute([':test_id' => $this->id]);
-
-        return (int)$stmt->fetchColumn() >= 3;
-    }
-
     public function belongsToUser(user $user): bool
     {
         $stmt = $this->dbh->prepare("SELECT true
@@ -401,32 +392,13 @@ class Test
                 'solved_hard_attempts' => 0,
             ]
         );
-
-
-        $stmt = $this->dbh->prepare("
-            SELECT 
-                tests.solutions_required
-            FROM tests
-            WHERE id = :test_id ;
-        ");
-
-        $stmt->execute([':test_id' => $this->id]);
-
-        $must_to_solve = $stmt->fetchColumn(0) ?? ceil($testResult['total_questions'] * 0.5);
-        //$must_to_solve = ceil($testResult['total_questions'] * 0.5);
+        $must_to_solve = ceil($testResult['total_questions'] * 0.5);
 
         if ($testResult['solved_questions'] < $must_to_solve) {
             $testResult['ok'] = false;
             $testResult['hints']['not_enought_tasks_solved'] = 'You must to solve at least ' . $must_to_solve;
             $testResult['hints']['must_to_solve'] = $must_to_solve;
         } else {
-            if ($must_to_solve === 3) {//MariaDB challenge
-                $testResult['ok'] = true;
-                $testResult['grade'] = intval($testResult['solved_questions'] / 3) + 1;
-                $testResult['hints'][] = 'MariaDB challenge solved';
-
-                return $testResult;
-            }
             if (
                 $testResult['solved_easy_questions'] === $testResult['easy_questions'] 
             ) {
@@ -493,6 +465,48 @@ class Test
         if ($testResult['grade'] < 1) {
             $testResult['hints']['grade_below_the_minimum'] = 'Your grade balow the minimum';
         } 
+        return $testResult;
+    }
+
+
+    public function calculateChallengeResult(): array
+    {
+        $stmt = $this->dbh->prepare("
+            select
+                t.id,
+                t.created_at test_start,
+                count(*) filter (where tq.solved_at is not null ) solved_questions,
+                count(*) filter (where tq.solved_at is not null and qc.category_id = 801 ) tier1_solved_questions,
+                count(*) filter (where tq.solved_at is not null and qc.category_id = 802 ) tier2_solved_questions,
+                count(*) filter (where tq.solved_at is not null and qc.category_id = 803 ) tier3_solved_questions
+            from tests t
+            join users u on u.id = t.user_id
+            join test_questions tq on tq.test_id = t.id
+            join question_categories qc on tq.question_id = qc.question_id and qc.category_id between 801 and 804
+            where t.id = :test_id
+            group by t.id;
+        ");
+
+        $stmt->execute([':test_id' => $this->id]);
+
+        $testQuestions = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $testResult = [];
+        if ($testQuestions['tier1_solved_questions'] ?? 0 === 3) {
+            $testResult['ok'] = true;
+            $testResult['grade'] = 1;
+            $testResult['hints'][] = 'Warming questions solved';
+        }
+        if ($testResult['ok'] && $testQuestions['tier2_solved_questions'] ?? 0 === 3) {
+            $testResult['ok'] = true;
+            $testResult['grade'] = 2;
+            $testResult['hints'][] = 'Features questions solved';
+        }
+        if ($testResult['ok'] && $testQuestions['tier3_solved_questions'] ?? 0 === 3) {
+            $testResult['ok'] = true;
+            $testResult['grade'] = 3;
+            $testResult['hints'][] = 'Features questions solved';
+        }
         return $testResult;
     }
 

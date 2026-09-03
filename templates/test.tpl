@@ -12,8 +12,6 @@
     <main3 id="main3">
         <div class="column">
             <div class="menu" id="menu">
-                {* <div class="question-wrapper selector"> *}
-
                 <div id="menu-content" class="question-wrapper menu-content">
                     {foreach $Questionnire.menu as $categoryId => $panel}
                     <button class="accordion {if $categoryId eq $QuestionCategoryID}active{/if}">
@@ -35,10 +33,10 @@
                     </div>
                     {/foreach}
                 </div>
-                <div id="test-timer" class="question-wrapper test-overview">
+                <div id="test-timer" class="question-wrapper test-overview">###
                     {if isset($TestData.timeout) && $TestData.timeout}
                         <button class="button red">
-                            {translate}test_time_out{/translate}
+                            {translate}test_time_out{/translate} ***
                         </button>
                     {else}
                         <div class="timer-copy">
@@ -201,7 +199,7 @@
                         const hours = (time - minutes) / 60;
                         document.getElementById('test-timer-time').innerText = (hours > 0 ? `${ldelim}hours{rdelim} ` + (hours === 1 ? '{translate}hour{/translate} ': '{translate}hours{/translate} ') :'') + minutes + ' {translate}min{/translate}';
                     {rdelim} else {ldelim}
-                        document.getElementById('test-timer').innerHTML = '<button class="button red" style="margin: 3em auto; font-size: large; padding: 1em;" >{translate}test_time_over{/translate}</button>'
+                        document.getElementById('test-timer').innerHTML = '<button class="button red" style="margin: 3em auto; font-size: large; padding: 1em;" >{translate}test_time_over{/translate}</button><a class="button green" style="margin: 3em auto; font-size: large; padding: 0.75em;" id="testResult" href="/{$Lang}/test/{$TestId}/result">{translate}test_show_result{/translate}</a>'
                     {rdelim}
                 {rdelim};
                 showTimer();

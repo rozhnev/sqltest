@@ -947,7 +947,8 @@ class User
                 (closed_at is not null and closed_at <= current_timestamp) closed, 
                 grade 
             FROM tests 
-            WHERE user_id = :user_id order by created_at desc limit 1;
+            WHERE user_id = :user_id AND tests.questionnire_id != 999
+            ORDER BY created_at desc limit 1;
         ");
         $stmt->execute([':user_id' => $this->id]);
         return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
