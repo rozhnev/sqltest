@@ -65,6 +65,9 @@ switch ($resource) {
     case 'llm':
         handleLLM($method);
         break;
+    case 'mariadb-results':
+        handleMariaDBResults($dbh, $env, $_GET, $method);
+        break;
     default:
         respondJson(['error' => 'Resource not found'], 404);
         break;
@@ -86,6 +89,47 @@ function renderAdminTemplate(User $user, array $env, int $lessonId = 0): void
     $smarty->assign('QuestionID', 0);
     $smarty->assign('LessonID', max(0, $lessonId));
     $smarty->display('index.tpl');
+}
+
+function handleMariaDBResults(PDO $dbh, array $env, array $query, string $method): void
+{
+    if ($method !== 'GET') {
+        respondMethodNotAllowed();
+    }
+
+    $startDate = trim((string)($query['start_date'] ?? '2026-09-01'));
+    $parsedDate = DateTimeImmutable::createFromFormat('!Y-m-d', $startDate);
+    if (!$parsedDate || $parsedDate->format('Y-m-d') !== $startDate) {
+        $startDate = '2026-09-01';
+    }
+
+    $stmt = $dbh->prepare("SELECT
+            u.full_name,
+            u.email,
+            t.id,
+            t.created_at AS test_start,
+            COUNT(*) FILTER (WHERE tq.solved_at IS NOT NULL) AS solved_questions,
+            COUNT(*) FILTER (WHERE tq.solved_at IS NOT NULL AND qc.category_id = 801) AS tier1_solved_questions,
+            COUNT(*) FILTER (WHERE tq.solved_at IS NOT NULL AND qc.category_id = 802) AS tier2_solved_questions,
+            COUNT(*) FILTER (WHERE tq.solved_at IS NOT NULL AND qc.category_id = 803) AS tier3_solved_questions,
+            COUNT(*) FILTER (WHERE tq.solved_at IS NOT NULL AND qc.category_id = 804) AS free_answer
+        FROM tests t
+        JOIN users u ON u.id = t.user_id
+        JOIN test_questions tq ON tq.test_id = t.id
+        JOIN question_categories qc ON tq.question_id = qc.question_id AND qc.category_id BETWEEN 801 AND 804
+        WHERE t.questionnire_id = 999
+          AND t.created_at > CAST(:start_date AS timestamp)
+        GROUP BY u.full_name, u.email, u.id, t.id, t.created_at
+        ORDER BY t.created_at DESC");
+    $stmt->execute([':start_date' => $startDate]);
+
+    $smarty = new Smarty();
+    $smarty->assign('Lang', 'en');
+    $smarty->assign('DB', $env['DB_NAME'] ?? 'sakila');
+    $smarty->assign('VERSION', $env['APP_VERSION'] ?? time());
+    $smarty->assign('StartDate', $startDate);
+    $smarty->assign('Results', $stmt->fetchAll(PDO::FETCH_ASSOC));
+    $smarty->display('mariadb-results.tpl');
 }
 
 function handleQuestions(AdminQuestionManager $manager, array $query, string $method): void
