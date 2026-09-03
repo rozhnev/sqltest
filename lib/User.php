@@ -561,10 +561,10 @@ class User
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getPrizeClaimForTest(string $testId): ?array
+    public function getPrizeClaimForTest(string $testId): array|false
     {
         if (!$this->logged()) {
-            return null;
+            return false;
         }
 
         $stmt = $this->dbh->prepare("SELECT identifier, qr_code_url, created_at FROM user_prize_claims WHERE user_id = :user_id AND test_id = :test_id LIMIT 1");
@@ -574,7 +574,7 @@ class User
         ]);
 
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $row ?: null;
+        return $row ?: false;
     }
 
     public function createPrizeClaim(string $testId, string $identifier, string $qrCodeUrl): void

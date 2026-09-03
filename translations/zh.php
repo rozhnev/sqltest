@@ -224,6 +224,7 @@ $translations = [
     'save_my_grade' => '保存成绩',
     'claim_my_prize' => '领取我的奖品',
     'mariadb_prize_prize_draw' => '您有资格参加今天的抽奖活动。您的奖品是 ##Prize##。',
+    'mariadb_prize_already_claimed' => '您已经领取过您的 ##Prize## 奖品了。',
     'mariadb_prize_claim_requires_three' => '请先完成挑战前 3 道题中的至少 3 道，才能领取奖品。',
     'mariadb_prize_qr_code' => '奖品二维码',
     'prize_claim_success' => '您的奖品代码已生成并发送到您的电子邮件。',

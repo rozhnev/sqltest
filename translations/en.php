@@ -167,6 +167,7 @@ $translations = [
     'save_my_grade' => 'Save grade',
     'claim_my_prize' => 'Claim my prize',
     'mariadb_prize_prize_draw' => 'You are eligible to participate in today\'s prize draw. Your prize is ##Prize##.',
+    'mariadb_prize_already_claimed' => 'You have already claimed your ##Prize##.',
     'mariadb_prize_claim_requires_three' => 'Solve at least 3 of the first challenge questions to claim the prize.',
     'mariadb_prize_qr_code' => 'Prize code QR',
     'prize_claim_success' => 'Your prize code has been generated and sent to your email.',

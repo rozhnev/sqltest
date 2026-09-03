@@ -166,6 +166,7 @@ $translations = [
     'save_my_grade' => 'Enregistrer la note',
     'claim_my_prize' => 'Réclamer mon prix',
     'mariadb_prize_prize_draw' => 'Vous êtes éligible pour participer au tirage au sort des prix d\'aujourd\'hui. Votre prix est ##Prize##.',
+    'mariadb_prize_already_claimed' => 'Vous avez déjà réclamé votre ##Prize##.',
     'mariadb_prize_claim_requires_three' => 'Résolvez au moins 3 des premières questions du défi pour réclamer le prix.',
     'mariadb_prize_qr_code' => 'QR code du prix',
     'prize_claim_success' => 'Votre code de prix a été généré et envoyé à votre adresse e-mail.',

@@ -1071,11 +1071,11 @@ class Controller
             // print_r($testResult);
             // print_r($testData);
             // die();
-            $alreadyClaimed = $this->user->getPrizeClaimForTest($params['testId']);
+            // die($this->user->getPrizeClaimForTest($params['testId']) ? 'Already claimed' : 'Not claimed');
             $this->assignVariables([
-                'IsMariaDBChallenge' => $isMariaDBChallenge,
-                'AlreadyClaimed'      => $alreadyClaimed,
-                'UserSubscribed' => $this->user->isSubscribedToList('mariadb_newsletter'),
+                'IsMariaDBChallenge'    => $isMariaDBChallenge,
+                'AlreadyClaimed'        => $this->user->getPrizeClaimForTest($params['testId']),
+                'UserSubscribed'        => $this->user->isSubscribedToList('mariadb_newsletter'),
             ]);
             $this->engine->display("mariadb_challenge_result.tpl");
         } else {

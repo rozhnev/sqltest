@@ -167,6 +167,7 @@ $translations = [
     'save_my_grade' => 'Salvar nota',
     'claim_my_prize' => 'Resgatar meu prêmio',
     'mariadb_prize_prize_draw' => 'Você está apto(a) a participar do sorteio de prêmios de hoje. Seu prêmio é ##Prize##.',
+    'mariadb_prize_already_claimed' => 'Você já resgatou seu ##Prize##.',
     'mariadb_prize_claim_requires_three' => 'Resolva pelo menos 3 das primeiras perguntas do desafio para resgatar o prêmio.',
     'mariadb_prize_qr_code' => 'QR code do prêmio',
     'prize_claim_success' => 'Seu código do prêmio foi gerado e enviado para seu e-mail.',
