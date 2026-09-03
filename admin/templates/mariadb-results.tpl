@@ -75,7 +75,7 @@
             </main>
 
             <footer class="admin-shell__footer">
-                <a href="/admin">Admin home</a>
+                {* <a href="/admin">Admin home</a> *}
             </footer>
         </div>
         <style>

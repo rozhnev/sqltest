@@ -19,6 +19,23 @@ if ($_SESSION) {
     $user->loginSession($_SESSION);
 }
 
+$mariaDBUsers = [
+    'f32182be-b82f-a2c0-6de3-50d797663692', //lefred@mariadb.org@password
+    '5bb67b43-9fcf-6ce0-6f40-6918ee17cffa', //simona@mariadb.org@password
+];
+if (in_array($user->getId(), $mariaDBUsers) and $resource === 'mariadb-results') {
+    // Allow access to MariaDB results for specific users
+    // No additional checks needed for these specific users
+    // Temporary bypass for MariaDB results access
+} elseif (!$user->isAdmin()) {
+    if ($resource === '' && !isApiRequest()) {
+        http_response_code(403);
+        echo 'Admin area requires authorization. Please sign in with an administrator account.';
+        exit;
+    }
+    respondJson(['error' => 'Admin privileges required'], 403);
+}
+
 if (!$user->isAdmin()) {
     if ($resource === '' && !isApiRequest()) {
         http_response_code(403);
