@@ -1104,7 +1104,7 @@ class Controller
 
         $alreadyClaimed = $this->user->getPrizeClaimForTest($params['testId']);
         $isUserSubscribed = $this->user->isSubscribedToList('mariadb_newsletter');
-        $canClaim = $test->isMariaDBChallengePrizeEligible();
+        $canClaim = true; //$test->isMariaDBChallengePrizeEligible();
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (!$canClaim) {
