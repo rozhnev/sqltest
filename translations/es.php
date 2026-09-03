@@ -188,6 +188,7 @@ $translations = [
     'question_action_copy_code' => 'Copiar código',
     'question_action_get_hint' => 'Obtener pista',
     'question_action_mark_all_answers' => 'Marque todas las respuestas correctas y haga clic en el botón "¡Verificar!"',
+    'question_action_choose_one_answer' => 'Elija una respuesta y haga clic en el botón "¡Verificar!"',
     'question_action_next' => 'Siguiente',
     'question_action_next_title' => 'Siguiente tarea',
     'question_action_previous_title' => 'Tarea anterior',

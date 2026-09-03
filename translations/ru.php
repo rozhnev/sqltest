@@ -111,6 +111,7 @@ $translations = [
     'question_solved_at' => 'Решено',
     'question_last_attempt_date' => 'Последняя попытка',
     'question_action_mark_all_answers' => 'Отметьте все правильные ответы и нажмите кнопку "Проверить!"',
+    'question_action_choose_one_answer' => 'Выберите один ответ и нажмите кнопку "Проверить!"',
     'question_action_write_your_request' => 'Напишите ваш запрос в поле ниже и нажмите кнопку "Проверить!"',
     'question_action_use_syntax' => 'Для написания ответа используйте синтаксис ##DBMS##.',
     'question_action_see_definitions' => 'Описания таблиц приведены в правой панели.',

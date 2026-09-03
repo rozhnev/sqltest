@@ -104,6 +104,7 @@ $translations = [
     'question_solved_at' => 'Résolu le',
     'question_last_attempt_date' => 'Date de la dernière tentative',
     'question_action_mark_all_answers' => 'Cochez toutes les bonnes réponses et cliquez sur le bouton "Vérifier !"',
+    'question_action_choose_one_answer' => 'Choisissez une réponse et cliquez sur le bouton « Vérifier ! »',
     'question_action_write_your_request' => 'Écrivez votre requête dans le champ ci-dessous et cliquez sur le bouton "Vérifier !"',
     'question_action_use_syntax' => 'Utilisez la syntaxe ##DBMS## pour écrire votre réponse.',
     'question_action_see_definitions' => 'Schémas des tables dans le panneau de droite.',

@@ -182,6 +182,7 @@ $translations = [
     'question_action_copy_code' => '复制代码',
     'question_action_get_hint' => '获取提示',
     'question_action_mark_all_answers' => '标记所有正确答案并点击 "检查！" 按钮',
+    'question_action_choose_one_answer' => '选择一个答案，然后点击“检查！”按钮',
     'question_action_next' => '下一步',
     'question_action_next_title' => '下一个任务',
     'question_action_previous_title' => '上一个任务',

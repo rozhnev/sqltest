@@ -87,12 +87,12 @@
                     <div class="answers" id="answers-list">
                     {foreach $Question.answers as $answer}
                         <div class="answer">
-                            <input type="checkbox" id="answer-{$answer.id}" name="answers" value="{$answer.id}" {if $answer.id|in_array:$Question.last_query} checked{/if}>
+                            <input type="{if $Question.question_type == 'single_answer'}radio{else}checkbox{/if}" id="answer-{$answer.id}" name="answers" value="{$answer.id}" {if $answer.id|in_array:$Question.last_query} checked{/if}>
                             <label for="answer-{$answer.id}"> {$answer.answer}</label>
                         </div>
                     {/foreach}
                     </div>
-                    <p class="question-action">{translate}question_action_mark_all_answers{/translate}</p>
+                    <p class="question-action">{if $Question.question_type == 'single_answer'}{translate}question_action_choose_one_answer{/translate}{else}{translate}question_action_mark_all_answers{/translate}{/if}</p>
                 {elseif $Question.question_type == 'free_answer'}
                     <p class="question-action">{translate}question_action_write_free_answer{/translate}</p>
                     {if $Question.solved_date}

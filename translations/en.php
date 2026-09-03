@@ -105,6 +105,7 @@ $translations = [
     'question_solved_at' => 'Solved at',
     'question_last_attempt_date' => 'Last attempt date',
     'question_action_mark_all_answers' => 'Mark all correct answers and click the "Check!" button',
+    'question_action_choose_one_answer' => 'Choose one answer and click the "Check!" button',
     'question_action_write_your_request' => 'Write your request in the field below and click the "Check it!" button.',
     'question_action_use_syntax' => 'Use ##DBMS## syntax to write your answer.',
     'question_action_see_definitions' => 'Descriptions of tables are provided in the right pane.',
