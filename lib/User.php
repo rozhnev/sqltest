@@ -599,6 +599,18 @@ class User
             return false;
         }
 
+        if (!class_exists('PHPMailer\\PHPMailer\\PHPMailer')) {
+            $autoload = __DIR__ . '/../vendor/autoload.php';
+            if (is_file($autoload)) {
+                require_once $autoload;
+            }
+        }
+
+        if (!class_exists('PHPMailer\\PHPMailer\\PHPMailer')) {
+            error_log('Prize claim email failed: PHPMailer is not installed');
+            return false;
+        }
+
         $subject = 'MariaDB challenge prize code';
         $message = "Your MariaDB prize identifier: {$identifier}\n\nQR code: {$qrCodeUrl}\n";
 
@@ -622,10 +634,42 @@ class User
                 $this->env['SMTP_FROM_NAME'] ?? 'SQLTest.online'
             );
             $mail->addAddress($email);
-            $mail->isHTML(false);
             $mail->CharSet = 'UTF-8';
             $mail->Subject = $subject;
-            $mail->Body = $message;
+            $mail->AltBody = $message;
+
+            $qrImage = null;
+            $qrUrlParts = parse_url($qrCodeUrl);
+            if (($qrUrlParts['scheme'] ?? '') === 'https' && ($qrUrlParts['host'] ?? '') === 'api.qrserver.com') {
+                $curl = curl_init($qrCodeUrl);
+                curl_setopt_array($curl, [
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_FOLLOWLOCATION => false,
+                    CURLOPT_CONNECTTIMEOUT => 5,
+                    CURLOPT_TIMEOUT => 10,
+                    CURLOPT_FAILONERROR => true,
+                    CURLOPT_SSL_VERIFYPEER => true,
+                    CURLOPT_SSL_VERIFYHOST => 2,
+                ]);
+                $downloadedImage = curl_exec($curl);
+                $contentType = (string)curl_getinfo($curl, CURLINFO_CONTENT_TYPE);
+                curl_close($curl);
+
+                if (is_string($downloadedImage) && strlen($downloadedImage) <= 2 * 1024 * 1024 && str_starts_with($contentType, 'image/')) {
+                    $qrImage = $downloadedImage;
+                }
+            }
+
+            $mail->isHTML(true);
+            if ($qrImage !== null) {
+                $mail->addStringEmbeddedImage($qrImage, 'mariadb-prize-qr', 'mariadb-prize-qr.png', 'base64', 'image/png');
+                $mail->Body = '<p>Your MariaDB prize identifier:</p><p><strong>' . htmlspecialchars($identifier, ENT_QUOTES, 'UTF-8') . '</strong></p>'
+                    . '<p><img src="cid:mariadb-prize-qr" alt="MariaDB prize QR code" width="220" height="220"></p>'
+                    . '<p>If the image is not displayed, open the QR code: <a href="' . htmlspecialchars($qrCodeUrl, ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($qrCodeUrl, ENT_QUOTES, 'UTF-8') . '</a></p>';
+            } else {
+                $mail->Body = '<p>Your MariaDB prize identifier:</p><p><strong>' . htmlspecialchars($identifier, ENT_QUOTES, 'UTF-8') . '</strong></p>'
+                    . '<p>Open your QR code: <a href="' . htmlspecialchars($qrCodeUrl, ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($qrCodeUrl, ENT_QUOTES, 'UTF-8') . '</a></p>';
+            }
 
             return $mail->send();
         } catch (\Throwable $e) {
