@@ -40,7 +40,7 @@
                             <tr>
                                 <th>Participant</th>
                                 <th>Email</th>
-                                <th>Test ID</th>
+                                {* <th>Test ID</th> *}
                                 <th>Started</th>
                                 <th>Total solved</th>
                                 <th>Tier 1</th>
@@ -59,7 +59,7 @@
                                     <tr>
                                         <td>{$result.full_name|default:'-'|escape:'html'}</td>
                                         <td><a href="mailto:{$result.email|escape:'html'}">{$result.email|default:'-'|escape:'html'}</a></td>
-                                        <td><code>{$result.id|escape:'html'}</code></td>
+                                        {* <td><code>{$result.id|escape:'html'}</code></td> *}
                                         <td>{$result.test_start|escape:'html'}</td>
                                         <td class="results-number">{$result.solved_questions}</td>
                                         <td class="results-number">{$result.tier1_solved_questions}</td>
