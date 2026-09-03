@@ -29,7 +29,7 @@
         </p>
         <ul class="mariadb-list">
             <li>Test your knowledge of MariaDB features, history, and practical use cases.</li>
-            <li>Solve SQL tasks at the booth and get instant feedback.</li>
+            <li>Solve SQL tasks on your device and get instant feedback.</li>
             <li>Earn a sticker by completing the quiz and enter the daily prize draw by solving the SQL tasks.</li>
             <li>Play at any time during the conference and return later if you need to pause.</li>
         </ul>
