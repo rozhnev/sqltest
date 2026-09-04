@@ -67,7 +67,7 @@
         </div>
         <div class="prize-card">
             <h4>Ronda de funciones completada</h4>
-            <p>Pegatina premium.</p>
+            <p>Camiseta oficial de MariaDB para los primeros 50 participantes.</p>
         </div>
         <div class="prize-card">
             <h4>Tareas SQL resueltas correctamente</h4>

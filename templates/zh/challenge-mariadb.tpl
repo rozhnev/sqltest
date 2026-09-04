@@ -67,7 +67,7 @@
         </div>
         <div class="prize-card">
             <h4>完成功能环节</h4>
-            <p>高级贴纸。</p>
+            <p>MariaDB 官方 T 恤，前 50 名参与者可获得。</p>
         </div>
         <div class="prize-card">
             <h4>所有 SQL 任务均正确完成</h4>

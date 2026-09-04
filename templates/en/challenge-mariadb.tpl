@@ -67,7 +67,7 @@
         </div>
         <div class="prize-card">
             <h4>Feature round completed</h4>
-            <p>Premium sticker.</p>
+            <p>Maria DB branded t-shirt for 50 first participants.</p>
         </div>
         <div class="prize-card">
             <h4>All SQL tasks solved correctly</h4>

@@ -67,7 +67,7 @@
         </div>
         <div class="prize-card">
             <h4>Étape des fonctionnalités terminée</h4>
-            <p>Autocollant premium.</p>
+            <p>T-shirt officiel MariaDB pour les 50 premiers participants.</p>
         </div>
         <div class="prize-card">
             <h4>Toutes les tâches SQL résolues correctement</h4>

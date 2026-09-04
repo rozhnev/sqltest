@@ -67,7 +67,7 @@
         </div>
         <div class="prize-card">
             <h4>Ronda de funcionalidades concluída</h4>
-            <p>Autocolante premium.</p>
+            <p>Camiseta oficial da MariaDB para os primeiros 50 participantes.</p>
         </div>
         <div class="prize-card">
             <h4>Todas as tarefas SQL resolvidas corretamente</h4>
