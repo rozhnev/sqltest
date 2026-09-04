@@ -33,10 +33,10 @@
                     </div>
                     {/foreach}
                 </div>
-                <div id="test-timer" class="question-wrapper test-overview">###
+                <div id="test-timer" class="question-wrapper test-overview">
                     {if isset($TestData.timeout) && $TestData.timeout}
                         <button class="button red">
-                            {translate}test_time_out{/translate} ***
+                            {translate}test_time_out{/translate}
                         </button>
                     {else}
                         <div class="timer-copy">
