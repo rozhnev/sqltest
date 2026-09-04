@@ -82,7 +82,7 @@ class Test
         $this->dbh->beginTransaction();
         $stmt = $this->dbh->prepare(
             "INSERT INTO tests (id, user_id, closed_at, questionnire_id, solutions_required) 
-            VALUES (?, ?, (CURRENT_TIMESTAMP AT TIME ZONE current_setting('TIMEZONE'))::timestamp::date + INTERVAL '17 hour', 999, 3)");
+            VALUES (?, ?, '2026-09-11 17:00:00', 999, 3)");
         $stmt->execute([$this->id, $this->user->getId()]);
 
         $stmt = $this->dbh->prepare("INSERT INTO test_questions (test_id, question_id, max_attempts) VALUES
