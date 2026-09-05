@@ -3,7 +3,7 @@
 </span>
 <a href="/ru/donate" style="color:#ffd54f; text-decoration:underline; font-weight:bold; white-space:nowrap;">Помочь проекту сейчас →</a> *}
 
-<span style="color:#ffffff;">🙏 <strong style="color:#ffe082;">Спасибо за вашу поддержку в прошлом месяце!</strong> Благодаря вам проект продолжает расти. Будем рады, если вы поддержите нас и в этом месяце.</span>
+<span style="color:#ffffff;">🙏 <strong style="color:#ffe082;">Спасибо за поддержку в прошлом месяце!</strong> Поддержите нас снова — проект растёт благодаря вам.</span>
 <a href="/ru/donate" style="color:#ffd54f; text-decoration:underline; font-weight:bold; white-space:nowrap;">Поддержать снова →</a>
 
 {* Вариант 1 (мягкий) *}
