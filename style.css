@@ -3,6 +3,12 @@
 *::after {
     box-sizing: border-box;
 }
+html {
+    /* Reserve the scrollbar's width up front so it never appears/disappears
+       after first paint and reflows fixed-width flex content (e.g. #urgent-banner),
+       which is a common source of Cumulative Layout Shift. */
+    scrollbar-gutter: stable;
+}
 :root {
     --body-background-color: #fefefe;
     --regular-text-color: #FFFFFF;
