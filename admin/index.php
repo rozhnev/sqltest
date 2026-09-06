@@ -124,14 +124,14 @@ function handleMariaDBResults(PDO $dbh, array $env, array $query, string $method
             u.full_name,
             u.email,
             t.id,
-            to_char(t.created_at, 'YYYY-MM-DD HH24:MI') AS test_start,
+            to_char(t.created_at, 'YYYY-MM-DD HH24:MI') AS test_started,
             COUNT(*) FILTER (WHERE tq.solved_at IS NOT NULL) AS solved_questions,
             COUNT(*) FILTER (WHERE tq.solved_at IS NOT NULL AND qc.category_id = 801) AS tier1_solved_questions,
             COUNT(*) FILTER (WHERE tq.solved_at IS NOT NULL AND qc.category_id = 802) AS tier2_solved_questions,
             COUNT(*) FILTER (WHERE tq.solved_at IS NOT NULL AND qc.category_id = 803) AS tier3_solved_questions,
             COUNT(*) FILTER (WHERE tq.solved_at IS NOT NULL AND qc.category_id = 804) AS free_answer_count,
             STRING_AGG(tq.solution, ',') FILTER (WHERE tq.solved_at IS NOT NULL AND qc.category_id = 804) AS free_answer,
-            to_char(MAX(tq.solved_at) FILTER (WHERE tq.solved_at IS NOT NULL), 'YYYY-MM-DD HH24:MI') AS last_solved_at
+            to_char(MAX(tq.solved_at) FILTER (WHERE tq.solved_at IS NOT NULL), 'YYYY-MM-DD HH24:MI') AS test_finished
         FROM tests t
         JOIN users u ON u.id = t.user_id
         JOIN test_questions tq ON tq.test_id = t.id

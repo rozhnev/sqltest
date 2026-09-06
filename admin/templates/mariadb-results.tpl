@@ -99,7 +99,8 @@
                         return `<a href="mailto:${safe}">${safe}</a>`;
                     },
                 },
-                {title: "Started", field: "test_start", sorter: "string", headerFilter: "input"},
+                {title: "Started", field: "test_started", sorter: "string", headerFilter: "input"},
+                {title: "Finished", field: "test_finished", sorter: "string", headerFilter: "input"},
                 {title: "Total solved", field: "solved_questions", sorter: "number", headerFilter: "number", hozAlign: "center", cssClass: "results-number"},
                 {title: "Tier 1", field: "tier1_solved_questions", sorter: "number", headerFilter: "number", hozAlign: "center", cssClass: "results-number"},
                 {title: "Tier 2", field: "tier2_solved_questions", sorter: "number", headerFilter: "number", hozAlign: "center", cssClass: "results-number"},
@@ -110,7 +111,7 @@
                 },
             ],
             initialSort: [
-                {column: "test_start", dir: "desc"},
+                {column: "test_started", dir: "desc"},
             ],
         });
         </script>
