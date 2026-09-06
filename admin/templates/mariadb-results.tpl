@@ -99,6 +99,11 @@
                         return `<a href="mailto:${safe}">${safe}</a>`;
                     },
                 },
+                {
+                    title: "Subscribed", field: "subscribed", sorter: "boolean", headerFilter: "select",
+                    headerFilterParams: {values: {"": "All", true: "Yes", false: "No"}},
+                    formatter: cell => cell.getValue() ? "Yes" : "No",
+                },
                 {title: "Started", field: "test_started", sorter: "string", headerFilter: "input"},
                 {title: "Finished", field: "test_finished", sorter: "string", headerFilter: "input"},
                 {title: "Total solved", field: "solved_questions", sorter: "number", headerFilter: "number", hozAlign: "center", cssClass: "results-number"},
