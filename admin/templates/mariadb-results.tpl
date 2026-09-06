@@ -17,10 +17,6 @@
                     <p class="brand__title">SQLtest.online Admin</p>
                     <p class="brand__subtitle">MariaDB challenge results</p>
                 </div>
-                <div class="status-pill">
-                    <span>QUESTIONNAIRE: 999</span>
-                    <span>FROM: {$StartDate}</span>
-                </div>
             </header>
 
             <main class="panel">
@@ -29,11 +25,6 @@
                         <h2>Challenge results</h2>
                         <p class="panel__sub">One row per MariaDB challenge test.</p>
                     </div>
-                    <form method="get" action="/admin/mariadb-results" class="results-filter">
-                        <label for="start-date">Started from</label>
-                        <input id="start-date" type="date" name="start_date" value="{$StartDate|escape:'html'}" />
-                        <button type="submit" class="button-primary">Apply</button>
-                    </form>
                 </div>
 
                 <div class="results-table-wrap">
