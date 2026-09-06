@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="/style.min.css?{$VERSION}" media="all" />
         <link rel="stylesheet" href="/admin/style.min.css?{$VERSION}" media="all" />
         <link href="https://unpkg.com/tabulator-tables@5.5.2/dist/css/tabulator.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
         <script type="text/javascript" src="https://unpkg.com/tabulator-tables@5.5.2/dist/js/tabulator.min.js"></script>
     </head>
     <body>
@@ -25,6 +26,7 @@
                         <h2>Challenge results</h2>
                         <p class="panel__sub">One row per MariaDB challenge test.</p>
                     </div>
+                    <button type="button" class="button-primary" id="download-results-xlsx">Export Excel</button>
                 </div>
 
                 <div class="results-table-wrap">
@@ -41,6 +43,7 @@
             .results-filter label { display: flex; flex-direction: column; gap: 6px; color: var(--muted); font-size: .85rem; }
             .results-filter input { min-height: 42px; border: 1px solid var(--line); border-radius: 10px; background: rgba(255,255,255,.04); color: var(--text); padding: 0 10px; }
             .results-table-wrap { overflow-x: auto; }
+            #download-results-xlsx { white-space: nowrap; }
 
             /* Tabulator theme matching the admin dark shell */
             .tabulator { background-color: var(--panel); border: 1px solid var(--line); border-radius: 10px; font-size: .92rem; }
@@ -118,6 +121,12 @@
             initialSort: [
                 {column: "test_started", dir: "desc"},
             ],
+        });
+
+        document.getElementById("download-results-xlsx").addEventListener("click", function () {
+            resultsTable.download("xlsx", "mariadb-challenge-results.xlsx", {
+                sheetName: "Challenge Results",
+            });
         });
         </script>
         {/literal}
