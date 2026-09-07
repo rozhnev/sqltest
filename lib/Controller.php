@@ -504,13 +504,13 @@ class Controller
                 echo json_encode(['status' => 'ok']);
             } else {
                 http_response_code(401);
-                echo json_encode(['status' => 'error', 'message' => Localizer::translateString('action_not_permitted')]);
+                    echo json_encode(['status' => 'error', 'message' => Localizer::translateString('login_failed')]);
             }
             exit();
         }
 
         if (!$success) {
-            $this->engine->assign('ErrorMessage', Localizer::translateString('action_not_permitted'));
+                $this->engine->assign('ErrorMessage', Localizer::translateString('login_failed'));
             $this->engine->display("error.tpl");
             return;
         }

@@ -11,6 +11,7 @@ $translations = [
     'achievement_share_card_label' => '成就解锁',
     'achievement_share_card_site' => 'SQLtest.online',
     'action_not_permitted' => '您不被允许执行此操作。',
+    'login_failed' => '电子邮件或密码无效。',
     'add_to_favorites' => '点击添加到收藏夹',
     'already_have_account' => '已经有账户？',
     'avaliable_databases' => '可用数据库',

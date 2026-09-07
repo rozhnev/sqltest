@@ -11,6 +11,7 @@ $translations = [
     'achievement_share_card_label' => 'Logro desbloqueado',
     'achievement_share_card_site' => 'SQLtest.online',
     'action_not_permitted' => 'No tienes permiso para realizar esta acción.',
+    'login_failed' => 'Correo electrónico o contraseña no válidos.',
     'add_to_favorites' => 'Haz clic para agregar a favoritos',
     'already_have_account' => '¿Ya tienes una cuenta?',
     'avaliable_databases' => 'Bases de datos disponibles',

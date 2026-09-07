@@ -93,6 +93,7 @@ $translations = [
     'up_your_level' => 'Passez le test pour augmenter votre niveau.',
     'login_needed' => 'Cette action n\'est pas autorisée pour les utilisateurs anonymes.<br>Veuillez vous <a href="" class="button-small green" style="padding: 3px; margin-top: 3px; display: inline-block;" onClick="toggleLoginWindow(); return false;">connecter</a> pour l\'effectuer.',
     'action_not_permitted' => 'Vous n\'êtes pas autorisé à effectuer cette action.',
+    'login_failed' => 'E-mail ou mot de passe invalide.',
     'qustion_should_be_solved' => 'Vous devriez résoudre le problème vous-même avant de regarder les solutions des autres',
     'privacy_policy_page_title' => 'SQLTest.online : Politique de confidentialité',
     'privacy_policy_page_description' => 'Chez SQLTest, nous accordons une grande importance à votre vie privée. Cette politique décrit comment nous collectons, utilisons et protégeons vos informations personnelles lorsque vous visitez notre site Web. Nous nous engageons à maintenir la confidentialité et la sécurité de vos données. En utilisant nos services, vous acceptez les pratiques décrites dans cette politique.',
