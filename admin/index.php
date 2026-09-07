@@ -36,15 +36,6 @@ if (in_array($user->getId(), $mariaDBUsers) and $resource === 'mariadb-results')
     respondJson(['error' => 'Admin privileges required'], 403);
 }
 
-if (!$user->isAdmin()) {
-    if ($resource === '' && !isApiRequest()) {
-        http_response_code(403);
-        echo 'Admin area requires authorization. Please sign in with an administrator account.';
-        exit;
-    }
-    respondJson(['error' => 'Admin privileges required'], 403);
-}
-
 $questionManager = new AdminQuestionManager($dbh);
 $lessonManager   = new AdminLessonManager($dbh);
 
