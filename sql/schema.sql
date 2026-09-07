@@ -889,6 +889,13 @@ CREATE TABLE public.users (
     user_agreement_accepted_at timestamp without time zone
 );
 
+CREATE TABLE public.password_reset_rate_limit (
+    identifier text NOT NULL,
+    window_start timestamp without time zone NOT NULL,
+    request_count integer DEFAULT 0 NOT NULL,
+    PRIMARY KEY (identifier, window_start)
+);
+
 CREATE TABLE public.mailinglists (
     user_id uuid NOT NULL,
     list_name text NOT NULL,
