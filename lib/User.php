@@ -678,6 +678,95 @@ class User
         }
     }
 
+    public function resetPasswordAndSendEmail(string $email): bool
+    {
+        $temporaryPassword = '';
+        $this->dbh->beginTransaction();
+
+        try {
+            $stmt = $this->dbh->prepare(
+                'SELECT id, email FROM users WHERE LOWER(email) = :email AND password_hash IS NOT NULL FOR UPDATE'
+            );
+            $stmt->execute([':email' => strtolower(trim($email))]);
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if (!$user) {
+                $this->dbh->commit();
+                return false;
+            }
+
+            $alphabet = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789';
+            for ($index = 0; $index < 16; $index++) {
+                $temporaryPassword .= $alphabet[random_int(0, strlen($alphabet) - 1)];
+            }
+
+            $update = $this->dbh->prepare('UPDATE users SET password_hash = :password_hash WHERE id = :id');
+            $update->execute([
+                ':password_hash' => password_hash($temporaryPassword, PASSWORD_DEFAULT),
+                ':id' => $user['id'],
+            ]);
+
+            if (!$this->sendTemporaryPasswordEmail((string)$user['email'], $temporaryPassword)) {
+                throw new RuntimeException('Temporary password email could not be sent');
+            }
+
+            $this->dbh->commit();
+            return true;
+        } catch (Throwable $error) {
+            if ($this->dbh->inTransaction()) {
+                $this->dbh->rollBack();
+            }
+            error_log('Password reset failed: ' . $error->getMessage());
+            return false;
+        }
+    }
+
+    private function sendTemporaryPasswordEmail(string $email, string $temporaryPassword): bool
+    {
+        if (!class_exists('PHPMailer\\PHPMailer\\PHPMailer')) {
+            $autoload = __DIR__ . '/../vendor/autoload.php';
+            if (is_file($autoload)) {
+                require_once $autoload;
+            }
+        }
+
+        if (!class_exists('PHPMailer\\PHPMailer\\PHPMailer')) {
+            error_log('Password reset email failed: PHPMailer is not installed');
+            return false;
+        }
+
+        try {
+            $mail = new \PHPMailer\PHPMailer\PHPMailer(true);
+            $mail->isSMTP();
+            $mail->Host = $this->env['SMTP_HOST'] ?? 'localhost';
+            $mail->Username = $this->env['SMTP_USER'] ?? '';
+            $mail->Password = $this->env['SMTP_PASS'] ?? '';
+            $mail->SMTPAuth = $mail->Username !== '' || $mail->Password !== '';
+            $mail->Port = (int)($this->env['SMTP_PORT'] ?? 587);
+            if ($mail->Port === 587) {
+                $mail->SMTPSecure = \PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS;
+            } elseif ($mail->Port === 465) {
+                $mail->SMTPSecure = \PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_SMTPS;
+            }
+            $mail->setFrom(
+                $this->env['SMTP_FROM'] ?? 'support@sqltest.online',
+                $this->env['SMTP_FROM_NAME'] ?? 'SQLTest.online'
+            );
+            $mail->addAddress($email);
+            $mail->CharSet = 'UTF-8';
+            $mail->Subject = 'Your SQLTest.online temporary password';
+            $mail->Body = '<p>Your temporary SQLTest.online password is:</p><p><strong>'
+                . htmlspecialchars($temporaryPassword, ENT_QUOTES, 'UTF-8')
+                . '</strong></p><p>Please sign in and change it as soon as possible.</p>';
+            $mail->AltBody = "Your temporary SQLTest.online password is: {$temporaryPassword}\n\nPlease sign in and change it as soon as possible.";
+            $mail->isHTML(true);
+            return $mail->send();
+        } catch (Throwable $error) {
+            error_log('Password reset email failed: ' . $error->getMessage());
+            return false;
+        }
+    }
+
     /**
      * Set User's current path
      *

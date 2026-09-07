@@ -25,6 +25,7 @@
                     {translate}login_button{/translate}
                 </button>
             </form>
+            <a href="#" onclick="handleForgotPassword(event)" class="email-login-link">{translate}forgot_password{/translate}</a>
             <div class="email-login-switch-text">
                 <span>{translate}dont_have_account{/translate} </span>
                 <a href="#" onclick="switchToRegister(event)" class="email-login-link">{translate}sign_up{/translate}</a>

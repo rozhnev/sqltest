@@ -136,6 +136,43 @@ class Controller
         return $requestsToday <= $dailyLimit;
     }
 
+    private function hitPasswordResetRateLimit(string $email): bool
+    {
+        $identifiers = [
+            'ip:' . $this->getClientIp(),
+            'email:' . hash('sha256', strtolower(trim($email))),
+        ];
+        $limits = [10, 3];
+
+        foreach ($identifiers as $index => $identifier) {
+            $stmt = $this->dbh->prepare("
+                INSERT INTO password_reset_rate_limit (identifier, window_start, request_count)
+                VALUES (:identifier, date_trunc('hour', CURRENT_TIMESTAMP), 1)
+                ON CONFLICT (identifier, window_start)
+                    DO UPDATE SET request_count = password_reset_rate_limit.request_count + 1
+                RETURNING request_count
+            ");
+            $stmt->execute([':identifier' => $identifier]);
+            if ((int)$stmt->fetchColumn() > $limits[$index]) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private function invalidateCurrentSession(): void
+    {
+        $_SESSION = [];
+        if (ini_get('session.use_cookies')) {
+            $cookieParams = session_get_cookie_params();
+            setcookie(session_name(), '', time() - 42000, $cookieParams['path'], $cookieParams['domain'], $cookieParams['secure'], $cookieParams['httponly']);
+        }
+        if (session_status() === PHP_SESSION_ACTIVE) {
+            session_destroy();
+        }
+    }
+
     public function setLanguge(string $lang='en'): void
     {
         $langCode = strtolower(trim($lang));
@@ -550,6 +587,31 @@ class Controller
             echo json_encode(['status' => 'error', 'message' => $error->getMessage()]);
         }
         exit();
+    }
+
+    public function forgot_password(array $params): void
+    {
+        header('Content-Type: application/json');
+
+        $email = trim((string)($_POST['email'] ?? ''));
+        $genericResponse = [
+            'status' => 'ok',
+            'message' => Localizer::translateString('password_reset_requested'),
+        ];
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            echo json_encode($genericResponse);
+            return;
+        }
+
+        if ($this->hitPasswordResetRateLimit($email)) {
+            if ($this->user->resetPasswordAndSendEmail(strtolower($email))) {
+                $this->invalidateCurrentSession();
+            }
+        }
+
+        // Do not reveal whether the address exists or whether delivery succeeded.
+        echo json_encode($genericResponse);
     }
 
     public function logout(array $params): void

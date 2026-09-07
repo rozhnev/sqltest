@@ -849,6 +849,31 @@ function handleEmailLogin(event) {
     });
 }
 
+function handleForgotPassword(event) {
+    event.preventDefault();
+    hideLoginError();
+
+    const email = document.getElementById('loginEmail').value.trim();
+    if (!email) {
+        showLoginError('Please enter your email address first.');
+        return;
+    }
+
+    fetch(`/${lang}/forgot-password/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        },
+        body: new URLSearchParams({ email }).toString()
+    })
+    .then(response => response.json())
+    .then(data => showLoginError(data.message || 'If an account exists, a temporary password has been sent.'))
+    .catch(error => {
+        console.error('Error:', error);
+        showLoginError('An error occurred. Please try again later.');
+    });
+}
+
 function handleEmailRegister(event) {
     event.preventDefault();
     hideRegisterError();

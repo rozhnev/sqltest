@@ -95,6 +95,8 @@ $translations = [
     'login_needed' => 'This action isn\'t allowed for anonymous users.<br>Please <a href="" class="button-small green" style="padding: 3px; margin-top: 3px; display: inline-block;" onClick="toggleLoginWindow(); return false;">log in</a> to perform it.',
     'action_not_permitted' => 'You are not allowed to perform this action.',
     'login_failed' => 'Invalid email or password.',
+    'forgot_password' => 'Forgot password?',
+    'password_reset_requested' => 'If an account exists for this email, a temporary password has been sent.',
     'qustion_should_be_solved' => 'You should solve the problem yourself before looking at others\' solutions',
     'privacy_policy_page_title' => 'SQLTest.online: Privacy Policy',
     'privacy_policy_page_description' => 'At SQLTest, we value your privacy. This policy outlines how we collect, use, and protect your personal information when you visit our website. We are committed to maintaining the confidentiality and security of your data. By using our services, you agree to the practices described in this policy.',
