@@ -17,13 +17,13 @@
         </address>
     </div>
 </div>
-<div class="footer-links">
+{* <div class="footer-links">
     <script src="https://yastatic.net/share2/share.js"></script>
     <div>
         {translate}footer_like_site{/translate}
     </div>
     <div class="ya-share2" data-curtain data-services="telegram,twitter,whatsapp,linkedin,reddit"></div>
-</div>
+</div> *}
 <div class="footer-links">
     <div>
         <a href="/{$Lang}/about" target="_self">{translate}footer_about{/translate}</a>
