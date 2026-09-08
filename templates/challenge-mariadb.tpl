@@ -541,11 +541,33 @@
             }
 
             .mariadb-auth-card {
-                width: calc(100% - 2rem);
+                box-sizing: border-box;
+                width: 100%;
+                min-width: 0;
+                max-width: 420px;
                 max-height: calc(100dvh - 2rem);
                 overflow-y: auto;
                 padding: 1.5rem 1rem;
                 border-radius: 14px;
+            }
+
+            .mariadb-auth-popup {
+                box-sizing: border-box;
+                padding: 1rem;
+            }
+
+            .mariadb-auth-card,
+            .mariadb-auth-card form,
+            .mariadb-auth-checkbox,
+            .mariadb-auth-note {
+                max-width: 100%;
+                overflow-wrap: anywhere;
+            }
+
+            .mariadb-auth-card .mariadb-button {
+                width: 100%;
+                justify-content: center;
+                text-align: center;
             }
         }
     </style>
