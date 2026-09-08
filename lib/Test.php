@@ -80,19 +80,22 @@ class Test
         $this->id = vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex(random_bytes(16)), 4));
 
         $this->dbh->beginTransaction();
-        $stmt = $this->dbh->prepare("INSERT INTO tests (id, user_id, closed_at, questionnire_id) VALUES (?, ?, CURRENT_TIMESTAMP + INTERVAL '3 hour', 999)");
+        $stmt = $this->dbh->prepare(
+            "INSERT INTO tests (id, user_id, closed_at, questionnire_id, solutions_required) 
+            VALUES (?, ?, '2026-09-11 17:00:00', 999, 3)");
         $stmt->execute([$this->id, $this->user->getId()]);
 
         $stmt = $this->dbh->prepare("INSERT INTO test_questions (test_id, question_id, max_attempts) VALUES
-            (:test_id, 20, 5),
-            (:test_id, 21, 5),
-            (:test_id, 69, 5),
-            (:test_id, 80, 5),
-            (:test_id, 111, 5),
-            (:test_id, 387, 3),
-            (:test_id, 388, 3),
-            (:test_id, 389, 3),
-            (:test_id, 390, 3);"
+            (:test_id, 461, 3),
+            (:test_id, 462, 3),
+            (:test_id, 463, 3),
+            (:test_id, 464, 3),
+            (:test_id, 465, 3),
+            (:test_id, 466, 3),
+            (:test_id, 417, 3),
+            (:test_id, 419, 3),
+            (:test_id, 420, 3),
+            (:test_id, 467, 1);"
          );
         $stmt->execute([':test_id' => $this->id]);
         $this->dbh->commit();
@@ -166,8 +169,10 @@ class Test
         $stmt = $this->dbh->prepare("
             SELECT 
                 *, 
-                (tests.closed_at <= CURRENT_TIMESTAMP) timeout, 
-                extract(epoch from (tests.closed_at - CURRENT_TIMESTAMP))::int/60 time_to_end,
+                (tests.closed_at <= (CURRENT_TIMESTAMP AT TIME ZONE current_setting('TIMEZONE'))::timestamp) timeout,
+                GREATEST(0, FLOOR(EXTRACT(EPOCH FROM (
+                    tests.closed_at - (CURRENT_TIMESTAMP AT TIME ZONE current_setting('TIMEZONE'))::timestamp
+                )) / 60))::int time_to_end,
                 test_questions.questions_count,
                 test_questions.solved_questions_count
             FROM tests
@@ -231,7 +236,8 @@ class Test
                 categories.title_sef category_sef,
                 last_answer last_query,
                 (max_attempts - attempts) possible_attempts,
-                question_categories.category_id 
+                question_categories.category_id,
+                questions.question_type
             FROM questions
             JOIN test_questions ON test_questions.question_id = questions.id AND test_id = :test_id
             JOIN tests ON tests.id = test_questions.test_id
@@ -461,6 +467,48 @@ class Test
         if ($testResult['grade'] < 1) {
             $testResult['hints']['grade_below_the_minimum'] = 'Your grade balow the minimum';
         } 
+        return $testResult;
+    }
+
+
+    public function calculateChallengeResult(): array
+    {
+        $stmt = $this->dbh->prepare("
+            select
+                t.id,
+                t.created_at test_start,
+                count(*) filter (where tq.solved_at is not null ) solved_questions,
+                count(*) filter (where tq.solved_at is not null and qc.category_id = 801 ) tier1_solved_questions,
+                count(*) filter (where tq.solved_at is not null and qc.category_id = 802 ) tier2_solved_questions,
+                count(*) filter (where tq.solved_at is not null and qc.category_id = 803 ) tier3_solved_questions
+            from tests t
+            join users u on u.id = t.user_id
+            join test_questions tq on tq.test_id = t.id
+            join question_categories qc on tq.question_id = qc.question_id and qc.category_id between 801 and 804
+            where t.id = :test_id
+            group by t.id;
+        ");
+
+        $stmt->execute([':test_id' => $this->id]);
+
+        $testQuestions = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $testResult = [];
+        if ($testQuestions['tier1_solved_questions'] ?? 0 === 3) {
+            $testResult['ok'] = true;
+            $testResult['grade'] = 1;
+            $testResult['hints'][] = 'Warming questions solved';
+        }
+        if ($testResult['ok'] && $testQuestions['tier2_solved_questions'] ?? 0 === 3) {
+            $testResult['ok'] = true;
+            $testResult['grade'] = 2;
+            $testResult['hints'][] = 'Features questions solved';
+        }
+        if ($testResult['ok'] && $testQuestions['tier3_solved_questions'] ?? 0 === 3) {
+            $testResult['ok'] = true;
+            $testResult['grade'] = 3;
+            $testResult['hints'][] = 'Features questions solved';
+        }
         return $testResult;
     }
 
