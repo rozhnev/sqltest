@@ -39,6 +39,7 @@
             top: 0;
             z-index: 20;
             backdrop-filter: blur(16px);
+            min-height: 7em;
         }
 
         .mariadb-header-inner,
@@ -100,7 +101,7 @@
         }
 
         .mariadb-hero {
-            padding: 2.5rem;
+            padding: 3rem 2.5rem 2.5rem;
             border-radius: 20px;
             border: 1px solid var(--mdb-border);
             background: linear-gradient(135deg, rgba(27, 177, 255, 0.25), rgba(100, 243, 189, 0.15));
@@ -112,14 +113,14 @@
             letter-spacing: 0.4rem;
             font-size: 0.8rem;
             color: rgba(245, 255, 255, 0.85);
-            margin-bottom: 0.6rem;
+            margin-bottom: 0.9rem;
         }
 
         .mariadb-hero h1 {
-            margin: 1em 0;
-            font-size: clamp(2rem, 4vw, 3rem);
+            margin: 1.2em 0 0.8em;
+            font-size: clamp(2.2rem, 4vw, 3.4rem);
             letter-spacing: -0.02em;
-            line-height: 1.2em;
+            line-height: 1.15em;
         }
 
         .hero-subtitle {
@@ -296,10 +297,17 @@
             gap: 0.75rem;
             color: rgba(245, 251, 255, 0.85);
         }
-
-        .mariadb-footer-inner .footer-links:last-of-type {
-            border-bottom: none;
-            padding-bottom: 0;
+        .mariadb-footer-inner .footer-links {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            padding-bottom: 1rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 0.75rem;
+            color: rgba(245, 251, 255, 0.85);
+        }
+        .mariadb-footer-inner a {
+            color: white !important;
         }
 
         .mariadb-auth-popup {
@@ -340,6 +348,35 @@
             display: flex;
             flex-direction: column;
             gap: 0.85rem;
+        }
+
+        .mariadb-auth-checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.7rem;
+            margin-top: 0.15rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.92rem;
+            line-height: 1.45;
+        }
+
+        .mariadb-auth-checkbox input {
+            margin-top: 0.2rem;
+            accent-color: #15d0ff;
+            width: 1.05rem;
+            height: 1.05rem;
+            flex-shrink: 0;
+        }
+
+        .mariadb-auth-note {
+            margin: -0.2rem 0 0;
+            font-size: 0.8rem;
+            line-height: 1.5;
+            color: rgba(255, 255, 255, 0.75);
+        }
+
+        .mariadb-auth-note a {
+            color: #64f3bd;
         }
 
         .mariadb-auth-input {
@@ -402,9 +439,9 @@
                             <a href="/{$Lang}/" target="_self"><h1 class="site-name">SQLtest</h1></a>
                             <div id="achievements-popup" class="achievements-popup hidden"></div>
                         </div>
-                        {* <div class="top-menu-switchers">
+                        <div class="top-menu-switchers">
                             {include file='lang-switcher.tpl'}
-                        </div> *}
+                        </div>
                     {else}
                         {if !isset($SitePromo)}
                             {assign var="SitePromo" value="{translate}site_promo{/translate}"}
@@ -424,9 +461,9 @@
                         <div class="top-menu-center">
                             <span  class="site-description">{$SiteDescription}</span>
                         </div>
-                        {* <div class="top-menu-switchers">
+                        <div class="top-menu-switchers">
                             {include file='lang-switcher.tpl'}
-                        </div> *}
+                        </div>
                     {/if}
                 </div>
             </header>
@@ -446,6 +483,15 @@
                     <input type="email" name="email" class="mariadb-auth-input" placeholder="{translate}registration_email_placeholder{/translate}" required autocomplete="email">
                     <input type="password" name="password" class="mariadb-auth-input" placeholder="{translate}registration_password_placeholder{/translate}" required minlength="8" autocomplete="new-password">
                     <input type="password" name="password_confirm" class="mariadb-auth-input" placeholder="{translate}registration_password_confirm_placeholder{/translate}" required minlength="8" autocomplete="new-password">
+                    <label class="mariadb-auth-checkbox">
+                        <input type="checkbox" name="newsletter_opt_in" value="mariadb_newsletter">
+                        <span>{translate}mariadb_newsletter_checkbox_label{/translate}</span>
+                    </label>
+                    <p class="mariadb-auth-note">
+                        {translate}mariadb_newsletter_checkbox_note_prefix{/translate}
+                        <a href="https://mariadb.org/privacy-policy/" target="_blank" rel="noreferrer">{translate}mariadb_newsletter_privacy_policy{/translate}</a>
+                        {translate}mariadb_newsletter_checkbox_note_suffix{/translate}
+                    </p>
                     <button type="submit" class="mariadb-button">{translate}register_button{/translate}</button>
                 </form>
                 <p class="mariadb-auth-feedback" role="status"></p>

@@ -136,6 +136,43 @@ class Controller
         return $requestsToday <= $dailyLimit;
     }
 
+    private function hitPasswordResetRateLimit(string $email): bool
+    {
+        $identifiers = [
+            'ip:' . $this->getClientIp(),
+            'email:' . hash('sha256', strtolower(trim($email))),
+        ];
+        $limits = [10, 3];
+
+        foreach ($identifiers as $index => $identifier) {
+            $stmt = $this->dbh->prepare("
+                INSERT INTO password_reset_rate_limit (identifier, window_start, request_count)
+                VALUES (:identifier, date_trunc('hour', CURRENT_TIMESTAMP), 1)
+                ON CONFLICT (identifier, window_start)
+                    DO UPDATE SET request_count = password_reset_rate_limit.request_count + 1
+                RETURNING request_count
+            ");
+            $stmt->execute([':identifier' => $identifier]);
+            if ((int)$stmt->fetchColumn() > $limits[$index]) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private function invalidateCurrentSession(): void
+    {
+        $_SESSION = [];
+        if (ini_get('session.use_cookies')) {
+            $cookieParams = session_get_cookie_params();
+            setcookie(session_name(), '', time() - 42000, $cookieParams['path'], $cookieParams['domain'], $cookieParams['secure'], $cookieParams['httponly']);
+        }
+        if (session_status() === PHP_SESSION_ACTIVE) {
+            session_destroy();
+        }
+    }
+
     public function setLanguge(string $lang='en'): void
     {
         $langCode = strtolower(trim($lang));
@@ -504,13 +541,13 @@ class Controller
                 echo json_encode(['status' => 'ok']);
             } else {
                 http_response_code(401);
-                echo json_encode(['status' => 'error', 'message' => Localizer::translateString('action_not_permitted')]);
+                    echo json_encode(['status' => 'error', 'message' => Localizer::translateString('login_failed')]);
             }
             exit();
         }
 
         if (!$success) {
-            $this->engine->assign('ErrorMessage', Localizer::translateString('action_not_permitted'));
+                $this->engine->assign('ErrorMessage', Localizer::translateString('login_failed'));
             $this->engine->display("error.tpl");
             return;
         }
@@ -533,6 +570,12 @@ class Controller
             $fullName = trim((string)($_POST['full_name'] ?? ''));
 
             if ($this->user->register($email, $password, $fullName)) {
+                if (
+                    isset($_POST['newsletter_opt_in']) && 
+                    in_array($_POST['newsletter_opt_in'], ['mariadb_newsletter', 'sqltest_newsletter'])
+                ) {
+                    $this->user->subscribeToList($_POST['newsletter_opt_in']);
+                }
                 $_SESSION["user_id"] = $this->user->getId();
                 $_SESSION["admin"] = $this->user->isAdmin();
                 echo json_encode(['status' => 'ok']);
@@ -544,6 +587,31 @@ class Controller
             echo json_encode(['status' => 'error', 'message' => $error->getMessage()]);
         }
         exit();
+    }
+
+    public function forgot_password(array $params): void
+    {
+        header('Content-Type: application/json');
+
+        $email = trim((string)($_POST['email'] ?? ''));
+        $genericResponse = [
+            'status' => 'ok',
+            'message' => Localizer::translateString('password_reset_requested'),
+        ];
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            echo json_encode($genericResponse);
+            return;
+        }
+
+        if ($this->hitPasswordResetRateLimit($email)) {
+            if ($this->user->resetPasswordAndSendEmail(strtolower($email))) {
+                $this->invalidateCurrentSession();
+            }
+        }
+
+        // Do not reveal whether the address exists or whether delivery succeeded.
+        echo json_encode($genericResponse);
     }
 
     public function logout(array $params): void
@@ -966,20 +1034,20 @@ class Controller
     {
         $meta = [
             'en' => [
-                'title'       => 'SQLTest.online: MariaDB Day Brussels SQL Quiz',
-                'description' => 'Ten theoretical and practical questions for MariaDB Day Brussels with prizes on the FOSDEM stage.'
+                'title'       => 'SQLTest.online: MariaDB Foundation Challenge at Percona Live Amsterdam',
+                'description' => 'Take the MariaDB Foundation and SQLTest.online challenge at Percona Live Amsterdam, test your MariaDB knowledge, and compete for prizes.'
             ],
             'ru' => [
-                'title'       => 'SQLTest.online: SQL-челлендж MariaDB Day Брюссель',
-                'description' => 'Десять теоретических и практических заданий, связанные с MariaDB Day Brussels и призами на FOSDEM.'
+                'title'       => 'SQLTest.online: Челлендж MariaDB Foundation и SQLTest.online на Percona Live Amsterdam',
+                'description' => 'Пройдите челлендж MariaDB Foundation и SQLTest.online на Percona Live Amsterdam, проверьте знания MariaDB и участвуйте в розыгрыше призов.'
             ],
             'pt' => [
-                'title'       => 'SQLTest.online: Quiz SQL do MariaDB Day Bruxelas',
-                'description' => 'Dez questões teóricas e práticas alinhadas ao MariaDB Day Bruxelas e prémios no FOSDEM.'
+                'title'       => 'SQLTest.online: Desafio MariaDB Foundation e SQLTest.online em Percona Live Amsterdam',
+                'description' => 'Participe do desafio MariaDB Foundation e SQLTest.online em Percona Live Amsterdam, teste seus conhecimentos em MariaDB e concorra a prêmios.'
             ],
             'zh' => [
-                'title'       => 'SQLTest.online: MariaDB Day 布鲁塞尔 SQL 挑战',
-                'description' => '面向 MariaDB Day Brussels 的十道理论与实战 SQL 题目，并在 FOSDEM 现场设置奖项。'
+                'title'       => 'SQLTest.online: MariaDB Foundation 与 SQLTest.online 在 Percona Live Amsterdam 的挑战赛',
+                'description' => '参加 MariaDB Foundation 与 SQLTest.online 在 Percona Live Amsterdam 的挑战赛，测试 MariaDB 知识并参与奖品抽奖。'
             ]
         ];
 
@@ -1052,15 +1120,92 @@ class Controller
         $testEnd -> add(new DateInterval('P1M0D'));
         $testData['next_test_in'] = $testEnd->diff(new DateTime())->days;
 
-        $testResult = $test->calculateResult();
+        $isMariaDBChallenge = (($testData['questionnire_id'] ?? null) === 999);
+
+        $testResult = $isMariaDBChallenge ? $test->calculateChallengeResult() : $test->calculateResult();
         $this->assignVariables([
             'SitePromo' => Localizer::translateString('site_promo'),
             'SiteDescription'       => Localizer::translateString('site_description_test'),
             'TestData'      => $testData,
-            'TestResult'    => $testResult
+            'TestResult'    => $testResult,
+        ]);
+        if ($isMariaDBChallenge) {
+            // print_r($testResult);
+            // print_r($testData);
+            // die();
+            // die($this->user->getPrizeClaimForTest($params['testId']) ? 'Already claimed' : 'Not claimed');
+            $this->assignVariables([
+                'IsMariaDBChallenge'    => $isMariaDBChallenge,
+                'AlreadyClaimed'        => $this->user->getPrizeClaimForTest($params['testId']),
+                'UserSubscribed'        => $this->user->isSubscribedToList('mariadb_newsletter'),
+            ]);
+            $this->engine->display("mariadb_challenge_result.tpl");
+        } else {
+            $this->engine->display("test_result.tpl");
+        }
+    }
+
+    public function test_claim(array $params): void
+    {
+        if (!$this->user->logged() || !isset($params['testId'])) {
+            header("Location: /" . $this->lang . "/test/start");
+            exit();
+        }
+
+        $test = new Test($this->dbh, $this->lang, $this->user);
+        $test->setId($params['testId']);
+
+        if (!$test->belongsToUser($this->user)) {
+            header("HTTP/1.1 404 Not Found");
+            $this->engine->assign('ErrorMessage', Localizer::translateString('action_not_permitted'));
+            $this->engine->display("error.tpl");
+            exit();
+        }
+
+        $testData = $test->getData();
+        if (($testData['questionnire_id'] ?? null) !== 999) {
+            header("Location: /" . $this->lang . "/test/{$params['testId']}/result");
+            exit();
+        }
+
+        $alreadyClaimed = $this->user->getPrizeClaimForTest($params['testId']);
+        $isUserSubscribed = $this->user->isSubscribedToList('mariadb_newsletter');
+        $canClaim = true; //$test->isMariaDBChallengePrizeEligible();
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if (!$canClaim) {
+                header("Location: /" . $this->lang . "/test/{$params['testId']}/claim");
+                exit();
+            }
+
+            if (!$isUserSubscribed && !empty($_POST['newsletter_opt_in'])) {
+                $this->user->subscribeToList((string)$_POST['newsletter_opt_in']);
+                $isUserSubscribed = true;
+            }
+
+            $identifier = $this->user->getId() . ':' . $params['testId'];
+            $qrCodeUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=' . urlencode($identifier);
+
+            $this->user->createPrizeClaim($params['testId'], $identifier, $qrCodeUrl);
+            $this->user->sendPrizeClaimEmail($this->user->getEmail(), $identifier, $qrCodeUrl);
+
+            header("Location: /" . $this->lang . "/test/{$params['testId']}/claim?done=1");
+            exit();
+        }
+
+        $this->assignVariables([
+            'SitePromo' => Localizer::translateString('site_promo'),
+            'SiteDescription' => Localizer::translateString('site_description_test'),
+            'TestData' => $testData,
+            'CanClaim' => $canClaim,
+            'AlreadyClaimed' => $alreadyClaimed,
+            'UserSubscribed' => $isUserSubscribed,
+            'ClaimDone' => isset($_GET['done']) && $_GET['done'] === '1',
+            'ClaimIdentifier' => $alreadyClaimed['identifier'] ?? null,
+            'ClaimQrCodeUrl' => $alreadyClaimed['qr_code_url'] ?? null,
         ]);
 
-        $this->engine->display("test_result.tpl");
+        $this->engine->display('test_claim.tpl');
     }
 
     public function test_grade(array $params): void 
@@ -1207,6 +1352,20 @@ class Controller
             $test->saveQuestionAttempt($params['questionID'], $checkResult, $answers);
         }
 
+        if (isset($_POST["free-answer"])) {
+            $freeAnswer = $_POST["free-answer"] ?? '';
+
+            // $checkResult = $question->checkFreeAnswer($freeAnswer);
+            $checkResult = [
+                'ok' => true, 
+                'cost' => 0,
+                'answerResult' => 'Free answer submitted successfully.'
+            ]; // For now, we assume the free answer is always correct. Implement actual checking logic as needed.
+
+            $this->engine->assign('QueryTestResult', $checkResult);
+            $test->saveQuestionAttempt($params['questionID'], $checkResult, $freeAnswer);
+        }
+
         if (!$checkResult['ok']) header( 'HTTP/1.1 418 BAD REQUEST' );
         $this->engine->display($template);   
     }
@@ -1309,6 +1468,7 @@ class Controller
 
         $questions = $this->user->getQuestions($this->lang);
         $tests = $this->user->getTests($this->lang);
+        $prizeClaims = $this->user->getPrizeClaims();
 
         $this->assignVariables([
             'Action' => 'profile',
@@ -1316,6 +1476,7 @@ class Controller
             'User'  => $this->user,
             'Questions'     => $this->user->getQuestions($this->lang),
             'Tests'         => $this->user->getTests($this->lang),
+            'PrizeClaims'   => $prizeClaims,
 
             'Achievements'  => $this->user->achievements($this->lang),
             'UserEmail'     => $this->user->getEmail(),

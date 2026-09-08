@@ -528,6 +528,11 @@ function checkSolution(url) {
         .toSorted();
         formData.append('answers', JSON.stringify(answers));
     }
+    if (document.getElementById('free-answer-input')) {
+        const freeAnswer = document.getElementById('free-answer-input').value;
+        formData.append('free-answer', freeAnswer);
+        console.log('Free answer:', freeAnswer);
+    }
     fetch(url, {
         method: "POST",
         mode: "cors",
@@ -841,6 +846,31 @@ function handleEmailLogin(event) {
     .catch(error => {
         console.error('Error:', error);
         showLoginError('An error occurred during login. Please try again.');
+    });
+}
+
+function handleForgotPassword(event) {
+    event.preventDefault();
+    hideLoginError();
+
+    const email = document.getElementById('loginEmail').value.trim();
+    if (!email) {
+        showLoginError('Please enter your email address first.');
+        return;
+    }
+
+    fetch(`/${lang}/forgot-password/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        },
+        body: new URLSearchParams({ email }).toString()
+    })
+    .then(response => response.json())
+    .then(data => showLoginError(data.message || 'If an account exists, a temporary password has been sent.'))
+    .catch(error => {
+        console.error('Error:', error);
+        showLoginError('An error occurred. Please try again later.');
     });
 }
 

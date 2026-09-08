@@ -167,11 +167,17 @@ class Question
      */
     public function checkAnswers($answers): array 
     {
+        $selectedAnswers = json_decode((string)$answers, true);
+        if (!is_array($selectedAnswers)) {
+            $selectedAnswers = [];
+        }
+        sort($selectedAnswers);
+
         $stmt = $this->dbh->prepare("SELECT json_agg(id ORDER BY id) answers FROM answers WHERE question_id = ? and is_valid");
         $stmt->execute([$this->id]);
-        $validAnswers = $stmt->fetchColumn();
+        $validAnswers = json_decode($stmt->fetchColumn(), true);
 
-        if (json_decode($answers) !== json_decode($validAnswers)) {
+        if ($selectedAnswers !== $validAnswers) {
             return [
                 'ok' => false,
                 'cost' => 0
