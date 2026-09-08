@@ -75,7 +75,7 @@
                 <div class="answers" id="answers-list">
                 {foreach $Question.answers as $answer}
                     <div class="answer">
-                        <input type="checkbox" id="answer-{$answer.id}" name="answers" value="{$answer.id}" {if $answer.id|in_array:$Question.last_query} checked{/if}>
+                        <input type="{if $Question.question_type == 'single_answer'}radio{else}checkbox{/if}" id="answer-{$answer.id}" name="answers" value="{$answer.id}" {if $answer.id|in_array:$Question.last_query} checked{/if}>
                         <label for="answer-{$answer.id}"> {$answer.answer}</label>
                     </div>
                 {/foreach}
