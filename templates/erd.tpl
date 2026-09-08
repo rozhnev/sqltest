@@ -52,7 +52,7 @@
                     This ER diagram shows the main entities and foreign key relationships for the {$Db} database.
                 </p>
                 <div class="erd-figure-wrap">
-                {if file_exists("images/erd_{$DbKey}.svg")}
+                {if $ErdDiagramExists}
                     {include file="images/erd_{$DbKey}.svg"}
                 {/if}
                 </div>

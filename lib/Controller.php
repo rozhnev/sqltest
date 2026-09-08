@@ -313,6 +313,12 @@ class Controller
      */
     public function erd(array $params): void
     {
+        $databaseKey = strtolower((string)($params['db'] ?? ''));
+        $erdFile = __DIR__ . "/../images/erd_{$databaseKey}.svg";
+        $this->assignVariables([
+            'ErdBase' => "/images/erd_{$databaseKey}",
+            'ErdDiagramExists' => is_file($erdFile),
+        ]);
         $this->engine->assign('Params', $params);
         $this->engine->display("erd.tpl");
     }
