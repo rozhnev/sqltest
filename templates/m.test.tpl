@@ -5,6 +5,7 @@
         min-height: 100vh;
         background: var(--body-background-color);
         color: var(--question-text);
+        padding: 3px;
     }
 
     .mobile-container .menu-panel,
@@ -57,16 +58,34 @@
     .mobile-container .answer {
         display: flex;
         align-items: flex-start;
-        gap: 0.5rem;
-        padding: 0.65rem;
+        padding: 0;
         background: var(--text-block-background-color);
         border: 1px solid var(--text-block-border-color);
         border-radius: 5px;
     }
 
     .mobile-container .answer label {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.5rem;
+        width: 100%;
+        min-height: 2.75rem;
+        padding: 0.65rem;
         color: var(--question-text);
         overflow-wrap: anywhere;
+        cursor: pointer;
+    }
+
+    .mobile-container .answer input {
+        flex: 0 0 auto;
+        width: 1.15rem;
+        height: 1.15rem;
+        margin: 0.1rem 0 0;
+    }
+
+    .mobile-container .answer:has(input:checked) {
+        border-color: var(--border-color);
+        background-color: var(--question-title-bg-color);
     }
 
     .mobile-container .code-actions-upper,
@@ -83,13 +102,45 @@
         overflow-wrap: anywhere;
     }
 
+    .mobile-container .code-buttons #checkSolutionBtn,
+    .mobile-container .code-buttons #checkFreeAnswerBtn2 {
+        width: 100%;
+        max-width: none;
+        justify-content: center;
+    }
+
+    .mobile-container .db-schema-panel {
+        /* margin: 0 0.5rem 1rem; */
+        border: 1px solid var(--text-block-border-color);
+        border-radius: 6px;
+        background: var(--accordion-panel-bg-color);
+        color: var(--question-text);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    }
+
+    .mobile-container .db-schema-panel summary {
+        padding: 0.8rem;
+        cursor: pointer;
+        font-weight: 600;
+    }
+
+    .mobile-container .db-schema-panel[open] summary {
+        border-bottom: 1px solid var(--text-block-border-color);
+    }
+
+    .mobile-container .db-schema-content {
+        min-width: 0;
+        overflow-x: auto;
+        padding: 0.25rem;
+    }
+
     .mobile-container .free-answer-textarea {
         min-height: 12rem;
         resize: vertical;
     }
 
     .mobile-container .right {
-        padding: 0 0.5rem;
+        margin: 1em 0;
     }
 
     .mobile-container .right > * {
@@ -141,7 +192,7 @@
             <div class="question-title-bar" style="display: flex;">
                 <div class="question-title">
                     <div class="question-level rate{$Question.rate}" title="{$Question.question_rate|default:'Not rated yet'}"></div>
-                    <span title="({$QuestionID})">{translate}question_title{/translate}&nbsp;{$Question.number}:</span>
+                    <span title="({$QuestionID})">{translate}question_title{/translate}&nbsp;{$Question.number} / {$TestData.questions_count}</span>
                     <span class="question-dates">
                         {if $Question.solved_date}
                             {translate}question_solved_at{/translate}: {$Question.solved_date}
@@ -168,8 +219,10 @@
                 <div class="answers" id="answers-list">
                 {foreach $Question.answers as $answer}
                     <div class="answer">
-                        <input type="{if $Question.question_type == 'single_answer'}radio{else}checkbox{/if}" id="answer-{$answer.id}" name="answers" value="{$answer.id}" {if $answer.id|in_array:$Question.last_query} checked{/if}>
-                        <label for="answer-{$answer.id}"> {$answer.answer}</label>
+                        <label for="answer-{$answer.id}">
+                            <input type="{if $Question.question_type == 'single_answer'}radio{else}checkbox{/if}" id="answer-{$answer.id}" name="answers" value="{$answer.id}" {if $answer.id|in_array:$Question.last_query} checked{/if}>
+                            <span>{$answer.answer}</span>
+                        </label>
                     </div>
                 {/foreach}
                 </div>
@@ -271,9 +324,16 @@
             setInterval(showTimer,  60000);
         </script>
     </div>
-    <div class="right" id="right-panel">
-        {include file="{$Lang}/{$DB}.tpl"}
-    </div>
+    {if $Question.question_type == 'query'}
+        <div class="right" id="right-panel">
+            <details class="db-schema-panel">
+                <summary>{translate}mobile_schema_toggle{/translate}</summary>
+                <div class="db-schema-content">
+                    {include file="{$Lang}/{$DB}.tpl"}
+                </div>
+            </details>
+        </div>
+    {/if}
     <footer>
         {include file='m.footer.tpl'}
     </footer>

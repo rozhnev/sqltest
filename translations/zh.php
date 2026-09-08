@@ -12,6 +12,7 @@ $translations = [
     'achievement_share_card_site' => 'SQLtest.online',
     'action_not_permitted' => '您不被允许执行此操作。',
     'login_failed' => '电子邮件或密码无效。',
+    'mobile_schema_toggle' => '显示数据库结构',
     'forgot_password' => '忘记密码？',
     'password_reset_requested' => '如果此电子邮件对应账户，临时密码已发送。',
     'add_to_favorites' => '点击添加到收藏夹',

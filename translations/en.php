@@ -95,6 +95,7 @@ $translations = [
     'login_needed' => 'This action isn\'t allowed for anonymous users.<br>Please <a href="" class="button-small green" style="padding: 3px; margin-top: 3px; display: inline-block;" onClick="toggleLoginWindow(); return false;">log in</a> to perform it.',
     'action_not_permitted' => 'You are not allowed to perform this action.',
     'login_failed' => 'Invalid email or password.',
+    'mobile_schema_toggle' => 'Show database schema',
     'forgot_password' => 'Forgot password?',
     'password_reset_requested' => 'If an account exists for this email, a temporary password has been sent.',
     'qustion_should_be_solved' => 'You should solve the problem yourself before looking at others\' solutions',
