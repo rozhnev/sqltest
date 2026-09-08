@@ -101,6 +101,7 @@ $translations = [
     'login_needed' => 'Это действие недоступно анонимным пользователям.<br>Пожалуйста, <a href="" class="button-small green" style="padding: 3px; margin-top: 3px; display: inline-block;" onClick="toggleLoginWindow(); return false;">войдите в систему</a>, чтобы выполнить его.',
     'action_not_permitted' => 'Действие не разрешено.',
     'login_failed' => 'Неверный email или пароль.',
+    'mobile_schema_toggle' => 'Показать схему базы данных',
     'forgot_password' => 'Забыли пароль?',
     'password_reset_requested' => 'Если для этого email существует учетная запись, временный пароль отправлен на почту.',
     'qustion_should_be_solved' => 'Вы должны решить задачу самостоятельно, прежде чем просматривать решения других пользователей',

@@ -12,6 +12,7 @@ $translations = [
     'achievement_share_card_site' => 'SQLtest.online',
     'action_not_permitted' => 'No tienes permiso para realizar esta acción.',
     'login_failed' => 'Correo electrónico o contraseña no válidos.',
+    'mobile_schema_toggle' => 'Mostrar esquema de la base de datos',
     'forgot_password' => '¿Olvidaste tu contraseña?',
     'password_reset_requested' => 'Si existe una cuenta con este correo, se ha enviado una contraseña temporal.',
     'add_to_favorites' => 'Haz clic para agregar a favoritos',
