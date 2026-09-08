@@ -1,5 +1,101 @@
 {include file='header.tpl'}
 <body>
+<style>
+    .mobile-container {
+        min-height: 100vh;
+        background: var(--body-background-color);
+        color: var(--question-text);
+    }
+
+    .mobile-container .menu-panel,
+    .mobile-container .main,
+    .mobile-container .right {
+        min-width: 0;
+    }
+
+    .mobile-container .question-wrapper,
+    .mobile-container .code-wrapper,
+    .mobile-container .free-answer-textarea,
+    .mobile-container .code-result {
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    }
+
+    .mobile-container .question-title-bar {
+        align-items: center;
+        gap: 0.5rem;
+        min-width: 0;
+        padding: 0.35rem 0.25rem 0.5rem;
+        border-bottom: 1px solid var(--text-block-border-color);
+    }
+
+    .mobile-container .question-title {
+        display: flex;
+        align-items: center;
+        flex: 1;
+        min-width: 0;
+        gap: 0.35rem;
+        flex-wrap: wrap;
+    }
+
+    .mobile-container .question-title .question-dates {
+        padding-left: 0;
+        width: 100%;
+    }
+
+    .mobile-container .question {
+        padding: 0.75rem 0.5rem;
+        overflow-wrap: anywhere;
+    }
+
+    .mobile-container .answers {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin: 0.75rem 0;
+    }
+
+    .mobile-container .answer {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.5rem;
+        padding: 0.65rem;
+        background: var(--text-block-background-color);
+        border: 1px solid var(--text-block-border-color);
+        border-radius: 5px;
+    }
+
+    .mobile-container .answer label {
+        color: var(--question-text);
+        overflow-wrap: anywhere;
+    }
+
+    .mobile-container .code-actions-upper,
+    .mobile-container .code-buttons {
+        align-items: center;
+        flex-wrap: wrap;
+        row-gap: 0.5rem;
+    }
+
+    .mobile-container .code-buttons .button,
+    .mobile-container .code-buttons #nextQuestionBtn {
+        max-width: 100%;
+        min-width: 0;
+        overflow-wrap: anywhere;
+    }
+
+    .mobile-container .free-answer-textarea {
+        min-height: 12rem;
+        resize: vertical;
+    }
+
+    .mobile-container .right {
+        padding: 0 0.5rem;
+    }
+
+    .mobile-container .right > * {
+        max-width: 100%;
+    }
+</style>
 <div class="mobile-container">
     {include file='popups.tpl'}
     <header>
