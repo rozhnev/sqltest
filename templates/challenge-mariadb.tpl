@@ -17,6 +17,7 @@
             font-family: 'Space Grotesk', 'Inter', 'Segoe UI', system-ui, sans-serif;
             line-height: 1.5em;
             height: fit-content;
+            overflow-x: hidden;
         }
 
         .mariadb-shell {
@@ -416,6 +417,31 @@
         }
 
         @media (max-width: 768px) {
+            .mariadb-header {
+                padding: 0.75rem 0.75rem 0.65rem;
+                min-height: 0;
+            }
+
+            .mariadb-header-inner {
+                align-items: center;
+                justify-content: space-between;
+                gap: 0.5rem;
+            }
+
+            .mariadb-header .top-menu-left {
+                min-width: 0;
+                width: auto !important;
+                flex: 1 1 auto;
+            }
+
+            .mariadb-header .top-menu-left .site-name {
+                font-size: 1.25rem;
+            }
+
+            .mariadb-header .top-menu-switchers {
+                flex: 0 0 auto;
+            }
+
             .hero-subtitle {
                 font-size: 0.95rem;
             }
@@ -426,7 +452,100 @@
             }
 
             .mariadb-wrapper {
-                padding: 1rem 1rem 2rem;
+                padding: 0.75rem 0.75rem 1.5rem;
+            }
+
+            .mariadb-page {
+                gap: 1rem;
+            }
+
+            .mariadb-hero {
+                padding: 1.5rem 1rem 1.25rem;
+                border-radius: 14px;
+            }
+
+            .hero-eyebrow {
+                letter-spacing: 0.12rem;
+                font-size: 0.7rem;
+                line-height: 1.4;
+            }
+
+            .mariadb-hero h1 {
+                margin: 0.8rem 0 0.65rem;
+                font-size: clamp(1.8rem, 9vw, 2.5rem);
+                line-height: 1.1;
+            }
+
+            .hero-subtitle {
+                line-height: 1.45;
+            }
+
+            .hero-cta {
+                align-items: stretch;
+                flex-direction: column;
+                gap: 0.65rem;
+            }
+
+            .hero-cta .mariadb-button,
+            .mariadb-final .mariadb-button {
+                width: 100%;
+                text-align: center;
+            }
+
+            .hero-note {
+                font-size: 0.85rem;
+                line-height: 1.4;
+            }
+
+            .mariadb-highlight,
+            .mariadb-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .mariadb-highlight > div,
+            .mariadb-grid article,
+            .mariadb-prizes,
+            .mariadb-final {
+                padding: 1.15rem;
+                border-radius: 14px;
+            }
+
+            .mariadb-highlight h2,
+            .mariadb-prizes h2 {
+                font-size: 1.45rem;
+                line-height: 1.2;
+            }
+
+            .mariadb-list {
+                padding-left: 1.2rem;
+                overflow-wrap: anywhere;
+            }
+
+            .prize-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .mariadb-footer {
+                padding: 1rem 0.75rem 1.5rem;
+            }
+
+            .mariadb-footer-inner {
+                padding: 1.15rem;
+                border-radius: 14px;
+            }
+
+            .mariadb-footer-inner .footer-links {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .mariadb-auth-card {
+                width: calc(100% - 2rem);
+                max-height: calc(100dvh - 2rem);
+                overflow-y: auto;
+                padding: 1.5rem 1rem;
+                border-radius: 14px;
             }
         }
     </style>
@@ -512,7 +631,7 @@
         </div>
             <footer class="mariadb-footer">
                 <div class="mariadb-footer-inner">
-                    {if $MobileView}
+                    {if $MobileView} 
                         {include file='m.footer.tpl'}
                     {else}
                         {include file='footer.tpl'}

@@ -1062,6 +1062,7 @@ class Controller
             'PageTitle'       => $langMeta['title'],
             'PageDescription' => $langMeta['description'],
             'Action'          => 'challenge-mariadb',
+            'MobileView'      => $this->isMobileView(),
             'User'            => $this->user
         ]);
         if ($this->user->logged()) {
