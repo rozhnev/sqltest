@@ -135,12 +135,22 @@ function handleMariaDBResults(PDO $dbh, array $env, array $query, string $method
         ORDER BY t.created_at DESC");
     $stmt->execute([':start_date' => $startDate]);
 
+    $mailingListStmt = $dbh->query("SELECT
+        COALESCE(u.full_name, u.nickname) AS name,
+            u.email,
+            m.created_at
+        FROM mailinglists m
+        JOIN users u ON u.id = m.user_id
+        WHERE m.list_name = 'mariadb_newsletter'
+        ORDER BY m.created_at DESC");
+
     $smarty = new Smarty();
     $smarty->assign('Lang', 'en');
     $smarty->assign('DB', $env['DB_NAME'] ?? 'sakila');
     $smarty->assign('VERSION', $env['APP_VERSION'] ?? time());
     $smarty->assign('StartDate', $startDate);
     $smarty->assign('Results', $stmt->fetchAll(PDO::FETCH_ASSOC));
+    $smarty->assign('MailingList', $mailingListStmt->fetchAll(PDO::FETCH_ASSOC));
     $smarty->display('mariadb-results.tpl');
 }
 

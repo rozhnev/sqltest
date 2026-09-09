@@ -34,6 +34,20 @@
                 </div>
             </main>
 
+            <main class="panel">
+                <div class="panel__title">
+                    <div>
+                        <h2>Newsletter mailing list</h2>
+                        <p class="panel__sub">MariaDB newsletter subscriptions.</p>
+                    </div>
+                    <button type="button" class="button-primary" id="download-mailing-list-xlsx">Export Excel</button>
+                </div>
+
+                <div class="results-table-wrap">
+                    <div id="mailing-list-table"></div>
+                </div>
+            </main>
+
             <footer class="admin-shell__footer">
                 {* <a href="/admin">Admin home</a> *}
             </footer>
@@ -73,6 +87,7 @@
         {literal}
         <script>
         const resultsTableData = {/literal}{$Results|json_encode nofilter}{literal};
+        const mailingListTableData = {/literal}{$MailingList|json_encode nofilter}{literal};
 
         function escapeHtml(value) {
             const div = document.createElement("div");
@@ -126,6 +141,41 @@
         document.getElementById("download-results-xlsx").addEventListener("click", function () {
             resultsTable.download("xlsx", "mariadb-challenge-results.xlsx", {
                 sheetName: "Challenge Results",
+            });
+        });
+
+        const mailingListTable = new Tabulator("#mailing-list-table", {
+            data: mailingListTableData,
+            layout: "fitDataFill",
+            placeholder: "No MariaDB newsletter subscriptions found.",
+            pagination: true,
+            paginationMode: "local",
+            paginationSize: 25,
+            paginationSizeSelector: [10, 25, 50, 100],
+            columns: [
+                {
+                    title: "Name", field: "name", sorter: "string", headerFilter: "input", widthGrow: 1,
+                    formatter: cell => cell.getValue() ? escapeHtml(cell.getValue()) : "-",
+                },
+                {
+                    title: "Email", field: "email", sorter: "string", headerFilter: "input", widthGrow: 2,
+                    formatter: cell => {
+                        const value = cell.getValue();
+                        if (!value) return "-";
+                        const safe = escapeHtml(value);
+                        return `<a href="mailto:${safe}">${safe}</a>`;
+                    },
+                },
+                {title: "Subscribed", field: "created_at", sorter: "string", headerFilter: "input", widthGrow: 1},
+            ],
+            initialSort: [
+                {column: "created_at", dir: "desc"},
+            ],
+        });
+
+        document.getElementById("download-mailing-list-xlsx").addEventListener("click", function () {
+            mailingListTable.download("xlsx", "mariadb-newsletter-mailing-list.xlsx", {
+                sheetName: "Mailing List",
             });
         });
         </script>
