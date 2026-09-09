@@ -138,7 +138,7 @@ function handleMariaDBResults(PDO $dbh, array $env, array $query, string $method
     $mailingListStmt = $dbh->query("SELECT
         COALESCE(u.full_name, u.nickname) AS name,
             u.email,
-            m.created_at
+            to_char(m.created_at, 'YYYY-MM-DD HH24:MI') AS created_at
         FROM mailinglists m
         JOIN users u ON u.id = m.user_id
         WHERE m.list_name = 'mariadb_newsletter'
