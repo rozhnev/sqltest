@@ -127,8 +127,8 @@ function handleMariaDBResults(PDO $dbh, array $env, array $query, string $method
         FROM tests t
         JOIN users u ON u.id = t.user_id
         LEFT JOIN mailinglists ON mailinglists.user_id = u.id AND list_name = 'mariadb_newsletter'
-        JOIN test_questions tq ON tq.test_id = t.id
-        JOIN question_categories qc ON tq.question_id = qc.question_id AND qc.category_id BETWEEN 801 AND 804
+        LEFT JOIN test_questions tq ON tq.test_id = t.id
+        LEFT JOIN question_categories qc ON tq.question_id = qc.question_id AND qc.category_id BETWEEN 801 AND 804
         WHERE t.questionnire_id = 999
           AND t.created_at > CAST(:start_date AS timestamp)
         GROUP BY u.full_name, u.email, u.id, t.id, t.created_at
