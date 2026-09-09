@@ -416,6 +416,45 @@
             color: #ffbaba;
         }
 
+        .mariadb-auth-divider {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin: 1.25rem 0;
+            color: rgba(245, 251, 255, 0.65);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .mariadb-auth-divider::before,
+        .mariadb-auth-divider::after {
+            content: '';
+            height: 1px;
+            flex: 1;
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .mariadb-oauth-options {
+            display: grid;
+            gap: 0.65rem;
+        }
+
+        .mariadb-oauth-button {
+            min-height: 44px;
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            border-radius: 8px;
+            color: #f5fbff;
+            cursor: pointer;
+            font: inherit;
+            font-weight: 600;
+        }
+
+        .mariadb-oauth-button--google { background: #ffffff; color: #1f2937; }
+        .mariadb-oauth-button--github { background: #24292f; }
+        .mariadb-oauth-button--linkedin { background: #0a66c2; }
+        .mariadb-oauth-button:hover { filter: brightness(1.1); }
+
         @media (max-width: 768px) {
             .mariadb-header {
                 padding: 0.75rem 0.75rem 0.65rem;
@@ -635,6 +674,12 @@
                     </p>
                     <button type="submit" class="mariadb-button">{translate}register_button{/translate}</button>
                 </form>
+                <div class="mariadb-auth-divider" aria-hidden="true">or</div>
+                <div class="mariadb-oauth-options">
+                    <button type="button" class="mariadb-oauth-button mariadb-oauth-button--google" data-oauth-provider="google">Continue with Google</button>
+                    <button type="button" class="mariadb-oauth-button mariadb-oauth-button--github" data-oauth-provider="github">Continue with GitHub</button>
+                    <button type="button" class="mariadb-oauth-button mariadb-oauth-button--linkedin" data-oauth-provider="linkedin">Continue with LinkedIn</button>
+                </div>
                 <p class="mariadb-auth-feedback" role="status"></p>
             </div>
         </div>
@@ -648,6 +693,12 @@
                     <input type="hidden" name="ajax" value="1">
                     <button type="submit" class="mariadb-button">{translate}login_button{/translate}</button>
                 </form>
+                <div class="mariadb-auth-divider" aria-hidden="true">or</div>
+                <div class="mariadb-oauth-options">
+                    <button type="button" class="mariadb-oauth-button mariadb-oauth-button--google" data-oauth-provider="google">Continue with Google</button>
+                    <button type="button" class="mariadb-oauth-button mariadb-oauth-button--github" data-oauth-provider="github">Continue with GitHub</button>
+                    <button type="button" class="mariadb-oauth-button mariadb-oauth-button--linkedin" data-oauth-provider="linkedin">Continue with LinkedIn</button>
+                </div>
                 <p class="mariadb-auth-feedback" role="status"></p>
             </div>
         </div>
@@ -715,6 +766,23 @@
             loginClose?.addEventListener('click', () => togglePopup(loginPopup, false));
             registerPopup?.addEventListener('click', event => event.target === registerPopup && togglePopup(registerPopup, false));
             loginPopup?.addEventListener('click', event => event.target === loginPopup && togglePopup(loginPopup, false));
+
+            const oauthLaunchers = {
+                google: 'openGoogleLoginPopUp',
+                github: 'openGitHubLoginPopUp',
+                linkedin: 'openLinkedinLoginPopUp',
+            };
+
+            document.querySelectorAll('[data-oauth-provider]').forEach(button => {
+                button.addEventListener('click', () => {
+                    const launchOAuth = window[oauthLaunchers[button.dataset.oauthProvider]];
+                    if (typeof launchOAuth !== 'function') {
+                        setLoginFeedback('This sign-in option is currently unavailable.', true);
+                        return;
+                    }
+                    launchOAuth();
+                });
+            });
 
             registerForm?.addEventListener('submit', async (event) => {
                 event.preventDefault();
