@@ -59,6 +59,12 @@
                     <p class="donation-fallback">Если виджет не загрузился, откройте прямую ссылку: <a href="https://ko-fi.com/D1D76X1T1" target="_blank" rel="noopener noreferrer">ko-fi.com/D1D76X1T1</a>.</p>
                 </div>
                 <div class="donation-method">
+                    <h3>lava.top:</h3>
+                    <p>Оплата в евро через lava.top - сервис принимает карты российских банков, PayPal и другие способы оплаты.</p>
+                    <iframe title="lava.top" style="border: none" width="250" height="60" src="https://widget.lava.top/f753dc3c-096e-40ca-afe4-c106fa194b18"></iframe>
+                    <p class="donation-fallback">Если виджет не загрузился, используйте прямую ссылку: <a href="https://app.lava.top/products/2800c402-a8c3-404e-8e75-940937b813f9/e2ee84c7-d8e7-4521-98dc-cc336c001a45?currency=EUR&domainId=77569739-54ac-45a4-9efc-9c6fc8b454aa&domainName=sqltest.online" target="_blank" rel="noopener noreferrer">lava.top</a>.</p>
+                </div>
+                <div class="donation-method">
                     <h3>В криптовалюте</h3>
                     <p>Если вам удобнее донатить в криптовалюте, используйте виджет ниже:</p>
                     <iframe src="https://nowpayments.io/embeds/donation-widget?api_key=8881e1d0-aaef-46c4-9a60-298bb6f26c3b" width="346" height="623" frameborder="0" scrolling="no" style="overflow-y: hidden;">

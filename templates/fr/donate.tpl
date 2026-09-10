@@ -40,6 +40,12 @@
                     <p class="donation-fallback">Si le widget ne se charge pas, utilisez le lien direct : <a href="https://ko-fi.com/D1D76X1T1" target="_blank" rel="noopener noreferrer">ko-fi.com/D1D76X1T1</a>.</p>
                 </div>
                 <div class="donation-method">
+                    <h3>Lava.top (paiements en EUR/USD)</h3>
+                    <p>Vous préférez payer en euros ? Lava.top accepte les cartes des banques russes, PayPal et d'autres moyens de paiement.</p>
+                    <iframe title="lava.top" style="border: none" width="250" height="60" src="https://widget.lava.top/f753dc3c-096e-40ca-afe4-c106fa194b18"></iframe>
+                    <p class="donation-fallback">Si le widget ne se charge pas, utilisez le lien direct : <a href="https://app.lava.top/products/2800c402-a8c3-404e-8e75-940937b813f9/e2ee84c7-d8e7-4521-98dc-cc336c001a45?currency=EUR&domainId=77569739-54ac-45a4-9efc-9c6fc8b454aa&domainName=sqltest.online" target="_blank" rel="noopener noreferrer">lava.top</a>.</p>
+                </div>
+                <div class="donation-method">
                     <h3>Soutien en Crypto</h3>
                     <p>Si la cryptomonnaie vous convient mieux, utilisez le widget ci-dessous :</p>
                     <iframe src="https://nowpayments.io/embeds/donation-widget?api_key=8881e1d0-aaef-46c4-9a60-298bb6f26c3b" width="346" height="623" frameborder="0" scrolling="no" style="overflow-y: hidden;">
