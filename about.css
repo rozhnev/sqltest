@@ -207,4 +207,21 @@
 .about .donations-history-empty {
   margin: 0;
 }
+.about .donation-method--primary {
+  border: 2px solid var(--dark-panel-bg-color);
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+}
+.about .donation-method-badge {
+  display: inline-block;
+  background: var(--dark-panel-bg-color);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: bold;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 999px;
+  margin-bottom: 0.6rem;
+}
 /*# sourceMappingURL=about.css.map */
