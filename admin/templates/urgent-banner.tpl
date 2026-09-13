@@ -50,7 +50,18 @@
                     {foreach from=$Languages item=langCode}
                         <label>
                             Message HTML ({$langCode|upper})
-                            <textarea name="messages[{$langCode}]" rows="4">{$Banner.messages.$langCode|default:''}</textarea>
+                            <span class="translate-controls">
+                                Translate from
+                                <select class="translate-source" data-target="{$langCode}">
+                                    {foreach from=$Languages item=sourceLangCode}
+                                        {if $sourceLangCode !== $langCode}
+                                            <option value="{$sourceLangCode}">{$sourceLangCode|upper}</option>
+                                        {/if}
+                                    {/foreach}
+                                </select>
+                                <button type="button" class="translate-button" data-target="{$langCode}">Translate</button>
+                            </span>
+                            <textarea name="messages[{$langCode}]" id="message-{$langCode}" rows="4">{$Banner.messages.$langCode|default:''}</textarea>
                         </label>
                     {/foreach}
                 </form>
@@ -58,6 +69,54 @@
             </main>
         </div>
         <script>
+            const LANGUAGE_LABELS = {
+                ru: 'Russian',
+                en: 'English',
+                es: 'Spanish',
+                fr: 'French',
+                pt: 'Portuguese',
+                zh: 'Chinese',
+            };
+
+            async function translateMessage(sourceLang, targetLang) {
+                const sourceField = document.getElementById(`message-${sourceLang}`);
+                const targetField = document.getElementById(`message-${targetLang}`);
+                if (!sourceField || !targetField || !sourceField.value.trim()) {
+                    return;
+                }
+
+                const response = await fetch('/admin/llm', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        task: 'translate',
+                        from_lang: LANGUAGE_LABELS[sourceLang] || sourceLang,
+                        to_lang: LANGUAGE_LABELS[targetLang] || targetLang,
+                        text: sourceField.value,
+                    }),
+                });
+                const body = await response.json();
+                if (body.error) {
+                    throw new Error(body.error);
+                }
+                targetField.value = body.result || '';
+            }
+
+            document.querySelectorAll('.translate-button').forEach(button => {
+                button.addEventListener('click', async () => {
+                    const targetLang = button.dataset.target;
+                    const sourceLang = document.querySelector(`.translate-source[data-target="${targetLang}"]`).value;
+                    const feedback = document.getElementById('urgent-banner-feedback');
+                    feedback.textContent = 'Translating…';
+                    try {
+                        await translateMessage(sourceLang, targetLang);
+                        feedback.textContent = `Translated into ${targetLang.toUpperCase()}. Review the HTML before saving.`;
+                    } catch (error) {
+                        feedback.textContent = error.message || 'Failed to translate.';
+                    }
+                });
+            });
+
             document.getElementById('urgent-banner-form').addEventListener('submit', async function (event) {
                 event.preventDefault();
                 const feedback = document.getElementById('urgent-banner-feedback');
