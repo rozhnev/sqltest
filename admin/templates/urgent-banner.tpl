@@ -90,7 +90,7 @@
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        task: 'translate',
+                        task: 'translate-html',
                         from_lang: LANGUAGE_LABELS[sourceLang] || sourceLang,
                         to_lang: LANGUAGE_LABELS[targetLang] || targetLang,
                         text: sourceField.value,

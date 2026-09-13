@@ -469,6 +469,9 @@ function handleLLM(string $method): void
             case 'translate':
                 respondJson(['result' => doTranslate($llm, $payload)]);
                 break;
+            case 'translate-html':
+                respondJson(['result' => doTranslateHtml($llm, $payload)]);
+                break;
             case 'edit':
                 respondJson(['result' => doEdit($llm, $payload)]);
                 break;
@@ -501,6 +504,36 @@ function doTranslate(LLM $llm, array $payload): string
     ];
 
     return $llm->parseMarkdown($llm->ask($messages));
+}
+
+function doTranslateHtml(LLM $llm, array $payload): string
+{
+    $from = $payload['from_lang'] ?? 'English';
+    $to = $payload['to_lang'] ?? 'Russian';
+    $html = trim($payload['text'] ?? '');
+
+    if ($html === '') {
+        throw new Exception('HTML to translate is required');
+    }
+
+    $messages = [
+        ['role' => 'system', 'content' => 'You act as a professional technical translator working directly on HTML snippets embedded in a website.'],
+        ['role' => 'user', 'content' => "Translate the visible text in the following HTML snippet from {$from} to {$to}.
+
+Rules you must follow exactly:
+- Keep every HTML tag, attribute, and attribute value (style, href, class, etc.) byte-for-byte unchanged.
+- Only translate the human-readable text between tags.
+- Do not add, remove, or reorder tags.
+- Do not wrap the output in markdown code fences or add any commentary.
+- Return only the resulting HTML snippet, nothing else."],
+        ['role' => 'user', 'content' => $html],
+    ];
+
+    $result = trim($llm->ask($messages));
+    $result = preg_replace('#^```(?:html)?\s*#i', '', $result);
+    $result = preg_replace('#\s*```$#', '', $result);
+
+    return trim($result);
 }
 
 function doQuestionReview(LLM $llm, array $payload): string
