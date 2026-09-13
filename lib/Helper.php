@@ -142,4 +142,57 @@ class Helper
         $donations = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return ['monthly_amount_usd' => $monthly_amount_usd, 'donations' => $donations];
     }
+
+    /**
+     * Fetches the singleton urgent banner row.
+     * Returns a disabled/empty banner if the row does not exist yet.
+     */
+    public static function getUrgentBanner(PDO $dbh): array
+    {
+        $stmt = $dbh->query("SELECT enabled, version, background, text_color, messages FROM urgent_banner WHERE id = 1");
+        $row = $stmt ? $stmt->fetch(PDO::FETCH_ASSOC) : false;
+
+        if (!$row) {
+            return [
+                'enabled' => false,
+                'version' => 0,
+                'background' => '',
+                'text_color' => '',
+                'messages' => [],
+            ];
+        }
+
+        return [
+            'enabled' => (bool)$row['enabled'],
+            'version' => (int)$row['version'],
+            'background' => (string)$row['background'],
+            'text_color' => (string)$row['text_color'],
+            'messages' => json_decode($row['messages'], true) ?: [],
+        ];
+    }
+
+    /**
+     * Saves the singleton urgent banner row (creates it if missing).
+     */
+    public static function saveUrgentBanner(PDO $dbh, array $data): void
+    {
+        $stmt = $dbh->prepare(
+            "INSERT INTO urgent_banner (id, enabled, version, background, text_color, messages, updated_at)
+            VALUES (1, :enabled, :version, :background, :text_color, :messages, CURRENT_TIMESTAMP)
+            ON CONFLICT (id) DO UPDATE SET
+                enabled = EXCLUDED.enabled,
+                version = EXCLUDED.version,
+                background = EXCLUDED.background,
+                text_color = EXCLUDED.text_color,
+                messages = EXCLUDED.messages,
+                updated_at = CURRENT_TIMESTAMP"
+        );
+        $stmt->execute([
+            ':enabled' => $data['enabled'] ? 't' : 'f',
+            ':version' => (int)$data['version'],
+            ':background' => (string)$data['background'],
+            ':text_color' => (string)$data['text_color'],
+            ':messages' => json_encode($data['messages'], JSON_UNESCAPED_UNICODE),
+        ]);
+    }
 }

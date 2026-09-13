@@ -10,6 +10,7 @@ class Controller
     private $lang;
     private array $languages;
     private array $playgroundConfig;
+    private array $urgentBanner;
 
     private function getAutoTranslator(): LocalizationAutoTranslator
     {
@@ -74,11 +75,15 @@ class Controller
             'GITHUB_CLIENT_ID' => $env['GITHUB_CLIENT_ID'] ?? '',
             'DONATION_MONTHLY_GOAL' => (float)($env['DONATION_MONTHLY_GOAL'] ?? 50),
             'DONATIONS' => Helper::getDonations($this->dbh, 5),
-            'SHOW_URGENT_BANNER' => $env['SHOW_URGENT_BANNER'] ?? false,
             'Domain'        => $this->domain,
             'MobileView'    => $this->isMobileView(),
             'Languages'     => $this->languages,
             'User'          => $this->user,
+        ]);
+
+        $this->urgentBanner = Helper::getUrgentBanner($this->dbh);
+        $this->assignVariables([
+            'SHOW_URGENT_BANNER' => $this->urgentBanner['enabled'] ? $this->urgentBanner['version'] : false,
         ]);
     }
 
@@ -198,6 +203,15 @@ class Controller
         $this->lang = $langCode;
         $this->assignVariables(['Lang' => $langCode]);
         Localizer::init($langCode);
+
+        $messages = $this->urgentBanner['messages'] ?? [];
+        $this->assignVariables([
+            'UrgentBanner' => [
+                'background' => $this->urgentBanner['background'] ?? '',
+                'text_color' => $this->urgentBanner['text_color'] ?? '',
+                'html' => $messages[$langCode] ?? $messages['en'] ?? '',
+            ],
+        ]);
     }
 
     public function setCanonicalLink(string $path): void

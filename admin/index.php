@@ -76,6 +76,9 @@ switch ($resource) {
     case 'mariadb-results':
         handleMariaDBResults($dbh, $env, $_GET, $method);
         break;
+    case 'urgent-banner':
+        handleUrgentBanner($dbh, $env, $method);
+        break;
     default:
         respondJson(['error' => 'Resource not found'], 404);
         break;
@@ -152,6 +155,43 @@ function handleMariaDBResults(PDO $dbh, array $env, array $query, string $method
     $smarty->assign('Results', $stmt->fetchAll(PDO::FETCH_ASSOC));
     $smarty->assign('MailingList', $mailingListStmt->fetchAll(PDO::FETCH_ASSOC));
     $smarty->display('mariadb-results.tpl');
+}
+
+function handleUrgentBanner(PDO $dbh, array $env, string $method): void
+{
+    $languages = ['ru', 'en', 'es', 'fr', 'pt', 'zh'];
+
+    if ($method === 'GET') {
+        $banner = Helper::getUrgentBanner($dbh);
+
+        $smarty = new Smarty();
+        $smarty->assign('Lang', 'en');
+        $smarty->assign('DB', $env['DB_NAME'] ?? 'sakila');
+        $smarty->assign('VERSION', $env['APP_VERSION'] ?? time());
+        $smarty->assign('Languages', $languages);
+        $smarty->assign('Banner', $banner);
+        $smarty->display('urgent-banner.tpl');
+        return;
+    }
+
+    if ($method !== 'POST') {
+        respondMethodNotAllowed();
+    }
+
+    $messages = [];
+    foreach ($languages as $langCode) {
+        $messages[$langCode] = (string)($_POST['messages'][$langCode] ?? '');
+    }
+
+    Helper::saveUrgentBanner($dbh, [
+        'enabled' => isset($_POST['enabled']),
+        'version' => max(1, (int)($_POST['version'] ?? 1)),
+        'background' => trim((string)($_POST['background'] ?? '')),
+        'text_color' => trim((string)($_POST['text_color'] ?? '#ffffff')),
+        'messages' => $messages,
+    ]);
+
+    respondJson(['status' => 'ok']);
 }
 
 function handleQuestions(AdminQuestionManager $manager, array $query, string $method): void
