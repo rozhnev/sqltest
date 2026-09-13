@@ -69,6 +69,7 @@
             </main>
         </div>
         <script>
+        {literal}
             const LANGUAGE_LABELS = {
                 ru: 'Russian',
                 en: 'English',
@@ -133,6 +134,7 @@
                     feedback.textContent = error.message || 'Failed to save.';
                 }
             });
+        {/literal}
         </script>
     </body>
 </html>
