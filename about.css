@@ -182,46 +182,4 @@
   color: chocolate;
   margin: 0 8px 0 0;
 }
-.about .donations-history {
-  max-width: 100%;
-  min-width: 20rem;
-  text-align: left;
-}
-.about .donations-history-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-.about .donations-history-table th,
-.about .donations-history-table td {
-  padding: 0.5rem;
-}
-.about .donations-history-table thead th {
-  border-bottom: 1px solid #ccc;
-}
-.about .donations-history-table tbody td {
-  border-bottom: 1px solid #eee;
-}
-.about .donations-history-table .align-right {
-  text-align: right;
-}
-.about .donations-history-empty {
-  margin: 0;
-}
-.about .donation-method--primary {
-  border: 2px solid var(--dark-panel-bg-color);
-  border-radius: 10px;
-  padding: 1rem 1.25rem;
-}
-.about .donation-method-badge {
-  display: inline-block;
-  background: var(--dark-panel-bg-color);
-  color: #fff;
-  font-size: 0.72rem;
-  font-weight: bold;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  padding: 3px 10px;
-  border-radius: 999px;
-  margin-bottom: 0.6rem;
-}
 /*# sourceMappingURL=about.css.map */

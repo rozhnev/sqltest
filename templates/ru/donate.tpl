@@ -30,6 +30,16 @@
         <div style="display: block;">      
             <h2 style="color: var(--ligth-h2-color);">Способы поддержки:</h2>
             <div class="donation-methods">
+                <div class="donation-method donation-method--primary">
+                    <span class="donation-method-badge">Рекомендуемый способ</span>
+                    <h3>Удобная поддержка проекта</h3>
+                    <p>Сервис lava.top позволяет поддержать проект банковской картой, через СБП и другими способами в RUB, USD и EUR.</p>
+                    <div class="lava-top-actions">
+                        <a class="lava-top-button lava-top-button--primary" href="https://app.lava.top/products/2800c402-a8c3-404e-8e75-940937b813f9/e2ee84c7-d8e7-4521-98dc-cc336c001a45?currency=RUB&amp;language=RUS&amp;domainId=77569739-54ac-45a4-9efc-9c6fc8b454aa&amp;domainName=sqltest.online&amp;utm_campaign=sqltest.online&amp;utm_referrer=sqltest.online" target="_blank" rel="noopener noreferrer">Поддержать проект разово</a>
+                        <a class="lava-top-button lava-top-button--secondary" href="https://app.lava.top/products/e4dd4ca7-300a-48ea-a64b-5619db7c294c/3295a3f7-82a7-4476-8bad-5f7b6d492025?currency=RUB&amp;domainId=77569739-54ac-45a4-9efc-9c6fc8b454aa&amp;domainName=sqltest.online&amp;utm_source=widget.lava.top&amp;utm_medium=referral&amp;utm_campaign=sqltest.online&amp;utm_referrer=sqltest.online" target="_blank" rel="noopener noreferrer">Оформить ежемесячную поддержку</a>
+                    </div>
+                    <p class="donation-fallback">Разовый платёж помогает прямо сейчас, а ежемесячная поддержка помогает планировать новые уроки и функции.</p>
+                </div>
                 <div class="donation-method">
                     <h3>В рублях:</h3>
                     <p style="margin: 1.5rem 0;">
@@ -57,12 +67,6 @@
                     </script>
                     <p>Удобный платёж через Ko-fi. Сервис принимает <span class="payment-badge"><span aria-hidden="true">💳</span>Карта</span> и <span class="payment-badge"><span aria-hidden="true">🅿️</span>PayPal</span></p>
                     <p class="donation-fallback">Если виджет не загрузился, откройте прямую ссылку: <a href="https://ko-fi.com/D1D76X1T1" target="_blank" rel="noopener noreferrer">ko-fi.com/D1D76X1T1</a>.</p>
-                </div>
-                <div class="donation-method">
-                    <h3>lava.top:</h3>
-                    <p>Оплата в евро через lava.top - сервис принимает карты российских банков, PayPal и другие способы оплаты.</p>
-                    <iframe title="lava.top" style="border: none" width="270" height="60" src="https://widget.lava.top/f753dc3c-096e-40ca-afe4-c106fa194b18"></iframe>
-                    <p class="donation-fallback">Если виджет не загрузился, используйте прямую ссылку: <a href="https://app.lava.top/products/2800c402-a8c3-404e-8e75-940937b813f9/e2ee84c7-d8e7-4521-98dc-cc336c001a45?currency=EUR&domainId=77569739-54ac-45a4-9efc-9c6fc8b454aa&domainName=sqltest.online" target="_blank" rel="noopener noreferrer">lava.top</a>.</p>
                 </div>
                 <div class="donation-method">
                     <h3>В криптовалюте</h3>
