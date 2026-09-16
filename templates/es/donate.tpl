@@ -15,6 +15,15 @@
         <div style="display: block;">      
             <h2 style="color: var(--ligth-h2-color);">💳 Elige Cómo Apoyar</h2>
             <div class="donation-methods">
+                <div class="donation-method donation-method--primary">
+                    <span class="donation-method-badge">Recomendado</span>
+                    <h3>Apoya el proyecto fácilmente</h3>
+                    <p>Lava.top permite apoyar el proyecto con tarjetas, PayPal y otros métodos de pago en USD y EUR.</p>
+                    <div class="lava-top-actions">
+                        <a class="lava-top-button lava-top-button--primary" href="https://app.lava.top/products/2800c402-a8c3-404e-8e75-940937b813f9/e2ee84c7-d8e7-4521-98dc-cc336c001a45?currency=USD&amp;language=SPA&amp;domainId=77569739-54ac-45a4-9efc-9c6fc8b454aa&amp;domainName=sqltest.online&amp;utm_campaign=sqltest.online&amp;utm_referrer=sqltest.online" target="_blank" rel="noopener noreferrer">Apoyar el proyecto</a>
+                    </div>
+                    <p class="donation-fallback">Una contribución única ayuda ahora. Tu apoyo ayuda a planificar nuevas lecciones, ejercicios y funciones.</p>
+                </div>
                 <div class="donation-method">
                     <h3>Ko‑fi (Tarjeta Bancaria / PayPal)</h3>
                     <p style="margin: 1.5rem 0;">
@@ -26,12 +35,6 @@
                     </p>
                     <p>Pagos simples y seguros disponibles en la mayoría de las regiones.</p>
                     <p class="donation-fallback">Si el widget no se carga, utiliza el enlace directo: <a href="https://ko-fi.com/D1D76X1T1" target="_blank" rel="noopener noreferrer">ko-fi.com/D1D76X1T1</a>.</p>
-                </div>
-                <div class="donation-method">
-                    <h3>Lava.top (pagos en EUR/USD)</h3>
-                    <p>¿Prefieres pagar en euros? Lava.top acepta tarjetas de bancos rusos, PayPal y otros métodos de pago.</p>
-                    <iframe title="lava.top" style="border: none" width="270" height="60" src="https://widget.lava.top/f753dc3c-096e-40ca-afe4-c106fa194b18"></iframe>
-                    <p class="donation-fallback">Si el widget no se carga, utiliza el enlace directo: <a href="https://app.lava.top/products/2800c402-a8c3-404e-8e75-940937b813f9/e2ee84c7-d8e7-4521-98dc-cc336c001a45?currency=EUR&domainId=77569739-54ac-45a4-9efc-9c6fc8b454aa&domainName=sqltest.online" target="_blank" rel="noopener noreferrer">lava.top</a>.</p>
                 </div>
                 <div class="donation-method">
                     <h3>Donaciones en Cripto</h3>
