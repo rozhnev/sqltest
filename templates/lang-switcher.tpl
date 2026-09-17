@@ -3,10 +3,7 @@
                     <label class="visually-hidden" for="language-select">Language</label>
                     <select id="language-select" class="language-selector__control" onchange="window.location.href=this.value">
                         {foreach $Languages as $l => $name}
-                            {if $l !== $Lang}
-                                <option value="/{$l}{$path}">{$name}</option>
-                            {/if}
-                            {* <option value="/{$l}{$path}"{if $l === $Lang} selected{/if}>{$name}</option> *}
+                            <option value="/{$l}{$path}"{if $l === $Lang} selected{/if}>{$name}</option>
                         {/foreach}
                     </select>
                 </div>
