@@ -95,4 +95,10 @@ $config = [
             'max_tokens_json'  => 500,
         ],
     ],
+    // Job interview simulation (see INTERVIEW_SIMULATION_PLAN.md).
+    'interview' => [
+        'positions' => ['sql_developer', 'data_analyst'],
+        'grades' => [2, 3, 4],
+        'lava_payment_url' => $env['INTERVIEW_LAVA_PAYMENT_URL'] ?? '',
+    ],
 ];    

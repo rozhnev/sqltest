@@ -1,0 +1,20 @@
+<svg width="360" height="96" viewBox="0 0 360 96" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="mlLogoTitle">
+  <title id="mlLogoTitle">Meridian Logistics</title>
+
+  <defs>
+    <linearGradient id="mlBadge" x1="0" y1="0" x2="88" y2="88" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#3B82F6"/>
+      <stop offset="1" stop-color="#1E3A8A"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="4" y="4" width="88" height="88" rx="22" fill="url(#mlBadge)"/>
+
+  <!-- Abstract route line forming an M, with a delivery-point dot -->
+  <path d="M20 66 L20 30 L48 58 L76 30 L76 66"
+        stroke="#F8FAFC" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <circle cx="76" cy="30" r="6" fill="#93C5FD"/>
+
+  <text x="112" y="50" fill="#0F172A" font-size="34" font-weight="700" font-family="Segoe UI, Arial, sans-serif">Meridian</text>
+  <text x="112" y="76" fill="#334155" font-size="16" font-weight="600" letter-spacing="3" font-family="Segoe UI, Arial, sans-serif">LOGISTICS</text>
+</svg>
