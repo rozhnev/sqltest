@@ -11,6 +11,7 @@ class Controller
     private array $languages;
     private array $playgroundConfig;
     private array $urgentBanner;
+    private array $interviewConfig;
 
     private function getAutoTranslator(): LocalizationAutoTranslator
     {
@@ -45,6 +46,7 @@ class Controller
         $this->domain       = $config['domain'] ?? 'localhost';
         $this->languages    = $config['languages'] ?? [];
         $this->playgroundConfig = $config['playground'] ?? [];
+        $this->interviewConfig = $config['interview'] ?? [];
 
         // Build absolute domain safely (works with proxies)
         $host = (string)($_SERVER['HTTP_HOST'] ?? $this->domain);
@@ -309,6 +311,179 @@ class Controller
         $this->assignVariables(['Action' => 'books']);
         $this->engine->display("books.tpl");
     }
+
+    public function interview_start(array $params): void
+    {
+        $pending = $_SESSION['interview_pending'] ?? null;
+        $this->assignVariables([
+            'Action'    => 'interview-start',
+            'PageTitle' => $this->lang === 'ru'
+                ? 'Симуляция собеседования — Meridian Logistics | SQLTest.online'
+                : 'Mock Interview — Meridian Logistics | SQLTest.online',
+            'InterviewLoginRequired' => isset($_GET['login_required']) && $pending !== null,
+            'InterviewPending'       => $pending,
+            'ActiveInterviewSession' => null,
+        ]);
+
+        if ($this->user->logged()) {
+            $interview = new Interview($this->dbh);
+            $activeSession = $interview->findActiveSession((string)$this->user->getId());
+            if ($activeSession) {
+                $this->engine->assign('ActiveInterviewSession', $activeSession);
+            }
+        }
+
+        $this->engine->display('interview-start.tpl');
+    }
+
+    /**
+     * Gate + generate a new interview session (see INTERVIEW_SIMULATION_PLAN.md, п. 1 flow step 2, п. 3.2.2).
+     * Order matters: login check, then active-session check, then payment/cooldown, then generation.
+     */
+    public function interview_create(array $params): void
+    {
+        $interview = new Interview($this->dbh);
+
+        $position = (string)($_GET['position'] ?? '');
+        $grade = (int)($_GET['grade'] ?? 0);
+
+        if (!$interview->isValidPosition($position) || !$interview->isValidGrade($grade)) {
+            $this->engine->assign('ErrorMessage', $this->lang === 'ru'
+                ? 'Некорректная позиция или грейд.'
+                : 'Invalid position or grade.');
+            $this->engine->display('error.tpl');
+            return;
+        }
+
+        // 1. Not logged in -> show the login form with a relevant message, remember the choice.
+        if (!$this->user->logged()) {
+            $_SESSION['interview_pending'] = ['position' => $position, 'grade' => $grade];
+            header("Location: /{$this->lang}/interview-start?login_required=1");
+            exit();
+        }
+
+        $userId = (string)$this->user->getId();
+        unset($_SESSION['interview_pending']);
+
+        // 2. Already has an active (unfinished) session -> continue it, regardless of position/grade.
+        $activeSession = $interview->findActiveSession($userId);
+        if ($activeSession) {
+            header("Location: /{$this->lang}/interview/{$activeSession['id']}");
+            exit();
+        }
+
+        // 3. No active session and not paid -> send to the payment page (Lava.top).
+        if (!$interview->hasPaidAccess($userId)) {
+            header("Location: /{$this->lang}/interview/payment");
+            exit();
+        }
+
+        // Cooldown: already started a session for this exact position/grade today.
+        if (!$interview->canRetryToday($userId, $position, $grade)) {
+            $this->engine->assign('ErrorMessage', $this->lang === 'ru'
+                ? 'Повторная попытка на эту позицию и грейд доступна начиная со следующего дня.'
+                : 'A retry for this position and grade is available starting the next calendar day.');
+            $this->engine->display('error.tpl');
+            return;
+        }
+
+        // 4. Logged in and paid -> generate the session.
+        try {
+            $sessionId = $interview->create($userId, $position, $grade);
+        } catch (Exception $error) {
+            // Entitlement got consumed by a concurrent request between the check above and create().
+            header("Location: /{$this->lang}/interview/payment");
+            exit();
+        }
+        header("Location: /{$this->lang}/interview/{$sessionId}");
+        exit();
+    }
+
+    /**
+     * Current-step screen for a session: self-presentation form (status 'intro'), its
+     * LLM-analyzed result right after submission, or a placeholder for later statuses
+     * until the question/result UI is built (see INTERVIEW_SIMULATION_PLAN.md, Этап 3+).
+     */
+    public function interview_session(array $params): void
+    {
+        if (!$this->user->logged()) {
+            header("Location: /{$this->lang}/interview-start");
+            exit();
+        }
+
+        $interview = new Interview($this->dbh);
+        $sessionId = (string)$params['sessionId'];
+        $userId = (string)$this->user->getId();
+        $session = $interview->getSession($sessionId, $userId);
+
+        if (!$session) {
+            $this->engine->assign('ErrorMessage', $this->lang === 'ru'
+                ? 'Сессия интервью не найдена.'
+                : 'Interview session not found.');
+            $this->engine->display('error.tpl');
+            return;
+        }
+
+        $justSubmitted = false;
+        $selfIntroError = null;
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && $session['status'] === 'intro') {
+            if (!$this->hitFreeAnswerRateLimit()) {
+                $this->engine->assign('ErrorMessage', $this->lang === 'ru'
+                    ? 'Слишком много запросов. Попробуйте позже.'
+                    : 'Too many requests. Please try again later.');
+                $this->engine->display('error.tpl');
+                return;
+            }
+
+            $languageNames = [
+                'en' => 'English', 'ru' => 'Russian', 'pt' => 'Portuguese',
+                'fr' => 'French', 'zh' => 'Simplified Chinese', 'es' => 'Spanish',
+            ];
+            $llmProfileName = (string)($this->env['USER_ANSWER_LLM_PROFILE'] ?? 'openai-gpt-4o-mini');
+            $result = $interview->saveSelfIntro(
+                $sessionId,
+                $userId,
+                (string)($_POST['self_intro'] ?? ''),
+                $llmProfileName,
+                $languageNames[$this->lang] ?? 'English'
+            );
+
+            if ($result['ok']) {
+                $session = $interview->getSession($sessionId, $userId);
+                $justSubmitted = true;
+            } else {
+                $selfIntroError = $result['error'] === 'empty'
+                    ? ($this->lang === 'ru' ? 'Пожалуйста, напишите пару предложений о себе.' : 'Please write a few sentences about yourself.')
+                    : ($this->lang === 'ru' ? 'Не удалось сохранить самопрезентацию. Попробуйте ещё раз.' : 'Could not save your self-presentation. Please try again.');
+            }
+        }
+
+        $this->assignVariables(['Action' => 'interview-session']);
+        $this->engine->assign('InterviewSession', $session);
+        $this->engine->assign('InterviewJustSubmitted', $justSubmitted);
+        $this->engine->assign('SelfIntroError', $selfIntroError);
+        $this->engine->display('interview-session.tpl');
+    }
+
+    /**
+     * Payment page for interview access (Lava.top). Automatic entitlement grants via the
+     * Lava.top API/webhook are not wired up yet (see config.php, 'interview' section) --
+     * access is granted manually in interview_entitlements after payment is confirmed.
+     */
+    public function interview_payment(array $params): void
+    {
+        if (!$this->user->logged()) {
+            header("Location: /{$this->lang}/interview-start");
+            exit();
+        }
+
+        $this->assignVariables([
+            'Action' => 'interview-payment',
+            'InterviewPaymentUrl' => (string)($this->interviewConfig['lava_payment_url'] ?? ''),
+        ]);
+        $this->engine->display('interview-payment.tpl');
+    }
+
     public function redirect(array $params): void
     {
         $questionCategoryID = $params['questionCategoryId'];

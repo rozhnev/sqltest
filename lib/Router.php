@@ -26,6 +26,9 @@ class Router
             'tests'             => "@(?<lang>{$this->langPattern})/(?<class>test)/(?<action>start|create)@i",
             'challenge-mariadb-start' => "@(?<lang>{$this->langPattern})/challenge-mariadb/start/?@i",
             'challenge-mariadb' => "@(?<lang>{$this->langPattern})/(?<action>challenge-mariadb)/?@i",
+            'interview-start'   => "@(?<lang>{$this->langPattern})/(?<action>interview-start)/?@i",
+            'interview-session' => "@(?<lang>{$this->langPattern})/interview/(?<sessionId>[0-9a-f-]{36})/?@i",
+            'interview'         => "@(?<lang>{$this->langPattern})/(?<class>interview)/(?<action>create|payment)/?@i",
             'test'              => "@(?<lang>{$this->langPattern})/(?<class>test)/(?<testId>[a-z0-9-]+)/(?<action>grade|result|claim)@i",
             'test_question'     => "@(?<lang>{$this->langPattern})/(?<class>test)/(?<testId>[a-z0-9-]+)/(?<action>question|check)/?(?<questionID>\d+)?@i",
             'user'              => "@(?<lang>{$this->langPattern})/(?<class>user)/(?<action>achievements|profile|update)@i",
@@ -121,6 +124,9 @@ class Router
                 }
                 if ($route === 'challenge-mariadb-start') {
                     $params['action'] = 'challenge-mariadb_start';
+                }
+                if ($route === 'interview-session') {
+                    $params['action'] = 'interview_session';
                 }
                 $action = str_replace('-', '_', strtolower($params['action']));
                 $method = isset($params['class']) ? $params['class'] . '_' . $action : $action;
