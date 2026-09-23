@@ -1,43 +1,20 @@
 {include file='short-header.tpl'}
+<style>
+    /* The site's light theme sets --regular-text-color to white; text on the plain page background needs --question-text. */
+    .interview-page { color: var(--question-text); }
+</style>
 <body>
     <div class="container">
         <header>
             {if $MobileView}
-                {include file='m.top-menu.tpl' path="/interview-start"}
+                {include file='m.top-menu.tpl' path="/interview/payment"}
             {else}
-                {include file='top-menu.tpl' path="/interview-start"}
+                {include file='top-menu.tpl' path="/interview/payment"}
             {/if}
         </header>
         <main>
-            <div style="max-width: 640px; margin: 15vh auto; text-align: center;">
-                <h2>{if $Lang === 'ru'}Доступ к симуляции собеседования{else}Interview simulation access{/if}</h2>
-                <p>
-                    {if $Lang === 'ru'}
-                        Симуляция собеседования — платная функция. Оплатите доступ через Lava.top, чтобы продолжить.
-                    {else}
-                        The interview simulation is a paid feature. Pay for access via Lava.top to continue.
-                    {/if}
-                </p>
-                {if $InterviewPaymentUrl}
-                    <p><a class="button blue" href="{$InterviewPaymentUrl|escape}" target="_blank" rel="noopener noreferrer">
-                        {if $Lang === 'ru'}Оплатить через Lava.top{else}Pay with Lava.top{/if}
-                    </a></p>
-                    <p style="font-size: 0.9em;">
-                        {if $Lang === 'ru'}
-                            После оплаты доступ будет открыт вручную в течение короткого времени.
-                        {else}
-                            Access is granted manually shortly after payment is confirmed.
-                        {/if}
-                    </p>
-                {else}
-                    <p>
-                        {if $Lang === 'ru'}
-                            Оплата временно недоступна. Напишите нам, чтобы получить доступ.
-                        {else}
-                            Payment is temporarily unavailable. Please contact us to get access.
-                        {/if}
-                    </p>
-                {/if}
+            <div class="interview-page">
+                {include file=$InterviewContentTemplate}
             </div>
         </main>
         <footer>

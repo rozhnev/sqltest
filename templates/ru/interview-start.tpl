@@ -3,6 +3,12 @@
         Войдите, чтобы начать собеседование на выбранную позицию и грейд.
     </div>
 {/if}
+{if $ActiveInterviewSession}
+    <div class="interview-notice">
+        У вас уже есть незавершённое собеседование.
+        <a class="interview-start-btn" href="/{$Lang}/interview/{$ActiveInterviewSession.id}">Продолжить интервью</a>
+    </div>
+{/if}
 <div class="interview-page">
 <section class="interview-hero">
     <div class="interview-hero-logo">

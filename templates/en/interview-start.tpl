@@ -3,6 +3,12 @@
         Sign in to start the interview for the position and grade you selected.
     </div>
 {/if}
+{if $ActiveInterviewSession}
+    <div class="interview-notice">
+        You already have an unfinished interview session.
+        <a class="interview-start-btn" href="/{$Lang}/interview/{$ActiveInterviewSession.id}">Continue interview</a>
+    </div>
+{/if}
 <div class="interview-page">
 <section class="interview-hero">
     <div class="interview-hero-logo">

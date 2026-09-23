@@ -85,6 +85,10 @@
         transition: background-color 0.15s ease;
     }
     .interview-start-btn:hover { background: #3B82F6; }
+    .interview-notice {
+        max-width: 720px; margin: 1rem auto 0; padding: 1rem 1.25rem; border-radius: 12px;
+        background: #DBEAFE; color: #1E3A8A; text-align: center;
+    }
 
     @media (max-width: 640px) {
         .interview-hero { padding: 1.5rem; }
@@ -93,24 +97,12 @@
 </style>
 <body>
     {include file='popups.tpl'}
-    {if $ActiveInterviewSession}
-        <div style="max-width: 720px; margin: 1rem auto 0; padding: 1rem 1.25rem; border-radius: 12px; background: #DBEAFE; color: #1E3A8A; text-align: center;">
-            {if $Lang === 'ru'}
-                У вас уже есть незавершённое собеседование.
-            {else}
-                You already have an unfinished interview session.
-            {/if}
-            <a class="interview-start-btn" href="/{$Lang}/interview/{$ActiveInterviewSession.id}">
-                {if $Lang === 'ru'}Продолжить интервью{else}Continue interview{/if}
-            </a>
-        </div>
-    {/if}
     {if $MobileView}
         <header>
             {include file='m.top-menu.tpl' path="/interview-start"}
         </header>
         <main>
-            {include file="{$Lang}/interview-start.tpl"}
+            {include file=$InterviewContentTemplate}
         </main>
         <footer>
             {include file='m.footer.tpl'}
@@ -130,7 +122,7 @@
                         });
                     </script>
                 {/if}
-                {include file="{$Lang}/interview-start.tpl"}
+                {include file=$InterviewContentTemplate}
             </main>
             <footer>
                 {include file='footer.tpl'}
