@@ -742,9 +742,13 @@ class Interview
             return false;
         }
 
+        // Topic = the question's primary interview skill (question_interview_tags, п. 3.7); the site category
+        // is only a fallback for questions the tagging script hasn't reached yet.
         $stmt = $this->dbh->prepare(
             "SELECT sq.category_id, sq.question_type, sq.auto_check_ok, sq.llm_score, sq.attempt_number,
-                    COALESCE(q.rate, 1) AS rate, q.dbms
+                    COALESCE(q.rate, 1) AS rate, q.dbms,
+                    (SELECT qit.skill_tag_id FROM question_interview_tags qit
+                     WHERE qit.question_id = sq.question_id AND qit.is_primary) AS skill_tag_id
              FROM interview_session_questions sq
              JOIN questions q ON q.id = sq.question_id
              WHERE sq.session_id = :session_id"
@@ -765,15 +769,20 @@ class Interview
                 $credit *= self::RETRY_CREDIT;
             }
 
-            if ($row['category_id'] !== null) {
-                $key = 'category:' . $row['category_id'];
+            $skillTagId = $row['skill_tag_id'] !== null ? (int)$row['skill_tag_id'] : null;
+            $categoryId = $skillTagId === null && $row['category_id'] !== null ? (int)$row['category_id'] : null;
+            if ($skillTagId !== null) {
+                $key = 'skill:' . $skillTagId;
+            } elseif ($categoryId !== null) {
+                $key = 'category:' . $categoryId;
             } else {
                 $key = $row['dbms'] === 'Soft Skills' ? 'soft_skills' : 'other';
             }
             $topics[$key] ??= [
-                'key'         => $key,
-                'category_id' => $row['category_id'] !== null ? (int)$row['category_id'] : null,
-                'questions'   => 0,
+                'key'          => $key,
+                'skill_tag_id' => $skillTagId,
+                'category_id'  => $categoryId,
+                'questions'    => 0,
                 'earned'      => 0.0,
                 'weight'      => 0.0,
             ];
@@ -818,8 +827,8 @@ class Interview
 
     /**
      * Everything the result page shows for a finished session: score, topics with localized titles,
-     * lesson recommendations for weak topics (lesson_categories, п. 3.6) and the question-by-question
-     * transcript. Titles/lessons are resolved at render time so they follow the viewer's language.
+     * lesson recommendations for weak topics and the question-by-question transcript. Titles/lessons are
+     * resolved at render time so they follow the viewer's language.
      */
     public function getResult(string $sessionId, string $userId, string $lang): ?array
     {
@@ -832,25 +841,7 @@ class Interview
         $stmt->execute([':id' => $sessionId]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         $result = json_decode((string)$row['result'], true) ?: [];
-        $topics = $result['topics'] ?? [];
-
-        $categoryIds = array_values(array_filter(array_column($topics, 'category_id')));
-        $categoryTitles = $this->categoryTitles($categoryIds, $lang);
-        $weakCategoryIds = array_values(array_filter(array_map(
-            fn($topic) => $topic['weak'] ? $topic['category_id'] : null,
-            $topics
-        )));
-        $lessons = $this->lessonsForCategories($weakCategoryIds, $lang, 2);
-
-        foreach ($topics as &$topic) {
-            $topic['title'] = $topic['category_id'] !== null
-                ? ($categoryTitles[$topic['category_id']] ?? (string)$topic['category_id'])
-                : $topic['key'];
-            $topic['lessons'] = $topic['category_id'] !== null && $topic['weak']
-                ? ($lessons[$topic['category_id']] ?? [])
-                : [];
-        }
-        unset($topic);
+        $topics = $this->describeTopics($result['topics'] ?? [], $lang);
         usort($topics, fn($a, $b) => $b['percent'] <=> $a['percent']);
 
         return [
@@ -876,20 +867,14 @@ class Interview
         $language = self::LANGUAGE_NAMES[$lang] ?? 'English';
         $role = "{$session['position_label']}, {$session['grade_label']}";
 
-        $categoryTitles = $this->categoryTitles(array_values(array_filter(array_column($topics, 'category_id'))), $lang);
-        $weakCategoryIds = array_values(array_filter(array_map(fn($topic) => $topic['weak'] ? $topic['category_id'] : null, $topics)));
-        $lessons = $this->lessonsForCategories($weakCategoryIds, $lang, 2);
-        $topicLines = array_map(function ($topic) use ($categoryTitles, $lessons) {
-            $title = $topic['category_id'] !== null
-                ? ($categoryTitles[$topic['category_id']] ?? (string)$topic['category_id'])
-                : ($topic['key'] === 'soft_skills' ? 'Professional skills' : 'Other');
+        $topicLines = array_map(function ($topic) {
+            $title = ['soft_skills' => 'Professional skills', 'other' => 'Other'][$topic['key']] ?? $topic['title'];
             $line = "- {$title}: {$topic['percent']}%" . ($topic['weak'] ? ' (weak)' : '');
-            $topicLessons = $topic['category_id'] !== null ? ($lessons[$topic['category_id']] ?? []) : [];
-            if ($topicLessons) {
-                $line .= '; lessons on the site: ' . implode(', ', array_map(fn($lesson) => '"' . $lesson['title'] . '"', $topicLessons));
+            if ($topic['lessons']) {
+                $line .= '; lessons on the site: ' . implode(', ', array_map(fn($lesson) => '"' . $lesson['title'] . '"', $topic['lessons']));
             }
             return $line;
-        }, $topics);
+        }, $this->describeTopics($topics, $lang));
 
         $questionLines = [];
         foreach ($this->getTranscript($session['id'], $lang) as $item) {
@@ -959,6 +944,59 @@ class Interview
         ];
     }
 
+    /**
+     * Adds a localized 'title' and, for weak topics, up to 2 recommended 'lessons' to each topic of a
+     * session result. A topic is an interview skill (skill_tag_id, п. 3.7) or, in results saved before the
+     * skill tags / for untagged questions, a site category (category_id); 'soft_skills' and 'other' keep
+     * their key as the title (templates translate those).
+     */
+    private function describeTopics(array $topics, string $lang): array
+    {
+        $idsOf = fn(string $field, bool $weakOnly) => array_values(array_unique(array_filter(array_map(
+            fn($topic) => (!$weakOnly || $topic['weak']) ? ($topic[$field] ?? null) : null,
+            $topics
+        ))));
+        $skillTitles = $this->skillTitles($idsOf('skill_tag_id', false), $lang);
+        $categoryTitles = $this->categoryTitles($idsOf('category_id', false), $lang);
+        $skillLessons = $this->lessonsFor('lesson_interview_tags', 'skill_tag_id', $idsOf('skill_tag_id', true), $lang, 2);
+        $categoryLessons = $this->lessonsFor('lesson_categories', 'category_id', $idsOf('category_id', true), $lang, 2);
+
+        foreach ($topics as &$topic) {
+            $skillTagId = $topic['skill_tag_id'] ?? null;
+            $categoryId = $topic['category_id'] ?? null;
+            if ($skillTagId !== null) {
+                $topic['title'] = $skillTitles[$skillTagId] ?? (string)$skillTagId;
+                $lessons = $skillLessons[$skillTagId] ?? [];
+            } elseif ($categoryId !== null) {
+                $topic['title'] = $categoryTitles[$categoryId] ?? (string)$categoryId;
+                $lessons = $categoryLessons[$categoryId] ?? [];
+            } else {
+                $topic['title'] = $topic['key'];
+                $lessons = [];
+            }
+            $topic['lessons'] = $topic['weak'] ? $lessons : [];
+        }
+        unset($topic);
+        return $topics;
+    }
+
+    private function skillTitles(array $skillTagIds, string $lang): array
+    {
+        if (!$skillTagIds) {
+            return [];
+        }
+        $placeholders = implode(',', array_fill(0, count($skillTagIds), '?'));
+        $stmt = $this->dbh->prepare(
+            "SELECT t.id, COALESCE(tl_lang.title, tl_en.title, t.code) AS title
+             FROM interview_skill_tags t
+             LEFT JOIN interview_skill_tags_localization tl_lang ON tl_lang.skill_tag_id = t.id AND tl_lang.language = ?
+             LEFT JOIN interview_skill_tags_localization tl_en ON tl_en.skill_tag_id = t.id AND tl_en.language = 'en'
+             WHERE t.id IN ({$placeholders})"
+        );
+        $stmt->execute(array_merge([$lang], array_map('intval', $skillTagIds)));
+        return $stmt->fetchAll(PDO::FETCH_KEY_PAIR);
+    }
+
     private function categoryTitles(array $categoryIds, string $lang): array
     {
         if (!$categoryIds) {
@@ -977,32 +1015,37 @@ class Interview
     }
 
     /**
-     * Top $perCategory lessons by confidence for each category, keyed by category_id.
+     * Top $perTopic lessons by confidence for each id, keyed by id -- from lesson_interview_tags (by skill)
+     * or lesson_categories (by category). Both link tables share the (lesson_id, <id>, confidence) shape.
      */
-    private function lessonsForCategories(array $categoryIds, string $lang, int $perCategory): array
+    private function lessonsFor(string $linkTable, string $idColumn, array $ids, string $lang, int $perTopic): array
     {
-        if (!$categoryIds) {
+        $allowed = ['lesson_interview_tags' => 'skill_tag_id', 'lesson_categories' => 'category_id'];
+        if (($allowed[$linkTable] ?? null) !== $idColumn) {
+            throw new InvalidArgumentException("Unknown lesson link: {$linkTable}.{$idColumn}");
+        }
+        if (!$ids) {
             return [];
         }
-        $placeholders = implode(',', array_fill(0, count($categoryIds), '?'));
+        $placeholders = implode(',', array_fill(0, count($ids), '?'));
         $stmt = $this->dbh->prepare(
-            "SELECT lc.category_id, m.slug AS module_slug, l.slug AS lesson_slug,
+            "SELECT link.{$idColumn} AS topic_id, m.slug AS module_slug, l.slug AS lesson_slug,
                     COALESCE(ll_lang.title, ll_en.title, l.slug) AS title
-             FROM lesson_categories lc
-             JOIN lessons l ON l.id = lc.lesson_id AND NOT COALESCE(l.deleted, false)
+             FROM {$linkTable} link
+             JOIN lessons l ON l.id = link.lesson_id AND NOT COALESCE(l.deleted, false)
              JOIN modules m ON m.id = l.module_id AND NOT COALESCE(m.deleted, false)
              LEFT JOIN lessons_localization ll_lang ON ll_lang.lesson_id = l.id AND ll_lang.language = ?
              LEFT JOIN lessons_localization ll_en ON ll_en.lesson_id = l.id AND ll_en.language = 'en'
-             WHERE lc.category_id IN ({$placeholders})
-             ORDER BY lc.category_id, lc.confidence DESC NULLS LAST"
+             WHERE link.{$idColumn} IN ({$placeholders})
+             ORDER BY link.{$idColumn}, link.confidence DESC NULLS LAST"
         );
-        $stmt->execute(array_merge([$lang], array_map('intval', $categoryIds)));
+        $stmt->execute(array_merge([$lang], array_map('intval', $ids)));
 
         $lessons = [];
         foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $lesson) {
-            $categoryId = (int)$lesson['category_id'];
-            if (count($lessons[$categoryId] ?? []) < $perCategory) {
-                $lessons[$categoryId][] = $lesson;
+            $topicId = (int)$lesson['topic_id'];
+            if (count($lessons[$topicId] ?? []) < $perTopic) {
+                $lessons[$topicId][] = $lesson;
             }
         }
         return $lessons;
