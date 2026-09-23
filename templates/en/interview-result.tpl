@@ -8,6 +8,31 @@
     </div>
 </section>
 
+{if $InterviewResult.report}
+    {assign var="report" value=$InterviewResult.report}
+    <section class="interview-report">
+        <div class="interview-dialog">
+            <div class="dialog-row">
+                <img class="dialog-avatar" src="/images/interview/meridian-logistics-representative.jpeg" alt="Elena Cho">
+                <div class="dialog-message">
+                    <p class="dialog-author">Elena Cho, Head of Data &amp; Engineering</p>
+                    <div class="dialog-bubble">
+                        <p class="pre-wrap">{$report.summary|escape}</p>
+                        {if $report.strengths}
+                            <h4>Strengths</h4>
+                            <ul>{foreach $report.strengths as $point}<li>{$point|escape}</li>{/foreach}</ul>
+                        {/if}
+                        {if $report.improvements}
+                            <h4>What to work on</h4>
+                            <ul>{foreach $report.improvements as $point}<li>{$point|escape}</li>{/foreach}</ul>
+                        {/if}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{/if}
+
 <section>
     <h3>Results by topic</h3>
     {foreach $InterviewResult.topics as $topic}
@@ -42,7 +67,7 @@
     {foreach $InterviewResult.transcript as $item}
         <div class="interview-transcript-item">
             <h4>
-                <span>{$item.sequence}. {$item.title|escape}</span>
+                <span>{$item.sequence}. {$item.title|escape}{if $item.attempt_number > 1} <small class="interview-muted">({$item.attempt_number} attempts)</small>{/if}</span>
                 {if $item.question_type === 'free_answer' && $item.llm_score !== null}
                     <span class="{if $item.auto_check_ok}verdict-ok{else}verdict-bad{/if}">{$item.llm_score}/100</span>
                 {elseif $item.auto_check_ok}

@@ -103,13 +103,14 @@ class LLM {
      *
      * @param array $dialog Chat messages, same shape as ask().
      * @param int $timeoutSeconds Hard curl timeout so a hanging request can't hang the page.
+     * @param int|null $maxTokens Overrides the profile's max_tokens_json for longer answers.
      * @return array|null
      */
-    public function askJson(array $dialog, int $timeoutSeconds = 20): ?array {
+    public function askJson(array $dialog, int $timeoutSeconds = 20, ?int $maxTokens = null): ?array {
         $data = [
             'model'            => $this->model,
             'messages'         => $dialog,
-            $this->tokenParam  => $this->maxTokensJson,
+            $this->tokenParam  => $maxTokens ?? $this->maxTokensJson,
             'response_format'  => ['type' => 'json_object'],
         ];
         if ($this->reasoningEffort !== null) {

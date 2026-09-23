@@ -459,9 +459,13 @@ class Question
         return preg_replace_callback($regex, function($code) { eval("\$evaluated = $code[1];"); return $evaluated; }, $input);    
     }
 
-    public function checkQueryResult(string $queryResult)
+    /**
+     * @param bool $ignoreOrder Compare rows as sets even when the question has no pre_check_sort --
+     *                          lets a caller tell "right rows, wrong order" from a wrong result.
+     */
+    public function checkQueryResult(string $queryResult, bool $ignoreOrder = false)
     {
-        
+
         $stmt = $this->dbh->prepare("SELECT query_valid_result, pre_check_sort FROM questions WHERE id = ?");
         $stmt->execute([$this->id]);
         $questionData = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -526,7 +530,7 @@ class Question
             }
 
             // check rows order
-            if ($questionData['pre_check_sort']) {
+            if ($questionData['pre_check_sort'] || $ignoreOrder) {
                 // sort rows before compare
                 sort($resultObject[0]->data);
                 sort($queryValidResult->data);

@@ -32,6 +32,16 @@
                     {/if}
                 </div>
             </div>
+            {if $InterviewSession.status === 'intro'}
+                {* Shown on submit while Elena's reply is being prepared (interview-session.tpl script). *}
+                <div class="dialog-row" id="interviewer-typing" hidden>
+                    <img class="dialog-avatar" src="/images/interview/meridian-logistics-representative.jpeg" alt="Elena Cho">
+                    <div class="dialog-message">
+                        <p class="dialog-author">Elena Cho is typing…</p>
+                        <div class="dialog-bubble"><span class="typing-dots" aria-label="Elena is typing a reply"><span></span><span></span><span></span></span></div>
+                    </div>
+                </div>
+            {/if}
             {if $InterviewSession.status === 'in_progress'}
                 <div class="dialog-row">
                     <img class="dialog-avatar" src="/images/interview/meridian-logistics-representative.jpeg" alt="Elena Cho">

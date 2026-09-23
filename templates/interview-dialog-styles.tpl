@@ -31,6 +31,24 @@
         background: var(--text-block-background-color); color: var(--question-text);
     }
     .dialog-actions { display: flex; justify-content: flex-end; margin-top: 0.75rem; }
+    /* .dialog-row sets display:flex, which would otherwise override the hidden attribute. */
+    .dialog-row[hidden] { display: none; }
+
+    /* "The interviewer is typing" indicator shown while the LLM reply is being prepared. */
+    .typing-dots { display: inline-flex; gap: 0.3rem; align-items: center; height: 1.2em; }
+    .typing-dots span {
+        width: 0.5rem; height: 0.5rem; border-radius: 50%; background: var(--question-date-color);
+        animation: typing-dot 1.2s infinite ease-in-out;
+    }
+    .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes typing-dot {
+        0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
+        30% { opacity: 1; transform: translateY(-0.25rem); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .typing-dots span { animation: none; opacity: 0.6; }
+    }
 
     @media (max-width: 640px) {
         .dialog-avatar { width: 40px; height: 40px; }

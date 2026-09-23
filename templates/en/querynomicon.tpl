@@ -154,11 +154,9 @@
             {/literal}
         </div>
     </div>
-    {if $User->showAd()}
+    {if $User->showAd() && isset($Book)}
         <div class="referal-add-block">
-            {if $Book}
-                {include file='book_card.tpl'}
-            {/if}
+            {include file='book_card.tpl'}
         </div>
     {/if}
 </div>

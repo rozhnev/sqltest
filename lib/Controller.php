@@ -394,6 +394,12 @@ class Controller
         exit();
     }
 
+    /** LLM profile for everything the interviewer says or grades (config.php llm_profiles). */
+    private function interviewLlmProfile(): string
+    {
+        return (string)($this->env['USER_ANSWER_LLM_PROFILE'] ?? 'openai-gpt-4o-mini');
+    }
+
     /**
      * Path of a language-specific template ("{lang}/{name}"), falling back to English for
      * languages that don't have their own version yet.
@@ -513,7 +519,7 @@ class Controller
 
         $questionId = $interview->getCurrentQuestionId($sessionId);
         if ($questionId === null) {
-            $interview->finish($sessionId, (string)$this->user->getId());
+            $interview->finish($sessionId, (string)$this->user->getId(), $this->lang, $this->interviewLlmProfile());
             header("Location: /{$this->lang}/interview/{$sessionId}/result");
             exit();
         }
@@ -529,6 +535,8 @@ class Controller
             } catch (Exception $e) {
                 $question['answers'] = [];
             }
+            // On a retry the previous choice stays checked, so the candidate adjusts it rather than starting over.
+            $question['selected_answers'] = json_decode((string)$question['answer_text'], true) ?: [];
         }
 
         $dbTemplate = (string)$question['db_template'];
@@ -568,19 +576,18 @@ class Controller
         $userId = (string)$this->user->getId();
         $questionId = (int)($_POST['question_id'] ?? 0);
 
-        $isFreeAnswer = isset($_POST['free-answer']);
-        if ($isFreeAnswer && !$this->hitFreeAnswerRateLimit()) {
-            $result = ['saved' => false, 'error' => 'rate_limit'];
-        } else {
-            $result = $interview->answerCurrentQuestion(
-                $sessionId,
-                $userId,
-                $questionId,
-                $_POST,
-                $this->lang,
-                (string)($this->env['USER_ANSWER_LLM_PROFILE'] ?? 'openai-gpt-4o-mini')
-            );
-        }
+        // No hitFreeAnswerRateLimit() here: that daily quota is shared with the free site-wide check and
+        // could lock a paying candidate out mid-interview. LLM use per session is already bounded by the
+        // question count, max_attempts and the interview.llm_call_budget setting.
+        $result = $interview->answerCurrentQuestion(
+            $sessionId,
+            $userId,
+            $questionId,
+            $_POST,
+            $this->lang,
+            $this->interviewLlmProfile(),
+            (int)($this->interviewConfig['llm_call_budget'] ?? 15)
+        );
 
         $this->assignVariables([
             'SessionId'    => $sessionId,
@@ -588,6 +595,8 @@ class Controller
         ]);
         echo json_encode([
             'saved' => $result['saved'],
+            // false while the question stays open for another attempt after a "close" answer
+            'final' => $result['saved'] && $result['final'],
             'html'  => $this->engine->fetch($this->localizedTemplate('interview-answer-result.tpl')),
         ], JSON_UNESCAPED_UNICODE);
     }
@@ -607,7 +616,7 @@ class Controller
         $sessionId = (string)$session['id'];
         $userId = (string)$this->user->getId();
 
-        if ($session['status'] === 'in_progress' && !$interview->finish($sessionId, $userId)) {
+        if ($session['status'] === 'in_progress' && !$interview->finish($sessionId, $userId, $this->lang, $this->interviewLlmProfile())) {
             header("Location: /{$this->lang}/interview/{$sessionId}/question");
             exit();
         }

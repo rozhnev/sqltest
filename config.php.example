@@ -100,5 +100,8 @@ $config = [
         'positions' => ['sql_developer', 'data_analyst'],
         'grades' => [2, 3, 4],
         'lava_payment_url' => $env['INTERVIEW_LAVA_PAYMENT_URL'] ?? '',
+        // Max LLM calls per interview session (self-presentation analysis, free-answer grading,
+        // interviewer comments on wrong answers). Once reached, wrong answers are only marked wrong.
+        'llm_call_budget' => (int)($env['INTERVIEW_LLM_CALL_BUDGET'] ?? 15),
     ],
 ];    
