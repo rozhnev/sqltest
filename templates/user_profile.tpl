@@ -312,12 +312,22 @@
 }
 .profile-tab {
     flex: 0 0 auto;
-    background: none; border: none; border-bottom: 3px solid transparent;
+    background: none; border: none; border-bottom: 3px solid transparent; border-radius: 8px 8px 0 0;
     padding: 0.6rem 0.9rem; cursor: pointer; font: inherit; font-weight: 600;
     color: var(--question-date-color); white-space: nowrap;
+    transition: color 0.15s, background-color 0.15s, border-color 0.15s;
 }
-.profile-tab:hover { color: var(--light-h2-color); }
 .profile-tab.active { color: var(--accordion-active); border-bottom-color: var(--accordion-active); }
+/* Hover: accent text on a translucent accent tint -- reads on both the light and the dark background
+   (in the dark theme the muted tab color is already near-white, so a text-only change was invisible). */
+@media (hover: hover) {
+    .profile-tab:hover {
+        color: var(--accordion-active);
+        background-color: rgba(0, 110, 245, 0.12);
+        border-bottom-color: rgba(0, 110, 245, 0.45);
+    }
+    .profile-tab.active:hover { border-bottom-color: var(--accordion-active); }
+}
 .profile-tab:focus-visible { outline: 2px solid var(--accordion-active); outline-offset: -2px; }
 .profile-tab-count {
     display: inline-block; min-width: 1.4em; padding: 0 0.35em; margin-left: 0.25em;
