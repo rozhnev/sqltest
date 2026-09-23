@@ -1835,8 +1835,6 @@ class Controller
             exit();
         }
 
-        $questions = $this->user->getQuestions($this->lang);
-        $tests = $this->user->getTests($this->lang);
         $prizeClaims = $this->user->getPrizeClaims();
 
         $this->assignVariables([

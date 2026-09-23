@@ -8,15 +8,9 @@
 <script type="text/javascript" src="https://unpkg.com/tabulator-tables@5.5.2/dist/js/tabulator.min.js"></script>
 <body>
     {include file='popups.tpl'}
-    {if $MobileView}
-        
-    {else}
-        <div class="container">
-            <header>
-                {include file='top-menu.tpl' path="/user/profile"}
-            </header>
-            <main>
-                <div class="about">
+    {* The page body is shared by the mobile and desktop layouts below. *}
+    {capture name="profileContent"}
+                <div class="about profile-page">
                     <div class="section top colored">
                         <div>
                         <h2>{translate}profile_page_title{/translate}</h2>
@@ -133,28 +127,46 @@
                             <h2>{translate}tests{/translate}</h2>
                         </div>
                         <div id="tests-table"></div>
-                            {if $PrizeClaims|@count > 0}
-                                <div class="section colored" style="height: 100%;">
-                                    <div style="width: 100%;">
-                                        <h2>{translate}mariadb_prize_qr_code{/translate}</h2>
-                                    </div>
-                                    <div class="profile-achievements">
-                                        {foreach $PrizeClaims as $claim}
-                                            <div class="profile-achievement">
-                                                <span class="pa-date">{$claim.created_at}</span>
-                                                <div>
-                                                    <img src="{$claim.qr_code_url}" alt="QR code" style="max-width: 180px; display: block; margin-bottom: 0.75rem;">
-                                                    <code>{$claim.identifier}</code>
-                                                </div>
-                                            </div>
-                                        {/foreach}
-                                    </div>
-                                </div>
-                            {/if}
                     </div>
+                    {if $PrizeClaims|@count > 0}
+                        <div class="section colored" style="height: 100%;">
+                            <div style="width: 100%;">
+                                <h2>{translate}mariadb_prize_qr_code{/translate}</h2>
+                            </div>
+                            <div class="profile-achievements">
+                                {foreach $PrizeClaims as $claim}
+                                    <div class="profile-achievement">
+                                        <span class="pa-date">{$claim.created_at}</span>
+                                        <div>
+                                            <img src="{$claim.qr_code_url}" alt="QR code" style="max-width: 180px; display: block; margin-bottom: 0.75rem;">
+                                            <code>{$claim.identifier}</code>
+                                        </div>
+                                    </div>
+                                {/foreach}
+                            </div>
+                        </div>
+                    {/if}
                 </div>
+    {/capture}
+    {if $MobileView}
+        <header>
+            {include file='m.top-menu.tpl' path="/user/profile"}
+        </header>
+        <main>
+            {$smarty.capture.profileContent}
+        </main>
+        <footer>
+            {include file='m.footer.tpl'}
+        </footer>
+    {else}
+        <div class="container">
+            <header>
+                {include file='top-menu.tpl' path="/user/profile"}
+            </header>
+            <main>
+                {$smarty.capture.profileContent}
             </main>
-            <footer>               
+            <footer>
                 {include file='footer.tpl'}
             </footer>
         </div>
@@ -163,6 +175,15 @@
 </html>
 {literal}
 <style>
+/* about.css colors only the .top section heading; the rest inherited body's white text in the light theme. */
+.profile-page .section h2 {
+    color: var(--ligth-h2-color);
+}
+@media (max-width: 640px) {
+    .about.profile-page .section { padding: 1rem; }
+    .profile-field { flex-wrap: wrap; row-gap: 0.25rem; }
+    .nickname-container { flex-wrap: wrap; }
+}
 .profile {
     display: flex;
     flex-direction: column !important;
@@ -273,7 +294,16 @@
 }
 .tabulator .tabulator-row {
     border-bottom: 1px solid var(--text-block-border-color);
-    color: darkslategray;
+    /* theme variables: tabulator.min.css paints rows white, and a fixed dark text color
+       was unreadable on the dark theme's panel */
+    color: var(--ligth-h2-color);
+    background-color: var(--text-block-background-color);
+}
+.tabulator .tabulator-row.tabulator-row-even {
+    background-color: var(--ligth-panel-bg-color);
+}
+.tabulator .tabulator-tableholder {
+    background-color: transparent;
 }
 
 .tabulator .tabulator-row:hover {
@@ -633,8 +663,8 @@ let testsTable = new Tabulator("#tests-table", {
         {column: "created_at", dir: "desc"}
     ]
 });
-tasksTable.on("rowClick", function(e, row){
-    window.location.href = "/{/literal}{$Lang}{literal}/question/" + row.getData().category + "/" + row.getData().slug;
+testsTable.on("rowClick", function(e, row){
+    window.location.href = "/{/literal}{$Lang}{literal}/test/" + row.getData().id + "/result";
 });
 
 // Mock interviews: a finished session opens its result page, an unfinished one continues where it stopped.
