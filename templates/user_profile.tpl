@@ -120,6 +120,14 @@
                         </div>
                         <div id="questions-table"></div>
                     </div>
+                    {if $InterviewSessions}
+                        <div class="section colored" style="height: 100%;">
+                            <div style="width: 100%;">
+                                <h2>{translate}interviews{/translate}</h2>
+                            </div>
+                            <div id="interviews-table"></div>
+                        </div>
+                    {/if}
                     <div class="section colored" style="height: 100%;">
                         <div style="width: 100%;">
                             <h2>{translate}tests{/translate}</h2>
@@ -628,5 +636,33 @@ let testsTable = new Tabulator("#tests-table", {
 tasksTable.on("rowClick", function(e, row){
     window.location.href = "/{/literal}{$Lang}{literal}/question/" + row.getData().category + "/" + row.getData().slug;
 });
+
+// Mock interviews: a finished session opens its result page, an unfinished one continues where it stopped.
+const interviewsTableData = {/literal}{$InterviewSessions|json_encode nofilter}{literal};
+if (interviewsTableData.length) {
+    const interviewsTable = new Tabulator("#interviews-table", {
+        data: interviewsTableData,
+        layout: "fitColumns",
+        pagination: true,
+        paginationSize: 10,
+        selectable: false,
+        columns: [
+            {title: "{/literal}{translate}date{/translate}{literal}", field: "created_at", widthGrow: 1},
+            {title: "{/literal}{translate}interview_position{/translate}{literal}", field: "position_label", widthGrow: 1.5},
+            {title: "{/literal}{translate}interview_grade{/translate}{literal}", field: "grade_label", widthGrow: 1},
+            {title: "{/literal}{translate}interview_status{/translate}{literal}", field: "finished", widthGrow: 1.5,
+                formatter: (cell) => cell.getValue()
+                    ? "{/literal}{translate}interview_status_finished{/translate}{literal}"
+                    : "{/literal}{translate}interview_status_active{/translate}{literal}"},
+            {title: "{/literal}{translate}interview_score{/translate}{literal}", field: "final_score", widthGrow: 1, hozAlign: "right",
+                formatter: (cell) => cell.getValue() === null ? "—" : cell.getValue() + "%"},
+        ],
+        initialSort: [{column: "created_at", dir: "desc"}],
+    });
+    interviewsTable.on("rowClick", function (e, row) {
+        const session = row.getData();
+        window.location.href = "/{/literal}{$Lang}{literal}/interview/" + session.id + (session.finished ? "/result" : "");
+    });
+}
 </script>
 {/literal}

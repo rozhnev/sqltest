@@ -314,6 +314,14 @@ $translations = [
     'update_profile_full_name' => 'Обновите свой <a class="button small green" href="/ru/user/profile">профиль</a> указав полное имя, чтобы ваши достижения выглядели более персонально.',
     'view_achievement' => 'Посмотреть достижение',
 
+    // Interview simulation: list of sessions in the user profile (templates/user_profile.tpl)
+    'interviews' => 'Собеседования',
+    'interview_position' => 'Позиция',
+    'interview_grade' => 'Грейд',
+    'interview_status' => 'Статус',
+    'interview_score' => 'Результат',
+    'interview_status_finished' => 'Завершено',
+    'interview_status_active' => 'В процессе — продолжить',
     // Interview simulation: strings used from PHP (Controller::interview_*); page texts live in templates/{lang}/interview-*.tpl
     'interview_start_page_title' => 'Симуляция собеседования — Meridian Logistics | SQLTest.online',
     'interview_question_page_title' => 'Собеседование — Meridian Logistics | SQLTest.online',

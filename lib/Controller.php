@@ -1845,6 +1845,7 @@ class Controller
             'User'  => $this->user,
             'Questions'     => $this->user->getQuestions($this->lang),
             'Tests'         => $this->user->getTests($this->lang),
+            'InterviewSessions' => $this->user->getInterviewSessions(),
             'PrizeClaims'   => $prizeClaims,
 
             'Achievements'  => $this->user->achievements($this->lang),

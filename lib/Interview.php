@@ -1053,7 +1053,8 @@ class Interview
         return $transcript;
     }
 
-    private const POSITION_LABELS = [
+    // Public: also used by User::getInterviewSessions() for the profile list.
+    public const POSITION_LABELS = [
         'sql_developer' => 'SQL Developer',
         'data_analyst'  => 'Data Analyst',
     ];
@@ -1070,7 +1071,7 @@ class Interview
         . '(in Russian: "вы готовы", "ваш уровень соответствует роли" -- never "вы выглядите готовым/готовой", '
         . '"вы были уверенным").';
 
-    private const GRADE_LABELS = [
+    public const GRADE_LABELS = [
         2 => 'Junior',
         3 => 'Middle',
         4 => 'Senior',

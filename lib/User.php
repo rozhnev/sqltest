@@ -1437,4 +1437,33 @@ class User
         $stmt->execute([':lang' => $lang, ':user_id' => $this->id]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    /**
+     * The user's mock interview sessions for the profile list (INTERVIEW_SIMULATION_PLAN.md, п. 3.8),
+     * newest first: one row per session with what the list shows -- details are loaded on the session's
+     * own result page.
+     */
+    public function getInterviewSessions(): array
+    {
+        $stmt = $this->dbh->prepare("
+            SELECT s.id, s.position, s.grade, s.status,
+                to_char(s.created_at, 'YYYY-MM-DD') created_at,
+                round(s.final_score) final_score,
+                COUNT(sq.question_id) questions_count,
+                COUNT(sq.answered_at) answered_count
+            FROM interview_sessions s
+            LEFT JOIN interview_session_questions sq ON sq.session_id = s.id
+            WHERE s.user_id = :user_id
+            GROUP BY s.id
+            ORDER BY s.created_at DESC
+        ");
+        $stmt->execute([':user_id' => $this->id]);
+        return array_map(function ($session) {
+            $session['position_label'] = Interview::POSITION_LABELS[$session['position']] ?? $session['position'];
+            $session['grade_label'] = Interview::GRADE_LABELS[(int)$session['grade']] ?? (string)$session['grade'];
+            $session['finished'] = $session['status'] === 'finished';
+            $session['final_score'] = $session['final_score'] !== null ? (int)$session['final_score'] : null;
+            return $session;
+        }, $stmt->fetchAll(PDO::FETCH_ASSOC));
+    }
 }

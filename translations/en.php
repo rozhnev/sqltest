@@ -306,6 +306,14 @@ $translations = [
     'update_profile_full_name' => 'Update your <a class="button small green" href="/en/user/profile">profile</a> with your full name to make your achievement shares more personal.',
     'view_achievement' => 'View achievement',
 
+    // Interview simulation: list of sessions in the user profile (templates/user_profile.tpl)
+    'interviews' => 'Mock interviews',
+    'interview_position' => 'Position',
+    'interview_grade' => 'Grade',
+    'interview_status' => 'Status',
+    'interview_score' => 'Result',
+    'interview_status_finished' => 'Finished',
+    'interview_status_active' => 'In progress — continue',
     // Interview simulation: strings used from PHP (Controller::interview_*); page texts live in templates/{lang}/interview-*.tpl
     'interview_start_page_title' => 'Mock Interview — Meridian Logistics | SQLTest.online',
     'interview_question_page_title' => 'Interview — Meridian Logistics | SQLTest.online',
