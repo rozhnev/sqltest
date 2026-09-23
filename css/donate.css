@@ -12,8 +12,8 @@
   text-align: center;
   padding: 1.5rem;
   border-radius: 12px;
-  color: var(--ligth-h2-color);
-  background-color: var(--ligth-panel-bg-color);
+  color: var(--light-h2-color);
+  background-color: var(--light-panel-bg-color);
   border: 1px solid var(--text-block-border-color);
   max-width: 45%;
   min-width: 20rem;
@@ -33,15 +33,15 @@
 .donation-intro, .donation-helper, .donation-fallback, .donation-suggested { text-align: left; }
 .donation-helper { margin: 0.75rem 0 1rem; color: var(--text-color); line-height: 1.5; }
 .about .top .donation-suggested {
-  margin: 0 0 1rem; padding-left: 1.25rem; color: var(--ligth-h2-color) !important; list-style: disc !important;
+  margin: 0 0 1rem; padding-left: 1.25rem; color: var(--light-h2-color) !important; list-style: disc !important;
 }
-.about .top .donation-suggested li { margin: 0.35rem 0; color: var(--ligth-h2-color) !important; list-style: disc !important; }
-.about .top .donation-suggested li::marker { color: var(--ligth-h2-color) !important; }
+.about .top .donation-suggested li { margin: 0.35rem 0; color: var(--light-h2-color) !important; list-style: disc !important; }
+.about .top .donation-suggested li::marker { color: var(--light-h2-color) !important; }
 .donation-fallback { margin-top: 0.75rem; font-size: 0.9rem; overflow-wrap: anywhere; }
 .payment-badge {
   display: inline-flex; align-items: center; gap: 0.3rem; border: 1px solid var(--text-block-border-color);
   border-radius: 999px; padding: 0.2rem 0.6rem; font-size: 0.84rem; background: var(--text-block-background-color);
-  color: var(--ligth-h2-color); line-height: 1.2; white-space: nowrap;
+  color: var(--light-h2-color); line-height: 1.2; white-space: nowrap;
 }
 .payment-badge.mir { background: linear-gradient(90deg, #23a038 0%, #1f9ed8 100%); color: #fff; border-color: transparent; font-weight: 700; letter-spacing: 0.02em; }
 .payment-badge.mir .mir-logo { font-weight: 800; }
@@ -53,7 +53,7 @@
 .donation-method .button.green:focus-visible { outline: 2px solid #22c55e; outline-offset: 2px; }
 [data-theme=dark] .donation-method {
   box-shadow: 0 10px 26px rgba(0, 0, 0, 0.28);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0) 100%), var(--ligth-panel-bg-color);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0) 100%), var(--light-panel-bg-color);
 }
 .donations-history { max-width: 100%; min-width: 20rem; text-align: left; overflow-x: auto; -webkit-overflow-scrolling: touch; }
 .donations-history-table { width: 100%; min-width: 42rem; border-collapse: collapse; }

@@ -115,21 +115,21 @@
                 <div class="section-column column30">
                     <img src="/images/start1.png" alt="Passo 1: abrir a secao de tarefas no SQLTest.online" width="281" height="150" style="height: 150px;">
                     <div>
-                    <div class="bold"><span style="color: var(--ligth-h1-color);">1.&nbsp;</span>Visite o site</div>
+                    <div class="bold"><span style="color: var(--light-h1-color);">1.&nbsp;</span>Visite o site</div>
                     <div style="font-size: small; margin-top: 0.5rem;">Vá para SQLTest.online e selecione a seção "Tarefas"</div>
                 </div>
                 </div>
                 <div class="section-column column30">
                     <img src="/images/start2.png" alt="Passo 2: escolher uma categoria de tarefas SQL" width="281" height="150" style="height: 150px;">
                 <div>
-                    <div class="bold"><span style="color: var(--ligth-h1-color);">2.&nbsp;</span>Selecione uma categoria</div>
+                    <div class="bold"><span style="color: var(--light-h1-color);">2.&nbsp;</span>Selecione uma categoria</div>
                     <div style="font-size: small; margin-top: 0.5rem;">Escolha o tópico ou nível de dificuldade que lhe interessa</div>
                 </div>                
             </div>
                 <div class="section-column column30">
                     <img src="/images/start3.png" alt="Passo 3: resolver tarefas SQL no simulador" width="268" height="150" style="height: 150px;">
                         <div>
-                    <div class="bold"><span style="color: var(--ligth-h1-color);">3.&nbsp;</span>Resolva tarefas</div>
+                    <div class="bold"><span style="color: var(--light-h1-color);">3.&nbsp;</span>Resolva tarefas</div>
                     <div style="font-size: small; margin-top: 0.5rem;">Aplique seu conhecimento de SQL para resolver as tarefas dadas</div>
                     </div>
                 </div>

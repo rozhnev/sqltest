@@ -314,6 +314,20 @@ $translations = [
     'update_profile_full_name' => 'Обновите свой <a class="button small green" href="/ru/user/profile">профиль</a> указав полное имя, чтобы ваши достижения выглядели более персонально.',
     'view_achievement' => 'Посмотреть достижение',
 
+    // User profile layout (templates/user_profile.tpl)
+    'profile_account' => 'Аккаунт',
+    'profile_stat_solved' => 'Решено задач',
+    'profile_stat_tests' => 'Пройдено тестов',
+    'profile_stat_best_interview' => 'Лучшее собеседование',
+    'profile_stat_achievements' => 'Достижений',
+    'profile_grade_not_set' => 'Грейд ещё не определён',
+    'profile_take_test' => 'Пройти тест',
+    'profile_empty_tasks' => 'Вы ещё не решили ни одной задачи.',
+    'profile_empty_tasks_action' => 'Начать решать',
+    'profile_empty_tests' => 'Вы ещё не проходили тест — он определяет ваш грейд.',
+    'profile_empty_achievements' => 'Достижений пока нет — они появляются за решённые задачи и тесты.',
+    'profile_interview_promo' => 'Попробуйте симуляцию SQL-собеседования в Meridian Logistics: теория, живые SQL-задачи и письменный отзыв интервьюера.',
+    'profile_interview_promo_action' => 'Пройти собеседование',
     // Interview simulation: list of sessions in the user profile (templates/user_profile.tpl)
     'interviews' => 'Собеседования',
     'interview_position' => 'Позиция',
@@ -332,4 +346,14 @@ $translations = [
     'interview_error_rate_limit' => 'Слишком много запросов. Попробуйте позже.',
     'interview_error_self_intro_empty' => 'Пожалуйста, напишите пару предложений о себе.',
     'interview_error_self_intro_save' => 'Не удалось сохранить самопрезентацию. Попробуйте ещё раз.',
+    // Tabulator tables (pagination buttons, header filter placeholder) -- templates/user_profile.tpl
+    'tabulator_first' => 'Первая',
+    'tabulator_first_title' => 'Первая страница',
+    'tabulator_prev' => 'Назад',
+    'tabulator_prev_title' => 'Предыдущая страница',
+    'tabulator_next' => 'Вперёд',
+    'tabulator_next_title' => 'Следующая страница',
+    'tabulator_last' => 'Последняя',
+    'tabulator_last_title' => 'Последняя страница',
+    'tabulator_filter' => 'фильтр…',
 ];

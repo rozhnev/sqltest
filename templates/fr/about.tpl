@@ -115,21 +115,21 @@
                     <div class="section-column column30">
                         <img src="/images/start1.png" alt="Etape 1 : ouvrir la section des exercices sur SQLTest.online" width="281" height="150" style="height: 150px;">
                         <div>
-                        <div class="bold"><span style="color: var(--ligth-h1-color);">1.&nbsp;</span>Visitez le site</div>
+                        <div class="bold"><span style="color: var(--light-h1-color);">1.&nbsp;</span>Visitez le site</div>
                         <div style="font-size: small; margin-top: 0.5rem;">Rendez-vous sur SQLTest.online et sélectionnez la section "Tâches"</div>
                     </div>
                     </div>
                     <div class="section-column column30">
                         <img src="/images/start2.png" alt="Etape 2 : choisir une categorie d'exercices SQL" width="281" height="150" style="height: 150px;">
                     <div>
-                        <div class="bold"><span style="color: var(--ligth-h1-color);">2.&nbsp;</span>Sélectionnez une catégorie</div>
+                        <div class="bold"><span style="color: var(--light-h1-color);">2.&nbsp;</span>Sélectionnez une catégorie</div>
                         <div style="font-size: small; margin-top: 0.5rem;">Choisissez le sujet ou le niveau de difficulté qui vous intéresse</div>
                     </div>                
                 </div>
                     <div class="section-column column30">
                         <img src="/images/start3.png" alt="Etape 3 : resoudre des exercices SQL dans le simulateur" width="268" height="150" style="height: 150px;">
                     <div>
-                        <div class="bold"><span style="color: var(--ligth-h1-color);">3.&nbsp;</span>Résolvez des tâches</div>
+                        <div class="bold"><span style="color: var(--light-h1-color);">3.&nbsp;</span>Résolvez des tâches</div>
                         <div style="font-size: small; margin-top: 0.5rem;">Appliquez vos connaissances SQL pour résoudre les tâches proposées</div>
                     </div>                    
                 </div>

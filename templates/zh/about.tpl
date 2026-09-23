@@ -115,21 +115,21 @@
                     <div class="section-column column30">
                         <img src="/images/start1.png" alt="步骤 1：打开 SQLTest.online 任务部分" width="281" height="150" style="height: 150px;">
                         <div>
-                        <div class="bold"><span style="color: var(--ligth-h1-color);">1.&nbsp;</span>访问网站</div>
+                        <div class="bold"><span style="color: var(--light-h1-color);">1.&nbsp;</span>访问网站</div>
                         <div style="font-size: small; margin-top: 0.5rem;">前往 SQLTest.online 并选择“任务”部分</div>
                     </div>
                     </div>
                     <div class="section-column column30">
                         <img src="/images/start2.png" alt="步骤 2：选择一个 SQL 任务类别" width="281" height="150" style="height: 150px;">
                     <div>
-                        <div class="bold"><span style="color: var(--ligth-h1-color);">2.&nbsp;</span>选择一个类别</div>
+                        <div class="bold"><span style="color: var(--light-h1-color);">2.&nbsp;</span>选择一个类别</div>
                         <div style="font-size: small; margin-top: 0.5rem;">选择您感兴趣的主题或难度级别</div>
                     </div>                
                 </div>
                     <div class="section-column column30">
                         <img src="/images/start3.png" alt="步骤 3：在培训师中解决 SQL 任务" width="268" height="150" style="height: 150px;">
                     <div>
-                        <div class="bold"><span style="color: var(--ligth-h1-color);">3.&nbsp;</span>解决任务</div>
+                        <div class="bold"><span style="color: var(--light-h1-color);">3.&nbsp;</span>解决任务</div>
                         <div style="font-size: small; margin-top: 0.5rem;">运用您的 SQL 知识解决给定的任务</div>
                     </div>                    
                 </div>

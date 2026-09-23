@@ -28,7 +28,7 @@
     </div>
     <div class="section" style="height: 100%;">
         <div style="display: block;">      
-            <h2 style="color: var(--ligth-h2-color);">Способы поддержки:</h2>
+            <h2 style="color: var(--light-h2-color);">Способы поддержки:</h2>
             <div class="donation-methods">
                 <div class="donation-method donation-method--primary">
                     <span class="donation-method-badge">Рекомендуемый способ</span>
@@ -78,7 +78,7 @@
                 </div>
             </div>
 
-            <h2 style="color: var(--ligth-h2-color); margin-top: 2rem;">Последние пожертвования</h2>
+            <h2 style="color: var(--light-h2-color); margin-top: 2rem;">Последние пожертвования</h2>
             <div class="donation-method donations-history">
                 {if $LatestDonations|@count > 0}
                     <table class="donations-history-table">

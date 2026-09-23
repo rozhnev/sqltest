@@ -27,7 +27,7 @@
     </div>
     <div class="section" style="height: 100%;">
         <div style="display: block;">      
-            <h2 style="color: var(--ligth-h2-color);">Façons de nous soutenir :</h2>
+            <h2 style="color: var(--light-h2-color);">Façons de nous soutenir :</h2>
             <div class="donation-methods">
                 <div class="donation-method">
                     <h3>Soutenir via Ko-fi</h3>
@@ -55,7 +55,7 @@
                 </div>
             </div>
 
-            <h2 style="color: var(--ligth-h2-color); margin-top: 2rem;">Derniers dons</h2>
+            <h2 style="color: var(--light-h2-color); margin-top: 2rem;">Derniers dons</h2>
             <div class="donation-method donations-history">
                 {if $LatestDonations|@count > 0}
                     <table class="donations-history-table">

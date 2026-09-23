@@ -1,15 +1,15 @@
 
 :root {
     --dark-panel-bg-color: #0B4FCC;
-    --ligth-panel-bg-color: #F6F6F6;
-    --ligth-h1-color: #0B4FCC;
-    --ligth-h2-color: #333333;
+    --light-panel-bg-color: #F6F6F6;
+    --light-h1-color: #0B4FCC;
+    --light-h2-color: #333333;
 }
 [data-theme="dark"] {
     --dark-panel-bg-color: #0B4FCC;
-    --ligth-panel-bg-color: #21283A;
-    --ligth-h1-color: #0B4FCC;
-    --ligth-h2-color: #EEEEEE;
+    --light-panel-bg-color: #21283A;
+    --light-h1-color: #0B4FCC;
+    --light-h2-color: #EEEEEE;
 }
 .about {
     display: flex;
@@ -124,31 +124,31 @@
         border-radius: 2rem 2rem 0 0 ;
     }
     .colored {
-        background-color: var(--ligth-panel-bg-color);
+        background-color: var(--light-panel-bg-color);
     }
     .top, .bottom {
         h1 {
-            color: var(--ligth-h1-color);
+            color: var(--light-h1-color);
             font-size: large;
             margin: 0;
         }
         h2 {
-            color: var(--ligth-h2-color);
+            color: var(--light-h2-color);
             margin: 0;
         }
         h4 {
-            color: var(--ligth-h2-color);
+            color: var(--light-h2-color);
             margin: 0;
         }
         p {
-            color: var(--ligth-h2-color);
+            color: var(--light-h2-color);
         }
         a, a:visited {
-            color: var(--ligth-h1-color);
+            color: var(--light-h1-color);
         }
     }
     .not-colored {
-        color: var(--ligth-h2-color);
+        color: var(--light-h2-color);
     }
     .currency {
         background-color: gold;

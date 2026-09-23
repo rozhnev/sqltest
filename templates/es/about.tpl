@@ -115,21 +115,21 @@
                     <div class="section-column column30">
                         <img src="/images/start1.png" alt="Paso 1: abrir la sección de tareas de SQLTest.online" width="281" height="150" style="height: 150px;">
                         <div>
-                        <div class="bold"><span style="color: var(--ligth-h1-color);">1.&nbsp;</span>Visita el sitio web</div>
+                        <div class="bold"><span style="color: var(--light-h1-color);">1.&nbsp;</span>Visita el sitio web</div>
                         <div style="font-size: small; margin-top: 0.5rem;">Ve a SQLTest.online y selecciona la sección "Tareas"</div>
                     </div>
                     </div>
                     <div class="section-column column30">
                         <img src="/images/start2.png" alt="Paso 2: elegir una categoría de tarea SQL" width="281" height="150" style="height: 150px;">
                     <div>
-                        <div class="bold"><span style="color: var(--ligth-h1-color);">2.&nbsp;</span>Selecciona una categoría</div>
+                        <div class="bold"><span style="color: var(--light-h1-color);">2.&nbsp;</span>Selecciona una categoría</div>
                         <div style="font-size: small; margin-top: 0.5rem;">Elige el tema o nivel de dificultad que te interese</div>
                     </div>                
                 </div>
                     <div class="section-column column30">
                         <img src="/images/start3.png" alt="Paso 3: resolver tareas SQL en el entrenador" width="268" height="150" style="height: 150px;">
                     <div>
-                        <div class="bold"><span style="color: var(--ligth-h1-color);">3.&nbsp;</span>Resuelve tareas</div>
+                        <div class="bold"><span style="color: var(--light-h1-color);">3.&nbsp;</span>Resuelve tareas</div>
                         <div style="font-size: small; margin-top: 0.5rem;">Aplica tus conocimientos de SQL para resolver las tareas dadas</div>
                     </div>                    
                 </div>

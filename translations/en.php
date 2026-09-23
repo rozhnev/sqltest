@@ -306,6 +306,20 @@ $translations = [
     'update_profile_full_name' => 'Update your <a class="button small green" href="/en/user/profile">profile</a> with your full name to make your achievement shares more personal.',
     'view_achievement' => 'View achievement',
 
+    // User profile layout (templates/user_profile.tpl)
+    'profile_account' => 'Account',
+    'profile_stat_solved' => 'Tasks solved',
+    'profile_stat_tests' => 'Tests taken',
+    'profile_stat_best_interview' => 'Best interview',
+    'profile_stat_achievements' => 'Achievements',
+    'profile_grade_not_set' => 'Grade not determined yet',
+    'profile_take_test' => 'Take the test',
+    'profile_empty_tasks' => 'You haven\'t solved any tasks yet.',
+    'profile_empty_tasks_action' => 'Start solving',
+    'profile_empty_tests' => 'You haven\'t taken a test yet — it determines your grade.',
+    'profile_empty_achievements' => 'No achievements yet — they come with solved tasks and tests.',
+    'profile_interview_promo' => 'Try a mock SQL interview at Meridian Logistics: theory, live SQL tasks and written feedback from the interviewer.',
+    'profile_interview_promo_action' => 'Try an interview',
     // Interview simulation: list of sessions in the user profile (templates/user_profile.tpl)
     'interviews' => 'Mock interviews',
     'interview_position' => 'Position',
@@ -324,4 +338,14 @@ $translations = [
     'interview_error_rate_limit' => 'Too many requests. Please try again later.',
     'interview_error_self_intro_empty' => 'Please write a few sentences about yourself.',
     'interview_error_self_intro_save' => 'Could not save your self-presentation. Please try again.',
+    // Tabulator tables (pagination buttons, header filter placeholder) -- templates/user_profile.tpl
+    'tabulator_first' => 'First',
+    'tabulator_first_title' => 'First page',
+    'tabulator_prev' => 'Prev',
+    'tabulator_prev_title' => 'Previous page',
+    'tabulator_next' => 'Next',
+    'tabulator_next_title' => 'Next page',
+    'tabulator_last' => 'Last',
+    'tabulator_last_title' => 'Last page',
+    'tabulator_filter' => 'filter…',
 ];

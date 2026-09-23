@@ -1835,19 +1835,29 @@ class Controller
             exit();
         }
 
-        $prizeClaims = $this->user->getPrizeClaims();
+        $tests = $this->user->getTests($this->lang);
+        $interviewSessions = $this->user->getInterviewSessions();
+        $achievements = $this->user->achievements($this->lang);
+        $interviewScores = array_filter(array_column($interviewSessions, 'final_score'), fn($score) => $score !== null);
 
         $this->assignVariables([
             'Action' => 'profile',
             'Title' => Localizer::translateString('profile_page_title'),
             'User'  => $this->user,
             'Questions'     => $this->user->getQuestions($this->lang),
-            'Tests'         => $this->user->getTests($this->lang),
-            'InterviewSessions' => $this->user->getInterviewSessions(),
-            'PrizeClaims'   => $prizeClaims,
+            'Tests'         => $tests,
+            'InterviewSessions' => $interviewSessions,
+            'PrizeClaims'   => $this->user->getPrizeClaims(),
 
-            'Achievements'  => $this->user->achievements($this->lang),
+            'Achievements'  => $achievements,
             'UserEmail'     => $this->user->getEmail(),
+            // Summary shown in the profile card.
+            'ProfileStats'  => [
+                'solved'        => $this->user->getSolvedQuestionsCount(),
+                'tests'         => count($tests),
+                'bestInterview' => $interviewScores ? max($interviewScores) : null,
+                'achievements'  => count($achievements),
+            ],
         ]);
 
         $this->engine->display('user_profile.tpl');

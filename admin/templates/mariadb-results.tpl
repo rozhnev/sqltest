@@ -7,9 +7,9 @@
         <title>SQLtest.online Admin - MariaDB challenge results</title>
         <link rel="stylesheet" href="/style.min.css?{$VERSION}" media="all" />
         <link rel="stylesheet" href="/admin/style.min.css?{$VERSION}" media="all" />
-        <link href="https://unpkg.com/tabulator-tables@5.5.2/dist/css/tabulator.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/tabulator/5.5.2/css/tabulator.min.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
-        <script type="text/javascript" src="https://unpkg.com/tabulator-tables@5.5.2/dist/js/tabulator.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tabulator/5.5.2/js/tabulator.min.js"></script>
     </head>
     <body>
         <div class="admin-shell">
