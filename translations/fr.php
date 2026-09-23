@@ -343,5 +343,6 @@ $translations = [
     'interview_error_session_not_found' => 'Session d\'entretien introuvable.',
     'interview_error_rate_limit' => 'Trop de requêtes. Veuillez réessayer plus tard.',
     'interview_error_self_intro_empty' => 'Écrivez quelques phrases sur vous.',
+    'interview_error_followup_empty' => 'Veuillez répondre à la question du recruteur.',
     'interview_error_self_intro_save' => 'Impossible d\'enregistrer votre présentation. Veuillez réessayer.',
 ];

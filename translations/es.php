@@ -343,5 +343,6 @@ $translations = [
     'interview_error_session_not_found' => 'No se encontró la sesión de entrevista.',
     'interview_error_rate_limit' => 'Demasiadas solicitudes. Inténtalo de nuevo más tarde.',
     'interview_error_self_intro_empty' => 'Escribe unas frases sobre ti.',
+    'interview_error_followup_empty' => 'Por favor, responde a la pregunta del entrevistador.',
     'interview_error_self_intro_save' => 'No se pudo guardar tu presentación. Inténtalo de nuevo.',
 ];

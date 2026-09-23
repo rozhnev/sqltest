@@ -896,6 +896,11 @@ class Interview
             'Seniority signal from the self-presentation: ' . ($analysis['seniority_signal'] ?? 'unknown'),
             'Concerns about the fit to the role: ' . (($analysis['fit']['concerns'] ?? []) ? implode('; ', $analysis['fit']['concerns']) : 'none'),
         ];
+        if (!empty($analysis['followup']['answer'])) {
+            // п. 4.5: the clarifying question and the candidate's answer feed the final report.
+            $introLines[] = 'Your clarifying question after the self-presentation: ' . ($analysis['followup']['question'] ?? '');
+            $introLines[] = "Candidate's answer to it: " . $analysis['followup']['answer'];
+        }
 
         $messages = [
             [
@@ -1170,10 +1175,17 @@ class Interview
                         . 'interviewer_message is what actually gets shown to the candidate: 2-4 sentences, in the '
                         . 'first person, as if you are speaking to them directly in a live interview -- acknowledge '
                         . 'something specific they said, sound natural and conversational (not a bullet list, not a '
-                        . 'JSON dump, no meta-commentary about scoring), and end by transitioning into the interview '
-                        . '("let\'s dive into some questions" or similar). If there is a mismatch with the chosen '
+                        . 'JSON dump, no meta-commentary about scoring). If there is a mismatch with the chosen '
                         . 'role, weave it in gently and encouragingly -- never say it disqualifies them or that the '
-                        . "interview will stop. Write interviewer_message and every other string value in {$commentLanguage}."
+                        . 'interview will stop. '
+                        . 'followup_question: ask ONE short clarifying question only when something important for this '
+                        . 'role and grade is missing or unclear in the introduction (e.g. a Middle candidate who says '
+                        . 'nothing about query optimization, or vague experience claims) -- a concrete question about that '
+                        . 'specific gap, never a generic "tell me more about yourself". Otherwise null; a clear, relevant '
+                        . 'introduction needs no follow-up. If you ask a follow-up question, interviewer_message must NOT '
+                        . 'move on to the interview questions (the follow-up is shown right after it); if you do not, end '
+                        . 'interviewer_message by transitioning into the interview ("let\'s dive into some questions" or '
+                        . "similar). Write interviewer_message and every other string value in {$commentLanguage}."
                 ],
                 [
                     'role' => 'user',
@@ -1188,18 +1200,72 @@ class Interview
             $analysis = null;
         }
 
+        // A clarifying question (п. 4.5) holds the session at 'intro_followup' until the candidate answers it.
+        $followupQuestion = null;
+        if (is_array($analysis)) {
+            $followupQuestion = is_string($analysis['followup_question'] ?? null) ? trim($analysis['followup_question']) : '';
+            if (preg_match('/^.{0,500}/us', (string)$followupQuestion, $truncated)) {
+                $followupQuestion = $truncated[0];
+            }
+            $followupQuestion = $followupQuestion !== '' ? $followupQuestion : null;
+            $analysis['followup_question'] = $followupQuestion;
+        }
+
         $stmt = $this->dbh->prepare(
             "UPDATE interview_sessions
-             SET self_intro = :self_intro, self_intro_analysis = :analysis, status = 'in_progress'
-             WHERE id = :id AND user_id = :user_id"
+             SET self_intro = :self_intro, self_intro_analysis = :analysis, status = :status
+             WHERE id = :id AND user_id = :user_id AND status = 'intro'"
         );
         $stmt->execute([
             ':self_intro' => $text,
             ':analysis'   => $analysis !== null ? json_encode($analysis, JSON_UNESCAPED_UNICODE) : null,
+            ':status'     => $followupQuestion !== null ? 'intro_followup' : 'in_progress',
             ':id'         => $sessionId,
             ':user_id'    => $userId,
         ]);
 
         return ['ok' => true, 'analysis' => $analysis];
+    }
+
+    /**
+     * Saves the candidate's answer to the interviewer's clarifying question (п. 4.5) and moves the session on to
+     * the interview questions. No LLM call here -- the answer is only used by the final report (buildFinalReport),
+     * which keeps this within the two fixed LLM calls per session (self-presentation + final report).
+     *
+     * @return array{ok: bool, error?: string}
+     */
+    public function saveIntroFollowupAnswer(string $sessionId, string $userId, string $answer): array
+    {
+        $session = $this->getSession($sessionId, $userId);
+        if (!$session || $session['status'] !== 'intro_followup') {
+            return ['ok' => false, 'error' => 'Session is not awaiting a follow-up answer.'];
+        }
+
+        $answer = trim($answer);
+        if ($answer === '') {
+            return ['ok' => false, 'error' => 'empty'];
+        }
+        if (preg_match('/^.{0,4000}/us', $answer, $truncated)) {
+            $answer = $truncated[0];
+        }
+
+        $analysis = $session['self_intro_analysis'] ?? [];
+        $analysis['followup'] = [
+            'question'    => $analysis['followup_question'] ?? null,
+            'answer'      => $answer,
+            'answered_at' => date('c'),
+        ];
+
+        $stmt = $this->dbh->prepare(
+            "UPDATE interview_sessions
+             SET self_intro_analysis = :analysis, status = 'in_progress'
+             WHERE id = :id AND user_id = :user_id AND status = 'intro_followup'"
+        );
+        $stmt->execute([
+            ':analysis' => json_encode($analysis, JSON_UNESCAPED_UNICODE),
+            ':id'       => $sessionId,
+            ':user_id'  => $userId,
+        ]);
+        return $stmt->rowCount() > 0 ? ['ok' => true] : ['ok' => false, 'error' => 'Session is not awaiting a follow-up answer.'];
     }
 }

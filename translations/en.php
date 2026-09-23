@@ -337,6 +337,7 @@ $translations = [
     'interview_error_session_not_found' => 'Interview session not found.',
     'interview_error_rate_limit' => 'Too many requests. Please try again later.',
     'interview_error_self_intro_empty' => 'Please write a few sentences about yourself.',
+    'interview_error_followup_empty' => 'Please answer the interviewer\'s question.',
     'interview_error_self_intro_save' => 'Could not save your self-presentation. Please try again.',
     // Tabulator tables (pagination buttons, header filter placeholder) -- templates/user_profile.tpl
     'tabulator_first' => 'First',

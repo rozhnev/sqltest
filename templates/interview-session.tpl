@@ -11,6 +11,8 @@
     .interview-muted { color: var(--question-date-color); }
 
     .dialog-next { text-align: center; margin-top: 1.75rem; }
+    /* Elena's clarifying question after the self-presentation (п. 4.5). */
+    .followup-question { font-weight: 600; }
 
     @media (max-width: 640px) {
         .interview-session-box { padding: 1rem; margin: 2vh auto; }

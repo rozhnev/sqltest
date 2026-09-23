@@ -486,6 +486,17 @@ class Controller
                     ? Localizer::translateString('interview_error_self_intro_empty')
                     : Localizer::translateString('interview_error_self_intro_save');
             }
+        } elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && $session['status'] === 'intro_followup') {
+            // Answer to the interviewer's clarifying question -- no LLM call, so no rate limit.
+            $result = $interview->saveIntroFollowupAnswer($sessionId, $userId, (string)($_POST['followup_answer'] ?? ''));
+            if ($result['ok']) {
+                $session = $interview->getSession($sessionId, $userId);
+                $justSubmitted = true;
+            } else {
+                $selfIntroError = $result['error'] === 'empty'
+                    ? Localizer::translateString('interview_error_followup_empty')
+                    : Localizer::translateString('interview_error_self_intro_save');
+            }
         }
 
         $this->assignVariables([

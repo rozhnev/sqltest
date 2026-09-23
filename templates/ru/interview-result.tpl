@@ -62,6 +62,10 @@
             {if $session.self_intro_analysis.interviewer_message|default:''}
                 <p class="feedback">&ldquo;{$session.self_intro_analysis.interviewer_message|escape}&rdquo;</p>
             {/if}
+            {if $session.self_intro_analysis.followup.answer|default:''}
+                <p><strong>Уточняющий вопрос:</strong> {$session.self_intro_analysis.followup.question|escape}</p>
+                <p style="white-space: pre-wrap;"><strong>Ваш ответ:</strong> {$session.self_intro_analysis.followup.answer|escape}</p>
+            {/if}
         </div>
     {/if}
     {foreach $InterviewResult.transcript as $item}

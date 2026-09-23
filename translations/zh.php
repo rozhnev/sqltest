@@ -343,5 +343,6 @@ $translations = [
     'interview_error_session_not_found' => '未找到面试会话。',
     'interview_error_rate_limit' => '请求过多，请稍后再试。',
     'interview_error_self_intro_empty' => '请写几句话介绍一下自己。',
+    'interview_error_followup_empty' => '请回答面试官的问题。',
     'interview_error_self_intro_save' => '无法保存您的自我介绍，请重试。',
 ];
