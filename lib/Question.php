@@ -531,6 +531,11 @@ class Question
                 sort($resultObject[0]->data);
                 sort($queryValidResult->data);
             }
+            // optional per-column tolerance: allowed absolute difference for numeric values
+            $tolerance = array_map(
+                fn($h) => (isset($h->tolerance) && is_numeric($h->tolerance)) ? abs((float)$h->tolerance) : 0.0000000001,
+                $queryValidResult->headers
+            );
             foreach ($queryValidResult->data as $i => $row) {
                 if ($row !== $resultObject[0]->data[$i]) {
                     // convert numeric strings to floating numbers
@@ -540,8 +545,8 @@ class Question
                         ) {
                             $row[$col] = floatval($val);
                             $resultObject[0]->data[$i][$col] = floatval($resultObject[0]->data[$i][$col]);
-                            // patch for compare float values with limited precision
-                            if(abs($row[$col]-$resultObject[0]->data[$i][$col]) < 0.0000000001) {
+                            // patch for compare float values with limited precision (or configured tolerance)
+                            if(abs($row[$col]-$resultObject[0]->data[$i][$col]) < $tolerance[$col]) {
                                 $resultObject[0]->data[$i][$col] = $row[$col];
                             }
                         } elseif (
