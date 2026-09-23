@@ -317,9 +317,8 @@ class Controller
         $pending = $_SESSION['interview_pending'] ?? null;
         $this->assignVariables([
             'Action'    => 'interview-start',
-            'PageTitle' => $this->lang === 'ru'
-                ? 'Симуляция собеседования — Meridian Logistics | SQLTest.online'
-                : 'Mock Interview — Meridian Logistics | SQLTest.online',
+            'PageTitle' => Localizer::translateString('interview_start_page_title'),
+            'InterviewContentTemplate' => $this->localizedTemplate('interview-start.tpl'),
             'InterviewLoginRequired' => isset($_GET['login_required']) && $pending !== null,
             'InterviewPending'       => $pending,
             'ActiveInterviewSession' => null,
@@ -348,9 +347,7 @@ class Controller
         $grade = (int)($_GET['grade'] ?? 0);
 
         if (!$interview->isValidPosition($position) || !$interview->isValidGrade($grade)) {
-            $this->engine->assign('ErrorMessage', $this->lang === 'ru'
-                ? 'Некорректная позиция или грейд.'
-                : 'Invalid position or grade.');
+            $this->engine->assign('ErrorMessage', Localizer::translateString('interview_error_invalid_position'));
             $this->engine->display('error.tpl');
             return;
         }
@@ -380,9 +377,7 @@ class Controller
 
         // Cooldown: already started a session for this exact position/grade today.
         if (!$interview->canRetryToday($userId, $position, $grade)) {
-            $this->engine->assign('ErrorMessage', $this->lang === 'ru'
-                ? 'Повторная попытка на эту позицию и грейд доступна начиная со следующего дня.'
-                : 'A retry for this position and grade is available starting the next calendar day.');
+            $this->engine->assign('ErrorMessage', Localizer::translateString('interview_error_cooldown'));
             $this->engine->display('error.tpl');
             return;
         }
@@ -400,37 +395,66 @@ class Controller
     }
 
     /**
-     * Current-step screen for a session: self-presentation form (status 'intro'), its
-     * LLM-analyzed result right after submission, or a placeholder for later statuses
-     * until the question/result UI is built (see INTERVIEW_SIMULATION_PLAN.md, Этап 3+).
+     * Path of a language-specific template ("{lang}/{name}"), falling back to English for
+     * languages that don't have their own version yet.
      */
-    public function interview_session(array $params): void
+    private function localizedTemplate(string $name): string
+    {
+        $template = "{$this->lang}/{$name}";
+        return $this->engine->templateExists($template) ? $template : "en/{$name}";
+    }
+
+    /**
+     * Loads the logged-in user's own interview session from the route, or renders the
+     * "not found" error (also for someone else's session -- no leaking whether it exists).
+     * Redirects anonymous visitors to the public company page.
+     */
+    private function loadOwnInterviewSession(Interview $interview, array $params): ?array
     {
         if (!$this->user->logged()) {
             header("Location: /{$this->lang}/interview-start");
             exit();
         }
 
-        $interview = new Interview($this->dbh);
-        $sessionId = (string)$params['sessionId'];
-        $userId = (string)$this->user->getId();
-        $session = $interview->getSession($sessionId, $userId);
-
+        $session = $interview->getSession((string)$params['sessionId'], (string)$this->user->getId());
         if (!$session) {
-            $this->engine->assign('ErrorMessage', $this->lang === 'ru'
-                ? 'Сессия интервью не найдена.'
-                : 'Interview session not found.');
+            header("HTTP/1.1 404 Not Found");
+            $this->engine->assign('ErrorMessage', Localizer::translateString('interview_error_session_not_found'));
             $this->engine->display('error.tpl');
+            return null;
+        }
+        return $session;
+    }
+
+    /**
+     * Current-step screen for a session: self-presentation form (status 'intro') and the
+     * interviewer's reaction right after submission. Later statuses are forwarded to the
+     * question screen or the result page.
+     */
+    public function interview_session(array $params): void
+    {
+        $interview = new Interview($this->dbh);
+        $session = $this->loadOwnInterviewSession($interview, $params);
+        if (!$session) {
             return;
+        }
+        $sessionId = (string)$session['id'];
+        $userId = (string)$this->user->getId();
+
+        if ($session['status'] === 'finished') {
+            header("Location: /{$this->lang}/interview/{$sessionId}/result");
+            exit();
+        }
+        if ($session['status'] === 'in_progress' && $_SERVER['REQUEST_METHOD'] !== 'POST') {
+            header("Location: /{$this->lang}/interview/{$sessionId}/question");
+            exit();
         }
 
         $justSubmitted = false;
         $selfIntroError = null;
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && $session['status'] === 'intro') {
             if (!$this->hitFreeAnswerRateLimit()) {
-                $this->engine->assign('ErrorMessage', $this->lang === 'ru'
-                    ? 'Слишком много запросов. Попробуйте позже.'
-                    : 'Too many requests. Please try again later.');
+                $this->engine->assign('ErrorMessage', Localizer::translateString('interview_error_rate_limit'));
                 $this->engine->display('error.tpl');
                 return;
             }
@@ -453,16 +477,155 @@ class Controller
                 $justSubmitted = true;
             } else {
                 $selfIntroError = $result['error'] === 'empty'
-                    ? ($this->lang === 'ru' ? 'Пожалуйста, напишите пару предложений о себе.' : 'Please write a few sentences about yourself.')
-                    : ($this->lang === 'ru' ? 'Не удалось сохранить самопрезентацию. Попробуйте ещё раз.' : 'Could not save your self-presentation. Please try again.');
+                    ? Localizer::translateString('interview_error_self_intro_empty')
+                    : Localizer::translateString('interview_error_self_intro_save');
             }
         }
 
-        $this->assignVariables(['Action' => 'interview-session']);
+        $this->assignVariables([
+            'Action' => 'interview-session',
+            'InterviewContentTemplate' => $this->localizedTemplate('interview-session.tpl'),
+        ]);
         $this->engine->assign('InterviewSession', $session);
         $this->engine->assign('InterviewJustSubmitted', $justSubmitted);
         $this->engine->assign('SelfIntroError', $selfIntroError);
         $this->engine->display('interview-session.tpl');
+    }
+
+    /**
+     * Question screen: shows the current (first unanswered) question of the session. When every
+     * question is answered, closes the session and forwards to the result page.
+     */
+    public function interview_question(array $params): void
+    {
+        $interview = new Interview($this->dbh);
+        $session = $this->loadOwnInterviewSession($interview, $params);
+        if (!$session) {
+            return;
+        }
+        $sessionId = (string)$session['id'];
+
+        if ($session['status'] !== 'in_progress') {
+            $target = $session['status'] === 'finished' ? "{$sessionId}/result" : $sessionId;
+            header("Location: /{$this->lang}/interview/{$target}");
+            exit();
+        }
+
+        $questionId = $interview->getCurrentQuestionId($sessionId);
+        if ($questionId === null) {
+            $interview->finish($sessionId, (string)$this->user->getId());
+            header("Location: /{$this->lang}/interview/{$sessionId}/result");
+            exit();
+        }
+
+        if ($this->lang !== 'en') {
+            $this->getAutoTranslator()->ensureQuestionLocalized($questionId, $this->lang);
+        }
+        $question = $interview->getQuestionView($sessionId, $questionId, $this->lang);
+        if ($question['question_type'] === 'answer') {
+            try {
+                $question['answers'] = (new Question($this->dbh, (string)$questionId))
+                    ->getAnswers(0, $this->lang, (string)$this->user->getId());
+            } catch (Exception $e) {
+                $question['answers'] = [];
+            }
+        }
+
+        $dbTemplate = (string)$question['db_template'];
+        $this->assignVariables([
+            'Action'            => 'interview-question',
+            'PageTitle'         => Localizer::translateString('interview_question_page_title'),
+            'InterviewContentTemplate' => $this->localizedTemplate('interview-question.tpl'),
+            'UseAce'            => $question['question_type'] === 'query',
+            'QuestionID'        => $questionId,
+            'DB'                => $dbTemplate,
+            'DBDescription'     => $dbTemplate !== '' && $this->engine->templateExists("{$this->lang}/{$dbTemplate}.tpl")
+                ? "{$this->lang}/{$dbTemplate}.tpl"
+                : null,
+            'InterviewSession'  => $session,
+            'InterviewQuestion' => $question,
+            'InterviewProgressPercent' => (int)round($question['answered_count'] / max(1, $question['questions_count']) * 100),
+        ]);
+        $this->engine->display('interview-question.tpl');
+    }
+
+    /**
+     * POST handler for an answer to the current question. Responds with JSON:
+     * {saved: bool, html: string} -- html is the feedback fragment shown under the editor.
+     */
+    public function interview_answer(array $params): void
+    {
+        $interview = new Interview($this->dbh);
+        header('Content-Type: application/json; charset=utf-8');
+
+        if (!$this->user->logged() || $_SERVER['REQUEST_METHOD'] !== 'POST') {
+            http_response_code(403);
+            echo json_encode(['saved' => false, 'html' => '']);
+            return;
+        }
+
+        $sessionId = (string)$params['sessionId'];
+        $userId = (string)$this->user->getId();
+        $questionId = (int)($_POST['question_id'] ?? 0);
+
+        $isFreeAnswer = isset($_POST['free-answer']);
+        if ($isFreeAnswer && !$this->hitFreeAnswerRateLimit()) {
+            $result = ['saved' => false, 'error' => 'rate_limit'];
+        } else {
+            $result = $interview->answerCurrentQuestion(
+                $sessionId,
+                $userId,
+                $questionId,
+                $_POST,
+                $this->lang,
+                (string)($this->env['USER_ANSWER_LLM_PROFILE'] ?? 'openai-gpt-4o-mini')
+            );
+        }
+
+        $this->assignVariables([
+            'SessionId'    => $sessionId,
+            'AnswerResult' => $result,
+        ]);
+        echo json_encode([
+            'saved' => $result['saved'],
+            'html'  => $this->engine->fetch($this->localizedTemplate('interview-answer-result.tpl')),
+        ], JSON_UNESCAPED_UNICODE);
+    }
+
+    /**
+     * Result page of any of the user's finished sessions (score, topics, lesson recommendations,
+     * transcript). An in-progress session is closed here if all its questions are answered,
+     * otherwise the candidate is sent back to the current question.
+     */
+    public function interview_result(array $params): void
+    {
+        $interview = new Interview($this->dbh);
+        $session = $this->loadOwnInterviewSession($interview, $params);
+        if (!$session) {
+            return;
+        }
+        $sessionId = (string)$session['id'];
+        $userId = (string)$this->user->getId();
+
+        if ($session['status'] === 'in_progress' && !$interview->finish($sessionId, $userId)) {
+            header("Location: /{$this->lang}/interview/{$sessionId}/question");
+            exit();
+        }
+
+        $result = $interview->getResult($sessionId, $userId, $this->lang);
+        if (!$result) {
+            // Still at the self-presentation step.
+            header("Location: /{$this->lang}/interview/{$sessionId}");
+            exit();
+        }
+
+        $this->assignVariables([
+            'Action'          => 'interview-result',
+            'PageTitle'       => Localizer::translateString('interview_result_page_title'),
+            'InterviewContentTemplate' => $this->localizedTemplate('interview-result.tpl'),
+            'InterviewResult' => $result,
+        ]);
+        $this->engine->display('interview-result.tpl');
     }
 
     /**
@@ -479,6 +642,7 @@ class Controller
 
         $this->assignVariables([
             'Action' => 'interview-payment',
+            'InterviewContentTemplate' => $this->localizedTemplate('interview-payment.tpl'),
             'InterviewPaymentUrl' => (string)($this->interviewConfig['lava_payment_url'] ?? ''),
         ]);
         $this->engine->display('interview-payment.tpl');

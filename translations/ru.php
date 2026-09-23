@@ -313,4 +313,15 @@ $translations = [
     'welcome_page_description' => 'Начните свое путешествие в SQL с интерактивными заданиями и обратной связью в реальном времени на SQLTest.online. Повышайте свои навыки с помощью практических упражнений и станьте уверенным пользователем SQL.',
     'update_profile_full_name' => 'Обновите свой <a class="button small green" href="/ru/user/profile">профиль</a> указав полное имя, чтобы ваши достижения выглядели более персонально.',
     'view_achievement' => 'Посмотреть достижение',
+
+    // Interview simulation: strings used from PHP (Controller::interview_*); page texts live in templates/{lang}/interview-*.tpl
+    'interview_start_page_title' => 'Симуляция собеседования — Meridian Logistics | SQLTest.online',
+    'interview_question_page_title' => 'Собеседование — Meridian Logistics | SQLTest.online',
+    'interview_result_page_title' => 'Результат собеседования — Meridian Logistics | SQLTest.online',
+    'interview_error_invalid_position' => 'Некорректная позиция или грейд.',
+    'interview_error_cooldown' => 'Повторная попытка на эту позицию и грейд доступна начиная со следующего дня.',
+    'interview_error_session_not_found' => 'Сессия интервью не найдена.',
+    'interview_error_rate_limit' => 'Слишком много запросов. Попробуйте позже.',
+    'interview_error_self_intro_empty' => 'Пожалуйста, напишите пару предложений о себе.',
+    'interview_error_self_intro_save' => 'Не удалось сохранить самопрезентацию. Попробуйте ещё раз.',
 ];

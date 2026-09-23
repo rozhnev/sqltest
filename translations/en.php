@@ -305,4 +305,15 @@ $translations = [
     'welcome_page_description' => 'Start your SQL journey with interactive challenges and real-time feedback at SQLTest.online. Enhance your skills through practical exercises and become a confident SQL user.',
     'update_profile_full_name' => 'Update your <a class="button small green" href="/en/user/profile">profile</a> with your full name to make your achievement shares more personal.',
     'view_achievement' => 'View achievement',
+
+    // Interview simulation: strings used from PHP (Controller::interview_*); page texts live in templates/{lang}/interview-*.tpl
+    'interview_start_page_title' => 'Mock Interview — Meridian Logistics | SQLTest.online',
+    'interview_question_page_title' => 'Interview — Meridian Logistics | SQLTest.online',
+    'interview_result_page_title' => 'Interview result — Meridian Logistics | SQLTest.online',
+    'interview_error_invalid_position' => 'Invalid position or grade.',
+    'interview_error_cooldown' => 'A retry for this position and grade is available starting the next calendar day.',
+    'interview_error_session_not_found' => 'Interview session not found.',
+    'interview_error_rate_limit' => 'Too many requests. Please try again later.',
+    'interview_error_self_intro_empty' => 'Please write a few sentences about yourself.',
+    'interview_error_self_intro_save' => 'Could not save your self-presentation. Please try again.',
 ];
