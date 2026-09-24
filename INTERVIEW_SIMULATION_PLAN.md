@@ -465,13 +465,110 @@ FROM tests JOIN test_questions tq ON ... WHERE tests.user_id = :user_id ...
 атомарно списывает одну сессию (`sessions_used + 1` с `FOR UPDATE`) в той же
 транзакции, что и создание сессии — исправлен баг, из-за которого счётчик
 изначально не инкрементировался при создании сессии.
-- **Вариант B (полноценная интеграция) — по-прежнему не стартован**: реальный
-  приём оплаты — например, через Lava.top API (создание счёта + вебхук
-  подтверждения оплаты), который автоматически создаёт/продлевает запись в
-  `interview_entitlements`. Это отдельный по объёму кусок работы (подпись вебхука,
-  идемпотентность, обработка возвратов) и не заявлен явно в исходном запросе
-  — выносится в открытый вопрос №5, требует отдельного решения о старте.
-  Документация API Lava.top: https://developers.lava.top/ru
+- **Вариант B (интеграция с Lava.top API) — спроектирован, к реализации**.
+  Документация API Lava.top: https://developers.lava.top/ru (OpenAPI-спецификация:
+  https://gate.lava.top/docs/documentation.yaml). Решение: **одна таблица** —
+  расширяем `interview_entitlements`, отдельную таблицу платежей не заводим
+  (продаём только пакеты сессий, одна оплата = одна запись доступа; подписки не
+  планируются — если появятся, платежи выносим в отдельную таблицу).
+
+  **Что даёт API (проверено по спецификации):**
+  - База `https://gate.lava.top`, авторизация заголовком `X-Api-Key` (ключ —
+    `app.lava.top/integrations/public-api`), лимит 50 req/s с IP.
+  - `POST /api/v3/invoice` — создание контракта: `email`, `offerId`, `currency`
+    (RUB/USD/EUR), опционально `buyerLanguage` (EN/RU/ES), `promoCode`,
+    `clientUtm`, `successful_return_url`/`failure_return_url`/`cancel_return_url`.
+    Ответ: `id` (contractId), `status`, `paymentUrl` — на него редиректим.
+  - `GET /api/v2/invoices/{id}` — статус контракта (`NEW`/`IN_PROGRESS`/
+    `COMPLETED`/`FAILED`), сумма, покупатель.
+  - `GET /api/v2/products` — получить `offerId` (продукт и цена заводятся в UI
+    Lava.top).
+  - Вебхуки: `payment.success`, `payment.failed`, `refund.success`,
+    `chargeback.initiated` (+ события подписок — не используем). При ответе
+    4xx/5xx — до 19 повторов в течение ~5 часов.
+
+  **Ограничения, влияющие на дизайн:**
+  - Вебхуки **не подписываются** (нет HMAC) — только общий секрет (Basic auth
+    или `X-Api-Key`, задаётся в кабинете). Поэтому каждый `payment.success`
+    перепроверяем запросом `GET /api/v2/invoices/{contractId}`.
+  - Нет поля для своих метаданных (user_id) — связь "платёж ↔ пользователь"
+    только через `contractId`, сохранённый при создании счёта.
+  - Вебхуки `refund.success`/`chargeback.initiated` имеют другой формат
+    (`event_type`, `data.*`) и **не содержат документированного `contractId`**
+    (есть `refund_id`, `customer_email`, `product_id`); в примере спецификации
+    `refund_id` совпадает с `contractId` платежа — уточнить у поддержки
+    (`@lava_sup_bot`) до реализации (открытый вопрос №5).
+  - Нет песочницы — тестирование на реальном дешёвом продукте / промокоде 100%
+    + ручная отправка сохранённых payload на вебхук.
+  - Параметры возврата (`?invoiceId=…&status=success`) подделываются — только
+    для UI, доступ по ним не выдаётся.
+
+  ✅ **Схема (миграция `sql/interview_entitlements_lava.sql`) — применена в БД**;
+  `sql/interview_entitlements_ddl.sql` обновлён до итогового состояния:
+  ```sql
+  ALTER TABLE interview_entitlements
+      ADD COLUMN status varchar(16) NOT NULL DEFAULT 'active'
+          CHECK (status IN ('pending','active','failed','refunded')),
+      ADD COLUMN lava_contract_id uuid UNIQUE,   -- NULL для manual/promo
+      ADD COLUMN lava_offer_id uuid,
+      ADD COLUMN amount numeric(12,2),
+      ADD COLUMN currency varchar(3),
+      ADD COLUMN paid_at timestamp,
+      ADD COLUMN raw_webhook jsonb;
+  GRANT INSERT, UPDATE ON interview_entitlements TO sqltester;
+  GRANT USAGE ON SEQUENCE interview_entitlements_id_seq TO sqltester;
+  ```
+  Default `'active'` оставляет существующие manual/promo-записи рабочими.
+
+  **Изменения в коде:**
+  - `Interview::hasPaidAccess()` и списание сессии в `Interview::create()` —
+    добавить `AND status = 'active'` (иначе доступ появится в момент чекаута).
+  - `.env`: `LAVA_API_KEY`, `LAVA_WEBHOOK_SECRET` (секреты
+    только в `.env`); `config.php` читает их в `interview.lava_api_key` /
+    `interview.lava_webhook_secret` — по образцу существующего
+    `interview.lava_payment_url`.
+  - `config.php`, `interview.packages`: мапа пакетов `offerId → sessions_total`
+    — единственное место, где задаются пакеты. Валюта и цена — **по языку
+    сайта** (`interview.pricing[lang]` → `currency`, `price` для отображения),
+    напр. `ru` → RUB, `en`/`pt`/`fr`/`es` → USD/EUR. Эта же `currency`
+    передаётся в `POST /api/v3/invoice` (цена в Lava.top задаётся на оффере во
+    всех нужных валютах; `amount` из ответа сохраняется в запись).
+  - Новый `lib/LavaClient.php`: `createInvoice()`, `getInvoice()` (curl,
+    `X-Api-Key`, таймауты, логирование ошибок).
+
+  **Поток:**
+  1. Чекаут (`interview_payment` → action `interview-checkout`, только для
+     залогиненного): email берётся из `users.email` (`User::getEmail()`); если
+     его нет (OAuth-пользователь) — поле email на странице оплаты, введённое
+     значение **сохраняется в профиль** через `User::setEmail()` (валидация и
+     проверка уникальности уже там; при `email_taken` — показать ошибку, чекаут
+     не создавать). Затем `POST /api/v3/invoice` с этим email, `currency` из
+     `interview.pricing[lang]` и `buyerLanguage` по языку сайта (Lava.top
+     поддерживает только EN/RU/ES: `pt`/`fr` → EN) →
+     `INSERT interview_entitlements (user_id, source='lava', status='pending',
+     sessions_total=<из мапы>, lava_contract_id, lava_offer_id, amount,
+     currency)` → редирект на `paymentUrl`.
+  2. Вебхук `POST /lava/webhook`:
+     - проверить секрет через `hash_equals()`, иначе 401;
+     - найти запись по `contractId`; неизвестный контракт → 200 и игнор (в лог);
+     - `payment.success` → `GET /api/v2/invoices/{contractId}`, убедиться в
+       `COMPLETED` и совпадении суммы/валюты → `UPDATE ... SET status='active',
+       paid_at=now(), raw_webhook=:payload WHERE lava_contract_id=:cid AND
+       status='pending'` (идемпотентно: повтор вебхука меняет 0 строк);
+     - `payment.failed` → `status='failed'` (только из `pending`);
+     - `refund.success`/`chargeback.initiated` → `status='refunded'`,
+       `expires_at=now()` (не удаляем — использованные сессии остаются
+       консистентными);
+     - ошибка БД/API → 5xx, чтобы Lava.top повторила доставку; иначе 200.
+  3. Возврат пользователя на `successful_return_url` → страница читает статус
+     записи: `active` — "доступ открыт", `pending` — "ждём подтверждения
+     оплаты" (автообновление), `failed` — предложение повторить.
+  - Брошенные чекауты (`pending` старше суток) — периодически переводить в
+    `failed` (cron-скрипт) либо удалять.
+  - Вариант A (ручная выдача, `source='manual'`) остаётся как запасной путь —
+    ручные возвраты и сбои интеграции.
+  - Оценка: ~2–3 дня (миграция, `LavaClient`, чекаут, вебхук, страница
+    статуса, ручное тестирование на реальном продукте).
 - В обоих вариантах именно `interview_entitlements` (а не прямая проверка
   оплаты) — источник истины для `Interview::hasPaidAccess()`, чтобы вариант
   A→B можно было заменить, не трогая остальную логику фичи.
@@ -1154,10 +1251,10 @@ soft-skills `free_answer` через LLM, страница результата 
 33. Опционально: авто-построение `interview_skill_tags` сканированием банка
     вопросов через LLM (п. 3.7) — заменяет эвристический классификатор
     (`scripts/classify_interview_questions.py`) из п. 3.1.2 более точным.
-34. Опционально: реальная интеграция оплаты (Lava.top API/вебхук →
-    `interview_entitlements`, вариант B из п. 3.5) — отдельная по объёму
-    задача, требует отдельного решения о старте. Документация API:
-    https://developers.lava.top/ru
+34. Интеграция оплаты Lava.top (вариант B из п. 3.5, одна таблица
+    `interview_entitlements` со статусами): миграция, `LavaClient`, чекаут,
+    вебхук с перепроверкой контракта через API, страница статуса оплаты.
+    Документация API: https://developers.lava.top/ru
 35. Опционально (фаза 2+): многораундовое уточнение самопрезентации (п. 4.5,
     сейчас ограничено одним раундом) — если по опыту MVP окажется, что одного
     уточняющего вопроса недостаточно.
@@ -1183,8 +1280,11 @@ soft-skills `free_answer` через LLM, страница результата 
    сессию, значение настраивается в `config.php`; при приближении к лимиту
    сессия перестаёт расти и идёт к завершению (п. 4.3).
 5. ~~Оплата~~ — решено: на первом этапе вариант A (ручная выдача доступа
-   через `interview_entitlements`), полноценная интеграция оплаты (вариант B)
-   — отдельная задача на будущее (п. 3.5).
+   через `interview_entitlements`); вариант B — интеграция Lava.top API с
+   расширением той же таблицы (статусы `pending/active/failed/refunded`, без
+   отдельной таблицы платежей), см. п. 3.5. **Открыто**: как связать вебхуки
+   `refund.success`/`chargeback.initiated` с платежом (нет документированного
+   `contractId`, совпадает ли `refund_id` с ним) — уточнить у поддержки Lava.top.
 6. ~~Кулдаун и антидубли вопросов~~ — решено: повтор доступен со следующего
    календарного дня; из выборки новой попытки исключаются вопросы последних
    3 попыток по той же паре позиция/грейд (п. 4.4).
