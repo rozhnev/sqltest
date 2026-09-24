@@ -1,30 +1,30 @@
 {assign var="session" value=$InterviewResult.session}
 <section class="interview-score">
-    <h2 style="margin-top: 0;">Результат собеседования</h2>
+    <h2 style="margin-top: 0;">Resultado da entrevista</h2>
     <div class="value">{$InterviewResult.final_percent}%</div>
     <div class="meta">
         Meridian Logistics &middot; {$session.position_label|escape} &middot; {$session.grade_label|escape}
         &middot; {$InterviewResult.closed_at|date_format:"%d.%m.%Y"}
     </div>
 </section>
-<p class="interview-disclaimer" role="note">Это учебная симуляция, а не настоящее собеседование: компания Meridian Logistics вымышлена, а результат не является предложением о работе — это учебная самооценка ваших навыков SQL.</p>
+<p class="interview-disclaimer" role="note">Uma simulação para praticar, não uma entrevista de emprego real: a Meridian Logistics é fictícia e este resultado não é uma oferta de emprego — é uma autoavaliação educativa das suas habilidades em SQL.</p>
 
 {if $InterviewResult.report}
     {assign var="report" value=$InterviewResult.report}
     <section class="interview-report">
         <div class="interview-dialog">
             <div class="dialog-row">
-                <img class="dialog-avatar" src="/images/interview/meridian-logistics-representative.jpeg" alt="Елена Чо">
+                <img class="dialog-avatar" src="/images/interview/meridian-logistics-representative.jpeg" alt="Elena Cho">
                 <div class="dialog-message">
-                    <p class="dialog-author">Елена Чо, руководитель отдела данных и разработки</p>
+                    <p class="dialog-author">Elena Cho, diretora de Dados e Engenharia</p>
                     <div class="dialog-bubble">
                         <p class="pre-wrap">{$report.summary|escape}</p>
                         {if $report.strengths}
-                            <h4>Сильные стороны</h4>
+                            <h4>Pontos fortes</h4>
                             <ul>{foreach $report.strengths as $point}<li>{$point|escape}</li>{/foreach}</ul>
                         {/if}
                         {if $report.improvements}
-                            <h4>Что стоит подтянуть</h4>
+                            <h4>O que melhorar</h4>
                             <ul>{foreach $report.improvements as $point}<li>{$point|escape}</li>{/foreach}</ul>
                         {/if}
                     </div>
@@ -35,18 +35,18 @@
 {/if}
 
 <section>
-    <h3>Результаты по темам</h3>
+    <h3>Resultados por tema</h3>
     {foreach $InterviewResult.topics as $topic}
         <div class="interview-topic {if $topic.weak}weak{/if}">
             <div class="interview-topic-head">
-                <span>{if $topic.key === 'soft_skills'}Профессиональные навыки{elseif $topic.key === 'other'}Прочее{else}{$topic.title|escape}{/if}</span>
+                <span>{if $topic.key === 'soft_skills'}Habilidades profissionais{elseif $topic.key === 'other'}Outros{else}{$topic.title|escape}{/if}</span>
                 <span>{$topic.percent}%</span>
             </div>
             <div class="interview-topic-bar"><span style="width: {$topic.percent}%;"></span></div>
             {if $topic.lessons}
                 <ul>
                     {foreach $topic.lessons as $lesson}
-                        <li>Стоит повторить: <a href="/{$Lang}/lesson/{$lesson.module_slug|escape:'url'}/{$lesson.lesson_slug|escape:'url'}">{$lesson.title|escape}</a></li>
+                        <li>Vale a pena rever: <a href="/{$Lang}/lesson/{$lesson.module_slug|escape:'url'}/{$lesson.lesson_slug|escape:'url'}">{$lesson.title|escape}</a></li>
                     {/foreach}
                 </ul>
             {/if}
@@ -55,24 +55,24 @@
 </section>
 
 <section>
-    <h3>Ход собеседования</h3>
+    <h3>Transcrição da entrevista</h3>
     {if $session.self_intro}
         <div class="interview-transcript-item">
-            <h4>Самопрезентация</h4>
+            <h4>Apresentação pessoal</h4>
             <p style="white-space: pre-wrap;">{$session.self_intro|escape}</p>
             {if $session.self_intro_analysis.interviewer_message|default:''}
                 <p class="feedback">&ldquo;{$session.self_intro_analysis.interviewer_message|escape}&rdquo;</p>
             {/if}
             {if $session.self_intro_analysis.followup.answer|default:''}
-                <p><strong>Уточняющий вопрос:</strong> {$session.self_intro_analysis.followup.question|escape}</p>
-                <p style="white-space: pre-wrap;"><strong>Ваш ответ:</strong> {$session.self_intro_analysis.followup.answer|escape}</p>
+                <p><strong>Pergunta de esclarecimento:</strong> {$session.self_intro_analysis.followup.question|escape}</p>
+                <p style="white-space: pre-wrap;"><strong>Sua resposta:</strong> {$session.self_intro_analysis.followup.answer|escape}</p>
             {/if}
         </div>
     {/if}
     {foreach $InterviewResult.transcript as $item}
         <div class="interview-transcript-item">
             <h4>
-                <span>{$item.sequence}. {$item.title|escape}{if $item.attempt_number > 1} <small class="interview-muted">(попыток: {$item.attempt_number})</small>{/if}</span>
+                <span>{$item.sequence}. {$item.title|escape}{if $item.attempt_number > 1} <small class="interview-muted">({$item.attempt_number} tentativas)</small>{/if}</span>
                 {if $item.question_type === 'free_answer' && $item.llm_score !== null}
                     <span class="{if $item.auto_check_ok}verdict-ok{else}verdict-bad{/if}">{$item.llm_score}/100</span>
                 {elseif $item.auto_check_ok}
@@ -88,7 +88,7 @@
                 <ul>
                     {foreach $item.options as $option}
                         <li class="{if $option.is_valid}option-valid{/if}">
-                            {if $option.selected}☑{else}☐{/if} {$option.answer}{if $option.is_valid} &mdash; верный вариант{/if}
+                            {if $option.selected}☑{else}☐{/if} {$option.answer}{if $option.is_valid} &mdash; opção correta{/if}
                         </li>
                     {/foreach}
                 </ul>
@@ -103,5 +103,5 @@
 </section>
 
 <p style="text-align: center;">
-    <a class="button blue" href="/{$Lang}/interview-start">К вакансиям Meridian Logistics</a>
+    <a class="button blue" href="/{$Lang}/interview-start">Voltar às vagas da Meridian Logistics</a>
 </p>

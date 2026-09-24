@@ -23,6 +23,12 @@
     .interview-report .dialog-bubble h4 { margin: 0.9rem 0 0.35rem; color: var(--accordion-active); }
     .interview-report .dialog-bubble ul { margin: 0; padding-left: 1.2rem; }
     .interview-report .dialog-bubble li { margin-bottom: 0.3rem; }
+    /* "This is a practice simulation, not a real job interview / job offer" note. */
+    .interview-disclaimer {
+        max-width: 1080px; box-sizing: border-box; margin: 0 auto 1.5rem; padding: 0.85rem 1.1rem;
+        border-radius: 12px; border: 1px solid rgba(217, 119, 6, 0.45); background: rgba(217, 119, 6, 0.10);
+        color: var(--question-text); font-size: 0.92rem; line-height: 1.5;
+    }
     .interview-muted { color: var(--question-date-color); font-weight: normal; }
 </style>
 <body>

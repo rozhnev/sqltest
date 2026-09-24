@@ -7,6 +7,7 @@
         &middot; {$InterviewResult.closed_at|date_format:"%d.%m.%Y"}
     </div>
 </section>
+<p class="interview-disclaimer" role="note">A practice simulation, not a real job interview: Meridian Logistics is fictional, and this result is not a job offer — it is an educational self-assessment of your SQL skills.</p>
 
 {if $InterviewResult.report}
     {assign var="report" value=$InterviewResult.report}

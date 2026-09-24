@@ -85,6 +85,12 @@
         transition: background-color 0.15s ease;
     }
     .interview-start-btn:hover { background: #3B82F6; }
+    /* "This is a practice simulation, not a real job interview / job offer" note. */
+    .interview-disclaimer {
+        max-width: 1080px; box-sizing: border-box; margin: 0 auto 1.5rem; padding: 0.85rem 1.1rem;
+        border-radius: 12px; border: 1px solid rgba(217, 119, 6, 0.45); background: rgba(217, 119, 6, 0.10);
+        color: var(--question-text); font-size: 0.92rem; line-height: 1.5;
+    }
     .interview-notice {
         max-width: 720px; margin: 1rem auto 0; padding: 1rem 1.25rem; border-radius: 12px;
         background: #DBEAFE; color: #1E3A8A; text-align: center;
