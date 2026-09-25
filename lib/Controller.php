@@ -12,6 +12,7 @@ class Controller
     private array $playgroundConfig;
     private array $urgentBanner;
     private array $interviewConfig;
+    private array $subscriptionConfig;
 
     private function getAutoTranslator(): LocalizationAutoTranslator
     {
@@ -47,6 +48,7 @@ class Controller
         $this->languages    = $config['languages'] ?? [];
         $this->playgroundConfig = $config['playground'] ?? [];
         $this->interviewConfig = $config['interview'] ?? [];
+        $this->subscriptionConfig = $config['subscription'] ?? [];
 
         // Build absolute domain safely (works with proxies)
         $host = (string)($_SERVER['HTTP_HOST'] ?? $this->domain);
@@ -610,6 +612,39 @@ class Controller
             'InterviewPaymentUrl' => (string)($this->interviewConfig['lava_payment_url'] ?? ''),
         ]);
         $this->engine->display('interview-payment.tpl');
+    }
+
+    /**
+     * Subscription page (Lava.top): benefits, the user's current plan state and the payment
+     * button. Like interview access, the subscription is granted manually after the payment
+     * is confirmed (scripts/grant_subscription.php).
+     */
+    public function subscribe(array $params): void
+    {
+        $freeTokens = max(1, (int)($this->env['LLM_FREE_TOKENS'] ?? 50000));
+        $cycleTokens = (int)($this->env['LLM_SUBSCRIBER_CYCLE_TOKENS'] ?? 1000000);
+
+        $quota = null;
+        $activeThrough = null;
+        if ($this->user->logged()) {
+            $quota = (new TokenQuota($this->dbh, $this->user, $this->env))->status();
+            if ($quota['subscribed']) {
+                // subscribed_till is exclusive: the last active day is the day before
+                $activeThrough = (new DateTimeImmutable((string)$quota['resets_at']))->modify('-1 day')->format('Y-m-d');
+            }
+        }
+
+        $this->assignVariables([
+            'Action'                    => 'subscribe',
+            'PageTitle'                 => Localizer::translateString('subscribe_page_title'),
+            'SubscribeContentTemplate'  => $this->localizedTemplate('subscribe.tpl'),
+            'SubscriptionPaymentUrl'    => (string)($this->subscriptionConfig['lava_payment_url'] ?? ''),
+            'SubscriptionAiMultiplier'  => (int)round($cycleTokens / $freeTokens),
+            'AiQuota'                   => $quota,
+            'SubscriptionActiveThrough' => $activeThrough,
+            'UserEmail'                 => $this->user->logged() ? $this->user->getEmail() : '',
+        ]);
+        $this->engine->display('subscribe.tpl');
     }
 
     public function redirect(array $params): void

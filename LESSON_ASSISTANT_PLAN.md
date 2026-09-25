@@ -266,6 +266,7 @@ Same pattern as `Controller::interview_payment()` / `interview-payment.tpl`:
    WHERE id = :user_id;
    ```
    Keep this as a documented snippet (or a `User::grantSubscription(DateTimeInterface $paidOn)` method used by an admin action) so the refresh isn't forgotten when it's typed by hand. A Lava.top webhook that calls the same method is a later stage and would serve both products.
+   Implemented as `User::grantSubscription()` (uses `GREATEST(subscribed_till, :paid_on)`, which ignores NULL) and the CLI wrapper `php scripts/grant_subscription.php --user=<email|uuid> --paid-on=YYYY-MM-DD`.
 6. All "Subscribe" links (quota exceeded in the assistant and in the free-answer check) point here.
 
 ## Stage 7: Admin & observability

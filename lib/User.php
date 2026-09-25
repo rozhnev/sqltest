@@ -453,6 +453,31 @@ class User
     }
 
     /**
+     * Grant one monthly subscription cycle paid on $paidOn and start a new AI budget cycle.
+     * Renewal extends from the current end, so paying early doesn't lose days. The balance
+     * is set, not added: leftovers (including the free allowance) don't carry over.
+     *
+     * @param DateTimeInterface $paidOn Payment date from Lava.top, not the day the grant is run
+     * @return string|null New exclusive subscribed_till (Y-m-d), null if the user doesn't exist
+     */
+    public function grantSubscription(DateTimeInterface $paidOn): ?string
+    {
+        $stmt = $this->dbh->prepare("UPDATE users SET
+                -- GREATEST ignores NULL, so a first subscription starts from the payment date
+                subscribed_till = (GREATEST(subscribed_till, CAST(:paid_on AS date)) + interval '1 month')::date,
+                llm_tokens = :cycle_tokens
+            WHERE id = :user_id
+            RETURNING subscribed_till");
+        $stmt->execute([
+            ':paid_on'      => $paidOn->format('Y-m-d'),
+            ':cycle_tokens' => (int)($this->env['LLM_SUBSCRIBER_CYCLE_TOKENS'] ?? 1000000),
+            ':user_id'      => $this->id,
+        ]);
+        $subscribedTill = $stmt->fetchColumn();
+        return $subscribedTill === false ? null : (string)$subscribedTill;
+    }
+
+    /**
      * One-time LLM token allowance for new accounts
      *
      * @return int

@@ -101,4 +101,8 @@ $config = [
         'grades' => [2, 3, 4],
         'lava_payment_url' => $env['INTERVIEW_LAVA_PAYMENT_URL'] ?? '',
     ],
+    // Monthly subscription: no ads + subscriber AI token budget (see LESSON_ASSISTANT_PLAN.md, Stage 6).
+    'subscription' => [
+        'lava_payment_url' => $env['SUBSCRIPTION_LAVA_PAYMENT_URL'] ?? '',
+    ],
 ];    
