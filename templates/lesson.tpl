@@ -1,5 +1,8 @@
 {include file='header.tpl'}
 <link rel="stylesheet" href="/css/lesson.min.css?{$VERSION}" media="all">
+{if isset($LessonAssistantTemplate)}
+<link rel="stylesheet" href="/css/lesson-assistant.css?{$VERSION}" media="all">
+{/if}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rozhnev/sql-highlighter@v1.0.2/sql-highlighter.min.css" media="all">
 <body>
     <div class="container">
@@ -96,7 +99,10 @@
                     </div>
                 </div>
             </main>
-            <aside class="column db-description" id="right-panel" aria-label="Additional lesson information">            
+            <aside class="column db-description" id="right-panel" aria-label="Additional lesson information">
+                {if isset($LessonAssistantTemplate)}
+                    {include file='lesson-assistant.tpl' mobile=false}
+                {/if}
                 {if $User->showAd()}
                     {include file="{$Lang}/donation_goal_widget.tpl"}
                 {/if} 
@@ -114,6 +120,9 @@
             });
             SQLHighlighter.highlightCodeBlocks();
         </script>
+        {if isset($LessonAssistantTemplate)}
+        <script src="/js/lesson-assistant.js?{$VERSION}" defer></script>
+        {/if}
         {if $User->isAdmin()}
         <script src="/js/lesson-inline-editor.min.js?{$VERSION}" defer></script>
         {/if}

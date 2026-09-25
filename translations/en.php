@@ -133,6 +133,8 @@ $translations = [
     'ai_quota_exceeded_free' => 'Your free AI allowance is used up. It is a one-time trial and does not renew. <a href="/en/subscribe">Subscribe</a> to get a monthly AI budget.',
     'subscribe_page_title' => 'Subscription | SQLTest.online',
     'ai_quota_exceeded_subscriber' => 'Your AI budget for this subscription period is used up. It will be renewed on ##AiQuotaResetsAt##.',
+    'ai_unavailable' => 'The AI assistant is not available right now. Please try again in a minute.',
+    'ai_question_empty' => 'Please write a question first.',
     'question_action_next' => 'Next',
     'question_action_next_title' => 'Next task',
     'question_action_previous_title' => 'Previous task',

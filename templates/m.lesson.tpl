@@ -1,5 +1,8 @@
 {include file='header.tpl'}
 <link rel="stylesheet" href="/css/lesson.min.css?{$VERSION}" media="all">
+{if isset($LessonAssistantTemplate)}
+<link rel="stylesheet" href="/css/lesson-assistant.css?{$VERSION}" media="all">
+{/if}
 <body>
     <div class="mobile-container">
         {include file='popups.tpl'}
@@ -80,6 +83,9 @@
         <footer>
             {include file='m.footer.tpl'}
         </footer>
+        {if isset($LessonAssistantTemplate)}
+            {include file='lesson-assistant.tpl' mobile=true}
+        {/if}
     </div>
     {include file='counters.tpl'}
     <script src="/js/sql-highlighter.min.js?{$VERSION}"></script>
@@ -89,5 +95,8 @@
         });
         SQLHighlighter.highlightCodeBlocks();
     </script>
+    {if isset($LessonAssistantTemplate)}
+    <script src="/js/lesson-assistant.js?{$VERSION}" defer></script>
+    {/if}
 </body>
 </html>

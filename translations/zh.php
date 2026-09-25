@@ -209,6 +209,8 @@ $translations = [
     'ai_quota_exceeded_free' => '您的免费 AI 额度已用完。这是一次性试用额度，不会续期。<a href="/zh/subscribe">订阅</a>即可每月获得 AI 额度。',
     'subscribe_page_title' => '订阅 | SQLTest.online',
     'ai_quota_exceeded_subscriber' => '您本订阅周期的 AI 额度已用完，将于 ##AiQuotaResetsAt## 续期。',
+    'ai_unavailable' => 'AI 助手暂时不可用，请一分钟后再试。',
+    'ai_question_empty' => '请先输入问题。',
     'question_last_attempt_date' => '最后尝试日期',
     'question_maximum_attempts_used' => '不幸的是，尽管您付出了所有努力，您仍然无法解决此问题。',
     'question_solved_at' => '解决于',

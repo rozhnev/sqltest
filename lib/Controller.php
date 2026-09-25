@@ -68,7 +68,7 @@ class Controller
 
         $this->host = $scheme . '://' . $host;
 
-        $this->registerModifiers(["array_key_exists", "mt_rand", "array_rand"]);
+        $this->registerModifiers(["array_key_exists", "mt_rand", "array_rand", "trim"]);
         $this->engine->registerPlugin('block', 'translate', array('Localizer', 'translate'), true);
 
         $this->assignVariables([
@@ -1977,6 +1977,30 @@ class Controller
             'LessonData'        => $lessonData,
             'RelevantTasks'     => $relevantTasks
         ]);
+
+        if ($this->lessonAssistantEnabled()) {
+            $assistant = new LessonAssistant($this->env);
+            $assistantHistory = [];
+            $assistantQuota = null;
+            if ($this->user->logged()) {
+                // Re-render the session history so a reload doesn't lose the conversation
+                foreach ($assistant->getHistory($lesson->id()) as $message) {
+                    $assistantHistory[] = [
+                        'role' => $message['role'],
+                        'html' => $message['role'] === 'assistant'
+                            ? $assistant->renderAnswer($message['content'])
+                            : nl2br(htmlspecialchars($message['content'], ENT_QUOTES | ENT_HTML5, 'UTF-8')),
+                    ];
+                }
+                $assistantQuota = (new TokenQuota($this->dbh, $this->user, $this->env))->status();
+            }
+            $this->assignVariables([
+                'LessonAssistantTemplate' => $this->localizedTemplate('lesson-assistant.tpl'),
+                'LessonAssistantHistory'  => $assistantHistory,
+                'AiQuota'                 => $assistantQuota,
+                'AiQuotaExceededMessage'  => $assistantQuota ? $this->aiQuotaExceededMessage($assistantQuota) : '',
+            ]);
+        }
         $this->setHreflangLinks($params['path'], $this->lang);
 
         if ($this->user->logged()) {
@@ -2062,7 +2086,159 @@ class Controller
         $this->engine->display($this->isMobileView() ? "m.lesson.tpl" : "lesson.tpl");
     }
 
-    public function playground(array $params): void 
+    /**
+     * Lesson assistant rollout switch: LESSON_ASSISTANT_ENABLED=1 for everyone,
+     * =admin for admins only, anything else (or unset) disables it.
+     */
+    private function lessonAssistantEnabled(): bool
+    {
+        $flag = strtolower(trim((string)($this->env['LESSON_ASSISTANT_ENABLED'] ?? '')));
+        if ($flag === 'admin') {
+            return $this->user->logged() && $this->user->isAdmin();
+        }
+        return in_array($flag, ['1', 'true', 'on', 'yes'], true);
+    }
+
+    private function jsonResponse(int $status, array $data): void
+    {
+        http_response_code($status);
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+    }
+
+    /**
+     * Localized "AI budget is used up" message for the given TokenQuota::status()
+     */
+    private function aiQuotaExceededMessage(array $quotaStatus): string
+    {
+        if ($quotaStatus['subscribed']) {
+            return str_replace('##AiQuotaResetsAt##', (string)$quotaStatus['resets_at'], Localizer::translateString('ai_quota_exceeded_subscriber'));
+        }
+        return Localizer::translateString('ai_quota_exceeded_free');
+    }
+
+    /**
+     * Reject cross-site POSTs: Origin (or Referer, if the browser sent no Origin) must
+     * point at this host. The session cookie is SameSite=Lax as a second line of defence.
+     */
+    private function isSameOriginRequest(): bool
+    {
+        $source = (string)($_SERVER['HTTP_ORIGIN'] ?? $_SERVER['HTTP_REFERER'] ?? '');
+        if ($source === '') {
+            return true;
+        }
+        $sourceHost = strtolower((string)parse_url($source, PHP_URL_HOST));
+        $port = parse_url($source, PHP_URL_PORT);
+        if ($port !== null) {
+            $sourceHost .= ':' . $port;
+        }
+        return $sourceHost === strtolower((string)($_SERVER['HTTP_HOST'] ?? ''));
+    }
+
+    /**
+     * Re-open the session after session_write_close(), with the same options as index.php
+     */
+    private function reopenSession(): void
+    {
+        $lifetime = defined('SESSION_LIFETIME') ? SESSION_LIFETIME : 86400;
+        session_start(['cookie_lifetime' => $lifetime, 'gc_maxlifetime' => $lifetime]);
+    }
+
+    /**
+     * POST /{lang}/lesson/{id}/assistant-ask: answer a question about the lesson.
+     * Responds with JSON {answer_html, quota} or {error, message[, quota]}.
+     */
+    public function assistant_ask(array $params): void
+    {
+        if (!$this->lessonAssistantEnabled()) {
+            $this->jsonResponse(404, ['error' => 'not_found']);
+            return;
+        }
+        if (($_SERVER['REQUEST_METHOD'] ?? 'GET') !== 'POST' || !$this->isSameOriginRequest()) {
+            $this->jsonResponse(403, ['error' => 'forbidden']);
+            return;
+        }
+        if (!$this->user->logged()) {
+            $this->jsonResponse(401, ['error' => 'login_required', 'message' => Localizer::translateString('ai_login_required')]);
+            return;
+        }
+
+        $assistant = new LessonAssistant($this->env);
+        $question = $assistant->normalizeQuestion((string)($_POST['question'] ?? ''));
+        if ($question === '') {
+            $this->jsonResponse(400, ['error' => 'empty_question', 'message' => Localizer::translateString('ai_question_empty')]);
+            return;
+        }
+
+        $quota = new TokenQuota($this->dbh, $this->user, $this->env);
+        if (!$quota->canSpend()) {
+            $quotaStatus = $quota->status();
+            $this->jsonResponse(429, ['error' => 'quota_exceeded', 'message' => $this->aiQuotaExceededMessage($quotaStatus), 'quota' => $quotaStatus]);
+            return;
+        }
+
+        $lessonId = (int)$params['lessonID'];
+        try {
+            $lesson = Lesson::fromId($this->dbh, $lessonId);
+        } catch (Exception $e) {
+            $this->jsonResponse(404, ['error' => 'not_found']);
+            return;
+        }
+        $lessonData = $lesson->get($this->lang);
+        $content = (string)$lessonData['content'];
+        $lesson->parseMedadata($content); // strips the front matter from $content
+
+        $dialog = $assistant->buildDialog($this->lang, (string)$lessonData['title'], $content, $assistant->getHistory($lessonId), $question);
+
+        // Don't hold the session lock during the LLM call: it would block the user's other tabs
+        session_write_close();
+        $profile = $assistant->llmProfile();
+        $answer = null;
+        $usage = null;
+        try {
+            $llm = new LLM($profile);
+            $answer = $llm->chat($dialog, $assistant->maxOutputTokens());
+            $usage = $llm->getLastUsage();
+        } catch (Exception $e) {
+            error_log('Lesson assistant: ' . $e->getMessage());
+        }
+
+        try {
+            $quota->charge('lesson_assistant', $lessonId, $profile, $usage);
+        } catch (Throwable $error) {
+            error_log('Lesson assistant charge failed: ' . $error->getMessage());
+        }
+
+        if ($answer === null) {
+            $this->jsonResponse(503, ['error' => 'llm_unavailable', 'message' => Localizer::translateString('ai_unavailable'), 'quota' => $quota->status()]);
+            return;
+        }
+
+        $this->reopenSession();
+        $assistant->appendHistory($lessonId, $question, $answer);
+        session_write_close();
+
+        $this->jsonResponse(200, ['answer_html' => $assistant->renderAnswer($answer), 'quota' => $quota->status()]);
+    }
+
+    /**
+     * POST /{lang}/lesson/{id}/assistant-reset: clear the lesson's chat history
+     */
+    public function assistant_reset(array $params): void
+    {
+        if (!$this->lessonAssistantEnabled()) {
+            $this->jsonResponse(404, ['error' => 'not_found']);
+            return;
+        }
+        if (($_SERVER['REQUEST_METHOD'] ?? 'GET') !== 'POST' || !$this->isSameOriginRequest() || !$this->user->logged()) {
+            $this->jsonResponse(403, ['error' => 'forbidden']);
+            return;
+        }
+        (new LessonAssistant($this->env))->resetHistory((int)$params['lessonID']);
+        $this->jsonResponse(200, ['ok' => true]);
+    }
+
+    public function playground(array $params): void
     {
         if (!$this->user->logged() && ($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'GET') {
             header('Cache-Control: public, max-age=300, s-maxage=900, stale-while-revalidate=60');

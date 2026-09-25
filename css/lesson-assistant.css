@@ -1,0 +1,199 @@
+/* Lesson assistant panel (templates/lesson-assistant.tpl) */
+.lesson-assistant {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    border: 1px solid var(--text-block-border-color);
+    border-radius: 6px;
+    background: var(--text-block-background-color);
+    color: var(--question-text);
+    font-size: 0.95rem;
+}
+
+.lesson-assistant .la-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.lesson-assistant .la-title {
+    margin: 0;
+    font-size: 1.05rem;
+    color: var(--question-text);
+}
+
+.lesson-assistant .la-close {
+    border: none;
+    background: none;
+    color: var(--question-text);
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.lesson-assistant .la-messages {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    max-height: 50vh;
+    overflow-y: auto;
+}
+
+.lesson-assistant .la-intro p {
+    margin: 0 0 0.5rem;
+}
+
+.lesson-assistant .la-examples {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.lesson-assistant .la-example {
+    padding: 0.4rem 0.6rem;
+    border: 1px solid var(--text-block-border-color);
+    border-radius: 4px;
+    background: var(--code-result-background-color);
+    color: var(--question-text);
+    text-align: left;
+    cursor: pointer;
+}
+
+.lesson-assistant .la-example:hover {
+    border-color: var(--accordion-hover);
+}
+
+.lesson-assistant .la-message {
+    padding: 0.5rem 0.65rem;
+    border-radius: 6px;
+    overflow-wrap: anywhere;
+}
+
+.lesson-assistant .la-user {
+    align-self: flex-end;
+    max-width: 90%;
+    background: var(--question-title-bg-color);
+    white-space: pre-wrap;
+}
+
+.lesson-assistant .la-assistant {
+    background: var(--code-result-background-color);
+}
+
+.lesson-assistant .la-assistant p {
+    margin: 0 0 0.5rem;
+}
+
+.lesson-assistant .la-assistant p:last-child {
+    margin-bottom: 0;
+}
+
+.lesson-assistant .la-assistant pre {
+    overflow-x: auto;
+    padding: 0.5rem;
+    border-radius: 4px;
+    background: var(--sql-background-color);
+}
+
+.lesson-assistant .la-assistant a {
+    color: var(--accordion-hover);
+}
+
+.lesson-assistant .la-notice {
+    padding: 0.5rem;
+    border-left: 3px solid var(--danger-text-color);
+}
+
+.lesson-assistant .la-notice a {
+    color: var(--accordion-hover);
+}
+
+.lesson-assistant .hidden {
+    display: none;
+}
+
+.lesson-assistant .la-input {
+    width: 100%;
+    resize: vertical;
+    padding: 0.5rem;
+    border: 1px solid var(--text-block-border-color);
+    border-radius: 4px;
+    background: var(--body-background-color);
+    color: var(--question-text);
+    font: inherit;
+}
+
+.lesson-assistant .la-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 0.4rem;
+}
+
+.lesson-assistant .la-reset {
+    border: none;
+    background: none;
+    color: var(--question-text);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.lesson-assistant .la-quota {
+    font-size: 0.8rem;
+    opacity: 0.85;
+}
+
+.lesson-assistant .la-quota a {
+    color: var(--accordion-hover);
+}
+
+.lesson-assistant .la-meter {
+    height: 4px;
+    margin-top: 0.3rem;
+    border-radius: 2px;
+    background: rgba(128, 128, 128, 0.3);
+    overflow: hidden;
+}
+
+.lesson-assistant .la-meter > div {
+    height: 100%;
+    background: #2EA043;
+}
+
+.lesson-assistant .la-login {
+    text-align: center;
+}
+
+/* Mobile: bottom sheet opened by the floating button */
+.lesson-assistant.mobile {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    max-height: 85vh;
+    margin: 0;
+    border-radius: 12px 12px 0 0;
+    box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.25);
+    transform: translateY(105%);
+    transition: transform 0.2s ease-out;
+}
+
+.lesson-assistant.mobile.open {
+    transform: none;
+}
+
+.lesson-assistant.mobile .la-messages {
+    max-height: 45vh;
+}
+
+.lesson-assistant-fab {
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    z-index: 999;
+    border-radius: 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}

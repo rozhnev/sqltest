@@ -139,6 +139,8 @@ $translations = [
     'ai_quota_exceeded_free' => 'Бесплатный лимит AI исчерпан. Это разовый пробный лимит, он не обновляется. <a href="/ru/subscribe">Оформите подписку</a>, чтобы получать AI-бюджет каждый месяц.',
     'subscribe_page_title' => 'Подписка | SQLTest.online',
     'ai_quota_exceeded_subscriber' => 'AI-бюджет на текущий период подписки исчерпан. Он обновится ##AiQuotaResetsAt##.',
+    'ai_unavailable' => 'AI-ассистент сейчас недоступен. Попробуйте ещё раз через минуту.',
+    'ai_question_empty' => 'Сначала напишите вопрос.',
     'question_action_next' => 'Далее',
     'my_progress' => 'Мой прогресс',
     'question_action_previous_title' => 'Предыдущее задание',

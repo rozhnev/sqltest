@@ -36,8 +36,10 @@ class Router
             'user'              => "@(?<lang>{$this->langPattern})/(?<class>user)/(?<action>achievements|profile|update)@i",
             'achievement_image' => "@(?<lang>{$this->langPattern})/achievement/(?<action>image)/(?<achievementID>[a-z0-9-]+)@i",
             'achievement'       => "@(?<lang>{$this->langPattern})/(?<action>achievement)/(?<achievementID>[a-z0-9-]+)@i",
+            // Must precede 'lessons', whose unanchored pattern would also match these paths.
+            'lesson-assistant'  => "@(?<lang>{$this->langPattern})/lesson/(?<lessonID>\d+)/(?<action>assistant-ask|assistant-reset)/?$@i",
             // Accepts with both module and lesson
-            'lessons'           => "@(?<lang>{$this->langPattern})/(?<action>lesson)(?:/(?<module>[a-z-]+))?(?:/(?<lesson>[a-z-]+))?@i",
+            'lessons'          => "@(?<lang>{$this->langPattern})/(?<action>lesson)(?:/(?<module>[a-z-]+))?(?:/(?<lesson>[a-z-]+))?@i",
             'playground_run'    => "@(?<lang>{$this->langPattern})/(?<class>playground)/(?<database>[a-z0-9_]+)/(?<action>query-run)@i",
             'playground'        => "@(?<lang>{$this->langPattern})/(?<action>playground)(?:/(?<database>[a-z0-9_]+))?(?:/(?<snippetHash>[a-f0-9]{32}))?/?@i",
             'embed'             => "@(?<lang>{$this->langPattern})/(?<action>embed)@i",

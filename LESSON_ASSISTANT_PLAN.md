@@ -205,6 +205,7 @@ The Router maps these to `assistant_ask` / `assistant_reset` / `assistant_status
 ### 4.5 `assistant_reset` / `assistant_status`
 - `reset`: clear the session history for the lesson.
 - `status`: return `quota` so the panel can show the meter on load. Alternatively, pass the quota in `Controller::lesson()` via `assignVariables` and skip this endpoint.
+- **Implemented**: no `assistant-status` endpoint; `Controller::lesson()` passes the quota and the rendered history. `LESSON_ASSISTANT_ENABLED` accepts `1` (everyone) or `admin` (admins only). The session is released (`session_write_close()`) during the LLM call so the user's other tabs aren't blocked for up to 30 s.
 
 ## Stage 5: Lesson assistant UI
 

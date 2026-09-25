@@ -83,6 +83,8 @@ $translations = [
     'ai_quota_exceeded_free' => 'Tu cuota gratuita de IA se ha agotado. Es una prueba única y no se renueva. <a href="/es/subscribe">Suscríbete</a> para obtener un presupuesto mensual de IA.',
     'subscribe_page_title' => 'Suscripción | SQLTest.online',
     'ai_quota_exceeded_subscriber' => 'Tu presupuesto de IA para este período de suscripción se ha agotado. Se renovará el ##AiQuotaResetsAt##.',
+    'ai_unavailable' => 'El asistente de IA no está disponible en este momento. Inténtalo de nuevo en un minuto.',
+    'ai_question_empty' => 'Primero escribe una pregunta.',
     'from' => 'de',
     'full_name' => 'Nombre Completo',
     'full_name_placeholder' => 'Nombre completo',

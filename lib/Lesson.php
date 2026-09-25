@@ -38,6 +38,22 @@ class Lesson
         $this->id = $lesson['id'];
     }
 
+    /**
+     * Load a lesson by its numeric id
+     *
+     * @throws Exception If the lesson doesn't exist or is deleted
+     */
+    public static function fromId(PDO $dbh, int $id): Lesson
+    {
+        $stmt = $dbh->prepare("SELECT slug FROM lessons WHERE id = :id");
+        $stmt->execute([':id' => $id]);
+        $slug = $stmt->fetchColumn();
+        if ($slug === false) {
+            throw new Exception("Lesson not found");
+        }
+        return new Lesson($dbh, (string)$slug);
+    }
+
     public function slug(): string
     {
         return $this->slug;
