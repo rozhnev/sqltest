@@ -29,7 +29,13 @@ class User
     private $id;
     private $grade;
     private $graded_at;
-    private $show_ad = true;
+    private bool $subscribed = false;
+    /**
+     * Exclusive subscription end date (Y-m-d), null if never subscribed
+     *
+     * @var string|null
+     */
+    private $subscribedTill;
     private $admin = false;
     private $nickname;
     private $authProvider;
@@ -80,7 +86,8 @@ class User
     {
         if (($session && isset($session['user_id']))) {
             $stmt = $this->dbh->prepare("SELECT 
-                    id, login, grade, graded_at, (hide_ad_till is null or hide_ad_till < current_date) show_ad, admin, nickname
+                    id, login, grade, graded_at, subscribed_till,
+                    (subscribed_till is not null and subscribed_till > current_date) subscribed, admin, nickname
                 FROM users WHERE id = :user_id;");
             $stmt->execute([':user_id' => $session['user_id']]);
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -89,7 +96,8 @@ class User
                 $this->login = $user['login'];
                 $this->grade = $user['grade'];
                 $this->graded_at = $user['graded_at'];
-                $this->show_ad = $user['show_ad'];
+                $this->subscribed = (bool)$user['subscribed'];
+                $this->subscribedTill = $user['subscribed_till'];
                 $this->admin = $user['admin'];
                 $this->nickname = $user['nickname'];
                 $this->authProvider = $this->resolveAuthProviderFromLogin($user['login']);
@@ -106,7 +114,8 @@ class User
         }
 
         $normalizedEmail = strtolower($email);
-        $stmt = $this->dbh->prepare("SELECT id, login, password_hash, grade, graded_at, (hide_ad_till is null or hide_ad_till < current_date) show_ad, admin, nickname
+        $stmt = $this->dbh->prepare("SELECT id, login, password_hash, grade, graded_at, subscribed_till,
+                (subscribed_till is not null and subscribed_till > current_date) subscribed, admin, nickname
             FROM users WHERE LOWER(email) = :email AND password_hash IS NOT NULL;");
         $stmt->execute([':email' => $normalizedEmail]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -118,7 +127,8 @@ class User
         $this->login = $user['login'];
         $this->grade = $user['grade'];
         $this->graded_at = $user['graded_at'];
-        $this->show_ad = $user['show_ad'];
+        $this->subscribed = (bool)$user['subscribed'];
+        $this->subscribedTill = $user['subscribed_till'];
         $this->admin = $user['admin'];
         $this->nickname = $user['nickname'];
         $this->authProvider = 'password';
@@ -419,7 +429,37 @@ class User
      */
     public function showAd(): bool
     {
-        return $this->show_ad;
+        return !$this->subscribed;
+    }
+
+    /**
+     * Return User active subscription status
+     *
+     * @return bool
+     */
+    public function isSubscribed(): bool
+    {
+        return $this->subscribed;
+    }
+
+    /**
+     * Return exclusive subscription end date (Y-m-d), null if never subscribed
+     *
+     * @return string|null
+     */
+    public function getSubscribedTill(): ?string
+    {
+        return $this->subscribedTill;
+    }
+
+    /**
+     * One-time LLM token allowance for new accounts
+     *
+     * @return int
+     */
+    private function freeLlmTokens(): int
+    {
+        return (int)($this->env['LLM_FREE_TOKENS'] ?? 50000);
     }
 
     /**
@@ -470,12 +510,13 @@ class User
     {
         $this->id = $this->generateUUID();
 
+        // llm_tokens is set only for new users; returning users keep their balance
         $stmt = $this->dbh->prepare("
-            INSERT INTO users (id, login) VALUES (?, ?) 
-            ON CONFLICT (login) DO 
-               UPDATE SET last_login_at = CURRENT_TIMESTAMP 
+            INSERT INTO users (id, login, llm_tokens) VALUES (?, ?, ?)
+            ON CONFLICT (login) DO
+               UPDATE SET last_login_at = CURRENT_TIMESTAMP
             RETURNING id");
-        if ($stmt->execute([$this->id, $this->login])) {
+        if ($stmt->execute([$this->id, $this->login, $this->freeLlmTokens()])) {
             $this->id = (string)$stmt->fetchColumn();
         }
     }
@@ -510,9 +551,9 @@ class User
         $hash = password_hash($password, PASSWORD_DEFAULT);
         $userId = $this->generateUUID();
 
-        $insert = $this->dbh->prepare("INSERT INTO users (id, login, email, password_hash, full_name, created_at, last_login_at) 
-            VALUES (:id, :login, :email, :hash, :full_name, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);");
-        if (!$insert->execute([':id' => $userId, ':login' => $login, ':email' => $email, ':hash' => $hash, ':full_name' => $fullName])) {
+        $insert = $this->dbh->prepare("INSERT INTO users (id, login, email, password_hash, full_name, llm_tokens, created_at, last_login_at)
+            VALUES (:id, :login, :email, :hash, :full_name, :llm_tokens, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);");
+        if (!$insert->execute([':id' => $userId, ':login' => $login, ':email' => $email, ':hash' => $hash, ':full_name' => $fullName, ':llm_tokens' => $this->freeLlmTokens()])) {
             throw new Exception(Localizer::translateString('something_went_wrong'));
         }
 
