@@ -7,6 +7,7 @@ class LLM {
     private $reasoningEffort; // null = send normal sampling params instead
     private $maxTokens;       // budget used by ask()
     private $maxTokensJson;   // budget used by askJson()
+    private ?array $lastUsage = null; // token usage of the last call, see getLastUsage()
 
     /**
      * @param string $llm Name of an entry in config.php's llm_profiles (e.g.
@@ -86,10 +87,12 @@ class LLM {
         curl_setopt($crl, CURLOPT_POSTFIELDS, json_encode($data));
         curl_setopt($crl, CURLOPT_HTTPHEADER, ["Content-Type: application/json", "Authorization: Bearer " . $this->key]);
 
+        $this->lastUsage = null;
         $result = curl_exec($crl);
         $response = json_decode($result);
         curl_close($crl);
 
+        $this->lastUsage = $this->extractUsage(json_decode(json_encode($response->usage ?? null), true));
         if (property_exists($response, 'error')) {
             return $response->error->message;
         }
@@ -118,6 +121,64 @@ class LLM {
             $data['temperature'] = 0.3;
         }
 
+        $content = $this->request($data, $timeoutSeconds);
+        if ($content === null) {
+            return null;
+        }
+
+        $json = $this->extractJsonObject($content);
+        if ($json === null) {
+            return null;
+        }
+
+        $decoded = json_decode($json, true);
+        return is_array($decoded) ? $decoded : null;
+    }
+
+    /**
+     * Ask the model for a plain-text (markdown) answer, or null on any failure
+     * (network error, timeout, API error, or empty response). Unlike ask(), the
+     * answer is returned raw (no nl2br) and API errors are never returned as text.
+     *
+     * @param array $dialog Chat messages, same shape as ask().
+     * @param int $maxTokens Output token budget for this call.
+     * @param int $timeoutSeconds Hard curl timeout so a hanging request can't hang the page.
+     * @return string|null
+     */
+    public function chat(array $dialog, int $maxTokens, int $timeoutSeconds = 30): ?string {
+        $data = [
+            'model'            => $this->model,
+            'messages'         => $dialog,
+            $this->tokenParam  => $maxTokens,
+        ];
+        if ($this->reasoningEffort !== null) {
+            $data['reasoning_effort'] = $this->reasoningEffort;
+        } else {
+            $data['temperature'] = 0.5;
+        }
+
+        return $this->request($data, $timeoutSeconds);
+    }
+
+    /**
+     * Token usage reported by the provider for the last ask()/askJson()/chat() call:
+     * ['prompt' => int, 'completion' => int, 'total' => int], or null if the call
+     * failed before the provider reported usage.
+     *
+     * @return array|null
+     */
+    public function getLastUsage(): ?array {
+        return $this->lastUsage;
+    }
+
+    /**
+     * POST a chat completion request and return the trimmed message content, or null
+     * on any failure. Records the reported usage even when the content is unusable,
+     * since the provider still bills for it.
+     */
+    private function request(array $data, int $timeoutSeconds): ?string {
+        $this->lastUsage = null;
+
         $crl = curl_init($this->baseUrl);
         curl_setopt($crl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($crl, CURLOPT_POST, true);
@@ -134,22 +195,27 @@ class LLM {
         }
 
         $response = json_decode($result, true);
-        if (!is_array($response) || !empty($response['error']['message'])) {
+        if (!is_array($response)) {
+            return null;
+        }
+        $this->lastUsage = $this->extractUsage($response['usage'] ?? null);
+        if (!empty($response['error']['message'])) {
             return null;
         }
 
         $content = trim((string)($response['choices'][0]['message']['content'] ?? ''));
-        if ($content === '') {
+        return $content === '' ? null : $content;
+    }
+
+    private function extractUsage($usage): ?array {
+        if (!is_array($usage) || !isset($usage['total_tokens'])) {
             return null;
         }
-
-        $json = $this->extractJsonObject($content);
-        if ($json === null) {
-            return null;
-        }
-
-        $decoded = json_decode($json, true);
-        return is_array($decoded) ? $decoded : null;
+        return [
+            'prompt'     => (int)($usage['prompt_tokens'] ?? 0),
+            'completion' => (int)($usage['completion_tokens'] ?? 0),
+            'total'      => (int)$usage['total_tokens'],
+        ];
     }
 
     private function extractJsonObject(string $raw): ?string {

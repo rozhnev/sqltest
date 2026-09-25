@@ -187,7 +187,8 @@ Difficulty levels (1–5).
 | `admin`                      | boolean      |                                    |
 | `last_login_at`              | timestamp    |                                    |
 | `last_path`                  | varchar      |                                    |
-| `hide_ad_till`               | date         |                                    |
+| `subscribed_till`            | date         | Exclusive subscription end; active while `> CURRENT_DATE` (no ads + subscriber AI quota) |
+| `llm_tokens`                 | int          | Remaining AI token balance; may be slightly negative after an overshooting request |
 | `created_at`                 | timestamp    |                                    |
 | `email_verified_at`          | timestamp    | NULL = unverified                  |
 | `user_agreement_accepted_at` | timestamp    |                                    |
@@ -263,6 +264,20 @@ User-submitted question proposals for moderation.
 | `rejected_at`         | timestamp |                                                    |
 | `created_at`          | timestamp |                                                    |
 | `updated_at`          | timestamp |                                                    |
+
+### `llm_usage_log`
+Append-only per-call log of user-triggered LLM usage (cost analysis). The quota itself is `users.llm_tokens`; this table is never read by the quota check.
+
+| Column              | Type         | Notes                                   |
+|---------------------|--------------|-----------------------------------------|
+| `id`                | bigserial PK |                                         |
+| `user_id`           | uuid FK      | → `users.id`                            |
+| `feature`           | varchar(32)  | `lesson_assistant` \| `free_answer`     |
+| `ref_id`            | int          | Lesson id / question id                 |
+| `llm_profile`       | varchar(64)  | Profile name from `config.php`          |
+| `prompt_tokens`     | int          |                                         |
+| `completion_tokens` | int          |                                         |
+| `created_at`        | timestamp    |                                         |
 
 ---
 
