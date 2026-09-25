@@ -129,7 +129,9 @@ $translations = [
     'question_action_clear_answer' => 'Clear answer',
     'free_answer_empty_error' => 'Please write an answer before checking.',
     'free_answer_llm_unavailable' => 'We could not check your answer right now. Please try again in a moment.',
-    'free_answer_rate_limited' => 'You have reached the daily limit of answer checks. Each check uses a paid AI service, so this limit helps us keep it available to everyone — please try again tomorrow, or <a href="/en/donate">make a donation</a> to help us raise the limit for everyone.',
+    'ai_login_required' => 'AI features are available to registered users. Please <a href="" onClick="toggleLoginWindow(); return false;">log in</a> to continue.',
+    'ai_quota_exceeded_free' => 'Your free AI allowance is used up. It is a one-time trial and does not renew.',
+    'ai_quota_exceeded_subscriber' => 'Your AI budget for this subscription period is used up. It will be renewed on ##AiQuotaResetsAt##.',
     'question_action_next' => 'Next',
     'question_action_next_title' => 'Next task',
     'question_action_previous_title' => 'Previous task',
@@ -313,7 +315,6 @@ $translations = [
     'interview_error_invalid_position' => 'Invalid position or grade.',
     'interview_error_cooldown' => 'A retry for this position and grade is available starting the next calendar day.',
     'interview_error_session_not_found' => 'Interview session not found.',
-    'interview_error_rate_limit' => 'Too many requests. Please try again later.',
     'interview_error_self_intro_empty' => 'Please write a few sentences about yourself.',
     'interview_error_self_intro_save' => 'Could not save your self-presentation. Please try again.',
 ];

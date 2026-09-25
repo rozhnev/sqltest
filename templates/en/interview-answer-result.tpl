@@ -7,8 +7,6 @@
             Select at least one option.
         {elseif $AnswerResult.error === 'llm_unavailable'}
             We couldn't evaluate your answer right now. Please submit again in a minute — this attempt wasn't used up.
-        {elseif $AnswerResult.error === 'rate_limit'}
-            Too many requests. Please try again later.
         {else}
             This question is no longer active.
             <a href="/{$Lang}/interview/{$SessionId}/question">Go to the current question</a>

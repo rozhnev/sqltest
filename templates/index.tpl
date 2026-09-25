@@ -196,7 +196,7 @@
                     {/if}
                     <div class="code-buttons">
                         {if $Question.question_type == 'free_answer'}
-                            <button class="button green" id="checkFreeAnswerBtn" onClick="checkFreeAnswer('{$Lang}', {$QuestionID})">
+                            <button class="button green" id="checkFreeAnswerBtn" onClick="{if $User->logged()}checkFreeAnswer('{$Lang}', {$QuestionID}){else}toggleLoginWindow(){/if}">
                                 <i class="run-icon"></i>
                                 <span>{translate}question_action_check_free_answer{/translate}</span>
                             </button>

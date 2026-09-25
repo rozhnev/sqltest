@@ -118,31 +118,6 @@ class Controller
         return $candidate !== '' ? $candidate : (string)($_SERVER['REMOTE_ADDR'] ?? 'unknown');
     }
 
-    /**
-     * Record one hit for the free-answer LLM check and report whether the identifier
-     * (logged-in user, or IP address for anonymous users) is still within its daily quota.
-     * Always increments first, so the counter itself can't be skipped by retrying.
-     */
-    private function hitFreeAnswerRateLimit(): bool
-    {
-        $identifier = $this->user->logged()
-            ? "user:{$this->user->getId()}"
-            : "ip:{$this->getClientIp()}";
-        $dailyLimit = (int)($this->env['FREE_ANSWER_DAILY_LIMIT'] ?? 20);
-
-        $stmt = $this->dbh->prepare("
-            INSERT INTO free_answer_rate_limit (identifier, window_start, request_count)
-            VALUES (:identifier, CURRENT_DATE, 1)
-            ON CONFLICT (identifier, window_start)
-                DO UPDATE SET request_count = free_answer_rate_limit.request_count + 1
-            RETURNING request_count
-        ");
-        $stmt->execute([':identifier' => $identifier]);
-        $requestsToday = (int)$stmt->fetchColumn();
-
-        return $requestsToday <= $dailyLimit;
-    }
-
     private function hitPasswordResetRateLimit(string $email): bool
     {
         $identifiers = [
@@ -453,12 +428,6 @@ class Controller
         $justSubmitted = false;
         $selfIntroError = null;
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && $session['status'] === 'intro') {
-            if (!$this->hitFreeAnswerRateLimit()) {
-                $this->engine->assign('ErrorMessage', Localizer::translateString('interview_error_rate_limit'));
-                $this->engine->display('error.tpl');
-                return;
-            }
-
             $languageNames = [
                 'en' => 'English', 'ru' => 'Russian', 'pt' => 'Portuguese',
                 'fr' => 'French', 'zh' => 'Simplified Chinese', 'es' => 'Spanish',
@@ -568,19 +537,14 @@ class Controller
         $userId = (string)$this->user->getId();
         $questionId = (int)($_POST['question_id'] ?? 0);
 
-        $isFreeAnswer = isset($_POST['free-answer']);
-        if ($isFreeAnswer && !$this->hitFreeAnswerRateLimit()) {
-            $result = ['saved' => false, 'error' => 'rate_limit'];
-        } else {
-            $result = $interview->answerCurrentQuestion(
-                $sessionId,
-                $userId,
-                $questionId,
-                $_POST,
-                $this->lang,
-                (string)($this->env['USER_ANSWER_LLM_PROFILE'] ?? 'openai-gpt-4o-mini')
-            );
-        }
+        $result = $interview->answerCurrentQuestion(
+            $sessionId,
+            $userId,
+            $questionId,
+            $_POST,
+            $this->lang,
+            (string)($this->env['USER_ANSWER_LLM_PROFILE'] ?? 'openai-gpt-4o-mini')
+        );
 
         $this->assignVariables([
             'SessionId'    => $sessionId,
@@ -1324,16 +1288,24 @@ class Controller
         $answer = (string)($_POST['answer'] ?? '');
         $questionID = $params['questionID'];
 
-        // Guard the paid LLM call against abusive/high-volume use before spending anything on it.
-        if (!$this->hitFreeAnswerRateLimit()) {
+        // The LLM check is paid from the user's AI token budget, so it needs an account.
+        if (!$this->user->logged()) {
             $this->assignVariables([
                 'QuestionID'        => $questionID,
-                'FreeAnswerResult'  => [
-                    'ok'            => false,
-                    'cost'          => 0,
-                    'rate_limited'  => true,
-                    'comment'       => Localizer::translateString('free_answer_rate_limited'),
-                ]
+                'FreeAnswerResult'  => ['ok' => false, 'cost' => 0, 'login_required' => true],
+            ]);
+            header('HTTP/1.1 401 Unauthorized');
+            $this->engine->display($this->lang . "/check_free_answer_result.tpl");
+            return;
+        }
+
+        $quota = new TokenQuota($this->dbh, $this->user, $this->env);
+        if (!$quota->canSpend()) {
+            $quotaStatus = $quota->status();
+            $this->assignVariables([
+                'QuestionID'        => $questionID,
+                'FreeAnswerResult'  => ['ok' => false, 'cost' => 0, 'quota_exceeded' => true, 'quota' => $quotaStatus],
+                'AiQuotaResetsAt'   => $quotaStatus['resets_at'],
             ]);
             header('HTTP/1.1 429 Too Many Requests');
             $this->engine->display($this->lang . "/check_free_answer_result.tpl");
@@ -1347,12 +1319,18 @@ class Controller
 
         $question = new Question($this->dbh, $questionID);
         $freeAnswerResult = $question->checkFreeAnswer($answer, $this->lang, $llmProfileName);
+        try {
+            $quota->charge('free_answer', (int)$questionID, $llmProfileName, $freeAnswerResult['usage'] ?? null);
+        } catch (Throwable $error) {
+            // The answer is already graded (and paid for); don't hide the result from the user.
+            error_log('Free answer charge failed: ' . $error->getMessage());
+        }
         $this->assignVariables([
             'QuestionID'        => $questionID,
             'FreeAnswerResult'  => $freeAnswerResult
         ]);
         // Do not overwrite a previously saved answer with an empty submission.
-        if ($this->user->logged() && trim($answer) !== '') {
+        if (trim($answer) !== '') {
             $this->user->saveQuestionAttempt($questionID, $freeAnswerResult, trim($answer));
         }
         if (!$freeAnswerResult['ok']) header( 'HTTP/1.1 418 BAD REQUEST' );

@@ -157,13 +157,13 @@ Rough sizing:
    - **Logged in**: build `TokenQuota`. If `!canSpend()`, return `quota_exceeded => true` with HTTP 429 and a message. Free users see "your free AI allowance is used up" plus a link to the subscribe page (`/{lang}/subscribe`, Stage 6). Subscribers see the cycle reset date.
    - Otherwise grade as today, then call `charge('free_answer', $questionID, $profile, $llm->getLastUsage())`.
 2. `Question::checkFreeAnswer()` must expose usage. Add `'usage' => ?array` to its returned array, filled from `LLM::getLastUsage()`. Existing callers ignore unknown keys.
-3. `Interview` is **not charged**: interviews are paid per session. The call path stays as it is.
-4. Remove `hitFreeAnswerRateLimit()` and `FREE_ANSWER_DAILY_LIMIT`. Drop `free_answer_rate_limit` after a release cycle.
+3. `Interview` is **not charged**: interviews are paid per session.
+4. Remove `hitFreeAnswerRateLimit()` and `FREE_ANSWER_DAILY_LIMIT`, **including the interview call sites** (`interview_session` self-intro, `interview_answer`): each interview LLM call is tied to a one-time step (one self-intro, one answer per question), so the daily limit protected almost nothing there. Drop `free_answer_rate_limit` after a release cycle.
 5. Front end (`templates/question.tpl` / free-answer block, `script.js` ~L298):
    - Anonymous users see the textarea, but the check button opens the login popup (same UX as other login-gated actions).
    - Handle the 401 and 429 responses.
 6. Templates `templates/{lang}/check_free_answer_result.tpl`: replace the `rate_limited` branch with `login_required` and `quota_exceeded` branches (en + ru first, fallback via `localizedTemplate`).
-7. Translations: replace `free_answer_rate_limited` with `ai_quota_exceeded` and add `ai_login_required`. These are short shared strings, so they go in `translations/{lang}.php`.
+7. Translations: replace `free_answer_rate_limited` with `ai_quota_exceeded_free`, `ai_quota_exceeded_subscriber` (uses `##AiQuotaResetsAt##`) and `ai_login_required`. These are short shared strings, so they go in `translations/{lang}.php`. The "Subscribe" link is added to `ai_quota_exceeded_free` in Stage 6, when the page exists.
 8. Optional: show the quota next to the check button as a percentage only ("AI budget: 28% used"; subscribers also see "· resets Oct 24").
 
 ## Stage 4: Lesson assistant backend

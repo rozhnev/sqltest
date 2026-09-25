@@ -197,7 +197,8 @@ class Question
      *                     'openai-gpt-4o-mini', 'groq-gpt-oss-20b'), or a raw model id to
      *                     use OpenAI directly. LLM resolves the provider, request shape,
      *                     and API key from this on its own — nothing else to pass in here.
-     * @return array{ok: bool, cost: float, comment: string, score?: int}
+     * @return array{ok: bool, cost: float, comment: string, score?: int, usage?: array|null}
+     *         usage: token usage reported by the LLM (see LLM::getLastUsage()), set once the LLM was called
      */
     public function checkFreeAnswer(string $answer, string $lang, string $llm): array
     {
@@ -280,6 +281,8 @@ class Question
                 'ok'      => false,
                 'cost'    => 0,
                 'comment' => Localizer::translateString('free_answer_llm_unavailable'),
+                // An unusable answer may still have been billed by the provider
+                'usage'   => $llmClient->getLastUsage(),
             ];
         }
 
@@ -288,6 +291,7 @@ class Question
             'cost'    => 0,
             'score'   => isset($parsed['score']) ? max(0, min(100, (int)$parsed['score'])) : null,
             'comment' => trim((string)($parsed['comment'] ?? '')),
+            'usage'   => $llmClient->getLastUsage(),
         ];
     }
     /**

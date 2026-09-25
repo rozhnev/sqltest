@@ -135,7 +135,9 @@ $translations = [
     'question_action_clear_answer' => 'Очистить ответ',
     'free_answer_empty_error' => 'Пожалуйста, напишите ответ перед проверкой.',
     'free_answer_llm_unavailable' => 'Не удалось проверить ваш ответ сейчас. Пожалуйста, попробуйте еще раз через минуту.',
-    'free_answer_rate_limited' => 'Вы достигли дневного лимита проверок ответов. Каждая проверка использует платный AI-сервис, поэтому этот лимит помогает нам оставаться доступными для всех — попробуйте снова завтра, или <a href="/ru/donate">сделайте пожертвование</a>, чтобы помочь нам увеличить лимит для всех.',
+    'ai_login_required' => 'AI-функции доступны зарегистрированным пользователям. Пожалуйста, <a href="" onClick="toggleLoginWindow(); return false;">войдите</a>, чтобы продолжить.',
+    'ai_quota_exceeded_free' => 'Бесплатный лимит AI исчерпан. Это разовый пробный лимит, он не обновляется.',
+    'ai_quota_exceeded_subscriber' => 'AI-бюджет на текущий период подписки исчерпан. Он обновится ##AiQuotaResetsAt##.',
     'question_action_next' => 'Далее',
     'my_progress' => 'Мой прогресс',
     'question_action_previous_title' => 'Предыдущее задание',
@@ -321,7 +323,6 @@ $translations = [
     'interview_error_invalid_position' => 'Некорректная позиция или грейд.',
     'interview_error_cooldown' => 'Повторная попытка на эту позицию и грейд доступна начиная со следующего дня.',
     'interview_error_session_not_found' => 'Сессия интервью не найдена.',
-    'interview_error_rate_limit' => 'Слишком много запросов. Попробуйте позже.',
     'interview_error_self_intro_empty' => 'Пожалуйста, напишите пару предложений о себе.',
     'interview_error_self_intro_save' => 'Не удалось сохранить самопрезентацию. Попробуйте ещё раз.',
 ];
