@@ -279,6 +279,47 @@ Append-only per-call log of user-triggered LLM usage (cost analysis). The quota 
 | `completion_tokens` | int          |                                         |
 | `created_at`        | timestamp    |                                         |
 
+### `subscriptions`
+Lava.top subscriptions (see `SUBSCRIPTION_PLAN.md`): one row per checkout, keyed by Lava's first (parent) contract id. The subscription period itself is `users.subscribed_till`.
+
+| Column              | Type       | Notes                                              |
+|---------------------|------------|----------------------------------------------------|
+| `contract_id`       | uuid PK    | Lava parent contract id                            |
+| `user_id`           | uuid FK    | → `users.id`                                       |
+| `email`             | text       | Email sent to Lava (needed to cancel)              |
+| `currency`          | varchar(3) | `RUB` \| `USD`                                     |
+| `status`            | varchar    | `pending` \| `active` \| `failed` \| `cancelled`   |
+| `created_at`        | timestamp  |                                                    |
+| `activated_at`      | timestamp  | First payment                                      |
+| `cancelled_at`      | timestamp  | Auto-renewal cancelled                             |
+| `renewal_failed_at` | timestamp  | Last failed renewal; cleared by a successful one   |
+| `renewal_error`     | text       |                                                    |
+
+### `subscription_payments`
+One row per successful payment (first or renewal); the PK makes webhook retries idempotent.
+
+| Column            | Type          | Notes                          |
+|-------------------|---------------|--------------------------------|
+| `contract_id`     | uuid PK       | Lava contract id of the payment |
+| `subscription_id` | uuid FK       | → `subscriptions.contract_id`  |
+| `amount`          | numeric(12,2) |                                |
+| `currency`        | varchar(3)    |                                |
+| `paid_at`         | timestamp     |                                |
+| `created_at`      | timestamp     |                                |
+
+### `lava_webhook_log`
+Every webhook received from Lava, raw.
+
+| Column        | Type         | Notes                                                                     |
+|---------------|--------------|---------------------------------------------------------------------------|
+| `id`          | bigserial PK |                                                                           |
+| `event_type`  | varchar(64)  |                                                                           |
+| `contract_id` | uuid         |                                                                           |
+| `body`        | jsonb        |                                                                           |
+| `received_at` | timestamp    |                                                                           |
+| `result`      | varchar(16)  | `processed` \| `duplicate` \| `ignored` \| `unmatched` \| `error`         |
+| `error`       | text         |                                                                           |
+
 ---
 
 ## Test Domain
