@@ -2,6 +2,7 @@ vendor/*
 **templates_c/
 composer.phar
 .env
+tests/.env.testing
 config.php
 
 # Minified files (if generating during deployment)
