@@ -129,7 +129,7 @@ $translations = [
     'free_answer_empty_error' => 'Por favor, escreva uma resposta antes de verificar.',
     'free_answer_llm_unavailable' => 'Não foi possível verificar sua resposta agora. Por favor, tente novamente em breve.',
     'ai_login_required' => 'Os recursos de IA estão disponíveis para usuários registrados. Por favor, <a href="" onClick="toggleLoginWindow(); return false;">faça login</a> para continuar.',
-    'ai_quota_exceeded' => 'Seus tokens de IA acabaram. <a href="/pt/tokens">Compre um pacote de tokens</a> para continuar usando o tutor de IA e a verificação de respostas.',
+    'ai_quota_exceeded' => 'Seus tokens de IA acabaram. <a href="/pt/buy-tokens">Compre um pacote de tokens</a> para continuar usando o tutor de IA e a verificação de respostas.',
     'tokens_page_title' => 'Tokens de IA | SQLTest.online',
     'tokens_error_checkout' => 'Não foi possível iniciar o pagamento. Tente novamente em alguns minutos ou fale conosco.',
     'tokens_error_promo_code' => 'Este código promocional não é válido. Verifique-o e tente novamente, ou compre sem ele.',

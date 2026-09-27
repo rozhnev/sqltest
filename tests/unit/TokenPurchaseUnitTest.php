@@ -90,7 +90,7 @@ class TokenPurchaseUnitTest extends \Codeception\Test\Unit
         $this->assertSame('RU', $invoice['buyerLanguage']);
         $this->assertSame('buyer@example.com', $invoice['email']);
         $this->assertSame(self::ENV['TOKENS_LAVA_OFFER_ID'], $invoice['offerId']);
-        $this->assertSame('https://sqltest.online/ru/tokens?payment=success', $invoice['successful_return_url']);
+        $this->assertSame('https://sqltest.online/ru/buy-tokens?payment=success', $invoice['successful_return_url']);
         $this->assertSame(
             ['user_id' => $userId, 'tokens' => 1000000, 'currency' => 'RUB', 'promo_code' => null, 'status' => 'pending'],
             $this->purchaseRow(FakeLavaClient::DEFAULT_CONTRACT)

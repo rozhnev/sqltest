@@ -11,5 +11,5 @@
 {elseif $part == 'send'}Envoyer
 {elseif $part == 'reset'}Effacer la conversation
 {elseif $part == 'login'}Connectez-vous pour poser des questions
-{elseif $part == 'quota'}Jetons d'IA restants : <span class="la-remaining">{$AiQuota.remaining_text}</span> · <a href="/{$Lang}/tokens">En acheter</a>
+{elseif $part == 'quota'}Jetons d'IA restants : <span class="la-remaining">{$AiQuota.remaining_text}</span> · <a href="/{$Lang}/buy-tokens">En acheter</a>
 {/if}

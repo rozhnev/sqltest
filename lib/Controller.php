@@ -617,7 +617,7 @@ class Controller
      * (see TOKEN_PURCHASE_PLAN.md). Payments are processed through Lava.top webhooks
      * (lava_webhook()).
      */
-    public function tokens(array $params): void
+    public function buy_tokens(array $params): void
     {
         $purchase = new TokenPurchase($this->dbh, $this->env);
 
@@ -635,7 +635,7 @@ class Controller
         $paymentReturn = (string)($_GET['payment'] ?? '');
 
         $this->assignVariables([
-            'Action'                  => 'tokens',
+            'Action'                  => 'buy-tokens',
             'PageTitle'               => Localizer::translateString('tokens_page_title'),
             'TokensContentTemplate'   => $this->localizedTemplate('tokens.tpl'),
             'TokensCheckoutAvailable' => $purchase->checkoutAvailable(),
@@ -654,7 +654,17 @@ class Controller
      */
     public function subscribe(array $params): void
     {
-        header("Location: /{$this->lang}/tokens", true, 301);
+        header("Location: /{$this->lang}/buy-tokens", true, 301);
+    }
+
+    /**
+     * GET /{lang}/tokens: the former address of the tokens page. Keeps the query string:
+     * Lava checkouts started before the rename return to /tokens?payment=...
+     */
+    public function tokens(array $params): void
+    {
+        $query = (string)($_SERVER['QUERY_STRING'] ?? '');
+        header("Location: /{$this->lang}/buy-tokens" . ($query !== '' ? "?{$query}" : ''), true, 301);
     }
 
     /**
@@ -665,7 +675,7 @@ class Controller
         if ($flashType !== null) {
             $_SESSION['tokens_flash'] = ['type' => $flashType, 'message' => $flashMessage];
         }
-        header("Location: /{$this->lang}/tokens", true, 303);
+        header("Location: /{$this->lang}/buy-tokens", true, 303);
     }
 
     /**
@@ -681,9 +691,9 @@ class Controller
     }
 
     /**
-     * POST /{lang}/tokens/checkout: create a Lava invoice for one pack and send the user to its payment page
+     * POST /{lang}/buy-tokens/checkout: create a Lava invoice for one pack and send the user to its payment page
      */
-    public function tokens_checkout(array $params): void
+    public function buy_tokens_checkout(array $params): void
     {
         if (!$this->tokensActionAllowed()) {
             return;
@@ -714,9 +724,9 @@ class Controller
     }
 
     /**
-     * POST /{lang}/tokens/email: save the account email that Lava needs for the checkout
+     * POST /{lang}/buy-tokens/email: save the account email that Lava needs for the checkout
      */
-    public function tokens_email(array $params): void
+    public function buy_tokens_email(array $params): void
     {
         if (!$this->tokensActionAllowed()) {
             return;

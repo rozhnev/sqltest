@@ -129,7 +129,7 @@ $translations = [
     'free_answer_empty_error' => 'Veuillez écrire une réponse avant de vérifier.',
     'free_answer_llm_unavailable' => 'Nous n\'avons pas pu vérifier votre réponse pour le moment. Veuillez réessayer dans un instant.',
     'ai_login_required' => 'Les fonctions d\'IA sont réservées aux utilisateurs inscrits. Veuillez vous <a href="" onClick="toggleLoginWindow(); return false;">connecter</a> pour continuer.',
-    'ai_quota_exceeded' => 'Vos jetons d\'IA sont épuisés. <a href="/fr/tokens">Achetez un pack de jetons</a> pour continuer à utiliser le tuteur IA et la vérification des réponses.',
+    'ai_quota_exceeded' => 'Vos jetons d\'IA sont épuisés. <a href="/fr/buy-tokens">Achetez un pack de jetons</a> pour continuer à utiliser le tuteur IA et la vérification des réponses.',
     'tokens_page_title' => 'Jetons d\'IA | SQLTest.online',
     'tokens_error_checkout' => 'Impossible de lancer le paiement. Réessayez dans quelques minutes ou contactez-nous.',
     'tokens_error_promo_code' => 'Ce code promo n\'est pas valide. Vérifiez-le et réessayez, ou achetez sans code.',

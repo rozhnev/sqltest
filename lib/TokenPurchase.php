@@ -1,7 +1,7 @@
 <?php
 /**
  * One-time AI token purchases through Lava.top (see TOKEN_PURCHASE_PLAN.md):
- * checkout, webhook handling and the purchase history shown on /tokens.
+ * checkout, webhook handling and the purchase history shown on /buy-tokens.
  * A paid purchase adds its pack to users.llm_tokens, which TokenQuota spends.
  */
 class TokenPurchase
@@ -89,7 +89,7 @@ class TokenPurchase
         [$currency, $provider, $method] = $lang === 'ru'
             ? ['RUB', $this->env['LAVA_PROVIDER_RUB'] ?? 'SMART_GLOCAL', $this->env['LAVA_METHOD_RUB'] ?? '']
             : ['USD', $this->env['LAVA_PROVIDER_USD'] ?? 'UNLIMINT', $this->env['LAVA_METHOD_USD'] ?? 'CARD'];
-        $returnUrl = rtrim($siteUrl, '/') . "/{$lang}/tokens?payment=";
+        $returnUrl = rtrim($siteUrl, '/') . "/{$lang}/buy-tokens?payment=";
 
         // No periodicity: that is what makes it a one-time purchase
         $invoice = [

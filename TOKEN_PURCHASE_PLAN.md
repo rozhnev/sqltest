@@ -94,7 +94,7 @@ Keep `createInvoice()` and error handling. Remove `cancelSubscription()`.
 - `checkoutAvailable()`, `isValidWebhookKey()`, `normalizePromoCode()`: moved over unchanged.
 - `startCheckout(User $user, string $email, string $lang, string $siteUrl, ?string $promoCode): string`
   → payment URL. Same as today minus `periodicity`; inserts a `pending` row with `tokens = LLM_PACK_TOKENS`.
-  Return URLs: `https://{host}/{lang}/tokens?payment=success|failed|cancelled`.
+  Return URLs: `https://{host}/{lang}/buy-tokens?payment=success|failed|cancelled`.
 - `receiveWebhook(string $body)` / `handleWebhook(array $event)`: log first, then in one transaction:
   - product isn't `TOKENS_LAVA_PRODUCT_ID` → `ignored`
   - `payment.success` → credit as in Stage 1 → `processed` or `duplicate`; unknown contract → `unmatched` + admin email
@@ -123,11 +123,11 @@ Keep `createInvoice()` and error handling. Remove `cancelSubscription()`.
 
 | Route | Method | Handler |
 |---|---|---|
-| `/{lang}/tokens` | GET | `Controller::tokens()`: the purchase page |
-| `/{lang}/tokens/checkout` | POST | `Controller::tokens_checkout()` → 303 to Lava `paymentUrl` |
-| `/{lang}/tokens/email` | POST | `Controller::tokens_email()`: save the email Lava needs |
+| `/{lang}/buy-tokens` | GET | `Controller::buy_tokens()`: the purchase page |
+| `/{lang}/buy-tokens/checkout` | POST | `Controller::buy_tokens_checkout()` → 303 to Lava `paymentUrl` |
+| `/{lang}/buy-tokens/email` | POST | `Controller::buy_tokens_email()`: save the email Lava needs |
 | `/lava/webhook` | POST | `Controller::lava_webhook()`, unchanged apart from the class it calls |
-| `/{lang}/subscribe` | GET | 301 → `/{lang}/tokens` |
+| `/{lang}/subscribe`, `/{lang}/tokens` | GET | 301 → `/{lang}/buy-tokens` |
 
 Removed: `/{lang}/subscribe/cancel`, `/{lang}/subscribe/checkout`, `/{lang}/subscribe/email`.
 Checkout and email stay POST only, logged in, same-origin check.
@@ -191,7 +191,7 @@ the spec's example payloads):
    - the invoice is accepted with the code and the Lava page shows a zero price;
    - `payment.success` arrives (`lava_webhook_log`) with `amount` 0, the purchase is `paid` and the balance
      grew by the pack;
-   - the return to `/tokens?payment=success` shows the new balance.
+   - the return to `/buy-tokens?payment=success` shows the new balance.
    If Lava doesn't create an invoice or send a webhook for a zero amount, repeat with `FIRST10` (90% discount):
    a real payment of 10% of the price, and `amount` in the webhook is the discounted sum.
    `TESTFREE` is limited to 10 uses in Lava; disable it once testing is done, since anyone who knows it gets free

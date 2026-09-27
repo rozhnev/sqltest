@@ -11,5 +11,5 @@
 {elseif $part == 'send'}Отправить
 {elseif $part == 'reset'}Очистить чат
 {elseif $part == 'login'}Войдите, чтобы задавать вопросы
-{elseif $part == 'quota'}Осталось AI-токенов: <span class="la-remaining">{$AiQuota.remaining_text}</span> · <a href="/{$Lang}/tokens">Купить ещё</a>
+{elseif $part == 'quota'}Осталось AI-токенов: <span class="la-remaining">{$AiQuota.remaining_text}</span> · <a href="/{$Lang}/buy-tokens">Купить ещё</a>
 {/if}

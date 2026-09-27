@@ -16,9 +16,9 @@ class Router
             'question'          => "@(?<lang>{$this->langPattern})/(?<action>question)/(?<questionCategory>[a-z-]+)/(?<question>[a-z-]+)@i",
             'question-action'   => "@(?<lang>{$this->langPattern})/question/(?<questionID>\d+)/(?<action>query-help|query-run|query-test|rate|check-answers|check-free-answer)@i",
             // Must precede 'static-page', whose unanchored pattern would also match these paths.
-            'tokens-action'     => "@(?<lang>{$this->langPattern})/(?<class>tokens)/(?<action>checkout|email)/?$@i",
+            'buy-tokens-action' => "@(?<lang>{$this->langPattern})/(?<class>buy-tokens)/(?<action>checkout|email)/?$@i",
             'lava-webhook'      => "@^/(?<class>lava)/(?<action>webhook)/?$@i",
-            'static-page'       => "@(?<lang>{$this->langPattern})/(?<action>privacy-policy|logout|about|menu|books|courses|donate|subscribe|tokens)/?@i",
+            'static-page'       => "@(?<lang>{$this->langPattern})/(?<action>privacy-policy|logout|about|menu|books|courses|donate|buy-tokens)/?@i",
             'register'          => "@(?<lang>{$this->langPattern})/(?<action>register)/?@i",
             'forgot-password'   => "@(?<lang>{$this->langPattern})/(?<action>forgot-password)/?@i",
             'login'             => "@^/(?<action>login)/(?<loginProvider>[a-z]+)/?$@i",
@@ -136,7 +136,7 @@ class Router
                     $params['action'] = 'interview_session';
                 }
                 $action = str_replace('-', '_', strtolower($params['action']));
-                $method = isset($params['class']) ? $params['class'] . '_' . $action : $action;
+                $method = isset($params['class']) ? str_replace('-', '_', strtolower($params['class'])) . '_' . $action : $action;
                 // echo "Method: $method\n";
                 $this->controller->setLanguge($params['lang'] ?? $this->resolveDefaultLanguage());
 

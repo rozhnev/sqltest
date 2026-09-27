@@ -206,7 +206,7 @@ $translations = [
     'free_answer_empty_error' => '请在检查之前写下答案。',
     'free_answer_llm_unavailable' => '目前无法检查您的答案。请稍后再试。',
     'ai_login_required' => 'AI 功能仅对注册用户开放。请<a href="" onClick="toggleLoginWindow(); return false;">登录</a>后继续。',
-    'ai_quota_exceeded' => '您的 AI 令牌已用完。<a href="/zh/tokens">购买令牌包</a>即可继续使用 AI 导师和答案检查。',
+    'ai_quota_exceeded' => '您的 AI 令牌已用完。<a href="/zh/buy-tokens">购买令牌包</a>即可继续使用 AI 导师和答案检查。',
     'tokens_page_title' => 'AI 令牌 | SQLTest.online',
     'tokens_error_checkout' => '无法发起付款。请几分钟后重试，或联系我们。',
     'tokens_error_promo_code' => '该优惠码无效。请检查后重试，或不使用优惠码直接购买。',

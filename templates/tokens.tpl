@@ -28,9 +28,9 @@
     <div class="container">
         <header>
             {if $MobileView}
-                {include file='m.top-menu.tpl' path="/tokens"}
+                {include file='m.top-menu.tpl' path="/buy-tokens"}
             {else}
-                {include file='top-menu.tpl' path="/tokens"}
+                {include file='top-menu.tpl' path="/buy-tokens"}
             {/if}
         </header>
         <main>
@@ -54,7 +54,7 @@
                         </div>
                         {if $TokensPaymentReturn == 'success'}
                             {* The webhook can arrive after the redirect: reload once without the parameter *}
-                            <meta http-equiv="refresh" content="5;url=/{$Lang}/tokens">
+                            <meta http-equiv="refresh" content="5;url=/{$Lang}/buy-tokens">
                         {/if}
                     {/if}
 
@@ -65,12 +65,12 @@
                             <p>{include file=$Text part='unavailable'}</p>
                         {elseif !$UserEmail}
                             <p>{include file=$Text part='email_prompt'}</p>
-                            <form method="post" action="/{$Lang}/tokens/email" class="tokens-email">
+                            <form method="post" action="/{$Lang}/buy-tokens/email" class="tokens-email">
                                 <input type="email" name="email" required placeholder="{$smarty.capture.email_placeholder|trim|escape}">
                                 <button type="submit" class="button">{include file=$Text part='email_save'}</button>
                             </form>
                         {else}
-                            <form method="post" action="/{$Lang}/tokens/checkout">
+                            <form method="post" action="/{$Lang}/buy-tokens/checkout">
                                 <details class="tokens-promo">
                                     <summary>{include file=$Text part='promo_code_label'}</summary>
                                     <input type="text" name="promo_code" maxlength="36" pattern="[A-Za-z0-9_\-]{ldelim}3,36{rdelim}" autocomplete="off" placeholder="{$smarty.capture.promo_code_placeholder|trim|escape}">

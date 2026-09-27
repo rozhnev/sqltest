@@ -11,5 +11,5 @@
 {elseif $part == 'send'}发送
 {elseif $part == 'reset'}清空对话
 {elseif $part == 'login'}登录后即可提问
-{elseif $part == 'quota'}剩余 AI 令牌：<span class="la-remaining">{$AiQuota.remaining_text}</span> · <a href="/{$Lang}/tokens">购买更多</a>
+{elseif $part == 'quota'}剩余 AI 令牌：<span class="la-remaining">{$AiQuota.remaining_text}</span> · <a href="/{$Lang}/buy-tokens">购买更多</a>
 {/if}

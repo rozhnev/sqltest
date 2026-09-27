@@ -130,7 +130,7 @@ $translations = [
     'free_answer_empty_error' => 'Please write an answer before checking.',
     'free_answer_llm_unavailable' => 'We could not check your answer right now. Please try again in a moment.',
     'ai_login_required' => 'AI features are available to registered users. Please <a href="" onClick="toggleLoginWindow(); return false;">log in</a> to continue.',
-    'ai_quota_exceeded' => 'Your AI tokens are used up. <a href="/en/tokens">Buy a token pack</a> to keep using the AI tutor and answer checks.',
+    'ai_quota_exceeded' => 'Your AI tokens are used up. <a href="/en/buy-tokens">Buy a token pack</a> to keep using the AI tutor and answer checks.',
     'tokens_page_title' => 'AI tokens | SQLTest.online',
     'tokens_error_checkout' => 'We could not start the payment. Please try again in a few minutes or contact us.',
     'tokens_error_promo_code' => 'This promo code isn\'t valid. Check it and try again, or buy without it.',

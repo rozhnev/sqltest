@@ -11,5 +11,5 @@
 {elseif $part == 'send'}Enviar
 {elseif $part == 'reset'}Borrar conversación
 {elseif $part == 'login'}Inicia sesión para hacer preguntas
-{elseif $part == 'quota'}Tokens de IA restantes: <span class="la-remaining">{$AiQuota.remaining_text}</span> · <a href="/{$Lang}/tokens">Comprar más</a>
+{elseif $part == 'quota'}Tokens de IA restantes: <span class="la-remaining">{$AiQuota.remaining_text}</span> · <a href="/{$Lang}/buy-tokens">Comprar más</a>
 {/if}
