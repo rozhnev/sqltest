@@ -27,5 +27,7 @@
 {elseif $part == 'email_save'}Enregistrer l'e-mail
 {elseif $part == 'subscribe_button'}S'abonner
 {elseif $part == 'subscribe_again_button'}Se réabonner
+{elseif $part == 'promo_code_label'}Vous avez un code promo ?
+{elseif $part == 'promo_code_placeholder'}Code promo
 {elseif $part == 'checkout_note'}Paiement sécurisé via Lava.top en USD. L'abonnement se renouvelle chaque mois ; vous pouvez annuler le renouvellement automatique ici à tout moment.
 {/if}

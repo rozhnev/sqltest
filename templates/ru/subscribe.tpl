@@ -27,5 +27,7 @@
 {elseif $part == 'email_save'}Сохранить email
 {elseif $part == 'subscribe_button'}Оформить подписку
 {elseif $part == 'subscribe_again_button'}Оформить заново
+{elseif $part == 'promo_code_label'}Есть промокод?
+{elseif $part == 'promo_code_placeholder'}Промокод
 {elseif $part == 'checkout_note'}Безопасная оплата через Lava.top в рублях. Подписка продлевается ежемесячно, автопродление можно отменить здесь в любой момент.
 {/if}

@@ -6,6 +6,7 @@
 {assign var=Subscribed value=$AiQuota && $AiQuota.subscribed}
 {capture name=cancel_confirm}{include file=$Text part='cancel_confirm'}{/capture}
 {capture name=email_placeholder}{include file=$Text part='email_placeholder'}{/capture}
+{capture name=promo_code_placeholder}{include file=$Text part='promo_code_placeholder'}{/capture}
 <style>
     /* The site's light theme sets --regular-text-color to white; text on the plain page background needs --question-text. */
     .subscribe-page { color: var(--question-text); max-width: 640px; margin: 10vh auto; padding: 0 16px; }
@@ -21,6 +22,9 @@
     .subscribe-message.error { border-left-color: var(--danger-text-color); }
     .subscribe-email { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; }
     .subscribe-email input { min-width: 240px; padding: 0.5rem; border: 1px solid var(--text-block-border-color); border-radius: 4px; background: var(--body-background-color); color: var(--question-text); }
+    .subscribe-promo { margin-bottom: 1rem; }
+    .subscribe-promo summary { cursor: pointer; text-decoration: underline; }
+    .subscribe-promo input { margin-top: 0.5rem; min-width: 200px; padding: 0.5rem; border: 1px solid var(--text-block-border-color); border-radius: 4px; background: var(--body-background-color); color: var(--question-text); text-transform: uppercase; }
     .subscribe-link-button { border: none; background: none; color: var(--question-text); text-decoration: underline; cursor: pointer; font: inherit; }
 </style>
 <body>
@@ -93,6 +97,10 @@
                             </form>
                         {else}
                             <form method="post" action="/{$Lang}/subscribe/checkout">
+                                <details class="subscribe-promo">
+                                    <summary>{include file=$Text part='promo_code_label'}</summary>
+                                    <input type="text" name="promo_code" maxlength="36" pattern="[A-Za-z0-9_\-]{ldelim}3,36{rdelim}" autocomplete="off" placeholder="{$smarty.capture.promo_code_placeholder|trim|escape}">
+                                </details>
                                 <button type="submit" class="button blue">{if $Subscribed}{include file=$Text part='subscribe_again_button'}{else}{include file=$Text part='subscribe_button'}{/if}</button>
                             </form>
                             <p class="subscribe-note">{include file=$Text part='checkout_note'}</p>

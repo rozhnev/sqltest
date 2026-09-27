@@ -210,6 +210,7 @@ $translations = [
     'subscribe_page_title' => '订阅 | SQLTest.online',
     'subscribe_already_active' => '您的订阅已处于有效状态。',
     'subscribe_error_checkout' => '无法发起付款。请几分钟后重试或联系我们。',
+    'subscribe_error_promo_code' => '该优惠码无效。请检查后重试，或不使用优惠码直接订阅。',
     'subscribe_error_cancel' => '无法取消订阅。请几分钟后重试或联系我们。',
     'subscribe_cancelled_notice' => '已取消自动续订。订阅在已付费期限结束前仍然有效。',
     'ai_quota_exceeded_subscriber' => '您本订阅周期的 AI 额度已用完，将于 ##AiQuotaResetsAt## 续期。',

@@ -84,6 +84,7 @@ $translations = [
     'subscribe_page_title' => 'Suscripción | SQLTest.online',
     'subscribe_already_active' => 'Tu suscripción ya está activa.',
     'subscribe_error_checkout' => 'No pudimos iniciar el pago. Inténtalo de nuevo en unos minutos o contáctanos.',
+    'subscribe_error_promo_code' => 'Este código promocional no es válido. Revísalo e inténtalo de nuevo, o suscríbete sin él.',
     'subscribe_error_cancel' => 'No pudimos cancelar la suscripción. Inténtalo de nuevo en unos minutos o contáctanos.',
     'subscribe_cancelled_notice' => 'La renovación automática está cancelada. Tu suscripción sigue activa hasta el final del período pagado.',
     'ai_quota_exceeded_subscriber' => 'Tu presupuesto de IA para este período de suscripción se ha agotado. Se renovará el ##AiQuotaResetsAt##.',

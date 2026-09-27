@@ -54,13 +54,29 @@ class Subscription
     // Checkout
 
     /**
+     * Normalize a promo code typed by the user to the format Lava accepts:
+     * 3-36 characters, A-Z, 0-9, "-" and "_".
+     *
+     * @return string|null|false null when empty, false when the format is invalid
+     */
+    public static function normalizePromoCode(string $raw): string|null|false
+    {
+        $code = strtoupper(trim($raw));
+        if ($code === '') {
+            return null;
+        }
+        return preg_match('/^[A-Z0-9_-]{3,36}$/', $code) ? $code : false;
+    }
+
+    /**
      * Create a Lava invoice for a monthly subscription and remember it as pending.
      *
      * @param string $siteUrl Scheme and host for the return URLs, e.g. https://sqltest.online
+     * @param string|null $promoCode A code already passed through normalizePromoCode()
      * @return string Lava payment page URL
      * @throws LavaApiException
      */
-    public function startCheckout(User $user, string $email, string $lang, string $siteUrl): string
+    public function startCheckout(User $user, string $email, string $lang, string $siteUrl, ?string $promoCode = null): string
     {
         [$currency, $provider, $method] = $lang === 'ru'
             ? ['RUB', $this->env['SUBSCRIPTION_LAVA_PROVIDER_RUB'] ?? 'SMART_GLOCAL', $this->env['SUBSCRIPTION_LAVA_METHOD_RUB'] ?? '']
@@ -80,6 +96,9 @@ class Subscription
         ];
         if ($method !== '') {
             $invoice['paymentMethod'] = $method;
+        }
+        if ($promoCode !== null) {
+            $invoice['promoCode'] = $promoCode;
         }
 
         $contract = $this->lava->createInvoice($invoice);

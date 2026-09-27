@@ -84,6 +84,29 @@ class SubscriptionUnitTest extends \Codeception\Test\Unit
         $this->assertSame('EN', $invoice['buyerLanguage']);
     }
 
+    public function testPromoCodeIsNormalizedAndValidated()
+    {
+        $this->assertNull(Subscription::normalizePromoCode(''));
+        $this->assertNull(Subscription::normalizePromoCode('   '));
+        $this->assertSame('FIRST10', Subscription::normalizePromoCode(' first10 '));
+        $this->assertSame('SUMMER_2026-X', Subscription::normalizePromoCode('summer_2026-x'));
+        $this->assertFalse(Subscription::normalizePromoCode('AB'));
+        $this->assertFalse(Subscription::normalizePromoCode(str_repeat('A', 37)));
+        $this->assertFalse(Subscription::normalizePromoCode('WELCOME 10'));
+        $this->assertFalse(Subscription::normalizePromoCode('СКИДКА'));
+    }
+
+    public function testCheckoutPassesPromoCodeOnlyWhenGiven()
+    {
+        $subscription = $this->subscription();
+        $subscription->startCheckout($this->user($this->createUser()), 'buyer@example.com', 'en', 'https://sqltest.online');
+        $this->lava->nextContractId = '66666666-2222-3333-4444-555555555555';
+        $subscription->startCheckout($this->user($this->createUser()), 'buyer@example.com', 'en', 'https://sqltest.online', 'FIRST10');
+
+        $this->assertArrayNotHasKey('promoCode', $this->lava->invoices[0]);
+        $this->assertSame('FIRST10', $this->lava->invoices[1]['promoCode']);
+    }
+
     // First payment
 
     public function testFirstPaymentActivatesAndGrantsOnce()

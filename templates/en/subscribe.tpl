@@ -27,5 +27,7 @@
 {elseif $part == 'email_save'}Save email
 {elseif $part == 'subscribe_button'}Subscribe
 {elseif $part == 'subscribe_again_button'}Subscribe again
+{elseif $part == 'promo_code_label'}Have a promo code?
+{elseif $part == 'promo_code_placeholder'}Promo code
 {elseif $part == 'checkout_note'}Secure payment through Lava.top in USD. The subscription renews monthly; you can cancel auto-renewal here at any time.
 {/if}

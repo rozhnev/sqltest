@@ -27,5 +27,7 @@
 {elseif $part == 'email_save'}保存邮箱
 {elseif $part == 'subscribe_button'}订阅
 {elseif $part == 'subscribe_again_button'}重新订阅
+{elseif $part == 'promo_code_label'}有优惠码？
+{elseif $part == 'promo_code_placeholder'}优惠码
 {elseif $part == 'checkout_note'}通过 Lava.top 以美元安全付款。订阅按月续订，您可以随时在此取消自动续订。
 {/if}

@@ -27,5 +27,7 @@
 {elseif $part == 'email_save'}Salvar e-mail
 {elseif $part == 'subscribe_button'}Assinar
 {elseif $part == 'subscribe_again_button'}Assinar novamente
+{elseif $part == 'promo_code_label'}Tem um código promocional?
+{elseif $part == 'promo_code_placeholder'}Código promocional
 {elseif $part == 'checkout_note'}Pagamento seguro pela Lava.top em USD. A assinatura é renovada mensalmente; você pode cancelar a renovação automática aqui a qualquer momento.
 {/if}

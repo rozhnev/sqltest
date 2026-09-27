@@ -697,11 +697,19 @@ class Controller
             return;
         }
 
+        $promoCode = Subscription::normalizePromoCode((string)($_POST['promo_code'] ?? ''));
+        if ($promoCode === false) {
+            $this->redirectToSubscribe('error', Localizer::translateString('subscribe_error_promo_code'));
+            return;
+        }
+
         try {
-            $paymentUrl = $subscription->startCheckout($this->user, $email, $this->lang, $this->host);
+            $paymentUrl = $subscription->startCheckout($this->user, $email, $this->lang, $this->host, $promoCode);
         } catch (Throwable $error) {
             error_log('Subscription checkout failed: ' . $error->getMessage());
-            $this->redirectToSubscribe('error', Localizer::translateString('subscribe_error_checkout'));
+            // Lava answers 400 for an unknown, expired or used-up promo code
+            $promoRejected = $promoCode !== null && $error instanceof LavaApiException && $error->getCode() === 400;
+            $this->redirectToSubscribe('error', Localizer::translateString($promoRejected ? 'subscribe_error_promo_code' : 'subscribe_error_checkout'));
             return;
         }
         header('Location: ' . $paymentUrl, true, 303);

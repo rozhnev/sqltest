@@ -133,6 +133,7 @@ $translations = [
     'subscribe_page_title' => 'Abonnement | SQLTest.online',
     'subscribe_already_active' => 'Votre abonnement est déjà actif.',
     'subscribe_error_checkout' => 'Impossible de lancer le paiement. Réessayez dans quelques minutes ou contactez-nous.',
+    'subscribe_error_promo_code' => 'Ce code promo n\'est pas valide. Vérifiez-le et réessayez, ou abonnez-vous sans code.',
     'subscribe_error_cancel' => 'Impossible d\'annuler l\'abonnement. Réessayez dans quelques minutes ou contactez-nous.',
     'subscribe_cancelled_notice' => 'Le renouvellement automatique est annulé. Votre abonnement reste actif jusqu\'à la fin de la période payée.',
     'ai_quota_exceeded_subscriber' => 'Votre budget d\'IA pour cette période d\'abonnement est épuisé. Il sera renouvelé le ##AiQuotaResetsAt##.',
