@@ -1746,3 +1746,90 @@ footer a:visited {
     background-size: contain;
     background-position: center;
 }
+
+/* Sidebar card: title bar + body (donation widget, lesson assistant) */
+.side-card {
+    margin: 0.5em 0 0 0;
+    background-color: var(--accordion-panel-bg-color);
+    border: 1px solid var(--text-block-border-color);
+    color: var(--question-text);
+    border-radius: 6px;
+    overflow: hidden;
+}
+.side-card-title {
+    background-color: var(--menu-button-background-color);
+    padding: 0.6em 0.7em;
+    color: #fff;
+    font-weight: 700;
+}
+.side-card-body {
+    padding: 0.7em;
+    font-size: 0.92rem;
+    line-height: 1.45;
+}
+.side-card-body p {
+    margin: 0 0 0.7em;
+}
+.side-card-body p:last-of-type {
+    margin-bottom: 0;
+}
+.side-card-progress {
+    margin-top: 0.45em;
+    background: var(--text-block-border-color);
+    border-radius: 999px;
+    overflow: hidden;
+    height: 10px;
+}
+.side-card-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #22c55e, #10b981);
+}
+/* Green call-to-action button */
+.side-card .button.side-card-button {
+    background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+    border-color: #166534;
+    box-shadow: 0 6px 14px rgba(21, 128, 61, 0.28);
+    transition: transform 0.16s ease, box-shadow 0.16s ease, filter 0.16s ease;
+}
+.side-card .button.side-card-button:not(:disabled):hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 18px rgba(21, 128, 61, 0.34);
+    filter: brightness(1.04);
+}
+.side-card .button.side-card-button:focus-visible {
+    outline: 2px solid #22c55e;
+    outline-offset: 2px;
+}
+.side-card .button.side-card-button:disabled {
+    box-shadow: none;
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Donation goal widget ({lang}/donation_goal_widget.tpl) */
+.donation-stats {
+    margin-top: 0.6em;
+    display: flex;
+    justify-content: space-between;
+    gap: 0.6em;
+    flex-wrap: wrap;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+.donation-stats span {
+    flex: 1 1 8rem;
+}
+.donation-percent {
+    margin-top: 0.35em;
+    font-size: 0.82rem;
+    opacity: 0.85;
+}
+.donation-action {
+    margin-top: 0.65em;
+}
+.donation-action a {
+    display: block;
+}
+.donation-action .button {
+    width: 100%;
+}

@@ -1,8 +1,5 @@
 {include file='header.tpl'}
 <link rel="stylesheet" href="/css/lesson.min.css?{$VERSION}" media="all">
-{if isset($LessonAssistantTemplate)}
-<link rel="stylesheet" href="/css/lesson-assistant.css?{$VERSION}" media="all">
-{/if}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rozhnev/sql-highlighter@v1.0.2/sql-highlighter.min.css" media="all">
 <body>
     <div class="container">

@@ -1,8 +1,5 @@
 {include file='header.tpl'}
 <link rel="stylesheet" href="/css/lesson.min.css?{$VERSION}" media="all">
-{if isset($LessonAssistantTemplate)}
-<link rel="stylesheet" href="/css/lesson-assistant.css?{$VERSION}" media="all">
-{/if}
 <body>
     <div class="mobile-container">
         {include file='popups.tpl'}
