@@ -23,6 +23,4 @@
 
         <p>该页面用于在 SQLTest.online 上练习数据工程师面试相关问题。</p>
     </div>
-
-    {include file='zh/donation_goal_widget.tpl'}
 </div>

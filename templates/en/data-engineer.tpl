@@ -23,6 +23,4 @@
 
         <p>This page helps you practice interview-style Data Engineering questions on SQLTest.online.</p>
     </div>
-
-    {include file='en/donation_goal_widget.tpl'}
 </div>

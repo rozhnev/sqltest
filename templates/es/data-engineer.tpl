@@ -23,6 +23,4 @@
 
         <p>Esta página te ayuda a practicar preguntas de Ingeniería de Datos estilo entrevista en SQLTest.online.</p>
     </div>
-
-    {include file='es/donation_goal_widget.tpl'}
 </div>

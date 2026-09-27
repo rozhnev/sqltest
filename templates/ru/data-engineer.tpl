@@ -23,6 +23,4 @@
 
         <p>Эта страница помогает практиковать вопросы по Data Engineering в формате собеседования на SQLTest.online.</p>
     </div>
-
-    {include file='ru/donation_goal_widget.tpl'}
 </div>
