@@ -13,7 +13,7 @@
     </div>
     <div class="section" style="height: 100%;">
         <div style="display: block;">      
-            <h2 style="color: var(--ligth-h2-color);">💳 Choose How to Support</h2>
+            <h2 style="color: var(--light-h2-color);">💳 Choose How to Support</h2>
             <div class="donation-methods">
                 <div class="donation-method">
                     <h3>Ko‑fi (Bank Card / PayPal)</h3>
@@ -42,7 +42,7 @@
                     <p class="donation-fallback">If it’s blocked by your browser, try disabling content blockers or use Ko‑fi instead.</p>
                 </div>
             </div>
-            <h3 style="color: var(--ligth-h2-color);">🎯 How Your Support Helps</h3>
+            <h3 style="color: var(--light-h2-color);">🎯 How Your Support Helps</h3>
             <div class="donation-method donations-history">
             <ul class="donation-suggested">
                 <li>$3-5 helps cover part of the monthly server bill.</li>
@@ -53,7 +53,7 @@
                 Every contribution, no matter the size, is greatly appreciated. Thank you for helping us make SQLtest.online even better!
             </p>
             </div>
-            <h3 style="color: var(--ligth-h2-color); margin-top: 2rem;">💬 Recent Support</h3>
+            <h3 style="color: var(--light-h2-color); margin-top: 2rem;">💬 Recent Support</h3>
             <div class="donation-method donations-history">
                 {if $LatestDonations|@count > 0}
                     <table class="donations-history-table">
@@ -82,7 +82,7 @@
                     <p class="donations-history-empty">No donations to display yet.</p>
                 {/if}
             </div>
-            <h3 style="color: var(--ligth-h2-color);">🙏 Thank You</h3>
+            <h3 style="color: var(--light-h2-color);">🙏 Thank You</h3>
             <div class="donation-method donations-history">
                 Hi, I’m Slava — I created SQLtest.online to help people learn SQL for free.
                 I build and maintain this project myself, and your support directly helps me

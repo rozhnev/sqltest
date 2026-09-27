@@ -13,7 +13,7 @@
     </div>
     <div class="section" style="height: 100%;">
         <div style="display: block;">      
-            <h2 style="color: var(--ligth-h2-color);">💳 Elige Cómo Apoyar</h2>
+            <h2 style="color: var(--light-h2-color);">💳 Elige Cómo Apoyar</h2>
             <div class="donation-methods">
                 <div class="donation-method donation-method--primary">
                     <span class="donation-method-badge">Recomendado</span>
@@ -45,7 +45,7 @@
                     <p class="donation-fallback">Si está bloqueado por tu navegador, intenta desactivar los bloqueadores de contenido o usa Ko‑fi en su lugar.</p>
                 </div>
             </div>
-            <h3 style="color: var(--ligth-h2-color);">🎯 Cómo Ayuda Tu Apoyo</h3>
+            <h3 style="color: var(--light-h2-color);">🎯 Cómo Ayuda Tu Apoyo</h3>
             <div class="donation-method donations-history">
             <ul class="donation-suggested">
                 <li>$3-5 ayuda a cubrir parte de la factura mensual del servidor.</li>
@@ -56,7 +56,7 @@
                 Cada contribución, sin importar su tamaño, es muy apreciada. ¡Gracias por ayudarnos a hacer que SQLtest.online sea aún mejor!
             </p>
             </div>
-            <h3 style="color: var(--ligth-h2-color); margin-top: 2rem;">💬 Apoyo Reciente</h3>
+            <h3 style="color: var(--light-h2-color); margin-top: 2rem;">💬 Apoyo Reciente</h3>
             <div class="donation-method donations-history">
                 {if $LatestDonations|@count > 0}
                     <table class="donations-history-table">
@@ -85,7 +85,7 @@
                     <p class="donations-history-empty">No hay donaciones para mostrar aún.</p>
                 {/if}
             </div>
-            <h3 style="color: var(--ligth-h2-color);">🙏 Gracias</h3>
+            <h3 style="color: var(--light-h2-color);">🙏 Gracias</h3>
             <div class="donation-method donations-history">
                 Hola, soy Slava — creé SQLtest.online para ayudar a las personas a aprender SQL de forma gratuita.
                 Yo construyo y mantengo este proyecto yo mismo, y tu apoyo me ayuda directamente a

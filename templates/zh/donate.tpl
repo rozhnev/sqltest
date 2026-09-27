@@ -13,7 +13,7 @@
     </div>
     <div class="section" style="height: 100%;">
         <div style="display: block;">      
-            <h2 style="color: var(--ligth-h2-color);">💳 选择支持方式</h2>
+            <h2 style="color: var(--light-h2-color);">💳 选择支持方式</h2>
             <div class="donation-methods">
                 {* <div class="donation-method">
                     <h3>Ko‑fi（银行卡 / PayPal）</h3>
@@ -52,7 +52,7 @@
                     <p class="donation-fallback">如果被浏览器阻止，请尝试禁用内容拦截器或使用 Ko‑fi。</p>
                 </div>
             </div>
-            <h3 style="color: var(--ligth-h2-color);">🎯 你的支持如何帮助我们</h3>
+            <h3 style="color: var(--light-h2-color);">🎯 你的支持如何帮助我们</h3>
             <div class="donation-method donations-history">
             <ul class="donation-suggested">
                 <li>$3-5 有助于覆盖部分月度服务器费用。</li>
@@ -63,7 +63,7 @@
                 每一份贡献，无论大小，都非常感谢。感谢你帮助我们让 SQLtest.online 变得更好！
             </p>
             </div>
-            <h3 style="color: var(--ligth-h2-color); margin-top: 2rem;">💬 最近的支持</h3>
+            <h3 style="color: var(--light-h2-color); margin-top: 2rem;">💬 最近的支持</h3>
             <div class="donation-method donations-history">
                 {if $LatestDonations|@count > 0}
                     <table class="donations-history-table">
@@ -92,7 +92,7 @@
                     <p class="donations-history-empty">尚无捐赠记录。</p>
                 {/if}
             </div>
-            <h3 style="color: var(--ligth-h2-color);">🙏 谢谢你</h3>
+            <h3 style="color: var(--light-h2-color);">🙏 谢谢你</h3>
             <div class="donation-method donations-history">
                 嗨，我是 Slava — 我创建了 SQLtest.online 来帮助人们免费学习 SQL。
                 我自己构建和维护这个项目，你的支持直接帮助我

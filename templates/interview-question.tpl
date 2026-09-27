@@ -11,16 +11,36 @@
     .interview-page #sql-code { height: 260px; }
     .interview-page .free-answer-textarea { width: 100%; min-height: 180px; box-sizing: border-box; }
     .interview-page .code-buttons { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 0.75rem; }
+    /* style.css declares .button { display: flex } after .hidden { display: none } with the same specificity,
+       so .hidden alone doesn't hide a button -- the Submit/Run buttons stayed visible after the final answer. */
+    .interview-page .hidden { display: none; }
     .interview-feedback { padding: 1rem 1.25rem; border-radius: 12px; border: 1px solid var(--text-block-border-color); background: var(--code-result-background-color); color: var(--question-text); }
     .interview-feedback.correct { border-color: #16A34A; background: rgba(22, 163, 74, 0.12); }
     .interview-feedback.wrong { border-color: #DC2626; background: rgba(220, 38, 38, 0.10); }
+    .interview-feedback.retry { border-color: #D97706; background: rgba(217, 119, 6, 0.12); }
+    .interview-reaction { margin-top: 1rem; }
+    .interview-next { margin-top: 1rem; }
+    #interview-answer-feedback:empty { display: none; }
     .interview-feedback .verdict { font-weight: 700; font-size: 1.1em; margin: 0 0 0.5rem; }
     .interview-feedback p { margin: 0.35rem 0; }
     /* style.css forces links inside #code-result to blue (.code-result a { color: ... !important }),
        which turns the "next question" button's text blue on blue. */
-    .interview-feedback a.button, .interview-feedback a.button:visited { color: white !important; text-decoration: none; }
-    .interview-page details { margin-top: 1rem; }
-    .interview-page details summary { cursor: pointer; font-weight: 600; }
+    .interview-feedback a.button, .interview-feedback a.button:visited,
+    .interview-next a.button, .interview-next a.button:visited { color: white !important; text-decoration: none; }
+    /* SQL tasks: the database description sits in a right-hand panel that stays in view while the query
+       is written. <main> is the page's scroll container, so the panel sticks relative to it. */
+    .interview-page.with-db-panel {
+        max-width: 1440px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(300px, 0.55fr);
+        gap: 1rem; align-items: start;
+    }
+    .interview-main { min-width: 0; }
+    .interview-db-panel { position: sticky; top: 1rem; max-height: 80vh; overflow-y: auto; margin: 0; }
+    /* style.css caps DB tables at 24vw for the 3-column test layout; the panel sets its own width. */
+    .interview-db-panel .db-description .table-wrapper { max-width: none; }
+    @media (max-width: 960px) {
+        .interview-page.with-db-panel { grid-template-columns: minmax(0, 1fr); }
+        .interview-db-panel { position: static; max-height: none; }
+    }
 </style>
 <body>
 <div class="container">
@@ -33,8 +53,16 @@
         {/if}
     </header>
     <main>
-        <div class="interview-page">
-            {include file=$InterviewContentTemplate}
+        {assign var="showDbPanel" value=$DBDescription && $InterviewQuestion.question_type == 'query'}
+        <div class="interview-page{if $showDbPanel} with-db-panel{/if}">
+            <div class="interview-main">
+                {include file=$InterviewContentTemplate}
+            </div>
+            {if $showDbPanel}
+                <aside class="interview-db-panel question-wrapper" id="right-panel">
+                    {include file=$DBDescription}
+                </aside>
+            {/if}
         </div>
     </main>
     <footer>
@@ -48,7 +76,8 @@
 <script>
 {literal}
 function submitInterviewAnswer(button) {
-    const result = document.getElementById('code-result');
+    // The interviewer's reaction has its own block: #code-result is overwritten by "Run query".
+    const result = document.getElementById('interview-answer-feedback');
     const answersList = document.getElementById('answers-list');
     const freeAnswer = document.getElementById('free-answer-input');
 
@@ -68,7 +97,10 @@ function submitInterviewAnswer(button) {
     }
 
     button.disabled = true;
-    setLoader('code-result');
+    // The interviewer "typing" while the answer is checked -- the site's generic loader has page-sized margins.
+    const typing = document.getElementById('interviewer-typing');
+    result.innerHTML = typing ? typing.innerHTML : '';
+    result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     fetch(button.dataset.url, {
         method: 'POST',
         credentials: 'same-origin',
@@ -77,7 +109,9 @@ function submitInterviewAnswer(button) {
     .then(response => response.json())
     .then(data => {
         result.innerHTML = data.html;
-        if (!data.saved) {
+        result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        if (!data.saved || !data.final) {
+            // Not saved (e.g. empty answer), or a "close" answer: the question stays open for another attempt.
             button.disabled = false;
             return;
         }

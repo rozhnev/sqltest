@@ -33,6 +33,8 @@
     </div>
 </section>
 
+<p class="interview-disclaimer" role="note"><strong>Обратите внимание:</strong> это учебная симуляция, а не настоящее собеседование. Компания Meridian Logistics, её сотрудники и вакансии вымышлены. Прохождение интервью не ведёт к предложению о работе или трудоустройству — результат и отзыв служат только учебной самооценкой ваших навыков SQL.</p>
+
 <h2 style="color:#0F172A; margin-bottom: 1rem;">Открытые позиции</h2>
 
 <section class="interview-positions">

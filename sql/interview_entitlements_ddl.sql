@@ -9,6 +9,11 @@
 -- future Вариант B (real payment integration, п. 3.5) only needs to start
 -- writing rows here -- no change to the rest of the feature.
 --
+-- Вариант B (Lava.top API, see sql/interview_entitlements_lava.sql): the same
+-- table doubles as the payment record. A checkout inserts a 'pending' row with
+-- lava_contract_id; the payment webhook flips it to 'active'. Only 'active'
+-- rows grant access. manual/promo rows are 'active' by default.
+--
 
 CREATE TABLE public.interview_entitlements (
     id SERIAL NOT NULL,
@@ -18,10 +23,20 @@ CREATE TABLE public.interview_entitlements (
     sessions_total smallint NOT NULL,
     sessions_used smallint DEFAULT 0 NOT NULL,
     source character varying(16) DEFAULT 'manual'::character varying NOT NULL,
+    status character varying(16) DEFAULT 'active'::character varying NOT NULL,
+    lava_contract_id uuid,
+    lava_offer_id uuid,
+    amount numeric(12,2),
+    currency character varying(3),
+    paid_at timestamp without time zone,
+    raw_webhook jsonb,
     CONSTRAINT interview_entitlements_source_check
         CHECK (((source)::text = ANY ((ARRAY['manual'::character varying, 'lava'::character varying, 'promo'::character varying])::text[]))),
     CONSTRAINT interview_entitlements_sessions_used_check
-        CHECK ((sessions_used >= 0) AND (sessions_used <= sessions_total))
+        CHECK ((sessions_used >= 0) AND (sessions_used <= sessions_total)),
+    CONSTRAINT interview_entitlements_status_check
+        CHECK (((status)::text = ANY ((ARRAY['pending'::character varying, 'active'::character varying, 'failed'::character varying, 'refunded'::character varying])::text[]))),
+    CONSTRAINT interview_entitlements_lava_contract_id_key UNIQUE (lava_contract_id)
 );
 
 
@@ -55,4 +70,5 @@ CREATE INDEX interview_entitlements_user_id_idx ON public.interview_entitlements
 -- Name: TABLE interview_entitlements; Type: ACL; Schema: public; Owner: dba
 --
 
-GRANT SELECT ON TABLE public.interview_entitlements TO sqltester;
+GRANT SELECT, INSERT, UPDATE ON TABLE public.interview_entitlements TO sqltester;
+GRANT USAGE ON SEQUENCE public.interview_entitlements_id_seq TO sqltester;

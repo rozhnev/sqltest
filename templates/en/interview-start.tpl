@@ -34,6 +34,8 @@
     </div>
 </section>
 
+<p class="interview-disclaimer" role="note"><strong>Please note:</strong> this is a practice simulation, not a real job interview. Meridian Logistics, its employees and its vacancies are fictional. Completing the interview does not lead to a job offer or any form of employment — the result and the feedback are only an educational self-assessment of your SQL skills.</p>
+
 <h2 style="color:#0F172A; margin-bottom: 1rem;">Open positions</h2>
 
 <section class="interview-positions">

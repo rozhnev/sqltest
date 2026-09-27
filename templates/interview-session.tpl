@@ -11,6 +11,8 @@
     .interview-muted { color: var(--question-date-color); }
 
     .dialog-next { text-align: center; margin-top: 1.75rem; }
+    /* Elena's clarifying question after the self-presentation (п. 4.5). */
+    .followup-question { font-weight: 600; }
 
     @media (max-width: 640px) {
         .interview-session-box { padding: 1rem; margin: 2vh auto; }
@@ -28,6 +30,30 @@
         <main>
             {include file=$InterviewContentTemplate}
         </main>
+        <script>
+        {literal}
+        (function () {
+            // The self-presentation POST waits for the LLM reply (several seconds): lock the form and show
+            // Elena "typing" so the page doesn't look frozen and the answer can't be sent twice.
+            const form = document.querySelector('.interview-session-box form');
+            const typing = document.getElementById('interviewer-typing');
+            if (!form || !typing) return;
+            const button = form.querySelector('button[type=submit]');
+            const textarea = form.querySelector('textarea');
+            form.addEventListener('submit', function (event) {
+                if (button.disabled) { event.preventDefault(); return; }
+                button.disabled = true;
+                textarea.readOnly = true; // not disabled: a disabled field isn't submitted
+                typing.hidden = false;
+                typing.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            });
+            // Back/forward cache restores the page as it was left -- unlock it again.
+            window.addEventListener('pageshow', function (event) {
+                if (event.persisted) { button.disabled = false; textarea.readOnly = false; typing.hidden = true; }
+            });
+        })();
+        {/literal}
+        </script>
         <footer>
             {if $MobileView}
                 {include file='m.footer.tpl'}

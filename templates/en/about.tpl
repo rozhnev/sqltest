@@ -115,21 +115,21 @@
                     <div class="section-column column30">
                         <img src="/images/start1.png" alt="Step 1: open SQLTest.online tasks section" width="281" height="150" style="height: 150px;">
                         <div>
-                        <div class="bold"><span style="color: var(--ligth-h1-color);">1.&nbsp;</span>Visit the website</div>
+                        <div class="bold"><span style="color: var(--light-h1-color);">1.&nbsp;</span>Visit the website</div>
                         <div style="font-size: small; margin-top: 0.5rem;">Go to SQLTest.online and select the "Tasks" section</div>
                     </div>
                     </div>
                     <div class="section-column column30">
                         <img src="/images/start2.png" alt="Step 2: choose an SQL task category" width="281" height="150" style="height: 150px;">
                     <div>
-                        <div class="bold"><span style="color: var(--ligth-h1-color);">2.&nbsp;</span>Select a category</div>
+                        <div class="bold"><span style="color: var(--light-h1-color);">2.&nbsp;</span>Select a category</div>
                         <div style="font-size: small; margin-top: 0.5rem;">Choose the topic or difficulty level that interests you</div>
                     </div>                
                 </div>
                     <div class="section-column column30">
                         <img src="/images/start3.png" alt="Step 3: solve SQL tasks in the trainer" width="268" height="150" style="height: 150px;">
                     <div>
-                        <div class="bold"><span style="color: var(--ligth-h1-color);">3.&nbsp;</span>Solve tasks</div>
+                        <div class="bold"><span style="color: var(--light-h1-color);">3.&nbsp;</span>Solve tasks</div>
                         <div style="font-size: small; margin-top: 0.5rem;">Apply your SQL knowledge to solve the given tasks</div>
                     </div>                    
                 </div>

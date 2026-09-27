@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="/about.css?{$VERSION}" media="all">
 <style>
 .about .colored {
-    color: var(--ligth-h2-color);
+    color: var(--light-h2-color);
 }
 .rank-table {
     width: 100%;

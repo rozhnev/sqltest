@@ -1,4 +1,5 @@
 {include file='short-header.tpl'}
+{include file='interview-dialog-styles.tpl'}
 <style>
     /* Theme variables, not fixed colors: the site's light theme sets --regular-text-color to white. */
     .interview-page { max-width: 880px; margin: 2rem auto; padding: 0 1rem; box-sizing: border-box; width: 100%; color: var(--question-text); }
@@ -19,6 +20,16 @@
     .interview-transcript-item pre { white-space: pre-wrap; background: var(--sql-background-color); color: var(--question-text); padding: 0.75rem; border-radius: 8px; overflow-x: auto; }
     .interview-transcript-item .option-valid { font-weight: 600; }
     .interview-transcript-item .feedback { font-style: italic; }
+    .interview-report .dialog-bubble h4 { margin: 0.9rem 0 0.35rem; color: var(--accordion-active); }
+    .interview-report .dialog-bubble ul { margin: 0; padding-left: 1.2rem; }
+    .interview-report .dialog-bubble li { margin-bottom: 0.3rem; }
+    /* "This is a practice simulation, not a real job interview / job offer" note. */
+    .interview-disclaimer {
+        max-width: 1080px; box-sizing: border-box; margin: 0 auto 1.5rem; padding: 0.85rem 1.1rem;
+        border-radius: 12px; border: 1px solid rgba(217, 119, 6, 0.45); background: rgba(217, 119, 6, 0.10);
+        color: var(--question-text); font-size: 0.92rem; line-height: 1.5;
+    }
+    .interview-muted { color: var(--question-date-color); font-weight: normal; }
 </style>
 <body>
     <div class="container">
