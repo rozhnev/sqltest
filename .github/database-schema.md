@@ -187,7 +187,6 @@ Difficulty levels (1–5).
 | `admin`                      | boolean      |                                    |
 | `last_login_at`              | timestamp    |                                    |
 | `last_path`                  | varchar      |                                    |
-| `subscribed_till`            | date         | Exclusive subscription end; active while `> CURRENT_DATE` (no ads + subscriber AI quota) |
 | `llm_tokens`                 | int          | Remaining AI token balance; may be slightly negative after an overshooting request |
 | `created_at`                 | timestamp    |                                    |
 | `email_verified_at`          | timestamp    | NULL = unverified                  |
@@ -279,33 +278,22 @@ Append-only per-call log of user-triggered LLM usage (cost analysis). The quota 
 | `completion_tokens` | int          |                                         |
 | `created_at`        | timestamp    |                                         |
 
-### `subscriptions`
-Lava.top subscriptions (see `SUBSCRIPTION_PLAN.md`): one row per checkout, keyed by Lava's first (parent) contract id. The subscription period itself is `users.subscribed_till`.
+### `token_purchases`
+Lava.top AI token purchases (see `TOKEN_PURCHASE_PLAN.md`): one row per checkout, keyed by the Lava contract id. A paid purchase adds `tokens` to `users.llm_tokens` once.
 
-| Column              | Type       | Notes                                              |
-|---------------------|------------|----------------------------------------------------|
-| `contract_id`       | uuid PK    | Lava parent contract id                            |
-| `user_id`           | uuid FK    | → `users.id`                                       |
-| `email`             | text       | Email sent to Lava (needed to cancel)              |
-| `currency`          | varchar(3) | `RUB` \| `USD`                                     |
-| `status`            | varchar    | `pending` \| `active` \| `failed` \| `cancelled`   |
-| `created_at`        | timestamp  |                                                    |
-| `activated_at`      | timestamp  | First payment                                      |
-| `cancelled_at`      | timestamp  | Auto-renewal cancelled                             |
-| `renewal_failed_at` | timestamp  | Last failed renewal; cleared by a successful one   |
-| `renewal_error`     | text       |                                                    |
-
-### `subscription_payments`
-One row per successful payment (first or renewal); the PK makes webhook retries idempotent.
-
-| Column            | Type          | Notes                          |
-|-------------------|---------------|--------------------------------|
-| `contract_id`     | uuid PK       | Lava contract id of the payment |
-| `subscription_id` | uuid FK       | → `subscriptions.contract_id`  |
-| `amount`          | numeric(12,2) |                                |
-| `currency`        | varchar(3)    |                                |
-| `paid_at`         | timestamp     |                                |
-| `created_at`      | timestamp     |                                |
+| Column        | Type          | Notes                                              |
+|---------------|---------------|----------------------------------------------------|
+| `contract_id` | uuid PK       | Lava contract id                                   |
+| `user_id`     | uuid FK       | → `users.id`                                       |
+| `email`       | text          | Email sent to Lava                                 |
+| `tokens`      | int           | Pack size at checkout time                         |
+| `currency`    | varchar(3)    | `RUB` \| `USD`                                     |
+| `promo_code`  | varchar(36)   |                                                    |
+| `status`      | varchar       | `pending` \| `paid` \| `failed`                    |
+| `amount`      | numeric(12,2) | Charged amount from the webhook (after a discount) |
+| `created_at`  | timestamp     |                                                    |
+| `paid_at`     | timestamp     |                                                    |
+| `error`       | text          | Lava's error for a failed payment                  |
 
 ### `lava_webhook_log`
 Every webhook received from Lava, raw.

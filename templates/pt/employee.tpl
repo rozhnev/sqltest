@@ -410,15 +410,4 @@
                 </tr></tbody></table>
         </div>
     </div>
-    {if $User->showAd()}
-        <div class="referal-add-block">
-            {if $Book}
-                {include file='book_card.tpl'}
-            {else}
-                <a href="https://www.kqzyfj.com/86104kjspjr6878CE9F9G68E9B9898" target="_blank">
-                    <img src="https://www.awltovhc.com/60106z15u-yJLKLPRMSMTJLRMOMLML" alt="" style="border: 0; width: 100%;"/>
-                </a>
-            {/if}
-        </div>
-    {/if}
 </div>

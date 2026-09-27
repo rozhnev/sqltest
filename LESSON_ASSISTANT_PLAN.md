@@ -1,5 +1,10 @@
 # Lesson LLM Assistant & Token-Based AI Quota: Implementation Plan
 
+> **Superseded in part by `TOKEN_PURCHASE_PLAN.md`:** the monthly subscription (`subscribed_till`, cycle resets,
+> lazy expiry, "% of plan used" display) was replaced by one-time token packs that add to `users.llm_tokens` and
+> never expire. The balance is shown as a number. The rest of this plan (token accounting, the assistant,
+> free-answer checks) still applies.
+
 ## Goals
 
 1. **Lesson assistant**: a chat panel on the lesson page where the user asks questions about the current lesson and an LLM answers using the lesson content as context.

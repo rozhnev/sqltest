@@ -37,10 +37,10 @@ GRANT USAGE ON SEQUENCE public.llm_usage_log_id_seq TO sqltester;
 -- Admin snippets
 --
 
--- User balance against plan size (admins see raw numbers, users only percentages):
--- SELECT id, login, llm_tokens, subscribed_till,
---        CASE WHEN subscribed_till > CURRENT_DATE THEN 1000000 ELSE 50000 END AS plan_size
--- FROM public.users WHERE id = :user_id;
+-- User balance and purchased tokens:
+-- SELECT u.id, u.login, u.llm_tokens,
+--        (SELECT COALESCE(SUM(tokens), 0) FROM public.token_purchases p WHERE p.user_id = u.id AND p.status = 'paid') AS purchased
+-- FROM public.users u WHERE u.id = :user_id;
 
 -- Monthly cost by feature and profile:
 -- SELECT date_trunc('month', created_at) AS month, feature, llm_profile,

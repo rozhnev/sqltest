@@ -42,14 +42,7 @@
                     <button type="submit" class="button green side-card-button la-send"{if $AssistantExhausted} disabled{/if}>{include file=$AssistantText part='send'}</button>
                 </div>
             </form>
-            <div class="la-quota">
-                {if $AiQuota.subscribed}
-                    {include file=$AssistantText part='quota_subscriber'}
-                {else}
-                    {include file=$AssistantText part='quota_free'}
-                {/if}
-                <div class="la-meter side-card-progress"><div class="side-card-progress-fill" style="width: {$AiQuota.percent_used}%"></div></div>
-            </div>
+            <div class="la-quota">{include file=$AssistantText part='quota'}</div>
             <template class="la-exhausted-message">{$AiQuotaExceededMessage}</template>
         {else}
             <div class="la-login">

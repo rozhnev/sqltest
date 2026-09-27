@@ -5,8 +5,8 @@ require_once __DIR__ . '/../_support/Helper/TestDatabase.php';
 use Helper\TestDatabase;
 
 /**
- * AI token budget: registration allowance, subscription grants, expiry, charging
- * (see LESSON_ASSISTANT_PLAN.md, Stage 8). Runs against the test database from
+ * AI token budget: registration allowance, status, charging
+ * (see LESSON_ASSISTANT_PLAN.md, Stage 8, and TOKEN_PURCHASE_PLAN.md). Runs against the test database from
  * tests/.env.testing and is skipped when it isn't configured.
  */
 class TokenQuotaUnitTest extends \Codeception\Test\Unit
@@ -17,9 +17,8 @@ class TokenQuotaUnitTest extends \Codeception\Test\Unit
     protected $tester;
 
     private const ENV = [
-        'LLM_FREE_TOKENS'             => 50000,
-        'LLM_SUBSCRIBER_CYCLE_TOKENS' => 1000000,
-        'LLM_MIN_TOKENS_PER_REQUEST'  => 3000,
+        'LLM_FREE_TOKENS'            => 50000,
+        'LLM_MIN_TOKENS_PER_REQUEST' => 3000,
     ];
 
     private PDO $dbh;
@@ -56,109 +55,46 @@ class TokenQuotaUnitTest extends \Codeception\Test\Unit
         $this->assertSame(1234, $this->balance($user->getId()));
     }
 
-    // Subscription grant
-
-    public function testGrantSetsCycleBalanceAndStartsFromPaymentDate()
+    public function testLoginSessionWorksWithoutSubscriptionColumns()
     {
-        $userId = $this->createUser(balance: 20000);
+        $userId = $this->createUser();
 
-        $till = $this->user($userId)->grantSubscription(new DateTimeImmutable('2026-09-24'));
-
-        $this->assertSame('2026-10-24', $till);
-        // Set, not added: the free leftover doesn't carry over
-        $this->assertSame(1000000, $this->balance($userId));
+        $this->assertSame($userId, $this->loggedIn($userId)->getId());
     }
 
-    public function testEarlyRenewalExtendsFromCurrentEnd()
+    // Balance
+
+    public function testBalanceNeverExpires()
     {
-        $userId = $this->createUser(subscribedTill: '2026-10-24', balance: 300000);
+        $userId = $this->createUser(balance: 1400000);
 
-        $till = $this->user($userId)->grantSubscription(new DateTimeImmutable('2026-10-20'));
-
-        $this->assertSame('2026-11-24', $till);
-        $this->assertSame(1000000, $this->balance($userId));
-    }
-
-    public function testRenewalAfterExpiryStartsFromPaymentDate()
-    {
-        $userId = $this->createUser(subscribedTill: '2026-08-01');
-
-        $till = $this->user($userId)->grantSubscription(new DateTimeImmutable('2026-09-10'));
-
-        $this->assertSame('2026-10-10', $till);
-    }
-
-    // Subscription state
-
-    public function testSubscribedTillIsExclusive()
-    {
-        $today = (new DateTimeImmutable('today'))->format('Y-m-d');
-        $tomorrow = (new DateTimeImmutable('tomorrow'))->format('Y-m-d');
-
-        $endsToday = $this->loggedIn($this->createUser(subscribedTill: $today));
-        $this->assertFalse($endsToday->isSubscribed());
-        $this->assertTrue($endsToday->showAd());
-
-        $endsTomorrow = $this->loggedIn($this->createUser(subscribedTill: $tomorrow));
-        $this->assertTrue($endsTomorrow->isSubscribed());
-        $this->assertFalse($endsTomorrow->showAd());
-        $this->assertSame($tomorrow, $endsTomorrow->getSubscribedTill());
-    }
-
-    public function testExpiredSubscriptionBalanceIsZeroedAndWrittenBack()
-    {
-        $userId = $this->createUser(subscribedTill: (new DateTimeImmutable('today'))->format('Y-m-d'), balance: 400000);
-
-        $quota = $this->quota($userId);
-
-        $this->assertSame(0, $quota->remaining());
-        $this->assertFalse($quota->canSpend());
-        $this->assertSame(0, $this->balance($userId));
-    }
-
-    public function testFreeUserBalanceIsNotZeroed()
-    {
-        $userId = $this->createUser(balance: 40000);
-
-        $this->assertSame(40000, $this->quota($userId)->remaining());
-        $this->assertSame(40000, $this->balance($userId));
+        $this->assertSame(1400000, $this->quota($userId)->remaining());
+        $this->assertSame(1400000, $this->balance($userId));
     }
 
     // Status for the UI
 
-    public function testPercentUsesFreePlanSize()
+    public function testStatusShowsRemainingBalance()
     {
-        $status = $this->quota($this->createUser(balance: 12500))->status();
+        $status = $this->quota($this->createUser(balance: 1234567))->status();
 
-        $this->assertSame(75, $status['percent_used']);
-        $this->assertFalse($status['subscribed']);
-        $this->assertNull($status['resets_at']);
+        $this->assertSame(['remaining' => 1234567, 'remaining_text' => "1\u{00A0}234\u{00A0}567", 'exhausted' => false], $status);
     }
 
-    public function testPercentUsesSubscriberPlanSize()
-    {
-        $tomorrow = (new DateTimeImmutable('tomorrow'))->format('Y-m-d');
-        $status = $this->quota($this->createUser(subscribedTill: $tomorrow, balance: 900000))->status();
-
-        $this->assertSame(10, $status['percent_used']);
-        $this->assertTrue($status['subscribed']);
-        $this->assertSame($tomorrow, $status['resets_at']);
-    }
-
-    public function testStatusExposesNoRawTokenNumbers()
-    {
-        $status = $this->quota($this->createUser(balance: 12345))->status();
-
-        $this->assertSame(['percent_used', 'subscribed', 'resets_at', 'exhausted'], array_keys($status));
-        $this->assertNotContains(12345, $status, 'raw balance leaked');
-    }
-
-    public function testNegativeBalanceShowsAsFullyUsed()
+    public function testNegativeBalanceShowsAsZeroAndExhausted()
     {
         $status = $this->quota($this->createUser(balance: -500))->status();
 
-        $this->assertSame(100, $status['percent_used']);
+        $this->assertSame(0, $status['remaining']);
+        $this->assertSame('0', $status['remaining_text']);
         $this->assertTrue($status['exhausted']);
+    }
+
+    public function testFormatTokensGroupsThousands()
+    {
+        $this->assertSame('999', TokenQuota::formatTokens(999));
+        $this->assertSame("50\u{00A0}000", TokenQuota::formatTokens(50000));
+        $this->assertSame("1\u{00A0}000\u{00A0}000", TokenQuota::formatTokens(1000000));
     }
 
     // Spending
@@ -222,11 +158,11 @@ class TokenQuotaUnitTest extends \Codeception\Test\Unit
 
     // Helpers
 
-    private function createUser(?string $subscribedTill = null, int $balance = 50000): string
+    private function createUser(int $balance = 50000): string
     {
         $id = vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex(random_bytes(16)), 4));
-        $stmt = $this->dbh->prepare('INSERT INTO users (id, login, subscribed_till, llm_tokens) VALUES (:id, :login, :till, :tokens)');
-        $stmt->execute([':id' => $id, ':login' => "{$id}@test", ':till' => $subscribedTill, ':tokens' => $balance]);
+        $stmt = $this->dbh->prepare('INSERT INTO users (id, login, llm_tokens) VALUES (:id, :login, :tokens)');
+        $stmt->execute([':id' => $id, ':login' => "{$id}@test", ':tokens' => $balance]);
         return $id;
     }
 

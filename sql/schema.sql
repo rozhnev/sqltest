@@ -880,7 +880,6 @@ CREATE TABLE public.users (
     admin boolean DEFAULT false NOT NULL,
     grade smallint,
     graded_at timestamp without time zone,
-    subscribed_till date,
     llm_tokens integer DEFAULT 0 NOT NULL,
     nickname character varying(50),
     email text,

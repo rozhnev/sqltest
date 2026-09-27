@@ -3,7 +3,7 @@
 {if isset($FreeAnswerResult.login_required)}
     <p class="question-action">{translate}ai_login_required{/translate}</p>
 {elseif isset($FreeAnswerResult.quota_exceeded)}
-    <p class="question-action">{if $FreeAnswerResult.quota.subscribed}{translate}ai_quota_exceeded_subscriber{/translate}{else}{translate}ai_quota_exceeded_free{/translate}{/if}</p>
+    <p class="question-action">{translate}ai_quota_exceeded{/translate}</p>
 {elseif $FreeAnswerResult.ok}
     {assign var="phrases" value=[
         ['¡Genial! Has completado la tarea!', 'Para guardar tu progreso, por favor <a href="" onClick="toggleLoginWindow(); return false;">inicia sesión</a>.'],

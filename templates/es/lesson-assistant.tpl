@@ -11,6 +11,5 @@
 {elseif $part == 'send'}Enviar
 {elseif $part == 'reset'}Borrar conversación
 {elseif $part == 'login'}Inicia sesión para hacer preguntas
-{elseif $part == 'quota_free'}Presupuesto de IA: <span class="la-percent">{$AiQuota.percent_used}</span>% usado · cuota gratuita, no se renueva · <a href="/{$Lang}/subscribe">Suscribirse</a>
-{elseif $part == 'quota_subscriber'}Presupuesto de IA: <span class="la-percent">{$AiQuota.percent_used}</span>% usado · se renueva el {$AiQuota.resets_at}
+{elseif $part == 'quota'}Tokens de IA restantes: <span class="la-remaining">{$AiQuota.remaining_text}</span> · <a href="/{$Lang}/tokens">Comprar más</a>
 {/if}

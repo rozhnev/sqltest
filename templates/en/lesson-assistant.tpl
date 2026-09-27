@@ -11,6 +11,5 @@
 {elseif $part == 'send'}Send
 {elseif $part == 'reset'}Clear chat
 {elseif $part == 'login'}Log in to ask questions
-{elseif $part == 'quota_free'}AI budget: <span class="la-percent">{$AiQuota.percent_used}</span>% used · free allowance, doesn't renew · <a href="/{$Lang}/subscribe">Subscribe</a>
-{elseif $part == 'quota_subscriber'}AI budget: <span class="la-percent">{$AiQuota.percent_used}</span>% used · renews on {$AiQuota.resets_at}
+{elseif $part == 'quota'}AI tokens left: <span class="la-remaining">{$AiQuota.remaining_text}</span> · <a href="/{$Lang}/tokens">Buy more</a>
 {/if}

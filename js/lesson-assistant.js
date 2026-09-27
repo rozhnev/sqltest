@@ -139,13 +139,9 @@
     }
 
     function updateQuota(quota) {
-        root.querySelectorAll('.la-percent').forEach(function (percent) {
-            percent.textContent = quota.percent_used;
+        root.querySelectorAll('.la-remaining').forEach(function (remaining) {
+            remaining.textContent = quota.remaining_text;
         });
-        var meter = root.querySelector('.la-meter > div');
-        if (meter) {
-            meter.style.width = quota.percent_used + '%';
-        }
         if (quota.exhausted) {
             input.disabled = true;
             sendButton.disabled = true;

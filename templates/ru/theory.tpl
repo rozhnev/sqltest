@@ -1,10 +1,3 @@
 <div id="db-description" class="db-description">
-    {if $User->showAd()}
-        {include file='ru/donation_goal_widget.tpl'}
-        {if isset($Book)}        
-            <div class="referal-add-block">
-                {include file='book_card.tpl'}
-            </div>
-        {/if}
-    {/if} 
+    {include file='ru/donation_goal_widget.tpl'}
 </div>

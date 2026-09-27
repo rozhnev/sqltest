@@ -24,12 +24,5 @@
         <p>Esta página te ayuda a practicar preguntas de Ingeniería de Datos estilo entrevista en SQLTest.online.</p>
     </div>
 
-    {if $User->showAd()}
-        {include file='es/donation_goal_widget.tpl'}
-        <div class="referal-add-block">
-            {if $Book}
-                {include file='book_card.tpl'}
-            {/if}
-        </div>
-    {/if}
+    {include file='es/donation_goal_widget.tpl'}
 </div>

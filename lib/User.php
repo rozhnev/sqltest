@@ -29,13 +29,6 @@ class User
     private $id;
     private $grade;
     private $graded_at;
-    private bool $subscribed = false;
-    /**
-     * Exclusive subscription end date (Y-m-d), null if never subscribed
-     *
-     * @var string|null
-     */
-    private $subscribedTill;
     private $admin = false;
     private $nickname;
     private $authProvider;
@@ -86,8 +79,7 @@ class User
     {
         if (($session && isset($session['user_id']))) {
             $stmt = $this->dbh->prepare("SELECT 
-                    id, login, grade, graded_at, subscribed_till,
-                    (subscribed_till is not null and subscribed_till > current_date) subscribed, admin, nickname
+                    id, login, grade, graded_at, admin, nickname
                 FROM users WHERE id = :user_id;");
             $stmt->execute([':user_id' => $session['user_id']]);
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -96,8 +88,6 @@ class User
                 $this->login = $user['login'];
                 $this->grade = $user['grade'];
                 $this->graded_at = $user['graded_at'];
-                $this->subscribed = (bool)$user['subscribed'];
-                $this->subscribedTill = $user['subscribed_till'];
                 $this->admin = $user['admin'];
                 $this->nickname = $user['nickname'];
                 $this->authProvider = $this->resolveAuthProviderFromLogin($user['login']);
@@ -114,8 +104,7 @@ class User
         }
 
         $normalizedEmail = strtolower($email);
-        $stmt = $this->dbh->prepare("SELECT id, login, password_hash, grade, graded_at, subscribed_till,
-                (subscribed_till is not null and subscribed_till > current_date) subscribed, admin, nickname
+        $stmt = $this->dbh->prepare("SELECT id, login, password_hash, grade, graded_at, admin, nickname
             FROM users WHERE LOWER(email) = :email AND password_hash IS NOT NULL;");
         $stmt->execute([':email' => $normalizedEmail]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -127,8 +116,6 @@ class User
         $this->login = $user['login'];
         $this->grade = $user['grade'];
         $this->graded_at = $user['graded_at'];
-        $this->subscribed = (bool)$user['subscribed'];
-        $this->subscribedTill = $user['subscribed_till'];
         $this->admin = $user['admin'];
         $this->nickname = $user['nickname'];
         $this->authProvider = 'password';
@@ -420,61 +407,6 @@ class User
     public function isAdmin(): bool
     {
         return $this->admin;
-    }
-
-    /**
-     * Return User show advertising status
-     *
-     * @return bool
-     */
-    public function showAd(): bool
-    {
-        return !$this->subscribed;
-    }
-
-    /**
-     * Return User active subscription status
-     *
-     * @return bool
-     */
-    public function isSubscribed(): bool
-    {
-        return $this->subscribed;
-    }
-
-    /**
-     * Return exclusive subscription end date (Y-m-d), null if never subscribed
-     *
-     * @return string|null
-     */
-    public function getSubscribedTill(): ?string
-    {
-        return $this->subscribedTill;
-    }
-
-    /**
-     * Grant one monthly subscription cycle paid on $paidOn and start a new AI budget cycle.
-     * Renewal extends from the current end, so paying early doesn't lose days. The balance
-     * is set, not added: leftovers (including the free allowance) don't carry over.
-     *
-     * @param DateTimeInterface $paidOn Payment date from Lava.top, not the day the grant is run
-     * @return string|null New exclusive subscribed_till (Y-m-d), null if the user doesn't exist
-     */
-    public function grantSubscription(DateTimeInterface $paidOn): ?string
-    {
-        $stmt = $this->dbh->prepare("UPDATE users SET
-                -- GREATEST ignores NULL, so a first subscription starts from the payment date
-                subscribed_till = (GREATEST(subscribed_till, CAST(:paid_on AS date)) + interval '1 month')::date,
-                llm_tokens = :cycle_tokens
-            WHERE id = :user_id
-            RETURNING subscribed_till");
-        $stmt->execute([
-            ':paid_on'      => $paidOn->format('Y-m-d'),
-            ':cycle_tokens' => (int)($this->env['LLM_SUBSCRIBER_CYCLE_TOKENS'] ?? 1000000),
-            ':user_id'      => $this->id,
-        ]);
-        $subscribedTill = $stmt->fetchColumn();
-        return $subscribedTill === false ? null : (string)$subscribedTill;
     }
 
     /**

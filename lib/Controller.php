@@ -613,144 +613,121 @@ class Controller
     }
 
     /**
-     * Subscription page: benefits, the user's plan and subscription state, and the
-     * subscribe/cancel actions (see SUBSCRIPTION_PLAN.md). Payments are processed
-     * automatically through Lava.top webhooks (lava_webhook()).
+     * AI tokens page: the user's balance, one-time pack purchase and purchase history
+     * (see TOKEN_PURCHASE_PLAN.md). Payments are processed through Lava.top webhooks
+     * (lava_webhook()).
      */
-    public function subscribe(array $params): void
+    public function tokens(array $params): void
     {
-        $freeTokens = max(1, (int)($this->env['LLM_FREE_TOKENS'] ?? 50000));
-        $cycleTokens = (int)($this->env['LLM_SUBSCRIBER_CYCLE_TOKENS'] ?? 1000000);
-        $subscription = new Subscription($this->dbh, $this->env);
+        $purchase = new TokenPurchase($this->dbh, $this->env);
 
         $quota = null;
-        $activeThrough = null;
-        $state = ['status' => 'none', 'renewal_failed' => false, 'renewal_error' => null];
+        $history = [];
         if ($this->user->logged()) {
             $quota = (new TokenQuota($this->dbh, $this->user, $this->env))->status();
-            if ($quota['subscribed']) {
-                // subscribed_till is exclusive: the last active day is the day before
-                $activeThrough = (new DateTimeImmutable((string)$quota['resets_at']))->modify('-1 day')->format('Y-m-d');
-            }
-            $state = $subscription->state($this->user);
+            $history = array_map(static fn(array $row) => $row + [
+                'tokens_text' => TokenQuota::formatTokens($row['tokens']),
+            ], $purchase->history($this->user));
         }
 
-        $flash = $_SESSION['subscribe_flash'] ?? null;
-        unset($_SESSION['subscribe_flash']);
+        $flash = $_SESSION['tokens_flash'] ?? null;
+        unset($_SESSION['tokens_flash']);
         $paymentReturn = (string)($_GET['payment'] ?? '');
 
         $this->assignVariables([
-            'Action'                    => 'subscribe',
-            'PageTitle'                 => Localizer::translateString('subscribe_page_title'),
-            'SubscribeContentTemplate'  => $this->localizedTemplate('subscribe.tpl'),
-            'SubscriptionCheckoutAvailable' => $subscription->checkoutAvailable(),
-            'SubscriptionAiMultiplier'  => (int)round($cycleTokens / $freeTokens),
-            'SubscriptionState'         => $state,
-            'SubscriptionPaymentReturn' => in_array($paymentReturn, ['success', 'failed', 'cancelled'], true) ? $paymentReturn : '',
-            'SubscribeFlash'            => $flash,
-            'AiQuota'                   => $quota,
-            'SubscriptionActiveThrough' => $activeThrough,
-            'UserEmail'                 => $this->user->logged() ? $this->user->getEmail() : '',
+            'Action'                  => 'tokens',
+            'PageTitle'               => Localizer::translateString('tokens_page_title'),
+            'TokensContentTemplate'   => $this->localizedTemplate('tokens.tpl'),
+            'TokensCheckoutAvailable' => $purchase->checkoutAvailable(),
+            'TokensPack'              => TokenQuota::formatTokens($purchase->packTokens()),
+            'TokensPaymentReturn'     => in_array($paymentReturn, ['success', 'failed', 'cancelled'], true) ? $paymentReturn : '',
+            'TokensFlash'             => $flash,
+            'TokensHistory'           => $history,
+            'AiQuota'                 => $quota,
+            'UserEmail'               => $this->user->logged() ? $this->user->getEmail() : '',
         ]);
-        $this->engine->display('subscribe.tpl');
+        $this->engine->display('tokens.tpl');
     }
 
     /**
-     * Redirect back to the subscribe page, optionally with a one-time message
+     * GET /{lang}/subscribe: the former subscription page, now the tokens page
      */
-    private function redirectToSubscribe(?string $flashType = null, string $flashMessage = ''): void
+    public function subscribe(array $params): void
+    {
+        header("Location: /{$this->lang}/tokens", true, 301);
+    }
+
+    /**
+     * Redirect back to the tokens page, optionally with a one-time message
+     */
+    private function redirectToTokens(?string $flashType = null, string $flashMessage = ''): void
     {
         if ($flashType !== null) {
-            $_SESSION['subscribe_flash'] = ['type' => $flashType, 'message' => $flashMessage];
+            $_SESSION['tokens_flash'] = ['type' => $flashType, 'message' => $flashMessage];
         }
-        header("Location: /{$this->lang}/subscribe", true, 303);
+        header("Location: /{$this->lang}/tokens", true, 303);
     }
 
     /**
-     * Guard for the subscribe page's POST actions; redirects and returns false when not allowed
+     * Guard for the tokens page's POST actions; redirects and returns false when not allowed
      */
-    private function subscribeActionAllowed(): bool
+    private function tokensActionAllowed(): bool
     {
         if (($_SERVER['REQUEST_METHOD'] ?? 'GET') !== 'POST' || !$this->isSameOriginRequest() || !$this->user->logged()) {
-            $this->redirectToSubscribe();
+            $this->redirectToTokens();
             return false;
         }
         return true;
     }
 
     /**
-     * POST /{lang}/subscribe/checkout: create a Lava invoice and send the user to its payment page
+     * POST /{lang}/tokens/checkout: create a Lava invoice for one pack and send the user to its payment page
      */
-    public function subscribe_checkout(array $params): void
+    public function tokens_checkout(array $params): void
     {
-        if (!$this->subscribeActionAllowed()) {
+        if (!$this->tokensActionAllowed()) {
             return;
         }
-        $subscription = new Subscription($this->dbh, $this->env);
+        $purchase = new TokenPurchase($this->dbh, $this->env);
         $email = $this->user->getEmail();
-        if ($email === '' || !$subscription->checkoutAvailable()) {
-            $this->redirectToSubscribe();
-            return;
-        }
-        if ($subscription->state($this->user)['status'] === 'active') {
-            $this->redirectToSubscribe('info', Localizer::translateString('subscribe_already_active'));
+        if ($email === '' || !$purchase->checkoutAvailable()) {
+            $this->redirectToTokens();
             return;
         }
 
-        $promoCode = Subscription::normalizePromoCode((string)($_POST['promo_code'] ?? ''));
+        $promoCode = TokenPurchase::normalizePromoCode((string)($_POST['promo_code'] ?? ''));
         if ($promoCode === false) {
-            $this->redirectToSubscribe('error', Localizer::translateString('subscribe_error_promo_code'));
+            $this->redirectToTokens('error', Localizer::translateString('tokens_error_promo_code'));
             return;
         }
 
         try {
-            $paymentUrl = $subscription->startCheckout($this->user, $email, $this->lang, $this->host, $promoCode);
+            $paymentUrl = $purchase->startCheckout($this->user, $email, $this->lang, $this->host, $promoCode);
         } catch (Throwable $error) {
-            error_log('Subscription checkout failed: ' . $error->getMessage());
+            error_log('Token checkout failed: ' . $error->getMessage());
             // Lava answers 400 for an unknown, expired or used-up promo code
             $promoRejected = $promoCode !== null && $error instanceof LavaApiException && $error->getCode() === 400;
-            $this->redirectToSubscribe('error', Localizer::translateString($promoRejected ? 'subscribe_error_promo_code' : 'subscribe_error_checkout'));
+            $this->redirectToTokens('error', Localizer::translateString($promoRejected ? 'tokens_error_promo_code' : 'tokens_error_checkout'));
             return;
         }
         header('Location: ' . $paymentUrl, true, 303);
     }
 
     /**
-     * POST /{lang}/subscribe/cancel: stop auto-renewal; the paid period is kept
+     * POST /{lang}/tokens/email: save the account email that Lava needs for the checkout
      */
-    public function subscribe_cancel(array $params): void
+    public function tokens_email(array $params): void
     {
-        if (!$this->subscribeActionAllowed()) {
-            return;
-        }
-        try {
-            $cancelled = (new Subscription($this->dbh, $this->env))->cancel($this->user);
-        } catch (Throwable $error) {
-            error_log('Subscription cancel failed: ' . $error->getMessage());
-            $this->redirectToSubscribe('error', Localizer::translateString('subscribe_error_cancel'));
-            return;
-        }
-        $this->redirectToSubscribe(
-            $cancelled ? 'info' : null,
-            $cancelled ? Localizer::translateString('subscribe_cancelled_notice') : ''
-        );
-    }
-
-    /**
-     * POST /{lang}/subscribe/email: save the account email that Lava needs for the checkout
-     */
-    public function subscribe_email(array $params): void
-    {
-        if (!$this->subscribeActionAllowed()) {
+        if (!$this->tokensActionAllowed()) {
             return;
         }
         try {
             $this->user->setEmail((string)($_POST['email'] ?? ''));
         } catch (Exception $error) {
-            $this->redirectToSubscribe('error', $error->getMessage());
+            $this->redirectToTokens('error', $error->getMessage());
             return;
         }
-        $this->redirectToSubscribe();
+        $this->redirectToTokens();
     }
 
     /**
@@ -765,14 +742,14 @@ class Controller
             echo json_encode(['error' => 'method_not_allowed']);
             return;
         }
-        if (!Subscription::isValidWebhookKey((string)($this->env['LAVA_WEBHOOK_SECRET'] ?? ''), $_SERVER['HTTP_X_API_KEY'] ?? null)) {
+        if (!TokenPurchase::isValidWebhookKey((string)($this->env['LAVA_WEBHOOK_SECRET'] ?? ''), $_SERVER['HTTP_X_API_KEY'] ?? null)) {
             http_response_code(401);
             echo json_encode(['error' => 'unauthorized']);
             return;
         }
 
         try {
-            $result = (new Subscription($this->dbh, $this->env))->receiveWebhook((string)file_get_contents('php://input'));
+            $result = (new TokenPurchase($this->dbh, $this->env))->receiveWebhook((string)file_get_contents('php://input'));
         } catch (InvalidArgumentException $error) {
             http_response_code(400);
             echo json_encode(['error' => 'invalid_body']);
@@ -1312,7 +1289,6 @@ class Controller
             'Action'                => 'question',
             'QuestionsCount'        => $totalQuestions,
             'SolvedQuestionsCount'  => $this->user->getSolvedQuestionsCount(),
-            'Book'                  => Helper::getBook($this->dbh, $this->lang, $questionData['dbms']),
             'Favorites'             => $this->user->getFavorites($this->lang)
         ]);
         $this->setHreflangLinks($params['path'], $this->lang);
@@ -1418,13 +1394,6 @@ class Controller
             header( 'HTTP/1.1 418 BAD REQUEST' );
         }
 
-        if ($this->user->showAd()) {
-            $referralLink = Helper::getReferralLink($this->dbh, $this->lang, $this->isMobileView() ? 'mobile' : 'desktop');
-            if (isset($referralLink)) {
-                Helper::updateReferralLinkStats($this->dbh, $referralLink['id']);
-                $this->engine->assign('ReferralLink', $referralLink);
-            }
-        }
 
         $this->engine->display($this->lang . "/query_test_result.tpl");
     }
@@ -1447,13 +1416,6 @@ class Controller
         }
 
         if (!$answerResult['ok']) header( 'HTTP/1.1 418 BAD REQUEST' );
-        if ($this->user->showAd()) {
-            $referralLink = Helper::getReferralLink($this->dbh, $this->lang, $this->isMobileView() ? 'mobile' : 'desktop');
-            if (isset($referralLink)) {
-                Helper::updateReferralLinkStats($this->dbh, $referralLink['id']);
-                $this->engine->assign('ReferralLink', $referralLink);
-            }
-        }
         $this->engine->display($this->lang . "/check_answer_result.tpl");
     }
 
@@ -1479,7 +1441,6 @@ class Controller
             $this->assignVariables([
                 'QuestionID'        => $questionID,
                 'FreeAnswerResult'  => ['ok' => false, 'cost' => 0, 'quota_exceeded' => true, 'quota' => $quotaStatus],
-                'AiQuotaResetsAt'   => $quotaStatus['resets_at'],
             ]);
             header('HTTP/1.1 429 Too Many Requests');
             $this->engine->display($this->lang . "/check_free_answer_result.tpl");
@@ -1508,13 +1469,6 @@ class Controller
             $this->user->saveQuestionAttempt($questionID, $freeAnswerResult, trim($answer));
         }
         if (!$freeAnswerResult['ok']) header( 'HTTP/1.1 418 BAD REQUEST' );
-        if ($this->user->showAd()) {
-            $referralLink = Helper::getReferralLink($this->dbh, $this->lang, $this->isMobileView() ? 'mobile' : 'desktop');
-            if (isset($referralLink)) {
-                Helper::updateReferralLinkStats($this->dbh, $referralLink['id']);
-                $this->engine->assign('ReferralLink', $referralLink);
-            }
-        }
         $this->engine->display($this->lang . "/check_free_answer_result.tpl");
     }
 
@@ -2137,7 +2091,7 @@ class Controller
                 'LessonAssistantTemplate' => $this->localizedTemplate('lesson-assistant.tpl'),
                 'LessonAssistantHistory'  => $assistantHistory,
                 'AiQuota'                 => $assistantQuota,
-                'AiQuotaExceededMessage'  => $assistantQuota ? $this->aiQuotaExceededMessage($assistantQuota) : '',
+                'AiQuotaExceededMessage'  => $assistantQuota ? $this->aiQuotaExceededMessage() : '',
             ]);
         }
         $this->setHreflangLinks($params['path'], $this->lang);
@@ -2246,14 +2200,11 @@ class Controller
     }
 
     /**
-     * Localized "AI budget is used up" message for the given TokenQuota::status()
+     * Localized "AI tokens are used up" message with a link to the tokens page
      */
-    private function aiQuotaExceededMessage(array $quotaStatus): string
+    private function aiQuotaExceededMessage(): string
     {
-        if ($quotaStatus['subscribed']) {
-            return str_replace('##AiQuotaResetsAt##', (string)$quotaStatus['resets_at'], Localizer::translateString('ai_quota_exceeded_subscriber'));
-        }
-        return Localizer::translateString('ai_quota_exceeded_free');
+        return Localizer::translateString('ai_quota_exceeded');
     }
 
     /**
@@ -2312,7 +2263,7 @@ class Controller
         $quota = new TokenQuota($this->dbh, $this->user, $this->env);
         if (!$quota->canSpend()) {
             $quotaStatus = $quota->status();
-            $this->jsonResponse(429, ['error' => 'quota_exceeded', 'message' => $this->aiQuotaExceededMessage($quotaStatus), 'quota' => $quotaStatus]);
+            $this->jsonResponse(429, ['error' => 'quota_exceeded', 'message' => $this->aiQuotaExceededMessage(), 'quota' => $quotaStatus]);
             return;
         }
 

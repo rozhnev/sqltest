@@ -24,12 +24,5 @@
         <p>Esta pagina ajuda voce a praticar perguntas de entrevista de Data Engineering no SQLTest.online.</p>
     </div>
 
-    {if $User->showAd()}
-        {include file='pt/donation_goal_widget.tpl'}
-        <div class="referal-add-block">
-            {if $Book}
-                {include file='book_card.tpl'}
-            {/if}
-        </div>
-    {/if}
+    {include file='pt/donation_goal_widget.tpl'}
 </div>

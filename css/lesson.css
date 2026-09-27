@@ -192,12 +192,6 @@
     color: var(--accordion-hover);
 }
 
-/* A thinner bar than the donation widget's */
-.lesson-assistant .la-meter {
-    height: 6px;
-    margin-top: 0.35em;
-}
-
 .lesson-assistant .la-login .button {
     width: 100%;
 }

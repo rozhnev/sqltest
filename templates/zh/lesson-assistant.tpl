@@ -11,6 +11,5 @@
 {elseif $part == 'send'}发送
 {elseif $part == 'reset'}清空对话
 {elseif $part == 'login'}登录后即可提问
-{elseif $part == 'quota_free'}AI 额度：已使用 <span class="la-percent">{$AiQuota.percent_used}</span>% · 免费额度，不会续期 · <a href="/{$Lang}/subscribe">订阅</a>
-{elseif $part == 'quota_subscriber'}AI 额度：已使用 <span class="la-percent">{$AiQuota.percent_used}</span>% · {$AiQuota.resets_at} 续期
+{elseif $part == 'quota'}剩余 AI 令牌：<span class="la-remaining">{$AiQuota.remaining_text}</span> · <a href="/{$Lang}/tokens">购买更多</a>
 {/if}

@@ -41,8 +41,8 @@ class TestDatabase
     }
 
     /**
-     * Recreate the tables the AI quota and subscription code use, from the project's own DDL:
-     * users from sql/schema.sql, the rest from sql/llm_usage_log_ddl.sql and sql/subscription_ddl.sql.
+     * Recreate the tables the AI quota and token purchase code use, from the project's own DDL:
+     * users from sql/schema.sql, the rest from sql/llm_usage_log_ddl.sql and sql/token_purchases_ddl.sql.
      */
     public static function resetSchema(PDO $dbh): void
     {
@@ -53,12 +53,12 @@ class TestDatabase
             throw new \RuntimeException('users DDL not found in sql/schema.sql');
         }
 
-        $dbh->exec('DROP TABLE IF EXISTS public.lava_webhook_log, public.subscription_payments, public.subscriptions,
+        $dbh->exec('DROP TABLE IF EXISTS public.lava_webhook_log, public.token_purchases, public.subscription_payments, public.subscriptions,
             public.llm_usage_log, public.users CASCADE');
         $dbh->exec($users[0]);
         $dbh->exec('ALTER TABLE public.users ADD PRIMARY KEY (id), ADD UNIQUE (login)');
         $dbh->exec(self::loadDdl($root . '/sql/llm_usage_log_ddl.sql'));
-        $dbh->exec(self::loadDdl($root . '/sql/subscription_ddl.sql'));
+        $dbh->exec(self::loadDdl($root . '/sql/token_purchases_ddl.sql'));
     }
 
     /**

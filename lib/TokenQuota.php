@@ -1,11 +1,10 @@
 <?php
 /**
- * Per-user AI token budget (see LESSON_ASSISTANT_PLAN.md, Stage 2).
+ * Per-user AI token budget (see LESSON_ASSISTANT_PLAN.md, Stage 2, and TOKEN_PURCHASE_PLAN.md).
  *
  * The balance is users.llm_tokens: set to LLM_FREE_TOKENS on registration,
- * reset to LLM_SUBSCRIBER_CYCLE_TOKENS on every subscription payment, and
- * reduced by the actual usage of every charged LLM call. Only percentages
- * leave this class via status(); raw token numbers stay internal.
+ * increased by every paid token pack (TokenPurchase), and reduced by the actual
+ * usage of every charged LLM call. Tokens never expire.
  */
 class TokenQuota
 {
@@ -14,11 +13,11 @@ class TokenQuota
     private array $env;
 
     /**
-     * Fresh users row: llm_tokens, subscribed_till, subscribed. Loaded lazily.
+     * Balance read fresh from the DB, loaded lazily
      *
-     * @var array|null
+     * @var int|null
      */
-    private ?array $row = null;
+    private ?int $balance = null;
 
     public function __construct(PDO $dbh, User $user, array $env)
     {
@@ -28,25 +27,13 @@ class TokenQuota
     }
 
     /**
-     * Plan size, used only for the percentage display
-     *
-     * @return int
-     */
-    public function planSize(): int
-    {
-        return $this->load()['subscribed']
-            ? (int)($this->env['LLM_SUBSCRIBER_CYCLE_TOKENS'] ?? 1000000)
-            : (int)($this->env['LLM_FREE_TOKENS'] ?? 50000);
-    }
-
-    /**
      * Remaining tokens, never negative
      *
      * @return int
      */
     public function remaining(): int
     {
-        return max(0, (int)$this->load()['llm_tokens']);
+        return max(0, $this->load());
     }
 
     /**
@@ -102,63 +89,41 @@ class TokenQuota
             throw $error;
         }
 
-        if ($this->row !== null && $balance !== false) {
-            $this->row['llm_tokens'] = (int)$balance;
+        if ($this->balance !== null && $balance !== false) {
+            $this->balance = (int)$balance;
         }
     }
 
     /**
-     * Quota state for the UI: percentages and the reset date only, no raw token numbers
+     * Quota state for the UI
      *
-     * @return array ['percent_used' => int, 'subscribed' => bool, 'resets_at' => ?string, 'exhausted' => bool]
+     * @return array ['remaining' => int, 'remaining_text' => string, 'exhausted' => bool]
      */
     public function status(): array
     {
-        $row = $this->load();
-        $planSize = $this->planSize();
-        $percentUsed = $planSize > 0 ? 100 - (int)round(100 * $this->remaining() / $planSize) : 100;
-
         return [
-            'percent_used' => max(0, min(100, $percentUsed)),
-            'subscribed'   => $row['subscribed'],
-            // subscribed_till is the next payment, when the balance is refreshed
-            'resets_at'    => $row['subscribed'] ? $row['subscribed_till'] : null,
-            'exhausted'    => !$this->canSpend(),
+            'remaining'      => $this->remaining(),
+            'remaining_text' => self::formatTokens($this->remaining()),
+            'exhausted'      => !$this->canSpend(),
         ];
     }
 
     /**
-     * Read the balance fresh from the DB and apply lazy subscription expiry:
-     * an expired subscriber's leftover balance drops to 0.
-     *
-     * @return array
+     * Token count for display: digits grouped by thousands with a no-break space
+     * (e.g. "1 000 000"), the same in every language
      */
-    private function load(): array
+    public static function formatTokens(int $tokens): string
     {
-        if ($this->row !== null) {
-            return $this->row;
-        }
+        return number_format($tokens, 0, '.', "\u{00A0}");
+    }
 
-        $stmt = $this->dbh->prepare("SELECT llm_tokens, subscribed_till,
-                (subscribed_till is not null and subscribed_till > current_date) subscribed,
-                (subscribed_till is not null and subscribed_till <= current_date) expired
-            FROM users WHERE id = :user_id");
-        $stmt->execute([':user_id' => $this->user->getId()]);
-        $row = $stmt->fetch(PDO::FETCH_ASSOC) ?: ['llm_tokens' => 0, 'subscribed_till' => null, 'subscribed' => false, 'expired' => false];
-
-        if ($row['expired'] && (int)$row['llm_tokens'] > 0) {
-            // Conditions repeated in SQL so a grant made in between is not wiped out
-            $stmt = $this->dbh->prepare("UPDATE users SET llm_tokens = 0
-                WHERE id = :user_id AND subscribed_till <= current_date AND llm_tokens > 0");
+    private function load(): int
+    {
+        if ($this->balance === null) {
+            $stmt = $this->dbh->prepare("SELECT llm_tokens FROM users WHERE id = :user_id");
             $stmt->execute([':user_id' => $this->user->getId()]);
-            $row['llm_tokens'] = 0;
+            $this->balance = (int)$stmt->fetchColumn();
         }
-
-        $this->row = [
-            'llm_tokens'      => (int)$row['llm_tokens'],
-            'subscribed_till' => $row['subscribed_till'],
-            'subscribed'      => (bool)$row['subscribed'],
-        ];
-        return $this->row;
+        return $this->balance;
     }
 }

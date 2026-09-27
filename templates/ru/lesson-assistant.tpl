@@ -11,6 +11,5 @@
 {elseif $part == 'send'}Отправить
 {elseif $part == 'reset'}Очистить чат
 {elseif $part == 'login'}Войдите, чтобы задавать вопросы
-{elseif $part == 'quota_free'}AI-бюджет: израсходовано <span class="la-percent">{$AiQuota.percent_used}</span>% · бесплатный лимит, не обновляется · <a href="/{$Lang}/subscribe">Подписка</a>
-{elseif $part == 'quota_subscriber'}AI-бюджет: израсходовано <span class="la-percent">{$AiQuota.percent_used}</span>% · обновится {$AiQuota.resets_at}
+{elseif $part == 'quota'}Осталось AI-токенов: <span class="la-remaining">{$AiQuota.remaining_text}</span> · <a href="/{$Lang}/tokens">Купить ещё</a>
 {/if}

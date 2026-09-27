@@ -1,7 +1,7 @@
 <?php
 /**
  * Thin client for the Lava.top public API (https://gate.lava.top/docs).
- * No business logic here: see Subscription. Not final, so tests can substitute a fake.
+ * No business logic here: see TokenPurchase. Not final, so tests can substitute a fake.
  */
 class LavaClient
 {
@@ -19,7 +19,7 @@ class LavaClient
     /**
      * Create a purchase contract (POST /api/v3/invoice)
      *
-     * @param array $invoice Request body: email, offerId, currency, periodicity, paymentProvider, ...
+     * @param array $invoice Request body: email, offerId, currency, paymentProvider, ...
      * @return array{id: string, paymentUrl: string}
      * @throws LavaApiException
      */
@@ -30,18 +30,6 @@ class LavaClient
             throw new LavaApiException('Lava invoice response has no id or paymentUrl', 0);
         }
         return ['id' => (string)$response['id'], 'paymentUrl' => (string)$response['paymentUrl']];
-    }
-
-    /**
-     * Cancel a subscription (DELETE /api/v1/subscriptions)
-     *
-     * @param string $contractId The first (parent) contract id of the subscription
-     * @param string $email Email of the buyer who owns the subscription
-     * @throws LavaApiException
-     */
-    public function cancelSubscription(string $contractId, string $email): void
-    {
-        $this->request('DELETE', '/api/v1/subscriptions', ['contractId' => $contractId, 'email' => $email]);
     }
 
     /**

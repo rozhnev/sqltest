@@ -14,11 +14,9 @@
         <main3 id="main3">
             <nav class="column" aria-label="Lesson navigation">
                 <div class="menu" id="menu">
-                {if $User->showAd()}
-                    <div style="height: 5em;">
-                        {translate}menu_small_add_placeholder{/translate}
-                    </div>
-                {/if}
+                <div style="height: 5em;">
+                    {translate}menu_small_add_placeholder{/translate}
+                </div>
                 <div class="question-wrapper">
                     <div id="menu-content" class="menu-content">     
                         {foreach $Lessons as $moduleSlug => $module}
@@ -100,9 +98,7 @@
                 {if isset($LessonAssistantTemplate)}
                     {include file='lesson-assistant.tpl' mobile=false}
                 {/if}
-                {if $User->showAd()}
-                    {include file="{$Lang}/donation_goal_widget.tpl"}
-                {/if} 
+                {include file="{$Lang}/donation_goal_widget.tpl"}
             </aside>
         </main3>
         <footer>

@@ -16,7 +16,7 @@
             </div>
         </div>
     </div>
-    {* {if $User->showAd()&& !$MobileView}
+    {* {if !$MobileView}
         <div style="height: 5em;">
             {translate}menu_small_add_placeholder{/translate}
         </div>

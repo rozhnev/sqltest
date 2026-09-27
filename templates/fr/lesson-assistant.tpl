@@ -11,6 +11,5 @@
 {elseif $part == 'send'}Envoyer
 {elseif $part == 'reset'}Effacer la conversation
 {elseif $part == 'login'}Connectez-vous pour poser des questions
-{elseif $part == 'quota_free'}Budget d'IA : <span class="la-percent">{$AiQuota.percent_used}</span> % utilisé · quota gratuit, non renouvelable · <a href="/{$Lang}/subscribe">S'abonner</a>
-{elseif $part == 'quota_subscriber'}Budget d'IA : <span class="la-percent">{$AiQuota.percent_used}</span> % utilisé · renouvelé le {$AiQuota.resets_at}
+{elseif $part == 'quota'}Jetons d'IA restants : <span class="la-remaining">{$AiQuota.remaining_text}</span> · <a href="/{$Lang}/tokens">En acheter</a>
 {/if}

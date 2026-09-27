@@ -100,9 +100,7 @@
                 </div>
             </div>
             <aside class="column db-description" id="right-panel">            
-                {if $User->showAd()}
-                    {include file="{$Lang}/donation_goal_widget.tpl"}
-                {/if} 
+                {include file="{$Lang}/donation_goal_widget.tpl"}
             </aside>
         </main3>
         <footer>

@@ -24,12 +24,5 @@
         <p>Эта страница помогает практиковать вопросы по Data Engineering в формате собеседования на SQLTest.online.</p>
     </div>
 
-    {if $User->showAd()}
-        {include file='ru/donation_goal_widget.tpl'}
-        {if $Book}
-            <div class="referal-add-block">
-                {include file='book_card.tpl'}
-            </div>
-        {/if}
-    {/if}
+    {include file='ru/donation_goal_widget.tpl'}
 </div>

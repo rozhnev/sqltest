@@ -274,11 +274,4 @@
             <li>主键，btree (gid)</li>
         </ul>
     </div>
-    {if $User->showAd()}
-        <div class="referal-add-block">
-            {if $Book}
-                {include file='book_card.tpl'}
-            {/if}
-        </div>
-    {/if}
 </div>

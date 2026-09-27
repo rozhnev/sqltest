@@ -24,12 +24,5 @@
         <p>该页面用于在 SQLTest.online 上练习数据工程师面试相关问题。</p>
     </div>
 
-    {if $User->showAd()}
-        {include file='zh/donation_goal_widget.tpl'}
-        <div class="referal-add-block">
-            {if $Book}
-                {include file='book_card.tpl'}
-            {/if}
-        </div>
-    {/if}
+    {include file='zh/donation_goal_widget.tpl'}
 </div>

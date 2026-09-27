@@ -16,9 +16,9 @@ class Router
             'question'          => "@(?<lang>{$this->langPattern})/(?<action>question)/(?<questionCategory>[a-z-]+)/(?<question>[a-z-]+)@i",
             'question-action'   => "@(?<lang>{$this->langPattern})/question/(?<questionID>\d+)/(?<action>query-help|query-run|query-test|rate|check-answers|check-free-answer)@i",
             // Must precede 'static-page', whose unanchored pattern would also match these paths.
-            'subscribe-action'  => "@(?<lang>{$this->langPattern})/(?<class>subscribe)/(?<action>checkout|cancel|email)/?$@i",
+            'tokens-action'     => "@(?<lang>{$this->langPattern})/(?<class>tokens)/(?<action>checkout|email)/?$@i",
             'lava-webhook'      => "@^/(?<class>lava)/(?<action>webhook)/?$@i",
-            'static-page'       => "@(?<lang>{$this->langPattern})/(?<action>privacy-policy|logout|about|menu|books|courses|donate|subscribe)/?@i",
+            'static-page'       => "@(?<lang>{$this->langPattern})/(?<action>privacy-policy|logout|about|menu|books|courses|donate|subscribe|tokens)/?@i",
             'register'          => "@(?<lang>{$this->langPattern})/(?<action>register)/?@i",
             'forgot-password'   => "@(?<lang>{$this->langPattern})/(?<action>forgot-password)/?@i",
             'login'             => "@^/(?<action>login)/(?<loginProvider>[a-z]+)/?$@i",
