@@ -12,6 +12,8 @@ class Controller
     private array $playgroundConfig;
     private array $urgentBanner;
     private array $interviewConfig;
+    /** Lava.top products by product id (config.php 'lava_products'), e.g. token pack prices */
+    private array $lavaProducts;
 
     private function getAutoTranslator(): LocalizationAutoTranslator
     {
@@ -47,6 +49,7 @@ class Controller
         $this->languages    = $config['languages'] ?? [];
         $this->playgroundConfig = $config['playground'] ?? [];
         $this->interviewConfig = $config['interview'] ?? [];
+        $this->lavaProducts = $config['lava_products'] ?? [];
 
         // Build absolute domain safely (works with proxies)
         $host = (string)($_SERVER['HTTP_HOST'] ?? $this->domain);
@@ -644,7 +647,7 @@ class Controller
      */
     public function buy_tokens(array $params): void
     {
-        $purchase = new TokenPurchase($this->dbh, $this->env);
+        $purchase = new TokenPurchase($this->dbh, $this->env, $this->lavaProducts);
 
         $quota = null;
         $history = [];
@@ -722,7 +725,7 @@ class Controller
         if (!$this->tokensActionAllowed()) {
             return;
         }
-        $purchase = new TokenPurchase($this->dbh, $this->env);
+        $purchase = new TokenPurchase($this->dbh, $this->env, $this->lavaProducts);
         $email = $this->user->getEmail();
         if ($email === '' || !$purchase->checkoutAvailable()) {
             $this->redirectToTokens();
@@ -783,7 +786,7 @@ class Controller
         }
 
         try {
-            $result = (new TokenPurchase($this->dbh, $this->env))->receiveWebhook((string)file_get_contents('php://input'));
+            $result = (new TokenPurchase($this->dbh, $this->env, $this->lavaProducts))->receiveWebhook((string)file_get_contents('php://input'));
         } catch (InvalidArgumentException $error) {
             http_response_code(400);
             echo json_encode(['error' => 'invalid_body']);

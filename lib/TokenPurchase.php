@@ -13,18 +13,22 @@ class TokenPurchase
 
     private PDO $dbh;
     private array $env;
+    /** @var array Lava products by product id, from config.php ('lava_products') */
+    private array $products;
     private LavaClient $lava;
     /** @var callable(string $subject, string $text): void */
     private $notifyAdmin;
 
     /**
+     * @param array $products config.php 'lava_products': [product id => ['prices' => [currency => amount]]]
      * @param callable|null $notifyAdmin fn(string $subject, string $text), defaults to an email
      *                                   to LAVA_ADMIN_EMAIL
      */
-    public function __construct(PDO $dbh, array $env, ?LavaClient $lava = null, ?callable $notifyAdmin = null)
+    public function __construct(PDO $dbh, array $env, array $products = [], ?LavaClient $lava = null, ?callable $notifyAdmin = null)
     {
         $this->dbh = $dbh;
         $this->env = $env;
+        $this->products = $products;
         $this->lava = $lava ?? new LavaClient(
             (string)($env['LAVA_API_KEY'] ?? ''),
             (string)($env['LAVA_API_URL'] ?? 'https://gate.lava.top')
@@ -48,6 +52,17 @@ class TokenPurchase
     public function packTokens(): int
     {
         return max(1, (int)($this->env['LLM_PACK_TOKENS'] ?? 1000000));
+    }
+
+    /**
+     * Pack price in the given currency from config.php ('lava_products', keyed by
+     * TOKENS_LAVA_PRODUCT_ID), or null when not configured: then the offer's own price in Lava is used
+     */
+    public function packPrice(string $currency): ?float
+    {
+        $productId = (string)($this->env['TOKENS_LAVA_PRODUCT_ID'] ?? '');
+        $price = (float)($this->products[$productId]['prices'][strtoupper($currency)] ?? 0);
+        return $price > 0 ? $price : null;
     }
 
     /**
@@ -104,6 +119,11 @@ class TokenPurchase
         ];
         if ($method !== '') {
             $invoice['paymentMethod'] = $method;
+        }
+        // A dynamic-price offer has no price of its own: Lava needs the amount in the invoice
+        $price = $this->packPrice($currency);
+        if ($price !== null) {
+            $invoice['amount'] = $price;
         }
         if ($promoCode !== null) {
             $invoice['promoCode'] = $promoCode;

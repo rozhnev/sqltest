@@ -69,9 +69,9 @@ class TokenPurchaseUnitTest extends \Codeception\Test\Unit
 
     public function testCheckoutNeedsApiKeyAndOffer()
     {
-        $this->assertTrue((new TokenPurchase(new FakePdo(), self::ENV, $this->lava))->checkoutAvailable());
-        $this->assertFalse((new TokenPurchase(new FakePdo(), ['TOKENS_LAVA_OFFER_ID' => ''] + self::ENV, $this->lava))->checkoutAvailable());
-        $this->assertFalse((new TokenPurchase(new FakePdo(), ['LAVA_API_KEY' => ''] + self::ENV, $this->lava))->checkoutAvailable());
+        $this->assertTrue((new TokenPurchase(new FakePdo(), self::ENV, [], $this->lava))->checkoutAvailable());
+        $this->assertFalse((new TokenPurchase(new FakePdo(), ['TOKENS_LAVA_OFFER_ID' => ''] + self::ENV, [], $this->lava))->checkoutAvailable());
+        $this->assertFalse((new TokenPurchase(new FakePdo(), ['LAVA_API_KEY' => ''] + self::ENV, [], $this->lava))->checkoutAvailable());
     }
 
     // Checkout
@@ -106,6 +106,26 @@ class TokenPurchaseUnitTest extends \Codeception\Test\Unit
         $this->assertSame('UNLIMINT', $invoice['paymentProvider']);
         $this->assertSame('CARD', $invoice['paymentMethod']);
         $this->assertSame('EN', $invoice['buyerLanguage']);
+    }
+
+    public function testCheckoutSendsConfiguredPriceForTheCurrency()
+    {
+        $products = [self::PRODUCT_ID => ['prices' => ['RUB' => 490, 'USD' => 4.99]]];
+        $this->purchase(self::ENV, $products)->startCheckout($this->user($this->createUser()), 'buyer@example.com', 'ru', 'https://sqltest.online');
+        $this->lava->nextContractId = self::CONTRACT;
+        $this->purchase(self::ENV, $products)->startCheckout($this->user($this->createUser()), 'buyer@example.com', 'en', 'https://sqltest.online');
+
+        $this->assertSame(490.0, $this->lava->invoices[0]['amount']);
+        $this->assertSame(4.99, $this->lava->invoices[1]['amount']);
+    }
+
+    public function testCheckoutWithoutConfiguredPriceUsesTheOfferPrice()
+    {
+        // Prices for another product, or none for this currency, don't apply
+        $products = ['72d53efb-3696-469f-b856-f0d815748dd6' => ['prices' => ['RUB' => 500]], self::PRODUCT_ID => ['prices' => ['USD' => 4.99]]];
+        $this->purchase(self::ENV, $products)->startCheckout($this->user($this->createUser()), 'buyer@example.com', 'ru', 'https://sqltest.online');
+
+        $this->assertArrayNotHasKey('amount', $this->lava->invoices[0]);
     }
 
     public function testCheckoutPassesPromoCodeOnlyWhenGiven()
@@ -338,9 +358,9 @@ class TokenPurchaseUnitTest extends \Codeception\Test\Unit
         return $this->db;
     }
 
-    private function purchase(array $env = self::ENV): TokenPurchase
+    private function purchase(array $env = self::ENV, array $products = []): TokenPurchase
     {
-        return new TokenPurchase($this->db(), $env, $this->lava, function (string $subject, string $text): void {
+        return new TokenPurchase($this->db(), $env, $products, $this->lava, function (string $subject, string $text): void {
             $this->notifications[] = [$subject, $text];
         });
     }
