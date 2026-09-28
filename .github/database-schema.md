@@ -287,10 +287,10 @@ Lava.top AI token purchases (see `TOKEN_PURCHASE_PLAN.md`): one row per checkout
 | `user_id`     | uuid FK       | → `users.id`                                       |
 | `email`       | text          | Email sent to Lava                                 |
 | `tokens`      | int           | Pack size at checkout time                         |
-| `currency`    | varchar(3)    | `RUB` \| `USD`                                     |
-| `promo_code`  | varchar(36)   |                                                    |
+| `currency`    | varchar(3)    | `RUB` \| `USD` \| `EUR`                            |
+| `promo_code`  | varchar(36)   | Code from `config.php`; its discount is in `amount` |
 | `status`      | varchar       | `pending` \| `paid` \| `failed`                    |
-| `amount`      | numeric(12,2) | Charged amount from the webhook (after a discount) |
+| `amount`      | numeric(12,2) | Charged amount from the webhook                    |
 | `created_at`  | timestamp     |                                                    |
 | `paid_at`     | timestamp     |                                                    |
 | `error`       | text          | Lava's error for a failed payment                  |
