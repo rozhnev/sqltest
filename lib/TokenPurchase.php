@@ -58,9 +58,8 @@ class TokenPurchase
      * Pack price in the given currency from config.php ('lava_products', keyed by
      * TOKENS_LAVA_PRODUCT_ID), or null when not configured: then the offer's own price in Lava is used
      */
-    public function packPrice(string $currency): ?float
+    public function packPrice(string $productId, string $currency): ?float
     {
-        $productId = (string)($this->env['TOKENS_LAVA_PRODUCT_ID'] ?? '');
         $price = (float)($this->products[$productId]['prices'][strtoupper($currency)] ?? 0);
         return $price > 0 ? $price : null;
     }
@@ -101,27 +100,23 @@ class TokenPurchase
      */
     public function startCheckout(User $user, string $email, string $lang, string $siteUrl, ?string $promoCode = null): string
     {
-        [$currency, $provider, $method] = $lang === 'ru'
-            ? ['RUB', $this->env['LAVA_PROVIDER_RUB'] ?? 'SMART_GLOCAL', $this->env['LAVA_METHOD_RUB'] ?? '']
-            : ['USD', $this->env['LAVA_PROVIDER_USD'] ?? 'UNLIMINT', $this->env['LAVA_METHOD_USD'] ?? 'CARD'];
+        $currency  = ['ru' => 'RUB', 'es' => 'EUR', 'en' => 'USD'][$lang] ?? 'USD';
         $returnUrl = rtrim($siteUrl, '/') . "/{$lang}/buy-tokens?payment=";
 
         // No periodicity: that is what makes it a one-time purchase
+        $offerId = (string)($this->env['TOKENS_LAVA_OFFER_ID'] ?? '');
         $invoice = [
             'email'                 => $email,
-            'offerId'               => (string)($this->env['TOKENS_LAVA_OFFER_ID'] ?? ''),
+            'offerId'               => $offerId,
             'currency'              => $currency,
-            'paymentProvider'       => $provider,
             'buyerLanguage'         => ['ru' => 'RU', 'es' => 'ES'][$lang] ?? 'EN',
             'successful_return_url' => $returnUrl . 'success',
             'failure_return_url'    => $returnUrl . 'failed',
             'cancel_return_url'     => $returnUrl . 'cancelled',
         ];
-        if ($method !== '') {
-            $invoice['paymentMethod'] = $method;
-        }
+
         // A dynamic-price offer has no price of its own: Lava needs the amount in the invoice
-        $price = $this->packPrice($currency);
+        $price = $this->packPrice($offerId, $currency);
         if ($price !== null) {
             $invoice['amount'] = $price;
         }
