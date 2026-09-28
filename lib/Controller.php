@@ -662,7 +662,6 @@ class Controller
         $this->assignVariables([
             'Action'                  => 'buy-tokens',
             'PageTitle'               => Localizer::translateString('tokens_page_title'),
-            'TokensContentTemplate'   => $this->localizedTemplate('tokens.tpl'),
             'TokensCheckoutAvailable' => $purchase->checkoutAvailable(),
             'TokensPack'              => TokenQuota::formatTokens($purchase->packTokens()),
             'TokensPaymentReturn'     => in_array($paymentReturn, ['success', 'failed', 'cancelled'], true) ? $paymentReturn : '',

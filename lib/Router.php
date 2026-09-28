@@ -18,7 +18,7 @@ class Router
             // Must precede 'static-page', whose unanchored pattern would also match these paths.
             'buy-tokens-action' => "@(?<lang>{$this->langPattern})/(?<class>buy-tokens)/(?<action>checkout|email)/?$@i",
             'lava-webhook'      => "@^/(?<class>lava)/(?<action>webhook)/?$@i",
-            'static-page'       => "@(?<lang>{$this->langPattern})/(?<action>privacy-policy|logout|about|menu|books|courses|donate|buy-tokens)/?@i",
+            'static-page'       => "@(?<lang>{$this->langPattern})/(?<action>privacy-policy|logout|about|menu|books|courses|donate|buy-tokens|tokens|subscribe)/?@i",
             'register'          => "@(?<lang>{$this->langPattern})/(?<action>register)/?@i",
             'forgot-password'   => "@(?<lang>{$this->langPattern})/(?<action>forgot-password)/?@i",
             'login'             => "@^/(?<action>login)/(?<loginProvider>[a-z]+)/?$@i",
