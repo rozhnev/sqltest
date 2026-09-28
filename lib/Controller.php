@@ -12,7 +12,7 @@ class Controller
     private array $playgroundConfig;
     private array $urgentBanner;
     private array $interviewConfig;
-    /** Lava.top products by product id (config.php 'lava_products'), e.g. token pack prices */
+    /** Lava.top offers by offer id (config.php 'lava_products'): prices and promo codes */
     private array $lavaProducts;
 
     private function getAutoTranslator(): LocalizationAutoTranslator
@@ -739,12 +739,14 @@ class Controller
         }
 
         try {
+            // A Lava payment page, or our own success page when a promo code makes the pack free
             $paymentUrl = $purchase->startCheckout($this->user, $email, $this->lang, $this->host, $promoCode);
+        } catch (InvalidPromoCodeException $error) {
+            $this->redirectToTokens('error', Localizer::translateString('tokens_error_promo_code'));
+            return;
         } catch (Throwable $error) {
             error_log('Token checkout failed: ' . $error->getMessage());
-            // Lava answers 400 for an unknown, expired or used-up promo code
-            $promoRejected = $promoCode !== null && $error instanceof LavaApiException && $error->getCode() === 400;
-            $this->redirectToTokens('error', Localizer::translateString($promoRejected ? 'tokens_error_promo_code' : 'tokens_error_checkout'));
+            $this->redirectToTokens('error', Localizer::translateString('tokens_error_checkout'));
             return;
         }
         header('Location: ' . $paymentUrl, true, 303);

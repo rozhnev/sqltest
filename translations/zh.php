@@ -209,7 +209,7 @@ $translations = [
     'ai_quota_exceeded' => '您的 AI 令牌已用完。<a href="/zh/buy-tokens">购买令牌包</a>即可继续使用 AI 导师和答案检查。',
     'tokens_page_title' => 'AI 令牌 | SQLTest.online',
     'tokens_error_checkout' => '无法发起付款。请几分钟后重试，或联系我们。',
-    'tokens_error_promo_code' => '该优惠码无效。请检查后重试，或不使用优惠码直接购买。',
+    'tokens_error_promo_code' => '该优惠码无效：可能输入有误、已过期或已被使用。请检查后重试，或不使用优惠码直接购买。',
     'tokens_title' => 'AI 令牌',
     'tokens_subtitle' => '令牌用于支付课程中的 AI 导师和答案的 AI 检查。',
     'tokens_balance_title' => '您的余额',

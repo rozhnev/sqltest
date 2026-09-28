@@ -133,7 +133,7 @@ $translations = [
     'ai_quota_exceeded' => 'Your AI tokens are used up. <a href="/en/buy-tokens">Buy a token pack</a> to keep using the AI tutor and answer checks.',
     'tokens_page_title' => 'AI tokens | SQLTest.online',
     'tokens_error_checkout' => 'We could not start the payment. Please try again in a few minutes or contact us.',
-    'tokens_error_promo_code' => 'This promo code isn\'t valid. Check it and try again, or buy without it.',
+    'tokens_error_promo_code' => 'This promo code isn\'t valid: it may be mistyped, expired or already used. Check it and try again, or buy without it.',
     'tokens_title' => 'AI tokens',
     'tokens_subtitle' => 'Tokens pay for the AI tutor in lessons and AI checks of your answers.',
     'tokens_balance_title' => 'Your balance',

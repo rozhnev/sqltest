@@ -132,7 +132,7 @@ $translations = [
     'ai_quota_exceeded' => 'Vos jetons d\'IA sont épuisés. <a href="/fr/buy-tokens">Achetez un pack de jetons</a> pour continuer à utiliser le tuteur IA et la vérification des réponses.',
     'tokens_page_title' => 'Jetons d\'IA | SQLTest.online',
     'tokens_error_checkout' => 'Impossible de lancer le paiement. Réessayez dans quelques minutes ou contactez-nous.',
-    'tokens_error_promo_code' => 'Ce code promo n\'est pas valide. Vérifiez-le et réessayez, ou achetez sans code.',
+    'tokens_error_promo_code' => 'Ce code promo n\'est pas valide : il est peut-être mal saisi, expiré ou déjà utilisé. Vérifiez-le ou achetez sans code.',
     'tokens_title' => 'Jetons d\'IA',
     'tokens_subtitle' => 'Les jetons paient le tuteur IA des leçons et la vérification de vos réponses par l\'IA.',
     'tokens_balance_title' => 'Votre solde',

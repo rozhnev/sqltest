@@ -21,18 +21,18 @@ database), so there are no subscribers to migrate.
 | Donation widget | Shown to **everyone** (it isn't an ad) |
 | Subscription | **Removed**: recurring checkout, renewals, cancellation, `subscribed_till` |
 | Currency | By site language (unchanged): `ru` → RUB, all other languages → USD |
-| Promo codes | Kept: optional `promoCode` on the invoice (already implemented) |
+| Promo codes | Defined per offer in `config.php` → `lava_products[<offer id>]['promo_codes']` (percent `discount`, optional `expires`, `max_uses`, `max_uses_per_user` = 1 by default; uses counted from paid purchases). The discount is applied on our side to the price sent as `amount`; Lava never sees the code. A 100% code skips Lava (it can't invoice 0) and credits the pack right away |
 | Refund / chargeback | Notify only (unchanged): log the event and email the admin; the admin deducts tokens manually with a script |
 | Binding payment → user | By the contract id we get when *we* create the invoice (unchanged) |
 | Quota display | The remaining balance as a number (e.g. "412K tokens left"). There is no plan size any more, so "% of plan used" no longer makes sense. Replaces the "no raw token numbers in the UI" rule of `LESSON_ASSISTANT_PLAN.md` |
-| Pack price | Set in Lava (RUB and USD prices of the offer); the site shows no price of its own |
+| Pack price | The offer has a dynamic price in Lava, so the invoice carries `amount` from `config.php` → `lava_products[<TOKENS_LAVA_OFFER_ID>]['prices']` (per currency). Without them the offer's own price is used (for a fixed-price offer) |
 
 ## Lava.top API (from `https://gate.lava.top/docs/documentation.yaml`)
 
 - Auth: header `X-Api-Key: <API key>`.
 - **Create invoice**: `POST /api/v3/invoice`, body:
   `email`, `offerId`, `currency` (`RUB|USD|EUR`), `paymentProvider`, `paymentMethod`, `buyerLanguage` (`EN|RU|ES`),
-  `promoCode` (optional), `successful_return_url`, `failure_return_url`, `cancel_return_url`.
+  `amount` (for a dynamic-price offer), `successful_return_url`, `failure_return_url`, `cancel_return_url`.
   **No `periodicity`**: that is what makes it a one-time purchase.
   Response `201`: `id` (contract id), `status`, `paymentUrl`.
   - `buyerLanguage` only sets the language of Lava's emails, not of the payment page.
@@ -59,9 +59,8 @@ CREATE TABLE public.token_purchases (
     email        text NOT NULL,                       -- email sent to Lava
     tokens       integer NOT NULL,                    -- pack size at checkout time
     currency     varchar(3) NOT NULL,
-    promo_code   varchar(36),
     status       varchar(16) NOT NULL DEFAULT 'pending', -- pending | paid | failed
-    amount       numeric(12,2),                       -- charged amount from the webhook (after a promo discount)
+    amount       numeric(12,2),                       -- charged amount from the webhook
     created_at   timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     paid_at      timestamp,
     error        text                                 -- Lava's errorMessage for a failed payment
@@ -91,8 +90,8 @@ Keep `createInvoice()` and error handling. Remove `cancelSubscription()`.
 
 ## Stage 3: `lib/TokenPurchase.php` (replaces `lib/Subscription.php`)
 
-- `checkoutAvailable()`, `isValidWebhookKey()`, `normalizePromoCode()`: moved over unchanged.
-- `startCheckout(User $user, string $email, string $lang, string $siteUrl, ?string $promoCode): string`
+- `checkoutAvailable()`, `isValidWebhookKey()`: moved over unchanged.
+- `startCheckout(User $user, string $email, string $lang, string $siteUrl): string`
   → payment URL. Same as today minus `periodicity`; inserts a `pending` row with `tokens = LLM_PACK_TOKENS`.
   Return URLs: `https://{host}/{lang}/buy-tokens?payment=success|failed|cancelled`.
 - `receiveWebhook(string $body)` / `handleWebhook(array $event)`: log first, then in one transaction:
@@ -139,11 +138,11 @@ built from `subscribe.tpl`:
 - **Not logged in**: login prompt.
 - **No email on the account**: the email form (unchanged).
 - **Balance**: remaining tokens, and what they're for (lesson assistant, free-answer checks).
-- **Buy**: pack size, "one-time payment, tokens never expire", optional promo code, "Buy" button.
+- **Buy**: pack size, "one-time payment, tokens never expire", "Buy" button, no-refund note.
 - **`?payment=success`**: "Payment received, the tokens appear in a moment"; auto-refresh once (the webhook can
   lag behind the redirect). **`failed|cancelled`**: short message + the Buy button.
 - **History**: the last purchases (date, tokens, amount).
-- Short errors (`tokens_error_checkout`, `tokens_error_promo_code`) in `translations/`; page title too.
+- Page text and short errors (`tokens_*`) in `translations/`.
 
 Links to the page: the quota-exceeded message, the lesson assistant's balance line, the top menu if there was a
 "Subscribe" item.
@@ -170,7 +169,7 @@ fixes; a negative `--tokens` deducts after a refund or chargeback.
 
 Replace `tests/unit/SubscriptionUnitTest.php` with `TokenPurchaseUnitTest.php` (test DB, fake `LavaClient`,
 the spec's example payloads):
-- checkout: pending row with the pack size, no `periodicity`, currency by language, `promoCode` only when given
+- checkout: pending row with the pack size, no `periodicity`, currency by language, `amount` from `lava_products`
 - `payment.success` adds the pack; the same webhook again → `duplicate`, balance unchanged
 - a negative balance is raised to 0 before the pack is added
 - two purchases add up
@@ -186,15 +185,7 @@ the spec's example payloads):
 1. In Lava: create a one-time digital product "AI tokens" with one offer (RUB and USD prices); note the offer
    and product ids. The webhook URL and secret stay the same.
 2. Dev: apply `sql/token_purchases_ddl.sql`, drop the subscription tables, set the new `.env` keys, deploy.
-3. Test on dev with the promo code `TESTFREE` (100% discount; Lava has no sandbox, so this is a real purchase
-   that costs nothing). Check:
-   - the invoice is accepted with the code and the Lava page shows a zero price;
-   - `payment.success` arrives (`lava_webhook_log`) with `amount` 0, the purchase is `paid` and the balance
-     grew by the pack;
-   - the return to `/buy-tokens?payment=success` shows the new balance.
-   If Lava doesn't create an invoice or send a webhook for a zero amount, repeat with `FIRST10` (90% discount):
-   a real payment of 10% of the price, and `amount` in the webhook is the discounted sum.
-   `TESTFREE` is limited to 10 uses in Lava; disable it once testing is done, since anyone who knows it gets free
-   tokens.
+3. Test a real purchase on dev and check `lava_webhook_log`, the purchase row and the balance (checkout confirmed
+   working on dev). Promo codes now live in `config.php`: the `TESTFREE` / `FIRST10` codes in Lava are unused.
 4. Prod: apply `sql/token_purchases_ddl.sql`, deploy, then drop `users.subscribed_till`.
 5. Update `LESSON_ASSISTANT_PLAN.md` (subscription parts) and `.github/database-schema.md`.

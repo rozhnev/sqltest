@@ -11,9 +11,9 @@ CREATE TABLE public.token_purchases (
     email text NOT NULL,                                -- email sent to Lava
     tokens integer NOT NULL,                            -- pack size at checkout time
     currency character varying(3) NOT NULL,
-    promo_code character varying(36),
+    promo_code character varying(36),                   -- config.php 'promo_codes'; its discount is already in amount
     status character varying(16) DEFAULT 'pending' NOT NULL,
-    amount numeric(12,2),                               -- charged amount from the webhook (after a promo discount)
+    amount numeric(12,2),                               -- charged amount from the webhook
     created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
     paid_at timestamp without time zone,
     error text,                                         -- Lava's errorMessage for a failed payment

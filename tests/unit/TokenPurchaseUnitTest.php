@@ -28,6 +28,13 @@ class TokenPurchaseUnitTest extends \Codeception\Test\Unit
         'TOKENS_LAVA_PRODUCT_ID' => self::PRODUCT_ID,
     ];
 
+    private const OFFER_ID = '836b9fc5-7ae9-4a27-9642-592bc44072b7';
+    private const PRICES = [self::OFFER_ID => ['prices' => ['RUB' => 490, 'USD' => 4.99]]];
+    private const PROMO_CODES = [
+        'TESTFREE' => ['discount' => 100, 'max_uses' => 10],
+        'FIRST10'  => ['discount' => 90],
+    ];
+
     /** @var PDO|string */
     private $db;
     private FakeLavaClient $lava;
@@ -59,7 +66,6 @@ class TokenPurchaseUnitTest extends \Codeception\Test\Unit
         $this->assertNull(TokenPurchase::normalizePromoCode(''));
         $this->assertNull(TokenPurchase::normalizePromoCode('   '));
         $this->assertSame('TESTFREE', TokenPurchase::normalizePromoCode(' testfree '));
-        $this->assertSame('FIRST10', TokenPurchase::normalizePromoCode('first10'));
         $this->assertSame('SUMMER_2026-X', TokenPurchase::normalizePromoCode('summer_2026-x'));
         $this->assertFalse(TokenPurchase::normalizePromoCode('AB'));
         $this->assertFalse(TokenPurchase::normalizePromoCode(str_repeat('A', 37)));
@@ -85,8 +91,9 @@ class TokenPurchaseUnitTest extends \Codeception\Test\Unit
         $this->assertSame('https://pay.lava.top/fake', $url);
         $invoice = $this->lava->invoices[0];
         $this->assertArrayNotHasKey('periodicity', $invoice, 'a one-time purchase has no periodicity');
+        $this->assertArrayNotHasKey('promoCode', $invoice);
         $this->assertSame('RUB', $invoice['currency']);
-        $this->assertSame('SMART_GLOCAL', $invoice['paymentProvider']);
+        $this->assertArrayNotHasKey('paymentProvider', $invoice, 'Lava picks the provider');
         $this->assertSame('RU', $invoice['buyerLanguage']);
         $this->assertSame('buyer@example.com', $invoice['email']);
         $this->assertSame(self::ENV['TOKENS_LAVA_OFFER_ID'], $invoice['offerId']);
@@ -97,20 +104,22 @@ class TokenPurchaseUnitTest extends \Codeception\Test\Unit
         );
     }
 
-    public function testCheckoutInOtherLanguagesUsesDollars()
+    public function testCheckoutCurrencyByLanguage()
     {
-        $this->purchase()->startCheckout($this->user($this->createUser()), 'buyer@example.com', 'fr', 'https://sqltest.online');
+        foreach (['fr' => ['USD', 'EN'], 'en' => ['USD', 'EN'], 'es' => ['EUR', 'ES'], 'zh' => ['USD', 'EN']] as $lang => [$currency, $buyerLanguage]) {
+            $this->lava->nextContractId = vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex(random_bytes(16)), 4));
+            $this->purchase()->startCheckout($this->user($this->createUser()), 'buyer@example.com', $lang, 'https://sqltest.online');
 
-        $invoice = $this->lava->invoices[0];
-        $this->assertSame('USD', $invoice['currency']);
-        $this->assertSame('UNLIMINT', $invoice['paymentProvider']);
-        $this->assertSame('CARD', $invoice['paymentMethod']);
-        $this->assertSame('EN', $invoice['buyerLanguage']);
+            $invoice = end($this->lava->invoices);
+            $this->assertSame($currency, $invoice['currency'], $lang);
+            $this->assertSame($buyerLanguage, $invoice['buyerLanguage'], $lang);
+            $this->assertArrayNotHasKey('paymentMethod', $invoice, $lang);
+        }
     }
 
     public function testCheckoutSendsConfiguredPriceForTheCurrency()
     {
-        $products = [self::PRODUCT_ID => ['prices' => ['RUB' => 490, 'USD' => 4.99]]];
+        $products = [self::ENV['TOKENS_LAVA_OFFER_ID'] => ['prices' => ['RUB' => 490, 'USD' => 4.99]]];
         $this->purchase(self::ENV, $products)->startCheckout($this->user($this->createUser()), 'buyer@example.com', 'ru', 'https://sqltest.online');
         $this->lava->nextContractId = self::CONTRACT;
         $this->purchase(self::ENV, $products)->startCheckout($this->user($this->createUser()), 'buyer@example.com', 'en', 'https://sqltest.online');
@@ -121,21 +130,136 @@ class TokenPurchaseUnitTest extends \Codeception\Test\Unit
 
     public function testCheckoutWithoutConfiguredPriceUsesTheOfferPrice()
     {
-        // Prices for another product, or none for this currency, don't apply
-        $products = ['72d53efb-3696-469f-b856-f0d815748dd6' => ['prices' => ['RUB' => 500]], self::PRODUCT_ID => ['prices' => ['USD' => 4.99]]];
+        // Prices for another offer, or none for this currency, don't apply
+        $products = ['98a9b3b4-6b33-48d0-ab0a-a0bd7b68e9d9' => ['prices' => ['RUB' => 500]], self::ENV['TOKENS_LAVA_OFFER_ID'] => ['prices' => ['USD' => 4.99]]];
         $this->purchase(self::ENV, $products)->startCheckout($this->user($this->createUser()), 'buyer@example.com', 'ru', 'https://sqltest.online');
 
         $this->assertArrayNotHasKey('amount', $this->lava->invoices[0]);
     }
 
-    public function testCheckoutPassesPromoCodeOnlyWhenGiven()
-    {
-        $this->checkedOut($this->createUser(), self::CONTRACT);
-        $this->checkedOut($this->createUser(), self::SECOND_CONTRACT, 'FIRST10');
+    // Promo codes
 
-        $this->assertArrayNotHasKey('promoCode', $this->lava->invoices[0]);
-        $this->assertSame('FIRST10', $this->lava->invoices[1]['promoCode']);
-        $this->assertSame('FIRST10', $this->purchaseRow(self::SECOND_CONTRACT)['promo_code']);
+    public function testPromoDiscountIsAppliedToTheAmountAndNotSentToLava()
+    {
+        $userId = $this->createUser();
+
+        $this->promoCheckout($userId, 'ru', 'FIRST10');
+
+        $invoice = $this->lava->invoices[0];
+        $this->assertSame(49.0, $invoice['amount']);
+        $this->assertArrayNotHasKey('promoCode', $invoice);
+        $this->assertSame('FIRST10', $this->purchaseRow(FakeLavaClient::DEFAULT_CONTRACT)['promo_code']);
+    }
+
+    public function testPromoCodeIsCaseInsensitiveInConfig()
+    {
+        $this->promoCheckout($this->createUser(), 'ru', 'FIRST10', ['first10' => ['discount' => 90]]);
+
+        $this->assertSame(49.0, $this->lava->invoices[0]['amount']);
+    }
+
+    public function testDiscountedAmountIsRoundedToCents()
+    {
+        $this->promoCheckout($this->createUser(), 'en', 'FIRST10');
+
+        // 4.99 * 10% = 0.499
+        $this->assertSame(0.5, $this->lava->invoices[0]['amount']);
+    }
+
+    public function testUnknownPromoCodeIsRejectedBeforeLava()
+    {
+        $userId = $this->createUser();
+
+        $this->assertPromoRejected(fn() => $this->promoCheckout($userId, 'ru', 'NOSUCHCODE'));
+        $this->assertSame([], $this->lava->invoices);
+        $this->assertSame(0, (int)$this->db()->query('SELECT COUNT(*) FROM token_purchases')->fetchColumn());
+    }
+
+    public function testExpiredPromoCodeIsRejectedAndTheLastDayStillWorks()
+    {
+        $yesterday = (new DateTimeImmutable('yesterday'))->format('Y-m-d');
+        $today = (new DateTimeImmutable('today'))->format('Y-m-d');
+
+        $this->assertPromoRejected(fn() => $this->promoCheckout($this->createUser(), 'ru', 'OLD', ['OLD' => ['discount' => 50, 'expires' => $yesterday]]));
+        $this->promoCheckout($this->createUser(), 'ru', 'LASTDAY', ['LASTDAY' => ['discount' => 50, 'expires' => $today]]);
+
+        $this->assertSame(245.0, $this->lava->invoices[0]['amount']);
+    }
+
+    public function testPromoCodeTotalUsesCountOnlyPaidPurchases()
+    {
+        $codes = ['ONCE' => ['discount' => 50, 'max_uses' => 1]];
+        $this->lava->nextContractId = self::CONTRACT;
+        $this->promoCheckout($this->createUser(), 'ru', 'ONCE', $codes);
+        // An abandoned checkout doesn't use the code up
+        $this->lava->nextContractId = self::SECOND_CONTRACT;
+        $this->promoCheckout($this->createUser(), 'ru', 'ONCE', $codes);
+
+        $this->purchase()->handleWebhook($this->paid(self::CONTRACT));
+
+        $this->assertPromoRejected(fn() => $this->promoCheckout($this->createUser(), 'ru', 'ONCE', $codes));
+    }
+
+    public function testPromoCodeWorksOncePerUserByDefault()
+    {
+        $userId = $this->createUser();
+        $this->lava->nextContractId = self::CONTRACT;
+        $this->promoCheckout($userId, 'ru', 'FIRST10');
+        $this->purchase()->handleWebhook($this->paid(self::CONTRACT));
+
+        $this->assertPromoRejected(fn() => $this->promoCheckout($userId, 'ru', 'FIRST10'));
+        // Another user still can
+        $this->lava->nextContractId = self::SECOND_CONTRACT;
+        $this->promoCheckout($this->createUser(), 'ru', 'FIRST10');
+        $this->assertCount(2, $this->lava->invoices);
+    }
+
+    public function testPerUserLimitCanBeLifted()
+    {
+        $codes = ['FRIENDS' => ['discount' => 50, 'max_uses_per_user' => null]];
+        $userId = $this->createUser();
+        $this->lava->nextContractId = self::CONTRACT;
+        $this->promoCheckout($userId, 'ru', 'FRIENDS', $codes);
+        $this->purchase()->handleWebhook($this->paid(self::CONTRACT));
+
+        $this->lava->nextContractId = self::SECOND_CONTRACT;
+        $this->promoCheckout($userId, 'ru', 'FRIENDS', $codes);
+
+        $this->assertCount(2, $this->lava->invoices);
+    }
+
+    public function testFullDiscountCreditsThePackWithoutLava()
+    {
+        $userId = $this->createUser(balance: 20000);
+
+        $url = $this->promoCheckout($userId, 'ru', 'TESTFREE');
+
+        $this->assertSame('https://sqltest.online/ru/buy-tokens?payment=success', $url);
+        $this->assertSame([], $this->lava->invoices, 'Lava is not asked to invoice a zero amount');
+        $this->assertSame(1020000, $this->balance($userId));
+        $history = $this->purchase()->history($this->user($userId));
+        $this->assertCount(1, $history);
+        $this->assertSame(['tokens' => 1000000, 'amount' => '0.00', 'currency' => 'RUB'], array_diff_key($history[0], ['paid_at' => 1]));
+        // It counts as a use of the code
+        $this->assertPromoRejected(fn() => $this->promoCheckout($userId, 'ru', 'TESTFREE'));
+        $this->assertSame(1020000, $this->balance($userId));
+    }
+
+    public function testPromoCodeOfAnotherOfferDoesNotApply()
+    {
+        $products = self::PRICES + ['98a9b3b4-6b33-48d0-ab0a-a0bd7b68e9d9' => ['promo_codes' => ['INTERVIEW50' => ['discount' => 50]]]];
+
+        $this->assertPromoRejected(fn() => $this->purchase(self::ENV, $products)
+            ->startCheckout($this->user($this->createUser()), 'buyer@example.com', 'ru', 'https://sqltest.online', 'INTERVIEW50'));
+    }
+
+    public function testPromoCodeWithoutConfiguredPriceFailsTheCheckout()
+    {
+        // A configuration problem, reported as a failed checkout rather than a bad code
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('No price in config.php');
+
+        $this->purchase(self::ENV, [self::OFFER_ID => ['promo_codes' => self::PROMO_CODES]])->startCheckout($this->user($this->createUser()), 'buyer@example.com', 'ru', 'https://sqltest.online', 'FIRST10');
     }
 
     // Payment
@@ -192,9 +316,9 @@ class TokenPurchaseUnitTest extends \Codeception\Test\Unit
 
     public function testFullDiscountPaymentStillCreditsTheFullPack()
     {
-        // TESTFREE: 100% discount, Lava reports amount 0
+        // A 100% discount applied in Lava: the webhook reports amount 0
         $userId = $this->createUser(balance: 0);
-        $this->checkedOut($userId, self::CONTRACT, 'TESTFREE');
+        $this->checkedOut($userId, self::CONTRACT);
 
         $result = $this->purchase()->handleWebhook($this->paid(self::CONTRACT, amount: 0));
 
@@ -380,10 +504,28 @@ class TokenPurchaseUnitTest extends \Codeception\Test\Unit
         return $user;
     }
 
-    private function checkedOut(string $userId, string $contractId, ?string $promoCode = null): void
+    private function promoCheckout(string $userId, string $lang, string $code, array $promoCodes = self::PROMO_CODES): string
+    {
+        $products = [self::OFFER_ID => ['prices' => self::PRICES[self::OFFER_ID]['prices'], 'promo_codes' => $promoCodes]];
+        return $this->purchase(self::ENV, $products)
+            ->startCheckout($this->user($userId), 'buyer@example.com', $lang, 'https://sqltest.online', $code);
+    }
+
+    private function assertPromoRejected(callable $checkout): void
+    {
+        $invoices = count($this->lava->invoices);
+        try {
+            $checkout();
+            $this->fail('InvalidPromoCodeException expected');
+        } catch (InvalidPromoCodeException $expected) {
+        }
+        $this->assertCount($invoices, $this->lava->invoices, 'no invoice for a rejected code');
+    }
+
+    private function checkedOut(string $userId, string $contractId): void
     {
         $this->lava->nextContractId = $contractId;
-        $this->purchase()->startCheckout($this->user($userId), 'buyer@example.com', 'en', 'https://sqltest.online', $promoCode);
+        $this->purchase()->startCheckout($this->user($userId), 'buyer@example.com', 'en', 'https://sqltest.online');
     }
 
     private function paid(string $contractId, float $amount = 5, string $timestamp = '2026-09-24T08:00:00Z'): array
