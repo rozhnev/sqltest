@@ -29,10 +29,10 @@
     /* .button is display: flex with max-width: max-content site-wide */
     .tokens-buy .button { width: 100%; max-width: none; justify-content: center; margin: 0; font-size: 1.05rem; padding: 0.7rem 1rem; }
     .tokens-note { margin: 0; font-size: 0.85rem; text-align: center; opacity: 0.75; }
-    .tokens-refund { margin: 0; padding-top: 0.7rem; border-top: 1px solid var(--text-block-border-color); font-size: 0.85rem; text-align: center; opacity: 0.75; }
     .tokens-promo summary { cursor: pointer; font-size: 0.92rem; text-decoration: underline; width: fit-content; }
     .tokens-promo input { width: 100%; margin-top: 0.5rem; padding: 0.55rem 0.6rem; border: 1px solid var(--text-block-border-color); border-radius: 4px;
         background: var(--body-background-color); color: var(--question-text); font: inherit; text-transform: uppercase; letter-spacing: 0.04em; }
+    .tokens-refund { margin: 0; padding-top: 0.7rem; border-top: 1px solid var(--text-block-border-color); font-size: 0.85rem; text-align: center; opacity: 0.75; }
     .tokens-email { display: flex; gap: 0.5rem; flex-wrap: wrap; }
     .tokens-email input { flex: 1 1 180px; padding: 0.55rem 0.6rem; border: 1px solid var(--text-block-border-color); border-radius: 4px;
         background: var(--body-background-color); color: var(--question-text); font: inherit; }
