@@ -49,11 +49,11 @@ logged as `ignored`.
 
 ## Stage 1: Storage
 
-New DDL `sql/token_purchases_ddl.sql` (replaces `sql/subscription_ddl.sql`):
+New DDL `sql/tokens_purchases_ddl.sql` (replaces `sql/subscription_ddl.sql`):
 
 ```sql
 -- One row per checkout: the Lava contract created by our invoice
-CREATE TABLE public.token_purchases (
+CREATE TABLE public.tokens_purchases (
     contract_id  uuid PRIMARY KEY,                    -- Lava contract id
     user_id      uuid NOT NULL REFERENCES public.users(id),
     email        text NOT NULL,                       -- email sent to Lava
@@ -65,14 +65,14 @@ CREATE TABLE public.token_purchases (
     paid_at      timestamp,
     error        text                                 -- Lava's errorMessage for a failed payment
 );
-CREATE INDEX token_purchases_user_idx ON public.token_purchases (user_id, created_at);
+CREATE INDEX tokens_purchases_user_idx ON public.tokens_purchases (user_id, created_at);
 ```
 
 - `tokens` is stored per purchase, so changing `LLM_PACK_TOKENS` doesn't affect checkouts already in progress.
 - `lava_webhook_log` is kept as is.
 - **Crediting is idempotent** through the status change, in one transaction:
   ```sql
-  UPDATE token_purchases SET status = 'paid', amount = :amount, paid_at = :paid_at
+  UPDATE tokens_purchases SET status = 'paid', amount = :amount, paid_at = :paid_at
       WHERE contract_id = :contract_id AND status <> 'paid'
       RETURNING user_id, tokens;
   -- only if a row came back:
@@ -80,7 +80,7 @@ CREATE INDEX token_purchases_user_idx ON public.token_purchases (user_id, create
   ```
   A repeated `payment.success` updates nothing and credits nothing. A late success after a `failed` still credits.
 
-Cleanup migration `sql/token_purchases_migration.sql`:
+Cleanup migration `sql/tokens_purchases_migration.sql`:
 - Dev database only (the tables never existed on prod): `DROP TABLE subscription_payments, subscriptions`.
 - Both databases, **after** the new code is deployed: `ALTER TABLE users DROP COLUMN subscribed_till`.
 
@@ -191,7 +191,7 @@ Tick the boxes as you go. Order matters where noted.
 - [ ] **One real purchase on dev, end to end** (with `FIRST10`, 90% off):
   - [ ] the Lava payment page opens with the discounted price;
   - [ ] after paying, `SELECT id, event_type, result, error FROM lava_webhook_log ORDER BY id DESC LIMIT 5;` shows `payment.success` → `processed`;
-  - [ ] `SELECT status, amount, promo_code, paid_at FROM token_purchases ORDER BY created_at DESC LIMIT 1;` shows `paid`;
+  - [ ] `SELECT status, amount, promo_code, paid_at FROM tokens_purchases ORDER BY created_at DESC LIMIT 1;` shows `paid`;
   - [ ] the balance on `/ru/buy-tokens` and in the profile grew by the pack; the purchase is in the history.
 - [ ] **A 100% code on dev** (`TESTFREE`): tokens are credited at once, without Lava.
 - [ ] **Wrong webhook secret is refused**: `curl -s -o /dev/null -w '%{http_code}' -X POST https://dev.sqltest.online/lava/webhook -H 'X-Api-Key: wrong' -d '{}'` → `401`.
@@ -202,7 +202,7 @@ Tick the boxes as you go. Order matters where noted.
 - [ ] Back up the database.
 - [ ] `users.llm_tokens` exists (phase 1 of `sql/subscribed_till_migration.sql`, already applied on prod): `\d users`.
 - [ ] `tokens_usage_log` exists; if not, apply `sql/tokens_usage_log_ddl.sql`.
-- [ ] Apply `sql/token_purchases_ddl.sql` (creates `token_purchases`; `lava_webhook_log` only if missing).
+- [ ] Apply `sql/tokens_purchases_ddl.sql` (creates `tokens_purchases`; `lava_webhook_log` only if missing).
 
 ### Production configuration
 
@@ -235,11 +235,11 @@ Tick the boxes as you go. Order matters where noted.
 ### After a few days
 
 - [ ] Nothing stuck: `SELECT * FROM lava_webhook_log WHERE result IN ('unmatched', 'error') ORDER BY id DESC;`
-      and `SELECT * FROM token_purchases WHERE status = 'pending' AND created_at < now() - interval '1 day';`
+      and `SELECT * FROM tokens_purchases WHERE status = 'pending' AND created_at < now() - interval '1 day';`
       A pending row the buyer actually paid for (check in Lava) means a lost webhook. Mark it paid first, so a late
       webhook is ignored as a duplicate, then credit the pack:
-      `UPDATE token_purchases SET status = 'paid', paid_at = now() WHERE contract_id = '<id>';` and
+      `UPDATE tokens_purchases SET status = 'paid', paid_at = now() WHERE contract_id = '<id>';` and
       `php scripts/grant_tokens.php --user=<email> --tokens=<pack>`.
-- [ ] Drop `users.subscribed_till`: `sql/token_purchases_migration.sql` (its subscription-table part is for dev only).
+- [ ] Drop `users.subscribed_till`: `sql/tokens_purchases_migration.sql` (its subscription-table part is for dev only).
 - [ ] In Lava: disable the unused `TESTFREE` / `FIRST10` codes (the site's codes live in `config.php`).
 - [ ] Keep Lava payout statements and LLM/hosting invoices from the first sale.

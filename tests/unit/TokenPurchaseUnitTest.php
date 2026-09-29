@@ -172,7 +172,7 @@ class TokenPurchaseUnitTest extends \Codeception\Test\Unit
 
         $this->assertPromoRejected(fn() => $this->promoCheckout($userId, 'ru', 'NOSUCHCODE'));
         $this->assertSame([], $this->lava->invoices);
-        $this->assertSame(0, (int)$this->db()->query('SELECT COUNT(*) FROM token_purchases')->fetchColumn());
+        $this->assertSame(0, (int)$this->db()->query('SELECT COUNT(*) FROM tokens_purchases')->fetchColumn());
     }
 
     public function testExpiredPromoCodeIsRejectedAndTheLastDayStillWorks()
@@ -288,7 +288,7 @@ class TokenPurchaseUnitTest extends \Codeception\Test\Unit
 
         $this->purchase()->handleWebhook($this->paid(self::CONTRACT, amount: 450.5, timestamp: '2026-09-24T08:44:32.42176Z'));
 
-        $row = $this->db()->query("SELECT amount, paid_at FROM token_purchases")->fetch(PDO::FETCH_ASSOC);
+        $row = $this->db()->query("SELECT amount, paid_at FROM tokens_purchases")->fetch(PDO::FETCH_ASSOC);
         $this->assertSame(['amount' => '450.50', 'paid_at' => '2026-09-24 08:44:32'], $row);
     }
 
@@ -324,7 +324,7 @@ class TokenPurchaseUnitTest extends \Codeception\Test\Unit
 
         $this->assertSame(TokenPurchase::WEBHOOK_PROCESSED, $result);
         $this->assertSame(1000000, $this->balance($userId));
-        $this->assertSame('0.00', (string)$this->db()->query("SELECT amount FROM token_purchases")->fetchColumn());
+        $this->assertSame('0.00', (string)$this->db()->query("SELECT amount FROM tokens_purchases")->fetchColumn());
     }
 
     public function testPackSizeIsFixedAtCheckout()
@@ -550,7 +550,7 @@ class TokenPurchaseUnitTest extends \Codeception\Test\Unit
 
     private function purchaseRow(string $contractId): array
     {
-        $stmt = $this->db()->prepare('SELECT user_id, tokens, currency, promo_code, status FROM token_purchases WHERE contract_id = :id');
+        $stmt = $this->db()->prepare('SELECT user_id, tokens, currency, promo_code, status FROM tokens_purchases WHERE contract_id = :id');
         $stmt->execute([':id' => $contractId]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }

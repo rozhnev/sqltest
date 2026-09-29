@@ -1,5 +1,5 @@
 -- Switch from the monthly subscription to token purchases (see TOKEN_PURCHASE_PLAN.md).
--- Apply sql/token_purchases_ddl.sql first.
+-- Apply sql/tokens_purchases_ddl.sql first.
 
 -- Dev database only: the subscription tables never existed on prod.
 DROP TABLE IF EXISTS public.subscription_payments, public.subscriptions;

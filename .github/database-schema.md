@@ -278,7 +278,7 @@ Append-only per-call log of user-triggered LLM usage (cost analysis). The quota 
 | `completion_tokens` | int          |                                         |
 | `created_at`        | timestamp    |                                         |
 
-### `token_purchases`
+### `tokens_purchases`
 Lava.top AI token purchases (see `TOKEN_PURCHASE_PLAN.md`): one row per checkout, keyed by the Lava contract id. A paid purchase adds `tokens` to `users.llm_tokens` once.
 
 | Column        | Type          | Notes                                              |
