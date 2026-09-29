@@ -264,7 +264,7 @@ User-submitted question proposals for moderation.
 | `created_at`          | timestamp |                                                    |
 | `updated_at`          | timestamp |                                                    |
 
-### `llm_usage_log`
+### `tokens_usage_log`
 Append-only per-call log of user-triggered LLM usage (cost analysis). The quota itself is `users.llm_tokens`; this table is never read by the quota check.
 
 | Column              | Type         | Notes                                   |

@@ -113,7 +113,7 @@ class TokenQuotaUnitTest extends \Codeception\Test\Unit
         $this->quota($userId)->charge('free_answer', 42, 'openai-gpt-4o-mini', ['prompt' => 700, 'completion' => 300, 'total' => 1000]);
 
         $this->assertSame(9000, $this->balance($userId));
-        $log = $this->dbh->query('SELECT user_id, feature, ref_id, llm_profile, prompt_tokens, completion_tokens FROM llm_usage_log')->fetchAll(PDO::FETCH_ASSOC);
+        $log = $this->dbh->query('SELECT user_id, feature, ref_id, llm_profile, prompt_tokens, completion_tokens FROM tokens_usage_log')->fetchAll(PDO::FETCH_ASSOC);
         $this->assertSame([[
             'user_id' => $userId, 'feature' => 'free_answer', 'ref_id' => 42,
             'llm_profile' => 'openai-gpt-4o-mini', 'prompt_tokens' => 700, 'completion_tokens' => 300,
@@ -127,7 +127,7 @@ class TokenQuotaUnitTest extends \Codeception\Test\Unit
         $this->quota($userId)->charge('lesson_assistant', 1, 'openai-gpt-4o-mini', null);
 
         $this->assertSame(10000, $this->balance($userId));
-        $this->assertSame(0, (int)$this->dbh->query('SELECT COUNT(*) FROM llm_usage_log')->fetchColumn());
+        $this->assertSame(0, (int)$this->dbh->query('SELECT COUNT(*) FROM tokens_usage_log')->fetchColumn());
     }
 
     public function testConcurrentChargesBothDecrement()
@@ -195,7 +195,7 @@ class TokenQuotaUnitTest extends \Codeception\Test\Unit
 
     private function logUsage(string $userId, string $feature, int $prompt, int $completion, string $at): void
     {
-        $this->dbh->prepare("INSERT INTO llm_usage_log (user_id, feature, ref_id, llm_profile, prompt_tokens, completion_tokens, created_at)
+        $this->dbh->prepare("INSERT INTO tokens_usage_log (user_id, feature, ref_id, llm_profile, prompt_tokens, completion_tokens, created_at)
             VALUES (:user_id, :feature, 1, 'p', :prompt, :completion, :at)")
             ->execute([':user_id' => $userId, ':feature' => $feature, ':prompt' => $prompt, ':completion' => $completion, ':at' => $at]);
     }

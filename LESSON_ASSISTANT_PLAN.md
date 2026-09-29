@@ -23,7 +23,7 @@
 | Subscription | Monthly only; `subscribed_till = payment date + 1 month` |
 | Token storage | One balance column `users.llm_tokens` (remaining tokens). No separate usage-counter table |
 | Subscription expiry | Balance drops to 0 (applied lazily on the next quota check) |
-| Usage log | Keep `llm_usage_log` (append-only, per call) for cost analysis; the quota check never reads it |
+| Usage log | Keep `tokens_usage_log` (append-only, per call) for cost analysis; the quota check never reads it |
 | Balance lifecycle | Set to `LLM_FREE_TOKENS` on registration (never refreshed for free users); reset to `LLM_SUBSCRIBER_CYCLE_TOKENS` at the start of every subscription cycle; reduced by actual usage on every LLM call |
 | Budget scope | One shared budget for all user-triggered LLM features (assistant + free-answer check) |
 | Chat history | Multi-turn, last N messages kept in the PHP session (not in DB) |
@@ -82,11 +82,11 @@
 - Add a `lesson-assistant` profile or reuse an existing one. Configure it with `.env` `LESSON_ASSISTANT_LLM_PROFILE`, falling back to `USER_ANSWER_LLM_PROFILE`.
 
 ### 2.2 Storage
-The balance itself is `users.llm_tokens` (Stage 1). The only new table is an append-only log, which the quota check never reads. New DDL `sql/llm_usage_log_ddl.sql`:
+The balance itself is `users.llm_tokens` (Stage 1). The only new table is an append-only log, which the quota check never reads. New DDL `sql/tokens_usage_log_ddl.sql`:
 
 ```sql
 -- Per-call log for cost analysis, abuse review and tuning limits.
-CREATE TABLE public.llm_usage_log (
+CREATE TABLE public.tokens_usage_log (
     id                BIGSERIAL PRIMARY KEY,
     user_id           uuid NOT NULL REFERENCES public.users(id),
     feature           varchar(32) NOT NULL,   -- 'lesson_assistant' | 'free_answer'
@@ -96,10 +96,10 @@ CREATE TABLE public.llm_usage_log (
     completion_tokens integer NOT NULL,
     created_at        timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
-CREATE INDEX llm_usage_log_user_created_idx ON public.llm_usage_log (user_id, created_at);
+CREATE INDEX tokens_usage_log_user_created_idx ON public.tokens_usage_log (user_id, created_at);
 
-GRANT SELECT, INSERT ON public.llm_usage_log TO sqltester;
-GRANT USAGE ON SEQUENCE public.llm_usage_log_id_seq TO sqltester;
+GRANT SELECT, INSERT ON public.tokens_usage_log TO sqltester;
+GRANT USAGE ON SEQUENCE public.tokens_usage_log_id_seq TO sqltester;
 ```
 
 ### 2.3 `lib/TokenQuota.php`
@@ -111,7 +111,7 @@ class TokenQuota {
     public function canSpend(): bool;    // remaining() >= LLM_MIN_TOKENS_PER_REQUEST
     public function charge(string $feature, ?int $refId, string $profile, array $usage): void;
         // UPDATE users SET llm_tokens = llm_tokens - :total WHERE id = :user_id  (atomic, no read-modify-write)
-        // plus one llm_usage_log insert, in one transaction
+        // plus one tokens_usage_log insert, in one transaction
     public function status(): array;     // ['percent_used'=>..,'subscribed'=>..,'resets_at'=>date|null,'exhausted'=>..]
                                          // percent_used = 100 - round(100 * remaining / planSize), clamped to 0..100
                                          // only percentages leave the server; raw token numbers stay internal
@@ -152,7 +152,7 @@ Rough sizing:
 - A free-answer check is about 0.5–1.5k tokens.
 - The one-time 50k tokens ≈ 10–15 assistant questions or about 40 answer checks in total. That's a trial, not an ongoing free tier.
 - With gpt-4o-mini, 50k tokens costs about $0.01 per account, once.
-- Risk: someone can register extra accounts to get more free tokens. The cost per account is tiny, so this is accepted for now; `llm_usage_log` shows it if it happens.
+- Risk: someone can register extra accounts to get more free tokens. The cost per account is tiny, so this is accepted for now; `tokens_usage_log` shows it if it happens.
 - Changing `LLM_FREE_TOKENS` later only affects new registrations. Existing balances stay as they are.
 
 ## Stage 3: Free-answer checking rework
@@ -278,7 +278,7 @@ Same pattern as `Controller::interview_payment()` / `interview-payment.tpl`:
 ## Stage 7: Admin & observability
 
 - Show a user's `llm_tokens` balance against their plan size on their admin page (if one exists). Otherwise provide a SQL snippet in the DDL file comments. Admins see raw numbers; users only see percentages.
-- Monthly cost query: `SUM(prompt_tokens), SUM(completion_tokens)` from `llm_usage_log` grouped by feature and profile.
+- Monthly cost query: `SUM(prompt_tokens), SUM(completion_tokens)` from `tokens_usage_log` grouped by feature and profile.
 
 ## Stage 8: Tests
 
@@ -304,7 +304,7 @@ Same pattern as `Controller::interview_payment()` / `interview-payment.tpl`:
 3. Stage 3 (free-answer switch). Announce the login requirement.
 4. Stage 6 (subscribe page), so the "Subscribe" links have a target before the assistant ships.
 5. Stages 4–5 (assistant) behind `.env` `LESSON_ASSISTANT_ENABLED=1`. Test with admins first (`$this->user->isAdmin()`), then enable for everyone.
-6. After ~1 month: review `llm_usage_log` and tune the limits. Drop `free_answer_rate_limit`.
+6. After ~1 month: review `tokens_usage_log` and tune the limits. Drop `free_answer_rate_limit`.
 
 ## Open Questions
 

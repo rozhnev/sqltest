@@ -201,7 +201,7 @@ Tick the boxes as you go. Order matters where noted.
 
 - [ ] Back up the database.
 - [ ] `users.llm_tokens` exists (phase 1 of `sql/subscribed_till_migration.sql`, already applied on prod): `\d users`.
-- [ ] `llm_usage_log` exists; if not, apply `sql/llm_usage_log_ddl.sql`.
+- [ ] `tokens_usage_log` exists; if not, apply `sql/tokens_usage_log_ddl.sql`.
 - [ ] Apply `sql/token_purchases_ddl.sql` (creates `token_purchases`; `lava_webhook_log` only if missing).
 
 ### Production configuration

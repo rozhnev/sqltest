@@ -70,7 +70,7 @@ class TokenQuota
             $stmt->execute([':total' => $total, ':user_id' => $this->user->getId()]);
             $balance = $stmt->fetchColumn();
 
-            $stmt = $this->dbh->prepare("INSERT INTO llm_usage_log (user_id, feature, ref_id, llm_profile, prompt_tokens, completion_tokens)
+            $stmt = $this->dbh->prepare("INSERT INTO tokens_usage_log (user_id, feature, ref_id, llm_profile, prompt_tokens, completion_tokens)
                 VALUES (:user_id, :feature, :ref_id, :llm_profile, :prompt_tokens, :completion_tokens)");
             $stmt->execute([
                 ':user_id'           => $this->user->getId(),
@@ -111,7 +111,7 @@ class TokenQuota
     }
 
     /**
-     * The user's AI usage for the profile page, from llm_usage_log (which the quota check itself
+     * The user's AI usage for the profile page, from tokens_usage_log (which the quota check itself
      * never reads): tokens per day and feature over the last $days days, newest first, and totals.
      *
      * @return array ['days' => [['day' => 'Y-m-d', 'feature' => string, 'requests' => int, 'tokens' => int]],
@@ -121,7 +121,7 @@ class TokenQuota
     {
         $stmt = $this->dbh->prepare("SELECT created_at::date AS day, feature, COUNT(*) AS requests,
                 SUM(prompt_tokens + completion_tokens) AS tokens
-            FROM llm_usage_log
+            FROM tokens_usage_log
             WHERE user_id = :user_id AND created_at >= CURRENT_DATE - :days_back * INTERVAL '1 day'
             GROUP BY 1, 2
             ORDER BY 1 DESC, 2");
@@ -135,7 +135,7 @@ class TokenQuota
             'tokens'   => (int)$row['tokens'],
         ], $stmt->fetchAll(PDO::FETCH_ASSOC));
 
-        $stmt = $this->dbh->prepare("SELECT COALESCE(SUM(prompt_tokens + completion_tokens), 0) FROM llm_usage_log WHERE user_id = :user_id");
+        $stmt = $this->dbh->prepare("SELECT COALESCE(SUM(prompt_tokens + completion_tokens), 0) FROM tokens_usage_log WHERE user_id = :user_id");
         $stmt->execute([':user_id' => $this->user->getId()]);
 
         return [
