@@ -33,7 +33,7 @@ jobs:
       
       - name: Minify JavaScript
         run: |
-          terser script.js -c -m -o "script.js.min.js" --source-map
+          terser script.js -c -m -o "script.min.js" --source-map "url=script.min.js.map"
           terser admin/script.js -c -m -o "admin/script.min.js" --source-map
 
       - name: Minify CSS
