@@ -293,6 +293,14 @@ function checkAnswers(lang, questionId) {
     });
 }
 function checkFreeAnswer(lang, questionId) {
+    // One check at a time: each check is paid from the AI token balance
+    const checkBtn = document.getElementById('checkFreeAnswerBtn');
+    if (checkBtn?.disabled) {
+        return;
+    }
+    if (checkBtn) {
+        checkBtn.disabled = true;
+    }
     setLoader('code-result');
     let formData = new FormData();
     formData.append('answer', document.getElementById('free-answer-input').value);
@@ -333,6 +341,11 @@ function checkFreeAnswer(lang, questionId) {
     })
     .catch(err=>{
         document.getElementById('code-result').innerHTML = 'Something went wrong. Please review your answer and try again or contact us by email: <a href="mailto:support@sqltest.online">support@sqltest.online</a>.';
+    })
+    .finally(()=>{
+        if (checkBtn) {
+            checkBtn.disabled = false;
+        }
     });
 }
 // Maps site interface language codes to BCP-47 locale tags the Web Speech API expects.

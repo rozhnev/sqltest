@@ -1136,6 +1136,11 @@ input:checked + .slider:before {
 .code-buttons .free-answer-tokens ~ .button {
     flex: none;
 }
+/* Check button while a free-answer check is in progress */
+.code-buttons .button:disabled {
+    opacity: 0.6;
+    cursor: wait;
+}
 /* .button sets display: flex after .hidden, so hide the buy button explicitly */
 .code-buttons .button.hidden {
     display: none;
