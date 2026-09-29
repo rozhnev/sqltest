@@ -74,6 +74,14 @@
                                 <dt>{translate}profile_stat_achievements{/translate}</dt>
                                 <dd>{$ProfileStats.achievements}</dd>
                             </div>
+                            <div class="profile-stat profile-stat-wide">
+                                <dt>{translate}profile_ai_balance{/translate}</dt>
+                                <dd class="profile-ai-balance{if $AiTokens.quota.exhausted} empty{/if}">{$AiTokens.quota.remaining_text}</dd>
+                                <dd class="profile-stat-links">
+                                    <a class="profile-link" href="#ai" onclick="document.getElementById('tab-btn-ai').click(); return false;">{translate}profile_ai_usage_link{/translate}</a>
+                                    <a class="profile-link" href="/{$Lang}/buy-tokens">{translate}profile_ai_buy{/translate} →</a>
+                                </dd>
+                            </div>
                         </dl>
 
                         <section class="profile-account">
@@ -118,6 +126,7 @@
                             <button class="profile-tab" role="tab" data-tab="tests" id="tab-btn-tests" aria-controls="tab-tests">{translate}tests{/translate} <span class="profile-tab-count">{$Tests|@count}</span></button>
                             <button class="profile-tab" role="tab" data-tab="interviews" id="tab-btn-interviews" aria-controls="tab-interviews">{translate}interviews{/translate} <span class="profile-tab-count">{$InterviewSessions|@count}</span></button>
                             <button class="profile-tab" role="tab" data-tab="achievements" id="tab-btn-achievements" aria-controls="tab-achievements">{translate}your_achievements{/translate} <span class="profile-tab-count">{$Achievements|@count}</span></button>
+                            <button class="profile-tab" role="tab" data-tab="ai" id="tab-btn-ai" aria-controls="tab-ai">{translate}profile_ai_tab{/translate}</button>
                         </div>
 
                         <div class="profile-panel" role="tabpanel" id="tab-tasks" aria-labelledby="tab-btn-tasks">
@@ -181,6 +190,81 @@
                                     {/foreach}
                                 </div>
                             {/if}
+                        </div>
+
+                        <div class="profile-panel" role="tabpanel" id="tab-ai" aria-labelledby="tab-btn-ai" hidden>
+                            <dl class="profile-stats profile-ai-stats">
+                                <div class="profile-stat">
+                                    <dt>{translate}profile_ai_balance{/translate}</dt>
+                                    <dd class="profile-ai-balance{if $AiTokens.quota.exhausted} empty{/if}">{$AiTokens.quota.remaining_text}</dd>
+                                </div>
+                                <div class="profile-stat">
+                                    <dt>{translate}profile_ai_spent_period{/translate}</dt>
+                                    <dd>{$AiTokens.period_text}</dd>
+                                </div>
+                                <div class="profile-stat">
+                                    <dt>{translate}profile_ai_spent_total{/translate}</dt>
+                                    <dd>{$AiTokens.total_text}</dd>
+                                </div>
+                            </dl>
+
+                            <h3 class="profile-subheading">{translate}profile_ai_usage_title{/translate}</h3>
+                            {if $AiTokens.usage}
+                                <div class="profile-ai-table-wrap">
+                                    <table class="profile-ai-table">
+                                        <thead>
+                                            <tr>
+                                                <th>{translate}profile_ai_col_date{/translate}</th>
+                                                <th>{translate}profile_ai_col_feature{/translate}</th>
+                                                <th class="num">{translate}profile_ai_col_requests{/translate}</th>
+                                                <th class="num">{translate}profile_ai_col_tokens{/translate}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {foreach $AiTokens.usage as $row}
+                                                <tr>
+                                                    <td>{$row.day}</td>
+                                                    <td>{if $row.feature == 'lesson_assistant'}{translate}profile_ai_feature_lesson_assistant{/translate}{elseif $row.feature == 'free_answer'}{translate}profile_ai_feature_free_answer{/translate}{else}{$row.feature|escape}{/if}</td>
+                                                    <td class="num">{$row.requests}</td>
+                                                    <td class="num">{$row.tokens_text}</td>
+                                                </tr>
+                                            {/foreach}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            {else}
+                                <div class="profile-empty">
+                                    <p>{translate}profile_ai_usage_empty{/translate}</p>
+                                    <a class="button blue" href="/{$Lang}/lesson">{translate}profile_ai_usage_empty_action{/translate}</a>
+                                </div>
+                            {/if}
+
+                            <h3 class="profile-subheading">{translate}profile_ai_purchases_title{/translate}</h3>
+                            {if $AiTokens.purchases}
+                                <div class="profile-ai-table-wrap">
+                                    <table class="profile-ai-table">
+                                        <thead>
+                                            <tr>
+                                                <th>{translate}profile_ai_col_date{/translate}</th>
+                                                <th class="num">{translate}profile_ai_col_tokens{/translate}</th>
+                                                <th class="num">{translate}profile_ai_col_paid{/translate}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {foreach $AiTokens.purchases as $purchase}
+                                                <tr>
+                                                    <td>{$purchase.paid_at|date_format:'%Y-%m-%d'}</td>
+                                                    <td class="num">{$purchase.tokens_text}</td>
+                                                    <td class="num">{$purchase.amount|string_format:'%.2f'} {$purchase.currency|escape}</td>
+                                                </tr>
+                                            {/foreach}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            {else}
+                                <p class="profile-ai-note">{translate}profile_ai_purchases_empty{/translate}</p>
+                            {/if}
+                            <p><a class="button green" href="/{$Lang}/buy-tokens">{translate}profile_ai_buy{/translate}</a></p>
                         </div>
                     </section>
                 </div>
@@ -276,6 +360,20 @@
 }
 .profile-stat dt { font-size: 0.78rem; color: var(--question-date-color); }
 .profile-stat dd { margin: 0.15rem 0 0; font-size: 1.4rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+
+/* ---- AI tokens: balance in the card, usage and purchases in the "ai" tab ---- */
+.profile-stat-wide { grid-column: 1 / -1; }
+.profile-stat dd.profile-stat-links { display: flex; justify-content: space-between; gap: 0.5rem; flex-wrap: wrap; font-size: 0.85rem; font-weight: 400; }
+.profile-ai-balance.empty { color: var(--danger-text-color); }
+.profile-ai-stats { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
+.profile-ai-table-wrap { overflow-x: auto; }
+.profile-ai-table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+/* Override the site-wide td borders */
+.profile-ai-table th, .profile-ai-table td { padding: 0.45rem 0.6rem; border: none; border-bottom: 1px solid var(--text-block-border-color); text-align: left; }
+.profile-ai-table th { font-size: 0.85rem; font-weight: 600; color: var(--question-date-color); }
+.profile-ai-table .num { text-align: right; }
+.profile-ai-note { margin: 0 0 0.75rem; color: var(--question-date-color); }
+#tab-ai .button, #tab-ai .button:visited { display: inline-flex; color: #fff; text-decoration: none; }
 
 .profile-account { border-top: 1px solid var(--text-block-border-color); padding-top: 0.75rem; }
 .profile-account-title { margin: 0 0 0.75rem; font-size: 1rem; }

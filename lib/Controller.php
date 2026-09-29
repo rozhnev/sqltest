@@ -1986,6 +1986,18 @@ class Controller
         $achievements = $this->user->achievements($this->lang);
         $interviewScores = array_filter(array_column($interviewSessions, 'final_score'), fn($score) => $score !== null);
 
+        // AI tokens: balance, usage over the last 30 days and purchases
+        $quota = new TokenQuota($this->dbh, $this->user, $this->env);
+        $usage = $quota->usage(30);
+        $withTokensText = static fn(array $row) => $row + ['tokens_text' => TokenQuota::formatTokens($row['tokens'])];
+        $aiTokens = [
+            'quota'       => $quota->status(),
+            'usage'       => array_map($withTokensText, $usage['days']),
+            'period_text' => TokenQuota::formatTokens($usage['period_tokens']),
+            'total_text'  => TokenQuota::formatTokens($usage['total_tokens']),
+            'purchases'   => array_map($withTokensText, (new TokenPurchase($this->dbh, $this->env, $this->lavaProducts))->history($this->user)),
+        ];
+
         $this->assignVariables([
             'Action' => 'profile',
             'Title' => Localizer::translateString('profile_page_title'),
@@ -1994,6 +2006,7 @@ class Controller
             'Tests'         => $tests,
             'InterviewSessions' => $interviewSessions,
             'PrizeClaims'   => $this->user->getPrizeClaims(),
+            'AiTokens'      => $aiTokens,
 
             'Achievements'  => $achievements,
             'UserEmail'     => $this->user->getEmail(),

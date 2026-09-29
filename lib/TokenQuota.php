@@ -111,6 +111,41 @@ class TokenQuota
     }
 
     /**
+     * The user's AI usage for the profile page, from llm_usage_log (which the quota check itself
+     * never reads): tokens per day and feature over the last $days days, newest first, and totals.
+     *
+     * @return array ['days' => [['day' => 'Y-m-d', 'feature' => string, 'requests' => int, 'tokens' => int]],
+     *                'period_tokens' => int, 'total_tokens' => int]
+     */
+    public function usage(int $days = 30): array
+    {
+        $stmt = $this->dbh->prepare("SELECT created_at::date AS day, feature, COUNT(*) AS requests,
+                SUM(prompt_tokens + completion_tokens) AS tokens
+            FROM llm_usage_log
+            WHERE user_id = :user_id AND created_at >= CURRENT_DATE - :days_back * INTERVAL '1 day'
+            GROUP BY 1, 2
+            ORDER BY 1 DESC, 2");
+        $stmt->bindValue(':user_id', $this->user->getId());
+        $stmt->bindValue(':days_back', max(0, $days - 1), PDO::PARAM_INT);
+        $stmt->execute();
+        $rows = array_map(static fn(array $row) => [
+            'day'      => (string)$row['day'],
+            'feature'  => (string)$row['feature'],
+            'requests' => (int)$row['requests'],
+            'tokens'   => (int)$row['tokens'],
+        ], $stmt->fetchAll(PDO::FETCH_ASSOC));
+
+        $stmt = $this->dbh->prepare("SELECT COALESCE(SUM(prompt_tokens + completion_tokens), 0) FROM llm_usage_log WHERE user_id = :user_id");
+        $stmt->execute([':user_id' => $this->user->getId()]);
+
+        return [
+            'days'          => $rows,
+            'period_tokens' => array_sum(array_column($rows, 'tokens')),
+            'total_tokens'  => (int)$stmt->fetchColumn(),
+        ];
+    }
+
+    /**
      * Token count for display: digits grouped by thousands with a no-break space
      * (e.g. "1 000 000"), the same in every language
      */

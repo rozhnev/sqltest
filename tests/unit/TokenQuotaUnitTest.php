@@ -157,7 +157,48 @@ class TokenQuotaUnitTest extends \Codeception\Test\Unit
         $this->assertSame(0, $quota->remaining());
     }
 
+    // Usage for the profile
+
+    public function testUsageGroupsByDayAndFeatureWithinThePeriod()
+    {
+        $userId = $this->createUser();
+        $other = $this->createUser();
+        $today = (new DateTimeImmutable('today'))->format('Y-m-d');
+        $yesterday = (new DateTimeImmutable('yesterday'))->format('Y-m-d');
+        $this->logUsage($userId, 'lesson_assistant', 1000, 500, "{$today} 10:00");
+        $this->logUsage($userId, 'lesson_assistant', 2000, 500, "{$today} 11:00");
+        $this->logUsage($userId, 'free_answer', 700, 300, "{$today} 12:00");
+        $this->logUsage($userId, 'free_answer', 900, 100, "{$yesterday} 09:00");
+        // 29 days ago is the first day of a 30-day period; 30 days ago is outside it
+        $this->logUsage($userId, 'lesson_assistant', 100, 0, (new DateTimeImmutable('-29 days'))->format('Y-m-d') . ' 00:00');
+        $this->logUsage($userId, 'lesson_assistant', 5000, 0, (new DateTimeImmutable('-30 days'))->format('Y-m-d') . ' 23:59');
+        $this->logUsage($other, 'lesson_assistant', 9999, 0, "{$today} 10:00");
+
+        $usage = $this->quota($userId)->usage(30);
+
+        $this->assertSame([
+            ['day' => $today, 'feature' => 'free_answer', 'requests' => 1, 'tokens' => 1000],
+            ['day' => $today, 'feature' => 'lesson_assistant', 'requests' => 2, 'tokens' => 4000],
+            ['day' => $yesterday, 'feature' => 'free_answer', 'requests' => 1, 'tokens' => 1000],
+            ['day' => (new DateTimeImmutable('-29 days'))->format('Y-m-d'), 'feature' => 'lesson_assistant', 'requests' => 1, 'tokens' => 100],
+        ], $usage['days']);
+        $this->assertSame(6100, $usage['period_tokens']);
+        $this->assertSame(11100, $usage['total_tokens']);
+    }
+
+    public function testUsageWithoutActivityIsEmpty()
+    {
+        $this->assertSame(['days' => [], 'period_tokens' => 0, 'total_tokens' => 0], $this->quota($this->createUser())->usage());
+    }
+
     // Helpers
+
+    private function logUsage(string $userId, string $feature, int $prompt, int $completion, string $at): void
+    {
+        $this->dbh->prepare("INSERT INTO llm_usage_log (user_id, feature, ref_id, llm_profile, prompt_tokens, completion_tokens, created_at)
+            VALUES (:user_id, :feature, 1, 'p', :prompt, :completion, :at)")
+            ->execute([':user_id' => $userId, ':feature' => $feature, ':prompt' => $prompt, ':completion' => $completion, ':at' => $at]);
+    }
 
     private function createUser(int $balance = 50000): string
     {
