@@ -180,12 +180,66 @@ the spec's example payloads):
 - webhook auth: missing/wrong key → 401
 - `TokenQuota` without subscriptions: remaining, exhausted, charging
 
-## Rollout
+## Deploy checklist
 
-1. In Lava: create a one-time digital product "AI tokens" with one offer (RUB and USD prices); note the offer
-   and product ids. The webhook URL and secret stay the same.
-2. Dev: apply `sql/token_purchases_ddl.sql`, drop the subscription tables, set the new `.env` keys, deploy.
-3. Test a real purchase on dev and check `lava_webhook_log`, the purchase row and the balance (checkout confirmed
-   working on dev). Promo codes now live in `config.php`: the `TESTFREE` / `FIRST10` codes in Lava are unused.
-4. Prod: apply `sql/token_purchases_ddl.sql`, deploy, then drop `users.subscribed_till`.
-5. Update `LESSON_ASSISTANT_PLAN.md` (subscription parts) and `.github/database-schema.md`.
+Tick the boxes as you go. Order matters where noted.
+
+### Before deploy day
+
+- [ ] **Rotate the Lava API key** (it was pasted in a chat): Lava profile → Integration → new key; update `LAVA_API_KEY` on dev.
+- [ ] **Lava payouts**: confirm Lava.top can pay out to you as you are now (account/card, currency, required documents).
+- [ ] **One real purchase on dev, end to end** (with `FIRST10`, 90% off):
+  - [ ] the Lava payment page opens with the discounted price;
+  - [ ] after paying, `SELECT id, event_type, result, error FROM lava_webhook_log ORDER BY id DESC LIMIT 5;` shows `payment.success` → `processed`;
+  - [ ] `SELECT status, amount, promo_code, paid_at FROM token_purchases ORDER BY created_at DESC LIMIT 1;` shows `paid`;
+  - [ ] the balance on `/ru/buy-tokens` and in the profile grew by the pack; the purchase is in the history.
+- [ ] **A 100% code on dev** (`TESTFREE`): tokens are credited at once, without Lava.
+- [ ] **Wrong webhook secret is refused**: `curl -s -o /dev/null -w '%{http_code}' -X POST https://dev.sqltest.online/lava/webhook -H 'X-Api-Key: wrong' -d '{}'` → `401`.
+- [ ] **Phone check**: open `/ru/buy-tokens` on a phone; the cards stack, the buttons fit.
+
+### Production database (before deploying the code)
+
+- [ ] Back up the database.
+- [ ] `users.llm_tokens` exists (phase 1 of `sql/subscribed_till_migration.sql`, already applied on prod): `\d users`.
+- [ ] `llm_usage_log` exists; if not, apply `sql/llm_usage_log_ddl.sql`.
+- [ ] Apply `sql/token_purchases_ddl.sql` (creates `token_purchases`; `lava_webhook_log` only if missing).
+
+### Production configuration
+
+- [ ] `.env`:
+  - [ ] `LAVA_API_KEY` (the new one), `LAVA_API_URL=https://gate.lava.top`
+  - [ ] `LAVA_WEBHOOK_SECRET`: a long random value, e.g. `openssl rand -hex 32`
+  - [ ] `TOKENS_LAVA_OFFER_ID=7ec77746-effb-415a-b93d-7d6bfc8796a6`, `TOKENS_LAVA_PRODUCT_ID=a636666c-3745-4a2b-9876-630cfa3ba800`
+  - [ ] `LAVA_ADMIN_EMAIL` (refunds, chargebacks, unmatched payments)
+  - [ ] `LLM_FREE_TOKENS`, `LLM_PACK_TOKENS`, `LLM_MIN_TOKENS_PER_REQUEST`, `LLM_LOW_BALANCE_TOKENS`
+  - [ ] `LESSON_ASSISTANT_ENABLED`: `admin` for a staged start, then the value that enables it for everyone
+  - [ ] `VERSION`: bump it, so browsers reload the changed CSS and JS
+- [ ] `config.php`: the `lava_products` block with RUB, USD and EUR prices and the promo codes (as in `config.php.example`).
+- [ ] Lava profile → webhook: URL `https://sqltest.online/lava/webhook`, auth "API key" = `LAVA_WEBHOOK_SECRET`.
+
+### Deploy
+
+- [ ] Merge `lesson_llm_integration` into `main`; wait for the "Auto-minify assets" commit (`style.min.css`, `css/lesson.min.css`) before deploying.
+- [ ] `composer dump-autoload` on the server (new classes: `TokenPurchase`, `LavaClient`).
+- [ ] Deploy.
+
+### Right after deploy
+
+- [ ] `/ru/buy-tokens` and `/en/buy-tokens` load; `/ru/subscribe` and `/ru/tokens` redirect to them.
+- [ ] Log in: the profile shows the balance and the "AI tokens" tab.
+- [ ] The lesson assistant answers a question and the balance goes down.
+- [ ] Webhook auth: the `curl` above against `https://sqltest.online/lava/webhook` → `401`.
+- [ ] One real purchase on prod with a promo code; check `lava_webhook_log` and the balance as on dev.
+- [ ] Security headers: `curl -sI https://sqltest.online/ | grep -iE "strict|nosniff|frame|set-cookie"`.
+
+### After a few days
+
+- [ ] Nothing stuck: `SELECT * FROM lava_webhook_log WHERE result IN ('unmatched', 'error') ORDER BY id DESC;`
+      and `SELECT * FROM token_purchases WHERE status = 'pending' AND created_at < now() - interval '1 day';`
+      A pending row the buyer actually paid for (check in Lava) means a lost webhook. Mark it paid first, so a late
+      webhook is ignored as a duplicate, then credit the pack:
+      `UPDATE token_purchases SET status = 'paid', paid_at = now() WHERE contract_id = '<id>';` and
+      `php scripts/grant_tokens.php --user=<email> --tokens=<pack>`.
+- [ ] Drop `users.subscribed_till`: `sql/token_purchases_migration.sql` (its subscription-table part is for dev only).
+- [ ] In Lava: disable the unused `TESTFREE` / `FIRST10` codes (the site's codes live in `config.php`).
+- [ ] Keep Lava payout statements and LLM/hosting invoices from the first sale.
