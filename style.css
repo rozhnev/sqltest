@@ -1119,6 +1119,28 @@ input:checked + .slider:before {
     font-size: smaller;
 }
 
+/* AI token note next to the free-answer Check button: fills the space left of the buttons */
+.code-buttons .free-answer-tokens {
+    flex: 1 1 auto;
+    min-width: 0;
+    align-self: center;
+    font-size: smaller;
+    line-height: 1.4;
+    text-align: justify;
+    hyphens: auto;
+    color: var(--question-text);
+}
+.code-buttons .free-answer-tokens b {
+    white-space: nowrap;
+}
+.code-buttons .free-answer-tokens ~ .button {
+    flex: none;
+}
+/* .button sets display: flex after .hidden, so hide the buy button explicitly */
+.code-buttons .button.hidden {
+    display: none;
+}
+
 .test-overview {
     display: flex;
     justify-content: space-between;

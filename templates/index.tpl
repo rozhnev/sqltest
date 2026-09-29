@@ -196,10 +196,18 @@
                     {/if}
                     <div class="code-buttons">
                         {if $Question.question_type == 'free_answer'}
-                            <button class="button green" id="checkFreeAnswerBtn" onClick="{if $User->logged()}checkFreeAnswer('{$Lang}', {$QuestionID}){else}toggleLoginWindow(){/if}">
-                                <i class="run-icon"></i>
-                                <span>{translate}question_action_check_free_answer{/translate}</span>
-                            </button>
+                            {if $User->logged()}
+                                {* Checks are paid from the AI token balance; checkFreeAnswer() refreshes it after each check *}
+                                <span class="free-answer-tokens">{translate}free_answer_tokens_left{/translate} <b id="free-answer-tokens-remaining">{$AiQuota.remaining_text}</b></span>
+                                <a class="button{if !$AiQuota.low} hidden{/if}" id="buyTokensBtn" href="/{$Lang}/buy-tokens">{translate}tokens_buy_button{/translate}</a>
+                                <button class="button green" id="checkFreeAnswerBtn" onClick="checkFreeAnswer('{$Lang}', {$QuestionID})">
+                                    <i class="run-icon"></i>
+                                    <span>{translate}question_action_check_free_answer{/translate}</span>
+                                </button>
+                            {else}
+                                <span class="free-answer-tokens">{translate}free_answer_login_remark{/translate}</span>
+                                <button class="button green" id="freeAnswerLoginBtn" onClick="toggleLoginWindow()">{translate}free_answer_login_button{/translate}</button>
+                            {/if}
                         {elseif !isset($Question.answers)}
                             <button class="button" id="runQueryBtn" onClick="runQuery('{$Lang}', {$QuestionID})" title="Ctrl+Enter">
                                 <i class="run-query-icon"></i>

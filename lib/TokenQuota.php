@@ -97,7 +97,7 @@ class TokenQuota
     /**
      * Quota state for the UI
      *
-     * @return array ['remaining' => int, 'remaining_text' => string, 'exhausted' => bool]
+     * @return array ['remaining' => int, 'remaining_text' => string, 'exhausted' => bool, 'low' => bool]
      */
     public function status(): array
     {
@@ -105,6 +105,8 @@ class TokenQuota
             'remaining'      => $this->remaining(),
             'remaining_text' => self::formatTokens($this->remaining()),
             'exhausted'      => !$this->canSpend(),
+            // Time to offer a top-up (also true when exhausted)
+            'low'            => $this->remaining() < (int)($this->env['LLM_LOW_BALANCE_TOKENS'] ?? 20000),
         ];
     }
 

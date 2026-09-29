@@ -1330,6 +1330,10 @@ class Controller
             'SolvedQuestionsCount'  => $this->user->getSolvedQuestionsCount(),
             'Favorites'             => $this->user->getFavorites($this->lang)
         ]);
+        if (($questionData['question_type'] ?? '') === 'free_answer' && $this->user->logged()) {
+            // Free-answer checks are paid from the shared AI token balance, shown next to the Check button
+            $this->engine->assign('AiQuota', (new TokenQuota($this->dbh, $this->user, $this->env))->status());
+        }
         $this->setHreflangLinks($params['path'], $this->lang);
         $schemaType  = $questionData['have_answers'] ? 'Quiz' : 'LearningResource';
         $questionUrl = "{$this->host}/{$this->lang}/question/{$questionData['category_sef']}/{$questionData['question_sef']}";
@@ -1481,6 +1485,8 @@ class Controller
                 'QuestionID'        => $questionID,
                 'FreeAnswerResult'  => ['ok' => false, 'cost' => 0, 'quota_exceeded' => true, 'quota' => $quotaStatus],
             ]);
+            header('X-AI-Tokens-Remaining: ' . rawurlencode($quotaStatus['remaining_text']));
+            header('X-AI-Tokens-Low: 1');
             header('HTTP/1.1 429 Too Many Requests');
             $this->engine->display($this->lang . "/check_free_answer_result.tpl");
             return;
@@ -1507,6 +1513,10 @@ class Controller
         if (trim($answer) !== '') {
             $this->user->saveQuestionAttempt($questionID, $freeAnswerResult, trim($answer));
         }
+        // Balance after this check, for the counter next to the Check button (checkFreeAnswer() in script.js)
+        $quotaStatus = $quota->status();
+        header('X-AI-Tokens-Remaining: ' . rawurlencode($quotaStatus['remaining_text']));
+        header('X-AI-Tokens-Low: ' . ($quotaStatus['low'] ? '1' : '0'));
         if (!$freeAnswerResult['ok']) header( 'HTTP/1.1 418 BAD REQUEST' );
         $this->engine->display($this->lang . "/check_free_answer_result.tpl");
     }

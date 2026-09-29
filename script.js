@@ -304,6 +304,12 @@ function checkFreeAnswer(lang, questionId) {
         body: formData,
     })
     .then((async response=>{
+        // The check is paid from the AI token balance: refresh the counter and the buy button
+        const remaining = response.headers.get('X-AI-Tokens-Remaining');
+        if (remaining !== null && document.getElementById('free-answer-tokens-remaining')) {
+            document.getElementById('free-answer-tokens-remaining').textContent = decodeURIComponent(remaining);
+            document.getElementById('buyTokensBtn')?.classList.toggle('hidden', response.headers.get('X-AI-Tokens-Low') !== '1');
+        }
         if (response.ok && document.getElementById("nextTaskBtn")) {
             document.getElementById("nextTaskBtn").classList.toggle("hidden");
             setTimeout(()=>{

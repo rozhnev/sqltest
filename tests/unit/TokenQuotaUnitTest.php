@@ -78,7 +78,7 @@ class TokenQuotaUnitTest extends \Codeception\Test\Unit
     {
         $status = $this->quota($this->createUser(balance: 1234567))->status();
 
-        $this->assertSame(['remaining' => 1234567, 'remaining_text' => "1\u{00A0}234\u{00A0}567", 'exhausted' => false], $status);
+        $this->assertSame(['remaining' => 1234567, 'remaining_text' => "1\u{00A0}234\u{00A0}567", 'exhausted' => false, 'low' => false], $status);
     }
 
     public function testNegativeBalanceShowsAsZeroAndExhausted()
@@ -88,6 +88,7 @@ class TokenQuotaUnitTest extends \Codeception\Test\Unit
         $this->assertSame(0, $status['remaining']);
         $this->assertSame('0', $status['remaining_text']);
         $this->assertTrue($status['exhausted']);
+        $this->assertTrue($status['low']);
     }
 
     public function testFormatTokensGroupsThousands()
