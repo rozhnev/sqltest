@@ -158,7 +158,7 @@ $translations = [
     'tokens_promo_code_placeholder' => 'Promo code',
     'tokens_buy_button' => 'Buy tokens',
     'tokens_checkout_note' => 'Secure one-time payment through Lava.top in USD.',
-    'tokens_no_refund' => 'All sales are final: purchased tokens are non-refundable.',
+    'tokens_no_refund' => 'Tokens are credited to your account right after payment. Payments for used tokens are non-refundable; for unused tokens, contact <a href="mailto:support@sqltest.online">support@sqltest.online</a>. This does not limit your rights under consumer protection law.',
     'tokens_history_title' => 'Your purchases',
     'tokens_history_date' => 'Date',
     'tokens_history_tokens' => 'Tokens',

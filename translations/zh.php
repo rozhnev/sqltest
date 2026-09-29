@@ -234,7 +234,7 @@ $translations = [
     'tokens_promo_code_placeholder' => '优惠码',
     'tokens_buy_button' => '购买令牌',
     'tokens_checkout_note' => '通过 Lava.top 以美元安全地一次性付款。',
-    'tokens_no_refund' => '所有购买均为最终交易：已购令牌不予退款。',
+    'tokens_no_refund' => '付款后令牌会立即计入您的账户。已使用的令牌不予退款；如需处理未使用的令牌，请联系 <a href="mailto:support@sqltest.online">support@sqltest.online</a>。本条款不限制您依据消费者保护法享有的权利。',
     'tokens_history_title' => '您的购买记录',
     'tokens_history_date' => '日期',
     'tokens_history_tokens' => '令牌',

@@ -157,7 +157,7 @@ $translations = [
     'tokens_promo_code_placeholder' => 'Code promo',
     'tokens_buy_button' => 'Acheter des jetons',
     'tokens_checkout_note' => 'Paiement unique sécurisé via Lava.top en USD.',
-    'tokens_no_refund' => 'Toutes les ventes sont définitives : les jetons achetés ne sont pas remboursables.',
+    'tokens_no_refund' => 'Les jetons sont crédités sur votre compte dès le paiement. Les paiements pour les jetons déjà utilisés ne sont pas remboursables ; pour les jetons non utilisés, écrivez à <a href="mailto:support@sqltest.online">support@sqltest.online</a>. Cela ne limite pas vos droits au titre du droit de la consommation.',
     'tokens_history_title' => 'Vos achats',
     'tokens_history_date' => 'Date',
     'tokens_history_tokens' => 'Jetons',

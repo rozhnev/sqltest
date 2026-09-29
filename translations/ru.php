@@ -164,7 +164,7 @@ $translations = [
     'tokens_promo_code_placeholder' => 'Промокод',
     'tokens_buy_button' => 'Купить токены',
     'tokens_checkout_note' => 'Безопасный разовый платёж через Lava.top в рублях.',
-    'tokens_no_refund' => 'Все покупки окончательные: деньги за купленные токены не возвращаются.',
+    'tokens_no_refund' => 'Токены зачисляются на аккаунт сразу после оплаты. Деньги за израсходованные токены не возвращаются; по неиспользованным токенам напишите на <a href="mailto:support@sqltest.online">support@sqltest.online</a>. Это не ограничивает ваши права по закону о защите прав потребителей.',
     'tokens_history_title' => 'Ваши покупки',
     'tokens_history_date' => 'Дата',
     'tokens_history_tokens' => 'Токены',

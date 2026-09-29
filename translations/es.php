@@ -105,7 +105,7 @@ $translations = [
     'tokens_promo_code_placeholder' => 'Código promocional',
     'tokens_buy_button' => 'Comprar tokens',
     'tokens_checkout_note' => 'Pago único seguro a través de Lava.top en USD.',
-    'tokens_no_refund' => 'Todas las ventas son definitivas: los tokens comprados no son reembolsables.',
+    'tokens_no_refund' => 'Los tokens se acreditan en tu cuenta justo después del pago. Los pagos por tokens ya usados no son reembolsables; para tokens no usados, escribe a <a href="mailto:support@sqltest.online">support@sqltest.online</a>. Esto no limita tus derechos según la ley de protección al consumidor.',
     'tokens_history_title' => 'Tus compras',
     'tokens_history_date' => 'Fecha',
     'tokens_history_tokens' => 'Tokens',
