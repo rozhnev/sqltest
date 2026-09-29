@@ -559,9 +559,9 @@ class Controller
         $userId = (string)$this->user->getId();
         $questionId = (int)($_POST['question_id'] ?? 0);
 
-        // No hitFreeAnswerRateLimit() here: that daily quota is shared with the free site-wide check and
-        // could lock a paying candidate out mid-interview. LLM use per session is already bounded by the
-        // question count, max_attempts and the interview.llm_call_budget setting.
+        // Not charged to the AI token budget: interviews are paid separately, and running out of tokens
+        // must not lock a paying candidate out mid-interview. LLM use per session is already bounded by
+        // the question count, max_attempts and the interview.llm_call_budget setting.
         $result = $interview->answerCurrentQuestion(
             $sessionId,
             $userId,
