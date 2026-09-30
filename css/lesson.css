@@ -82,3 +82,82 @@
     opacity: 0.75;
 }
 
+
+/* Tables in lesson content: a card with a header row, row separators and light zebra striping.
+   Scoped to .lesson-wrapper; overrides the global td border/padding from style.css. */
+.lesson-wrapper table {
+    width: 100%;
+    margin: 1rem 0;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid var(--text-block-border-color);
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: var(--text-block-background-color);
+    font-size: 0.95em;
+    line-height: 1.45;
+}
+
+.lesson-wrapper th,
+.lesson-wrapper td {
+    padding: 0.55rem 0.8rem;
+    border: none;
+    text-align: left;
+    vertical-align: top;
+}
+
+.lesson-wrapper th {
+    background-color: var(--question-title-bg-color);
+    color: var(--question-text);
+    font-weight: 600;
+    border-bottom: 1px solid var(--text-block-border-color);
+}
+
+/* Separators between rows and columns */
+.lesson-wrapper tbody tr + tr td {
+    border-top: 1px solid var(--text-block-border-color);
+}
+
+.lesson-wrapper th + th,
+.lesson-wrapper td + td {
+    border-left: 1px solid var(--text-block-border-color);
+}
+
+.lesson-wrapper tbody tr:nth-child(even) td {
+    background-color: var(--code-result-background-color);
+}
+
+.lesson-wrapper tbody tr:hover td {
+    background-color: var(--question-title-bg-color);
+}
+
+/* Mobile lesson: the page must not be wider than the screen (templates/m.lesson.tpl).
+   main is a grid, and a grid track grows to its widest unshrinkable content (a table, an image)
+   unless it is minmax(0, 1fr); such content then scrolls inside its own box. */
+.mobile-container main {
+    grid-template-columns: minmax(0, 1fr);
+}
+
+.mobile-container .lesson-wrapper img {
+    max-width: 100%;
+    height: auto;
+}
+
+.mobile-container .lesson-wrapper table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+.mobile-container .lesson-wrapper pre {
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+/* Tighter cells, so most tables fit without scrolling */
+.mobile-container .lesson-wrapper th,
+.mobile-container .lesson-wrapper td {
+    padding: 0.35rem 0.4rem;
+    font-size: 0.9em;
+    overflow-wrap: break-word;
+}
