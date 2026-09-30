@@ -1860,3 +1860,247 @@ footer a:visited {
 .donation-action .button {
     width: 100%;
 }
+
+/* AI assistant chat panel (templates/ai-assistant.tpl), on the lesson page and the playground.
+   The card look (title bar, body, green button) comes from the .side-card classes above. */
+.ai-assistant {
+    display: flex;
+    flex-direction: column;
+}
+
+.ai-assistant .la-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.ai-assistant .la-title {
+    /* The right panel (.db-description h3) underlines headings */
+    border-bottom: none;
+    padding: 0;
+    margin: 0;
+    font-size: 1em;
+    font-weight: inherit;
+    color: inherit;
+}
+
+.ai-assistant .la-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    min-height: 0;
+}
+
+.ai-assistant .la-close {
+    border: none;
+    background: none;
+    color: #fff;
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.ai-assistant .la-messages {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    max-height: 50vh;
+    overflow-y: auto;
+}
+
+.ai-assistant .la-intro p {
+    margin: 0 0 0.5rem;
+}
+
+.ai-assistant .la-examples {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.ai-assistant .la-example {
+    padding: 0.4rem 0.6rem;
+    border: 1px solid var(--text-block-border-color);
+    border-radius: 4px;
+    background: var(--text-block-background-color);
+    color: var(--question-text);
+    text-align: left;
+    cursor: pointer;
+}
+
+.ai-assistant .la-example:hover {
+    border-color: var(--accordion-hover);
+}
+
+.ai-assistant .la-message {
+    padding: 0.5rem 0.65rem;
+    border-radius: 6px;
+    overflow-wrap: anywhere;
+}
+
+.ai-assistant .la-user {
+    align-self: flex-end;
+    max-width: 90%;
+    background: var(--question-title-bg-color);
+    white-space: pre-wrap;
+}
+
+.ai-assistant .la-assistant {
+    border: 1px solid var(--text-block-border-color);
+    background: var(--text-block-background-color);
+}
+
+.ai-assistant .la-assistant p {
+    margin: 0 0 0.5rem;
+}
+
+.ai-assistant .la-assistant p:last-child {
+    margin-bottom: 0;
+}
+
+.ai-assistant .la-assistant pre {
+    overflow-x: auto;
+    padding: 0.5rem;
+    border-radius: 4px;
+    background: var(--sql-background-color);
+}
+
+.ai-assistant .la-assistant a {
+    color: var(--accordion-hover);
+}
+
+.ai-assistant .la-notice {
+    padding: 0.5rem;
+    border-left: 3px solid var(--danger-text-color);
+}
+
+.ai-assistant .la-notice a {
+    color: var(--accordion-hover);
+}
+
+.ai-assistant .hidden {
+    display: none;
+}
+
+.ai-assistant .la-input {
+    width: 100%;
+    resize: vertical;
+    padding: 0.5rem;
+    border: 1px solid var(--text-block-border-color);
+    border-radius: 4px;
+    background: var(--body-background-color);
+    color: var(--question-text);
+    font: inherit;
+}
+
+.ai-assistant .la-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 0.4rem;
+}
+
+.ai-assistant .la-reset {
+    border: none;
+    background: none;
+    color: var(--question-text);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.ai-assistant .la-quota {
+    font-size: 0.8rem;
+    opacity: 0.85;
+}
+
+.ai-assistant .la-quota a {
+    color: var(--accordion-hover);
+}
+
+.ai-assistant .la-login .button {
+    width: 100%;
+}
+
+/* Mobile: bottom sheet opened by the floating button */
+.ai-assistant.mobile {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    max-height: 85vh;
+    margin: 0;
+    border-radius: 12px 12px 0 0;
+    box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.25);
+    transform: translateY(105%);
+    transition: transform 0.2s ease-out;
+}
+
+.ai-assistant.mobile.open {
+    transform: none;
+}
+
+.ai-assistant.mobile .la-messages {
+    max-height: 45vh;
+}
+
+/* The card clips its overflow, so scroll the body on short screens */
+.ai-assistant.mobile .la-body {
+    overflow-y: auto;
+}
+
+.ai-assistant-fab {
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    z-index: 999;
+    border-radius: 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* What the assistant sees (playground) */
+.ai-assistant .la-context-note {
+    margin: 0;
+    font-size: 0.8rem;
+    opacity: 0.75;
+}
+
+/* Quick actions above the question box (playground) */
+.ai-assistant .la-quick {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-bottom: 0.4rem;
+}
+
+.ai-assistant .la-quick .la-example {
+    padding: 0.25rem 0.55rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+}
+
+/* "Fix the error" only after a failed run */
+.ai-assistant .la-example[data-requires-error] {
+    display: none;
+}
+
+.ai-assistant.ai-has-error .la-example[data-requires-error] {
+    display: inline-block;
+}
+
+/* Copy / Insert under code blocks of answers */
+.ai-assistant .la-code-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    margin: -0.25rem 0 0.5rem;
+}
+
+.ai-assistant .la-code-action {
+    border: none;
+    background: none;
+    color: var(--accordion-hover);
+    font-size: 0.85rem;
+    text-decoration: underline;
+    cursor: pointer;
+}
