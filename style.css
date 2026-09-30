@@ -138,6 +138,15 @@ a, a:visited {
     grid-template-rows: auto 1fr auto;
     height: 100%;
 }
+/* Pages read as a document (lessons): the whole page scrolls and the footer ends it,
+   instead of the app layout where only main3 scrolls and the footer stays on screen */
+.container.page-scroll {
+    height: auto;
+    min-height: 100%;
+}
+.container.page-scroll main3 {
+    overflow-y: visible;
+}
 main2 {
     display: grid;
     grid-template-columns: 20% 80%;

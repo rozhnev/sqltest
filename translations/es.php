@@ -178,6 +178,7 @@ $translations = [
     'new_achievement_unlocked' => 'Nuevo logro desbloqueado',
     'new_password' => 'Nueva contraseña',
     'next_lesson' => 'Siguiente lección',
+    'lesson_course_contents' => 'Contenido del curso',
     'nickname' => 'Apodo',
     'nickname_empty' => 'El apodo no puede estar vacío',
     'nickname_invalid_chars' => 'El apodo solo puede contener letras, números, espacios, puntos, guiones bajos y guiones',

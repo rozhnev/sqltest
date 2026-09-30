@@ -327,6 +327,7 @@ $translations = [
     'lesson_relevant_tasks' => 'Попробуйте решить следующие задачи, чтобы закрепить материал этого урока.',
     'lesson_edit_content' => 'Редактировать контент',
     'next_lesson' => 'Следующий урок',
+    'lesson_course_contents' => 'Содержание курса',
     'previous_lesson' => 'Предыдущий урок',
     'playground' => 'Песочница',
     'playground_page_title' => 'Онлайн редактор SQL: практикуйтесь в браузере',

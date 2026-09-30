@@ -35,3 +35,50 @@
 .lesson-relevant-tasks-list a:hover {
     color: var(--accordion-hover);
 }
+
+/* Mobile: the course navigation above the lesson is a drawer, closed by default (templates/m.lesson.tpl) */
+.course-drawer {
+    margin-bottom: 0.5rem;
+}
+
+.course-drawer-summary {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    padding: 0.6rem 2rem 0.6rem 0.75rem;
+    cursor: pointer;
+    list-style: none;
+    position: relative;
+    color: var(--question-text);
+}
+
+.course-drawer-summary::-webkit-details-marker {
+    display: none;
+}
+
+/* Chevron: points down when closed, up when open */
+.course-drawer-summary::after {
+    content: "";
+    position: absolute;
+    right: 0.9rem;
+    top: 50%;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: translateY(-70%) rotate(45deg);
+}
+
+.course-drawer[open] .course-drawer-summary::after {
+    transform: translateY(-30%) rotate(-135deg);
+}
+
+.course-drawer-title {
+    font-weight: 700;
+}
+
+.course-drawer-current {
+    font-size: 0.85rem;
+    opacity: 0.75;
+}
+

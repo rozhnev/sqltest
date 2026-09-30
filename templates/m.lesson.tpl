@@ -8,7 +8,14 @@
         </header>
 
         <main class="main" style="padding: 6px;" id="main-content">
-            <nav class="question-wrapper" aria-label="Lesson navigation">
+            <details class="question-wrapper course-drawer">
+                <summary class="course-drawer-summary">
+                    <span class="course-drawer-title">{translate}lesson_course_contents{/translate}</span>
+                    {foreach $Lessons as $moduleSlug => $module}
+                        {if $moduleSlug eq $Lesson->moduleSlug()}<span class="course-drawer-current">{$module.title}</span>{/if}
+                    {/foreach}
+                </summary>
+            <nav aria-label="Lesson navigation">
                 <div class="menu">
                 <div id="menu-content" class="menu-content">
                     {foreach $Lessons as $moduleSlug => $module}
@@ -31,6 +38,7 @@
                 </div>
                 </div>
             </nav>
+            </details>
             <article class="lesson-wrapper" id="lesson-wrapper">
                 {$ModuleNum = $LessonData.module_num}
                 {$LessonNum = $LessonData.lesson_num}

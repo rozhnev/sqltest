@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="/css/lesson.min.css?{$VERSION}" media="all">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rozhnev/sql-highlighter@v1.0.2/sql-highlighter.min.css" media="all">
 <body>
-    <div class="container">
+    <div class="container page-scroll">
         {include file='popups.tpl'}
         <header>
         {if $MobileView}

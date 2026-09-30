@@ -121,6 +121,7 @@ $translations = [
     'new_achievement_unlocked' => '新成就解锁',
     'new_password' => '新密码',
     'next_lesson' => '下一课',
+    'lesson_course_contents' => '课程目录',
     'nickname' => '昵称',
     'nickname_empty' => '昵称不能为空',
     'nickname_invalid_chars' => '昵称只能包含字母、数字、空格、点、下划线和连字符',

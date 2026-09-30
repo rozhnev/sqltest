@@ -324,6 +324,7 @@ $translations = [
     'lesson_relevant_tasks' => 'Essayez de resoudre les exercices suivants pour consolider ce que vous avez appris dans cette lecon.',
     'lesson_edit_content' => 'Modifier le contenu',
     'next_lesson' => 'Leçon suivante',
+    'lesson_course_contents' => 'Sommaire du cours',
     'previous_lesson' => 'Leçon précédente',
     'playground' => 'Playground',
     'playground_page_title' => 'SQL Playground : Écrire et exécuter des requêtes SQL en ligne',

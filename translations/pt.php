@@ -325,6 +325,7 @@ $translations = [
     'lesson_relevant_tasks' => 'Tente resolver as tarefas a seguir para reforcar o que voce aprendeu nesta licao.',
     'lesson_edit_content' => 'Editar conteúdo',
     'next_lesson' =>    'Próxima lição',
+    'lesson_course_contents' => 'Conteúdo do curso',
     'previous_lesson' => 'Lição anterior',
     'playground' => 'Playground',
     'playground_page_title' => 'SQL Playground: Experimente o SQL Online',
