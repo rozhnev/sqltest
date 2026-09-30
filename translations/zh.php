@@ -112,10 +112,6 @@ $translations = [
     'low_grades_restricted' => '仅对中级和高级用户可用。',
     'maximum_attempts_reached' => '您已使用最大尝试次数来解决此问题。',
     'menu_groups' => '按组任务',
-    'menu_small_add_placeholder' => '<div style="color: var(--regular-text-color); display: flex; gap: 0.5rem; flex-direction: column; align-items: center;">
-        支持这个项目。 <a href="https://ko-fi.com/D1D76X1T1" target="_blank">
-            <img height="36" width="145" style="border:0px; height:36px; width:145px;" src="https://storage.ko-fi.com/cdn/kofi6.png?v=6" border="0" alt="在 ko-fi.com 上请我喝咖啡" />
-        </a></div>',
     'min' => '分钟',
     'mobile_menu_donate' => '<span class="currency">€</span> 支持该项目',
     'my_progress' => '我的进度',

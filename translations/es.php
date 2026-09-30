@@ -169,10 +169,6 @@ $translations = [
     'low_grades_restricted' => 'Disponible solo para usuarios de nivel Medio y Senior.',
     'maximum_attempts_reached' => 'Has utilizado el número máximo de intentos para resolver el problema.',
     'menu_groups' => 'Agrupar tareas por',
-    'menu_small_add_placeholder' => '<div style="color: var(--regular-text-color); display: flex; gap: 0.5rem; flex-direction: column; align-items: center;">
-        Apoya el proyecto. <a href="https://ko-fi.com/D1D76X1T1" target="_blank">
-            <img height="36" width="145" style="border:0px; height:36px; width:145px;" src="https://storage.ko-fi.com/cdn/kofi6.png?v=6" border="0" alt="Buy Me a Coffee at ko-fi.com" />
-        </a></div>',
     'min' => 'min',
     'mobile_menu_donate' => '<span class="currency">€</span> Apoya el proyecto',
     'my_progress' => 'Mi progreso',

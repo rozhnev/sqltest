@@ -64,16 +64,6 @@ $translations = [
     'favorite' => 'Избранное',
     'favorites' => 'Избранное',
     'add_to_favorites' => 'Добавить в избранное',
-    'menu_small_add_placeholder' => '<div style="color: var(--regular-text-color); display: flex; gap: 5px; flex-direction: column; align-items: center;">Поддержите проект на 
-                    <a href="https://pay.cloudtips.ru/p/60214a3d" target="_blank">
-                    <img src="https://static.tildacdn.com/tild3431-6231-4938-b464-663831306266/Horiz.svg" 
-                         alt="Оплата через CloudTips"
-                         style="width: 180px;
-                         background-color: white;
-                         padding: 5px;
-                         border-radius: 5px;">
-                    </a>
-            </div>',
     'toast_sql_copied_to_buffer' => 'SQL код скопирован в буфер обмена',
     'login_popup_footer' => 'Авторизация необходима для сохранения вашего прогресса и некоторых расширенных функций. Вы можете пользоваться сайтом и без авторизации.',
     'rate_saved' => 'Спасибо! Ваш голос учтен.',

@@ -16,11 +16,6 @@
             </div>
         </div>
     </div>
-    {* {if !$MobileView}
-        <div style="height: 5em;">
-            {translate}menu_small_add_placeholder{/translate}
-        </div>
-    {/if} *}
     <div class="question-wrapper">
         <div id="menu-content" class="menu-content">
             {if $User->logged()}

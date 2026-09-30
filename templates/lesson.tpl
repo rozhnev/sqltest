@@ -14,9 +14,6 @@
         <main3 id="main3">
             <nav class="column" aria-label="Lesson navigation">
                 <div class="menu" id="menu">
-                <div style="height: 5em;">
-                    {translate}menu_small_add_placeholder{/translate}
-                </div>
                 <div class="question-wrapper">
                     <div id="menu-content" class="menu-content">     
                         {foreach $Lessons as $moduleSlug => $module}
