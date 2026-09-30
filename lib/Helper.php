@@ -144,55 +144,110 @@ class Helper
     }
 
     /**
-     * Fetches the singleton urgent banner row.
-     * Returns a disabled/empty banner if the row does not exist yet.
+     * The site messages of a language (site_messages, falling back to 'en') with this month's
+     * donations, in one query: the urgent banner and the donation goal widget of every page.
+     *
+     * @return array ['urgent_banner' => [enabled, version, background, text_color, html],
+     *                'donation_goal' => [title, html, amount, received, progress]]
      */
-    public static function getUrgentBanner(PDO $dbh): array
+    public static function getSiteMessages(PDO $dbh, string $lang): array
     {
-        $stmt = $dbh->query("SELECT enabled, version, background, text_color, messages FROM urgent_banner WHERE id = 1");
-        $row = $stmt ? $stmt->fetch(PDO::FETCH_ASSOC) : false;
+        $stmt = $dbh->prepare(
+            "SELECT m.*,
+                (SELECT COALESCE(SUM(amount_usd), 0) FROM donations
+                    WHERE donated_at >= date_trunc('month', CURRENT_DATE)) AS donations_received
+            FROM site_messages m
+            WHERE m.language IN (:lang, 'en')
+            ORDER BY (m.language = :preferred) DESC
+            LIMIT 1"
+        );
+        $stmt->execute([':lang' => $lang, ':preferred' => $lang]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC) ?: [];
 
-        if (!$row) {
-            return [
-                'enabled' => false,
-                'version' => 0,
-                'background' => '',
-                'text_color' => '',
-                'messages' => [],
-            ];
-        }
-
+        $amount = (float)($row['donation_goal_amount'] ?? 0);
+        $received = (float)($row['donations_received'] ?? 0);
         return [
-            'enabled' => (bool)$row['enabled'],
-            'version' => (int)$row['version'],
-            'background' => (string)$row['background'],
-            'text_color' => (string)$row['text_color'],
-            'messages' => json_decode($row['messages'], true) ?: [],
+            'urgent_banner' => [
+                'enabled'    => (bool)($row['urgent_banner_enabled'] ?? false),
+                'version'    => (int)($row['urgent_banner_version'] ?? 0),
+                'background' => (string)($row['urgent_banner_background'] ?? ''),
+                'text_color' => (string)($row['urgent_banner_text_color'] ?? ''),
+                'html'       => (string)($row['urgent_banner'] ?? ''),
+            ],
+            'donation_goal' => [
+                'title'    => (string)($row['donation_goal_title'] ?? ''),
+                'html'     => str_replace('##goal##', number_format($amount, 0, '.', ''), (string)($row['donation_goal'] ?? '')),
+                'amount'   => $amount,
+                'received' => $received,
+                'progress' => $amount > 0 ? max(0, min(100, 100 * $received / $amount)) : 0,
+            ],
         ];
     }
 
     /**
-     * Saves the singleton urgent banner row (creates it if missing).
+     * All rows of site_messages by language, for the admin page
+     *
+     * @return array<string, array> language => row
      */
-    public static function saveUrgentBanner(PDO $dbh, array $data): void
+    public static function getAllSiteMessages(PDO $dbh): array
+    {
+        $rows = [];
+        foreach ($dbh->query("SELECT * FROM site_messages ORDER BY language")->fetchAll(PDO::FETCH_ASSOC) as $row) {
+            $row['urgent_banner_enabled'] = (bool)$row['urgent_banner_enabled'];
+            $rows[$row['language']] = $row;
+        }
+        return $rows;
+    }
+
+    /**
+     * Save the admin page: the texts and banner settings of each language, and the donation goal
+     * amount, which is the same for every language. One transaction.
+     *
+     * @param array<string, array> $messages language => [donation_goal_title, donation_goal, urgent_banner,
+     *                                       urgent_banner_enabled, urgent_banner_version,
+     *                                       urgent_banner_background, urgent_banner_text_color]
+     */
+    public static function saveSiteMessages(PDO $dbh, array $messages, float $donationGoalAmount): void
     {
         $stmt = $dbh->prepare(
-            "INSERT INTO urgent_banner (id, enabled, version, background, text_color, messages, updated_at)
-            VALUES (1, :enabled, :version, :background, :text_color, :messages, CURRENT_TIMESTAMP)
-            ON CONFLICT (id) DO UPDATE SET
-                enabled = EXCLUDED.enabled,
-                version = EXCLUDED.version,
-                background = EXCLUDED.background,
-                text_color = EXCLUDED.text_color,
-                messages = EXCLUDED.messages,
+            "INSERT INTO site_messages (language, donation_goal_title, donation_goal, donation_goal_amount,
+                urgent_banner, urgent_banner_enabled, urgent_banner_version, urgent_banner_background,
+                urgent_banner_text_color, updated_at)
+            VALUES (:language, :donation_goal_title, :donation_goal, :donation_goal_amount,
+                :urgent_banner, :urgent_banner_enabled, :urgent_banner_version, :urgent_banner_background,
+                :urgent_banner_text_color, CURRENT_TIMESTAMP)
+            ON CONFLICT (language) DO UPDATE SET
+                donation_goal_title = EXCLUDED.donation_goal_title,
+                donation_goal = EXCLUDED.donation_goal,
+                donation_goal_amount = EXCLUDED.donation_goal_amount,
+                urgent_banner = EXCLUDED.urgent_banner,
+                urgent_banner_enabled = EXCLUDED.urgent_banner_enabled,
+                urgent_banner_version = EXCLUDED.urgent_banner_version,
+                urgent_banner_background = EXCLUDED.urgent_banner_background,
+                urgent_banner_text_color = EXCLUDED.urgent_banner_text_color,
                 updated_at = CURRENT_TIMESTAMP"
         );
-        $stmt->execute([
-            ':enabled' => $data['enabled'] ? 't' : 'f',
-            ':version' => (int)$data['version'],
-            ':background' => (string)$data['background'],
-            ':text_color' => (string)$data['text_color'],
-            ':messages' => json_encode($data['messages'], JSON_UNESCAPED_UNICODE),
-        ]);
+        $dbh->beginTransaction();
+        try {
+            foreach ($messages as $language => $message) {
+                $stmt->execute([
+                    ':language'                 => (string)$language,
+                    ':donation_goal_title'      => (string)($message['donation_goal_title'] ?? ''),
+                    ':donation_goal'            => (string)($message['donation_goal'] ?? ''),
+                    ':donation_goal_amount'     => $donationGoalAmount,
+                    ':urgent_banner'            => (string)($message['urgent_banner'] ?? ''),
+                    ':urgent_banner_enabled'    => !empty($message['urgent_banner_enabled']) ? 't' : 'f',
+                    ':urgent_banner_version'    => max(1, (int)($message['urgent_banner_version'] ?? 1)),
+                    ':urgent_banner_background' => (string)($message['urgent_banner_background'] ?? ''),
+                    ':urgent_banner_text_color' => (string)($message['urgent_banner_text_color'] ?? ''),
+                ]);
+            }
+            $dbh->commit();
+        } catch (Throwable $error) {
+            if ($dbh->inTransaction()) {
+                $dbh->rollBack();
+            }
+            throw $error;
+        }
     }
 }

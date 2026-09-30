@@ -98,7 +98,7 @@
                 {if isset($LessonAssistantTemplate)}
                     {include file='lesson-assistant.tpl' mobile=false}
                 {/if}
-                {include file="{$Lang}/donation_goal_widget.tpl"}
+                {include file='donation_goal_widget.tpl'}
             </aside>
         </main3>
         <footer>

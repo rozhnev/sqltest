@@ -104,7 +104,7 @@
                     {include file='ai-assistant.tpl' assistantId='playground-assistant' endpoint="/{$Lang}/playground/assistant"
                         text=$PlaygroundAssistantText history=$PlaygroundAssistantHistory mobile=false}
                 {/if}
-                {include file="{$Lang}/donation_goal_widget.tpl"}
+                {include file='donation_goal_widget.tpl'}
             </aside>
         </main3>
         <footer>

@@ -88,8 +88,9 @@ switch ($resource) {
     case 'mariadb-results':
         handleMariaDBResults($dbh, $env, $_GET, $method);
         break;
-    case 'urgent-banner':
-        handleUrgentBanner($dbh, $env, $method);
+    case 'site-messages':
+    case 'urgent-banner': // former address of the page
+        handleSiteMessages($dbh, $env, $method);
         break;
     default:
         respondJson(['error' => 'Resource not found'], 404);
@@ -169,20 +170,25 @@ function handleMariaDBResults(PDO $dbh, array $env, array $query, string $method
     $smarty->display('mariadb-results.tpl');
 }
 
-function handleUrgentBanner(PDO $dbh, array $env, string $method): void
+/**
+ * /admin/site-messages: the donation goal widget and the urgent banner, per language (site_messages)
+ */
+function handleSiteMessages(PDO $dbh, array $env, string $method): void
 {
     $languages = ['ru', 'en', 'es', 'fr', 'pt', 'zh'];
 
     if ($method === 'GET') {
-        $banner = Helper::getUrgentBanner($dbh);
+        $messages = Helper::getAllSiteMessages($dbh);
+        $amounts = array_column($messages, 'donation_goal_amount');
 
         $smarty = new Smarty();
         $smarty->assign('Lang', 'en');
         $smarty->assign('DB', $env['DB_NAME'] ?? 'sakila');
         $smarty->assign('VERSION', $env['APP_VERSION'] ?? time());
         $smarty->assign('Languages', $languages);
-        $smarty->assign('Banner', $banner);
-        $smarty->display('urgent-banner.tpl');
+        $smarty->assign('Messages', $messages);
+        $smarty->assign('DonationGoalAmount', $amounts ? (float)max($amounts) : 50);
+        $smarty->display('site-messages.tpl');
         return;
     }
 
@@ -192,16 +198,19 @@ function handleUrgentBanner(PDO $dbh, array $env, string $method): void
 
     $messages = [];
     foreach ($languages as $langCode) {
-        $messages[$langCode] = (string)($_POST['messages'][$langCode] ?? '');
+        $posted = (array)($_POST['messages'][$langCode] ?? []);
+        $messages[$langCode] = [
+            'donation_goal_title'      => trim((string)($posted['donation_goal_title'] ?? '')),
+            'donation_goal'            => (string)($posted['donation_goal'] ?? ''),
+            'urgent_banner'            => (string)($posted['urgent_banner'] ?? ''),
+            'urgent_banner_enabled'    => isset($posted['urgent_banner_enabled']),
+            'urgent_banner_version'    => max(1, (int)($posted['urgent_banner_version'] ?? 1)),
+            'urgent_banner_background' => trim((string)($posted['urgent_banner_background'] ?? '')),
+            'urgent_banner_text_color' => trim((string)($posted['urgent_banner_text_color'] ?? '#ffffff')),
+        ];
     }
 
-    Helper::saveUrgentBanner($dbh, [
-        'enabled' => isset($_POST['enabled']),
-        'version' => max(1, (int)($_POST['version'] ?? 1)),
-        'background' => trim((string)($_POST['background'] ?? '')),
-        'text_color' => trim((string)($_POST['text_color'] ?? '#ffffff')),
-        'messages' => $messages,
-    ]);
+    Helper::saveSiteMessages($dbh, $messages, max(0.0, (float)($_POST['donation_goal_amount'] ?? 0)));
 
     respondJson(['status' => 'ok']);
 }

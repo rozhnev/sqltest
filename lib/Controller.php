@@ -10,7 +10,6 @@ class Controller
     private $lang;
     private array $languages;
     private array $playgroundConfig;
-    private array $urgentBanner;
     private array $interviewConfig;
     /** Lava.top offers by offer id (config.php 'lava_products'): prices and promo codes */
     private array $lavaProducts;
@@ -78,18 +77,14 @@ class Controller
             'GOOGLE_TAG_MANAGER_ID' => $env['GOOGLE_TAG_MANAGER_ID'] ?? '',
             'GOOGLE_CLIENT_ID' => $env['GOOGLE_CLIENT_ID'] ?? '',
             'GITHUB_CLIENT_ID' => $env['GITHUB_CLIENT_ID'] ?? '',
-            'DONATION_MONTHLY_GOAL' => (float)($env['DONATION_MONTHLY_GOAL'] ?? 50),
-            'DONATIONS' => Helper::getDonations($this->dbh, 5),
             'Domain'        => $this->domain,
             'MobileView'    => $this->isMobileView(),
             'Languages'     => $this->languages,
             'User'          => $this->user,
         ]);
 
-        $this->urgentBanner = Helper::getUrgentBanner($this->dbh);
-        $this->assignVariables([
-            'SHOW_URGENT_BANNER' => $this->urgentBanner['enabled'] ? $this->urgentBanner['version'] : false,
-        ]);
+        // The banner and the donation widget depend on the language: see setLanguge()
+        $this->assignVariables(['SHOW_URGENT_BANNER' => false]);
     }
 
     private function isMobileView(): bool
@@ -184,13 +179,13 @@ class Controller
         $this->assignVariables(['Lang' => $langCode]);
         Localizer::init($langCode);
 
-        $messages = $this->urgentBanner['messages'] ?? [];
+        // The urgent banner and the donation goal widget of this language (site_messages), one query
+        $siteMessages = Helper::getSiteMessages($this->dbh, $langCode);
+        $banner = $siteMessages['urgent_banner'];
         $this->assignVariables([
-            'UrgentBanner' => [
-                'background' => $this->urgentBanner['background'] ?? '',
-                'text_color' => $this->urgentBanner['text_color'] ?? '',
-                'html' => $messages[$langCode] ?? $messages['en'] ?? '',
-            ],
+            'SHOW_URGENT_BANNER' => $banner['enabled'] && $banner['html'] !== '' ? $banner['version'] : false,
+            'UrgentBanner'       => $banner,
+            'DonationGoal'       => $siteMessages['donation_goal'],
         ]);
     }
 

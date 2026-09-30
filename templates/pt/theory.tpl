@@ -1,3 +1,3 @@
 <div id="db-description" class="db-description">
-    {include file='pt/donation_goal_widget.tpl'}
+    {include file='donation_goal_widget.tpl'}
 </div>

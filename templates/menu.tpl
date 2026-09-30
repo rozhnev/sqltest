@@ -83,6 +83,6 @@
         </div>  
     </div>
     {if !$MobileView}
-        {include file="{$Lang}/donation_goal_widget.tpl"}
+        {include file='donation_goal_widget.tpl'}
     {/if}
 </nav>
