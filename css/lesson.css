@@ -83,6 +83,68 @@
 }
 
 
+/* Lesson typography: a system font and 17px text with a 1.65 line height; text uses the full column width.
+   Lessons only for now; the rest of the site is SITE_TYPOGRAPHY_TODO.md. Overrides the
+   .lesson-wrapper p/li rules in style.css. */
+.lesson-wrapper {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    padding: 0.75rem 1.25rem;
+}
+
+.lesson-wrapper p,
+.lesson-wrapper li {
+    line-height: inherit;
+}
+
+.lesson-wrapper p {
+    margin: 0 0 0.9em;
+}
+
+.lesson-wrapper li {
+    padding-top: 0;
+    margin: 0.45em 0;
+}
+
+/* Headings: tighter lines, and more space above than below, so a heading belongs to its section */
+.lesson-wrapper h1,
+.lesson-wrapper h2,
+.lesson-wrapper h3,
+.lesson-wrapper h4 {
+    line-height: 1.25;
+}
+
+.lesson-wrapper h1 {
+    font-size: clamp(1.6rem, 5vw, 2rem);
+    margin: 0.4em 0 0.6em;
+}
+
+.lesson-wrapper h2 {
+    font-size: 1.45rem;
+    margin: 1.9em 0 0.6em;
+}
+
+.lesson-wrapper h3 {
+    font-size: 1.15rem;
+    margin: 1.5em 0 0.5em;
+}
+
+.lesson-wrapper code,
+.lesson-wrapper pre {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+}
+
+.lesson-wrapper :not(pre) > code {
+    font-size: 0.9em;
+}
+
+/* Phones: 16px text and less padding, the screen is narrow */
+.mobile-container .lesson-wrapper {
+    font-size: 1rem;
+    padding: 0.6rem 0.75rem;
+}
+
 /* Tables in lesson content: a card with a header row, row separators and light zebra striping.
    Scoped to .lesson-wrapper; overrides the global td border/padding from style.css. */
 .lesson-wrapper table {
