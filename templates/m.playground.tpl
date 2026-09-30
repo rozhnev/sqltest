@@ -98,8 +98,16 @@
         <footer>
             {include file='m.footer.tpl'}
         </footer>
+        {if isset($PlaygroundAssistantText)}
+            {include file='ai-assistant.tpl' assistantId='playground-assistant' endpoint="/{$Lang}/playground/assistant"
+                text=$PlaygroundAssistantText history=$PlaygroundAssistantHistory mobile=true}
+        {/if}
     </div>
     {include file='counters.tpl'}
+    {if isset($PlaygroundAssistantText)}
+    <script src="/js/playground-assistant.js?{$VERSION}"></script>
+    <script src="/js/ai-assistant.js?{$VERSION}" defer></script>
+    {/if}
     <script>
         {literal}
         const playgroundDatabases = {/literal}{$PlaygroundDatabases|json_encode nofilter}{literal};
@@ -181,6 +189,7 @@
             }))
             .then(JSON.parse)
             .then((JSONResult)=>{
+                if (window.playgroundAssistantSetResult) window.playgroundAssistantSetResult(JSONResult);
                 let html = '';
                 JSONResult.forEach((jsonObject)=>{
                     if (jsonObject.error) {

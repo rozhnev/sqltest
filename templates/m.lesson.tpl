@@ -93,7 +93,7 @@
         SQLHighlighter.highlightCodeBlocks();
     </script>
     {if isset($LessonAssistantTemplate)}
-    <script src="/js/lesson-assistant.js?{$VERSION}" defer></script>
+    <script src="/js/ai-assistant.js?{$VERSION}" defer></script>
     {/if}
 </body>
 </html>

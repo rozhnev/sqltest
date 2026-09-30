@@ -43,6 +43,8 @@ class Router
             'lesson-assistant'  => "@(?<lang>{$this->langPattern})/lesson/(?<lessonID>\d+)/(?<action>assistant-ask|assistant-reset)/?$@i",
             // Accepts with both module and lesson
             'lessons'          => "@(?<lang>{$this->langPattern})/(?<action>lesson)(?:/(?<module>[a-z-]+))?(?:/(?<lesson>[a-z-]+))?@i",
+            // Must precede 'playground', whose pattern would take "assistant" for a database
+            'playground-assistant' => "@(?<lang>{$this->langPattern})/(?<class>playground)/(?<action>assistant-ask|assistant-reset)/?$@i",
             'playground_run'    => "@(?<lang>{$this->langPattern})/(?<class>playground)/(?<database>[a-z0-9_]+)/(?<action>query-run)@i",
             'playground'        => "@(?<lang>{$this->langPattern})/(?<action>playground)(?:/(?<database>[a-z0-9_]+))?(?:/(?<snippetHash>[a-f0-9]{32}))?/?@i",
             'embed'             => "@(?<lang>{$this->langPattern})/(?<action>embed)@i",

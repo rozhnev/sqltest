@@ -2143,19 +2143,10 @@ class Controller
         ]);
 
         if ($this->lessonAssistantEnabled()) {
-            $assistant = new LessonAssistant($this->env);
             $assistantHistory = [];
             $assistantQuota = null;
             if ($this->user->logged()) {
-                // Re-render the session history so a reload doesn't lose the conversation
-                foreach ($assistant->getHistory($lesson->id()) as $message) {
-                    $assistantHistory[] = [
-                        'role' => $message['role'],
-                        'html' => $message['role'] === 'assistant'
-                            ? $assistant->renderAnswer($message['content'])
-                            : nl2br(htmlspecialchars($message['content'], ENT_QUOTES | ENT_HTML5, 'UTF-8')),
-                    ];
-                }
+                $assistantHistory = $this->renderAssistantHistory(new LessonAssistant($this->env), $lesson->id());
                 $assistantQuota = (new TokenQuota($this->dbh, $this->user, $this->env))->status();
             }
             $this->assignVariables([
@@ -2256,7 +2247,20 @@ class Controller
      */
     private function lessonAssistantEnabled(): bool
     {
-        $flag = strtolower(trim((string)($this->env['LESSON_ASSISTANT_ENABLED'] ?? '')));
+        return $this->assistantEnabled('LESSON_ASSISTANT_ENABLED');
+    }
+
+    private function playgroundAssistantEnabled(): bool
+    {
+        return $this->assistantEnabled('PLAYGROUND_ASSISTANT_ENABLED');
+    }
+
+    /**
+     * An assistant's .env flag: 'admin' turns it on for admins only, '1'/'true'/'on'/'yes' for everyone
+     */
+    private function assistantEnabled(string $flagKey): bool
+    {
+        $flag = strtolower(trim((string)($this->env[$flagKey] ?? '')));
         if ($flag === 'admin') {
             return $this->user->logged() && $this->user->isAdmin();
         }
@@ -2315,6 +2319,115 @@ class Controller
             $this->jsonResponse(404, ['error' => 'not_found']);
             return;
         }
+        $lessonId = (int)$params['lessonID'];
+        $assistant = new LessonAssistant($this->env);
+        $this->answerAssistantQuestion($assistant, 'lesson_assistant', $lessonId, $lessonId,
+            function (string $question, array $history) use ($assistant, $lessonId): ?array {
+                try {
+                    $lesson = Lesson::fromId($this->dbh, $lessonId);
+                } catch (Exception $e) {
+                    return null;
+                }
+                $lessonData = $lesson->get($this->lang);
+                $content = (string)$lessonData['content'];
+                $lesson->parseMedadata($content); // strips the front matter from $content
+                return $assistant->buildDialog($this->lang, (string)$lessonData['title'], $content, $history, $question);
+            });
+    }
+
+    /**
+     * POST /{lang}/lesson/{id}/assistant-reset: clear the lesson's chat history
+     */
+    public function assistant_reset(array $params): void
+    {
+        if (!$this->lessonAssistantEnabled()) {
+            $this->jsonResponse(404, ['error' => 'not_found']);
+            return;
+        }
+        $this->resetAssistantHistory(new LessonAssistant($this->env), (int)$params['lessonID']);
+    }
+
+    /**
+     * POST /{lang}/playground/assistant-ask: answer a question about the SQL in the playground.
+     * Body: question, version (a playground engine version), sql (editor content), result (the last
+     * run's result as JSON, see PlaygroundAssistant::parseResult()).
+     */
+    public function playground_assistant_ask(array $params): void
+    {
+        if (!$this->playgroundAssistantEnabled()) {
+            $this->jsonResponse(404, ['error' => 'not_found']);
+            return;
+        }
+        $engineLabel = $this->playgroundEngineLabel((string)($_POST['version'] ?? ''));
+        if ($engineLabel === null) {
+            $this->jsonResponse(400, ['error' => 'unsupported_version']);
+            return;
+        }
+        $assistant = new PlaygroundAssistant($this->env);
+        $this->answerAssistantQuestion($assistant, 'playground_assistant', PlaygroundAssistant::SCOPE, null,
+            function (string $question, array $history) use ($assistant, $engineLabel): array {
+                $context = $assistant->buildContext(
+                    $engineLabel,
+                    (string)($_POST['sql'] ?? ''),
+                    $assistant->parseResult((string)($_POST['result'] ?? ''))
+                );
+                return $assistant->buildDialog($this->lang, $context, $history, $question);
+            });
+    }
+
+    /**
+     * POST /{lang}/playground/assistant-reset: clear the playground chat
+     */
+    public function playground_assistant_reset(array $params): void
+    {
+        if (!$this->playgroundAssistantEnabled()) {
+            $this->jsonResponse(404, ['error' => 'not_found']);
+            return;
+        }
+        $this->resetAssistantHistory(new PlaygroundAssistant($this->env), PlaygroundAssistant::SCOPE);
+    }
+
+    /**
+     * "PostgreSQL 17" for a configured playground version id like psql17, null for an unknown id
+     */
+    private function playgroundEngineLabel(string $versionId): ?string
+    {
+        foreach ($this->getPlaygroundDatabasesData()['databases'] as $database) {
+            foreach ($database['versions'] as $version) {
+                if ($version['id'] === $versionId) {
+                    return $version['label'];
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * An assistant's chat history from the session, rendered for its panel, so a reload doesn't lose the conversation
+     *
+     * @return array [['role' => 'user'|'assistant', 'html' => ...]]
+     */
+    private function renderAssistantHistory(AiAssistant $assistant, int|string $scope): array
+    {
+        return array_map(static fn(array $message) => [
+            'role' => $message['role'],
+            'html' => $message['role'] === 'assistant'
+                ? $assistant->renderAnswer($message['content'])
+                : nl2br(htmlspecialchars($message['content'], ENT_QUOTES | ENT_HTML5, 'UTF-8')),
+        ], $assistant->getHistory($scope));
+    }
+
+    /**
+     * Shared request flow of the AI assistants: checks, quota, the LLM call, charging and history.
+     * Responds with JSON {answer_html, quota} or {error, message[, quota]}.
+     *
+     * @param string $feature tokens_usage_log feature, e.g. 'lesson_assistant'
+     * @param int|string $scope Chat history scope (a lesson id, or one playground chat)
+     * @param int|null $refId tokens_usage_log ref_id (lesson id), null when there is none
+     * @param callable $buildDialog fn(string $question, array $history): ?array, the LLM dialog, or null for 404
+     */
+    private function answerAssistantQuestion(AiAssistant $assistant, string $feature, int|string $scope, ?int $refId, callable $buildDialog): void
+    {
         if (($_SERVER['REQUEST_METHOD'] ?? 'GET') !== 'POST' || !$this->isSameOriginRequest()) {
             $this->jsonResponse(403, ['error' => 'forbidden']);
             return;
@@ -2324,7 +2437,6 @@ class Controller
             return;
         }
 
-        $assistant = new LessonAssistant($this->env);
         $question = $assistant->normalizeQuestion((string)($_POST['question'] ?? ''));
         if ($question === '') {
             $this->jsonResponse(400, ['error' => 'empty_question', 'message' => Localizer::translateString('ai_question_empty')]);
@@ -2338,18 +2450,11 @@ class Controller
             return;
         }
 
-        $lessonId = (int)$params['lessonID'];
-        try {
-            $lesson = Lesson::fromId($this->dbh, $lessonId);
-        } catch (Exception $e) {
+        $dialog = $buildDialog($question, $assistant->getHistory($scope));
+        if ($dialog === null) {
             $this->jsonResponse(404, ['error' => 'not_found']);
             return;
         }
-        $lessonData = $lesson->get($this->lang);
-        $content = (string)$lessonData['content'];
-        $lesson->parseMedadata($content); // strips the front matter from $content
-
-        $dialog = $assistant->buildDialog($this->lang, (string)$lessonData['title'], $content, $assistant->getHistory($lessonId), $question);
 
         // Don't hold the session lock during the LLM call: it would block the user's other tabs
         session_write_close();
@@ -2361,13 +2466,13 @@ class Controller
             $answer = $llm->chat($dialog, $assistant->maxOutputTokens());
             $usage = $llm->getLastUsage();
         } catch (Exception $e) {
-            error_log('Lesson assistant: ' . $e->getMessage());
+            error_log("AI assistant ({$feature}): " . $e->getMessage());
         }
 
         try {
-            $quota->charge('lesson_assistant', $lessonId, $profile, $usage);
+            $quota->charge($feature, $refId, $profile, $usage);
         } catch (Throwable $error) {
-            error_log('Lesson assistant charge failed: ' . $error->getMessage());
+            error_log("AI assistant ({$feature}) charge failed: " . $error->getMessage());
         }
 
         if ($answer === null) {
@@ -2376,26 +2481,22 @@ class Controller
         }
 
         $this->reopenSession();
-        $assistant->appendHistory($lessonId, $question, $answer);
+        $assistant->appendHistory($scope, $question, $answer);
         session_write_close();
 
         $this->jsonResponse(200, ['answer_html' => $assistant->renderAnswer($answer), 'quota' => $quota->status()]);
     }
 
     /**
-     * POST /{lang}/lesson/{id}/assistant-reset: clear the lesson's chat history
+     * Shared reset action of the AI assistants: POST from this site by a logged-in user
      */
-    public function assistant_reset(array $params): void
+    private function resetAssistantHistory(AiAssistant $assistant, int|string $scope): void
     {
-        if (!$this->lessonAssistantEnabled()) {
-            $this->jsonResponse(404, ['error' => 'not_found']);
-            return;
-        }
         if (($_SERVER['REQUEST_METHOD'] ?? 'GET') !== 'POST' || !$this->isSameOriginRequest() || !$this->user->logged()) {
             $this->jsonResponse(403, ['error' => 'forbidden']);
             return;
         }
-        (new LessonAssistant($this->env))->resetHistory((int)$params['lessonID']);
+        $assistant->resetHistory($scope);
         $this->jsonResponse(200, ['ok' => true]);
     }
 
@@ -2458,6 +2559,21 @@ class Controller
             'PlaygroundInitialSnippetHash' => $snippetHash,
             'PlaygroundInitialQuery' => $initialQuery,
         ]);
+
+        if ($this->playgroundAssistantEnabled()) {
+            $assistantHistory = [];
+            $assistantQuota = null;
+            if ($this->user->logged()) {
+                $assistantHistory = $this->renderAssistantHistory(new PlaygroundAssistant($this->env), PlaygroundAssistant::SCOPE);
+                $assistantQuota = (new TokenQuota($this->dbh, $this->user, $this->env))->status();
+            }
+            $this->assignVariables([
+                'PlaygroundAssistantText'    => 'playground-assistant-text.tpl',
+                'PlaygroundAssistantHistory' => $assistantHistory,
+                'AiQuota'                    => $assistantQuota,
+                'AiQuotaExceededMessage'     => $assistantQuota ? $this->aiQuotaExceededMessage() : '',
+            ]);
+        }
 
         $this->setHreflangLinks($params['path'], $this->lang);
 

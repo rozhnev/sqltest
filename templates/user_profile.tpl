@@ -224,7 +224,7 @@
                                             {foreach $AiTokens.usage as $row}
                                                 <tr>
                                                     <td>{$row.day}</td>
-                                                    <td>{if $row.feature == 'lesson_assistant'}{translate}profile_ai_feature_lesson_assistant{/translate}{elseif $row.feature == 'free_answer'}{translate}profile_ai_feature_free_answer{/translate}{else}{$row.feature|escape}{/if}</td>
+                                                    <td>{if $row.feature == 'lesson_assistant'}{translate}profile_ai_feature_lesson_assistant{/translate}{elseif $row.feature == 'free_answer'}{translate}profile_ai_feature_free_answer{/translate}{elseif $row.feature == 'playground_assistant'}{translate}profile_ai_feature_playground_assistant{/translate}{else}{$row.feature|escape}{/if}</td>
                                                     <td class="num">{$row.requests}</td>
                                                     <td class="num">{$row.tokens_text}</td>
                                                 </tr>

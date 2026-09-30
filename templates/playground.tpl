@@ -99,7 +99,11 @@
                     <div class="code-result ace-xcode" id="code-result"></div>
                 </div>
             </div>
-            <aside class="column db-description" id="right-panel">            
+            <aside class="column db-description" id="right-panel">
+                {if isset($PlaygroundAssistantText)}
+                    {include file='ai-assistant.tpl' assistantId='playground-assistant' endpoint="/{$Lang}/playground/assistant"
+                        text=$PlaygroundAssistantText history=$PlaygroundAssistantHistory mobile=false}
+                {/if}
                 {include file="{$Lang}/donation_goal_widget.tpl"}
             </aside>
         </main3>
@@ -108,6 +112,10 @@
         </footer>
         </div>
         {include file='counters.tpl'}
+        {if isset($PlaygroundAssistantText)}
+        <script src="/js/playground-assistant.js?{$VERSION}"></script>
+        <script src="/js/ai-assistant.js?{$VERSION}" defer></script>
+        {/if}
     </body>
     <script>
         {literal}
@@ -191,6 +199,7 @@
             }))
             .then(JSON.parse)
             .then((JSONResult)=>{
+                if (window.playgroundAssistantSetResult) window.playgroundAssistantSetResult(JSONResult);
                 let html = '';
                 JSONResult.forEach((jsonObject)=>{
                     if (jsonObject.error) {

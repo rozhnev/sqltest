@@ -1,53 +1,5 @@
-{* Lesson assistant panel (see LESSON_ASSISTANT_PLAN.md, Stage 5). Text comes from
-   $LessonAssistantTemplate ({lang}/lesson-assistant.tpl), picked by the "part" parameter.
+{* Lesson assistant panel (see LESSON_ASSISTANT_PLAN.md, Stage 5): the shared AI assistant panel with the
+   lesson's endpoint and texts ({lang}/lesson-assistant.tpl, picked by the "part" parameter).
    Params: mobile (bool) - render as a bottom sheet opened by a floating button. *}
-{assign var=AssistantText value=$LessonAssistantTemplate}
-{assign var=AssistantExhausted value=$AiQuota && $AiQuota.exhausted}
-{* Text parts end with a newline; trim the ones used in attributes *}
-{capture name=la_title}{include file=$AssistantText part='title'}{/capture}
-{capture name=la_placeholder}{include file=$AssistantText part='placeholder'}{/capture}
-{if $mobile}
-    <button type="button" class="lesson-assistant-fab button blue" data-lesson-assistant-toggle>{include file=$AssistantText part='fab'}</button>
-{/if}
-<section id="lesson-assistant" class="lesson-assistant side-card{if $mobile} mobile{/if}"
-    data-lang="{$Lang}" data-lesson-id="{$LessonData.id}" data-logged="{if $User->logged()}1{else}0{/if}"
-    aria-label="{$smarty.capture.la_title|trim|escape}">
-    <div class="la-header side-card-title">
-        <h3 class="la-title">{$smarty.capture.la_title|trim|escape}</h3>
-        {if $mobile}
-            <button type="button" class="la-close" data-lesson-assistant-toggle aria-label="Close">×</button>
-        {/if}
-    </div>
-    <div class="la-body side-card-body">
-        <div class="la-messages" aria-live="polite">
-            {if !$LessonAssistantHistory}
-                <div class="la-intro">
-                    {include file=$AssistantText part='intro'}
-                    <div class="la-examples">
-                        {include file=$AssistantText part='examples'}
-                    </div>
-                </div>
-            {/if}
-            {foreach $LessonAssistantHistory as $message}
-                <div class="la-message la-{$message.role}">{$message.html}</div>
-            {/foreach}
-        </div>
-        <div class="la-notice{if !$AssistantExhausted} hidden{/if}">{if $AssistantExhausted}{$AiQuotaExceededMessage}{/if}</div>
-        {if $User->logged()}
-            <form class="la-form" autocomplete="off">
-                <textarea class="la-input" name="question" rows="3" maxlength="1000"
-                    placeholder="{$smarty.capture.la_placeholder|trim|escape}"{if $AssistantExhausted} disabled{/if}></textarea>
-                <div class="la-actions">
-                    <button type="button" class="la-reset text-button">{include file=$AssistantText part='reset'}</button>
-                    <button type="submit" class="button green side-card-button la-send"{if $AssistantExhausted} disabled{/if}>{include file=$AssistantText part='send'}</button>
-                </div>
-            </form>
-            <div class="la-quota">{include file=$AssistantText part='quota'}</div>
-            <template class="la-exhausted-message">{$AiQuotaExceededMessage}</template>
-        {else}
-            <div class="la-login">
-                <button type="button" class="button green side-card-button" onClick="toggleLoginWindow()">{include file=$AssistantText part='login'}</button>
-            </div>
-        {/if}
-    </div>
-</section>
+{include file='ai-assistant.tpl' assistantId='lesson-assistant' endpoint="/{$Lang}/lesson/{$LessonData.id}/assistant"
+    text=$LessonAssistantTemplate history=$LessonAssistantHistory mobile=$mobile}
