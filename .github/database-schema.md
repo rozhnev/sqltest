@@ -371,6 +371,22 @@ Tracks fully-completed (not just earned) achievement milestones.
 
 ## Misc
 
+### `site_messages`
+Per-language site messages edited in `/admin/site-messages`: the donation goal widget and the urgent banner. One row per language; pages load the row of their language (falling back to `en`) with this month's donations in one query (`Helper::getSiteMessages()`).
+
+| Column                     | Type          | Notes                                                        |
+|----------------------------|---------------|--------------------------------------------------------------|
+| `language`                 | varchar(5) PK | `en`, `ru`, …                                                |
+| `donation_goal_title`      | text          | Widget title                                                 |
+| `donation_goal`            | text          | Widget text, HTML; `##goal##` is replaced by the amount      |
+| `donation_goal_amount`     | numeric(10,2) | Monthly goal in USD; the admin page sets it for all languages |
+| `urgent_banner`            | text          | Banner HTML                                                  |
+| `urgent_banner_enabled`    | boolean       |                                                              |
+| `urgent_banner_version`    | int           | Bump to re-show the banner to visitors who closed it         |
+| `urgent_banner_background` | text          | CSS color or gradient                                        |
+| `urgent_banner_text_color` | text          |                                                              |
+| `updated_at`               | timestamp     |                                                              |
+
 ### `referral_links`
 
 | Column | Type      | Notes |

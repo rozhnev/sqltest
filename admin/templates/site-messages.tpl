@@ -3,55 +3,53 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content="Urgent banner settings" />
-        <title>SQLtest.online Admin - Urgent banner</title>
+        <meta name="description" content="Site messages: donation goal and urgent banner" />
+        <title>SQLtest.online Admin - Site messages</title>
         <link rel="stylesheet" href="/style.min.css?{$VERSION}" media="all" />
         <link rel="stylesheet" href="/admin/style.min.css?{$VERSION}" media="all" />
+        <style>
+            .site-messages-language { margin: 1.5rem 0 0; padding: 1rem; border: 1px solid var(--text-block-border-color); border-radius: 8px; }
+            .site-messages-language legend { padding: 0 0.4rem; font-weight: 700; }
+            .site-messages-language h3 { margin: 1rem 0 0.4rem; font-size: 1rem; }
+            .site-messages-settings { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.6rem; align-items: end; }
+            .site-messages-row { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; margin-top: 0.5rem; }
+            /* Label above a full-width field; checkboxes stay on one line */
+            #site-messages-form label { display: flex; flex-direction: column; gap: 0.3rem; margin-top: 0.6rem; }
+            #site-messages-form label:has(> input[type="checkbox"]) { flex-direction: row; align-items: center; }
+            #site-messages-form input[type="text"], #site-messages-form input[type="number"] { width: 100%; box-sizing: border-box; padding: 0.4rem; }
+            #site-messages-form .translate-controls select { width: auto; }
+        </style>
     </head>
     <body>
         <div class="admin-shell">
             <header class="admin-shell__header">
                 <div>
                     <p class="brand__title">SQLtest.online Admin</p>
-                    <p class="brand__subtitle">Urgent banner</p>
+                    <p class="brand__subtitle">Site messages</p>
                 </div>
             </header>
 
             <main class="panel">
                 <div class="panel__title">
                     <div>
-                        <h2>Site-wide urgent banner</h2>
-                        <p class="panel__sub">Edit without a deploy. Bump the version to re-show the banner to visitors who dismissed a previous one.</p>
+                        <h2>Donation goal and urgent banner</h2>
+                        <p class="panel__sub">Edit without a deploy. One set per language. Bump a banner's version to re-show it to visitors who closed it.</p>
                     </div>
-                    <button type="submit" form="urgent-banner-form" class="button-primary">Save</button>
+                    <button type="submit" form="site-messages-form" class="button-primary">Save</button>
                 </div>
 
-                <form id="urgent-banner-form" class="editor-form">
+                <form id="site-messages-form" class="editor-form">
                     <label>
-                        <input type="checkbox" name="enabled" {if $Banner.enabled}checked{/if}>
-                        Enabled
-                    </label>
-
-                    <label>
-                        Version (bump to re-show to users who dismissed it)
-                        <input type="number" name="version" min="1" value="{$Banner.version|default:1}">
-                    </label>
-
-                    <label>
-                        Background (CSS color or gradient)
-                        <input type="text" name="background" value="{$Banner.background|escape}">
-                    </label>
-
-                    <label>
-                        Text color
-                        <input type="text" name="text_color" value="{$Banner.text_color|escape}">
+                        Monthly donation goal, USD (the same for every language)
+                        <input type="number" name="donation_goal_amount" min="0" step="0.01" value="{$DonationGoalAmount|escape}">
                     </label>
 
                     {foreach from=$Languages item=langCode}
-                        <label>
-                            Message HTML ({$langCode|upper})
-                            <span class="translate-controls">
-                                Translate from
+                        {assign var=m value=$Messages.$langCode|default:[]}
+                        <fieldset class="site-messages-language" data-lang="{$langCode}">
+                            <legend>{$langCode|upper}</legend>
+                            <div class="site-messages-row translate-controls">
+                                Translate all texts from
                                 <select class="translate-source" data-target="{$langCode}">
                                     {foreach from=$Languages item=sourceLangCode}
                                         {if $sourceLangCode !== $langCode}
@@ -60,12 +58,48 @@
                                     {/foreach}
                                 </select>
                                 <button type="button" class="translate-button" data-target="{$langCode}">Translate</button>
-                            </span>
-                            <textarea name="messages[{$langCode}]" id="message-{$langCode}" rows="4">{$Banner.messages.$langCode|default:''}</textarea>
-                        </label>
+                            </div>
+
+                            <h3>Donation goal widget</h3>
+                            <label>
+                                Title
+                                <input type="text" name="messages[{$langCode}][donation_goal_title]" id="donation_goal_title-{$langCode}" data-translatable value="{$m.donation_goal_title|default:''|escape}">
+                            </label>
+                            <label>
+                                Text (HTML; ##goal## is replaced by the amount)
+                                <textarea name="messages[{$langCode}][donation_goal]" id="donation_goal-{$langCode}" data-translatable rows="6">{$m.donation_goal|default:''|escape}</textarea>
+                            </label>
+
+                            <h3>Urgent banner</h3>
+                            <div class="site-messages-settings">
+                                <label>
+                                    <input type="checkbox" name="messages[{$langCode}][urgent_banner_enabled]" data-setting="enabled" {if $m.urgent_banner_enabled|default:false}checked{/if}>
+                                    Enabled
+                                </label>
+                                <label>
+                                    Version
+                                    <input type="number" name="messages[{$langCode}][urgent_banner_version]" data-setting="version" min="1" value="{$m.urgent_banner_version|default:1}">
+                                </label>
+                                <label>
+                                    Background (CSS color or gradient)
+                                    <input type="text" name="messages[{$langCode}][urgent_banner_background]" data-setting="background" value="{$m.urgent_banner_background|default:''|escape}">
+                                </label>
+                                <label>
+                                    Text color
+                                    <input type="text" name="messages[{$langCode}][urgent_banner_text_color]" data-setting="text_color" value="{$m.urgent_banner_text_color|default:'#ffffff'|escape}">
+                                </label>
+                            </div>
+                            <div class="site-messages-row">
+                                <button type="button" class="apply-settings-button" data-source="{$langCode}">Apply these banner settings to all languages</button>
+                            </div>
+                            <label>
+                                Banner HTML
+                                <textarea name="messages[{$langCode}][urgent_banner]" id="urgent_banner-{$langCode}" data-translatable rows="4">{$m.urgent_banner|default:''|escape}</textarea>
+                            </label>
+                        </fieldset>
                     {/foreach}
                 </form>
-                <p class="panel__sub" id="urgent-banner-feedback"></p>
+                <p class="panel__sub" id="site-messages-feedback"></p>
             </main>
         </div>
         <script>
@@ -78,14 +112,14 @@
                 pt: 'Portuguese',
                 zh: 'Chinese',
             };
+            const feedback = document.getElementById('site-messages-feedback');
 
-            async function translateMessage(sourceLang, targetLang) {
-                const sourceField = document.getElementById(`message-${sourceLang}`);
-                const targetField = document.getElementById(`message-${targetLang}`);
+            async function translateField(fieldPrefix, sourceLang, targetLang) {
+                const sourceField = document.getElementById(`${fieldPrefix}-${sourceLang}`);
+                const targetField = document.getElementById(`${fieldPrefix}-${targetLang}`);
                 if (!sourceField || !targetField || !sourceField.value.trim()) {
                     return;
                 }
-
                 const response = await fetch('/admin/llm', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -103,14 +137,16 @@
                 targetField.value = body.result || '';
             }
 
+            // Translate the title, the widget text and the banner of one language from another
             document.querySelectorAll('.translate-button').forEach(button => {
                 button.addEventListener('click', async () => {
                     const targetLang = button.dataset.target;
                     const sourceLang = document.querySelector(`.translate-source[data-target="${targetLang}"]`).value;
-                    const feedback = document.getElementById('urgent-banner-feedback');
                     feedback.textContent = 'Translating…';
                     try {
-                        await translateMessage(sourceLang, targetLang);
+                        for (const field of ['donation_goal_title', 'donation_goal', 'urgent_banner']) {
+                            await translateField(field, sourceLang, targetLang);
+                        }
                         feedback.textContent = `Translated into ${targetLang.toUpperCase()}. Review the HTML before saving.`;
                     } catch (error) {
                         feedback.textContent = error.message || 'Failed to translate.';
@@ -118,13 +154,29 @@
                 });
             });
 
-            document.getElementById('urgent-banner-form').addEventListener('submit', async function (event) {
-                event.preventDefault();
-                const feedback = document.getElementById('urgent-banner-feedback');
-                feedback.textContent = 'Saving…';
+            // Copy one language's banner settings (enabled, version, colors) to every language
+            document.querySelectorAll('.apply-settings-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const source = document.querySelector(`.site-messages-language[data-lang="${button.dataset.source}"]`);
+                    document.querySelectorAll('.site-messages-language').forEach(section => {
+                        source.querySelectorAll('[data-setting]').forEach(input => {
+                            const target = section.querySelector(`[data-setting="${input.dataset.setting}"]`);
+                            if (input.type === 'checkbox') {
+                                target.checked = input.checked;
+                            } else {
+                                target.value = input.value;
+                            }
+                        });
+                    });
+                    feedback.textContent = `Banner settings of ${button.dataset.source.toUpperCase()} applied to all languages. Save to keep them.`;
+                });
+            });
 
+            document.getElementById('site-messages-form').addEventListener('submit', async function (event) {
+                event.preventDefault();
+                feedback.textContent = 'Saving…';
                 try {
-                    const response = await fetch('/admin/urgent-banner', {
+                    const response = await fetch('/admin/site-messages', {
                         method: 'POST',
                         body: new FormData(event.target),
                     });
