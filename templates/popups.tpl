@@ -1,4 +1,5 @@
-{if $SHOW_URGENT_BANNER}
+{* Not on phones: there the banner takes several lines above the content *}
+{if $SHOW_URGENT_BANNER && !$MobileView}
     {include file='urgent_banner.tpl'}
 {/if}
 <div class="toast" id="toast">{translate}toast_sql_copied_to_buffer{/translate}</div>
