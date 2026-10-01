@@ -96,7 +96,13 @@
                     </div>
                 </div>
                 <div class="question-wrapper" style="margin-right: 6px;">
-                    <div class="code-result ace-xcode" id="code-result"></div>
+                    {* data-*: labels and the "Explain the error" button for SQL errors (enhanceSqlErrors() in script.js) *}
+                    <div class="code-result ace-xcode" id="code-result"
+                        data-location-label="{translate}sql_error_location{/translate}" data-goto-label="{translate}sql_error_goto{/translate}"
+                        {if isset($PlaygroundAssistantText)}
+                        data-explain-question="{translate}playground_assistant_q_fix{/translate}"
+                        data-explain-label="{translate}sql_error_explain{/translate}" data-explain-hint="{translate}sql_error_explain_hint{/translate}"
+                        {/if}></div>
                 </div>
             </div>
             <aside class="column db-description" id="right-panel">
@@ -183,9 +189,11 @@
 
         function executeQuery() {
             setLoader('code-result');
+            clearSqlErrorMarker();
+            const sql = window.sql_editor.getValue();
             let formData = new FormData();
             const databaseVersion = document.getElementById('databaseVersion').value;
-            formData.append('query', window.sql_editor.getValue());
+            formData.append('query', sql);
             fetch(`/${lang}/playground/${databaseVersion}/query-run`, {
                 method: "POST",
                 mode: "cors",
@@ -210,6 +218,7 @@
                 });
                 if (html === '') html = '✓ (Done)';
                 document.getElementById('code-result').innerHTML = html;
+                enhanceSqlErrors(document.getElementById('code-result'), sql);
             })
             .catch(err=>{
                 document.getElementById('code-result').innerHTML = 'Something went wrong. Please review your query and try again.';

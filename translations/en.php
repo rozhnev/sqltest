@@ -423,4 +423,11 @@ $translations = [
     'tabulator_last' => 'Last',
     'tabulator_last_title' => 'Last page',
     'tabulator_filter' => 'filter…',
+    // SQL errors on the task page (enhanceSqlErrors() in script.js)
+    'sql_error_location' => 'Line {line}, column {column}',
+    'sql_error_goto' => 'Show in the editor',
+    'sql_error_explain' => 'Explain the error',
+    'sql_error_explain_loading' => 'Explaining…',
+    'sql_error_explain_hint' => 'AI explanation, uses AI tokens',
+    'profile_ai_feature_query_error' => 'Error explanation',
 ];

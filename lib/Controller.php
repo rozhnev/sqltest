@@ -1320,6 +1320,7 @@ class Controller
             'PreviousQuestionId'    => $question->getPreviousSefId($questionCategoryID),
             'DB'                    => $questionData['db_template'],
             'DBMS'                  => $questionData['dbms'],
+            'QueryErrorAssistant'   => $this->queryErrorAssistantEnabled(),
             'Action'                => 'question',
             'QuestionsCount'        => $totalQuestions,
             'SolvedQuestionsCount'  => $this->user->getSolvedQuestionsCount(),
@@ -1514,6 +1515,46 @@ class Controller
         header('X-AI-Tokens-Low: ' . ($quotaStatus['low'] ? '1' : '0'));
         if (!$freeAnswerResult['ok']) header( 'HTTP/1.1 418 BAD REQUEST' );
         $this->engine->display($this->lang . "/check_free_answer_result.tpl");
+    }
+
+    /**
+     * POST /{lang}/question/{id}/explain-error: AI explanation of the SQL error the user got when running
+     * or checking the task query, paid from the AI token balance. Body: sql, error (as shown on the page).
+     * Responds with JSON {answer_html, quota} or {error, message[, quota]}.
+     */
+    public function explain_error(array $params): void
+    {
+        if (!$this->queryErrorAssistantEnabled()) {
+            $this->jsonResponse(404, ['error' => 'not_found']);
+            return;
+        }
+        $quota = $this->startAssistantRequest();
+        if ($quota === null) {
+            return;
+        }
+
+        $assistant = new QueryErrorAssistant($this->env);
+        $sql = $assistant->normalizeSql((string)($_POST['sql'] ?? ''));
+        $error = $assistant->normalizeError((string)($_POST['error'] ?? ''));
+        if ($sql === '' || $error === '') {
+            $this->jsonResponse(400, ['error' => 'empty_error']);
+            return;
+        }
+
+        $questionID = (int)$params['questionID'];
+        try {
+            $questionData = (new Question($this->dbh, (string)$questionID))->get(0, $this->lang, null);
+        } catch (Exception $e) {
+            $this->jsonResponse(404, ['error' => 'not_found']);
+            return;
+        }
+
+        $dialog = $assistant->buildDialog($this->lang, (string)$questionData['dbms'], (string)$questionData['task'], $sql, $error);
+        $answer = $this->askAssistantLlm($assistant, 'query_error', $questionID, $quota, $dialog);
+        if ($answer === null) {
+            return;
+        }
+        $this->jsonResponse(200, ['answer_html' => $assistant->renderAnswer($answer), 'quota' => $quota->status()]);
     }
 
     public function rate(array $params): void
@@ -2250,6 +2291,11 @@ class Controller
         return $this->assistantEnabled('PLAYGROUND_ASSISTANT_ENABLED');
     }
 
+    private function queryErrorAssistantEnabled(): bool
+    {
+        return $this->assistantEnabled('QUERY_ERROR_ASSISTANT_ENABLED');
+    }
+
     /**
      * An assistant's .env flag: 'admin' turns it on for admins only, '1'/'true'/'on'/'yes' for everyone
      */
@@ -2423,12 +2469,8 @@ class Controller
      */
     private function answerAssistantQuestion(AiAssistant $assistant, string $feature, int|string $scope, ?int $refId, callable $buildDialog): void
     {
-        if (($_SERVER['REQUEST_METHOD'] ?? 'GET') !== 'POST' || !$this->isSameOriginRequest()) {
-            $this->jsonResponse(403, ['error' => 'forbidden']);
-            return;
-        }
-        if (!$this->user->logged()) {
-            $this->jsonResponse(401, ['error' => 'login_required', 'message' => Localizer::translateString('ai_login_required')]);
+        $quota = $this->startAssistantRequest();
+        if ($quota === null) {
             return;
         }
 
@@ -2438,19 +2480,55 @@ class Controller
             return;
         }
 
-        $quota = new TokenQuota($this->dbh, $this->user, $this->env);
-        if (!$quota->canSpend()) {
-            $quotaStatus = $quota->status();
-            $this->jsonResponse(429, ['error' => 'quota_exceeded', 'message' => $this->aiQuotaExceededMessage(), 'quota' => $quotaStatus]);
-            return;
-        }
-
         $dialog = $buildDialog($question, $assistant->getHistory($scope));
         if ($dialog === null) {
             $this->jsonResponse(404, ['error' => 'not_found']);
             return;
         }
 
+        $answer = $this->askAssistantLlm($assistant, $feature, $refId, $quota, $dialog);
+        if ($answer === null) {
+            return;
+        }
+
+        $this->reopenSession();
+        $assistant->appendHistory($scope, $question, $answer);
+        session_write_close();
+
+        $this->jsonResponse(200, ['answer_html' => $assistant->renderAnswer($answer), 'quota' => $quota->status()]);
+    }
+
+    /**
+     * Checks shared by the AI assistant actions: a POST from this site by a logged-in user with tokens left.
+     * Responds with the JSON error and returns null when a check fails.
+     */
+    private function startAssistantRequest(): ?TokenQuota
+    {
+        if (($_SERVER['REQUEST_METHOD'] ?? 'GET') !== 'POST' || !$this->isSameOriginRequest()) {
+            $this->jsonResponse(403, ['error' => 'forbidden']);
+            return null;
+        }
+        if (!$this->user->logged()) {
+            $this->jsonResponse(401, ['error' => 'login_required', 'message' => Localizer::translateString('ai_login_required')]);
+            return null;
+        }
+
+        $quota = new TokenQuota($this->dbh, $this->user, $this->env);
+        if (!$quota->canSpend()) {
+            $quotaStatus = $quota->status();
+            $this->jsonResponse(429, ['error' => 'quota_exceeded', 'message' => $this->aiQuotaExceededMessage(), 'quota' => $quotaStatus]);
+            return null;
+        }
+        return $quota;
+    }
+
+    /**
+     * The LLM call of an AI assistant action, charged to the user's token balance.
+     * Closes the session (reopen it with reopenSession() to write). Responds with 503 and returns null
+     * when the LLM fails.
+     */
+    private function askAssistantLlm(AiAssistant $assistant, string $feature, ?int $refId, TokenQuota $quota, array $dialog): ?string
+    {
         // Don't hold the session lock during the LLM call: it would block the user's other tabs
         session_write_close();
         $profile = $assistant->llmProfile();
@@ -2472,14 +2550,8 @@ class Controller
 
         if ($answer === null) {
             $this->jsonResponse(503, ['error' => 'llm_unavailable', 'message' => Localizer::translateString('ai_unavailable'), 'quota' => $quota->status()]);
-            return;
         }
-
-        $this->reopenSession();
-        $assistant->appendHistory($scope, $question, $answer);
-        session_write_close();
-
-        $this->jsonResponse(200, ['answer_html' => $assistant->renderAnswer($answer), 'quota' => $quota->status()]);
+        return $answer;
     }
 
     /**

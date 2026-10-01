@@ -421,4 +421,11 @@ $translations = [
     'interview_error_self_intro_empty' => 'Escreva algumas frases sobre você.',
     'interview_error_followup_empty' => 'Por favor, responda à pergunta do entrevistador.',
     'interview_error_self_intro_save' => 'Não foi possível salvar a sua apresentação. Tente novamente.',
+    // SQL errors on the task page (enhanceSqlErrors() in script.js)
+    'sql_error_location' => 'Linha {line}, coluna {column}',
+    'sql_error_goto' => 'Mostrar no editor',
+    'sql_error_explain' => 'Explicar o erro',
+    'sql_error_explain_loading' => 'Explicando…',
+    'sql_error_explain_hint' => 'Explicação por IA, usa tokens de IA',
+    'profile_ai_feature_query_error' => 'Explicação de erro',
 ];

@@ -1107,6 +1107,67 @@ input:checked + .slider:before {
 }
 .code-result .sql_error {
     color: red;
+    /* PostgreSQL and DuckDB point at the error with a "^" under the query line */
+    white-space: pre-wrap;
+}
+/* Under a SQL error: where it is, and the AI explanation (enhanceSqlErrors() in script.js) */
+.sql-error-tools {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem 1.25rem;
+    margin-top: 0.6rem;
+}
+.sql-error-tools .text-button {
+    padding: 0;
+    border: none;
+    background: none;
+    font: inherit;
+}
+/* The AI button stands out: filled, unlike the plain "line, column" link next to it */
+.sql-error-tools .sql-error-explain {
+    padding: 0.3rem 0.8rem;
+    border-radius: 999px;
+    background-color: #0069E6;
+    color: #fff;
+    font-weight: 600;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+.sql-error-tools .sql-error-explain:hover {
+    background-color: #0052b4;
+}
+.sql-error-tools .text-button:disabled {
+    cursor: wait;
+    opacity: 0.7;
+}
+.sql-error-explanation {
+    margin-top: 0.6rem;
+    padding: 0.6rem 0.9rem;
+    border-left: 3px solid #0069E6;
+    border-radius: 4px;
+    background-color: var(--text-block-background-color);
+    color: var(--question-text);
+    line-height: 1.55;
+}
+.sql-error-explanation > :first-child {
+    margin-top: 0;
+}
+.sql-error-explanation > :last-child {
+    margin-bottom: 0;
+}
+.sql-error-quota {
+    margin-top: 0.5rem;
+    font-size: 0.85em;
+    opacity: 0.75;
+}
+/* The error spot in the task editor; removed on the next edit */
+.ace_editor .sql-error-marker {
+    position: absolute;
+    background-color: rgba(230, 0, 0, 0.15);
+    border-bottom: 2px solid #E60000;
+}
+.ace_gutter-cell.sql-error-gutter {
+    background-color: rgba(230, 0, 0, 0.25);
 }
 .arrow {
     display: inline-block;

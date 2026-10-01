@@ -45,6 +45,22 @@
 
     messages.querySelectorAll('.la-assistant').forEach(addCodeActions);
 
+    // Ask a question from outside the panel: the "Explain the error" button under playground errors
+    // (enhanceSqlErrors() in script.js). Opens the panel; guests get the login window.
+    window.aiAssistantAsk = function (question) {
+        if (!logged || !form) {
+            toggleLoginWindow();
+            return;
+        }
+        root.classList.add('open');
+        root.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        if (busy || input.disabled) {
+            return;
+        }
+        input.value = question;
+        ask();
+    };
+
     if (!form) {
         return;
     }

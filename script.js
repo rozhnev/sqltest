@@ -203,7 +203,210 @@ function jsonToTable(jsonObject) {
 }
 
 function errorToTable(jsonObject) {
-    return `<span class="sql_error">${jsonObject.error}</span>`;
+    const error = document.createElement('span');
+    error.className = 'sql_error';
+    error.textContent = jsonObject.error;
+    return error.outerHTML;
+}
+
+// SQL errors under the editor (runQuery, testQuery, the playground's executeQuery): where the error is, marked
+// in the message and in the editor, and the "Explain the error" AI button: on task pages it calls
+// Controller::explain_error (data-explain-url), in the playground it asks the playground AI chat
+// (data-explain-question). Both are paid from the AI tokens.
+// Settings and labels come from the data-* attributes of #code-result (index.tpl, m.index.tpl, playground templates).
+
+/**
+ * Where an engine's error message points in the query: {row, column, length} (0-based), or null.
+ * Formats: PostgreSQL/DuckDB "LINE 2: ... ^", Firebird "line 2, column 10", MySQL "near '...' at line 2",
+ * otherwise the first quoted name ('foo', "foo", no such table: foo) searched in the query.
+ */
+function sqlErrorLocation(error, sql) {
+    const lines = sql.replace(/\r\n?/g, '\n').split('\n');
+    const wordAt = (row, column) => {
+        const match = (lines[row] || '').slice(column).match(/^[\w$.]+|^\S/);
+        return match ? match[0].length : 1;
+    };
+    const at = (row, column) => (row >= 0 && row < lines.length && column >= 0 && column <= lines[row].length)
+        ? {row, column, length: wordAt(row, column)}
+        : null;
+    const find = (text, row) => {
+        if (!text) return null;
+        const escaped = text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const pattern = new RegExp((/^\w/.test(text) ? '(^|[^\\w$])' : '()') + '(' + escaped + ')' + (/\w$/.test(text) ? '(?![\\w$])' : ''), 'i');
+        const rows = row === undefined ? lines.map((_, i) => i) : [row];
+        for (const r of rows) {
+            const match = (lines[r] || '').match(pattern);
+            if (match) return {row: r, column: match.index + match[1].length, length: text.length};
+        }
+        return null;
+    };
+
+    let match = error.match(/LINE (\d+): ([^\n]*)\n( *)\^/);
+    if (match) {
+        const row = parseInt(match[1]) - 1;
+        let column = match[3].length - ('LINE ' + match[1] + ': ').length;
+        // A long line is shown cut: "...fragment..."; find the fragment in the line
+        if (match[2].startsWith('...')) {
+            const fragment = match[2].slice(3).replace(/\.\.\.$/, '');
+            const offset = (lines[row] || '').indexOf(fragment);
+            column = offset < 0 ? -1 : offset + column - 3;
+        }
+        const location = at(row, column);
+        if (location) return location;
+    }
+    match = error.match(/line (\d+), column (\d+)/i);
+    if (match) {
+        const location = at(parseInt(match[1]) - 1, parseInt(match[2]) - 1);
+        if (location) return location;
+    }
+    match = error.match(/near '([\s\S]*)' at line (\d+)/);
+    if (match) {
+        const row = parseInt(match[2]) - 1;
+        const fragment = match[1].split('\n')[0].trim();
+        if (fragment === '') {
+            // Unexpected end of the query: mark its last word
+            const lastRow = Math.min(row, lines.length - 1);
+            const lastWord = lastRow >= 0 ? lines[lastRow].match(/[\w$.]+\s*$|\S\s*$/) : null;
+            return lastWord ? at(lastRow, lastWord.index) : null;
+        }
+        const location = find(fragment, row) || find(fragment);
+        if (location) return {...location, length: wordAt(location.row, location.column)};
+    }
+    match = error.match(/['"`]([^'"`\n]{1,64})['"`]|no such (?:table|column): ([\w$.]+)/);
+    if (match) {
+        const name = match[1] || match[2];
+        return find(name) || find(name.split('.').pop());
+    }
+    return null;
+}
+
+function clearSqlErrorMarker() {
+    const marker = window.sqlErrorMarker;
+    if (marker && window.sql_editor) {
+        window.sql_editor.session.removeMarker(marker.id);
+        window.sql_editor.session.removeGutterDecoration(marker.row, 'sql-error-gutter');
+    }
+    window.sqlErrorMarker = null;
+}
+
+function markSqlErrorInEditor(location) {
+    clearSqlErrorMarker();
+    if (!window.sql_editor) return;
+    const Range = ace.require('ace/range').Range;
+    const session = window.sql_editor.session;
+    window.sqlErrorMarker = {
+        id: session.addMarker(new Range(location.row, location.column, location.row, location.column + location.length), 'sql-error-marker', 'text'),
+        row: location.row
+    };
+    session.addGutterDecoration(location.row, 'sql-error-gutter');
+    // Remove the mark once the query is edited
+    session.once('change', clearSqlErrorMarker);
+}
+
+/**
+ * Adds the location and the AI button to each .sql_error in container
+ *
+ * @param {HTMLElement} container #code-result
+ * @param {string} sql The query that produced the result
+ */
+function enhanceSqlErrors(container, sql) {
+    const settings = document.getElementById('code-result')?.dataset || {};
+    container.querySelectorAll('.sql_error').forEach(errorElement => {
+        const error = errorElement.textContent;
+        const location = sqlErrorLocation(error, sql);
+        const tools = document.createElement('div');
+        tools.className = 'sql-error-tools';
+
+        if (location) {
+            markSqlErrorInEditor(location);
+            const goTo = document.createElement('button');
+            goTo.type = 'button';
+            goTo.className = 'text-button blue sql-error-goto';
+            goTo.title = settings.gotoLabel || '';
+            goTo.textContent = (settings.locationLabel || 'Line {line}, column {column}')
+                .replace('{line}', location.row + 1)
+                .replace('{column}', location.column + 1);
+            goTo.addEventListener('click', () => {
+                if (!window.sql_editor) return;
+                window.sql_editor.selection.setRange(new (ace.require('ace/range').Range)(location.row, location.column, location.row, location.column + location.length));
+                window.sql_editor.scrollToLine(location.row, true, true);
+                window.sql_editor.focus();
+            });
+            tools.appendChild(goTo);
+        }
+
+        // Playground: the question goes to its AI chat panel (js/ai-assistant.js), which sees the error itself
+        if (settings.explainQuestion && typeof window.aiAssistantAsk === 'function') {
+            const explain = sqlErrorExplainButton(settings);
+            explain.addEventListener('click', () => window.aiAssistantAsk(settings.explainQuestion));
+            tools.appendChild(explain);
+            errorElement.after(tools);
+        } else if (settings.explainUrl) {
+            const explain = sqlErrorExplainButton(settings);
+            const answer = document.createElement('div');
+            answer.className = 'sql-error-explanation hidden';
+            explain.addEventListener('click', () => {
+                if (settings.logged !== '1') {
+                    toggleLoginWindow();
+                    return;
+                }
+                explainSqlError(settings, explain, answer, sql, error);
+            });
+            tools.appendChild(explain);
+            errorElement.after(tools, answer);
+        } else {
+            errorElement.after(tools);
+        }
+    });
+}
+
+function sqlErrorExplainButton(settings) {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'text-button blue sql-error-explain';
+    button.title = settings.explainHint || '';
+    button.textContent = '✨ ' + settings.explainLabel;
+    return button;
+}
+
+function explainSqlError(settings, button, answer, sql, error) {
+    if (button.disabled) return;
+    const label = button.textContent;
+    button.disabled = true;
+    button.textContent = settings.explainLoading;
+    let formData = new FormData();
+    formData.append('sql', sql);
+    formData.append('error', error);
+    fetch(settings.explainUrl, {
+        method: "POST",
+        credentials: "same-origin",
+        body: formData,
+    })
+    .then(response => response.json())
+    .then(data => {
+        answer.classList.remove('hidden');
+        if (data.answer_html) {
+            answer.innerHTML = data.answer_html;
+            if (data.quota && settings.tokensLeftLabel) {
+                const quota = document.createElement('div');
+                quota.className = 'sql-error-quota';
+                quota.textContent = settings.tokensLeftLabel + ' ' + data.quota.remaining_text;
+                answer.appendChild(quota);
+            }
+            button.remove();
+            return;
+        }
+        // Server messages are site translations, some with links (buy tokens, log in)
+        answer.innerHTML = data.message || 'Something went wrong.';
+        button.disabled = false;
+        button.textContent = label;
+    })
+    .catch(() => {
+        answer.classList.remove('hidden');
+        answer.textContent = 'Something went wrong.';
+        button.disabled = false;
+        button.textContent = label;
+    });
 }
 
 function getHelp(lang, questionId) {
@@ -225,8 +428,10 @@ function getHelp(lang, questionId) {
 
 function runQuery(lang, questionId) {
   setLoader('code-result');
+  clearSqlErrorMarker();
+  const sql = window.sql_editor.getValue();
   let formData = new FormData();
-  formData.append('query', window.sql_editor.getValue());
+  formData.append('query', sql);
   fetch(`/${lang}/question/${questionId}/query-run`, {
       method: "POST",
       mode: "cors",
@@ -248,6 +453,7 @@ function runQuery(lang, questionId) {
             : jsonToTable(jsonObject);
       }
       document.getElementById('code-result').innerHTML = html;
+      enhanceSqlErrors(document.getElementById('code-result'), sql);
   })
   .catch(err=>{
     document.getElementById('code-result').innerHTML = 'Something went wrong. Please review your query and try again or contact us by email: <a href="mailto:support@sqltest.online">support@sqltest.online</a>.';
@@ -449,8 +655,10 @@ function stopVoiceInput() {
 
 function testQuery(lang, questionId) {
     setLoader('code-result');
+    clearSqlErrorMarker();
+    const sql = window.sql_editor.getValue();
     let formData = new FormData();
-    formData.append('query', window.sql_editor.getValue());
+    formData.append('query', sql);
     fetch(`/${lang}/question/${questionId}/query-test`, {
         method: "POST",
         mode: "cors",
@@ -479,6 +687,7 @@ function testQuery(lang, questionId) {
     }))
     .then((message)=>{
         document.getElementById('code-result').innerHTML = message;
+        enhanceSqlErrors(document.getElementById('code-result'), sql);
     })
     .catch(err=>{
         document.getElementById('code-result').innerHTML = 'Something went wrong. Please review your query and try again or contact us by email: <a href="mailto:support@sqltest.online">support@sqltest.online</a>.';

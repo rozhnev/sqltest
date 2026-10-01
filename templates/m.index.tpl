@@ -122,7 +122,14 @@
                 </div>
             </div>
             <div class="question-wrapper">
-            <div class="code-result ace-xcode" id="code-result"></div>
+            {* data-*: labels and the "Explain the error" AI button for SQL errors (enhanceSqlErrors() in script.js) *}
+            <div class="code-result ace-xcode" id="code-result"
+                data-location-label="{translate}sql_error_location{/translate}" data-goto-label="{translate}sql_error_goto{/translate}"
+                {if $QueryErrorAssistant}
+                data-explain-url="/{$Lang}/question/{$QuestionID}/explain-error" data-logged="{if $User->logged()}1{else}0{/if}"
+                data-explain-label="{translate}sql_error_explain{/translate}" data-explain-loading="{translate}sql_error_explain_loading{/translate}"
+                data-explain-hint="{translate}sql_error_explain_hint{/translate}" data-tokens-left-label="{translate}free_answer_tokens_left{/translate}"
+                {/if}></div>
                 {if $NextQuestionId}
                     <div class="code-buttons">
                         <div id="nextTaskBtn" class="hidden">

@@ -50,7 +50,7 @@ class TokenQuota
      * Charge the actual usage of one LLM call and log it. Charges nothing when the
      * call reported no usage (failed before the provider billed anything).
      *
-     * @param string $feature 'lesson_assistant' | 'free_answer'
+     * @param string $feature 'lesson_assistant' | 'playground_assistant' | 'free_answer' | 'query_error'
      * @param int|null $refId Lesson id / question id
      * @param string $profile LLM profile name from config.php
      * @param array|null $usage LLM::getLastUsage() result

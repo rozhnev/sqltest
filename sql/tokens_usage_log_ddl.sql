@@ -9,7 +9,7 @@
 CREATE TABLE public.tokens_usage_log (
     id bigserial NOT NULL,
     user_id uuid NOT NULL,
-    feature character varying(32) NOT NULL,   -- 'lesson_assistant' | 'free_answer'
+    feature character varying(32) NOT NULL,   -- 'lesson_assistant' | 'playground_assistant' | 'free_answer' | 'query_error'
     ref_id integer,                           -- lesson id / question id
     llm_profile character varying(64) NOT NULL,
     prompt_tokens integer NOT NULL,

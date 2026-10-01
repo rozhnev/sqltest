@@ -420,4 +420,11 @@ $translations = [
     'interview_error_self_intro_empty' => '请写几句话介绍一下自己。',
     'interview_error_followup_empty' => '请回答面试官的问题。',
     'interview_error_self_intro_save' => '无法保存您的自我介绍，请重试。',
+    // SQL errors on the task page (enhanceSqlErrors() in script.js)
+    'sql_error_location' => '第 {line} 行，第 {column} 列',
+    'sql_error_goto' => '在编辑器中显示',
+    'sql_error_explain' => '解释错误',
+    'sql_error_explain_loading' => '正在解释…',
+    'sql_error_explain_hint' => 'AI 解释，会消耗 AI 令牌',
+    'profile_ai_feature_query_error' => '错误解释',
 ];

@@ -14,7 +14,7 @@ class Router
 
         $this->routes = [
             'question'          => "@(?<lang>{$this->langPattern})/(?<action>question)/(?<questionCategory>[a-z-]+)/(?<question>[a-z-]+)@i",
-            'question-action'   => "@(?<lang>{$this->langPattern})/question/(?<questionID>\d+)/(?<action>query-help|query-run|query-test|rate|check-answers|check-free-answer)@i",
+            'question-action'   => "@(?<lang>{$this->langPattern})/question/(?<questionID>\d+)/(?<action>query-help|query-run|query-test|rate|check-answers|check-free-answer|explain-error)@i",
             // Must precede 'static-page', whose unanchored pattern would also match these paths.
             'buy-tokens-action' => "@(?<lang>{$this->langPattern})/(?<class>buy-tokens)/(?<action>checkout|email)/?$@i",
             'lava-webhook'      => "@^/(?<class>lava)/(?<action>webhook)/?$@i",
