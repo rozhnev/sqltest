@@ -441,17 +441,38 @@ header .button .currency,
     min-height: 44px; 
     display: flex;
 }
+/* Login methods dropdown under the Login button: blue frame and a deep shadow so it stands out from the page */
 .login-menu {
     position: absolute;
-    top: 105%;
+    top: calc(100% + 8px);
     right: 0px;
-    padding: 10px;
+    padding: 12px;
     z-index: 1000;
-    width: 240px;
+    width: 250px;
     background-color: var(--accordion-panel-bg-color);
-    border: 1px solid var(--text-block-border-color);
+    border: 2px solid #0069E6;
     color: var(--question-text);
-    border-radius: 6px 0 6px 6px;
+    border-radius: 8px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35), 0 2px 6px rgba(0, 0, 0, 0.2);
+    cursor: default;
+}
+/* Arrow pointing at the Login button */
+.login-menu::before {
+    content: "";
+    position: absolute;
+    top: -9px;
+    right: 22px;
+    width: 14px;
+    height: 14px;
+    background-color: var(--accordion-panel-bg-color);
+    border-top: 2px solid #0069E6;
+    border-left: 2px solid #0069E6;
+    transform: rotate(45deg);
+}
+.login-menu .login-popup-title {
+    margin-bottom: 4px;
+    font-size: 1.05rem;
+    font-weight: 700;
 }
 .login-option {
     border: 1px solid var(--text-block-border-color);
