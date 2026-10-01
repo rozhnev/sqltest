@@ -426,5 +426,7 @@ $translations = [
     'sql_error_explain' => '解释错误',
     'sql_error_explain_loading' => '正在解释…',
     'sql_error_explain_hint' => 'AI 解释，会消耗 AI 令牌',
+    'sql_error_explain_login' => '登录后即可获得 AI 解释。新用户可免费获得 AI 令牌。',
+    'sql_error_explain_login_button' => '登录并获取解释',
     'profile_ai_feature_query_error' => '错误解释',
 ];

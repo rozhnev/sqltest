@@ -426,5 +426,7 @@ $translations = [
     'sql_error_explain' => 'Expliquer l\'erreur',
     'sql_error_explain_loading' => 'Explication…',
     'sql_error_explain_hint' => 'Explication par IA, utilise des jetons IA',
+    'sql_error_explain_login' => 'L\'explication par IA est disponible après connexion. Les nouveaux utilisateurs reçoivent des jetons IA gratuits.',
+    'sql_error_explain_login_button' => 'Se connecter et obtenir l\'explication',
     'profile_ai_feature_query_error' => 'Explication d\'erreur',
 ];

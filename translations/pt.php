@@ -427,5 +427,7 @@ $translations = [
     'sql_error_explain' => 'Explicar o erro',
     'sql_error_explain_loading' => 'Explicando…',
     'sql_error_explain_hint' => 'Explicação por IA, usa tokens de IA',
+    'sql_error_explain_login' => 'A explicação por IA fica disponível depois de entrar. Novos usuários recebem tokens de IA grátis.',
+    'sql_error_explain_login_button' => 'Entrar e obter a explicação',
     'profile_ai_feature_query_error' => 'Explicação de erro',
 ];

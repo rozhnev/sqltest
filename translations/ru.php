@@ -431,5 +431,7 @@ $translations = [
     'sql_error_explain' => 'Объяснить ошибку',
     'sql_error_explain_loading' => 'Объясняю…',
     'sql_error_explain_hint' => 'Объяснение от AI, расходует AI-токены',
+    'sql_error_explain_login' => 'Объяснение от AI доступно после входа на сайт. Новым пользователям AI-токены даются бесплатно.',
+    'sql_error_explain_login_button' => 'Войти и получить объяснение',
     'profile_ai_feature_query_error' => 'Объяснение ошибки',
 ];

@@ -335,30 +335,98 @@ function enhanceSqlErrors(container, sql) {
             tools.appendChild(goTo);
         }
 
-        // Playground: the question goes to its AI chat panel (js/ai-assistant.js), which sees the error itself
-        if (settings.explainQuestion && typeof window.aiAssistantAsk === 'function') {
-            const explain = sqlErrorExplainButton(settings);
-            explain.addEventListener('click', () => window.aiAssistantAsk(settings.explainQuestion));
-            tools.appendChild(explain);
+        const chatMode = settings.explainQuestion && typeof window.aiAssistantAsk === 'function';
+        if (!chatMode && !settings.explainUrl) {
             errorElement.after(tools);
-        } else if (settings.explainUrl) {
-            const explain = sqlErrorExplainButton(settings);
-            const answer = document.createElement('div');
-            answer.className = 'sql-error-explanation hidden';
-            explain.addEventListener('click', () => {
-                if (settings.logged !== '1') {
-                    toggleLoginWindow();
-                    return;
-                }
+            return;
+        }
+        const explain = sqlErrorExplainButton(settings);
+        tools.appendChild(explain);
+        const answer = document.createElement('div');
+        answer.className = 'sql-error-explanation hidden';
+        errorElement.after(tools, answer);
+
+        explain.addEventListener('click', () => {
+            if (settings.logged !== '1') {
+                showSqlErrorLoginPrompt(settings, answer, sql);
+            } else if (chatMode) {
+                // Playground: the question goes to its AI chat panel (js/ai-assistant.js), which sees the error itself
+                window.aiAssistantAsk(settings.explainQuestion);
+            } else {
                 explainSqlError(settings, explain, answer, sql, error);
-            });
-            tools.appendChild(explain);
-            errorElement.after(tools, answer);
-        } else {
-            errorElement.after(tools);
+            }
+        });
+
+        // Back from the login started by the guest prompt: point at the button
+        if (window.sqlErrorExplainResumed) {
+            window.sqlErrorExplainResumed = false;
+            explain.scrollIntoView({block: 'center', behavior: 'smooth'});
+            explain.classList.add('ai-attention');
         }
     });
 }
+
+// Guests: say why the AI needs an account, right under the error, with a button that opens the login menu.
+// The query is kept in sessionStorage, so after the login (the page reloads) it is run again.
+const SQL_ERROR_EXPLAIN_PENDING = 'sqlErrorExplainPending';
+
+function showSqlErrorLoginPrompt(settings, container, sql) {
+    container.classList.remove('hidden');
+    if (container.querySelector('.sql-error-login')) return;
+    const prompt = document.createElement('div');
+    prompt.className = 'sql-error-login';
+    const text = document.createElement('p');
+    text.textContent = settings.loginText;
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'button green';
+    button.textContent = settings.loginButton;
+    button.addEventListener('click', event => {
+        // Keep the document click handlers from closing the menu right away
+        event.stopPropagation();
+        try {
+            sessionStorage.setItem(SQL_ERROR_EXPLAIN_PENDING, JSON.stringify({path: location.pathname, sql}));
+        } catch (e) {}
+        openLoginMenu();
+    });
+    prompt.append(text, button);
+    container.appendChild(prompt);
+}
+
+function openLoginMenu() {
+    const menu = document.getElementById('login-menu');
+    if (!menu) return;
+    menu.classList.remove('hidden');
+    (menu.closest('header') || menu).scrollIntoView({block: 'start', behavior: 'smooth'});
+    // Restart the highlight animation
+    menu.classList.remove('ai-attention');
+    void menu.offsetWidth;
+    menu.classList.add('ai-attention');
+}
+
+// After the login: put the query back and run it, so the error and the explain button show up again
+function resumeSqlErrorExplain() {
+    let pending = null;
+    try {
+        pending = JSON.parse(sessionStorage.getItem(SQL_ERROR_EXPLAIN_PENDING) || 'null');
+    } catch (e) {}
+    const settings = document.getElementById('code-result')?.dataset;
+    if (!pending || !settings || settings.logged !== '1' || !window.sql_editor) return;
+    try {
+        sessionStorage.removeItem(SQL_ERROR_EXPLAIN_PENDING);
+    } catch (e) {}
+    if (pending.path !== location.pathname || !pending.sql) return;
+
+    window.sql_editor.setValue(pending.sql, 1);
+    window.sqlErrorExplainResumed = true;
+    if (typeof executeQuery === 'function') {
+        executeQuery();
+    } else if (questionId && questionId !== 'null') {
+        runQuery(lang, questionId);
+    }
+}
+// After the playground's own editor setup on DOMContentLoaded (shared snippets)
+window.addEventListener('load', () => setTimeout(resumeSqlErrorExplain, 300));
 
 function sqlErrorExplainButton(settings) {
     const button = document.createElement('button');

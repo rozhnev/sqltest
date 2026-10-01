@@ -1155,6 +1155,17 @@ input:checked + .slider:before {
 .sql-error-explanation > :last-child {
     margin-bottom: 0;
 }
+.sql-error-login p {
+    margin: 0 0 0.6rem;
+}
+/* Drawing the eye: the login menu opened from the guest prompt, the explain button after the login */
+.ai-attention {
+    animation: ai-attention-pulse 1s ease-out 3;
+}
+@keyframes ai-attention-pulse {
+    0% { box-shadow: 0 0 0 0 rgba(0, 105, 230, 0.7); }
+    100% { box-shadow: 0 0 0 14px rgba(0, 105, 230, 0); }
+}
 .sql-error-quota {
     margin-top: 0.5rem;
     font-size: 0.85em;

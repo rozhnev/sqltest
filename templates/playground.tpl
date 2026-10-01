@@ -99,6 +99,8 @@
                     {* data-*: labels and the "Explain the error" button for SQL errors (enhanceSqlErrors() in script.js) *}
                     <div class="code-result ace-xcode" id="code-result"
                         data-location-label="{translate}sql_error_location{/translate}" data-goto-label="{translate}sql_error_goto{/translate}"
+                        data-logged="{if $User->logged()}1{else}0{/if}" data-login-text="{translate}sql_error_explain_login{/translate}"
+                        data-login-button="{translate}sql_error_explain_login_button{/translate}"
                         {if isset($PlaygroundAssistantText)}
                         data-explain-question="{translate}playground_assistant_q_fix{/translate}"
                         data-explain-label="{translate}sql_error_explain{/translate}" data-explain-hint="{translate}sql_error_explain_hint{/translate}"
