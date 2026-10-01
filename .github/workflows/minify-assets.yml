@@ -42,11 +42,12 @@ jobs:
           cleancss -o "admin/style.min.css" "admin/style.css"
           cleancss -o "css/donate.min.css" "css/donate.css"
           cleancss -o "css/lesson.min.css" "css/lesson.css"
+          cleancss -o "css/playground.min.css" "css/playground.css"
       
       - name: Commit minified files
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add *.min.js *.min.js.map *.min.css admin/*.min.js admin/*.min.js.map admin/*.min.css css/donate.min.css css/lesson.min.css
+          git add *.min.js *.min.js.map *.min.css admin/*.min.js admin/*.min.js.map admin/*.min.css css/donate.min.css css/lesson.min.css css/playground.min.css
           git diff --quiet && git diff --staged --quiet || git commit -m "Auto-minify assets [skip ci]"
           git push

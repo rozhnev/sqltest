@@ -44,6 +44,8 @@
 }
 .playground-text-section {
     padding: 1.5rem;
+    /* The column around it uses a smaller font; this is reading text */
+    font-size: 0.95rem;
 }
 .playground-text-section h1,
 .playground-text-section h2 {
