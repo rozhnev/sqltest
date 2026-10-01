@@ -16,6 +16,8 @@
     }
     .books-summary {
         margin-top: 1rem;
+        /* No background of its own: the inherited --regular-text-color is white in the light theme */
+        color: var(--question-text);
     }
     .books-summary h2 {
         margin-bottom: 0.75rem;

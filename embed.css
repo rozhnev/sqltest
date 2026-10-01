@@ -75,6 +75,16 @@
     color: var(--question-text);
 }
 
+/* Reading text of the documentation: the default line-height (normal, ~1.2) is too tight */
+.embed-page .text-content p,
+.embed-page .text-content li {
+    line-height: 1.6;
+}
+
+.embed-page .text-content li {
+    margin: 0.3em 0;
+}
+
 .embed-page hr {
     border: 0;
     border-top: 1px solid var(--text-block-border-color);

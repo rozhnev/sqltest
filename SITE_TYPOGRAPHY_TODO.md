@@ -28,14 +28,20 @@ The rest of the site still uses the old settings. To do:
 - [x] `css/donate.css`: crypto address uses `--font-mono`.
 - [x] Minify workflow builds `css/playground.min.css` too (it was only listed as a trigger).
 
-## Still to check or decide
+## Checked after deploy
 
-- [ ] Phones (`m.` templates): menus and buttons with the narrower system font.
-- [ ] Windows (Segoe UI) and Android (Roboto), Cyrillic and Chinese pages.
-- [ ] Interview pages, books, profile, buy-tokens, admin: only the font changed; look them over.
-- [ ] Admin panel (`admin/style.css`) has its own font (`Space Grotesk`, `Inter`, …): leave or align.
-- [ ] Optional: move the lesson typography block into a reusable `.prose` class if other long-text pages
-      should get 17px / 1.65 too.
+- [x] Phones (`m.` templates): question menu, playground, about: no broken lines or overflow with the system font.
+- [x] Interview start, donate, embed docs, books: font and code look right.
+- [x] Embed docs (`embed.css`): `line-height: 1.6` for the documentation text (was `normal`).
+- [x] Books page: the "How this book selection helps" block had white text on a white background in the light
+      theme (inherited `--regular-text-color`); now `--question-text`.
+- [x] Admin panel: keeps its own font (`Space Grotesk`, `Inter`, system fallback), by decision.
+
+## Optional
+
+- [ ] Windows (Segoe UI) and Android (Roboto) on real devices, Cyrillic and Chinese pages.
+- [ ] Move the lesson typography block into a reusable `.prose` class if other long-text pages should get
+      17px / 1.65 too.
 
 ## Also pending from the lesson page UX review
 
