@@ -8,11 +8,11 @@
         </header>
 
         <main class="main" style="padding: 6px;" id="main-content">
-            <details class="question-wrapper course-drawer">
-                <summary class="course-drawer-summary">
-                    <span class="course-drawer-title">{translate}lesson_course_contents{/translate}</span>
+            <details class="question-wrapper nav-drawer">
+                <summary class="nav-drawer-summary">
+                    <span class="nav-drawer-title">{translate}lesson_course_contents{/translate}</span>
                     {foreach $Lessons as $moduleSlug => $module}
-                        {if $moduleSlug eq $Lesson->moduleSlug()}<span class="course-drawer-current">{$module.title}</span>{/if}
+                        {if $moduleSlug eq $Lesson->moduleSlug()}<span class="nav-drawer-current">{$module.title}</span>{/if}
                     {/foreach}
                 </summary>
             <nav aria-label="Lesson navigation">

@@ -633,6 +633,53 @@ input:checked + .slider:before {
 .mobile-container .menu .selector {
     margin-bottom: 0.5rem;
 }
+/* Mobile: the navigation above the content is a drawer, closed by default
+   (course contents in templates/m.lesson.tpl, task list in templates/m.index.tpl) */
+.nav-drawer {
+    margin-bottom: 0.5rem;
+}
+
+.nav-drawer-summary {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    padding: 0.6rem 2rem 0.6rem 0.75rem;
+    cursor: pointer;
+    list-style: none;
+    position: relative;
+    color: var(--question-text);
+}
+
+.nav-drawer-summary::-webkit-details-marker {
+    display: none;
+}
+
+/* Chevron: points down when closed, up when open */
+.nav-drawer-summary::after {
+    content: "";
+    position: absolute;
+    right: 0.9rem;
+    top: 50%;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: translateY(-70%) rotate(45deg);
+}
+
+.nav-drawer[open] .nav-drawer-summary::after {
+    transform: translateY(-30%) rotate(-135deg);
+}
+
+.nav-drawer-title {
+    font-weight: 700;
+}
+
+.nav-drawer-current {
+    font-size: 0.85rem;
+    opacity: 0.75;
+}
+
 .menu .selector .selector-options {
     display: flex;
     padding: 0.5em 1em 0.3em 0.3em;

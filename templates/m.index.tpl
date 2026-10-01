@@ -5,13 +5,18 @@
         <header>
             {include file='m.top-menu.tpl' path="/question/{$Question.category_sef}/{$Question.question_sef}"}
         </header>
-        {if $User->logged()}
-            <div style="padding: 6px;">
-                {include file="my_progress.tpl"}
-            </div>
-        {/if}
-        <div style="padding-right: 6px;">
-        {include file='menu.tpl'}
+        {* The task list is a drawer, closed by default, so the task and the editor are on the first screen *}
+        <div style="padding: 6px 6px 0;">
+            <details class="question-wrapper nav-drawer task-drawer" ontoggle="if (this.open) scrollQuestionPanel()">
+                <summary class="nav-drawer-summary">
+                    <span class="nav-drawer-title">{translate}tasks{/translate}</span>
+                    <span class="nav-drawer-current">{$Question.category_title|escape}{if $User->logged()} · {$SolvedQuestionsCount}/{$QuestionsCount}{/if}</span>
+                </summary>
+                {if $User->logged()}
+                    {include file="my_progress.tpl"}
+                {/if}
+                {include file='menu.tpl'}
+            </details>
         </div>
         <div class="main" style="padding: 6px;">
             <div class="question-wrapper" id="question-wrapper">
