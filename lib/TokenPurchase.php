@@ -124,7 +124,7 @@ class TokenPurchase
 
     private function countPaidWithCode(string $code, ?User $user = null): int
     {
-        $sql = "SELECT COUNT(*) FROM token_purchases WHERE promo_code = :code AND status = 'paid'";
+        $sql = "SELECT COUNT(*) FROM tokens_purchases WHERE promo_code = :code AND status = 'paid'";
         $params = [':code' => $code];
         if ($user !== null) {
             $sql .= " AND user_id = :user_id";
@@ -183,7 +183,7 @@ class TokenPurchase
 
         $contract = $this->lava->createInvoice($invoice);
 
-        $stmt = $this->dbh->prepare("INSERT INTO token_purchases (contract_id, user_id, email, tokens, currency, promo_code)
+        $stmt = $this->dbh->prepare("INSERT INTO tokens_purchases (contract_id, user_id, email, tokens, currency, promo_code)
             VALUES (:contract_id, :user_id, :email, :tokens, :currency, :promo_code)");
         $stmt->execute([
             ':contract_id' => $contract['id'],
@@ -205,7 +205,7 @@ class TokenPurchase
     {
         $this->dbh->beginTransaction();
         try {
-            $stmt = $this->dbh->prepare("INSERT INTO token_purchases (contract_id, user_id, email, tokens, currency, promo_code, status, amount, paid_at)
+            $stmt = $this->dbh->prepare("INSERT INTO tokens_purchases (contract_id, user_id, email, tokens, currency, promo_code, status, amount, paid_at)
                 VALUES (:contract_id, :user_id, :email, :tokens, :currency, :promo_code, 'paid', 0, CURRENT_TIMESTAMP)");
             $stmt->execute([
                 ':contract_id' => self::newUuid(),
@@ -250,7 +250,7 @@ class TokenPurchase
      */
     public function history(User $user, int $limit = 10): array
     {
-        $stmt = $this->dbh->prepare("SELECT paid_at, tokens, amount, currency FROM token_purchases
+        $stmt = $this->dbh->prepare("SELECT paid_at, tokens, amount, currency FROM tokens_purchases
             WHERE user_id = :user_id AND status = 'paid'
             ORDER BY paid_at DESC LIMIT :limit");
         $stmt->bindValue(':user_id', $user->getId());
@@ -369,7 +369,7 @@ class TokenPurchase
 
         // A late success after a failure still counts: the money did arrive
         $paidAt = new DateTimeImmutable((string)($event['timestamp'] ?? 'now'));
-        $stmt = $this->dbh->prepare("UPDATE token_purchases SET status = 'paid', amount = :amount, paid_at = :paid_at, error = NULL
+        $stmt = $this->dbh->prepare("UPDATE tokens_purchases SET status = 'paid', amount = :amount, paid_at = :paid_at, error = NULL
             WHERE contract_id = :contract_id");
         $stmt->execute([
             ':amount'      => (float)($event['amount'] ?? 0),
@@ -391,7 +391,7 @@ class TokenPurchase
         if ($purchase['status'] !== 'pending') {
             return self::WEBHOOK_DUPLICATE;
         }
-        $stmt = $this->dbh->prepare("UPDATE token_purchases SET status = 'failed', error = :error WHERE contract_id = :contract_id");
+        $stmt = $this->dbh->prepare("UPDATE tokens_purchases SET status = 'failed', error = :error WHERE contract_id = :contract_id");
         $stmt->execute([':error' => (string)($event['errorMessage'] ?? ''), ':contract_id' => $purchase['contract_id']]);
         return self::WEBHOOK_PROCESSED;
     }
@@ -424,7 +424,7 @@ class TokenPurchase
         if ($contractId === null) {
             return null;
         }
-        $stmt = $this->dbh->prepare("SELECT contract_id, user_id, tokens, status FROM token_purchases
+        $stmt = $this->dbh->prepare("SELECT contract_id, user_id, tokens, status FROM tokens_purchases
             WHERE contract_id = :contract_id FOR UPDATE");
         $stmt->execute([':contract_id' => $contractId]);
         return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;

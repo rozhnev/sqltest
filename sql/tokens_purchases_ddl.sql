@@ -5,7 +5,7 @@
 --
 
 -- One row per checkout: the Lava contract created by our invoice
-CREATE TABLE public.token_purchases (
+CREATE TABLE public.tokens_purchases (
     contract_id uuid NOT NULL,                          -- Lava contract id
     user_id uuid NOT NULL,
     email text NOT NULL,                                -- email sent to Lava
@@ -17,13 +17,13 @@ CREATE TABLE public.token_purchases (
     created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
     paid_at timestamp without time zone,
     error text,                                         -- Lava's errorMessage for a failed payment
-    CONSTRAINT token_purchases_pkey PRIMARY KEY (contract_id),
-    CONSTRAINT token_purchases_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id),
-    CONSTRAINT token_purchases_status_check CHECK (status IN ('pending', 'paid', 'failed')),
-    CONSTRAINT token_purchases_tokens_check CHECK (tokens > 0)
+    CONSTRAINT tokens_purchases_pkey PRIMARY KEY (contract_id),
+    CONSTRAINT tokens_purchases_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id),
+    CONSTRAINT tokens_purchases_status_check CHECK (status IN ('pending', 'paid', 'failed')),
+    CONSTRAINT tokens_purchases_tokens_check CHECK (tokens > 0)
 );
 
-CREATE INDEX token_purchases_user_created_idx ON public.token_purchases USING btree (user_id, created_at);
+CREATE INDEX tokens_purchases_user_created_idx ON public.tokens_purchases USING btree (user_id, created_at);
 
 -- Every webhook received from Lava, raw: debugging, refunds/chargebacks, events we couldn't match.
 -- IF NOT EXISTS: the dev database already has it from the former subscription DDL.
@@ -39,10 +39,10 @@ CREATE TABLE IF NOT EXISTS public.lava_webhook_log (
 );
 
 
-ALTER TABLE public.token_purchases OWNER TO dba;
+ALTER TABLE public.tokens_purchases OWNER TO dba;
 ALTER TABLE public.lava_webhook_log OWNER TO dba;
 
-GRANT SELECT, INSERT, UPDATE ON TABLE public.token_purchases TO sqltester;
+GRANT SELECT, INSERT, UPDATE ON TABLE public.tokens_purchases TO sqltester;
 GRANT SELECT, INSERT, UPDATE ON TABLE public.lava_webhook_log TO sqltester;
 GRANT USAGE ON SEQUENCE public.lava_webhook_log_id_seq TO sqltester;
 
@@ -53,7 +53,7 @@ GRANT USAGE ON SEQUENCE public.lava_webhook_log_id_seq TO sqltester;
 
 -- A user's purchases:
 -- SELECT contract_id, status, tokens, amount, currency, promo_code, created_at, paid_at, error
--- FROM public.token_purchases WHERE user_id = :user_id ORDER BY created_at DESC;
+-- FROM public.tokens_purchases WHERE user_id = :user_id ORDER BY created_at DESC;
 
 -- Webhooks that need attention:
 -- SELECT id, received_at, event_type, result, error, body
