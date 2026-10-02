@@ -49,11 +49,11 @@ logged as `ignored`.
 
 ## Stage 1: Storage
 
-New DDL `sql/token_purchases_ddl.sql` (replaces `sql/subscription_ddl.sql`):
+New DDL `sql/tokens_purchases_ddl.sql` (replaces `sql/subscription_ddl.sql`):
 
 ```sql
 -- One row per checkout: the Lava contract created by our invoice
-CREATE TABLE public.token_purchases (
+CREATE TABLE public.tokens_purchases (
     contract_id  uuid PRIMARY KEY,                    -- Lava contract id
     user_id      uuid NOT NULL REFERENCES public.users(id),
     email        text NOT NULL,                       -- email sent to Lava
@@ -65,14 +65,14 @@ CREATE TABLE public.token_purchases (
     paid_at      timestamp,
     error        text                                 -- Lava's errorMessage for a failed payment
 );
-CREATE INDEX token_purchases_user_idx ON public.token_purchases (user_id, created_at);
+CREATE INDEX tokens_purchases_user_idx ON public.tokens_purchases (user_id, created_at);
 ```
 
 - `tokens` is stored per purchase, so changing `LLM_PACK_TOKENS` doesn't affect checkouts already in progress.
 - `lava_webhook_log` is kept as is.
 - **Crediting is idempotent** through the status change, in one transaction:
   ```sql
-  UPDATE token_purchases SET status = 'paid', amount = :amount, paid_at = :paid_at
+  UPDATE tokens_purchases SET status = 'paid', amount = :amount, paid_at = :paid_at
       WHERE contract_id = :contract_id AND status <> 'paid'
       RETURNING user_id, tokens;
   -- only if a row came back:
@@ -184,8 +184,8 @@ the spec's example payloads):
 
 1. In Lava: create a one-time digital product "AI tokens" with one offer (RUB and USD prices); note the offer
    and product ids. The webhook URL and secret stay the same.
-2. Dev: apply `sql/token_purchases_ddl.sql`, drop the subscription tables, set the new `.env` keys, deploy.
+2. Dev: apply `sql/tokens_purchases_ddl.sql`, drop the subscription tables, set the new `.env` keys, deploy.
 3. Test a real purchase on dev and check `lava_webhook_log`, the purchase row and the balance (checkout confirmed
    working on dev). Promo codes now live in `config.php`: the `TESTFREE` / `FIRST10` codes in Lava are unused.
-4. Prod: apply `sql/token_purchases_ddl.sql`, deploy, then drop `users.subscribed_till`.
+4. Prod: apply `sql/tokens_purchases_ddl.sql`, deploy, then drop `users.subscribed_till`.
 5. Update `LESSON_ASSISTANT_PLAN.md` (subscription parts) and `.github/database-schema.md`.

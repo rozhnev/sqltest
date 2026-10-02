@@ -114,7 +114,7 @@ $config = [
     //   valid day, Y-m-d), 'max_uses' (in total), 'max_uses_per_user' (default 1, null = unlimited).
     'lava_products' => [
         '7ec77746-effb-415a-b93d-7d6bfc8796a6' => [ // 1M AI tokens (TOKENS_LAVA_OFFER_ID)
-            'prices' => ['RUB' => 490, 'USD' => 4.99, 'EUR' => 4.99],
+            'prices' => ['RUB' => 490, 'USD' => 5, 'EUR' => 5], // Lava minimum: 5 USD/EUR
             'promo_codes' => [
                 'TESTFREE' => ['discount' => 100, 'max_uses' => 10],
                 'FIRST10'  => ['discount' => 90],
