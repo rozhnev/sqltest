@@ -15,7 +15,7 @@
         <div style="display: block;">      
             <h2 style="color: var(--light-h2-color);">💳 选择支持方式</h2>
             <div class="donation-methods">
-                {* <div class="donation-method">
+                <div class="donation-method">
                     <h3>Ko‑fi（银行卡 / PayPal）</h3>
                     <p style="margin: 1.5rem 0;">
                     <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
@@ -26,13 +26,13 @@
                     </p>
                     <p>大多数地区提供简单安全的支付方式。</p>
                     <p class="donation-fallback">如果小部件未加载，请使用直接链接：<a href="https://ko-fi.com/D1D76X1T1" target="_blank" rel="noopener noreferrer">ko-fi.com/D1D76X1T1</a>。</p>
-                </div> *}
-                <div class="donation-method">
+                </div>
+                {* <div class="donation-method">
                     <h3>Lava.top（欧元支付）</h3>
                     <p>更喜欢用欧元支付？lava.top 支持俄罗斯银行发行的银行卡、PayPal 以及其他多种支付方式。</p>
                     <iframe title="lava.top" style="border: none" width="270" height="60" src="https://widget.lava.top/f753dc3c-096e-40ca-afe4-c106fa194b18"></iframe>
                     <p class="donation-fallback">如果小部件未加载，请使用直接链接：<a href="https://app.lava.top/products/2800c402-a8c3-404e-8e75-940937b813f9/e2ee84c7-d8e7-4521-98dc-cc336c001a45?currency=EUR&domainId=77569739-54ac-45a4-9efc-9c6fc8b454aa&domainName=sqltest.online" target="_blank" rel="noopener noreferrer">lava.top</a>。</p>
-                </div>
+                </div> *}
                 <div class="donation-method">
                     <h3>加密货币捐赠</h3>
                     <p>喜欢加密货币？请使用下面的小部件：</p>
