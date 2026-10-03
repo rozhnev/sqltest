@@ -561,6 +561,57 @@ header .button .currency,
 .achievements-popup h4 {
     margin: 0.5rem 0;
 }
+/* Achievements in the user popup (achievements.tpl). Scoped to the popup, which sits in <header>: the
+   `header a:visited` color would otherwise win over the link rules */
+.achievements-popup .achievement-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    border-radius: 12px;
+}
+.achievements-popup .achievement-row:hover {
+    background: var(--achievement-row-hover);
+}
+.achievements-popup .achievement-row--recommended {
+    background: var(--achievement-row-recommended-bg);
+}
+.achievements-popup .achievement-row--recommended a,
+.achievements-popup .achievement-row--recommended a:visited {
+    color: var(--question-text);
+}
+.achievements-popup .achievement-badge {
+    flex: 0 0 auto;
+    width: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.achievements-popup .achievement-main,
+.achievements-popup .achievement-main:visited {
+    flex: 1 1 auto;
+    min-width: 0;
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+    text-decoration: none;
+    color: var(--question-text);
+}
+.achievements-popup .achievement-date {
+    flex: 0 0 auto;
+    opacity: 0.9;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+.achievements-popup .achievement-title {
+    flex: 1 1 auto;
+    min-width: 0;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+.achievements-popup .achievement-main:hover .achievement-title {
+    text-decoration: underline;
+}
 .top-menu-switchers {
     display: flex; flex-direction: column; justify-content: center; align-items: center; row-gap: 0.7em;
 }
@@ -1180,9 +1231,13 @@ input:checked + .slider:before {
     padding-bottom: 8px;
     border-bottom: 1px solid var(--text-block-border-color);
 }
-.user-popup-links a,
-.user-popup-all,
-.user-popup-footer a {
+/* The popup sits in <header>: `header a:visited` would win over a plain class, so visited links lost their color */
+.achievements-popup .user-popup-links a,
+.achievements-popup .user-popup-links a:visited,
+.achievements-popup a.user-popup-all,
+.achievements-popup a.user-popup-all:visited,
+.achievements-popup .user-popup-footer a,
+.achievements-popup .user-popup-footer a:visited {
     color: var(--info-text-color);
     white-space: nowrap;
 }
@@ -1199,7 +1254,8 @@ input:checked + .slider:before {
     padding-top: 8px;
     border-top: 1px solid var(--text-block-border-color);
 }
-.user-popup-footer a.user-popup-logout {
+.achievements-popup .user-popup-footer a.user-popup-logout,
+.achievements-popup .user-popup-footer a.user-popup-logout:visited {
     color: var(--question-text);
     opacity: 0.75;
 }

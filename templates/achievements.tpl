@@ -1,102 +1,6 @@
 {$GradeColors = [''=>null,'Intern'=>'#3F3F3F','Junior'=>'#00FF00','Middle'=>'#0000FF','Senior'=>'#FF0000']}
 {assign var="GradeColor" value="{$GradeColors[$User->grade()]}"|default:'#FFFFFF'}
 {assign var="Grade" value="{$User->grade()}"}
-<style>
-/* ...existing code... */
-
-.achievement-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 10px;
-  border-radius: 12px;
-}
-
-.achievement-row:hover {
-  background: var(--achievement-row-hover);
-}
-
-.achievement-row--recommended {
-  background: var(--achievement-row-recommended-bg);
-}
-
-.achievement-row--recommended a {
-  color: var(--question-text) !important;
-}
-.achievement-badge {
-  flex: 0 0 auto;
-  width: 22px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.achievement-main {
-  flex: 1 1 auto;
-  min-width: 0;
-  display: flex;
-  gap: 10px;
-  align-items: baseline;
-  text-decoration: none;
-  color: inherit;
-}
-
-.achievement-date {
-  flex: 0 0 auto;
-  opacity: 0.9;
-  font-variant-numeric: tabular-nums;
-  white-space: nowrap;
-}
-
-.achievement-title {
-  flex: 1 1 auto;
-  min-width: 0;
-  font-weight: 600;
-  overflow-wrap: anywhere;
-  color: var(--question-text-color) !important;
-}
-
-.achievement-actions {
-  flex: 0 0 auto;
-  display: flex;
-  gap: 8px;
-}
-
-.icon-button {
-  width: 32px;
-  height: 32px;
-  border-radius: 10px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--achievement-icon-fg);
-  background: var(--achievement-icon-bg);
-  border: 1px solid var(--achievement-icon-border);
-  text-decoration: none;
-}
-
-.icon-button:hover {
-  background: color-mix(in srgb, var(--achievement-icon-bg) 70%, #fff 30%);
-  border-color: color-mix(in srgb, var(--achievement-icon-border) 70%, #fff 30%);
-}
-
-.icon-button--linkedin {
-  color: var(--achievement-linkedin-fg);
-  background: var(--achievement-linkedin-bg);
-  border-color: var(--achievement-linkedin-border);
-}
-
-.icon-button--linkedin:hover {
-  background: color-mix(in srgb, var(--achievement-linkedin-bg) 70%, #fff 30%);
-  border-color: color-mix(in srgb, var(--achievement-linkedin-border) 70%, #fff 30%);
-}
-
-/* Optional: clearer affordance on hover */
-.achievement-main:hover .achievement-title {
-  text-decoration: underline;
-}
-/* ...existing code... */
-</style>
 <div style="display:flex; gap:1rem; align-items:center;">
     <div class="button green" style="padding:0; display:flex; align-items:center; justify-content:center;">
         <svg width="36" height="36" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -156,16 +60,6 @@
             <span class="achievement-title">{$achievement.title}</span>
         </a>
 
-        {* Actions (icons) *}
-        <div class="achievement-actions">
-            <a class="icon-button icon-button--linkedin"
-                target="_blank" rel="noopener noreferrer"
-                href="{$achievement.linkedin_share_url}"
-                title="{translate}share_your_achievement{/translate}"
-                aria-label="{translate}share_your_achievement{/translate}">
-                in
-            </a>
-        </div>
     </div>
 {/foreach}
 

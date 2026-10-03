@@ -1974,7 +1974,6 @@ class Controller
                 }
                 $shareUrl = "{$this->host}/{$this->lang}/achievement/" .$achievement['user_achievement_id'];
                 $achievement['share_url'] = $shareUrl;
-                $achievement['linkedin_share_url'] = 'https://www.linkedin.com/sharing/share-offsite/?url=' . rawurlencode($shareUrl);
             }
             unset($achievement);
         }
