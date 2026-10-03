@@ -1171,6 +1171,32 @@ input:checked + .slider:before {
 .free-answer-last-check__score {
     font-weight: normal;
 }
+/* User popup (achievements.tpl): profile links on top, logout as a quiet link at the bottom */
+.user-popup-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 16px;
+    margin: 8px 0 4px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--text-block-border-color);
+}
+.user-popup-links a,
+.user-popup-footer a {
+    color: var(--info-text-color);
+    white-space: nowrap;
+}
+.user-popup-footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid var(--text-block-border-color);
+}
+.user-popup-footer a.user-popup-logout {
+    color: var(--question-text);
+    opacity: 0.75;
+}
 /* "Get hint" panel above the editor (hint_panel.tpl) */
 .hint-panel {
     margin: 6px 0;

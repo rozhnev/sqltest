@@ -1962,8 +1962,10 @@ class Controller
     {
         $achievements = [];
         if ($this->user->logged()) {
-            $achievements = $this->user->achievements($this->lang, 5);
+            // The popup shows the last few; the profile's Achievements tab has them all
+            $achievements = $this->user->achievements($this->lang, 3);
             $this->engine->assign('RecommendedAchievement', $this->user->recommendedAchievement($this->lang));
+            $this->engine->assign('AiQuota', (new TokenQuota($this->dbh, $this->user, $this->env))->status());
 
             $userId = (string)$this->user->getId();
             foreach ($achievements as &$achievement) {

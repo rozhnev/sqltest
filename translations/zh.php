@@ -374,6 +374,8 @@ $translations = [
     'your_achievements' => '您的成就',
     'your_grade' => '您的成绩',
     'your_last_achievements' => '您最近的成就',
+    'user_popup_my_tasks' => '我的题目',
+    'user_popup_all_achievements' => '全部成就',
     // Tabulator tables (pagination buttons, header filter placeholder) -- templates/user_profile.tpl
     'tabulator_first' => '首页',
     'tabulator_first_title' => '第一页',

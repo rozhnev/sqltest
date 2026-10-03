@@ -374,6 +374,8 @@ $translations = [
     'your_achievements' => 'Tus logros',
     'your_grade' => 'Tu calificación',
     'your_last_achievements' => 'Tus últimos logros',
+    'user_popup_my_tasks' => 'Mis tareas',
+    'user_popup_all_achievements' => 'Todos los logros',
     // Tabulator tables (pagination buttons, header filter placeholder) -- templates/user_profile.tpl
     'tabulator_first' => 'Primera',
     'tabulator_first_title' => 'Primera página',

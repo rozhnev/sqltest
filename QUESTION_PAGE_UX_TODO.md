@@ -151,11 +151,11 @@ Suggested order: bugs 14, 15 first, then 2 → 7 → 5 → 1 (biggest effect for
         the column (deployed 2026-10-03).
 - [ ] **28. AI check cost is unknown**: "AI tokens left: 43 560", but not how much one check costs. Add "≈ N tokens per
       check".
-- [ ] **29. User popup** (`/{lang}/user/achievements`): "User Profile" / "Logout" are at the very bottom after the full
-      achievements list.
-  - [ ] Links on top; add the AI token balance and "My solutions".
-  - [ ] Show the last 3–5 achievements plus an "All" link.
-  - [ ] Logout as a secondary link, not a big red button equal to Profile.
+- [x] **29. User popup** (`/{lang}/user/achievements`, `achievements.tpl`): "User Profile" / "Logout" were at the very
+      bottom after the achievements list.
+  - [x] Links on top: Profile, "My tasks" (`/user/profile#tasks`), "AI tokens: N" (`#ai`).
+  - [x] The last 3 achievements (was 5) plus "All achievements →" (`#achievements`).
+  - [x] Logout as a quiet link at the bottom, not a big red button equal to Profile.
 
 ## Admin
 
