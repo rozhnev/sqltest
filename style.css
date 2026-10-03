@@ -1016,6 +1016,21 @@ input:checked + .slider:before {
     width: 16px;
     text-align: right;
 }
+.code-result-empty {
+    /* Empty state of the result area until the first run, check or hint */
+    min-height: 24vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    text-align: center;
+    color: var(--question-text);
+    opacity: 0.6;
+}
+.code-result-empty-shortcut {
+    font-size: smaller;
+}
 .code-result .referral-link {
     font-size:large; 
     padding: 1em; 

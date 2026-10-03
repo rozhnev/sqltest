@@ -1307,6 +1307,11 @@ if (document.getElementById("sql-code")) {
 
     window.sql_editor.setShowPrintMargin(false);
     window.sql_editor.setOptions({enableBasicAutocompletion: true});
+    // Shown while the editor is empty (data-placeholder: index.tpl, m.index.tpl)
+    const editorPlaceholder = document.getElementById("sql-code").dataset.placeholder;
+    if (editorPlaceholder) {
+        window.sql_editor.setOption("placeholder", editorPlaceholder);
+    }
 }
 
 window.onload = function() {
