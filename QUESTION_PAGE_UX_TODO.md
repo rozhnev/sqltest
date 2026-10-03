@@ -83,12 +83,14 @@ Suggested order: bugs 14, 15 first, then 2 → 7 → 5 → 1 (biggest effect for
   - [ ] Refresh the "My progress" widget (`my_progress.tpl`).
   - [ ] Show a new achievement right away (now only on the next page load, `$NewAchievement`).
   - [ ] Check what the widget counts: live it shows 3/460 while the menu marks only 2 tasks solved.
-- [ ] **17. Success block texts** (`en/query_test_result.tpl`; check the other languages too).
-  - [ ] "Your **request** is among the best" → "query".
-  - [ ] "your result is a little low of the record" → e.g. "Your query costs more than the best one — there's room
-        to optimize".
-  - [ ] "Before starting the next **test**, please rate…" → "task".
-  - [ ] Move inline styles of the block (`font-size`, colors `#E60000`, `#11926E`, `#0069E6`) to CSS.
+- [x] **17. Success block texts** (`{$Lang}/query_test_result.tpl`, all six languages).
+  - [x] "Your **request** is among the best" → "query" (en, es).
+  - [x] "your result is a little low of the record" → "Your query costs more than the best solution, so there's room
+        to optimize it" (en; same idea in pt, fr, es, where the old text was off too).
+  - [x] "Before starting the next **test**, please rate…" → "task" (en, fr, es); ru punctuation.
+  - [x] Inline styles of the block moved to CSS (`.query-success-*`, `.query-cost*`); colors are theme variables
+        (`--cost-best-color`, `--danger-text-color`, `--info-text-color`), the note icons use `currentColor`.
+  - [ ] Left as is: the VK share promo in `ru/query_test_result.tpl` (inline styles) and the wrong-solution branch.
 - [ ] **18. Solved date on a solved task**. The title shows only the last attempt date of an unsolved task; for a
       solved one it is empty. Show "Solved on …".
 - [ ] **19. "You already solved this task" line**: inline `style="… color: #2EA043 !important"` with a button inside a

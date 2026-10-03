@@ -48,6 +48,8 @@ html {
     --achievement-icon-border: rgba(0, 0, 0, 0.10);
     --achievement-icon-fg: rgba(0, 105, 230, 0.95);
     --achievement-link-color: #0057CC;
+    --cost-best-color: #11926E;
+    --info-text-color: #0057CC;
 
     --achievement-linkedin-bg: rgba(10, 102, 194, 0.12);
     --achievement-linkedin-border: rgba(10, 102, 194, 0.22);
@@ -92,6 +94,8 @@ html {
     --achievement-icon-border: rgba(255, 255, 255, 0.12);
     --achievement-icon-fg: rgba(121, 192, 255, 0.95);
     --achievement-link-color: #58A6FF;
+    --cost-best-color: #3FB950;
+    --info-text-color: #58A6FF;
 
     --achievement-linkedin-bg: rgba(10, 102, 194, 0.16);
     --achievement-linkedin-border: rgba(10, 102, 194, 0.28);
@@ -1138,6 +1142,39 @@ input:checked + .slider:before {
     background-color: gray;
     margin-right: 0.5em;
     margin-top: 0.15em;
+}
+/* Correct solution block ({$Lang}/query_test_result.tpl) */
+.query-success-title {
+    font-size: larger;
+    margin-bottom: 10px;
+}
+.query-success-body {
+    display: flex;
+    flex-flow: row wrap;
+    line-height: 1.5em;
+}
+.query-cost {
+    flex: 2 1;
+}
+.query-cost-value {
+    color: var(--cost-best-color);
+    font-weight: bold;
+}
+.query-cost-value.worse,
+.query-cost-note.worse {
+    color: var(--danger-text-color);
+}
+.query-cost-hint {
+    font-size: small;
+}
+.query-cost-note {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--info-text-color);
+}
+.question-rate-panel__title {
+    min-width: 280px;
 }
 .question-rate-panel {
     border: 1px solid #1B9843;
