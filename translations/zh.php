@@ -89,6 +89,7 @@ $translations = [
     'hello' => '你好',
     'hide_hide_solved_tasks' => '隐藏已解决的问题',
     'hint_default' => '尝试在没有提示的情况下解决问题。',
+    'hint_title' => '提示',
     'hour' => '小时',
     'hours' => '小时',
     'keep_going' => '继续加油！',

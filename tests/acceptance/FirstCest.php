@@ -56,18 +56,18 @@ class FirstCest
     {
         $I->amOnPage('/en/question/bookings/get-airports-data');
         $I->click('#getHelpBtn');
-        $I->see('Use airports_data table.', '#code-result');
+        $I->see('Use airports_data table.', '#hint-panel-content');
     }
     public function tryRuQueryHelpTest(AcceptanceTester $I)
     {
         $I->amOnPage('/ru/question/bookings/get-airports-data');
         $I->click('#getHelpBtn');
-        $I->see('Используйте таблицу airports_data.', '#code-result');
+        $I->see('Используйте таблицу airports_data.', '#hint-panel-content');
     }
     public function tryPtQueryHelpTest(AcceptanceTester $I)
     {
         $I->amOnPage('/pt/question/bookings/get-airports-data');
         $I->click('#getHelpBtn');
-        $I->see('Use a tabela airports_data.', '#code-result');
+        $I->see('Use a tabela airports_data.', '#hint-panel-content');
     }
 }

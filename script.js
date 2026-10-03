@@ -477,8 +477,26 @@ function explainSqlError(settings, button, answer, sql, error) {
     });
 }
 
+/**
+ * "Get hint": the hint goes to #hint-panel (hint_panel.tpl) above the editor, so the query result stays.
+ * The button toggles the panel; the hint is loaded once. Pages without the panel show it in #code-result.
+ */
 function getHelp(lang, questionId) {
-    setLoader('code-result');
+    const panel = document.getElementById('hint-panel');
+    const content = document.getElementById('hint-panel-content');
+    if (panel && !panel.classList.contains('hidden')) {
+        closeHint();
+        return;
+    }
+    if (panel && content.dataset.loaded) {
+        showHint(panel);
+        return;
+    }
+    const target = panel ? content : document.getElementById('code-result');
+    if (panel) {
+        showHint(panel);
+    }
+    setLoader(target.id);
     fetch(`/${lang}/question/${questionId}/query-help`, {
           method: "GET",
           mode: "cors",
@@ -490,8 +508,25 @@ function getHelp(lang, questionId) {
           return await response.text();
       }))
       .then((message)=>{
-          document.getElementById('code-result').innerHTML = message;
+          target.innerHTML = message;
+          if (panel) {
+              content.dataset.loaded = '1';
+          }
+      })
+      .catch(()=>{
+          target.textContent = 'Something went wrong. Please try again.';
       });
+}
+
+function showHint(panel) {
+    panel.classList.remove('hidden');
+    document.getElementById('getHelpBtn')?.setAttribute('aria-expanded', 'true');
+    panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function closeHint() {
+    document.getElementById('hint-panel')?.classList.add('hidden');
+    document.getElementById('getHelpBtn')?.setAttribute('aria-expanded', 'false');
 }
 
 function runQuery(lang, questionId) {

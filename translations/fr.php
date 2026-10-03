@@ -34,6 +34,7 @@ $translations = [
     'footer_ask_in_telegram' => 'Posez vos questions dans notre chat Telegram !',
     'footer_books' => 'Livres',
     'hint_default' => 'Essayez de résoudre le problème sans indices.',
+    'hint_title' => 'Indice',
     'category' => 'catégorie',
     'complexity' => 'complexité',
     'complexity_level' => 'Niveau de complexité',

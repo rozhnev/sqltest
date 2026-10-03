@@ -99,6 +99,7 @@
                             </span>
                         {/if}
                     </div>
+                    {include file='hint_panel.tpl'}
                     {if $Question.question_type == 'free_answer'}
                         <textarea class="code-wrapper free-answer-textarea" id="free-answer-input" name="free-answer-input" placeholder="{translate}free_answer_placeholder{/translate}">{$Question.last_query|escape:"html"}</textarea>
                     {else}

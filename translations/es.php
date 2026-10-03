@@ -146,6 +146,7 @@ $translations = [
     'hello' => 'Hola',
     'hide_hide_solved_tasks' => 'Ocultar problemas resueltos',
     'hint_default' => 'Intenta resolver el problema sin pistas.',
+    'hint_title' => 'Pista',
     'hour' => 'hora',
     'hours' => 'h',
     'keep_going' => '¡Sigue así!',

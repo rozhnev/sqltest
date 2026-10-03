@@ -48,8 +48,18 @@ Suggested order: bugs 14, 15 first, then 2 → 7 → 5 → 1 (biggest effect for
         `<span class='sql'>` in the task text), collapse the rest.
   - [ ] Click on a table or column name (in the task or in the schema) inserts it into the editor.
   - [ ] Show 3–5 sample rows instead of 1, so data quirks (e.g. NULL in `sex`) are visible.
-- [ ] **3. Show the expected result**: the expected columns in order, or the first 2–3 rows of the reference
-      result. Reduces blind attempts.
+- [ ] **3. Show the expected result**, step by step, so the task doesn't get easier. A wrong check already reveals the
+      column count / names, the row count and (25) the first differing row; this puts it in order.
+  - [ ] Level 1, right away: a collapsed "Expected result ▸" block under the task with the column names in order and
+        the row count, no data (`sex | body_mass_g` — 10 rows).
+  - [ ] Level 2, after 2–3 wrong checks: the first 2–3 rows in that block, and a "Show sample rows" link in the
+        check result. After 2 attempts for Simple / Normal, after 3 or by button only for Difficult / Very hard.
+  - [ ] No sample rows when the answer is a single row or value (aggregates, `COUNT`): the sample is the answer.
+  - [ ] Never the full result: for sorting tasks (like `sort-penguins`) the first rows are almost the answer.
+  - [ ] Data: the reference result is computed on every check (`$queryValidResult` in
+        `Question::checkQueryResult()`); for level 1 compute it once per task and cache it. Level 2 needs a wrong
+        attempts counter (`user_questions` has dates only).
+  - [ ] Track solutions made after the sample rows were shown, to see whether they open too early.
 
 ## Texts and hints
 
@@ -67,8 +77,9 @@ Suggested order: bugs 14, 15 first, then 2 → 7 → 5 → 1 (biggest effect for
 
 ## Behavior
 
-- [ ] **7. "Get hint" must not wipe the query result**. `getHelp()` replaces `#code-result` entirely
-      (`script.js`, `function getHelp`). Show the hint in its own block above the result or in a collapsible panel.
+- [x] **7. "Get hint" must not wipe the query result**. `getHelp()` replaced `#code-result` entirely. Now the hint goes
+      to its own panel above the editor (`hint_panel.tpl`, desktop and mobile): the button toggles it, × closes it,
+      the hint is loaded once. Pages without the panel still use `#code-result`; acceptance tests updated.
 - [x] **8. Empty states** (question page, desktop and mobile).
   - [x] Editor: Ace `placeholder` from `data-placeholder` of `#sql-code` (`sql_editor_placeholder`).
   - [x] Result area: `.code-result-empty` inside `#code-result`, text per question type
@@ -134,8 +145,8 @@ Suggested order: bugs 14, 15 first, then 2 → 7 → 5 → 1 (biggest effect for
       The AI check was not stored (`llm_feedback` is the interview table). Now `user_questions.last_feedback`
       (`{ok, score, comment}`, `User::saveFreeAnswerFeedback()`) is shown in the result area until the next check:
       "Last AI check (date): passed · Score 85/100" + the comment (`free_answer_last_check.tpl`, desktop and mobile).
-  - [ ] **Deploy**: run `sql/user_questions_last_feedback_migration.sql` before the code, `Question::get()` selects
-        the column.
+  - [x] **Deploy**: run `sql/user_questions_last_feedback_migration.sql` before the code, `Question::get()` selects
+        the column (deployed 2026-10-03).
 - [ ] **28. AI check cost is unknown**: "AI tokens left: 43 560", but not how much one check costs. Add "≈ N tokens per
       check".
 - [ ] **29. User popup** (`/{lang}/user/achievements`): "User Profile" / "Logout" are at the very bottom after the full

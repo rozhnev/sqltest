@@ -1137,6 +1137,45 @@ input:checked + .slider:before {
 .free-answer-last-check__score {
     font-weight: normal;
 }
+/* "Get hint" panel above the editor (hint_panel.tpl) */
+.hint-panel {
+    margin: 6px 0;
+    padding: 6px 6px 10px 12px;
+    background-color: var(--accordion-panel-bg-color);
+    border: 1px solid var(--text-block-border-color);
+    border-left: 4px solid var(--info-text-color);
+    border-radius: 6px;
+    color: var(--question-text);
+}
+.hint-panel.hidden {
+    display: none;
+}
+.hint-panel__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.hint-panel__title {
+    font-weight: bold;
+}
+.hint-panel__close {
+    width: 28px;
+    height: 28px;
+    border: none;
+    border-radius: 4px;
+    background: transparent;
+    color: var(--question-text);
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+}
+.hint-panel__close:hover,
+.hint-panel__close:focus-visible {
+    background-color: var(--text-block-border-color);
+}
+.hint-panel .loader {
+    margin: 12px auto;
+}
 /* Expected vs the user's row of a wrong result (row_diff.tpl) */
 .row-diff th[scope="row"] {
     text-align: left;
