@@ -1311,8 +1311,10 @@ input:checked + .slider:before {
 .hint-panel__close:focus-visible {
     background-color: var(--text-block-border-color);
 }
+/* The spinner is drawn in em (load4 box-shadows): a smaller font makes it smaller */
 .hint-panel .loader {
-    margin: 12px auto;
+    font-size: 8px;
+    margin: 28px auto;
 }
 /* Expected vs the user's row of a wrong result (row_diff.tpl) */
 .row-diff th[scope="row"] {
