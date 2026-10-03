@@ -18,7 +18,7 @@
     </div>
     <div class="question-wrapper">
         <div id="menu-content" class="menu-content">
-            {if $User->logged()}
+            {if $User->logged() && !empty($Favorites)}
                 <button class="accordion {if isset($QuestionCategoryID) && 99 eq $QuestionCategoryID}active{/if}">
                     <span class="star-list accordion-title">{translate}favorites{/translate}</span>
                 </button>
