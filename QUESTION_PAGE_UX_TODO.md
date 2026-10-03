@@ -107,10 +107,12 @@ Suggested order: bugs 14, 15 first, then 2 → 7 → 5 → 1 (biggest effect for
   - [x] Inline styles of the block moved to CSS (`.query-success-*`, `.query-cost*`); colors are theme variables
         (`--cost-best-color`, `--danger-text-color`, `--info-text-color`), the note icons use `currentColor`.
   - [ ] Left as is: the VK share promo in `ru/query_test_result.tpl` (inline styles) and the wrong-solution branch.
-- [ ] **18. Solved date on a solved task**. The title shows only the last attempt date of an unsolved task; for a
-      solved one it is empty. Show "Solved on …".
-- [ ] **19. "You already solved this task" line**: inline `style="… color: #2EA043 !important"` with a button inside a
-      `span`. Move to a class; make "View solutions" a secondary button (now as green as "Check it!").
+- [x] **18. Solved date on a solved task**. The title showed only the last attempt date of an unsolved task; for a
+      solved one it was empty. Now "Solved on …" (`question_solved_at`, en text "Solved at" → "Solved on").
+  - [ ] The mobile title has no dates at all (commented out in `m.index.tpl`).
+- [x] **19. "You already solved this task" line**: inline `style="… color: #2EA043 !important"` with a button inside a
+      `span`. Now `.question-solved` (✓, `--cost-best-color`) on the question and test pages; "View solutions" is a
+      link-like `text-button`, no longer as green as "Check it!".
 - [ ] **20. User icon in the top menu** (`top-menu.tpl`): a green button with a silhouette colored by grade, no name,
       `title` or `aria-label`; it opens the achievements popup. Add `title` / `aria-label`, better a short label
       with the grade.

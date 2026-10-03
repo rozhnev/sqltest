@@ -221,6 +221,27 @@ main {
 .text-button > span {
     padding: 2px;
 }
+/* "You already solved this task" line; "View solutions" is a secondary, link-like action (index.tpl, test pages) */
+.question-solved {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 8px;
+    font-style: normal;
+    font-weight: bold;
+    color: var(--cost-best-color);
+}
+.question-solved::before {
+    content: "¹3";
+}
+.question-solved__solutions {
+    padding: 0;
+    border: none;
+    background: none;
+    font: inherit;
+    font-weight: normal;
+    text-decoration: underline;
+}
 .text-button.blue {
     color: #0069E6
 }

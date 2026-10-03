@@ -28,7 +28,9 @@
                                 <span id="favoriteStar" class="question-star{if isset($Question.favored) && $Question.favored} favored{/if}" title="{if isset($Question.favored) && $Question.favored}{translate}favorite{/translate}{else}{translate}add_to_favorites{/translate}{/if}" onClick="toggleFavorites('{$Lang}', {$QuestionID})">★</span>
                             {/if}
                             <span class="question-dates">
-                                {if !$Question.solved_date && $Question.last_attempt_date}
+                                {if $Question.solved_date}
+                                    {translate}question_solved_at{/translate}: {$Question.solved_date}
+                                {elseif $Question.last_attempt_date}
                                     {translate}question_last_attempt_date{/translate}: {$Question.last_attempt_date}
                                 {/if}
                             </span>
@@ -70,13 +72,13 @@
                     {elseif $Question.question_type == 'free_answer'}
                         <p class="question-action">{translate}question_action_write_free_answer{/translate}</p>
                         {if $Question.solved_date}
-                            <span class="question-action" style="display: flex; align-items: center; font-weight: bold; color: #2EA043 !important;">{translate}you_already_solved_this_task{/translate}</span>
+                            <p class="question-action question-solved">{translate}you_already_solved_this_task{/translate}</p>
                         {/if}
                     {else}
                         {* The dialect is the badge next to the title *}
                         <p class="question-action">{translate}question_action_write_query{/translate}</p>
                         {if $Question.solved_date}
-                            <span class="question-action" style="display: flex; align-items: center; font-weight: bold; color: #2EA043 !important;">{translate}you_already_solved_this_task{/translate}.&nbsp;<button class="button green" onClick="showMySolutions({$QuestionID})">{translate}view_solutions{/translate}</button></span>
+                            <p class="question-action question-solved">{translate}you_already_solved_this_task{/translate}. <button type="button" class="text-button blue question-solved__solutions" onClick="showMySolutions({$QuestionID})">{translate}view_solutions{/translate}</button></p>
                         {/if}
                     {/if}
                 </section>

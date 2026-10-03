@@ -230,7 +230,7 @@
             {elseif $Question.question_type == 'free_answer'}
                 <p class="question-action">{translate}question_action_write_free_answer{/translate}</p>
                 {if $Question.solved_date}
-                    <span class="question-action" style="display: flex; align-items: center; font-weight: bold; color: #2EA043 !important;">{translate}you_already_solved_this_task{/translate}</span>
+                    <p class="question-action question-solved">{translate}you_already_solved_this_task{/translate}</p>
                 {/if}
             {else}
                 <p class="question-action">{translate}question_action_write_your_request{/translate}</p>
