@@ -4,11 +4,11 @@
     </div>
     <div class="progress-widget-content">
         <div class="progress-bar-container">
-            <div class="progress-bar" style="width: {($SolvedQuestionsCount / $QuestionsCount * 100)}%"></div>
+            <div class="progress-bar" style="width: {if $QuestionsCount}{($SolvedQuestionsCount / $QuestionsCount * 100)}{else}0{/if}%"></div>
         </div>
         <div class="progress-stats">
             <span class="progress-count">{$SolvedQuestionsCount}/{$QuestionsCount}</span>
-            <span class="progress-percentage">{round(($SolvedQuestionsCount / $QuestionsCount * 100), 1)}%</span>
+            <span class="progress-percentage">{if $QuestionsCount}{round(($SolvedQuestionsCount / $QuestionsCount * 100), 1)}{else}0{/if}%</span>
         </div>
     </div>
 </div>

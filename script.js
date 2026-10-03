@@ -547,6 +547,9 @@ function checkAnswers(lang, questionId) {
     })
     .then((async response=>{
         if (response.ok) {
+        if (response.ok) {
+            showSolvedProgress(response);
+        }
         if (response.ok && document.getElementById("nextTaskBtn")) {
             document.getElementById("nextTaskBtn").classList.remove("hidden");
             setTimeout(()=>{
@@ -561,6 +564,7 @@ function checkAnswers(lang, questionId) {
     }))
     .then((message)=>{
         document.getElementById('code-result').innerHTML = message;
+        placeNewAchievement(document.getElementById('code-result'));
     })
     .catch(err=>{
         document.getElementById('code-result').innerHTML = 'Something went wrong. Please review your query and try again or contact us by email: <a href="mailto:support@sqltest.online">support@sqltest.online</a>.';
@@ -592,6 +596,9 @@ function checkFreeAnswer(lang, questionId) {
             document.getElementById('free-answer-tokens-remaining').textContent = decodeURIComponent(remaining);
             document.getElementById('buyTokensBtn')?.classList.toggle('hidden', response.headers.get('X-AI-Tokens-Low') !== '1');
         }
+        if (response.ok) {
+            showSolvedProgress(response);
+        }
         if (response.ok && document.getElementById("nextTaskBtn")) {
             document.getElementById("nextTaskBtn").classList.remove("hidden");
             setTimeout(()=>{
@@ -612,6 +619,7 @@ function checkFreeAnswer(lang, questionId) {
     }))
     .then((message)=>{
         document.getElementById('code-result').innerHTML = message;
+        placeNewAchievement(document.getElementById('code-result'));
     })
     .catch(err=>{
         document.getElementById('code-result').innerHTML = 'Something went wrong. Please review your answer and try again or contact us by email: <a href="mailto:support@sqltest.online">support@sqltest.online</a>.';
@@ -721,6 +729,82 @@ function stopVoiceInput() {
     }
 }
 
+/**
+ * New-achievement line (new_achievement.tpl): opening a link in it (the achievement page or a share link) or closing
+ * it (× or Esc) marks the achievement viewed, so it isn't shown again.
+ */
+function initNewAchievement(block) {
+    const viewUrl = block.dataset.achievementViewUrl;
+    let isMarkedViewed = false;
+
+    const markViewed = function () {
+        if (isMarkedViewed || !viewUrl) {
+            return;
+        }
+        isMarkedViewed = true;
+        fetch(viewUrl, { method: 'GET', credentials: 'same-origin', keepalive: true })
+            .catch(function () {
+                // Best effort: at worst the achievement is shown once more
+            });
+    };
+    const closeOnEscape = function (event) {
+        if (event.key === 'Escape') {
+            close();
+        }
+    };
+    const close = function () {
+        markViewed();
+        block.remove();
+        document.removeEventListener('keydown', closeOnEscape);
+    };
+
+    block.addEventListener('click', function (event) {
+        if (event.target.closest('a')) {
+            markViewed();
+            return;
+        }
+        if (event.target.closest('.new-achievement__close')) {
+            close();
+        }
+    });
+    document.addEventListener('keydown', closeOnEscape);
+}
+
+/**
+ * A correct check response may start with a new-achievement line (Controller::sendSolvedProgress()): move it above
+ * the task, replacing the one shown on page load. The mobile page has no main column: it stays in the result there.
+ */
+function placeNewAchievement(container) {
+    const block = container.querySelector('.new-achievement');
+    if (!block) {
+        return;
+    }
+    const mainColumn = document.querySelector('main.column');
+    if (mainColumn) {
+        document.querySelectorAll('.new-achievement').forEach(el => el !== block && el.remove());
+        mainColumn.prepend(block);
+    }
+    initNewAchievement(block);
+}
+
+/**
+ * After a correct check: mark the task solved in the menu and refresh "My progress" (my_progress.tpl)
+ * from the X-Solved-Count / X-Questions-Count headers (Controller::sendSolvedProgress()).
+ */
+function showSolvedProgress(response) {
+    document.querySelectorAll('.question-link.current-question').forEach(el => el.classList.add('solved'));
+
+    const solved = parseInt(response.headers.get('X-Solved-Count'), 10);
+    const total = parseInt(response.headers.get('X-Questions-Count'), 10);
+    if (isNaN(solved) || !total) {
+        return;
+    }
+    const percent = solved / total * 100;
+    document.querySelectorAll('.progress-bar').forEach(el => el.style.width = `${percent}%`);
+    document.querySelectorAll('.progress-count').forEach(el => el.textContent = `${solved}/${total}`);
+    document.querySelectorAll('.progress-percentage').forEach(el => el.textContent = `${Math.round(percent * 10) / 10}%`);
+}
+
 function testQuery(lang, questionId) {
     setLoader('code-result');
     clearSqlErrorMarker();
@@ -735,6 +819,9 @@ function testQuery(lang, questionId) {
         body: formData,
     })
     .then((async response=>{
+        if (response.ok) {
+            showSolvedProgress(response);
+        }
         if (response.ok && document.getElementById("nextTaskBtn")) {
             document.getElementById("nextTaskBtn").classList.remove("hidden");
             setTimeout(()=>{
@@ -755,6 +842,7 @@ function testQuery(lang, questionId) {
     }))
     .then((message)=>{
         document.getElementById('code-result').innerHTML = message;
+        placeNewAchievement(document.getElementById('code-result'));
         enhanceSqlErrors(document.getElementById('code-result'), sql);
     })
     .catch(err=>{
@@ -1293,6 +1381,7 @@ function setEventListeners() {
 
 setMenuEventListeners();
 setEventListeners();
+document.querySelectorAll('.new-achievement').forEach(initNewAchievement);
 applyUIConfig();
 lazyInitShareThis();
 if (document.getElementById("sql-code")) {

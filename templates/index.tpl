@@ -15,74 +15,7 @@
             </div>
             <main class="column">
                 {if $User->logged() && $NewAchievement}
-                    {assign var="AchievementViewUrl" value="/{$Lang}/achievement/{$NewAchievement.user_achievement_id}"}
-                    {assign var="AchievementShareUrl" value="https://sqltest.online/{$Lang}/achievement/{$NewAchievement.user_achievement_id}"}
-                    {* One compact line above the task; opening the achievement or a share link, or closing it marks it viewed *}
-                    <div class="new-achievement" id="new-achievement" role="status" data-achievement-view-url="{$AchievementViewUrl|escape}">
-                        <span class="new-achievement__icon" aria-hidden="true">🏆</span>
-                        <span class="new-achievement__text">
-                            {translate}new_achievement_unlocked{/translate}:
-                            <a class="new-achievement__title" href="{$AchievementViewUrl|escape}">{$NewAchievement.title|escape}</a>
-                        </span>
-                        <details class="new-achievement__share">
-                            <summary>{translate}share{/translate}</summary>
-                            <div class="new-achievement__share-menu">
-                                {include file="{$Lang}/achievement_share_buttons.tpl" AchievementShareUrl=$AchievementShareUrl}
-                            </div>
-                        </details>
-                        <button type="button" class="new-achievement__close" id="close-new-achievement" aria-label="{translate}close{/translate}" title="{translate}close{/translate}">×</button>
-                    </div>
-                    <script>
-                        (function () {
-                            const achievementBlock = document.getElementById('new-achievement');
-                            if (!achievementBlock) {
-                                return;
-                            }
-
-                            const achievementViewUrl = achievementBlock.getAttribute('data-achievement-view-url');
-                            let isMarkedViewed = false;
-
-                            const markAchievementViewed = function () {
-                                if (isMarkedViewed || !achievementViewUrl) {
-                                    return;
-                                }
-
-                                isMarkedViewed = true;
-                                fetch(achievementViewUrl, {
-                                    method: 'GET',
-                                    credentials: 'same-origin',
-                                    keepalive: true
-                                }).catch(function () {
-                                    // Ignore failures; this is best-effort telemetry/action.
-                                });
-                            };
-
-                            const closeOnEscape = function (event) {
-                                if (event.key === 'Escape') {
-                                    closeAchievement();
-                                }
-                            };
-
-                            const closeAchievement = function () {
-                                markAchievementViewed();
-                                achievementBlock.remove();
-                                document.removeEventListener('keydown', closeOnEscape);
-                            };
-
-                            achievementBlock.addEventListener('click', function (event) {
-                                // Share links open in a new tab, the title opens the achievement page
-                                if (event.target.closest('a')) {
-                                    markAchievementViewed();
-                                    return;
-                                }
-
-                                if (event.target.closest('#close-new-achievement')) {
-                                    closeAchievement();
-                                }
-                            });
-                            document.addEventListener('keydown', closeOnEscape);
-                        })();
-                    </script>
+                    {include file='new_achievement.tpl'}
                 {/if}
                 <section class="question-wrapper">
                     <div class="question-title-bar" style="display: flex;">

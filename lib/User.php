@@ -976,7 +976,11 @@ class User
     public function getSolvedQuestionsCount(): int 
     {
         if (!$this->logged()) return 0;
-        $stmt = $this->dbh->prepare("SELECT COUNT(question_id) FROM user_questions WHERE user_id = :user_id and solved_at is not null;");
+        // Over the same questions as Questionnire::getQuestionsCount(): deleted questions don't count
+        $stmt = $this->dbh->prepare("SELECT COUNT(user_questions.question_id)
+            FROM user_questions
+            JOIN questions ON questions.id = user_questions.question_id AND NOT questions.deleted
+            WHERE user_questions.user_id = :user_id and user_questions.solved_at is not null;");
         $stmt->execute([':user_id' => $this->id]);
         return $stmt->fetchColumn(0);
     }
@@ -1061,7 +1065,7 @@ class User
             JOIN achievements ON user_achievements.achievement_id = achievements.id
             JOIN achievements_localization ON achievements.id = achievements_localization.achievement_id AND achievements_localization.language = :lang
             WHERE user_id = :user_id and not achievements.deleted and viewed_at is null
-            ORDER BY user_achievements.earned_at ASC 
+            ORDER BY user_achievements.earned_at DESC 
             LIMIT 1;");
         $stmt->execute([':lang' => $lang, ':user_id' => $this->id]);
         return $stmt->fetch(PDO::FETCH_ASSOC) ?: false;

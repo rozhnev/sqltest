@@ -1397,6 +1397,27 @@ class Controller
         $this->engine->display("query_result.tpl");
     }
 
+    /**
+     * After a correct check by a logged-in user: the progress for the "My progress" widget in the headers and,
+     * before the result, the line of an achievement this check earned (showSolvedProgress() / placeNewAchievement()
+     * in script.js). Call it before any output.
+     */
+    private function sendSolvedProgress(): void
+    {
+        if (!$this->user->logged()) {
+            return;
+        }
+        $questionnire = new Questionnire($this->dbh, $this->lang);
+        header('X-Solved-Count: ' . $this->user->getSolvedQuestionsCount());
+        header('X-Questions-Count: ' . $questionnire->getQuestionsCount());
+
+        $newAchievement = $this->user->haveNewAchievement($this->lang);
+        if ($newAchievement) {
+            $this->engine->assign('NewAchievement', $newAchievement);
+            $this->engine->display('new_achievement.tpl');
+        }
+    }
+
     public function query_test(array $params): void 
     {
         $sql = $_POST["query"] ?? '';
@@ -1431,6 +1452,8 @@ class Controller
         }
         if (!$queryTestResult['ok'] || !$queryCheckResult['ok']) {
             header( 'HTTP/1.1 418 BAD REQUEST' );
+        } else {
+            $this->sendSolvedProgress();
         }
 
 
@@ -1454,7 +1477,11 @@ class Controller
             }
         }
 
-        if (!$answerResult['ok']) header( 'HTTP/1.1 418 BAD REQUEST' );
+        if (!$answerResult['ok']) {
+            header( 'HTTP/1.1 418 BAD REQUEST' );
+        } else {
+            $this->sendSolvedProgress();
+        }
         $this->engine->display($this->lang . "/check_answer_result.tpl");
     }
 
@@ -1513,7 +1540,11 @@ class Controller
         $quotaStatus = $quota->status();
         header('X-AI-Tokens-Remaining: ' . rawurlencode($quotaStatus['remaining_text']));
         header('X-AI-Tokens-Low: ' . ($quotaStatus['low'] ? '1' : '0'));
-        if (!$freeAnswerResult['ok']) header( 'HTTP/1.1 418 BAD REQUEST' );
+        if (!$freeAnswerResult['ok']) {
+            header( 'HTTP/1.1 418 BAD REQUEST' );
+        } else {
+            $this->sendSolvedProgress();
+        }
         $this->engine->display($this->lang . "/check_free_answer_result.tpl");
     }
 

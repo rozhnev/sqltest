@@ -30,8 +30,10 @@ Suggested order: bugs 14, 15 first, then 2 → 7 → 5 → 1 (biggest effect for
 - [ ] **34. No new-achievement banner on mobile**: `$NewAchievement` is rendered in `index.tpl` only, not in
       `m.index.tpl`.
 - [ ] **35. The banner shows the oldest unviewed achievement, not the one just earned**: `User::haveNewAchievement()`
-      uses `ORDER BY earned_at ASC LIMIT 1`, so "First difficult task done" shows up on a Simple task, one banner per
-      page. Show the just-earned one with the check response (see 16); on pages show the newest one, plus "+N more".
+      used `ORDER BY earned_at ASC LIMIT 1`, so "First difficult task done" shows up on a Simple task, one banner per
+      page.
+  - [x] The just-earned one comes with the check response (see 16); pages show the newest one (`DESC`).
+  - [ ] "+N more" when several are unviewed.
 
 ## High impact
 
@@ -77,12 +79,15 @@ Suggested order: bugs 14, 15 first, then 2 → 7 → 5 → 1 (biggest effect for
 
 ## Logged-in user
 
-- [ ] **16. Update the page after a correct solution** without a reload. The server knows everything at check time;
-      return it with the response.
-  - [ ] Mark the task `solved` in the menu.
-  - [ ] Refresh the "My progress" widget (`my_progress.tpl`).
-  - [ ] Show a new achievement right away (now only on the next page load, `$NewAchievement`).
-  - [ ] Check what the widget counts: live it shows 3/460 while the menu marks only 2 tasks solved.
+- [x] **16. Update the page after a correct solution** without a reload: `Controller::sendSolvedProgress()` on a
+      correct `query_test` / `check_answers` / `check_free_answer` of a logged-in user; `showSolvedProgress()` and
+      `placeNewAchievement()` in `script.js`.
+  - [x] Mark the task `solved` in the menu (`.question-link.current-question`).
+  - [x] Refresh the "My progress" widget from the `X-Solved-Count` / `X-Questions-Count` headers.
+  - [x] Show a new achievement right away: `new_achievement.tpl` (now a partial, also used by `index.tpl`) is
+        rendered before the result and moved above the task (on mobile it stays in the result).
+  - [x] Widget count: solved tasks counted all `user_questions`, the total only not deleted questions; the solved
+        count now skips deleted questions too. Recheck live (3/460 vs 2 in the menu): the menu may hide more.
 - [x] **17. Success block texts** (`{$Lang}/query_test_result.tpl`, all six languages).
   - [x] "Your **request** is among the best" → "query" (en, es).
   - [x] "your result is a little low of the record" → "Your query costs more than the best solution, so there's room
@@ -112,7 +117,7 @@ Suggested order: bugs 14, 15 first, then 2 → 7 → 5 → 1 (biggest effect for
         has its own OG title (`share_achievement_og_title`).
   - [x] `aria-hidden` on the 🏆 emoji; inline styles to CSS; the borrowed `user-solutions-count` class dropped.
   - [ ] The share menu doesn't close on an outside click (plain `<details>`).
-- [ ] **23. `my_progress.tpl` divides by `$QuestionsCount`** without a zero check.
+- [x] **23. `my_progress.tpl` divides by `$QuestionsCount`** without a zero check.
 - [ ] **24. Favorites star** is a `<span onClick>` too (see 11).
 - [ ] **25. Wrong-solution row hint is hard to read**: "the row number 1 … should contain: `1 | MALE | 5550`",
       "your result: `1 | MALE | 5300`". No column headers, and the leading row number looks like a value.
