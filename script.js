@@ -548,7 +548,7 @@ function checkAnswers(lang, questionId) {
     .then((async response=>{
         if (response.ok) {
         if (response.ok && document.getElementById("nextTaskBtn")) {
-            document.getElementById("nextTaskBtn").classList.toggle("hidden");
+            document.getElementById("nextTaskBtn").classList.remove("hidden");
             setTimeout(()=>{
                 document.getElementById("main3").scrollTo({
                     top: document.getElementById("nextTaskBtn").offsetTop,
@@ -593,7 +593,7 @@ function checkFreeAnswer(lang, questionId) {
             document.getElementById('buyTokensBtn')?.classList.toggle('hidden', response.headers.get('X-AI-Tokens-Low') !== '1');
         }
         if (response.ok && document.getElementById("nextTaskBtn")) {
-            document.getElementById("nextTaskBtn").classList.toggle("hidden");
+            document.getElementById("nextTaskBtn").classList.remove("hidden");
             setTimeout(()=>{
                 if (document.getElementById("main3")) {
                     document.getElementById("main3").scrollTo({
@@ -736,7 +736,7 @@ function testQuery(lang, questionId) {
     })
     .then((async response=>{
         if (response.ok && document.getElementById("nextTaskBtn")) {
-            document.getElementById("nextTaskBtn").classList.toggle("hidden");
+            document.getElementById("nextTaskBtn").classList.remove("hidden");
             setTimeout(()=>{
                 if (document.getElementById("main3")) {
                     document.getElementById("main3").scrollTo({

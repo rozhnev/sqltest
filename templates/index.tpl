@@ -252,7 +252,7 @@
                 {if $NextQuestionId}
                     <div class="code-buttons">
                         <div id="nextTaskBtn" class="hidden">
-                            <a class="button green hidden" href="/{$Lang}/question/{$Question.category_sef}/{$NextQuestionId}" title="{translate}question_action_next_title{/translate}">
+                            <a class="button green" href="/{$Lang}/question/{$Question.category_sef}/{$NextQuestionId}" title="{translate}question_action_next_title{/translate}">
                                 <i class="run-icon"></i>
                                 <span>{translate}question_action_next{/translate}</span>
                             </a>

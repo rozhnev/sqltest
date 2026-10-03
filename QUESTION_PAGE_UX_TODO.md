@@ -1,9 +1,26 @@
 # TODO: Question page UI/UX
 
 Reviewed `/en/question/sql-basics/sort-penguins` (HTML of the live page, ~200 KB, and `templates/index.tpl`).
+The logged-in view (items 14–32) was reviewed from the code (the `$User->logged()` branches, the solution check
+response `{$Lang}/query_test_result.tpl` and its JS) and then on the live site under an admin account
+(2026-10-03): `sort-penguins` (Run query, one wrong check), a solved free-answer task, the user popup.
+A correct solution was not submitted, so the success path is reviewed from the code only.
 No visual check yet: desktop and mobile screenshots may reveal more layout issues.
 
-Suggested order: 2 → 7 → 5 → 1 (biggest effect for the least work).
+Suggested order: bugs 14, 15 first, then 2 → 7 → 5 → 1 (biggest effect for the least work).
+
+## Bugs
+
+- [x] **14. The "Next" button never shows after a correct solution** (desktop and mobile).
+      Markup is `<div id="nextTaskBtn" class="hidden"><a class="button green hidden">` (`index.tpl`, `m.index.tpl`);
+      the JS removes `hidden` from the `div` only (markup confirmed on the live page). It used to work because `.button` (`display: flex`) beat
+      `.hidden`; since `787f976` (2026-09-29) `.code-buttons .button.hidden { display: none }` hides the link for good.
+  - [x] Drop `hidden` from the inner `<a>`.
+  - [x] `classList.toggle("hidden")` → `remove`: a second correct check (e.g. to lower the cost) hides the
+        button again (`script.js`: `checkAnswers`, `checkFreeAnswer`, `testQuery`).
+- [x] **15. "Use the hint" in the wrong-solution response asks for the hint in Russian**: `getHelp('ru', …)` is
+      hard-coded in `en/query_test_result.tpl` and `pt/query_test_result.tpl`. Now `{$Lang}` in all six languages. The button also repeats
+      `id="getHelpBtn"` of the page's own button (duplicate id): removed from the response.
 
 ## High impact
 
@@ -44,8 +61,64 @@ Suggested order: 2 → 7 → 5 → 1 (biggest effect for the least work).
   - [x] Result area: `.code-result-empty` inside `#code-result`, text per question type
         (`result_empty_query` / `_answers` / `_free_answer`), plus the Ctrl+Enter hint on desktop.
         Replaced by the first result, hint or error.
-- [ ] **9. After a correct solution**, besides "Next": "View other solutions" (now shown only on a repeat visit),
-      "Share", category progress.
+- [ ] **9. After a correct solution**: put "Next" (see 14) into the success block next to
+      "Show me other solutions!", it is the main action; add "Share" and the category progress.
+
+## Logged-in user
+
+- [ ] **16. Update the page after a correct solution** without a reload. The server knows everything at check time;
+      return it with the response.
+  - [ ] Mark the task `solved` in the menu.
+  - [ ] Refresh the "My progress" widget (`my_progress.tpl`).
+  - [ ] Show a new achievement right away (now only on the next page load, `$NewAchievement`).
+  - [ ] Check what the widget counts: live it shows 3/460 while the menu marks only 2 tasks solved.
+- [ ] **17. Success block texts** (`en/query_test_result.tpl`; check the other languages too).
+  - [ ] "Your **request** is among the best" → "query".
+  - [ ] "your result is a little low of the record" → e.g. "Your query costs more than the best one — there's room
+        to optimize".
+  - [ ] "Before starting the next **test**, please rate…" → "task".
+  - [ ] Move inline styles of the block (`font-size`, colors `#E60000`, `#11926E`, `#0069E6`) to CSS.
+- [ ] **18. Solved date on a solved task**. The title shows only the last attempt date of an unsolved task; for a
+      solved one it is empty. Show "Solved on …".
+- [ ] **19. "You already solved this task" line**: inline `style="… color: #2EA043 !important"` with a button inside a
+      `span`. Move to a class; make "View solutions" a secondary button (now as green as "Check it!").
+- [ ] **20. User icon in the top menu** (`top-menu.tpl`): a green button with a silhouette colored by grade, no name,
+      `title` or `aria-label`; it opens the achievements popup. Add `title` / `aria-label`, better a short label
+      with the grade.
+- [ ] **21. Menu for a logged-in user** (`menu.tpl`).
+  - [ ] The "hide solved" eye is repeated in every group but works globally: one switch above the menu.
+  - [ ] Don't render an empty "Favorites" group (confirmed live: it is the first group with 0 tasks).
+- [ ] **22. New-achievement block above the task** (`index.tpl`) pushes the task down, has a red 32×32 close button
+      and inline styles. Make it a compact toast or place it under the result.
+- [ ] **23. `my_progress.tpl` divides by `$QuestionsCount`** without a zero check.
+- [ ] **24. Favorites star** is a `<span onClick>` too (see 11).
+- [ ] **25. Wrong-solution row hint is hard to read**: "the row number 1 … should contain: `1 | MALE | 5550`",
+      "your result: `1 | MALE | 5300`". No column headers, and the leading row number looks like a value.
+      Show two rows with headers ("Expected" / "Yours") and highlight the differing cells
+      (`hints.rowsData` in `{$Lang}/query_test_result.tpl`).
+- [ ] **26. Instructions name a button that doesn't exist**: free answer says "click the "Check!" button", the button is
+      "Check answer"; choice questions say "Check!", the button is "Check answers"
+      (`question_action_write_free_answer`, `question_action_choose_one_answer`, `question_action_mark_all_answers`).
+- [ ] **27. Solved free-answer task on revisit** shows the old answer and "You already solved this task" only. Show the
+      AI score and feedback (`llm_feedback` is stored) and the date.
+- [ ] **28. AI check cost is unknown**: "AI tokens left: 43 560", but not how much one check costs. Add "≈ N tokens per
+      check".
+- [ ] **29. User popup** (`/{lang}/user/achievements`): "User Profile" / "Logout" are at the very bottom after the full
+      achievements list.
+  - [ ] Links on top; add the AI token balance and "My solutions".
+  - [ ] Show the last 3–5 achievements plus an "All" link.
+  - [ ] Logout as a secondary link, not a big red button equal to Profile.
+
+## Admin
+
+- [ ] **30. "Edit" pencil is invisible in the light theme**: `color: white` on the light title bar (`#E8F2FE`)
+      (`index.tpl`, `question-navigate`).
+- [ ] **31. Admin menu weighs ~300 KB** (guest ~64 KB) because of 552 ▲▼ reorder buttons. Show them on hover or in
+      a separate reorder mode.
+
+## Content
+
+- [ ] **32. Typo in `de-etl-elt-pipeline-design`**: the task text ends with "…and reruns a?".
 
 ## Noise around the task
 
