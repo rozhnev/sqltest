@@ -1181,12 +1181,18 @@ input:checked + .slider:before {
     border-bottom: 1px solid var(--text-block-border-color);
 }
 .user-popup-links a,
+.user-popup-all,
 .user-popup-footer a {
     color: var(--info-text-color);
     white-space: nowrap;
 }
+.user-popup-all {
+    display: inline-block;
+    margin: 4px 10px;
+}
 .user-popup-footer {
     display: flex;
+    align-items: center;
     justify-content: space-between;
     gap: 16px;
     margin-top: 8px;

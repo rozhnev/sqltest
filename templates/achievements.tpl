@@ -110,7 +110,6 @@
 </div>
 {* Profile links on top: the popup opens from the user icon in the top menu *}
 <nav class="user-popup-links">
-    <a href="/{$Lang}/user/profile">{translate}profile_page_title{/translate}</a>
     <a href="/{$Lang}/user/profile#tasks">{translate}user_popup_my_tasks{/translate}</a>
     {if isset($AiQuota)}
         <a href="/{$Lang}/user/profile#ai">{translate}profile_ai_tab{/translate}: <b>{$AiQuota.remaining_text}</b></a>
@@ -170,7 +169,8 @@
     </div>
 {/foreach}
 
+<a class="user-popup-all" href="/{$Lang}/user/profile#achievements">{translate}user_popup_all_achievements{/translate} →</a>
 <div class="user-popup-footer">
-    <a href="/{$Lang}/user/profile#achievements">{translate}user_popup_all_achievements{/translate} →</a>
+    <button class="button" onclick="location.href='/{$Lang}/user/profile';"><span>{translate}profile_page_title{/translate}</span></button>
     <a class="user-popup-logout" href="/{$Lang}/logout">{translate}top_menu_logout{/translate}</a>
 </div>
