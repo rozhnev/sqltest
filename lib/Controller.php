@@ -1279,6 +1279,8 @@ class Controller
         }
         // free_answer stores raw text in last_query (like `query`), so it is passed through unchanged
         // to prefill the textarea; only the quiz (`answer`) mode decodes it as a JSON array of ids above.
+        // Its last AI check is shown in the result area until the next check (index.tpl, m.index.tpl).
+        $questionData['last_feedback'] = json_decode($questionData['last_feedback'] ?? 'null', true);
 
         if ($this->user->logged()) {
             $this->user->setPath($params['path']);
@@ -1535,6 +1537,10 @@ class Controller
         // Do not overwrite a previously saved answer with an empty submission.
         if (trim($answer) !== '') {
             $this->user->saveQuestionAttempt($questionID, $freeAnswerResult, trim($answer));
+            // Only a real grading has a score key; "AI unavailable" results are not kept
+            if (array_key_exists('score', $freeAnswerResult)) {
+                $this->user->saveFreeAnswerFeedback((int)$questionID, $freeAnswerResult);
+            }
         }
         // Balance after this check, for the counter next to the Check button (checkFreeAnswer() in script.js)
         $quotaStatus = $quota->status();

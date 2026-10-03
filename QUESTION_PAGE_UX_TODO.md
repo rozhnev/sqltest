@@ -125,11 +125,17 @@ Suggested order: bugs 14, 15 first, then 2 → 7 → 5 → 1 (biggest effect for
       `columns` / `expected` / `actual` / `diff` to `hints.rowsData` (all six `{$Lang}/query_test_result.tpl`).
   - [x] Same table in the test (`check_test_solution.tpl`) and interview (`interview-answer-result.tpl`) results;
         hints saved before (no `columns`) still show the old `rowTable` / `resultTable`.
-- [ ] **26. Instructions name a button that doesn't exist**: free answer says "click the "Check!" button", the button is
+- [x] **26. Instructions name a button that doesn't exist**: free answer says "click the "Check!" button", the button is
       "Check answer"; choice questions say "Check!", the button is "Check answers"
       (`question_action_write_free_answer`, `question_action_choose_one_answer`, `question_action_mark_all_answers`).
-- [ ] **27. Solved free-answer task on revisit** shows the old answer and "You already solved this task" only. Show the
-      AI score and feedback (`llm_feedback` is stored) and the date.
+      Now the instructions quote the real labels (`question_action_check_answers` /
+      `question_action_check_free_answer`) in all six languages; the SQL line already matched "Check it!".
+- [x] **27. Solved free-answer task on revisit** showed the old answer and "You already solved this task" only.
+      The AI check was not stored (`llm_feedback` is the interview table). Now `user_questions.last_feedback`
+      (`{ok, score, comment}`, `User::saveFreeAnswerFeedback()`) is shown in the result area until the next check:
+      "Last AI check (date): passed · Score 85/100" + the comment (`free_answer_last_check.tpl`, desktop and mobile).
+  - [ ] **Deploy**: run `sql/user_questions_last_feedback_migration.sql` before the code, `Question::get()` selects
+        the column.
 - [ ] **28. AI check cost is unknown**: "AI tokens left: 43 560", but not how much one check costs. Add "≈ N tokens per
       check".
 - [ ] **29. User popup** (`/{lang}/user/achievements`): "User Profile" / "Logout" are at the very bottom after the full

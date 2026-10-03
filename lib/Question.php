@@ -67,6 +67,7 @@ class Question
                 last_attempt_at::date last_attempt_date, 
                 solved_at::date solved_date, 
                 last_query,
+                user_questions.last_feedback,
                 questions.rate,
                 COALESCE(qrl_lang.rate, qrl_en.rate, '') question_rate,
                 (exists (select true from answers where question_id = questions.id)) have_answers,

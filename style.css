@@ -1120,6 +1120,23 @@ input:checked + .slider:before {
 .code-result-empty-shortcut {
     font-size: smaller;
 }
+/* Last AI check of a free answer (free_answer_last_check.tpl) */
+.free-answer-last-check__title {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 10px;
+    font-weight: bold;
+}
+.free-answer-last-check__verdict {
+    color: var(--cost-best-color);
+}
+.free-answer-last-check__verdict.failed {
+    color: var(--danger-text-color);
+}
+.free-answer-last-check__score {
+    font-weight: normal;
+}
 /* Expected vs the user's row of a wrong result (row_diff.tpl) */
 .row-diff th[scope="row"] {
     text-align: left;

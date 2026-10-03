@@ -771,7 +771,8 @@ CREATE TABLE public.user_questions (
     solved_at timestamp without time zone,
     last_query text,
     rate smallint,
-    query_cost numeric(12,3)
+    query_cost numeric(12,3),
+    last_feedback jsonb
 );
 
 

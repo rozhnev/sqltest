@@ -134,6 +134,9 @@
                 data-explain-hint="{translate}sql_error_explain_hint{/translate}" data-tokens-left-label="{translate}free_answer_tokens_left{/translate}"
                 {/if}>
                 {* Empty state, replaced by the first result, hint or error *}
+                {if $Question.question_type == 'free_answer' && $Question.last_feedback}
+                    {include file='free_answer_last_check.tpl' Feedback=$Question.last_feedback CheckedAt=$Question.last_attempt_date}
+                {else}
                 <div class="code-result-empty">
                     {if $Question.question_type == 'free_answer'}
                         {translate}result_empty_free_answer{/translate}
@@ -143,6 +146,7 @@
                         {translate}result_empty_query{/translate}
                     {/if}
                 </div>
+                {/if}
             </div>
                 {if $NextQuestionId}
                     <div class="code-buttons">

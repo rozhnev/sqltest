@@ -818,6 +818,26 @@ class User
     }
 
     /**
+     * The last AI check of a free answer (Question::checkFreeAnswer()), shown when the user comes back to the task.
+     * Call it after saveQuestionAttempt(), which creates the row.
+     */
+    public function saveFreeAnswerFeedback(int $questionID, array $result): void
+    {
+        $feedback = [
+            'ok'      => (bool)$result['ok'],
+            'score'   => $result['score'] ?? null,
+            'comment' => (string)($result['comment'] ?? ''),
+        ];
+        $stmt = $this->dbh->prepare("UPDATE user_questions SET last_feedback = :feedback
+            WHERE user_id = :user_id AND question_id = :question_id");
+        $stmt->execute([
+            ':feedback'    => json_encode($feedback, JSON_UNESCAPED_UNICODE),
+            ':user_id'     => $this->id,
+            ':question_id' => $questionID,
+        ]);
+    }
+
+    /**
      * Save Questoin attepmt in DB
      *
      * @param integer $questionID
