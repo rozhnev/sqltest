@@ -114,12 +114,8 @@
             <p>Подсказка: результат должен содержать {$QueryTestResult.hints.rowsCount} строк.</p>
         {/if}
         {if array_key_exists('rowsData', $QueryTestResult.hints) }
-            <p>Подсказка: строка номер {$QueryTestResult.hints.rowsData.rowNumber} таблицы результатов должна содержать следующие значения: 
-                {$QueryTestResult.hints.rowsData.rowTable}
-            </p>
-            <p>ваш результат:
-                {$QueryTestResult.hints.rowsData.resultTable}
-            </p>
+            <p>Подсказка: строка {$QueryTestResult.hints.rowsData.rowNumber} вашего результата отличается от ожидаемой:</p>
+            {include file='row_diff.tpl' RowDiff=$QueryTestResult.hints.rowsData}
         {/if}
         {if array_key_exists('emptyQuery', $QueryTestResult.hints) }
             <p>Подсказка: ваш запрос пуст.</p>

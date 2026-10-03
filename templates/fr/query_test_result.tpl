@@ -102,12 +102,8 @@
             <p>Indice : le résultat doit contenir {$QueryTestResult.hints.rowsCount} lignes.</p>
         {/if}
         {if array_key_exists('rowsData', $QueryTestResult.hints) }
-            <p>Indice : la ligne numéro {$QueryTestResult.hints.rowsData.rowNumber} du tableau de résultats doit contenir les valeurs suivantes : 
-                {$QueryTestResult.hints.rowsData.rowTable}
-            </p>
-            <p>votre résultat :
-                {$QueryTestResult.hints.rowsData.resultTable}
-            </p>
+            <p>Indice : la ligne {$QueryTestResult.hints.rowsData.rowNumber} de votre résultat diffère de celle attendue :</p>
+            {include file='row_diff.tpl' RowDiff=$QueryTestResult.hints.rowsData}
         {/if}
         {if array_key_exists('emptyQuery', $QueryTestResult.hints) }
             <p>Indice : votre requête est vide.</p>

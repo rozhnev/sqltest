@@ -119,10 +119,12 @@ Suggested order: bugs 14, 15 first, then 2 → 7 → 5 → 1 (biggest effect for
   - [ ] The share menu doesn't close on an outside click (plain `<details>`).
 - [x] **23. `my_progress.tpl` divides by `$QuestionsCount`** without a zero check.
 - [ ] **24. Favorites star** is a `<span onClick>` too (see 11).
-- [ ] **25. Wrong-solution row hint is hard to read**: "the row number 1 … should contain: `1 | MALE | 5550`",
-      "your result: `1 | MALE | 5300`". No column headers, and the leading row number looks like a value.
-      Show two rows with headers ("Expected" / "Yours") and highlight the differing cells
-      (`hints.rowsData` in `{$Lang}/query_test_result.tpl`).
+- [x] **25. Wrong-solution row hint is hard to read**: it was "the row number 1 … should contain: `1 | MALE | 5550`",
+      "your result: `1 | MALE | 5300`", without column headers. Now `row_diff.tpl`: one table with the column names,
+      rows "Expected" / "Yours", differing cells highlighted, values escaped. `Question::checkQueryResult()` adds
+      `columns` / `expected` / `actual` / `diff` to `hints.rowsData` (all six `{$Lang}/query_test_result.tpl`).
+  - [x] Same table in the test (`check_test_solution.tpl`) and interview (`interview-answer-result.tpl`) results;
+        hints saved before (no `columns`) still show the old `rowTable` / `resultTable`.
 - [ ] **26. Instructions name a button that doesn't exist**: free answer says "click the "Check!" button", the button is
       "Check answer"; choice questions say "Check!", the button is "Check answers"
       (`question_action_write_free_answer`, `question_action_choose_one_answer`, `question_action_mark_all_answers`).

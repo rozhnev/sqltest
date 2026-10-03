@@ -74,7 +74,7 @@
                     {if array_key_exists('columnsCount', $QueryTestResult.hints)}<p>Dica: a tabela resultante deve conter {$QueryTestResult.hints.columnsCount} colunas.</p>{/if}
                     {if array_key_exists('columnsList', $QueryTestResult.hints)}<p>Dica: a tabela resultante deve conter as seguintes colunas: {$QueryTestResult.hints.columnsList}.</p>{/if}
                     {if array_key_exists('rowsCount', $QueryTestResult.hints)}<p>Dica: o resultado deve conter {$QueryTestResult.hints.rowsCount} linhas.</p>{/if}
-                    {if array_key_exists('rowsData', $QueryTestResult.hints)}<p>Dica: a linha número {$QueryTestResult.hints.rowsData.rowNumber} deve conter os valores: {$QueryTestResult.hints.rowsData.rowTable}</p><p>Seu resultado: {$QueryTestResult.hints.rowsData.resultTable}</p>{/if}
+                    {if array_key_exists('rowsData', $QueryTestResult.hints)}{if isset($QueryTestResult.hints.rowsData.columns)}<p>Dica: a linha {$QueryTestResult.hints.rowsData.rowNumber} do seu resultado é diferente da esperada:</p>{include file='row_diff.tpl' RowDiff=$QueryTestResult.hints.rowsData}{else}<p>Dica: a linha número {$QueryTestResult.hints.rowsData.rowNumber} deve conter os valores: {$QueryTestResult.hints.rowsData.rowTable}</p><p>Seu resultado: {$QueryTestResult.hints.rowsData.resultTable}</p>{/if}{/if}
                     {if array_key_exists('emptyQuery', $QueryTestResult.hints)}<p>Dica: sua consulta está vazia.</p>{/if}
                 </div>
             {/if}

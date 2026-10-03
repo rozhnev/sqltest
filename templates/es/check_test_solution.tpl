@@ -335,12 +335,17 @@
                         <p>Pista: el resultado debe contener {$QueryTestResult.hints.rowsCount} filas.</p>
                     {/if}
                     {if array_key_exists('rowsData', $QueryTestResult.hints)}
-                        <p>Pista: el número de fila {$QueryTestResult.hints.rowsData.rowNumber} de la tabla de resultados debe contener los siguientes valores:
-                            {$QueryTestResult.hints.rowsData.rowTable}
-                        </p>
-                        <p>su resultado:
-                            {$QueryTestResult.hints.rowsData.resultTable}
-                        </p>
+                        {if isset($QueryTestResult.hints.rowsData.columns)}
+                            <p>Pista: la fila {$QueryTestResult.hints.rowsData.rowNumber} de tu resultado es distinta de la esperada:</p>
+                            {include file='row_diff.tpl' RowDiff=$QueryTestResult.hints.rowsData}
+                        {else}
+                            <p>Pista: el número de fila {$QueryTestResult.hints.rowsData.rowNumber} de la tabla de resultados debe contener los siguientes valores:
+                                {$QueryTestResult.hints.rowsData.rowTable}
+                            </p>
+                            <p>su resultado:
+                                {$QueryTestResult.hints.rowsData.resultTable}
+                            </p>
+                        {/if}
                     {/if}
                     {if array_key_exists('emptyQuery', $QueryTestResult.hints)}
                         <p>Pista: su consulta está vacía.</p>

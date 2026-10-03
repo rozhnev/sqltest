@@ -50,10 +50,15 @@
                     <p>结果应包含 {$check.hints.rowsCount} 行。</p>
                 {/if}
                 {if isset($check.hints.rowsData)}
-                    <p>第 {$check.hints.rowsData.rowNumber} 行应为：</p>
-                    {$check.hints.rowsData.rowTable}
-                    <p>您的结果：</p>
-                    {$check.hints.rowsData.resultTable}
+                    {if isset($check.hints.rowsData.columns)}
+                        <p>你的结果第 {$check.hints.rowsData.rowNumber} 行与预期不同：</p>
+                        {include file='row_diff.tpl' RowDiff=$check.hints.rowsData}
+                    {else}
+                        <p>第 {$check.hints.rowsData.rowNumber} 行应为：</p>
+                        {$check.hints.rowsData.rowTable}
+                        <p>您的结果：</p>
+                        {$check.hints.rowsData.resultTable}
+                    {/if}
                 {/if}
             {/if}
         {/if}

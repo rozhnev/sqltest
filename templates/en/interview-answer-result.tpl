@@ -50,10 +50,15 @@
                     <p>The result should have {$check.hints.rowsCount} rows.</p>
                 {/if}
                 {if isset($check.hints.rowsData)}
-                    <p>Row {$check.hints.rowsData.rowNumber} should be:</p>
-                    {$check.hints.rowsData.rowTable}
-                    <p>Your result:</p>
-                    {$check.hints.rowsData.resultTable}
+                    {if isset($check.hints.rowsData.columns)}
+                        <p>Row {$check.hints.rowsData.rowNumber} of your result differs from the expected one:</p>
+                        {include file='row_diff.tpl' RowDiff=$check.hints.rowsData}
+                    {else}
+                        <p>Row {$check.hints.rowsData.rowNumber} should be:</p>
+                        {$check.hints.rowsData.rowTable}
+                        <p>Your result:</p>
+                        {$check.hints.rowsData.resultTable}
+                    {/if}
                 {/if}
             {/if}
         {/if}

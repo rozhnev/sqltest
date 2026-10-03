@@ -102,12 +102,8 @@
             <p>Hint: the result must contain {$QueryTestResult.hints.rowsCount} rows.</p>
         {/if}
         {if array_key_exists('rowsData', $QueryTestResult.hints) }
-            <p>Hint: the row number {$QueryTestResult.hints.rowsData.rowNumber} of the results table should contain the following values: 
-                {$QueryTestResult.hints.rowsData.rowTable}
-            </p>
-            <p>your result:
-                {$QueryTestResult.hints.rowsData.resultTable}
-            </p>
+            <p>Hint: row {$QueryTestResult.hints.rowsData.rowNumber} of your result differs from the expected one:</p>
+            {include file='row_diff.tpl' RowDiff=$QueryTestResult.hints.rowsData}
         {/if}
         {if array_key_exists('emptyQuery', $QueryTestResult.hints) }
             <p>Hint: your query is empty.</p>

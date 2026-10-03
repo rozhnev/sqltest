@@ -50,10 +50,15 @@
                     <p>Ожидаемое число строк: {$check.hints.rowsCount}.</p>
                 {/if}
                 {if isset($check.hints.rowsData)}
-                    <p>Строка {$check.hints.rowsData.rowNumber} должна быть такой:</p>
-                    {$check.hints.rowsData.rowTable}
-                    <p>У вас получилось:</p>
-                    {$check.hints.rowsData.resultTable}
+                    {if isset($check.hints.rowsData.columns)}
+                        <p>Строка {$check.hints.rowsData.rowNumber} вашего результата отличается от ожидаемой:</p>
+                        {include file='row_diff.tpl' RowDiff=$check.hints.rowsData}
+                    {else}
+                        <p>Строка {$check.hints.rowsData.rowNumber} должна быть такой:</p>
+                        {$check.hints.rowsData.rowTable}
+                        <p>У вас получилось:</p>
+                        {$check.hints.rowsData.resultTable}
+                    {/if}
                 {/if}
             {/if}
         {/if}

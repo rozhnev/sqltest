@@ -102,12 +102,8 @@
             <p>Dica: o resultado deve conter {$QueryTestResult.hints.rowsCount} linhas.</p>
         {/if}
         {if array_key_exists('rowsData', $QueryTestResult.hints) }
-            <p>Dica: a linha número {$QueryTestResult.hints.rowsData.rowNumber} da tabela de resultados deve conter os seguintes valores: 
-                {$QueryTestResult.hints.rowsData.rowTable}
-            </p>
-            <p>seu resultado:
-                {$QueryTestResult.hints.rowsData.resultTable}
-            </p>
+            <p>Dica: a linha {$QueryTestResult.hints.rowsData.rowNumber} do seu resultado é diferente da esperada:</p>
+            {include file='row_diff.tpl' RowDiff=$QueryTestResult.hints.rowsData}
         {/if}
         {if array_key_exists('emptyQuery', $QueryTestResult.hints) }
             <p>Dica: sua consulta está vazia.</p>

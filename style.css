@@ -1120,6 +1120,20 @@ input:checked + .slider:before {
 .code-result-empty-shortcut {
     font-size: smaller;
 }
+/* Expected vs the user's row of a wrong result (row_diff.tpl) */
+.row-diff th[scope="row"] {
+    text-align: left;
+    white-space: nowrap;
+}
+.row-diff .row-diff__cell {
+    font-weight: bold;
+}
+.row-diff .row-diff__cell--expected {
+    background-color: rgba(46, 160, 67, 0.18);
+}
+.row-diff .row-diff__cell--yours {
+    background-color: rgba(248, 81, 73, 0.18);
+}
 .code-result .referral-link {
     font-size:large; 
     padding: 1em; 

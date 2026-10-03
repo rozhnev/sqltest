@@ -102,12 +102,8 @@
             <p>提示：结果必须包含 {$QueryTestResult.hints.rowsCount} 行。</p>
         {/if}
         {if array_key_exists('rowsData', $QueryTestResult.hints) }
-            <p>提示：结果表第 {$QueryTestResult.hints.rowsData.rowNumber} 行应包含以下值：
-                {$QueryTestResult.hints.rowsData.rowTable}
-            </p>
-            <p>你的结果：
-                {$QueryTestResult.hints.rowsData.resultTable}
-            </p>
+            <p>提示：你的结果第 {$QueryTestResult.hints.rowsData.rowNumber} 行与预期不同：</p>
+            {include file='row_diff.tpl' RowDiff=$QueryTestResult.hints.rowsData}
         {/if}
         {if array_key_exists('emptyQuery', $QueryTestResult.hints) }
             <p>提示：你的查询为空。</p>

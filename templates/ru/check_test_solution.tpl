@@ -74,7 +74,7 @@
                     {if array_key_exists('columnsCount', $QueryTestResult.hints)}<p>Подсказка: результирующая таблица должна содержать {$QueryTestResult.hints.columnsCount} столбцов.</p>{/if}
                     {if array_key_exists('columnsList', $QueryTestResult.hints)}<p>Подсказка: результирующая таблица должна состоять из следующих столбцов: {$QueryTestResult.hints.columnsList}.</p>{/if}
                     {if array_key_exists('rowsCount', $QueryTestResult.hints)}<p>Подсказка: результат должен содержать {$QueryTestResult.hints.rowsCount} строк.</p>{/if}
-                    {if array_key_exists('rowsData', $QueryTestResult.hints)}<p>Подсказка: строка №{$QueryTestResult.hints.rowsData.rowNumber} должна содержать значения: {$QueryTestResult.hints.rowsData.rowTable}</p><p>Ваш результат: {$QueryTestResult.hints.rowsData.resultTable}</p>{/if}
+                    {if array_key_exists('rowsData', $QueryTestResult.hints)}{if isset($QueryTestResult.hints.rowsData.columns)}<p>Подсказка: строка {$QueryTestResult.hints.rowsData.rowNumber} вашего результата отличается от ожидаемой:</p>{include file='row_diff.tpl' RowDiff=$QueryTestResult.hints.rowsData}{else}<p>Подсказка: строка №{$QueryTestResult.hints.rowsData.rowNumber} должна содержать значения: {$QueryTestResult.hints.rowsData.rowTable}</p><p>Ваш результат: {$QueryTestResult.hints.rowsData.resultTable}</p>{/if}{/if}
                     {if array_key_exists('emptyQuery', $QueryTestResult.hints)}<p>Подсказка: ваш запрос пуст.</p>{/if}
                 </div>
             {/if}

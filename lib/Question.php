@@ -572,13 +572,19 @@ class Question
                         }
                     }
                     if ($row !== $resultObject[0]->data[$i]) {
+                        // Which cells differ (after the tolerance patch above), for the row_diff.tpl highlight
+                        $diff = array_map(fn($col) => $row[$col] !== $resultObject[0]->data[$i][$col], array_keys($row));
                         // map NULLs to '[null]' before show
                         $resultRow = array_map(fn($el)=>(is_null($el) ? '[null]' : $el), $resultObject[0]->data[$i]);
                         $row = array_map(fn($el)=>(is_null($el) ? '[null]' : $el), $row);
                         $hints['rowsData'] = [
                             'rowNumber' => $i + 1,
                             'rowTable' => '<table class="result-table"><tr><td>' . ($i + 1) . '</td><td>' . implode("</td><td>", $row) .'</td></tr></table>',
-                            'resultTable' => '<table class="result-table"><tr><td>' . ($i + 1) . '</td><td>' . implode("</td><td>", $resultRow) .'</td></tr></table>'
+                            'resultTable' => '<table class="result-table"><tr><td>' . ($i + 1) . '</td><td>' . implode("</td><td>", $resultRow) .'</td></tr></table>',
+                            'columns' => array_map(fn($h) => $h->header, $queryValidResult->headers),
+                            'expected' => array_values($row),
+                            'actual' => array_values($resultRow),
+                            'diff' => $diff
                         ];
                         return [
                             'ok' => false,
