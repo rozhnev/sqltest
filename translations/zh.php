@@ -356,6 +356,7 @@ $translations = [
     'donation_goal' => '目标：',
     'donation_progress' => '进度：',
     'top_menu_login' => '登录',
+    'user_menu_title' => '个人资料和成就',
     'top_menu_logout' => '登出',
     'up_your_level' => '参加测试以提升您的级别。',
     'update_failed' => '更新昵称失败',

@@ -54,6 +54,7 @@ $translations = [
     'donation_progress' => 'Progresso:',
      'mobile_menu_donate' => '<span class="currency">€</span> Apoie o projeto',
     'top_menu_login' => 'Entrar',
+    'user_menu_title' => 'Perfil e conquistas',
     'top_menu_logout' => 'Sair',
     'site_description' => 'Aproveite o poder da prática para dominar o SQL. Nossos exercícios interativos são projetados para solidificar sua compreensão, desde conceitos básicos até técnicas avançadas. Seja você um iniciante em SQL ou um profissional experiente, encontrará desafios adaptados ao seu nível de habilidade. Aumente sua confiança para entrevistas de emprego e aplicações do mundo real por meio da prática consistente.',
     'site_description_question_task' => '<b>Aprimore suas habilidades em SQL com nossos exercícios interativos!</b><br>Pratique uma ampla gama de tarefas SQL, desde consultas básicas até técnicas avançadas. Receba feedback instantâneo sobre suas soluções, ajudando você a aprender com os erros e melhorar suas habilidades. Aumente sua confiança para entrevistas de emprego e aplicações SQL do mundo real.',

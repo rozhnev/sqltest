@@ -8,25 +8,10 @@ A correct solution was not submitted, so the success path is reviewed from the c
 The new-achievement banner was reviewed live the same day ("First difficult task done" on `sort-penguins`).
 No visual check yet: desktop and mobile screenshots may reveal more layout issues.
 
-Suggested order: bugs 14, 15 first, then 2 → 7 → 5 → 1 (biggest effect for the least work).
+Open items first, by area; resolved ones are under "Done" at the end.
 
 ## Bugs
 
-- [x] **14. The "Next" button never shows after a correct solution** (desktop and mobile).
-      Markup is `<div id="nextTaskBtn" class="hidden"><a class="button green hidden">` (`index.tpl`, `m.index.tpl`);
-      the JS removes `hidden` from the `div` only (markup confirmed on the live page). It used to work because `.button` (`display: flex`) beat
-      `.hidden`; since `787f976` (2026-09-29) `.code-buttons .button.hidden { display: none }` hides the link for good.
-  - [x] Drop `hidden` from the inner `<a>`.
-  - [x] `classList.toggle("hidden")` → `remove`: a second correct check (e.g. to lower the cost) hides the
-        button again (`script.js`: `checkAnswers`, `checkFreeAnswer`, `testQuery`).
-- [x] **15. "Use the hint" in the wrong-solution response asks for the hint in Russian**: `getHelp('ru', …)` is
-      hard-coded in `en/query_test_result.tpl` and `pt/query_test_result.tpl`. Now `{$Lang}` in all six languages. The button also repeats
-      `id="getHelpBtn"` of the page's own button (duplicate id): removed from the response.
-
-- [x] **33. Sharing an achievement doesn't mark it viewed**: the banner script in `index.tpl` waits for
-      `a[data-mark-achievement-viewed="1"]`, but the LinkedIn / X / Facebook / Telegram links in
-      `{$Lang}/achievement_share_buttons.tpl` don't have the attribute. After sharing, the banner keeps showing on
-      every page until closed with ×. Now any link in the banner (title or share) marks it viewed.
 - [ ] **34. No new-achievement banner on mobile**: `$NewAchievement` is rendered in `index.tpl` only, not in
       `m.index.tpl`.
 - [ ] **35. The banner shows the oldest unviewed achievement, not the one just earned**: `User::haveNewAchievement()`
@@ -63,11 +48,6 @@ Suggested order: bugs 14, 15 first, then 2 → 7 → 5 → 1 (biggest effect for
 
 ## Texts and hints
 
-- [x] **4. Merge the two italic instruction lines** under the task into one short line
-      (`question_action_write_query`, `_mobile` for `m.index.tpl`).
-  - [x] "Write your **request**…" → "query" (`question_action_write_your_request`, still used by the test pages).
-  - [x] "…provided in the right pane" is wrong on mobile: the mobile line says "at the bottom of the screen".
-  - [x] Show the dialect as a badge next to the title (`.question-dbms`, tooltip `question_action_use_syntax`).
 - [ ] **5. Explain "Run query" vs "Check it!"**.
   - [ ] Show the shortcut on the button (`Run ⌃↵`), not only in `title`.
   - [ ] Add a shortcut for Check, e.g. Ctrl+Shift+Enter.
@@ -77,6 +57,83 @@ Suggested order: bugs 14, 15 first, then 2 → 7 → 5 → 1 (biggest effect for
 
 ## Behavior
 
+- [ ] **9. After a correct solution**: put "Next" (see 14) into the success block next to
+      "Show me other solutions!", it is the main action; add "Share" and the category progress.
+
+## Logged-in user
+
+- [ ] **21. Menu for a logged-in user** (`menu.tpl`).
+  - [ ] The "hide solved" eye is repeated in every group but works globally: one switch above the menu.
+  - [x] Don't render an empty "Favorites" group (confirmed live: it is the first group with 0 tasks).
+- [ ] **22. New-achievement block above the task** (`index.tpl`; bugs: 33–35).
+  - [x] Too big: title, 4 large share buttons and a divider push the task ~150 px down. Now one compact line
+        `.new-achievement`: "🏆 New achievement unlocked: <title> · Share ▾ · ×", share buttons in a `<details>` menu.
+  - [x] Achievement link `#00CED1` on `#F6F6F6` had ~1.9:1 contrast: now `--achievement-link-color`
+        (`#0057CC` light, `#58A6FF` dark, ~6:1).
+  - [x] The red 32×32 close button (`#d93025`) read as an error: now a transparent "×" in the text color; Esc closes.
+  - [ ] Share with text, not just the URL: `text=` for X and Telegram ("I unlocked "…" on SQLtest.online")
+        (`{$Lang}/achievement_share_buttons.tpl`, also used by `share_achievement.tpl`). The achievement page already
+        has its own OG title (`share_achievement_og_title`).
+  - [x] `aria-hidden` on the 🏆 emoji; inline styles to CSS; the borrowed `user-solutions-count` class dropped.
+  - [ ] The share menu doesn't close on an outside click (plain `<details>`).
+- [ ] **28. AI check cost is unknown**: "AI tokens left: 43 560", but not how much one check costs. Add "≈ N tokens per
+      check".
+
+## Admin
+
+- [ ] **30. "Edit" pencil is invisible in the light theme**: `color: white` on the light title bar (`#E8F2FE`)
+      (`index.tpl`, `question-navigate`).
+- [ ] **31. Admin menu weighs ~300 KB** (guest ~64 KB) because of 552 ▲▼ reorder buttons. Show them on hover or in
+      a separate reorder mode.
+
+## Content
+
+- [ ] **32. Typo in `de-etl-elt-pipeline-design`**: the task text ends with "…and reruns a?".
+
+## Noise around the task
+
+- [ ] **10. Fewer competing banners**: donation banner on top, cookie banner at the bottom, achievement block.
+      Don't show the donation banner on the first visit / on task pages; e.g. after 3–5 solved tasks.
+
+## Accessibility and code quality
+
+- [ ] **12. Move inline styles to CSS**: urgent banner, new-achievement block, the warning in the right panel.
+      Hard-coded colors (`#fff3cd`, `#00CED1`) don't follow the dark theme.
+
+## SEO
+
+- [ ] **13. Per-task `og:description` / `twitter:description`**. They are site-wide now; use the task's own
+      description, as `meta description` already does.
+
+## Done
+
+### Bugs
+
+- [x] **14. The "Next" button never shows after a correct solution** (desktop and mobile).
+      Markup is `<div id="nextTaskBtn" class="hidden"><a class="button green hidden">` (`index.tpl`, `m.index.tpl`);
+      the JS removes `hidden` from the `div` only (markup confirmed on the live page). It used to work because `.button` (`display: flex`) beat
+      `.hidden`; since `787f976` (2026-09-29) `.code-buttons .button.hidden { display: none }` hides the link for good.
+  - [x] Drop `hidden` from the inner `<a>`.
+  - [x] `classList.toggle("hidden")` → `remove`: a second correct check (e.g. to lower the cost) hides the
+        button again (`script.js`: `checkAnswers`, `checkFreeAnswer`, `testQuery`).
+- [x] **15. "Use the hint" in the wrong-solution response asks for the hint in Russian**: `getHelp('ru', …)` is
+      hard-coded in `en/query_test_result.tpl` and `pt/query_test_result.tpl`. Now `{$Lang}` in all six languages. The button also repeats
+      `id="getHelpBtn"` of the page's own button (duplicate id): removed from the response.
+- [x] **33. Sharing an achievement doesn't mark it viewed**: the banner script in `index.tpl` waits for
+      `a[data-mark-achievement-viewed="1"]`, but the LinkedIn / X / Facebook / Telegram links in
+      `{$Lang}/achievement_share_buttons.tpl` don't have the attribute. After sharing, the banner keeps showing on
+      every page until closed with ×. Now any link in the banner (title or share) marks it viewed.
+
+### Texts and hints
+
+- [x] **4. Merge the two italic instruction lines** under the task into one short line
+      (`question_action_write_query`, `_mobile` for `m.index.tpl`).
+  - [x] "Write your **request**…" → "query" (`question_action_write_your_request`, still used by the test pages).
+  - [x] "…provided in the right pane" is wrong on mobile: the mobile line says "at the bottom of the screen".
+  - [x] Show the dialect as a badge next to the title (`.question-dbms`, tooltip `question_action_use_syntax`).
+
+### Behavior
+
 - [x] **7. "Get hint" must not wipe the query result**. `getHelp()` replaced `#code-result` entirely. Now the hint goes
       to its own panel above the editor (`hint_panel.tpl`, desktop and mobile): the button toggles it, × closes it,
       the hint is loaded once. Pages without the panel still use `#code-result`; acceptance tests updated.
@@ -85,10 +142,8 @@ Suggested order: bugs 14, 15 first, then 2 → 7 → 5 → 1 (biggest effect for
   - [x] Result area: `.code-result-empty` inside `#code-result`, text per question type
         (`result_empty_query` / `_answers` / `_free_answer`), plus the Ctrl+Enter hint on desktop.
         Replaced by the first result, hint or error.
-- [ ] **9. After a correct solution**: put "Next" (see 14) into the success block next to
-      "Show me other solutions!", it is the main action; add "Share" and the category progress.
 
-## Logged-in user
+### Logged-in user
 
 - [x] **16. Update the page after a correct solution** without a reload: `Controller::sendSolvedProgress()` on a
       correct `query_test` / `check_answers` / `check_free_answer` of a logged-in user; `showSolvedProgress()` and
@@ -113,23 +168,10 @@ Suggested order: bugs 14, 15 first, then 2 → 7 → 5 → 1 (biggest effect for
 - [x] **19. "You already solved this task" line**: inline `style="… color: #2EA043 !important"` with a button inside a
       `span`. Now `.question-solved` (✓, `--cost-best-color`) on the question and test pages; "View solutions" is a
       link-like `text-button`, no longer as green as "Check it!".
-- [ ] **20. User icon in the top menu** (`top-menu.tpl`): a green button with a silhouette colored by grade, no name,
-      `title` or `aria-label`; it opens the achievements popup. Add `title` / `aria-label`, better a short label
-      with the grade.
-- [ ] **21. Menu for a logged-in user** (`menu.tpl`).
-  - [ ] The "hide solved" eye is repeated in every group but works globally: one switch above the menu.
-  - [x] Don't render an empty "Favorites" group (confirmed live: it is the first group with 0 tasks).
-- [ ] **22. New-achievement block above the task** (`index.tpl`; bugs: 33–35).
-  - [x] Too big: title, 4 large share buttons and a divider push the task ~150 px down. Now one compact line
-        `.new-achievement`: "🏆 New achievement unlocked: <title> · Share ▾ · ×", share buttons in a `<details>` menu.
-  - [x] Achievement link `#00CED1` on `#F6F6F6` had ~1.9:1 contrast: now `--achievement-link-color`
-        (`#0057CC` light, `#58A6FF` dark, ~6:1).
-  - [x] The red 32×32 close button (`#d93025`) read as an error: now a transparent "×" in the text color; Esc closes.
-  - [ ] Share with text, not just the URL: `text=` for X and Telegram ("I unlocked "…" on SQLtest.online")
-        (`{$Lang}/achievement_share_buttons.tpl`, also used by `share_achievement.tpl`). The achievement page already
-        has its own OG title (`share_achievement_og_title`).
-  - [x] `aria-hidden` on the 🏆 emoji; inline styles to CSS; the borrowed `user-solutions-count` class dropped.
-  - [ ] The share menu doesn't close on an outside click (plain `<details>`).
+- [x] **20. User icon in the top menu** (`top-menu.tpl`): a green `div` with a silhouette colored by grade, no name,
+      `title` or `aria-label`; it opens the achievements popup. Now a real button `#userMenuBtn` (desktop and mobile)
+      with `title` / `aria-label` "Profile and achievements · <grade>", `aria-expanded`, and the grade as a label on
+      desktop. The popup no longer closes on clicks inside it; Esc and a click outside close it.
 - [x] **23. `my_progress.tpl` divides by `$QuestionsCount`** without a zero check.
 - [x] **24. Favorites star** is a `<span onClick>` too (see 11): done with 11.
 - [x] **25. Wrong-solution row hint is hard to read**: it was "the row number 1 … should contain: `1 | MALE | 5550`",
@@ -149,40 +191,15 @@ Suggested order: bugs 14, 15 first, then 2 → 7 → 5 → 1 (biggest effect for
       "Last AI check (date): passed · Score 85/100" + the comment (`free_answer_last_check.tpl`, desktop and mobile).
   - [x] **Deploy**: run `sql/user_questions_last_feedback_migration.sql` before the code, `Question::get()` selects
         the column (deployed 2026-10-03).
-- [ ] **28. AI check cost is unknown**: "AI tokens left: 43 560", but not how much one check costs. Add "≈ N tokens per
-      check".
 - [x] **29. User popup** (`/{lang}/user/achievements`, `achievements.tpl`): "User Profile" / "Logout" were at the very
       bottom after the achievements list.
   - [x] Links on top: Profile, "My tasks" (`/user/profile#tasks`), "AI tokens: N" (`#ai`).
   - [x] The last 3 achievements (was 5) plus "All achievements →" (`#achievements`).
   - [x] Logout as a quiet link at the bottom, not a big red button equal to Profile.
 
-## Admin
-
-- [ ] **30. "Edit" pencil is invisible in the light theme**: `color: white` on the light title bar (`#E8F2FE`)
-      (`index.tpl`, `question-navigate`).
-- [ ] **31. Admin menu weighs ~300 KB** (guest ~64 KB) because of 552 ▲▼ reorder buttons. Show them on hover or in
-      a separate reorder mode.
-
-## Content
-
-- [ ] **32. Typo in `de-etl-elt-pipeline-design`**: the task text ends with "…and reruns a?".
-
-## Noise around the task
-
-- [ ] **10. Fewer competing banners**: donation banner on top, cookie banner at the bottom, achievement block.
-      Don't show the donation banner on the first visit / on task pages; e.g. after 3–5 solved tasks.
-
-## Accessibility and code quality
+### Accessibility and code quality
 
 - [x] **11. Real buttons**: "Get hint", "Copy code", "Clear editor", the favorites star were `<span onClick>`, not
       reachable from the keyboard or screen readers. Now `<button type="button">` (26 text buttons on the question,
       test and playground pages and in the check results; the star with `aria-pressed`). `.text-button.hidden` now
       really hides (`.text-button` set `display: flex` after `.hidden`).
-- [ ] **12. Move inline styles to CSS**: urgent banner, new-achievement block, the warning in the right panel.
-      Hard-coded colors (`#fff3cd`, `#00CED1`) don't follow the dark theme.
-
-## SEO
-
-- [ ] **13. Per-task `og:description` / `twitter:description`**. They are site-wide now; use the task's own
-      description, as `meta description` already does.

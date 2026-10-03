@@ -54,6 +54,7 @@ $translations = [
     'donation_progress' => 'Progression :',
     'mobile_menu_donate' => '<span class="currency">€</span> Soutenez le projet',
     'top_menu_login' => 'Connexion',
+    'user_menu_title' => 'Profil et succès',
     'top_menu_logout' => 'Déconnexion',
     'site_description' => 'Exploitez la puissance de la pratique pour maîtriser le SQL. Nos exercices interactifs sont conçus pour consolider votre compréhension, des concepts fondamentaux aux techniques avancées. Que vous soyez novice en SQL ou un professionnel chevronné, vous trouverez des défis adaptés à votre niveau. Améliorez votre confiance pour les entretiens d\'embauche et les applications réelles grâce à une pratique constante.',
     'site_description_question_task' => '<b>Affinez vos compétences SQL avec nos exercices et évaluations interactifs !</b><br>Pratiquez un large éventail de tâches SQL, des requêtes de base aux techniques avancées. Obtenez un retour immédiat sur vos solutions, ce qui vous aidera à apprendre de vos erreurs et à améliorer vos compétences. Renforcez votre confiance pour les entretiens d\'embauche et les applications SQL réelles.',

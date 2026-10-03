@@ -530,6 +530,22 @@ header .button .currency,
     background-color: black;
     color: white;
 }
+/* User menu button in the top menu (top-menu.tpl, m.top-menu.tpl) */
+.user-menu {
+    position: relative;
+}
+.user-menu-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 0;
+}
+.user-menu-btn__grade {
+    padding-right: 10px;
+    font-size: small;
+    white-space: nowrap;
+}
 .achievements-popup {
     position: absolute;
     top: 100%;

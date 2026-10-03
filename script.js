@@ -169,11 +169,24 @@ function toggleMobileMenu() {
     dropdown.classList.toggle("hidden");
 }
 
+/**
+ * User menu in the top menu (#userMenuBtn, top-menu.tpl / m.top-menu.tpl): opens the profile and achievements popup.
+ * Clicks inside the popup don't close it; the button, Esc or a click outside do.
+ */
 function toggleAchievements(lang) {
     const popup = document.getElementById('achievements-popup');
+    const button = document.getElementById('userMenuBtn');
+
+    if (!popup.classList.contains('hidden')) {
+        closeAchievements();
+        return;
+    }
+    popup.classList.remove('hidden');
+    button?.setAttribute('aria-expanded', 'true');
+    document.addEventListener('click', closeAchievementsOutside, true);
+    document.addEventListener('keydown', closeAchievementsOnEscape);
 
     setLoader('achievements-popup');
-    popup.classList.toggle("hidden");
     // Load achievements when opening popup
     fetch(`/${lang}/user/achievements`)
         .then((async response=>{
@@ -186,6 +199,28 @@ function toggleAchievements(lang) {
         .catch(error => {
             popup.innerHTML = '<p>Something went wrong.</p>';
         });
+}
+
+function closeAchievements() {
+    document.getElementById('achievements-popup')?.classList.add('hidden');
+    document.getElementById('userMenuBtn')?.setAttribute('aria-expanded', 'false');
+    document.removeEventListener('click', closeAchievementsOutside, true);
+    document.removeEventListener('keydown', closeAchievementsOnEscape);
+}
+
+function closeAchievementsOutside(event) {
+    const popup = document.getElementById('achievements-popup');
+    const button = document.getElementById('userMenuBtn');
+    if (!popup.contains(event.target) && !button?.contains(event.target)) {
+        closeAchievements();
+    }
+}
+
+function closeAchievementsOnEscape(event) {
+    if (event.key === 'Escape') {
+        closeAchievements();
+        document.getElementById('userMenuBtn')?.focus();
+    }
 }
 function jsonToTable(jsonObject) {
     let htmlTable = '';

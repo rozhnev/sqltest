@@ -356,6 +356,7 @@ $translations = [
     'donation_goal' => 'Meta:',
     'donation_progress' => 'Progreso:',
     'top_menu_login' => 'Iniciar sesión',
+    'user_menu_title' => 'Perfil y logros',
     'top_menu_logout' => 'Cerrar sesión',
     'up_your_level' => 'Realiza el examen para subir tu nivel.',
     'update_failed' => 'Error al actualizar el apodo',

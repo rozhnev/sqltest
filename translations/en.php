@@ -54,6 +54,7 @@ $translations = [
     'donation_progress' => 'Progress:',
     'mobile_menu_donate' => '<span class="currency">€</span> Support the project',
     'top_menu_login' => 'Login',
+    'user_menu_title' => 'Profile and achievements',
     'top_menu_logout' => 'Logout',
     'site_description' => 'Harness the power of practice to master SQL. Our interactive exercises are designed to solidify your understanding, from foundational concepts to advanced techniques. Whether you\'re a SQL novice or a seasoned pro, you’ll find challenges tailored to your skill level. Boost your confidence for job interviews and real-world applications through consistent practice.',
     // 'site_description_question_task' => '<b>Sharpen your SQL skills with our interactive exercises!</b><br>Practice a wide range of SQL tasks, from basic queries to advanced techniques. Get immediate feedback on your solutions, helping you learn from mistakes and improve your skills. Boost your confidence for job interviews and real-world SQL applications.',

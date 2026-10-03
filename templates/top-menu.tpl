@@ -46,15 +46,18 @@
     {include file='theme-switcher.tpl'}
     {include file='lang-switcher.tpl'}
     {if $User->logged()}
-        <div style="position: relative;" onclick="toggleAchievements('{$Lang}');">
+        <div class="user-menu">
             {$GradeColors = [''=>null,'Intern'=>'#3F3F3F','Junior'=>'#00FF00','Middle'=>'#0000FF','Senior'=>'#FF0000']}
             {assign var="GradeColor" value="{$GradeColors[$User->grade()]}"|default:'#FFFFFF'}
-            <div class="button green" style="padding: 0; display: flex; align-items: center; justify-content: center;">
-                <svg width="36" height="36" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <button type="button" class="button green user-menu-btn" id="userMenuBtn" onclick="toggleAchievements('{$Lang}');"
+                title="{translate}user_menu_title{/translate}{if $User->grade()} · {$User->grade()}{/if}" aria-label="{translate}user_menu_title{/translate}"
+                aria-haspopup="true" aria-expanded="false" aria-controls="achievements-popup">
+                <svg aria-hidden="true" width="36" height="36" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="32" cy="22" r="10" fill="#FFFFFF"/>
                     <path d="M32 40C20 40 10 48 10 58H54C54 48 44 40 32 40Z" fill="{$GradeColor}"/>
                 </svg>
-            </div>
+                {if $User->grade()}<span class="user-menu-btn__grade">{$User->grade()}</span>{/if}
+            </button>
             <div id="achievements-popup" class="achievements-popup hidden" style="right: 5px;">
             </div>
         </div>
