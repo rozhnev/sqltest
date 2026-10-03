@@ -16,22 +16,21 @@
             <main class="column">
                 {if $User->logged() && $NewAchievement}
                     {assign var="AchievementViewUrl" value="/{$Lang}/achievement/{$NewAchievement.user_achievement_id}"}
-                    <div class="user-solutions-count" id="new-achievement" style="position: relative; padding: 12px 16px; margin-bottom: 16px; border-radius: 4px; display: flex; flex-direction: column; gap: 12px;">
-                        <button type="button" id="close-new-achievement" aria-label="Close" title="Close" style="position: absolute; top: 8px; right: 8px; width: 32px; height: 32px; border: none; border-radius: 4px; background: #d93025; color: #fff; font-size: 20px; line-height: 1; cursor: pointer; display: inline-flex; align-items: center; justify-content: center;">×</button>
-                        <div style="display: flex; align-items: flex-start; gap: 12px; position: relative;" data-achievement-view-url="{$AchievementViewUrl|escape}">
-                            <div style="font-size: 20px;">🏆</div>
-                            <div style="padding-right: 44px;">
-                                {translate}new_achievement_unlocked{/translate}!&nbsp;
-                                <a href="/{$Lang}/achievement/{$NewAchievement.user_achievement_id}" style="color: #00CED1; text-decoration: underline;">
-                                    <strong>{$NewAchievement.title}</strong>
-                                </a>
+                    {assign var="AchievementShareUrl" value="https://sqltest.online/{$Lang}/achievement/{$NewAchievement.user_achievement_id}"}
+                    {* One compact line above the task; opening the achievement or a share link, or closing it marks it viewed *}
+                    <div class="new-achievement" id="new-achievement" role="status" data-achievement-view-url="{$AchievementViewUrl|escape}">
+                        <span class="new-achievement__icon" aria-hidden="true">🏆</span>
+                        <span class="new-achievement__text">
+                            {translate}new_achievement_unlocked{/translate}:
+                            <a class="new-achievement__title" href="{$AchievementViewUrl|escape}">{$NewAchievement.title|escape}</a>
+                        </span>
+                        <details class="new-achievement__share">
+                            <summary>{translate}share{/translate}</summary>
+                            <div class="new-achievement__share-menu">
+                                {include file="{$Lang}/achievement_share_buttons.tpl" AchievementShareUrl=$AchievementShareUrl}
                             </div>
-                        </div>
-                        {assign var="AchievementShareUrl" value="https://sqltest.online/{$Lang}/achievement/{$NewAchievement.user_achievement_id}"}
-                        <div style="padding-top: 12px; border-top: 1px solid var(--text-block-border-color);">
-                            <div style="font-weight: 700; margin-bottom: 10px;">{translate}share_your_achievement{/translate}</div>
-                            {include file="{$Lang}/achievement_share_buttons.tpl" AchievementShareUrl=$AchievementShareUrl}
-                        </div>
+                        </details>
+                        <button type="button" class="new-achievement__close" id="close-new-achievement" aria-label="{translate}close{/translate}" title="{translate}close{/translate}">×</button>
                     </div>
                     <script>
                         (function () {
@@ -40,8 +39,7 @@
                                 return;
                             }
 
-                            const header = achievementBlock.querySelector('[data-achievement-view-url]');
-                            const achievementViewUrl = header ? header.getAttribute('data-achievement-view-url') : '';
+                            const achievementViewUrl = achievementBlock.getAttribute('data-achievement-view-url');
                             let isMarkedViewed = false;
 
                             const markAchievementViewed = function () {
@@ -59,18 +57,30 @@
                                 });
                             };
 
+                            const closeOnEscape = function (event) {
+                                if (event.key === 'Escape') {
+                                    closeAchievement();
+                                }
+                            };
+
+                            const closeAchievement = function () {
+                                markAchievementViewed();
+                                achievementBlock.remove();
+                                document.removeEventListener('keydown', closeOnEscape);
+                            };
+
                             achievementBlock.addEventListener('click', function (event) {
-                                const shareLink = event.target.closest('a[data-mark-achievement-viewed="1"]');
-                                if (shareLink) {
+                                // Share links open in a new tab, the title opens the achievement page
+                                if (event.target.closest('a')) {
                                     markAchievementViewed();
                                     return;
                                 }
 
-                                if (event.target.id === 'close-new-achievement') {
-                                    markAchievementViewed();
-                                    achievementBlock.remove();
+                                if (event.target.closest('#close-new-achievement')) {
+                                    closeAchievement();
                                 }
                             });
+                            document.addEventListener('keydown', closeOnEscape);
                         })();
                     </script>
                 {/if}

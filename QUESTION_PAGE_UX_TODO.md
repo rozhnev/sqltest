@@ -23,10 +23,10 @@ Suggested order: bugs 14, 15 first, then 2 → 7 → 5 → 1 (biggest effect for
       hard-coded in `en/query_test_result.tpl` and `pt/query_test_result.tpl`. Now `{$Lang}` in all six languages. The button also repeats
       `id="getHelpBtn"` of the page's own button (duplicate id): removed from the response.
 
-- [ ] **33. Sharing an achievement doesn't mark it viewed**: the banner script in `index.tpl` waits for
+- [x] **33. Sharing an achievement doesn't mark it viewed**: the banner script in `index.tpl` waits for
       `a[data-mark-achievement-viewed="1"]`, but the LinkedIn / X / Facebook / Telegram links in
       `{$Lang}/achievement_share_buttons.tpl` don't have the attribute. After sharing, the banner keeps showing on
-      every page until closed with ×.
+      every page until closed with ×. Now any link in the banner (title or share) marks it viewed.
 - [ ] **34. No new-achievement banner on mobile**: `$NewAchievement` is rendered in `index.tpl` only, not in
       `m.index.tpl`.
 - [ ] **35. The banner shows the oldest unviewed achievement, not the one just earned**: `User::haveNewAchievement()`
@@ -100,13 +100,16 @@ Suggested order: bugs 14, 15 first, then 2 → 7 → 5 → 1 (biggest effect for
   - [ ] The "hide solved" eye is repeated in every group but works globally: one switch above the menu.
   - [x] Don't render an empty "Favorites" group (confirmed live: it is the first group with 0 tasks).
 - [ ] **22. New-achievement block above the task** (`index.tpl`; bugs: 33–35).
-  - [ ] Too big: title, 4 large share buttons and a divider push the task ~150 px down. Make it one compact line
-        ("🏆 First difficult task done · Share ▾ · ×") or a toast in the bottom right corner.
-  - [ ] Achievement link `#00CED1` on `#F6F6F6` has ~1.9:1 contrast (needs 4.5:1): use the site link color.
-  - [ ] The red 32×32 close button (`#d93025`) reads as an error: a transparent "×" in the text color; close on Esc.
-  - [ ] Share with text, not just the URL: `text=` for X and Telegram ("I unlocked "…" on SQLtest.online");
-        check that the achievement page has its own OG tags for LinkedIn / Facebook.
-  - [ ] `aria-hidden` on the 🏆 emoji; inline styles to CSS; drop the borrowed `user-solutions-count` class.
+  - [x] Too big: title, 4 large share buttons and a divider push the task ~150 px down. Now one compact line
+        `.new-achievement`: "🏆 New achievement unlocked: <title> · Share ▾ · ×", share buttons in a `<details>` menu.
+  - [x] Achievement link `#00CED1` on `#F6F6F6` had ~1.9:1 contrast: now `--achievement-link-color`
+        (`#0057CC` light, `#58A6FF` dark, ~6:1).
+  - [x] The red 32×32 close button (`#d93025`) read as an error: now a transparent "×" in the text color; Esc closes.
+  - [ ] Share with text, not just the URL: `text=` for X and Telegram ("I unlocked "…" on SQLtest.online")
+        (`{$Lang}/achievement_share_buttons.tpl`, also used by `share_achievement.tpl`). The achievement page already
+        has its own OG title (`share_achievement_og_title`).
+  - [x] `aria-hidden` on the 🏆 emoji; inline styles to CSS; the borrowed `user-solutions-count` class dropped.
+  - [ ] The share menu doesn't close on an outside click (plain `<details>`).
 - [ ] **23. `my_progress.tpl` divides by `$QuestionsCount`** without a zero check.
 - [ ] **24. Favorites star** is a `<span onClick>` too (see 11).
 - [ ] **25. Wrong-solution row hint is hard to read**: "the row number 1 … should contain: `1 | MALE | 5550`",
