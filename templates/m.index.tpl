@@ -25,6 +25,7 @@
                         <span>
                             <div class="question-level rate{$Question.rate}" title="{$Question.question_rate|default:'Not rated yet'}"></div>
                             <span title="({$QuestionID})">{translate}question_title{/translate}&nbsp;{$Question.number}:</span>
+                            {if !isset($Question.answers) && $Question.question_type != 'free_answer'}<span class="question-dbms" title="{translate}question_action_use_syntax{/translate}">{$DBMS|escape}</span>{/if}
                         </span>
                         {* <span class="question-dates">
                             {if $Question.solved_date}
@@ -61,8 +62,8 @@
                 {elseif $Question.question_type == 'free_answer'}
                     <p class="question-action">{translate}question_action_write_free_answer{/translate}</p>
                 {else}
-                    <p class="question-action">{translate}question_action_write_your_request{/translate}</p>
-                    <p class="question-action">{translate}question_action_use_syntax{/translate} {translate}question_action_see_definitions_mobile{/translate}</p></p>
+                    {* The dialect is the badge next to the title *}
+                    <p class="question-action">{translate}question_action_write_query_mobile{/translate}</p>
                 {/if}
             </div>
             <div class="question-wrapper">
@@ -101,7 +102,7 @@
                     {if $Question.question_type == 'free_answer'}
                         <textarea class="code-wrapper free-answer-textarea" id="free-answer-input" name="free-answer-input" placeholder="{translate}free_answer_placeholder{/translate}">{$Question.last_query|escape:"html"}</textarea>
                     {else}
-                        <div class="code-wrapper" id="sql-code" name="sql-code">{$Question.last_query}</div>
+                        <div class="code-wrapper" id="sql-code" name="sql-code" data-placeholder="{translate}sql_editor_placeholder{/translate}">{$Question.last_query}</div>
                     {/if}
                 {/if}
                 <div class="code-buttons">
@@ -131,7 +132,18 @@
                 data-explain-url="/{$Lang}/question/{$QuestionID}/explain-error"
                 data-explain-label="{translate}sql_error_explain{/translate}" data-explain-loading="{translate}sql_error_explain_loading{/translate}"
                 data-explain-hint="{translate}sql_error_explain_hint{/translate}" data-tokens-left-label="{translate}free_answer_tokens_left{/translate}"
-                {/if}></div>
+                {/if}>
+                {* Empty state, replaced by the first result, hint or error *}
+                <div class="code-result-empty">
+                    {if $Question.question_type == 'free_answer'}
+                        {translate}result_empty_free_answer{/translate}
+                    {elseif isset($Question.answers)}
+                        {translate}result_empty_answers{/translate}
+                    {else}
+                        {translate}result_empty_query{/translate}
+                    {/if}
+                </div>
+            </div>
                 {if $NextQuestionId}
                     <div class="code-buttons">
                         <div id="nextTaskBtn" class="hidden">

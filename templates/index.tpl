@@ -80,6 +80,7 @@
                             <div class="question-level rate{$Question.rate}" title="{$Question.question_rate|default:'Not rated yet'}"></div>
                             <span title="({$QuestionID})">{translate}question_title{/translate}{if $Question.number}&nbsp;{$Question.number}:{/if}</span>
                             <h1 class="question-heading">{$Question.title|escape}</h1>
+                            {if !isset($Question.answers) && $Question.question_type != 'free_answer'}<span class="question-dbms" title="{translate}question_action_use_syntax{/translate}">{$DBMS|escape}</span>{/if}
                             {if $User->logged()}
                                 <span id="favoriteStar" class="question-star{if isset($Question.favored) && $Question.favored} favored{/if}" title="{if isset($Question.favored) && $Question.favored}{translate}favorite{/translate}{else}{translate}add_to_favorites{/translate}{/if}" onClick="toggleFavorites('{$Lang}', {$QuestionID})">★</span>
                             {/if}
@@ -129,11 +130,10 @@
                             <span class="question-action" style="display: flex; align-items: center; font-weight: bold; color: #2EA043 !important;">{translate}you_already_solved_this_task{/translate}</span>
                         {/if}
                     {else}
-                        <p class="question-action">{translate}question_action_use_syntax{/translate} {translate}question_action_see_definitions{/translate}</p>
+                        {* The dialect is the badge next to the title *}
+                        <p class="question-action">{translate}question_action_write_query{/translate}</p>
                         {if $Question.solved_date}
                             <span class="question-action" style="display: flex; align-items: center; font-weight: bold; color: #2EA043 !important;">{translate}you_already_solved_this_task{/translate}.&nbsp;<button class="button green" onClick="showMySolutions({$QuestionID})">{translate}view_solutions{/translate}</button></span>
-                        {else}
-                            <span class="question-action">{translate}question_action_write_your_request{/translate}</span>
                         {/if}
                     {/if}
                 </section>
@@ -192,7 +192,7 @@
                     {if $Question.question_type == 'free_answer'}
                         <textarea class="code-wrapper free-answer-textarea" id="free-answer-input" name="free-answer-input" placeholder="{translate}free_answer_placeholder{/translate}">{$Question.last_query|escape:"html"}</textarea>
                     {elseif !isset($Question.answers)}
-                        <div class="code-wrapper" id="sql-code" label="sql-code" name="sql-code">{$Question.last_query|escape:"html"}</div>
+                        <div class="code-wrapper" id="sql-code" label="sql-code" name="sql-code" data-placeholder="{translate}sql_editor_placeholder{/translate}">{$Question.last_query|escape:"html"}</div>
                     {/if}
                     <div class="code-buttons">
                         {if $Question.question_type == 'free_answer'}
@@ -235,7 +235,19 @@
                         data-explain-url="/{$Lang}/question/{$QuestionID}/explain-error"
                         data-explain-label="{translate}sql_error_explain{/translate}" data-explain-loading="{translate}sql_error_explain_loading{/translate}"
                         data-explain-hint="{translate}sql_error_explain_hint{/translate}" data-tokens-left-label="{translate}free_answer_tokens_left{/translate}"
-                        {/if}></div>
+                        {/if}>
+                        {* Empty state, replaced by the first result, hint or error *}
+                        <div class="code-result-empty">
+                            {if $Question.question_type == 'free_answer'}
+                                {translate}result_empty_free_answer{/translate}
+                            {elseif isset($Question.answers)}
+                                {translate}result_empty_answers{/translate}
+                            {else}
+                                {translate}result_empty_query{/translate}
+                                <span class="code-result-empty-shortcut"><kbd>Ctrl</kbd>+<kbd>Enter</kbd> - {translate}question_action_run_query{/translate}</span>
+                            {/if}
+                        </div>
+                    </div>
                 </div>
                 {if $NextQuestionId}
                     <div class="code-buttons">
