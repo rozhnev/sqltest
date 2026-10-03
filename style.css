@@ -1168,6 +1168,7 @@ input:checked + .slider:before {
     background-color: #990000;
 }
 .question-title .question-star {
+    align-self: center;
     font-size: small;
     cursor: pointer;
 }
@@ -1204,8 +1205,9 @@ input:checked + .slider:before {
 }
 
 .question-dbms {
-    /* SQL dialect of the task, next to the title */
+    /* SQL dialect of the task, next to the title; the margin keeps the favorites star apart */
     align-self: center;
+    margin-right: 0.5em;
     padding: 0.1em 0.5em;
     border: 1px solid var(--text-block-border-color);
     border-radius: 4px;
