@@ -104,22 +104,22 @@
             <div class="question-wrapper">
                 {if $Question.question_type == 'free_answer'}
                     <div class="code-actions-upper" id="code-actions">
-                        <span class="text-button red" onClick="clearFreeAnswer()">
+                        <button type="button" class="text-button red" onClick="clearFreeAnswer()">
                             <i class="icon-trash"></i>
                             <span>{translate}question_action_clear_answer{/translate}</span>
-                        </span>
+                        </button>
                     </div>
                     <textarea class="code-wrapper free-answer-textarea" id="free-answer-input" name="free-answer-input" placeholder="{translate}free_answer_placeholder{/translate}">{$Question.last_query|escape:"html"}</textarea>
                 {elseif !isset($Question.answers)}
                     <div class="code-actions-upper" id="code-actions">
-                        <span class="text-button blue" onClick="copyCode(`{translate}toast_sql_copied_to_buffer{/translate}`)">
+                        <button type="button" class="text-button blue" onClick="copyCode(`{translate}toast_sql_copied_to_buffer{/translate}`)">
                             <i class="icon-copy"></i>
                             <span>{translate}question_action_copy_code{/translate}</span>
-                        </span>
-                        <span class="text-button red" onClick="clearEditor()">
+                        </button>
+                        <button type="button" class="text-button red" onClick="clearEditor()">
                             <i class="icon-trash"></i>
                             <span>{translate}question_action_clear_editor{/translate}</span>
-                        </span>
+                        </button>
                     </div>
                     <div class="code-wrapper" id="sql-code" name="sql-code">{$Question.last_query}</div>
                 {/if}

@@ -36,14 +36,14 @@
 
             <section class="playground-editor question-wrapper">
                 <div class="code-actions-upper" id="code-actions">
-                    <span class="text-button blue" onClick="copyCode(`{translate}toast_sql_copied_to_buffer{/translate}`)">
+                    <button type="button" class="text-button blue" onClick="copyCode(`{translate}toast_sql_copied_to_buffer{/translate}`)">
                         <i class="icon-copy"></i>
                         <span>{translate}question_action_copy_code{/translate}</span>
-                    </span>
-                    <span class="text-button red" onClick="clearEditor()">
+                    </button>
+                    <button type="button" class="text-button red" onClick="clearEditor()">
                         <i class="icon-trash"></i>
                         <span>{translate}question_action_clear_editor{/translate}</span>
-                    </span>
+                    </button>
                 </div>
                 <div class="code-wrapper" id="sql-code" name="sql-code"></div>
                 <div class="code-buttons">

@@ -25,7 +25,7 @@
                             <h1 class="question-heading">{$Question.title|escape}</h1>
                             {if !isset($Question.answers) && $Question.question_type != 'free_answer'}<span class="question-dbms" title="{translate}question_action_use_syntax{/translate}">{$DBMS|escape}</span>{/if}
                             {if $User->logged()}
-                                <span id="favoriteStar" class="question-star{if isset($Question.favored) && $Question.favored} favored{/if}" title="{if isset($Question.favored) && $Question.favored}{translate}favorite{/translate}{else}{translate}add_to_favorites{/translate}{/if}" onClick="toggleFavorites('{$Lang}', {$QuestionID})">★</span>
+                                <button type="button" id="favoriteStar" class="question-star{if isset($Question.favored) && $Question.favored} favored{/if}" title="{if isset($Question.favored) && $Question.favored}{translate}favorite{/translate}{else}{translate}add_to_favorites{/translate}{/if}" aria-label="{translate}add_to_favorites{/translate}" aria-pressed="{if isset($Question.favored) && $Question.favored}true{else}false{/if}" onClick="toggleFavorites('{$Lang}', {$QuestionID})">★</button>
                             {/if}
                             <span class="question-dates">
                                 {if $Question.solved_date}
@@ -97,31 +97,31 @@
                                     <span>{translate}question_action_tutorial{/translate}</span>
                                 </a>
                             {/if}
-                            <span class="text-button blue" id="getHelpBtn" onClick="getHelp('{$Lang}', {$QuestionID})">
+                            <button type="button" class="text-button blue" id="getHelpBtn" onClick="getHelp('{$Lang}', {$QuestionID})">
                                 <i class="icon icon-hint" aria-hidden="true"></i>
                                 <span>{translate}question_action_get_hint{/translate}</span>
-                            </span>
+                            </button>
                         </div>
                         <div>
                             {if $Question.question_type == 'free_answer'}
-                                <span class="text-button blue" id="voiceInputBtn" onClick="toggleVoiceInput('{$Lang}')">
+                                <button type="button" class="text-button blue" id="voiceInputBtn" onClick="toggleVoiceInput('{$Lang}')">
                                     <i class="icon icon-microphone" aria-hidden="true"></i>
                                     <span class="voice-label-idle">{translate}question_action_voice_input{/translate}</span>
                                     <span class="voice-label-listening">{translate}question_action_voice_input_stop{/translate}</span>
-                                </span>
-                                <span class="text-button red" onClick="clearFreeAnswer()">
+                                </button>
+                                <button type="button" class="text-button red" onClick="clearFreeAnswer()">
                                     <i class="icon-trash"></i>
                                     <span>{translate}question_action_clear_answer{/translate}</span>
-                                </span>
+                                </button>
                             {elseif !isset($Question.answers)}
-                                <span class="text-button blue" onClick="copyCode(`{translate}toast_sql_copied_to_buffer{/translate}`)">
+                                <button type="button" class="text-button blue" onClick="copyCode(`{translate}toast_sql_copied_to_buffer{/translate}`)">
                                     <i class="icon-copy"></i>
                                     <span>{translate}question_action_copy_code{/translate}</span>
-                                </span>
-                                <span class="text-button red" onClick="clearEditor()">
+                                </button>
+                                <button type="button" class="text-button red" onClick="clearEditor()">
                                     <i class="icon-trash"></i>
                                     <span>{translate}question_action_clear_editor{/translate}</span>
-                                </span>
+                                </button>
                             {/if}
                         </div>
                     </div>

@@ -131,7 +131,7 @@ Suggested order: bugs 14, 15 first, then 2 → 7 → 5 → 1 (biggest effect for
   - [x] `aria-hidden` on the 🏆 emoji; inline styles to CSS; the borrowed `user-solutions-count` class dropped.
   - [ ] The share menu doesn't close on an outside click (plain `<details>`).
 - [x] **23. `my_progress.tpl` divides by `$QuestionsCount`** without a zero check.
-- [ ] **24. Favorites star** is a `<span onClick>` too (see 11).
+- [x] **24. Favorites star** is a `<span onClick>` too (see 11): done with 11.
 - [x] **25. Wrong-solution row hint is hard to read**: it was "the row number 1 … should contain: `1 | MALE | 5550`",
       "your result: `1 | MALE | 5300`", without column headers. Now `row_diff.tpl`: one table with the column names,
       rows "Expected" / "Yours", differing cells highlighted, values escaped. `Question::checkQueryResult()` adds
@@ -175,8 +175,10 @@ Suggested order: bugs 14, 15 first, then 2 → 7 → 5 → 1 (biggest effect for
 
 ## Accessibility and code quality
 
-- [ ] **11. Real buttons**: "Get hint", "Copy code", "Clear editor", the favorites star are `<span onClick>`, not
-      reachable from the keyboard or screen readers. Replace with `<button type="button">`.
+- [x] **11. Real buttons**: "Get hint", "Copy code", "Clear editor", the favorites star were `<span onClick>`, not
+      reachable from the keyboard or screen readers. Now `<button type="button">` (26 text buttons on the question,
+      test and playground pages and in the check results; the star with `aria-pressed`). `.text-button.hidden` now
+      really hides (`.text-button` set `display: flex` after `.hidden`).
 - [ ] **12. Move inline styles to CSS**: urgent banner, new-achievement block, the warning in the right panel.
       Hard-coded colors (`#fff3cd`, `#00CED1`) don't follow the dark theme.
 

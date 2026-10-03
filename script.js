@@ -898,7 +898,8 @@ function toggleFavorites(lang, questionId) {
             if (document.getElementById("favoriteStar")) {
                 const message =  await response.text();
                 showToast('info', message);
-                document.getElementById("favoriteStar").classList.toggle("favored");
+                const favored = document.getElementById("favoriteStar").classList.toggle("favored");
+                document.getElementById("favoriteStar").setAttribute("aria-pressed", favored ? "true" : "false");
                 // document.getElementById("favoriteStar").title = 'Favored'
             } 
         }

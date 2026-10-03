@@ -74,10 +74,10 @@
                     </ul>
                 {else}.
                 {/if}
-                <span class="text-button blue" onclick="getHelp('{$Lang}', {$QuestionID})">
+                <button type="button" class="text-button blue" onclick="getHelp('{$Lang}', {$QuestionID})">
                     <i class="icon icon-hint" aria-hidden="true"></i>
                     Obter dica e tente reescrevê-la.
-                </span>
+                </button>
             </p>
         {/if}
         {if array_key_exists('multipleResults', $QueryTestResult.hints) }

@@ -218,6 +218,18 @@ main {
 .mobile-container .text-button {
     font-size: small;
 }
+/* Text buttons are <button>s (keyboard and screen readers): no native button look */
+button.text-button {
+    padding: 0;
+    border: none;
+    background: none;
+    font: inherit;
+    text-align: inherit;
+}
+/* .text-button sets display: flex after .hidden */
+.text-button.hidden {
+    display: none;
+}
 .text-button > span {
     padding: 2px;
 }
@@ -1296,6 +1308,13 @@ input:checked + .slider:before {
 .question-level.rate5 {
     background-color: #990000;
 }
+button.question-star {
+    padding: 0 2px;
+    border: none;
+    background: none;
+    color: inherit;
+    line-height: 1;
+}
 .question-title .question-star {
     align-self: center;
     font-size: small;
@@ -1493,10 +1512,7 @@ input:checked + .slider:before {
 #voiceInputBtn.listening .voice-label-listening {
     display: inline;
 }
-#voiceInputBtn.listening svg rect,
-#voiceInputBtn.listening svg path {
-    fill: var(--danger-text-color);
-}
+/* The microphone icon follows the text color (.icon mask) */
 #voiceInputBtn.listening {
     color: var(--danger-text-color);
     animation: voice-input-pulse 1.2s ease-in-out infinite;
