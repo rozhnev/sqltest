@@ -243,7 +243,8 @@ main {
     text-decoration: underline;
 }
 .text-button.blue {
-    color: #0069E6
+    /* #0069E6 had 2.9:1 on the dark theme blocks; the theme variable gives ~6:1 in both */
+    color: var(--info-text-color);
 }
 .text-button.red {
     color: var(--danger-text-color)
