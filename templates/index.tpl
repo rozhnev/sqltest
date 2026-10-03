@@ -93,28 +93,19 @@
                                     title="{translate}question_action_tutorial{/translate}"
                                     class="text-button blue"
                                 >
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M8.25 8C8.25 7.58579 8.58579 7.25 9 7.25H16C16.4142 7.25 16.75 7.58579 16.75 8C16.75 8.41421 16.4142 8.75 16 8.75H9C8.58579 8.75 8.25 8.41421 8.25 8Z" fill="#0069E6"/>
-                                        <path d="M9 10.25C8.58579 10.25 8.25 10.5858 8.25 11C8.25 11.4142 8.58579 11.75 9 11.75H14C14.4142 11.75 14.75 11.4142 14.75 11C14.75 10.5858 14.4142 10.25 14 10.25H9Z" fill="#0069E6"/>
-                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M8.5 3.25C5.87665 3.25 3.75 5.37665 3.75 8V18C3.75 20.0711 5.42893 21.75 7.5 21.75H18.5C19.4665 21.75 20.25 20.9665 20.25 20V5C20.25 4.0335 19.4665 3.25 18.5 3.25H8.5ZM18.75 14.25V5C18.75 4.86193 18.6381 4.75 18.5 4.75H8.5C6.70507 4.75 5.25 6.20507 5.25 8V14.9997C5.87675 14.529 6.6558 14.25 7.5 14.25H18.75ZM18.75 15.75H7.5C6.25736 15.75 5.25 16.7574 5.25 18C5.25 19.2426 6.25736 20.25 7.5 20.25H18.5C18.6381 20.25 18.75 20.1381 18.75 20V15.75Z" fill="#0069E6"/>
-                                    </svg>
+                                    <i class="icon icon-tutorial" aria-hidden="true"></i>
                                     <span>{translate}question_action_tutorial{/translate}</span>
                                 </a>
                             {/if}
                             <span class="text-button blue" id="getHelpBtn" onClick="getHelp('{$Lang}', {$QuestionID})">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 3.75C8.52397 3.75 5.75 6.46727 5.75 9.76594C5.75 11.7705 6.57093 13.4993 8.03534 14.576C8.3581 14.8133 8.63421 15.1672 8.73996 15.6162C8.82675 15.9847 8.92608 16.4337 9.02447 16.9095H14.9755C15.0739 16.4337 15.1732 15.9847 15.26 15.6162C15.3658 15.1672 15.6419 14.8133 15.9647 14.576C17.4291 13.4993 18.25 11.7705 18.25 9.76594C18.25 6.46727 15.476 3.75 12 3.75ZM14.6887 18.4095H9.31128C9.42169 19.0471 9.50831 19.6509 9.53454 20.0844C9.56215 20.5408 9.90326 20.9498 10.4062 21.0585L10.6022 21.1009C11.5226 21.2997 12.4774 21.2997 13.3978 21.1009L13.5938 21.0585C14.0967 20.9498 14.4379 20.5408 14.4655 20.0844C14.4917 19.6509 14.5783 19.0471 14.6887 18.4095ZM4.25 9.76594C4.25 5.59116 7.74404 2.25 12 2.25C16.256 2.25 19.75 5.59116 19.75 9.76594C19.75 12.1898 18.7464 14.3926 16.8532 15.7845C16.7668 15.848 16.7307 15.9148 16.7201 15.9601C16.6017 16.4627 16.4575 17.128 16.326 17.8029C16.1432 18.7412 15.9944 19.6512 15.9627 20.175C15.8927 21.3332 15.0406 22.2805 13.9106 22.5247L13.7146 22.567C12.5854 22.811 11.4146 22.811 10.2854 22.567L10.0894 22.5247C8.95941 22.2805 8.10735 21.3332 8.03727 20.175C8.00558 19.6512 7.85678 18.7412 7.67399 17.8029C7.5425 17.128 7.3983 16.4627 7.27991 15.9601C7.26925 15.9148 7.23315 15.848 7.14681 15.7845C5.25357 14.3926 4.25 12.1898 4.25 9.76594Z" fill="#0069E6"/>
-                                </svg>
+                                <i class="icon icon-hint" aria-hidden="true"></i>
                                 <span>{translate}question_action_get_hint{/translate}</span>
                             </span>
                         </div>
                         <div>
                             {if $Question.question_type == 'free_answer'}
                                 <span class="text-button blue" id="voiceInputBtn" onClick="toggleVoiceInput('{$Lang}')">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <rect x="9" y="2" width="6" height="12" rx="3" fill="#0069E6"/>
-                                        <path d="M5 11a1 1 0 1 0-2 0 9 9 0 0 0 8 8.94V22a1 1 0 1 0 2 0v-2.06A9 9 0 0 0 21 11a1 1 0 1 0-2 0 7 7 0 0 1-14 0Z" fill="#0069E6"/>
-                                    </svg>
+                                    <i class="icon icon-microphone" aria-hidden="true"></i>
                                     <span class="voice-label-idle">{translate}question_action_voice_input{/translate}</span>
                                     <span class="voice-label-listening">{translate}question_action_voice_input_stop{/translate}</span>
                                 </span>
