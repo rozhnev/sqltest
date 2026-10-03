@@ -232,7 +232,7 @@ main {
     color: var(--cost-best-color);
 }
 .question-solved::before {
-    content: "¹3";
+    content: "\2713";
 }
 .question-solved__solutions {
     padding: 0;
