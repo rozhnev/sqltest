@@ -1,0 +1,35 @@
+{
+  "specVersion": "1.0",
+  "host": {
+    "displayName": "SQLtest.online",
+    "url": "https://sqltest.online/"
+  },
+  "entries": [
+    {
+      "identifier": "urn:air:sqltest.online:site:sql-practice",
+      "displayName": "SQLtest.online — interactive SQL practice",
+      "type": "text/html",
+      "url": "https://sqltest.online/en/",
+      "description": "Free interactive SQL trainer: 460+ practice tasks with instant checking on MySQL, PostgreSQL, SQL Server, SQLite, Oracle and Firebird, SQL lessons, a playground, tests and job interview simulation. Available in English, Russian, Portuguese, French, Spanish and Chinese.",
+      "tags": ["sql", "education", "practice", "database", "interview-preparation"],
+      "representativeQueries": [
+        "practice SQL queries online with instant feedback",
+        "SQL exercises for beginners",
+        "prepare for an SQL job interview",
+        "learn window functions with practice tasks"
+      ]
+    },
+    {
+      "identifier": "urn:air:sqltest.online:doc:llm-info",
+      "displayName": "SQLtest.online information for LLMs",
+      "type": "text/plain",
+      "url": "https://sqltest.online/llm.txt",
+      "description": "Plain-text overview of the site for language models: purpose, features, supported databases and sections.",
+      "tags": ["llm", "site-info"],
+      "representativeQueries": [
+        "what is SQLtest.online",
+        "which databases does SQLtest.online support"
+      ]
+    }
+  ]
+}
