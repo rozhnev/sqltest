@@ -449,4 +449,9 @@ $translations = [
     'sql_error_explain_login' => 'The AI explanation is available after you log in. New users get free AI tokens.',
     'sql_error_explain_login_button' => 'Log in and get the explanation',
     'profile_ai_feature_query_error' => 'Error explanation',
+    // Task menu: search and group progress (menu.tpl)
+    'menu_search_placeholder' => 'Search tasks',
+    'menu_search_nothing_found' => 'Nothing found',
+    'menu_group_solved' => 'Solved / total tasks',
+    'menu_group_tasks' => 'Tasks in the group',
 ];

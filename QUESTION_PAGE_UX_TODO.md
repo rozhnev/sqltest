@@ -22,11 +22,6 @@ Open items first, by area; resolved ones are under "Done" at the end.
 
 ## High impact
 
-- [ ] **1. Lighten the left menu** (`menu.tpl`). It renders 277 links in 17 accordions, ~64 KB of markup
-      (a third of the page), and takes a whole column away from the task.
-  - [ ] Render only the current category, load the others when expanded (reuse `loadMenu()`).
-  - [ ] Progress in each group header: "12 / 40 solved".
-  - [ ] Search by task title.
 - [ ] **2. Focus the schema panel on the task** (right panel, `{$Lang}/{$DB}.tpl`). It shows all 5 tables of the
       database, but the task uses only `little_penguins`.
   - [ ] Expand and highlight the tables and columns mentioned in the task (they are already marked up as
@@ -106,6 +101,21 @@ Open items first, by area; resolved ones are under "Done" at the end.
       description, as `meta description` already does.
 
 ## Done
+
+### High impact
+
+- [x] **1. Lighten the left menu** (`menu.tpl`). It rendered 277 links in 17 accordions, ~64 KB of markup
+      (a third of the page).
+  - [x] Only the current group's tasks come with the page (`menu-group.tpl`); the others are loaded when expanded
+        (`GET /{lang}/menu?questionnire=…&group=<id>`, `loadMenuGroups()`), or all at once for the search
+        (`&group=all`).
+  - [x] Progress in each group header: "12 / 40" solved (guests: the task count), updated after a correct
+        solution (`showSolvedProgress()`).
+  - [x] Search by task title or number above the groups (`searchMenu()`): matching tasks in all groups,
+        "Nothing found" otherwise.
+  - [x] "Hide solved" is one class on `<html>` (CSS), so groups loaded later follow it; the current task stays
+        visible. A second click on an open group now closes it; `loadMenu()` no longer nests `<nav id="menu">`
+        in itself.
 
 ### Bugs
 

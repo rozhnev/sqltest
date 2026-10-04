@@ -79,9 +79,12 @@ class Questionnire
                         'title'     => $el['questions_category'],
                         'db'        => $el['db_template'],
                         'sef'       => $el['sef'],
+                        'solved'    => 0,
                         'questions' => []
                     ];
                     $acc[$el['id']]['questions'][] = [$el['question_title'], $el['question_id'], $el['solved'], $el['question_sef'], $el['favored'], $el['question_number']];
+                    // For the "12 / 40" progress in the menu group header
+                    if ($el['solved']) $acc[$el['id']]['solved']++;
                     return $acc;
                 },
                 []

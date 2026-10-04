@@ -124,10 +124,14 @@ function loadMenu(questionnire) {
         return await response.text();
     }))
     .then((message)=>{
-        document.getElementById('menu').innerHTML = message;
+        // The response is the whole <nav id="menu">: replace the element, don't nest it
+        const menu = document.getElementById('menu');
+        menu.insertAdjacentHTML('afterend', message);
+        menu.remove();
+        menuGroupsRequest = null;
         window.UIConfig.questionnire = questionnire;
         saveUIConfig();
-        setMenuEventListeners();
+        setMenuEventListeners(document.getElementById('menu'));
     })
     .catch(err=>{
         console.log(err)
@@ -862,7 +866,15 @@ function placeNewAchievement(container) {
  * from the X-Solved-Count / X-Questions-Count headers (Controller::sendSolvedProgress()).
  */
 function showSolvedProgress(response) {
-    document.querySelectorAll('.question-link.current-question').forEach(el => el.classList.add('solved'));
+    document.querySelectorAll('.question-link.current-question:not(.solved)').forEach(el => {
+        el.classList.add('solved');
+        // "12 / 40" in the header of the task's menu group
+        const count = el.closest('.panel')?.previousElementSibling?.querySelector('.accordion-count');
+        if (count) {
+            count.dataset.solved = parseInt(count.dataset.solved || '0', 10) + 1;
+            count.textContent = `${count.dataset.solved}\u2009/\u2009${count.dataset.total}`;
+        }
+    });
 
     const solved = parseInt(response.headers.get('X-Solved-Count'), 10);
     const total = parseInt(response.headers.get('X-Questions-Count'), 10);
@@ -1151,10 +1163,8 @@ function rateQuestion(questionId, rate) {
     });
 }
 function toggleSolvedTasks(e) {
-    [...document.getElementsByClassName("eye-btn")].map(el=>el.classList.toggle("hidden"));
-    [...document.getElementsByClassName("question-link solved")].map(el=>{
-        el.parentNode.classList.toggle("invisible")
-    });
+    // CSS hides the solved tasks and swaps the eye icons, also in the groups loaded later
+    document.documentElement.classList.toggle('hide-solved-tasks');
     window.UIConfig.hideSolvedTasks = !window.UIConfig.hideSolvedTasks;
     saveUIConfig();
     return false;
@@ -1403,26 +1413,114 @@ function applyUIConfig() {
     document.querySelector('#theme-switch-checkbox').checked = (window.UIConfig.theme === 'dark' ? 1 : 0);
 }
 
-function setMenuEventListeners() {
-    [...document.getElementsByClassName("accordion")].map(el=>{
+/**
+ * Accordions (the task menu groups, the database tables in the right panel), the "hide solved" eyes and the
+ * menu search. scope: the element whose accordions to bind (the menu after loadMenu() replaced it).
+ */
+function setMenuEventListeners(scope = document) {
+    scope.querySelectorAll(".accordion").forEach(el=>{
       el.addEventListener ('click', function() {
           const parentElement = this.parentElement;
+          const wasActive = this.classList.contains("active");
           if (parentElement.id === 'menu-content') {
             //close all panels
             for (let el of parentElement.getElementsByClassName("panel")) el.classList.remove("active");
             for (let el of parentElement.getElementsByClassName("accordion")) el.classList.remove("active");
           }
-          this.classList.toggle("active");
+          this.classList.toggle("active", !wasActive);
           const panel = this.nextElementSibling;
-          panel.classList.toggle("active");
+          panel.classList.toggle("active", !wasActive);
+          if (!wasActive && panel.dataset.group && !panel.children.length) {
+              loadMenuGroups(panel.dataset.group);
+          }
       });
     });
 
-    [...document.getElementsByClassName("eye-btn")].map(el=>{
+    scope.querySelectorAll(".eye-btn").forEach(el=>{
       el.addEventListener ('click', e=>{
           e.preventDefault();
+          // Don't collapse the group under the button
+          e.stopPropagation();
           toggleSolvedTasks()
       });
+    });
+
+    const search = scope.querySelector('#menu-search-input');
+    if (search) {
+        let timer = null;
+        search.addEventListener('input', () => {
+            clearTimeout(timer);
+            timer = setTimeout(() => searchMenu(search.value), 150);
+        });
+    }
+}
+
+// Task menu groups other than the current one come without their task lists (menu.tpl); load one group,
+// or 'all' for the search. Resolves when the lists are in place.
+let menuGroupsRequest = null;
+function loadMenuGroups(group) {
+    const content = document.getElementById('menu-content');
+    if (!content) return Promise.resolve();
+    if (group === 'all' && menuGroupsRequest) return menuGroupsRequest;
+    const questionnire = document.querySelector('input[name=menu_groups]:checked')?.value || 'category';
+    const request = fetch(`/${lang}/menu?questionnire=${encodeURIComponent(questionnire)}&group=${encodeURIComponent(group)}`, {
+        credentials: "same-origin",
+    })
+    .then(response => {
+        if (!response.ok) throw Error('Something went wrong.');
+        return response.text();
+    })
+    .then(html => {
+        const fill = (id, listHtml) => {
+            const panel = content.querySelector(`.panel[data-group="${id}"]`);
+            if (panel && !panel.children.length) panel.innerHTML = listHtml;
+        };
+        if (group === 'all') {
+            const holder = document.createElement('div');
+            holder.innerHTML = html;
+            holder.querySelectorAll(':scope > [data-group]').forEach(el => fill(el.dataset.group, el.innerHTML));
+        } else {
+            fill(group, html);
+        }
+    })
+    .catch(err => {
+        if (group === 'all') menuGroupsRequest = null;
+        console.log(err);
+    });
+    if (group === 'all') menuGroupsRequest = request;
+    return request;
+}
+
+// Search by task title or number: shows the matching tasks in all groups, hides the rest
+function searchMenu(query) {
+    const content = document.getElementById('menu-content');
+    const empty = document.querySelector('.menu-search-empty');
+    if (!content) return;
+    const words = query.trim().toLowerCase().split(/\s+/).filter(Boolean);
+    if (!words.length) {
+        content.classList.remove('searching');
+        content.querySelectorAll('.search-match, .search-hit').forEach(el => el.classList.remove('search-match', 'search-hit'));
+        empty?.classList.add('hidden');
+        return;
+    }
+    loadMenuGroups('all').then(() => {
+        // The query may have changed while the lists were loading
+        if (document.getElementById('menu-search-input')?.value.trim().toLowerCase().split(/\s+/).join(' ') !== words.join(' ')) return;
+        content.classList.add('searching');
+        let found = 0;
+        content.querySelectorAll('.panel').forEach(panel => {
+            let panelFound = 0;
+            panel.querySelectorAll('li').forEach(li => {
+                const text = li.textContent.replace(/\s+/g, ' ').toLowerCase();
+                const hit = words.every(word => text.includes(word));
+                li.classList.toggle('search-hit', hit);
+                if (hit) panelFound++;
+            });
+            panel.classList.toggle('search-match', panelFound > 0);
+            panel.previousElementSibling?.classList.toggle('search-match', panelFound > 0);
+            found += panelFound;
+        });
+        empty?.classList.toggle('hidden', found > 0);
     });
 }
 

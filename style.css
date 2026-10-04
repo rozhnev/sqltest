@@ -892,6 +892,66 @@ input:checked + .slider:before {
 .menu-content .panel.active {
     max-height: 22vh !important;
 }
+/* Group header: "12 / 40" solved (guests: the task count), then the eye of the open group */
+.menu .accordion-meta {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+    padding: 4px 4px 0 6px;
+}
+.menu .accordion-count {
+    font-size: 0.8rem;
+    font-weight: normal;
+    opacity: 0.7;
+    white-space: nowrap;
+}
+.menu .accordion-meta .accordion-icons {
+    padding-top: 0;
+}
+/* "Hide solved tasks": one class on <html>, so lists loaded later follow it (toggleSolvedTasks()) */
+.menu .eye-btn-show,
+.hide-solved-tasks .menu .eye-btn-hide {
+    display: none;
+}
+.hide-solved-tasks .menu .eye-btn-show {
+    display: inline;
+}
+.hide-solved-tasks .menu .panel li:has(.question-link.solved:not(.current-question)) {
+    display: none;
+}
+/* Search by task title (searchMenu()): only groups and tasks that match */
+.menu-search {
+    padding: 2px 4px 8px;
+}
+.menu-search-input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 6px 10px;
+    border: 1px solid var(--text-block-border-color);
+    border-radius: 6px;
+    background-color: var(--text-block-background-color);
+    color: var(--question-text);
+    font: inherit;
+    font-size: 0.9rem;
+}
+.menu-search-input:focus {
+    outline: 2px solid #0069E6;
+    outline-offset: -1px;
+}
+.menu-search-empty {
+    margin: 0 4px 8px;
+    font-size: 0.9rem;
+    opacity: 0.75;
+}
+.menu-content.searching .accordion:not(.search-match),
+.menu-content.searching .panel:not(.search-match),
+.menu-content.searching .panel li:not(.search-hit) {
+    display: none;
+}
+.menu-content.searching .panel.search-match {
+    max-height: 50vh !important;
+}
 
 /* New-achievement line above the task (index.tpl) */
 .new-achievement {
