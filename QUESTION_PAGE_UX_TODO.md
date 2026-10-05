@@ -28,29 +28,6 @@ Open items first, by area; resolved ones are under "Done" at the end.
         `<span class='sql'>` in the task text), collapse the rest.
   - [ ] Click on a table or column name (in the task or in the schema) inserts it into the editor.
   - [ ] Show 3–5 sample rows instead of 1, so data quirks (e.g. NULL in `sex`) are visible.
-- [ ] **3. Show the expected result**, step by step, so the task doesn't get easier. A wrong check already reveals the
-      column count / names, the row count and (25) the first differing row; this puts it in order.
-      `expected_result.tpl` under the task (desktop and mobile), `Question::getExpectedResult()` / `getExpectedSample()`.
-  - [x] Level 1, right away: a collapsed "Expected result ▸" block under the task with the column names in order and
-        the row count, no data ("Columns: 2 · Rows: 10", the names as the table header).
-  - [x] Level 2, after 2 wrong checks (Easy / Simple / Normal) or 3 (Difficult / Hard): "Show sample rows" in the block
-        and in the check result (`expected_sample_link.tpl`); rows come from `GET /{lang}/question/{id}/expected-sample`,
-        which checks the count itself. Before that the block says "Sample rows open after wrong checks: 1 of 2"; the
-        `X-Sample-Rows` header of the check unlocks it without a reload. Once opened, the rows show on later visits.
-        Opened by click only, for all difficulties.
-  - [x] No sample rows while the task is in the user's open test (`User::hasOpenTestWithQuestion()`: tests pick
-        random practice tasks, so the practice page could help to pass one); the block says so instead. The test page
-        itself (`test.tpl`, `test_check()`) has no expected result block.
-  - [x] No sample rows when the result has fewer than 5 rows (single value, aggregates, `COUNT`): 148 of 389 tasks.
-  - [x] Never the full result: 2 rows for 5–9, 3 rows for 10+, i.e. at most 40%.
-  - [x] Data: `query_valid_result` is stored JSON, not computed per check, so no cache. Wrong checks:
-        `user_questions.failed_checks` (`saveQuestionAttempt()`), the session for guests.
-  - [x] Track solutions made after the sample rows were shown: `user_questions.sample_rows_shown_at`, query in the
-        migration.
-  - [x] **Deploy**: run `sql/user_questions_expected_result_migration.sql` before the code (`Question::get()` selects
-        the new columns) (migrated 2026-10-05).
-  - [ ] Check live: desktop and mobile, light and dark theme, a guest and a logged-in user.
-
 ## Texts and hints
 
 - [ ] **5. Explain "Run query" vs "Check it!"**.
@@ -126,6 +103,31 @@ Open items first, by area; resolved ones are under "Done" at the end.
   - [x] "Hide solved" is one class on `<html>` (CSS), so groups loaded later follow it; the current task stays
         visible. A second click on an open group now closes it; `loadMenu()` no longer nests `<nav id="menu">`
         in itself.
+
+- [x] **3. Show the expected result** (deployed 2026-10-05), step by step, so the task doesn't get easier. A wrong check already reveals the
+      column count / names, the row count and (25) the first differing row; this puts it in order.
+      `expected_result.tpl` under the task (desktop and mobile), `Question::getExpectedResult()` / `getExpectedSample()`.
+  - [x] Level 1, right away: a collapsed "Expected result ▸" block under the task with the column names in order and
+        the row count, no data ("Columns: 2 · Rows: 10", the names as the table header).
+  - [x] Level 2, after 2 wrong checks (Easy / Simple / Normal) or 3 (Difficult / Hard): "Show sample rows" in the block
+        and in the check result (`expected_sample_link.tpl`); rows come from `GET /{lang}/question/{id}/expected-sample`,
+        which checks the count itself. Before that the block says "Sample rows open after wrong checks: 1 of 2"; the
+        `X-Sample-Rows` header of the check unlocks it without a reload. Once opened, the rows show on later visits.
+        Opened by click only, for all difficulties.
+  - [x] No sample rows while the task is in the user's open test (`User::hasOpenTestWithQuestion()`: tests pick
+        random practice tasks, so the practice page could help to pass one); the block says so instead. The test page
+        itself (`test.tpl`, `test_check()`) has no expected result block.
+  - [x] No sample rows when the result has fewer than 5 rows (single value, aggregates, `COUNT`): 148 of 389 tasks.
+  - [x] Never the full result: 2 rows for 5–9, 3 rows for 10+, i.e. at most 40%.
+  - [x] Data: `query_valid_result` is stored JSON, not computed per check, so no cache. Wrong checks:
+        `user_questions.failed_checks` (`saveQuestionAttempt()`), the session for guests.
+  - [x] Track solutions made after the sample rows were shown: `user_questions.sample_rows_shown_at`, query in the
+        migration.
+  - [x] **Deploy**: run `sql/user_questions_expected_result_migration.sql` before the code (`Question::get()` selects
+        the new columns) (migrated 2026-10-05).
+  - [x] Checked live as a guest (2026-10-05, `sort-penguins`): the block renders ("Columns: 2 · Rows: 10",
+        "…wrong checks: 0 of 2"), `expected-sample` answers 403 before the unlock, the minified CSS has the icon.
+  - [ ] Still to check by hand: the unlock after wrong checks, a logged-in user, mobile, the dark theme.
 
 ### Bugs
 
