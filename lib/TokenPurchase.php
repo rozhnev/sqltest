@@ -71,7 +71,7 @@ class TokenPurchase
      */
     public static function currencyForLang(string $lang): string
     {
-        return ['ru' => 'RUB', 'es' => 'EUR', 'en' => 'USD'][$lang] ?? 'USD';
+        return ['ru' => 'RUB', 'es' => 'EUR', 'fr' => 'EUR', 'en' => 'USD'][$lang] ?? 'USD';
     }
 
     /**
