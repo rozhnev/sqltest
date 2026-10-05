@@ -446,4 +446,9 @@ $translations = [
     'sql_error_explain_login' => 'La explicación con IA está disponible después de iniciar sesión. Los nuevos usuarios reciben tokens de IA gratis.',
     'sql_error_explain_login_button' => 'Iniciar sesión y obtener la explicación',
     'profile_ai_feature_query_error' => 'Explicación de error',
+    // Task menu: search and group progress (menu.tpl)
+    'menu_search_placeholder' => 'Buscar tareas',
+    'menu_search_nothing_found' => 'No se encontró nada',
+    'menu_group_solved' => 'Resueltas / total de tareas',
+    'menu_group_tasks' => 'Tareas del grupo',
 ];

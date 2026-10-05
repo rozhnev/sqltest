@@ -446,4 +446,9 @@ $translations = [
     'sql_error_explain_login' => '登录后即可获得 AI 解释。新用户可免费获得 AI 令牌。',
     'sql_error_explain_login_button' => '登录并获取解释',
     'profile_ai_feature_query_error' => '错误解释',
+    // Task menu: search and group progress (menu.tpl)
+    'menu_search_placeholder' => '搜索任务',
+    'menu_search_nothing_found' => '未找到任何结果',
+    'menu_group_solved' => '已解决 / 任务总数',
+    'menu_group_tasks' => '本组任务数',
 ];

@@ -1142,15 +1142,44 @@ class Controller
         header("location:/" . $this->lang);
         die();
     }
+    /**
+     * GET /{lang}/menu?questionnire=...: the task menu (menu.tpl) for another grouping.
+     * With &group=<id> only that group's task list (menu-group.tpl), with &group=all every group's list
+     * wrapped in <div data-group="id"> (for the menu search); see loadMenuGroups() in script.js.
+     */
     public function menu(array $params): void 
     {
         $QuestionnireName = $_GET['questionnire'] ?? 'category';
-        setcookie("Questionnire", $QuestionnireName, time() + 86400 * 365, "/" );
         $questionnire = new Questionnire($this->dbh, $this->lang);
+        $questionnireData = $questionnire->get($QuestionnireName, $this->user->getId());
         $this->assignVariables([
-            'Questionnire'      => $questionnire->get($QuestionnireName, $this->user->getId()),
+            'Questionnire'      => $questionnireData,
             'Lang'              => $this->lang
         ]);
+
+        if (isset($_GET['group'])) {
+            $group = (string)$_GET['group'];
+            $groups = $group === 'all'
+                ? $questionnireData['menu']
+                : array_intersect_key($questionnireData['menu'], [(int)$group => true]);
+            if (!$groups) {
+                http_response_code(404);
+                return;
+            }
+            foreach ($groups as $categoryId => $panel) {
+                $this->engine->assign(['panel' => $panel, 'categoryId' => $categoryId]);
+                if ($group === 'all') {
+                    echo '<div data-group="' . (int)$categoryId . '">';
+                }
+                $this->engine->display('menu-group.tpl');
+                if ($group === 'all') {
+                    echo '</div>';
+                }
+            }
+            return;
+        }
+
+        setcookie("Questionnire", $QuestionnireName, time() + 86400 * 365, "/" );
         if ($this->user->logged()) {
             $this->engine->assign('Favorites', $this->user->getFavorites($this->lang));
         }

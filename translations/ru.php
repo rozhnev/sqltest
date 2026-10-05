@@ -451,4 +451,9 @@ $translations = [
     'sql_error_explain_login' => 'Объяснение от AI доступно после входа на сайт. Новым пользователям AI-токены даются бесплатно.',
     'sql_error_explain_login_button' => 'Войти и получить объяснение',
     'profile_ai_feature_query_error' => 'Объяснение ошибки',
+    // Task menu: search and group progress (menu.tpl)
+    'menu_search_placeholder' => 'Поиск задания',
+    'menu_search_nothing_found' => 'Ничего не найдено',
+    'menu_group_solved' => 'Решено / всего заданий',
+    'menu_group_tasks' => 'Заданий в группе',
 ];

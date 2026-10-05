@@ -446,4 +446,9 @@ $translations = [
     'sql_error_explain_login' => 'L\'explication par IA est disponible après connexion. Les nouveaux utilisateurs reçoivent des jetons IA gratuits.',
     'sql_error_explain_login_button' => 'Se connecter et obtenir l\'explication',
     'profile_ai_feature_query_error' => 'Explication d\'erreur',
+    // Task menu: search and group progress (menu.tpl)
+    'menu_search_placeholder' => 'Rechercher une tâche',
+    'menu_search_nothing_found' => 'Aucun résultat',
+    'menu_group_solved' => 'Résolues / total des tâches',
+    'menu_group_tasks' => 'Tâches du groupe',
 ];
