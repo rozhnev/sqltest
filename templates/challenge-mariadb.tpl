@@ -714,8 +714,9 @@
     </div>
     <script>
         (function () {
-            const registerBtn = document.querySelector('.mariadb-register-btn');
-            const loginBtn = document.querySelector('.mariadb-login-btn');
+            // The page has two Register / Log in pairs: in the hero and at the bottom
+            const registerBtns = document.querySelectorAll('.mariadb-register-btn');
+            const loginBtns = document.querySelectorAll('.mariadb-login-btn');
             const registerPopup = document.getElementById('mariadb-registration-popup');
             const loginPopup = document.getElementById('mariadb-login-popup');
             const registerForm = document.getElementById('mariadb-registration-form');
@@ -752,15 +753,15 @@
             const registerFullNameRequiredMessage = registerForm?.dataset.fullnameRequired || 'Full name is required';
             const registerFullNameLengthMessage = registerForm?.dataset.fullnameLength || 'Full name must be 100 characters or less';
 
-            registerBtn?.addEventListener('click', (event) => {
+            registerBtns.forEach(button => button.addEventListener('click', (event) => {
                 event.preventDefault();
                 togglePopup(registerPopup, true);
-            });
+            }));
 
-            loginBtn?.addEventListener('click', (event) => {
+            loginBtns.forEach(button => button.addEventListener('click', (event) => {
                 event.preventDefault();
                 togglePopup(loginPopup, true);
-            });
+            }));
 
             registerClose?.addEventListener('click', () => togglePopup(registerPopup, false));
             loginClose?.addEventListener('click', () => togglePopup(loginPopup, false));
