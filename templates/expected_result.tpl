@@ -7,6 +7,7 @@
 {assign var="SampleUnlockAfter" value=$ExpectedResult.unlock_after}
 <details class="expected-result" id="expected-result"{if $ExpectedResult.sample} data-sample-loaded="1"{/if}>
     <summary>
+        <i class="icon icon-table expected-result__icon" aria-hidden="true"></i>
         <span class="expected-result__title">{translate}expected_result_title{/translate}</span>
         <span class="expected-result__meta">{translate}expected_result_columns{/translate}: {$ExpectedResult.columns|@count} · {translate}expected_result_rows{/translate}: {$ExpectedResult.rows}</span>
     </summary>
