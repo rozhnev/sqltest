@@ -114,7 +114,7 @@
     }
     .mdb-tiers {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
         gap: 0.75rem;
         margin: 0 0 1.75rem;
         padding: 0;
@@ -128,12 +128,20 @@
         color: var(--mdb-text-muted);
         font-size: 0.85rem;
         line-height: 1.3;
-        opacity: 0.55;
+        opacity: 0.75;
     }
     .mdb-tier-icon {
         display: block;
         font-size: 1.6rem;
         margin-bottom: 0.4rem;
+    }
+    .mdb-tier-title {
+        display: block;
+        margin-bottom: 0.3rem;
+        font-size: 0.95rem;
+    }
+    .mdb-tier-status {
+        display: block;
     }
     .mdb-tier.is-reached {
         opacity: 1;
@@ -229,30 +237,23 @@
             {/if}
         </header>
         <main>
-            {$prizes = ['🏷️', '👕', '📜']}
-            {$prizeNames = ['mariadb_prize_sticker', 'mariadb_prize_tshirt', 'mariadb_prize_voucher_draw']}
-            {$grade = $TestResult.grade|default:0}
+            {* Prizes as on the landing page ({$Lang}/challenge-mariadb.tpl), see Test::calculateChallengeResult() *}
+            {assign var="ParticipationSolved" value=$TestResult.solved_questions}
+            {assign var="ParticipationRequired" value=$TestResult.must_to_solve}
             <div class="mdb-result">
                 <div class="mdb-result-card">
                     <p class="mdb-eyebrow">{translate}test_result{/translate}</p>
 
-                    {if $TestResult.ok}
-                        {capture assign="Prize"}{$prizes[$grade-1]} {translate}{$prizeNames[$grade-1]}{/translate}{/capture}
-                        <div class="mdb-prize-icon" aria-hidden="true">{$prizes[$grade-1]}</div>
-                        <h2 class="mdb-result-title">
-                            {if $AlreadyClaimed}
-                                {translate}mariadb_prize_already_claimed{/translate}
-                            {else}
-                                {translate}mariadb_prize_prize_draw{/translate}
-                            {/if}
-                        </h2>
-                    {else}
-                        <div class="mdb-prize-icon is-pending" aria-hidden="true">⏳</div>
-                        {if !$AlreadyClaimed && array_key_exists('hints', $TestResult) && array_key_exists('not_enought_tasks_solved', $TestResult.hints)}
-                            {assign var="MinTasksRequired" value="{$TestResult.hints.must_to_solve}"}
-                            <h2 class="mdb-result-title">{translate}not_solved_minimum_tasks{/translate}</h2>
+                    <div class="mdb-prize-icon{if !$TestResult.ok} is-pending{/if}" aria-hidden="true">{if $TestResult.grand_prize}🏆{elseif $TestResult.ok}🎁{else}⏳{/if}</div>
+                    <h2 class="mdb-result-title">
+                        {if $AlreadyClaimed}
+                            {translate}mariadb_result_participation_claimed{/translate}
+                        {elseif $TestResult.ok}
+                            {translate}mariadb_result_participation_earned{/translate}
+                        {else}
+                            {translate}mariadb_prize_claim_requirement{/translate}
                         {/if}
-                    {/if}
+                    </h2>
 
                     {if $TestData.questions_count > 0}
                         <div class="mdb-progress">
@@ -267,54 +268,68 @@
                     {/if}
 
                     <ul class="mdb-tiers">
-                        {foreach $prizes as $i => $icon}
-                            <li class="mdb-tier{if $TestResult.ok && $i < $grade} is-reached{/if}{if $TestResult.ok && $i == $grade-1} is-current{/if}">
-                                <span class="mdb-tier-icon" aria-hidden="true">{$icon}</span>
-                                {translate}{$prizeNames[$i]}{/translate}
-                            </li>
-                        {/foreach}
+                        <li class="mdb-tier{if $TestResult.ok} is-reached is-current{/if}">
+                            <span class="mdb-tier-icon" aria-hidden="true">🎁</span>
+                            <strong class="mdb-tier-title">{translate}mariadb_prize_participation{/translate}</strong>
+                            <span class="mdb-tier-status">
+                                {if $TestResult.ok}
+                                    ✓ {translate}mariadb_result_earned{/translate}
+                                {else}
+                                    {translate}mariadb_result_correct_answers{/translate}: {$TestResult.solved_questions} / {$TestResult.must_to_solve}
+                                {/if}
+                            </span>
+                        </li>
+                        <li class="mdb-tier{if $TestResult.grand_prize} is-reached is-current{/if}">
+                            <span class="mdb-tier-icon" aria-hidden="true">🏆</span>
+                            <strong class="mdb-tier-title">{translate}mariadb_prize_grand{/translate}</strong>
+                            <span class="mdb-tier-status">
+                                {if $TestResult.grand_prize}
+                                    {translate}mariadb_result_grand_qualified{/translate}
+                                {else}
+                                    {translate}mariadb_result_sql_tasks{/translate}: {$TestResult.sql_solved} / {$TestResult.sql_total}
+                                {/if}
+                            </span>
+                        </li>
                     </ul>
 
-                    {if $TestResult.ok}
-                        {if !$AlreadyClaimed && !$TestData.timeout && $TestData.questions_count > $TestData.solved_questions_count}
-                            {assign var="ImproveTimeoutHours" value="{($TestData.time_to_end - $TestData.time_to_end % 60) / 60}"}
-                            {assign var="ImproveTimeoutMinutes" value="{$TestData.time_to_end % 60}"}
-                            <p class="mdb-note">{translate}test_improve{/translate}</p>
-                        {/if}
-                    {else}
-                        {if $TestData.timeout}
-                            {assign var="NextTestTry" value="{$TestData.next_test_in}"}
-                            <p class="mdb-note">{translate}you_can_try_again{/translate}</p>
-                        {elseif !$AlreadyClaimed}
-                            <p class="mdb-note">{translate}mariadb_prize_claim_requires_three{/translate}</p>
-                        {/if}
+                    {if $TestData.timeout}
+                        <p class="mdb-note">{translate}mariadb_challenge_closed{/translate}</p>
+                    {elseif $TestData.questions_count > $TestData.solved_questions_count}
+                        {assign var="ImproveTimeoutHours" value="{($TestData.time_to_end - $TestData.time_to_end % 60) / 60}"}
+                        {assign var="ImproveTimeoutMinutes" value="{$TestData.time_to_end % 60}"}
+                        <p class="mdb-note">{translate}test_improve{/translate}</p>
                     {/if}
 
-                    {if !$AlreadyClaimed}
-                        {if $TestResult.ok}
-                            <form class="mdb-claim-form" method="post" action="/{$Lang}/test/{$TestData.id}/claim">
-                                {if !$UserSubscribed}
-                                    <label class="mdb-optin">
-                                        <input type="checkbox" name="newsletter_opt_in" value="mariadb_newsletter">
-                                        <span>{translate}mariadb_newsletter_checkbox_label{/translate}</span>
-                                    </label>
-                                {/if}
-                                <div class="mdb-actions">
-                                    <button type="submit" class="mdb-btn mdb-btn-primary">{translate}claim_my_prize{/translate}</button>
-                                    {if !$TestData.timeout}
-                                        <a class="mdb-btn mdb-btn-secondary" href="/{$Lang}/test/{$TestData.id}/question/" title="{translate}return_to_test{/translate}">{translate}return_to_test{/translate}</a>
-                                    {/if}
-                                </div>
-                            </form>
-                        {else}
+                    {if $AlreadyClaimed}
+                        <div class="mdb-actions">
+                            <a class="mdb-btn mdb-btn-primary" href="/{$Lang}/test/{$TestData.id}/claim">{translate}mariadb_result_show_qr{/translate}</a>
+                            {if !$TestData.timeout && !$TestResult.grand_prize}
+                                <a class="mdb-btn mdb-btn-secondary" href="/{$Lang}/test/{$TestData.id}/question/" title="{translate}return_to_test{/translate}">{translate}return_to_test{/translate}</a>
+                            {/if}
+                        </div>
+                    {elseif $TestResult.ok}
+                        <form class="mdb-claim-form" method="post" action="/{$Lang}/test/{$TestData.id}/claim">
+                            {if !$UserSubscribed}
+                                <label class="mdb-optin">
+                                    <input type="checkbox" name="newsletter_opt_in" value="mariadb_newsletter">
+                                    <span>{translate}mariadb_newsletter_checkbox_label{/translate}</span>
+                                </label>
+                            {/if}
                             <div class="mdb-actions">
-                                {if $TestData.timeout}
-                                    <a class="mdb-btn mdb-btn-primary" href="/{$Lang}/question/db-theory/what-is-sql" title="{translate}continue_practice{/translate}">{translate}continue_practice{/translate}</a>
-                                {else}
-                                    <a class="mdb-btn mdb-btn-primary" href="/{$Lang}/test/{$TestData.id}/question/" title="{translate}return_to_test{/translate}">{translate}return_to_test{/translate}</a>
+                                <button type="submit" class="mdb-btn mdb-btn-primary">{translate}claim_my_prize{/translate}</button>
+                                {if !$TestData.timeout && !$TestResult.grand_prize}
+                                    <a class="mdb-btn mdb-btn-secondary" href="/{$Lang}/test/{$TestData.id}/question/" title="{translate}return_to_test{/translate}">{translate}return_to_test{/translate}</a>
                                 {/if}
                             </div>
-                        {/if}
+                        </form>
+                    {else}
+                        <div class="mdb-actions">
+                            {if $TestData.timeout}
+                                <a class="mdb-btn mdb-btn-primary" href="/{$Lang}/question/db-theory/what-is-sql" title="{translate}continue_practice{/translate}">{translate}continue_practice{/translate}</a>
+                            {else}
+                                <a class="mdb-btn mdb-btn-primary" href="/{$Lang}/test/{$TestData.id}/question/" title="{translate}return_to_test{/translate}">{translate}return_to_test{/translate}</a>
+                            {/if}
+                        </div>
                     {/if}
                 </div>
             </div>

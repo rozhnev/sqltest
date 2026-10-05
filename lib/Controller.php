@@ -1886,7 +1886,8 @@ class Controller
 
         $alreadyClaimed = $this->user->getPrizeClaimForTest($params['testId']);
         $isUserSubscribed = $this->user->isSubscribedToList('mariadb_newsletter');
-        $canClaim = true; //$test->isMariaDBChallengePrizeEligible();
+        // The QR code is for the participation prize: Test::CHALLENGE_PARTICIPATION_MIN correct answers
+        $canClaim = $test->calculateChallengeResult()['ok'];
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (!$canClaim) {
@@ -1914,6 +1915,7 @@ class Controller
             'SiteDescription' => Localizer::translateString('site_description_test'),
             'TestData' => $testData,
             'CanClaim' => $canClaim,
+            'ParticipationRequired' => Test::CHALLENGE_PARTICIPATION_MIN,
             'AlreadyClaimed' => $alreadyClaimed,
             'UserSubscribed' => $isUserSubscribed,
             'ClaimDone' => isset($_GET['done']) && $_GET['done'] === '1',

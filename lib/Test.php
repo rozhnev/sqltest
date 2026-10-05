@@ -471,45 +471,45 @@ class Test
     }
 
 
+    /**
+     * Correct answers needed for the participation prize of the MariaDB challenge (challenge-mariadb.tpl)
+     */
+    public const CHALLENGE_PARTICIPATION_MIN = 5;
+
+    /**
+     * MariaDB challenge result, by the prizes of the landing page (templates/{lang}/challenge-mariadb.tpl):
+     * a participation prize for CHALLENGE_PARTICIPATION_MIN correct answers (ok, claimed as a QR code at the booth),
+     * and the grand prize race for all SQL tasks solved (category 803; winners are picked by the organizers).
+     */
     public function calculateChallengeResult(): array
     {
         $stmt = $this->dbh->prepare("
             select
-                t.id,
-                t.created_at test_start,
-                count(*) filter (where tq.solved_at is not null ) solved_questions,
-                count(*) filter (where tq.solved_at is not null and qc.category_id = 801 ) tier1_solved_questions,
-                count(*) filter (where tq.solved_at is not null and qc.category_id = 802 ) tier2_solved_questions,
-                count(*) filter (where tq.solved_at is not null and qc.category_id = 803 ) tier3_solved_questions
-            from tests t
-            join users u on u.id = t.user_id
-            join test_questions tq on tq.test_id = t.id
+                count(*) total_questions,
+                count(*) filter (where tq.solved_at is not null) solved_questions,
+                count(*) filter (where qc.category_id = 803) sql_total,
+                count(*) filter (where tq.solved_at is not null and qc.category_id = 803) sql_solved
+            from test_questions tq
             join question_categories qc on tq.question_id = qc.question_id and qc.category_id between 801 and 804
-            where t.id = :test_id
-            group by t.id;
+            where tq.test_id = :test_id;
         ");
-
         $stmt->execute([':test_id' => $this->id]);
+        $counts = array_map('intval', $stmt->fetch(PDO::FETCH_ASSOC) ?: []);
 
-        $testQuestions = $stmt->fetch(PDO::FETCH_ASSOC);
+        $solved = $counts['solved_questions'] ?? 0;
+        $sqlTotal = $counts['sql_total'] ?? 0;
+        $sqlSolved = $counts['sql_solved'] ?? 0;
+        $ok = $solved >= self::CHALLENGE_PARTICIPATION_MIN;
 
-        $testResult = [];
-        if ($testQuestions['tier1_solved_questions'] ?? 0 === 3) {
-            $testResult['ok'] = true;
-            $testResult['grade'] = 1;
-            $testResult['hints'][] = 'Warming questions solved';
-        }
-        if ($testResult['ok'] && $testQuestions['tier2_solved_questions'] ?? 0 === 3) {
-            $testResult['ok'] = true;
-            $testResult['grade'] = 2;
-            $testResult['hints'][] = 'Features questions solved';
-        }
-        if ($testResult['ok'] && $testQuestions['tier3_solved_questions'] ?? 0 === 3) {
-            $testResult['ok'] = true;
-            $testResult['grade'] = 3;
-            $testResult['hints'][] = 'Features questions solved';
-        }
-        return $testResult;
+        return [
+            'ok'                => $ok,
+            'solved_questions'  => $solved,
+            'total_questions'   => $counts['total_questions'] ?? 0,
+            'must_to_solve'     => self::CHALLENGE_PARTICIPATION_MIN,
+            'sql_solved'        => $sqlSolved,
+            'sql_total'         => $sqlTotal,
+            'grand_prize'       => $sqlTotal > 0 && $sqlSolved === $sqlTotal,
+        ];
     }
 
     public function saveGrade(int $grade): void

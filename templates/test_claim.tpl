@@ -27,7 +27,7 @@
                             <p><code>{$AlreadyClaimed.identifier}</code></p>
                         {else}
                             {if !$CanClaim}
-                                <p>{translate}mariadb_prize_claim_requires_three{/translate}</p>
+                                <p>{translate}mariadb_prize_claim_requirement{/translate}</p>
                             {else}
                                 <form method="post" action="/{$Lang}/test/{$TestData.id}/claim">
                                     {if !$UserSubscribed}

@@ -492,11 +492,19 @@ header .button .currency,
     padding: 10px;
     box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 5px;
     z-index: 1000;
-    width: 400px;
+    box-sizing: border-box;
+    /* Never wider than the screen (mobile: the popup hangs from the left of m.top-menu.tpl) */
+    width: min(400px, calc(100vw - 16px));
+    overflow-wrap: anywhere;
     background-color: var(--accordion-panel-bg-color);
     border: 1px solid var(--text-block-border-color);
     color: var(--question-text);
     border-radius: 6px 0 6px 6px;
+}
+/* Mobile: m.top-menu.tpl puts the popup in .top-menu-left, so it opens to the right from the left edge */
+.top-menu-left > .achievements-popup {
+    left: 0;
+    border-radius: 0 6px 6px 6px;
 }
 .achievement {
     display: flex;
