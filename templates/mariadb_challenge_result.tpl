@@ -2,17 +2,43 @@
 <link rel="stylesheet" type="text/css" href="/about.css?{$VERSION}" media="all">
 <style>
     .mdb-result {
+        --mdb-surface: #ffffff;
+        --mdb-text: #0f1b2d;
+        --mdb-text-muted: rgba(15, 27, 45, 0.7);
+        --mdb-border: rgba(10, 118, 166, 0.25);
+        --mdb-tile: rgba(15, 27, 45, 0.05);
+        --mdb-accent: #0a76a6;
+        --mdb-accent-text: #ffffff;
+        --mdb-success: #12936c;
+        --mdb-success-soft: rgba(18, 147, 108, 0.1);
+        --mdb-warning: #c98a00;
+        --mdb-glow-1: rgba(21, 208, 255, 0.16);
+        --mdb-glow-2: rgba(100, 243, 189, 0.16);
+        --mdb-icon-bg: linear-gradient(135deg, rgba(21, 208, 255, 0.18), rgba(100, 243, 189, 0.22));
+        --mdb-icon-glow: rgba(18, 147, 108, 0.2);
+        --mdb-shadow: rgba(15, 27, 45, 0.12);
+        --mdb-btn-glow: rgba(10, 118, 166, 0.3);
+        display: flex;
+        justify-content: center;
+        padding: 2rem 16px 3rem;
+    }
+    [data-theme="dark"] .mdb-result {
         --mdb-surface: #030a18;
         --mdb-text: #f5fbff;
         --mdb-text-muted: rgba(245, 251, 255, 0.75);
         --mdb-border: rgba(255, 255, 255, 0.18);
         --mdb-tile: rgba(255, 255, 255, 0.06);
-        --mdb-highlight: #15d0ff;
-        --mdb-emerald: #64f3bd;
+        --mdb-accent: #15d0ff;
+        --mdb-accent-text: #04101e;
+        --mdb-success: #64f3bd;
+        --mdb-success-soft: rgba(100, 243, 189, 0.12);
         --mdb-warning: #ffc861;
-        display: flex;
-        justify-content: center;
-        padding: 2rem 16px 3rem;
+        --mdb-glow-1: rgba(21, 208, 255, 0.28);
+        --mdb-glow-2: rgba(100, 243, 189, 0.2);
+        --mdb-icon-bg: linear-gradient(135deg, rgba(21, 208, 255, 0.3), rgba(100, 243, 189, 0.3));
+        --mdb-icon-glow: rgba(100, 243, 189, 0.35);
+        --mdb-shadow: rgba(0, 0, 0, 0.35);
+        --mdb-btn-glow: rgba(21, 208, 255, 0.35);
     }
     .mdb-result-card {
         width: min(640px, 100%);
@@ -22,10 +48,10 @@
         border: 1px solid var(--mdb-border);
         color: var(--mdb-text);
         background:
-            radial-gradient(circle at 20% 0%, rgba(21, 208, 255, 0.28), transparent 50%),
-            radial-gradient(circle at 90% 10%, rgba(100, 243, 189, 0.2), transparent 45%),
+            radial-gradient(circle at 20% 0%, var(--mdb-glow-1), transparent 50%),
+            radial-gradient(circle at 90% 10%, var(--mdb-glow-2), transparent 45%),
             var(--mdb-surface);
-        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+        box-shadow: 0 16px 40px var(--mdb-shadow);
         text-align: center;
         line-height: 1.5;
     }
@@ -45,9 +71,9 @@
         justify-content: center;
         font-size: 3.5rem;
         border-radius: 50%;
-        background: linear-gradient(135deg, rgba(21, 208, 255, 0.3), rgba(100, 243, 189, 0.3));
-        border: 2px solid var(--mdb-emerald);
-        box-shadow: 0 0 32px rgba(100, 243, 189, 0.35);
+        background: var(--mdb-icon-bg);
+        border: 2px solid var(--mdb-success);
+        box-shadow: 0 0 32px var(--mdb-icon-glow);
     }
     .mdb-prize-icon.is-pending {
         background: var(--mdb-tile);
@@ -84,7 +110,7 @@
         display: block;
         height: 100%;
         border-radius: inherit;
-        background: linear-gradient(90deg, var(--mdb-highlight), var(--mdb-emerald));
+        background: linear-gradient(90deg, var(--mdb-accent), var(--mdb-success));
     }
     .mdb-tiers {
         display: grid;
@@ -114,8 +140,8 @@
         color: var(--mdb-text);
     }
     .mdb-tier.is-current {
-        border-color: var(--mdb-emerald);
-        background: rgba(100, 243, 189, 0.12);
+        border-color: var(--mdb-success);
+        background: var(--mdb-success-soft);
     }
     .mdb-note {
         margin: 0 0 1rem;
@@ -138,7 +164,7 @@
     .mdb-optin input {
         margin-top: 0.2rem;
         flex-shrink: 0;
-        accent-color: var(--mdb-emerald);
+        accent-color: var(--mdb-success);
     }
     .mdb-actions {
         display: flex;
@@ -152,7 +178,7 @@
         min-width: 200px;
         padding: 0.85rem 1.6rem;
         border-radius: 999px;
-        border: 1px solid var(--mdb-highlight);
+        border: 1px solid var(--mdb-accent);
         font: inherit;
         font-weight: 600;
         text-decoration: none;
@@ -161,15 +187,15 @@
     }
     .mdb-btn:hover {
         transform: translateY(-2px);
-        box-shadow: 0 12px 25px rgba(21, 208, 255, 0.35);
+        box-shadow: 0 12px 25px var(--mdb-btn-glow);
     }
     .mdb-btn-primary {
-        background: var(--mdb-highlight);
-        color: #04101e;
+        background: var(--mdb-accent);
+        color: var(--mdb-accent-text);
     }
     .mdb-btn-secondary {
         background: transparent;
-        color: var(--mdb-highlight);
+        color: var(--mdb-accent);
     }
     .mdb-claim-form .mdb-actions {
         margin-top: 1rem;
