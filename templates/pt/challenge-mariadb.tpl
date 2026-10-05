@@ -1,9 +1,9 @@
 <section class="mariadb-hero">
-    <p class="hero-eyebrow">MariaDB Foundation × SQLTest.online · Percona Live Amsterdam</p>
+    <p class="hero-eyebrow">MariaDB Foundation × SQLTest.online · SOURCE INDIA</p>
     <h1>Desafio MariaDB Foundation<br>e SQLTest.online</h1>
     <p class="hero-subtitle">
-        <a href="https://perconalive.com/2026-amsterdam/" target="_blank" rel="noreferrer">9–11 de setembro de 2026</a>
-        · Percona Live, Amsterdã · estande da MariaDB Foundation
+        <a href="https://www.opensourceindia.in/" target="_blank" rel="noreferrer">7–8 de outubro de 2026</a>
+        · SOURCE INDIA · NIMHANS Convention Center, Bengaluru · estande da MariaDB Foundation
     </p>
     <div class="hero-cta">
         {if $User->logged() === false}
@@ -81,9 +81,9 @@
 
 <section class="mariadb-final">
     <p>
-        Se estiver a visitar o Percona Live Amsterdam, passe pelo estande da MariaDB Foundation, faça o quiz e teste os seus conhecimentos de MariaDB em pessoa.
-        <a class="external-link" href="https://perconalive.com/2026-amsterdam/" target="_blank" rel="noreferrer">
-            Saiba mais sobre o Percona Live Amsterdam
+        Se estiver a visitar o SOURCE INDIA, passe pelo estande da MariaDB Foundation, faça o quiz e teste os seus conhecimentos de MariaDB em pessoa.
+        <a class="external-link" href="https://www.opensourceindia.in/" target="_blank" rel="noreferrer">
+            Saiba mais sobre o SOURCE INDIA
         </a>
     </p>
     <p class="hero-note">

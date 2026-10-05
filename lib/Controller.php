@@ -1621,20 +1621,28 @@ class Controller
     {
         $meta = [
             'en' => [
-                'title'       => 'SQLTest.online: MariaDB Foundation Challenge at Percona Live Amsterdam',
-                'description' => 'Take the MariaDB Foundation and SQLTest.online challenge at Percona Live Amsterdam, test your MariaDB knowledge, and compete for prizes.'
+                'title'       => 'SQLTest.online: MariaDB Foundation Challenge at SOURCE INDIA',
+                'description' => 'Take the MariaDB Foundation and SQLTest.online challenge at SOURCE INDIA, test your MariaDB knowledge, and compete for prizes.'
             ],
             'ru' => [
-                'title'       => 'SQLTest.online: Челлендж MariaDB Foundation и SQLTest.online на Percona Live Amsterdam',
-                'description' => 'Пройдите челлендж MariaDB Foundation и SQLTest.online на Percona Live Amsterdam, проверьте знания MariaDB и участвуйте в розыгрыше призов.'
+                'title'       => 'SQLTest.online: Челлендж MariaDB Foundation и SQLTest.online на SOURCE INDIA',
+                'description' => 'Пройдите челлендж MariaDB Foundation и SQLTest.online на SOURCE INDIA, проверьте знания MariaDB и участвуйте в розыгрыше призов.'
             ],
             'pt' => [
-                'title'       => 'SQLTest.online: Desafio MariaDB Foundation e SQLTest.online em Percona Live Amsterdam',
-                'description' => 'Participe do desafio MariaDB Foundation e SQLTest.online em Percona Live Amsterdam, teste seus conhecimentos em MariaDB e concorra a prêmios.'
+                'title'       => 'SQLTest.online: Desafio MariaDB Foundation e SQLTest.online em SOURCE INDIA',
+                'description' => 'Participe do desafio MariaDB Foundation e SQLTest.online em SOURCE INDIA, teste seus conhecimentos em MariaDB e concorra a prêmios.'
             ],
             'zh' => [
-                'title'       => 'SQLTest.online: MariaDB Foundation 与 SQLTest.online 在 Percona Live Amsterdam 的挑战赛',
-                'description' => '参加 MariaDB Foundation 与 SQLTest.online 在 Percona Live Amsterdam 的挑战赛，测试 MariaDB 知识并参与奖品抽奖。'
+                'title'       => 'SQLTest.online: MariaDB Foundation 与 SQLTest.online 在 SOURCE INDIA 的挑战赛',
+                'description' => '参加 MariaDB Foundation 与 SQLTest.online 在 SOURCE INDIA 的挑战赛，测试 MariaDB 知识并参与奖品抽奖。'
+            ],
+            'fr' => [
+                'title'       => 'SQLTest.online : Défi MariaDB Foundation et SQLTest.online à SOURCE INDIA',
+                'description' => 'Relevez le défi MariaDB Foundation et SQLTest.online à SOURCE INDIA, testez vos connaissances MariaDB et tentez de gagner des prix.'
+            ],
+            'es' => [
+                'title'       => 'SQLTest.online: Reto MariaDB Foundation y SQLTest.online en SOURCE INDIA',
+                'description' => 'Participa en el reto de MariaDB Foundation y SQLTest.online en SOURCE INDIA, pon a prueba tus conocimientos de MariaDB y compite por premios.'
             ]
         ];
 
