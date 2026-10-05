@@ -662,6 +662,7 @@ class Controller
             'PageTitle'               => Localizer::translateString('tokens_page_title'),
             'TokensCheckoutAvailable' => $purchase->checkoutAvailable(),
             'TokensPack'              => TokenQuota::formatTokens($purchase->packTokens()),
+            'TokensPackPrice'         => $purchase->packPriceText($this->lang),
             'TokensPaymentReturn'     => in_array($paymentReturn, ['success', 'failed', 'cancelled'], true) ? $paymentReturn : '',
             'TokensFlash'             => $flash,
             'TokensHistory'           => $history,

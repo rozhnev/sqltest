@@ -18,6 +18,7 @@
     .tokens-amount strong { font-size: clamp(2rem, 6vw, 2.6rem); line-height: 1.1; font-variant-numeric: tabular-nums; }
     .tokens-amount span { font-size: 1rem; opacity: 0.75; }
     .tokens-amount.empty strong { color: var(--danger-text-color); }
+    .tokens-price { margin-top: -0.5rem; font-size: 1.5rem; font-weight: 600; font-variant-numeric: tabular-nums; color: var(--cost-best-color); }
     .tokens-muted { margin: 0; font-size: 0.92rem; opacity: 0.8; line-height: 1.45; }
 
     .tokens-features { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.45rem; }
@@ -101,6 +102,9 @@
                                 <strong>{$TokensPack}</strong>
                                 <span>{translate}tokens_unit{/translate}</span>
                             </div>
+                            {if $TokensPackPrice}
+                                <div class="tokens-price">{$TokensPackPrice|escape}</div>
+                            {/if}
                             <ul class="tokens-features">
                                 <li>{translate}tokens_feature_one_time{/translate}</li>
                                 <li>{translate}tokens_feature_never_expire{/translate}</li>

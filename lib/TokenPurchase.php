@@ -67,6 +67,38 @@ class TokenPurchase
     }
 
     /**
+     * Checkout currency for the site language
+     */
+    public static function currencyForLang(string $lang): string
+    {
+        return ['ru' => 'RUB', 'es' => 'EUR', 'en' => 'USD'][$lang] ?? 'USD';
+    }
+
+    /**
+     * Pack price in the checkout currency for the language, formatted for display
+     * (e.g. "$5.99", "500 ₽"), or null when config.php has no price for it
+     */
+    public function packPriceText(string $lang): ?string
+    {
+        $currency = self::currencyForLang($lang);
+        $price = $this->packPrice((string)($this->env['TOKENS_LAVA_OFFER_ID'] ?? ''), $currency);
+        if ($price === null) {
+            return null;
+        }
+        if (class_exists('NumberFormatter')) {
+            $formatter = new NumberFormatter($lang, NumberFormatter::CURRENCY);
+            if (floor($price) == $price) {
+                $formatter->setAttribute(NumberFormatter::FRACTION_DIGITS, 0);
+            }
+            $text = $formatter->formatCurrency($price, $currency);
+            if ($text !== false) {
+                return $text;
+            }
+        }
+        return number_format($price, floor($price) == $price ? 0 : 2) . ' ' . $currency;
+    }
+
+    /**
      * Webhook authentication: Lava sends the secret configured in its profile in X-Api-Key.
      * Fails closed when no secret is configured.
      */
@@ -148,7 +180,7 @@ class TokenPurchase
      */
     public function startCheckout(User $user, string $email, string $lang, string $siteUrl, ?string $promoCode = null): string
     {
-        $currency  = ['ru' => 'RUB', 'es' => 'EUR', 'en' => 'USD'][$lang] ?? 'USD';
+        $currency  = self::currencyForLang($lang);
         $returnUrl = rtrim($siteUrl, '/') . "/{$lang}/buy-tokens?payment=";
 
         // No periodicity: that is what makes it a one-time purchase
