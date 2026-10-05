@@ -1,9 +1,9 @@
 <section class="mariadb-hero">
-    <p class="hero-eyebrow">MariaDB Foundation × SQLTest.online · SOURCE INDIA</p>
+    <p class="hero-eyebrow">MariaDB Foundation × SQLTest.online · OPEN SOURCE INDIA</p>
     <h1>Челлендж MariaDB Foundation<br>и SQLTest.online</h1>
     <p class="hero-subtitle">
         <a href="https://www.opensourceindia.in/" target="_blank" rel="noreferrer">7–8 октября 2026</a>
-        · SOURCE INDIA · NIMHANS Convention Center, Бенгалуру · стенд MariaDB Foundation
+        · OPEN SOURCE INDIA · NIMHANS Convention Center, Бенгалуру · стенд MariaDB Foundation
     </p>
     <div class="hero-cta">
         {if $User->logged() === false}
@@ -16,7 +16,7 @@
                 <a class="mariadb-button" href="/{$Lang}/test/{$LastTest.id}/question/">Продолжить викторину</a>
             {/if}
         {/if}
-        <span class="hero-note">Квиз по MariaDB + SQL-задачи · победители уведомляются по email · ежедневный розыгрыш призов</span>
+        <span class="hero-note">Квиз по MariaDB + SQL-задачи · главный приз: ваучер на сертификацию MariaDB · победители уведомляются по email</span>
     </div>
 </section>
 
@@ -31,7 +31,7 @@
         <ul class="mariadb-list">
             <li>Проверьте свои знания о возможностях MariaDB, истории и реальных сценариях использования.</li>
             <li>Решайте SQL-задачи на стенде и сразу получайте обратную связь.</li>
-            <li>Получите стикер за завершение квиза и примите участие в ежедневном розыгрыше, решив SQL-задачи.</li>
+            <li>Ответьте хотя бы на 5 вопросов, чтобы получить приз участника, и решите SQL-задачи, чтобы побороться за главный приз.</li>
             <li>Можно проходить в любое время во время конференции и вернуться позже, если нужно сделать паузу.</li>
         </ul>
     </div>
@@ -53,9 +53,9 @@
         <ol class="mariadb-list">
             <li>Отсканируйте QR-код у стенда MariaDB Foundation или откройте эту страницу на устройстве.</li>
             <li>Зарегистрируйтесь и проходите квиз в любое время во время конференции. Можно сделать паузу и вернуться позже.</li>
-            <li>Завершите вопросы квиза и покажите результат на стенде, чтобы получить стикер.</li>
-            <li>Решите SQL-задачи правильно, чтобы участвовать в дневном розыгрыше призов.</li>
-            <li>Розыгрыш проходит у стенда в 17:00 каждый день. Приз: ваучер на сертификацию MariaDB. Победители также уведомляются по email.</li>
+            <li>Пройдите квиз, ответьте хотя бы на 5 вопросов и покажите результат на стенде, чтобы получить приз участника.</li>
+            <li>Решите SQL-задачи правильно, чтобы побороться за главный приз.</li>
+            <li>Главный приз: ваучер на сертификацию MariaDB стоимостью 150 USD. Победители уведомляются по email.</li>
         </ol>
     </article>
 </section>
@@ -64,28 +64,21 @@
     <h2>Призы</h2>
     <div class="prize-grid">
         <div class="prize-card">
-            <h4>Квиз завершён</h4>
-            <p>Стикер MariaDB на стенде.</p>
+            <h4>Главный приз</h4>
+            <p>Первые 3 победителя получат ваучер на сертификацию MariaDB стоимостью 150 USD на любой из наших курсов.</p>
         </div>
         <div class="prize-card">
-            <h4>Раунд с фичами завершён</h4>
-            <p>Фирменная футболка MariaDB для первых 50 участников.</p>
-        </div>
-        <div class="prize-card">
-            <h4>Все SQL-задачи решены правильно</h4>
-            <p>Участие в ежедневном розыгрыше ваучера на сертификацию MariaDB.</p>
+            <h4>Приз участника</h4>
+            <p>Все, кто ответит хотя бы на 5 вопросов, получают приз участника (подойдите к стенду, чтобы забрать его).</p>
         </div>
     </div>
-    <p class="prize-note">
-        Каждый участник получает что-то. Лучшие участники получают больше, а победители, не присутствующие на стенде, могут быть уведомлены по email.
-    </p>
 </section>
 
 <section class="mariadb-final">
     <p>
-        Если вы приезжаете на SOURCE INDIA, загляните к стенду MariaDB Foundation, пройдите квиз и проверьте свои знания MariaDB лично.
+        Если вы приезжаете на OPEN SOURCE INDIA, загляните к стенду MariaDB Foundation, пройдите квиз и проверьте свои знания MariaDB лично.
         <a class="external-link" href="https://www.opensourceindia.in/" target="_blank" rel="noreferrer">
-            Подробнее про SOURCE INDIA
+            Подробнее про OPEN SOURCE INDIA
         </a>
     </p>
     <p class="hero-note">

@@ -1,9 +1,9 @@
 <section class="mariadb-hero">
-    <p class="hero-eyebrow">MariaDB Foundation × SQLTest.online · SOURCE INDIA</p>
+    <p class="hero-eyebrow">MariaDB Foundation × SQLTest.online · OPEN SOURCE INDIA</p>
     <h1>Défi MariaDB Foundation<br>et SQLTest.online</h1>
     <p class="hero-subtitle">
         <a href="https://www.opensourceindia.in/" target="_blank" rel="noreferrer">7–8 octobre 2026</a>
-        · SOURCE INDIA · NIMHANS Convention Center, Bengaluru · stand MariaDB Foundation
+        · OPEN SOURCE INDIA · NIMHANS Convention Center, Bengaluru · stand MariaDB Foundation
     </p>
     <div class="hero-cta">
         {if $User->logged() === false}
@@ -16,7 +16,7 @@
                 <a class="mariadb-button" href="/{$Lang}/test/{$LastTest.id}/question/">Continuer le quiz</a>
             {/if}
         {/if}
-        <span class="hero-note">Quiz MariaDB + tâches SQL · gagnants informés par e-mail · tirage au sort quotidien</span>
+        <span class="hero-note">Quiz MariaDB + tâches SQL · grand prix : bon de certification MariaDB · gagnants informés par e-mail</span>
     </div>
 </section>
 
@@ -30,7 +30,7 @@
         <ul class="mariadb-list">
             <li>Testez vos connaissances sur les fonctionnalités, l'histoire et les cas d'usage concrets de MariaDB.</li>
             <li>Résolvez des tâches SQL au stand et obtenez un retour immédiat.</li>
-            <li>Gagnez un autocollant en terminant le quiz et participez au tirage quotidien en résolvant les tâches SQL.</li>
+            <li>Répondez à au moins 5 questions pour gagner un prix de participation, et résolvez les tâches SQL pour tenter de remporter le grand prix.</li>
             <li>Jouez à tout moment pendant la conférence et revenez plus tard si vous avez besoin de faire une pause.</li>
         </ul>
     </div>
@@ -51,9 +51,9 @@
         <ol class="mariadb-list">
             <li>Scannez le QR code au stand MariaDB Foundation ou ouvrez cette page sur votre appareil.</li>
             <li>Inscrivez-vous et complétez le quiz à tout moment pendant la conférence. Vous pouvez faire une pause et reprendre plus tard.</li>
-            <li>Terminez le quiz et montrez votre résultat au stand pour recevoir un autocollant.</li>
-            <li>Résolvez correctement les tâches SQL pour participer au tirage quotidien.</li>
-            <li>Le tirage a lieu au stand à 17:00 chaque jour. Prix : un bon de certification MariaDB. Les gagnants sont aussi informés par e-mail.</li>
+            <li>Terminez le quiz, répondez à au moins 5 questions et montrez votre résultat au stand pour obtenir un prix de participation.</li>
+            <li>Résolvez correctement les tâches SQL pour tenter de remporter le grand prix.</li>
+            <li>Grand prix : un bon de certification MariaDB d'une valeur de 150 USD. Les gagnants sont informés par e-mail.</li>
         </ol>
     </article>
 </section>
@@ -62,28 +62,21 @@
     <h2>Prix</h2>
     <div class="prize-grid">
         <div class="prize-card">
-            <h4>Quiz terminé</h4>
-            <p>Autocollant MariaDB au stand.</p>
+            <h4>Grand prix</h4>
+            <p>Les 3 premiers gagnants recevront un bon de certification MariaDB d'une valeur de 150 USD pour choisir l'un de nos cours.</p>
         </div>
         <div class="prize-card">
-            <h4>Étape des fonctionnalités terminée</h4>
-            <p>T-shirt officiel MariaDB pour les 50 premiers participants.</p>
-        </div>
-        <div class="prize-card">
-            <h4>Toutes les tâches SQL résolues correctement</h4>
-            <p>Participation au tirage quotidien pour un bon de certification MariaDB.</p>
+            <h4>Prix de participation</h4>
+            <p>Ceux qui répondent à au moins 5 questions gagnent un prix de participation (passez au stand pour récupérer le vôtre).</p>
         </div>
     </div>
-    <p class="prize-note">
-        Tout le monde reçoit quelque chose. Les meilleurs participants obtiennent plus, et les gagnants peuvent aussi être contactés par e-mail s'ils ne sont pas présents au stand.
-    </p>
 </section>
 
 <section class="mariadb-final">
     <p>
-        Si vous êtes à SOURCE INDIA, rendez-vous au stand MariaDB Foundation, passez le quiz et vérifiez vos compétences MariaDB en personne.
+        Si vous êtes à OPEN SOURCE INDIA, rendez-vous au stand MariaDB Foundation, passez le quiz et vérifiez vos compétences MariaDB en personne.
         <a class="external-link" href="https://www.opensourceindia.in/" target="_blank" rel="noreferrer">
-            En savoir plus sur SOURCE INDIA
+            En savoir plus sur OPEN SOURCE INDIA
         </a>
     </p>
     <p class="hero-note">

@@ -1,9 +1,9 @@
 <section class="mariadb-hero">
-    <p class="hero-eyebrow">MariaDB Foundation × SQLTest.online · SOURCE INDIA</p>
+    <p class="hero-eyebrow">MariaDB Foundation × SQLTest.online · OPEN SOURCE INDIA</p>
     <h1>MariaDB Foundation Challenge<br>and SQLTest.online</h1>
     <p class="hero-subtitle">
         <a href="https://www.opensourceindia.in/" target="_blank" rel="noreferrer">7–8 October 2026</a>
-        · SOURCE INDIA · NIMHANS Convention Center, Bengaluru · MariaDB Foundation booth
+        · OPEN SOURCE INDIA · NIMHANS Convention Center, Bengaluru · MariaDB Foundation booth
     </p>
     <div class="hero-cta">
         {if $User->logged() === false}
@@ -16,7 +16,7 @@
                 <a class="mariadb-button" href="/{$Lang}/test/{$LastTest.id}/question/">Continue quiz</a>
             {/if}
         {/if}
-        <span class="hero-note">MariaDB quiz + SQL tasks · winners notified by email · daily prize draw</span>
+        <span class="hero-note">MariaDB quiz + SQL tasks · grand prize: MariaDB certification voucher · winners notified by email</span>
     </div>
 </section>
 
@@ -30,7 +30,7 @@
         <ul class="mariadb-list">
             <li>Test your knowledge of MariaDB features, history, and practical use cases.</li>
             <li>Solve SQL tasks on your device and get instant feedback.</li>
-            <li>Earn a sticker by completing the quiz and enter the daily prize draw by solving the SQL tasks.</li>
+            <li>Answer at least 5 questions to win a participation prize, and solve the SQL tasks to compete for the grand prize.</li>
             <li>Play at any time during the conference and return later if you need to pause.</li>
         </ul>
     </div>
@@ -51,9 +51,9 @@
         <ol class="mariadb-list">
             <li>Scan the QR code at the MariaDB Foundation booth or open this page on your device.</li>
             <li>Register and complete the quiz any time during the conference. You can pause and continue later.</li>
-            <li>Finish the quiz and show your result at the booth to receive a sticker.</li>
-            <li>Solve the SQL tasks correctly to qualify for the daily prize draw.</li>
-            <li>The draw takes place at the booth at 17:00 each day. Prize: a MariaDB certification voucher. Winners are also notified by email.</li>
+            <li>Finish the quiz, answer at least 5 questions and show your result at the booth to get a participation prize.</li>
+            <li>Solve the SQL tasks correctly to compete for the grand prize.</li>
+            <li>Grand Prize: a MariaDB certification voucher worth 150 USD. Winners are notified by email.</li>
         </ol>
     </article>
 </section>
@@ -62,28 +62,21 @@
     <h2>Prizes</h2>
     <div class="prize-grid">
         <div class="prize-card">
-            <h4>Quiz completed</h4>
-            <p>MariaDB sticker at the booth.</p>
+            <h4>Grand prize</h4>
+            <p>The first 3 winners will receive a MariaDB certification voucher worth 150 USD to choose any of our courses.</p>
         </div>
         <div class="prize-card">
-            <h4>Feature round completed</h4>
-            <p>Maria DB branded t-shirt for 50 first participants.</p>
-        </div>
-        <div class="prize-card">
-            <h4>All SQL tasks solved correctly</h4>
-            <p>Entry into the daily MariaDB certification voucher draw.</p>
+            <h4>Participation prize</h4>
+            <p>Those who answer at least 5 questions win a participation prize (come to the booth to get yours).</p>
         </div>
     </div>
-    <p class="prize-note">
-        Everyone who takes part gets something. The best performers get more, and winners may also be contacted by email if they are not present at the booth.
-    </p>
 </section>
 
 <section class="mariadb-final">
     <p>
-        If you are visiting SOURCE INDIA, stop by the MariaDB Foundation booth, take the quiz, and test your MariaDB skills in person.
+        If you are visiting OPEN SOURCE INDIA, stop by the MariaDB Foundation booth, take the quiz, and test your MariaDB skills in person.
         <a class="external-link" href="https://www.opensourceindia.in/" target="_blank" rel="noreferrer">
-            Learn more about SOURCE INDIA
+            Learn more about OPEN SOURCE INDIA
         </a>
     </p>
     <p class="hero-note">
