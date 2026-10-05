@@ -1356,7 +1356,8 @@ class Controller
             'Action'                => 'question',
             'QuestionsCount'        => $totalQuestions,
             'SolvedQuestionsCount'  => $this->user->getSolvedQuestionsCount(),
-            'Favorites'             => $this->user->getFavorites($this->lang)
+            'Favorites'             => $this->user->getFavorites($this->lang),
+            'ExpectedResult'        => $this->expectedResultState($question, (int)$questionID, $questionData),
         ]);
         if (($questionData['question_type'] ?? '') === 'free_answer' && $this->user->logged()) {
             // Free-answer checks are paid from the shared AI token balance, shown next to the Check button
@@ -1450,6 +1451,82 @@ class Controller
         }
     }
 
+    /**
+     * Wrong checks of a task: user_questions for a logged-in user, the session for a guest
+     */
+    private function failedChecks(int $questionID): int
+    {
+        return $this->user->logged()
+            ? $this->user->getFailedChecks($questionID)
+            : (int)($_SESSION['failed_checks'][$questionID] ?? 0);
+    }
+
+    /**
+     * Whether the sample rows of the expected result may be shown (QUESTION_PAGE_UX_TODO.md, item 3):
+     * enough wrong checks, and the task is not in the user's open test
+     */
+    private function sampleRowsUnlocked(Question $question, int $questionID): bool
+    {
+        $expected = $question->getExpectedResult();
+        if ($expected === null || $expected['sample_size'] === 0 || $this->user->hasOpenTestWithQuestion($questionID)) {
+            return false;
+        }
+        $rate = $question->getData()['rate'] ?? null;
+        return $this->failedChecks($questionID) >= Question::sampleRowsUnlockAfter($rate === null ? null : (int)$rate);
+    }
+
+    /**
+     * The expected result block of the question page (expected_result.tpl), null for tasks without a query result
+     */
+    private function expectedResultState(Question $question, int $questionID, array $questionData): ?array
+    {
+        $expected = $question->getExpectedResult();
+        if ($expected === null) {
+            return null;
+        }
+        $failedChecks = $this->user->logged()
+            ? (int)($questionData['failed_checks'] ?? 0)
+            : (int)($_SESSION['failed_checks'][$questionID] ?? 0);
+        $unlockAfter = Question::sampleRowsUnlockAfter(isset($questionData['rate']) ? (int)$questionData['rate'] : null);
+        // No sample rows while the task is in the user's open test: they would help to pass it
+        $inOpenTest = $expected['sample_size'] > 0 && $this->user->hasOpenTestWithQuestion($questionID);
+        $unlocked = $expected['sample_size'] > 0 && !$inOpenTest && $failedChecks >= $unlockAfter;
+        $shownBefore = $this->user->logged()
+            ? !empty($questionData['sample_rows_shown_at'])
+            : !empty($_SESSION['sample_rows_shown'][$questionID]);
+
+        return $expected + [
+            'failed_checks' => min($failedChecks, $unlockAfter),
+            'unlock_after'  => $unlockAfter,
+            'unlocked'      => $unlocked,
+            'in_open_test'  => $inOpenTest,
+            'sample'        => $unlocked && $shownBefore ? $question->getExpectedSample() : null,
+        ];
+    }
+
+    /**
+     * GET /{lang}/question/{id}/expected-sample: the first rows of the expected result, once unlocked by wrong checks
+     */
+    public function expected_sample(array $params): void
+    {
+        $questionID = (int)$params['questionID'];
+        $question = new Question($this->dbh, (string)$questionID);
+        if (!$this->sampleRowsUnlocked($question, $questionID)) {
+            http_response_code(403);
+            return;
+        }
+        if ($this->user->logged()) {
+            $this->user->saveSampleRowsShown($questionID);
+        } else {
+            $_SESSION['sample_rows_shown'][$questionID] = true;
+        }
+        $this->assignVariables([
+            'ExpectedResult' => $question->getExpectedResult(),
+            'ExpectedSample' => $question->getExpectedSample(),
+        ]);
+        $this->engine->display('expected_result_rows.tpl');
+    }
+
     public function query_test(array $params): void 
     {
         $sql = $_POST["query"] ?? '';
@@ -1483,6 +1560,13 @@ class Controller
             }
         }
         if (!$queryTestResult['ok'] || !$queryCheckResult['ok']) {
+            if (!$this->user->logged()) {
+                $_SESSION['failed_checks'][(int)$questionID] = ($_SESSION['failed_checks'][(int)$questionID] ?? 0) + 1;
+            }
+            if ($this->sampleRowsUnlocked($question, (int)$questionID)) {
+                header('X-Sample-Rows: available');
+                $this->engine->assign('SampleRowsAvailable', true);
+            }
             header( 'HTTP/1.1 418 BAD REQUEST' );
         } else {
             $this->sendSolvedProgress();

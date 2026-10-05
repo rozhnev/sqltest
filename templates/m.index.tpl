@@ -49,6 +49,9 @@
                 <div class="question">
                     {$Question.task}
                 </div>
+                {if $ExpectedResult}
+                    {include file='expected_result.tpl'}
+                {/if}
                 {if isset($Question.answers)}
                     <div class="question">
                     {foreach $Question.answers as $answer}

@@ -904,6 +904,9 @@ function testQuery(lang, questionId) {
         if (response.ok) {
             showSolvedProgress(response);
         }
+        if (response.headers.get('X-Sample-Rows') === 'available') {
+            unlockSampleRows();
+        }
         if (response.ok && document.getElementById("nextTaskBtn")) {
             document.getElementById("nextTaskBtn").classList.remove("hidden");
             setTimeout(()=>{
@@ -930,6 +933,41 @@ function testQuery(lang, questionId) {
     .catch(err=>{
         document.getElementById('code-result').innerHTML = 'Something went wrong. Please review your query and try again or contact us by email: <a href="mailto:support@sqltest.online">support@sqltest.online</a>.';
     });
+}
+// Expected result block (expected_result.tpl): the sample rows became available after a wrong check
+function unlockSampleRows() {
+    const block = document.getElementById('expected-result');
+    if (!block) {
+        return;
+    }
+    const locked = block.querySelector('[data-sample-state="locked"]');
+    if (locked) {
+        locked.remove();
+        block.querySelector('[data-sample-state="available"]')?.classList.remove('hidden');
+    }
+}
+// Load the first rows of the expected result into its block and open it
+function showSampleRows(lang, questionId) {
+    const block = document.getElementById('expected-result');
+    if (!block) {
+        return;
+    }
+    block.open = true;
+    const reveal = () => block.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    if (block.dataset.sampleLoaded) {
+        reveal();
+        return;
+    }
+    fetch(`/${lang}/question/${questionId}/expected-sample`, { credentials: 'same-origin' })
+    .then(response => response.ok ? response.text() : Promise.reject(response.status))
+    .then(html => {
+        document.getElementById('expected-result-rows').innerHTML = html;
+        block.dataset.sampleLoaded = '1';
+        block.querySelector('[data-sample-state="available"]')?.remove();
+        block.querySelector('[data-sample-state="shown"]')?.classList.remove('hidden');
+        reveal();
+    })
+    .catch(err => console.error(err));
 }
 function toggleFavorites(lang, questionId) {
     let formData = new FormData();

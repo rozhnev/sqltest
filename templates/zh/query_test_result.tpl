@@ -103,6 +103,7 @@
             <p>提示：你的查询为空。</p>
         {/if}
      {/if}
+     {include file='expected_sample_link.tpl'}
     <div style="display: flex; flex-direction: column; align-items: flex-start; margin-top: 10px;">
         再试一次。<br>
         <p style="display: flex; margin-top: 2em; column-gap: 6px; font-style: italic;">

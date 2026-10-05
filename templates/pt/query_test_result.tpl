@@ -103,6 +103,7 @@
             <p>Dica: sua consulta está vazia.</p>
         {/if}
      {/if}
+     {include file='expected_sample_link.tpl'}
     <div style="display: flex; flex-direction: column; align-items: flex-start; margin-top: 10px;">
         Tente novamente.<br>
         <p style="display: flex; margin-top: 2em; column-gap: 6px; font-style: italic;">

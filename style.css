@@ -1310,6 +1310,57 @@ input:checked + .slider:before {
     font-size: 8px;
     margin: 28px auto;
 }
+/* Expected result of a query task under the task text (expected_result.tpl) */
+.expected-result {
+    margin: 6px 15px;
+    border: 1px solid var(--text-block-border-color);
+    border-radius: 6px;
+    background-color: var(--accordion-panel-bg-color);
+    color: var(--question-text);
+    font-size: smaller;
+}
+.expected-result > summary {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 10px;
+    padding: 6px 10px;
+    cursor: pointer;
+}
+.expected-result__title {
+    font-weight: bold;
+}
+.expected-result__meta {
+    opacity: 0.8;
+}
+.expected-result .table-wrapper {
+    padding: 0 10px;
+    overflow-x: auto;
+}
+.expected-result__table {
+    border-collapse: collapse;
+}
+.expected-result__table th,
+.expected-result__table td {
+    padding: 2px 8px;
+    border: 1px solid var(--text-block-border-color);
+    text-align: left;
+    white-space: nowrap;
+}
+.expected-result__table th {
+    font-family: var(--font-mono);
+    font-weight: normal;
+}
+.expected-result__note {
+    margin: 6px 10px 8px;
+    font-style: italic;
+}
+.expected-result__note.hidden {
+    display: none;
+}
+.expected-result__note .text-button {
+    font-style: normal;
+}
 /* Expected vs the user's row of a wrong result (row_diff.tpl) */
 .row-diff th[scope="row"] {
     text-align: left;

@@ -800,21 +800,59 @@ class User
         try {
             $stmt = $this->dbh->prepare("
                 INSERT INTO user_questions (
-                    user_id, question_id, last_attempt_at, solved_at, last_query, query_cost
+                    user_id, question_id, last_attempt_at, solved_at, last_query, query_cost, failed_checks
                 ) VALUES (
-                    ?, ?, CURRENT_TIMESTAMP, CASE WHEN ".($result['ok'] ? 'true' : 'false')." THEN CURRENT_TIMESTAMP END, ?, ?
+                    ?, ?, CURRENT_TIMESTAMP, CASE WHEN ".($result['ok'] ? 'true' : 'false')." THEN CURRENT_TIMESTAMP END, ?, ?, ".($result['ok'] ? 0 : 1)."
                 ) 
                 ON CONFLICT (user_id, question_id) DO UPDATE SET
                     last_attempt_at = CURRENT_TIMESTAMP, 
                     solved_at = LEAST(user_questions.solved_at, EXCLUDED.solved_at),
                     last_query = EXCLUDED.last_query,
-                    query_cost = EXCLUDED.query_cost
+                    query_cost = EXCLUDED.query_cost,
+                    failed_checks = LEAST(user_questions.failed_checks + EXCLUDED.failed_checks, 32767)
             ");
             $stmt->execute([$this->id, $questionID, $query, floatval($result['cost'])]);
         }
         catch (\Throwable $error) {
             throw new Exception($error->getMessage());
         }
+    }
+
+    /**
+     * Wrong checks of a task (user_questions.failed_checks)
+     */
+    public function getFailedChecks(int $questionID): int
+    {
+        $stmt = $this->dbh->prepare("SELECT failed_checks FROM user_questions WHERE user_id = ? AND question_id = ?");
+        $stmt->execute([$this->id, $questionID]);
+        return (int)$stmt->fetchColumn();
+    }
+
+    /**
+     * Whether the question is in one of the user's tests that are still open (tests.closed_at in the future)
+     */
+    public function hasOpenTestWithQuestion(int $questionID): bool
+    {
+        if (!$this->logged()) {
+            return false;
+        }
+        $stmt = $this->dbh->prepare("SELECT EXISTS (
+                SELECT 1 FROM tests JOIN test_questions ON test_questions.test_id = tests.id
+                WHERE tests.user_id = ? AND test_questions.question_id = ?
+                    AND (tests.closed_at IS NULL OR tests.closed_at > CURRENT_TIMESTAMP)
+            )");
+        $stmt->execute([$this->id, $questionID]);
+        return (bool)$stmt->fetchColumn();
+    }
+
+    /**
+     * Remember when the user first opened the sample rows of the expected result (QUESTION_PAGE_UX_TODO.md, item 3)
+     */
+    public function saveSampleRowsShown(int $questionID): void
+    {
+        $stmt = $this->dbh->prepare("UPDATE user_questions SET sample_rows_shown_at = CURRENT_TIMESTAMP
+            WHERE user_id = ? AND question_id = ? AND sample_rows_shown_at IS NULL");
+        $stmt->execute([$this->id, $questionID]);
     }
 
     /**

@@ -68,6 +68,8 @@ class Question
                 solved_at::date solved_date, 
                 last_query,
                 user_questions.last_feedback,
+                COALESCE(user_questions.failed_checks, 0) failed_checks,
+                user_questions.sample_rows_shown_at,
                 questions.rate,
                 COALESCE(qrl_lang.rate, qrl_en.rate, '') question_rate,
                 (exists (select true from answers where question_id = questions.id)) have_answers,
@@ -462,6 +464,77 @@ class Question
     {
         $regex = '@<\?php([^?]+)\?>@';
         return preg_replace_callback($regex, function($code) { eval("\$evaluated = $code[1];"); return $evaluated; }, $input);    
+    }
+
+    /**
+     * The reference result of a query task (questions.query_valid_result), or null for other task types
+     *
+     * @return array{headers: array, data: array}|null
+     */
+    private function validResult(): ?array
+    {
+        $stmt = $this->dbh->prepare("SELECT query_valid_result FROM questions WHERE id = ? AND question_type = 'query'");
+        $stmt->execute([$this->id]);
+        $stored = $stmt->fetchColumn();
+        if (!$stored) {
+            return null;
+        }
+        $result = json_decode($this->evaluateValidResult($stored), true)[0] ?? null;
+        if (!isset($result['headers'], $result['data']) || !is_array($result['data'])) {
+            return null;
+        }
+        return $result;
+    }
+
+    /**
+     * Level 1 of the expected result block: column names in order and the row count, no data.
+     *
+     * @return array{columns: string[], rows: int, sample_size: int}|null
+     */
+    public function getExpectedResult(): ?array
+    {
+        $result = $this->validResult();
+        if ($result === null) {
+            return null;
+        }
+        return [
+            'columns'     => array_map(fn($h) => (string)$h['header'], $result['headers']),
+            'rows'        => count($result['data']),
+            'sample_size' => self::sampleSize(count($result['data'])),
+        ];
+    }
+
+    /**
+     * Level 2: the first rows of the reference result (NULL as '[null]', like the row diff hint)
+     */
+    public function getExpectedSample(): array
+    {
+        $result = $this->validResult();
+        if ($result === null) {
+            return [];
+        }
+        $rows = array_slice($result['data'], 0, self::sampleSize(count($result['data'])));
+        return array_map(fn($row) => array_map(fn($el) => is_null($el) ? '[null]' : $el, array_values($row)), $rows);
+    }
+
+    /**
+     * How many rows of the reference result may be shown: none when the result is that small that the sample is
+     * the answer (a single value, aggregates), and never more than a third of it (sorting tasks)
+     */
+    private static function sampleSize(int $rows): int
+    {
+        if ($rows < 5) {
+            return 0;
+        }
+        return $rows < 10 ? 2 : 3;
+    }
+
+    /**
+     * Wrong checks before the sample rows open: 2 for Easy / Simple / Normal, 3 for Difficult / Hard (rate 4, 5)
+     */
+    public static function sampleRowsUnlockAfter(?int $rate): int
+    {
+        return ($rate ?? 0) >= 4 ? 3 : 2;
     }
 
     /**
