@@ -310,6 +310,7 @@ $translations = [
     'mariadb_result_sql_tasks' => '已完成 SQL 任务',
     'mariadb_result_grand_qualified' => '你已进入大奖角逐：前 3 名获奖者将获得价值 150 美元的认证券。中奖者将通过邮件通知。',
     'mariadb_result_show_qr' => '显示我的二维码',
+    'mariadb_claim_email_prompt' => '我们还没有你的邮箱。请填写邮箱，以便接收奖品二维码，并在你获奖时收到通知。',
     'mariadb_challenge_closed' => '挑战已结束，感谢参与！',
     'mariadb_solved_tasks' => '已解决的任务',
     'prize_claim_success' => '您的奖品代码已生成并发送到您的电子邮件。',

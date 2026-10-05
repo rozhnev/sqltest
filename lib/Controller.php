@@ -1854,6 +1854,7 @@ class Controller
                 'IsMariaDBChallenge'    => $isMariaDBChallenge,
                 'AlreadyClaimed'        => $this->user->getPrizeClaimForTest($params['testId']),
                 'UserSubscribed'        => $this->user->isSubscribedToList('mariadb_newsletter'),
+                'UserEmail'             => $this->user->getEmail(),
             ]);
             $this->engine->display("mariadb_challenge_result.tpl");
         } else {
@@ -1889,12 +1890,27 @@ class Controller
         // The QR code is for the participation prize: Test::CHALLENGE_PARTICIPATION_MIN correct answers
         $canClaim = $test->calculateChallengeResult()['ok'];
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $userEmail = $this->user->getEmail();
+        $claimError = null;
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$alreadyClaimed) {
             if (!$canClaim) {
                 header("Location: /" . $this->lang . "/test/{$params['testId']}/claim");
                 exit();
             }
 
+            // The QR code goes out by email: a user without a stored email (e.g. OAuth without email) enters it here
+            if ($userEmail === '') {
+                try {
+                    $this->user->setEmail((string)($_POST['email'] ?? ''));
+                    $userEmail = $this->user->getEmail();
+                } catch (Exception $error) {
+                    $claimError = $error->getMessage();
+                }
+            }
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$alreadyClaimed && $claimError === null) {
             if (!$isUserSubscribed && !empty($_POST['newsletter_opt_in'])) {
                 $this->user->subscribeToList((string)$_POST['newsletter_opt_in']);
                 $isUserSubscribed = true;
@@ -1904,7 +1920,7 @@ class Controller
             $qrCodeUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=' . urlencode($identifier);
 
             $this->user->createPrizeClaim($params['testId'], $identifier, $qrCodeUrl);
-            $this->user->sendPrizeClaimEmail($this->user->getEmail(), $identifier, $qrCodeUrl);
+            $this->user->sendPrizeClaimEmail($userEmail, $identifier, $qrCodeUrl);
 
             header("Location: /" . $this->lang . "/test/{$params['testId']}/claim?done=1");
             exit();
@@ -1916,6 +1932,9 @@ class Controller
             'TestData' => $testData,
             'CanClaim' => $canClaim,
             'ParticipationRequired' => Test::CHALLENGE_PARTICIPATION_MIN,
+            'UserEmail' => $userEmail,
+            'ClaimError' => $claimError,
+            'ClaimEmailValue' => $claimError !== null ? (string)($_POST['email'] ?? '') : '',
             'AlreadyClaimed' => $alreadyClaimed,
             'UserSubscribed' => $isUserSubscribed,
             'ClaimDone' => isset($_GET['done']) && $_GET['done'] === '1',

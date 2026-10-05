@@ -159,6 +159,29 @@
         color: var(--mdb-text-muted);
         font-size: 0.95rem;
     }
+    .mdb-email {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin: 1.25rem 0 0;
+        text-align: left;
+        font-size: 0.9rem;
+        color: var(--mdb-text-muted);
+    }
+    .mdb-email input {
+        box-sizing: border-box;
+        width: 100%;
+        padding: 0.7rem 0.9rem;
+        border-radius: 10px;
+        border: 1px solid var(--mdb-border);
+        background: var(--mdb-surface);
+        color: var(--mdb-text);
+        font: inherit;
+    }
+    .mdb-email input:focus-visible {
+        outline: 2px solid var(--mdb-accent);
+        outline-offset: 1px;
+    }
     .mdb-optin {
         display: flex;
         align-items: flex-start;
@@ -309,6 +332,12 @@
                         </div>
                     {elseif $TestResult.ok}
                         <form class="mdb-claim-form" method="post" action="/{$Lang}/test/{$TestData.id}/claim">
+                            {if !$UserEmail}
+                                <label class="mdb-email">
+                                    <span>{translate}mariadb_claim_email_prompt{/translate}</span>
+                                    <input type="email" name="email" required autocomplete="email" placeholder="{translate}registration_email_placeholder{/translate}">
+                                </label>
+                            {/if}
                             {if !$UserSubscribed}
                                 <label class="mdb-optin">
                                     <input type="checkbox" name="newsletter_opt_in" value="mariadb_newsletter">

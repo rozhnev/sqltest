@@ -310,6 +310,7 @@ $translations = [
     'mariadb_result_sql_tasks' => 'Tareas SQL resueltas',
     'mariadb_result_grand_qualified' => 'Estás en la carrera: los 3 primeros ganadores reciben un vale por valor de 150 USD. Los ganadores reciben notificación por email.',
     'mariadb_result_show_qr' => 'Mostrar mi código QR',
+    'mariadb_claim_email_prompt' => 'Aún no tenemos tu email. Indícalo para recibir el código QR del premio y saber si ganas.',
     'mariadb_challenge_closed' => 'El reto ha terminado. ¡Gracias por participar!',
     'mariadb_solved_tasks' => 'Tareas resueltas',
     'prize_claim_success' => 'Tu código de premio ha sido generado y enviado a tu correo electrónico.',

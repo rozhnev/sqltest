@@ -29,7 +29,16 @@
                             {if !$CanClaim}
                                 <p>{translate}mariadb_prize_claim_requirement{/translate}</p>
                             {else}
+                                {if $ClaimError}
+                                    <p style="color: var(--danger-text-color);">{$ClaimError|escape}</p>
+                                {/if}
                                 <form method="post" action="/{$Lang}/test/{$TestData.id}/claim">
+                                    {if !$UserEmail}
+                                        <label style="display:flex; flex-direction:column; gap:0.5rem; margin: 1rem 0;">
+                                            <span>{translate}mariadb_claim_email_prompt{/translate}</span>
+                                            <input type="email" name="email" required autocomplete="email" value="{$ClaimEmailValue|escape}" placeholder="{translate}registration_email_placeholder{/translate}">
+                                        </label>
+                                    {/if}
                                     {if !$UserSubscribed}
                                         <label style="display:flex; align-items:flex-start; gap:0.75rem; margin: 1rem 0;">
                                             <input type="checkbox" name="newsletter_opt_in" value="mariadb_newsletter">

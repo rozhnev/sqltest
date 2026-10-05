@@ -258,6 +258,7 @@ $translations = [
     'mariadb_result_sql_tasks' => 'Решено SQL-задач',
     'mariadb_result_grand_qualified' => 'Вы участвуете в борьбе за главный приз: первые 3 победителя получат ваучер стоимостью 150 USD. Победители уведомляются по email.',
     'mariadb_result_show_qr' => 'Показать мой QR-код',
+    'mariadb_claim_email_prompt' => 'У нас ещё нет вашего email. Укажите его, чтобы получить QR-код приза и узнать, если вы победите.',
     'mariadb_challenge_closed' => 'Челлендж завершён. Спасибо за участие!',
     'mariadb_solved_tasks' => 'Решено задач',
     'prize_claim_success' => 'Ваш код приза создан и отправлен на вашу почту.',
