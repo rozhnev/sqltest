@@ -82,7 +82,7 @@ class Test
         $this->dbh->beginTransaction();
         $stmt = $this->dbh->prepare(
             "INSERT INTO tests (id, user_id, closed_at, questionnire_id, solutions_required) 
-            VALUES (?, ?, '2026-09-11 17:00:00', 999, 3)");
+            VALUES (?, ?, (TIMESTAMPTZ '2026-10-08 17:00:00 Asia/Kolkata' AT TIME ZONE current_setting('TIMEZONE')), 999, 3)");
         $stmt->execute([$this->id, $this->user->getId()]);
 
         $stmt = $this->dbh->prepare("INSERT INTO test_questions (test_id, question_id, max_attempts) VALUES
@@ -243,7 +243,7 @@ class Test
             JOIN tests ON tests.id = test_questions.test_id
             LEFT JOIN questions_localization ql_lang on ql_lang.question_id = questions.id AND ql_lang.language = :lang
             LEFT JOIN questions_localization ql_en on ql_en.question_id = questions.id AND ql_en.language = 'en'
-            JOIN question_rates ON question_rates.id = questions.rate
+            LEFT JOIN question_rates ON question_rates.id = questions.rate
             LEFT JOIN question_rates_localization qrl_lang ON qrl_lang.id = question_rates.id AND qrl_lang.language = :lang
             LEFT JOIN question_rates_localization qrl_en ON qrl_en.id = question_rates.id AND qrl_en.language = 'en'
             JOIN question_categories ON questions.id = question_categories.question_id
