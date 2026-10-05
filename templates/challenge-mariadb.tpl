@@ -289,14 +289,11 @@
             backdrop-filter: blur(14px);
         }
 
-        .mariadb-footer-inner .footer-links {
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-            padding-bottom: 1rem;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            gap: 0.75rem;
-            color: rgba(245, 251, 255, 0.85);
+        .mariadb-footer {
+            /* The site footer font (clamp(10px, 0.9vw, 14px)) is 10px on phones */
+            font-size: 0.9rem;
+            /* footer.tpl text (the copyright) takes the theme text color, dark on this dark page */
+            color: rgba(245, 251, 255, 0.6);
         }
         .mariadb-footer-inner .footer-links {
             border-bottom: 1px solid rgba(255, 255, 255, 0.06);
@@ -305,6 +302,8 @@
             flex-wrap: wrap;
             justify-content: space-between;
             gap: 0.75rem;
+            /* style.css caps .footer-links at 4rem: a wrapped or stacked footer would overflow it */
+            max-height: none;
             color: rgba(245, 251, 255, 0.85);
         }
         .mariadb-footer-inner a {
@@ -576,7 +575,23 @@
 
             .mariadb-footer-inner .footer-links {
                 flex-direction: column;
+                flex-wrap: nowrap;
                 align-items: flex-start;
+            }
+
+            .mariadb-footer-inner .footer-links > div,
+            .mariadb-footer-inner .footer-links > div > a {
+                flex-wrap: wrap;
+                gap: 0.5rem 1rem;
+                padding: 0;
+            }
+
+            .mariadb-footer-inner .footer-links > div > a {
+                gap: 0.4rem;
+            }
+
+            .mariadb-footer-inner address {
+                margin-left: 0 !important;
             }
 
             .mariadb-auth-card {
