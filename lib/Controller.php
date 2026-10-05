@@ -1684,7 +1684,7 @@ class Controller
             'User'            => $this->user
         ]);
         if ($this->user->logged()) {
-            $this->engine->assign('LastTest', $this->user->getLastTest());
+            $this->engine->assign('LastTest', $this->user->getLastMariaDBChallengeTest());
         }
         $this->engine->display("challenge-mariadb.tpl");
     }
@@ -1693,6 +1693,12 @@ class Controller
     {
         if (!$this->user->logged()) {
             header("Location: /" . $this->lang . "/challenge-mariadb");
+            exit();
+        }
+
+        $lastTest = $this->user->getLastMariaDBChallengeTest();
+        if ($lastTest && !$lastTest['closed']) {
+            header("Location: /" . $this->lang . "/test/{$lastTest['id']}/question/");
             exit();
         }
 

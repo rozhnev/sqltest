@@ -1065,6 +1065,23 @@ class User
         return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
     }
 
+    public function getLastMariaDBChallengeTest(): ?array
+    {
+        $stmt = $this->dbh->prepare("
+            SELECT 
+                id, 
+                created_at, 
+                closed_at, 
+                (closed_at is not null and closed_at <= current_timestamp) closed, 
+                grade 
+            FROM tests 
+            WHERE user_id = :user_id AND tests.questionnire_id = 999
+            ORDER BY created_at desc limit 1;
+        ");
+        $stmt->execute([':user_id' => $this->id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
+    }
+
     /**
      * Save user's grade in DB
      * 
