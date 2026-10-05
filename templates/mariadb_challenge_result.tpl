@@ -21,19 +21,20 @@
                         <p>
                             {if $TestResult.ok}
                                 {$prizes = ['🏷️', '👕', '📜']}
-                                {assign var="Prize" value="{$prizes[$TestResult.grade-1]}"}
-                                {if AlreadyClaimed === true}
+                                {$prizeNames = ['mariadb_prize_sticker', 'mariadb_prize_tshirt', 'mariadb_prize_voucher_draw']}
+                                {capture assign="Prize"}{$prizes[$TestResult.grade-1]} {translate}{$prizeNames[$TestResult.grade-1]}{/translate}{/capture}
+                                {if $AlreadyClaimed}
                                     <h2>{translate}mariadb_prize_already_claimed{/translate}</h2>
                                 {else}
                                     <h2>{translate}mariadb_prize_prize_draw{/translate}</h2>
                                 {/if}
-                                {if AlreadyClaimed !== true && !$TestData.timeout && $TestData.questions_count > $TestData.solved_questions_count}
+                                {if !$AlreadyClaimed && !$TestData.timeout && $TestData.questions_count > $TestData.solved_questions_count}
                                     {assign var="ImproveTimeoutHours" value="{($TestData.time_to_end - $TestData.time_to_end  % 60) / 60}"}
                                     {assign var="ImproveTimeoutMinutes" value="{$TestData.time_to_end % 60}"}
                                     {translate}test_improve{/translate}
                                 {/if}
                             {else}
-                                {if AlreadyClaimed !== true && array_key_exists('hints', $TestResult)}
+                                {if !$AlreadyClaimed && array_key_exists('hints', $TestResult)}
                                     {if array_key_exists('not_enought_tasks_solved', $TestResult.hints)}
                                         {assign var="MinTasksRequired" value="{$TestResult.hints.must_to_solve}"}
                                         {translate}not_solved_minimum_tasks{/translate} <br>
@@ -47,7 +48,7 @@
                             {/if}
                         </p>
                         <p>
-                            {if AlreadyClaimed !== true}
+                            {if !$AlreadyClaimed}
                                 {if $TestResult.ok}
                                     {if !$TestData.timeout}
                                         {assign var="ImproveTimeoutHours" value="{($TestData.time_to_end  - $TestData.time_to_end  % 60) / 60}"}
