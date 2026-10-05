@@ -1,5 +1,198 @@
 {include file='short-header.tpl'}
 <link rel="stylesheet" type="text/css" href="/about.css?{$VERSION}" media="all">
+<style>
+    .mdb-result {
+        --mdb-surface: #030a18;
+        --mdb-text: #f5fbff;
+        --mdb-text-muted: rgba(245, 251, 255, 0.75);
+        --mdb-border: rgba(255, 255, 255, 0.18);
+        --mdb-tile: rgba(255, 255, 255, 0.06);
+        --mdb-highlight: #15d0ff;
+        --mdb-emerald: #64f3bd;
+        --mdb-warning: #ffc861;
+        display: flex;
+        justify-content: center;
+        padding: 2rem 16px 3rem;
+    }
+    .mdb-result-card {
+        width: min(640px, 100%);
+        box-sizing: border-box;
+        padding: 2.5rem 2rem 2rem;
+        border-radius: 20px;
+        border: 1px solid var(--mdb-border);
+        color: var(--mdb-text);
+        background:
+            radial-gradient(circle at 20% 0%, rgba(21, 208, 255, 0.28), transparent 50%),
+            radial-gradient(circle at 90% 10%, rgba(100, 243, 189, 0.2), transparent 45%),
+            var(--mdb-surface);
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+        text-align: center;
+        line-height: 1.5;
+    }
+    .mdb-eyebrow {
+        margin: 0 0 1.25rem;
+        text-transform: uppercase;
+        letter-spacing: 0.3rem;
+        font-size: 0.8rem;
+        color: var(--mdb-text-muted);
+    }
+    .mdb-prize-icon {
+        width: 112px;
+        height: 112px;
+        margin: 0 auto 1.25rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 3.5rem;
+        border-radius: 50%;
+        background: linear-gradient(135deg, rgba(21, 208, 255, 0.3), rgba(100, 243, 189, 0.3));
+        border: 2px solid var(--mdb-emerald);
+        box-shadow: 0 0 32px rgba(100, 243, 189, 0.35);
+    }
+    .mdb-prize-icon.is-pending {
+        background: var(--mdb-tile);
+        border-color: var(--mdb-warning);
+        box-shadow: none;
+    }
+    .mdb-result-title {
+        margin: 0 0 1.5rem;
+        font-size: 1.4rem;
+        line-height: 1.4;
+        color: var(--mdb-text);
+    }
+    .mdb-progress {
+        margin: 0 0 1.75rem;
+        text-align: left;
+    }
+    .mdb-progress-label {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.4rem;
+        font-size: 0.9rem;
+        color: var(--mdb-text-muted);
+    }
+    .mdb-progress-label strong {
+        color: var(--mdb-text);
+    }
+    .mdb-progress-bar {
+        height: 8px;
+        border-radius: 999px;
+        background: var(--mdb-tile);
+        overflow: hidden;
+    }
+    .mdb-progress-bar span {
+        display: block;
+        height: 100%;
+        border-radius: inherit;
+        background: linear-gradient(90deg, var(--mdb-highlight), var(--mdb-emerald));
+    }
+    .mdb-tiers {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.75rem;
+        margin: 0 0 1.75rem;
+        padding: 0;
+        list-style: none;
+    }
+    .mdb-tier {
+        padding: 0.9rem 0.6rem;
+        border-radius: 14px;
+        background: var(--mdb-tile);
+        border: 1px solid transparent;
+        color: var(--mdb-text-muted);
+        font-size: 0.85rem;
+        line-height: 1.3;
+        opacity: 0.55;
+    }
+    .mdb-tier-icon {
+        display: block;
+        font-size: 1.6rem;
+        margin-bottom: 0.4rem;
+    }
+    .mdb-tier.is-reached {
+        opacity: 1;
+        color: var(--mdb-text);
+    }
+    .mdb-tier.is-current {
+        border-color: var(--mdb-emerald);
+        background: rgba(100, 243, 189, 0.12);
+    }
+    .mdb-note {
+        margin: 0 0 1rem;
+        padding: 0.75rem 1rem;
+        border-radius: 12px;
+        background: var(--mdb-tile);
+        color: var(--mdb-text-muted);
+        font-size: 0.95rem;
+    }
+    .mdb-optin {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.75rem;
+        margin: 1.25rem 0 0;
+        text-align: left;
+        font-size: 0.85rem;
+        color: var(--mdb-text-muted);
+        cursor: pointer;
+    }
+    .mdb-optin input {
+        margin-top: 0.2rem;
+        flex-shrink: 0;
+        accent-color: var(--mdb-emerald);
+    }
+    .mdb-actions {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.75rem;
+        margin-top: 1.5rem;
+    }
+    .mdb-btn {
+        display: inline-block;
+        min-width: 200px;
+        padding: 0.85rem 1.6rem;
+        border-radius: 999px;
+        border: 1px solid var(--mdb-highlight);
+        font: inherit;
+        font-weight: 600;
+        text-decoration: none;
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .mdb-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 25px rgba(21, 208, 255, 0.35);
+    }
+    .mdb-btn-primary {
+        background: var(--mdb-highlight);
+        color: #04101e;
+    }
+    .mdb-btn-secondary {
+        background: transparent;
+        color: var(--mdb-highlight);
+    }
+    .mdb-claim-form .mdb-actions {
+        margin-top: 1rem;
+    }
+    @media (max-width: 520px) {
+        .mdb-result-card {
+            padding: 2rem 1.25rem 1.5rem;
+        }
+        .mdb-result-title {
+            font-size: 1.2rem;
+        }
+        .mdb-tiers {
+            gap: 0.5rem;
+        }
+        .mdb-tier {
+            font-size: 0.75rem;
+        }
+        .mdb-btn {
+            width: 100%;
+            min-width: 0;
+        }
+    }
+</style>
 <body>
     <div class="container">
         <header>
@@ -10,94 +203,103 @@
             {/if}
         </header>
         <main>
-            <div class="about">
-                <div class="section top colored">
-                    <div>
-                        <h2>{translate}test_result{/translate}</h2>
-                    </div>
-                </div>
-                <div class="section not-colored" style="height: 100%;">
-                    <div style="display: flex; justify-content: center; flex-direction: column; align-items: center;">
-                        <p>
-                            {if $TestResult.ok}
-                                {$prizes = ['🏷️', '👕', '📜']}
-                                {$prizeNames = ['mariadb_prize_sticker', 'mariadb_prize_tshirt', 'mariadb_prize_voucher_draw']}
-                                {capture assign="Prize"}{$prizes[$TestResult.grade-1]} {translate}{$prizeNames[$TestResult.grade-1]}{/translate}{/capture}
-                                {if $AlreadyClaimed}
-                                    <h2>{translate}mariadb_prize_already_claimed{/translate}</h2>
-                                {else}
-                                    <h2>{translate}mariadb_prize_prize_draw{/translate}</h2>
-                                {/if}
-                                {if !$AlreadyClaimed && !$TestData.timeout && $TestData.questions_count > $TestData.solved_questions_count}
-                                    {assign var="ImproveTimeoutHours" value="{($TestData.time_to_end - $TestData.time_to_end  % 60) / 60}"}
-                                    {assign var="ImproveTimeoutMinutes" value="{$TestData.time_to_end % 60}"}
-                                    {translate}test_improve{/translate}
-                                {/if}
+            {$prizes = ['🏷️', '👕', '📜']}
+            {$prizeNames = ['mariadb_prize_sticker', 'mariadb_prize_tshirt', 'mariadb_prize_voucher_draw']}
+            {$grade = $TestResult.grade|default:0}
+            <div class="mdb-result">
+                <div class="mdb-result-card">
+                    <p class="mdb-eyebrow">{translate}test_result{/translate}</p>
+
+                    {if $TestResult.ok}
+                        {capture assign="Prize"}{$prizes[$grade-1]} {translate}{$prizeNames[$grade-1]}{/translate}{/capture}
+                        <div class="mdb-prize-icon" aria-hidden="true">{$prizes[$grade-1]}</div>
+                        <h2 class="mdb-result-title">
+                            {if $AlreadyClaimed}
+                                {translate}mariadb_prize_already_claimed{/translate}
                             {else}
-                                {if !$AlreadyClaimed && array_key_exists('hints', $TestResult)}
-                                    {if array_key_exists('not_enought_tasks_solved', $TestResult.hints)}
-                                        {assign var="MinTasksRequired" value="{$TestResult.hints.must_to_solve}"}
-                                        {translate}not_solved_minimum_tasks{/translate} <br>
-                                    {/if}
-                                {/if}
-                                {if $TestData.timeout}
-                                    {assign var="NextTestTry" value="{$TestData.next_test_in}"}
-                                    {translate}you_can_try_again{/translate} 
-                                {else}
-                                {/if}
+                                {translate}mariadb_prize_prize_draw{/translate}
                             {/if}
-                        </p>
-                        <p>
-                            {if !$AlreadyClaimed}
-                                {if $TestResult.ok}
+                        </h2>
+                    {else}
+                        <div class="mdb-prize-icon is-pending" aria-hidden="true">⏳</div>
+                        {if !$AlreadyClaimed && array_key_exists('hints', $TestResult) && array_key_exists('not_enought_tasks_solved', $TestResult.hints)}
+                            {assign var="MinTasksRequired" value="{$TestResult.hints.must_to_solve}"}
+                            <h2 class="mdb-result-title">{translate}not_solved_minimum_tasks{/translate}</h2>
+                        {/if}
+                    {/if}
+
+                    {if $TestData.questions_count > 0}
+                        <div class="mdb-progress">
+                            <div class="mdb-progress-label">
+                                <span>{translate}mariadb_solved_tasks{/translate}</span>
+                                <strong>{$TestData.solved_questions_count} / {$TestData.questions_count}</strong>
+                            </div>
+                            <div class="mdb-progress-bar">
+                                <span style="width: {($TestData.solved_questions_count * 100 / $TestData.questions_count)|string_format:"%d"}%;"></span>
+                            </div>
+                        </div>
+                    {/if}
+
+                    <ul class="mdb-tiers">
+                        {foreach $prizes as $i => $icon}
+                            <li class="mdb-tier{if $TestResult.ok && $i < $grade} is-reached{/if}{if $TestResult.ok && $i == $grade-1} is-current{/if}">
+                                <span class="mdb-tier-icon" aria-hidden="true">{$icon}</span>
+                                {translate}{$prizeNames[$i]}{/translate}
+                            </li>
+                        {/foreach}
+                    </ul>
+
+                    {if $TestResult.ok}
+                        {if !$AlreadyClaimed && !$TestData.timeout && $TestData.questions_count > $TestData.solved_questions_count}
+                            {assign var="ImproveTimeoutHours" value="{($TestData.time_to_end - $TestData.time_to_end % 60) / 60}"}
+                            {assign var="ImproveTimeoutMinutes" value="{$TestData.time_to_end % 60}"}
+                            <p class="mdb-note">{translate}test_improve{/translate}</p>
+                        {/if}
+                    {else}
+                        {if $TestData.timeout}
+                            {assign var="NextTestTry" value="{$TestData.next_test_in}"}
+                            <p class="mdb-note">{translate}you_can_try_again{/translate}</p>
+                        {elseif !$AlreadyClaimed}
+                            <p class="mdb-note">{translate}mariadb_prize_claim_requires_three{/translate}</p>
+                        {/if}
+                    {/if}
+
+                    {if !$AlreadyClaimed}
+                        {if $TestResult.ok}
+                            <form class="mdb-claim-form" method="post" action="/{$Lang}/test/{$TestData.id}/claim">
+                                {if !$UserSubscribed}
+                                    <label class="mdb-optin">
+                                        <input type="checkbox" name="newsletter_opt_in" value="mariadb_newsletter">
+                                        <span>{translate}mariadb_newsletter_checkbox_label{/translate}</span>
+                                    </label>
+                                {/if}
+                                <div class="mdb-actions">
+                                    <button type="submit" class="mdb-btn mdb-btn-primary">{translate}claim_my_prize{/translate}</button>
                                     {if !$TestData.timeout}
-                                        {assign var="ImproveTimeoutHours" value="{($TestData.time_to_end  - $TestData.time_to_end  % 60) / 60}"}
-                                        {assign var="ImproveTimeoutMinutes" value="{$TestData.time_to_end % 60}"}
-                                        <div style="text-align: center;">
-                                            <a style="display:inline-block;width:240px; color: white;" href="/{$Lang}/test/{$TestData.id}/question/" title="{translate}return_to_test{/translate}" class="button green">{translate}return_to_test{/translate}</a>
-                                        </div>
+                                        <a class="mdb-btn mdb-btn-secondary" href="/{$Lang}/test/{$TestData.id}/question/" title="{translate}return_to_test{/translate}">{translate}return_to_test{/translate}</a>
                                     {/if}
-                                    <div style="text-align: center;">
-                                        <form method="post" action="/{$Lang}/test/{$TestData.id}/claim">
-                                            {if !$UserSubscribed}
-                                                <label style="display:flex; align-items:flex-start; gap:0.75rem; margin: 1rem 0;">
-                                                    <input type="checkbox" name="newsletter_opt_in" value="mariadb_newsletter">
-                                                    <span>{translate}mariadb_newsletter_checkbox_label{/translate}</span>
-                                                </label>
-                                            {/if}
-                                            <div style="text-align: center; margin-top: 1.5rem;">
-                                                <button type="submit" class="button green" style="display:inline-block; width:240px;">{translate}claim_my_prize{/translate}</button>
-                                            </div>
-                                        </form>
-                                        {* <a style="display:inline-block;width:240px; color: white;" href="/{$Lang}/test/{$TestData.id}/claim" title="{translate}claim_my_prize{/translate}" class="button blue">{translate}claim_my_prize{/translate}</a> *}
-                                    </div>
+                                </div>
+                            </form>
+                        {else}
+                            <div class="mdb-actions">
+                                {if $TestData.timeout}
+                                    <a class="mdb-btn mdb-btn-primary" href="/{$Lang}/question/db-theory/what-is-sql" title="{translate}continue_practice{/translate}">{translate}continue_practice{/translate}</a>
                                 {else}
-                                    {if $TestData.timeout}
-                                        {assign var="NextTestTry" value="{$TestData.next_test_in}"}
-                                        <div style="text-align: center;">
-                                            <a style="display:inline-block;width:240px; color: white;" href="/{$Lang}/question/db-theory/what-is-sql" title="{translate}continue_practice{/translate}" class="button green">{translate}continue_practice{/translate}</a>
-                                        </div>
-                                    {else}
-                                        <div style="margin-top: 1rem; color: var(--regular-text-color);">{translate}mariadb_prize_claim_requires_three{/translate}</div>
-                                        <div style="text-align: center;">
-                                            <a style="display:inline-block;width:240px; color: white;" href="/{$Lang}/test/{$TestData.id}/question/" title="{translate}return_to_test{/translate}" class="button green">{translate}return_to_test{/translate}</a>
-                                        </div>
-                                    {/if}
+                                    <a class="mdb-btn mdb-btn-primary" href="/{$Lang}/test/{$TestData.id}/question/" title="{translate}return_to_test{/translate}">{translate}return_to_test{/translate}</a>
                                 {/if}
-                            {/if}
-                        </p>
-                    </div>
+                            </div>
+                        {/if}
+                    {/if}
                 </div>
-                <div class="section bottom colored">
-                </div>
-            </main>
-            <footer>               
-                {if $MobileView}
-                    {include file='m.footer.tpl'}
-                {else}
-                    {include file='footer.tpl'}
-                {/if}
-            </footer>
-        </div>
-    </body>
+            </div>
+        </main>
+        <footer>
+            {if $MobileView}
+                {include file='m.footer.tpl'}
+            {else}
+                {include file='footer.tpl'}
+            {/if}
+        </footer>
+    </div>
+</body>
 </html>

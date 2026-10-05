@@ -299,6 +299,7 @@ $translations = [
     'mariadb_prize_sticker' => 'MariaDB 贴纸',
     'mariadb_prize_tshirt' => 'MariaDB T 恤',
     'mariadb_prize_voucher_draw' => 'MariaDB 认证券抽奖资格',
+    'mariadb_solved_tasks' => '已解决的任务',
     'prize_claim_success' => '您的奖品代码已生成并发送到您的电子邮件。',
     'prize_claim_already_done' => '您已经领取过奖品。您可以使用下面的二维码。',
     'share_achievement_earned' => '获得了成就',

@@ -299,6 +299,7 @@ $translations = [
     'mariadb_prize_sticker' => 'pegatina de MariaDB',
     'mariadb_prize_tshirt' => 'camiseta de MariaDB',
     'mariadb_prize_voucher_draw' => 'participación en el sorteo del vale de certificación de MariaDB',
+    'mariadb_solved_tasks' => 'Tareas resueltas',
     'prize_claim_success' => 'Tu código de premio ha sido generado y enviado a tu correo electrónico.',
     'prize_claim_already_done' => 'El premio ya fue reclamado. Puedes usar el código QR de abajo.',
     'share_achievement_earned' => 'ha obtenido el logro',

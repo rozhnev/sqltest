@@ -245,6 +245,7 @@ $translations = [
     'mariadb_prize_sticker' => 'MariaDB sticker',
     'mariadb_prize_tshirt' => 'MariaDB t-shirt',
     'mariadb_prize_voucher_draw' => 'entry into the MariaDB certification voucher draw',
+    'mariadb_solved_tasks' => 'Solved tasks',
     'prize_claim_success' => 'Your prize code has been generated and sent to your email.',
     'prize_claim_already_done' => 'Your prize was already claimed. You can use the QR code below.',
     'your_grade' => 'Your grade',
