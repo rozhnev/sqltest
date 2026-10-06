@@ -207,10 +207,11 @@ class Lesson
             }
             $text = preg_replace('/\[([^\]]*)\]\([^)]*\)/', '$1', $block);
             $text = trim(preg_replace('/\s+/', ' ', str_replace(['**', '__', '`'], '', $text)));
-            if (mb_strlen($text) > $maxLength) {
-                $cut = mb_substr($text, 0, $maxLength);
-                $space = mb_strrpos($cut, ' ');
-                $text = ($space > $maxLength / 2 ? mb_substr($cut, 0, $space) : $cut) . '…';
+            // PCRE /u instead of mb_*(): the mbstring extension isn't installed on every server
+            if (preg_match('/^.{' . $maxLength . '}(?=.)/us', $text, $cut)) {
+                $cut = $cut[0];
+                $space = strrpos($cut, ' ');
+                $text = ($space !== false && $space > strlen($cut) / 2 ? substr($cut, 0, $space) : $cut) . '…';
             }
             return $text;
         }
