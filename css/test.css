@@ -155,3 +155,191 @@
     font-weight: 600;
     color: var(--danger-text-color);
 }
+
+/* Test result page (test_result.tpl) */
+.test-result {
+    display: flex;
+    justify-content: center;
+    padding: 2rem 16px 3rem;
+}
+.test-result-card {
+    box-sizing: border-box;
+    /* vw, not %: the page grid grows to its content's width on mobile */
+    width: min(560px, calc(100vw - 32px));
+    padding: 2rem 1.75rem 1.75rem;
+    border: 1px solid var(--text-block-border-color);
+    border-radius: 16px;
+    background: var(--text-block-background-color);
+    color: var(--question-text);
+    box-shadow: 0 10px 30px rgba(15, 27, 45, 0.08);
+    text-align: center;
+}
+.test-result-eyebrow {
+    margin: 0 0 1rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.2rem;
+    text-transform: uppercase;
+    color: var(--test-timer-muted-text);
+}
+.test-result-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 84px;
+    height: 84px;
+    margin: 0 auto 1rem;
+    border-radius: 50%;
+    font-size: 2.6rem;
+    background: var(--accordion-panel-bg-color);
+    border: 2px solid #d97706;
+}
+.test-result-icon.is-ok {
+    border-color: var(--cost-best-color);
+}
+.test-result-icon.is-over {
+    border-color: var(--danger-text-color);
+}
+.test-result-title {
+    margin: 0 0 0.5rem;
+    font-size: 1.35rem;
+    line-height: 1.35;
+}
+.test-result-subtitle {
+    margin: 0 0 0.5rem;
+    color: var(--test-timer-muted-text);
+}
+.test-result-progress {
+    position: relative;
+    margin: 1.5rem 0 2.25rem;
+    text-align: left;
+}
+.test-result-progress .test-progress-bar {
+    height: 10px;
+}
+/* The minimum for a grade: a tick on the bar with its label under it */
+.test-result-minimum {
+    position: absolute;
+    bottom: -1.6rem;
+    transform: translateX(-50%);
+    font-size: 0.78rem;
+    white-space: nowrap;
+    color: #d97706;
+}
+.test-result-minimum::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 1px);
+    width: 2px;
+    height: 16px;
+    background: currentColor;
+    transform: translateX(-50%);
+}
+.test-result-minimum.is-reached {
+    color: var(--cost-best-color);
+}
+.test-result-section {
+    margin: 0 0 0.5rem;
+    font-size: 0.85rem;
+    color: var(--test-timer-muted-text);
+    text-align: left;
+}
+.test-result-levels ul {
+    margin: 0 0 1.5rem;
+    padding: 0;
+    list-style: none;
+}
+.test-result-levels li {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.3rem 0;
+}
+.test-result-levels .question-level {
+    width: 12px;
+    height: 12px;
+}
+.test-result-level-bar {
+    height: 6px;
+    border-radius: 999px;
+    background: var(--text-block-border-color);
+    overflow: hidden;
+}
+.test-result-level-bar span {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: var(--cost-best-color);
+}
+.test-result-level-count {
+    min-width: 3.5rem;
+    text-align: right;
+    font-size: 0.9rem;
+    font-variant-numeric: tabular-nums;
+}
+/* Grade ladder */
+.test-result-grades {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin: 0 0 1.5rem;
+    padding: 0;
+    list-style: none;
+}
+.test-result-grades li {
+    padding: 0.3rem 0.75rem;
+    border-radius: 999px;
+    border: 1px solid var(--text-block-border-color);
+    font-size: 0.85rem;
+    color: var(--test-timer-muted-text);
+}
+.test-result-grades li.is-reached {
+    color: var(--question-text);
+    border-color: var(--cost-best-color);
+}
+.test-result-grades li.is-current {
+    background: var(--cost-best-color);
+    border-color: var(--cost-best-color);
+    color: #fff;
+    font-weight: 700;
+}
+.test-result-note {
+    margin: 0 0 1.25rem;
+    padding: 0.7rem 1rem;
+    border-radius: 10px;
+    background: var(--accordion-panel-bg-color);
+    font-size: 0.92rem;
+}
+.test-result-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.6rem;
+}
+.test-result-actions .button {
+    max-width: none;
+    justify-content: center;
+    margin: 0;
+    padding: 0.7rem 1rem;
+    border-radius: 10px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+}
+.test-result-actions .test-result-primary {
+    padding: 0.85rem 1rem;
+    border: 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    box-shadow: 0 4px 12px rgba(24, 126, 4, 0.3);
+}
+@media (max-width: 520px) {
+    .test-result-card {
+        padding: 1.5rem 1.1rem 1.25rem;
+    }
+    .test-result-title {
+        font-size: 1.15rem;
+    }
+}
