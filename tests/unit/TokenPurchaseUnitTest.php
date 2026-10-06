@@ -21,7 +21,7 @@ class TokenPurchaseUnitTest extends \Codeception\Test\Unit
     private const SECOND_CONTRACT = 'c5a0cacc-3453-44b0-9532-aa492f1ba191';
 
     private const ENV = [
-        'LLM_FREE_TOKENS'        => 50000,
+        'LLM_FREE_TOKENS'        => 30000,
         'LLM_PACK_TOKENS'        => 1000000,
         'LAVA_API_KEY'           => 'test-key',
         'TOKENS_LAVA_OFFER_ID'   => '836b9fc5-7ae9-4a27-9642-592bc44072b7',

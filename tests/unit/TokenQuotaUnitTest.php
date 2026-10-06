@@ -17,7 +17,7 @@ class TokenQuotaUnitTest extends \Codeception\Test\Unit
     protected $tester;
 
     private const ENV = [
-        'LLM_FREE_TOKENS'            => 50000,
+        'LLM_FREE_TOKENS'            => 30000,
         'LLM_MIN_TOKENS_PER_REQUEST' => 3000,
     ];
 
