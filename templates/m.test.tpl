@@ -1,4 +1,6 @@
 {include file='header.tpl'}
+<link rel="stylesheet" href="/css/test.min.css?{$VERSION}" media="all">
+<script src="/js/test.min.js?{$VERSION}" defer></script>
 <body>
 <style>
     .mobile-container {
@@ -152,16 +154,7 @@
     <header>
         {include file='m.top-menu.tpl' path="/test/{$TestId}/question/{$QuestionID}"}
     </header>
-    <div id="test-timer" class="text-block test-overview">
-        <div class="timer-copy">
-            <span class="timer-title">
-                {translate}test_time_to_complete{/translate}
-                <span id="test-timer-time" class="timer-value"></span>
-            </span>
-            <span class="timer-progress">{translate}tasks_completed{/translate}: {$TestData.solved_questions_count} из {$TestData.questions_count}</span>
-        </div>
-        <a class="button green timer-action" id="doneTest" href="/{$Lang}/test/{$TestId}/result">{translate}test_show_result{/translate}</a>
-    </div>
+    {include file='test_overview.tpl' WrapperClass='text-block'}
     <div class="menu-panel">
         <div class="menu" id="menu">
             <div id="menu-content" class="menu-content">
@@ -309,20 +302,6 @@
             {/if}
         </div>
         <div class="code-result ace-xcode" id="code-result"></div>
-        <script>
-            const showTimer = ()=>{ldelim}
-                const time = Math.floor((new Date('{$Question.closed_at}') - new Date())/60000) + ((new Date()).getTimezoneOffset());
-                if (time > 0) {ldelim}
-                    const minutes = time % 60;
-                    const hours = (time - minutes) / 60;
-                    document.getElementById('test-timer-time').innerText = (hours > 0 ? `${ldelim}hours{rdelim} ` + (hours === 1 ? '{translate}hour{/translate} ': '{translate}hours{/translate} ') :'') + minutes + ' {translate}min{/translate}';
-                {rdelim} else {ldelim}
-                    document.getElementById('test-timer').innerText = '{translate}test_time_over{/translate}'
-                {rdelim}
-            {rdelim};
-            showTimer();
-            setInterval(showTimer,  60000);
-        </script>
     </div>
     {if $Question.question_type == 'query'}
         <div class="right" id="right-panel">

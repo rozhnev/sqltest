@@ -17,6 +17,8 @@ on:
       - '!css/donate.min.css'
       - 'css/lesson.css'
       - '!css/lesson.min.css'
+      - 'css/test.css'
+      - '!css/test.min.css'
 jobs:
   minify:
     runs-on: ubuntu-latest
@@ -35,6 +37,7 @@ jobs:
         run: |
           terser script.js -c -m -o "script.min.js" --source-map "url=script.min.js.map"
           terser admin/script.js -c -m -o "admin/script.min.js" --source-map
+          terser js/test.js -c -m -o "js/test.min.js" --source-map "url=test.min.js.map"
 
       - name: Minify CSS
         run: |
@@ -43,11 +46,12 @@ jobs:
           cleancss -o "css/donate.min.css" "css/donate.css"
           cleancss -o "css/lesson.min.css" "css/lesson.css"
           cleancss -o "css/playground.min.css" "css/playground.css"
+          cleancss -o "css/test.min.css" "css/test.css"
       
       - name: Commit minified files
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add *.min.js *.min.js.map *.min.css admin/*.min.js admin/*.min.js.map admin/*.min.css css/donate.min.css css/lesson.min.css css/playground.min.css
+          git add *.min.js *.min.js.map *.min.css admin/*.min.js admin/*.min.js.map admin/*.min.css css/donate.min.css css/lesson.min.css css/playground.min.css css/test.min.css js/test.min.js js/test.min.js.map
           git diff --quiet && git diff --staged --quiet || git commit -m "Auto-minify assets [skip ci]"
           git push

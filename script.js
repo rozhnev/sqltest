@@ -1018,53 +1018,6 @@ function moveQuestionPosition(questionId, categoryId, direction) {
         showToast('error', 'Something went wrong. Please ask admin for help.');
     });
 }
-function checkSolution(url) {
-    setLoader('code-result');
-    let formData = new FormData();
-    if (window.sql_editor) {
-        formData.append('query', window.sql_editor.getValue());
-    }
-    if (document.getElementById('answers-list')) {
-        const answers = [...document.querySelectorAll('input[name=answers]:checked')]
-        .reduce(
-            (res, el)=>{res.push(parseInt(el.value)); return res;}, 
-            []
-        )
-        .toSorted();
-        formData.append('answers', JSON.stringify(answers));
-    }
-    if (document.getElementById('free-answer-input')) {
-        const freeAnswer = document.getElementById('free-answer-input').value;
-        formData.append('free-answer', freeAnswer);
-        console.log('Free answer:', freeAnswer);
-    }
-    fetch(url, {
-        method: "POST",
-        mode: "cors",
-        cache: "default",
-        credentials: "same-origin",
-        body: formData,
-    })
-    .then((async response=>{
-        if (response.ok) {
-            document.getElementById("checkSolutionBtn") && document.getElementById("checkSolutionBtn").classList.toggle("hidden");
-            document.getElementById("nextQuestionBtn") && document.getElementById("nextQuestionBtn").classList.toggle("hidden");
-        } else {
-            // decrease attempts counter
-            let attempts = document.getElementById('attemptsCount').innerText;
-            if (parseInt(attempts) > 0) {
-                document.getElementById('attemptsCount').innerText = (attempts - 1).toString();
-            }
-        }
-        return await response.text();
-    }))
-    .then((message)=>{
-        document.getElementById('code-result').innerHTML = message;
-    })
-    .catch(err=>{
-        document.getElementById('code-result').innerHTML = 'Something went wrong. Please review your query and try again.';
-    });
-}
 function showMySolutions(questionId) {
     showSolutions(questionId, 'my');
 }

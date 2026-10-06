@@ -56,8 +56,6 @@ html {
     --achievement-linkedin-bg: rgba(10, 102, 194, 0.12);
     --achievement-linkedin-border: rgba(10, 102, 194, 0.22);
     --achievement-linkedin-fg: #0A66C2;
-    --test-timer-shadow: rgba(70, 108, 189, 0.25);
-    --test-timer-muted-text: rgba(51, 51, 51, 0.75);
 }
 
 [data-theme="dark"] {
@@ -102,8 +100,6 @@ html {
     --achievement-linkedin-bg: rgba(10, 102, 194, 0.16);
     --achievement-linkedin-border: rgba(10, 102, 194, 0.28);
     --achievement-linkedin-fg: #79C0FF; /* softer on dark background */
-    --test-timer-shadow: rgba(3, 7, 18, 0.8);
-    --test-timer-muted-text: rgba(240, 246, 252, 0.7);
 }
 [data-theme="dark"] .practice-list {
     background-image: url('data:image/svg+xml;utf8,<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%23F0F6FC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><circle cx="6" cy="6" r="2"></circle><circle cx="6" cy="12" r="2"></circle><circle cx="6" cy="18" r="2"></circle><line x1="6" y1="8" x2="6" y2="10"></line><line x1="6" y1="14" x2="6" y2="16"></line><line x1="12" y1="6" x2="20" y2="6"></line><line x1="12" y1="12" x2="20" y2="12"></line><line x1="12" y1="18" x2="20" y2="18"></line></svg>');
@@ -1757,50 +1753,6 @@ button.question-star {
     display: none;
 }
 
-.test-overview {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1.25rem;
-    padding: 0.5rem;
-    margin: 0.75rem 0 1.25rem;
-    
-    flex-direction: column;
-    align-items: stretch;
-    justify-self: anchor-center;
-    width: 100%; 
-    max-width: 100%;
-}
-.test-overview .timer-copy {
-    display: flex;
-    flex-direction: column;
-    gap: 0.35rem;
-}
-.test-overview .timer-title {
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--test-timer-muted-text);
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    white-space: nowrap;
-}
-.test-overview .timer-value {
-    font-size: 1.05rem;
-    font-weight: 700;
-    white-space: nowrap;
-}
-.test-overview .timer-progress {
-    font-size: 0.85rem;
-    color: var(--test-timer-muted-text);
-}
-/* @media (max-width: 640px) { */
-
-    .test-overview .timer-action {
-        width: 100%;
-        justify-content: center;
-    }
-/* } */
 
 .code-result {
     /* border-top: 1px solid var(--text-block-border-color); */

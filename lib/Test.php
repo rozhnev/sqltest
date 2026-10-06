@@ -173,6 +173,11 @@ class Test
                 GREATEST(0, FLOOR(EXTRACT(EPOCH FROM (
                     tests.closed_at - (CURRENT_TIMESTAMP AT TIME ZONE current_setting('TIMEZONE'))::timestamp
                 )) / 60))::int time_to_end,
+                -- For the visual timer (test_overview.tpl): seconds left and the whole time of the test
+                GREATEST(0, EXTRACT(EPOCH FROM (
+                    tests.closed_at - (CURRENT_TIMESTAMP AT TIME ZONE current_setting('TIMEZONE'))::timestamp
+                )))::int seconds_left,
+                GREATEST(1, EXTRACT(EPOCH FROM (tests.closed_at - tests.created_at)))::int duration_seconds,
                 test_questions.questions_count,
                 test_questions.solved_questions_count
             FROM tests

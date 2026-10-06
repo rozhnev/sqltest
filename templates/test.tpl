@@ -1,4 +1,6 @@
 {include file='header.tpl'}
+<link rel="stylesheet" href="/css/test.min.css?{$VERSION}" media="all">
+<script src="/js/test.min.js?{$VERSION}" defer></script>
 <body>
 <div class="container">
     {include file='popups.tpl'}
@@ -33,22 +35,7 @@
                     </div>
                     {/foreach}
                 </div>
-                <div id="test-timer" class="question-wrapper test-overview">
-                    {if isset($TestData.timeout) && $TestData.timeout}
-                        <button class="button red">
-                            {translate}test_time_out{/translate}
-                        </button>
-                    {else}
-                        <div class="timer-copy">
-                            <span class="timer-title">
-                                {translate}test_time_to_complete{/translate}
-                                <span id="test-timer-time" class="timer-value"></span>
-                            </span>
-                            <span class="timer-progress">{translate}tasks_completed{/translate}: {$TestData.solved_questions_count} {translate}from{/translate} {$TestData.questions_count}</span>
-                        </div>
-                        <a class="button green" id="doneTest" href="/{$Lang}/test/{$TestId}/result">{translate}test_show_result{/translate}</a>
-                    {/if}
-                </div>
+                {include file='test_overview.tpl' WrapperClass='question-wrapper'}
                 <div class="menu-ad">
                 </div>
             </div>
@@ -185,20 +172,6 @@
                 <div class="code-result ace-xcode" id="code-result"></div>
             </div>
         </div>
-            <script>
-                const showTimer = ()=>{ldelim}
-                    const time = Math.floor((new Date('{$Question.closed_at}') - new Date())/60000) + ((new Date()).getTimezoneOffset());
-                    if (time > 0) {ldelim}
-                        const minutes = time % 60;
-                        const hours = (time - minutes) / 60;
-                        document.getElementById('test-timer-time').innerText = (hours > 0 ? `${ldelim}hours{rdelim} ` + (hours === 1 ? '{translate}hour{/translate} ': '{translate}hours{/translate} ') :'') + minutes + ' {translate}min{/translate}';
-                    {rdelim} else {ldelim}
-                        document.getElementById('test-timer').innerHTML = '<button class="button red" style="margin: 3em auto; font-size: large; padding: 1em;" >{translate}test_time_over{/translate}</button><a class="button green" style="margin: 3em auto; font-size: large; padding: 0.75em;" id="testResult" href="/{$Lang}/test/{$TestId}/result">{translate}test_show_result{/translate}</a>'
-                    {rdelim}
-                {rdelim};
-                showTimer();
-                setInterval(showTimer,  60000);
-            </script>
             <div class="column" id="right-panel" style="margin-right: 6px;">
                 <div class="question-wrapper">
                 {include file="{$Lang}/{$DB}.tpl"}
