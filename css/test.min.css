@@ -1,1 +1,157 @@
-:root{--test-timer-muted-text:rgba(51, 51, 51, 0.75)}[data-theme=dark]{--test-timer-muted-text:rgba(240, 246, 252, 0.7)}.test-overview{display:flex;flex-direction:column;gap:.9rem;width:100%;max-width:100%;box-sizing:border-box;padding:.75rem;margin:.75rem 0 1.25rem;--test-timer-color:var(--info-text-color)}.test-countdown{display:flex;align-items:center;gap:.75rem}.test-countdown-ring{flex:none;width:3.25rem;height:3.25rem;transform:rotate(-90deg)}.test-countdown-ring circle{fill:none;stroke-width:3.5}.test-countdown-track{stroke:var(--text-block-border-color)}.test-countdown-left{stroke:var(--test-timer-color);stroke-linecap:round;transition:stroke-dasharray 1s linear,stroke .3s}.test-countdown-copy{display:flex;flex-direction:column;min-width:0}.test-overview .timer-title{font-size:.85rem;color:var(--test-timer-muted-text)}.test-overview .timer-value{font-size:1.35rem;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--test-timer-color)}.test-overview.is-warning{--test-timer-color:#d97706}.test-overview.is-danger{--test-timer-color:var(--danger-text-color)}.test-overview.is-danger .test-countdown-ring{animation:test-timer-pulse 1s ease-in-out infinite}@keyframes test-timer-pulse{50%{opacity:.55}}@media (prefers-reduced-motion:reduce){.test-overview.is-danger .test-countdown-ring{animation:none}.test-countdown-left{transition:none}}.test-progress-label{display:flex;justify-content:space-between;align-items:baseline;gap:.5rem;margin-bottom:.35rem;font-size:.85rem;color:var(--test-timer-muted-text)}.test-progress-label strong{font-size:.95rem;font-variant-numeric:tabular-nums;color:var(--question-text)}.test-progress-bar{height:8px;border-radius:999px;background:var(--text-block-border-color);overflow:hidden}.test-progress-bar span{display:block;height:100%;border-radius:inherit;background:var(--cost-best-color);transition:width .4s ease}.test-overview .timer-action{width:100%;justify-content:center;box-sizing:border-box}.test-overview-over{margin:0;font-weight:600;color:var(--danger-text-color)}
+/* Test pages (test.tpl, m.test.tpl): the status block above the task menu (test_overview.tpl), with the countdown
+   (initTestOverview() in script.js) and the solved tasks bar. Minified to test.min.css by CI (.github/workflows). */
+:root {
+    --test-timer-muted-text: rgba(51, 51, 51, 0.75);
+}
+[data-theme="dark"] {
+    --test-timer-muted-text: rgba(240, 246, 252, 0.7);
+}
+
+.test-overview {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 0.75rem;
+    margin: 0.75rem 0 1.25rem;
+    --test-timer-color: var(--info-text-color);
+}
+/* Countdown (test_overview.tpl, initTestOverview() in script.js): a ring that drains as the time runs out */
+.test-countdown {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+.test-countdown-ring {
+    flex: none;
+    width: 3.25rem;
+    height: 3.25rem;
+    transform: rotate(-90deg);
+}
+.test-countdown-ring circle {
+    fill: none;
+    stroke-width: 3.5;
+}
+.test-countdown-track {
+    stroke: var(--text-block-border-color);
+}
+.test-countdown-left {
+    stroke: var(--test-timer-color);
+    stroke-linecap: round;
+    transition: stroke-dasharray 1s linear, stroke 0.3s;
+}
+.test-countdown-copy {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+.test-overview .timer-title {
+    font-size: 0.85rem;
+    color: var(--test-timer-muted-text);
+}
+.test-overview .timer-value {
+    font-size: 1.35rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    color: var(--test-timer-color);
+}
+.test-overview.is-warning {
+    --test-timer-color: #d97706;
+}
+.test-overview.is-danger {
+    --test-timer-color: var(--danger-text-color);
+}
+.test-overview.is-danger .test-countdown-ring {
+    animation: test-timer-pulse 1s ease-in-out infinite;
+}
+@keyframes test-timer-pulse {
+    50% { opacity: 0.55; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .test-overview.is-danger .test-countdown-ring {
+        animation: none;
+    }
+    .test-countdown-left {
+        transition: none;
+    }
+}
+/* Solved tasks */
+.test-progress-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin-bottom: 0.35rem;
+    font-size: 0.85rem;
+    color: var(--test-timer-muted-text);
+}
+.test-progress-label strong {
+    font-size: 0.95rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--question-text);
+}
+.test-progress-bar {
+    height: 8px;
+    border-radius: 999px;
+    background: var(--text-block-border-color);
+    overflow: hidden;
+}
+.test-progress-bar span {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: var(--cost-best-color);
+    transition: width 0.4s ease;
+}
+/* "I'm done!" / "Show my result": the block's main action, full width and centered.
+   .button sets max-width: max-content, so it is reset here. */
+.test-overview .timer-action {
+    align-self: center;
+    width: 100%;
+    max-width: none;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0.25rem 0 0;
+    padding: 0.8rem 1rem;
+    border: 0;
+    border-radius: 10px;
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(24, 126, 4, 0.35);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+}
+.test-overview .timer-action::before {
+    content: "✓";
+    font-size: 1.2em;
+    line-height: 1;
+}
+.test-overview .timer-action:hover,
+.test-overview .timer-action:focus-visible {
+    transform: translateY(-1px);
+    filter: brightness(1.08);
+    box-shadow: 0 6px 16px rgba(24, 126, 4, 0.45);
+}
+.test-overview .timer-action:focus-visible {
+    outline: 3px solid var(--info-text-color);
+    outline-offset: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+    .test-overview .timer-action {
+        transition: none;
+    }
+    .test-overview .timer-action:hover {
+        transform: none;
+    }
+}
+.test-overview-over {
+    margin: 0;
+    font-weight: 600;
+    color: var(--danger-text-color);
+}
