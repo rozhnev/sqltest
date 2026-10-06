@@ -16,7 +16,7 @@
         </a>
     </h2>
     <h2>
-        <a class="lessons-list" href="/{$Lang}/lesson/getting-started/introduction-to-databases" target="_self" style="display: flex; align-items: center; gap: 4px; font-size: 0.75em;">
+        <a class="lessons-list" href="/{$Lang}/lesson" target="_self" style="display: flex; align-items: center; gap: 4px; font-size: 0.75em;">
             {translate}lessons{/translate}
         </a>
     </h2>

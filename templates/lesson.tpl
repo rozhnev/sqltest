@@ -16,6 +16,7 @@
                 <div class="menu" id="menu">
                 <div class="question-wrapper">
                     <div id="menu-content" class="menu-content">     
+                        <a class="lessons-all-link" href="/{$Lang}/lesson">← {translate}lessons_all{/translate}</a>
                         {foreach $Lessons as $moduleSlug => $module}
                         <button class="accordion {if isset({$Lesson->moduleSlug()}) && $moduleSlug eq {$Lesson->moduleSlug()}}active{/if}">
                             <span class="lessons-list accordion-title" style="background-size: 20px;background-position: left 4px;">{$module.title}</span>

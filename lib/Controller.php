@@ -2449,9 +2449,81 @@ class Controller
         }
     }
 
+    /**
+     * GET /{lang}/lesson: all chapters and lessons with their descriptions, searchable on the page (lessons.tpl)
+     */
+    private function lessonsIndex(array $params): void
+    {
+        $chapters = Lesson::getIndex($this->dbh, $this->lang);
+        $lessonsCount = array_sum(array_map(fn($chapter) => count($chapter['lessons']), $chapters));
+
+        $path = "/{$this->lang}/lesson";
+        $this->setCanonicalLink($path);
+        $this->setHreflangLinks($path, $this->lang);
+
+        $items = [];
+        foreach ($chapters as $chapter) {
+            foreach ($chapter['lessons'] as $lesson) {
+                $items[] = [
+                    '@type'    => 'ListItem',
+                    'position' => count($items) + 1,
+                    'name'     => "{$chapter['number']}.{$lesson['number']} {$lesson['title']}",
+                    'url'      => "{$this->host}/{$this->lang}/lesson/{$chapter['slug']}/{$lesson['slug']}",
+                ];
+            }
+        }
+        $pageTitle = Localizer::translateString('lessons_index_page_title');
+        $this->assignSchemaJsonLd([
+            '@context' => 'https://schema.org',
+            '@graph'   => [
+                [
+                    '@type'           => 'ItemList',
+                    'name'            => $pageTitle,
+                    'numberOfItems'   => $lessonsCount,
+                    'itemListElement' => $items,
+                ],
+                [
+                    '@type'           => 'BreadcrumbList',
+                    'itemListElement' => [
+                        ['@type' => 'ListItem', 'position' => 1, 'name' => 'SQLtest.online', 'item' => "{$this->host}/{$this->lang}/"],
+                        ['@type' => 'ListItem', 'position' => 2, 'name' => $pageTitle, 'item' => "{$this->host}{$path}"],
+                    ],
+                ],
+            ],
+        ]);
+        $this->assignVariables([
+            'Action'          => 'lessons',
+            'PageTitle'       => $pageTitle,
+            'PageOGTitle'     => $pageTitle,
+            'PageDescription' => Localizer::translateString('lessons_index_page_description'),
+            'PageOGDescription' => Localizer::translateString('lessons_index_page_description'),
+            'MobileView'      => $this->isMobileView(),
+            'Chapters'        => $chapters,
+            'ChaptersCount'   => count($chapters),
+            'LessonsCount'    => $lessonsCount,
+            'LessonsText'     => $this->localizedTemplate('lessons.tpl'),
+        ]);
+        $this->engine->display('lessons.tpl');
+    }
+
     public function lesson(array $params): void
     {
-        $slug = $params['lesson'] ?? 'introduction-to-databases';
+        // /{lang}/lesson: the index of chapters and lessons; /{lang}/lesson/{module}: the chapter's first lesson
+        if (empty($params['lesson'])) {
+            if (empty($params['module'])) {
+                $this->lessonsIndex($params);
+                return;
+            }
+            $firstLesson = Lesson::firstLessonSlug($this->dbh, (string)$params['module']);
+            if ($firstLesson === null) {
+                header("HTTP/1.1 404 Not Found");
+                $this->engine->display("error.tpl");
+                exit();
+            }
+            header("Location: /{$this->lang}/lesson/{$params['module']}/{$firstLesson}", true, 301);
+            exit();
+        }
+        $slug = $params['lesson'];
         try {
             $lesson = new Lesson($this->dbh, $slug);
         } catch (Exception $e) {

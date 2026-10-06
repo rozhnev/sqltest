@@ -140,6 +140,98 @@ class Lesson
         return $menu;
     }
 
+    /**
+     * All chapters (modules) with their lessons for the lessons index page (Controller::lessonsIndex()):
+     * titles in the language (English as the fallback), the description from the lesson's front matter
+     * and the reading time from the English text ("Reading time: ~8 min").
+     *
+     * @return array<string, array{slug: string, title: string, number: int, lessons: array}>
+     */
+    public static function getIndex(PDO $dbh, string $lang): array
+    {
+        $stmt = $dbh->prepare("SELECT
+                modules.slug AS module_slug,
+                COALESCE(ml_lang.title, ml_en.title, modules.slug) AS module_title,
+                DENSE_RANK() OVER (ORDER BY modules.sequence_position) AS module_number,
+                lessons.slug AS lesson_slug,
+                COALESCE(ll_lang.title, ll_en.title, lessons.slug) AS lesson_title,
+                ROW_NUMBER() OVER (PARTITION BY modules.id ORDER BY lessons.sequence_position) AS lesson_number,
+                COALESCE(
+                    substring(ll_lang.content from 'description:[ ]*\"([^\"\n]*)\"'),
+                    substring(ll_en.content from 'description:[ ]*\"([^\"\n]*)\"')
+                ) AS description,
+                substring(ll_en.content from 'Reading time:[ ]*~?([0-9]+)') AS reading_minutes,
+                left(COALESCE(ll_lang.content, ll_en.content), 2000) AS content_head,
+                length(ll_en.content) AS content_length
+            FROM modules
+            JOIN lessons ON lessons.module_id = modules.id
+            LEFT JOIN modules_localization ml_lang ON ml_lang.module_id = modules.id AND ml_lang.language = :lang
+            LEFT JOIN modules_localization ml_en ON ml_en.module_id = modules.id AND ml_en.language = 'en'
+            LEFT JOIN lessons_localization ll_lang ON ll_lang.lesson_id = lessons.id AND ll_lang.language = :lang
+            LEFT JOIN lessons_localization ll_en ON ll_en.lesson_id = lessons.id AND ll_en.language = 'en'
+            WHERE NOT modules.deleted AND NOT lessons.deleted
+            ORDER BY modules.sequence_position, lessons.sequence_position;");
+        $stmt->execute([':lang' => $lang]);
+
+        $index = [];
+        foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row) {
+            $index[$row['module_slug']] ??= [
+                'slug'    => $row['module_slug'],
+                'title'   => $row['module_title'],
+                'number'  => (int)$row['module_number'],
+                'lessons' => [],
+            ];
+            $index[$row['module_slug']]['lessons'][] = [
+                'slug'            => $row['lesson_slug'],
+                'title'           => $row['lesson_title'],
+                'number'          => (int)$row['lesson_number'],
+                'description'     => (string)$row['description'] !== '' ? (string)$row['description'] : self::firstParagraph((string)$row['content_head']),
+                // Lessons without "Reading time": about 200 words a minute, 6 characters a word
+                'reading_minutes' => $row['reading_minutes'] !== null ? (int)$row['reading_minutes'] : max(1, (int)round((int)$row['content_length'] / 1200)),
+            ];
+        }
+        return $index;
+    }
+
+    /**
+     * Plain text of the first paragraph of a lesson's Markdown (after the front matter and headings), shortened
+     * to about 200 characters: the description of lessons without one in the front matter
+     */
+    private static function firstParagraph(string $markdown, int $maxLength = 200): string
+    {
+        $markdown = preg_replace('/^\s*---\r?\n.*?\r?\n---\r?\n/s', '', $markdown);
+        foreach (preg_split('/\r?\n\s*\r?\n/', $markdown) as $block) {
+            $block = trim($block);
+            if ($block === '' || preg_match('/^(#|_|```|\||>|-|\*\s|\d+\.|<)/', $block)) {
+                continue;
+            }
+            $text = preg_replace('/\[([^\]]*)\]\([^)]*\)/', '$1', $block);
+            $text = trim(preg_replace('/\s+/', ' ', str_replace(['**', '__', '`'], '', $text)));
+            if (mb_strlen($text) > $maxLength) {
+                $cut = mb_substr($text, 0, $maxLength);
+                $space = mb_strrpos($cut, ' ');
+                $text = ($space > $maxLength / 2 ? mb_substr($cut, 0, $space) : $cut) . '…';
+            }
+            return $text;
+        }
+        return '';
+    }
+
+    /**
+     * Slug of the first lesson of a chapter (module), or null for an unknown chapter
+     */
+    public static function firstLessonSlug(PDO $dbh, string $moduleSlug): ?string
+    {
+        $stmt = $dbh->prepare("SELECT lessons.slug
+            FROM lessons JOIN modules ON modules.id = lessons.module_id
+            WHERE modules.slug = :module AND NOT modules.deleted AND NOT lessons.deleted
+            ORDER BY lessons.sequence_position
+            LIMIT 1");
+        $stmt->execute([':module' => $moduleSlug]);
+        $slug = $stmt->fetchColumn();
+        return $slug === false ? null : (string)$slug;
+    }
+
     public function getMap(): array
     {
         $stmt = $this->dbh->prepare("SELECT

@@ -15,6 +15,12 @@
       <priority>0.8</priority>
     </url>
     <url>
+      <loc>https://{$Domain}/{$langCode}/lesson</loc>
+      <lastmod>{$Today}</lastmod>
+      <changefreq>weekly</changefreq>
+      <priority>0.8</priority>
+    </url>
+    <url>
       <loc>https://{$Domain}/{$langCode}/books</loc>
       <lastmod>{$Today}</lastmod>
       <changefreq>monthly</changefreq>

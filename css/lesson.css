@@ -167,3 +167,15 @@
     font-size: 0.9em;
     overflow-wrap: break-word;
 }
+
+/* "All lessons" link above the chapters in the lesson sidebar (lesson.tpl) → the lessons index */
+.lessons-all-link {
+    display: block;
+    padding: 6px 8px 10px;
+    color: var(--info-text-color);
+    text-decoration: none;
+    font-weight: 600;
+}
+.lessons-all-link:hover {
+    text-decoration: underline;
+}
