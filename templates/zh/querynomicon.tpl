@@ -4,10 +4,14 @@
             min-width: 9rem;
         }
     </style>
+    {* The landing page /zh/database/querynomicon has its own intro: only the table list there *}
+    {if ($Action|default:'') != 'database'}
     <h2>Querynomicon 数据库：表结构和概述</h2>
     <p>Querynomicon (SQLite) 是一个紧凑的训练数据库，用于学习 SQL 基础知识，提供清晰简单的示例。</p>
     <p>本页面展示了表格、关键列和示例行，以便进行实际的 SQL 练习。</p>
     <p>Querynomicon 数据库包含 5 个主要表。</p>
+    <p><a href="/{$Lang}/database/querynomicon">了解更多 Querynomicon 数据库：模式、示例查询和全部练习 →</a></p>
+    {/if}
     <h3>表格列表</h3>
     <div class="accordion" title="点击展开，双击将表名粘贴到编辑器中">
         <span><span class='sql'>department</span> - 部门表。</span>

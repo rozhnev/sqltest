@@ -5,6 +5,8 @@
             display: inline-block;
         }
     </style>
+    {* The landing page /zh/database/university has its own intro: only the table list there *}
+    {if ($Action|default:'') != 'database'}
     <h2>大学数据库：表结构和模式概述</h2>
     <p>大学数据库是一个现代的 <strong>MariaDB 11.7+</strong> 示例数据库，用于学习 SQL — 设计为经典 Sakila 数据库的功能丰富的替代品。</p>
     <p>它涵盖了所有重要的 MariaDB 数据类型，包括 <span class='sql'>VECTOR(1536)</span>、<span class='sql'>JSON</span>、<span class='sql'>SET</span> 和 <span class='sql'>FULLTEXT</span> 索引，完全标准化到 3NF，并提供足够的数据供初学者练习和复杂的分析查询。</p>
@@ -15,6 +17,8 @@
             大学数据库的 ER 图
         </a>
     </p>
+    <p><a href="/{$Lang}/database/university">了解更多 University 数据库：模式、示例查询和全部练习 →</a></p>
+    {/if}
     <h3>表列表</h3>
     <div class="accordion" title="点击展开，双击将表名粘贴到编辑器中">
         <span><span class='sql'>semesters</span> - 学术学期表。</span>

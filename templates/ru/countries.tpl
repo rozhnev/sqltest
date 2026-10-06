@@ -4,10 +4,14 @@
             min-width: 7rem;
         }
     </style>
+    {* The landing page /ru/database/countries has its own intro: only the table list there *}
+    {if ($Action|default:'') != 'database'}
     <h2>База данных Countries: структура таблиц и геопространственный обзор</h2>
     <p>База Countries (PostGIS) - это учебный набор данных для географического и геопространственного анализа с помощью SQL.</p>
     <p>Она включает пространственные данные по странам и столицам, а также слои по Нью-Йорку: переписные блоки, убийства, районы, улицы и станции метро.</p>
     <p>База данных Countries содержит 7 основных таблиц.</p>
+    <p><a href="/{$Lang}/database/countries">Подробнее о базе Countries: схема, примеры запросов и все задачи →</a></p>
+    {/if}
     <h3>Список таблиц</h3>
     <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span><span class='sql'>countries</span> — список стран с геометрией.</span>

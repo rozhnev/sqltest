@@ -5,6 +5,8 @@
             display: inline-block;
         }
     </style>
+    {* The landing page /ru/database/university has its own intro: only the table list there *}
+    {if ($Action|default:'') != 'database'}
     <h2>База данных University: описание таблиц и структуры</h2>
     <p>University DB — это современная учебная база данных <strong>MariaDB 11.7+</strong> для изучения SQL, разработанная как многофункциональная замена классической базы данных Sakila.</p>
     <p>Она охватывает все значимые типы данных MariaDB, включая <span class='sql'>VECTOR(1536)</span>, <span class='sql'>JSON</span>, <span class='sql'>SET</span> и индексы <span class='sql'>FULLTEXT</span>, полностью нормализована до 3НФ и содержит достаточно данных как для начальных упражнений, так и для сложных аналитических запросов.</p>
@@ -15,6 +17,8 @@
             ER диаграмма базы данных University
         </a>
     </p>
+    <p><a href="/{$Lang}/database/university">Подробнее о базе University: схема, примеры запросов и все задачи →</a></p>
+    {/if}
     <h3>Список таблиц</h3>
     <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span><span class='sql'>semesters</span> - таблица учебных семестров.</span>

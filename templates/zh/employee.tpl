@@ -4,6 +4,8 @@
             min-width: 10rem;
         }
     </style>
+    {* The landing page /zh/database/employee has its own intro: only the table list there *}
+    {if ($Action|default:'') != 'database'}
     <h2>员工数据库：表结构和概述</h2>
     <p>员工数据库（Firebird）是一个示例数据集，用于学习SQL并探索Firebird DBMS的功能。</p>
     <p>本页面描述了表结构、关键列和关系，以便进行实际的SQL查询。</p>
@@ -14,6 +16,8 @@
             员工数据库的ER图
         </a>
     </p>
+    <p><a href="/{$Lang}/database/employee">了解更多 Employee 数据库：模式、示例查询和全部练习 →</a></p>
+    {/if}
     <h3>表列表</h3>
 
     <div class="accordion" title="点击展开，双击将表名粘贴到编辑器中">

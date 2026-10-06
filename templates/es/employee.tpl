@@ -4,6 +4,8 @@
             min-width: 10rem;
         }
     </style>
+    {* The landing page /es/database/employee has its own intro: only the table list there *}
+    {if ($Action|default:'') != 'database'}
     <h2>Base de Datos de Empleados: estructura de la tabla y resumen</h2>
     <p>La base de datos de Empleados (Firebird) es un conjunto de datos de muestra utilizado para aprender SQL y explorar las capacidades del sistema de gestión de bases de datos Firebird.</p>
     <p>Esta página describe la estructura de la tabla, las columnas clave y las relaciones para consultas SQL prácticas.</p>
@@ -14,6 +16,8 @@
             Diagrama ER de la base de datos de Empleados
         </a>
     </p>
+    <p><a href="/{$Lang}/database/employee">Más sobre la base de datos Employee: esquema, consultas de ejemplo y todos los ejercicios →</a></p>
+    {/if}
     <h3>Lista de tablas</h3>
 
     <div class="accordion" title="Haga clic para expandir, haga doble clic para pegar el nombre de la tabla en el editor">

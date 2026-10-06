@@ -4,6 +4,8 @@
             min-width: 10rem;
         }
     </style>
+    {* The landing page /en/database/employee has its own intro: only the table list there *}
+    {if ($Action|default:'') != 'database'}
     <h2>Employee Database: table structure and overview</h2>
     <p>The Employee database (Firebird) is a sample dataset used to learn SQL and explore Firebird DBMS capabilities.</p>
     <p>This page describes table structure, key columns, and relationships for practical SQL querying.</p>
@@ -14,6 +16,8 @@
             ER diagram of the Employee database
         </a>
     </p>
+    <p><a href="/{$Lang}/database/employee">More about the Employee database: schema, sample queries and all exercises →</a></p>
+    {/if}
     <h3>List of tables</h3>
 
     <div class="accordion" title="Click to expand, double-click to paste table name into the editor">

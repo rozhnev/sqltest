@@ -4,6 +4,8 @@
             min-width: 8rem;
         }
     </style>
+    {* The landing page /pt/database/employee has its own intro: only the table list there *}
+    {if ($Action|default:'') != 'database'}
     <h2>Banco de Dados Employee: estrutura das tabelas e visão geral</h2>
     <p>O banco Employee (Firebird) é um conjunto de dados de exemplo usado para estudar SQL e explorar recursos do SGBD Firebird.</p>
     <p>Esta página descreve a estrutura das tabelas, colunas-chave e relacionamentos úteis em consultas SQL práticas.</p>
@@ -14,6 +16,8 @@
             Diagrama ER do banco Employee
         </a>
     </p>
+    <p><a href="/{$Lang}/database/employee">Mais sobre o banco de dados Employee: esquema, exemplos de consultas e todos os exercícios →</a></p>
+    {/if}
     <h3>Lista de tabelas</h3>
     <div class="accordion" title="Clique para expandir, duplo clique para colar nome da tabela">
         <span><span class='sql'>COUNTRY</span> - tabela de países.</span>

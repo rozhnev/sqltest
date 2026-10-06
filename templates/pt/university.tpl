@@ -5,6 +5,8 @@
             display: inline-block;
         }
     </style>
+    {* The landing page /pt/database/university has its own intro: only the table list there *}
+    {if ($Action|default:'') != 'database'}
     <h2>Banco de Dados University: estrutura e descrição das tabelas</h2>
     <p>University DB é um banco de dados de exemplo moderno para <strong>MariaDB 11.7+</strong> desenvolvido para aprendizado de SQL — criado como um substituto rico em recursos do clássico banco de dados Sakila.</p>
     <p>Ele abrange todos os principais tipos de dados do MariaDB, incluindo <span class='sql'>VECTOR(1536)</span>, <span class='sql'>JSON</span>, <span class='sql'>SET</span> e índices <span class='sql'>FULLTEXT</span>, está totalmente normalizado na 3FN e contém dados suficientes para exercícios de iniciantes e consultas analíticas complexas.</p>
@@ -15,6 +17,8 @@
             Diagrama ER do banco de dados University
         </a>
     </p>
+    <p><a href="/{$Lang}/database/university">Mais sobre o banco de dados University: esquema, exemplos de consultas e todos os exercícios →</a></p>
+    {/if}
     <h3>Lista de Tabelas</h3>
     <div class="accordion" title="Clique para expandir, duplo clique para colar nome da tabela">
         <span><span class='sql'>semesters</span> - tabela de semestres acadêmicos.</span>

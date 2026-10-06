@@ -5,6 +5,8 @@
             display: inline-block;
         }
     </style>
+    {* The landing page /en/database/university has its own intro: only the table list there *}
+    {if ($Action|default:'') != 'database'}
     <h2>University Database: table structure and schema overview</h2>
     <p>University DB is a modern <strong>MariaDB 11.7+</strong> sample database for learning SQL — designed as a feature-rich replacement for the classic Sakila database.</p>
     <p>It covers all significant MariaDB datatypes including <span class='sql'>VECTOR(1536)</span>, <span class='sql'>JSON</span>, <span class='sql'>SET</span>, and <span class='sql'>FULLTEXT</span> indexes, is fully normalized to 3NF, and ships with enough data for both beginner exercises and complex analytical queries.</p>
@@ -15,6 +17,8 @@
             ER diagram of the University database
         </a>
     </p>
+    <p><a href="/{$Lang}/database/university">More about the University database: schema, sample queries and all exercises →</a></p>
+    {/if}
     <h3>The list of tables</h3>
     <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span><span class='sql'>semesters</span> - academic semester table.</span>

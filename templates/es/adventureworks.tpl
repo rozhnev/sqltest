@@ -4,6 +4,8 @@
             min-width: 10rem;
         }
     </style>
+    {* The landing page /es/database/adventureworks has its own intro: only the table list there *}
+    {if ($Action|default:'') != 'database'}
     <h2>Base de datos AdventureWorks: estructura de tablas y descripción del esquema</h2>
     <p>La base de datos AdventureWorks (SQL Server) es un conjunto de datos de muestra que modela los procesos comerciales de una empresa de fabricación ficticia.</p>
     <p>Esta página presenta la estructura de las tablas, las columnas clave y las relaciones utilizadas para el aprendizaje práctico de SQL y la práctica de consultas.</p>
@@ -14,6 +16,8 @@
             Diagrama ER de la base de datos AdventureWorks
         </a>
     </p>
+    <p><a href="/{$Lang}/database/adventureworks">Más sobre la base de datos AdventureWorks: esquema, consultas de ejemplo y todos los ejercicios →</a></p>
+    {/if}
     <h3>Lista de tablas</h3>
     <div class="accordion" title="Haga clic para expandir, haga doble clic para pegar el nombre de la tabla en el editor">
         <span><span class='sql'>Address</span> - tabla de direcciones.</span>

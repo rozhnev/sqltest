@@ -5,6 +5,8 @@
             display: inline-block;
         }
     </style>
+    {* The landing page /pt/database/yellow-tripdata has its own intro: only the table list there *}
+    {if ($Action|default:'') != 'database'}
     <h2>Conjunto de dados DuckDB yellow_tripdata</h2>
     <h3>Sobre o DuckDB</h3>
     <p>O <strong>DuckDB</strong> é um SGBD analítico incorporado, projetado para consultas rápidas em dados locais e de aplicações.</p>
@@ -13,7 +15,8 @@
     <p><span class='sql'>yellow_tripdata</span> é um conjunto de dados educacional com viagens de táxis amarelos de Nova York.</p>
     <p>A tabela é adequada para praticar filtragem, agrupamento, ordenação, operações com datas e cálculos agregados no DuckDB.</p>
     <p>Todos os campos deste conjunto aceitam o valor <span class='sql'>NULL</span>. Não há chave primária nem restrições adicionais definidas.</p>
-
+    <p><a href="/{$Lang}/database/yellow-tripdata">Mais sobre o banco de dados NYC Yellow Taxi: esquema, exemplos de consultas e todos os exercícios →</a></p>
+    {/if}
     <h3>Tabela yellow_tripdata</h3>
     <div class="accordion" title="Clique para expandir; clique duas vezes para inserir o nome da tabela no editor">
         <span><span class='sql'>yellow_tripdata</span> - viagens de táxi amarelo.</span>

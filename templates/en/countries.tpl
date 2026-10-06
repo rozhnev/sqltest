@@ -4,10 +4,14 @@
             min-width: 7rem;
         }
     </style>
+    {* The landing page /en/database/countries has its own intro: only the table list there *}
+    {if ($Action|default:'') != 'database'}
     <h2>Countries Database: table structure and geospatial overview</h2>
     <p>The Countries database (PostGIS) is a sample dataset for geographic and geospatial analysis with SQL.</p>
     <p>It includes spatial data for countries and capitals, plus New York City layers such as census blocks, homicides, neighborhoods, streets, and subway stations.</p>
     <p>The Countries database contains 7 main tables.</p>
+    <p><a href="/{$Lang}/database/countries">More about the Countries database: schema, sample queries and all exercises →</a></p>
+    {/if}
     <h3>List of tables</h3>
     <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span><span class='sql'>countries</span> - list of countries with geometry.</span>

@@ -5,6 +5,8 @@
             display: inline-block;
         }
     </style>
+    {* The landing page /ru/database/employee has its own intro: only the table list there *}
+    {if ($Action|default:'') != 'database'}
     <h2>База данных Employee: структура таблиц и обзор</h2>
     <p>База Employee (Firebird) - это учебный набор данных, который используется для изучения SQL и возможностей СУБД Firebird.</p>
     <p>На этой странице описаны структура таблиц, ключевые поля и связи, полезные для практических SQL-запросов.</p>
@@ -15,6 +17,8 @@
             ER-диаграмма базы Employee
         </a>
     </p>
+    <p><a href="/{$Lang}/database/employee">Подробнее о базе Employee: схема, примеры запросов и все задачи →</a></p>
+    {/if}
     <h3>Список таблиц</h3>
 
     <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">

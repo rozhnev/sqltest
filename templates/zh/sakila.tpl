@@ -5,6 +5,8 @@
             display: inline-block;
         }
     </style>
+    {* The landing page /zh/database/sakila has its own intro and ER diagram: only the table list there *}
+    {if ($Action|default:'') != 'database'}
     <h2>Sakila 数据库：表结构和模式概述</h2>
     <p>Sakila 是 MySQL 为学习和演示 SQL 及关系数据库管理系统 (RDBMS) 功能而设计的示例关系数据库。</p>
     <p>本页面展示了 Sakila 的表结构、关键列和在教育 SQL 查询中常用的约束。</p>
@@ -15,6 +17,8 @@
             Sakila 数据库的 ER 图
         </a>
     </p>
+    <p><a href="/{$Lang}/database/sakila">了解更多 Sakila 数据库：模式、示例查询和全部练习 →</a></p>
+    {/if}
     <h3>表列表</h3>
     <div class="accordion" title="点击展开，双击将表名粘贴到编辑器中">
         <span><span class='sql'>actor</span> - 演员表。</span>

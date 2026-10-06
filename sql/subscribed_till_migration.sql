@@ -7,7 +7,7 @@ ALTER TABLE public.users ADD COLUMN IF NOT EXISTS subscribed_till date;
 -- after one overshooting request, so there is no >= 0 check.
 ALTER TABLE public.users ADD COLUMN IF NOT EXISTS llm_tokens integer NOT NULL DEFAULT 0;
 -- Existing users get the one-time free allowance (same value as LLM_FREE_TOKENS).
-UPDATE public.users SET llm_tokens = 50000;
+UPDATE public.users SET llm_tokens = 30000;
 
 -- Phase 2: after the code using subscribed_till is deployed.
 -- No real subscribers/donors exist yet, so hide_ad_till data is not copied.

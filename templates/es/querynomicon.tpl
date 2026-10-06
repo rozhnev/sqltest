@@ -4,10 +4,14 @@
             min-width: 9rem;
         }
     </style>
+    {* The landing page /es/database/querynomicon has its own intro: only the table list there *}
+    {if ($Action|default:'') != 'database'}
     <h2>Base de datos Querynomicon: estructura de tablas y resumen</h2>
     <p>Querynomicon (SQLite) es una base de datos de entrenamiento compacta para aprender los fundamentos de SQL con ejemplos claros y simples.</p>
     <p>Esta página presenta las tablas, columnas clave y filas de muestra para la práctica práctica de SQL.</p>
     <p>La base de datos Querynomicon contiene 5 tablas principales.</p>
+    <p><a href="/{$Lang}/database/querynomicon">Más sobre la base de datos Querynomicon: esquema, consultas de ejemplo y todos los ejercicios →</a></p>
+    {/if}
     <h3>Lista de tablas</h3>
     <div class="accordion" title="Haga clic para expandir, haga doble clic para pegar el nombre de la tabla en el editor">
         <span><span class='sql'>department</span> - tabla de departamentos.</span>

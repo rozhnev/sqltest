@@ -4,6 +4,8 @@
             min-width: 10rem;
         }
     </style>
+    {* The landing page /fr/database/employee has its own intro: only the table list there *}
+    {if ($Action|default:'') != 'database'}
     <h2>Base de données Employee : structure des tables et vue d'ensemble</h2>
     <p>La base Employee (Firebird) est un jeu de données d'exemple utilisé pour apprendre SQL et explorer les fonctionnalités du SGBD Firebird.</p>
     <p>Cette page décrit la structure des tables, les colonnes clés et les relations utiles pour des requêtes SQL pratiques.</p>
@@ -14,6 +16,8 @@
             Schéma ER de la base Employee
         </a>
     </p>
+    <p><a href="/{$Lang}/database/employee">En savoir plus sur la base Employee : schéma, exemples de requêtes et tous les exercices →</a></p>
+    {/if}
     <h3>Liste des tables</h3>
 
     <div class="accordion" title="Cliquez pour développer, double-cliquez pour coller le nom de la table">

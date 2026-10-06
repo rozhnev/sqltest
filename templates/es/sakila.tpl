@@ -5,6 +5,8 @@
             display: inline-block;
         }
     </style>
+    {* The landing page /es/database/sakila has its own intro and ER diagram: only the table list there *}
+    {if ($Action|default:'') != 'database'}
     <h2>Base de datos Sakila: estructura de tablas y visión general del esquema</h2>
     <p>Sakila es una base de datos relacional de muestra diseñada por MySQL para aprender y demostrar las capacidades de SQL y de los sistemas de gestión de bases de datos relacionales (RDBMS).</p>
     <p>Esta página presenta la estructura de las tablas de Sakila, las columnas clave y las restricciones comúnmente utilizadas en consultas SQL educativas.</p>
@@ -15,6 +17,8 @@
             Diagrama ER de la base de datos Sakila
         </a>
     </p>
+    <p><a href="/{$Lang}/database/sakila">Más sobre la base de datos Sakila: esquema, consultas de ejemplo y todos los ejercicios →</a></p>
+    {/if}
     <h3>La lista de tablas</h3>
     <div class="accordion" title="Haga clic para expandir, haga doble clic para pegar el nombre de la tabla en el editor">
         <span><span class='sql'>actor</span> - tabla de actores.</span>

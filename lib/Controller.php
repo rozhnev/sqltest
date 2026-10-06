@@ -1,6 +1,24 @@
 <?php
 class Controller 
 {
+    /**
+     * Database landing pages, /{lang}/database/{key} (Controller::database()). The text is in
+     * templates/{lang}/database-{key}.tpl: a language without it has no page (404, not in the sitemap).
+     * db_template: questions.db_template; category: its category in the "database" questionnire (3), null when
+     * there is none (the task list is then the topics' tasks); playground: the playground version with this
+     * database; erd: the /{lang}/erd/{name} page and images/erd_{name}.svg, null when there is no diagram.
+     */
+    private const DATABASE_LANDINGS = [
+        'sakila'          => ['db_template' => 'sakila', 'category' => 'sakila-db', 'playground' => 'mysql80_sakila', 'erd' => 'Sakila'],
+        'bookings'        => ['db_template' => 'bookings', 'category' => 'bookings', 'playground' => 'psql18demo', 'erd' => 'Bookings'],
+        'adventureworks'  => ['db_template' => 'adventureworks', 'category' => 'adventureworks', 'playground' => 'mssql2022aw', 'erd' => 'AdventureWorks'],
+        'employee'        => ['db_template' => 'employee', 'category' => 'employee-db', 'playground' => 'firebird4_employee', 'erd' => 'Employee'],
+        'university'      => ['db_template' => 'university', 'category' => 'university-db', 'playground' => 'mariadb118_university', 'erd' => 'University'],
+        'querynomicon'    => ['db_template' => 'querynomicon', 'category' => 'sqlite', 'playground' => 'sqlite3_data', 'erd' => null],
+        'yellow-tripdata' => ['db_template' => 'yellow_tripdata', 'category' => 'yellow-tripdata', 'playground' => 'duckdb_data', 'erd' => null],
+        'countries'       => ['db_template' => 'countries', 'category' => null, 'playground' => 'psql17postgis', 'erd' => null],
+    ];
+
     private $dbh;
     private $user;
     private $engine;
@@ -825,6 +843,100 @@ class Controller
         $this->engine->assign('Params', $params);
         $this->engine->display("erd.tpl");
     }
+    /**
+     * Languages that have the landing page of a database (templates/{lang}/database-{key}.tpl)
+     */
+    public function databaseLandingLanguages(string $key): array
+    {
+        if (!isset(self::DATABASE_LANDINGS[$key])) {
+            return [];
+        }
+        return array_values(array_filter(
+            array_keys($this->languages),
+            fn($lang) => $this->engine->templateExists("{$lang}/database-{$key}.tpl")
+        ));
+    }
+
+    /**
+     * GET /{lang}/database/{key}: landing page of a sample database (DATABASE_LANDINGS):
+     * what it is, the ER diagram, the tables, example queries and links to its tasks and the playground
+     */
+    public function database(array $params): void
+    {
+        $key = strtolower((string)($params['database'] ?? ''));
+        $languages = $this->databaseLandingLanguages($key);
+        if (!in_array($this->lang, $languages, true)) {
+            header("HTTP/1.1 404 Not Found");
+            $this->engine->display("error.tpl");
+            return;
+        }
+        $landing = self::DATABASE_LANDINGS[$key];
+
+        // Topics (questionnire 1) with the task count and difficulty range; the database's own task list
+        // (questionnire 3), or the topics' tasks for a database without a category there
+        $topics = [];
+        $databaseTasks = [];
+        $topicTasks = [];
+        $rows = (new Questionnire($this->dbh, $this->lang))->getDatabaseTasks($landing['db_template']);
+        foreach ($rows as $row) {
+            $link = "/{$this->lang}/question/{$row['category_sef']}/{$row['question_sef']}";
+            $rate = (int)$row['rate'];
+            if ((int)$row['questionnire_id'] === 1) {
+                $topic = $topics[$row['category_sef']] ?? ['title' => $row['category_title'], 'link' => $link, 'count' => 0, 'rate_min' => $rate, 'rate_max' => $rate];
+                $topic['count']++;
+                $topic['rate_min'] = min($topic['rate_min'], $rate);
+                $topic['rate_max'] = max($topic['rate_max'], $rate);
+                $topics[$row['category_sef']] = $topic;
+                $topicTasks[$row['question_id']] ??= ['title' => $row['title'], 'link' => $link, 'rate' => $rate];
+            } elseif ($row['category_sef'] === $landing['category']) {
+                $databaseTasks[] = ['title' => $row['title'], 'link' => $link, 'rate' => $rate];
+            }
+        }
+
+        if ($landing['category'] === null) {
+            $databaseTasks = array_values($topicTasks);
+        }
+
+        $path = "/{$this->lang}/database/{$key}";
+        $this->setCanonicalLink($path);
+        $hreflang = [];
+        foreach ($languages as $lang) {
+            $hreflang[$lang] = "{$this->host}/{$lang}/database/{$key}";
+        }
+        if (isset($hreflang['en'])) {
+            $hreflang['x-default'] = $hreflang['en'];
+        }
+
+        $pageTitle = Localizer::translateString("database_{$key}_page_title");
+        $this->assignSchemaJsonLd([
+            '@context' => 'https://schema.org',
+            '@type' => 'BreadcrumbList',
+            'itemListElement' => [
+                ['@type' => 'ListItem', 'position' => 1, 'name' => 'SQLtest.online', 'item' => "{$this->host}/{$this->lang}/"],
+                ['@type' => 'ListItem', 'position' => 2, 'name' => $pageTitle, 'item' => "{$this->host}{$path}"],
+            ],
+        ]);
+        $this->assignVariables([
+            'Action'            => 'database',
+            'PageTitle'         => $pageTitle,
+            'PageOGTitle'       => $pageTitle,
+            'PageDescription'   => Localizer::translateString("database_{$key}_page_description"),
+            'HreflangUrls'      => $hreflang,
+            'MobileView'        => $this->isMobileView(),
+            'DB'                => $landing['db_template'],
+            'DatabaseKey'       => $key,
+            'DatabaseText'      => "{$this->lang}/database-{$key}.tpl",
+            'Topics'            => array_values($topics),
+            'StartTasks'        => array_slice($databaseTasks, 0, 10),
+            'AllTasksLink'      => $databaseTasks[0]['link'] ?? null,
+            'TasksCount'        => count(array_unique(array_column($rows, 'question_id'))),
+            'PlaygroundLink'    => $landing['playground'] ? "/{$this->lang}/playground/{$landing['playground']}" : null,
+            'ErdLink'           => $landing['erd'] ? "/{$this->lang}/erd/{$landing['erd']}" : null,
+            'ErdImage'          => $landing['erd'] ? '/images/erd_' . strtolower($landing['erd']) . '.svg' : null,
+        ]);
+        $this->engine->display('database.tpl');
+    }
+
     /**
      * Show about page
      * @param array $params
@@ -2939,6 +3051,10 @@ class Controller
         $this->assignVariables([
             'Questionnire' => $questionnire->getMap(),
             'Lessons' => $lessons->getMap(),
+            'DatabaseLandings' => array_filter(array_map(
+                fn($key) => $this->databaseLandingLanguages($key),
+                array_combine(array_keys(self::DATABASE_LANDINGS), array_keys(self::DATABASE_LANDINGS))
+            )),
             'Today' => date('Y-m-d'),
         ]);
         $this->engine->display("sitemap.tpl");

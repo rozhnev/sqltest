@@ -5,6 +5,8 @@
             display: inline-block;
         }
     </style>
+    {* The landing page /fr/database/yellow-tripdata has its own intro: only the table list there *}
+    {if ($Action|default:'') != 'database'}
     <h2>Jeu de données DuckDB yellow_tripdata</h2>
     <h3>À propos de DuckDB</h3>
     <p><strong>DuckDB</strong> est un SGBD analytique embarqué, conçu pour exécuter rapidement des requêtes sur des données locales et applicatives.</p>
@@ -13,7 +15,8 @@
     <p><span class='sql'>yellow_tripdata</span> est un jeu de données pédagogique contenant des trajets de taxis jaunes de New York.</p>
     <p>Cette table permet de pratiquer le filtrage, le regroupement, le tri, les opérations sur les dates et les calculs d'agrégats dans DuckDB.</p>
     <p>Tous les champs de ce jeu de données acceptent la valeur <span class='sql'>NULL</span>. Aucune clé primaire ni contrainte supplémentaire n'est définie.</p>
-
+    <p><a href="/{$Lang}/database/yellow-tripdata">En savoir plus sur la base NYC Yellow Taxi : schéma, exemples de requêtes et tous les exercices →</a></p>
+    {/if}
     <h3>Table yellow_tripdata</h3>
     <div class="accordion" title="Cliquez pour développer, double-cliquez pour insérer le nom de la table dans l'éditeur">
         <span><span class='sql'>yellow_tripdata</span> - trajets en taxi jaune.</span>

@@ -4,6 +4,8 @@
             min-width: 10rem;
         }
     </style>
+    {* The landing page /es/database/bookings has its own intro: only the table list there *}
+    {if ($Action|default:'') != 'database'}
     <h2>Base de Datos de Reservas: estructura de tabla y visión general del esquema</h2>
     <p>La base de datos de Reservas (PostgreSQL) modela vuelos de aerolíneas a través de múltiples aeropuertos y se utiliza ampliamente para la práctica de SQL.</p>
     <p>Esta página muestra la estructura de la tabla, las columnas clave y las restricciones utilizadas en consultas SQL analíticas y transaccionales típicas.</p>
@@ -14,6 +16,8 @@
             Diagrama ER de la base de datos de Reservas
         </a>
     </p>
+    <p><a href="/{$Lang}/database/bookings">Más sobre la base de datos Bookings: esquema, consultas de ejemplo y todos los ejercicios →</a></p>
+    {/if}
     <h3>La lista de tablas</h3>
     {literal}
     <div class="accordion active">

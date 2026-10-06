@@ -5,6 +5,8 @@
             display: inline-block;
         }
     </style>
+    {* The landing page /ru/database/yellow-tripdata has its own intro: only the table list there *}
+    {if ($Action|default:'') != 'database'}
     <h2>Набор данных DuckDB yellow_tripdata</h2>
     <h3>О DuckDB</h3>
     <p><strong>DuckDB</strong> - встраиваемая аналитическая СУБД, предназначенная для быстрых запросов к локальным и прикладным данным.</p>
@@ -13,7 +15,8 @@
     <p><span class='sql'>yellow_tripdata</span> - учебный набор данных о поездках на жёлтых такси Нью-Йорка.</p>
     <p>Таблица подходит для практики фильтрации, группировки, сортировки, работы с датами и расчёта агрегатных показателей в DuckDB.</p>
     <p>Все поля в наборе допускают значение <span class='sql'>NULL</span>. Первичный ключ и дополнительные ограничения не заданы.</p>
-
+    <p><a href="/{$Lang}/database/yellow-tripdata">Подробнее о базе NYC Yellow Taxi: схема, примеры запросов и все задачи →</a></p>
+    {/if}
     <h3>Таблица yellow_tripdata</h3>
     <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки имени таблицы в редактор">
         <span><span class='sql'>yellow_tripdata</span> - поездки на жёлтых такси.</span>

@@ -5,6 +5,8 @@
             display: inline-block;
         }
     </style>
+    {* The landing page /en/database/yellow-tripdata has its own intro: only the table list there *}
+    {if ($Action|default:'') != 'database'}
     <h2>DuckDB yellow_tripdata Dataset</h2>
     <h3>About DuckDB</h3>
     <p><strong>DuckDB</strong> is an embedded analytical database designed for fast queries over local and application data.</p>
@@ -13,7 +15,8 @@
     <p><span class='sql'>yellow_tripdata</span> is a learning dataset containing New York City yellow taxi trips.</p>
     <p>The table is useful for practicing filtering, grouping, sorting, date operations, and aggregate calculations in DuckDB.</p>
     <p>All fields in this dataset allow <span class='sql'>NULL</span> values. No primary key or additional constraints are defined.</p>
-
+    <p><a href="/{$Lang}/database/yellow-tripdata">More about the NYC Yellow Taxi database: schema, sample queries and all exercises →</a></p>
+    {/if}
     <h3>yellow_tripdata Table</h3>
     <div class="accordion" title="Click to expand, double-click to insert the table name into the editor">
         <span><span class='sql'>yellow_tripdata</span> - yellow taxi trips.</span>

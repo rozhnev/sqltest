@@ -5,6 +5,8 @@
             display: inline-block;
         }
     </style>
+    {* The landing page /zh/database/yellow-tripdata has its own intro: only the table list there *}
+    {if ($Action|default:'') != 'database'}
     <h2>DuckDB yellow_tripdata 数据集</h2>
     <h3>关于 DuckDB</h3>
     <p><strong>DuckDB</strong> 是一款嵌入式分析型数据库，适用于对本地数据和应用数据执行快速查询。</p>
@@ -13,7 +15,8 @@
     <p><span class='sql'>yellow_tripdata</span> 是一个包含纽约市黄色出租车行程的学习数据集。</p>
     <p>该表适合练习筛选、分组、排序、日期操作以及在 DuckDB 中进行聚合计算。</p>
     <p>此数据集中的所有字段都允许使用 <span class='sql'>NULL</span> 值。未定义主键或其他约束。</p>
-
+    <p><a href="/{$Lang}/database/yellow-tripdata">了解更多 NYC Yellow Taxi 数据库：模式、示例查询和全部练习 →</a></p>
+    {/if}
     <h3>yellow_tripdata 表</h3>
     <div class="accordion" title="点击展开，双击将表名插入编辑器">
         <span><span class='sql'>yellow_tripdata</span> - 黄色出租车行程。</span>

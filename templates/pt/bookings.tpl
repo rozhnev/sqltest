@@ -4,6 +4,8 @@
             min-width: 10rem;
         }
     </style>
+    {* The landing page /pt/database/bookings has its own intro: only the table list there *}
+    {if ($Action|default:'') != 'database'}
     <h2>Banco de Dados Bookings: estrutura das tabelas e visão do esquema</h2>
     <p>O banco Bookings (PostgreSQL) modela voos de companhias aéreas entre diferentes aeroportos e é amplamente usado para prática de SQL.</p>
     <p>Esta página apresenta a estrutura das tabelas, colunas-chave e restrições usadas em consultas SQL analíticas e transacionais.</p>
@@ -14,6 +16,8 @@
             Diagrama ER do banco de dados Bookings
         </a>
     </p>
+    <p><a href="/{$Lang}/database/bookings">Mais sobre o banco de dados Bookings: esquema, exemplos de consultas e todos os exercícios →</a></p>
+    {/if}
     <h3>Lista de tabelas</h3>
     {literal}
     <div class="accordion active">

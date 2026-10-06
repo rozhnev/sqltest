@@ -4,6 +4,8 @@
             min-width: 10rem;
         }
     </style>
+    {* The landing page /ru/database/adventureworks has its own intro: only the table list there *}
+    {if ($Action|default:'') != 'database'}
     <h2>База данных AdventureWorks: структура таблиц и обзор схемы</h2>
     <p>База AdventureWorks (SQL Server) - это учебный набор данных, моделирующий бизнес-процессы вымышленной производственной компании.</p>
     <p>На этой странице показаны структура таблиц, ключевые поля и связи, которые используются при изучении и практике SQL.</p>
@@ -14,6 +16,8 @@
             ER диаграмма базы данных AdventureWorks
         </a>
     </p>
+    <p><a href="/{$Lang}/database/adventureworks">Подробнее о базе AdventureWorks: схема, примеры запросов и все задачи →</a></p>
+    {/if}
     <h3>Список таблиц</h3>
     <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
         <span><span class='sql'>Address</span> - таблица адресов.</span>

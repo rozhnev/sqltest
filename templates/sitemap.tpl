@@ -33,6 +33,16 @@
       <priority>0.3</priority>
     </url>
     {/foreach}
+    {foreach from=$DatabaseLandings key=databaseKey item=landingLanguages}
+      {foreach from=$landingLanguages item=langCode}
+      <url>
+        <loc>https://{$Domain}/{$langCode}/database/{$databaseKey}</loc>
+        <lastmod>{$Today}</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+      </url>
+      {/foreach}
+    {/foreach}
     {foreach from=$Questionnire item=question}
       {foreach from=$Languages key=langCode item=langName}
       <url>

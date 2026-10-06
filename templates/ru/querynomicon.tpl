@@ -4,10 +4,14 @@
             min-width: 7rem;
         }
     </style>
+    {* The landing page /ru/database/querynomicon has its own intro: only the table list there *}
+    {if ($Action|default:'') != 'database'}
     <h2>База данных Querynomicon: структура таблиц и обзор</h2>
     <p>Querynomicon (SQLite) - компактная учебная база данных для изучения основ SQL на простых и понятных примерах.</p>
     <p>На этой странице представлены таблицы, ключевые поля и примеры строк для практики SQL-запросов.</p>
     <p>База данных Querynomicon содержит 5 основных таблиц.</p>
+    <p><a href="/{$Lang}/database/querynomicon">Подробнее о базе Querynomicon: схема, примеры запросов и все задачи →</a></p>
+    {/if}
     <h3>Список таблиц</h3>
     <div class="accordion active">
         <span><span class='sql'>department</span> - таблица отделов.</span>

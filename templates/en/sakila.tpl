@@ -5,6 +5,8 @@
             display: inline-block;
         }
     </style>
+    {* The landing page /en/database/sakila has its own intro and ER diagram: only the table list there *}
+    {if ($Action|default:'') != 'database'}
     <h2>Sakila Database: table structure and schema overview</h2>
     <p>Sakila is a sample relational database designed by MySQL for learning and demonstrating SQL and relational database management system (RDBMS) capabilities.</p>
     <p>This page presents Sakila table structure, key columns, and constraints commonly used in educational SQL queries.</p>
@@ -15,6 +17,8 @@
             ER diagram of the Sakila database
         </a>
     </p>
+    <p><a href="/{$Lang}/database/sakila">More about the Sakila database: schema, sample queries and all exercises →</a></p>
+    {/if}
     <h3>The list of tables</h3>
     <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span><span class='sql'>actor</span> - actor table.</span>

@@ -4,6 +4,8 @@
             min-width: 10rem;
         }
     </style>
+    {* The landing page /zh/database/adventureworks has its own intro: only the table list there *}
+    {if ($Action|default:'') != 'database'}
     <h2>AdventureWorks 数据库：表结构和模式概述</h2>
     <p>AdventureWorks 数据库 (SQL Server) 是一个示例数据集，模拟了一个虚构制造公司的业务流程。</p>
     <p>本页面展示了表结构、关键列和用于实际 SQL 学习和查询练习的关系。</p>
@@ -14,6 +16,8 @@
             AdventureWorks 数据库 ER 图
         </a>
     </p>
+    <p><a href="/{$Lang}/database/adventureworks">了解更多 AdventureWorks 数据库：模式、示例查询和全部练习 →</a></p>
+    {/if}
     <h3>表列表</h3>
     <div class="accordion" title="点击展开，双击将表名粘贴到编辑器中">
         <span><span class='sql'>Address</span> - 地址表。</span>

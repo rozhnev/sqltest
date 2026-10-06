@@ -5,6 +5,8 @@
         display: inline-block;
     }
   </style>
+    {* The landing page /ru/database/sakila has its own intro and ER diagram: only the table list there *}
+    {if ($Action|default:'') != 'database'}
     <h2>База данных Sakila: описание таблиц и структуры</h2>
     <p>Sakila - это пример реляционной базы данных, разработанный компанией MySQL для обучения и демонстрации возможностей SQL и систем управления базами данных (СУБД).</p>
     <p>На этой странице собрана структура таблиц Sakila, основные поля и ключи, которые используются в учебных SQL-запросах.</p>
@@ -15,6 +17,8 @@
             ER диаграмма базы данных Sakila
         </a>
     </p>
+    <p><a href="/{$Lang}/database/sakila">Подробнее о базе Sakila: схема, примеры запросов и все задачи →</a></p>
+    {/if}
     <h3>Список таблиц</h3>
   <div class="accordion" title="Нажмите для развертывания, двойной щелчок для вставки в редактор">
       <span><span class='sql'>actor</span> - таблица актеров</span>

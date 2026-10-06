@@ -4,6 +4,8 @@
             min-width: 10rem;
         }
     </style>
+    {* The landing page /zh/database/bookings has its own intro: only the table list there *}
+    {if ($Action|default:'') != 'database'}
     <h2>预订数据库：表结构和模式概述</h2>
     <p>预订数据库（PostgreSQL）建模了多个机场之间的航空公司航班，广泛用于SQL练习。</p>
     <p>此页面显示了典型分析和事务SQL查询中使用的表结构、关键列和约束。</p>
@@ -14,6 +16,8 @@
             预订数据库的ER图
         </a>
     </p>
+    <p><a href="/{$Lang}/database/bookings">了解更多 Bookings 数据库：模式、示例查询和全部练习 →</a></p>
+    {/if}
     <h3>表列表</h3>
     {literal}
     <div class="accordion active">

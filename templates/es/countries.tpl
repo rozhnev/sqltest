@@ -4,10 +4,14 @@
             min-width: 7rem;
         }
     </style>
+    {* The landing page /es/database/countries has its own intro: only the table list there *}
+    {if ($Action|default:'') != 'database'}
     <h2>Base de Datos de Países: estructura de tabla y visión geoespacial</h2>
     <p>La base de datos de Países (PostGIS) es un conjunto de datos de muestra para análisis geográfico y geoespacial con SQL.</p>
     <p>Incluye datos espaciales para países y capitales, además de capas de la ciudad de Nueva York como bloques de censo, homicidios, barrios, calles y estaciones de metro.</p>
     <p>La base de datos de Países contiene 7 tablas principales.</p>
+    <p><a href="/{$Lang}/database/countries">Más sobre la base de datos Countries: esquema, consultas de ejemplo y todos los ejercicios →</a></p>
+    {/if}
     <h3>Lista de tablas</h3>
     <div class="accordion" title="Haga clic para expandir, haga doble clic para pegar el nombre de la tabla en el editor">
         <span><span class='sql'>countries</span> - lista de países con geometría.</span>

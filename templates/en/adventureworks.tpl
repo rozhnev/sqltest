@@ -4,6 +4,8 @@
             min-width: 10rem;
         }
     </style>
+    {* The landing page /en/database/adventureworks has its own intro: only the table list there *}
+    {if ($Action|default:'') != 'database'}
     <h2>AdventureWorks Database: table structure and schema overview</h2>
     <p>The AdventureWorks database (SQL Server) is a sample dataset that models business processes of a fictional manufacturing company.</p>
     <p>This page presents table structure, key columns, and relationships used for practical SQL learning and query practice.</p>
@@ -14,6 +16,8 @@
             AdventureWorks DB ER diagram
         </a>
     </p>
+    <p><a href="/{$Lang}/database/adventureworks">More about the AdventureWorks database: schema, sample queries and all exercises →</a></p>
+    {/if}
     <h3>List of tables</h3>
     <div class="accordion" title="Click to expand, double-click to paste table name into the editor">
         <span><span class='sql'>Address</span> - table of addresses.</span>

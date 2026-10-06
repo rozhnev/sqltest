@@ -22,6 +22,7 @@ class Router
             'register'          => "@(?<lang>{$this->langPattern})/(?<action>register)/?@i",
             'forgot-password'   => "@(?<lang>{$this->langPattern})/(?<action>forgot-password)/?@i",
             'login'             => "@^/(?<action>login)/(?<loginProvider>[a-z]+)/?$@i",
+            'database'          => "@(?<lang>{$this->langPattern})/(?<action>database)/(?<database>[a-z0-9-]+)/?$@i",
             'erd'               => "@(?<lang>{$this->langPattern})/(?<action>erd)/(?<db>Sakila|Bookings|AdventureWorks|Employee|University)/?@i",
             'favorite'          => "@(?<lang>{$this->langPattern})/(?<class>question)/(?<questionID>\d+)/(?<action>favorite)@i",
             'question_solutions'=> "@(?<lang>{$this->langPattern})/(?<class>question)/(?<questionID>\d+)/(?<action>solutions|my-solutions)@i",

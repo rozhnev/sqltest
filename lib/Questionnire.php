@@ -110,6 +110,34 @@ class Questionnire
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     
+    /**
+     * Tasks on one database (questions.db_template) for its landing page (Controller::database()):
+     * every category the task is in, topics (questionnire 1) and the database list (questionnire 3),
+     * in menu order, with the titles in the page language (English as the fallback).
+     */
+    public function getDatabaseTasks(string $dbTemplate): array
+    {
+        $stmt = $this->dbh->prepare("SELECT
+                c.questionnire_id,
+                c.title_sef category_sef,
+                COALESCE(cl_lang.title, cl_en.title, c.title_sef) category_title,
+                q.id question_id,
+                q.title_sef question_sef,
+                COALESCE(ql_lang.title, ql_en.title, q.title_sef) title,
+                q.rate
+            FROM questions q
+            JOIN question_categories qc ON qc.question_id = q.id
+            JOIN categories c ON c.id = qc.category_id
+            LEFT JOIN categories_localization cl_lang ON cl_lang.category_id = c.id AND cl_lang.language = :lang
+            LEFT JOIN categories_localization cl_en ON cl_en.category_id = c.id AND cl_en.language = 'en'
+            LEFT JOIN questions_localization ql_lang ON ql_lang.question_id = q.id AND ql_lang.language = :lang
+            LEFT JOIN questions_localization ql_en ON ql_en.question_id = q.id AND ql_en.language = 'en'
+            WHERE q.db_template = :db_template AND not q.deleted AND not c.deleted AND c.questionnire_id IN (1, 3)
+            ORDER BY c.questionnire_id, c.sequence_position, qc.sequence_position;");
+        $stmt->execute([':db_template' => $dbTemplate, ':lang' => $this->lang]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function getNameByCategory(string $category): string
     {
         $stmt = $this->dbh->prepare("SELECT questionnires.name 

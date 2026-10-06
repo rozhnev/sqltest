@@ -52,6 +52,7 @@
                 'firebird4': 'Firebird 4.0',
                 'firebird4_employee': 'Firebird 4.0 (Employee)',
                 'firebird5': 'Firebird 5.0',
+                'duckdb_data': 'DuckDB NYC Yellow Taxi (ReadOnly)',
                 'rdb5': 'RedDatabase 5.0',
                 'oracle19hr': 'Oracle Database 19c (HR)',
                 'oracle21': 'Oracle Database 21c',

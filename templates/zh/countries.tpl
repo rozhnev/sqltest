@@ -4,10 +4,14 @@
             min-width: 7rem;
         }
     </style>
+    {* The landing page /zh/database/countries has its own intro: only the table list there *}
+    {if ($Action|default:'') != 'database'}
     <h2>国家数据库：表结构和地理空间概述</h2>
     <p>国家数据库（PostGIS）是一个用于地理和地理空间分析的示例数据集，使用SQL。</p>
     <p>它包括国家和首都的空间数据，以及纽约市的图层，如人口普查区、凶杀案、社区、街道和地铁站。</p>
     <p>国家数据库包含7个主要表。</p>
+    <p><a href="/{$Lang}/database/countries">了解更多 Countries 数据库：模式、示例查询和全部练习 →</a></p>
+    {/if}
     <h3>表列表</h3>
     <div class="accordion" title="点击展开，双击将表名粘贴到编辑器中">
         <span><span class='sql'>countries</span> - 包含几何形状的国家列表。</span>

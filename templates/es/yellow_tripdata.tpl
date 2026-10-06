@@ -5,6 +5,8 @@
             display: inline-block;
         }
     </style>
+    {* The landing page /es/database/yellow-tripdata has its own intro: only the table list there *}
+    {if ($Action|default:'') != 'database'}
     <h2>Conjunto de datos yellow_tripdata de DuckDB</h2>
     <h3>Acerca de DuckDB</h3>
     <p><strong>DuckDB</strong> es una base de datos analítica embebida diseñada para consultas rápidas sobre datos locales y de aplicaciones.</p>
@@ -13,7 +15,8 @@
     <p><span class='sql'>yellow_tripdata</span> es un conjunto de datos de aprendizaje que contiene viajes en taxi amarillo de la ciudad de Nueva York.</p>
     <p>La tabla es útil para practicar filtrado, agrupamiento, ordenamiento, operaciones de fecha y cálculos agregados en DuckDB.</p>
     <p>Todos los campos en este conjunto de datos permiten valores <span class='sql'>NULL</span>. No se definen claves primarias ni restricciones adicionales.</p>
-
+    <p><a href="/{$Lang}/database/yellow-tripdata">Más sobre la base de datos NYC Yellow Taxi: esquema, consultas de ejemplo y todos los ejercicios →</a></p>
+    {/if}
     <h3>Tabla yellow_tripdata</h3>
     <div class="accordion" title="Haga clic para expandir, haga doble clic para insertar el nombre de la tabla en el editor">
         <span><span class='sql'>yellow_tripdata</span> - viajes en taxi amarillo.</span>

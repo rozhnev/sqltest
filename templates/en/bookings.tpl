@@ -4,6 +4,8 @@
             min-width: 10rem;
         }
     </style>
+    {* The landing page /en/database/bookings has its own intro: only the table list there *}
+    {if ($Action|default:'') != 'database'}
     <h2>Bookings Database: table structure and schema overview</h2>
     <p>The Bookings database (PostgreSQL) models airline flights across multiple airports and is widely used for SQL practice.</p>
     <p>This page shows the table structure, key columns, and constraints used in typical analytical and transactional SQL queries.</p>
@@ -14,6 +16,8 @@
             ER diagram of the Bookings database
         </a>
     </p>
+    <p><a href="/{$Lang}/database/bookings">More about the Bookings database: schema, sample queries and all exercises →</a></p>
+    {/if}
     <h3>The list of tables</h3>
     {literal}
     <div class="accordion active">
