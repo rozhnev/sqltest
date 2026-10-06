@@ -6,17 +6,18 @@ class Controller
      * templates/{lang}/database-{key}.tpl: a language without it has no page (404, not in the sitemap).
      * db_template: questions.db_template; category: its category in the "database" questionnire (3), null when
      * there is none (the task list is then the topics' tasks); playground: the playground version with this
-     * database; erd: the /{lang}/erd/{name} page and images/erd_{name}.svg, null when there is no diagram.
+     * database (playground_also: other versions with it); erd: the /{lang}/erd/{name} page and images/erd_{name}.svg,
+     * null when there is no diagram; name, dbms: shown in the links from the playground.
      */
     private const DATABASE_LANDINGS = [
-        'sakila'          => ['db_template' => 'sakila', 'category' => 'sakila-db', 'playground' => 'mysql80_sakila', 'erd' => 'Sakila'],
-        'bookings'        => ['db_template' => 'bookings', 'category' => 'bookings', 'playground' => 'psql18demo', 'erd' => 'Bookings'],
-        'adventureworks'  => ['db_template' => 'adventureworks', 'category' => 'adventureworks', 'playground' => 'mssql2022aw', 'erd' => 'AdventureWorks'],
-        'employee'        => ['db_template' => 'employee', 'category' => 'employee-db', 'playground' => 'firebird4_employee', 'erd' => 'Employee'],
-        'university'      => ['db_template' => 'university', 'category' => 'university-db', 'playground' => 'mariadb118_university', 'erd' => 'University'],
-        'querynomicon'    => ['db_template' => 'querynomicon', 'category' => 'sqlite', 'playground' => 'sqlite3_data', 'erd' => null],
-        'yellow-tripdata' => ['db_template' => 'yellow_tripdata', 'category' => 'yellow-tripdata', 'playground' => 'duckdb_data', 'erd' => null],
-        'countries'       => ['db_template' => 'countries', 'category' => null, 'playground' => 'psql17postgis', 'erd' => null],
+        'sakila'          => ['name' => 'Sakila', 'dbms' => 'MySQL', 'db_template' => 'sakila', 'category' => 'sakila-db', 'playground' => 'mysql80_sakila', 'playground_also' => ['mysql97_sakila', 'mariadb_sakila'], 'erd' => 'Sakila'],
+        'bookings'        => ['name' => 'Bookings', 'dbms' => 'PostgreSQL', 'db_template' => 'bookings', 'category' => 'bookings', 'playground' => 'psql18demo', 'erd' => 'Bookings'],
+        'adventureworks'  => ['name' => 'AdventureWorks', 'dbms' => 'SQL Server', 'db_template' => 'adventureworks', 'category' => 'adventureworks', 'playground' => 'mssql2022aw', 'erd' => 'AdventureWorks'],
+        'employee'        => ['name' => 'Employee', 'dbms' => 'Firebird', 'db_template' => 'employee', 'category' => 'employee-db', 'playground' => 'firebird4_employee', 'erd' => 'Employee'],
+        'university'      => ['name' => 'University', 'dbms' => 'MariaDB', 'db_template' => 'university', 'category' => 'university-db', 'playground' => 'mariadb118_university', 'erd' => 'University'],
+        'querynomicon'    => ['name' => 'Querynomicon', 'dbms' => 'SQLite', 'db_template' => 'querynomicon', 'category' => 'sqlite', 'playground' => 'sqlite3_data', 'erd' => null],
+        'yellow-tripdata' => ['name' => 'NYC Yellow Taxi', 'dbms' => 'DuckDB', 'db_template' => 'yellow_tripdata', 'category' => 'yellow-tripdata', 'playground' => 'duckdb_data', 'erd' => null],
+        'countries'       => ['name' => 'Countries', 'dbms' => 'PostGIS', 'db_template' => 'countries', 'category' => null, 'playground' => 'psql17postgis', 'erd' => null],
     ];
 
     private $dbh;
@@ -855,6 +856,29 @@ class Controller
             array_keys($this->languages),
             fn($lang) => $this->engine->templateExists("{$lang}/database-{$key}.tpl")
         ));
+    }
+
+    /**
+     * Landing pages of the sample databases in the current language: the playground links to them
+     *
+     * @return array{list: array<array{name: string, dbms: string, url: string}>, by_version: array<string, array{url: string, text: string}>}
+     */
+    private function databaseLandingLinks(): array
+    {
+        $list = [];
+        $byVersion = [];
+        foreach (self::DATABASE_LANDINGS as $key => $landing) {
+            if (!in_array($this->lang, $this->databaseLandingLanguages($key), true)) {
+                continue;
+            }
+            $url = "/{$this->lang}/database/{$key}";
+            $list[] = ['name' => $landing['name'], 'dbms' => $landing['dbms'], 'url' => $url];
+            $text = sprintf(Localizer::translateString('playground_database_link'), $landing['name']);
+            foreach (array_merge([$landing['playground']], $landing['playground_also'] ?? []) as $version) {
+                $byVersion[$version] = ['url' => $url, 'text' => $text];
+            }
+        }
+        return ['list' => $list, 'by_version' => $byVersion];
     }
 
     /**
@@ -2924,6 +2948,7 @@ class Controller
             'PlaygroundSelectedVersion' => $selectedVersion,
             'PlaygroundInitialSnippetHash' => $snippetHash,
             'PlaygroundInitialQuery' => $initialQuery,
+            'PlaygroundDatabaseLinks' => $this->databaseLandingLinks(),
         ]);
 
         if ($this->playgroundAssistantEnabled()) {

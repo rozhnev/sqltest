@@ -30,6 +30,14 @@
     color: var(--menu-link-color);
     margin-bottom: 0.35rem;
 }
+.menu-panel .playground-db-link {
+    padding: 0 0.5rem 0.5rem;
+    font-size: smaller;
+    line-height: 1.4;
+}
+.menu-panel .playground-db-link.hidden {
+    display: none;
+}
 .menu-panel .version-select-wrap select {
     width: 100%;
     border: 1px solid silver;

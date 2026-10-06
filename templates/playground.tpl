@@ -32,6 +32,11 @@
                                         <label for="databaseVersion">Version</label>
                                         <select id="databaseVersion" name="databaseVersion"></select>
                                     </li>
+                                    {* The landing page of the sample database in the selected version (Controller::databaseLandingLinks()), updated by updateDatabaseLink() *}
+                                    {if isset($PlaygroundDatabaseLinks.by_version[$PlaygroundSelectedVersion])}{assign var="SelectedDatabaseLink" value=$PlaygroundDatabaseLinks.by_version[$PlaygroundSelectedVersion]}{/if}
+                                    <li class="playground-db-link{if !isset($SelectedDatabaseLink)} hidden{/if}">
+                                        <a id="playgroundDbLink" href="{if isset($SelectedDatabaseLink)}{$SelectedDatabaseLink.url}{/if}">{if isset($SelectedDatabaseLink)}{$SelectedDatabaseLink.text|escape}{/if}</a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -60,6 +65,15 @@
 
                             <h2>{translate}playground_content_supported_title{/translate}</h2>
                             <p>{translate}playground_content_supported_text{/translate}</p>
+                            {if $PlaygroundDatabaseLinks.list}
+                            <h2>{translate}playground_sample_databases_title{/translate}</h2>
+                            <p>{translate}playground_sample_databases_intro{/translate}</p>
+                            <ul>
+                                {foreach $PlaygroundDatabaseLinks.list as $databaseLink}
+                                    <li><a href="{$databaseLink.url}">{$databaseLink.name|escape}</a> ({$databaseLink.dbms|escape})</li>
+                                {/foreach}
+                            </ul>
+                            {/if}
 
                             <h2>{translate}playground_content_use_cases_title{/translate}</h2>
                             <p>{translate}playground_content_use_cases_text{/translate}</p>
@@ -132,6 +146,21 @@
         const selectedPlaygroundVersion = {/literal}{$PlaygroundSelectedVersion|json_encode nofilter}{literal};
         const initialSnippetHash = {/literal}{$PlaygroundInitialSnippetHash|json_encode nofilter}{literal};
         const initialSnippetQuery = {/literal}{$PlaygroundInitialQuery|json_encode nofilter}{literal};
+        const playgroundDatabaseLinks = {/literal}{$PlaygroundDatabaseLinks.by_version|json_encode nofilter}{literal};
+
+        // Link to the landing page of the sample database in the selected version, if there is one
+        function updateDatabaseLink(version) {
+            const link = document.getElementById('playgroundDbLink');
+            if (!link) {
+                return;
+            }
+            const target = playgroundDatabaseLinks[version];
+            link.closest('.playground-db-link').classList.toggle('hidden', !target);
+            if (target) {
+                link.href = target.url;
+                link.textContent = target.text;
+            }
+        }
 
         function updateVersionOptions(databaseId, preferredVersion = null) {
             const versionSelect = document.getElementById('databaseVersion');
@@ -157,6 +186,7 @@
             const requestedVersion = preferredVersion || defaultPlaygroundVersion;
             const hasRequestedVersion = versions.some((version) => version.id === requestedVersion);
             versionSelect.value = hasRequestedVersion ? requestedVersion : versions[0].id;
+            updateDatabaseLink(versionSelect.value);
         }
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -164,6 +194,10 @@
             if (checkedDatabase) {
                 updateVersionOptions(checkedDatabase.value, selectedPlaygroundVersion || defaultPlaygroundVersion);
             }
+
+            document.getElementById('databaseVersion')?.addEventListener('change', (event) => {
+                updateDatabaseLink(event.target.value);
+            });
 
             document.querySelectorAll('input[name="database"]').forEach((radio) => {
                 radio.addEventListener('change', (event) => {

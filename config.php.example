@@ -13,6 +13,7 @@ $config = [
                 'name' => 'MariaDB',
                 'versions' => [
                     'mariadb118' => 'MariaDB 11.8',
+                    'mariadb118_university' => 'MariaDB 11.8 University (ReadOnly)',
                 ],
             ],
             'mysql' => [
@@ -49,6 +50,12 @@ $config = [
                 'name' => 'Firebird',
                 'versions' => [
                     'firebird4' => 'Firebird 4.0',
+                ],
+            ],
+            'duckdb' => [
+                'name' => 'DuckDB',
+                'versions' => [
+                    'duckdb_data' => 'DuckDB NYC Yellow Taxi (ReadOnly)',
                 ],
             ],
         ],
