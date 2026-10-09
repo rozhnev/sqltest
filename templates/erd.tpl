@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 {assign var="Db" value=$Params.db}
 {assign var="DbKey" value=$Db|lower}
-{assign var="PageTitle" value="`$Db` ER Diagram — Database Schema Visualization | SQLtest.online"}
-{assign var="PageDescription" value="Interactive ER diagram for the `$Db` database. Explore table structure, primary/foreign key relationships, and download the schema as SVG. Perfect for SQL learning and database design."}
+{assign var="PageTitle" value="{translate}erd_page_title{/translate}"}
+{assign var="PageDescription" value="{translate}erd_page_description{/translate}"}
 {assign var="PageOGTitle" value=$PageTitle}
 {assign var="PageOGDescription" value=$PageDescription}
 {assign var="PageOGImage" value="https://sqltest.online`$ErdBase`.svg"}
-{assign var="PageOGImageAlt" value="ER diagram for `$Db` database"}
+{assign var="PageOGImageAlt" value="{translate}erd_og_image_alt{/translate}"}
 {assign var="PageOGImageWidth" value="1600"}
 {assign var="PageOGImageHeight" value="1200"}
 <html xmlns="http://www.w3.org/1999/xhtml" lang="{$Lang}" data-theme="{$Params.theme|default:'light'}">
