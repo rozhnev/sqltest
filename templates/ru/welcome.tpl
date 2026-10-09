@@ -1,6 +1,6 @@
 <div class="welcome-container">
     <div class="welcome-page-header">
-        <h2 style="margin: 0">SQLTest.online — бесплатный тренажёр для изучения SQL</h2>
+        <h1 style="margin: 0; font-size: 1.5em">SQLTest.online — бесплатный тренажёр для изучения SQL</h1>
     </div>
 
     <section>
