@@ -288,13 +288,13 @@
             <li><span class='sql'>CONTACT_FIRST</span>联系人名字</li>
             <li><span class='sql'>CONTACT_LAST</span>联系人姓氏</li>
             <li><span class='sql'>PHONE_NO</span>客户电话号码</li>
-            <li><span class='sql'>ADDRESS_LINE1</span> 地址行1</li>
-            <li><span class='sql'>ADDRESS_LINE2</span>地址行2（可以为null）</li>
+            <li><span class='sql'>ADDRESS_LINE1</span> 地址第 1 行</li>
+            <li><span class='sql'>ADDRESS_LINE2</span>地址第 2 行（可为空）</li>
             <li><span class='sql'>CITY</span>客户所在城市</li>
             <li><span class='sql'>STATE_PROVINCE</span>客户所在州或省</li>
             <li><span class='sql'>COUNTRY</span>客户所在国家</li>
             <li><span class='sql'>POSTAL_CODE</span>客户邮政编码</li>
-            <li><span class='sql'>ON_HOLD</span>暂停状态（可以为null）</li>
+            <li><span class='sql'>ON_HOLD</span>暂停状态（可为空）</li>
         </ul>
         <div class="table-wrapper">
             <table><thead><tr>
@@ -312,6 +312,107 @@
                     <th scope="col">ON_HOLD</th>
                 </tr></thead><tbody><tr>
                     <td>1001</td>
-                    <td>签名设计</td>
-                    <td>戴尔·J.</td>
-                    <td>小
+                    <td>Signature Design</td>
+                    <td>Dale J.</td>
+                    <td>Little</td>
+                    <td>(619) 530-2710</td>
+                    <td>15500 Pacific Heights Blvd.</td>
+                    <td>[null]</td>
+                    <td>San Diego</td>
+                    <td>CA</td>
+                    <td>USA</td>
+                    <td>92121</td>
+                    <td>[null]</td>
+                </tr></tbody></table>
+        </div>
+        <ul class="table-columns">
+            <li>FOREIGN KEY (COUNTRY) REFERENCES COUNTRY(COUNTRY)</li>
+        </ul>
+    </div>
+    <div class="accordion" title="点击展开，双击将表名粘贴到编辑器中">
+    <span><span class='sql'>SALES</span> - 销售列表。</span>
+    </div>
+    <div class="panel">
+        <ul class="table-columns">
+            <li><span class='sql'>PO_NUMBER</span>采购订单号</li>
+            <li><span class='sql'>CUST_NO</span>与订单关联的客户编号</li>
+            <li><span class='sql'>SALES_REP</span>销售代表编号</li>
+            <li><span class='sql'>ORDER_STATUS</span>订单状态</li>
+            <li><span class='sql'>ORDER_DATE</span>订单日期</li>
+            <li><span class='sql'>SHIP_DATE</span>发货日期</li>
+            <li><span class='sql'>DATE_NEEDED</span>需求日期（可为空）</li>
+            <li><span class='sql'>PAID</span>付款状态</li>
+            <li><span class='sql'>QTY_ORDERED</span>订购数量</li>
+            <li><span class='sql'>TOTAL_VALUE</span>订单总金额</li>
+            <li><span class='sql'>DISCOUNT</span>折扣</li>
+            <li><span class='sql'>ITEM_TYPE</span>订单商品类型</li>
+            <li><span class='sql'>AGED</span>账龄值</li>
+        </ul>
+        <div class="table-wrapper">
+            <table><thead><tr>
+                    <th scope="col">PO_NUMBER</th>
+                    <th scope="col">CUST_NO</th>
+                    <th scope="col">SALES_REP</th>
+                    <th scope="col">ORDER_STATUS</th>
+                    <th scope="col">ORDER_DATE</th>
+                    <th scope="col">SHIP_DATE</th>
+                    <th scope="col">DATE_NEEDED</th>
+                    <th scope="col">PAID</th>
+                    <th scope="col">QTY_ORDERED</th>
+                    <th scope="col">TOTAL_VALUE</th>
+                    <th scope="col">DISCOUNT</th>
+                    <th scope="col">ITEM_TYPE</th>
+                    <th scope="col">AGED</th>
+                </tr></thead><tbody><tr>
+                    <td>V91E0210</td>
+                    <td>1004</td>
+                    <td>11</td>
+                    <td>shipped</td>
+                    <td>1991-03-04 00:00:00</td>
+                    <td>1991-03-05 00:00:00</td>
+                    <td>[null]</td>
+                    <td>y</td>
+                    <td>10</td>
+                    <td>5000.00</td>
+                    <td>0.100000</td>
+                    <td>hardware</td>
+                    <td>1.000000000</td>
+                </tr></tbody></table>
+        </div>
+        <ul class="table-columns">
+            <li>FOREIGN KEY (CUST_NO) REFERENCES CUSTOMER(CUST_NO)</li>
+            <li>FOREIGN KEY (SALES_REP) REFERENCES EMPLOYEE(EMP_NO)</li>
+        </ul>
+    </div>
+    <h3>以下是该数据库的视图列表：</h3>
+    <div class="accordion" title="点击展开，双击将视图名粘贴到编辑器中">
+        <span><span class='sql'>PHONE_LIST</span> - 员工电话列表视图。</span>
+    </div>
+    <div class="panel">
+        <ul class="table-columns">
+            <li><span class='sql'>EMP_NO</span>员工编号</li>
+            <li><span class='sql'>FIRST_NAME</span>员工名字</li>
+            <li><span class='sql'>LAST_NAME</span>员工姓氏</li>
+            <li><span class='sql'>PHONE_EXT</span>员工分机号</li>
+            <li><span class='sql'>LOCATION</span>部门所在地</li>
+            <li><span class='sql'>PHONE_NO</span>部门电话号码</li>
+        </ul>
+        <div class="table-wrapper">
+            <table><thead><tr>
+                    <th scope="col">EMP_NO</th>
+                    <th scope="col">FIRST_NAME</th>
+                    <th scope="col">LAST_NAME</th>
+                    <th scope="col">PHONE_EXT</th>
+                    <th scope="col">LOCATION</th>
+                    <th scope="col">PHONE_NO</th>
+                </tr></thead><tbody><tr>
+                    <td>2</td>
+                    <td>Robert</td>
+                    <td>Nelson</td>
+                    <td>250</td>
+                    <td>Monterey</td>
+                    <td>(408) 555-1234</td>
+                </tr></tbody></table>
+        </div>
+    </div>
+</div>

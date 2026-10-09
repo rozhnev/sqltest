@@ -259,4 +259,227 @@
         </div>
     </div>
     <div class="accordion" title="Haga clic para expandir, haga doble clic para pegar el nombre de la tabla en el editor">
-        <span><span class='sql
+        <span><span class='sql'>ProductDescription</span> - tabla de descripciones de productos.</span>
+    </div>
+    <div class="panel">
+        <ul class="table-columns">
+            <li> <span class="sql" style="min-width: 14.5rem;">ProductDescriptionID</span>identificador único del registro (PK)</li>
+            <li> <span class="sql" style="min-width: 14.5rem;">Description</span>descripción del producto</li>
+            <li> <span class="sql" style="min-width: 14.5rem;">rowguid</span>guid</li>
+            <li> <span class="sql" style="min-width: 14.5rem;">ModifiedDate</span>marca de tiempo de creación o última actualización de la fila</li>
+        </ul>
+        <ul class="table-columns">
+            <li>CLAVE PRIMARIA, btree (ProductDescriptionID)</li>
+        </ul>
+        <div class="table-wrapper">
+            <table><thead><tr>
+                    <th scope="col">ProductDescriptionID</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">rowguid</th>
+                    <th scope="col">ModifiedDate</th>
+                </tr></thead><tbody><tr>
+                    <td>4</td>
+                    <td>Aluminum alloy cups; large diameter spindle.</td>
+                    <td>DFEBA528-DA11-4650-9D86-CAFDA7294EB0</td>
+                    <td>2007-06-01 00:00:00.000</td>
+                </tr></tbody></table>
+        </div>
+    </div>
+    <div class="accordion" title="Haga clic para expandir, haga doble clic para pegar el nombre de la tabla en el editor">
+        <span><span class='sql'>ProductModel</span> - tabla de modelos de productos.</span>
+    </div>
+    <div class="panel">
+        <ul class="table-columns">
+            <li> <span class="sql" style="min-width: 12rem;">ProductModelID</span>identificador único de cada registro (PK)</li>
+            <li> <span class="sql" style="min-width: 12rem;">Name</span>nombre del modelo de producto</li>
+            <li> <span class="sql" style="min-width: 12rem;">CatalogDescription</span>descripción en formato XML</li>
+            <li> <span class="sql" style="min-width: 12rem;">rowguid</span>guid</li>
+            <li> <span class="sql" style="min-width: 12rem;">ModifiedDate</span>marca de tiempo de creación o última actualización de la fila</li>
+        </ul>
+        <ul class="table-columns">
+            <li>CLAVE PRIMARIA, btree (ProductModelID)</li>
+        </ul>
+        <div class="table-wrapper">
+            <table><thead><tr>
+                    <th scope="col">ProductModelID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">CatalogDescription</th>
+                    <th scope="col">rowguid</th>
+                    <th scope="col">ModifiedDate</th>
+                </tr></thead><tbody><tr>
+                    <td>1</td>
+                    <td>Classic Vest</td>
+                    <td>[null]</td>
+                    <td>29321D47-1E4C-4AAC-887C-19634328C25E</td>
+                    <td>2007-06-01 00:00:00.000</td>
+                </tr></tbody></table>
+        </div>
+    </div>
+    <div class="accordion" title="Haga clic para expandir, haga doble clic para pegar el nombre de la tabla en el editor">
+        <span><span class='sql'>ProductModelProductDescription</span> - tabla de descripciones de modelos de productos.</span>
+    </div>
+    <div class="panel">
+        <ul class="table-columns">
+            <li> <span class="sql" style="min-width: 14rem;">ProductModelID</span>identificador del modelo en la tabla ProductModel</li>
+            <li> <span class="sql" style="min-width: 14rem;">ProductDescriptionID</span>identificador de la descripción en la tabla ProductDescription</li>
+            <li> <span class="sql" style="min-width: 14rem;">Culture</span>código de idioma en formato ISO</li>
+            <li> <span class="sql" style="min-width: 14rem;">rowguid</span>guid</li>
+            <li> <span class="sql" style="min-width: 14rem;">ModifiedDate</span>marca de tiempo de creación o última actualización de la fila</li>
+        </ul>
+        <ul class="table-columns">
+            <li>CLAVE PRIMARIA, btree (ProductModelID, ProductDescriptionID)</li>
+        </ul>
+        <ul class="table-columns">
+            <li>CLAVE FORÁNEA (ProductModelID) REFERENCIAS ProductModel(ProductModelID)</li>
+            <li>CLAVE FORÁNEA (ProductDescriptionID) REFERENCIAS ProductDescription(ProductDescriptionID)</li>
+        </ul>
+        <div class="table-wrapper">
+            <table><thead><tr>
+                    <th scope="col">ProductModelID</th>
+                    <th scope="col">ProductDescriptionID</th>
+                    <th scope="col">Culture</th>
+                    <th scope="col">rowguid</th>
+                    <th scope="col">ModifiedDate</th>
+                </tr></thead><tbody><tr>
+                    <td>1</td>
+                    <td>1199</td>
+                    <td>en</td>
+                    <td>4D00B649-027A-4F99-A380-F22A46EC8638</td>
+                    <td>2007-06-01 00:00:00.000</td>
+                </tr></tbody></table>
+        </div>
+    </div>
+    <div class="accordion" title="Haga clic para expandir, haga doble clic para pegar el nombre de la tabla en el editor">
+        <span><span class='sql'>SalesOrderDetail</span> - tabla de detalles de pedidos de venta.</span>
+    </div>
+    <div class="panel">
+        <ul class="table-columns">
+        <li> <span class="sql" style="min-width: 12rem;">SalesOrderID</span>clave foránea que referencia la tabla SalesOrderHeader</li>
+        <li> <span class="sql" style="min-width: 12rem;">SalesOrderDetailID</span>identificador único del registro en la tabla</li>
+        <li> <span class="sql" style="min-width: 12rem;">OrderQty</span>cantidad</li>
+        <li> <span class="sql" style="min-width: 12rem;">ProductID</span>clave foránea que referencia la tabla Product</li>
+        <li> <span class="sql" style="min-width: 12rem;">UnitPrice</span>precio por unidad</li>
+        <li> <span class="sql" style="min-width: 12rem;">UnitPriceDiscount</span>descuento sobre el precio unitario</li>
+        <li> <span class="sql" style="min-width: 12rem;">LineTotal</span>importe total de la línea</li>
+        <li> <span class="sql" style="min-width: 12rem;">rowguid</span>guid</li>
+        <li> <span class="sql" style="min-width: 12rem;">ModifiedDate</span>marca de tiempo de creación o última actualización de la fila</li>
+        </ul>
+        <ul class="table-columns">
+            <li>CLAVE PRIMARIA, btree (SalesOrderID, SalesOrderDetailID, ProductID)</li>
+        </ul>
+        <ul class="table-columns">
+            <li>CLAVE FORÁNEA (SalesOrderID) REFERENCIAS SalesOrderHeader(SalesOrderID)</li>
+            <li>CLAVE FORÁNEA (ProductID) REFERENCIAS Product(ProductID)</li>
+        </ul>
+        <div class="table-wrapper">
+          <table><thead><tr>
+                  <th scope="col">SalesOrderID</th>
+                  <th scope="col">SalesOrderDetailID</th>
+                  <th scope="col">OrderQty</th>
+                  <th scope="col">ProductID</th>
+                  <th scope="col">UnitPrice</th>
+                  <th scope="col">UnitPriceDiscount</th>
+                  <th scope="col">LineTotal</th>
+                  <th scope="col">rowguid</th>
+                  <th scope="col">ModifiedDate</th>
+              </tr></thead><tbody><tr>
+                  <td>71774</td>
+                  <td>110562</td>
+                  <td>1</td>
+                  <td>836</td>
+                  <td>356.8980</td>
+                  <td>.0000</td>
+                  <td>356.898000</td>
+                  <td>E3A1994C-7A68-4CE8-96A3-77FDD3BBD730</td>
+                  <td>2008-06-01 00:00:00.000</td>
+              </tr></tbody></table>
+        </div>
+    </div>
+    <div class="accordion" title="Haga clic para expandir, haga doble clic para pegar el nombre de la tabla en el editor">
+        <span><span class='sql'>SalesOrderHeader</span> - pedidos de venta de productos.</span>
+    </div>
+    <div class="panel">
+        <ul class="table-columns">
+            <li> <span class="sql" style="min-width: 12rem;">SalesOrderID</span>identificador único del registro en la tabla (PK)</li>
+            <li> <span class="sql" style="min-width: 12rem;">RevisionNumber</span>número de revisión</li>
+            <li> <span class="sql" style="min-width: 12rem;">OrderDate</span>fecha de creación del pedido</li>
+            <li> <span class="sql" style="min-width: 12rem;">DueDate</span>fecha de vencimiento del pago del pedido</li>
+            <li> <span class="sql" style="min-width: 12rem;">ShipDate</span>fecha de envío del pedido</li>
+            <li> <span class="sql" style="min-width: 12rem;">Status</span>estado del pedido</li>
+            <li> <span class="sql" style="min-width: 12rem;">OnlineOrderFlag</span>pedido en línea (sí/no)</li>
+            <li> <span class="sql" style="min-width: 12rem;">SalesOrderNumber</span>número de pedido</li>
+            <li> <span class="sql" style="min-width: 12rem;">PurchaseOrderNumber</span>número de orden de compra</li>
+            <li> <span class="sql" style="min-width: 12rem;">AccountNumber</span>número de cuenta</li>
+            <li> <span class="sql" style="min-width: 12rem;">CustomerID</span>clave foránea que referencia la tabla Customer</li>
+            <li> <span class="sql" style="min-width: 12rem;">ShipToAddressID</span>clave foránea a la tabla Address: dirección de entrega</li>
+            <li> <span class="sql" style="min-width: 12rem;">BillToAddressID</span>clave foránea a la tabla Address: dirección de facturación</li>
+            <li> <span class="sql" style="min-width: 12rem;">ShipMethod</span>método de envío</li>
+            <li> <span class="sql" style="min-width: 12rem;">CreditCardApprovalCode</span><br>código de aprobación de la tarjeta de crédito</li>
+            <li> <span class="sql" style="min-width: 12rem;">SubTotal</span>subtotal</li>
+            <li> <span class="sql" style="min-width: 12rem;">TaxAmt</span>impuestos</li>
+            <li> <span class="sql" style="min-width: 12rem;">Freight</span>coste de envío</li>
+            <li> <span class="sql" style="min-width: 12rem;">TotalDue</span>total</li>
+            <li> <span class="sql" style="min-width: 12rem;">Comment</span>comentario</li>
+            <li> <span class="sql" style="min-width: 12rem;">rowguid</span>guid</li>
+            <li> <span class="sql" style="min-width: 12rem;">ModifiedDate</span>marca de tiempo de creación o última actualización de la fila</li>
+        </ul>
+        <ul class="table-columns">
+            <li>CLAVE PRIMARIA, btree (SalesOrderID, CustomerID, ShipToAddressID, BillToAddressID)</li>
+        </ul>
+        <ul class="table-columns">
+            <li>CLAVE FORÁNEA (CustomerID) REFERENCIAS Customer(CustomerID)</li>
+            <li>CLAVE FORÁNEA (ShipToAddressID) REFERENCIAS Address(AddressID)</li>
+            <li>CLAVE FORÁNEA (BillToAddressID) REFERENCIAS Address(AddressID)</li>
+        </ul>
+        <div class="table-wrapper">
+            <table><thead><tr>
+                    <th scope="col">SalesOrderID</th>
+                    <th scope="col">RevisionNumber</th>
+                    <th scope="col">OrderDate</th>
+                    <th scope="col">DueDate</th>
+                    <th scope="col">ShipDate</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">OnlineOrderFlag</th>
+                    <th scope="col">SalesOrderNumber</th>
+                    <th scope="col">PurchaseOrderNumber</th>
+                    <th scope="col">AccountNumber</th>
+                    <th scope="col">CustomerID</th>
+                    <th scope="col">ShipToAddressID</th>
+                    <th scope="col">BillToAddressID</th>
+                    <th scope="col">ShipMethod</th>
+                    <th scope="col">CreditCardApprovalCode</th>
+                    <th scope="col">SubTotal</th>
+                    <th scope="col">TaxAmt</th>
+                    <th scope="col">Freight</th>
+                    <th scope="col">TotalDue</th>
+                    <th scope="col">Comment</th>
+                    <th scope="col">rowguid</th>
+                    <th scope="col">ModifiedDate</th>
+                </tr></thead><tbody><tr>
+                    <td>71774</td>
+                    <td>2</td>
+                    <td>2008-06-01 00:00:00.000</td>
+                    <td>2008-06-13 00:00:00.000</td>
+                    <td>2008-06-08 00:00:00.000</td>
+                    <td>5</td>
+                    <td>0</td>
+                    <td>SO71774</td>
+                    <td>PO348186287</td>
+                    <td>10-4020-000609</td>
+                    <td>29847</td>
+                    <td>1092</td>
+                    <td>1092</td>
+                    <td>CARGO TRANSPORT 5</td>
+                    <td>[null]</td>
+                    <td>880.3484</td>
+                    <td>70.4279</td>
+                    <td>22.0087</td>
+                    <td>972.7850</td>
+                    <td>[null]</td>
+                    <td>89E42CDC-8506-48A2-B89B-EB3E64E3554E</td>
+                    <td>2008-06-08 00:00:00.000</td>
+                </tr></tbody></table>
+        </div>
+    </div>
+
+</div>

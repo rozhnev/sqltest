@@ -267,18 +267,18 @@
     <div class="panel">
         <ul class="table-columns">
             <li><span class='sql'>student_id</span>唯一记录标识符 (PK, INT)</li>
-            <li><span class='sql'>department_id</span>所属部门标识符 (外键)</li>
-            <li><span class='sql'>student_number</span>唯一学生 ID 号码 (CHAR, 例如 'S000123')</li>
+            <li><span class='sql'>department_id</span>所属院系标识符 (FK)</li>
+            <li><span class='sql'>student_number</span>唯一学号 (CHAR，例如 'S000123')</li>
             <li><span class='sql'>first_name</span>学生的名字</li>
             <li><span class='sql'>last_name</span>学生的姓氏</li>
             <li><span class='sql'>email</span>学生的电子邮件地址</li>
             <li><span class='sql'>date_of_birth</span>学生的出生日期</li>
-            <li><span class='sql'>gender</span>性别：M、F、NB、其他或不愿透露 (ENUM, 可为空)</li>
-            <li><span class='sql'>enrollment_date</span>学生首次注册的日期</li>
-            <li><span class='sql'>expected_grad</span>预计毕业年份 (YEAR, 可为空)</li>
-            <li><span class='sql'>status</span>注册状态：有效、无效、已毕业、暂停或退学 (ENUM)</li>
-            <li><span class='sql'>gpa</span>累计 GPA 0.000–4.000，由触发器维护 (DECIMAL, 可为空)</li>
-            <li><span class='sql'>contacts</span>紧急联系人和地址作为 JSON — 例如 <code>{ldelim}"emergency":{ldelim}"name":"Jane Doe","phone":"+1-555-0100"{rdelim}{rdelim}</code></li>
+            <li><span class='sql'>gender</span>性别：M、F、NB、Other 或 Prefer not to say (ENUM，可为空)</li>
+            <li><span class='sql'>enrollment_date</span>学生首次入学日期</li>
+            <li><span class='sql'>expected_grad</span>预计毕业年份 (YEAR，可为空)</li>
+            <li><span class='sql'>status</span>学籍状态：active、inactive、graduated、suspended 或 withdrawn (ENUM)</li>
+            <li><span class='sql'>gpa</span>累计 GPA 0.000–4.000，由触发器维护 (DECIMAL，可为空)</li>
+            <li><span class='sql'>contacts</span>紧急联系人和地址（JSON），例如 <code>{ldelim}"emergency":{ldelim}"name":"Jane Doe","phone":"+1-555-0100"{rdelim}{rdelim}</code></li>
         </ul>
         <div class="table-wrapper">
             <table>
@@ -310,4 +310,820 @@
                         <td>2002-04-23</td>
                         <td>M</td>
                         <td>2021-09-01</td>
-                        <td>2025
+                        <td>2025</td>
+                        <td>active</td>
+                        <td>3.720</td>
+                        <td>{ldelim}"emergency":{ldelim}"name":"Susan Miller","phone":"+1-555-0100"{rdelim}{rdelim}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <ul class="table-columns">
+            <li>主键，btree (student_id)</li>
+            <li>唯一键 (student_number)</li>
+            <li>唯一键 (email)</li>
+        </ul>
+        <ul class="table-columns">
+            <li>外键 (department_id) 参考 departments(department_id)</li>
+        </ul>
+    </div>
+    <div class="accordion" title="点击展开，双击将表名粘贴到编辑器中">
+        <span><span class='sql'>courses</span> - 支持全文和向量搜索的课程目录。</span>
+    </div>
+    <div class="panel">
+        <ul class="table-columns">
+            <li><span class='sql'>course_id</span>唯一记录标识符 (PK, SMALLINT)</li>
+            <li><span class='sql'>department_id</span>开课院系标识符 (FK)</li>
+            <li><span class='sql'>code</span>课程代码，例如 'CS101' (CHAR)</li>
+            <li><span class='sql'>title</span>课程名称</li>
+            <li><span class='sql'>credits</span>学分数 (TINYINT)</li>
+            <li><span class='sql'>level</span>学术层次：undergraduate、graduate 或 doctoral (ENUM)</li>
+            <li><span class='sql'>description</span>详细课程描述 (TEXT，与 title 共同建立 FULLTEXT 索引)</li>
+            <li><span class='sql'>is_active</span>课程当前是否开设 (BOOLEAN)</li>
+            <li><span class='sql'>embedding</span>用于向量相似度搜索的 1536 维语义嵌入 (VECTOR(1536)，可为空)</li>
+        </ul>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col">course_id</th>
+                        <th scope="col">department_id</th>
+                        <th scope="col">code</th>
+                        <th scope="col">title</th>
+                        <th scope="col">credits</th>
+                        <th scope="col">level</th>
+                        <th scope="col">description</th>
+                        <th scope="col">is_active</th>
+                        <th scope="col">embedding</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>3</td>
+                        <td>CS301</td>
+                        <td>Database Systems</td>
+                        <td>3</td>
+                        <td>undergraduate</td>
+                        <td>Introduction to relational databases, SQL, and data modeling.</td>
+                        <td>1</td>
+                        <td>[0.023, -0.011, ...]</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <ul class="table-columns">
+            <li>主键，btree (course_id)</li>
+            <li>唯一键 (code)</li>
+            <li>FULLTEXT (title, description)</li>
+        </ul>
+        <ul class="table-columns">
+            <li>外键 (department_id) 参考 departments(department_id)</li>
+        </ul>
+    </div>
+    <div class="accordion" title="点击展开，双击将表名粘贴到编辑器中">
+        <span><span class='sql'>course_prerequisites</span> - 课程先修关系（自引用多对多）。</span>
+    </div>
+    <div class="panel">
+        <ul class="table-columns">
+            <li><span class='sql'>course_id</span>课程标识符 (FK)</li>
+            <li><span class='sql'>prerequisite_id</span>先修课程标识符 (FK)</li>
+            <li><span class='sql'>is_mandatory</span>先修课程是必修还是推荐 (BOOLEAN)</li>
+        </ul>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col">course_id</th>
+                        <th scope="col">prerequisite_id</th>
+                        <th scope="col">is_mandatory</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>5</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <ul class="table-columns">
+            <li>主键，btree (course_id, prerequisite_id)</li>
+        </ul>
+        <ul class="table-columns">
+            <li>外键 (course_id) 参考 courses(course_id)</li>
+            <li>外键 (prerequisite_id) 参考 courses(course_id)</li>
+        </ul>
+    </div>
+    <div class="accordion" title="点击展开，双击将表名粘贴到编辑器中">
+        <span><span class='sql'>sections</span> - 某学期开设的一个课程班。</span>
+    </div>
+    <div class="panel">
+        <ul class="table-columns">
+            <li><span class='sql'>section_id</span>唯一记录标识符 (PK, INT)</li>
+            <li><span class='sql'>course_id</span>课程标识符 (FK)</li>
+            <li><span class='sql'>semester_id</span>学期标识符 (FK)</li>
+            <li><span class='sql'>faculty_id</span>授课教师标识符 (FK)</li>
+            <li><span class='sql'>room_id</span>分配的教室标识符 (FK，可为空——完全在线时为 NULL)</li>
+            <li><span class='sql'>section_number</span>课程/学期内的班号 (TINYINT)</li>
+            <li><span class='sql'>delivery</span>授课方式：in-person、online 或 hybrid (ENUM)</li>
+            <li><span class='sql'>max_capacity</span>最大选课人数 (SMALLINT)</li>
+            <li><span class='sql'>status</span>课程班状态：open、closed、cancelled 或 completed (ENUM)</li>
+            <li><span class='sql'>schedule</span>每周上课时间（JSON），例如 <code>[{ldelim}"day":"Mon","start":"09:00","end":"10:30"{rdelim}]</code></li>
+        </ul>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col">section_id</th>
+                        <th scope="col">course_id</th>
+                        <th scope="col">semester_id</th>
+                        <th scope="col">faculty_id</th>
+                        <th scope="col">room_id</th>
+                        <th scope="col">section_number</th>
+                        <th scope="col">delivery</th>
+                        <th scope="col">max_capacity</th>
+                        <th scope="col">status</th>
+                        <th scope="col">schedule</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>in-person</td>
+                        <td>30</td>
+                        <td>open</td>
+                        <td>[{ldelim}"day":"Mon","start":"09:00","end":"10:30"{rdelim},{ldelim}"day":"Wed","start":"09:00","end":"10:30"{rdelim}]</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <ul class="table-columns">
+            <li>主键，btree (section_id)</li>
+            <li>唯一键 (course_id, semester_id, section_number)</li>
+        </ul>
+        <ul class="table-columns">
+            <li>外键 (course_id) 参考 courses(course_id)</li>
+            <li>外键 (semester_id) 参考 semesters(semester_id)</li>
+            <li>外键 (faculty_id) 参考 faculty(faculty_id)</li>
+            <li>外键 (room_id) 参考 rooms(room_id)</li>
+        </ul>
+    </div>
+    <div class="accordion" title="点击展开，双击将表名粘贴到编辑器中">
+        <span><span class='sql'>enrollments</span> - 学生选课记录。</span>
+    </div>
+    <div class="panel">
+        <ul class="table-columns">
+            <li><span class='sql'>enrollment_id</span>唯一记录标识符 (PK, INT)</li>
+            <li><span class='sql'>student_id</span>学生标识符 (FK)</li>
+            <li><span class='sql'>section_id</span>课程班标识符 (FK)</li>
+            <li><span class='sql'>enrolled_at</span>选课日期和时间 (TIMESTAMP)</li>
+            <li><span class='sql'>status</span>选课状态：enrolled、dropped、completed、failed 或 incomplete (ENUM)</li>
+            <li><span class='sql'>final_grade</span>最终字母成绩，例如 'A'、'B+' (CHAR，可为空)</li>
+            <li><span class='sql'>final_score</span>最终分数 0.00–100.00 (DECIMAL，可为空)</li>
+        </ul>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col">enrollment_id</th>
+                        <th scope="col">student_id</th>
+                        <th scope="col">section_id</th>
+                        <th scope="col">enrolled_at</th>
+                        <th scope="col">status</th>
+                        <th scope="col">final_grade</th>
+                        <th scope="col">final_score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>2024-08-25 10:34:02</td>
+                        <td>completed</td>
+                        <td>A</td>
+                        <td>93.50</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <ul class="table-columns">
+            <li>主键，btree (enrollment_id)</li>
+            <li>唯一键 (student_id, section_id)</li>
+        </ul>
+        <ul class="table-columns">
+            <li>外键 (student_id) 参考 students(student_id)</li>
+            <li>外键 (section_id) 参考 sections(section_id)</li>
+        </ul>
+    </div>
+    <div class="accordion" title="点击展开，双击将表名粘贴到编辑器中">
+        <span><span class='sql'>student_scholarships</span> - 授予学生的奖学金。</span>
+    </div>
+    <div class="panel">
+        <ul class="table-columns">
+            <li><span class='sql'>award_id</span>唯一记录标识符 (PK, INT)</li>
+            <li><span class='sql'>student_id</span>学生标识符 (FK)</li>
+            <li><span class='sql'>scholarship_id</span>奖学金标识符 (FK)</li>
+            <li><span class='sql'>awarded_date</span>奖学金授予日期</li>
+            <li><span class='sql'>expires_date</span>奖学金到期日期（可为空）</li>
+            <li><span class='sql'>amount_awarded</span>实际授予金额 (DECIMAL)</li>
+            <li><span class='sql'>notes</span>关于奖学金的附加说明 (TEXT，可为空)</li>
+        </ul>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col">award_id</th>
+                        <th scope="col">student_id</th>
+                        <th scope="col">scholarship_id</th>
+                        <th scope="col">awarded_date</th>
+                        <th scope="col">expires_date</th>
+                        <th scope="col">amount_awarded</th>
+                        <th scope="col">notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>2024-09-01</td>
+                        <td>2025-08-31</td>
+                        <td>5000.00</td>
+                        <td>[null]</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <ul class="table-columns">
+            <li>主键，btree (award_id)</li>
+        </ul>
+        <ul class="table-columns">
+            <li>外键 (student_id) 参考 students(student_id)</li>
+            <li>外键 (scholarship_id) 参考 scholarships(scholarship_id)</li>
+        </ul>
+    </div>
+    <div class="accordion" title="点击展开，双击将表名粘贴到编辑器中">
+        <span><span class='sql'>research_projects</span> - 教师主导的科研项目。</span>
+    </div>
+    <div class="panel">
+        <ul class="table-columns">
+            <li><span class='sql'>project_id</span>唯一记录标识符 (PK, SMALLINT)</li>
+            <li><span class='sql'>department_id</span>院系标识符 (FK)</li>
+            <li><span class='sql'>lead_faculty_id</span>项目负责人 (FK)</li>
+            <li><span class='sql'>title</span>项目名称</li>
+            <li><span class='sql'>abstract</span>项目描述 (TEXT，可为空)</li>
+            <li><span class='sql'>start_date</span>项目开始日期</li>
+            <li><span class='sql'>end_date</span>项目结束日期（可为空）</li>
+            <li><span class='sql'>status</span>项目状态：proposed、active、completed 或 cancelled (ENUM)</li>
+            <li><span class='sql'>funding</span>资金来源（JSON），例如 <code>[{ldelim}"source":"NSF","amount":150000,"grant_id":"NSF-2024-001"{rdelim}]</code></li>
+        </ul>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col">project_id</th>
+                        <th scope="col">department_id</th>
+                        <th scope="col">lead_faculty_id</th>
+                        <th scope="col">title</th>
+                        <th scope="col">abstract</th>
+                        <th scope="col">start_date</th>
+                        <th scope="col">end_date</th>
+                        <th scope="col">status</th>
+                        <th scope="col">funding</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>5</td>
+                        <td>1</td>
+                        <td>AI-Assisted Drug Discovery</td>
+                        <td>Using machine learning to identify candidate molecules.</td>
+                        <td>2023-01-15</td>
+                        <td>[null]</td>
+                        <td>active</td>
+                        <td>[{ldelim}"source":"NSF","amount":150000,"grant_id":"NSF-2023-042"{rdelim}]</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <ul class="table-columns">
+            <li>主键，btree (project_id)</li>
+        </ul>
+        <ul class="table-columns">
+            <li>外键 (department_id) 参考 departments(department_id)</li>
+            <li>外键 (lead_faculty_id) 参考 faculty(faculty_id)</li>
+        </ul>
+    </div>
+    <div class="accordion" title="点击展开，双击将表名粘贴到编辑器中">
+        <span><span class='sql'>publications</span> - 支持全文搜索的科研论文。</span>
+    </div>
+    <div class="panel">
+        <ul class="table-columns">
+            <li><span class='sql'>publication_id</span>唯一记录标识符 (PK, INT)</li>
+            <li><span class='sql'>project_id</span>关联的科研项目 (FK，可为空)</li>
+            <li><span class='sql'>title</span>论文标题</li>
+            <li><span class='sql'>abstract</span>论文摘要 (MEDIUMTEXT，与 title 共同建立 FULLTEXT 索引)</li>
+            <li><span class='sql'>pub_year</span>发表年份 (YEAR)</li>
+            <li><span class='sql'>venue</span>期刊或会议名称（可为空）</li>
+            <li><span class='sql'>doi</span>数字对象标识符 DOI（可为空）</li>
+            <li><span class='sql' style="min-width: 9rem;">keywords</span>关键词标签，可取以下一个或多个值：AI、ML、Data Science、Networking、Security、Algorithms、Databases、HCI、Theory、Bioinformatics、Systems、Mathematics、Physics、Chemistry、Biology (SET)</li>
+            <li><span class='sql'>citation_count</span>被引用次数 (INT)</li>
+        </ul>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col">publication_id</th>
+                        <th scope="col">project_id</th>
+                        <th scope="col">title</th>
+                        <th scope="col">abstract</th>
+                        <th scope="col">pub_year</th>
+                        <th scope="col">venue</th>
+                        <th scope="col">doi</th>
+                        <th scope="col">keywords</th>
+                        <th scope="col">citation_count</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>Deep Learning for Molecular Screening</td>
+                        <td>We present a transformer-based architecture for virtual screening...</td>
+                        <td>2024</td>
+                        <td>Nature Machine Intelligence</td>
+                        <td>10.1038/s42256-024-00001-1</td>
+                        <td>AI,ML,Bioinformatics</td>
+                        <td>12</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <ul class="table-columns">
+            <li>主键，btree (publication_id)</li>
+            <li>唯一键 (doi)</li>
+            <li>FULLTEXT (title, abstract)</li>
+        </ul>
+        <ul class="table-columns">
+            <li>外键 (project_id) 参考 research_projects(project_id)</li>
+        </ul>
+    </div>
+    <div class="accordion" title="点击展开，双击将表名粘贴到编辑器中">
+        <span><span class='sql'>project_members</span> - 教师和学生参与科研项目的记录。</span>
+    </div>
+    <div class="panel">
+        <ul class="table-columns">
+            <li><span class='sql'>member_id</span>唯一记录标识符 (PK, INT)</li>
+            <li><span class='sql'>project_id</span>科研项目标识符 (FK)</li>
+            <li><span class='sql'>faculty_id</span>教师标识符 (FK，可为空)</li>
+            <li><span class='sql'>student_id</span>学生标识符 (FK，可为空)</li>
+            <li><span class='sql'>role</span>成员角色：Principal Investigator、Co-Investigator、Research Assistant、Graduate Student 或 Undergraduate Student (ENUM)</li>
+            <li><span class='sql'>joined_date</span>成员加入项目的日期</li>
+            <li><span class='sql'>left_date</span>成员离开项目的日期（可为空）</li>
+        </ul>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col">member_id</th>
+                        <th scope="col">project_id</th>
+                        <th scope="col">faculty_id</th>
+                        <th scope="col">student_id</th>
+                        <th scope="col">role</th>
+                        <th scope="col">joined_date</th>
+                        <th scope="col">left_date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>[null]</td>
+                        <td>Principal Investigator</td>
+                        <td>2023-01-15</td>
+                        <td>[null]</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <ul class="table-columns">
+            <li>主键，btree (member_id)</li>
+        </ul>
+        <ul class="table-columns">
+            <li>外键 (project_id) 参考 research_projects(project_id)</li>
+            <li>外键 (faculty_id) 参考 faculty(faculty_id)</li>
+            <li>外键 (student_id) 参考 students(student_id)</li>
+        </ul>
+    </div>
+    <div class="accordion" title="点击展开，双击将表名粘贴到编辑器中">
+        <span><span class='sql'>grade_events</span> - 每条选课记录的单项评分（约 120 000 行）。</span>
+    </div>
+    <div class="panel">
+        <ul class="table-columns">
+            <li><span class='sql'>event_id</span>唯一记录标识符 (PK, BIGINT)</li>
+            <li><span class='sql'>enrollment_id</span>选课记录标识符 (FK)</li>
+            <li><span class='sql'>item_name</span>评分项名称，例如 'Assignment 1'、'Midterm Exam'</li>
+            <li><span class='sql'>item_type</span>评分项类型：assignment、quiz、midterm、final、project、participation 或 lab (ENUM)</li>
+            <li><span class='sql'>score</span>得分 (DECIMAL)</li>
+            <li><span class='sql'>max_score</span>满分，默认 100.00 (DECIMAL)</li>
+            <li><span class='sql'>weight</span>占最终成绩的比例，例如 0.1500 表示 15% (DECIMAL)</li>
+            <li><span class='sql'>graded_at</span>成绩录入日期和时间 (DATETIME)</li>
+            <li><span class='sql'>grader_id</span>评分教师 (FK，可为空)</li>
+            <li><span class='sql'>feedback</span>评分教师的反馈 (TEXT，可为空)</li>
+        </ul>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col">event_id</th>
+                        <th scope="col">enrollment_id</th>
+                        <th scope="col">item_name</th>
+                        <th scope="col">item_type</th>
+                        <th scope="col">score</th>
+                        <th scope="col">max_score</th>
+                        <th scope="col">weight</th>
+                        <th scope="col">graded_at</th>
+                        <th scope="col">grader_id</th>
+                        <th scope="col">feedback</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>Midterm Exam</td>
+                        <td>midterm</td>
+                        <td>87.00</td>
+                        <td>100.00</td>
+                        <td>0.3000</td>
+                        <td>2024-10-18 14:22:00</td>
+                        <td>1</td>
+                        <td>Good analysis, review section 3.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <ul class="table-columns">
+            <li>主键，btree (event_id)</li>
+        </ul>
+        <ul class="table-columns">
+            <li>外键 (enrollment_id) 参考 enrollments(enrollment_id)</li>
+            <li>外键 (grader_id) 参考 faculty(faculty_id)</li>
+        </ul>
+    </div>
+    <div class="accordion" title="点击展开，双击将表名粘贴到编辑器中">
+        <span><span class='sql'>audit_log</span> - 由触发器生成的行级变更历史（约 60 000 行）。</span>
+    </div>
+    <div class="panel">
+        <ul class="table-columns">
+            <li><span class='sql'>log_id</span>唯一记录标识符 (PK, BIGINT)</li>
+            <li><span class='sql'>table_name</span>被修改的表名</li>
+            <li><span class='sql'>record_id</span>被修改记录的主键 (BIGINT)</li>
+            <li><span class='sql'>action</span>变更类型：INSERT、UPDATE 或 DELETE (ENUM)</li>
+            <li><span class='sql'>changed_at</span>变更日期和时间 (TIMESTAMP)</li>
+            <li><span class='sql'>changed_by</span>数据库用户或应用上下文（可为空）</li>
+            <li><span class='sql'>old_values</span>变更前的列值（JSON，INSERT 时为 NULL）</li>
+            <li><span class='sql'>new_values</span>变更后的列值（JSON，DELETE 时为 NULL）</li>
+        </ul>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col">log_id</th>
+                        <th scope="col">table_name</th>
+                        <th scope="col">record_id</th>
+                        <th scope="col">action</th>
+                        <th scope="col">changed_at</th>
+                        <th scope="col">changed_by</th>
+                        <th scope="col">old_values</th>
+                        <th scope="col">new_values</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>enrollments</td>
+                        <td>1</td>
+                        <td>UPDATE</td>
+                        <td>2024-12-21 09:05:33</td>
+                        <td>app_user</td>
+                        <td>{ldelim}"status":"enrolled","final_score":null{rdelim}</td>
+                        <td>{ldelim}"status":"completed","final_score":93.50{rdelim}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <ul class="table-columns">
+            <li>主键，btree (log_id)</li>
+        </ul>
+    </div>
+    <h3>视图</h3>
+    <div class="accordion" title="点击展开，双击将视图名粘贴到编辑器中">
+        <span><span class='sql'>v_student_gpa</span> - 每名学生每学期的加权 GPA。</span>
+    </div>
+    <div class="panel">
+        <ul class="table-columns">
+            <li><span class='sql'>student_id</span>学生标识符</li>
+            <li><span class='sql'>student_number</span>唯一学号</li>
+            <li><span class='sql'>first_name</span>学生的名字</li>
+            <li><span class='sql'>last_name</span>学生的姓氏</li>
+            <li><span class='sql'>semester_id</span>学期标识符</li>
+            <li><span class='sql'>semester_name</span>学期名称</li>
+            <li><span class='sql'>semester_gpa</span>本学期加权 GPA</li>
+            <li><span class='sql'>credits_earned</span>本学期获得的学分</li>
+        </ul>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col">student_id</th>
+                        <th scope="col">student_number</th>
+                        <th scope="col">first_name</th>
+                        <th scope="col">last_name</th>
+                        <th scope="col">semester_id</th>
+                        <th scope="col">semester_name</th>
+                        <th scope="col">semester_gpa</th>
+                        <th scope="col">credits_earned</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>S000123</td>
+                        <td>James</td>
+                        <td>Miller</td>
+                        <td>1</td>
+                        <td>Fall 2024</td>
+                        <td>3.72</td>
+                        <td>15</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="accordion" title="点击展开，双击将视图名粘贴到编辑器中">
+        <span><span class='sql'>v_section_roster</span> - 各课程班的选课学生及联系方式。</span>
+    </div>
+    <div class="panel">
+        <ul class="table-columns">
+            <li><span class='sql'>section_id</span>课程班标识符</li>
+            <li><span class='sql'>course_code</span>课程代码</li>
+            <li><span class='sql'>course_title</span>课程名称</li>
+            <li><span class='sql'>semester_name</span>学期名称</li>
+            <li><span class='sql'>student_id</span>学生标识符</li>
+            <li><span class='sql'>student_number</span>唯一学号</li>
+            <li><span class='sql'>first_name</span>学生的名字</li>
+            <li><span class='sql'>last_name</span>学生的姓氏</li>
+            <li><span class='sql'>email</span>学生的电子邮件地址</li>
+            <li><span class='sql'>status</span>选课状态</li>
+        </ul>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col">section_id</th>
+                        <th scope="col">course_code</th>
+                        <th scope="col">course_title</th>
+                        <th scope="col">semester_name</th>
+                        <th scope="col">student_id</th>
+                        <th scope="col">student_number</th>
+                        <th scope="col">first_name</th>
+                        <th scope="col">last_name</th>
+                        <th scope="col">email</th>
+                        <th scope="col">status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>CS301</td>
+                        <td>Database Systems</td>
+                        <td>Fall 2024</td>
+                        <td>1</td>
+                        <td>S000123</td>
+                        <td>James</td>
+                        <td>Miller</td>
+                        <td>j.miller@student.edu</td>
+                        <td>enrolled</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="accordion" title="点击展开，双击将视图名粘贴到编辑器中">
+        <span><span class='sql'>v_course_pass_rate</span> - 各课程的历史通过率和平均分。</span>
+    </div>
+    <div class="panel">
+        <ul class="table-columns">
+            <li><span class='sql'>course_id</span>课程标识符</li>
+            <li><span class='sql'>code</span>课程代码</li>
+            <li><span class='sql'>title</span>课程名称</li>
+            <li><span class='sql'>semester_id</span>学期标识符</li>
+            <li><span class='sql'>semester_name</span>学期名称</li>
+            <li><span class='sql'>total_enrolled</span>选课学生总数</li>
+            <li><span class='sql'>passed</span>通过的学生人数</li>
+            <li><span class='sql'>pass_rate</span>通过率（百分比）</li>
+            <li><span class='sql'>avg_score</span>平均最终分数</li>
+        </ul>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col">course_id</th>
+                        <th scope="col">code</th>
+                        <th scope="col">title</th>
+                        <th scope="col">semester_id</th>
+                        <th scope="col">semester_name</th>
+                        <th scope="col">total_enrolled</th>
+                        <th scope="col">passed</th>
+                        <th scope="col">pass_rate</th>
+                        <th scope="col">avg_score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>CS301</td>
+                        <td>Database Systems</td>
+                        <td>1</td>
+                        <td>Fall 2024</td>
+                        <td>28</td>
+                        <td>25</td>
+                        <td>89.29</td>
+                        <td>81.40</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="accordion" title="点击展开，双击将视图名粘贴到编辑器中">
+        <span><span class='sql'>v_faculty_workload</span> - 每位教师每学期的授课班数和满员率。</span>
+    </div>
+    <div class="panel">
+        <ul class="table-columns">
+            <li><span class='sql'>faculty_id</span>教师标识符</li>
+            <li><span class='sql'>first_name</span>教师的名字</li>
+            <li><span class='sql'>last_name</span>教师的姓氏</li>
+            <li><span class='sql'>semester_id</span>学期标识符</li>
+            <li><span class='sql'>semester_name</span>学期名称</li>
+            <li><span class='sql'>sections_taught</span>授课班数</li>
+            <li><span class='sql'>total_capacity</span>所有课程班的总容量</li>
+            <li><span class='sql'>total_enrolled</span>选课学生总数</li>
+            <li><span class='sql'>fill_rate</span>满员率（百分比）</li>
+        </ul>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col">faculty_id</th>
+                        <th scope="col">first_name</th>
+                        <th scope="col">last_name</th>
+                        <th scope="col">semester_id</th>
+                        <th scope="col">semester_name</th>
+                        <th scope="col">sections_taught</th>
+                        <th scope="col">total_capacity</th>
+                        <th scope="col">total_enrolled</th>
+                        <th scope="col">fill_rate</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Alice</td>
+                        <td>Carter</td>
+                        <td>1</td>
+                        <td>Fall 2024</td>
+                        <td>3</td>
+                        <td>90</td>
+                        <td>82</td>
+                        <td>91.11</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="accordion" title="点击展开，双击将视图名粘贴到编辑器中">
+        <span><span class='sql'>v_top_scholars</span> - 按获得奖学金总额排名的学生。</span>
+    </div>
+    <div class="panel">
+        <ul class="table-columns">
+            <li><span class='sql'>rank_position</span>按奖学金总额的排名</li>
+            <li><span class='sql'>student_id</span>学生标识符</li>
+            <li><span class='sql'>student_number</span>唯一学号</li>
+            <li><span class='sql'>first_name</span>学生的名字</li>
+            <li><span class='sql'>last_name</span>学生的姓氏</li>
+            <li><span class='sql'>total_scholarships</span>获得奖学金的次数</li>
+            <li><span class='sql'>total_amount</span>所有奖学金 amount_awarded 的总和</li>
+        </ul>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col">rank_position</th>
+                        <th scope="col">student_id</th>
+                        <th scope="col">student_number</th>
+                        <th scope="col">first_name</th>
+                        <th scope="col">last_name</th>
+                        <th scope="col">total_scholarships</th>
+                        <th scope="col">total_amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>S000123</td>
+                        <td>James</td>
+                        <td>Miller</td>
+                        <td>2</td>
+                        <td>8500.00</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="accordion" title="点击展开，双击将视图名粘贴到编辑器中">
+        <span><span class='sql'>v_publication_stats</span> - 各院系每年的论文数和引用数。</span>
+    </div>
+    <div class="panel">
+        <ul class="table-columns">
+            <li><span class='sql'>department_id</span>院系标识符</li>
+            <li><span class='sql'>department_name</span>院系名称</li>
+            <li><span class='sql'>pub_year</span>发表年份</li>
+            <li><span class='sql'>paper_count</span>发表论文数</li>
+            <li><span class='sql'>total_citations</span>所有论文的总引用数</li>
+        </ul>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col">department_id</th>
+                        <th scope="col">department_name</th>
+                        <th scope="col">pub_year</th>
+                        <th scope="col">paper_count</th>
+                        <th scope="col">total_citations</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>3</td>
+                        <td>Computer Science</td>
+                        <td>2024</td>
+                        <td>12</td>
+                        <td>87</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="accordion" title="点击展开，双击将视图名粘贴到编辑器中">
+        <span><span class='sql'>v_prerequisite_tree</span> - 每门课程的直接先修课程。</span>
+    </div>
+    <div class="panel">
+        <ul class="table-columns">
+            <li><span class='sql'>course_id</span>课程标识符</li>
+            <li><span class='sql'>course_code</span>课程代码</li>
+            <li><span class='sql'>course_title</span>课程名称</li>
+            <li><span class='sql'>prerequisite_id</span>先修课程标识符</li>
+            <li><span class='sql'>prerequisite_code</span>先修课程代码</li>
+            <li><span class='sql'>prerequisite_title</span>先修课程名称</li>
+            <li><span class='sql'>is_mandatory</span>先修课程是必修还是推荐</li>
+        </ul>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col">course_id</th>
+                        <th scope="col">course_code</th>
+                        <th scope="col">course_title</th>
+                        <th scope="col">prerequisite_id</th>
+                        <th scope="col">prerequisite_code</th>
+                        <th scope="col">prerequisite_title</th>
+                        <th scope="col">is_mandatory</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>5</td>
+                        <td>CS401</td>
+                        <td>Advanced Database Systems</td>
+                        <td>1</td>
+                        <td>CS301</td>
+                        <td>Database Systems</td>
+                        <td>1</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

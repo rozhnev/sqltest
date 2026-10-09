@@ -327,4 +327,329 @@
         <ul class="table-columns">
             <li> <span class='sql'>actor_id</span>identificador del actor (FK)</li>
             <li> <span class='sql'>film_id</span>identificador de la película (FK)</li>
-            <li> <span class='sql'>last_update</span>fecha y hora de la última
+            <li> <span class='sql'>last_update</span>fecha y hora de la última actualización</li>
+          </ul>
+          <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                <th scope="col">actor_id</th>
+                <th scope="col">film_id</th>
+                <th scope="col">last_update</th>
+              </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                <td>1</td>
+                <td>1</td>
+                <td>2023-01-01 12:00:00</td>
+              </tr>
+                </tbody>
+            </table>
+          </div>
+          <ul class="table-columns">
+            <li>CLAVE PRIMARIA, btree (actor_id, film_id)</li>
+                    </ul>
+                    <ul class="table-columns">
+                        <li>CLAVE FORÁNEA (actor_id) REFERENCIAS actor(actor_id)</li>
+                        <li>CLAVE FORÁNEA (film_id) REFERENCIAS film(film_id)</li>
+                    </ul>
+    </div>
+    <div class="accordion" title="Haga clic para expandir, haga doble clic para pegar el nombre de la tabla en el editor">
+        <span class='sql'>film_category</span> - relación películas a categorías.
+    </div>
+    <div class="panel">
+        <ul class="table-columns">
+            <li> <span class='sql'>film_id</span>identificador de la película (FK)</li>
+            <li> <span class='sql'>category_id</span>identificador de la categoría (FK)</li>
+            <li> <span class='sql'>last_update</span>fecha y hora de la última actualización</li>
+          </ul>
+          <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                <th scope="col">film_id</th>
+                <th scope="col">category_id</th>
+                <th scope="col">last_update</th>
+              </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                <td>1</td>
+                <td>1</td>
+                <td>2023-01-01 12:00:00</td>
+              </tr>
+                </tbody>
+            </table>
+          </div>
+          <ul class="table-columns">
+              <li>CLAVE PRIMARIA, btree (film_id, category_id)</li>
+          </ul>
+          <ul class="table-columns">
+              <li>CLAVE FORÁNEA (film_id) REFERENCIAS film(film_id)</li>
+              <li>CLAVE FORÁNEA (category_id) REFERENCIAS category(category_id)</li>
+          </ul>
+    </div>
+    <div class="accordion" title="Haga clic para expandir, haga doble clic para pegar el nombre de la tabla en el editor">
+        <span class='sql'>inventory</span> - inventario de discos en las tiendas.
+    </div>
+    <div class="panel">
+        <ul class="table-columns">
+            <li><span class='sql'>inventory_id</span>identificador único del registro (PK)</li>
+            <li><span class='sql'>film_id</span>identificador de la película (FK)</li>
+            <li><span class='sql'>store_id</span>identificador de la tienda donde se encuentra el disco (FK)</li>
+            <li><span class='sql'>last_update</span>fecha y hora de la última actualización</li>
+        </ul>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                    <th scope="col">inventory_id</th>
+                    <th scope="col">film_id</th>
+                    <th scope="col">store_id</th>
+                    <th scope="col">last_update</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    <td>1</td>
+                    <td>23</td>
+                    <td>2</td>
+                    <td>2023-01-01 12:00:00</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <ul class="table-columns">
+            <li>CLAVE PRIMARIA, btree (inventory_id)</li>
+        </ul>
+        <ul class="table-columns">
+            <li>CLAVE FORÁNEA (film_id) REFERENCIAS film(film_id)</li>
+            <li>CLAVE FORÁNEA (store_id) REFERENCIAS store(store_id)</li>
+        </ul>
+    </div>
+    <div class="accordion" title="Haga clic para expandir, haga doble clic para pegar el nombre de la tabla en el editor">
+        <span class='sql'>language</span> - idiomas de las películas.
+    </div>
+    <div class="panel">
+        <ul class="table-columns">
+            <li> <span class='sql'>language_id</span>identificador único del registro (PK)</li>
+            <li> <span class='sql'>name</span>nombre del idioma</li>
+            <li> <span class='sql'>last_update</span>fecha y hora de la última actualización</li>
+        </ul>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                    <th scope="col">language_id</th>
+                    <th scope="col">name</th>
+                    <th scope="col">last_update</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    <td>1</td>
+                    <td>English</td>
+                    <td>2023-01-01 12:00:00</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <ul class="table-columns">
+            <li>CLAVE PRIMARIA, btree (language_id)</li>
+        </ul>
+    </div>
+    <div class="accordion" title="Haga clic para expandir, haga doble clic para pegar el nombre de la tabla en el editor">
+        <span class='sql'>payment</span> - pagos de los clientes.
+    </div>
+    <div class="panel">
+        <ul class="table-columns">
+            <li> <span class='sql' style="min-width: 8rem;">payment_id</span>identificador único del registro (PK)</li>
+            <li> <span class='sql' style="min-width: 8rem;">customer_id</span>identificador del cliente (FK)</li>
+            <li> <span class='sql' style="min-width: 8rem;">staff_id</span>identificador del empleado que recibió el pago (FK)</li>
+            <li> <span class='sql' style="min-width: 8rem;">rental_id</span>identificador del alquiler (FK)</li>
+            <li> <span class='sql' style="min-width: 8rem;">amount</span>importe del pago</li>
+            <li> <span class='sql' style="min-width: 8rem;">payment_date</span>fecha y hora del pago</li>
+            <li> <span class='sql' style="min-width: 8rem;">last_update</span>fecha y hora de la última actualización</li>
+        </ul>
+        <div class="table-wrapper">
+        <table>
+                <thead>
+                    <tr>
+                <th scope="col">payment_id</th>
+                <th scope="col">customer_id</th>
+                <th scope="col">staff_id</th>
+                <th scope="col">rental_id</th>
+                <th scope="col">amount</th>
+                <th scope="col">payment_date</th>
+                <th scope="col">last_update</th>
+            </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>4.99</td>
+                <td>2023-01-01 12:13:14</td>
+                <td>2023-01-01 12:14:15</td>
+            </tr>
+                </tbody>
+            </table>
+        </div>
+        <ul class="table-columns">
+            <li>CLAVE PRIMARIA, btree (payment_id)</li>
+        </ul>
+        <ul class="table-columns">
+            <li>CLAVE FORÁNEA (customer_id) REFERENCIAS customer(customer_id)</li>
+            <li>CLAVE FORÁNEA (staff_id) REFERENCIAS staff(staff_id)</li>
+            <li>CLAVE FORÁNEA (rental_id) REFERENCIAS rental(rental_id)</li>
+        </ul>
+    </div>
+    <div class="accordion" title="Haga clic para expandir, haga doble clic para pegar el nombre de la tabla en el editor">
+        <span class='sql'>rental</span> - alquileres de los clientes.
+    </div>
+    <div class="panel">
+        <ul class="table-columns">
+        <li> <span class='sql'>rental_id</span>identificador único del registro (PK)</li>
+        <li> <span class='sql'>rental_date</span>fecha de inicio del alquiler</li>
+        <li> <span class='sql'>inventory_id</span>identificador del disco (FK)</li>
+        <li> <span class='sql'>customer_id</span>identificador del cliente (FK)</li>
+        <li> <span class='sql'>return_date</span>fecha de devolución de la película</li>
+        <li> <span class='sql'>staff_id</span>identificador del empleado que entregó el disco (FK)</li>
+        <li> <span class='sql'>last_update</span>fecha y hora de la última actualización</li>
+        </ul>
+        <div class="table-wrapper">
+        <table>
+                <thead>
+                    <tr>
+                <th scope="col">rental_id</th>
+                <th scope="col">rental_date</th>
+                <th scope="col">inventory_id</th>
+                <th scope="col">customer_id</th>
+                <th scope="col">return_date</th>
+                <th scope="col">staff_id</th>
+                <th scope="col">last_update</th>
+            </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                <td>1</td>
+                <td>2023-01-01 16:15:21</td>
+                <td>1</td>
+                <td>1</td>
+                <td>2023-01-10 09:12:36</td>
+                <td>1</td>
+                <td>2023-01-01 12:00:00</td>
+            </tr>
+                </tbody>
+            </table>
+        </div>
+        <ul class="table-columns">
+            <li>CLAVE PRIMARIA, btree (rental_id)</li>
+        </ul>
+        <ul class="table-columns">
+            <li>CLAVE FORÁNEA (inventory_id) REFERENCIAS inventory(inventory_id)</li>
+            <li>CLAVE FORÁNEA (customer_id) REFERENCIAS customer(customer_id)</li>
+            <li>CLAVE FORÁNEA (staff_id) REFERENCIAS staff(staff_id)</li>
+        </ul>
+    </div>
+    <div class="accordion" title="Haga clic para expandir, haga doble clic para pegar el nombre de la tabla en el editor">
+        <span class='sql'>staff</span> - empleados de la empresa.
+    </div>
+    <div class="panel">
+        <ul class="table-columns">
+            <li> <span class='sql'>staff_id</span>identificador único del registro (PK)</li>
+            <li> <span class='sql'>first_name</span>nombre del empleado</li>
+            <li> <span class='sql'>last_name</span>apellido del empleado</li>
+            <li> <span class='sql'>address_id</span>identificador de la dirección (FK)</li>
+            <li> <span class='sql'>picture</span>foto del empleado</li>
+            <li> <span class='sql'>email</span>dirección de correo electrónico del empleado</li>
+            <li> <span class='sql'>store_id</span>identificador de la tienda (FK)</li>
+            <li> <span class='sql'>active</span>indicador de actividad del empleado (0/1)</li>
+            <li> <span class='sql'>username</span>nombre de usuario para iniciar sesión</li>
+            <li> <span class='sql'>password</span>contraseña para iniciar sesión</li>
+            <li> <span class='sql'>last_update</span>fecha y hora de la última actualización</li>
+        </ul>
+        <div class="table-wrapper">
+        <table>
+                <thead>
+                    <tr>
+                <th scope="col">staff_id</th>
+                <th scope="col">first_name</th>
+                <th scope="col">last_name</th>
+                <th scope="col">address_id</th>
+                <th scope="col">picture</th>
+                <th scope="col">email</th>
+                <th scope="col">store_id</th>
+                <th scope="col">active</th>
+                <th scope="col">username</th>
+                <th scope="col">password</th>
+                <th scope="col">last_update</th>
+            </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                <td>1</td>
+                <td>John</td>
+                <td>Doe</td>
+                <td>1</td>
+                <td>[null]</td>
+                <td>john.doe@example.com</td>
+                <td>1</td>
+                <td>1</td>
+                <td>johndoe</td>
+                <td>********</td>
+                <td>2023-01-01 12:00:00</td>
+            </tr>
+                </tbody>
+            </table>
+        </div>
+        <ul class="table-columns">
+            <li>CLAVE PRIMARIA, btree (staff_id)</li>
+        </ul>
+        <ul class="table-columns">
+            <li>CLAVE FORÁNEA (address_id) REFERENCIAS address(address_id)</li>
+            <li>CLAVE FORÁNEA (store_id) REFERENCIAS store(store_id)</li>
+        </ul>
+    </div>
+    <div class="accordion" title="Haga clic para expandir, haga doble clic para pegar el nombre de la tabla en el editor">
+        <span class='sql'>store</span> - tiendas de la empresa.
+    </div>
+    <div class="panel">
+        <ul class="table-columns">
+            <li> <span class='sql' style="min-width: 11rem;">store_id</span>identificador único del registro (PK)</li>
+            <li> <span class='sql' style="min-width: 11rem;">manager_staff_id</span>identificador del gerente de la tienda (FK)</li>
+            <li> <span class='sql' style="min-width: 11rem;">address_id</span>identificador de la dirección (FK)</li>
+            <li> <span class='sql' style="min-width: 11rem;">last_update</span>fecha y hora de la última actualización</li>
+        </ul>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                  <th scope="col">store_id</th>
+                  <th scope="col">manager_staff_id</th>
+                  <th scope="col">address_id</th>
+                  <th scope="col">last_update</th>
+              </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>2023-01-01 12:00:00</td>
+              </tr>
+                </tbody>
+            </table>
+        </div>
+        <ul class="table-columns">
+            <li>CLAVE PRIMARIA, btree (store_id)</li>
+        </ul>
+        <ul class="table-columns">
+            <li>CLAVE FORÁNEA (manager_staff_id) REFERENCIAS staff(staff_id)</li>
+            <li>CLAVE FORÁNEA (address_id) REFERENCIAS address(address_id)</li>
+        </ul>
+    </div>
+</div>

@@ -291,4 +291,66 @@ ORDER BY distance;
 SELECT '来自只读编辑器的问候！' AS message, NOW() AS execution_time;
     </div>
 
-    <!-- 示例 5：自
+    <!-- 示例 5：自定义结果高度 -->
+    <h2 id="example-result-height"><a href="#example-result-height" style="color: inherit; text-decoration: none;">5. 自定义结果高度示例</a></h2>
+    <p>此编辑器使用 <code>result-rows="6"</code>，使结果区域比默认值更小。</p>
+    <div data-sqlize-editor data-sql-version="sqlite3" code-rows="6" result-rows="6">
+-- 更小的编辑器和更小的结果区域
+SELECT '小结果区域' as note;
+    </div>
+
+    <hr>
+
+    <h2 id="chaining"><a href="#chaining" style="color: inherit; text-decoration: none;">6. SQL 查询链</a></h2>
+    <p>您可以将多个编辑器串联起来。运行带有 <code>data-sqlize-parent</code> 的编辑器时，链中所有父编辑器的代码（从根编辑器开始）会在执行前被添加到当前编辑器代码的前面。</p>
+
+    <div class="example-chain">
+        <h3 id="chain-example"><a href="#chain-example" style="color: inherit; text-decoration: none;">示例：父子链</a></h3>
+        <p>第一个编辑器创建表，第二个编辑器插入数据并查询。运行第二个编辑器时，会自动包含第一个编辑器中的 <code>CREATE TABLE</code> 语句。</p>
+        
+        <div data-sqlize-editor 
+             data-sqlize-id="base-setup" 
+             data-sql-version="mysql80" 
+             code-rows="3">
+CREATE TABLE temp_users (id INT, name VARCHAR(50));
+INSERT INTO temp_users VALUES (1, 'John Doe'), (2, 'Jane Smith');
+        </div>
+
+        <div data-sqlize-editor 
+             data-sqlize-parent="base-setup" 
+             data-sql-version="mysql80" 
+             code-rows="4">
+SELECT * FROM temp_users;
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- 示例 7：预加载数据库 -->
+    <h2 id="example-preloaded"><a href="#example-preloaded" style="color: inherit; text-decoration: none;">7. 预加载数据库示例</a></h2>
+    <p>使用只读的预加载数据库，无需任何设置即可查询真实数据。</p>
+
+    <h3 id="example-mysql97-sakila"><a href="#example-mysql97-sakila" style="color: inherit; text-decoration: none;">MySQL 9.7 — Sakila</a></h3>
+    <div data-sqlize-editor data-sql-version="mysql97_sakila" code-rows="5">
+SELECT actor_id, first_name, last_name FROM actor LIMIT 10;
+    </div>
+
+    <h3 id="example-psql17postgis"><a href="#example-psql17postgis" style="color: inherit; text-decoration: none;">PostgreSQL 17 + PostGIS Workshop</a></h3>
+    <div data-sqlize-editor data-sql-version="psql17postgis" code-rows="5">
+SELECT name, ST_AsText(geom) FROM nyc_neighborhoods LIMIT 5;
+    </div>
+
+    <h3 id="example-mssql2022aw"><a href="#example-mssql2022aw" style="color: inherit; text-decoration: none;">MS SQL Server 2022 — AdventureWorks</a></h3>
+    <div data-sqlize-editor data-sql-version="mssql2022aw" code-rows="5">
+SELECT TOP 10 ProductID, Name, ListPrice FROM Product ORDER BY ListPrice DESC;
+    </div>
+
+    <hr>
+    <h3 id="how-to-use-summary"><a href="#how-to-use-summary" style="color: inherit; text-decoration: none;">使用方法：</a></h3>
+    <ol>
+        <li>引入脚本：<code>&lt;script src="/js/sqlize-embed.js"&gt;&lt;/script&gt;</code></li>
+        <li>添加容器：<code>&lt;div data-sqlize-editor data-sql-version="mysql80"&gt;SELECT ...&lt;/div&gt;</code></li>
+    </ol>
+</div>
+</div>
+</div>

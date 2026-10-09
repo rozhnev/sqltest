@@ -288,15 +288,131 @@
             <li><span class='sql'>CONTACT_FIRST</span>Nombre de la persona de contacto</li>
             <li><span class='sql'>CONTACT_LAST</span>Apellido de la persona de contacto</li>
             <li><span class='sql'>PHONE_NO</span>Número de teléfono del cliente</li>
-            <li><span class='sql'>ADDRESS_LINE1</span>Línea de dirección 1</li>
-            <li><span class='sql'>ADDRESS_LINE2</span>Línea de dirección 2 (puede ser nulo)</li>
+            <li><span class='sql'>ADDRESS_LINE1</span> Línea de dirección 1</li>
+            <li><span class='sql'>ADDRESS_LINE2</span>Línea de dirección 2 (puede ser nula)</li>
             <li><span class='sql'>CITY</span>Ciudad del cliente</li>
             <li><span class='sql'>STATE_PROVINCE</span>Estado o provincia del cliente</li>
             <li><span class='sql'>COUNTRY</span>País del cliente</li>
             <li><span class='sql'>POSTAL_CODE</span>Código postal del cliente</li>
-            <li><span class='sql'>ON_HOLD</span>Estado en espera (puede ser nulo)</li>
+            <li><span class='sql'>ON_HOLD</span>Estado de bloqueo (puede ser nulo)</li>
         </ul>
         <div class="table-wrapper">
             <table><thead><tr>
                     <th scope="col">CUST_NO</th>
-                    <th scope="col">
+                    <th scope="col">CUSTOMER</th>
+                    <th scope="col">CONTACT_FIRST</th>
+                    <th scope="col">CONTACT_LAST</th>
+                    <th scope="col">PHONE_NO</th>
+                    <th scope="col">ADDRESS_LINE1</th>
+                    <th scope="col">ADDRESS_LINE2</th>
+                    <th scope="col">CITY</th>
+                    <th scope="col">STATE_PROVINCE</th>
+                    <th scope="col">COUNTRY</th>
+                    <th scope="col">POSTAL_CODE</th>
+                    <th scope="col">ON_HOLD</th>
+                </tr></thead><tbody><tr>
+                    <td>1001</td>
+                    <td>Signature Design</td>
+                    <td>Dale J.</td>
+                    <td>Little</td>
+                    <td>(619) 530-2710</td>
+                    <td>15500 Pacific Heights Blvd.</td>
+                    <td>[null]</td>
+                    <td>San Diego</td>
+                    <td>CA</td>
+                    <td>USA</td>
+                    <td>92121</td>
+                    <td>[null]</td>
+                </tr></tbody></table>
+        </div>
+        <ul class="table-columns">
+            <li>FOREIGN KEY (COUNTRY) REFERENCES COUNTRY(COUNTRY)</li>
+        </ul>
+    </div>
+    <div class="accordion" title="Haga clic para expandir, haga doble clic para pegar el nombre de la tabla en el editor">
+    <span><span class='sql'>SALES</span> - lista de ventas.</span>
+    </div>
+    <div class="panel">
+        <ul class="table-columns">
+            <li><span class='sql'>PO_NUMBER</span>Número de orden de compra</li>
+            <li><span class='sql'>CUST_NO</span>Número de cliente asociado al pedido</li>
+            <li><span class='sql'>SALES_REP</span>Número del representante de ventas</li>
+            <li><span class='sql'>ORDER_STATUS</span>Estado del pedido</li>
+            <li><span class='sql'>ORDER_DATE</span>Fecha del pedido</li>
+            <li><span class='sql'>SHIP_DATE</span>Fecha de envío</li>
+            <li><span class='sql'>DATE_NEEDED</span>Fecha requerida (puede ser nula)</li>
+            <li><span class='sql'>PAID</span>Estado del pago</li>
+            <li><span class='sql'>QTY_ORDERED</span>Cantidad pedida</li>
+            <li><span class='sql'>TOTAL_VALUE</span>Valor total del pedido</li>
+            <li><span class='sql'>DISCOUNT</span>Descuento aplicado</li>
+            <li><span class='sql'>ITEM_TYPE</span>Tipo de artículo del pedido</li>
+            <li><span class='sql'>AGED</span>Antigüedad del pedido</li>
+        </ul>
+        <div class="table-wrapper">
+            <table><thead><tr>
+                    <th scope="col">PO_NUMBER</th>
+                    <th scope="col">CUST_NO</th>
+                    <th scope="col">SALES_REP</th>
+                    <th scope="col">ORDER_STATUS</th>
+                    <th scope="col">ORDER_DATE</th>
+                    <th scope="col">SHIP_DATE</th>
+                    <th scope="col">DATE_NEEDED</th>
+                    <th scope="col">PAID</th>
+                    <th scope="col">QTY_ORDERED</th>
+                    <th scope="col">TOTAL_VALUE</th>
+                    <th scope="col">DISCOUNT</th>
+                    <th scope="col">ITEM_TYPE</th>
+                    <th scope="col">AGED</th>
+                </tr></thead><tbody><tr>
+                    <td>V91E0210</td>
+                    <td>1004</td>
+                    <td>11</td>
+                    <td>shipped</td>
+                    <td>1991-03-04 00:00:00</td>
+                    <td>1991-03-05 00:00:00</td>
+                    <td>[null]</td>
+                    <td>y</td>
+                    <td>10</td>
+                    <td>5000.00</td>
+                    <td>0.100000</td>
+                    <td>hardware</td>
+                    <td>1.000000000</td>
+                </tr></tbody></table>
+        </div>
+        <ul class="table-columns">
+            <li>FOREIGN KEY (CUST_NO) REFERENCES CUSTOMER(CUST_NO)</li>
+            <li>FOREIGN KEY (SALES_REP) REFERENCES EMPLOYEE(EMP_NO)</li>
+        </ul>
+    </div>
+    <h3>A continuación se muestra la lista de vistas de esta base de datos:</h3>
+    <div class="accordion" title="Haga clic para expandir, haga doble clic para pegar el nombre de la vista en el editor">
+        <span><span class='sql'>PHONE_LIST</span> - vista con la lista de teléfonos de los empleados.</span>
+    </div>
+    <div class="panel">
+        <ul class="table-columns">
+            <li><span class='sql'>EMP_NO</span>Número de empleado</li>
+            <li><span class='sql'>FIRST_NAME</span>Nombre del empleado</li>
+            <li><span class='sql'>LAST_NAME</span>Apellido del empleado</li>
+            <li><span class='sql'>PHONE_EXT</span>Extensión telefónica del empleado</li>
+            <li><span class='sql'>LOCATION</span>Ubicación del departamento</li>
+            <li><span class='sql'>PHONE_NO</span>Teléfono del departamento</li>
+        </ul>
+        <div class="table-wrapper">
+            <table><thead><tr>
+                    <th scope="col">EMP_NO</th>
+                    <th scope="col">FIRST_NAME</th>
+                    <th scope="col">LAST_NAME</th>
+                    <th scope="col">PHONE_EXT</th>
+                    <th scope="col">LOCATION</th>
+                    <th scope="col">PHONE_NO</th>
+                </tr></thead><tbody><tr>
+                    <td>2</td>
+                    <td>Robert</td>
+                    <td>Nelson</td>
+                    <td>250</td>
+                    <td>Monterey</td>
+                    <td>(408) 555-1234</td>
+                </tr></tbody></table>
+        </div>
+    </div>
+</div>

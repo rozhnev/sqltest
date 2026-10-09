@@ -285,4 +285,72 @@ ORDER BY distance;
 
     <!-- Example 4: Read-Only Example -->
     <h2 id="example-readonly"><a href="#example-readonly" style="color: inherit; text-decoration: none;">4. Ejemplo de Solo Lectura</a></h2>
-    <p>Este editor está configurado como <code>data-read
+    <p>Este editor está configurado como <code>data-read-only="true"</code>: puede ejecutar la consulta, pero no modificarla.</p>
+    <div data-sqlize-editor data-sql-version="mysql80" data-read-only="true" code-rows="5">
+-- Este editor es de solo lectura
+SELECT '¡Hola desde un editor de solo lectura!' AS message, NOW() AS execution_time;
+    </div>
+
+    <!-- Example 5: Custom Result Height -->
+    <h2 id="example-result-height"><a href="#example-result-height" style="color: inherit; text-decoration: none;">5. Ejemplo de Altura de Resultado Personalizada</a></h2>
+    <p>Este editor usa <code>result-rows="6"</code> para que el bloque de resultados sea más pequeño que el predeterminado.</p>
+    <div data-sqlize-editor data-sql-version="sqlite3" code-rows="6" result-rows="6">
+-- Editor y bloque de resultados más pequeños
+SELECT 'Bloque de resultados pequeño' as note;
+    </div>
+
+    <hr>
+
+    <h2 id="chaining"><a href="#chaining" style="color: inherit; text-decoration: none;">6. Encadenamiento de Consultas SQL</a></h2>
+    <p>Puede encadenar varios editores. Al ejecutar un editor que tiene <code>data-sqlize-parent</code>, el código de todos los editores padre de la cadena (empezando por la raíz) se antepone al código del editor actual antes de ejecutarlo.</p>
+
+    <div class="example-chain">
+        <h3 id="chain-example"><a href="#chain-example" style="color: inherit; text-decoration: none;">Ejemplo: Cadena Padre-Hijo</a></h3>
+        <p>El primer editor crea una tabla y el segundo inserta datos y los consulta. Al ejecutar el segundo editor se incluye automáticamente la sentencia <code>CREATE TABLE</code> del primero.</p>
+        
+        <div data-sqlize-editor 
+             data-sqlize-id="base-setup" 
+             data-sql-version="mysql80" 
+             code-rows="3">
+CREATE TABLE temp_users (id INT, name VARCHAR(50));
+INSERT INTO temp_users VALUES (1, 'John Doe'), (2, 'Jane Smith');
+        </div>
+
+        <div data-sqlize-editor 
+             data-sqlize-parent="base-setup" 
+             data-sql-version="mysql80" 
+             code-rows="4">
+SELECT * FROM temp_users;
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- Example 7: Preloaded Databases -->
+    <h2 id="example-preloaded"><a href="#example-preloaded" style="color: inherit; text-decoration: none;">7. Ejemplos con Bases de Datos Precargadas</a></h2>
+    <p>Use bases de datos precargadas de solo lectura para consultar datos reales sin ninguna configuración.</p>
+
+    <h3 id="example-mysql97-sakila"><a href="#example-mysql97-sakila" style="color: inherit; text-decoration: none;">MySQL 9.7 — Sakila</a></h3>
+    <div data-sqlize-editor data-sql-version="mysql97_sakila" code-rows="5">
+SELECT actor_id, first_name, last_name FROM actor LIMIT 10;
+    </div>
+
+    <h3 id="example-psql17postgis"><a href="#example-psql17postgis" style="color: inherit; text-decoration: none;">PostgreSQL 17 + PostGIS Workshop</a></h3>
+    <div data-sqlize-editor data-sql-version="psql17postgis" code-rows="5">
+SELECT name, ST_AsText(geom) FROM nyc_neighborhoods LIMIT 5;
+    </div>
+
+    <h3 id="example-mssql2022aw"><a href="#example-mssql2022aw" style="color: inherit; text-decoration: none;">MS SQL Server 2022 — AdventureWorks</a></h3>
+    <div data-sqlize-editor data-sql-version="mssql2022aw" code-rows="5">
+SELECT TOP 10 ProductID, Name, ListPrice FROM Product ORDER BY ListPrice DESC;
+    </div>
+
+    <hr>
+    <h3 id="how-to-use-summary"><a href="#how-to-use-summary" style="color: inherit; text-decoration: none;">Cómo usarlo:</a></h3>
+    <ol>
+        <li>Incluya el script: <code>&lt;script src="/js/sqlize-embed.js"&gt;&lt;/script&gt;</code></li>
+        <li>Añada un contenedor: <code>&lt;div data-sqlize-editor data-sql-version="mysql80"&gt;SELECT ...&lt;/div&gt;</code></li>
+    </ol>
+</div>
+</div>
+</div>

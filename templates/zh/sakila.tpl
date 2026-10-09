@@ -325,9 +325,9 @@
     </div>
     <div class="panel">
         <ul class="table-columns">
-            <li> <span class='sql'>actor_id</span>演员的标识符 (FK)</li>
-            <li> <span class='sql'>film_id</span>电影的标识符 (FK)</li>
-            <li> <span class='sql'>last_update</span>最后更新时间</li> 
+            <li> <span class='sql'>actor_id</span>演员标识符 (FK)</li>
+            <li> <span class='sql'>film_id</span>电影标识符 (FK)</li>
+            <li> <span class='sql'>last_update</span>最后更新时间</li>
           </ul>
           <div class="table-wrapper">
             <table>
@@ -352,4 +352,304 @@
                     </ul>
                     <ul class="table-columns">
                         <li>外键 (actor_id) 参考 actor(actor_id)</li>
-                        <li>外键 (film_id) 参考 film(film
+                        <li>外键 (film_id) 参考 film(film_id)</li>
+                    </ul>
+    </div>
+    <div class="accordion" title="点击展开，双击将表名粘贴到编辑器中">
+        <span class='sql'>film_category</span> - 电影与类别的关系。
+    </div>
+    <div class="panel">
+        <ul class="table-columns">
+            <li> <span class='sql'>film_id</span>电影标识符 (FK)</li>
+            <li> <span class='sql'>category_id</span>类别标识符 (FK)</li>
+            <li> <span class='sql'>last_update</span>最后更新时间</li>
+          </ul>
+          <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                <th scope="col">film_id</th>
+                <th scope="col">category_id</th>
+                <th scope="col">last_update</th>
+              </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                <td>1</td>
+                <td>1</td>
+                <td>2023-01-01 12:00:00</td>
+              </tr>
+                </tbody>
+            </table>
+          </div>
+          <ul class="table-columns">
+              <li>主键，btree (film_id, category_id)</li>
+          </ul>
+          <ul class="table-columns">
+              <li>外键 (film_id) 参考 film(film_id)</li>
+              <li>外键 (category_id) 参考 category(category_id)</li>
+          </ul>
+    </div>
+    <div class="accordion" title="点击展开，双击将表名粘贴到编辑器中">
+        <span class='sql'>inventory</span> - 各门店的光盘库存。
+    </div>
+    <div class="panel">
+        <ul class="table-columns">
+            <li><span class='sql'>inventory_id</span>唯一记录标识符 (PK)</li>
+            <li><span class='sql'>film_id</span>电影标识符 (FK)</li>
+            <li><span class='sql'>store_id</span>光盘所在商店的标识符 (FK)</li>
+            <li><span class='sql'>last_update</span>最后更新时间</li>
+        </ul>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                    <th scope="col">inventory_id</th>
+                    <th scope="col">film_id</th>
+                    <th scope="col">store_id</th>
+                    <th scope="col">last_update</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    <td>1</td>
+                    <td>23</td>
+                    <td>2</td>
+                    <td>2023-01-01 12:00:00</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <ul class="table-columns">
+            <li>主键，btree (inventory_id)</li>
+        </ul>
+        <ul class="table-columns">
+            <li>外键 (film_id) 参考 film(film_id)</li>
+            <li>外键 (store_id) 参考 store(store_id)</li>
+        </ul>
+    </div>
+    <div class="accordion" title="点击展开，双击将表名粘贴到编辑器中">
+        <span class='sql'>language</span> - 电影语言。
+    </div>
+    <div class="panel">
+        <ul class="table-columns">
+            <li> <span class='sql'>language_id</span>唯一记录标识符 (PK)</li>
+            <li> <span class='sql'>name</span>语言名称</li>
+            <li> <span class='sql'>last_update</span>最后更新时间</li>
+        </ul>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                    <th scope="col">language_id</th>
+                    <th scope="col">name</th>
+                    <th scope="col">last_update</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    <td>1</td>
+                    <td>English</td>
+                    <td>2023-01-01 12:00:00</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <ul class="table-columns">
+            <li>主键，btree (language_id)</li>
+        </ul>
+    </div>
+    <div class="accordion" title="点击展开，双击将表名粘贴到编辑器中">
+        <span class='sql'>payment</span> - 客户付款。
+    </div>
+    <div class="panel">
+        <ul class="table-columns">
+            <li> <span class='sql' style="min-width: 8rem;">payment_id</span>唯一记录标识符 (PK)</li>
+            <li> <span class='sql' style="min-width: 8rem;">customer_id</span>客户标识符 (FK)</li>
+            <li> <span class='sql' style="min-width: 8rem;">staff_id</span>收款员工的标识符 (FK)</li>
+            <li> <span class='sql' style="min-width: 8rem;">rental_id</span>租赁记录标识符 (FK)</li>
+            <li> <span class='sql' style="min-width: 8rem;">amount</span>付款金额</li>
+            <li> <span class='sql' style="min-width: 8rem;">payment_date</span>付款日期和时间</li>
+            <li> <span class='sql' style="min-width: 8rem;">last_update</span>最后更新时间</li>
+        </ul>
+        <div class="table-wrapper">
+        <table>
+                <thead>
+                    <tr>
+                <th scope="col">payment_id</th>
+                <th scope="col">customer_id</th>
+                <th scope="col">staff_id</th>
+                <th scope="col">rental_id</th>
+                <th scope="col">amount</th>
+                <th scope="col">payment_date</th>
+                <th scope="col">last_update</th>
+            </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>4.99</td>
+                <td>2023-01-01 12:13:14</td>
+                <td>2023-01-01 12:14:15</td>
+            </tr>
+                </tbody>
+            </table>
+        </div>
+        <ul class="table-columns">
+            <li>主键，btree (payment_id)</li>
+        </ul>
+        <ul class="table-columns">
+            <li>外键 (customer_id) 参考 customer(customer_id)</li>
+            <li>外键 (staff_id) 参考 staff(staff_id)</li>
+            <li>外键 (rental_id) 参考 rental(rental_id)</li>
+        </ul>
+    </div>
+    <div class="accordion" title="点击展开，双击将表名粘贴到编辑器中">
+        <span class='sql'>rental</span> - 客户租赁记录。
+    </div>
+    <div class="panel">
+        <ul class="table-columns">
+        <li> <span class='sql'>rental_id</span>唯一记录标识符 (PK)</li>
+        <li> <span class='sql'>rental_date</span>租赁开始日期</li>
+        <li> <span class='sql'>inventory_id</span>光盘标识符 (FK)</li>
+        <li> <span class='sql'>customer_id</span>客户标识符 (FK)</li>
+        <li> <span class='sql'>return_date</span>电影归还日期</li>
+        <li> <span class='sql'>staff_id</span>出租光盘的员工标识符 (FK)</li>
+        <li> <span class='sql'>last_update</span>最后更新时间</li>
+        </ul>
+        <div class="table-wrapper">
+        <table>
+                <thead>
+                    <tr>
+                <th scope="col">rental_id</th>
+                <th scope="col">rental_date</th>
+                <th scope="col">inventory_id</th>
+                <th scope="col">customer_id</th>
+                <th scope="col">return_date</th>
+                <th scope="col">staff_id</th>
+                <th scope="col">last_update</th>
+            </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                <td>1</td>
+                <td>2023-01-01 16:15:21</td>
+                <td>1</td>
+                <td>1</td>
+                <td>2023-01-10 09:12:36</td>
+                <td>1</td>
+                <td>2023-01-01 12:00:00</td>
+            </tr>
+                </tbody>
+            </table>
+        </div>
+        <ul class="table-columns">
+            <li>主键，btree (rental_id)</li>
+        </ul>
+        <ul class="table-columns">
+            <li>外键 (inventory_id) 参考 inventory(inventory_id)</li>
+            <li>外键 (customer_id) 参考 customer(customer_id)</li>
+            <li>外键 (staff_id) 参考 staff(staff_id)</li>
+        </ul>
+    </div>
+    <div class="accordion" title="点击展开，双击将表名粘贴到编辑器中">
+        <span class='sql'>staff</span> - 公司员工。
+    </div>
+    <div class="panel">
+        <ul class="table-columns">
+            <li> <span class='sql'>staff_id</span>唯一记录标识符 (PK)</li>
+            <li> <span class='sql'>first_name</span>员工的名字</li>
+            <li> <span class='sql'>last_name</span>员工的姓氏</li>
+            <li> <span class='sql'>address_id</span>地址标识符 (FK)</li>
+            <li> <span class='sql'>picture</span>员工照片</li>
+            <li> <span class='sql'>email</span>员工的电子邮件地址</li>
+            <li> <span class='sql'>store_id</span>商店标识符 (FK)</li>
+            <li> <span class='sql'>active</span>员工活动指示器 (0/1)</li>
+            <li> <span class='sql'>username</span>系统登录用户名</li>
+            <li> <span class='sql'>password</span>登录密码</li>
+            <li> <span class='sql'>last_update</span>最后更新时间</li>
+        </ul>
+        <div class="table-wrapper">
+        <table>
+                <thead>
+                    <tr>
+                <th scope="col">staff_id</th>
+                <th scope="col">first_name</th>
+                <th scope="col">last_name</th>
+                <th scope="col">address_id</th>
+                <th scope="col">picture</th>
+                <th scope="col">email</th>
+                <th scope="col">store_id</th>
+                <th scope="col">active</th>
+                <th scope="col">username</th>
+                <th scope="col">password</th>
+                <th scope="col">last_update</th>
+            </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                <td>1</td>
+                <td>John</td>
+                <td>Doe</td>
+                <td>1</td>
+                <td>[null]</td>
+                <td>john.doe@example.com</td>
+                <td>1</td>
+                <td>1</td>
+                <td>johndoe</td>
+                <td>********</td>
+                <td>2023-01-01 12:00:00</td>
+            </tr>
+                </tbody>
+            </table>
+        </div>
+        <ul class="table-columns">
+            <li>主键，btree (staff_id)</li>
+        </ul>
+        <ul class="table-columns">
+            <li>外键 (address_id) 参考 address(address_id)</li>
+            <li>外键 (store_id) 参考 store(store_id)</li>
+        </ul>
+    </div>
+    <div class="accordion" title="点击展开，双击将表名粘贴到编辑器中">
+        <span class='sql'>store</span> - 公司门店。
+    </div>
+    <div class="panel">
+        <ul class="table-columns">
+            <li> <span class='sql' style="min-width: 11rem;">store_id</span>唯一记录标识符 (PK)</li>
+            <li> <span class='sql' style="min-width: 11rem;">manager_staff_id</span>商店经理标识符 (FK)</li>
+            <li> <span class='sql' style="min-width: 11rem;">address_id</span>地址标识符 (FK)</li>
+            <li> <span class='sql' style="min-width: 11rem;">last_update</span>最后更新时间</li>
+        </ul>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                  <th scope="col">store_id</th>
+                  <th scope="col">manager_staff_id</th>
+                  <th scope="col">address_id</th>
+                  <th scope="col">last_update</th>
+              </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>2023-01-01 12:00:00</td>
+              </tr>
+                </tbody>
+            </table>
+        </div>
+        <ul class="table-columns">
+            <li>主键，btree (store_id)</li>
+        </ul>
+        <ul class="table-columns">
+            <li>外键 (manager_staff_id) 参考 staff(staff_id)</li>
+            <li>外键 (address_id) 参考 address(address_id)</li>
+        </ul>
+    </div>
+</div>
