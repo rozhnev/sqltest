@@ -24,7 +24,8 @@
 {/if}
 <title>{$PageTitle}</title>
 <meta http-equiv = "content-language" content = "{$Lang}">
-<meta name="description" content="{$PageDescription}"/>
+{capture assign="PageDefaultDescription"}{translate}page_default_description{/translate}{/capture}
+<meta name="description" content="{$PageDescription|meta_description:$PageDefaultDescription}"/>
 <meta name="keywords" content="{if isset($PageKeywords) && $PageKeywords}{$PageKeywords}{else}{translate}page_keywords{/translate}{/if}">
 <meta property="og:site_name" content="SQLtest.online">
 <meta property="og:type" content="website">

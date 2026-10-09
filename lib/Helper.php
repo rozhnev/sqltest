@@ -1,6 +1,77 @@
 <?php
-class Helper 
+class Helper
 {
+    /**
+     * Normalizes text for <meta name="description">: plain text, 25–160 characters.
+     * Longer text is cut at a word boundary with an ellipsis; shorter text is replaced by $fallback.
+     */
+    public static function metaDescription(?string $text, string $fallback = '', int $min = 25, int $max = 160): string
+    {
+        $text = html_entity_decode(strip_tags((string)$text), ENT_QUOTES | ENT_HTML5, 'UTF-8');
+        $text = self::truncateText(trim(preg_replace('/\s+/u', ' ', $text)), $max);
+
+        if (preg_match_all('/./us', $text) < $min && $fallback !== '') {
+            return self::metaDescription($fallback, '', $min, $max);
+        }
+
+        return htmlspecialchars($text, ENT_QUOTES, 'UTF-8');
+    }
+
+    /**
+     * Cuts text to at most $max characters at a word boundary, appending an ellipsis.
+     */
+    public static function truncateText(string $text, int $max): string
+    {
+        if (preg_match_all('/./us', $text) <= $max) {
+            return $text;
+        }
+        if ($max < 2) {
+            return '…';
+        }
+        preg_match('/^.{0,' . ($max - 1) . '}/us', $text, $m);
+        $cut = $m[0];
+        // Cut back to the last word boundary unless that drops more than half of the text
+        if (preg_match('/^(.{' . intdiv($max, 2) . ',})\s\S*$/us', $cut, $w)) {
+            $cut = $w[1];
+        }
+        return rtrim($cut, " \t,;:-–—.") . '…';
+    }
+
+    /**
+     * Fills a description template with ##Name## placeholders so the text fits into $max characters.
+     * The $shrinkable value (e.g. a question title) is the most specific part, so it is kept whole
+     * when possible: first the template's last sentence (a generic call to action) is dropped,
+     * and only then the $shrinkable value is shortened.
+     */
+    public static function fitDescription(string $template, array $vars, string $shrinkable, int $max = 160): string
+    {
+        $pairs = [];
+        foreach ($vars as $name => $value) {
+            $pairs["##{$name}##"] = trim(preg_replace('/\s+/u', ' ', (string)$value));
+        }
+        $length = fn(string $s): int => preg_match_all('/./us', $s);
+
+        $text = strtr($template, $pairs);
+        if ($length($text) <= $max) {
+            return $text;
+        }
+
+        // Drop the last sentence when the template has more than one
+        if (preg_match('/^(.+?[.!?。])\s*[^.!?。]+[.!?。]?$/us', $template, $m)) {
+            $template = $m[1];
+            $text = strtr($template, $pairs);
+            if ($length($text) <= $max) {
+                return $text;
+            }
+        }
+
+        $key = "##{$shrinkable}##";
+        $room = $max - $length(strtr($template, [$key => ''] + $pairs));
+        $pairs[$key] = self::truncateText($pairs[$key] ?? '', max($room, 1));
+
+        return strtr($template, $pairs);
+    }
+
     public static function getUserOSLanguage(array $SERVER): string
     {
         $lang = 'en';

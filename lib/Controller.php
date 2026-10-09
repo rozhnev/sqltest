@@ -89,6 +89,7 @@ class Controller
 
         $this->registerModifiers(["array_key_exists", "mt_rand", "array_rand", "trim"]);
         $this->engine->registerPlugin('block', 'translate', array('Localizer', 'translate'), true);
+        $this->engine->registerPlugin('modifier', 'meta_description', array('Helper', 'metaDescription'));
 
         $this->assignVariables([
             'VERSION'       => $env['VERSION'] ?? 0,
@@ -1461,18 +1462,26 @@ class Controller
 
         if (isset($questionData['answers'])) {
             $pageTitle = Localizer::translateString('page_question_title');
-            $pageDescription = Localizer::translateString('page_question_description');
+            $descriptionKey = 'question_meta_description_quiz';
             $sitePromo = Localizer::translateString('site_promo');
             $siteDescription = Localizer::translateString('site_description_question_quiz');
         } else {
             $pageTitle = Localizer::translateString('page_task_title');
-            $pageDescription = Localizer::translateString('page_task_description');
+            $descriptionKey = ($questionData['question_type'] ?? '') === 'free_answer'
+                ? 'question_meta_description_free_answer'
+                : 'question_meta_description_query';
             $sitePromo = Localizer::translateString('site_promo');
             $siteDescription = Localizer::translateString('site_description_question_task');
         }
         $totalQuestions = $questionnire->getQuestionsCount();
         $questionNumber = $questionData['number'] ?? '?';
-        $richDescription = sprintf("%s: «%s» (#%s of %s). Database: %s (%s). Improve SQL skills with this practical, real-world database exercise.", $pageDescription, $questionData['title'], $questionNumber, $totalQuestions, $categoryTitle, $dbmsLabel);
+        // Category titles like "Sakila DB (MySQL)" already name the DBMS
+        $topic = stripos($categoryTitle, $dbmsLabel) === false ? "{$categoryTitle} ({$dbmsLabel})" : $categoryTitle;
+        $richDescription = Helper::fitDescription(Localizer::translateString($descriptionKey), [
+            'Title'  => $questionData['title'],
+            'Number' => "#{$questionNumber}",
+            'Topic'  => $topic,
+        ], 'Title');
         $this->assignVariables([
             'PageTitle'             => sprintf("%s #%s: %s", $pageTitle, $questionNumber, $questionData['title']),
             'PageOGTitle'           => sprintf("%s #%s: %s", $pageTitle, $questionNumber, $questionData['title']),
